@@ -1,0 +1,49 @@
+name: deokive
+publish_to: 'none'
+description: Local-first fandom archive app starter.
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  hive_ce_flutter: ^2.3.4
+  flutter_secure_storage: ^10.0.0
+  google_sign_in: ^6.3.0
+  google_mobile_ads: ^5.3.1
+  http: ^1.2.2
+  http_parser: ^4.1.2
+  image_picker: ^1.1.2
+  mobile_scanner: ^6.0.2
+  path_provider: ^2.1.5
+  provider: ^6.1.5+1
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/avatar/body/
+    - assets/avatar/background/
+    - assets/avatar/hair/
+    - assets/avatar/accessory/
+    - lib/logo.png
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Bold.otf
+          weight: 700
