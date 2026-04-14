@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../config/app_server_config.dart';
 import '../data/badge_definitions.dart';
 import '../config/google_auth_config.dart';
 import '../config/monetization_catalog.dart';
@@ -42,6 +43,18 @@ enum AuthProviderType {
   google,
 }
 
+class BackupSnapshotInfo {
+  final String source;
+  final String uploadedAt;
+  final int? payloadBytes;
+
+  const BackupSnapshotInfo({
+    required this.source,
+    required this.uploadedAt,
+    this.payloadBytes,
+  });
+}
+
 class AppState extends ChangeNotifier {
   static const _driveAppDataScope =
       'https://www.googleapis.com/auth/drive.appdata';
@@ -60,6 +73,8 @@ class AppState extends ChangeNotifier {
   static const _lastAccountIdKey = 'last_account_id';
   static const _keepSignedInKey = 'keep_signed_in';
   static const _languageKey = 'app_language';
+  static const _serverAccessTokenKey = 'server_access_token';
+  static const _serverBackupPromptDismissedKey = 'server_backup_prompt_dismissed';
 
   final List<FolderItem> folders = [];
   final List<GoodsItem> goodsItems = [];
@@ -67,11 +82,30 @@ class AppState extends ChangeNotifier {
   final List<SupportInquiryItem> inquiries = [];
   final List<String> equippedBadgeIds = [];
 
+  static String? _resolveGoogleClientId() {
+    if (kIsWeb) {
+      return GoogleAuthConfig.webClientId;
+    }
+    if (Platform.isIOS || Platform.isMacOS) {
+      return GoogleAuthConfig.iosClientId;
+    }
+    return null;
+  }
+
+  static String? _resolveGoogleServerClientId() {
+    if (kIsWeb) {
+      return GoogleAuthConfig.webServerClientId;
+    }
+    if (Platform.isAndroid) {
+      return GoogleAuthConfig.androidServerClientId;
+    }
+    return null;
+  }
+
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: const ['email', _driveAppDataScope],
-    clientId: GoogleAuthConfig.iosClientId ?? GoogleAuthConfig.webClientId,
-    serverClientId: GoogleAuthConfig.androidServerClientId ??
-        GoogleAuthConfig.webServerClientId,
+    clientId: _resolveGoogleClientId(),
+    serverClientId: _resolveGoogleServerClientId(),
   );
   final List<Map<String, dynamic>> _localAccounts = [];
 
@@ -95,6 +129,13 @@ class AppState extends ChangeNotifier {
   bool driveBackupInProgress = false;
   String? driveBackupLastSyncedAt;
   String? driveBackupError;
+  bool syncDialogVisible = false;
+  String? syncStatusMessage;
+  bool localServerBackupInProgress = false;
+  String? localServerBackupLastSyncedAt;
+  String? localServerBackupError;
+  BackupSnapshotInfo? pendingRestoreSnapshot;
+  String? serverAccessToken;
 
   AuthProviderType authProvider = AuthProviderType.guest;
   AppPalette appPalette = AppPalette.skyBlue;
@@ -119,6 +160,7 @@ class AppState extends ChangeNotifier {
   bool avatarHasBackRibbon = false;
 
   int _signupSequence = 1;
+  bool _serverBackupPromptDismissed = false;
 
   FolderSortType folderSortType = FolderSortType.nameAsc;
   GoodsSortType defaultGoodsSortType = GoodsSortType.nameAsc;
@@ -186,9 +228,22 @@ class AppState extends ChangeNotifier {
         _storageBox?.get(_homePopupDismissedDateKey) as String?;
     keepSignedIn =
         _storageBox?.get(_keepSignedInKey, defaultValue: true) as bool? ?? true;
+    serverAccessToken = _storageBox?.get(_serverAccessTokenKey) as String?;
+    _serverBackupPromptDismissed =
+        _storageBox?.get(
+              _serverBackupPromptDismissedKey,
+              defaultValue: false,
+            ) as bool? ??
+            false;
     driveBackupInProgress = false;
     driveBackupLastSyncedAt = null;
     driveBackupError = null;
+    syncDialogVisible = false;
+    syncStatusMessage = null;
+    localServerBackupInProgress = false;
+    localServerBackupLastSyncedAt = null;
+    localServerBackupError = null;
+    pendingRestoreSnapshot = null;
 
     final savedPaletteName = _storageBox?.get(_paletteKey,
             defaultValue: AppPalette.skyBlue.name) as String? ??
@@ -219,6 +274,10 @@ class AppState extends ChangeNotifier {
     await _storageBox!.put(_homePopupDismissedDateKey, homePopupDismissedDate);
     await _storageBox!.put(_keepSignedInKey, keepSignedIn);
     await _storageBox!.put(_languageKey, appLanguage.name);
+    await _storageBox!.put(
+      _serverBackupPromptDismissedKey,
+      _serverBackupPromptDismissed,
+    );
   }
 
   Future<void> _persistAuthSession() async {
@@ -228,16 +287,23 @@ class AppState extends ChangeNotifier {
         authProvider == AuthProviderType.guest) {
       await _storageBox!.delete(_lastAuthProviderKey);
       await _storageBox!.delete(_lastAccountIdKey);
+      await _storageBox!.delete(_serverAccessTokenKey);
       return;
     }
     await _storageBox!.put(_lastAuthProviderKey, authProvider.name);
     await _storageBox!.put(_lastAccountIdKey, accountId);
+    if ((serverAccessToken ?? '').isNotEmpty) {
+      await _storageBox!.put(_serverAccessTokenKey, serverAccessToken);
+    } else {
+      await _storageBox!.delete(_serverAccessTokenKey);
+    }
   }
 
   Future<void> _clearPersistedAuthSession() async {
     if (_storageBox == null) return;
     await _storageBox!.delete(_lastAuthProviderKey);
     await _storageBox!.delete(_lastAccountIdKey);
+    await _storageBox!.delete(_serverAccessTokenKey);
   }
 
   Future<void> _restoreSavedSession() async {
@@ -269,6 +335,23 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> _restoreSavedLocalSession(String savedAccountId) async {
+    if (AppServerConfig.isConfigured && (serverAccessToken ?? '').isNotEmpty) {
+      try {
+        final profile = await _fetchRemoteProfile();
+        isLoggedIn = true;
+        isGoogleLinked = false;
+        authProvider = AuthProviderType.local;
+        driveBackupEnabled = false;
+        displayName = profile['nickname']?.toString() ?? 'Deokive User';
+        accountId = profile['login_id']?.toString() ?? savedAccountId;
+        tag = profile['tag']?.toString() ?? _allocateTag();
+        profileImageUrl = profile['profile_image_url'] as String?;
+        profileImageBytes = null;
+        await _loadServerBackupSnapshotIfNeeded();
+        return;
+      } catch (_) {}
+    }
+
     final account = _findLocalAccount(savedAccountId);
     if (account == null) {
       await _clearPersistedAuthSession();
@@ -285,6 +368,7 @@ class AppState extends ChangeNotifier {
     profileImageUrl = null;
     final savedImage = account['profileImageBytes'];
     profileImageBytes = savedImage is Uint8List ? savedImage : null;
+    serverAccessToken = null;
   }
 
   Future<void> _restoreSavedGoogleSession(String savedAccountId) async {
@@ -316,6 +400,7 @@ class AppState extends ChangeNotifier {
       googleSignInError = null;
       driveBackupError = null;
       driveBackupLastSyncedAt = null;
+      await _restoreDriveBackupIfAvailable(account);
     } catch (_) {
       await _clearPersistedAuthSession();
     }
@@ -368,56 +453,154 @@ class AppState extends ChangeNotifier {
     );
   }
 
+  Map<String, dynamic> _buildAccountPayload() {
+    return <String, dynamic>{
+      'savedAt': DateTime.now().toIso8601String(),
+      'accountKey': _currentStorageAccountKey,
+      'accountId': accountId,
+      'authProvider': authProvider.name,
+      'driveBackupEnabled': driveBackupEnabled,
+      'profile': <String, dynamic>{
+        'displayName': displayName,
+        'tag': tag,
+        'profileImageBytes': profileImageBytes,
+        'profileImageUrl': profileImageUrl,
+        'avatar': <String, dynamic>{
+          'bodyType': avatarBodyType,
+          'backgroundType': avatarBackgroundType,
+          'faceType': avatarFaceType,
+          'hairStyle': avatarHairStyle,
+          'hairColorIndex': avatarHairColorIndex,
+          'accentColorIndex': avatarAccentColorIndex,
+          'outfitColorIndex': avatarOutfitColorIndex,
+          'skinToneIndex': avatarSkinToneIndex,
+          'hasHat': avatarHasHat,
+          'hasCape': avatarHasCape,
+          'hasHandheld': avatarHasHandheld,
+          'hasBackRibbon': avatarHasBackRibbon,
+        },
+      },
+      'folders': folders.map((item) => item.toJson()).toList(),
+      'goodsItems': goodsItems.map((item) => item.toJson()).toList(),
+      'calendarEvents': calendarEvents.map((item) => item.toJson()).toList(),
+      'inquiries': inquiries.map((item) => item.toJson()).toList(),
+      'equippedBadgeIds': [...equippedBadgeIds],
+      'purchaseRecords': <Map<String, dynamic>>[],
+      'monetization': <String, dynamic>{
+        'premiumEnabled': premiumEnabled,
+        'adsRemoved': adsRemoved,
+        'debugAdsEnabled': debugAdsEnabled,
+      },
+      'permissionFlags': <String, dynamic>{
+        'canEditProfile': canEditProfile,
+        'pushEnabled': pushEnabled,
+        'darkModeEnabled': darkModeEnabled,
+      },
+    };
+  }
+
+  Future<void> _writeAccountPayloadToFile(
+    File file,
+    Map<String, dynamic> payload,
+  ) async {
+    await file.writeAsString(
+      const JsonEncoder.withIndent('  ').convert(payload),
+      flush: true,
+    );
+  }
+
+  void _resetAccountCollections() {
+    folders.clear();
+    goodsItems.clear();
+    calendarEvents.clear();
+    inquiries.clear();
+    equippedBadgeIds.clear();
+    premiumEnabled = false;
+    adsRemoved = false;
+    debugAdsEnabled = true;
+    _resetAvatarSelection();
+    _ensureDefaultFolder();
+  }
+
+  void _applyAccountPayload(Map<String, dynamic> json) {
+    final loadedFolders = ((json['folders'] as List<dynamic>?) ?? const [])
+        .map((item) => FolderItem.fromJson(Map<String, dynamic>.from(item as Map)))
+        .toList();
+    final loadedGoods = ((json['goodsItems'] as List<dynamic>?) ?? const [])
+        .map((item) => GoodsItem.fromJson(Map<String, dynamic>.from(item as Map)))
+        .toList();
+    final loadedEvents = ((json['calendarEvents'] as List<dynamic>?) ?? const [])
+        .map((item) => CalendarEventItem.fromJson(Map<String, dynamic>.from(item as Map)))
+        .toList();
+    final loadedInquiries = ((json['inquiries'] as List<dynamic>?) ?? const [])
+        .map((item) => SupportInquiryItem.fromJson(Map<String, dynamic>.from(item as Map)))
+        .toList();
+    final loadedBadges = ((json['equippedBadgeIds'] as List<dynamic>?) ?? const [])
+        .map((item) => item.toString())
+        .toList();
+    final monetization =
+        Map<String, dynamic>.from(json['monetization'] as Map? ?? const {});
+    final profile = Map<String, dynamic>.from(json['profile'] as Map? ?? const {});
+    final avatar = Map<String, dynamic>.from(profile['avatar'] as Map? ?? const {});
+
+    folders
+      ..clear()
+      ..addAll(loadedFolders);
+    goodsItems
+      ..clear()
+      ..addAll(loadedGoods);
+    calendarEvents
+      ..clear()
+      ..addAll(loadedEvents);
+    inquiries
+      ..clear()
+      ..addAll(loadedInquiries);
+    equippedBadgeIds
+      ..clear()
+      ..addAll(loadedBadges);
+    displayName = (profile['displayName'] as String?)?.trim().isNotEmpty == true
+        ? (profile['displayName'] as String).trim()
+        : displayName;
+    tag = (profile['tag'] as String?)?.trim().isNotEmpty == true
+        ? (profile['tag'] as String).trim()
+        : tag;
+    final savedProfileImageBytes = _decodeImageBytes(profile['profileImageBytes']);
+    if (savedProfileImageBytes != null) {
+      profileImageBytes = savedProfileImageBytes;
+      profileImageUrl = null;
+    } else {
+      final savedProfileImageUrl = profile['profileImageUrl'] as String?;
+      if ((savedProfileImageUrl ?? '').isNotEmpty) {
+        profileImageUrl = savedProfileImageUrl;
+      }
+    }
+    avatarBodyType = avatar['bodyType'] as int? ?? avatarBodyType;
+    avatarBackgroundType = avatar['backgroundType'] as int? ?? avatarBackgroundType;
+    avatarFaceType = avatar['faceType'] as int? ?? avatarFaceType;
+    avatarHairStyle = avatar['hairStyle'] as int? ?? avatarHairStyle;
+    avatarHairColorIndex = avatar['hairColorIndex'] as int? ?? avatarHairColorIndex;
+    avatarAccentColorIndex =
+        avatar['accentColorIndex'] as int? ?? avatarAccentColorIndex;
+    avatarOutfitColorIndex =
+        avatar['outfitColorIndex'] as int? ?? avatarOutfitColorIndex;
+    avatarSkinToneIndex = avatar['skinToneIndex'] as int? ?? avatarSkinToneIndex;
+    avatarHasHat = avatar['hasHat'] as bool? ?? avatarHasHat;
+    avatarHasCape = avatar['hasCape'] as bool? ?? avatarHasCape;
+    avatarHasHandheld = avatar['hasHandheld'] as bool? ?? avatarHasHandheld;
+    avatarHasBackRibbon =
+        avatar['hasBackRibbon'] as bool? ?? avatarHasBackRibbon;
+    premiumEnabled = monetization['premiumEnabled'] as bool? ?? premiumEnabled;
+    adsRemoved = monetization['adsRemoved'] as bool? ?? adsRemoved;
+    debugAdsEnabled = monetization['debugAdsEnabled'] as bool? ?? debugAdsEnabled;
+
+    _ensureDefaultFolder();
+  }
+
   Future<void> _saveAccountData() async {
     try {
       final file = await _accountStorageFile();
-      final payload = <String, dynamic>{
-        'savedAt': DateTime.now().toIso8601String(),
-        'accountKey': _currentStorageAccountKey,
-        'accountId': accountId,
-        'authProvider': authProvider.name,
-        'driveBackupEnabled': driveBackupEnabled,
-        'profile': <String, dynamic>{
-          'displayName': displayName,
-          'tag': tag,
-          'profileImageBytes': profileImageBytes,
-          'profileImageUrl': profileImageUrl,
-          'avatar': <String, dynamic>{
-            'bodyType': avatarBodyType,
-            'backgroundType': avatarBackgroundType,
-            'faceType': avatarFaceType,
-            'hairStyle': avatarHairStyle,
-            'hairColorIndex': avatarHairColorIndex,
-            'accentColorIndex': avatarAccentColorIndex,
-            'outfitColorIndex': avatarOutfitColorIndex,
-            'skinToneIndex': avatarSkinToneIndex,
-            'hasHat': avatarHasHat,
-            'hasCape': avatarHasCape,
-            'hasHandheld': avatarHasHandheld,
-            'hasBackRibbon': avatarHasBackRibbon,
-          },
-        },
-        'folders': folders.map((item) => item.toJson()).toList(),
-        'goodsItems': goodsItems.map((item) => item.toJson()).toList(),
-        'calendarEvents': calendarEvents.map((item) => item.toJson()).toList(),
-        'inquiries': inquiries.map((item) => item.toJson()).toList(),
-        'equippedBadgeIds': [...equippedBadgeIds],
-        'purchaseRecords': <Map<String, dynamic>>[],
-        'monetization': <String, dynamic>{
-          'premiumEnabled': premiumEnabled,
-          'adsRemoved': adsRemoved,
-          'debugAdsEnabled': debugAdsEnabled,
-        },
-        'permissionFlags': <String, dynamic>{
-          'canEditProfile': canEditProfile,
-          'pushEnabled': pushEnabled,
-          'darkModeEnabled': darkModeEnabled,
-        },
-      };
-      await file.writeAsString(
-        const JsonEncoder.withIndent('  ').convert(payload),
-        flush: true,
-      );
+      final payload = _buildAccountPayload();
+      await _writeAccountPayloadToFile(file, payload);
       _enqueueDriveBackup();
     } catch (_) {}
   }
@@ -425,135 +608,21 @@ class AppState extends ChangeNotifier {
   Future<void> _loadAccountData() async {
     try {
       if (authProvider == AuthProviderType.guest) {
-        folders.clear();
-        goodsItems.clear();
-        calendarEvents.clear();
-        inquiries.clear();
-        equippedBadgeIds.clear();
-        premiumEnabled = false;
-        adsRemoved = false;
-        debugAdsEnabled = true;
-        _resetAvatarSelection();
-        _ensureDefaultFolder();
+        _resetAccountCollections();
         return;
       }
 
       final file = await _accountStorageFile();
       if (!await file.exists()) {
-        folders.clear();
-        goodsItems.clear();
-        calendarEvents.clear();
-        inquiries.clear();
-        equippedBadgeIds.clear();
-        premiumEnabled = false;
-        adsRemoved = false;
-        debugAdsEnabled = true;
-        _resetAvatarSelection();
-        _ensureDefaultFolder();
+        _resetAccountCollections();
         return;
       }
 
       final raw = await file.readAsString();
       final json = jsonDecode(raw) as Map<String, dynamic>;
-
-      final loadedFolders = ((json['folders'] as List<dynamic>?) ?? const [])
-          .map((item) =>
-              FolderItem.fromJson(Map<String, dynamic>.from(item as Map)))
-          .toList();
-      final loadedGoods = ((json['goodsItems'] as List<dynamic>?) ?? const [])
-          .map((item) =>
-              GoodsItem.fromJson(Map<String, dynamic>.from(item as Map)))
-          .toList();
-      final loadedEvents =
-          ((json['calendarEvents'] as List<dynamic>?) ?? const [])
-              .map((item) => CalendarEventItem.fromJson(
-                  Map<String, dynamic>.from(item as Map)))
-              .toList();
-      final loadedInquiries =
-          ((json['inquiries'] as List<dynamic>?) ?? const [])
-              .map((item) => SupportInquiryItem.fromJson(
-                  Map<String, dynamic>.from(item as Map)))
-              .toList();
-      final loadedBadges =
-          ((json['equippedBadgeIds'] as List<dynamic>?) ?? const [])
-              .map((item) => item.toString())
-              .toList();
-      final monetization =
-          Map<String, dynamic>.from(json['monetization'] as Map? ?? const {});
-      final profile =
-          Map<String, dynamic>.from(json['profile'] as Map? ?? const {});
-      final avatar =
-          Map<String, dynamic>.from(profile['avatar'] as Map? ?? const {});
-
-      folders
-        ..clear()
-        ..addAll(loadedFolders);
-      goodsItems
-        ..clear()
-        ..addAll(loadedGoods);
-      calendarEvents
-        ..clear()
-        ..addAll(loadedEvents);
-      inquiries
-        ..clear()
-        ..addAll(loadedInquiries);
-      equippedBadgeIds
-        ..clear()
-        ..addAll(loadedBadges);
-      displayName =
-          (profile['displayName'] as String?)?.trim().isNotEmpty == true
-              ? (profile['displayName'] as String).trim()
-              : displayName;
-      tag = (profile['tag'] as String?)?.trim().isNotEmpty == true
-          ? (profile['tag'] as String).trim()
-          : tag;
-      final savedProfileImageBytes =
-          _decodeImageBytes(profile['profileImageBytes']);
-      if (savedProfileImageBytes != null) {
-        profileImageBytes = savedProfileImageBytes;
-        profileImageUrl = null;
-      } else {
-        final savedProfileImageUrl = profile['profileImageUrl'] as String?;
-        if ((savedProfileImageUrl ?? '').isNotEmpty) {
-          profileImageUrl = savedProfileImageUrl;
-        }
-      }
-      avatarBodyType = avatar['bodyType'] as int? ?? avatarBodyType;
-      avatarBackgroundType =
-          avatar['backgroundType'] as int? ?? avatarBackgroundType;
-      avatarFaceType = avatar['faceType'] as int? ?? avatarFaceType;
-      avatarHairStyle = avatar['hairStyle'] as int? ?? avatarHairStyle;
-      avatarHairColorIndex =
-          avatar['hairColorIndex'] as int? ?? avatarHairColorIndex;
-      avatarAccentColorIndex =
-          avatar['accentColorIndex'] as int? ?? avatarAccentColorIndex;
-      avatarOutfitColorIndex =
-          avatar['outfitColorIndex'] as int? ?? avatarOutfitColorIndex;
-      avatarSkinToneIndex =
-          avatar['skinToneIndex'] as int? ?? avatarSkinToneIndex;
-      avatarHasHat = avatar['hasHat'] as bool? ?? avatarHasHat;
-      avatarHasCape = avatar['hasCape'] as bool? ?? avatarHasCape;
-      avatarHasHandheld = avatar['hasHandheld'] as bool? ?? avatarHasHandheld;
-      avatarHasBackRibbon =
-          avatar['hasBackRibbon'] as bool? ?? avatarHasBackRibbon;
-      premiumEnabled =
-          monetization['premiumEnabled'] as bool? ?? premiumEnabled;
-      adsRemoved = monetization['adsRemoved'] as bool? ?? adsRemoved;
-      debugAdsEnabled =
-          monetization['debugAdsEnabled'] as bool? ?? debugAdsEnabled;
-
-      _ensureDefaultFolder();
+      _applyAccountPayload(json);
     } catch (_) {
-      folders.clear();
-      goodsItems.clear();
-      calendarEvents.clear();
-      inquiries.clear();
-      equippedBadgeIds.clear();
-      premiumEnabled = false;
-      adsRemoved = false;
-      debugAdsEnabled = true;
-      _resetAvatarSelection();
-      _ensureDefaultFolder();
+      _resetAccountCollections();
     }
   }
 
@@ -611,6 +680,15 @@ class AppState extends ChangeNotifier {
     }
     return '일반 계정은 주기적인 클라우드 백업이 제한될 수 있습니다.';
   }
+
+  bool get isBusy =>
+      syncDialogVisible || driveBackupInProgress || localServerBackupInProgress;
+
+  bool get hasPendingRestorePrompt =>
+      pendingRestoreSnapshot != null && !_serverBackupPromptDismissed;
+
+  bool get canUseServerBackups =>
+      AppServerConfig.isConfigured && authProvider == AuthProviderType.local;
 
   String get nextDefaultTag => '@deokive$_signupSequence';
 
@@ -738,6 +816,7 @@ class AppState extends ChangeNotifier {
     driveBackupError = null;
     driveBackupLastSyncedAt = null;
     await _persistAuthSession();
+    await _restoreDriveBackupIfAvailable(account);
     await _loadAccountData();
     unawaited(_prepareDriveBackup(account));
     notifyListeners();
@@ -786,11 +865,70 @@ class AppState extends ChangeNotifier {
     if (hasDriveAccess) {
       googleSignInError = null;
       driveBackupError = null;
+      await _restoreDriveBackupIfAvailable(account);
       _enqueueDriveBackup();
     } else {
       driveBackupError = 'drive_scope_missing';
     }
     notifyListeners();
+  }
+
+  Future<void> _restoreDriveBackupIfAvailable(GoogleSignInAccount account) async {
+    try {
+      if (!await _hasDriveBackupAccess(account)) {
+        return;
+      }
+
+      final localFile = await _accountStorageFile();
+      if (await localFile.exists()) {
+        return;
+      }
+
+      var authHeaders = await account.authHeaders;
+      if (!authHeaders.containsKey('Authorization')) {
+        return;
+      }
+
+      final backupFileName =
+          'deokive_backup_${_sanitizeStorageKey(accountId)}.json';
+      final existingFileId = await _findDriveBackupFileId(
+        authHeaders: authHeaders,
+        fileName: backupFileName,
+      );
+      if (existingFileId == null) {
+        return;
+      }
+
+      try {
+        final mediaBytes = await _downloadDriveBackup(
+          authHeaders: authHeaders,
+          fileId: existingFileId,
+        );
+        await _writeDriveBackupToLocalFile(
+          localFile: localFile,
+          mediaBytes: mediaBytes,
+        );
+        driveBackupLastSyncedAt = DateTime.now().toIso8601String();
+      } on HttpException catch (error) {
+        final message = error.message.toLowerCase();
+        if (!message.contains('401')) {
+          rethrow;
+        }
+        await account.clearAuthCache();
+        authHeaders = await account.authHeaders;
+        final mediaBytes = await _downloadDriveBackup(
+          authHeaders: authHeaders,
+          fileId: existingFileId,
+        );
+        await _writeDriveBackupToLocalFile(
+          localFile: localFile,
+          mediaBytes: mediaBytes,
+        );
+        driveBackupLastSyncedAt = DateTime.now().toIso8601String();
+      }
+    } catch (error) {
+      driveBackupError = error.toString();
+    }
   }
 
   Future<bool> _ensureDriveBackupAccess(GoogleSignInAccount account) async {
@@ -883,17 +1021,28 @@ class AppState extends ChangeNotifier {
       throw StateError('Google Drive authorization is missing.');
     }
 
-    final file = await _accountStorageFile();
-    if (!await file.exists()) {
-      await _saveAccountData();
-    }
-    final mediaBytes = await file.readAsBytes();
     final backupFileName =
         'deokive_backup_${_sanitizeStorageKey(accountId)}.json';
     final existingFileId = await _findDriveBackupFileId(
       authHeaders: authHeaders,
       fileName: backupFileName,
     );
+    final file = await _accountStorageFile();
+    if (!await file.exists()) {
+      if (existingFileId != null) {
+        final mediaBytes = await _downloadDriveBackup(
+          authHeaders: authHeaders,
+          fileId: existingFileId,
+        );
+        await _writeDriveBackupToLocalFile(
+          localFile: file,
+          mediaBytes: mediaBytes,
+        );
+        return;
+      }
+      await _saveAccountData();
+    }
+    final mediaBytes = await file.readAsBytes();
     try {
       await _uploadDriveBackup(
         authHeaders: authHeaders,
@@ -1010,6 +1159,201 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  Future<List<int>> _downloadDriveBackup({
+    required Map<String, String> authHeaders,
+    required String fileId,
+  }) async {
+    final uri = Uri.https(
+      'www.googleapis.com',
+      '/drive/v3/files/$fileId',
+      const {'alt': 'media'},
+    );
+    final response = await http.get(uri, headers: authHeaders);
+    if (response.statusCode != 200) {
+      throw HttpException(
+        'Drive download failed with ${response.statusCode}: ${response.body}',
+      );
+    }
+    return response.bodyBytes;
+  }
+
+  Future<void> _writeDriveBackupToLocalFile({
+    required File localFile,
+    required List<int> mediaBytes,
+  }) async {
+    final decoded = utf8.decode(mediaBytes);
+    jsonDecode(decoded) as Map<String, dynamic>;
+    await localFile.writeAsBytes(mediaBytes, flush: true);
+  }
+
+  Uri? _serverUri(String path) {
+    final baseUrl = AppServerConfig.serverBaseUrl;
+    if (baseUrl == null) return null;
+    return Uri.parse('$baseUrl$path');
+  }
+
+  Map<String, String> _jsonHeaders({bool includeAuth = false}) {
+    final headers = <String, String>{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+    if (includeAuth && (serverAccessToken ?? '').isNotEmpty) {
+      headers['Authorization'] = 'Bearer $serverAccessToken';
+    }
+    return headers;
+  }
+
+  void _showSyncDialog(String message) {
+    syncDialogVisible = true;
+    syncStatusMessage = message;
+    notifyListeners();
+  }
+
+  void _hideSyncDialog() {
+    syncDialogVisible = false;
+    syncStatusMessage = null;
+    notifyListeners();
+  }
+
+  Future<Map<String, dynamic>> _readServerJson(http.Response response) async {
+    final decoded = jsonDecode(utf8.decode(response.bodyBytes));
+    return Map<String, dynamic>.from(decoded as Map);
+  }
+
+  Future<Map<String, dynamic>> _fetchRemoteProfile() async {
+    final uri = _serverUri('/me');
+    if (uri == null) {
+      throw StateError('Server base URL is not configured.');
+    }
+    final response = await http.get(uri, headers: _jsonHeaders(includeAuth: true));
+    if (response.statusCode != 200) {
+      throw HttpException('Profile fetch failed with ${response.statusCode}.');
+    }
+    return _readServerJson(response);
+  }
+
+  Future<void> _loadServerBackupSnapshotIfNeeded() async {
+    pendingRestoreSnapshot = null;
+    localServerBackupError = null;
+    _serverBackupPromptDismissed = false;
+
+    if (!canUseServerBackups || (serverAccessToken ?? '').isEmpty) {
+      return;
+    }
+
+    final localFile = await _accountStorageFile();
+    if (await localFile.exists()) {
+      return;
+    }
+
+    final uri = _serverUri('/backup/snapshot');
+    if (uri == null) return;
+
+    final response = await http.get(uri, headers: _jsonHeaders(includeAuth: true));
+    if (response.statusCode == 404) {
+      return;
+    }
+    if (response.statusCode != 200) {
+      localServerBackupError =
+          'server_backup_lookup_${response.statusCode.toString()}';
+      return;
+    }
+
+    final json = await _readServerJson(response);
+    final uploadedAt = json['uploaded_at']?.toString() ?? '';
+    pendingRestoreSnapshot = BackupSnapshotInfo(
+      source: 'server',
+      uploadedAt: uploadedAt,
+      payloadBytes: json['payload_bytes'] as int?,
+    );
+  }
+
+  Future<bool> restorePendingServerBackup() async {
+    if (!canUseServerBackups || pendingRestoreSnapshot == null) return false;
+
+    final uri = _serverUri('/backup/snapshot');
+    if (uri == null) return false;
+
+    _showSyncDialog('서버 백업에서 데이터를 불러오는 중입니다.');
+    try {
+      localServerBackupInProgress = true;
+      notifyListeners();
+      final response =
+          await http.get(uri, headers: _jsonHeaders(includeAuth: true));
+      if (response.statusCode != 200) {
+        localServerBackupError =
+            'server_backup_restore_${response.statusCode.toString()}';
+        return false;
+      }
+      final json = await _readServerJson(response);
+      final payload = Map<String, dynamic>.from(json['payload'] as Map);
+      final file = await _accountStorageFile();
+      await _writeAccountPayloadToFile(file, payload);
+      await _loadAccountData();
+      localServerBackupLastSyncedAt =
+          json['uploaded_at']?.toString() ?? DateTime.now().toIso8601String();
+      pendingRestoreSnapshot = null;
+      _serverBackupPromptDismissed = false;
+      await _persistStorageValues();
+      return true;
+    } catch (_) {
+      localServerBackupError = 'server_backup_restore_failed';
+      return false;
+    } finally {
+      localServerBackupInProgress = false;
+      _hideSyncDialog();
+    }
+  }
+
+  Future<void> dismissPendingServerBackup() async {
+    pendingRestoreSnapshot = null;
+    _serverBackupPromptDismissed = true;
+    await _persistStorageValues();
+    notifyListeners();
+  }
+
+  Future<bool> uploadLocalBackupToServer() async {
+    if (!canUseServerBackups || (serverAccessToken ?? '').isEmpty) {
+      return false;
+    }
+
+    final uri = _serverUri('/backup/snapshot');
+    if (uri == null) return false;
+
+    _showSyncDialog('임시 서버 백업을 업로드하는 중입니다.');
+    try {
+      localServerBackupInProgress = true;
+      localServerBackupError = null;
+      notifyListeners();
+
+      final payload = _buildAccountPayload();
+      final response = await http.put(
+        uri,
+        headers: _jsonHeaders(includeAuth: true),
+        body: jsonEncode(<String, dynamic>{
+          'payload': payload,
+          'source': 'manual_local_backup',
+        }),
+      );
+      if (response.statusCode != 200) {
+        localServerBackupError =
+            'server_backup_upload_${response.statusCode.toString()}';
+        return false;
+      }
+      final json = await _readServerJson(response);
+      localServerBackupLastSyncedAt =
+          json['uploaded_at']?.toString() ?? DateTime.now().toIso8601String();
+      return true;
+    } catch (_) {
+      localServerBackupError = 'server_backup_upload_failed';
+      return false;
+    } finally {
+      localServerBackupInProgress = false;
+      _hideSyncDialog();
+      notifyListeners();
+    }
+  }
+
   Map<String, dynamic>? _findLocalAccount(String id) {
     for (final account in _localAccounts) {
       if (account['id'] == id) {
@@ -1024,7 +1368,51 @@ class AppState extends ChangeNotifier {
     required String password,
   }) async {
     await _ensureStorageReady();
-    final account = _findLocalAccount(id.trim());
+    final normalizedId = id.trim();
+
+    if (AppServerConfig.isConfigured) {
+      final uri = _serverUri('/auth/login');
+      if (uri != null) {
+        _showSyncDialog('계정 정보를 확인하는 중입니다.');
+        try {
+          final response = await http.post(
+            uri,
+            headers: _jsonHeaders(),
+            body: jsonEncode(<String, dynamic>{
+              'login_id': normalizedId,
+              'password': password,
+            }),
+          );
+          if (response.statusCode == 200) {
+            final tokenJson = await _readServerJson(response);
+            serverAccessToken = tokenJson['access_token']?.toString();
+            final profile = await _fetchRemoteProfile();
+
+            isLoggedIn = true;
+            isGoogleLinked = false;
+            authProvider = AuthProviderType.local;
+            driveBackupEnabled = false;
+            displayName = profile['nickname']?.toString() ?? 'Deokive User';
+            accountId = profile['login_id']?.toString() ?? normalizedId;
+            tag = profile['tag']?.toString() ?? _allocateTag();
+            profileImageUrl = profile['profile_image_url'] as String?;
+            profileImageBytes = null;
+
+            await _persistAuthSession();
+            await _loadAccountData();
+            await _loadServerBackupSnapshotIfNeeded();
+            notifyListeners();
+            return true;
+          }
+        } catch (_) {
+          localServerBackupError = 'server_login_failed';
+        } finally {
+          _hideSyncDialog();
+        }
+      }
+    }
+
+    final account = _findLocalAccount(normalizedId);
     if (account == null) return false;
     if (account['password'] != password) return false;
 
@@ -1033,9 +1421,10 @@ class AppState extends ChangeNotifier {
     authProvider = AuthProviderType.local;
     driveBackupEnabled = false;
     displayName = (account['nickname'] as String?) ?? 'Deokive User';
-    accountId = (account['id'] as String?) ?? id.trim();
+    accountId = (account['id'] as String?) ?? normalizedId;
     tag = (account['tag'] as String?) ?? _allocateTag();
     profileImageUrl = null;
+    serverAccessToken = null;
 
     final savedImage = account['profileImageBytes'];
     profileImageBytes = savedImage is Uint8List ? savedImage : null;
@@ -1053,6 +1442,50 @@ class AppState extends ChangeNotifier {
   }) async {
     await _ensureStorageReady();
     final normalizedId = id.trim();
+
+    if (AppServerConfig.isConfigured) {
+      final uri = _serverUri('/auth/signup');
+      if (uri != null) {
+        _showSyncDialog('계정을 생성하는 중입니다.');
+        try {
+          final response = await http.post(
+            uri,
+            headers: _jsonHeaders(),
+            body: jsonEncode(<String, dynamic>{
+              'login_id': normalizedId,
+              'password': password,
+              'nickname': nickname.trim(),
+            }),
+          );
+          if (response.statusCode == 201) {
+            final tokenJson = await _readServerJson(response);
+            serverAccessToken = tokenJson['access_token']?.toString();
+            final profile = await _fetchRemoteProfile();
+
+            isLoggedIn = true;
+            isGoogleLinked = false;
+            authProvider = AuthProviderType.local;
+            driveBackupEnabled = false;
+            displayName = profile['nickname']?.toString() ?? nickname.trim();
+            accountId = profile['login_id']?.toString() ?? normalizedId;
+            tag = profile['tag']?.toString() ?? _allocateTag();
+            profileImageBytes = null;
+            profileImageUrl = profile['profile_image_url'] as String?;
+            await _persistAuthSession();
+            await _saveAccountData();
+            notifyListeners();
+            return true;
+          }
+          return false;
+        } catch (_) {
+          localServerBackupError = 'server_signup_failed';
+          return false;
+        } finally {
+          _hideSyncDialog();
+        }
+      }
+    }
+
     if (_findLocalAccount(normalizedId) != null) {
       return false;
     }
@@ -1076,6 +1509,7 @@ class AppState extends ChangeNotifier {
     displayName = nickname.trim();
     accountId = normalizedId;
     tag = allocatedTag;
+    serverAccessToken = null;
     profileImageBytes = null;
     profileImageUrl = null;
     await _persistAuthSession();
@@ -1097,6 +1531,14 @@ class AppState extends ChangeNotifier {
     driveBackupInProgress = false;
     driveBackupLastSyncedAt = null;
     driveBackupError = null;
+    syncDialogVisible = false;
+    syncStatusMessage = null;
+    localServerBackupInProgress = false;
+    localServerBackupLastSyncedAt = null;
+    localServerBackupError = null;
+    pendingRestoreSnapshot = null;
+    serverAccessToken = null;
+    _serverBackupPromptDismissed = false;
     authProvider = AuthProviderType.guest;
     displayName = 'Guest';
     accountId = '로그인이 필요합니다';
@@ -1152,6 +1594,23 @@ class AppState extends ChangeNotifier {
         account['tag'] = tag;
         account['profileImageBytes'] = profileImageBytes;
         _persistStorageValues();
+      }
+
+      if (canUseServerBackups && (serverAccessToken ?? '').isNotEmpty) {
+        final uri = _serverUri('/me');
+        if (uri != null) {
+          http
+              .patch(
+                uri,
+                headers: _jsonHeaders(includeAuth: true),
+                body: jsonEncode(<String, dynamic>{
+                  'nickname': displayName,
+                  'tag': tag,
+                  'profile_image_url': profileImageUrl,
+                }),
+              )
+              .catchError((_) {});
+        }
       }
     }
 

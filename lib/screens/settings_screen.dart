@@ -387,9 +387,39 @@ class SettingsScreen extends StatelessWidget {
                             ),
                           ),
                         ],
+                        if (appState.canUseServerBackups) ...[
+                          const SizedBox(height: 8),
+                          SizedBox(
+                            width: double.infinity,
+                            child: FilledButton.tonalIcon(
+                              onPressed: appState.localServerBackupInProgress
+                                  ? null
+                                  : () async {
+                                      final success = await appState
+                                          .uploadLocalBackupToServer();
+                                      if (!context.mounted) return;
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            success
+                                                ? '임시 서버 백업이 저장되었습니다.'
+                                                : '임시 서버 백업 저장에 실패했습니다.',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                              icon: const Icon(Icons.cloud_upload_outlined),
+                              label: Text(
+                                appState.localServerBackupInProgress
+                                    ? '서버 백업 준비 중..'
+                                    : '임시 서버 백업',
+                              ),
+                            ),
+                          ),
+                        ],
                       ],
-                    ],
-                  ),
+                    ),
                 ),
               ),
               const SizedBox(height: 16),
