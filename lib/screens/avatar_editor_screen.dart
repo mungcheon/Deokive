@@ -52,7 +52,7 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: Consumer<AppState>(
         builder: (context, appState, _) {
           final palette = Theme.of(context).extension<DeokivePalette>()!;
@@ -66,6 +66,7 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> {
                   Tab(text: '배경'),
                   Tab(text: '바디'),
                   Tab(text: '헤어'),
+                  Tab(text: '얼굴'),
                   Tab(text: '옷'),
                   Tab(text: '소품'),
                 ],
@@ -88,8 +89,7 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(24),
                                   border: Border.all(
-                                    color:
-                                        palette.primary.withValues(alpha: 0.42),
+                                    color: palette.primary.withValues(alpha: 0.42),
                                     width: 1.4,
                                   ),
                                 ),
@@ -97,11 +97,12 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> {
                                   palette: palette,
                                   bodyType: appState.avatarBodyType,
                                   backgroundType: appState.avatarBackgroundType,
-                                  faceType: -1,
                                   hairStyle: appState.avatarHairStyle,
-                                  hairColorIndex: 0,
-                                  accentColorIndex: 0,
-                                  outfitColorIndex: -1,
+                                  hairColorIndex: appState.avatarHairColorIndex,
+                                  accentColorIndex:
+                                      appState.avatarAccentColorIndex,
+                                  outfitColorIndex:
+                                      appState.avatarOutfitColorIndex,
                                   skinToneIndex: appState.avatarSkinToneIndex,
                                   hasHat: appState.avatarHasHat,
                                   hasCape: appState.avatarHasCape,
@@ -116,8 +117,7 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> {
                             right: 10,
                             child: FilledButton.icon(
                               onPressed: _savePreviewImage,
-                              icon:
-                                  const Icon(Icons.download_rounded, size: 18),
+                              icon: const Icon(Icons.download_rounded, size: 18),
                               label: const Text('이미지 저장'),
                               style: FilledButton.styleFrom(
                                 visualDensity: VisualDensity.compact,
@@ -136,6 +136,7 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> {
                       _BackgroundTab(appState: appState),
                       _BodyTab(appState: appState),
                       _HairTab(appState: appState),
+                      _FaceTab(appState: appState),
                       _OutfitTab(appState: appState),
                       _AccessoryTab(appState: appState),
                     ],
@@ -280,6 +281,44 @@ class _HairTab extends StatelessWidget {
   }
 }
 
+class _FaceTab extends StatelessWidget {
+  final AppState appState;
+
+  const _FaceTab({required this.appState});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+      children: [
+        _EditorSection(
+          title: '얼굴 선택',
+          child: GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 0.82,
+            children: List.generate(
+              deokiveAvatarFaceLabels.length,
+              (index) => _PlaceholderChoiceTile(
+                label: deokiveAvatarFaceLabels[index],
+                subtitle: '이미지 연결 대기',
+                selected: appState.avatarSkinToneIndex == index,
+                onTap: () => appState.updateAvatar(
+                  skinToneIndex:
+                      appState.avatarSkinToneIndex == index ? -1 : index,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _OutfitTab extends StatelessWidget {
   final AppState appState;
 
@@ -291,18 +330,25 @@ class _OutfitTab extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
       children: [
         _EditorSection(
-          title: '의상',
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
-              color: Theme.of(context).colorScheme.surfaceContainerLowest,
-              border: Border.all(color: Theme.of(context).dividerColor),
-            ),
-            child: Text(
-              '현재 의상 색상 변경은 비활성화되어 있습니다.',
-              style: Theme.of(context).textTheme.bodyMedium,
+          title: '옷 선택',
+          child: GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 0.82,
+            children: List.generate(
+              deokiveAvatarOutfitLabels.length,
+              (index) => _PlaceholderChoiceTile(
+                label: deokiveAvatarOutfitLabels[index],
+                subtitle: '이미지 연결 대기',
+                selected: appState.avatarOutfitColorIndex == index,
+                onTap: () => appState.updateAvatar(
+                  outfitColorIndex:
+                      appState.avatarOutfitColorIndex == index ? -1 : index,
+                ),
+              ),
             ),
           ),
         ),
@@ -533,6 +579,82 @@ class _BackgroundChoiceTile extends StatelessWidget {
               style: theme.textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PlaceholderChoiceTile extends StatelessWidget {
+  final String label;
+  final String subtitle;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _PlaceholderChoiceTile({
+    required this.label,
+    required this.subtitle,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final palette = theme.extension<DeokivePalette>()!;
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(18),
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          color: selected
+              ? palette.primary.withValues(alpha: 0.10)
+              : theme.colorScheme.surface,
+          border: Border.all(
+            color: selected ? palette.primary : theme.dividerColor,
+            width: selected ? 2 : 1,
+          ),
+        ),
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  color: theme.colorScheme.surfaceContainerHighest,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.asset(deokiveAvatarUnsetAsset, fit: BoxFit.contain),
+                      if (selected)
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: _SelectedBadge(color: palette.primary),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              subtitle,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.labelSmall,
             ),
           ],
         ),

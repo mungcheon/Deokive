@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../config/monetization_catalog.dart';
 import '../models/badge_item.dart';
 import '../state/app_state.dart';
-import '../theme/deokive_palette.dart';
-import '../widgets/deokive_avatar.dart';
-import '../widgets/deokive_header_title.dart';
-import '../widgets/live_banner_ad.dart';
-import '../widgets/premium_gate_card.dart';
-import 'avatar_editor_screen.dart';
 import 'badge_screen.dart';
 import 'news_detail_screen.dart';
 import 'news_list_screen.dart';
@@ -22,9 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final PageController _pageController = PageController(viewportFraction: 0.92);
+  final PageController _pageController = PageController(viewportFraction: 0.94);
   int _currentPage = 0;
-  String? _checkedPopupDate;
 
   @override
   void dispose() {
@@ -32,318 +24,202 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  void _openNews(BuildContext context, _HomePost post) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => NewsDetailScreen(
-          title: post.title,
-          date: post.date,
-          content: post.content,
-        ),
-      ),
-    );
+  void _goToPreviousPage() {
+    if (_currentPage > 0) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 260),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
-  void _showHomePromoPopupIfNeeded(AppState appState) {
-    if (_checkedPopupDate == appState.todayStamp ||
-        !appState.shouldShowHomePromoPopup) {
-      return;
-    }
-    _checkedPopupDate = appState.todayStamp;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      showDialog(
-        context: context,
-        builder: (dialogContext) {
-          final theme = Theme.of(dialogContext);
-          final palette = theme.extension<DeokivePalette>()!;
-          return AlertDialog(
-            contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-            content: SizedBox(
-              width: 360,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(18),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(
-                        colors: [
-                          palette.primary.withValues(alpha: 0.18),
-                          palette.accent.withValues(alpha: 0.18),
-                        ],
-                      ),
-                    ),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '오늘의 추천',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          '배지 컬렉션과 홈 기능을 더 넓게 쓰고 싶다면 프리미엄 기능을 확인해보세요.',
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  Text(
-                    '이 팝업은 홈 진입 시 노출되며, 하루 동안 보지 않기를 선택할 수 있습니다.',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () async {
-                  await appState.dismissHomePromoPopupForToday();
-                  if (!dialogContext.mounted) return;
-                  Navigator.pop(dialogContext);
-                },
-                child: const Text('하루 동안 보지 않기'),
-              ),
-              FilledButton(
-                onPressed: () => Navigator.pop(dialogContext),
-                child: const Text('닫기'),
-              ),
-            ],
-          );
-        },
+  void _goToNextPage(int itemCount) {
+    if (_currentPage < itemCount - 1) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 260),
+        curve: Curves.easeOut,
       );
-    });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, appState, _) {
-        _showHomePromoPopupIfNeeded(appState);
+        final equippedBadges = appState.equippedBadges;
 
-        final notices = [
-          const _HomePost(
-            title: '홈 쇼케이스가 새롭게 정리되었어요',
-            date: '2026-03-11',
-            summary: '프로필 포토카드와 배지 전시대를 홈에서 바로 확인할 수 있어요.',
-            content:
-                '홈 상단에 Deokive 포토카드형 프로필을 배치했습니다.\n\n대표 정보와 배지 전시대, 빠른 이동 흐름을 한 카드 안에 담았습니다.',
-          ),
-          const _HomePost(
-            title: '배지 컬렉션 구성이 개선되었어요',
-            date: '2026-03-10',
-            summary: '카테고리별 확인과 장착 관리가 더 자연스러워졌어요.',
-            content: '배지 컬렉션 화면에서 카테고리별로 확인하고, 홈 쇼케이스 배지 전시대와 바로 연결됩니다.',
-          ),
+        final notices = <Map<String, String>>[
+          {
+            'title': '홈 쇼케이스 업데이트 안내',
+            'date': '2026-03-11',
+            'summary': '프로필 포토카드형 쇼케이스와 배지 진열장이 추가되었습니다.',
+            'content':
+                '홈 탭 상단에 Deokive 쇼케이스 프로필이 추가되었습니다.\n\n대표 배지는 배지 컬렉션에서 장착할 수 있고, 장착한 배지는 홈 쇼케이스 진열장에 바로 반영됩니다.',
+          },
+          {
+            'title': '배지 컬렉션 개선',
+            'date': '2026-03-10',
+            'summary': '카테고리별 배지를 접고 펼칠 수 있도록 바뀌었습니다.',
+            'content':
+                '배지 컬렉션에서 굿즈 개수, 실구매가, 정리 활동 카테고리를 각각 펼치거나 접을 수 있습니다.\n\n대표 배지는 상단 슬롯에서 바로 해제할 수 있습니다.',
+          },
         ];
 
-        final goodsNews = [
-          const _HomePost(
-            title: '이번 주 굿즈 발매 소식',
-            date: '2026-03-11',
-            summary: '포토카드 세트와 행사 한정 MD 발매 일정을 모아봤어요.',
-            content:
-                '이번 주 발매 예정 굿즈를 정리했습니다.\n\n캘린더 탭에서도 같은 날짜 기준으로 확인할 수 있습니다.',
-          ),
-          const _HomePost(
-            title: '구매 전 체크 포인트',
-            date: '2026-03-09',
-            summary: '구성과 판매처 조건을 미리 확인하면 중복 구매를 줄일 수 있어요.',
-            content: '시리즈 정보와 판매처 메모를 함께 적어두면 원하는 굿즈를 다시 찾기 쉬워집니다.',
-          ),
+        final goodsNews = <Map<String, String>>[
+          {
+            'title': '이번 주 신규 굿즈 발매 정리',
+            'date': '2026-03-11',
+            'summary': '아크릴 스탠드와 포토카드 홀더 발매 소식을 모았습니다.',
+            'content':
+                '이번 주에는 아크릴 스탠드, 포토카드 홀더, 한정 특전 굿즈 발매가 예정되어 있습니다.\n\n관심 굿즈는 캘린더에 발매 일정으로 등록해두면 더 편하게 관리할 수 있습니다.',
+          },
+          {
+            'title': '한정판 재입고 체크',
+            'date': '2026-03-09',
+            'summary': '품절 상품 재입고와 수량 한정 판매 소식입니다.',
+            'content':
+                '인기 굿즈 재입고 소식과 함께 수량 한정 판매가 열리고 있습니다.\n\n원하는 상품은 폴더별로 정리해두고, 발매 일정과 함께 체크해두는 것을 추천합니다.',
+          },
         ];
 
-        final eventNews = [
-          const _HomePost(
-            title: '이번 달 행사 일정 모음',
-            date: '2026-03-11',
-            summary: '팝업, 전시, 이벤트 일정을 달력 기준으로 확인해보세요.',
-            content: '행사 일정과 개인 일정을 같은 달력 안에서 함께 볼 수 있도록 구성했습니다.',
-          ),
-          const _HomePost(
-            title: '행사 준비 체크리스트',
-            date: '2026-03-08',
-            summary: '입장 시간, 현장 수령, 특전 여부를 미리 정리해두세요.',
-            content: '행사 준비용 메모와 시간을 함께 기록하면 이동 동선 정리가 쉬워집니다.',
-          ),
+        final eventNews = <Map<String, String>>[
+          {
+            'title': '이번 달 행사 일정 모아보기',
+            'date': '2026-03-11',
+            'summary': '팝업, 전시, 팬 이벤트 일정을 한 번에 정리했습니다.',
+            'content':
+                '이번 달 예정된 팝업 스토어, 전시, 팬 이벤트 일정을 확인해보세요.\n\n가고 싶은 일정은 캘린더에 등록해두면 날짜별로 더 쉽게 확인할 수 있습니다.',
+          },
+          {
+            'title': '행사 체크 포인트',
+            'date': '2026-03-08',
+            'summary': '행사 전에 확인하면 좋은 준비 사항입니다.',
+            'content':
+                '입장 시간, 현장 구매 제한, 특전 수령 조건 등 행사 전 확인이 필요한 항목을 정리했습니다.\n\n행사 일정과 개인 일정은 캘린더에서 색상으로 구분해서 볼 수 있습니다.',
+          },
         ];
 
-        final menus = [
-          _HomeMenu(
-            title: '공지',
-            subtitle: '업데이트와 주요 안내',
-            icon: Icons.campaign_outlined,
-            posts: notices,
-          ),
-          _HomeMenu(
-            title: '굿즈 소식',
-            subtitle: '발매와 예약 정보',
-            icon: Icons.newspaper_outlined,
-            posts: goodsNews,
-          ),
-          _HomeMenu(
-            title: '행사 이벤트',
-            subtitle: '팝업, 전시, 이벤트 일정',
-            icon: Icons.event_note_outlined,
-            posts: eventNews,
-          ),
+        final newsMenus = [
+          {
+            'title': '공지',
+            'subtitle': '업데이트와 중요한 안내',
+            'icon': Icons.campaign_outlined,
+            'posts': notices,
+          },
+          {
+            'title': '굿즈 소식',
+            'subtitle': '신규 발매와 재입고 소식',
+            'icon': Icons.newspaper_outlined,
+            'posts': goodsNews,
+          },
+          {
+            'title': '행사 이벤트',
+            'subtitle': '팝업, 전시, 행사 일정 정보',
+            'icon': Icons.event_note_outlined,
+            'posts': eventNews,
+          },
         ];
 
-        final slides = [
-          _PromoSlide(
-            title: '쇼케이스 프로필 둘러보기',
-            subtitle: '프로필 카드와 배지 전시대를 홈에서 바로 확인해보세요.',
-            icon: Icons.auto_awesome_rounded,
-            post: notices.first,
-          ),
-          _PromoSlide(
-            title: '굿즈 발매 소식 보기',
-            subtitle: '이번 주 굿즈 소식을 빠르게 확인하고 일정까지 함께 정리해보세요.',
-            icon: Icons.redeem_outlined,
-            post: goodsNews.first,
-          ),
-          _PromoSlide(
-            title: '행사 일정 미리 체크',
-            subtitle: '행사와 개인 일정을 같은 흐름으로 관리할 수 있어요.',
-            icon: Icons.event_available_outlined,
-            post: eventNews.first,
-          ),
+        final promoSlides = [
+          {
+            'title': '쇼케이스 프로필 오픈',
+            'subtitle': '홈에서 대표 배지를 진열하고 프로필 포토카드처럼 확인해보세요.',
+            'icon': Icons.auto_awesome_rounded,
+            'post': notices.first,
+          },
+          {
+            'title': '굿즈 발매 소식 한눈에',
+            'subtitle': '신규 발매와 재입고 소식을 배너에서 바로 살펴볼 수 있어요.',
+            'icon': Icons.redeem_outlined,
+            'post': goodsNews.first,
+          },
+          {
+            'title': '행사 일정 미리 체크',
+            'subtitle': '팝업과 전시 일정을 모아보고 캘린더로 연결해보세요.',
+            'icon': Icons.event_available_outlined,
+            'post': eventNews.first,
+          },
         ];
-
-        final theme = Theme.of(context);
-        final palette = theme.extension<DeokivePalette>()!;
 
         return Scaffold(
-          appBar: AppBar(title: const DeokiveHeaderTitle()),
+          appBar: AppBar(
+            title: const Text('Deokive'),
+          ),
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              if (appState.shouldShowAd(AdPlacement.homeBanner)) ...[
-                const Center(
-                  child: LiveBannerAd(placement: AdPlacement.homeBanner),
-                ),
-                const SizedBox(height: 16),
-              ],
               _ShowcaseProfileCard(
                 isLoggedIn: appState.isLoggedIn,
-                displayName: appState.displayName,
-                tag: appState.tag,
-                level: appState.totalUnlockedBadgeLevel,
-                folderCount: appState.folders.length,
-                goodsCount: appState.totalGoodsCount,
-                badgeCount: appState.totalUnlockedBadgeCount,
-                equippedBadges: appState.equippedBadges,
-                avatarBodyType: appState.avatarBodyType,
-                avatarBackgroundType: appState.avatarBackgroundType,
-                avatarFaceType: appState.avatarFaceType,
-                avatarHairStyle: appState.avatarHairStyle,
-                avatarHairColorIndex: appState.avatarHairColorIndex,
-                avatarAccentColorIndex: appState.avatarAccentColorIndex,
-                avatarOutfitColorIndex: appState.avatarOutfitColorIndex,
-                avatarSkinToneIndex: appState.avatarSkinToneIndex,
-                avatarHasHat: appState.avatarHasHat,
-                avatarHasCape: appState.avatarHasCape,
-                avatarHasHandheld: appState.avatarHasHandheld,
-                avatarHasBackRibbon: appState.avatarHasBackRibbon,
-                onEditAvatar: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const AvatarEditorScreen(),
-                    ),
-                  );
-                },
+                darkModeEnabled: appState.darkModeEnabled,
+                equippedBadges: equippedBadges,
                 onOpenBadges: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const BadgeScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => const BadgeScreen(),
+                    ),
                   );
                 },
               ),
               const SizedBox(height: 24),
-              Text(
+              const Text(
                 '추천 배너',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(height: 12),
               SizedBox(
-                height: 214,
+                height: 210,
                 child: Column(
                   children: [
                     Expanded(
-                      child: Stack(
+                      child: Row(
                         children: [
-                          Positioned.fill(
+                          _BannerArrowButton(
+                            icon: Icons.chevron_left,
+                            onTap: _currentPage == 0 ? null : _goToPreviousPage,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
                             child: PageView.builder(
                               controller: _pageController,
-                              itemCount: slides.length,
+                              itemCount: promoSlides.length,
                               onPageChanged: (index) {
                                 setState(() {
                                   _currentPage = index;
                                 });
                               },
                               itemBuilder: (context, index) {
-                                final slide = slides[index];
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: _PromoSlideCard(
-                                    title: slide.title,
-                                    subtitle: slide.subtitle,
-                                    icon: slide.icon,
-                                    onTap: () => _openNews(context, slide.post),
-                                  ),
+                                final slide = promoSlides[index];
+                                return _PromoSlideCard(
+                                  title: slide['title'] as String,
+                                  subtitle: slide['subtitle'] as String,
+                                  icon: slide['icon'] as IconData,
+                                  onTap: () {
+                                    final post = slide['post'] as Map<String, String>;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => NewsDetailScreen(
+                                          title: post['title'] ?? '',
+                                          date: post['date'] ?? '',
+                                          content: post['content'] ?? '',
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                             ),
                           ),
-                          Positioned(
-                            left: 6,
-                            top: 0,
-                            bottom: 0,
-                            child: Center(
-                              child: _BannerArrowButton(
-                                icon: Icons.chevron_left,
-                                onTap: _currentPage == 0
-                                    ? null
-                                    : () {
-                                        _pageController.previousPage(
-                                          duration:
-                                              const Duration(milliseconds: 260),
-                                          curve: Curves.easeOut,
-                                        );
-                                      },
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            right: 6,
-                            top: 0,
-                            bottom: 0,
-                            child: Center(
-                              child: _BannerArrowButton(
-                                icon: Icons.chevron_right,
-                                onTap: _currentPage == slides.length - 1
-                                    ? null
-                                    : () {
-                                        _pageController.nextPage(
-                                          duration:
-                                              const Duration(milliseconds: 260),
-                                          curve: Curves.easeOut,
-                                        );
-                                      },
-                              ),
-                            ),
+                          const SizedBox(width: 8),
+                          _BannerArrowButton(
+                            icon: Icons.chevron_right,
+                            onTap: _currentPage == promoSlides.length - 1
+                                ? null
+                                : () => _goToNextPage(promoSlides.length),
                           ),
                         ],
                       ),
@@ -352,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
-                        slides.length,
+                        promoSlides.length,
                         (index) => AnimatedContainer(
                           duration: const Duration(milliseconds: 180),
                           margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -360,8 +236,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 8,
                           decoration: BoxDecoration(
                             color: _currentPage == index
-                                ? palette.primary
-                                : theme.colorScheme.outline,
+                                ? Colors.deepPurple
+                                : Colors.deepPurple.withOpacity(0.25),
                             borderRadius: BorderRadius.circular(999),
                           ),
                         ),
@@ -370,60 +246,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 18),
-              if (appState.shouldShowAd(AdPlacement.homeBanner))
-                const Center(
-                  child: LiveBannerAd(placement: AdPlacement.homeBanner),
-                ),
-              if (appState.isLoggedIn &&
-                  !appState.isFeatureUnlocked(PremiumFeature.adFree)) ...[
-                const SizedBox(height: 12),
-                PremiumGateCard(
-                  feature: PremiumFeature.adFree,
-                  unlocked: false,
-                  trailingLabel: '설정에서 관리',
-                  onTap: () => context.read<AppState>().setTab(3),
-                ),
-              ],
               const SizedBox(height: 24),
-              Text(
+              const Text(
                 '소식',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(height: 12),
-              ...menus.map(
+              ...newsMenus.map(
                 (item) => Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      side: BorderSide(color: Colors.grey.shade300),
+                    ),
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: palette.softSurface,
-                        child: Icon(
-                          item.icon,
-                          color: theme.colorScheme.onSurface,
-                        ),
+                        backgroundColor: Colors.deepPurple.shade50,
+                        child: Icon(item['icon'] as IconData),
                       ),
-                      title: Text(item.title),
-                      subtitle: Text(item.subtitle),
+                      title: Text(item['title'] as String),
+                      subtitle: Text(item['subtitle'] as String),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (_) => NewsListScreen(
-                              title: item.title,
-                              posts: item.posts
-                                  .map(
-                                    (post) => {
-                                      'title': post.title,
-                                      'date': post.date,
-                                      'summary': post.summary,
-                                      'content': post.content,
-                                    },
-                                  )
-                                  .toList(),
+                              title: item['title'] as String,
+                              posts: item['posts'] as List<Map<String, String>>,
                             ),
                           ),
                         );
@@ -441,368 +296,253 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _ShowcaseProfileCard extends StatelessWidget {
-  static const double _frameStrokeWidth = 1.4;
-  static const double _frameStrokeAlpha = 0.42;
-
   final bool isLoggedIn;
-  final String displayName;
-  final String tag;
-  final int level;
-  final int folderCount;
-  final int goodsCount;
-  final int badgeCount;
+  final bool darkModeEnabled;
   final List<BadgeItem> equippedBadges;
-  final int avatarBodyType;
-  final int avatarBackgroundType;
-  final int avatarFaceType;
-  final int avatarHairStyle;
-  final int avatarHairColorIndex;
-  final int avatarAccentColorIndex;
-  final int avatarOutfitColorIndex;
-  final int avatarSkinToneIndex;
-  final bool avatarHasHat;
-  final bool avatarHasCape;
-  final bool avatarHasHandheld;
-  final bool avatarHasBackRibbon;
-  final VoidCallback onEditAvatar;
   final VoidCallback onOpenBadges;
 
   const _ShowcaseProfileCard({
     required this.isLoggedIn,
-    required this.displayName,
-    required this.tag,
-    required this.level,
-    required this.folderCount,
-    required this.goodsCount,
-    required this.badgeCount,
+    required this.darkModeEnabled,
     required this.equippedBadges,
-    required this.avatarBodyType,
-    required this.avatarBackgroundType,
-    required this.avatarFaceType,
-    required this.avatarHairStyle,
-    required this.avatarHairColorIndex,
-    required this.avatarAccentColorIndex,
-    required this.avatarOutfitColorIndex,
-    required this.avatarSkinToneIndex,
-    required this.avatarHasHat,
-    required this.avatarHasCape,
-    required this.avatarHasHandheld,
-    required this.avatarHasBackRibbon,
-    required this.onEditAvatar,
     required this.onOpenBadges,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final palette = theme.extension<DeokivePalette>()!;
-    final surfaceColor = theme.colorScheme.surface;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(26),
         gradient: LinearGradient(
+          colors: [
+            colorScheme.primaryContainer,
+            colorScheme.surface,
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            surfaceColor,
-            palette.softSurface.withValues(alpha: 0.95),
-          ],
-        ),
-        border: Border.all(
-          color: palette.primary.withValues(alpha: _frameStrokeAlpha),
-          width: _frameStrokeWidth,
         ),
         boxShadow: [
           BoxShadow(
-            color: palette.primary.withValues(alpha: 0.12),
+            color: colorScheme.primary.withOpacity(0.10),
             blurRadius: 18,
-            offset: const Offset(0, 10),
+            offset: const Offset(0, 8),
           ),
         ],
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: surfaceColor,
-          border: Border.all(
-            color: palette.primary.withValues(alpha: _frameStrokeAlpha),
-            width: _frameStrokeWidth,
-          ),
-        ),
-        padding: const EdgeInsets.all(14),
-        child: Column(
-          children: [
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              color: colorScheme.surface.withOpacity(0.88),
+              border: Border.all(
+                color: colorScheme.primary.withOpacity(0.12),
+              ),
+            ),
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                InkWell(
-                  borderRadius: BorderRadius.circular(22),
-                  onTap: isLoggedIn ? onEditAvatar : null,
-                  child: Container(
-                    width: 148,
-                    height: 148,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(22),
-                      border: Border.all(
-                        color: palette.primary.withValues(
-                          alpha: _frameStrokeAlpha,
-                        ),
-                        width: _frameStrokeWidth,
-                      ),
-                    ),
-                    child: DeokiveAvatar(
-                      palette: palette,
-                      padding: const EdgeInsets.fromLTRB(6, 38, 6, 0),
-                      bodyType: avatarBodyType,
-                      backgroundType: avatarBackgroundType,
-                      faceType: -1,
-                      hairStyle: avatarHairStyle,
-                      hairColorIndex: avatarHairColorIndex,
-                      accentColorIndex: avatarAccentColorIndex,
-                      outfitColorIndex: avatarOutfitColorIndex,
-                      skinToneIndex: avatarSkinToneIndex,
-                      hasHat: avatarHasHat,
-                      hasCape: avatarHasCape,
-                      hasHandheld: avatarHasHandheld,
-                      hasBackRibbon: avatarHasBackRibbon,
+                Container(
+                  width: 88,
+                  height: 118,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    gradient: LinearGradient(
+                      colors: [
+                        colorScheme.primary,
+                        colorScheme.secondary,
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
                   ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 24,
+                        backgroundColor: Colors.white.withOpacity(0.18),
+                        child: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'DEOKIVE',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.8,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(width: 14),
+                const SizedBox(width: 16),
                 Expanded(
-                  child: SizedBox(
-                    height: 148,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: surfaceColor,
-                            borderRadius: BorderRadius.circular(999),
-                            border: Border.all(
-                              color: palette.primary.withValues(alpha: 0.22),
-                            ),
-                          ),
-                          child: Text(
-                            'Lv.$level',
-                            style: theme.textTheme.labelMedium?.copyWith(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        isLoggedIn ? 'Deokive User' : 'Guest Collector',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w800,
                             ),
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          displayName,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: -0.4,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          tag,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: theme.colorScheme.onSurface.withValues(
-                              alpha: 0.72,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                Expanded(
-                  child: _ProfileSummaryCard(
-                    label: '폴더',
-                    value: '$folderCount',
-                    icon: Icons.folder_copy_outlined,
-                    onTap: null,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _ProfileSummaryCard(
-                    label: '굿즈',
-                    value: '$goodsCount',
-                    icon: Icons.inventory_2_outlined,
-                    onTap: null,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _ProfileSummaryCard(
-                    label: '배지',
-                    value: '$badgeCount',
-                    icon: Icons.workspace_premium_outlined,
-                    onTap: isLoggedIn ? onOpenBadges : null,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
-            InkWell(
-              borderRadius: BorderRadius.circular(18),
-              onTap: isLoggedIn ? onOpenBadges : null,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  color: palette.primary.withValues(alpha: 0.08),
-                  border: Border.all(
-                    color: palette.primary.withValues(alpha: 0.18),
-                    width: _frameStrokeWidth,
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.workspace_premium_outlined,
-                          size: 18,
-                          color: palette.primary,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          '배지 전시대',
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        const Spacer(),
-                        Icon(
-                          Icons.chevron_right_rounded,
-                          color: theme.colorScheme.onSurface.withValues(
-                            alpha: 0.56,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    if (equippedBadges.isEmpty)
+                      ),
+                      const SizedBox(height: 6),
                       Text(
-                        isLoggedIn ? '아직 장착한 배지가 없습니다.' : '로그인 후 배지 전시대를 사용할 수 있습니다.',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurface.withValues(
-                            alpha: 0.68,
-                          ),
+                        isLoggedIn ? '@deokive' : '@guest',
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontWeight: FontWeight.w700,
                         ),
-                      )
-                    else
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        isLoggedIn
+                            ? '대표 배지와 취향을 전시하는 프로필 쇼케이스'
+                            : '로그인 후 나만의 쇼케이스를 꾸며보세요',
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                          fontSize: 13.5,
+                          height: 1.4,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
-                        children: equippedBadges
-                            .map((badge) => _BadgeShowcaseChip(badge: badge))
-                            .toList(),
+                        children: [
+                          _InfoChip(
+                            icon: isLoggedIn
+                                ? Icons.verified_user_outlined
+                                : Icons.lock_outline,
+                            label: isLoggedIn ? '로그인됨' : '게스트',
+                          ),
+                          _InfoChip(
+                            icon: darkModeEnabled
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
+                            label: darkModeEnabled ? '다크 모드' : '라이트 모드',
+                          ),
+                        ],
                       ),
-                  ],
+                    ],
+                  ),
                 ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              color: colorScheme.surface.withOpacity(0.80),
+              border: Border.all(
+                color: colorScheme.primary.withOpacity(0.10),
               ),
             ),
-          ],
-        ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.collections_bookmark_outlined,
+                      color: colorScheme.primary,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        '대표 배지 진열장',
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              fontWeight: FontWeight.w800,
+                            ),
+                      ),
+                    ),
+                    IconButton(
+                      tooltip: '배지 관리',
+                      onPressed: onOpenBadges,
+                      icon: const Icon(Icons.workspace_premium_outlined),
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: List.generate(3, (index) {
+                    if (index < equippedBadges.length) {
+                      return _BadgeShowcaseChip(badge: equippedBadges[index]);
+                    }
+                    return const _EmptyBadgeSlot();
+                  }),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  equippedBadges.isEmpty
+                      ? '아직 장착한 대표 배지가 없습니다. 우측 상단 아이콘에서 배지를 장착해보세요.',
+                  style: TextStyle(
+                    color: Colors.grey.shade700,
+                    height: 1.4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _ProfileSummaryCard extends StatelessWidget {
-  static const double _frameStrokeWidth = 1.4;
-
-  final String label;
-  final String value;
+class _InfoChip extends StatelessWidget {
   final IconData icon;
-  final VoidCallback? onTap;
+  final String label;
 
-  const _ProfileSummaryCard({
-    required this.label,
-    required this.value,
+  const _InfoChip({
     required this.icon,
-    required this.onTap,
+    required this.label,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final palette = theme.extension<DeokivePalette>()!;
-
-    final child = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        color: theme.colorScheme.surface,
-        border: Border.all(
-          color: palette.primary.withValues(alpha: 0.18),
-          width: _frameStrokeWidth,
-        ),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(999),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            size: 16,
-            color: theme.colorScheme.onSurface.withValues(alpha: 0.56),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  label,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 13,
-                  ),
-                ),
-              ),
-              Text(
-                value,
-                style: theme.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ],
+          Icon(icon, size: 16),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 12.5,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ],
       ),
-    );
-
-    if (onTap == null) {
-      return child;
-    }
-
-    return InkWell(
-      borderRadius: BorderRadius.circular(18),
-      onTap: onTap,
-      child: child,
     );
   }
 }
 
 class _BadgeShowcaseChip extends StatelessWidget {
-  static const double _frameStrokeWidth = 1.4;
-  static const double _frameStrokeAlpha = 0.42;
-
   final BadgeItem badge;
 
   const _BadgeShowcaseChip({required this.badge});
@@ -813,11 +553,8 @@ class _BadgeShowcaseChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        color: badge.color.withValues(alpha: 0.12),
-        border: Border.all(
-          color: badge.color.withValues(alpha: _frameStrokeAlpha),
-          width: _frameStrokeWidth,
-        ),
+        color: badge.color.withOpacity(0.12),
+        border: Border.all(color: badge.color.withOpacity(0.24)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -827,11 +564,34 @@ class _BadgeShowcaseChip extends StatelessWidget {
           Text(
             badge.title,
             style: TextStyle(
-              color: badge.color,
               fontWeight: FontWeight.w700,
+              color: badge.color,
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _EmptyBadgeSlot extends StatelessWidget {
+  const _EmptyBadgeSlot();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        color: Colors.grey.shade100,
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Text(
+        '빈 슬롯',
+        style: TextStyle(
+          fontWeight: FontWeight.w700,
+          color: Colors.grey.shade600,
+        ),
       ),
     );
   }
@@ -848,27 +608,23 @@ class _BannerArrowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final palette = theme.extension<DeokivePalette>()!;
-
     return InkWell(
       borderRadius: BorderRadius.circular(999),
       onTap: onTap,
       child: Ink(
-        width: 36,
-        height: 36,
+        width: 34,
+        height: 34,
         decoration: BoxDecoration(
-          color:
-              onTap == null ? palette.softSurface : theme.colorScheme.surface,
+          color: onTap == null
+              ? Colors.grey.shade200
+              : Colors.deepPurple.withOpacity(0.08),
           shape: BoxShape.circle,
-          border: Border.all(color: theme.colorScheme.outline),
+          border: Border.all(color: Colors.grey.shade300),
         ),
         child: Icon(
           icon,
           size: 20,
-          color: onTap == null
-              ? theme.colorScheme.onSurface.withValues(alpha: 0.35)
-              : theme.colorScheme.onSurface,
+          color: onTap == null ? Colors.grey : Colors.deepPurple,
         ),
       ),
     );
@@ -890,9 +646,6 @@ class _PromoSlideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final palette = theme.extension<DeokivePalette>()!;
-
     return InkWell(
       borderRadius: BorderRadius.circular(24),
       onTap: onTap,
@@ -901,21 +654,19 @@ class _PromoSlideCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
             colors: [
-              theme.colorScheme.surface,
-              palette.softSurface,
+              Colors.white,
+              Colors.deepPurple.shade50,
             ],
           ),
-          border: Border.all(color: theme.colorScheme.outline),
+          border: Border.all(color: Colors.grey.shade300),
         ),
         child: Row(
           children: [
             CircleAvatar(
               radius: 28,
-              backgroundColor: palette.primary,
-              child: Icon(icon, color: palette.text),
+              backgroundColor: Colors.deepPurple.shade100,
+              child: Icon(icon, color: Colors.deepPurple),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -925,14 +676,19 @@ class _PromoSlideCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: theme.textTheme.titleMedium?.copyWith(
+                    style: const TextStyle(
+                      fontSize: 17,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     subtitle,
-                    style: theme.textTheme.bodyMedium?.copyWith(height: 1.35),
+                    style: TextStyle(
+                      fontSize: 13.5,
+                      color: Colors.grey.shade700,
+                      height: 1.35,
+                    ),
                   ),
                 ],
               ),
@@ -942,46 +698,4 @@ class _PromoSlideCard extends StatelessWidget {
       ),
     );
   }
-}
-
-class _HomePost {
-  final String title;
-  final String date;
-  final String summary;
-  final String content;
-
-  const _HomePost({
-    required this.title,
-    required this.date,
-    required this.summary,
-    required this.content,
-  });
-}
-
-class _HomeMenu {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final List<_HomePost> posts;
-
-  const _HomeMenu({
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.posts,
-  });
-}
-
-class _PromoSlide {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final _HomePost post;
-
-  const _PromoSlide({
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.post,
-  });
 }

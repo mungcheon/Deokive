@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
 
 import 'l10n/app_language.dart';
 import 'services/ad_service.dart';
@@ -14,7 +13,7 @@ import 'widgets/mobile_ratio_frame.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  unawaited(AdService.instance.initialize());
+  await AdService.instance.initialize();
   runApp(const DeokiveApp());
 }
 
@@ -51,15 +50,12 @@ class DeokiveApp extends StatelessWidget {
     required double navLabelSize,
   }) {
     final isDark = brightness == Brightness.dark;
-    final background = isDark
-        ? mixColors(spec.background, const Color(0xFF0F1115), 0.88)
-        : spec.background;
-    final surface = isDark
-        ? mixColors(spec.primary, const Color(0xFF1A1F27), 0.82)
-        : Colors.white;
-    final softSurface = isDark
-        ? mixColors(spec.primary, const Color(0xFF262C37), 0.74)
-        : mixColors(spec.primary, Colors.white, 0.72);
+    final background =
+        isDark ? mixColors(spec.background, const Color(0xFF0F1115), 0.88) : spec.background;
+    final surface =
+        isDark ? mixColors(spec.primary, const Color(0xFF1A1F27), 0.82) : Colors.white;
+    final softSurface =
+        isDark ? mixColors(spec.primary, const Color(0xFF262C37), 0.74) : mixColors(spec.primary, Colors.white, 0.72);
     final text = _contrastText(
       background,
       dark: spec.text,
@@ -68,12 +64,10 @@ class DeokiveApp extends StatelessWidget {
       surface,
       dark: spec.text,
     );
-    final outline = isDark
-        ? mixColors(spec.primary, Colors.white, 0.28)
-        : mixColors(spec.primary, spec.accent, 0.45);
-    final cardTint = isDark
-        ? mixColors(spec.accent, const Color(0xFF1D212A), 0.72)
-        : mixColors(spec.accent, Colors.white, 0.55);
+    final outline =
+        isDark ? mixColors(spec.primary, Colors.white, 0.28) : mixColors(spec.primary, spec.accent, 0.45);
+    final cardTint =
+        isDark ? mixColors(spec.accent, const Color(0xFF1D212A), 0.72) : mixColors(spec.accent, Colors.white, 0.55);
 
     final colorScheme = ColorScheme.fromSeed(
       seedColor: spec.primary,
@@ -103,11 +97,10 @@ class DeokiveApp extends StatelessWidget {
           softSurface: softSurface,
         ),
       ],
-      textTheme:
-          (isDark ? ThemeData.dark() : ThemeData.light()).textTheme.apply(
-                bodyColor: surfaceText,
-                displayColor: text,
-              ),
+      textTheme: (isDark ? ThemeData.dark() : ThemeData.light()).textTheme.apply(
+            bodyColor: surfaceText,
+            displayColor: text,
+          ),
       appBarTheme: AppBarTheme(
         centerTitle: false,
         toolbarHeight: appBarHeight,
@@ -133,13 +126,11 @@ class DeokiveApp extends StatelessWidget {
         height: navBarHeight,
         backgroundColor: surface,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-        indicatorColor:
-            mixColors(spec.primary, Colors.white, isDark ? 0.18 : 0.55),
+        indicatorColor: mixColors(spec.primary, Colors.white, isDark ? 0.18 : 0.55),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final isSelected = states.contains(WidgetState.selected);
           return TextStyle(
-            color:
-                isSelected ? spec.primary : surfaceText.withValues(alpha: 0.78),
+            color: isSelected ? spec.primary : surfaceText.withOpacity(0.78),
             fontSize: navLabelSize,
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
           );
@@ -176,14 +167,11 @@ class DeokiveApp extends StatelessWidget {
       ),
       chipTheme: ChipThemeData(
         backgroundColor: softSurface,
-        selectedColor:
-            mixColors(spec.primary, Colors.white, isDark ? 0.22 : 0.45),
-        secondarySelectedColor:
-            mixColors(spec.accent, Colors.white, isDark ? 0.2 : 0.35),
+        selectedColor: mixColors(spec.primary, Colors.white, isDark ? 0.22 : 0.45),
+        secondarySelectedColor: mixColors(spec.accent, Colors.white, isDark ? 0.2 : 0.35),
         side: BorderSide(color: outline),
         labelStyle: TextStyle(color: text, fontWeight: FontWeight.w600),
-        secondaryLabelStyle:
-            TextStyle(color: text, fontWeight: FontWeight.w700),
+        secondaryLabelStyle: TextStyle(color: text, fontWeight: FontWeight.w700),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
       ),
@@ -196,7 +184,7 @@ class DeokiveApp extends StatelessWidget {
         filled: true,
         fillColor: surface,
         labelStyle: TextStyle(color: surfaceText),
-        helperStyle: TextStyle(color: surfaceText.withValues(alpha: 0.75)),
+        helperStyle: TextStyle(color: surfaceText.withOpacity(0.75)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: outline),
@@ -212,8 +200,7 @@ class DeokiveApp extends StatelessWidget {
       ),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: cardTint,
-        contentTextStyle:
-            TextStyle(color: _contrastText(cardTint, dark: spec.text)),
+        contentTextStyle: TextStyle(color: _contrastText(cardTint, dark: spec.text)),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),

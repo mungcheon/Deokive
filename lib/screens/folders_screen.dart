@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/folder_item.dart';
@@ -31,7 +31,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
   void _showLoginRequired() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('로그인하세요. 게스트 계정으로는 폴더와 굿즈를 추가할 수 없습니다.'),
+        content: Text('濡쒓렇?명븯?몄슂. 寃뚯뒪??怨꾩젙?쇰줈???대뜑? 援우쫰瑜?異붽??????놁뒿?덈떎.'),
       ),
     );
   }
@@ -156,14 +156,14 @@ class _FoldersScreenState extends State<FoldersScreen> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
-              title: const Text('폴더 이동'),
+              title: const Text('?대뜑 ?대룞'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   RadioListTile<String?>(
                     value: null,
                     groupValue: selectedParentId,
-                    title: const Text('폴더'),
+                    title: const Text('?대뜑'),
                     onChanged: (value) {
                       setDialogState(() {
                         selectedParentId = value;
@@ -174,7 +174,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
                     const Padding(
                       padding: EdgeInsets.fromLTRB(16, 4, 16, 8),
                       child: Text(
-                        '그룹폴더는 다른 그룹폴더 안으로 이동할 수 없습니다.',
+                        '洹몃９?대뜑???ㅻⅨ 洹몃９?대뜑 ?덉쑝濡??대룞?????놁뒿?덈떎.',
                         style: TextStyle(fontSize: 13),
                       ),
                     ),
@@ -195,7 +195,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(dialogContext),
-                  child: const Text('취소'),
+                  child: const Text('痍⑥냼'),
                 ),
                 FilledButton(
                   onPressed: () {
@@ -203,7 +203,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
                     Navigator.pop(dialogContext);
                     _exitFolderSelection();
                   },
-                  child: const Text('이동'),
+                  child: const Text('?대룞'),
                 ),
               ],
             );
@@ -375,94 +375,47 @@ class _FoldersScreenState extends State<FoldersScreen> {
             actions: favoritesOnly ? null : const [],
           ),
           floatingActionButton: _buildFab(context),
-          body: Column(
-            children: [
-              if (showTopActionBar)
-                _FolderTopActionBarFixed(
-                  selectionMode: folderSelectionMode,
-                  hasItems: visibleFolders.isNotEmpty,
-                  hasSelection: selectedFolderIds.isNotEmpty,
-                  allSelected: visibleFolders.isNotEmpty &&
-                      selectedFolderIds.length == visibleFolders.length,
-                  onSelectTap: () {
-                    setState(() {
-                      folderSelectionMode = true;
-                      selectedFolderIds.clear();
-                    });
-                  },
-                  onSelectAllTap: () => _selectAllVisibleFolders(visibleFolders),
-                  onCancelTap: _exitFolderSelection,
-                  onMoveTap: () => openMoveFoldersDialog(appState),
-                  onSearchTap: () => openGoodsSearch(context, appState),
-                  onSortSelected: appState.setFolderSortType,
-                ),
-              Expanded(
-                child: favoritesOnly
-                    ? FolderDetailContent(
-                        folder: null,
-                        favoritesOnly: true,
-                        onBack: closeDetail,
-                      )
-                    : selectedFolder != null && !selectedFolder!.isGroup
-                        ? FolderDetailContent(
-                            folder: selectedFolder,
-                            favoritesOnly: false,
-                            onBack: closeDetail,
-                          )
-                        : Center(
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(maxWidth: 1300),
-                              child: GridView.builder(
-                                padding: const EdgeInsets.all(16),
-                                itemCount: selectedFolder == null
-                                    ? topFolders.length + 1
-                                    : childFolders.length,
-                                gridDelegate:
-                                    const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 220,
-                                  mainAxisSpacing: 12,
-                                  crossAxisSpacing: 12,
-                                  childAspectRatio: 1,
-                                ),
-                                itemBuilder: (context, index) {
-                                  if (selectedFolder == null && index == 0) {
-                                    return _SpecialFolderCard(
-                                      title: '좋아요',
-                                      subtitle: '$favoriteCount개',
-                                      icon: Icons.favorite,
-                                      color: const Color(0xFFF28482),
-                                      onTap: openFavorites,
-                                    );
-                                  }
-
-                                  final folder = selectedFolder == null
-                                      ? topFolders[index - 1]
-                                      : childFolders[index];
-                                  final subtitle = folder.isGroup
-                                      ? '하위 ${_groupChildCount(appState, folder.id)}개'
-                                      : '${appState.goodsCountForFolder(folder.id)}개';
-                                  final isSelected =
-                                      selectedFolderIds.contains(folder.id);
-
-                                  return _FolderGridCard(
-                                    folder: folder,
-                                    subtitle: subtitle,
-                                    selectionMode: folderSelectionMode,
-                                    selected: isSelected,
-                                    onTap: () => openFolder(folder),
-                                    onEdit: () => openFolderEditor(
-                                      context,
-                                      initialFolder: folder,
-                                      isGroup: folder.isGroup,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-              ),
-            ],
-          ),
+          body: favoritesOnly
+              ? FolderDetailContent(
+                  folder: null,
+                  favoritesOnly: true,
+                  onBack: closeDetail,
+                )
+              : selectedFolder != null && !selectedFolder!.isGroup
+                  ? FolderDetailContent(
+                      folder: selectedFolder,
+                      favoritesOnly: false,
+                      onBack: closeDetail,
+                    )
+                  : _FoldersCollectionView(
+                      appState: appState,
+                      selectedFolder: selectedFolder,
+                      topFolders: topFolders,
+                      childFolders: childFolders,
+                      favoriteCount: favoriteCount,
+                      selectionMode: folderSelectionMode,
+                      selectedFolderIds: selectedFolderIds,
+                      showTopActionBar: showTopActionBar,
+                      onSelectTap: () {
+                        setState(() {
+                          folderSelectionMode = true;
+                          selectedFolderIds.clear();
+                        });
+                      },
+                      onSelectAllTap: () =>
+                          _selectAllVisibleFolders(visibleFolders),
+                      onCancelTap: _exitFolderSelection,
+                      onMoveTap: () => openMoveFoldersDialog(appState),
+                      onSearchTap: () => openGoodsSearch(context, appState),
+                      onSortSelected: appState.setFolderSortType,
+                      onOpenFavorites: openFavorites,
+                      onOpenFolder: openFolder,
+                      onOpenFolderEditor: (folder) => openFolderEditor(
+                        context,
+                        initialFolder: folder,
+                        isGroup: folder.isGroup,
+                      ),
+                    ),
         );
       },
     );
@@ -478,7 +431,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
         actions: [
           _CircleFabAction(
             icon: Icons.create_new_folder_outlined,
-            label: '폴더 생성',
+            label: '?대뜑 ?앹꽦',
             onTap: () async {
               setState(() {
                 fabExpanded = false;
@@ -502,7 +455,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
         actions: [
           _CircleFabAction(
             icon: Icons.add_box_outlined,
-            label: '굿즈 생성',
+            label: '援우쫰 ?앹꽦',
             onTap: () async {
               setState(() {
                 fabExpanded = false;
@@ -525,7 +478,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
       actions: [
         _CircleFabAction(
           icon: Icons.create_new_folder_outlined,
-          label: '폴더 생성',
+          label: '?대뜑 ?앹꽦',
           onTap: () async {
             setState(() {
               fabExpanded = false;
@@ -535,7 +488,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
         ),
         _CircleFabAction(
           icon: Icons.folder_copy_outlined,
-          label: '그룹폴더 생성',
+          label: '洹몃９?대뜑 ?앹꽦',
           onTap: () async {
             setState(() {
               fabExpanded = false;
@@ -594,22 +547,22 @@ class _FolderTopActionBar extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            tooltip: '굿즈 검색',
+            tooltip: '援우쫰 寃??,
             onPressed: onSearchTap,
             icon: const Icon(Icons.search_rounded),
           ),
           const Spacer(),
           PopupMenuButton<FolderSortType>(
-            tooltip: '정렬',
+            tooltip: '?뺣젹',
             onSelected: onSortSelected,
             itemBuilder: (context) => const [
               PopupMenuItem(
                 value: FolderSortType.nameAsc,
-                child: Text('가나다순'),
+                child: Text('媛?섎떎??),
               ),
               PopupMenuItem(
                 value: FolderSortType.goodsCountDesc,
-                child: Text('굿즈 많은순'),
+                child: Text('援우쫰 留롮???),
               ),
             ],
             icon: const Icon(Icons.sort),
@@ -617,15 +570,15 @@ class _FolderTopActionBar extends StatelessWidget {
           if (!selectionMode)
             TextButton(
               onPressed: hasItems ? onSelectTap : null,
-              child: const Text('선택'),
+              child: const Text('?좏깮'),
             ),
           if (selectionMode) ...[
             TextButton(
               onPressed: onCancelTap,
-              child: const Text('취소'),
+              child: const Text('痍⑥냼'),
             ),
             IconButton(
-              tooltip: '폴더 이동',
+              tooltip: '?대뜑 ?대룞',
               onPressed: hasSelection ? onMoveTap : null,
               icon: const Icon(Icons.drive_file_move_outline),
             ),
@@ -679,22 +632,22 @@ class _FolderTopActionBarFixed extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            tooltip: '굿즈 검색',
+            tooltip: '援우쫰 寃??,
             onPressed: onSearchTap,
             icon: const Icon(Icons.search_rounded),
           ),
           const Spacer(),
           PopupMenuButton<FolderSortType>(
-            tooltip: '정렬',
+            tooltip: '?뺣젹',
             onSelected: onSortSelected,
             itemBuilder: (context) => const [
               PopupMenuItem(
                 value: FolderSortType.nameAsc,
-                child: Text('가나다순'),
+                child: Text('媛?섎떎??),
               ),
               PopupMenuItem(
                 value: FolderSortType.goodsCountDesc,
-                child: Text('굿즈 많은순'),
+                child: Text('援우쫰 留롮???),
               ),
             ],
             icon: const Icon(Icons.sort),
@@ -702,24 +655,370 @@ class _FolderTopActionBarFixed extends StatelessWidget {
           if (!selectionMode)
             TextButton(
               onPressed: hasItems ? onSelectTap : null,
-              child: const Text('선택'),
+              child: const Text('?좏깮'),
             ),
           if (selectionMode) ...[
             TextButton(
               onPressed: hasItems ? onSelectAllTap : null,
-              child: Text(allSelected ? '전체선택됨' : '전체선택'),
+              child: Text(allSelected ? '?꾩껜?좏깮?? : '?꾩껜?좏깮'),
             ),
             TextButton(
               onPressed: onCancelTap,
-              child: const Text('취소'),
+              child: const Text('痍⑥냼'),
             ),
             IconButton(
-              tooltip: '폴더 이동',
+              tooltip: '?대뜑 ?대룞',
               onPressed: hasSelection ? onMoveTap : null,
               icon: const Icon(Icons.drive_file_move_outline),
             ),
           ],
         ],
+      ),
+    );
+  }
+}
+
+class _FoldersCollectionView extends StatelessWidget {
+  final AppState appState;
+  final FolderItem? selectedFolder;
+  final List<FolderItem> topFolders;
+  final List<FolderItem> childFolders;
+  final int favoriteCount;
+  final bool selectionMode;
+  final Set<String> selectedFolderIds;
+  final bool showTopActionBar;
+  final VoidCallback onSelectTap;
+  final VoidCallback onSelectAllTap;
+  final VoidCallback onCancelTap;
+  final VoidCallback onMoveTap;
+  final VoidCallback onSearchTap;
+  final ValueChanged<FolderSortType> onSortSelected;
+  final VoidCallback onOpenFavorites;
+  final ValueChanged<FolderItem> onOpenFolder;
+  final ValueChanged<FolderItem> onOpenFolderEditor;
+
+  const _FoldersCollectionView({
+    required this.appState,
+    required this.selectedFolder,
+    required this.topFolders,
+    required this.childFolders,
+    required this.favoriteCount,
+    required this.selectionMode,
+    required this.selectedFolderIds,
+    required this.showTopActionBar,
+    required this.onSelectTap,
+    required this.onSelectAllTap,
+    required this.onCancelTap,
+    required this.onMoveTap,
+    required this.onSearchTap,
+    required this.onSortSelected,
+    required this.onOpenFavorites,
+    required this.onOpenFolder,
+    required this.onOpenFolderEditor,
+  });
+
+  String _sortLabel(FolderSortType value) {
+    switch (value) {
+      case FolderSortType.nameAsc:
+        return '이름순';
+      case FolderSortType.goodsCountDesc:
+        return '굿즈 많은순';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final palette = theme.extension<DeokivePalette>();
+    final visibleFolders = selectedFolder == null ? topFolders : childFolders;
+    final totalGoods = appState.totalGoodsCount;
+    final groupCount = topFolders.where((folder) => folder.isGroup).length;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1300),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (showTopActionBar && !selectionMode) ...[
+                _FolderSearchButton(onTap: onSearchTap),
+                const SizedBox(height: 18),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _FolderSummaryStatCard(
+                        label: '전체 굿즈',
+                        value: '$totalGoods개',
+                        accent: const Color(0xFFF08B88),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _FolderSummaryStatCard(
+                        label: '즐겨찾기',
+                        value: '$favoriteCount개',
+                        accent: const Color(0xFFC89CEB),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _FolderSummaryStatCard(
+                        label: '컬렉션',
+                        value: '$groupCount개',
+                        accent: const Color(0xFFA89CF0),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 22),
+                Row(
+                  children: [
+                    Text(
+                      selectedFolder == null ? '컬렉션' : selectedFolder!.name,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const Spacer(),
+                    _FolderSortChip(
+                      label: _sortLabel(appState.folderSortType),
+                      onSelected: onSortSelected,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+              ],
+              if (selectionMode) ...[
+                _FolderTopActionBarFixed(
+                  selectionMode: selectionMode,
+                  hasItems: visibleFolders.isNotEmpty,
+                  hasSelection: selectedFolderIds.isNotEmpty,
+                  allSelected: visibleFolders.isNotEmpty &&
+                      selectedFolderIds.length == visibleFolders.length,
+                  onSelectTap: onSelectTap,
+                  onSelectAllTap: onSelectAllTap,
+                  onCancelTap: onCancelTap,
+                  onMoveTap: onMoveTap,
+                  onSearchTap: onSearchTap,
+                  onSortSelected: onSortSelected,
+                ),
+                const SizedBox(height: 16),
+              ],
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: selectedFolder == null
+                    ? topFolders.length + 1
+                    : childFolders.length,
+                gridDelegate:
+                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 300,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  childAspectRatio: 0.82,
+                ),
+                itemBuilder: (context, index) {
+                  if (selectedFolder == null && index == 0) {
+                    return _SpecialFolderCard(
+                      title: '즐겨찾기',
+                      subtitle: '$favoriteCount개',
+                      icon: Icons.favorite_rounded,
+                      color: const Color(0xFFF4A4B7),
+                      onTap: onOpenFavorites,
+                    );
+                  }
+
+                  final folder = selectedFolder == null
+                      ? topFolders[index - 1]
+                      : childFolders[index];
+                  final subtitle = folder.isGroup
+                      ? '하위 ${appState.folders.where((item) => item.parentId == folder.id).length}개'
+                      : '${appState.goodsCountForFolder(folder.id)}개';
+                  final isSelected = selectedFolderIds.contains(folder.id);
+
+                  return _FolderGridCard(
+                    folder: folder,
+                    subtitle: subtitle,
+                    selectionMode: selectionMode,
+                    selected: isSelected,
+                    onTap: () => onOpenFolder(folder),
+                    onEdit: () => onOpenFolderEditor(folder),
+                  );
+                },
+              ),
+              if (palette != null) ...[
+                const SizedBox(height: 24),
+                Container(
+                  height: 1,
+                  color: palette.line.withValues(alpha: 0.3),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FolderSearchButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const _FolderSearchButton({
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(26),
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(26),
+          border: Border.all(
+            color: theme.colorScheme.outline.withValues(alpha: 0.14),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: theme.colorScheme.shadow.withValues(alpha: 0.04),
+              blurRadius: 22,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.search_rounded,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.46),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                '전체 굿즈 검색',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.36),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            Icon(
+              Icons.favorite_border_rounded,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _FolderSummaryStatCard extends StatelessWidget {
+  final String label;
+  final String value;
+  final Color accent;
+
+  const _FolderSummaryStatCard({
+    required this.label,
+    required this.value,
+    required this.accent,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: theme.colorScheme.outline.withValues(alpha: 0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: accent,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: theme.textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.w800,
+              color: const Color(0xFF7B543A),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FolderSortChip extends StatelessWidget {
+  final String label;
+  final ValueChanged<FolderSortType> onSelected;
+
+  const _FolderSortChip({
+    required this.label,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return PopupMenuButton<FolderSortType>(
+      onSelected: onSelected,
+      itemBuilder: (context) => const [
+        PopupMenuItem(
+          value: FolderSortType.nameAsc,
+          child: Text('이름순'),
+        ),
+        PopupMenuItem(
+          value: FolderSortType.goodsCountDesc,
+          child: Text('굿즈 많은순'),
+        ),
+      ],
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: theme.colorScheme.outline.withValues(alpha: 0.14),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              label,
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Icon(
+              Icons.expand_more_rounded,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -931,6 +1230,67 @@ class _SpecialFolderCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _FavoriteHeroPanel extends StatelessWidget {
+  final Color color;
+  final IconData icon;
+
+  const _FavoriteHeroPanel({
+    required this.color,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            color.withValues(alpha: 0.18),
+            color.withValues(alpha: 0.07),
+            theme.colorScheme.surfaceContainerLowest,
+          ],
+        ),
+        border: Border.all(color: color.withValues(alpha: 0.14)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(999),
+            ),
+            child: Text(
+              'Favorites',
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: color,
+                fontWeight: FontWeight.w800,
+                fontSize: 10,
+              ),
+            ),
+          ),
+          const Spacer(),
+          Center(
+            child: Icon(
+              icon,
+              color: color,
+              size: 42,
+            ),
+          ),
+        ],
       ),
     );
   }

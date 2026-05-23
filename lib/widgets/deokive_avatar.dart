@@ -38,11 +38,11 @@ List<Color> deokiveAvatarOutfitColors(DeokivePalette palette) => [
       const Color(0xFFE9A95E),
     ];
 
-const String deokiveAvatarUnsetAsset = 'assets/avatar/body/미설정.png';
+const String deokiveAvatarUnsetAsset = 'assets/avatar/body/미설정.png';
 
 const List<String> deokiveAvatarBodyAssets = [
-  'assets/avatar/body/여자 몸.png',
-  'assets/avatar/body/남자 몸.png',
+  'assets/avatar/body/여자 몸.png',
+  'assets/avatar/body/남자 몸.png',
 ];
 
 const List<String> deokiveAvatarBodyLabels = [
@@ -51,7 +51,7 @@ const List<String> deokiveAvatarBodyLabels = [
 ];
 
 const List<String> deokiveAvatarHairAssets = [
-  'assets/avatar/hair/초코송이 단발.png',
+  'assets/avatar/hair/초코송이 단발.png',
 ];
 
 const List<String> deokiveAvatarHairLabels = [
@@ -74,10 +74,10 @@ const List<String> deokiveAvatarOutfitLabels = [
 ];
 
 const List<String> deokiveAvatarAccessoryAssets = [
-  'assets/avatar/accessory/루돌프 머리띠.png',
-  'assets/avatar/accessory/루돌프 사슴코.png',
-  'assets/avatar/accessory/가방.png',
-  'assets/avatar/accessory/빨간리본.png',
+  'assets/avatar/accessory/루돌프 머리띠.png',
+  'assets/avatar/accessory/루돌프 사슴코.png',
+  'assets/avatar/accessory/가방.png',
+  'assets/avatar/accessory/빨간리본.png',
 ];
 
 const List<String> deokiveAvatarAccessoryLabels = [
@@ -110,7 +110,6 @@ class DeokiveAvatar extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final int bodyType;
   final int backgroundType;
-  final int faceType;
   final int hairStyle;
   final int hairColorIndex;
   final int accentColorIndex;
@@ -127,7 +126,6 @@ class DeokiveAvatar extends StatelessWidget {
     this.padding = const EdgeInsets.fromLTRB(20, 88, 20, 0),
     required this.bodyType,
     required this.backgroundType,
-    required this.faceType,
     required this.hairStyle,
     required this.hairColorIndex,
     required this.accentColorIndex,
@@ -144,14 +142,12 @@ class DeokiveAvatar extends StatelessWidget {
     final bodyAsset = bodyType >= 0 && bodyType < deokiveAvatarBodyAssets.length
         ? deokiveAvatarBodyAssets[bodyType]
         : deokiveAvatarUnsetAsset;
-    final hairAsset =
-        hairStyle >= 0 && hairStyle < deokiveAvatarHairAssets.length
-            ? deokiveAvatarHairAssets[hairStyle]
-            : null;
-    final skinColor =
-        skinToneIndex >= 0 && skinToneIndex < deokiveAvatarSkinColors.length
-            ? deokiveAvatarSkinColors[skinToneIndex]
-            : null;
+    final hairAsset = hairStyle >= 0 && hairStyle < deokiveAvatarHairAssets.length
+        ? deokiveAvatarHairAssets[hairStyle]
+        : null;
+    final skinColor = skinToneIndex >= 0 && skinToneIndex < deokiveAvatarSkinColors.length
+        ? deokiveAvatarSkinColors[skinToneIndex]
+        : null;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(18),
@@ -162,20 +158,16 @@ class DeokiveAvatar extends StatelessWidget {
           Positioned.fill(
             child: Padding(
               padding: padding,
-              child: Stack(
+                child: Stack(
                 fit: StackFit.expand,
                 children: [
                   _BodyLayer(
                     assetPath: bodyAsset,
                     skinColor: bodyType >= 0 ? skinColor : null,
                   ),
-                  if (bodyType >= 0 && faceType >= 0)
-                    _FaceLayer(faceType: faceType),
                   if (hairAsset != null) _AssetLayer(assetPath: hairAsset),
-                  if (hasHat)
-                    _AssetLayer(assetPath: deokiveAvatarAccessoryAssets[0]),
-                  if (hasCape)
-                    _AssetLayer(assetPath: deokiveAvatarAccessoryAssets[1]),
+                  if (hasHat) _AssetLayer(assetPath: deokiveAvatarAccessoryAssets[0]),
+                  if (hasCape) _AssetLayer(assetPath: deokiveAvatarAccessoryAssets[1]),
                   if (hasHandheld)
                     _AssetLayer(assetPath: deokiveAvatarAccessoryAssets[2]),
                   if (hasBackRibbon)
@@ -234,135 +226,6 @@ class _AssetLayer extends StatelessWidget {
   }
 }
 
-class _FaceLayer extends StatelessWidget {
-  final int faceType;
-
-  const _FaceLayer({
-    required this.faceType,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final normalizedFaceType =
-        faceType >= 0 && faceType < deokiveAvatarFaceLabels.length
-            ? faceType
-            : 0;
-
-    return Align(
-      alignment: const Alignment(0, -0.18),
-      child: FractionallySizedBox(
-        widthFactor: 0.3,
-        heightFactor: 0.22,
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            const eyeColor = Color(0xFF2B2625);
-
-            Widget mouth;
-            switch (normalizedFaceType) {
-              case 1:
-                mouth = Container(
-                  width: constraints.maxWidth * 0.24,
-                  height: 3,
-                  decoration: BoxDecoration(
-                    color: eyeColor,
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                );
-                break;
-              case 2:
-                mouth = Container(
-                  width: constraints.maxWidth * 0.24,
-                  height: constraints.maxWidth * 0.12,
-                  decoration: BoxDecoration(
-                    border: const Border(
-                      bottom: BorderSide(color: eyeColor, width: 2),
-                    ),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                );
-                break;
-              default:
-                mouth = Container(
-                  width: constraints.maxWidth * 0.16,
-                  height: constraints.maxWidth * 0.16,
-                  decoration: const BoxDecoration(
-                    color: eyeColor,
-                    shape: BoxShape.circle,
-                  ),
-                );
-            }
-
-            return Stack(
-              children: [
-                Positioned(
-                  left: constraints.maxWidth * 0.16,
-                  top: constraints.maxHeight * 0.2,
-                  child: const _FaceDot(color: eyeColor),
-                ),
-                Positioned(
-                  right: constraints.maxWidth * 0.16,
-                  top: constraints.maxHeight * 0.2,
-                  child: const _FaceDot(color: eyeColor),
-                ),
-                Positioned(
-                  left: 0,
-                  top: constraints.maxHeight * 0.45,
-                  child: const _FaceBlush(),
-                ),
-                Positioned(
-                  right: 0,
-                  top: constraints.maxHeight * 0.45,
-                  child: const _FaceBlush(),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: Center(child: mouth),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class _FaceDot extends StatelessWidget {
-  final Color color;
-
-  const _FaceDot({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 6,
-      height: 6,
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-      ),
-    );
-  }
-}
-
-class _FaceBlush extends StatelessWidget {
-  const _FaceBlush();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 10,
-      height: 6,
-      decoration: BoxDecoration(
-        color: const Color(0xFFDEA9A9),
-        borderRadius: BorderRadius.circular(999),
-      ),
-    );
-  }
-}
-
 class _AvatarBackground extends StatelessWidget {
   final int backgroundType;
 
@@ -372,8 +235,7 @@ class _AvatarBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (backgroundType < 0 ||
-        backgroundType >= deokiveAvatarBackgroundAssets.length) {
+    if (backgroundType < 0 || backgroundType >= deokiveAvatarBackgroundAssets.length) {
       return const SizedBox.shrink();
     }
 

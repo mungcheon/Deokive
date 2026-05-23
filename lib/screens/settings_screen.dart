@@ -90,8 +90,9 @@ class SettingsScreen extends StatelessWidget {
                             backgroundImage: selectedImage != null
                                 ? MemoryImage(selectedImage!)
                                 : (appState.profileImageBytes != null
-                                    ? MemoryImage(appState.profileImageBytes!)
-                                    : null) as ImageProvider<Object>?,
+                                        ? MemoryImage(appState.profileImageBytes!)
+                                        : null)
+                                    as ImageProvider<Object>?,
                             child: selectedImage == null &&
                                     appState.profileImageBytes == null
                                 ? const Icon(Icons.person_outline, size: 32)
@@ -165,8 +166,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _openPaletteSheet(
-      BuildContext context, AppState appState) async {
+  Future<void> _openPaletteSheet(BuildContext context, AppState appState) async {
     await showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -335,6 +335,15 @@ class SettingsScreen extends StatelessWidget {
                           appState.googleSignInMessage,
                           style: theme.textTheme.bodySmall,
                         ),
+                        if (appState.googleSignInDebugError != null) ...[
+                          const SizedBox(height: 8),
+                          SelectableText(
+                            appState.googleSignInDebugError!,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.error,
+                            ),
+                          ),
+                        ],
                       ] else ...[
                         Row(
                           children: [
@@ -354,72 +363,9 @@ class SettingsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        if (appState.authProvider == AuthProviderType.google &&
-                            appState.driveBackupError ==
-                                'drive_scope_missing') ...[
-                          const SizedBox(height: 8),
-                          SizedBox(
-                            width: double.infinity,
-                            child: FilledButton.tonalIcon(
-                              onPressed: appState.driveBackupInProgress
-                                  ? null
-                                  : () async {
-                                      final success = await appState
-                                          .retryDriveBackupAuthorizationAndSync();
-                                      if (!context.mounted) return;
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            success
-                                                ? '로컬 데이터를 Google Drive에 백업했습니다.'
-                                                : 'Google Drive 권한이 아직 허용되지 않았습니다.',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                              icon: const Icon(Icons.cloud_sync_outlined),
-                              label: Text(
-                                appState.driveBackupInProgress
-                                    ? '백업 연결 중...'
-                                    : 'Google Drive 백업 다시 연결',
-                              ),
-                            ),
-                          ),
-                        ],
-                        if (appState.canUseServerBackups) ...[
-                          const SizedBox(height: 8),
-                          SizedBox(
-                            width: double.infinity,
-                            child: FilledButton.tonalIcon(
-                              onPressed: appState.localServerBackupInProgress
-                                  ? null
-                                  : () async {
-                                      final success = await appState
-                                          .uploadLocalBackupToServer();
-                                      if (!context.mounted) return;
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            success
-                                                ? '임시 서버 백업이 저장되었습니다.'
-                                                : '임시 서버 백업 저장에 실패했습니다.',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                              icon: const Icon(Icons.cloud_upload_outlined),
-                              label: Text(
-                                appState.localServerBackupInProgress
-                                    ? '서버 백업 준비 중..'
-                                    : '임시 서버 백업',
-                              ),
-                            ),
-                          ),
-                        ],
                       ],
-                    ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 16),

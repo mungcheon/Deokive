@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 class MobileRatioFrame extends StatelessWidget {
   final Widget child;
@@ -13,26 +12,6 @@ class MobileRatioFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (kIsWeb) {
-          final horizontalPadding = constraints.maxWidth >= 1280
-              ? 32.0
-              : constraints.maxWidth >= 900
-                  ? 24.0
-                  : 0.0;
-
-          return Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            alignment: Alignment.topCenter,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1440),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                child: child,
-              ),
-            ),
-          );
-        }
-
         if (constraints.maxWidth < 700) {
           return child;
         }
