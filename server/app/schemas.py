@@ -56,6 +56,54 @@ class GoodsCatalogRead(BaseModel):
     release_date: str | None = None
 
 
+class BoardCommentRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    post_id: int
+    author: str
+    content: str
+
+
+class BoardCommentCreate(BaseModel):
+    content: str = Field(min_length=1, max_length=2000)
+
+
+class BoardPostRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    tag: str
+    title: str
+    summary: str = ""
+    content: str = ""
+    author: str
+    author_user_id: int | None = None
+    source_url: str | None = None
+    image_url: str | None = None
+    view_count: int = 0
+    like_count: int = 0
+    approved: bool = True
+
+
+class BoardPostCreate(BaseModel):
+    tag: str = Field(default="general", max_length=20)
+    title: str = Field(min_length=1, max_length=200)
+    summary: str = Field(default="", max_length=300)
+    content: str = Field(default="", max_length=20000)
+    source_url: str | None = Field(default=None, max_length=500)
+    image_url: str | None = Field(default=None, max_length=500)
+
+
+class BoardPostUpdate(BaseModel):
+    tag: str | None = Field(default=None, max_length=20)
+    title: str | None = Field(default=None, max_length=200)
+    summary: str | None = Field(default=None, max_length=300)
+    content: str | None = Field(default=None, max_length=20000)
+    source_url: str | None = Field(default=None, max_length=500)
+    image_url: str | None = Field(default=None, max_length=500)
+
+
 class GoodsCatalogCreate(BaseModel):
     name_ko: str = Field(min_length=1, max_length=200)
     name_ja: str | None = Field(default=None, max_length=200)

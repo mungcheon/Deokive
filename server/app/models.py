@@ -25,6 +25,9 @@ class User(Base, TimestampMixin):
     google_email: Mapped[str | None] = mapped_column(String(255), nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     is_premium: Mapped[bool] = mapped_column(Boolean, default=False)
+    # Board moderation: only admins can post notices, approve info-bot posts,
+    # and edit/delete others' posts.
+    is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
 
     profile: Mapped["Profile"] = relationship(back_populates="user", uselist=False)
     folders: Mapped[list["Folder"]] = relationship(back_populates="user")
@@ -111,6 +114,67 @@ class Payment(Base, TimestampMixin):
     currency: Mapped[str] = mapped_column(String(10), default="KRW")
 
     user: Mapped[User] = relationship(back_populates="payments")
+
+
+class BoardPost(Base, TimestampMixin):
+    """Shared community board post. Unlike per-user goods/folders, board
+    posts are global — every device reads the same list. Info-bot-fetched
+    posts arrive with approved=False and surface publicly only after an
+    admin approves them; user/admin-authored posts default to approved."""
+
+    __tablename__ = "board_posts"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    # tag: notice / info / general
+    tag: Mapped[str] = mapped_column(String(20), default="general", index=True)
+    title: Mapped[str] = mapped_column(String(200))
+    summary: Mapped[str] = mapped_column(String(300), default="")
+    content: Mapped[str] = mapped_column(Text, default="")
+    author: Mapped[str] = mapped_column(String(80), default="관리자")
+    # Null for system/info-bot posts; set for user-authored posts so we can
+    # authorize edits/deletes.
+    author_user_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id"), nullable=True, index=True
+    )
+    source_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    image_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    view_count: Mapped[int] = mapped_column(Integer, default=0)
+    like_count: Mapped[int] = mapped_column(Integer, default=0)
+    approved: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
+
+    comments: Mapped[list["BoardComment"]] = relationship(
+        back_populates="post", cascade="all, delete-orphan"
+    )
+
+
+class BoardComment(Base, TimestampMixin):
+    __tablename__ = "board_comments"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    post_id: Mapped[int] = mapped_column(
+        ForeignKey("board_posts.id"), index=True
+    )
+    author: Mapped[str] = mapped_column(String(80), default="익명")
+    author_user_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id"), nullable=True, index=True
+    )
+    content: Mapped[str] = mapped_column(Text)
+
+    post: Mapped[BoardPost] = relationship(back_populates="comments")
+
+
+class BoardLike(Base):
+    """One row per (user, post) like. Composite-unique so a user can't
+    double-like; deleting a row = unlike."""
+
+    __tablename__ = "board_likes"
+    __table_args__ = (
+        UniqueConstraint("user_id", "post_id", name="uq_board_like"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    post_id: Mapped[int] = mapped_column(ForeignKey("board_posts.id"), index=True)
 
 
 class GoodsCatalog(Base, TimestampMixin):
