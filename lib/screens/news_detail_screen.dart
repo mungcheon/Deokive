@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/monetization_catalog.dart';
-import '../widgets/live_banner_ad.dart';
+import '../l10n/generated/app_localizations.dart';
 
 class NewsDetailScreen extends StatelessWidget {
   final String title;
@@ -19,7 +18,7 @@ class NewsDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('소식 상세'),
+        title: Text(AppLocalizations.of(context).newsDetailTitle),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -49,10 +48,6 @@ class NewsDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          const Center(
-            child: LiveBannerAd(placement: AdPlacement.newsFeedBanner),
           ),
         ],
       ),

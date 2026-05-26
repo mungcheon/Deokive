@@ -38,6 +38,23 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    // The `onnxruntime` Flutter plugin only ships arm64-v8a / armeabi-v7a
+    // .so files, so x86_64 emulators get dlopen("libonnxruntime.so") =
+    // "not found". Microsoft's official AAR on Maven Central bundles every
+    // ABI; pickFirst tells Gradle "if both AARs provide the same .so,
+    // grab whichever comes first" so there's no duplicate-resource error.
+    packaging {
+        jniLibs {
+            pickFirsts += "**/libonnxruntime.so"
+        }
+    }
+}
+
+dependencies {
+    // Provides libonnxruntime.so for x86 / x86_64 (Android emulator) on top
+    // of what the Flutter `onnxruntime` plugin ships for arm devices.
+    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.16.3")
 }
 
 flutter {

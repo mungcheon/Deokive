@@ -242,9 +242,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
         return Scaffold(
           appBar: AppBar(
             title: const DeokiveHeaderTitle(),
-            centerTitle: false,
+            centerTitle: true,
           ),
-          floatingActionButton: Column(
+          floatingActionButton: !appState.isLoggedIn ? null : Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -478,8 +478,35 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete_outline_rounded),
-                            onPressed: () {
-                              appState.deleteCalendarEvent(event.id);
+                            onPressed: () async {
+                              final confirmed = await showDialog<bool>(
+                                context: context,
+                                builder: (dctx) => AlertDialog(
+                                  title: const Text('일정 삭제'),
+                                  content: Text(
+                                    '"${event.title}" 일정을 삭제할까요?\n삭제한 일정은 복구할 수 없어요.',
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(dctx, false),
+                                      child: const Text('취소'),
+                                    ),
+                                    FilledButton(
+                                      style: FilledButton.styleFrom(
+                                        backgroundColor:
+                                            Theme.of(dctx).colorScheme.error,
+                                      ),
+                                      onPressed: () =>
+                                          Navigator.pop(dctx, true),
+                                      child: const Text('삭제'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              if (confirmed == true) {
+                                appState.deleteCalendarEvent(event.id);
+                              }
                             },
                           ),
                         ],

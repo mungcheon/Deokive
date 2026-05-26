@@ -4,16 +4,58 @@ import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'l10n/app_language.dart';
-import 'services/ad_service.dart';
+import 'l10n/generated/app_localizations.dart';
 import 'screens/root_screen.dart';
+import 'screens/welcome_screen.dart';
+import 'services/exchange_rate_service.dart';
 import 'state/app_state.dart';
 import 'theme/deokive_palette.dart';
+import 'theme/font_catalog.dart';
 import 'widgets/mobile_ratio_frame.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await AdService.instance.initialize();
+  await ExchangeRateService.instance.init();
+  // Show the actual error + stack on screen instead of just a red rectangle
+  // so we can diagnose runtime exceptions quickly during development.
+  ErrorWidget.builder = (details) => Container(
+        color: const Color(0xFF1B0B0B),
+        padding: const EdgeInsets.all(16),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Runtime error',
+                style: TextStyle(
+                  color: Color(0xFFFFB7B7),
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                details.exceptionAsString(),
+                style: const TextStyle(
+                  color: Color(0xFFFFD580),
+                  fontSize: 12,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                details.stack?.toString() ?? '',
+                style: const TextStyle(
+                  color: Color(0xFFEEEEEE),
+                  fontSize: 10,
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
   runApp(const DeokiveApp());
 }
 
@@ -48,6 +90,7 @@ class DeokiveApp extends StatelessWidget {
     required double navBarHeight,
     required double navIconSize,
     required double navLabelSize,
+    String? fontFamily,
   }) {
     final isDark = brightness == Brightness.dark;
     final background =
@@ -82,9 +125,17 @@ class DeokiveApp extends StatelessWidget {
       onSurface: surfaceText,
     );
 
+    final baseTextTheme =
+        (isDark ? ThemeData.dark() : ThemeData.light()).textTheme.apply(
+              bodyColor: surfaceText,
+              displayColor: text,
+            );
+    final themedTextTheme = applyAppFont(baseTextTheme, fontFamily);
+    final resolvedFamily = fontFamilyFor(fontFamily) ?? 'Pretendard';
+
     return ThemeData(
       useMaterial3: true,
-      fontFamily: 'Pretendard',
+      fontFamily: resolvedFamily,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: background,
       dividerColor: outline,
@@ -97,14 +148,16 @@ class DeokiveApp extends StatelessWidget {
           softSurface: softSurface,
         ),
       ],
-      textTheme: (isDark ? ThemeData.dark() : ThemeData.light()).textTheme.apply(
-            bodyColor: surfaceText,
-            displayColor: text,
-          ),
+      textTheme: themedTextTheme,
       appBarTheme: AppBarTheme(
-        centerTitle: false,
+        centerTitle: true,
         toolbarHeight: appBarHeight,
-        backgroundColor: background,
+        // Slightly more saturated than the scaffold — tinted with the
+        // palette primary instead of darkened with black, so the header
+        // reads "themed" rather than "muddy".
+        backgroundColor: isDark
+            ? mixColors(background, spec.primary, 0.22)
+            : mixColors(background, spec.primary, 0.14),
         foregroundColor: text,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
@@ -243,7 +296,15 @@ class DeokiveApp extends StatelessWidget {
               final navBarHeight = _clamp(screenHeight * 0.09, 64, 84);
               final navIconSize = _clamp(shortestSide * 0.034, 22, 30);
               final navLabelSize = _clamp(shortestSide * 0.018, 11.5, 14);
-              final spec = paletteSpecFor(appState.appPalette);
+              // Welcome + login flow stays locked to the cherry-blossom pink
+              // palette regardless of the user's saved theme. After login (or
+              // entering guest mode) we switch to whatever palette the user
+              // has saved.
+              final beforeLogin =
+                  !(appState.isLoggedIn || appState.inGuestSession);
+              final spec = paletteSpecFor(beforeLogin
+                  ? AppPalette.cherryBlossom
+                  : appState.appPalette);
 
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
@@ -252,14 +313,21 @@ class DeokiveApp extends StatelessWidget {
                 supportedLocales: const [
                   Locale('ko'),
                   Locale('en'),
+                  Locale('ja'),
+                  Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+                  Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
                 ],
                 localizationsDelegates: const [
+                  AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                themeMode:
-                    appState.darkModeEnabled ? ThemeMode.dark : ThemeMode.light,
+                themeMode: beforeLogin
+                    ? ThemeMode.light
+                    : (appState.darkModeEnabled
+                        ? ThemeMode.dark
+                        : ThemeMode.light),
                 theme: _buildTheme(
                   brightness: Brightness.light,
                   spec: spec,
@@ -268,6 +336,7 @@ class DeokiveApp extends StatelessWidget {
                   navBarHeight: navBarHeight,
                   navIconSize: navIconSize,
                   navLabelSize: navLabelSize,
+                  fontFamily: appState.fontFamily,
                 ),
                 darkTheme: _buildTheme(
                   brightness: Brightness.dark,
@@ -277,11 +346,12 @@ class DeokiveApp extends StatelessWidget {
                   navBarHeight: navBarHeight,
                   navIconSize: navIconSize,
                   navLabelSize: navLabelSize,
+                  fontFamily: appState.fontFamily,
                 ),
                 builder: (context, child) {
                   final mediaQuery = MediaQuery.of(context);
                   final width = mediaQuery.size.width;
-                  final textScale = _textScaleForWidth(width);
+                  final textScale = _textScaleForWidth(width) * appState.fontScale;
 
                   return MediaQuery(
                     data: mediaQuery.copyWith(
@@ -290,8 +360,10 @@ class DeokiveApp extends StatelessWidget {
                     child: child ?? const SizedBox.shrink(),
                   );
                 },
-                home: const MobileRatioFrame(
-                  child: RootScreen(),
+                home: MobileRatioFrame(
+                  child: (appState.isLoggedIn || appState.inGuestSession)
+                      ? const RootScreen()
+                      : const WelcomeScreen(),
                 ),
               );
             },

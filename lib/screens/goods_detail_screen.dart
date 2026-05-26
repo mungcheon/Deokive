@@ -18,14 +18,103 @@ class GoodsDetailScreen extends StatelessWidget {
     return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
   }
 
-  String priceCompareText(GoodsItem item) {
-    final diff = item.priceDifference;
-    final rate = item.priceRate;
+  String _formatPrice(int? amount, String currencyCode, AppState appState) {
+    if (amount == null) return '-';
+    final c = appState.currencyByCode(currencyCode);
+    return '${c.symbol}$amount';
+  }
 
-    if (diff == null || rate == null) return '-';
+  String priceCompareText(GoodsItem item, AppState appState) {
+    final official = item.officialPrice;
+    final paid = item.paidPrice;
+    if (official == null || paid == null) return '-';
+    final paidCur = appState.currencyByCode(item.priceCurrencyCode);
+    final officialCur =
+        appState.currencyByCode(item.effectiveOfficialPriceCurrencyCode);
+
+    // Convert official to paid currency for an apples-to-apples diff.
+    final officialInPaid =
+        appState.convertCurrency(official, officialCur, paidCur);
+    final diff = officialInPaid - paid;
+    if (officialInPaid == 0) return '-';
+    final ratePct = (diff / officialInPaid) * 100;
+    final symbol = paidCur.symbol;
+
     if (diff == 0) return '정가 구매';
-    if (diff > 0) return '${diff.abs()}원 이득 (${rate.abs().toStringAsFixed(1)}%)';
-    return '${diff.abs()}원 손해 (${rate.abs().toStringAsFixed(1)}%)';
+    final crossCurrency = officialCur != paidCur;
+    final convertedNote = crossCurrency
+        ? ' (정가 환산 $symbol$officialInPaid)'
+        : '';
+    if (diff > 0) {
+      return '$symbol${diff.abs()} 이득 (${ratePct.abs().toStringAsFixed(1)}%)$convertedNote';
+    }
+    return '$symbol${diff.abs()} 손해 (${ratePct.abs().toStringAsFixed(1)}%)$convertedNote';
+  }
+
+  Future<void> _showPurchaseDialog(
+    BuildContext context,
+    AppState appState,
+    GoodsItem currentItem,
+  ) async {
+    final targets = appState.owningFolders;
+    if (targets.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('이동할 폴더가 없습니다. 먼저 폴더를 만들어주세요.')),
+      );
+      return;
+    }
+    String? selectedFolderId = currentItem.wishlistTargetFolderId ??
+        (targets.isNotEmpty ? targets.first.id : null);
+    final chosen = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setLocalState) {
+            return AlertDialog(
+              title: const Text('구매 완료로 표시'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('어느 폴더로 옮길까요?'),
+                  const SizedBox(height: 12),
+                  DropdownButton<String>(
+                    value: selectedFolderId,
+                    isExpanded: true,
+                    items: targets
+                        .map((folder) => DropdownMenuItem(
+                              value: folder.id,
+                              child: Text(folder.name),
+                            ))
+                        .toList(),
+                    onChanged: (value) =>
+                        setLocalState(() => selectedFolderId = value),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(dialogContext),
+                  child: const Text('취소'),
+                ),
+                FilledButton(
+                  onPressed: selectedFolderId == null
+                      ? null
+                      : () => Navigator.pop(dialogContext, selectedFolderId),
+                  child: const Text('이동'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+    if (chosen != null) {
+      appState.markGoodsAsPurchased(currentItem.id, chosen);
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('보유 폴더로 이동했습니다.')),
+      );
+    }
   }
 
   @override
@@ -49,6 +138,12 @@ class GoodsDetailScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('굿즈 상세'),
             actions: [
+              if (currentItem.isWishlistItem)
+                IconButton(
+                  tooltip: '구매 완료로 표시',
+                  onPressed: () => _showPurchaseDialog(context, appState, currentItem),
+                  icon: const Icon(Icons.shopping_bag_outlined),
+                ),
               IconButton(
                 onPressed: () => appState.toggleFavorite(currentItem.id),
                 icon: Icon(
@@ -113,23 +208,27 @@ class GoodsDetailScreen extends StatelessWidget {
                         children: [
                           _InfoRow(
                             label: '정발가',
-                            value: currentItem.officialPrice?.toString() ?? '-',
+                            value: _formatPrice(
+                              currentItem.officialPrice,
+                              currentItem.effectiveOfficialPriceCurrencyCode,
+                              appState,
+                            ),
                           ),
                           _InfoRow(
                             label: '실구매가',
-                            value: currentItem.paidPrice?.toString() ?? '-',
+                            value: _formatPrice(
+                              currentItem.paidPrice,
+                              currentItem.priceCurrencyCode,
+                              appState,
+                            ),
                           ),
                           _InfoRow(
                             label: '가격 비교',
-                            value: priceCompareText(currentItem),
+                            value: priceCompareText(currentItem, appState),
                           ),
                           _InfoRow(
                             label: '구매 날짜',
                             value: formatDate(currentItem.purchaseDate),
-                          ),
-                          _InfoRow(
-                            label: '구매처',
-                            value: currentItem.purchasePlace ?? '-',
                           ),
                           _InfoRow(
                             label: '정발 회사명',
@@ -140,10 +239,6 @@ class GoodsDetailScreen extends StatelessWidget {
                       const SizedBox(height: 14),
                       _SectionCard(
                         children: [
-                          _InfoRow(
-                            label: '보관 위치',
-                            value: currentItem.storageLocation ?? '-',
-                          ),
                           _InfoRow(label: '메모', value: currentItem.memo ?? '-'),
                         ],
                       ),

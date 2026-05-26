@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:gal/gal.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -31,22 +32,42 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> {
     final image = await boundary.toImage(pixelRatio: 3);
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     if (byteData == null || !mounted) return;
+    final pngBytes = byteData.buffer.asUint8List();
+    final messenger = ScaffoldMessenger.of(context);
 
-    final directory = await getApplicationDocumentsDirectory();
-    final saveDir = Directory('${directory.path}\\saved_avatars');
-    if (!await saveDir.exists()) {
-      await saveDir.create(recursive: true);
+    try {
+      // Save to the device photo gallery (Photos / 갤러리) so the user can
+      // find it in their normal photo app — gal handles the platform
+      // permission prompt and the correct album path per-OS.
+      if (!await Gal.hasAccess()) {
+        await Gal.requestAccess();
+      }
+      await Gal.putImageBytes(
+        pngBytes,
+        name: 'deokive_avatar_${DateTime.now().millisecondsSinceEpoch}',
+      );
+      if (!mounted) return;
+      messenger.showSnackBar(
+        const SnackBar(content: Text('사진 앱(갤러리)에 저장했어요.')),
+      );
+    } on GalException catch (e) {
+      // Fallback: write into app documents so the image isn't lost even if
+      // gallery permission was denied.
+      final directory = await getApplicationDocumentsDirectory();
+      final saveDir = Directory('${directory.path}/saved_avatars');
+      if (!await saveDir.exists()) {
+        await saveDir.create(recursive: true);
+      }
+      final file = File(
+          '${saveDir.path}/avatar_${DateTime.now().millisecondsSinceEpoch}.png');
+      await file.writeAsBytes(pngBytes, flush: true);
+      if (!mounted) return;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text('갤러리 저장 권한이 없어 앱 폴더에 저장했어요. (${e.type.name})'),
+        ),
+      );
     }
-
-    final file = File(
-      '${saveDir.path}\\avatar_${DateTime.now().millisecondsSinceEpoch}.png',
-    );
-    await file.writeAsBytes(byteData.buffer.asUint8List(), flush: true);
-
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('이미지 저장됨: ${file.path}')),
-    );
   }
 
   @override

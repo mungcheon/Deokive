@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/monetization_catalog.dart';
-import '../widgets/live_banner_ad.dart';
+import '../l10n/generated/app_localizations.dart';
 import 'news_detail_screen.dart';
 
 class NewsListScreen extends StatelessWidget {
@@ -21,10 +20,10 @@ class NewsListScreen extends StatelessWidget {
         title: Text(title),
       ),
       body: posts.isEmpty
-          ? const Center(
+          ? Center(
               child: Text(
-                '아직 등록된 글이 없습니다.',
-                style: TextStyle(fontSize: 16),
+                AppLocalizations.of(context).noNewsPosts,
+                style: const TextStyle(fontSize: 16),
               ),
             )
           : ListView(
@@ -80,10 +79,6 @@ class NewsListScreen extends StatelessWidget {
                     ),
                   );
                 }),
-                const SizedBox(height: 16),
-                const Center(
-                  child: LiveBannerAd(placement: AdPlacement.newsFeedBanner),
-                ),
               ],
             ),
     );

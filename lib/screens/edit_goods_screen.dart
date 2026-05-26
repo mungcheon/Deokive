@@ -1,16 +1,22 @@
+import 'dart:io';
 import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart' show consolidateHttpClientResponseBytes;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../data/catalog/all.dart';
 import '../models/calendar_event_item.dart';
+import '../models/goods_catalog_entry.dart';
 import '../models/goods_item.dart';
-import '../services/barcode_lookup_service.dart';
 import '../state/app_state.dart';
-import 'barcode_scan_screen.dart';
+import '../widgets/currency_prefix.dart';
+import '../widgets/free_text_autocomplete.dart';
+import '../widgets/goods_name_search_field.dart';
+import 'image_catalog_search_screen.dart';
 
 class EditGoodsScreen extends StatefulWidget {
   final GoodsItem item;
@@ -32,121 +38,123 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
   late final TextEditingController officialPriceController;
   late final TextEditingController paidPriceController;
   late final TextEditingController seriesController;
+  late final TextEditingController characterController;
+  late final TextEditingController affiliationController;
+  late final TextEditingController kindController;
+  late final TextEditingController categoryController;
   late final TextEditingController companyController;
-  late final TextEditingController storeController;
   late final TextEditingController memoController;
-  late final TextEditingController storageLocationController;
 
   late int quantity;
-  late String? selectedCategory;
-  late String selectedStatus;
+  late ItemCondition itemCondition;
+  late Currency officialPriceCurrency;
+  late Currency paidPriceCurrency;
   late DateTime? purchaseDate;
+  late DateTime? releaseDate;
   late DateTime? plannedShippingDate;
-  late bool isPreorder;
-  late Uint8List? selectedImageBytes;
-  String? scannedBarcodeValue;
+  late List<Uint8List> selectedImages;
+  bool showDetail = false;
 
-  final List<String> categories = const [
-    '포토카드 / 지류',
-    '피규어 / 굿즈',
-    '의류 / 패션',
-    '음반 / 출판',
-    '문구 / 생활',
-    '이벤트 / 한정',
-    '기타',
-  ];
-
-  final List<String> statuses = const [
-    '미개봉',
-    '개봉',
-    '중고',
-  ];
+  bool get isPreorder => itemCondition == ItemCondition.preorder;
 
   @override
   void initState() {
     super.initState();
     final item = widget.item;
     nameController = TextEditingController(text: item.name);
-    officialPriceController = TextEditingController(text: item.officialPrice?.toString() ?? '');
-    paidPriceController = TextEditingController(text: item.paidPrice?.toString() ?? '');
+    officialPriceController =
+        TextEditingController(text: item.officialPrice?.toString() ?? '');
+    paidPriceController =
+        TextEditingController(text: item.paidPrice?.toString() ?? '');
     seriesController = TextEditingController(text: item.seriesName);
+    characterController = TextEditingController(text: item.characterName);
+    affiliationController = TextEditingController(text: item.affiliation ?? '');
+    kindController = TextEditingController(text: item.kind ?? '');
+    categoryController = TextEditingController(text: item.category);
     companyController = TextEditingController(text: item.companyName ?? '');
-    storeController = TextEditingController(text: item.purchasePlace ?? '');
     memoController = TextEditingController(text: item.memo ?? '');
-    storageLocationController = TextEditingController(text: item.storageLocation ?? '');
 
     quantity = item.quantity;
-    selectedCategory = item.category;
-    isPreorder = item.status == '예약구매';
-    selectedStatus = isPreorder ? statuses.first : item.status;
+    itemCondition = item.isPreorder
+        ? ItemCondition.preorder
+        : item.itemCondition;
+    paidPriceCurrency = Currency.values.firstWhere(
+      (c) => c.code == item.priceCurrencyCode,
+      orElse: () => Currency.krw,
+    );
+    officialPriceCurrency = Currency.values.firstWhere(
+      (c) => c.code == item.effectiveOfficialPriceCurrencyCode,
+      orElse: () => paidPriceCurrency,
+    );
     purchaseDate = item.purchaseDate;
+    releaseDate = item.releaseDate;
     plannedShippingDate = item.plannedShippingDate;
-    selectedImageBytes = item.imageBytes;
-    scannedBarcodeValue = item.barcode;
+    selectedImages = List<Uint8List>.from(item.imageBytesList);
   }
 
-  int? get officialPrice => int.tryParse(officialPriceController.text.replaceAll(',', ''));
-  int? get paidPrice => int.tryParse(paidPriceController.text.replaceAll(',', ''));
+  int? get officialPrice =>
+      int.tryParse(officialPriceController.text.replaceAll(',', ''));
+  int? get paidPrice =>
+      int.tryParse(paidPriceController.text.replaceAll(',', ''));
 
-  Future<void> pickDate() async {
-    final now = DateTime.now();
-    final result = await showDatePicker(
-      context: context,
-      initialDate: purchaseDate ?? now,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-    );
-    if (result != null) {
-      setState(() {
-        purchaseDate = result;
-      });
+  int? get priceDifference {
+    if (officialPrice == null || paidPrice == null) return null;
+    if (officialPriceCurrency != paidPriceCurrency) return null;
+    return officialPrice! - paidPrice!;
+  }
+
+  double? get priceRate {
+    if (officialPrice == null || paidPrice == null || officialPrice == 0) {
+      return null;
+    }
+    if (officialPriceCurrency != paidPriceCurrency) return null;
+    return ((officialPrice! - paidPrice!) / officialPrice!) * 100;
+  }
+
+  String _compareLabel(int diff) {
+    if (diff > 0) return '절약';
+    if (diff < 0) return '초과';
+    return '동일';
+  }
+
+  String _conditionLabel(ItemCondition condition) {
+    switch (condition) {
+      case ItemCondition.wish:
+        return '사고싶다';
+      case ItemCondition.unopened:
+        return '미개봉';
+      case ItemCondition.opened:
+        return '단순개봉';
+      case ItemCondition.used:
+        return '중고';
+      case ItemCondition.preorder:
+        return '예약구매';
     }
   }
 
-  Future<void> pickPlannedShippingDate() async {
+  Future<DateTime?> _pickDate(DateTime? initial) {
     final now = DateTime.now();
-    final result = await showDatePicker(
+    return showDatePicker(
       context: context,
-      initialDate: plannedShippingDate ?? purchaseDate ?? now,
+      initialDate: initial ?? now,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
-    if (result != null) {
-      setState(() {
-        plannedShippingDate = result;
-      });
-    }
   }
 
-  Future<void> pickImage() async {
+  Future<void> _addImage({required ImageSource source}) async {
     final result = await _imagePicker.pickImage(
-      source: ImageSource.gallery,
+      source: source,
       imageQuality: 92,
     );
     if (result == null || !mounted) return;
     final bytes = await result.readAsBytes();
     final edited = await _openGoodsImageEditor(bytes);
     if (edited == null || !mounted) return;
-    setState(() {
-      selectedImageBytes = edited;
-    });
+    setState(() => selectedImages.add(edited));
   }
 
-  Future<void> takePhoto() async {
-    final result = await _imagePicker.pickImage(
-      source: ImageSource.camera,
-      imageQuality: 92,
-    );
-    if (result == null || !mounted) return;
-    final bytes = await result.readAsBytes();
-    final edited = await _openGoodsImageEditor(bytes);
-    if (edited == null || !mounted) return;
-    setState(() {
-      selectedImageBytes = edited;
-    });
-  }
-
-  Future<void> chooseImageSource() async {
+  Future<void> _chooseImageSource() async {
     await showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -160,7 +168,7 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
                 title: const Text('카메라로 촬영'),
                 onTap: () async {
                   Navigator.pop(sheetContext);
-                  await takePhoto();
+                  await _addImage(source: ImageSource.camera);
                 },
               ),
               ListTile(
@@ -168,7 +176,15 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
                 title: const Text('앨범에서 선택'),
                 onTap: () async {
                   Navigator.pop(sheetContext);
-                  await pickImage();
+                  await _addImage(source: ImageSource.gallery);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.collections_bookmark_outlined),
+                title: const Text('이미지 검색'),
+                onTap: () async {
+                  Navigator.pop(sheetContext);
+                  await _openImageSearch();
                 },
               ),
             ],
@@ -178,73 +194,462 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
     );
   }
 
-  Future<void> scanBarcodeAndFetchImage() async {
-    final result = await Navigator.push<String>(
+  Future<void> _openImageSearch() async {
+    final picked = await Navigator.push<GoodsCatalogEntry>(
       context,
-      MaterialPageRoute(
-        builder: (_) => const BarcodeScanScreen(),
-      ),
+      MaterialPageRoute(builder: (_) => const ImageCatalogSearchScreen()),
     );
+    if (picked == null || !mounted) return;
+    _applyCatalogEntry(picked);
+    await _attachCatalogImage(picked);
+  }
 
-    if (result == null || result.isEmpty) return;
-
-    setState(() {
-      scannedBarcodeValue = result;
-    });
-
-    final foundImage = await BarcodeLookupService.instance.lookupImageBytes(result);
+  Future<void> _attachCatalogImage(GoodsCatalogEntry entry) async {
+    final raw = entry.imageUrl?.trim() ?? '';
+    if (raw.isEmpty) return;
+    var url = raw.replaceAll('&amp;', '&');
+    if (url.startsWith('//')) url = 'https:$url';
+    if (!url.startsWith('http')) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final bytes = await _downloadImageBytes(url);
     if (!mounted) return;
-
-    if (foundImage == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('해당 상품 이미지를 찾을 수 없습니다.')),
-      );
+    if (bytes == null) {
+      messenger.showSnackBar(const SnackBar(
+        content: Text('카탈로그 이미지를 불러오지 못했어요. 사진을 직접 추가해 주세요.'),
+      ));
       return;
     }
+    setState(() => selectedImages.add(bytes));
+  }
 
-    final shouldApply = await _confirmFetchedImage(foundImage);
-    if (shouldApply == true && mounted) {
-      setState(() {
-        selectedImageBytes = foundImage;
-      });
+  Future<Uint8List?> _downloadImageBytes(String url) async {
+    final client = HttpClient();
+    try {
+      final request = await client.getUrl(Uri.parse(url));
+      request.headers.set(HttpHeaders.userAgentHeader,
+          'Mozilla/5.0 (Linux; Android) Deokive/1.0');
+      request.headers.set(HttpHeaders.acceptHeader, 'image/*,*/*');
+      final response =
+          await request.close().timeout(const Duration(seconds: 12));
+      if (response.statusCode != 200) return null;
+      final bytes = await consolidateHttpClientResponseBytes(response);
+      return bytes.isEmpty ? null : bytes;
+    } catch (_) {
+      return null;
+    } finally {
+      client.close(force: true);
     }
   }
 
-  Future<bool?> _confirmFetchedImage(Uint8List imageBytes) {
-    return showDialog<bool>(
+  Future<bool> _confirmAddShippingSchedule(DateTime shippingDate) async {
+    final result = await showDialog<bool>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('상품 이미지 확인'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('조회된 상품 이미지를 굿즈 사진으로 사용할까요?'),
-              const SizedBox(height: 12),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.memory(
-                  imageBytes,
-                  width: 180,
-                  height: 180,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
+          title: const Text('캘린더에 추가'),
+          content: Text(
+            '발송 예정일 ${shippingDate.year}-${shippingDate.month.toString().padLeft(2, '0')}-${shippingDate.day.toString().padLeft(2, '0')} 을(를) 캘린더 일정으로 추가할까요?',
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext, false),
-              child: const Text('아니오'),
+              child: const Text('추가 안 함'),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(dialogContext, true),
-              child: const Text('사용'),
+              child: const Text('추가'),
             ),
           ],
         );
       },
+    );
+    return result ?? false;
+  }
+
+  Future<void> _saveGoods() async {
+    if (!_formKey.currentState!.validate()) return;
+    if (categoryController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('카테고리를 선택해주세요.')),
+      );
+      return;
+    }
+    final appState = context.read<AppState>();
+    final updated = widget.item.copyWith(
+      name: nameController.text.trim(),
+      category: categoryController.text.trim(),
+      kind: kindController.text.trim().isEmpty ? null : kindController.text.trim(),
+      quantity: quantity,
+      officialPrice: officialPrice,
+      paidPrice: paidPrice,
+      purchaseDate: purchaseDate,
+      isPreorder: isPreorder,
+      itemCondition: itemCondition,
+      seriesName: seriesController.text.trim(),
+      characterName: characterController.text.trim(),
+      affiliation: affiliationController.text.trim().isEmpty
+          ? null
+          : affiliationController.text.trim(),
+      companyName: companyController.text.trim().isEmpty
+          ? null
+          : companyController.text.trim(),
+      purchasePlace: null,
+      releaseDate: releaseDate,
+      memo: memoController.text.trim().isEmpty
+          ? null
+          : memoController.text.trim(),
+      plannedShippingDate: isPreorder ? plannedShippingDate : null,
+      status: _conditionLabel(itemCondition),
+      purchaseState: isPreorder ? PurchaseState.ordered : widget.item.purchaseState,
+      // Barcode scanning was removed; preserve any value saved previously.
+      barcode: widget.item.barcode,
+      storageLocation: null,
+      imageBytesList: List<Uint8List>.from(selectedImages),
+      priceCurrencyCode: paidPriceCurrency.code,
+      officialPriceCurrencyCode: officialPriceCurrency.code,
+    );
+
+    appState.updateGoods(updated);
+
+    if (isPreorder && plannedShippingDate != null) {
+      final shouldAdd = await _confirmAddShippingSchedule(plannedShippingDate!);
+      if (!mounted) return;
+      if (shouldAdd) {
+        appState.addCalendarEvent(
+          CalendarEventItem(
+            id: appState.makeId(),
+            date: plannedShippingDate!,
+            title: '${nameController.text.trim()} 발송 예정',
+            timeText: null,
+            memo: '예약구매 굿즈 발송 예정일',
+            type: CalendarEventType.release,
+          ),
+        );
+      }
+    }
+
+    if (!mounted) return;
+    Navigator.pop(context, updated);
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    officialPriceController.dispose();
+    paidPriceController.dispose();
+    seriesController.dispose();
+    characterController.dispose();
+    affiliationController.dispose();
+    kindController.dispose();
+    categoryController.dispose();
+    companyController.dispose();
+    memoController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final appState = context.watch<AppState>();
+    final diff = priceDifference;
+    final rate = priceRate;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('굿즈 수정'),
+        actions: [
+          IconButton(
+            tooltip: '이미지 검색',
+            onPressed: _openImageSearch,
+            icon: const Icon(Icons.image_search_rounded),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              _PhotoStrip(
+                images: selectedImages,
+                onAdd: _chooseImageSource,
+                onRemove: (index) =>
+                    setState(() => selectedImages.removeAt(index)),
+              ),
+              const SizedBox(height: 20),
+              GoodsNameSearchField(
+                controller: nameController,
+                catalog: kFullCatalog,
+                onCatalogSelected: _applyCatalogEntry,
+              ),
+              const SizedBox(height: 16),
+              FreeTextAutocomplete(
+                controller: seriesController,
+                suggestions: _mergedSuggestions(
+                  appState.knownSeriesNames,
+                  catalogSeriesNames(),
+                ),
+                labelText: '시리즈',
+              ),
+              const SizedBox(height: 16),
+              FreeTextAutocomplete(
+                controller: categoryController,
+                suggestions: _categorySuggestions(appState),
+                labelText: '카테고리',
+                required: true,
+              ),
+              const SizedBox(height: 16),
+              FreeTextAutocomplete(
+                controller: kindController,
+                suggestions: const [],
+                labelText: '종류',
+              ),
+              const SizedBox(height: 16),
+              FreeTextAutocomplete(
+                controller: characterController,
+                suggestions: _mergedSuggestions(
+                  appState.knownCharacterNames,
+                  catalogCharacterNames(),
+                ),
+                labelText: '캐릭터',
+              ),
+              const SizedBox(height: 16),
+              FreeTextAutocomplete(
+                controller: affiliationController,
+                suggestions: catalogAffiliations(),
+                labelText: '소속 (아이돌 그룹/애니메이션 등)',
+              ),
+              const SizedBox(height: 16),
+              _QuantityField(
+                quantity: quantity,
+                onChanged: (value) => setState(() => quantity = value),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: officialPriceController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: '정가',
+                        prefixIcon: CurrencyPrefix(
+                          currency: officialPriceCurrency,
+                          onSelected: (c) =>
+                              setState(() => officialPriceCurrency = c),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextFormField(
+                      controller: paidPriceController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: '실구매가',
+                        prefixIcon: CurrencyPrefix(
+                          currency: paidPriceCurrency,
+                          onSelected: (c) =>
+                              setState(() => paidPriceCurrency = c),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              if (diff != null && rate != null) ...[
+                const SizedBox(height: 12),
+                Card(
+                  margin: EdgeInsets.zero,
+                  child: Padding(
+                    padding: const EdgeInsets.all(14),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.calculate_outlined),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            '${_compareLabel(diff)} ${diff.abs()}원 (${rate.toStringAsFixed(1)}%)',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+              const SizedBox(height: 16),
+              InkWell(
+                onTap: () async {
+                  final picked = await _pickDate(purchaseDate);
+                  if (picked != null) setState(() => purchaseDate = picked);
+                },
+                child: InputDecorator(
+                  decoration: const InputDecoration(labelText: '구매 날짜'),
+                  child: Text(
+                    purchaseDate == null
+                        ? '날짜 선택'
+                        : '${purchaseDate!.year}-${purchaseDate!.month.toString().padLeft(2, '0')}-${purchaseDate!.day.toString().padLeft(2, '0')}',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text('상품 상태',
+                  style: TextStyle(fontWeight: FontWeight.w700)),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                children: ItemCondition.values.map((condition) {
+                  return ChoiceChip(
+                    label: Text(_conditionLabel(condition)),
+                    selected: itemCondition == condition,
+                    onSelected: (_) {
+                      setState(() {
+                        itemCondition = condition;
+                        if (!isPreorder) plannedShippingDate = null;
+                      });
+                    },
+                  );
+                }).toList(),
+              ),
+              if (isPreorder) ...[
+                const SizedBox(height: 12),
+                InkWell(
+                  onTap: () async {
+                    final picked = await _pickDate(plannedShippingDate ?? purchaseDate);
+                    if (picked != null) {
+                      setState(() => plannedShippingDate = picked);
+                    }
+                  },
+                  child: InputDecorator(
+                    decoration: const InputDecoration(labelText: '발송 예정일'),
+                    child: Text(
+                      plannedShippingDate == null
+                          ? '날짜 선택'
+                          : '${plannedShippingDate!.year}-${plannedShippingDate!.month.toString().padLeft(2, '0')}-${plannedShippingDate!.day.toString().padLeft(2, '0')}',
+                    ),
+                  ),
+                ),
+              ],
+              const SizedBox(height: 16),
+              OutlinedButton(
+                onPressed: () => setState(() => showDetail = !showDetail),
+                child: Text(showDetail ? '상세 입력 닫기' : '상세 입력 열기'),
+              ),
+              if (showDetail) ...[
+                const SizedBox(height: 16),
+                FreeTextAutocomplete(
+                  controller: companyController,
+                  suggestions: const [],
+                  labelText: '공식 판매처',
+                ),
+                const SizedBox(height: 16),
+                InkWell(
+                  onTap: () async {
+                    final picked = await _pickDate(releaseDate);
+                    if (picked != null) setState(() => releaseDate = picked);
+                  },
+                  child: InputDecorator(
+                    decoration: const InputDecoration(labelText: '발매일'),
+                    child: Text(
+                      releaseDate == null
+                          ? '날짜 선택'
+                          : '${releaseDate!.year}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: memoController,
+                  minLines: 3,
+                  maxLines: 5,
+                  decoration: const InputDecoration(
+                    labelText: '메모',
+                    alignLabelWithHint: true,
+                  ),
+                ),
+              ],
+              const SizedBox(height: 28),
+              SizedBox(
+                height: 52,
+                child: FilledButton(
+                  onPressed: _saveGoods,
+                  child: const Text('저장'),
+                ),
+              ),
+              const SizedBox(height: 24),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<String> _categorySuggestions(AppState appState) {
+    const defaultLabels = <String>[
+      '피규어',
+      '봉제 인형',
+      '포스터',
+      '카드',
+      '뱃지',
+      '키링',
+      '스티커',
+      '스탠디',
+      '포토카드',
+      '아트북',
+      '의류',
+      '액세서리',
+      '기타',
+    ];
+    return {
+      ...defaultLabels,
+      ...appState.knownCategories,
+      ...catalogCategories(),
+    }.toList()
+      ..sort();
+  }
+
+  List<String> _mergedSuggestions(List<String> a, List<String> b) {
+    return {...a, ...b}.toList()..sort();
+  }
+
+  /// Auto-fill metadata fields when the user picks a catalog entry. Every
+  /// catalog-known field overwrites the current input — the user can edit
+  /// freely after. Series is intentionally skipped.
+  void _applyCatalogEntry(GoodsCatalogEntry entry) {
+    setState(() {
+      if (entry.category.isNotEmpty) {
+        categoryController.text = entry.category;
+      }
+      if (entry.characterName.isNotEmpty) {
+        characterController.text = entry.characterName;
+      }
+      if (entry.affiliation.isNotEmpty) {
+        affiliationController.text = entry.affiliation;
+      }
+      if (entry.subSeries != null && entry.subSeries!.isNotEmpty) {
+        kindController.text = entry.subSeries!;
+      }
+      if (entry.officialPriceJpy != null) {
+        officialPriceController.text = entry.officialPriceJpy.toString();
+      }
+      if (entry.sourceStore.isNotEmpty) {
+        companyController.text = entry.sourceStore;
+      }
+      if (entry.officialPriceJpy != null) {
+        officialPriceCurrency = Currency.jpy;
+        paidPriceCurrency = Currency.jpy;
+      }
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          entry.officialPriceJpy != null
+              ? '카탈로그 정보를 채웠습니다. 정가는 ¥${entry.officialPriceJpy} (JPY) — 통화를 확인하세요.'
+              : '카탈로그 정보를 채웠습니다. 필요하면 수정해 주세요.',
+        ),
+        duration: const Duration(seconds: 3),
+      ),
     );
   }
 
@@ -253,7 +658,10 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
     final frame = await codec.getNextFrame();
     final image = frame.image;
     const previewSize = 220.0;
-    final baseScale = math.max(previewSize / image.width, previewSize / image.height);
+    final baseScale = math.max(
+      previewSize / image.width,
+      previewSize / image.height,
+    );
     double zoom = 1;
     double offsetX = 0;
     double offsetY = 0;
@@ -285,8 +693,10 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
 
             Future<Uint8List> exportImage() async {
               final scale = baseScale * zoom;
-              final cropLeft = ((image.width * scale - previewSize) / 2 - offsetX) / scale;
-              final cropTop = ((image.height * scale - previewSize) / 2 - offsetY) / scale;
+              final cropLeft =
+                  ((image.width * scale - previewSize) / 2 - offsetX) / scale;
+              final cropTop =
+                  ((image.height * scale - previewSize) / 2 - offsetY) / scale;
               final cropSize = previewSize / scale;
               final srcRect = Rect.fromLTWH(
                 cropLeft.clamp(0, math.max(0, image.width - cropSize)).toDouble(),
@@ -307,7 +717,8 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
                     outputSize.toInt(),
                     outputSize.toInt(),
                   );
-              final byteData = await rendered.toByteData(format: ui.ImageByteFormat.png);
+              final byteData =
+                  await rendered.toByteData(format: ui.ImageByteFormat.png);
               return byteData!.buffer.asUint8List();
             }
 
@@ -335,7 +746,9 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
                             },
                             child: Stack(
                               children: [
-                                Positioned.fill(child: Container(color: Colors.black12)),
+                                Positioned.fill(
+                                  child: Container(color: Colors.black12),
+                                ),
                                 Positioned(
                                   left: left,
                                   top: top,
@@ -377,20 +790,6 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
                         });
                       },
                     ),
-                    const Text('좌우 위치'),
-                    Slider(
-                      value: offsetX,
-                      min: -maxOffsetX(),
-                      max: maxOffsetX() == 0 ? 0.0001 : maxOffsetX(),
-                      onChanged: maxOffsetX() == 0 ? null : (value) => setDialogState(() => offsetX = value),
-                    ),
-                    const Text('상하 위치'),
-                    Slider(
-                      value: offsetY,
-                      min: -maxOffsetY(),
-                      max: maxOffsetY() == 0 ? 0.0001 : maxOffsetY(),
-                      onChanged: maxOffsetY() == 0 ? null : (value) => setDialogState(() => offsetY = value),
-                    ),
                   ],
                 ),
               ),
@@ -414,332 +813,135 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
       },
     );
   }
+}
 
-  Future<bool> _confirmAddShippingSchedule(DateTime shippingDate) async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (dialogContext) {
-        return AlertDialog(
-          title: const Text('캘린더에 추가'),
-          content: Text(
-            '발송 예정일 ${shippingDate.year}-${shippingDate.month.toString().padLeft(2, '0')}-${shippingDate.day.toString().padLeft(2, '0')} 을(를) 캘린더 일정으로 추가할까요?',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext, false),
-              child: const Text('추가 안 함'),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.pop(dialogContext, true),
-              child: const Text('추가'),
-            ),
-          ],
-        );
-      },
-    );
-    return result ?? false;
-  }
+class _PhotoStrip extends StatelessWidget {
+  final List<Uint8List> images;
+  final VoidCallback onAdd;
+  final void Function(int index) onRemove;
 
-  Future<void> saveEdit() async {
-    if (!_formKey.currentState!.validate()) return;
-    if (selectedCategory == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('카테고리를 선택해주세요.')),
-      );
-      return;
-    }
-    if (isPreorder && plannedShippingDate == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('예약구매인 경우 발송 예정일을 선택해주세요.')),
-      );
-      return;
-    }
-
-    final appState = context.read<AppState>();
-    final updated = GoodsItem(
-      id: widget.item.id,
-      folderId: widget.item.folderId,
-      name: nameController.text.trim(),
-      category: selectedCategory!,
-      quantity: quantity,
-      officialPrice: officialPrice,
-      paidPrice: paidPrice,
-      seriesName: seriesController.text.trim(),
-      companyName: companyController.text.trim().isEmpty ? null : companyController.text.trim(),
-      purchasePlace: storeController.text.trim().isEmpty ? null : storeController.text.trim(),
-      purchaseDate: purchaseDate,
-      plannedShippingDate: isPreorder ? plannedShippingDate : null,
-      status: isPreorder ? '예약구매' : selectedStatus,
-      barcode: (scannedBarcodeValue ?? '').trim().isEmpty ? null : scannedBarcodeValue!.trim(),
-      storageLocation: storageLocationController.text.trim().isEmpty ? null : storageLocationController.text.trim(),
-      memo: memoController.text.trim().isEmpty ? null : memoController.text.trim(),
-      imageBytes: selectedImageBytes,
-      isFavorite: widget.item.isFavorite,
-    );
-
-    appState.updateGoods(updated);
-
-    if (isPreorder && plannedShippingDate != null) {
-      final shouldAdd = await _confirmAddShippingSchedule(plannedShippingDate!);
-      if (!mounted) return;
-      if (shouldAdd) {
-        appState.addCalendarEvent(
-          CalendarEventItem(
-            id: appState.makeId(),
-            date: plannedShippingDate!,
-            title: '${nameController.text.trim()} 발송 예정',
-            timeText: null,
-            memo: '예약구매 굿즈 발송 예정일',
-            type: CalendarEventType.release,
-          ),
-        );
-      }
-    }
-
-    if (!mounted) return;
-    Navigator.pop(context);
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    officialPriceController.dispose();
-    paidPriceController.dispose();
-    seriesController.dispose();
-    companyController.dispose();
-    storeController.dispose();
-    memoController.dispose();
-    storageLocationController.dispose();
-    super.dispose();
-  }
+  const _PhotoStrip({
+    required this.images,
+    required this.onAdd,
+    required this.onRemove,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('굿즈 수정'),
-        actions: [
-          IconButton(
-            tooltip: '바코드 스캔',
-            onPressed: scanBarcodeAndFetchImage,
-            icon: const Icon(Icons.qr_code_scanner_rounded),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            padding: const EdgeInsets.all(16),
+    return SizedBox(
+      height: 110,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: images.length + 1,
+        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        itemBuilder: (context, index) {
+          if (index == images.length) {
+            return InkWell(
+              onTap: onAdd,
+              borderRadius: BorderRadius.circular(16),
+              child: Container(
+                width: 110,
+                height: 110,
+                decoration: BoxDecoration(
+                  color:
+                      Theme.of(context).colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                ),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add_a_photo_outlined, size: 28),
+                    SizedBox(height: 6),
+                    Text('사진 추가', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ),
+            );
+          }
+          return Stack(
             children: [
-              GestureDetector(
-                onTap: chooseImageSource,
-                child: Align(
-                  alignment: Alignment.center,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.memory(
+                  images[index],
+                  width: 110,
+                  height: 110,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                top: 2,
+                right: 2,
+                child: InkWell(
+                  onTap: () => onRemove(index),
                   child: Container(
-                    width: 180,
-                    height: 180,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Theme.of(context).colorScheme.outline),
+                    decoration: const BoxDecoration(
+                      color: Colors.black54,
+                      shape: BoxShape.circle,
                     ),
-                    child: selectedImageBytes == null
-                        ? const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.add_a_photo_outlined, size: 28),
-                              SizedBox(height: 8),
-                              Text('사진 변경'),
-                            ],
-                          )
-                        : Image.memory(selectedImageBytes!, fit: BoxFit.cover),
+                    padding: const EdgeInsets.all(4),
+                    child: const Icon(Icons.close,
+                        color: Colors.white, size: 16),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: seriesController,
-                decoration: const InputDecoration(labelText: '시리즈'),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: '굿즈 이름 *'),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return '굿즈 이름은 필수입니다.';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              DropdownButtonFormField<String>(
-                value: selectedCategory,
-                decoration: const InputDecoration(labelText: '카테고리 *'),
-                items: categories.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
-                onChanged: (value) => setState(() => selectedCategory = value),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  const Text(
-                    '개수',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(width: 12),
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: IconButton.filledTonal(
-                      padding: EdgeInsets.zero,
-                      visualDensity: VisualDensity.compact,
-                      onPressed: quantity > 1 ? () => setState(() => quantity--) : null,
-                      icon: const Icon(Icons.remove, size: 12),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                    child: Center(
-                      child: Text(
-                        '$quantity',
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: IconButton.filledTonal(
-                      padding: EdgeInsets.zero,
-                      visualDensity: VisualDensity.compact,
-                      onPressed: () => setState(() => quantity++),
-                      icon: const Icon(Icons.add, size: 12),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: officialPriceController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: '정가',
-                        prefixText: 'KRW ',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextFormField(
-                      controller: paidPriceController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: '실구매가',
-                        prefixText: 'KRW ',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              InkWell(
-                onTap: pickDate,
-                child: InputDecorator(
-                  decoration: const InputDecoration(labelText: '구매 날짜'),
-                  child: Text(
-                    purchaseDate == null
-                        ? '날짜 선택'
-                        : '${purchaseDate!.year}-${purchaseDate!.month.toString().padLeft(2, '0')}-${purchaseDate!.day.toString().padLeft(2, '0')}',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              SwitchListTile(
-                value: isPreorder,
-                contentPadding: EdgeInsets.zero,
-                title: const Text('예약구매'),
-                subtitle: const Text('아직 배송되지 않아 현물로 받지 않은 상태'),
-                onChanged: (value) {
-                  setState(() {
-                    isPreorder = value;
-                    if (!isPreorder) {
-                      plannedShippingDate = null;
-                    }
-                  });
-                },
-              ),
-              if (isPreorder) ...[
-                const SizedBox(height: 12),
-                InkWell(
-                  onTap: pickPlannedShippingDate,
-                  child: InputDecorator(
-                    decoration: const InputDecoration(labelText: '발송 예정일'),
-                    child: Text(
-                      plannedShippingDate == null
-                          ? '날짜 선택'
-                          : '${plannedShippingDate!.year}-${plannedShippingDate!.month.toString().padLeft(2, '0')}-${plannedShippingDate!.day.toString().padLeft(2, '0')}',
-                    ),
-                  ),
-                ),
-              ],
-              const SizedBox(height: 16),
-              DropdownButtonFormField<String>(
-                value: isPreorder ? null : selectedStatus,
-                decoration: const InputDecoration(labelText: '상태'),
-                items: statuses.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
-                onChanged: isPreorder
-                    ? null
-                    : (value) {
-                        if (value != null) {
-                          setState(() {
-                            selectedStatus = value;
-                          });
-                        }
-                      },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: companyController,
-                decoration: const InputDecoration(labelText: '공식 판매처'),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: storeController,
-                decoration: const InputDecoration(labelText: '구매처'),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: storageLocationController,
-                decoration: const InputDecoration(labelText: '보관 위치'),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: memoController,
-                minLines: 3,
-                maxLines: 5,
-                decoration: const InputDecoration(
-                  labelText: '메모',
-                  alignLabelWithHint: true,
-                ),
-              ),
-              const SizedBox(height: 24),
-              SizedBox(
-                height: 50,
-                child: FilledButton(
-                  onPressed: saveEdit,
-                  child: const Text('수정 저장'),
-                ),
-              ),
-              const SizedBox(height: 24),
             ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _QuantityField extends StatelessWidget {
+  final int quantity;
+  final ValueChanged<int> onChanged;
+
+  const _QuantityField({
+    required this.quantity,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Text('개수',
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+        const SizedBox(width: 12),
+        SizedBox(
+          width: 28,
+          height: 28,
+          child: IconButton.filledTonal(
+            padding: EdgeInsets.zero,
+            visualDensity: VisualDensity.compact,
+            onPressed: quantity > 1 ? () => onChanged(quantity - 1) : null,
+            icon: const Icon(Icons.remove, size: 14),
           ),
         ),
-      ),
+        SizedBox(
+          width: 36,
+          child: Center(
+            child: Text(
+              '$quantity',
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 28,
+          height: 28,
+          child: IconButton.filledTonal(
+            padding: EdgeInsets.zero,
+            visualDensity: VisualDensity.compact,
+            onPressed: () => onChanged(quantity + 1),
+            icon: const Icon(Icons.add, size: 14),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -759,13 +961,14 @@ class _GoodsCropGridPainter extends CustomPainter {
       ..strokeWidth = 1;
 
     canvas.drawRect(Offset.zero & size, borderPaint);
-
     final thirdX = size.width / 3;
     final thirdY = size.height / 3;
     canvas.drawLine(Offset(thirdX, 0), Offset(thirdX, size.height), gridPaint);
-    canvas.drawLine(Offset(thirdX * 2, 0), Offset(thirdX * 2, size.height), gridPaint);
+    canvas.drawLine(
+        Offset(thirdX * 2, 0), Offset(thirdX * 2, size.height), gridPaint);
     canvas.drawLine(Offset(0, thirdY), Offset(size.width, thirdY), gridPaint);
-    canvas.drawLine(Offset(0, thirdY * 2), Offset(size.width, thirdY * 2), gridPaint);
+    canvas.drawLine(
+        Offset(0, thirdY * 2), Offset(size.width, thirdY * 2), gridPaint);
   }
 
   @override

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../config/monetization_catalog.dart';
 import '../l10n/app_strings.dart';
-import '../services/ad_service.dart';
 import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
+import 'board_screen.dart';
 import 'calendar_screen.dart';
 import 'folders_screen.dart';
 import 'home_screen.dart';
@@ -20,14 +19,6 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   final List<int> _tabHistory = [];
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      AdService.instance.preloadInterstitial(AdPlacement.folderInterstitial);
-    });
-  }
 
   Future<void> _onDestinationSelected(AppState appState, int index) async {
     final previousIndex = appState.currentTabIndex;
@@ -59,6 +50,7 @@ class _RootScreenState extends State<RootScreen> {
       builder: (context, appState, _) {
         final pages = [
           const HomeScreen(),
+          const BoardScreen(),
           const FoldersScreen(),
           const CalendarScreen(),
           const SettingsScreen(),
@@ -71,6 +63,11 @@ class _RootScreenState extends State<RootScreen> {
             icon: Icons.home_outlined,
             selectedIcon: Icons.home,
             label: strings.home,
+          ),
+          _BottomTabItem(
+            icon: Icons.forum_outlined,
+            selectedIcon: Icons.forum,
+            label: strings.board,
           ),
           _BottomTabItem(
             icon: Icons.folder_outlined,

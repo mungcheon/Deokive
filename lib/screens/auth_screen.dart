@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
 
@@ -20,6 +21,10 @@ class _AuthScreenState extends State<AuthScreen>
   final nicknameController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+  bool _obscurePassword = true;
+  bool _obscureConfirm = true;
+  bool _submitting = false;
+
   bool get signupMode => _tabController.index == 1;
 
   @override
@@ -27,9 +32,7 @@ class _AuthScreenState extends State<AuthScreen>
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
+      if (mounted) setState(() {});
     });
   }
 
@@ -44,23 +47,24 @@ class _AuthScreenState extends State<AuthScreen>
   }
 
   Future<void> openForgotPasswordDialog() async {
+    final l = AppLocalizations.of(context);
     final resetController = TextEditingController(text: idController.text);
 
     await showDialog<void>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('비밀번호 찾기'),
+          title: Text(l.authForgotPassword),
           content: TextField(
             controller: resetController,
-            decoration: const InputDecoration(
-              labelText: '가입한 아이디',
+            decoration: InputDecoration(
+              labelText: l.authForgotPasswordEnterId,
             ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
-              child: const Text('취소'),
+              child: Text(l.cancel),
             ),
             FilledButton(
               onPressed: () {
@@ -70,13 +74,13 @@ class _AuthScreenState extends State<AuthScreen>
                   SnackBar(
                     content: Text(
                       id.isEmpty
-                          ? '아이디를 입력해주세요.'
-                          : '$id 계정의 비밀번호 찾기 기능은 추후 연결됩니다.',
+                          ? l.authMsgIdEmptyOnReset
+                          : l.authMsgResetSent(id),
                     ),
                   ),
                 );
               },
-              child: const Text('확인'),
+              child: Text(l.save),
             ),
           ],
         );
@@ -85,20 +89,23 @@ class _AuthScreenState extends State<AuthScreen>
   }
 
   Future<void> submit() async {
+    if (_submitting) return;
+    final l = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
     final appState = context.read<AppState>();
     final id = idController.text.trim();
     final password = passwordController.text;
 
     if (id.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('아이디와 비밀번호를 입력해주세요.')),
+      messenger.showSnackBar(
+        SnackBar(content: Text(l.authMsgIdPasswordRequired)),
       );
       return;
     }
 
     if (!appState.isValidTagText(id)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('아이디는 영문과 숫자만 사용할 수 있습니다.')),
+      messenger.showSnackBar(
+        SnackBar(content: Text(l.authMsgIdInvalidChars)),
       );
       return;
     }
@@ -108,58 +115,69 @@ class _AuthScreenState extends State<AuthScreen>
       final confirmPassword = confirmPasswordController.text;
 
       if (nickname.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('닉네임을 입력해주세요.')),
+        messenger.showSnackBar(
+          SnackBar(content: Text(l.authMsgNicknameRequired)),
+        );
+        return;
+      }
+
+      // Standard minimum password length.
+      if (password.length < 6) {
+        messenger.showSnackBar(
+          SnackBar(content: Text(l.authMsgPasswordTooShort)),
         );
         return;
       }
 
       if (password != confirmPassword) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('비밀번호 확인이 일치하지 않습니다.')),
+        messenger.showSnackBar(
+          SnackBar(content: Text(l.authMsgPasswordMismatch)),
         );
         return;
       }
 
+      setState(() => _submitting = true);
       final success = await appState.signUpLocal(
         nickname: nickname,
         id: id,
         password: password,
       );
+      if (!mounted) return;
+      setState(() => _submitting = false);
       if (!success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('이미 사용 중인 아이디입니다.')),
+        messenger.showSnackBar(
+          SnackBar(content: Text(l.authMsgIdTaken)),
         );
         return;
       }
 
-      if (!mounted) return;
       Navigator.pop(context, true);
       return;
     }
 
+    setState(() => _submitting = true);
     final success = await appState.signInLocal(id: id, password: password);
+    if (!mounted) return;
+    setState(() => _submitting = false);
     if (!success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('등록된 계정 정보와 일치하지 않습니다.')),
+      messenger.showSnackBar(
+        SnackBar(content: Text(l.authMsgLoginFailed)),
       );
       return;
     }
 
-    if (!mounted) return;
     Navigator.pop(context, true);
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final appState = context.watch<AppState>();
     final theme = Theme.of(context);
     final palette = theme.extension<DeokivePalette>()!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('로그인'),
-      ),
+      appBar: AppBar(title: Text(l.login)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -185,9 +203,9 @@ class _AuthScreenState extends State<AuthScreen>
                       unselectedLabelColor:
                           theme.colorScheme.onSurface.withValues(alpha: 0.75),
                       dividerColor: Colors.transparent,
-                      tabs: const [
-                        Tab(text: '로그인'),
-                        Tab(text: '회원가입'),
+                      tabs: [
+                        Tab(text: l.authLoginTab),
+                        Tab(text: l.authSignupTab),
                       ],
                     ),
                   ),
@@ -195,25 +213,52 @@ class _AuthScreenState extends State<AuthScreen>
                   if (signupMode) ...[
                     TextField(
                       controller: nicknameController,
-                      decoration: const InputDecoration(
-                        labelText: '닉네임',
+                      maxLength: 15,
+                      textInputAction: TextInputAction.next,
+                      autofillHints: const [AutofillHints.nickname],
+                      decoration: InputDecoration(
+                        labelText: l.authNicknameLabel,
+                        counterText: '',
+                        prefixIcon: const Icon(Icons.badge_outlined),
                       ),
                     ),
                     const SizedBox(height: 12),
                   ],
                   TextField(
                     controller: idController,
-                    decoration: const InputDecoration(
-                      labelText: '아이디',
-                      helperText: '아이디는 영문과 숫자만 사용할 수 있습니다.',
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.visiblePassword,
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    autofillHints: const [AutofillHints.username],
+                    decoration: InputDecoration(
+                      labelText: l.accountId,
+                      helperText: l.accountIdHelp,
+                      prefixIcon: const Icon(Icons.alternate_email_rounded),
                     ),
                   ),
                   const SizedBox(height: 12),
                   TextField(
                     controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: '비밀번호',
+                    obscureText: _obscurePassword,
+                    textInputAction:
+                        signupMode ? TextInputAction.next : TextInputAction.done,
+                    autofillHints: const [AutofillHints.password],
+                    onSubmitted: (_) {
+                      if (!signupMode) submit();
+                    },
+                    decoration: InputDecoration(
+                      labelText: l.authPasswordLabel,
+                      prefixIcon: const Icon(Icons.lock_outline_rounded),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                        ),
+                        onPressed: () => setState(
+                            () => _obscurePassword = !_obscurePassword),
+                      ),
                     ),
                   ),
                   if (!signupMode)
@@ -221,7 +266,7 @@ class _AuthScreenState extends State<AuthScreen>
                       value: appState.keepSignedIn,
                       contentPadding: EdgeInsets.zero,
                       controlAffinity: ListTileControlAffinity.leading,
-                      title: const Text('로그인 유지'),
+                      title: Text(l.authKeepSignedIn),
                       onChanged: (value) {
                         if (value == null) return;
                         appState.setKeepSignedIn(value);
@@ -231,9 +276,22 @@ class _AuthScreenState extends State<AuthScreen>
                     const SizedBox(height: 12),
                     TextField(
                       controller: confirmPasswordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: '비밀번호 확인',
+                      obscureText: _obscureConfirm,
+                      textInputAction: TextInputAction.done,
+                      autofillHints: const [AutofillHints.password],
+                      onSubmitted: (_) => submit(),
+                      decoration: InputDecoration(
+                        labelText: l.authPasswordConfirmLabel,
+                        prefixIcon: const Icon(Icons.lock_outline_rounded),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureConfirm
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                          ),
+                          onPressed: () => setState(
+                              () => _obscureConfirm = !_obscureConfirm),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 14),
@@ -249,20 +307,20 @@ class _AuthScreenState extends State<AuthScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '첫 태그는 ${appState.nextDefaultTag} 로 생성됩니다.',
+                            l.authSignupNoticeTagPrefix(appState.nextDefaultTag),
                             style: theme.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            '회원가입 순서대로 @deokive 뒤에 번호가 붙고, 이후 설정에서 원하는 태그로 바꿀 수 있습니다. 태그는 영문과 숫자만 사용할 수 있습니다.',
-                            style: TextStyle(height: 1.45),
+                          Text(
+                            l.authSignupNoticeTagBody,
+                            style: const TextStyle(height: 1.45),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            '일반 회원가입 정보는 로컬 DB에 저장됩니다. 일반 계정은 주기적인 클라우드 백업이 제한될 수 있으며 Google Drive 백업은 구글 로그인 계정에서 사용될 예정입니다.',
-                            style: TextStyle(height: 1.45),
+                          Text(
+                            l.authSignupNoticeBackup,
+                            style: const TextStyle(height: 1.45),
                           ),
                         ],
                       ),
@@ -273,8 +331,19 @@ class _AuthScreenState extends State<AuthScreen>
                     width: double.infinity,
                     height: 50,
                     child: FilledButton(
-                      onPressed: submit,
-                      child: Text(signupMode ? '회원가입 완료' : '로그인'),
+                      onPressed: _submitting ? null : submit,
+                      child: _submitting
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Text(
+                              signupMode ? l.authCompleteSignup : l.login,
+                            ),
                     ),
                   ),
                   if (!signupMode) ...[
@@ -283,7 +352,7 @@ class _AuthScreenState extends State<AuthScreen>
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: openForgotPasswordDialog,
-                        child: const Text('비밀번호 찾기'),
+                        child: Text(l.authForgotPassword),
                       ),
                     ),
                   ],

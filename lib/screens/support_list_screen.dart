@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../state/app_state.dart';
 import 'support_detail_screen.dart';
 
@@ -13,19 +14,18 @@ class SupportListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Consumer<AppState>(
       builder: (context, appState, _) {
         final inquiries = [...appState.inquiries.reversed];
 
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('내 문의'),
-          ),
+          appBar: AppBar(title: Text(l.myInquiries)),
           body: inquiries.isEmpty
-              ? const Center(
+              ? Center(
                   child: Text(
-                    '아직 등록한 문의가 없어요.',
-                    style: TextStyle(fontSize: 16),
+                    l.noInquiries,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 )
               : ListView.separated(
@@ -64,7 +64,7 @@ class SupportListScreen extends StatelessWidget {
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                         subtitle: Text(
-                          '${inquiry.isAnswered ? "답변 완료" : "답변 대기"} · ${formatDate(inquiry.createdAt)}',
+                          '${inquiry.isAnswered ? l.inquiryAnswered : l.inquiryPending} · ${formatDate(inquiry.createdAt)}',
                         ),
                         trailing: const Icon(Icons.chevron_right),
                         onTap: () {

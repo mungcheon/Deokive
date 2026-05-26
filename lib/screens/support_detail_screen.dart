@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../state/app_state.dart';
 
 class SupportDetailScreen extends StatelessWidget {
@@ -17,6 +18,7 @@ class SupportDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Consumer<AppState>(
       builder: (context, appState, _) {
         final inquiry = appState.inquiries.firstWhere(
@@ -24,9 +26,7 @@ class SupportDetailScreen extends StatelessWidget {
         );
 
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('문의 상세'),
-          ),
+          appBar: AppBar(title: Text(l.inquiryDetailTitle)),
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
@@ -51,17 +51,12 @@ class SupportDetailScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         formatDate(inquiry.createdAt),
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                        ),
+                        style: TextStyle(color: Colors.grey.shade600),
                       ),
                       const SizedBox(height: 16),
                       Text(
                         inquiry.content,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          height: 1.6,
-                        ),
+                        style: const TextStyle(fontSize: 15, height: 1.6),
                       ),
                     ],
                   ),
@@ -80,9 +75,9 @@ class SupportDetailScreen extends StatelessWidget {
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              '관리자 답변',
-                              style: TextStyle(
+                            Text(
+                              l.adminAnswer,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w800,
                               ),
@@ -91,34 +86,30 @@ class SupportDetailScreen extends StatelessWidget {
                             if (inquiry.answeredAt != null)
                               Text(
                                 formatDate(inquiry.answeredAt!),
-                                style: TextStyle(
-                                  color: Colors.grey.shade600,
-                                ),
+                                style: TextStyle(color: Colors.grey.shade600),
                               ),
                             const SizedBox(height: 16),
                             Text(
                               inquiry.answer ?? '',
-                              style: const TextStyle(
-                                fontSize: 15,
-                                height: 1.6,
-                              ),
+                              style:
+                                  const TextStyle(fontSize: 15, height: 1.6),
                             ),
                           ],
                         )
-                      : const Column(
+                      : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '관리자 답변',
-                              style: TextStyle(
+                              l.adminAnswer,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
-                              '아직 답변이 등록되지 않았어요.',
-                              style: TextStyle(fontSize: 15),
+                              l.noAnswerYet,
+                              style: const TextStyle(fontSize: 15),
                             ),
                           ],
                         ),

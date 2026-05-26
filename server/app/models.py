@@ -111,3 +111,28 @@ class Payment(Base, TimestampMixin):
     currency: Mapped[str] = mapped_column(String(10), default="KRW")
 
     user: Mapped[User] = relationship(back_populates="payments")
+
+
+class GoodsCatalog(Base, TimestampMixin):
+    """Editor-curated catalog of goods. Searched by autocomplete on the
+    client when users add their own goods. Multiple language fields let the
+    client display localized names while keeping a single canonical entry."""
+
+    __tablename__ = "goods_catalog"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    name_ko: Mapped[str] = mapped_column(String(200), index=True)
+    name_ja: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    name_en: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    category: Mapped[str] = mapped_column(String(80), index=True)
+    character_name: Mapped[str] = mapped_column(String(80), index=True)
+    affiliation: Mapped[str] = mapped_column(String(80), default="")
+    series_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    sub_series: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    official_price_jpy: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    barcode: Mapped[str | None] = mapped_column(String(80), nullable=True, index=True)
+    image_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    source_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    source_store: Mapped[str] = mapped_column(String(120), default="")
+    release_date: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)

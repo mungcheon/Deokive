@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../l10n/generated/app_localizations.dart';
+
 class SupportWriteScreen extends StatefulWidget {
   const SupportWriteScreen({super.key});
 
@@ -8,19 +10,30 @@ class SupportWriteScreen extends StatefulWidget {
   State<SupportWriteScreen> createState() => _SupportWriteScreenState();
 }
 
+/// Stable category keys (stored / sent to backend). Display labels come from
+/// `AppLocalizations.inquiryCategoryXxx`.
+enum InquiryCategory { general, bug, account, payment, feature }
+
 class _SupportWriteScreenState extends State<SupportWriteScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
-  String _category = '일반 문의';
+  InquiryCategory _category = InquiryCategory.general;
 
-  static const _categories = <String>[
-    '일반 문의',
-    '버그 제보',
-    '계정 문의',
-    '결제 문의',
-    '기능 제안',
-  ];
+  String _categoryLabel(AppLocalizations l, InquiryCategory c) {
+    switch (c) {
+      case InquiryCategory.general:
+        return l.inquiryCategoryGeneral;
+      case InquiryCategory.bug:
+        return l.inquiryCategoryBug;
+      case InquiryCategory.account:
+        return l.inquiryCategoryAccount;
+      case InquiryCategory.payment:
+        return l.inquiryCategoryPayment;
+      case InquiryCategory.feature:
+        return l.inquiryCategoryFeature;
+    }
+  }
 
   @override
   void dispose() {
@@ -31,33 +44,21 @@ class _SupportWriteScreenState extends State<SupportWriteScreen> {
 
   Future<void> _sendInquiry() async {
     if (!_formKey.currentState!.validate()) return;
-
-    final subject = '[Deokive 문의] $_category - ${_titleController.text.trim()}';
+    final l = AppLocalizations.of(context);
+    final categoryLabel = _categoryLabel(l, _category);
+    final subject = '[Deokive] $categoryLabel - ${_titleController.text.trim()}';
     final body = '''
-안녕하세요. Deokive 문의입니다.
+$categoryLabel
 
-카테고리
-$_category
-
-제목
 ${_titleController.text.trim()}
 
-문의 내용
 ${_contentController.text.trim()}
-
-기기 정보
-Windows
-
-답변 받을 이메일
 ''';
 
     final uri = Uri(
       scheme: 'mailto',
       path: 'deokivecs@gmail.com',
-      queryParameters: {
-        'subject': subject,
-        'body': body,
-      },
+      queryParameters: {'subject': subject, 'body': body},
     );
 
     final launched = await launchUrl(uri);
@@ -65,50 +66,47 @@ Windows
 
     if (!launched) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('메일 앱을 열 수 없습니다. 메일 앱 설정을 확인해 주세요.'),
-        ),
+        SnackBar(content: Text(l.mailLaunchFailed)),
       );
       return;
     }
-
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('메일 작성 화면을 열었습니다. 보내기를 누르면 문의가 접수됩니다.'),
-      ),
+      SnackBar(content: Text(l.mailComposeOpened)),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('문의하기')),
+      appBar: AppBar(title: Text(l.support)),
       body: SafeArea(
         child: Form(
           key: _formKey,
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              const Text(
-                '문의 메일 작성',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+              Text(
+                l.supportFormHeader,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
-                '문의 내용을 작성하면 deokivecs@gmail.com으로 메일 작성 화면이 열립니다.',
+                l.supportFormDescription,
                 style: TextStyle(color: Colors.grey.shade700, height: 1.5),
               ),
               const SizedBox(height: 20),
-              DropdownButtonFormField<String>(
+              DropdownButtonFormField<InquiryCategory>(
                 value: _category,
-                decoration: const InputDecoration(
-                  labelText: '문의 카테고리',
-                ),
-                items: _categories
+                decoration: InputDecoration(labelText: l.inquiryCategoryLabel),
+                items: InquiryCategory.values
                     .map(
-                      (item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(item),
+                      (c) => DropdownMenuItem<InquiryCategory>(
+                        value: c,
+                        child: Text(_categoryLabel(l, c)),
                       ),
                     )
                     .toList(),
@@ -120,10 +118,10 @@ Windows
               const SizedBox(height: 16),
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(labelText: '제목'),
+                decoration: InputDecoration(labelText: l.inquiryTitleLabel),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return '제목을 입력해 주세요.';
+                    return l.inquiryTitleRequired;
                   }
                   return null;
                 },
@@ -133,13 +131,13 @@ Windows
                 controller: _contentController,
                 minLines: 6,
                 maxLines: 10,
-                decoration: const InputDecoration(
-                  labelText: '문의 내용',
+                decoration: InputDecoration(
+                  labelText: l.inquiryContentLabel,
                   alignLabelWithHint: true,
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return '문의 내용을 입력해 주세요.';
+                    return l.inquiryContentRequired;
                   }
                   return null;
                 },
@@ -149,7 +147,7 @@ Windows
                 height: 50,
                 child: FilledButton(
                   onPressed: _sendInquiry,
-                  child: const Text('메일 작성 열기'),
+                  child: Text(l.openMailComposer),
                 ),
               ),
             ],

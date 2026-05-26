@@ -11,16 +11,38 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: any
   file_picker: ^10.3.10
   hive_ce_flutter: ^2.3.4
   flutter_secure_storage: ^10.0.0
   google_sign_in: ^6.3.0
-  google_mobile_ads: ^5.3.1
   image_picker: ^1.1.2
-  mobile_scanner: ^6.0.2
   path_provider: ^2.1.5
   provider: ^6.1.5+1
   url_launcher: ^6.3.1
+  fl_chart: ^0.69.0
+  share_plus: ^10.1.2
+  http: ^1.2.2
+  google_fonts: ^6.2.1
+  image: ^4.2.0
+  crypto: ^3.0.6
+  # Saves rendered avatar images to the device photo gallery (Photos / 갤러리).
+  gal: ^2.3.0
+  # On-device object detection — used by image-similarity search to crop
+  # the user's photo down to the actual object before comparing against the
+  # catalog. ML Kit ships its bundled detector model so no .tflite asset is
+  # required on our side.
+  google_mlkit_object_detection: ^0.14.0
+  # On-device image labeling — used to narrow the candidate pool to the
+  # right product category (plush / figure / bag / etc.) before signature
+  # matching. Coarse but free, on-device, and dramatically reduces false
+  # matches across categories.
+  google_mlkit_image_labeling: ^0.13.0
+  # ONNX Runtime for on-device inference of DINOv2-small embeddings.
+  # DINOv2 (Meta, self-supervised ViT) gives state-of-the-art image-image
+  # similarity — replaces the hand-crafted 16×16 signature with a 384-dim
+  # semantic embedding so the catalog finds character/IP-level matches.
+  onnxruntime: ^1.4.1
 
 dev_dependencies:
   flutter_test:
@@ -29,12 +51,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
   assets:
     - assets/avatar/body/
     - assets/avatar/background/
     - assets/avatar/hair/
     - assets/avatar/accessory/
     - lib/logo.png
+    - assets/catalog_signatures.bin
+    - assets/catalog_embeddings.bin
+    - assets/dinov2_small.onnx
   fonts:
     - family: Pretendard
       fonts:

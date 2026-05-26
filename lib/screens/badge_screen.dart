@@ -5,6 +5,7 @@ import '../data/badge_definitions.dart';
 import '../models/badge_item.dart';
 import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
+import '../widgets/showcase_background.dart';
 
 class BadgeScreen extends StatefulWidget {
   const BadgeScreen({super.key});
@@ -69,6 +70,12 @@ class _BadgeScreenState extends State<BadgeScreen> {
                         ],
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 16),
+                  _ShowcaseBackgroundPickerCard(
+                    profileLevel: appState.totalUnlockedBadgeLevel,
+                    selected: appState.selectedShowcaseBgTier,
+                    onPick: appState.setShowcaseBgTier,
                   ),
                   const SizedBox(height: 16),
                   _BadgeAccordionSection(
@@ -430,6 +437,229 @@ class _EmptyBadgeSlot extends StatelessWidget {
         '빈 슬롯',
         style: theme.textTheme.bodyMedium?.copyWith(
           fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+}
+
+class _ShowcaseBackgroundPickerCard extends StatelessWidget {
+  final int profileLevel;
+  final int selected; // -1 = auto, else 0..5
+  final ValueChanged<int> onPick;
+
+  const _ShowcaseBackgroundPickerCard({
+    required this.profileLevel,
+    required this.selected,
+    required this.onPick,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final palette = theme.extension<DeokivePalette>()!;
+    final maxUnlocked = unlockedShowcaseTier(profileLevel);
+    final effective = selected < 0 || selected > maxUnlocked
+        ? maxUnlocked
+        : selected;
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.wallpaper_rounded, color: palette.primary),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '진열장 배경',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+                Text(
+                  'Lv $profileLevel',
+                  style: TextStyle(
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(
+              '5레벨마다 새 배경이 열려요. 잠긴 배경은 레벨이 더 필요해요.',
+              style: TextStyle(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                fontSize: 12.5,
+              ),
+            ),
+            const SizedBox(height: 14),
+            GridView.count(
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 1.0,
+              children: List.generate(
+                  kMaxShowcaseBackgroundTier + 1, (tier) {
+                final unlocked = tier <= maxUnlocked;
+                final isSelected = effective == tier;
+                return _BgTierTile(
+                  tier: tier,
+                  unlocked: unlocked,
+                  selected: isSelected,
+                  primary: palette.primary,
+                  accent: palette.accent,
+                  onTap: unlocked ? () => onPick(tier) : null,
+                );
+              }),
+            ),
+            if (selected >= 0 && selected != effective) ...[
+              const SizedBox(height: 12),
+              Text(
+                '선택한 배경은 잠겨있어서 가장 높은 해금 배경으로 표시돼요.',
+                style: TextStyle(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _BgTierTile extends StatelessWidget {
+  final int tier;
+  final bool unlocked;
+  final bool selected;
+  final Color primary;
+  final Color accent;
+  final VoidCallback? onTap;
+
+  const _BgTierTile({
+    required this.tier,
+    required this.unlocked,
+    required this.selected,
+    required this.primary,
+    required this.accent,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final unlockAt = tier * 5;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: onTap,
+        child: Stack(
+          children: [
+            // Tier preview background
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(14),
+                child: Container(
+                  color: theme.colorScheme.surface,
+                  child: CustomPaint(
+                    painter: ShowcaseTierBackgroundPainter(
+                      tier: tier,
+                      primary: primary,
+                      accent: accent,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // Selection / locked overlay border
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: selected
+                        ? primary
+                        : theme.colorScheme.outlineVariant,
+                    width: selected ? 2.5 : 1,
+                  ),
+                ),
+              ),
+            ),
+            // Locked dimmer
+            if (!unlocked)
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: Container(
+                    color: Colors.black.withValues(alpha: 0.45),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.lock_rounded,
+                              color: Colors.white, size: 22),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Lv $unlockAt',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 11.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            // Tier label
+            Positioned(
+              left: 6,
+              top: 6,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.55),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  'T$tier',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ),
+            if (selected && unlocked)
+              Positioned(
+                right: 6,
+                top: 6,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: primary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.check_rounded,
+                      color: Colors.white, size: 14),
+                ),
+              ),
+          ],
         ),
       ),
     );
