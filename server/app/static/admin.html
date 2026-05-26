@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deokive 관리자 콘솔</title>
+<style>
+  :root { --pri:#87CEEB; --bg:#f6f8fb; --line:#e2e8f0; --txt:#2d3748; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,'Segoe UI',Roboto,sans-serif;
+         background:var(--bg); color:var(--txt); }
+  header { background:#fff; border-bottom:1px solid var(--line);
+           padding:14px 20px; display:flex; align-items:center; gap:12px; }
+  header h1 { font-size:18px; margin:0; }
+  header .who { margin-left:auto; font-size:13px; color:#718096; }
+  main { max-width:920px; margin:0 auto; padding:20px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:14px;
+          padding:18px; margin-bottom:18px; }
+  .card h2 { margin:0 0 12px; font-size:15px; }
+  input, textarea, select { width:100%; padding:9px 11px; border:1px solid var(--line);
+          border-radius:9px; font-size:14px; margin-bottom:8px; font-family:inherit; }
+  button { background:var(--pri); color:#114; border:none; border-radius:9px;
+           padding:9px 14px; font-weight:700; cursor:pointer; font-size:14px; }
+  button.ghost { background:#edf2f7; }
+  button.danger { background:#fed7d7; color:#9b2c2c; }
+  button.ok { background:#c6f6d5; color:#22543d; }
+  .row { display:flex; gap:8px; align-items:center; }
+  .post, .banner { border:1px solid var(--line); border-radius:11px; padding:12px;
+          margin-bottom:10px; }
+  .post .tag { font-size:11px; font-weight:800; padding:2px 7px; border-radius:5px;
+          background:#e6f0fa; color:#2b6cb0; margin-right:6px; }
+  .post .pending { background:#feebc8; color:#9c4221; }
+  .muted { color:#a0aec0; font-size:12px; }
+  .hidden { display:none; }
+  #login { max-width:360px; margin:60px auto; }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+           background:#2d3748; color:#fff; padding:10px 16px; border-radius:10px;
+           font-size:13px; opacity:0; transition:opacity .2s; }
+  .toast.show { opacity:1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🗂 Deokive 관리자 콘솔</h1>
+  <span class="who" id="who"></span>
+  <button class="ghost hidden" id="logoutBtn" onclick="logout()">로그아웃</button>
+</header>
+
+<div id="login" class="card">
+  <h2>관리자 로그인</h2>
+  <input id="loginId" placeholder="아이디" autocomplete="username" />
+  <input id="loginPw" type="password" placeholder="비밀번호" autocomplete="current-password" />
+  <button onclick="login()" style="width:100%">로그인</button>
+  <p class="muted" style="margin-top:10px">관리자 권한이 있는 계정만 작동합니다.
+  (서버에서 <code>python make_admin.py &lt;아이디&gt;</code>로 권한 부여)</p>
+</div>
+
+<main id="app" class="hidden">
+  <!-- 승인 대기 -->
+  <div class="card">
+    <h2>승인 대기 글 <span class="muted" id="pendingCount"></span></h2>
+    <div id="pendingList"></div>
+    <button class="ghost" onclick="loadPending()">새로고침</button>
+  </div>
+
+  <!-- 공지/정보 작성 -->
+  <div class="card">
+    <h2>새 글 작성</h2>
+    <select id="newTag">
+      <option value="notice">공지</option>
+      <option value="info">정보</option>
+      <option value="general">일반</option>
+    </select>
+    <input id="newTitle" placeholder="제목" />
+    <input id="newSummary" placeholder="요약 (목록 노출)" />
+    <textarea id="newContent" rows="4" placeholder="본문"></textarea>
+    <button onclick="createPost()">발행</button>
+  </div>
+
+  <!-- 전체 게시글 -->
+  <div class="card">
+    <h2>전체 게시글</h2>
+    <div id="postList"></div>
+    <button class="ghost" onclick="loadPosts()">새로고침</button>
+  </div>
+
+  <!-- 홈 배너 -->
+  <div class="card">
+    <h2>홈 배너</h2>
+    <div id="bannerList"></div>
+    <h3 style="font-size:13px">배너 추가</h3>
+    <input id="bTitle" placeholder="제목" />
+    <input id="bSubtitle" placeholder="부제" />
+    <textarea id="bBody" rows="3" placeholder="본문 (상세)"></textarea>
+    <input id="bImage" placeholder="이미지 URL (선택)" />
+    <input id="bOrder" type="number" placeholder="정렬 순서 (0=맨앞)" value="0" />
+    <button onclick="createBanner()">배너 추가</button>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = location.origin;
+let TOKEN = localStorage.getItem('deokive_admin_token') || '';
+
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg;
+  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+function hdr(){ return { 'Content-Type':'application/json',
+  ...(TOKEN?{'Authorization':'Bearer '+TOKEN}:{}) }; }
+
+async function api(path, opts={}){
+  const r = await fetch(API+path, {...opts, headers:{...hdr(), ...(opts.headers||{})}});
+  if(r.status===401||r.status===403){ toast('권한 없음 / 로그인 필요'); }
+  return r;
+}
+
+async function login(){
+  const login_id=document.getElementById('loginId').value.trim();
+  const password=document.getElementById('loginPw').value;
+  const r=await fetch(API+'/auth/login',{method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({login_id,password})});
+  if(!r.ok){ toast('로그인 실패'); return; }
+  const data=await r.json(); TOKEN=data.access_token;
+  // verify admin by hitting pending (admin-only)
+  const chk=await api('/board/posts/pending');
+  if(chk.status===403){ toast('관리자 계정이 아닙니다'); TOKEN=''; return; }
+  localStorage.setItem('deokive_admin_token',TOKEN);
+  showApp(login_id);
+}
+function logout(){ TOKEN=''; localStorage.removeItem('deokive_admin_token');
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('login').classList.remove('hidden');
+  document.getElementById('logoutBtn').classList.add('hidden');
+  document.getElementById('who').textContent=''; }
+
+function showApp(name){
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('logoutBtn').classList.remove('hidden');
+  document.getElementById('who').textContent=name?('관리자: '+name):'관리자';
+  loadPending(); loadPosts(); loadBanners();
+}
+
+function esc(s){ return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+async function loadPending(){
+  const r=await api('/board/posts/pending'); if(!r.ok) return;
+  const posts=await r.json();
+  document.getElementById('pendingCount').textContent='('+posts.length+'개)';
+  document.getElementById('pendingList').innerHTML = posts.length? posts.map(p=>`
+    <div class="post">
+      <span class="tag pending">승인대기</span><b>${esc(p.title)}</b>
+      <div class="muted">${esc(p.author)}</div>
+      <div style="margin:6px 0;font-size:13px">${esc(p.summary||p.content).slice(0,120)}</div>
+      <div class="row">
+        <button class="ok" onclick="approve(${p.id})">승인</button>
+        <button class="danger" onclick="delPost(${p.id})">삭제</button>
+      </div>
+    </div>`).join('') : '<p class="muted">승인 대기 글이 없어요.</p>';
+}
+async function approve(id){ const r=await api('/board/posts/'+id+'/approve',{method:'POST'});
+  if(r.ok){ toast('승인됨'); loadPending(); loadPosts(); } }
+async function delPost(id){ if(!confirm('삭제할까요?'))return;
+  const r=await api('/board/posts/'+id,{method:'DELETE'});
+  if(r.ok){ toast('삭제됨'); loadPending(); loadPosts(); } }
+
+async function createPost(){
+  const body={ tag:document.getElementById('newTag').value,
+    title:document.getElementById('newTitle').value.trim(),
+    summary:document.getElementById('newSummary').value.trim(),
+    content:document.getElementById('newContent').value.trim() };
+  if(!body.title){ toast('제목을 입력하세요'); return; }
+  const r=await api('/board/posts',{method:'POST',body:JSON.stringify(body)});
+  if(r.ok){ toast('발행됨'); document.getElementById('newTitle').value='';
+    document.getElementById('newSummary').value='';
+    document.getElementById('newContent').value=''; loadPosts(); } else toast('발행 실패');
+}
+
+async function loadPosts(){
+  const r=await api('/board/posts?limit=50'); if(!r.ok) return;
+  const posts=await r.json();
+  document.getElementById('postList').innerHTML = posts.map(p=>`
+    <div class="post">
+      <span class="tag">${esc(p.tag)}</span><b>${esc(p.title)}</b>
+      <span class="muted"> · ♥${p.like_count} · 👁${p.view_count}</span>
+      <div class="muted">${esc(p.author)}</div>
+      <div class="row" style="margin-top:6px">
+        <button class="danger" onclick="delPost(${p.id})">삭제</button>
+      </div>
+    </div>`).join('') || '<p class="muted">글이 없어요.</p>';
+}
+
+async function loadBanners(){
+  const r=await api('/banners'); if(!r.ok) return;
+  const banners=await r.json();
+  document.getElementById('bannerList').innerHTML = banners.map(b=>`
+    <div class="banner">
+      <b>${esc(b.title)}</b> <span class="muted">order ${b.sort_order}</span>
+      <div class="muted">${esc(b.subtitle)}</div>
+      <button class="danger" style="margin-top:6px" onclick="delBanner(${b.id})">삭제</button>
+    </div>`).join('') || '<p class="muted">배너가 없어요.</p>';
+}
+async function createBanner(){
+  const body={ title:document.getElementById('bTitle').value.trim(),
+    subtitle:document.getElementById('bSubtitle').value.trim(),
+    body:document.getElementById('bBody').value.trim(),
+    image_url:document.getElementById('bImage').value.trim()||null,
+    sort_order:parseInt(document.getElementById('bOrder').value||'0',10) };
+  if(!body.title){ toast('제목을 입력하세요'); return; }
+  const r=await api('/banners',{method:'POST',body:JSON.stringify(body)});
+  if(r.ok){ toast('배너 추가됨'); ['bTitle','bSubtitle','bBody','bImage'].forEach(id=>document.getElementById(id).value=''); loadBanners(); } else toast('추가 실패');
+}
+async function delBanner(id){ if(!confirm('배너 삭제?'))return;
+  const r=await api('/banners/'+id,{method:'DELETE'});
+  if(r.ok){ toast('삭제됨'); loadBanners(); } }
+
+// auto-login if token saved
+if(TOKEN){ api('/board/posts/pending').then(r=>{ if(r.ok) showApp(''); else logout(); }); }
+</script>
+</body>
+</html>
