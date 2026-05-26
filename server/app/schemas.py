@@ -56,6 +56,40 @@ class GoodsCatalogRead(BaseModel):
     release_date: str | None = None
 
 
+class HomeBannerRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    title: str
+    subtitle: str = ""
+    body: str = ""
+    icon_name: str = "campaign_rounded"
+    image_url: str | None = None
+    link_url: str | None = None
+    sort_order: int = 0
+
+
+class HomeBannerCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    subtitle: str = Field(default="", max_length=300)
+    body: str = Field(default="", max_length=20000)
+    icon_name: str = Field(default="campaign_rounded", max_length=80)
+    image_url: str | None = Field(default=None, max_length=500)
+    link_url: str | None = Field(default=None, max_length=500)
+    sort_order: int = 0
+
+
+class HomeBannerUpdate(BaseModel):
+    title: str | None = Field(default=None, max_length=200)
+    subtitle: str | None = Field(default=None, max_length=300)
+    body: str | None = Field(default=None, max_length=20000)
+    icon_name: str | None = Field(default=None, max_length=80)
+    image_url: str | None = Field(default=None, max_length=500)
+    link_url: str | None = Field(default=None, max_length=500)
+    sort_order: int | None = None
+    is_active: bool | None = None
+
+
 class BoardCommentRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 

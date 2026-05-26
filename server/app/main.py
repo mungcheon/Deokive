@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from .core.config import settings
-from .routers import auth, board, goods_catalog, profile
+from .routers import auth, banner, board, goods_catalog, profile
 
 app = FastAPI(title=settings.app_name)
 
@@ -15,3 +15,4 @@ app.include_router(auth.router)
 app.include_router(profile.router)
 app.include_router(goods_catalog.router)
 app.include_router(board.router)
+app.include_router(banner.router)

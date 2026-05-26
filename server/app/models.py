@@ -116,6 +116,25 @@ class Payment(Base, TimestampMixin):
     user: Mapped[User] = relationship(back_populates="payments")
 
 
+class HomeBanner(Base, TimestampMixin):
+    """Home-screen banner / announcement slide, editable by admins from any
+    device. Replaces the hardcoded tutorial slides once the server is live —
+    the app fetches and caches these so admins can update them without an app
+    release."""
+
+    __tablename__ = "home_banners"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    title: Mapped[str] = mapped_column(String(200))
+    subtitle: Mapped[str] = mapped_column(String(300), default="")
+    body: Mapped[str] = mapped_column(Text, default="")
+    icon_name: Mapped[str] = mapped_column(String(80), default="campaign_rounded")
+    image_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    link_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    sort_order: Mapped[int] = mapped_column(Integer, default=0, index=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+
+
 class BoardPost(Base, TimestampMixin):
     """Shared community board post. Unlike per-user goods/folders, board
     posts are global — every device reads the same list. Info-bot-fetched
