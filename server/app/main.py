@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -8,7 +9,17 @@ from .routers import auth, banner, board, goods_catalog, profile
 
 app = FastAPI(title=settings.app_name)
 
-_STATIC_DIR = Path(__file__).resolve().parent / "static"
+
+def _static_dir() -> Path:
+    # When packaged with PyInstaller (--onefile), bundled data lives under
+    # sys._MEIPASS; otherwise it's next to this source file.
+    base = getattr(sys, "_MEIPASS", None)
+    if base:
+        return Path(base) / "static"
+    return Path(__file__).resolve().parent / "static"
+
+
+_STATIC_DIR = _static_dir()
 
 
 @app.get("/health")

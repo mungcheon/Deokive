@@ -18,6 +18,8 @@ import '../models/folder_item.dart';
 import '../models/goods_item.dart';
 import '../models/support_inquiry_item.dart';
 import '../models/trade_post.dart';
+import '../config/server_config.dart';
+import '../services/board_api_service.dart';
 import '../services/free_translation_service.dart';
 import '../services/info_bot_service.dart';
 import '../l10n/app_language.dart';
@@ -297,9 +299,15 @@ class AppState extends ChangeNotifier {
     await _restoreSavedSession();
     await _loadAccountData();
     notifyListeners();
-    // Background-fill cached translations for any pre-existing posts that
-    // don't have one yet (seed notices, posts added before this version).
-    unawaited(_backfillBoardTranslations());
+    // When a board server is configured, pull the shared board on launch.
+    // (No-op + keeps local board when no server URL is set.)
+    if (ServerConfig.enabled) {
+      unawaited(syncBoardFromServer());
+    } else {
+      // Background-fill cached translations for any pre-existing posts that
+      // don't have one yet (seed notices, posts added before this version).
+      unawaited(_backfillBoardTranslations());
+    }
   }
 
   /// Walk every post in [boardPosts] and translate the ones that don't yet
@@ -1264,6 +1272,37 @@ class AppState extends ChangeNotifier {
     _storageBox!.put(_viewCountResetVersionKey, true);
   }
 
+  /// True when the app is pointed at a deployed board server.
+  bool get boardServerEnabled => ServerConfig.enabled;
+
+  /// Pull the shared board from the server and replace the local list with
+  /// it. When the server is unreachable the local (cached) board is kept, so
+  /// the board still renders offline. Returns the fetched count, or -1 on
+  /// failure (kept local).
+  Future<int> syncBoardFromServer() async {
+    if (!ServerConfig.enabled) return 0;
+    final api = BoardApiService();
+    try {
+      final serverPosts = await api.fetchPosts(limit: 200);
+      boardPosts
+        ..clear()
+        ..addAll(serverPosts);
+      await _persistBoardPosts();
+      notifyListeners();
+      // Translate the freshly-synced posts into the current language.
+      unawaited(_backfillBoardTranslations());
+      if (kDebugMode) {
+        debugPrint('📡 board synced from server: ${serverPosts.length} posts');
+      }
+      return serverPosts.length;
+    } catch (e) {
+      debugPrint('📡 board server sync failed (keeping local): $e');
+      return -1;
+    } finally {
+      api.dispose();
+    }
+  }
+
   Future<void> _persistBoardPosts() async {
     if (_storageBox == null) return;
     await _storageBox!.put(
@@ -1667,6 +1706,16 @@ class AppState extends ChangeNotifier {
   /// to the board. Returns the count of newly-inserted posts.
   Future<int> refreshInfoBots() async {
     if (isRefreshingInfoBots) return 0;
+    // When the board lives on the server, "refresh" means pull the shared
+    // board from the server rather than fetch RSS locally.
+    if (ServerConfig.enabled) {
+      isRefreshingInfoBots = true;
+      notifyListeners();
+      final n = await syncBoardFromServer();
+      isRefreshingInfoBots = false;
+      notifyListeners();
+      return n < 0 ? 0 : n;
+    }
     isRefreshingInfoBots = true;
     notifyListeners();
     int added = 0;
