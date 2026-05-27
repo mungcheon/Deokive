@@ -1,28 +1,22 @@
 @echo off
-chcp 65001 >nul
 cd /d "%~dp0"
-title Deokive 서버 exe 빌드
+title Deokive Server EXE Build
 
 echo ====================================================
-echo  Deokive 서버 독립 실행파일(.exe) 빌드
+echo  Building Deokive standalone server (.exe)
 echo ====================================================
 echo.
-echo [1/2] 빌드 도구 설치...
+echo [1/2] Installing build tools...
 python -m pip install -q -r requirements.txt
 python -m pip install -q pyinstaller
 
-echo [2/2] exe 빌드 중... (1~2분)
-python -m PyInstaller --onefile --name deokive_server --noconfirm ^
-  --add-data "app/static;static" ^
-  --collect-submodules uvicorn ^
-  --collect-submodules app ^
-  --hidden-import bcrypt ^
-  server_exe.py
+echo [2/2] Building exe (takes 1-2 minutes)...
+python -m PyInstaller --onefile --name deokive_server --noconfirm --add-data "app/static;static" --collect-submodules uvicorn --collect-submodules app --hidden-import bcrypt server_exe.py
 
 echo.
 echo ====================================================
-echo  완료!  dist\deokive_server.exe
-echo  더블클릭하면 서버가 켜지고, 첫 실행 시 관리자 계정이
-echo  자동 생성됩니다 (콘솔에 아이디/비번 출력).
+echo  Done -^> dist\deokive_server.exe
+echo  Double-click that exe to run the server.
+echo  First run auto-creates an admin (id/pw shown in console).
 echo ====================================================
 pause
