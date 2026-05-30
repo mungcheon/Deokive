@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:io';
 
@@ -153,12 +152,12 @@ class AppState extends ChangeNotifier {
   static const _fontScaleKey = 'font_scale';
   static const _fontFamilyKey = 'font_family';
   static const _showcaseBgTierKey = 'showcase_bg_tier';
-  static const _adminModeKey = 'admin_mode';
   static const _boardPostsKey = 'board_posts';
   static const _tradePostsKey = 'trade_posts';
   static const _infoBotFeedsKey = 'info_bot_feeds';
   static const _claudeApiKeyKey = 'claude_api_key';
   static const _postTranslationsKey = 'post_translations';
+
   /// Bumped when we need a one-time data migration. Bump the version when
   /// changing migration logic.
   static const _viewCountResetVersionKey = 'view_count_reset_v1';
@@ -198,9 +197,12 @@ class AppState extends ChangeNotifier {
 
   Box<dynamic>? _storageBox;
   Future<void>? _storageInitFuture;
+  Timer? _infoBotRefreshAnchorTimer;
+  Timer? _infoBotRefreshTimer;
 
   int currentTabIndex = 0;
   bool isLoggedIn = false;
+
   /// True when the user chose "browse as guest" from the welcome screen.
   /// Transient — not persisted across launches.
   bool inGuestSession = false;
@@ -208,30 +210,39 @@ class AppState extends ChangeNotifier {
   bool darkModeEnabled = false;
   double fontScale = 1.0;
   String? fontFamily;
+
   /// Selected showcase background tier (0-5). -1 = "auto", which tracks the
   /// highest unlocked tier based on profile level.
   int selectedShowcaseBgTier = -1;
-  /// When true, the signed-in user sees admin-only UI (board post editing,
-  /// notice tag, X URL ingest). Persisted across launches.
+
+  /// Legacy client-only admin toggle removed. Keep the field for compatibility
+  /// with older UI code paths, but the app no longer enables admin mode.
   bool adminMode = false;
   final List<BoardPost> boardPosts = [];
   final List<TradePost> tradePosts = [];
+
   /// Post IDs the current user has liked (heart).
   final Set<String> likedPostIds = {};
+
   /// Post IDs the current user has bookmarked (save).
   final Set<String> bookmarkedPostIds = {};
+
   /// Comments per post: postId → list of BoardComment.
   final Map<String, List<BoardComment>> postComments = {};
+
   /// Aggregated like counts per post (so multi-user backends can later sync
   /// real counts; for now this mirrors likedPostIds locally).
   final Map<String, int> postLikeCounts = {};
+
   /// Per-bot RSS URL override. Empty string = use the bot's default.
   final Map<String, String> infoBotFeedOverrides = {};
   bool isRefreshingInfoBots = false;
+
   /// Claude API key (Anthropic). Empty = not configured; translation features
   /// disabled. Stored in Hive for v1 — move to FlutterSecureStorage if this
   /// app ever ships to multiple users.
   String claudeApiKey = '';
+
   /// translated post fields keyed by `postId → langCode → fields`.
   final Map<String, Map<String, ProcessedTranslation>> postTranslations = {};
   final Set<String> _inFlightTranslations = {};
@@ -285,7 +296,29 @@ class AppState extends ChangeNotifier {
 
     _storageInitFuture ??= _initStorage();
     _initGoogleSignIn();
+    _startInfoBotAutoRefreshScheduler();
     notifyListeners();
+  }
+
+  void _startInfoBotAutoRefreshScheduler() {
+    _infoBotRefreshAnchorTimer?.cancel();
+    _infoBotRefreshTimer?.cancel();
+
+    final now = DateTime.now();
+    final nextHour = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      now.hour + 1,
+    );
+    final initialDelay = nextHour.difference(now);
+
+    _infoBotRefreshAnchorTimer = Timer(initialDelay, () {
+      unawaited(refreshInfoBots());
+      _infoBotRefreshTimer = Timer.periodic(const Duration(hours: 1), (_) {
+        unawaited(refreshInfoBots());
+      });
+    });
   }
 
   Future<void> _ensureStorageReady() async {
@@ -299,9 +332,9 @@ class AppState extends ChangeNotifier {
     await _restoreSavedSession();
     await _loadAccountData();
     notifyListeners();
-    // When a board server is configured, pull the shared board on launch.
-    // (No-op + keeps local board when no server URL is set.)
-    if (ServerConfig.enabled) {
+    final hasServer = await ServerConfig.ensureResolved();
+    if (hasServer) {
+      notifyListeners();
       unawaited(syncBoardFromServer());
     } else {
       // Background-fill cached translations for any pre-existing posts that
@@ -332,11 +365,16 @@ class AppState extends ChangeNotifier {
   }
 
   void _restoreStorageValues() {
-    final savedAccounts = _storageBox?.get(_localAccountsKey, defaultValue: <dynamic>[]) as List<dynamic>? ?? <dynamic>[];
+    final savedAccounts =
+        _storageBox?.get(_localAccountsKey, defaultValue: <dynamic>[])
+                as List<dynamic>? ??
+            <dynamic>[];
     _localAccounts
       ..clear()
       ..addAll(
-        savedAccounts.map((item) => Map<String, dynamic>.from(item as Map)).toList(),
+        savedAccounts
+            .map((item) => Map<String, dynamic>.from(item as Map))
+            .toList(),
       );
 
     _signupSequence =
@@ -345,14 +383,13 @@ class AppState extends ChangeNotifier {
         _storageBox?.get(_pushEnabledKey, defaultValue: true) as bool? ?? true;
     darkModeEnabled =
         _storageBox?.get(_darkModeKey, defaultValue: false) as bool? ?? false;
-    fontScale =
-        (_storageBox?.get(_fontScaleKey, defaultValue: 1.0) as num?)?.toDouble() ??
-            1.0;
+    fontScale = (_storageBox?.get(_fontScaleKey, defaultValue: 1.0) as num?)
+            ?.toDouble() ??
+        1.0;
     fontFamily = _storageBox?.get(_fontFamilyKey) as String?;
     selectedShowcaseBgTier =
         (_storageBox?.get(_showcaseBgTierKey, defaultValue: -1) as int?) ?? -1;
-    adminMode =
-        _storageBox?.get(_adminModeKey, defaultValue: false) as bool? ?? false;
+    adminMode = false;
     _loadBoardPosts();
     _loadBoardSocial();
     _loadTradePosts();
@@ -362,23 +399,23 @@ class AppState extends ChangeNotifier {
     keepSignedIn =
         _storageBox?.get(_keepSignedInKey, defaultValue: true) as bool? ?? true;
 
-    final savedPaletteName =
-        _storageBox?.get(_paletteKey, defaultValue: AppPalette.skyBlue.name) as String? ??
-            AppPalette.skyBlue.name;
+    final savedPaletteName = _storageBox?.get(_paletteKey,
+            defaultValue: AppPalette.skyBlue.name) as String? ??
+        AppPalette.skyBlue.name;
     appPalette = AppPalette.values.firstWhere(
       (item) => item.name == savedPaletteName,
       orElse: () => AppPalette.skyBlue,
     );
-    final savedLanguageName =
-        _storageBox?.get(_languageKey, defaultValue: AppLanguage.korean.name) as String? ??
-            AppLanguage.korean.name;
+    final savedLanguageName = _storageBox?.get(_languageKey,
+            defaultValue: AppLanguage.korean.name) as String? ??
+        AppLanguage.korean.name;
     appLanguage = AppLanguage.values.firstWhere(
       (item) => item.name == savedLanguageName,
       orElse: () => AppLanguage.korean,
     );
-    final savedCurrencyName =
-        _storageBox?.get(_currencyKey, defaultValue: Currency.krw.name) as String? ??
-            Currency.krw.name;
+    final savedCurrencyName = _storageBox?.get(_currencyKey,
+            defaultValue: Currency.krw.name) as String? ??
+        Currency.krw.name;
     displayCurrency = Currency.values.firstWhere(
       (item) => item.name == savedCurrencyName,
       orElse: () => Currency.krw,
@@ -399,7 +436,7 @@ class AppState extends ChangeNotifier {
       await _storageBox!.put(_fontFamilyKey, fontFamily);
     }
     await _storageBox!.put(_showcaseBgTierKey, selectedShowcaseBgTier);
-    await _storageBox!.put(_adminModeKey, adminMode);
+    await _storageBox!.delete('admin_mode');
     await _storageBox!.put(_keepSignedInKey, keepSignedIn);
     await _storageBox!.put(_languageKey, appLanguage.name);
     await _storageBox!.put(_currencyKey, displayCurrency.name);
@@ -413,8 +450,8 @@ class AppState extends ChangeNotifier {
   }
 
   void cycleDisplayCurrency() {
-    final next = Currency.values[
-        (displayCurrency.index + 1) % Currency.values.length];
+    final next =
+        Currency.values[(displayCurrency.index + 1) % Currency.values.length];
     setDisplayCurrency(next);
   }
 
@@ -450,7 +487,9 @@ class AppState extends ChangeNotifier {
 
   Future<void> _persistAuthSession() async {
     if (_storageBox == null) return;
-    if (!keepSignedIn || !isLoggedIn || authProvider == AuthProviderType.guest) {
+    if (!keepSignedIn ||
+        !isLoggedIn ||
+        authProvider == AuthProviderType.guest) {
       await _storageBox!.delete(_lastAuthProviderKey);
       await _storageBox!.delete(_lastAccountIdKey);
       return;
@@ -470,7 +509,9 @@ class AppState extends ChangeNotifier {
 
     final providerName = _storageBox!.get(_lastAuthProviderKey) as String?;
     final savedAccountId = _storageBox!.get(_lastAccountIdKey) as String?;
-    if (providerName == null || savedAccountId == null || savedAccountId.isEmpty) {
+    if (providerName == null ||
+        savedAccountId == null ||
+        savedAccountId.isEmpty) {
       return;
     }
 
@@ -523,7 +564,8 @@ class AppState extends ChangeNotifier {
 
   Future<File> _accountStorageFile([String? accountKey]) async {
     final documentsDir = await getApplicationDocumentsDirectory();
-    final baseDir = Directory('${documentsDir.path}${Platform.pathSeparator}deokive_accounts');
+    final baseDir = Directory(
+        '${documentsDir.path}${Platform.pathSeparator}deokive_accounts');
     if (!await baseDir.exists()) {
       await baseDir.create(recursive: true);
     }
@@ -681,20 +723,27 @@ class AppState extends ChangeNotifier {
       }
 
       final loadedFolders = ((json['folders'] as List<dynamic>?) ?? const [])
-          .map((item) => FolderItem.fromJson(Map<String, dynamic>.from(item as Map)))
+          .map((item) =>
+              FolderItem.fromJson(Map<String, dynamic>.from(item as Map)))
           .toList();
       final loadedGoods = ((json['goodsItems'] as List<dynamic>?) ?? const [])
-          .map((item) => GoodsItem.fromJson(Map<String, dynamic>.from(item as Map)))
+          .map((item) =>
+              GoodsItem.fromJson(Map<String, dynamic>.from(item as Map)))
           .toList();
-      final loadedEvents = ((json['calendarEvents'] as List<dynamic>?) ?? const [])
-          .map((item) => CalendarEventItem.fromJson(Map<String, dynamic>.from(item as Map)))
-          .toList();
-      final loadedInquiries = ((json['inquiries'] as List<dynamic>?) ?? const [])
-          .map((item) => SupportInquiryItem.fromJson(Map<String, dynamic>.from(item as Map)))
-          .toList();
-      final loadedBadges = ((json['equippedBadgeIds'] as List<dynamic>?) ?? const [])
-          .map((item) => item.toString())
-          .toList();
+      final loadedEvents =
+          ((json['calendarEvents'] as List<dynamic>?) ?? const [])
+              .map((item) => CalendarEventItem.fromJson(
+                  Map<String, dynamic>.from(item as Map)))
+              .toList();
+      final loadedInquiries =
+          ((json['inquiries'] as List<dynamic>?) ?? const [])
+              .map((item) => SupportInquiryItem.fromJson(
+                  Map<String, dynamic>.from(item as Map)))
+              .toList();
+      final loadedBadges =
+          ((json['equippedBadgeIds'] as List<dynamic>?) ?? const [])
+              .map((item) => item.toString())
+              .toList();
       final profile =
           Map<String, dynamic>.from(json['profile'] as Map? ?? const {});
       final avatar =
@@ -715,9 +764,10 @@ class AppState extends ChangeNotifier {
       equippedBadgeIds
         ..clear()
         ..addAll(loadedBadges);
-      displayName = (profile['displayName'] as String?)?.trim().isNotEmpty == true
-          ? (profile['displayName'] as String).trim()
-          : displayName;
+      displayName =
+          (profile['displayName'] as String?)?.trim().isNotEmpty == true
+              ? (profile['displayName'] as String).trim()
+              : displayName;
       tag = (profile['tag'] as String?)?.trim().isNotEmpty == true
           ? (profile['tag'] as String).trim()
           : tag;
@@ -745,8 +795,7 @@ class AppState extends ChangeNotifier {
           avatar['skinToneIndex'] as int? ?? avatarSkinToneIndex;
       avatarHasHat = avatar['hasHat'] as bool? ?? avatarHasHat;
       avatarHasCape = avatar['hasCape'] as bool? ?? avatarHasCape;
-      avatarHasHandheld =
-          avatar['hasHandheld'] as bool? ?? avatarHasHandheld;
+      avatarHasHandheld = avatar['hasHandheld'] as bool? ?? avatarHasHandheld;
       avatarHasBackRibbon =
           avatar['hasBackRibbon'] as bool? ?? avatarHasBackRibbon;
 
@@ -775,8 +824,9 @@ class AppState extends ChangeNotifier {
       // Only auto-restore a Google session if that email is linked to a
       // local account. Standalone Google login is no longer allowed —
       // users sign up with an ID first, then link Google in settings.
-      final linked =
-          account == null ? null : _findLocalAccountByGoogleEmail(account.email);
+      final linked = account == null
+          ? null
+          : _findLocalAccountByGoogleEmail(account.email);
       if (account != null && linked != null) {
         await _signInAsLinkedLocal(account, linked);
       } else {
@@ -797,10 +847,8 @@ class AppState extends ChangeNotifier {
   bool get canEditProfile => isLoggedIn;
 
   int get totalGoodsCount {
-    final wishlistIds = folders
-        .where((f) => f.isSystemWishlist)
-        .map((f) => f.id)
-        .toSet();
+    final wishlistIds =
+        folders.where((f) => f.isSystemWishlist).map((f) => f.id).toSet();
     return goodsItems.fold(
       0,
       (sum, item) {
@@ -817,10 +865,8 @@ class AppState extends ChangeNotifier {
   /// `Currency.rateFromKrw` if the network refresh hasn't completed yet.
   /// Wishlist items are excluded.
   int get totalPaidAmount {
-    final wishlistIds = folders
-        .where((f) => f.isSystemWishlist)
-        .map((f) => f.id)
-        .toSet();
+    final wishlistIds =
+        folders.where((f) => f.isSystemWishlist).map((f) => f.id).toSet();
     double sum = 0;
     for (final item in goodsItems) {
       if (item.isWishlistItem) continue;
@@ -904,7 +950,7 @@ class AppState extends ChangeNotifier {
     }
     if (googleSignInError != null && googleSignInError!.isNotEmpty) {
       return '구글 로그인 설정이 완료되지 않았거나 인증에 실패했습니다. ';
-          'Android는 패키지명과 SHA-1, iOS는 Client ID와 URL Scheme 설정이 필요합니다.';
+      'Android는 패키지명과 SHA-1, iOS는 Client ID와 URL Scheme 설정이 필요합니다.';
     }
     if (!googleSignInAvailable) {
       return '구글 로그인 초기화 중입니다.';
@@ -1041,7 +1087,8 @@ class AppState extends ChangeNotifier {
     final target = email.trim().toLowerCase();
     if (target.isEmpty) return null;
     for (final account in _localAccounts) {
-      final linked = (account['linkedGoogleEmail'] as String?)?.trim().toLowerCase();
+      final linked =
+          (account['linkedGoogleEmail'] as String?)?.trim().toLowerCase();
       if (linked != null && linked == target) {
         return account;
       }
@@ -1229,7 +1276,7 @@ class AppState extends ChangeNotifier {
   }
 
   void setAdminMode(bool value) {
-    adminMode = value;
+    adminMode = false;
     _persistStorageValues();
     notifyListeners();
   }
@@ -1245,8 +1292,8 @@ class AppState extends ChangeNotifier {
     } else {
       for (final item in raw) {
         try {
-          boardPosts.add(BoardPost.fromJson(
-              Map<String, dynamic>.from(item as Map)));
+          boardPosts
+              .add(BoardPost.fromJson(Map<String, dynamic>.from(item as Map)));
         } catch (_) {}
       }
     }
@@ -1257,8 +1304,8 @@ class AppState extends ChangeNotifier {
   /// counts only grow from real taps from this point on.
   void _runViewCountResetMigration() {
     if (_storageBox == null) return;
-    final done = _storageBox!.get(_viewCountResetVersionKey,
-        defaultValue: false) as bool? ??
+    final done = _storageBox!
+            .get(_viewCountResetVersionKey, defaultValue: false) as bool? ??
         false;
     if (done) return;
     var changed = false;
@@ -1280,7 +1327,8 @@ class AppState extends ChangeNotifier {
   /// the board still renders offline. Returns the fetched count, or -1 on
   /// failure (kept local).
   Future<int> syncBoardFromServer() async {
-    if (!ServerConfig.enabled) return 0;
+    final hasServer = await ServerConfig.ensureResolved();
+    if (!hasServer) return 0;
     final api = BoardApiService();
     try {
       final serverPosts = await api.fetchPosts(limit: 200);
@@ -1368,8 +1416,7 @@ class AppState extends ChangeNotifier {
     return out;
   }
 
-  int get pendingBoardPostCount =>
-      boardPosts.where((p) => !p.approved).length;
+  int get pendingBoardPostCount => boardPosts.where((p) => !p.approved).length;
 
   /// Approve a pending post so it becomes publicly visible.
   void approveBoardPost(String id) {
@@ -1503,8 +1550,7 @@ class AppState extends ChangeNotifier {
         if (k is String && v is List) {
           postComments[k] = v
               .whereType<Map>()
-              .map((m) =>
-                  BoardComment.fromJson(Map<String, dynamic>.from(m)))
+              .map((m) => BoardComment.fromJson(Map<String, dynamic>.from(m)))
               .toList();
         }
       });
@@ -1518,8 +1564,8 @@ class AppState extends ChangeNotifier {
     if (raw == null) return;
     for (final item in raw) {
       try {
-        tradePosts.add(TradePost.fromJson(
-            Map<String, dynamic>.from(item as Map)));
+        tradePosts
+            .add(TradePost.fromJson(Map<String, dynamic>.from(item as Map)));
       } catch (_) {}
     }
   }
@@ -1611,7 +1657,8 @@ class AppState extends ChangeNotifier {
   bool get hasClaudeApiKey => claudeApiKey.isNotEmpty;
 
   void _loadPostTranslations() {
-    final raw = _storageBox?.get(_postTranslationsKey) as Map<dynamic, dynamic>?;
+    final raw =
+        _storageBox?.get(_postTranslationsKey) as Map<dynamic, dynamic>?;
     postTranslations.clear();
     if (raw == null) return;
     raw.forEach((postId, langMap) {
@@ -1755,8 +1802,7 @@ class AppState extends ChangeNotifier {
                       result.content.isEmpty ? post.content : result.content,
                   translatedAt: DateTime.now(),
                 );
-                final bucket =
-                    postTranslations.putIfAbsent(post.id, () => {});
+                final bucket = postTranslations.putIfAbsent(post.id, () => {});
                 bucket[langCode] = entry;
               } catch (e) {
                 debugPrint('pre-translate failed for ${post.id}: $e');
@@ -1776,6 +1822,13 @@ class AppState extends ChangeNotifier {
       notifyListeners();
     }
     return added;
+  }
+
+  @override
+  void dispose() {
+    _infoBotRefreshAnchorTimer?.cancel();
+    _infoBotRefreshTimer?.cancel();
+    super.dispose();
   }
 
   Future<void> signOut() async {
@@ -1834,7 +1887,8 @@ class AppState extends ChangeNotifier {
         id.trim().isNotEmpty) {
       final normalizedId = id.trim();
       final duplicated = _localAccounts.any(
-        (account) => account['id'] == normalizedId && account['id'] != accountId,
+        (account) =>
+            account['id'] == normalizedId && account['id'] != accountId,
       );
       if (duplicated) {
         return false;
@@ -2005,8 +2059,7 @@ class AppState extends ChangeNotifier {
     );
     if (folder.id.isEmpty || folder.isSystemWishlist) return false;
     final hasGoods = goodsItems.any((item) => item.folderId == folderId);
-    final hasChildren =
-        folders.any((f) => f.parentId == folderId);
+    final hasChildren = folders.any((f) => f.parentId == folderId);
     if (hasGoods || hasChildren) return false;
     folders.removeWhere((f) => f.id == folderId);
     _saveAccountData();
@@ -2086,7 +2139,8 @@ class AppState extends ChangeNotifier {
         break;
       case FolderSortType.goodsCountDesc:
         copied.sort(
-          (a, b) => goodsCountForFolder(b.id).compareTo(goodsCountForFolder(a.id)),
+          (a, b) =>
+              goodsCountForFolder(b.id).compareTo(goodsCountForFolder(a.id)),
         );
         break;
     }
@@ -2129,7 +2183,8 @@ class AppState extends ChangeNotifier {
         break;
       case GoodsSortType.priceAsc:
         copied.sort(
-          (a, b) => (a.paidPrice ?? 999999999).compareTo(b.paidPrice ?? 999999999),
+          (a, b) =>
+              (a.paidPrice ?? 999999999).compareTo(b.paidPrice ?? 999999999),
         );
         break;
       case GoodsSortType.priceDesc:
@@ -2266,7 +2321,8 @@ class AppState extends ChangeNotifier {
   }
 
   void updateCalendarEvent(CalendarEventItem updatedEvent) {
-    final index = calendarEvents.indexWhere((event) => event.id == updatedEvent.id);
+    final index =
+        calendarEvents.indexWhere((event) => event.id == updatedEvent.id);
     if (index != -1) {
       calendarEvents[index] = updatedEvent;
       _saveAccountData();
@@ -2317,10 +2373,9 @@ class AppState extends ChangeNotifier {
 
   int get totalUnlockedBadgeCount => badgeProgress.unlockedBadgeIds.length;
 
-  int get totalUnlockedBadgeLevel =>
-      allBadges
-          .where((badge) => badgeProgress.unlockedBadgeIds.contains(badge.id))
-          .fold(0, (sum, badge) => sum + badge.level);
+  int get totalUnlockedBadgeLevel => allBadges
+      .where((badge) => badgeProgress.unlockedBadgeIds.contains(badge.id))
+      .fold(0, (sum, badge) => sum + badge.level);
 
   int get maxBadgeSlots => 3;
 
@@ -2328,7 +2383,9 @@ class AppState extends ChangeNotifier {
       folders.where((folder) => folder.parentId == null).length;
 
   List<BadgeItem> get equippedBadges {
-    return allBadges.where((badge) => equippedBadgeIds.contains(badge.id)).toList();
+    return allBadges
+        .where((badge) => equippedBadgeIds.contains(badge.id))
+        .toList();
   }
 
   bool isBadgeUnlocked(String badgeId) {
@@ -2393,4 +2450,3 @@ class AppState extends ChangeNotifier {
     }
   }
 }
-

@@ -1,13 +1,23 @@
 import sys
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 
+from .bootstrap import ensure_database_ready, ensure_sole_admin
 from .core.config import settings
 from .routers import auth, banner, board, goods_catalog, profile
 
-app = FastAPI(title=settings.app_name)
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    ensure_database_ready()
+    ensure_sole_admin()
+    yield
+
+
+app = FastAPI(title=settings.app_name, lifespan=lifespan)
 
 
 def _static_dir() -> Path:
@@ -29,10 +39,11 @@ def healthcheck() -> dict[str, str]:
 
 @app.get("/admin")
 def admin_console() -> FileResponse:
-    """Admin web console (게시판 승인·배너·공지 관리). Any admin-credentialed
-    user can log in; non-admins can open the page but every action 403s.
-    Keep this path off your port-forward (access via http://localhost:PORT/admin
-    on the server PC) if you want it LAN-only."""
+    """Admin web console.
+
+    The page is public to open, but only the configured sole-admin account can
+    perform admin actions after login.
+    """
     return FileResponse(_STATIC_DIR / "admin.html")
 
 

@@ -1,14 +1,11 @@
-from app.db import Base, engine
-
-# IMPORTANT: import models so their tables register on Base.metadata before
-# create_all — without this the metadata is empty and no tables are created.
-from app import models  # noqa: F401
+from app.bootstrap import ensure_database_ready
+from app.db import Base
 
 
 def main() -> None:
-    Base.metadata.create_all(bind=engine)
+    ensure_database_ready()
     tables = ", ".join(sorted(Base.metadata.tables.keys()))
-    print(f"SQLite DB initialized. Tables: {tables}")
+    print(f"Database initialized. Tables: {tables}")
 
 
 if __name__ == "__main__":

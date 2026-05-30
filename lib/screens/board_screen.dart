@@ -111,12 +111,8 @@ class _BoardScreenState extends State<BoardScreen> {
       case 0:
         return _FreeTalkView(
           accent: palette.primary,
-          // Admins see everything (incl. pending info-bot posts so they can
-          // approve them); everyone else sees only approved posts.
-          posts: appState.adminMode
-              ? appState.boardPosts
-              : appState.visibleBoardPosts,
-          isAdmin: appState.adminMode,
+          posts: appState.visibleBoardPosts,
+          isAdmin: false,
         );
       case 1:
         return _PostArchiveView(accent: palette.primary);
@@ -377,7 +373,8 @@ class _FreeTalkViewState extends State<_FreeTalkView> {
                             ? const SizedBox(
                                 width: 14,
                                 height: 14,
-                                child: CircularProgressIndicator(strokeWidth: 2),
+                                child:
+                                    CircularProgressIndicator(strokeWidth: 2),
                               )
                             : const Icon(Icons.refresh_rounded, size: 16),
                         label: Text(appState.isRefreshingInfoBots
@@ -451,7 +448,10 @@ class _TagFilterChip extends StatelessWidget {
           style: TextStyle(
             color: selected
                 ? color
-                : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.75),
+                : Theme.of(context)
+                    .colorScheme
+                    .onSurface
+                    .withValues(alpha: 0.75),
             fontSize: 12.5,
             fontWeight: FontWeight.w700,
           ),
@@ -471,14 +471,15 @@ class _BoardPostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appState = context.watch<AppState>();
+    final canManagePost = isAdmin ||
+        (post.author == appState.displayName.trim() && appState.isLoggedIn);
     final translation = appState.cachedTranslationFor(
       post.id,
       appState.appLanguage.translationCode,
     );
     final displayTitle = translation?.title ?? post.title;
     final displaySummary = translation?.summary ?? post.summary;
-    final dateText =
-        '${post.date.year}.${post.date.month}.${post.date.day}';
+    final dateText = '${post.date.year}.${post.date.month}.${post.date.day}';
 
     return Card(
       elevation: 0,
@@ -497,7 +498,7 @@ class _BoardPostCard extends StatelessWidget {
             ),
           );
         },
-        onLongPress: isAdmin
+        onLongPress: canManagePost
             ? () {
                 Navigator.push(
                   context,
@@ -609,9 +610,8 @@ class _BoardPostCard extends StatelessWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) =>
-                                              BoardPostEditorScreen(
-                                                  existing: post),
+                                          builder: (_) => BoardPostEditorScreen(
+                                              existing: post),
                                         ),
                                       );
                                     } else if (value == 'delete') {
@@ -779,9 +779,8 @@ class _PostArchiveViewState extends State<_PostArchiveView> {
     }
 
     final myName = appState.displayName.trim();
-    final myPosts = appState.boardPosts
-        .where((p) => p.author.trim() == myName)
-        .toList();
+    final myPosts =
+        appState.boardPosts.where((p) => p.author.trim() == myName).toList();
     final saved = appState.bookmarkedPosts;
     final list = _section == 0 ? myPosts : saved;
     final emptyText = _section == 0
@@ -839,7 +838,7 @@ class _PostArchiveViewState extends State<_PostArchiveView> {
                     separatorBuilder: (_, __) => const SizedBox(height: 10),
                     itemBuilder: (_, i) => _BoardPostCard(
                       post: list[i],
-                      isAdmin: appState.adminMode,
+                      isAdmin: false,
                     ),
                   ),
           ),
@@ -892,8 +891,7 @@ class _TradeViewState extends State<_TradeView> {
   List<TradePost> _filterSort(List<TradePost> posts) {
     var out = posts
         .where((p) => !_hiddenKinds.contains(p.kind))
-        .where(
-            (p) => !_hideCompleted || p.status != TradeStatus.completed)
+        .where((p) => !_hideCompleted || p.status != TradeStatus.completed)
         .toList();
     if (_query.trim().isNotEmpty) {
       final q = _query.toLowerCase();
@@ -1051,8 +1049,7 @@ class _TradeViewState extends State<_TradeView> {
                   padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
                   itemCount: posts.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 10),
-                  itemBuilder: (context, i) =>
-                      _TradePostCard(post: posts[i]),
+                  itemBuilder: (context, i) => _TradePostCard(post: posts[i]),
                 ),
         ),
       ],
@@ -1071,8 +1068,7 @@ class _TradePostCard extends StatelessWidget {
     final appState = context.read<AppState>();
     final isOwner = appState.isLoggedIn && appState.accountId == post.authorId;
     final isCompleted = post.status == TradeStatus.completed;
-    final dateText =
-        '${post.date.year}.${post.date.month}.${post.date.day}';
+    final dateText = '${post.date.year}.${post.date.month}.${post.date.day}';
     final priceText = post.kind == TradeKind.free
         ? '무료'
         : (post.price == null
@@ -1131,8 +1127,8 @@ class _TradePostCard extends StatelessWidget {
                     color: theme.colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Icon(Icons.image_outlined,
-                      color: Colors.grey.shade400),
+                  child:
+                      Icon(Icons.image_outlined, color: Colors.grey.shade400),
                 ),
               const SizedBox(width: 12),
               Expanded(
@@ -1301,8 +1297,8 @@ class _TradeDetailSheet extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: post.kind.color.withValues(alpha: 0.16),
                     borderRadius: BorderRadius.circular(6),
@@ -1348,8 +1344,8 @@ class _TradeDetailSheet extends StatelessWidget {
                   separatorBuilder: (_, __) => const SizedBox(width: 8),
                   itemBuilder: (_, i) => ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.memory(post.imageBytesList[i],
-                        fit: BoxFit.cover),
+                    child:
+                        Image.memory(post.imageBytesList[i], fit: BoxFit.cover),
                   ),
                 ),
               ),
@@ -1416,8 +1412,7 @@ class _EventScheduleView extends StatefulWidget {
 }
 
 class _EventScheduleViewState extends State<_EventScheduleView> {
-  DateTime _visibleMonth =
-      DateTime(DateTime.now().year, DateTime.now().month);
+  DateTime _visibleMonth = DateTime(DateTime.now().year, DateTime.now().month);
   DateTime _selectedDate = DateTime(
     DateTime.now().year,
     DateTime.now().month,
@@ -1440,9 +1435,8 @@ class _EventScheduleViewState extends State<_EventScheduleView> {
     final days = _buildDays(_visibleMonth);
     final accent = widget.accent;
 
-    final eventsForSelectedDay = kEventNotices
-        .where((e) => e.occursOn(_selectedDate))
-        .toList();
+    final eventsForSelectedDay =
+        kEventNotices.where((e) => e.occursOn(_selectedDate)).toList();
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
@@ -1515,8 +1509,7 @@ class _EventScheduleViewState extends State<_EventScheduleView> {
                     final day = days[index];
                     final inMonth = day.month == _visibleMonth.month;
                     final isSelected = _sameDay(day, _selectedDate);
-                    final hasEvent =
-                        kEventNotices.any((e) => e.occursOn(day));
+                    final hasEvent = kEventNotices.any((e) => e.occursOn(day));
 
                     return InkWell(
                       borderRadius: BorderRadius.circular(12),
@@ -1755,17 +1748,18 @@ class _BoardPostDetailScreenState extends State<_BoardPostDetailScreen> {
     final cached = appState.cachedTranslationFor(post.id, code);
     final hasTranslation = cached != null;
     final showTranslated = hasTranslation && !_showOriginal;
+    final canManagePost =
+        post.author == appState.displayName.trim() && appState.isLoggedIn;
 
     final title = showTranslated ? cached.title : post.title;
     final content = showTranslated ? cached.content : post.content;
-    final dateText =
-        '${post.date.year}.${post.date.month}.${post.date.day}';
+    final dateText = '${post.date.year}.${post.date.month}.${post.date.day}';
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('게시글'),
         actions: [
-          if (appState.adminMode)
+          if (canManagePost)
             IconButton(
               tooltip: '수정',
               icon: const Icon(Icons.edit_outlined),
@@ -1778,7 +1772,7 @@ class _BoardPostDetailScreenState extends State<_BoardPostDetailScreen> {
                 );
               },
             ),
-          if (appState.adminMode)
+          if (canManagePost)
             IconButton(
               tooltip: '삭제',
               icon: const Icon(Icons.delete_outline),
@@ -1797,8 +1791,7 @@ class _BoardPostDetailScreenState extends State<_BoardPostDetailScreen> {
                       ),
                       FilledButton(
                         style: FilledButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(dctx).colorScheme.error,
+                          backgroundColor: Theme.of(dctx).colorScheme.error,
                         ),
                         onPressed: () => Navigator.pop(dctx, true),
                         child: const Text('삭제'),
@@ -1914,8 +1907,7 @@ class _BoardPostDetailScreenState extends State<_BoardPostDetailScreen> {
           Row(
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: post.tag.color.withValues(alpha: 0.16),
                   borderRadius: BorderRadius.circular(6),
@@ -1936,8 +1928,8 @@ class _BoardPostDetailScreenState extends State<_BoardPostDetailScreen> {
                       fontWeight: FontWeight.w700)),
               const SizedBox(width: 8),
               Text(dateText,
-                  style: TextStyle(
-                      color: Colors.grey.shade500, fontSize: 12.5)),
+                  style:
+                      TextStyle(color: Colors.grey.shade500, fontSize: 12.5)),
             ],
           ),
           const SizedBox(height: 10),
@@ -1998,8 +1990,7 @@ class _PostActionBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest
-            .withValues(alpha: 0.5),
+        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -2152,10 +2143,8 @@ class _PostCommentsSectionState extends State<_PostCommentsSection> {
           for (final c in comments.reversed)
             _CommentTile(
               comment: c,
-              canDelete: appState.adminMode ||
-                  c.author == appState.displayName.trim(),
-              onDelete: () =>
-                  appState.deleteComment(widget.postId, c.id),
+              canDelete: c.author == appState.displayName.trim(),
+              onDelete: () => appState.deleteComment(widget.postId, c.id),
             ),
       ],
     );

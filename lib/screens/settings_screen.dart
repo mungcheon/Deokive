@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../config/admin_config.dart';
 import '../l10n/app_language.dart';
 import '../l10n/app_strings.dart';
 import '../state/app_state.dart';
@@ -89,9 +88,8 @@ class SettingsScreen extends StatelessWidget {
                             backgroundImage: selectedImage != null
                                 ? MemoryImage(selectedImage!)
                                 : (appState.profileImageBytes != null
-                                        ? MemoryImage(appState.profileImageBytes!)
-                                        : null)
-                                    as ImageProvider<Object>?,
+                                    ? MemoryImage(appState.profileImageBytes!)
+                                    : null) as ImageProvider<Object>?,
                             child: selectedImage == null &&
                                     appState.profileImageBytes == null
                                 ? const Icon(Icons.person_outline, size: 32)
@@ -157,7 +155,8 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _openPaletteSheet(BuildContext context, AppState appState) async {
+  Future<void> _openPaletteSheet(
+      BuildContext context, AppState appState) async {
     await showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -265,8 +264,7 @@ class SettingsScreen extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             children: kAppFonts.map((font) {
-              final selected =
-                  (appState.fontFamily ?? 'pretendard') == font.id;
+              final selected = (appState.fontFamily ?? 'pretendard') == font.id;
               return ListTile(
                 title: Text(
                   font.label,
@@ -453,8 +451,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     title: const Text('구글 계정 연동'),
                     subtitle: Text(
-                      appState.linkedGoogleEmail ??
-                          '구글 로그인으로도 같은 계정에 접속',
+                      appState.linkedGoogleEmail ?? '구글 로그인으로도 같은 계정에 접속',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -496,8 +493,7 @@ class SettingsScreen extends StatelessWidget {
                         kAppFonts
                             .firstWhere(
                               (f) =>
-                                  f.id ==
-                                  (appState.fontFamily ?? 'pretendard'),
+                                  f.id == (appState.fontFamily ?? 'pretendard'),
                               orElse: () => kAppFonts.first,
                             )
                             .label,
@@ -515,31 +511,6 @@ class SettingsScreen extends StatelessWidget {
                       title: const Text('알림 받기'),
                       onChanged: appState.setPushEnabled,
                     ),
-                    if (appState.isLoggedIn)
-                      SwitchListTile(
-                        value: appState.adminMode,
-                        title: const Text('관리자 모드'),
-                        subtitle: Text(
-                          appState.adminMode
-                              ? '공지/정보 글 작성·수정, 정보봇 글 승인 권한이 켜져 있어요'
-                              : '관리자 암호를 입력해야 켤 수 있어요',
-                        ),
-                        secondary: Icon(
-                          appState.adminMode
-                              ? Icons.shield_rounded
-                              : Icons.shield_outlined,
-                          color: appState.adminMode
-                              ? palette.primary
-                              : null,
-                        ),
-                        onChanged: (value) {
-                          if (!value) {
-                            appState.setAdminMode(false);
-                            return;
-                          }
-                          _promptAdminPasscode(context, appState);
-                        },
-                      ),
                   ],
                 ),
               ),
@@ -711,75 +682,6 @@ String _googleLinkErrorMessage(String? code) {
   }
 }
 
-Future<void> _promptAdminPasscode(
-    BuildContext context, AppState appState) async {
-  final controller = TextEditingController();
-  var obscure = true;
-  final ok = await showDialog<bool>(
-    context: context,
-    builder: (dctx) => StatefulBuilder(
-      builder: (ctx, setDialogState) => AlertDialog(
-        title: const Row(
-          children: [
-            Icon(Icons.shield_outlined, size: 20),
-            SizedBox(width: 8),
-            Text('관리자 인증'),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('관리자 암호를 입력하세요.',
-                style: TextStyle(fontSize: 13)),
-            const SizedBox(height: 12),
-            TextField(
-              controller: controller,
-              obscureText: obscure,
-              autofocus: true,
-              onSubmitted: (_) => Navigator.pop(dctx, true),
-              decoration: InputDecoration(
-                labelText: '암호',
-                prefixIcon: const Icon(Icons.key_rounded),
-                suffixIcon: IconButton(
-                  icon: Icon(obscure
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined),
-                  onPressed: () =>
-                      setDialogState(() => obscure = !obscure),
-                ),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dctx, false),
-            child: const Text('취소'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(dctx, true),
-            child: const Text('확인'),
-          ),
-        ],
-      ),
-    ),
-  );
-  if (ok != true) return;
-  if (!context.mounted) return;
-  final messenger = ScaffoldMessenger.of(context);
-  if (AdminConfig.verify(controller.text)) {
-    appState.setAdminMode(true);
-    messenger.showSnackBar(
-      const SnackBar(content: Text('관리자 모드가 켜졌어요.')),
-    );
-  } else {
-    messenger.showSnackBar(
-      const SnackBar(content: Text('암호가 올바르지 않습니다.')),
-    );
-  }
-}
-
 void _openGoogleLinkSheet(BuildContext context, AppState appState) {
   showModalBottomSheet<void>(
     context: context,
@@ -817,8 +719,8 @@ class _GoogleLinkSheetState extends State<_GoogleLinkSheet> {
     } else {
       messenger.showSnackBar(
         SnackBar(
-            content:
-                Text(_googleLinkErrorMessage(widget.appState.googleSignInError))),
+            content: Text(
+                _googleLinkErrorMessage(widget.appState.googleSignInError))),
       );
     }
   }
@@ -829,8 +731,7 @@ class _GoogleLinkSheetState extends State<_GoogleLinkSheet> {
       context: context,
       builder: (dctx) => AlertDialog(
         title: const Text('구글 계정 연동 해제'),
-        content: const Text(
-            '연동을 해제하면 구글 로그인으로는 이 계정에 자동 접속할 수 없게 됩니다. '
+        content: const Text('연동을 해제하면 구글 로그인으로는 이 계정에 자동 접속할 수 없게 됩니다. '
             '아이디 로그인은 계속 가능해요.'),
         actions: [
           TextButton(
@@ -879,7 +780,8 @@ class _GoogleLinkSheetState extends State<_GoogleLinkSheet> {
                 decoration: BoxDecoration(
                   color: isLinked
                       ? Colors.green.shade50
-                      : theme.colorScheme.primaryContainer.withValues(alpha: 0.6),
+                      : theme.colorScheme.primaryContainer
+                          .withValues(alpha: 0.6),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -966,7 +868,8 @@ class _GoogleLinkSheetState extends State<_GoogleLinkSheet> {
             ),
             const SizedBox(height: 20),
             FilledButton.icon(
-              onPressed: (_busy || !appState.supportsGoogleSignIn) ? null : _link,
+              onPressed:
+                  (_busy || !appState.supportsGoogleSignIn) ? null : _link,
               icon: _busy
                   ? const SizedBox(
                       width: 16,

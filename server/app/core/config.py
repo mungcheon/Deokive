@@ -8,6 +8,9 @@ class Settings(BaseSettings):
     jwt_secret_key: str = "change-this-secret-key"
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 60 * 24 * 7
+    sole_admin_login_id: str = "admin"
+    sole_admin_password: str = "deokiveadmin"
+    sole_admin_nickname: str = "관리자"
 
     model_config = SettingsConfigDict(
         env_file=".env",

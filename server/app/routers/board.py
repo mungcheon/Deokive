@@ -13,7 +13,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
 from .. import models
-from ..dependencies import get_current_user, get_db
+from ..dependencies import get_current_user, get_db, is_sole_admin, require_admin
 from ..schemas import (
     BoardCommentCreate,
     BoardCommentRead,
@@ -66,8 +66,7 @@ def list_pending(
     db: Session = Depends(get_db),
     user: models.User = Depends(get_current_user),
 ) -> list[models.BoardPost]:
-    if not user.is_admin:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="admin only")
+    require_admin(user)
     return (
         db.query(models.BoardPost)
         .filter(models.BoardPost.approved.is_(False))
@@ -96,7 +95,7 @@ def create_post(
 ) -> models.BoardPost:
     # Only admins may post notice/info tags; everyone may post general.
     tag = payload.tag if payload.tag in {"notice", "info", "general"} else "general"
-    if tag in {"notice", "info"} and not user.is_admin:
+    if tag in {"notice", "info"} and not is_sole_admin(user):
         tag = "general"
     post = models.BoardPost(
         tag=tag,
@@ -125,7 +124,7 @@ def update_post(
     post = db.get(models.BoardPost, post_id)
     if post is None:
         raise HTTPException(status_code=404, detail="post not found")
-    if not user.is_admin and post.author_user_id != user.id:
+    if not is_sole_admin(user) and post.author_user_id != user.id:
         raise HTTPException(status_code=403, detail="not your post")
     for field in ("tag", "title", "summary", "content", "source_url", "image_url"):
         value = getattr(payload, field)
@@ -145,7 +144,7 @@ def delete_post(
     post = db.get(models.BoardPost, post_id)
     if post is None:
         return
-    if not user.is_admin and post.author_user_id != user.id:
+    if not is_sole_admin(user) and post.author_user_id != user.id:
         raise HTTPException(status_code=403, detail="not your post")
     db.delete(post)
     db.commit()
@@ -157,8 +156,7 @@ def approve_post(
     db: Session = Depends(get_db),
     user: models.User = Depends(get_current_user),
 ) -> models.BoardPost:
-    if not user.is_admin:
-        raise HTTPException(status_code=403, detail="admin only")
+    require_admin(user)
     post = db.get(models.BoardPost, post_id)
     if post is None:
         raise HTTPException(status_code=404, detail="post not found")
@@ -244,7 +242,7 @@ def delete_comment(
     comment = db.get(models.BoardComment, comment_id)
     if comment is None:
         return
-    if not user.is_admin and comment.author_user_id != user.id:
+    if not is_sole_admin(user) and comment.author_user_id != user.id:
         raise HTTPException(status_code=403, detail="not your comment")
     db.delete(comment)
     db.commit()

@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: deokive-board
+    runtime: python
+    rootDir: server
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.9
+      - key: APP_ENV
+        value: production
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: JWT_EXPIRE_MINUTES
+        value: "10080"
+      - key: SOLE_ADMIN_LOGIN_ID
+        sync: false
+      - key: SOLE_ADMIN_PASSWORD
+        sync: false
+      - key: SOLE_ADMIN_NICKNAME
+        value: 관리자
+      - key: DATABASE_URL
+        sync: false

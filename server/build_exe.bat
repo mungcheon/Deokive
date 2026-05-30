@@ -17,6 +17,6 @@ echo.
 echo ====================================================
 echo  Done -^> dist\deokive_server.exe
 echo  Double-click that exe to run the server.
-echo  First run auto-creates an admin (id/pw shown in console).
+echo  The exe enforces one sole admin account from .env.
 echo ====================================================
 pause

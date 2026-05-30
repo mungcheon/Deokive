@@ -5,6 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 
 from . import models
+from .core.config import settings
 from .db import SessionLocal
 from .security import decode_access_token
 
@@ -36,5 +37,17 @@ def get_current_user(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="User not found",
-        )
+    )
     return user
+
+
+def is_sole_admin(user: models.User) -> bool:
+    return user.login_id == settings.sole_admin_login_id
+
+
+def require_admin(user: models.User) -> None:
+    if not is_sole_admin(user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="admin only",
+        )

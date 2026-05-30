@@ -5,21 +5,14 @@ are admin-only — so an admin can edit the home banners from any device and
 all users see the update without an app release.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from .. import models
-from ..dependencies import get_current_user, get_db
+from ..dependencies import get_current_user, get_db, require_admin
 from ..schemas import HomeBannerCreate, HomeBannerRead, HomeBannerUpdate
 
 router = APIRouter(prefix="/banners", tags=["banners"])
-
-
-def _require_admin(user: models.User) -> None:
-    if not user.is_admin:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="admin only"
-        )
 
 
 @router.get("", response_model=list[HomeBannerRead])
@@ -38,7 +31,7 @@ def create_banner(
     db: Session = Depends(get_db),
     user: models.User = Depends(get_current_user),
 ) -> models.HomeBanner:
-    _require_admin(user)
+    require_admin(user)
     banner = models.HomeBanner(**payload.model_dump())
     db.add(banner)
     db.commit()
@@ -53,7 +46,7 @@ def update_banner(
     db: Session = Depends(get_db),
     user: models.User = Depends(get_current_user),
 ) -> models.HomeBanner:
-    _require_admin(user)
+    require_admin(user)
     banner = db.get(models.HomeBanner, banner_id)
     if banner is None:
         raise HTTPException(status_code=404, detail="banner not found")
@@ -70,7 +63,7 @@ def delete_banner(
     db: Session = Depends(get_db),
     user: models.User = Depends(get_current_user),
 ) -> None:
-    _require_admin(user)
+    require_admin(user)
     banner = db.get(models.HomeBanner, banner_id)
     if banner is None:
         return
