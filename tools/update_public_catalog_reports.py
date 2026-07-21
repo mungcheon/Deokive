@@ -17,6 +17,7 @@ PUBLIC_META = DATA / "catalog_public_meta.json"
 QUALITY = DATA / "catalog_quality_public.json"
 IMAGE_BACKLOG = DATA / "catalog_image_backlog_public.json"
 IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
+DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
@@ -77,6 +78,11 @@ DISCOVERY_PRIORITY = {
     "official_search_url_available": 10,
     "licensed_retailer_search_review": 20,
     "manual_official_research": 40,
+}
+DEDUPLICATION_KEY_PRIORITY = {
+    "barcode": 10,
+    "source_url": 20,
+    "image_url": 30,
 }
 
 PUBLIC_FIELDS = [
@@ -229,6 +235,103 @@ def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int 
     }
 
 
+def normalize_text_key(value: Any) -> str:
+    return str(value or "").strip().lower()
+
+
+def row_richness(item: dict[str, Any]) -> int:
+    return sum(1 for field in PUBLIC_FIELDS if present(item.get(field)))
+
+
+def dedupe_keys(item: dict[str, Any]) -> list[tuple[str, str]]:
+    keys: list[tuple[str, str]] = []
+    name = normalize_text_key(item.get("name_ja") or item.get("name_ko"))
+    barcode = normalize_text_key(item.get("barcode"))
+    if barcode:
+        keys.append(("barcode", barcode))
+    source_url = normalize_text_key(item.get("source_url"))
+    if source_url and len(name) >= 6:
+        keys.append(("source_url", f"{source_url}|{name}"))
+    image_url = normalize_text_key(item.get("image_url"))
+    if image_url:
+        if len(name) >= 6:
+            keys.append(("image_url", f"{image_url}|{name}"))
+    return keys
+
+
+def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int = 80) -> dict[str, Any]:
+    key_to_indices: dict[tuple[str, str], list[int]] = {}
+    for index, item in enumerate(items):
+        for key in dedupe_keys(item):
+            key_to_indices.setdefault(key, []).append(index)
+
+    seen_groups: set[tuple[int, ...]] = set()
+    groups: list[dict[str, Any]] = []
+    duplicate_rows: set[int] = set()
+    for key, indices in sorted(
+        key_to_indices.items(),
+        key=lambda pair: (DEDUPLICATION_KEY_PRIORITY.get(pair[0][0], 99), pair[0][1]),
+    ):
+        unique_indices = sorted(set(indices))
+        if len(unique_indices) < 2:
+            continue
+        signature = tuple(unique_indices)
+        if signature in seen_groups:
+            continue
+        seen_groups.add(signature)
+        keep = max(unique_indices, key=lambda idx: (row_richness(items[idx]), -idx))
+        drops = [idx for idx in unique_indices if idx != keep]
+        duplicate_rows.update(drops)
+        groups.append(
+            {
+                "key_type": key[0],
+                "key": key[1],
+                "keep_catalog_index": items[keep].get("catalog_index", keep),
+                "drop_catalog_indexes": [items[idx].get("catalog_index", idx) for idx in drops],
+                "rows": [
+                    {
+                        "catalog_index": item.get("catalog_index", idx),
+                        "name_ko": item.get("name_ko"),
+                        "name_ja": item.get("name_ja"),
+                        "source_store": item.get("source_store"),
+                        "category": item.get("category"),
+                        "barcode": item.get("barcode"),
+                        "source_url": item.get("source_url"),
+                        "image_url": item.get("image_url"),
+                        "richness": row_richness(item),
+                    }
+                    for idx in unique_indices
+                    for item in [items[idx]]
+                ],
+            }
+        )
+
+    by_key_type = Counter(group["key_type"] for group in groups)
+    groups.sort(
+        key=lambda group: (
+            DEDUPLICATION_KEY_PRIORITY.get(str(group.get("key_type")), 99),
+            -len(group.get("rows") or []),
+            str(group.get("key") or ""),
+        )
+    )
+    return {
+        "schema_version": 1,
+        "summary": {
+            "rows": len(items),
+            "duplicate_groups": len(groups),
+            "duplicate_rows": len(duplicate_rows),
+            "published_groups": min(sample_groups, len(groups)),
+            "by_key_type": by_key_type.most_common(),
+        },
+        "automation_policy": {
+            "auto_delete": False,
+            "requires_manual_review": True,
+            "reason": "Shared barcode/source/image evidence can still represent variants; public report is a review queue only.",
+        },
+        "groups": groups[:sample_groups],
+    }
+
+
 def validate_public_files(paths: list[Path]) -> list[str]:
     findings: list[str] = []
     for path in paths:
@@ -257,6 +360,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     cov = coverage(missing, rows, ["source_url", "image_url", "release_date"])
     generated_at = now_utc()
     source_discovery = build_source_discovery_public(items)
+    deduplication = build_deduplication_public(items)
 
     public_meta = load_json(PUBLIC_META, {})
     public_meta.update(
@@ -334,6 +438,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{SOURCE_DISCOVERY.name}",
             **source_discovery["summary"],
         }
+        target["deduplication_review"] = {
+            "public_report": f"data/{DEDUPLICATION.name}",
+            **deduplication["summary"],
+        }
 
     public_files = [
         PUBLIC_CATALOG,
@@ -341,6 +449,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         QUALITY,
         IMAGE_BACKLOG,
         IMAGE_CANDIDATES,
+        DEDUPLICATION,
         GOTOUCHI,
         REQUESTED,
         GENERIC_SOURCE,
@@ -353,6 +462,7 @@ def update_reports(write: bool) -> dict[str, Any]:
 
     if write:
         write_json(SOURCE_DISCOVERY, source_discovery)
+        write_json(DEDUPLICATION, deduplication)
         write_json(PUBLIC_META, public_meta)
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)
@@ -369,6 +479,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_BACKLOG.relative_to(ROOT)),
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
+            str(DEDUPLICATION.relative_to(ROOT)),
         ],
     }
 
