@@ -1,186 +1,510 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ko">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="./">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="덕질 컬렉션을 기록하고 정리하는 적응형 웹 아카이브, Deokive">
-  <meta name="theme-color" content="#f7c9d9">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Deokive">
-  <meta name="mobile-web-app-capable" content="yes">
-
+  <meta name="theme-color" content="#fff2f7">
+  <meta name="description" content="덕질 굿즈 정보를 정리해 공개하는 Deokive 카탈로그">
   <meta property="og:title" content="Deokive">
-  <meta property="og:description" content="덕질 컬렉션을 기록하고 정리하는 적응형 웹 아카이브">
+  <meta property="og:description" content="굿즈 정보와 출처를 모아 보는 공개 카탈로그">
   <meta property="og:type" content="website">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png?v=20260623b">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png?v=20260623b"/>
-  <link rel="shortcut icon" type="image/png" href="favicon.png?v=20260623b"/>
-
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
   <title>Deokive</title>
-  <link rel="manifest" href="manifest.json?v=20260623b">
   <style>
+    :root {
+      color-scheme: light;
+      --bg: #fff2f7;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: #ffffff;
+      --ink: #28222b;
+      --muted: #806b78;
+      --line: rgba(255, 126, 178, 0.24);
+      --pink: #ff63a7;
+      --pink-dark: #c64c84;
+      --mint: #2db9a3;
+      --blue: #4e78ff;
+      --yellow: #f7c948;
+      --shadow: 0 18px 50px rgba(198, 76, 132, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     html,
     body {
-      background: #fff2f7;
       margin: 0;
       min-height: 100%;
     }
 
-    #deokive-boot {
-      align-items: center;
-      background: #fff2f7;
-      color: #c54f88;
-      display: flex;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      inset: 0;
-      justify-content: center;
-      position: fixed;
-      z-index: 9999;
-    }
-
-    .deokive-boot-card {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 24px;
-      text-align: center;
-    }
-
-    .deokive-boot-logo {
-      font-size: 32px;
-      font-weight: 800;
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       letter-spacing: 0;
     }
 
-    .deokive-boot-copy {
-      color: #d86b9d;
-      font-size: 14px;
-      font-weight: 600;
+    a {
+      color: inherit;
     }
 
-    .deokive-boot-spinner {
-      animation: deokive-spin 0.9s linear infinite;
-      border: 3px solid rgba(216, 107, 157, 0.2);
-      border-top-color: #ff5fa2;
+    .page {
+      margin: 0 auto;
+      max-width: 1120px;
+      min-height: 100vh;
+      padding: max(18px, env(safe-area-inset-top)) 18px max(28px, env(safe-area-inset-bottom));
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 42px;
+    }
+
+    .brand {
+      align-items: center;
+      display: inline-flex;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .mark {
+      align-items: center;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      color: var(--pink-dark);
+      display: inline-flex;
+      height: 42px;
+      justify-content: center;
+      width: 42px;
+    }
+
+    .nav {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+    }
+
+    .chip {
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 999px;
-      height: 28px;
-      width: 28px;
+      color: var(--pink-dark);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 800;
+      min-height: 38px;
+      padding: 0 14px;
+      text-decoration: none;
     }
 
-    @keyframes deokive-spin {
-      to {
-        transform: rotate(360deg);
+    .hero {
+      align-items: end;
+      display: grid;
+      gap: 26px;
+      grid-template-columns: minmax(0, 1.04fr) minmax(300px, 0.96fr);
+    }
+
+    .hero-copy {
+      padding-bottom: 18px;
+    }
+
+    .eyebrow {
+      color: var(--pink-dark);
+      font-size: 13px;
+      font-weight: 900;
+      margin: 0 0 14px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      letter-spacing: 0;
+      line-height: 0.96;
+      margin: 0;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 650;
+      line-height: 1.68;
+      margin: 22px 0 0;
+      max-width: 620px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .button {
+      align-items: center;
+      border-radius: 999px;
+      display: inline-flex;
+      font-size: 15px;
+      font-weight: 900;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      background: var(--ink);
+      box-shadow: 0 18px 40px rgba(40, 34, 43, 0.2);
+      color: #ffffff;
+    }
+
+    .button.secondary {
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      color: var(--pink-dark);
+    }
+
+    .phone {
+      aspect-ratio: 9 / 16;
+      background: #111116;
+      border: 10px solid #111116;
+      border-radius: 42px;
+      box-shadow: 0 30px 90px rgba(40, 34, 43, 0.22);
+      margin: 0 auto;
+      max-height: 700px;
+      overflow: hidden;
+      width: min(100%, 390px);
+    }
+
+    .screen {
+      background: #fffcff;
+      border-radius: 30px;
+      height: 100%;
+      overflow: hidden;
+      padding: 18px 16px;
+      position: relative;
+    }
+
+    .status {
+      align-items: center;
+      display: flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .hero-card {
+      background: #fff2f7;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 18px;
+    }
+
+    .hero-card h2 {
+      font-size: 26px;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0 0 10px;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .mini-stats {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 12px;
+    }
+
+    .mini-stat {
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+    }
+
+    .mini-stat b {
+      display: block;
+      font-size: 21px;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      margin-top: 7px;
+    }
+
+    .search-preview {
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      margin: 14px 0;
+      padding: 13px 15px;
+    }
+
+    .items {
+      display: grid;
+      gap: 10px;
+    }
+
+    .item {
+      align-items: center;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 54px minmax(0, 1fr);
+      padding: 10px;
+    }
+
+    .thumb {
+      align-items: center;
+      background: #fff2f7;
+      border-radius: 16px;
+      color: var(--pink-dark);
+      display: flex;
+      font-size: 24px;
+      height: 54px;
+      justify-content: center;
+      width: 54px;
+    }
+
+    .item b,
+    .item span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .item b {
+      font-size: 14px;
+    }
+
+    .item span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .section {
+      margin-top: 42px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      letter-spacing: 0;
+      margin: 0 0 14px;
+    }
+
+    .metrics {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric {
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 16px 42px rgba(198, 76, 132, 0.08);
+      padding: 18px;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 28px;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 10px;
+    }
+
+    .notice {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.65;
+      margin-top: 16px;
+      padding: 16px;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        align-items: start;
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding-bottom: 0;
+      }
+
+      .phone {
+        max-height: none;
+        width: min(100%, 360px);
+      }
+
+      .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    .deokive-public-catalog {
-      align-items: center;
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(255, 95, 162, 0.24);
-      border-radius: 999px;
-      box-shadow: 0 12px 28px rgba(197, 79, 136, 0.16);
-      color: #c54f88;
-      display: inline-flex;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      gap: 6px;
-      min-height: 38px;
-      padding: 0 14px;
-      position: fixed;
-      right: max(14px, env(safe-area-inset-right));
-      text-decoration: none;
-      top: max(14px, env(safe-area-inset-top));
-      z-index: 10000;
+    @media (max-width: 520px) {
+      .page {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .topbar {
+        margin-bottom: 30px;
+      }
+
+      .chip.optional {
+        display: none;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .lead {
+        font-size: 15px;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <a class="deokive-public-catalog" href="catalog.html">Catalog</a>
-  <div id="deokive-boot" aria-label="Deokive loading">
-    <div class="deokive-boot-card">
-      <div class="deokive-boot-spinner"></div>
-      <div class="deokive-boot-logo">Deokive</div>
-      <div class="deokive-boot-copy">굿즈 아카이브를 불러오는 중이에요</div>
-    </div>
-  </div>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark">D</span>
+        <span>Deokive</span>
+      </div>
+      <nav class="nav" aria-label="주요 이동">
+        <a class="chip" href="catalog.html">Catalog</a>
+        <a class="chip optional" href="data/catalog_public.json">Public DB</a>
+      </nav>
+    </header>
 
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">PUBLIC GOODS ARCHIVE</p>
+        <h1>Deokive</h1>
+        <p class="lead">
+          치이카와, 애니메이션 굿즈, 이치방쿠지 정보를 공개용 DB로 정리해 보는 카탈로그예요.
+          개인 소장 기록은 기기에만 두고, 사이트에는 공개 가능한 상품 정보만 올립니다.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="catalog.html">카탈로그 열기</a>
+          <a class="button secondary" href="data/catalog_public_meta.json">DB 상태 보기</a>
+        </div>
+      </div>
+
+      <div class="phone" aria-label="Deokive mobile preview">
+        <div class="screen">
+          <div class="status"><span>3:25</span><span>LTE 100%</span></div>
+          <section class="hero-card">
+            <h2>굿즈<br>아카이브</h2>
+            <p>사진, 발매일, 가격, 출처를 한 번에 검색해요.</p>
+            <div class="mini-stats">
+              <div class="mini-stat"><b id="phoneCount">17,934</b><span>공개 상품</span></div>
+              <div class="mini-stat"><b id="phoneImage">96%</b><span>이미지 보유</span></div>
+            </div>
+          </section>
+          <div class="search-preview">단간론파, 프리렌, 타피누이 검색</div>
+          <div class="items">
+            <article class="item">
+              <div class="thumb">★</div>
+              <div><b>치이카와 마켓</b><span>공식 마켓 굿즈</span></div>
+            </article>
+            <article class="item">
+              <div class="thumb">◎</div>
+              <div><b>이치방쿠지</b><span>과거 캠페인 정리</span></div>
+            </article>
+            <article class="item">
+              <div class="thumb">#</div>
+              <div><b>애니메이션 굿즈</b><span>누이, 피규어, 아크릴</span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="공개 DB 요약">
+      <h2>공개 DB 상태</h2>
+      <div class="metrics">
+        <div class="metric"><b id="rowCount">17,934</b><span>공개 상품</span></div>
+        <div class="metric"><b id="imageMissing">724</b><span>이미지 보강 필요</span></div>
+        <div class="metric"><b id="sourceMissing">777</b><span>출처 보강 필요</span></div>
+        <div class="metric"><b id="updatedAt">업데이트됨</b><span>마지막 생성</span></div>
+      </div>
+      <p class="notice">
+        GitHub Pages에서 정적 파일만으로 동작합니다. 로그인, 게시물 작성, 개인 컬렉션 기록은 공개 사이트에 포함하지 않았어요.
+      </p>
+    </section>
+  </main>
+
   <script>
-    (async function bootDeokive() {
-      const hideBoot = () => {
-        const boot = document.getElementById('deokive-boot');
-        if (boot) {
-          boot.style.opacity = '0';
-          boot.style.transition = 'opacity 220ms ease';
-          window.setTimeout(() => boot.remove(), 240);
-        }
-      };
-      const bootObserver = new MutationObserver(() => {
-        if (document.querySelector('flutter-view')) {
-          window.setTimeout(hideBoot, 600);
-          bootObserver.disconnect();
-        }
-      });
-      bootObserver.observe(document.documentElement, {
-        childList: true,
-        subtree: true,
-      });
+    const fmt = new Intl.NumberFormat('ko-KR');
+    const setText = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    };
 
-      const host = window.location.hostname;
-
-      const isLocalHost =
-        host === 'localhost' ||
-        host === '127.0.0.1' ||
-        host === '::1';
-
-      try {
-        if ('serviceWorker' in navigator) {
-          const regs = await navigator.serviceWorker.getRegistrations();
-          for (const reg of regs) {
-            await reg.unregister();
-          }
+    fetch('data/catalog_public_meta.json?v=925a48a', { cache: 'no-store' })
+      .then((response) => response.ok ? response.json() : null)
+      .then((meta) => {
+        if (!meta) return;
+        const rowCount = Number(meta.row_count || 0);
+        const missing = meta.missing || {};
+        const imageMissing = Number(missing.image_url || 0);
+        const sourceMissing = Number(missing.source_url || 0);
+        const imageRate = rowCount ? Math.round(((rowCount - imageMissing) / rowCount) * 100) : 0;
+        setText('rowCount', fmt.format(rowCount));
+        setText('phoneCount', fmt.format(rowCount));
+        setText('imageMissing', fmt.format(imageMissing));
+        setText('sourceMissing', fmt.format(sourceMissing));
+        setText('phoneImage', `${imageRate}%`);
+        if (meta.generated_at) {
+          setText('updatedAt', meta.generated_at.slice(0, 10).replaceAll('-', '.'));
         }
-        if ('caches' in window) {
-          const keys = await caches.keys();
-          await Promise.all(keys.map((key) => caches.delete(key)));
-        }
-      } catch (_) {}
-
-      const script = document.createElement('script');
-      script.src = isLocalHost
-        ? 'flutter_bootstrap.js'
-        : 'flutter_bootstrap.js?v=20260721-loading-screen';
-      script.async = true;
-      document.body.appendChild(script);
-      window.setTimeout(hideBoot, 45000);
-    })();
+      })
+      .catch(() => {});
   </script>
 </body>
 </html>
