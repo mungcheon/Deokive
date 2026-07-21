@@ -180,13 +180,15 @@
     }
 
     .collection,
-    .insight {
+    .insight,
+    .quality-panel {
       padding: 18px;
     }
 
     .collection h3,
     .insight h3,
-    .kuji-panel h3 {
+    .kuji-panel h3,
+    .quality-panel h3 {
       font-size: 15px;
       margin: 0 0 12px;
     }
@@ -267,6 +269,70 @@
       font-weight: 850;
       margin-top: 12px;
       text-decoration: none;
+    }
+
+    .quality-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 12px;
+    }
+
+    .quality-cell {
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(255, 126, 178, 0.14);
+      border-radius: 14px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .quality-cell b {
+      display: block;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .quality-cell span {
+      color: var(--muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 850;
+      margin-top: 6px;
+    }
+
+    .quality-note {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: -2px 0 12px;
+    }
+
+    .quality-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .quality-item {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 126, 178, 0.14);
+      border-radius: 14px;
+      padding: 10px;
+    }
+
+    .quality-item strong {
+      display: block;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .quality-item span {
+      color: var(--muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 750;
+      margin-top: 4px;
     }
 
     .collection-copy {
@@ -1221,6 +1287,20 @@
           </div>
           <a class="kuji-more" href="data/ichiban_kuji_campaigns.json" target="_blank" rel="noopener noreferrer">전체 JSON 열기</a>
         </aside>
+        <aside class="panel quality-panel">
+          <h3>DB 품질 리포트</h3>
+          <p class="quality-note">공개 카탈로그 기준으로 출처, 이미지, 발매일 채움 상태를 추적해요.</p>
+          <div class="quality-grid" aria-label="DB 품질 통계">
+            <div class="quality-cell"><b id="qualitySource">-</b><span>출처</span></div>
+            <div class="quality-cell"><b id="qualityImage">-</b><span>이미지</span></div>
+            <div class="quality-cell"><b id="qualityRelease">-</b><span>발매일</span></div>
+          </div>
+          <p class="quality-note">이미지는 있는데 출처가 비어 있는 우선 보강 항목 <b id="qualityGapCount">-</b>개</p>
+          <div id="qualityGapList" class="quality-list" aria-live="polite">
+            <div class="loading"><span class="spinner"></span>품질 리포트 확인 중</div>
+          </div>
+          <a class="kuji-more" href="data/catalog_quality_public.json" target="_blank" rel="noopener noreferrer">전체 리포트 열기</a>
+        </aside>
       </div>
     </section>
 
@@ -1306,6 +1386,7 @@
       },
       pendingOwnedItem: null,
       kujiCampaigns: [],
+      qualityReport: null,
     };
 
     const $ = (id) => document.getElementById(id);
@@ -1789,9 +1870,61 @@
       }
     }
 
+    function formatPercent(value) {
+      if (!Number.isFinite(Number(value))) return '-';
+      return `${(Number(value) * 100).toFixed(1)}%`;
+    }
+
+    function renderQualityReport() {
+      const report = state.qualityReport;
+      if (!report) return;
+      const coverage = report.coverage || {};
+      $('qualitySource').textContent = formatPercent(coverage.source_url);
+      $('qualityImage').textContent = formatPercent(coverage.image_url);
+      $('qualityRelease').textContent = formatPercent(coverage.release_date);
+
+      const gaps = report.high_priority_gaps || {};
+      const rows = Array.isArray(gaps.has_image_missing_source_sample) ? gaps.has_image_missing_source_sample : [];
+      $('qualityGapCount').textContent = fmt.format(gaps.has_image_missing_source_count || rows.length || 0);
+
+      const list = $('qualityGapList');
+      if (!rows.length) {
+        list.innerHTML = '<div class="empty">지금 우선 보강 항목은 없어요</div>';
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      for (const item of rows.slice(0, 3)) {
+        const entry = document.createElement('div');
+        entry.className = 'quality-item';
+        entry.innerHTML = `
+          <strong>${escapeHtml(item.product_name || '이름 미확인 굿즈')}</strong>
+          <span>${escapeHtml([item.source_store, item.category].filter(Boolean).join(' · ') || '출처 확인 필요')}</span>
+        `;
+        fragment.append(entry);
+      }
+      list.replaceChildren(fragment);
+    }
+
+    async function loadQualityReport() {
+      try {
+        const response = await fetch('data/catalog_quality_public.json?v=20260722-quality-report', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        state.qualityReport = await response.json();
+        renderQualityReport();
+      } catch (error) {
+        $('qualitySource').textContent = '-';
+        $('qualityImage').textContent = '-';
+        $('qualityRelease').textContent = '-';
+        $('qualityGapCount').textContent = '-';
+        $('qualityGapList').innerHTML = `<div class="empty">품질 리포트를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
+      }
+    }
+
     async function init() {
       loadOwned();
       loadKujiCampaigns();
+      loadQualityReport();
       try {
         const response = await fetch('data/catalog_public.json?v=20260722-owned-flow', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
