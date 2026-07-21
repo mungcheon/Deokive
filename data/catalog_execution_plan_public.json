@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:45:36Z",
+  "generated_at": "2026-07-21T22:50:20Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 12,
+    "action_count": 13,
     "blocked_action_count": 1,
-    "manual_review_action_count": 10,
+    "manual_review_action_count": 11,
     "pending_import_action_count": 0,
-    "total_action_rows": 31862,
+    "total_action_rows": 32102,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -23,6 +23,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "source_discovery_action_rows": 240,
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
       "animation_category_review_rows": 428
@@ -220,6 +221,38 @@
           [
             "manual_official_research",
             5
+          ]
+        ]
+      }
+    },
+    {
+      "priority": 21,
+      "workstream": "source_discovery_action_queue",
+      "public_report": "data/source_discovery_action_queue_public.json",
+      "status": "manual_review",
+      "rows": 240,
+      "command": "Confirm exact product/detail URLs from official search paths before broad source research.",
+      "next_step": "confirm_exact_source_url_then_fill_source_templates",
+      "blocker": "Auto source import is disabled; every source_url needs exact product evidence.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "actionable_source_rows": 642,
+        "queued_source_rows": 240,
+        "action_batch_count": 33,
+        "excluded_review_state_rows": [
+          [
+            "manual_official_research_required",
+            5
+          ]
+        ],
+        "by_workflow": [
+          [
+            "official_search_url_available",
+            630
+          ],
+          [
+            "licensed_retailer_search_review",
+            12
           ]
         ]
       }

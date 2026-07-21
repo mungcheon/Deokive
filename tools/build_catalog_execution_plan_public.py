@@ -100,6 +100,7 @@ def build_plan() -> dict[str, Any]:
     image_batches = _load("catalog_image_enrichment_batches_public.json")
     image_action_queue = _load("catalog_image_attachment_action_queue_public.json")
     source_batches = _load("source_discovery_review_batches_public.json")
+    source_action_queue = _load("source_discovery_action_queue_public.json")
     metadata_batches = _load("catalog_metadata_review_batches_public.json")
     requested_batches = _load("requested_focus_review_batches_public.json")
     requested_action_queue = _load("requested_focus_action_queue_public.json")
@@ -117,6 +118,7 @@ def build_plan() -> dict[str, Any]:
     image_summary = _summary(image_batches)
     image_action_summary = _summary(image_action_queue)
     source_summary = _summary(source_batches)
+    source_action_summary = _summary(source_action_queue)
     metadata_summary = _summary(metadata_batches)
     requested_summary = _summary(requested_batches)
     requested_action_summary = _summary(requested_action_queue)
@@ -214,6 +216,26 @@ def build_plan() -> dict[str, Any]:
             evidence={
                 "batch_count": _count(source_summary, "batch_count"),
                 "by_workflow": source_summary.get("by_workflow", []),
+            },
+        )
+    )
+
+    actions.append(
+        _action(
+            priority=21,
+            workstream="source_discovery_action_queue",
+            public_report="data/source_discovery_action_queue_public.json",
+            status="manual_review",
+            rows=_count(source_action_summary, "queued_source_rows"),
+            command="Confirm exact product/detail URLs from official search paths before broad source research.",
+            next_step="confirm_exact_source_url_then_fill_source_templates",
+            blocker="Auto source import is disabled; every source_url needs exact product evidence.",
+            evidence={
+                "actionable_source_rows": _count(source_action_summary, "actionable_source_rows"),
+                "queued_source_rows": _count(source_action_summary, "queued_source_rows"),
+                "action_batch_count": _count(source_action_summary, "action_batch_count"),
+                "excluded_review_state_rows": source_action_summary.get("excluded_review_state_rows", []),
+                "by_workflow": source_action_summary.get("by_workflow", []),
             },
         )
     )

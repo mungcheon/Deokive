@@ -30,6 +30,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "source_discovery_review_batches_public.json": {
                 "summary": {"source_discovery_rows": 10, "batch_count": 2}
             },
+            "source_discovery_action_queue_public.json": {
+                "summary": {
+                    "actionable_source_rows": 8,
+                    "queued_source_rows": 4,
+                    "action_batch_count": 1,
+                    "excluded_review_state_rows": [["manual_official_research_required", 2]],
+                }
+            },
             "catalog_metadata_review_batches_public.json": {
                 "summary": {"missing_cell_count": 20, "batch_count": 2, "field_missing_totals": {"barcode": 20}}
             },
@@ -115,6 +123,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(action_queue["priority"], 11)
         self.assertEqual(action_queue["rows"], 2)
         self.assertEqual(action_queue["evidence"]["barcode_template_rows_excluded"], 3)
+        source_action = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "source_discovery_action_queue"
+        )
+        self.assertEqual(source_action["priority"], 21)
+        self.assertEqual(source_action["rows"], 4)
+        self.assertEqual(source_action["evidence"]["actionable_source_rows"], 8)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
         image_action = next(

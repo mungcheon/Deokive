@@ -2037,6 +2037,7 @@
     "dedupe_action_groups": 40,
     "requested_focus_review_rows": 6275,
     "requested_focus_action_rows": 163,
+    "source_discovery_action_rows": 240,
     "image_attachment_action_rows": 25,
     "ichiban_metadata_action_campaigns": 32,
     "animation_category_review_rows": 428
@@ -2044,7 +2045,7 @@
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 80,
-    "summed_batch_rows": 11003,
+    "summed_batch_rows": 8897,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2060,6 +2061,10 @@
         12
       ],
       [
+        "source_discovery_action_queue",
+        10
+      ],
+      [
         "danganronpa_missing_media",
         8
       ],
@@ -2068,24 +2073,20 @@
         8
       ],
       [
-        "metadata_backlog",
-        7
-      ],
-      [
-        "requested_focus_enrichment",
-        4
-      ],
-      [
         "image_attachment_action_queue",
         4
       ],
       [
-        "ichiban_kuji_metadata_action_queue",
-        4
+        "requested_focus_enrichment",
+        3
       ],
       [
         "generic_source_url_cleanup",
         3
+      ],
+      [
+        "ichiban_kuji_metadata_action_queue",
+        2
       ],
       [
         "gotouchi_official_candidate_review",
@@ -2110,6 +2111,10 @@
         12
       ],
       [
+        "agent-source-action",
+        10
+      ],
+      [
         "agent-danganronpa-media",
         8
       ],
@@ -2118,24 +2123,20 @@
         8
       ],
       [
-        "agent-metadata",
-        7
-      ],
-      [
-        "agent-requested-focus",
-        4
-      ],
-      [
         "agent-image-action",
         4
       ],
       [
-        "agent-ichiban-action",
-        4
+        "agent-requested-focus",
+        3
       ],
       [
         "agent-generic-source-cleanup",
         3
+      ],
+      [
+        "agent-ichiban-action",
+        2
       ],
       [
         "agent-gotouchi-review",
@@ -2161,6 +2162,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "source_discovery_action_rows": 240,
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
       "animation_category_review_rows": 428
@@ -3130,11 +3132,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 12,
+    "action_count": 13,
     "blocked_action_count": 1,
-    "manual_review_action_count": 10,
+    "manual_review_action_count": 11,
     "pending_import_action_count": 0,
-    "total_action_rows": 31862,
+    "total_action_rows": 32102,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -3150,6 +3152,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "source_discovery_action_rows": 240,
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
       "animation_category_review_rows": 428
@@ -3331,6 +3334,203 @@
       ]
     ],
     "skipped_without_templates": 0,
+    "auto_apply_enabled": false
+  },
+  "source_discovery_action_queue": {
+    "public_report": "data/source_discovery_action_queue_public.json",
+    "actionable_source_rows": 642,
+    "queued_source_rows": 240,
+    "action_batch_count": 33,
+    "batch_size": 20,
+    "max_rows": 240,
+    "by_review_state": [
+      [
+        "official_search_review_required",
+        630
+      ],
+      [
+        "licensed_retailer_review_required",
+        12
+      ]
+    ],
+    "by_workflow": [
+      [
+        "official_search_url_available",
+        630
+      ],
+      [
+        "licensed_retailer_search_review",
+        12
+      ]
+    ],
+    "by_source_store": [
+      [
+        "애니메이트",
+        148
+      ],
+      [
+        "엔스카이",
+        142
+      ],
+      [
+        "굿스마일컴퍼니",
+        57
+      ],
+      [
+        "코토부키야",
+        44
+      ],
+      [
+        "Movic",
+        36
+      ],
+      [
+        "점프 캐릭터즈 스토어",
+        23
+      ],
+      [
+        "FuRyu",
+        21
+      ],
+      [
+        "Taito",
+        15
+      ],
+      [
+        "무기와라스토어",
+        15
+      ],
+      [
+        "치이카와 중국 팝업스토어",
+        15
+      ],
+      [
+        "귀멸의 칼날 공식",
+        13
+      ],
+      [
+        "AmiAmi",
+        12
+      ],
+      [
+        "Cospa",
+        11
+      ],
+      [
+        "반다이",
+        11
+      ],
+      [
+        "메가하우스",
+        9
+      ],
+      [
+        "MINISO 중국",
+        7
+      ],
+      [
+        "산리오",
+        6
+      ],
+      [
+        "JYP SHOP",
+        5
+      ],
+      [
+        "Re-ment",
+        5
+      ],
+      [
+        "치이카와샵 용산",
+        5
+      ],
+      [
+        "MINISO",
+        4
+      ],
+      [
+        "가샤폰",
+        4
+      ],
+      [
+        "디즈니 스토어",
+        4
+      ],
+      [
+        "이세계아이돌 공식 굿즈",
+        4
+      ],
+      [
+        "Bandai Premium",
+        3
+      ],
+      [
+        "SM STORE",
+        3
+      ],
+      [
+        "카도카와",
+        3
+      ],
+      [
+        "Phat! Company",
+        2
+      ],
+      [
+        "YG SELECT",
+        2
+      ],
+      [
+        "롯데웰푸드",
+        2
+      ],
+      [
+        "이세계아이돌 팝업스토어",
+        2
+      ],
+      [
+        "ALTER",
+        1
+      ],
+      [
+        "CUBE STORE",
+        1
+      ],
+      [
+        "Hobby Max International",
+        1
+      ],
+      [
+        "Hololive Production Official Shop",
+        1
+      ],
+      [
+        "IST STORE",
+        1
+      ],
+      [
+        "KQ FELLAZ",
+        1
+      ],
+      [
+        "SEGA",
+        1
+      ],
+      [
+        "STARSHIP STORE",
+        1
+      ],
+      [
+        "점프 숍",
+        1
+      ]
+    ],
+    "excluded_review_state_rows": [
+      [
+        "manual_official_research_required",
+        5
+      ]
+    ],
     "auto_apply_enabled": false
   }
 }

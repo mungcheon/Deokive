@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:45:37Z",
+  "generated_at": "2026-07-21T22:50:20Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -31,6 +31,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "source_discovery_action_rows": 240,
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
       "animation_category_review_rows": 428
@@ -108,6 +109,14 @@
       "open_rows": 647,
       "primary_report": "data/source_discovery_review_batches_public.json",
       "next_step": "work_source_discovery_batches_by_store",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "source_discovery_action_queue",
+      "status": "manual_review",
+      "open_rows": 240,
+      "primary_report": "data/source_discovery_action_queue_public.json",
+      "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "auto_apply_enabled": false
     },
     {
@@ -786,9 +795,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 12,
+      "action_count": 13,
       "blocked_action_count": 1,
-      "manual_review_action_count": 10,
+      "manual_review_action_count": 11,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -900,6 +909,15 @@
       "batch_count": 56,
       "source_discovery_rows": 647,
       "recommended_next_action": "Assign full source discovery batches by store/workflow before image imports."
+    },
+    {
+      "priority": 22,
+      "workstream": "source_discovery_action_queue",
+      "public_report": "data/source_discovery_action_queue_public.json",
+      "actionable_source_rows": 642,
+      "queued_source_rows": 240,
+      "action_batch_count": 33,
+      "recommended_next_action": "Work official-search source URL batches before broad manual source research."
     },
     {
       "priority": 30,
