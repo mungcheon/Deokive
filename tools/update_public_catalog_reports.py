@@ -489,6 +489,7 @@ def build_image_enrichment_batches_public(
 
 def build_operations_public(
     generated_at: str,
+    items: list[dict[str, Any]],
     rows: int,
     missing: dict[str, int],
     cov: dict[str, float],
@@ -505,6 +506,51 @@ def build_operations_public(
     animation_summary = animation_categories["summary"]
     kuji_summary = ichiban_kuji_history["summary"]
     metadata_summary = metadata_backlog["summary"]
+
+    priority_fields = ["source_url", "image_url", "release_date", "official_price_jpy", "barcode"]
+    store_totals: dict[str, dict[str, Any]] = defaultdict(lambda: {"rows": 0, **{field: 0 for field in priority_fields}})
+    for item in items:
+        store = str(item.get("source_store") or "unknown")
+        store_totals[store]["rows"] += 1
+        for field in priority_fields:
+            if not present(item.get(field)):
+                store_totals[store][field] += 1
+
+    def store_first_action(row: dict[str, Any]) -> str:
+        if row["missing_source_url"] or row["missing_image_url"]:
+            return "source_and_image_enrichment"
+        if row["missing_release_date"]:
+            return "release_date_enrichment"
+        if row["missing_price_jpy"]:
+            return "price_enrichment"
+        if row["missing_barcode"]:
+            return "barcode_review"
+        return "monitor"
+
+    store_priority_matrix = []
+    for store, totals in store_totals.items():
+        score = (
+            totals["source_url"] * 5
+            + totals["image_url"] * 4
+            + totals["release_date"] * 2
+            + totals["official_price_jpy"]
+            + min(totals["barcode"], 200) * 0.5
+        )
+        if score <= 0:
+            continue
+        row = {
+            "source_store": store,
+            "priority_score": round(score, 1),
+            "rows": totals["rows"],
+            "missing_source_url": totals["source_url"],
+            "missing_image_url": totals["image_url"],
+            "missing_release_date": totals["release_date"],
+            "missing_price_jpy": totals["official_price_jpy"],
+            "missing_barcode": totals["barcode"],
+        }
+        row["recommended_first_action"] = store_first_action(row)
+        store_priority_matrix.append(row)
+    store_priority_matrix.sort(key=lambda row: (-row["priority_score"], str(row["source_store"])))
 
     quality_gates = [
         {
@@ -608,8 +654,10 @@ def build_operations_public(
                 "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
                 "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
             },
+            "top_store_priority_score": store_priority_matrix[0]["priority_score"] if store_priority_matrix else 0,
         },
         "quality_gates": quality_gates,
+        "store_priority_matrix": store_priority_matrix[:40],
         "reports": [
             {"key": "quality", "public_report": f"data/{QUALITY.name}"},
             {"key": "image_backlog", "public_report": f"data/{IMAGE_BACKLOG.name}"},
@@ -1082,6 +1130,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
     operations = build_operations_public(
         generated_at,
+        items,
         rows,
         missing,
         cov,
