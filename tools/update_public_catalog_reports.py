@@ -19,6 +19,7 @@ GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
+SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 
 PUBLIC_FIELDS = [
     "catalog_index",
@@ -192,6 +193,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["generic_source_cleanup_queue"] = copy_report_summary(GENERIC_SOURCE, "generic_source")
         if SOURCE_DETAIL.exists():
             target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
+        if SOURCE_DISCOVERY.exists():
+            target["source_discovery_queue"] = copy_report_summary(SOURCE_DISCOVERY, "source_discovery")
 
     public_files = [
         PUBLIC_CATALOG,
@@ -203,6 +206,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         REQUESTED,
         GENERIC_SOURCE,
         SOURCE_DETAIL,
+        SOURCE_DISCOVERY,
     ]
     findings = validate_public_files([path for path in public_files if path.exists()])
     if findings:
