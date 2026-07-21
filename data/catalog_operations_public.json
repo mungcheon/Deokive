@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T19:12:47Z",
+  "generated_at": "2026-07-21T19:15:16Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -549,9 +549,10 @@
       "priority": 10,
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "ready_rows": 73,
+      "ready_rows": 23,
+      "generic_source_url_rows": 50,
       "blocked_rows": 642,
-      "recommended_next_action": "Process source_url-ready image rows before broad web search."
+      "recommended_next_action": "Process exact source_url-ready image rows first; replace generic storefront URLs before image import."
     },
     {
       "priority": 20,

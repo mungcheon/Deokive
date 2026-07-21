@@ -81,6 +81,12 @@ OFFICIAL_SEARCH_TEMPLATES = {
 }
 
 LICENSED_RETAILER_STORES = {"AmiAmi"}
+GENERIC_STOREFRONT_URLS = {
+    "https://fanding.kr/@stellive/shop",
+    "https://shop.weverse.io/home",
+    "https://www.pokemoncenter-online.com",
+    "https://www.pokemoncenter-online.com/",
+}
 DISCOVERY_PRIORITY = {
     "official_search_url_available": 10,
     "licensed_retailer_search_review": 20,
@@ -414,6 +420,8 @@ def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: in
 
 def image_workflow(item: dict[str, Any]) -> str:
     if present(item.get("source_url")):
+        if normalize_url_key(item.get("source_url")) in {normalize_url_key(url) for url in GENERIC_STOREFRONT_URLS}:
+            return "replace_generic_source_then_extract_image"
         return "extract_from_existing_source_url"
     if str(item.get("source_store") or "") in OFFICIAL_SEARCH_TEMPLATES:
         return "find_source_then_extract_image"
@@ -430,6 +438,7 @@ def build_image_enrichment_batches_public(
 
     workflow_priority = {
         "extract_from_existing_source_url": 10,
+        "replace_generic_source_then_extract_image": 15,
         "find_source_then_extract_image": 20,
         "manual_image_research": 40,
     }
@@ -447,6 +456,7 @@ def build_image_enrichment_batches_public(
                 "priority": workflow_priority.get(workflow, 99),
                 "recommended_action": {
                     "extract_from_existing_source_url": "crawl verified source_url and review extracted product image",
+                    "replace_generic_source_then_extract_image": "replace generic storefront URL with exact product URL before image import",
                     "find_source_then_extract_image": "find exact official product page, then attach source_url and image_url",
                     "manual_image_research": "manual web research with source verification required",
                 }.get(workflow, "manual review required"),
@@ -473,6 +483,7 @@ def build_image_enrichment_batches_public(
         "summary": {
             "missing_image_rows": len(missing),
             "source_url_ready_rows": by_workflow.get("extract_from_existing_source_url", 0),
+            "generic_source_url_rows": by_workflow.get("replace_generic_source_then_extract_image", 0),
             "needs_source_discovery_rows": by_workflow.get("find_source_then_extract_image", 0),
             "manual_image_research_rows": by_workflow.get("manual_image_research", 0),
             "published_group_rows": len(groups),
@@ -482,6 +493,7 @@ def build_image_enrichment_batches_public(
         "instructions": [
             "Public image enrichment batches grouped by readiness and source store.",
             "Rows with source_url should be attempted first because identity evidence already exists.",
+            "Generic storefront source_url rows must be replaced with exact product URLs before image import.",
             "Rows without source_url must attach an exact source URL before image_url is imported.",
         ],
         "groups": groups,
@@ -598,8 +610,9 @@ def build_operations_public(
             "workstream": "image_url_attachment",
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
             "ready_rows": image_summary.get("source_url_ready_rows", 0),
+            "generic_source_url_rows": image_summary.get("generic_source_url_rows", 0),
             "blocked_rows": image_summary.get("needs_source_discovery_rows", 0),
-            "recommended_next_action": "Process source_url-ready image rows before broad web search.",
+            "recommended_next_action": "Process exact source_url-ready image rows first; replace generic storefront URLs before image import.",
         },
         {
             "priority": 20,
@@ -743,10 +756,18 @@ def build_agent_work_queue_public(
 
     for group in image_enrichment_batches.get("groups", [])[:12]:
         workflow = str(group.get("workflow") or "")
-        agent_id = "agent-image-existing-source" if workflow == "extract_from_existing_source_url" else "agent-source-image"
+        if workflow == "extract_from_existing_source_url":
+            agent_id = "agent-image-existing-source"
+            workstream = "image_url_attachment"
+        elif workflow == "replace_generic_source_then_extract_image":
+            agent_id = "agent-generic-source-cleanup"
+            workstream = "generic_source_url_cleanup"
+        else:
+            agent_id = "agent-source-image"
+            workstream = "image_url_attachment"
         add_batch(
             agent_id=agent_id,
-            workstream="image_url_attachment",
+            workstream=workstream,
             priority=int(group.get("priority") or 99),
             title=f"{group.get('source_store')} 이미지 보강 ({workflow})",
             public_report=IMAGE_ENRICHMENT_BATCHES,
@@ -1406,7 +1427,12 @@ def validate_report_consistency(
         findings.append("image_enrichment missing_image_rows does not match missing image_url count")
     image_workflow_total = sum(
         int(image_summary.get(key, 0))
-        for key in ("source_url_ready_rows", "needs_source_discovery_rows", "manual_image_research_rows")
+        for key in (
+            "source_url_ready_rows",
+            "generic_source_url_rows",
+            "needs_source_discovery_rows",
+            "manual_image_research_rows",
+        )
     )
     if image_workflow_total != image_summary.get("missing_image_rows"):
         findings.append("image_enrichment workflow totals do not sum to missing_image_rows")

@@ -3132,7 +3132,8 @@
   "image_enrichment_batches": {
     "public_report": "data/catalog_image_enrichment_batches_public.json",
     "missing_image_rows": 720,
-    "source_url_ready_rows": 73,
+    "source_url_ready_rows": 23,
+    "generic_source_url_rows": 50,
     "needs_source_discovery_rows": 642,
     "manual_image_research_rows": 5,
     "published_group_rows": 46,
@@ -3264,8 +3265,12 @@
         642
       ],
       [
+        "replace_generic_source_then_extract_image",
+        50
+      ],
+      [
         "extract_from_existing_source_url",
-        73
+        23
       ],
       [
         "manual_image_research",
@@ -3286,11 +3291,8 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 53,
     "summed_batch_rows": 18032,
+    "top_next_batch_count": 10,
     "by_workstream": [
-      [
-        "image_url_attachment",
-        12
-      ],
       [
         "source_url_discovery",
         10
@@ -3304,8 +3306,16 @@
         10
       ],
       [
+        "image_url_attachment",
+        9
+      ],
+      [
         "ichiban_kuji_price",
         8
+      ],
+      [
+        "generic_source_url_cleanup",
+        3
       ],
       [
         "ichiban_kuji_release_date",
@@ -3338,8 +3348,12 @@
         8
       ],
       [
+        "agent-generic-source-cleanup",
+        3
+      ],
+      [
         "agent-image-existing-source",
-        4
+        1
       ],
       [
         "agent-animation-taxonomy",

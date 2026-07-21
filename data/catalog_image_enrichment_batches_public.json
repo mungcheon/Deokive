@@ -2,7 +2,8 @@
   "schema_version": 1,
   "summary": {
     "missing_image_rows": 720,
-    "source_url_ready_rows": 73,
+    "source_url_ready_rows": 23,
+    "generic_source_url_rows": 50,
     "needs_source_discovery_rows": 642,
     "manual_image_research_rows": 5,
     "published_group_rows": 46,
@@ -134,8 +135,12 @@
         642
       ],
       [
+        "replace_generic_source_then_extract_image",
+        50
+      ],
+      [
         "extract_from_existing_source_url",
-        73
+        23
       ],
       [
         "manual_image_research",
@@ -146,109 +151,10 @@
   "instructions": [
     "Public image enrichment batches grouped by readiness and source store.",
     "Rows with source_url should be attempted first because identity evidence already exists.",
+    "Generic storefront source_url rows must be replaced with exact product URLs before image import.",
     "Rows without source_url must attach an exact source URL before image_url is imported."
   ],
   "groups": [
-    {
-      "workflow": "extract_from_existing_source_url",
-      "source_store": "Stellive Store",
-      "missing_image_rows": 45,
-      "priority": 10,
-      "recommended_action": "crawl verified source_url and review extracted product image",
-      "official_search_available": true,
-      "sample_items": [
-        {
-          "catalog_index": 2325,
-          "name_ko": "스텔라이브 1주년 뱃지 세트",
-          "name_ja": null,
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8"
-        },
-        {
-          "catalog_index": 2352,
-          "name_ko": "강지 마스코트 인형",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95"
-        },
-        {
-          "catalog_index": 2355,
-          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
-          "name_ja": null,
-          "series_name": null,
-          "category": "액세서리",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4"
-        },
-        {
-          "catalog_index": 2356,
-          "name_ko": "아이리 칸나 마스코트 인형",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95"
-        },
-        {
-          "catalog_index": 2357,
-          "name_ko": "아이리 칸나 키링 세트",
-          "name_ja": null,
-          "series_name": null,
-          "category": "액세서리",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8"
-        },
-        {
-          "catalog_index": 2361,
-          "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
-          "name_ja": null,
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C"
-        },
-        {
-          "catalog_index": 2362,
-          "name_ko": "쿠루미 노아 생일 기념 굿즈",
-          "name_ja": null,
-          "series_name": null,
-          "category": "액세서리",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88"
-        },
-        {
-          "catalog_index": 2363,
-          "name_ko": "쿠루미 노아 마스코트 인형",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95"
-        },
-        {
-          "catalog_index": 2372,
-          "name_ko": "하나코 코코나 마스코트 인형",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95"
-        },
-        {
-          "catalog_index": 2373,
-          "name_ko": "비비 데뷔 기념 아크릴 스탠드",
-          "name_ja": null,
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_url": "https://fanding.kr/@stellive/shop",
-          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C"
-        }
-      ]
-    },
     {
       "workflow": "extract_from_existing_source_url",
       "source_store": "ご当地ちいかわ 공식(API)",
@@ -350,11 +256,111 @@
       ]
     },
     {
-      "workflow": "extract_from_existing_source_url",
+      "workflow": "replace_generic_source_then_extract_image",
+      "source_store": "Stellive Store",
+      "missing_image_rows": 45,
+      "priority": 15,
+      "recommended_action": "replace generic storefront URL with exact product URL before image import",
+      "official_search_available": true,
+      "sample_items": [
+        {
+          "catalog_index": 2325,
+          "name_ko": "스텔라이브 1주년 뱃지 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8"
+        },
+        {
+          "catalog_index": 2352,
+          "name_ko": "강지 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95"
+        },
+        {
+          "catalog_index": 2355,
+          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4"
+        },
+        {
+          "catalog_index": 2356,
+          "name_ko": "아이리 칸나 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95"
+        },
+        {
+          "catalog_index": 2357,
+          "name_ko": "아이리 칸나 키링 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8"
+        },
+        {
+          "catalog_index": 2361,
+          "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C"
+        },
+        {
+          "catalog_index": 2362,
+          "name_ko": "쿠루미 노아 생일 기념 굿즈",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88"
+        },
+        {
+          "catalog_index": 2363,
+          "name_ko": "쿠루미 노아 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95"
+        },
+        {
+          "catalog_index": 2372,
+          "name_ko": "하나코 코코나 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95"
+        },
+        {
+          "catalog_index": 2373,
+          "name_ko": "비비 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C"
+        }
+      ]
+    },
+    {
+      "workflow": "replace_generic_source_then_extract_image",
       "source_store": "Weverse Shop",
       "missing_image_rows": 3,
-      "priority": 10,
-      "recommended_action": "crawl verified source_url and review extracted product image",
+      "priority": 15,
+      "recommended_action": "replace generic storefront URL with exact product URL before image import",
       "official_search_available": false,
       "sample_items": [
         {
@@ -387,11 +393,11 @@
       ]
     },
     {
-      "workflow": "extract_from_existing_source_url",
+      "workflow": "replace_generic_source_then_extract_image",
       "source_store": "포켓몬 센터",
       "missing_image_rows": 2,
-      "priority": 10,
-      "recommended_action": "crawl verified source_url and review extracted product image",
+      "priority": 15,
+      "recommended_action": "replace generic storefront URL with exact product URL before image import",
       "official_search_available": false,
       "sample_items": [
         {
