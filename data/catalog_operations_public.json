@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:13:56Z",
+  "generated_at": "2026-07-21T20:24:26Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -607,6 +607,10 @@
       "public_report": "data/danganronpa_prize_probe_public.json"
     },
     {
+      "key": "danganronpa_source_detail_probe",
+      "public_report": "data/danganronpa_source_detail_probe_public.json"
+    },
+    {
       "key": "image_enrichment_batches",
       "public_report": "data/catalog_image_enrichment_batches_public.json"
     },
@@ -676,6 +680,15 @@
     },
     {
       "priority": 18,
+      "workstream": "danganronpa_source_detail_probe",
+      "public_report": "data/danganronpa_source_detail_probe_public.json",
+      "target_rows": 34,
+      "exact_candidate_rows": 0,
+      "fetch_failed_rows": 1,
+      "recommended_next_action": "Use the store-by-store probe misses to drive manual official Danganronpa source lookup."
+    },
+    {
+      "priority": 19,
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "ready_rows": 0,
