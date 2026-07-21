@@ -2788,5 +2788,29 @@
       "no_relevant_candidate_rows": 7
     },
     "auto_apply_enabled": false
+  },
+  "ichiban_kuji_metadata_probe": {
+    "public_report": "data/ichiban_kuji_metadata_probe_public.json",
+    "urls_with_missing_metadata": 44,
+    "audited_urls": 44,
+    "failure_count": 0,
+    "rows_missing_release_date": 16,
+    "rows_missing_official_price_jpy": 365,
+    "safe_release_url_count": 0,
+    "safe_price_url_count": 0,
+    "safe_release_row_count": 0,
+    "safe_price_row_count": 0,
+    "ambiguous_page_count": 44,
+    "blocked_reasons": [
+      [
+        "no labeled yen price in expected product-info area",
+        365
+      ],
+      [
+        "no exact release-date label; unlabeled/double-chance dates are unsafe",
+        16
+      ]
+    ],
+    "auto_apply_enabled": false
   }
 }

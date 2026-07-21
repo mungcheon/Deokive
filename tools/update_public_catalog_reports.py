@@ -22,6 +22,7 @@ DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
+ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
@@ -1131,6 +1132,10 @@ def build_operations_public(
     dedupe_summary = deduplication["summary"]
     animation_summary = animation_categories["summary"]
     kuji_summary = ichiban_kuji_history["summary"]
+    ichiban_kuji_metadata_probe = (
+        load_json(ICHIIBAN_KUJI_METADATA_PROBE, {}) if ICHIIBAN_KUJI_METADATA_PROBE.exists() else {}
+    )
+    ichiban_kuji_metadata_probe_summary = ichiban_kuji_metadata_probe.get("summary", {})
     metadata_summary = metadata_backlog["summary"]
     generic_patch_summary = generic_source_patch_candidates["summary"]
     requested_focus_summary = requested_focus["summary"]
@@ -1325,6 +1330,16 @@ def build_operations_public(
             "recommended_next_action": "Use campaign_metadata_review_queue to verify official pages before applying dates or prices.",
         },
         {
+            "priority": 51,
+            "workstream": "ichiban_kuji_metadata_probe",
+            "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}",
+            "audited_urls": ichiban_kuji_metadata_probe_summary.get("audited_urls", 0),
+            "safe_release_row_count": ichiban_kuji_metadata_probe_summary.get("safe_release_row_count", 0),
+            "safe_price_row_count": ichiban_kuji_metadata_probe_summary.get("safe_price_row_count", 0),
+            "blocked_reasons": ichiban_kuji_metadata_probe_summary.get("blocked_reasons", []),
+            "recommended_next_action": "Keep Ichiban Kuji date/price gaps blocked unless a labeled official source is found.",
+        } if ichiban_kuji_metadata_probe_summary else None,
+        {
             "priority": 60,
             "workstream": "animation_folder_visuals",
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
@@ -1392,6 +1407,18 @@ def build_operations_public(
             "auto_apply_enabled": False,
         },
         {
+            "workstream": "ichiban_kuji_metadata_probe",
+            "status": "blocked" if ichiban_kuji_metadata_probe_summary and not (
+                ichiban_kuji_metadata_probe_summary.get("safe_release_row_count", 0)
+                or ichiban_kuji_metadata_probe_summary.get("safe_price_row_count", 0)
+            ) else "open",
+            "open_rows": ichiban_kuji_metadata_probe_summary.get("rows_missing_release_date", 0)
+            + ichiban_kuji_metadata_probe_summary.get("rows_missing_official_price_jpy", 0),
+            "primary_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}",
+            "next_step": "find_labeled_official_ichiban_metadata_evidence",
+            "auto_apply_enabled": ichiban_kuji_metadata_probe_summary.get("auto_apply_enabled", False),
+        } if ichiban_kuji_metadata_probe_summary else None,
+        {
             "workstream": "animation_taxonomy",
             "status": "manual_review" if animation_summary.get("unknown_category_rows", 0) else "clear",
             "open_rows": animation_summary.get("unknown_category_rows", 0),
@@ -1454,6 +1481,7 @@ def build_operations_public(
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
+            {"key": "ichiban_kuji_metadata_probe", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}"},
             {"key": "agent_work_queue", "public_report": f"data/{AGENT_WORK_QUEUE.name}"},
         ],
         "next_actions": next_actions,
@@ -3073,6 +3101,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
             **ichiban_kuji_history["summary"],
         }
+        if ICHIIBAN_KUJI_METADATA_PROBE.exists():
+            target["ichiban_kuji_metadata_probe"] = copy_report_summary(
+                ICHIIBAN_KUJI_METADATA_PROBE, "ichiban_kuji_metadata_probe"
+            )
         target["operations"] = {
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
@@ -3109,6 +3141,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         DEDUPLICATION,
         ANIMATION_CATEGORIES,
         ICHIIBAN_KUJI_HISTORY,
+        ICHIIBAN_KUJI_METADATA_PROBE,
         GOTOUCHI,
         REQUESTED,
         REQUESTED_FOCUS,
