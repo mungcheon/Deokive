@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:54:35Z",
+  "generated_at": "2026-07-21T21:02:24Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -26,6 +26,7 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
+      "requested_focus_review_rows": 6275,
       "animation_category_review_rows": 428
     },
     "top_store_priority_score": 1832.0
@@ -69,6 +70,14 @@
       "open_rows": 5717,
       "primary_report": "data/requested_focus_enrichment_public.json",
       "next_step": "work_user_requested_focus_topics_first",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "requested_focus_review_batches",
+      "status": "manual_review",
+      "open_rows": 6275,
+      "primary_report": "data/requested_focus_review_batches_public.json",
+      "next_step": "work_requested_focus_batches_by_topic_field_store",
       "auto_apply_enabled": false
     },
     {
@@ -644,6 +653,10 @@
       "public_report": "data/requested_focus_enrichment_public.json"
     },
     {
+      "key": "requested_focus_review_batches",
+      "public_report": "data/requested_focus_review_batches_public.json"
+    },
+    {
       "key": "danganronpa_missing_media",
       "public_report": "data/danganronpa_missing_media_public.json"
     },
@@ -726,6 +739,14 @@
       "open_rows": 5717,
       "topics_with_open_work": 4,
       "recommended_next_action": "Prioritize user-requested focus topics before broad catalog enrichment."
+    },
+    {
+      "priority": 11,
+      "workstream": "requested_focus_review_batches",
+      "public_report": "data/requested_focus_review_batches_public.json",
+      "batch_count": 313,
+      "review_row_count": 6275,
+      "recommended_next_action": "Work user-requested focus batches by topic, missing field, and source store."
     },
     {
       "priority": 15,
