@@ -2428,12 +2428,13 @@
     "animation_unknown_categories": 8,
     "ichiban_missing_release_date_rows": 16,
     "ichiban_missing_price_rows": 365,
-    "generic_source_patch_candidate_rows": 3
+    "generic_source_patch_candidate_rows": 3,
+    "requested_focus_open_rows": 5717
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 53,
-    "summed_batch_rows": 18032,
+    "batch_count": 57,
+    "summed_batch_rows": 23749,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2455,6 +2456,10 @@
       [
         "ichiban_kuji_price",
         8
+      ],
+      [
+        "requested_focus_enrichment",
+        4
       ],
       [
         "generic_source_url_cleanup",
@@ -2495,6 +2500,10 @@
         8
       ],
       [
+        "agent-requested-focus",
+        4
+      ],
+      [
         "agent-generic-source-cleanup",
         3
       ],
@@ -2514,7 +2523,8 @@
       "animation_unknown_categories": 8,
       "ichiban_missing_release_date_rows": 16,
       "ichiban_missing_price_rows": 365,
-      "generic_source_patch_candidate_rows": 3
+      "generic_source_patch_candidate_rows": 3,
+      "requested_focus_open_rows": 5717
     }
   },
   "generic_source_patch_candidates": {
@@ -2545,5 +2555,19 @@
         1
       ]
     ]
+  },
+  "requested_focus_enrichment": {
+    "public_report": "data/requested_focus_enrichment_public.json",
+    "topic_count": 5,
+    "total_matched_catalog_rows": 5826,
+    "total_requested_labels": 27,
+    "topics_with_open_work": 4,
+    "open_rows": 5717,
+    "missing_image_rows": 34,
+    "missing_source_url_rows": 34,
+    "missing_release_date_rows": 132,
+    "missing_official_price_jpy_rows": 398,
+    "requested_needs_review": 1,
+    "auto_apply_enabled": false
   }
 }

@@ -1,0 +1,655 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-21T20:00:45Z",
+  "scope": "requested_focus_enrichment_priority",
+  "summary": {
+    "topic_count": 5,
+    "total_matched_catalog_rows": 5826,
+    "total_requested_labels": 27,
+    "topics_with_open_work": 4,
+    "open_rows": 5717,
+    "missing_image_rows": 34,
+    "missing_source_url_rows": 34,
+    "missing_release_date_rows": 132,
+    "missing_official_price_jpy_rows": 398,
+    "requested_needs_review": 1,
+    "auto_apply_enabled": false
+  },
+  "topics": [
+    {
+      "topic_id": "requested_special_goods",
+      "label": "사용자 요청 특별 리스트",
+      "priority": 10,
+      "catalog_rows": 27,
+      "requested_labels": 27,
+      "requested_needs_review": 1,
+      "open_rows": 28,
+      "next_step": "verify_official_metadata",
+      "public_source": "data/requested_special_goods_public.json",
+      "auto_apply_enabled": false,
+      "review_reason": "Keep the user's explicit requested list visible even when every item is already present.",
+      "sample_items": [
+        {
+          "catalog_index": 2324,
+          "name_ko": "스텔라이브 단체 응원봉",
+          "name_ja": null,
+          "series_name": null,
+          "category": "응원봉",
+          "source_store": "Stellive Store",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17811,
+          "name_ko": "치이카와 치이카와 포켓 굿즈",
+          "name_ja": "ちいかわぽけっと グッズ",
+          "series_name": "치이포케 치이카와",
+          "category": "기타 굿즈",
+          "source_store": "치이카와 포켓",
+          "source_url": "https://jp.chiikawa-pocket.com/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17812,
+          "name_ko": "단간론파 쿠루미타피누이 Vol.1",
+          "name_ja": "ダンガンロンパ くるみたぴぬい Vol.1",
+          "series_name": "단간론파 쿠루미타피누이 버전1",
+          "category": "인형",
+          "source_store": "TAPIOCA online shop",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17813,
+          "name_ko": "단간론파 쿠루미타피누이 Vol.2",
+          "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
+          "series_name": "단간론파 쿠루미타피누이 버전2",
+          "category": "인형",
+          "source_store": "TAPIOCA online shop",
+          "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17814,
+          "name_ko": "헌터헌터 쿠루미타피누이",
+          "name_ja": "HUNTER×HUNTER くるみたぴぬい",
+          "series_name": "헌터헌터 타피누이",
+          "category": "인형",
+          "source_store": "TAPIOCA online shop",
+          "source_url": "https://jp.mercari.com/item/m69892974117",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17815,
+          "name_ko": "하츠네 미쿠 경품 피규어",
+          "name_ja": "初音ミク プライズ フィギュア",
+          "series_name": "하츠네미쿠 경품 피규어",
+          "category": "피규어",
+          "source_store": "Taito",
+          "source_url": "https://www.taito.co.jp/taito-prize/0452072400",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17816,
+          "name_ko": "나의 히어로 아카데미아 리멘트",
+          "name_ja": "僕のヒーローアカデミア リーメント",
+          "series_name": "나히아 리멘트",
+          "category": "피규어",
+          "source_store": "Re-ment",
+          "source_url": "https://www.re-ment.co.jp/product/r20681",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17818,
+          "name_ko": "주술회전 withCAT 네코누이",
+          "name_ja": "呪術廻戦 withCAT ぬいぐるみ",
+          "series_name": "주술회전 네코누이",
+          "category": "인형",
+          "source_store": "Movic",
+          "source_url": "https://www.movic.jp/shop/pages/withcat.aspx",
+          "official_search_url": null
+        }
+      ],
+      "requested_samples": [
+        {
+          "request_label": "모구모구 혼포 치이카와",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "치이포케 치이카와",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "단간론파 쿠루미타피누이 버전1",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "단간론파 쿠루미타피누이 버전2",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "주술회전 타피누이",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "헌터헌터 타피누이",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": false,
+          "review_note": "Official image/source evidence still needs manual review."
+        },
+        {
+          "request_label": "하츠네미쿠 경품 피규어",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "하츠네미쿠 동화시리즈 피규어",
+          "status": "already_present",
+          "existing_count": 5,
+          "has_candidate_image": true,
+          "review_note": null
+        }
+      ],
+      "missing_image_rows": 0,
+      "missing_source_url_rows": 0,
+      "missing_release_date_rows": 21,
+      "missing_official_price_jpy_rows": 20,
+      "missing_barcode_rows": 25,
+      "missing_name_ja_rows": 2
+    },
+    {
+      "topic_id": "danganronpa",
+      "label": "단간론파 굿즈",
+      "priority": 20,
+      "catalog_rows": 134,
+      "requested_labels": 4,
+      "requested_needs_review": 0,
+      "open_rows": 117,
+      "next_step": "attach_exact_source_and_image_evidence",
+      "public_source": "data/requested_special_goods_public.json",
+      "auto_apply_enabled": false,
+      "review_reason": "Requested repeatedly, including nui and Bukubu-style goods; image/source gaps remain.",
+      "sample_items": [
+        {
+          "catalog_index": 1447,
+          "name_ko": "넨도로이드 토가미 뱌쿠야",
+          "name_ja": "ねんどろいど 十神白夜",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "굿스마일컴퍼니",
+          "source_url": null,
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 1454,
+          "name_ko": "넨도로이드 모모타 카이토",
+          "name_ja": "ねんどろいど 百田解斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "굿스마일컴퍼니",
+          "source_url": null,
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 1455,
+          "name_ko": "POP UP PARADE 모노쿠마",
+          "name_ja": "POP UP PARADE モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "굿스마일컴퍼니",
+          "source_url": null,
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 1458,
+          "name_ko": "ARTFX J 나에기 마코토",
+          "name_ja": "ARTFX J 苗木誠",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "코토부키야",
+          "source_url": null,
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 1459,
+          "name_ko": "ARTFX J 키리기리 쿄코",
+          "name_ja": "ARTFX J 霧切響子",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "코토부키야",
+          "source_url": null,
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 1467,
+          "name_ko": "Desktop Cute 모노쿠마",
+          "name_ja": "デスクトップキュート モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "Taito",
+          "source_url": null,
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 1468,
+          "name_ko": "Desktop Cute 코마에다 나기토",
+          "name_ja": "デスクトップキュート 狛枝凪斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "Taito",
+          "source_url": null,
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 1469,
+          "name_ko": "Desktop Cute 사이하라 슈이치",
+          "name_ja": "デスクトップキュート 最原終一",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "Taito",
+          "source_url": null,
+          "official_search_url": null
+        }
+      ],
+      "requested_samples": [
+        {
+          "request_label": "단간론파 쿠루미타피누이 버전1",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "단간론파 쿠루미타피누이 버전2",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "단간론파 부쿠부 굿즈",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "단간론파 누이",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        }
+      ],
+      "missing_image_rows": 34,
+      "missing_source_url_rows": 34,
+      "missing_release_date_rows": 92,
+      "missing_official_price_jpy_rows": 2,
+      "missing_barcode_rows": 77,
+      "missing_name_ja_rows": 0
+    },
+    {
+      "topic_id": "ichiban_kuji",
+      "label": "이치방쿠지 굿즈",
+      "priority": 30,
+      "catalog_rows": 5546,
+      "requested_labels": 0,
+      "requested_needs_review": 0,
+      "open_rows": 5546,
+      "next_step": "verify_official_metadata",
+      "public_source": "data/catalog_public.json",
+      "auto_apply_enabled": false,
+      "review_reason": "Large historical campaign set; prize images are strong, campaign dates and prices still need review.",
+      "sample_items": [
+        {
+          "catalog_index": 1014,
+          "name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상 마리오 피규어",
+          "name_ja": null,
+          "series_name": "이치방쿠지 슈퍼마리오 with YOSHI",
+          "category": "피규어",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14193,
+          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
+          "name_ja": "A賞 虎杖悠仁ビジュアルクロス",
+          "series_name": "一番くじ 呪術廻戦 －オンライン－",
+          "category": "굿즈",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/products/jujutsu-o",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14194,
+          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - B賞 伏黒恵ビジュアルクロス",
+          "name_ja": "B賞 伏黒恵ビジュアルクロス",
+          "series_name": "一番くじ 呪術廻戦 －オンライン－",
+          "category": "굿즈",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/products/jujutsu-o",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14195,
+          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - C賞 釘崎野薔薇ビジュアルクロス",
+          "name_ja": "C賞 釘崎野薔薇ビジュアルクロス",
+          "series_name": "一番くじ 呪術廻戦 －オンライン－",
+          "category": "굿즈",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/products/jujutsu-o",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14196,
+          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - D賞 五条悟ビジュアルクロス",
+          "name_ja": "D賞 五条悟ビジュアルクロス",
+          "series_name": "一番くじ 呪術廻戦 －オンライン－",
+          "category": "굿즈",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/products/jujutsu-o",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14197,
+          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - E賞 クリアボトル",
+          "name_ja": "E賞 クリアボトル",
+          "series_name": "一番くじ 呪術廻戦 －オンライン－",
+          "category": "굿즈",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/products/jujutsu-o",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14198,
+          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - F賞 アクリルスタンド",
+          "name_ja": "F賞 アクリルスタンド",
+          "series_name": "一番くじ 呪術廻戦 －オンライン－",
+          "category": "아크릴",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/products/jujutsu-o",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14199,
+          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
+          "name_ja": "G賞 アクリッツ",
+          "series_name": "一番くじ 呪術廻戦 －オンライン－",
+          "category": "굿즈",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/products/jujutsu-o",
+          "official_search_url": null
+        }
+      ],
+      "requested_samples": [],
+      "missing_image_rows": 0,
+      "missing_source_url_rows": 0,
+      "missing_release_date_rows": 16,
+      "missing_official_price_jpy_rows": 365,
+      "missing_barcode_rows": 5546,
+      "missing_name_ja_rows": 1
+    },
+    {
+      "topic_id": "maho_saba",
+      "label": "마법소녀의 마녀재판 굿즈",
+      "priority": 40,
+      "catalog_rows": 106,
+      "requested_labels": 0,
+      "requested_needs_review": 0,
+      "open_rows": 0,
+      "next_step": "monitor_coverage",
+      "public_source": "data/catalog_public.json",
+      "auto_apply_enabled": false,
+      "review_reason": "Recently requested game goods; keep Animate-imported rows grouped for spot checks.",
+      "sample_items": [
+        {
+          "catalog_index": 17934,
+          "name_ko": "마법소녀의 마녀재판 인형 (니카이도 히로)",
+          "name_ja": "魔法少女ノ魔女裁判 ぬいぴ～す 二階堂 ヒロ",
+          "series_name": "마법소녀의 마녀재판",
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E3%83%8E%E9%AD%94%E5%A5%B3%E8%A3%81%E5%88%A4+%E3%81%AC%E3%81%84%E3%81%B4%EF%BD%9E%E3%81%99+%E4%BA%8C%E9%9A%8E%E5%A0%82+%E3%83%92%E3%83%AD/pd/3481597/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17935,
+          "name_ko": "마법소녀의 마녀재판 인형 (나츠메 안안)",
+          "name_ja": "魔法少女ノ魔女裁判 ぬいぐるみ 夏目アンアン",
+          "series_name": "마법소녀의 마녀재판",
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E3%83%8E%E9%AD%94%E5%A5%B3%E8%A3%81%E5%88%A4+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%E5%A4%8F%E7%9B%AE%E3%82%A2%E3%83%B3%E3%82%A2%E3%83%B3/pd/3490793/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17936,
+          "name_ko": "마법소녀의 마녀재판 인형 (사쿠라바 에마)",
+          "name_ja": "魔法少女ノ魔女裁判 ぬいぐるみ 桜羽エマ",
+          "series_name": "마법소녀의 마녀재판",
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E3%83%8E%E9%AD%94%E5%A5%B3%E8%A3%81%E5%88%A4+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%E6%A1%9C%E7%BE%BD%E3%82%A8%E3%83%9E/pd/3431963/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17937,
+          "name_ko": "마법소녀의 마녀재판 인형 (토오노 한나)",
+          "name_ja": "魔法少女ノ魔女裁判 ぬいぐるみ 遠野ハンナ",
+          "series_name": "마법소녀의 마녀재판",
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E3%83%8E%E9%AD%94%E5%A5%B3%E8%A3%81%E5%88%A4+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%E9%81%A0%E9%87%8E%E3%83%8F%E3%83%B3%E3%83%8A/pd/3475044/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17938,
+          "name_ko": "마법소녀의 마녀재판 アクリルぷちスタンド02/ダークガーリーファッションver. ブラインド(全13種)(グラフアートイラスト)",
+          "name_ja": "魔法少女ノ魔女裁判 アクリルぷちスタンド02/ダークガーリーファッションver. ブラインド(全13種)(グラフアートイラスト)",
+          "series_name": "마법소녀의 마녀재판",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E3%83%8E%E9%AD%94%E5%A5%B3%E8%A3%81%E5%88%A4+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%81%B7%E3%81%A1%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%8902/%E3%83%80%E3%83%BC%E3%82%AF%E3%82%AC%E3%83%BC%E3%83%AA%E3%83%BC%E3%83%95%E3%82%A1%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3ver.+%E3%83%96%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%89%28%E5%85%A813%E7%A8%AE%29%28%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A2%E3%83%BC%E3%83%88%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%29/pd/3506854/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17939,
+          "name_ko": "마법소녀의 마녀재판 缶バッジ04/ダークガーリーファッションver. ブラインド(全13種)(グラフアートイラスト)",
+          "name_ja": "魔法少女ノ魔女裁判 缶バッジ04/ダークガーリーファッションver. ブラインド(全13種)(グラフアートイラスト)",
+          "series_name": "마법소녀의 마녀재판",
+          "category": "캔뱃지",
+          "source_store": "애니메이트",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E3%83%8E%E9%AD%94%E5%A5%B3%E8%A3%81%E5%88%A4+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B804/%E3%83%80%E3%83%BC%E3%82%AF%E3%82%AC%E3%83%BC%E3%83%AA%E3%83%BC%E3%83%95%E3%82%A1%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3ver.+%E3%83%96%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%89%28%E5%85%A813%E7%A8%AE%29%28%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A2%E3%83%BC%E3%83%88%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%29/pd/3506853/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17940,
+          "name_ko": "마법소녀의 마녀재판 아크릴 스탠드 (쿠로베 나노카)",
+          "name_ja": "魔法少女ノ魔女裁判 アクリルスタンド19/黒部ナノカ ダークガーリーファッションver.(描き下ろしイラスト)",
+          "series_name": "마법소녀의 마녀재판",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E3%83%8E%E9%AD%94%E5%A5%B3%E8%A3%81%E5%88%A4+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%8919/%E9%BB%92%E9%83%A8%E3%83%8A%E3%83%8E%E3%82%AB+%E3%83%80%E3%83%BC%E3%82%AF%E3%82%AC%E3%83%BC%E3%83%AA%E3%83%BC%E3%83%95%E3%82%A1%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3ver.%28%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%29/pd/3506852/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17941,
+          "name_ko": "마법소녀의 마녀재판 아크릴 스탠드 (나츠메 안안)",
+          "name_ja": "魔法少女ノ魔女裁判 アクリルスタンド18/夏目アンアン ダークガーリーファッションver.(描き下ろしイラスト)",
+          "series_name": "마법소녀의 마녀재판",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3%E3%83%8E%E9%AD%94%E5%A5%B3%E8%A3%81%E5%88%A4+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%8918/%E5%A4%8F%E7%9B%AE%E3%82%A2%E3%83%B3%E3%82%A2%E3%83%B3+%E3%83%80%E3%83%BC%E3%82%AF%E3%82%AC%E3%83%BC%E3%83%AA%E3%83%BC%E3%83%95%E3%82%A1%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3ver.%28%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%29/pd/3506851/",
+          "official_search_url": null
+        }
+      ],
+      "requested_samples": [],
+      "missing_image_rows": 0,
+      "missing_source_url_rows": 0,
+      "missing_release_date_rows": 0,
+      "missing_official_price_jpy_rows": 0,
+      "missing_barcode_rows": 0,
+      "missing_name_ja_rows": 0
+    },
+    {
+      "topic_id": "bokubu_style",
+      "label": "부쿠부 / 팝팀애픽 그림체 굿즈",
+      "priority": 50,
+      "catalog_rows": 26,
+      "requested_labels": 4,
+      "requested_needs_review": 0,
+      "open_rows": 26,
+      "next_step": "verify_official_metadata",
+      "public_source": "data/requested_special_goods_public.json",
+      "auto_apply_enabled": false,
+      "review_reason": "User asked for Pop Team Epic/Bukubu-style goods across Danganronpa, Gintama, Frieren, and others.",
+      "sample_items": [
+        {
+          "catalog_index": 17926,
+          "name_ko": "팝팀애픽 부쿠부 그림체 굿즈",
+          "name_ja": "ポプテピピック 大川ぶくぶ 絵柄 グッズ",
+          "series_name": "팝팀애픽 부쿠부 그림체 굿즈",
+          "category": "기타 굿즈",
+          "source_store": "검색 추가",
+          "source_url": "https://www.geestore.com/event/id/13995",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17927,
+          "name_ko": "장송의 프리렌 부쿠부 굿즈",
+          "name_ja": "葬送のフリーレン 大川ぶくぶ グッズ",
+          "series_name": "프리렌 부쿠부 굿즈",
+          "category": "기타 굿즈",
+          "source_store": "검색 추가",
+          "source_url": "https://prtimes.jp/main/html/rd/p/000000258.000066407.html",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17848,
+          "name_ko": "하츠네 미쿠 × 오오카와 부쿠부 Future Sounds 굿즈",
+          "name_ja": "初音ミク×大川ぶくぶ Future Sounds グッズ",
+          "series_name": "하츠네 미쿠 × 大川ぶくぶ Future Sounds 콜라보",
+          "category": "기타 굿즈",
+          "source_store": "Piapro / Cocollabo",
+          "source_url": "https://blog.piapro.net/2020/11/c2011051-1.html",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17851,
+          "name_ko": "몬스터헌터 와일즈 × 오오카와 부쿠부 콜라보 굿즈",
+          "name_ja": "モンスターハンターワイルズ×大川ぶくぶ グッズ",
+          "series_name": "몬스터헌터 와일즈 × 大川ぶくぶ 콜라보",
+          "category": "기타 굿즈",
+          "source_store": "PR TIMES / empty",
+          "source_url": "https://prtimes.jp/main/html/rd/p/000000033.000076366.html",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17852,
+          "name_ko": "사일런트 힐 f × 오오카와 부쿠부 콜라보 굿즈",
+          "name_ja": "SILENT HILL f×大川ぶくぶ グッズ",
+          "series_name": "SILENT HILL f × 大川ぶくぶ 콜라보",
+          "category": "기타 굿즈",
+          "source_store": "PR TIMES / empty",
+          "source_url": "https://prtimes.jp/main/html/rd/p/000000034.000076366.html",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17853,
+          "name_ko": "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
+          "name_ja": "葬送のフリーレン×大川ぶくぶ グッズ",
+          "series_name": "장송의 프리렌 × 大川ぶくぶ 콜라보",
+          "category": "기타 굿즈",
+          "source_store": "EDITH",
+          "source_url": "https://prtimes.jp/main/html/rd/p/000000258.000066407.html",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17854,
+          "name_ko": "킹 오브 프리즘 × 오오카와 부쿠부 팝업 굿즈",
+          "name_ja": "KING OF PRISM×大川ぶくぶ POP UP SHOP グッズ",
+          "series_name": "KING OF PRISM × 大川ぶくぶ POP UP SHOP",
+          "category": "기타 굿즈",
+          "source_store": "AMNIBUS STORE",
+          "source_url": "https://store.amnibus.com/kinpri-magnetbyshibuya109-bkub/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 17857,
+          "name_ko": "3년Z조 긴파치 선생 × 오오카와 부쿠부 누이구루미 마스코트",
+          "name_ja": "3年Z組銀八先生×大川ぶくぶ 青春☆ぬいぐるみマスコット",
+          "series_name": "3年Z組銀八先生 × 大川ぶくぶ 青春☆ 콜라보",
+          "category": "인형",
+          "source_store": "메가하우스",
+          "source_url": "https://hobby.dengeki.com/news/2793004/",
+          "official_search_url": null
+        }
+      ],
+      "requested_samples": [
+        {
+          "request_label": "팝팀애픽 부쿠부 그림체 굿즈",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "은혼 부쿠부 굿즈",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "프리렌 부쿠부 굿즈",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        },
+        {
+          "request_label": "단간론파 부쿠부 굿즈",
+          "status": "already_present",
+          "existing_count": 1,
+          "has_candidate_image": true,
+          "review_note": null
+        }
+      ],
+      "missing_image_rows": 0,
+      "missing_source_url_rows": 0,
+      "missing_release_date_rows": 3,
+      "missing_official_price_jpy_rows": 11,
+      "missing_barcode_rows": 25,
+      "missing_name_ja_rows": 0
+    }
+  ],
+  "instructions": [
+    "Use this as the user-requested focus queue before broad catalog enrichment.",
+    "Rows are public catalog references only; do not import private collection data.",
+    "Any catalog patch must be prepared from exact source evidence and reviewed manually."
+  ],
+  "automation_policy": {
+    "auto_apply_catalog_changes": false,
+    "requires_manual_review": true,
+    "private_collection_storage": "local_device_only"
+  }
+}

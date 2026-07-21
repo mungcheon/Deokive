@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T19:49:16Z",
+  "generated_at": "2026-07-21T20:00:45Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -23,7 +23,8 @@
       "animation_unknown_categories": 8,
       "ichiban_missing_release_date_rows": 16,
       "ichiban_missing_price_rows": 365,
-      "generic_source_patch_candidate_rows": 3
+      "generic_source_patch_candidate_rows": 3,
+      "requested_focus_open_rows": 5717
     },
     "top_store_priority_score": 1832.0
   },
@@ -60,6 +61,14 @@
     }
   ],
   "workstream_scorecard": [
+    {
+      "workstream": "requested_focus_enrichment",
+      "status": "open",
+      "open_rows": 5717,
+      "primary_report": "data/requested_focus_enrichment_public.json",
+      "next_step": "work_user_requested_focus_topics_first",
+      "auto_apply_enabled": false
+    },
     {
       "workstream": "source_discovery",
       "status": "open",
@@ -573,6 +582,10 @@
       "public_report": "data/generic_source_patch_candidates_public.json"
     },
     {
+      "key": "requested_focus_enrichment",
+      "public_report": "data/requested_focus_enrichment_public.json"
+    },
+    {
       "key": "image_enrichment_batches",
       "public_report": "data/catalog_image_enrichment_batches_public.json"
     },
@@ -610,6 +623,14 @@
     },
     {
       "priority": 10,
+      "workstream": "requested_focus_enrichment",
+      "public_report": "data/requested_focus_enrichment_public.json",
+      "open_rows": 5717,
+      "topics_with_open_work": 4,
+      "recommended_next_action": "Prioritize user-requested focus topics before broad catalog enrichment."
+    },
+    {
+      "priority": 15,
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "ready_rows": 0,

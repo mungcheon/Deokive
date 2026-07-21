@@ -20,6 +20,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         updated_files = {Path(path).as_posix() for path in result["updated_files"]}
         self.assertIn("data/catalog_operations_public.json", updated_files)
         self.assertIn("data/catalog_agent_work_queue_public.json", updated_files)
+        self.assertIn("data/requested_focus_enrichment_public.json", updated_files)
 
     def test_published_reports_keep_manual_review_guards(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)
@@ -41,6 +42,13 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIs(generic_summary.get("auto_apply_enabled"), False)
         self.assertEqual(generic_summary.get("candidate_rows"), len(generic_items))
 
+        requested_focus = reports.load_json(reports.REQUESTED_FOCUS)
+        focus_summary = requested_focus.get("summary", {})
+        focus_topics = requested_focus.get("topics", [])
+        self.assertIs(focus_summary.get("auto_apply_enabled"), False)
+        self.assertEqual(focus_summary.get("topic_count"), len(focus_topics))
+        self.assertTrue(all(topic.get("auto_apply_enabled") is False for topic in focus_topics))
+
     def test_published_reports_expose_home_catalog_work_blocks(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         image_batches = reports.load_json(reports.IMAGE_ENRICHMENT_BATCHES)
@@ -61,6 +69,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         scorecard_reports = {row.get("primary_report") for row in operations.get("workstream_scorecard", [])}
         next_action_reports = {row.get("public_report") for row in operations.get("next_actions", [])}
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
+        self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.AGENT_WORK_QUEUE.name}", next_action_reports)
 
 

@@ -24,6 +24,7 @@ ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
+REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 GENERIC_SOURCE_PATCH_CANDIDATES = DATA / "generic_source_patch_candidates_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
@@ -766,6 +767,203 @@ def build_image_enrichment_batches_public(
     }
 
 
+def build_requested_focus_enrichment_public(
+    items: list[dict[str, Any]],
+    requested_report: dict[str, Any],
+    generated_at: str,
+) -> dict[str, Any]:
+    topics = [
+        {
+            "topic_id": "requested_special_goods",
+            "label": "\uc0ac\uc6a9\uc790 \uc694\uccad \ud2b9\ubcc4 \ub9ac\uc2a4\ud2b8",
+            "terms": [],
+            "priority": 10,
+            "reason": "Keep the user's explicit requested list visible even when every item is already present.",
+        },
+        {
+            "topic_id": "danganronpa",
+            "label": "\ub2e8\uac04\ub860\ud30c \uad7f\uc988",
+            "terms": ["\ub2e8\uac04\ub860\ud30c", "\u30c0\u30f3\u30ac\u30f3\u30ed\u30f3\u30d1", "Danganronpa"],
+            "priority": 20,
+            "reason": "Requested repeatedly, including nui and Bukubu-style goods; image/source gaps remain.",
+        },
+        {
+            "topic_id": "ichiban_kuji",
+            "label": "\uc774\uce58\ubc29\ucfe0\uc9c0 \uad7f\uc988",
+            "terms": ["\uc774\uce58\ubc29\ucfe0\uc9c0", "\u4e00\u756a\u304f\u3058", "1kuji"],
+            "priority": 30,
+            "reason": "Large historical campaign set; prize images are strong, campaign dates and prices still need review.",
+        },
+        {
+            "topic_id": "maho_saba",
+            "label": "\ub9c8\ubc95\uc18c\ub140\uc758 \ub9c8\ub140\uc7ac\ud310 \uad7f\uc988",
+            "terms": [
+                "\ub9c8\ubc95\uc18c\ub140\uc758 \ub9c8\ub140\uc7ac\ud310",
+                "\ub9c8\ub140\uc7ac\ud310",
+                "\u9b54\u6cd5\u5c11\u5973\u30ce\u9b54\u5973\u88c1\u5224",
+                "\u9b54\u5973\u88c1\u5224",
+            ],
+            "priority": 40,
+            "reason": "Recently requested game goods; keep Animate-imported rows grouped for spot checks.",
+        },
+        {
+            "topic_id": "bokubu_style",
+            "label": "\ubd80\ucfe0\ubd80 / \ud31d\ud300\uc560\ud53d \uadf8\ub9bc\uccb4 \uad7f\uc988",
+            "terms": [
+                "\ubd80\ucfe0\ubd80",
+                "\u5927\u5ddd\u3076\u304f\u3076",
+                "\ud31d\ud300\uc560\ud53d",
+                "\u30dd\u30d7\u30c6\u30d4\u30d4\u30c3\u30af",
+                "Pop Team Epic",
+            ],
+            "priority": 50,
+            "reason": "User asked for Pop Team Epic/Bukubu-style goods across Danganronpa, Gintama, Frieren, and others.",
+        },
+    ]
+
+    requested_items = [
+        item for item in requested_report.get("items", []) if isinstance(item, dict)
+    ] if isinstance(requested_report, dict) else []
+
+    def matches_terms(item: dict[str, Any], terms: list[str]) -> bool:
+        haystack = json.dumps(item, ensure_ascii=False).lower()
+        return any(term.lower() in haystack for term in terms)
+
+    def item_issue_count(item: dict[str, Any]) -> int:
+        fields = ("image_url", "source_url", "release_date", "official_price_jpy", "barcode", "name_ja")
+        return sum(1 for field in fields if not present(item.get(field)))
+
+    topic_rows: list[dict[str, Any]] = []
+    all_matched_indexes: set[int] = set()
+    for topic in topics:
+        terms = list(topic["terms"])
+        if topic["topic_id"] == "requested_special_goods":
+            matched_requested = requested_items
+            matched_catalog: list[dict[str, Any]] = []
+            for request in requested_items:
+                source_url = str(request.get("matched_source_url") or "")
+                name_ko = str(request.get("matched_name_ko") or "")
+                for item in items:
+                    if source_url and source_url == str(item.get("source_url") or ""):
+                        matched_catalog.append(item)
+                        break
+                    if name_ko and name_ko == str(item.get("name_ko") or ""):
+                        matched_catalog.append(item)
+                        break
+        else:
+            matched_catalog = [item for item in items if matches_terms(item, terms)]
+            matched_requested = [request for request in requested_items if matches_terms(request, terms)]
+
+        deduped_catalog: list[dict[str, Any]] = []
+        seen_indexes: set[int] = set()
+        for item in matched_catalog:
+            index = int(item.get("catalog_index") or -1)
+            if index in seen_indexes:
+                continue
+            seen_indexes.add(index)
+            all_matched_indexes.add(index)
+            deduped_catalog.append(item)
+
+        missing_groups = {
+            "missing_image_rows": [item for item in deduped_catalog if not present(item.get("image_url"))],
+            "missing_source_url_rows": [item for item in deduped_catalog if not present(item.get("source_url"))],
+            "missing_release_date_rows": [item for item in deduped_catalog if not present(item.get("release_date"))],
+            "missing_official_price_jpy_rows": [
+                item for item in deduped_catalog if not present(item.get("official_price_jpy"))
+            ],
+            "missing_barcode_rows": [item for item in deduped_catalog if not present(item.get("barcode"))],
+            "missing_name_ja_rows": [item for item in deduped_catalog if not present(item.get("name_ja"))],
+        }
+        open_indexes = {
+            int(item.get("catalog_index") or -1)
+            for group in missing_groups.values()
+            for item in group
+        }
+        requested_needs_review = sum(
+            1
+            for request in matched_requested
+            if request.get("status") != "already_present"
+            or not request.get("has_candidate_image")
+            or request.get("review_note")
+        )
+
+        if missing_groups["missing_image_rows"] or missing_groups["missing_source_url_rows"]:
+            next_step = "attach_exact_source_and_image_evidence"
+        elif missing_groups["missing_release_date_rows"] or missing_groups["missing_official_price_jpy_rows"]:
+            next_step = "verify_official_metadata"
+        elif missing_groups["missing_barcode_rows"] or missing_groups["missing_name_ja_rows"]:
+            next_step = "fill_identity_metadata"
+        elif requested_needs_review:
+            next_step = "review_requested_special_item_evidence"
+        else:
+            next_step = "monitor_coverage"
+
+        ranked_samples = sorted(
+            deduped_catalog,
+            key=lambda item: (-item_issue_count(item), int(item.get("catalog_index") or 0)),
+        )
+        row = {
+            "topic_id": topic["topic_id"],
+            "label": topic["label"],
+            "priority": topic["priority"],
+            "catalog_rows": len(deduped_catalog),
+            "requested_labels": len(matched_requested),
+            "requested_needs_review": requested_needs_review,
+            "open_rows": len(open_indexes) + requested_needs_review,
+            "next_step": next_step,
+            "public_source": f"data/{REQUESTED.name}" if matched_requested else f"data/{PUBLIC_CATALOG.name}",
+            "auto_apply_enabled": False,
+            "review_reason": topic["reason"],
+            "sample_items": [compact_sample(item) for item in ranked_samples[:8]],
+            "requested_samples": [
+                {
+                    "request_label": request.get("request_label"),
+                    "status": request.get("status"),
+                    "existing_count": request.get("existing_count"),
+                    "has_candidate_image": request.get("has_candidate_image"),
+                    "review_note": request.get("review_note"),
+                }
+                for request in matched_requested[:8]
+            ],
+        }
+        row.update({key: len(value) for key, value in missing_groups.items()})
+        topic_rows.append(row)
+
+    topic_rows.sort(key=lambda row: (int(row.get("priority") or 999), -int(row.get("open_rows") or 0), row["topic_id"]))
+    summary = {
+        "topic_count": len(topic_rows),
+        "total_matched_catalog_rows": len(all_matched_indexes),
+        "total_requested_labels": len(requested_items),
+        "topics_with_open_work": sum(1 for row in topic_rows if int(row.get("open_rows") or 0) > 0),
+        "open_rows": sum(int(row.get("open_rows") or 0) for row in topic_rows),
+        "missing_image_rows": sum(int(row.get("missing_image_rows") or 0) for row in topic_rows),
+        "missing_source_url_rows": sum(int(row.get("missing_source_url_rows") or 0) for row in topic_rows),
+        "missing_release_date_rows": sum(int(row.get("missing_release_date_rows") or 0) for row in topic_rows),
+        "missing_official_price_jpy_rows": sum(
+            int(row.get("missing_official_price_jpy_rows") or 0) for row in topic_rows
+        ),
+        "requested_needs_review": sum(int(row.get("requested_needs_review") or 0) for row in topic_rows),
+        "auto_apply_enabled": False,
+    }
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "scope": "requested_focus_enrichment_priority",
+        "summary": summary,
+        "topics": topic_rows,
+        "instructions": [
+            "Use this as the user-requested focus queue before broad catalog enrichment.",
+            "Rows are public catalog references only; do not import private collection data.",
+            "Any catalog patch must be prepared from exact source evidence and reviewed manually.",
+        ],
+        "automation_policy": {
+            "auto_apply_catalog_changes": False,
+            "requires_manual_review": True,
+            "private_collection_storage": "local_device_only",
+        },
+    }
+
+
 def build_operations_public(
     generated_at: str,
     items: list[dict[str, Any]],
@@ -779,6 +977,7 @@ def build_operations_public(
     animation_categories: dict[str, Any],
     ichiban_kuji_history: dict[str, Any],
     generic_source_patch_candidates: dict[str, Any],
+    requested_focus: dict[str, Any],
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     image_summary = image_enrichment_batches["summary"]
@@ -787,6 +986,7 @@ def build_operations_public(
     kuji_summary = ichiban_kuji_history["summary"]
     metadata_summary = metadata_backlog["summary"]
     generic_patch_summary = generic_source_patch_candidates["summary"]
+    requested_focus_summary = requested_focus["summary"]
 
     priority_fields = ["source_url", "image_url", "release_date", "official_price_jpy", "barcode"]
     store_totals: dict[str, dict[str, Any]] = defaultdict(lambda: {"rows": 0, **{field: 0 for field in priority_fields}})
@@ -875,6 +1075,14 @@ def build_operations_public(
         },
         {
             "priority": 10,
+            "workstream": "requested_focus_enrichment",
+            "public_report": f"data/{REQUESTED_FOCUS.name}",
+            "open_rows": requested_focus_summary.get("open_rows", 0),
+            "topics_with_open_work": requested_focus_summary.get("topics_with_open_work", 0),
+            "recommended_next_action": "Prioritize user-requested focus topics before broad catalog enrichment.",
+        },
+        {
+            "priority": 15,
             "workstream": "image_url_attachment",
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
             "ready_rows": image_summary.get("source_url_ready_rows", 0),
@@ -933,6 +1141,14 @@ def build_operations_public(
         },
     ]
     workstream_scorecard = [
+        {
+            "workstream": "requested_focus_enrichment",
+            "status": "open" if requested_focus_summary.get("open_rows", 0) else "clear",
+            "open_rows": requested_focus_summary.get("open_rows", 0),
+            "primary_report": f"data/{REQUESTED_FOCUS.name}",
+            "next_step": "work_user_requested_focus_topics_first",
+            "auto_apply_enabled": requested_focus_summary.get("auto_apply_enabled", False),
+        },
         {
             "workstream": "source_discovery",
             "status": "open" if source_summary.get("source_discovery_rows", 0) else "clear",
@@ -1013,6 +1229,7 @@ def build_operations_public(
                 "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
                 "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
                 "generic_source_patch_candidate_rows": generic_patch_summary.get("candidate_rows", 0),
+                "requested_focus_open_rows": requested_focus_summary.get("open_rows", 0),
             },
             "top_store_priority_score": store_priority_matrix[0]["priority_score"] if store_priority_matrix else 0,
         },
@@ -1023,6 +1240,7 @@ def build_operations_public(
             {"key": "quality", "public_report": f"data/{QUALITY.name}"},
             {"key": "image_backlog", "public_report": f"data/{IMAGE_BACKLOG.name}"},
             {"key": "generic_source_patch_candidates", "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}"},
+            {"key": "requested_focus_enrichment", "public_report": f"data/{REQUESTED_FOCUS.name}"},
             {"key": "image_enrichment_batches", "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}"},
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
@@ -1064,6 +1282,7 @@ def build_agent_work_queue_public(
     animation_categories: dict[str, Any],
     ichiban_kuji_history: dict[str, Any],
     operations: dict[str, Any],
+    requested_focus: dict[str, Any],
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -1172,6 +1391,26 @@ def build_agent_work_queue_public(
         batch["review_state"] = review_state
         batch["next_machine_step"] = next_machine_step_for_state(review_state)
         batches.append(batch)
+
+    for topic in requested_focus.get("topics", []):
+        open_rows = int(topic.get("open_rows") or 0)
+        if open_rows <= 0:
+            continue
+        add_batch(
+            agent_id="agent-requested-focus",
+            workstream="requested_focus_enrichment",
+            priority=int(topic.get("priority") or 10),
+            title=f"요청 우선 보강: {topic.get('label')}",
+            public_report=REQUESTED_FOCUS,
+            rows=open_rows,
+            recommended_action=str(topic.get("next_step") or "review requested focus topic"),
+            acceptance_criteria=[
+                "Confirm each update against exact official or trusted source evidence.",
+                "Do not import private collection or device-only ownership data.",
+                "Prepare catalog patches only for reviewed rows; auto-apply remains disabled.",
+            ],
+            samples=topic.get("sample_items", []),
+        )
 
     for group in image_enrichment_batches.get("groups", [])[:12]:
         workflow = str(group.get("workflow") or "")
@@ -2023,6 +2262,7 @@ def validate_report_consistency(
     animation_categories: dict[str, Any],
     ichiban_kuji_history: dict[str, Any],
     generic_source_patch_candidates: dict[str, Any],
+    requested_focus: dict[str, Any],
     operations: dict[str, Any],
     agent_work_queue: dict[str, Any],
 ) -> list[str]:
@@ -2034,6 +2274,7 @@ def validate_report_consistency(
     animation_summary = animation_categories["summary"]
     kuji_summary = ichiban_kuji_history["summary"]
     generic_patch_summary = generic_source_patch_candidates["summary"]
+    requested_focus_summary = requested_focus["summary"]
     operations_summary = operations["summary"]
     open_queues = operations_summary["open_review_queues"]
     agent_summary = agent_work_queue["summary"]
@@ -2083,6 +2324,36 @@ def validate_report_consistency(
             findings.append(f"metadata field review row missing fields: {sorted(missing_policy_fields)}")
         if row.get("auto_apply_enabled") is not False:
             findings.append(f"metadata field review row enables auto apply: {row.get('field')}")
+
+    requested_focus_topics = requested_focus.get("topics", [])
+    if requested_focus_summary.get("topic_count") != len(requested_focus_topics):
+        findings.append("requested_focus.topic_count does not match topics length")
+    if requested_focus_summary.get("open_rows") != sum(
+        int(topic.get("open_rows") or 0) for topic in requested_focus_topics if isinstance(topic, dict)
+    ):
+        findings.append("requested_focus.open_rows does not match topic rows")
+    if requested_focus_summary.get("auto_apply_enabled") is not False:
+        findings.append("requested_focus enables auto apply")
+    required_focus_fields = {
+        "topic_id",
+        "label",
+        "priority",
+        "catalog_rows",
+        "open_rows",
+        "next_step",
+        "auto_apply_enabled",
+        "review_reason",
+        "sample_items",
+    }
+    for topic in requested_focus_topics:
+        if not isinstance(topic, dict):
+            findings.append("requested_focus.topics contains non-object row")
+            continue
+        missing_focus_fields = required_focus_fields - set(topic)
+        if missing_focus_fields:
+            findings.append(f"requested focus topic missing fields: {sorted(missing_focus_fields)}")
+        if topic.get("auto_apply_enabled") is not False:
+            findings.append(f"requested focus topic enables auto apply: {topic.get('topic_id')}")
 
     if source_summary.get("source_discovery_rows") != missing["source_url"]:
         findings.append("source_discovery_rows does not match missing source_url count")
@@ -2160,6 +2431,7 @@ def validate_report_consistency(
         "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
         "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
         "generic_source_patch_candidate_rows": generic_patch_summary.get("candidate_rows", 0),
+        "requested_focus_open_rows": requested_focus_summary.get("open_rows", 0),
     }
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
@@ -2287,6 +2559,7 @@ def validate_report_consistency(
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
         f"data/{GENERIC_SOURCE.name}",
         f"data/{GOTOUCHI.name}",
+        f"data/{REQUESTED_FOCUS.name}",
     }
     required_batch_fields = {
         "batch_id",
@@ -2376,6 +2649,8 @@ def update_reports(write: bool) -> dict[str, Any]:
     animation_categories = build_animation_categories_public(items)
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
     generic_source_patch_candidates = build_generic_source_patch_candidates_public(generated_at)
+    requested_report = load_json(REQUESTED, {}) if REQUESTED.exists() else {}
+    requested_focus = build_requested_focus_enrichment_public(items, requested_report, generated_at)
     patch_candidate_items = generic_source_patch_candidates.get("items", [])
     patch_candidate_summary = generic_source_patch_candidates.get("summary", {})
     if patch_candidate_summary.get("candidate_rows") != len(patch_candidate_items):
@@ -2395,6 +2670,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_categories,
         ichiban_kuji_history,
         generic_source_patch_candidates,
+        requested_focus,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -2405,6 +2681,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_categories,
         ichiban_kuji_history,
         operations,
+        requested_focus,
     )
 
     public_meta = load_json(PUBLIC_META, {})
@@ -2481,6 +2758,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}",
             **generic_source_patch_candidates["summary"],
         }
+        target["requested_focus_enrichment"] = {
+            "public_report": f"data/{REQUESTED_FOCUS.name}",
+            **requested_focus["summary"],
+        }
         if SOURCE_DETAIL.exists():
             target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
         target["source_discovery_queue"] = {
@@ -2526,6 +2807,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_categories,
         ichiban_kuji_history,
         generic_source_patch_candidates,
+        requested_focus,
         operations,
         agent_work_queue,
     )
@@ -2543,6 +2825,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ICHIIBAN_KUJI_HISTORY,
         GOTOUCHI,
         REQUESTED,
+        REQUESTED_FOCUS,
         GENERIC_SOURCE,
         GENERIC_SOURCE_PATCH_CANDIDATES,
         SOURCE_DETAIL,
@@ -2570,6 +2853,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_BACKLOG, image_backlog)
         write_json(IMAGE_CANDIDATES, image_candidates)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
+        write_json(REQUESTED_FOCUS, requested_focus)
 
     return {
         "write": write,
@@ -2582,6 +2866,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_BACKLOG.relative_to(ROOT)),
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
+            str(REQUESTED_FOCUS.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),
