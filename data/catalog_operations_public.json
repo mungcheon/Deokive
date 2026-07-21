@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T19:47:30Z",
+  "generated_at": "2026-07-21T19:49:16Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -57,6 +57,64 @@
       "status": "warn",
       "value": 109,
       "target": 0
+    }
+  ],
+  "workstream_scorecard": [
+    {
+      "workstream": "source_discovery",
+      "status": "open",
+      "open_rows": 647,
+      "primary_report": "data/source_discovery_queue_public.json",
+      "next_step": "find_exact_official_source_url",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "image_enrichment",
+      "status": "blocked",
+      "open_rows": 720,
+      "primary_report": "data/catalog_image_enrichment_batches_public.json",
+      "next_step": "resolve_blocker_summary_before_image_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "metadata_backlog",
+      "status": "open",
+      "open_rows": 21075,
+      "primary_report": "data/catalog_metadata_backlog_public.json",
+      "next_step": "review_field_evidence_policy",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "deduplication",
+      "status": "manual_review",
+      "open_rows": 109,
+      "primary_report": "data/catalog_deduplication_public.json",
+      "next_step": "review_risk_ranked_duplicate_groups",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "ichiban_kuji_history",
+      "status": "open",
+      "open_rows": 44,
+      "primary_report": "data/ichiban_kuji_history_public.json",
+      "next_step": "verify_campaign_metadata_review_queue",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "animation_taxonomy",
+      "status": "manual_review",
+      "open_rows": 428,
+      "primary_report": "data/animation_goods_categories_public.json",
+      "next_step": "review_taxonomy_folder_visual_tokens",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "generic_source_patch_candidates",
+      "status": "candidate_review",
+      "open_rows": 3,
+      "primary_report": "data/generic_source_patch_candidates_public.json",
+      "next_step": "verify_weak_candidates_before_patch",
+      "auto_apply_enabled": false
     }
   ],
   "store_priority_matrix": [

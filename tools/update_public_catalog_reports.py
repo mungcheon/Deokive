@@ -932,6 +932,64 @@ def build_operations_public(
             "recommended_next_action": "Use taxonomy_review_queue and folder_visual_tokens for app folder colors, icons, and category cleanup.",
         },
     ]
+    workstream_scorecard = [
+        {
+            "workstream": "source_discovery",
+            "status": "open" if source_summary.get("source_discovery_rows", 0) else "clear",
+            "open_rows": source_summary.get("source_discovery_rows", 0),
+            "primary_report": f"data/{SOURCE_DISCOVERY.name}",
+            "next_step": "find_exact_official_source_url",
+            "auto_apply_enabled": False,
+        },
+        {
+            "workstream": "image_enrichment",
+            "status": "blocked" if image_summary.get("missing_image_rows", 0) else "clear",
+            "open_rows": image_summary.get("missing_image_rows", 0),
+            "primary_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
+            "next_step": "resolve_blocker_summary_before_image_import",
+            "auto_apply_enabled": False,
+        },
+        {
+            "workstream": "metadata_backlog",
+            "status": "open" if sum(int(value or 0) for value in metadata_summary.get("field_missing_totals", {}).values()) else "clear",
+            "open_rows": sum(int(value or 0) for value in metadata_summary.get("field_missing_totals", {}).values()),
+            "primary_report": f"data/{METADATA_BACKLOG.name}",
+            "next_step": "review_field_evidence_policy",
+            "auto_apply_enabled": False,
+        },
+        {
+            "workstream": "deduplication",
+            "status": "manual_review" if dedupe_summary.get("duplicate_groups", 0) else "clear",
+            "open_rows": dedupe_summary.get("duplicate_groups", 0),
+            "primary_report": f"data/{DEDUPLICATION.name}",
+            "next_step": "review_risk_ranked_duplicate_groups",
+            "auto_apply_enabled": False,
+        },
+        {
+            "workstream": "ichiban_kuji_history",
+            "status": "open" if kuji_summary.get("campaign_metadata_review_queue_rows", 0) else "clear",
+            "open_rows": kuji_summary.get("campaign_metadata_review_queue_rows", 0),
+            "primary_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+            "next_step": "verify_campaign_metadata_review_queue",
+            "auto_apply_enabled": False,
+        },
+        {
+            "workstream": "animation_taxonomy",
+            "status": "manual_review" if animation_summary.get("unknown_category_rows", 0) else "clear",
+            "open_rows": animation_summary.get("unknown_category_rows", 0),
+            "primary_report": f"data/{ANIMATION_CATEGORIES.name}",
+            "next_step": "review_taxonomy_folder_visual_tokens",
+            "auto_apply_enabled": False,
+        },
+        {
+            "workstream": "generic_source_patch_candidates",
+            "status": "candidate_review" if generic_patch_summary.get("candidate_rows", 0) else "clear",
+            "open_rows": generic_patch_summary.get("candidate_rows", 0),
+            "primary_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}",
+            "next_step": "verify_weak_candidates_before_patch",
+            "auto_apply_enabled": generic_patch_summary.get("auto_apply_enabled", False),
+        },
+    ]
 
     return {
         "schema_version": 1,
@@ -959,6 +1017,7 @@ def build_operations_public(
             "top_store_priority_score": store_priority_matrix[0]["priority_score"] if store_priority_matrix else 0,
         },
         "quality_gates": quality_gates,
+        "workstream_scorecard": workstream_scorecard,
         "store_priority_matrix": store_priority_matrix[:40],
         "reports": [
             {"key": "quality", "public_report": f"data/{QUALITY.name}"},
@@ -2156,6 +2215,29 @@ def validate_report_consistency(
             findings.append("ichiban metadata review row has no missing_fields")
 
     store_matrix = operations.get("store_priority_matrix", [])
+    workstream_scorecard = operations.get("workstream_scorecard", [])
+    required_scorecard_fields = {
+        "workstream",
+        "status",
+        "open_rows",
+        "primary_report",
+        "next_step",
+        "auto_apply_enabled",
+    }
+    if not isinstance(workstream_scorecard, list) or not workstream_scorecard:
+        findings.append("operations.workstream_scorecard is missing")
+    for row in workstream_scorecard:
+        if not isinstance(row, dict):
+            findings.append("operations.workstream_scorecard contains non-object row")
+            continue
+        missing_scorecard_fields = required_scorecard_fields - set(row)
+        if missing_scorecard_fields:
+            findings.append(f"operations scorecard row missing fields: {sorted(missing_scorecard_fields)}")
+        if row.get("auto_apply_enabled") is not False:
+            findings.append(f"operations scorecard enables auto apply: {row.get('workstream')}")
+        if int(row.get("open_rows") or 0) < 0:
+            findings.append(f"operations scorecard has negative open_rows: {row.get('workstream')}")
+
     if store_matrix:
         scores = [row.get("priority_score", 0) for row in store_matrix]
         if scores != sorted(scores, reverse=True):
