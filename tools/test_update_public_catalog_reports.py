@@ -21,6 +21,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_operations_public.json", updated_files)
         self.assertIn("data/catalog_agent_work_queue_public.json", updated_files)
         self.assertIn("data/requested_focus_enrichment_public.json", updated_files)
+        self.assertIn("data/requested_focus_review_batches_public.json", updated_files)
+        self.assertIn("data/catalog_confirmed_import_readiness_public.json", updated_files)
+        self.assertIn("data/catalog_execution_plan_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
 
     def test_published_reports_keep_manual_review_guards(self):
@@ -76,10 +79,13 @@ class PublicCatalogReportTests(unittest.TestCase):
 
         scorecard_reports = {row.get("primary_report") for row in operations.get("workstream_scorecard", [])}
         next_action_reports = {row.get("public_report") for row in operations.get("next_actions", [])}
+        report_links = {row.get("public_report") for row in operations.get("reports", [])}
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
         self.assertIn(f"data/{reports.AGENT_WORK_QUEUE.name}", next_action_reports)
+        self.assertIn(f"data/{reports.EXECUTION_PLAN.name}", next_action_reports)
+        self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
 
 
 if __name__ == "__main__":

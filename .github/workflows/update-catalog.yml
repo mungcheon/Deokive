@@ -19,8 +19,21 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Build public review batches
+        run: |
+          python tools/build_source_discovery_review_batches_public.py
+          python tools/build_catalog_metadata_review_batches_public.py
+          python tools/build_deduplication_review_batches_public.py
+          python tools/build_animation_category_review_batches_public.py
+          python tools/build_ichiban_kuji_metadata_review_batches_public.py
+          python tools/build_requested_focus_review_batches_public.py
+          python tools/build_confirmed_import_readiness_public.py
+
       - name: Refresh public catalog reports
-        run: python tools/update_public_catalog_reports.py --write
+        run: |
+          python tools/update_public_catalog_reports.py --write
+          python tools/build_catalog_execution_plan_public.py
+          python tools/update_public_catalog_reports.py --write
 
       - name: Validate generated public files
         run: python tools/update_public_catalog_reports.py
@@ -36,10 +49,21 @@ jobs:
             data/catalog_image_candidate_review_public.json \
             data/catalog_image_enrichment_batches_public.json \
             data/source_discovery_queue_public.json \
+            data/source_discovery_review_batches_public.json \
             data/catalog_metadata_backlog_public.json \
+            data/catalog_metadata_review_batches_public.json \
             data/catalog_deduplication_public.json \
+            data/catalog_deduplication_review_batches_public.json \
             data/animation_goods_categories_public.json \
+            data/animation_category_review_batches_public.json \
             data/ichiban_kuji_history_public.json \
+            data/ichiban_kuji_metadata_review_batches_public.json \
+            data/requested_focus_enrichment_public.json \
+            data/requested_focus_review_batches_public.json \
+            data/catalog_confirmed_import_readiness_public.json \
+            data/catalog_execution_plan_public.json \
+            data/danganronpa_missing_media_public.json \
+            data/generic_source_patch_candidates_public.json \
             data/catalog_operations_public.json \
             data/catalog_agent_work_queue_public.json
           if git diff --cached --quiet; then
