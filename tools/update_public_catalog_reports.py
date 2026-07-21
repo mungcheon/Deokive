@@ -26,6 +26,7 @@ REQUESTED = DATA / "requested_special_goods_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
 SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
+METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 
 OFFICIAL_SEARCH_TEMPLATES = {
     "애니메이트": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
@@ -293,6 +294,86 @@ def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int 
             "Do not auto-apply uncertain matches; use manual review before changing the catalog database.",
         ],
         "items": queue[:sample_rows],
+    }
+
+
+def metadata_action(field: str) -> str:
+    if field in {"source_url", "image_url"}:
+        return "find exact official product page and attach source_url/image_url together"
+    if field in {"release_date", "official_price_jpy"}:
+        return "verify official detail page metadata before importing"
+    if field == "barcode":
+        return "fill only when barcode is shown by official or trusted retailer data"
+    if field == "name_ja":
+        return "verify original Japanese product title from official listing"
+    return "manual review required"
+
+
+def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: int = 120) -> dict[str, Any]:
+    tracked_fields = [
+        "source_url",
+        "image_url",
+        "release_date",
+        "official_price_jpy",
+        "barcode",
+        "name_ja",
+    ]
+    by_field_store: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    field_totals: Counter[str] = Counter()
+    store_totals: Counter[str] = Counter()
+
+    for item in items:
+        store = str(item.get("source_store") or "unknown")
+        missing_fields = [field for field in tracked_fields if not present(item.get(field))]
+        for field in missing_fields:
+            field_totals[field] += 1
+            by_field_store[(field, store)].append(item)
+        if missing_fields:
+            store_totals[store] += 1
+
+    groups: list[dict[str, Any]] = []
+    for (field, store), group_items in sorted(
+        by_field_store.items(),
+        key=lambda pair: (-len(pair[1]), pair[0][0], pair[0][1]),
+    )[:sample_groups]:
+        samples = group_items[:8]
+        groups.append(
+            {
+                "field": field,
+                "source_store": store,
+                "missing_rows": len(group_items),
+                "priority_score": len(group_items),
+                "recommended_action": metadata_action(field),
+                "sample_catalog_indexes": [item.get("catalog_index") for item in samples],
+                "sample_items": [
+                    {
+                        "catalog_index": item.get("catalog_index"),
+                        "name_ko": item.get("name_ko"),
+                        "name_ja": item.get("name_ja"),
+                        "series_name": item.get("series_name"),
+                        "category": item.get("category"),
+                        "source_url": item.get("source_url"),
+                        "image_url": item.get("image_url"),
+                    }
+                    for item in samples
+                ],
+            }
+        )
+
+    return {
+        "schema_version": 1,
+        "summary": {
+            "tracked_fields": tracked_fields,
+            "field_missing_totals": dict(field_totals),
+            "store_rows_with_any_missing_metadata": store_totals.most_common(40),
+            "published_group_rows": len(groups),
+        },
+        "instructions": [
+            "Public backlog grouped by missing field and source store.",
+            "Use this before source/image crawling so agents work on the largest safe gaps first.",
+            "Do not infer dates, prices, barcodes, or names without official or trusted source evidence.",
+        ],
+        "groups": groups,
     }
 
 
@@ -690,6 +771,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     cov = coverage(missing, rows, ["source_url", "image_url", "release_date"])
     generated_at = now_utc()
     source_discovery = build_source_discovery_public(items)
+    metadata_backlog = build_metadata_backlog_public(items)
     deduplication = build_deduplication_public(items)
     animation_categories = build_animation_categories_public(items)
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
@@ -770,6 +852,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{SOURCE_DISCOVERY.name}",
             **source_discovery["summary"],
         }
+        target["metadata_backlog"] = {
+            "public_report": f"data/{METADATA_BACKLOG.name}",
+            **metadata_backlog["summary"],
+        }
         target["deduplication_review"] = {
             "public_report": f"data/{DEDUPLICATION.name}",
             **deduplication["summary"],
@@ -797,6 +883,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         GENERIC_SOURCE,
         SOURCE_DETAIL,
         SOURCE_DISCOVERY,
+        METADATA_BACKLOG,
     ]
     findings = validate_public_files([path for path in public_files if path.exists()])
     if findings:
@@ -804,6 +891,7 @@ def update_reports(write: bool) -> dict[str, Any]:
 
     if write:
         write_json(SOURCE_DISCOVERY, source_discovery)
+        write_json(METADATA_BACKLOG, metadata_backlog)
         write_json(DEDUPLICATION, deduplication)
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
@@ -823,6 +911,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_BACKLOG.relative_to(ROOT)),
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
+            str(METADATA_BACKLOG.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
