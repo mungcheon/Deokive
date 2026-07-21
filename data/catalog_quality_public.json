@@ -3335,12 +3335,13 @@
     "dedupe_action_groups": 40,
     "requested_focus_review_rows": 6275,
     "requested_focus_action_rows": 163,
+    "image_attachment_action_rows": 25,
     "animation_category_review_rows": 428
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 80,
-    "summed_batch_rows": 11503,
+    "summed_batch_rows": 11467,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3357,7 +3358,7 @@
       ],
       [
         "metadata_backlog",
-        12
+        11
       ],
       [
         "danganronpa_missing_media",
@@ -3372,11 +3373,11 @@
         4
       ],
       [
-        "generic_source_url_cleanup",
-        3
+        "image_attachment_action_queue",
+        4
       ],
       [
-        "deduplication_action_queue",
+        "generic_source_url_cleanup",
         3
       ],
       [
@@ -3403,7 +3404,7 @@
       ],
       [
         "agent-metadata",
-        12
+        11
       ],
       [
         "agent-danganronpa-media",
@@ -3418,11 +3419,11 @@
         4
       ],
       [
-        "agent-generic-source-cleanup",
-        3
+        "agent-image-action",
+        4
       ],
       [
-        "agent-dedupe-action",
+        "agent-generic-source-cleanup",
         3
       ],
       [
@@ -3449,6 +3450,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "image_attachment_action_rows": 25,
       "animation_category_review_rows": 428
     }
   },
@@ -4406,11 +4408,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 10,
+    "action_count": 11,
     "blocked_action_count": 1,
-    "manual_review_action_count": 8,
+    "manual_review_action_count": 9,
     "pending_import_action_count": 0,
-    "total_action_rows": 31805,
+    "total_action_rows": 31830,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -4426,6 +4428,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "image_attachment_action_rows": 25,
       "animation_category_review_rows": 428
     },
     "requested_focus_actionable_template_rows": 600,
@@ -4526,5 +4529,53 @@
     ],
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
+  },
+  "image_attachment_action_queue": {
+    "public_report": "data/catalog_image_attachment_action_queue_public.json",
+    "actionable_image_rows": 73,
+    "queued_image_rows": 25,
+    "action_batch_count": 4,
+    "sample_action_item_rows": 25,
+    "batch_size": 20,
+    "max_batches": 18,
+    "by_workflow": [
+      [
+        "replace_generic_source_then_extract_image",
+        15
+      ],
+      [
+        "review_gotouchi_official_candidates",
+        10
+      ]
+    ],
+    "by_source_store": [
+      [
+        "Stellive Store",
+        10
+      ],
+      [
+        "ご当地ちいかわ 공식(API)",
+        10
+      ],
+      [
+        "Weverse Shop",
+        3
+      ],
+      [
+        "포켓몬 센터",
+        2
+      ]
+    ],
+    "excluded_workflow_rows": [
+      [
+        "find_source_then_extract_image",
+        642
+      ],
+      [
+        "manual_image_research",
+        5
+      ]
+    ],
+    "auto_apply_enabled": false
   }
 }

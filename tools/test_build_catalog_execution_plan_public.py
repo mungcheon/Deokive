@@ -19,6 +19,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "catalog_image_enrichment_batches_public.json": {
                 "summary": {"missing_image_rows": 10, "source_url_ready_rows": 0, "needs_source_discovery_rows": 10}
             },
+            "catalog_image_attachment_action_queue_public.json": {
+                "summary": {
+                    "actionable_image_rows": 2,
+                    "queued_image_rows": 2,
+                    "action_batch_count": 1,
+                    "excluded_workflow_rows": [["find_source_then_extract_image", 8]],
+                }
+            },
             "source_discovery_review_batches_public.json": {
                 "summary": {"source_discovery_rows": 10, "batch_count": 2}
             },
@@ -100,6 +108,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(action_queue["evidence"]["barcode_template_rows_excluded"], 3)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
+        image_action = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "image_attachment_action_queue"
+        )
+        self.assertEqual(image_action["priority"], 31)
+        self.assertEqual(image_action["rows"], 2)
+        self.assertEqual(image_action["evidence"]["actionable_image_rows"], 2)
         dedupe_action = next(
             action
             for action in report["actions"]

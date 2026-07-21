@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:29:07Z",
+  "generated_at": "2026-07-21T22:36:48Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -31,6 +31,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "image_attachment_action_rows": 25,
       "animation_category_review_rows": 428
     },
     "top_store_priority_score": 1832.0
@@ -122,6 +123,14 @@
       "open_rows": 720,
       "primary_report": "data/catalog_image_enrichment_batches_public.json",
       "next_step": "resolve_blocker_summary_before_image_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "image_attachment_action_queue",
+      "status": "manual_review",
+      "open_rows": 25,
+      "primary_report": "data/catalog_image_attachment_action_queue_public.json",
+      "next_step": "confirm_source_then_fill_image_url_templates",
       "auto_apply_enabled": false
     },
     {
@@ -768,9 +777,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 10,
+      "action_count": 11,
       "blocked_action_count": 1,
-      "manual_review_action_count": 8,
+      "manual_review_action_count": 9,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -840,6 +849,15 @@
       "gotouchi_official_review_rows": 23,
       "blocked_rows": 642,
       "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import."
+    },
+    {
+      "priority": 20,
+      "workstream": "image_attachment_action_queue",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "actionable_image_rows": 73,
+      "queued_image_rows": 25,
+      "action_batch_count": 4,
+      "recommended_next_action": "Work image action batches with exact product evidence before broad image backlog research."
     },
     {
       "priority": 19,

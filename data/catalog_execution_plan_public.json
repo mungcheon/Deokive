@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:28:57Z",
+  "generated_at": "2026-07-21T22:36:48Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 10,
+    "action_count": 11,
     "blocked_action_count": 1,
-    "manual_review_action_count": 8,
+    "manual_review_action_count": 9,
     "pending_import_action_count": 0,
-    "total_action_rows": 31805,
+    "total_action_rows": 31830,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -23,6 +23,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "image_attachment_action_rows": 25,
       "animation_category_review_rows": 428
     },
     "requested_focus_actionable_template_rows": 600,
@@ -237,6 +238,42 @@
         "generic_source_url_rows": 50,
         "needs_source_discovery_rows": 642,
         "gotouchi_official_review_rows": 23
+      }
+    },
+    {
+      "priority": 31,
+      "workstream": "image_attachment_action_queue",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "status": "manual_review",
+      "rows": 25,
+      "command": "Work image attachment batches with exact product evidence before broad missing-image research.",
+      "next_step": "confirm_source_then_fill_image_url_templates",
+      "blocker": "Auto image import is disabled; every image URL needs reviewed product evidence.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "actionable_image_rows": 73,
+        "queued_image_rows": 25,
+        "action_batch_count": 4,
+        "excluded_workflow_rows": [
+          [
+            "find_source_then_extract_image",
+            642
+          ],
+          [
+            "manual_image_research",
+            5
+          ]
+        ],
+        "by_workflow": [
+          [
+            "replace_generic_source_then_extract_image",
+            15
+          ],
+          [
+            "review_gotouchi_official_candidates",
+            10
+          ]
+        ]
       }
     },
     {

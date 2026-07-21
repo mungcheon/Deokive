@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:29:07Z",
+  "generated_at": "2026-07-21T22:36:48Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 11503,
+    "summed_batch_rows": 11467,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -20,7 +20,7 @@
       ],
       [
         "metadata_backlog",
-        12
+        11
       ],
       [
         "danganronpa_missing_media",
@@ -35,11 +35,11 @@
         4
       ],
       [
-        "generic_source_url_cleanup",
-        3
+        "image_attachment_action_queue",
+        4
       ],
       [
-        "deduplication_action_queue",
+        "generic_source_url_cleanup",
         3
       ],
       [
@@ -66,7 +66,7 @@
       ],
       [
         "agent-metadata",
-        12
+        11
       ],
       [
         "agent-danganronpa-media",
@@ -81,11 +81,11 @@
         4
       ],
       [
-        "agent-generic-source-cleanup",
-        3
+        "agent-image-action",
+        4
       ],
       [
-        "agent-dedupe-action",
+        "agent-generic-source-cleanup",
         3
       ],
       [
@@ -112,6 +112,7 @@
       "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
+      "image_attachment_action_rows": 25,
       "animation_category_review_rows": 428
     }
   },
@@ -2695,7 +2696,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-42",
+      "batch_id": "015-agent-generic-source-cleanup-46",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -2801,7 +2802,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-43",
+      "batch_id": "015-agent-generic-source-cleanup-47",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -2857,7 +2858,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-44",
+      "batch_id": "015-agent-generic-source-cleanup-48",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -2930,7 +2931,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-45",
+      "batch_id": "018-agent-gotouchi-review-49",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -3037,7 +3038,7 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "019-agent-confirmed-import-41",
+      "batch_id": "019-agent-confirmed-import-45",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -3128,7 +3129,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-46",
+      "batch_id": "020-agent-source-image-50",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3227,7 +3228,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-47",
+      "batch_id": "020-agent-source-image-51",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3425,7 +3426,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-48",
+      "batch_id": "020-agent-source-image-52",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3524,7 +3525,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-49",
+      "batch_id": "020-agent-source-image-53",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3623,7 +3624,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-50",
+      "batch_id": "020-agent-source-image-54",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3722,7 +3723,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-51",
+      "batch_id": "020-agent-source-image-55",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3821,7 +3822,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-52",
+      "batch_id": "020-agent-source-image-56",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3920,7 +3921,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-53",
+      "batch_id": "020-agent-source-image-57",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -4017,6 +4018,281 @@
       ],
       "review_state": "source_discovery_then_image_attachment",
       "next_machine_step": "find_source_url_before_image_import"
+    },
+    {
+      "batch_id": "020-agent-image-action-41",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_action_queue",
+      "priority": 20,
+      "title": "Stellive Store image attachment action",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 10,
+      "recommended_action": "Replace generic storefront URL with exact product page before image import.",
+      "acceptance_criteria": [
+        "Confirm exact product identity before filling image_url.",
+        "Use official or trusted product image evidence, not resale or generic listing images.",
+        "Prepare reviewed image templates only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2325,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "스텔라이브 1주년 뱃지 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2325,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "스텔라이브 1주년 뱃지 세트",
+            "name_ja": null,
+            "category": "캔뱃지",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2352,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "강지 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2352,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "강지 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2355,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2355,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "(전) 스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2356,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2356,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "(전) 스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2357,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 키링 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2357,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 키링 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "(전) 스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2361,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2361,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2362,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 생일 기념 굿즈",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2362,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 생일 기념 굿즈",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2363,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2363,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "image_evidence_confirmation_required",
+      "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
       "batch_id": "020-agent-requested-focus-action-37",
@@ -4706,6 +4982,121 @@
       "next_machine_step": "manual_review"
     },
     {
+      "batch_id": "020-agent-image-action-42",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_action_queue",
+      "priority": 20,
+      "title": "Weverse Shop image attachment action",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 3,
+      "recommended_action": "Replace generic storefront URL with exact product page before image import.",
+      "acceptance_criteria": [
+        "Confirm exact product identity before filling image_url.",
+        "Use official or trusted product image evidence, not resale or generic listing images.",
+        "Prepare reviewed image templates only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 17613,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Weverse Shop",
+          "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "source_url": "https://shop.weverse.io/home",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17613,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Weverse Shop",
+            "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+            "name_ja": null,
+            "category": "포토카드",
+            "affiliation": "SEVENTEEN",
+            "source_search_url": null,
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17622,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Weverse Shop",
+          "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "source_url": "https://shop.weverse.io/home",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17622,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Weverse Shop",
+            "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
+            "name_ja": null,
+            "category": "포토카드",
+            "affiliation": "ZEROBASEONE",
+            "source_search_url": null,
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17623,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Weverse Shop",
+          "name_ko": "ILLIT 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "source_url": "https://shop.weverse.io/home",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17623,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Weverse Shop",
+            "name_ko": "ILLIT 포토카드 (랜덤)",
+            "name_ja": null,
+            "category": "포토카드",
+            "affiliation": "ILLIT",
+            "source_search_url": null,
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "image_evidence_confirmation_required",
+      "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
       "batch_id": "020-agent-requested-focus-action-40",
       "agent_id": "agent-requested-focus-action",
       "workstream": "requested_focus_action_queue",
@@ -4815,6 +5206,89 @@
       "next_machine_step": "manual_review"
     },
     {
+      "batch_id": "020-agent-image-action-43",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_action_queue",
+      "priority": 20,
+      "title": "포켓몬 센터 image attachment action",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "Replace generic storefront URL with exact product page before image import.",
+      "acceptance_criteria": [
+        "Confirm exact product identity before filling image_url.",
+        "Use official or trusted product image evidence, not resale or generic listing images.",
+        "Prepare reviewed image templates only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1098,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "포켓몬 센터",
+          "name_ko": "포켓몬 봉제 인형 (피카츄)",
+          "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://www.pokemoncenter-online.com/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1098,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "포켓몬 센터",
+            "name_ko": "포켓몬 봉제 인형 (피카츄)",
+            "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
+            "category": "인형",
+            "affiliation": "포켓몬",
+            "source_search_url": null,
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17593,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "포켓몬 센터",
+          "name_ko": "포켓몬 카드 게임 부스터 팩",
+          "name_ja": null,
+          "series_name": null,
+          "category": "트레이딩 카드",
+          "source_url": "https://www.pokemoncenter-online.com/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17593,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "포켓몬 센터",
+            "name_ko": "포켓몬 카드 게임 부스터 팩",
+            "name_ja": null,
+            "category": "트레이딩 카드",
+            "affiliation": "포켓몬",
+            "source_search_url": null,
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "image_evidence_confirmation_required",
+      "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
       "batch_id": "030-agent-requested-focus-11",
       "agent_id": "agent-requested-focus",
       "workstream": "requested_focus_enrichment",
@@ -4914,7 +5388,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-source-discovery-54",
+      "batch_id": "030-agent-source-discovery-58",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5013,7 +5487,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-55",
+      "batch_id": "030-agent-source-discovery-59",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5112,7 +5586,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-56",
+      "batch_id": "030-agent-source-discovery-60",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5211,7 +5685,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-57",
+      "batch_id": "030-agent-source-discovery-61",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5310,7 +5784,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-58",
+      "batch_id": "030-agent-source-discovery-62",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5409,7 +5883,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-60",
+      "batch_id": "030-agent-source-discovery-64",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5508,7 +5982,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-61",
+      "batch_id": "030-agent-source-discovery-65",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5607,7 +6081,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-62",
+      "batch_id": "030-agent-source-discovery-66",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5706,7 +6180,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-63",
+      "batch_id": "030-agent-source-discovery-67",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5805,7 +6279,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-64",
+      "batch_id": "030-agent-source-discovery-68",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5904,7 +6378,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-59",
+      "batch_id": "030-agent-source-discovery-63",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -6003,7 +6477,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-65",
+      "batch_id": "030-agent-source-discovery-69",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -6100,6 +6574,281 @@
       ],
       "review_state": "exact_source_discovery_required",
       "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "030-agent-image-action-44",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_action_queue",
+      "priority": 30,
+      "title": "ご当地ちいかわ 공식(API) image attachment action",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 10,
+      "recommended_action": "Confirm motif candidate matches product type before image import.",
+      "acceptance_criteria": [
+        "Confirm exact product identity before filling image_url.",
+        "Use official or trusted product image evidence, not resale or generic listing images.",
+        "Prepare reviewed image templates only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 936,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "series_name": "ご当地",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 936,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+            "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 937,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 937,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+            "name_ja": "うさぎ ご当地マスコット (浅草)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 938,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+          "series_name": "ご当地",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 938,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+            "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+            "category": "타월",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 941,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 941,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+            "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 942,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "series_name": "ご当地",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 942,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+            "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 943,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+          "series_name": "ご当地",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 943,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+            "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+            "category": "타월",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 944,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 944,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+            "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 945,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 945,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+            "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "image_evidence_confirmation_required",
+      "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
       "batch_id": "030-agent-requested-focus-detail-14",
@@ -8196,7 +8945,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-66",
+      "batch_id": "050-agent-metadata-70",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -8295,7 +9044,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-69",
+      "batch_id": "050-agent-metadata-73",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -8394,7 +9143,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-67",
+      "batch_id": "050-agent-metadata-71",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -8592,7 +9341,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-68",
+      "batch_id": "050-agent-metadata-72",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -8691,7 +9440,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-73",
+      "batch_id": "060-agent-metadata-77",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -8790,7 +9539,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-70",
+      "batch_id": "060-agent-metadata-74",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -8889,7 +9638,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-71",
+      "batch_id": "060-agent-metadata-75",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -8988,7 +9737,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-72",
+      "batch_id": "060-agent-metadata-76",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -9087,7 +9836,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-74",
+      "batch_id": "070-agent-metadata-78",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -9186,7 +9935,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-75",
+      "batch_id": "070-agent-metadata-79",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -9285,7 +10034,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-76",
+      "batch_id": "070-agent-metadata-80",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -9382,2034 +10131,6 @@
       ],
       "review_state": "metadata_evidence_required",
       "next_machine_step": "collect_official_metadata_evidence"
-    },
-    {
-      "batch_id": "070-agent-metadata-77",
-      "agent_id": "agent-metadata",
-      "workstream": "metadata_backlog",
-      "priority": 70,
-      "title": "메타데이터 검수: metadata-review-012",
-      "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 31,
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "acceptance_criteria": [
-        "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
-        "Every proposed update includes catalog_index and source evidence.",
-        "Unverified inferred metadata remains in the review queue."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1274,
-          "name_ko": "치비누이 Vol.2 미도리야 이즈쿠",
-          "name_ja": "ちびぬいマスコット Vol.2 緑谷出久",
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": "https://shop.asobistore.jp/products/detail/204493-hero_01_v2-00-00",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 1275,
-          "name_ko": "치비누이 Vol.2 바쿠고 카츠키",
-          "name_ja": "ちびぬいマスコット Vol.2 爆豪勝己",
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": "https://shop.asobistore.jp/products/detail/204493-hero_02_v2-00-00",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 1276,
-          "name_ko": "치비누이 Vol.2 토도로키 쇼토",
-          "name_ja": "ちびぬいマスコット Vol.2 轟焦凍",
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": "https://shop.asobistore.jp/products/detail/204493-hero_04_v2-00-00",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 1835,
-          "name_ko": "원피스 나미 타올",
-          "name_ja": "ONE PIECE ナミ タオル",
-          "series_name": null,
-          "category": "타월",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 1836,
-          "name_ko": "원피스 상디 토트백",
-          "name_ja": "ONE PIECE サンジ トートバッグ",
-          "series_name": null,
-          "category": "가방",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 1840,
-          "name_ko": "원피스 쵸파 머그컵",
-          "name_ja": "ONE PIECE チョッパー マグカップ",
-          "series_name": null,
-          "category": "머그컵",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2283,
-          "name_ko": "IVE 공식 응원봉",
-          "name_ja": null,
-          "series_name": null,
-          "category": "응원봉",
-          "source_store": null,
-          "source_url": "https://www.ktown4u.com/iteminfo?goods_no=90416",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2284,
-          "name_ko": "IVE 포토카드 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "포토카드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        }
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence"
-    },
-    {
-      "batch_id": "085-agent-dedupe-action-78",
-      "agent_id": "agent-dedupe-action",
-      "workstream": "deduplication_action_queue",
-      "priority": 85,
-      "title": "Safe dedupe action dedupe-action-001",
-      "public_report": "data/catalog_deduplication_action_queue_public.json",
-      "rows": 10,
-      "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
-      "acceptance_criteria": [
-        "Only high/medium-confidence groups are included in this queue.",
-        "Every accepted group still needs an explicit manual keep/drop decision.",
-        "Auto-merge and auto-delete remain disabled."
-      ],
-      "sample_items": [
-        {
-          "key_type": "barcode",
-          "key": "4570189195898",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3710,
-          "drop_catalog_indexes": [
-            367
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "의류"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4570189195898",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3710,
-            "drop_catalog_indexes": [
-              367
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 367,
-              "name_ko": "치이카와 파크 스니커즈 양말 (하치와레/라이트블루)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "의류",
-              "barcode": "4570189195898",
-              "source_url": "https://chiikawamarket.jp/ko/products/4570189195898",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189195898_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3710,
-              "name_ko": "치이카와 파크 스니커즈 양말 (가르마 / 라이트 블루)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "의류",
-              "barcode": "4570189195898",
-              "source_url": "https://chiikawamarket.jp/ko/products/4570189195898",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189195898_1.jpg?v=1776259556",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4570189195942",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3714,
-          "drop_catalog_indexes": [
-            366
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "의류"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4570189195942",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3714,
-            "drop_catalog_indexes": [
-              366
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 366,
-              "name_ko": "치이카와 파크 스니커즈 양말 (시사/오렌지)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "의류",
-              "barcode": "4570189195942",
-              "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189195942_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3714,
-              "name_ko": "치이카와 파크 스니커즈 양말 (시사 / 오렌지)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "의류",
-              "barcode": "4570189195942",
-              "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189195942_1.jpg?v=1776259596",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4570189201551",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3722,
-          "drop_catalog_indexes": [
-            365
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "의류"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4570189201551",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3722,
-            "drop_catalog_indexes": [
-              365
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 365,
-              "name_ko": "치이카와 파크 키즈 T셔츠 (화이트)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "의류",
-              "barcode": "4570189201551",
-              "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189201551_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3722,
-              "name_ko": "치이카와 파크 키즈 T셔츠 (집합 / 화이트)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "의류",
-              "barcode": "4570189201551",
-              "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189201551_1.jpg?v=1776257761",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609351658",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3606,
-          "drop_catalog_indexes": [
-            171
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609351658",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3606,
-            "drop_catalog_indexes": [
-              171
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 171,
-              "name_ko": "치이카와 파크 인형 S (복어)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609351658",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609351658",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609351658_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3606,
-              "name_ko": "치이카와 파크 인형 S (복어)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609351658",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609351658",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351658_1.jpg?v=1774854223",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609367710",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3443,
-          "drop_catalog_indexes": [
-            370
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "식기"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609367710",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3443,
-            "drop_catalog_indexes": [
-              370
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 370,
-              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (치이카와)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "식기",
-              "barcode": "4571609367710",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609367710",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367710_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3443,
-              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (치이카와)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "식기",
-              "barcode": "4571609367710",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609367710",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367710_1.jpg?v=1776303567",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609367727",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3445,
-          "drop_catalog_indexes": [
-            371
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "식기"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609367727",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3445,
-            "drop_catalog_indexes": [
-              371
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 371,
-              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (하치와레)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "식기",
-              "barcode": "4571609367727",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609367727",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367727_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3445,
-              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (가르마)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "식기",
-              "barcode": "4571609367727",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609367727",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367727_1.jpg?v=1776303590",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609367734",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3442,
-          "drop_catalog_indexes": [
-            372
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "식기"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609367734",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3442,
-            "drop_catalog_indexes": [
-              372
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 372,
-              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (우사기)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "식기",
-              "barcode": "4571609367734",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609367734",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367734_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3442,
-              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (토끼)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "식기",
-              "barcode": "4571609367734",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609367734",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367734_1.jpg?v=1776303602",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609367741",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3444,
-          "drop_catalog_indexes": [
-            373
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "식기"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609367741",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3444,
-            "drop_catalog_indexes": [
-              373
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 373,
-              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (모몽가)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "식기",
-              "barcode": "4571609367741",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609367741",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367741_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3444,
-              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (하늘다람쥐)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "식기",
-              "barcode": "4571609367741",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609367741",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367741_1.jpg?v=1776303614",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "085-agent-dedupe-action-79",
-      "agent_id": "agent-dedupe-action",
-      "workstream": "deduplication_action_queue",
-      "priority": 85,
-      "title": "Safe dedupe action dedupe-action-002",
-      "public_report": "data/catalog_deduplication_action_queue_public.json",
-      "rows": 10,
-      "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
-      "acceptance_criteria": [
-        "Only high/medium-confidence groups are included in this queue.",
-        "Every accepted group still needs an explicit manual keep/drop decision.",
-        "Auto-merge and auto-delete remain disabled."
-      ],
-      "sample_items": [
-        {
-          "key_type": "barcode",
-          "key": "4571609385103",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3463,
-          "drop_catalog_indexes": [
-            238
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609385103",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3463,
-            "drop_catalog_indexes": [
-              238
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 238,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (하치와레)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609385103",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385103",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385103_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3463,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (가르마)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609385103",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385103",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385103_1.jpg?v=1776299127",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609385110",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3462,
-          "drop_catalog_indexes": [
-            239
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609385110",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3462,
-            "drop_catalog_indexes": [
-              239
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 239,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (우사기)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609385110",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385110",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385110_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3462,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (토끼)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609385110",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385110",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385110_1.jpg?v=1776299153",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609385127",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3464,
-          "drop_catalog_indexes": [
-            240
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609385127",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3464,
-            "drop_catalog_indexes": [
-              240
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 240,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (모몽가)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609385127",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385127",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385127_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3464,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (하늘다람쥐)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609385127",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385127",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385127_1.jpg?v=1776299177",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609385134",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3458,
-          "drop_catalog_indexes": [
-            241
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609385134",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3458,
-            "drop_catalog_indexes": [
-              241
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 241,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (쿠리만쥬)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609385134",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385134",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385134_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3458,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (밤만쥬)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609385134",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385134",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385134_1.jpg?v=1776299200",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609385141",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3457,
-          "drop_catalog_indexes": [
-            242
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609385141",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3457,
-            "drop_catalog_indexes": [
-              242
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 242,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (시사)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609385141",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385141",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385141_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3457,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (시사)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609385141",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385141",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385141_1.jpg?v=1776299223",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609385158",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3459,
-          "drop_catalog_indexes": [
-            243
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609385158",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3459,
-            "drop_catalog_indexes": [
-              243
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 243,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (라코)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609385158",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385158",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385158_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3459,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (해달)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609385158",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385158",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385158_1.jpg?v=1776299244",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609385165",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3460,
-          "drop_catalog_indexes": [
-            244
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609385165",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3460,
-            "drop_catalog_indexes": [
-              244
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 244,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (헌책방)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609385165",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385165",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385165_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3460,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (헌책방)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609385165",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385165",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385165_1.jpg?v=1776299264",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4571609385172",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3455,
-          "drop_catalog_indexes": [
-            245
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "인형"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4571609385172",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3455,
-            "drop_catalog_indexes": [
-              245
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 245,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (오데)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "인형",
-              "barcode": "4571609385172",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385172",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385172_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3455,
-              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (오데)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "인형",
-              "barcode": "4571609385172",
-              "source_url": "https://chiikawamarket.jp/ko/products/4571609385172",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385172_1.jpg?v=1776299286",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "085-agent-dedupe-action-80",
-      "agent_id": "agent-dedupe-action",
-      "workstream": "deduplication_action_queue",
-      "priority": 85,
-      "title": "Safe dedupe action dedupe-action-003",
-      "public_report": "data/catalog_deduplication_action_queue_public.json",
-      "rows": 10,
-      "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
-      "acceptance_criteria": [
-        "Only high/medium-confidence groups are included in this queue.",
-        "Every accepted group still needs an explicit manual keep/drop decision.",
-        "Auto-merge and auto-delete remain disabled."
-      ],
-      "sample_items": [
-        {
-          "key_type": "barcode",
-          "key": "4573256437754",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3670,
-          "drop_catalog_indexes": [
-            320
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "키링"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4573256437754",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3670,
-            "drop_catalog_indexes": [
-              320
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 320,
-              "name_ko": "치이카와 파크 피규어 키링 (우사기)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "키링",
-              "barcode": "4573256437754",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437754",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437754_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3670,
-              "name_ko": "치이카와 파크 피규어 키링 (토끼)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "키링",
-              "barcode": "4573256437754",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437754",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437754_1.jpg?v=1776254687",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4573256437761",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3675,
-          "drop_catalog_indexes": [
-            321
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "키링"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4573256437761",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3675,
-            "drop_catalog_indexes": [
-              321
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 321,
-              "name_ko": "치이카와 파크 피규어 키링 (모몽가)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "키링",
-              "barcode": "4573256437761",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437761",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437761_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3675,
-              "name_ko": "치이카와 파크 피규어 키링 (하늘다람쥐)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "키링",
-              "barcode": "4573256437761",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437761",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437761_1.jpg?v=1776254695",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4573256437778",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3674,
-          "drop_catalog_indexes": [
-            322
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "키링"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4573256437778",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3674,
-            "drop_catalog_indexes": [
-              322
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 322,
-              "name_ko": "치이카와 파크 피규어 키링 (시사)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "키링",
-              "barcode": "4573256437778",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437778",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437778_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3674,
-              "name_ko": "치이카와 파크 피규어 키링 (시사)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "키링",
-              "barcode": "4573256437778",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437778",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437778_1.jpg?v=1776254702",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4573256437785",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3673,
-          "drop_catalog_indexes": [
-            323
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "키링"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4573256437785",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3673,
-            "drop_catalog_indexes": [
-              323
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 323,
-              "name_ko": "치이카와 파크 피규어 키링 (쿠리만쥬)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "키링",
-              "barcode": "4573256437785",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437785",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437785_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3673,
-              "name_ko": "치이카와 파크 피규어 키링 (밤만쥬)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "키링",
-              "barcode": "4573256437785",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437785",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437785_1.jpg?v=1776254709",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4573256437792",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3676,
-          "drop_catalog_indexes": [
-            324
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "키링"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4573256437792",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3676,
-            "drop_catalog_indexes": [
-              324
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 324,
-              "name_ko": "치이카와 파크 피규어 키링 (라코)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "키링",
-              "barcode": "4573256437792",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437792",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437792_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3676,
-              "name_ko": "치이카와 파크 피규어 키링 (해달)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "키링",
-              "barcode": "4573256437792",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437792",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437792_1.jpg?v=1776254716",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4573256437808",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3678,
-          "drop_catalog_indexes": [
-            325
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "키링"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4573256437808",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3678,
-            "drop_catalog_indexes": [
-              325
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 325,
-              "name_ko": "치이카와 파크 피규어 키링 (헌책방)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "키링",
-              "barcode": "4573256437808",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437808",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437808_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3678,
-              "name_ko": "치이카와 파크 피규어 키링 (헌책방)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "키링",
-              "barcode": "4573256437808",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437808",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437808_1.jpg?v=1776254725",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4573256437815",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 2764,
-          "drop_catalog_indexes": [
-            326
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "키링"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4573256437815",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 2764,
-            "drop_catalog_indexes": [
-              326
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 326,
-              "name_ko": "치이카와 파크 피규어 키링 (아노코)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "키링",
-              "barcode": "4573256437815",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437815",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437815_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 2764,
-              "name_ko": "치이카와 파크 피규어 키링 (그 아이)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "키링",
-              "barcode": "4573256437815",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437815",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437815_1.jpg?v=1776254733",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        },
-        {
-          "key_type": "barcode",
-          "key": "4573256437822",
-          "review_priority": 10,
-          "review_risk": "strong_identity_review",
-          "review_confidence": "high_review_confidence",
-          "keep_catalog_index": 3679,
-          "drop_catalog_indexes": [
-            327
-          ],
-          "row_count": 2,
-          "stores": [
-            "치이카와 마켓",
-            "치이카와 파크"
-          ],
-          "categories": [
-            "키링"
-          ],
-          "evidence": [
-            "barcode",
-            "same_barcode",
-            "same_source_url",
-            "multi_store"
-          ],
-          "merge_blockers": [
-            "multi_store_variant_or_retailer_review"
-          ],
-          "identity_checklist": [
-            "compare_product_titles_and_character_names",
-            "compare_product_images_for_same_sellable_item",
-            "confirm_keep_drop_decision_in_a_separate_review_queue",
-            "barcode_matches_all_rows",
-            "source_page_is_not_a_variant_or_lineup_page",
-            "multi_store_rows_are_same_product_not_retailer_specific_variant"
-          ],
-          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
-          "dedupe_decision_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "key_type": "barcode",
-            "key": "4573256437822",
-            "review_confidence": "high_review_confidence",
-            "keep_catalog_index": 3679,
-            "drop_catalog_indexes": [
-              327
-            ],
-            "decision": "review_required",
-            "requires_same_sellable_product": true,
-            "requires_variant_difference_disproved": false
-          },
-          "rows": [
-            {
-              "catalog_index": 327,
-              "name_ko": "치이카와 파크 피규어 키링 (카부토무시)",
-              "name_ja": null,
-              "source_store": "치이카와 파크",
-              "category": "키링",
-              "barcode": "4573256437822",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437822",
-              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437822_1.jpg",
-              "richness": 12
-            },
-            {
-              "catalog_index": 3679,
-              "name_ko": "치이카와 파크 피규어 키링 (투구벌레)",
-              "name_ja": null,
-              "source_store": "치이카와 마켓",
-              "category": "키링",
-              "barcode": "4573256437822",
-              "source_url": "https://chiikawamarket.jp/ko/products/4573256437822",
-              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437822_1.jpg?v=1776254743",
-              "richness": 13
-            }
-          ],
-          "auto_merge_enabled": false,
-          "auto_delete_enabled": false,
-          "queue_priority": 10
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
     }
   ],
   "automation_policy": {

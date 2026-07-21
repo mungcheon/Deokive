@@ -44,6 +44,7 @@ SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
+IMAGE_ATTACHMENT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
 CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.json"
 EXECUTION_PLAN = DATA / "catalog_execution_plan_public.json"
 OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
@@ -1264,6 +1265,10 @@ def build_operations_public(
     )
     source_review_batches_summary = source_review_batches.get("summary", {})
     image_summary = image_enrichment_batches["summary"]
+    image_action_queue = (
+        load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
+    )
+    image_action_queue_summary = image_action_queue.get("summary", {})
     dedupe_summary = deduplication["summary"]
     dedupe_review_batches = (
         load_json(DEDUPLICATION_REVIEW_BATCHES, {}) if DEDUPLICATION_REVIEW_BATCHES.exists() else {}
@@ -1486,6 +1491,15 @@ def build_operations_public(
             "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import.",
         },
         {
+            "priority": 20,
+            "workstream": "image_attachment_action_queue",
+            "public_report": f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+            "actionable_image_rows": image_action_queue_summary.get("actionable_image_rows", 0),
+            "queued_image_rows": image_action_queue_summary.get("queued_image_rows", 0),
+            "action_batch_count": image_action_queue_summary.get("action_batch_count", 0),
+            "recommended_next_action": "Work image action batches with exact product evidence before broad image backlog research.",
+        } if image_action_queue_summary else None,
+        {
             "priority": 19,
             "workstream": "confirmed_import_readiness",
             "public_report": f"data/{CONFIRMED_IMPORT_READINESS.name}",
@@ -1667,6 +1681,14 @@ def build_operations_public(
             "auto_apply_enabled": False,
         },
         {
+            "workstream": "image_attachment_action_queue",
+            "status": "manual_review" if image_action_queue_summary.get("action_batch_count", 0) else "clear",
+            "open_rows": image_action_queue_summary.get("queued_image_rows", 0),
+            "primary_report": f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+            "next_step": "confirm_source_then_fill_image_url_templates",
+            "auto_apply_enabled": image_action_queue_summary.get("auto_apply_enabled", False),
+        } if image_action_queue_summary else None,
+        {
             "workstream": "metadata_backlog",
             "status": "open" if sum(int(value or 0) for value in metadata_summary.get("field_missing_totals", {}).values()) else "clear",
             "open_rows": sum(int(value or 0) for value in metadata_summary.get("field_missing_totals", {}).values()),
@@ -1782,6 +1804,8 @@ def build_operations_public(
         open_review_queues["requested_focus_review_rows"] = requested_focus_review_batches_summary.get("review_row_count", 0)
     if requested_focus_action_queue_summary:
         open_review_queues["requested_focus_action_rows"] = requested_focus_action_queue_summary.get("queued_action_rows", 0)
+    if image_action_queue_summary:
+        open_review_queues["image_attachment_action_rows"] = image_action_queue_summary.get("queued_image_rows", 0)
     if animation_review_batches_summary:
         open_review_queues["animation_category_review_rows"] = animation_review_batches_summary.get("source_rows", 0)
 
@@ -1880,6 +1904,9 @@ def build_agent_work_queue_public(
     requested_focus_action_queue = (
         load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
     )
+    image_action_queue = (
+        load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
+    )
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
     confirmed_import_readiness = (
@@ -1938,6 +1965,8 @@ def build_agent_work_queue_public(
             return "official_candidate_mismatch_review_required"
         if workstream == "image_url_attachment":
             return "source_discovery_then_image_attachment"
+        if workstream == "image_attachment_action_queue":
+            return "image_evidence_confirmation_required"
         if workstream == "source_url_discovery":
             return "exact_source_discovery_required"
         if workstream == "metadata_backlog":
@@ -1960,6 +1989,7 @@ def build_agent_work_queue_public(
             "official_exact_candidate_review_required": "verify_official_candidate_image_matches_row_type",
             "official_candidate_mismatch_review_required": "review_official_candidates_before_import",
             "source_discovery_then_image_attachment": "find_source_url_before_image_import",
+            "image_evidence_confirmation_required": "confirm_source_then_fill_image_url_templates",
             "metadata_evidence_required": "collect_official_metadata_evidence",
             "manual_dedupe_review_required": "compare_duplicate_group_evidence",
             "official_campaign_evidence_required": "verify_ichiban_campaign_page",
@@ -2080,6 +2110,25 @@ def build_agent_work_queue_public(
                     "Review non-barcode fields before long barcode research.",
                     "Confirm every source, image, date, price, or Japanese name against exact evidence.",
                     "Prepare reviewed catalog patches only; auto-apply remains disabled.",
+                ],
+                samples=[item for item in action_batch.get("items", []) if isinstance(item, dict)],
+            )
+
+    image_action_batches = [batch for batch in image_action_queue.get("batches", []) if isinstance(batch, dict)]
+    if image_action_batches:
+        for action_batch in image_action_batches[:10]:
+            add_batch(
+                agent_id="agent-image-action",
+                workstream="image_attachment_action_queue",
+                priority=int(action_batch.get("priority") or 99),
+                title=f"{action_batch.get('source_store')} image attachment action",
+                public_report=IMAGE_ATTACHMENT_ACTION_QUEUE,
+                rows=int(action_batch.get("row_count") or 0),
+                recommended_action=str(action_batch.get("recommended_action") or "review image action batch"),
+                acceptance_criteria=[
+                    "Confirm exact product identity before filling image_url.",
+                    "Use official or trusted product image evidence, not resale or generic listing images.",
+                    "Prepare reviewed image templates only; auto-apply remains disabled.",
                 ],
                 samples=[item for item in action_batch.get("items", []) if isinstance(item, dict)],
             )
@@ -3340,6 +3389,12 @@ def validate_report_consistency(
         expected_open_queues["requested_focus_action_rows"] = requested_focus_action_summary.get(
             "queued_action_rows", 0
         )
+    image_action_queue = (
+        load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
+    )
+    image_action_summary = image_action_queue.get("summary", {})
+    if image_action_summary:
+        expected_open_queues["image_attachment_action_rows"] = image_action_summary.get("queued_image_rows", 0)
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     dedupe_action_summary = dedupe_action_queue.get("summary", {})
     if dedupe_action_summary:
@@ -3481,6 +3536,7 @@ def validate_report_consistency(
         f"data/{REQUESTED_FOCUS.name}",
         f"data/{REQUESTED_FOCUS_REVIEW_BATCHES.name}",
         f"data/{REQUESTED_FOCUS_ACTION_QUEUE.name}",
+        f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
         f"data/{DANGANRONPA_MISSING_MEDIA.name}",
     }
     required_batch_fields = {
@@ -3504,6 +3560,7 @@ def validate_report_consistency(
         "official_exact_candidate_review_required",
         "official_candidate_mismatch_review_required",
         "source_discovery_then_image_attachment",
+        "image_evidence_confirmation_required",
         "metadata_evidence_required",
         "manual_dedupe_review_required",
         "official_campaign_evidence_required",
@@ -3517,6 +3574,7 @@ def validate_report_consistency(
         "verify_official_candidate_image_matches_row_type",
         "review_official_candidates_before_import",
         "find_source_url_before_image_import",
+        "confirm_source_then_fill_image_url_templates",
         "collect_official_metadata_evidence",
         "compare_duplicate_group_evidence",
         "verify_ichiban_campaign_page",
@@ -3695,6 +3753,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["requested_focus_action_queue"] = copy_report_summary(
                 REQUESTED_FOCUS_ACTION_QUEUE, "requested_focus_action_queue"
             )
+        if IMAGE_ATTACHMENT_ACTION_QUEUE.exists():
+            target["image_attachment_action_queue"] = copy_report_summary(
+                IMAGE_ATTACHMENT_ACTION_QUEUE, "image_attachment_action_queue"
+            )
         target["danganronpa_missing_media"] = {
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
             **danganronpa_missing_media["summary"],
@@ -3802,6 +3864,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         QUALITY,
         IMAGE_BACKLOG,
         IMAGE_CANDIDATES,
+        IMAGE_ATTACHMENT_ACTION_QUEUE,
         DEDUPLICATION,
         DEDUPLICATION_REVIEW_BATCHES,
         DEDUPLICATION_ACTION_QUEUE,
@@ -3862,6 +3925,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(QUALITY.relative_to(ROOT)),
             str(IMAGE_BACKLOG.relative_to(ROOT)),
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
+            str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
             str(REQUESTED_FOCUS_REVIEW_BATCHES.relative_to(ROOT)),
