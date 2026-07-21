@@ -139,6 +139,36 @@ FAMILY_VISUALS = {
     "other": {"icon_key": "category", "color_hint": "neutral", "color_hex": "0xFF9CA3AF"},
 }
 
+FOLDER_COLOR_PALETTE = [
+    {"color_hint": "red", "color_hex": "0xFFD64562", "sort_order": 10},
+    {"color_hint": "coral", "color_hex": "0xFFFF6B6B", "sort_order": 20},
+    {"color_hint": "orange", "color_hex": "0xFFFF9F43", "sort_order": 30},
+    {"color_hint": "yellow", "color_hex": "0xFFFFD84D", "sort_order": 40},
+    {"color_hint": "lime", "color_hex": "0xFFA3E635", "sort_order": 50},
+    {"color_hint": "green", "color_hex": "0xFF42A866", "sort_order": 60},
+    {"color_hint": "mint", "color_hex": "0xFF28D6C8", "sort_order": 70},
+    {"color_hint": "cyan", "color_hex": "0xFF22D3EE", "sort_order": 80},
+    {"color_hint": "blue", "color_hex": "0xFF5BA7F7", "sort_order": 90},
+    {"color_hint": "indigo", "color_hex": "0xFF4F46E5", "sort_order": 100},
+    {"color_hint": "purple", "color_hex": "0xFFA78BFA", "sort_order": 110},
+    {"color_hint": "pink", "color_hex": "0xFFFF8FC3", "sort_order": 120},
+    {"color_hint": "neutral", "color_hex": "0xFF9CA3AF", "sort_order": 130},
+]
+
+FAMILY_ICON_OPTIONS = {
+    "figure": ["toys", "view_in_ar", "emoji_objects"],
+    "plush": ["face", "sentiment_satisfied", "favorite"],
+    "badge": ["badge", "stars", "workspace_premium"],
+    "acrylic": ["view_carousel", "layers", "photo_library"],
+    "keyring": ["local_offer", "vpn_key", "sell"],
+    "stationery": ["sticky_note", "edit_note", "article"],
+    "daily_goods": ["inventory", "shopping_bag", "widgets"],
+    "display_goods": ["photo", "collections", "wallpaper"],
+    "apparel": ["style", "checkroom", "dry_cleaning"],
+    "fan_goods": ["celebration", "campaign", "favorite"],
+    "other": ["category", "folder", "apps"],
+}
+
 CANONICAL_CATEGORY_SUGGESTIONS = {
     "클리어파일": "문구",
     "카드": "문구",
@@ -577,6 +607,27 @@ def category_family(category: str) -> str:
     return "other"
 
 
+def color_sort_order(color_hint: str) -> int:
+    for row in FOLDER_COLOR_PALETTE:
+        if row["color_hint"] == color_hint:
+            return int(row["sort_order"])
+    return 999
+
+
+def folder_visual_token(category: str, family: str, rows: int) -> dict[str, Any]:
+    visual = FAMILY_VISUALS.get(family, FAMILY_VISUALS["other"])
+    return {
+        "category": category,
+        "family": family,
+        "rows": rows,
+        "color_hint": visual["color_hint"],
+        "color_hex": visual["color_hex"],
+        "color_sort_order": color_sort_order(visual["color_hint"]),
+        "primary_icon_key": visual["icon_key"],
+        "icon_options": FAMILY_ICON_OPTIONS.get(family, FAMILY_ICON_OPTIONS["other"]),
+    }
+
+
 def counter_rows(counter: Counter[Any], keys: tuple[str, ...], limit: int) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for values, count in counter.most_common(limit):
@@ -612,6 +663,7 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
     by_sub_series = Counter(str(item.get("sub_series") or "") for item in rows if present(item.get("sub_series")))
 
     category_visuals = []
+    folder_visual_tokens = []
     for category, count in by_category.most_common(120):
         family = category_family(category)
         visual = FAMILY_VISUALS.get(family, FAMILY_VISUALS["other"])
@@ -625,6 +677,15 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
                 "recommended_color_hex": visual["color_hex"],
             }
         )
+        folder_visual_tokens.append(folder_visual_token(category, family, count))
+
+    folder_visual_tokens.sort(
+        key=lambda row: (
+            row["color_sort_order"],
+            str(row.get("family") or ""),
+            str(row.get("category") or ""),
+        )
+    )
 
     suggestions = []
     for category, canonical in CANONICAL_CATEGORY_SUGGESTIONS.items():
@@ -661,6 +722,8 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
         "category_families": counter_rows(by_family, ("family",), 40),
         "categories": counter_rows(by_category, ("category",), 120),
         "category_visuals": category_visuals,
+        "folder_color_palette": FOLDER_COLOR_PALETTE,
+        "folder_visual_tokens": folder_visual_tokens,
         "top_store_categories": counter_rows(by_store_category, ("source_store", "category"), 120),
         "missing_image_by_category": counter_rows(missing_image_by_category, ("category",), 60),
         "missing_source_url_by_category": counter_rows(missing_source_by_category, ("category",), 60),
