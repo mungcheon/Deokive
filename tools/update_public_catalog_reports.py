@@ -553,6 +553,53 @@ def build_image_enrichment_batches_public(
 
     by_workflow = Counter(image_workflow(item) for item in missing)
     by_store = Counter(str(item.get("source_store") or "unknown") for item in missing)
+    workflow_steps = {
+        "extract_from_existing_source_url": {
+            "state": "ready_for_source_image_extraction",
+            "blocking_reason": None,
+            "next_step": "extract_product_image_from_existing_exact_source_url",
+            "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
+        },
+        "replace_generic_source_then_extract_image": {
+            "state": "blocked_by_generic_storefront_url",
+            "blocking_reason": "source_url points to a generic storefront, not an exact product detail page",
+            "next_step": "replace_with_exact_product_source_url_before_image_import",
+            "public_report": f"data/{GENERIC_SOURCE.name}",
+        },
+        "review_gotouchi_official_candidates": {
+            "state": "blocked_by_candidate_type_review",
+            "blocking_reason": "official motif candidates may not match row product type",
+            "next_step": "review_gotouchi_official_candidate_report",
+            "public_report": f"data/{GOTOUCHI.name}",
+        },
+        "find_source_then_extract_image": {
+            "state": "blocked_by_missing_source_url",
+            "blocking_reason": "image import requires an exact source_url first",
+            "next_step": "find_exact_official_source_url_then_extract_image",
+            "public_report": f"data/{SOURCE_DISCOVERY.name}",
+        },
+        "manual_image_research": {
+            "state": "manual_research_required",
+            "blocking_reason": "no trusted automated source discovery path is configured for this store",
+            "next_step": "manual_official_image_research_with_evidence",
+            "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
+        },
+    }
+    blocker_summary = [
+        {
+            "workflow": workflow,
+            "rows": by_workflow.get(workflow, 0),
+            **workflow_steps[workflow],
+        }
+        for workflow in (
+            "extract_from_existing_source_url",
+            "replace_generic_source_then_extract_image",
+            "review_gotouchi_official_candidates",
+            "find_source_then_extract_image",
+            "manual_image_research",
+        )
+        if by_workflow.get(workflow, 0)
+    ]
     return {
         "schema_version": 1,
         "summary": {
@@ -566,6 +613,8 @@ def build_image_enrichment_batches_public(
             "top_source_stores": by_store.most_common(30),
             "by_workflow": by_workflow.most_common(),
         },
+        "workflow_steps": workflow_steps,
+        "blocker_summary": blocker_summary,
         "instructions": [
             "Public image enrichment batches grouped by readiness and source store.",
             "Rows with source_url should be attempted first because identity evidence already exists.",
@@ -1825,6 +1874,26 @@ def validate_report_consistency(
     )
     if image_workflow_total != image_summary.get("missing_image_rows"):
         findings.append("image_enrichment workflow totals do not sum to missing_image_rows")
+    blocker_summary = image_enrichment_batches.get("blocker_summary", [])
+    if sum(int(row.get("rows") or 0) for row in blocker_summary if isinstance(row, dict)) != image_summary.get(
+        "missing_image_rows"
+    ):
+        findings.append("image_enrichment blocker_summary rows do not sum to missing_image_rows")
+    required_blocker_fields = {
+        "workflow",
+        "rows",
+        "state",
+        "blocking_reason",
+        "next_step",
+        "public_report",
+    }
+    for row in blocker_summary:
+        if not isinstance(row, dict):
+            findings.append("image_enrichment blocker_summary contains non-object row")
+            continue
+        missing_blocker_fields = required_blocker_fields - set(row)
+        if missing_blocker_fields:
+            findings.append(f"image_enrichment blocker_summary row missing fields: {sorted(missing_blocker_fields)}")
 
     expected_open_queues = {
         "source_discovery_rows": source_summary.get("source_discovery_rows", 0),

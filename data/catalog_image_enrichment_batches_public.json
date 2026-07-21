@@ -149,6 +149,72 @@
       ]
     ]
   },
+  "workflow_steps": {
+    "extract_from_existing_source_url": {
+      "state": "ready_for_source_image_extraction",
+      "blocking_reason": null,
+      "next_step": "extract_product_image_from_existing_exact_source_url",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    "replace_generic_source_then_extract_image": {
+      "state": "blocked_by_generic_storefront_url",
+      "blocking_reason": "source_url points to a generic storefront, not an exact product detail page",
+      "next_step": "replace_with_exact_product_source_url_before_image_import",
+      "public_report": "data/generic_source_cleanup_public.json"
+    },
+    "review_gotouchi_official_candidates": {
+      "state": "blocked_by_candidate_type_review",
+      "blocking_reason": "official motif candidates may not match row product type",
+      "next_step": "review_gotouchi_official_candidate_report",
+      "public_report": "data/gotouchi_chiikawa_image_candidates_public.json"
+    },
+    "find_source_then_extract_image": {
+      "state": "blocked_by_missing_source_url",
+      "blocking_reason": "image import requires an exact source_url first",
+      "next_step": "find_exact_official_source_url_then_extract_image",
+      "public_report": "data/source_discovery_queue_public.json"
+    },
+    "manual_image_research": {
+      "state": "manual_research_required",
+      "blocking_reason": "no trusted automated source discovery path is configured for this store",
+      "next_step": "manual_official_image_research_with_evidence",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    }
+  },
+  "blocker_summary": [
+    {
+      "workflow": "replace_generic_source_then_extract_image",
+      "rows": 50,
+      "state": "blocked_by_generic_storefront_url",
+      "blocking_reason": "source_url points to a generic storefront, not an exact product detail page",
+      "next_step": "replace_with_exact_product_source_url_before_image_import",
+      "public_report": "data/generic_source_cleanup_public.json"
+    },
+    {
+      "workflow": "review_gotouchi_official_candidates",
+      "rows": 23,
+      "state": "blocked_by_candidate_type_review",
+      "blocking_reason": "official motif candidates may not match row product type",
+      "next_step": "review_gotouchi_official_candidate_report",
+      "public_report": "data/gotouchi_chiikawa_image_candidates_public.json"
+    },
+    {
+      "workflow": "find_source_then_extract_image",
+      "rows": 642,
+      "state": "blocked_by_missing_source_url",
+      "blocking_reason": "image import requires an exact source_url first",
+      "next_step": "find_exact_official_source_url_then_extract_image",
+      "public_report": "data/source_discovery_queue_public.json"
+    },
+    {
+      "workflow": "manual_image_research",
+      "rows": 5,
+      "state": "manual_research_required",
+      "blocking_reason": "no trusted automated source discovery path is configured for this store",
+      "next_step": "manual_official_image_research_with_evidence",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    }
+  ],
   "instructions": [
     "Public image enrichment batches grouped by readiness and source store.",
     "Rows with source_url should be attempted first because identity evidence already exists.",
