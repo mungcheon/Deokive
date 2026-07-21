@@ -33,8 +33,9 @@ def _load_items(path: Path) -> list[dict[str, Any]]:
 
 
 def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
+    catalog_index = item.get("row_index")
     return {
-        "catalog_index": item.get("row_index"),
+        "catalog_index": catalog_index,
         "source_store": item.get("source_store"),
         "category": item.get("category"),
         "name_ko": item.get("name_ko"),
@@ -43,6 +44,16 @@ def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
         "web_search_url": item.get("web_search_url"),
         "allowed_source_domains": item.get("allowed_source_domains") or [],
         "acceptance_rule": item.get("acceptance_rule"),
+        "source_patch_template": {
+            "catalog_index": catalog_index,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": item.get("source_store"),
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": False,
+            "requires_exact_identity_match": True,
+        },
+        "blocked_until": "exact_product_detail_source_url_confirmed",
         "auto_apply_enabled": False,
     }
 
@@ -107,6 +118,14 @@ def build_report(items: list[dict[str, Any]], *, batch_size: int = 25) -> dict[s
                     "acceptance_rule": policy["acceptance_rule"],
                     "allowed_source_domains": allowed_domains,
                     "category_counts": categories.most_common(),
+                    "source_patch_template_fields": [
+                        "catalog_index",
+                        "source_url",
+                        "image_url",
+                        "evidence_url",
+                        "manual_confirmed",
+                    ],
+                    "blocked_until": "exact_product_detail_source_url_confirmed",
                     "recommended_action": "Find exact product/detail source URLs before any image_url import.",
                     "items": [_compact_item(row) for row in batch_rows],
                     "auto_apply_enabled": False,

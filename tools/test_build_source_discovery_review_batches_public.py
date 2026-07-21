@@ -45,6 +45,16 @@ class BuildSourceDiscoveryReviewBatchesPublicTest(unittest.TestCase):
         self.assertEqual(report["batches"][0]["workflow"], "official_search_url_available")
         self.assertEqual(report["batches"][0]["items"][0]["catalog_index"], 1)
         self.assertIn("www.animate-onlineshop.jp", report["batches"][0]["allowed_source_domains"])
+        self.assertEqual(
+            report["batches"][0]["blocked_until"],
+            "exact_product_detail_source_url_confirmed",
+        )
+        self.assertIn("source_url", report["batches"][0]["source_patch_template_fields"])
+        self.assertEqual(
+            report["batches"][0]["items"][0]["source_patch_template"]["source_url"],
+            "<exact_product_detail_url>",
+        )
+        self.assertFalse(report["batches"][0]["items"][0]["source_patch_template"]["manual_confirmed"])
         self.assertEqual(report["batches"][1]["workflow"], "licensed_retailer_search_review")
         self.assertTrue(all(batch["auto_apply_enabled"] is False for batch in report["batches"]))
 
