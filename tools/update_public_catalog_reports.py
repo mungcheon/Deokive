@@ -769,21 +769,25 @@ def build_agent_work_queue_public(
         if workflow == "extract_from_existing_source_url":
             agent_id = "agent-image-existing-source"
             workstream = "image_url_attachment"
+            batch_report = IMAGE_ENRICHMENT_BATCHES
         elif workflow == "replace_generic_source_then_extract_image":
             agent_id = "agent-generic-source-cleanup"
             workstream = "generic_source_url_cleanup"
+            batch_report = GENERIC_SOURCE if GENERIC_SOURCE.exists() else IMAGE_ENRICHMENT_BATCHES
         elif workflow == "review_gotouchi_official_candidates":
             agent_id = "agent-gotouchi-review"
             workstream = "gotouchi_official_candidate_review"
+            batch_report = GOTOUCHI if GOTOUCHI.exists() else IMAGE_ENRICHMENT_BATCHES
         else:
             agent_id = "agent-source-image"
             workstream = "image_url_attachment"
+            batch_report = IMAGE_ENRICHMENT_BATCHES
         add_batch(
             agent_id=agent_id,
             workstream=workstream,
             priority=int(group.get("priority") or 99),
             title=f"{group.get('source_store')} 이미지 보강 ({workflow})",
-            public_report=IMAGE_ENRICHMENT_BATCHES,
+            public_report=batch_report,
             rows=int(group.get("missing_image_rows") or 0),
             recommended_action=str(group.get("recommended_action") or "review image candidates"),
             acceptance_criteria=[
@@ -1507,6 +1511,8 @@ def validate_report_consistency(
         f"data/{DEDUPLICATION.name}",
         f"data/{ANIMATION_CATEGORIES.name}",
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+        f"data/{GENERIC_SOURCE.name}",
+        f"data/{GOTOUCHI.name}",
     }
     required_batch_fields = {
         "batch_id",
