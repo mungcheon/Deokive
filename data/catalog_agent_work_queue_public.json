@@ -1,9 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T19:11:02Z",
+  "generated_at": "2026-07-21T19:12:47Z",
   "summary": {
     "batch_count": 53,
     "summed_batch_rows": 18032,
+    "top_next_batch_count": 10,
     "by_workstream": [
       [
         "image_url_attachment",
@@ -73,6 +74,98 @@
       "ichiban_missing_price_rows": 365
     }
   },
+  "top_next_batches": [
+    {
+      "batch_id": "010-agent-image-existing-source-01",
+      "agent_id": "agent-image-existing-source",
+      "workstream": "image_url_attachment",
+      "priority": 10,
+      "rows": 45,
+      "title": "Stellive Store 이미지 보강 (extract_from_existing_source_url)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "010-agent-image-existing-source-02",
+      "agent_id": "agent-image-existing-source",
+      "workstream": "image_url_attachment",
+      "priority": 10,
+      "rows": 23,
+      "title": "ご当地ちいかわ 공식(API) 이미지 보강 (extract_from_existing_source_url)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "010-agent-image-existing-source-03",
+      "agent_id": "agent-image-existing-source",
+      "workstream": "image_url_attachment",
+      "priority": 10,
+      "rows": 3,
+      "title": "Weverse Shop 이미지 보강 (extract_from_existing_source_url)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "010-agent-image-existing-source-04",
+      "agent_id": "agent-image-existing-source",
+      "workstream": "image_url_attachment",
+      "priority": 10,
+      "rows": 2,
+      "title": "포켓몬 센터 이미지 보강 (extract_from_existing_source_url)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "020-agent-source-image-05",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "rows": 148,
+      "title": "애니메이트 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "020-agent-source-image-06",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "rows": 142,
+      "title": "엔스카이 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "020-agent-source-image-07",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "rows": 57,
+      "title": "굿스마일컴퍼니 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "020-agent-source-image-08",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "rows": 44,
+      "title": "코토부키야 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "020-agent-source-image-09",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "rows": 36,
+      "title": "Movic 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "batch_id": "020-agent-source-image-10",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "rows": 23,
+      "title": "점프 캐릭터즈 스토어 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    }
+  ],
   "instructions": [
     "Agent-ready public work queue generated from the public catalog reports.",
     "Use this file to split DB cleanup across agents without exposing private local data.",

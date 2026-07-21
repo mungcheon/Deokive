@@ -588,6 +588,12 @@ def build_operations_public(
 
     next_actions = [
         {
+            "priority": 5,
+            "workstream": "agent_work_queue",
+            "public_report": f"data/{AGENT_WORK_QUEUE.name}",
+            "recommended_next_action": "Open top_next_batches and assign the first image/source batches before broad metadata work.",
+        },
+        {
             "priority": 10,
             "workstream": "image_url_attachment",
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
@@ -879,16 +885,30 @@ def build_agent_work_queue_public(
     batches.sort(key=lambda row: (row["priority"], -row["rows"], row["batch_id"]))
     by_workstream = Counter(str(batch["workstream"]) for batch in batches)
     by_agent = Counter(str(batch["agent_id"]) for batch in batches)
+    top_next_batches = [
+        {
+            "batch_id": batch["batch_id"],
+            "agent_id": batch["agent_id"],
+            "workstream": batch["workstream"],
+            "priority": batch["priority"],
+            "rows": batch["rows"],
+            "title": batch["title"],
+            "public_report": batch["public_report"],
+        }
+        for batch in batches[:10]
+    ]
     return {
         "schema_version": 1,
         "generated_at": generated_at,
         "summary": {
             "batch_count": len(batches),
             "summed_batch_rows": sum(int(batch.get("rows") or 0) for batch in batches),
+            "top_next_batch_count": len(top_next_batches),
             "by_workstream": by_workstream.most_common(),
             "by_agent": by_agent.most_common(),
             "open_review_queues": operations["summary"]["open_review_queues"],
         },
+        "top_next_batches": top_next_batches,
         "instructions": [
             "Agent-ready public work queue generated from the public catalog reports.",
             "Use this file to split DB cleanup across agents without exposing private local data.",
@@ -1360,6 +1380,7 @@ def validate_report_consistency(
     open_queues = operations_summary["open_review_queues"]
     agent_summary = agent_work_queue["summary"]
     batches = agent_work_queue.get("batches", [])
+    top_next_batches = agent_work_queue.get("top_next_batches", [])
 
     expected_missing = {
         "source_url": missing["source_url"],
@@ -1413,6 +1434,8 @@ def validate_report_consistency(
         findings.append("agent_work_queue.open_review_queues does not match source report summaries")
     if agent_summary.get("batch_count") != len(batches):
         findings.append("agent_work_queue.batch_count does not match published batches")
+    if agent_summary.get("top_next_batch_count") != len(top_next_batches):
+        findings.append("agent_work_queue.top_next_batch_count does not match top_next_batches")
     if agent_summary.get("summed_batch_rows") != sum(int(batch.get("rows", 0)) for batch in batches):
         findings.append("agent_work_queue.summed_batch_rows does not match published batches")
     if agent_summary.get("by_workstream") != Counter(str(batch.get("workstream") or "") for batch in batches).most_common():
@@ -1422,6 +1445,20 @@ def validate_report_consistency(
     batch_priorities = [int(batch.get("priority", 999)) for batch in batches]
     if batch_priorities != sorted(batch_priorities):
         findings.append("agent_work_queue.batches are not sorted by ascending priority")
+    expected_top_next_batches = [
+        {
+            "batch_id": batch["batch_id"],
+            "agent_id": batch["agent_id"],
+            "workstream": batch["workstream"],
+            "priority": batch["priority"],
+            "rows": batch["rows"],
+            "title": batch["title"],
+            "public_report": batch["public_report"],
+        }
+        for batch in batches[:10]
+    ]
+    if top_next_batches != expected_top_next_batches:
+        findings.append("agent_work_queue.top_next_batches does not match first published batches")
     seen_batch_ids: set[str] = set()
     allowed_reports = {
         f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
