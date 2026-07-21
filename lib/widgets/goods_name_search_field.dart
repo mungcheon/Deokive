@@ -32,6 +32,7 @@ class _GoodsNameSearchFieldState extends State<GoodsNameSearchField> {
       builder: (_) => _GoodsCatalogPickerDialog(
         catalog: widget.catalog,
         initialQuery: widget.controller.text.trim(),
+        actionLabel: '선택',
       ),
     );
     if (picked == null) return;
@@ -72,12 +73,14 @@ Future<GoodsCatalogEntry?> showGoodsCatalogPicker(
   BuildContext context, {
   required List<GoodsCatalogEntry> catalog,
   String initialQuery = '',
+  String actionLabel = '선택',
 }) {
   return showDialog<GoodsCatalogEntry>(
     context: context,
     builder: (_) => _GoodsCatalogPickerDialog(
       catalog: catalog,
       initialQuery: initialQuery,
+      actionLabel: actionLabel,
     ),
   );
 }
@@ -87,10 +90,12 @@ Future<GoodsCatalogEntry?> showGoodsCatalogPicker(
 class _GoodsCatalogPickerDialog extends StatefulWidget {
   final List<GoodsCatalogEntry> catalog;
   final String initialQuery;
+  final String actionLabel;
 
   const _GoodsCatalogPickerDialog({
     required this.catalog,
     required this.initialQuery,
+    required this.actionLabel,
   });
 
   @override
@@ -155,8 +160,8 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
                   const Expanded(
                     child: Text(
                       '굿즈 검색',
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
                   IconButton(
@@ -227,14 +232,15 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
                           itemCount: results.length,
                           separatorBuilder: (_, __) =>
                               Divider(height: 1, color: theme.dividerColor),
-                          itemBuilder: (context, i) =>
-                              _CatalogRow(entry: results[i]),
+                          itemBuilder: (context, i) => _CatalogRow(
+                            entry: results[i],
+                            actionLabel: widget.actionLabel,
+                          ),
                         ),
             ),
             const Divider(height: 1),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 12, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Row(
                 children: [
                   if (q.isNotEmpty)
@@ -266,8 +272,12 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
 
 class _CatalogRow extends StatelessWidget {
   final GoodsCatalogEntry entry;
+  final String actionLabel;
 
-  const _CatalogRow({required this.entry});
+  const _CatalogRow({
+    required this.entry,
+    required this.actionLabel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -277,9 +287,8 @@ class _CatalogRow extends StatelessWidget {
       if (entry.affiliation.isNotEmpty) entry.affiliation,
       if (entry.sourceStore.isNotEmpty) entry.sourceStore,
     ].join(' · ');
-    final priceText = entry.officialPriceJpy == null
-        ? null
-        : '¥${entry.officialPriceJpy}';
+    final priceText =
+        entry.officialPriceJpy == null ? null : '¥${entry.officialPriceJpy}';
     return InkWell(
       onTap: () => Navigator.pop(context, entry),
       child: Padding(
@@ -332,16 +341,34 @@ class _CatalogRow extends StatelessWidget {
                 ],
               ),
             ),
-            if (priceText != null) ...[
-              const SizedBox(width: 8),
-              Text(
-                priceText,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 13,
+            const SizedBox(width: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                if (priceText != null)
+                  Text(
+                    priceText,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 13,
+                    ),
+                  ),
+                const SizedBox(height: 8),
+                FilledButton.tonalIcon(
+                  onPressed: () => Navigator.pop(context, entry),
+                  icon: const Icon(Icons.add_rounded, size: 16),
+                  label: Text(actionLabel),
+                  style: FilledButton.styleFrom(
+                    visualDensity: VisualDensity.compact,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    textStyle: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ],
         ),
       ),

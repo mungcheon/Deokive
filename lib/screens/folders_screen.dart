@@ -400,6 +400,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
     final entry = await showGoodsCatalogPicker(
       context,
       catalog: appState.curatedCatalogEntries,
+      actionLabel: '추가',
     );
     if (entry == null || !context.mounted) return;
 
