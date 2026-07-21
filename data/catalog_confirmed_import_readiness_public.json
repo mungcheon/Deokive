@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T21:06:41Z",
+  "generated_at": "2026-07-21T21:55:39Z",
   "scope": "public_confirmed_import_readiness",
   "summary": {
-    "workflow_count": 7,
+    "workflow_count": 8,
     "confirmed_files": 3,
-    "template_items": 1349,
+    "template_items": 1996,
     "manual_confirmed_true": 0,
     "updated_rows": 0,
     "skipped_rows": 0,
@@ -18,11 +18,11 @@
         3
       ],
       [
-        "no_current_candidates",
-        2
+        "template_ready_for_manual_confirmation",
+        3
       ],
       [
-        "template_ready_for_manual_confirmation",
+        "no_current_candidates",
         2
       ]
     ],
@@ -75,6 +75,24 @@
       "confirmed_items": 0,
       "manual_confirmed_true": 0,
       "template_items": 500,
+      "template_manual_confirmed_true": 0,
+      "updated_rows": 0,
+      "skipped_rows": 0,
+      "duplicates": 0,
+      "skip_reason_counts": [],
+      "next_action": "Review template candidates and copy exact matches into the confirmed file.",
+      "auto_apply_enabled": false
+    },
+    {
+      "workflow": "source_discovery",
+      "public_workstream": "source_discovery_source_urls",
+      "status": "template_ready_for_manual_confirmation",
+      "confirmed_file_exists": false,
+      "template_file_exists": true,
+      "import_report_exists": true,
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 647,
       "template_manual_confirmed_true": 0,
       "updated_rows": 0,
       "skipped_rows": 0,

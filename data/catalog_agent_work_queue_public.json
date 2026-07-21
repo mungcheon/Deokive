@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T21:53:04Z",
+  "generated_at": "2026-07-21T21:55:40Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 11120,
+    "summed_batch_rows": 11767,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -111,7 +111,7 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
-      "confirmed_import_template_rows": 1349,
+      "confirmed_import_template_rows": 1996,
       "confirmed_import_pending_rows": 0,
       "requested_focus_review_rows": 6275,
       "animation_category_review_rows": 428
@@ -1910,7 +1910,7 @@
       "priority": 19,
       "title": "Confirmed import readiness review",
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
-      "rows": 1349,
+      "rows": 1996,
       "recommended_action": "Review pending/blocked confirmed imports before any catalog write.",
       "acceptance_criteria": [
         "Do not expose row-level private candidate details in public reports.",
@@ -1928,6 +1928,24 @@
           "confirmed_items": 0,
           "manual_confirmed_true": 0,
           "template_items": 500,
+          "template_manual_confirmed_true": 0,
+          "updated_rows": 0,
+          "skipped_rows": 0,
+          "duplicates": 0,
+          "skip_reason_counts": [],
+          "next_action": "Review template candidates and copy exact matches into the confirmed file.",
+          "auto_apply_enabled": false
+        },
+        {
+          "workflow": "source_discovery",
+          "public_workstream": "source_discovery_source_urls",
+          "status": "template_ready_for_manual_confirmation",
+          "confirmed_file_exists": false,
+          "template_file_exists": true,
+          "import_report_exists": true,
+          "confirmed_items": 0,
+          "manual_confirmed_true": 0,
+          "template_items": 647,
           "template_manual_confirmed_true": 0,
           "updated_rows": 0,
           "skipped_rows": 0,

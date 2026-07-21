@@ -38,6 +38,12 @@ WORKFLOWS = {
         "report": SERVER / "catalog_field_confirmed_import_report.json",
         "public_workstream": "metadata_field_values",
     },
+    "source_discovery": {
+        "confirmed": SERVER / "source_discovery_confirmed_rows.json",
+        "template": SERVER / "source_discovery_confirmed_rows.template.json",
+        "report": SERVER / "source_discovery_confirmed_import_report.json",
+        "public_workstream": "source_discovery_source_urls",
+    },
     "catalog_image": {
         "confirmed": SERVER / "catalog_image_confirmed_rows.json",
         "template": SERVER / "catalog_image_confirmed_rows.template.json",

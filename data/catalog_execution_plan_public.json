@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T21:53:07Z",
+  "generated_at": "2026-07-21T21:55:42Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 8,
     "blocked_action_count": 1,
     "manual_review_action_count": 6,
     "pending_import_action_count": 0,
-    "total_action_rows": 30955,
+    "total_action_rows": 31602,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -18,7 +18,7 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
-      "confirmed_import_template_rows": 1349,
+      "confirmed_import_template_rows": 1996,
       "confirmed_import_pending_rows": 0,
       "requested_focus_review_rows": 6275,
       "animation_category_review_rows": 428
@@ -31,13 +31,13 @@
       "workstream": "confirmed_import_readiness",
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
       "status": "needs_manual_confirmation",
-      "rows": 1349,
+      "rows": 1996,
       "command": "Review templates and mark exact rows manual_confirmed=true before importing.",
       "next_step": "confirm_exact_rows_then_run_guarded_import",
       "blocker": "No public workflow has manual_confirmed=true rows yet.",
       "auto_apply_enabled": false,
       "evidence": {
-        "template_items": 1349,
+        "template_items": 1996,
         "ready_or_pending_import_rows": 0,
         "blocked_confirmed_rows": 0
       }

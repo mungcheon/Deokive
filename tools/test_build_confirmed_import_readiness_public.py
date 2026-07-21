@@ -17,6 +17,15 @@ def _write_json(path: Path, payload) -> Path:
 
 
 class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
+    def test_default_workflows_include_source_discovery_import_path(self) -> None:
+        self.assertIn("source_discovery", readiness.WORKFLOWS)
+        workflow = readiness.WORKFLOWS["source_discovery"]
+
+        self.assertEqual(workflow["confirmed"].name, "source_discovery_confirmed_rows.json")
+        self.assertEqual(workflow["template"].name, "source_discovery_confirmed_rows.template.json")
+        self.assertEqual(workflow["report"].name, "source_discovery_confirmed_import_report.json")
+        self.assertEqual(workflow["public_workstream"], "source_discovery_source_urls")
+
     def test_template_candidates_are_public_without_row_details(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
