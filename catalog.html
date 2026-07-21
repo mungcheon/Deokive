@@ -531,6 +531,159 @@
       transform: translate(-50%, 0);
     }
 
+    .owned-sheet {
+      background: rgba(44, 36, 48, 0.24);
+      display: grid;
+      inset: 0;
+      opacity: 0;
+      padding: 18px;
+      place-items: end center;
+      pointer-events: none;
+      position: fixed;
+      transition: opacity 180ms ease;
+      z-index: 18;
+    }
+
+    .owned-sheet.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .owned-sheet-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(44, 36, 48, 0.22);
+      display: grid;
+      gap: 14px;
+      max-width: 430px;
+      padding: 18px;
+      transform: translateY(18px);
+      transition: transform 180ms ease;
+      width: 100%;
+    }
+
+    .owned-sheet.open .owned-sheet-card {
+      transform: translateY(0);
+    }
+
+    .sheet-head {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .sheet-head h2 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .sheet-close {
+      background: rgba(255, 242, 247, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--pink-dark);
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 900;
+      height: 36px;
+      line-height: 1;
+      width: 36px;
+    }
+
+    .sheet-item {
+      align-items: center;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 58px 1fr;
+      min-width: 0;
+    }
+
+    .sheet-thumb {
+      background: #fff2f7;
+      border: 1px solid rgba(255, 126, 178, 0.18);
+      border-radius: 16px;
+      height: 58px;
+      overflow: hidden;
+      width: 58px;
+    }
+
+    .sheet-thumb img {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .sheet-thumb span {
+      align-items: center;
+      color: var(--muted);
+      display: flex;
+      font-size: 11px;
+      font-weight: 900;
+      height: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .sheet-name {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.35;
+      min-width: 0;
+    }
+
+    .sheet-meta {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      margin-top: 4px;
+    }
+
+    .sheet-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .sheet-field span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .sheet-field select {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--ink);
+      min-height: 46px;
+      padding: 0 12px;
+    }
+
+    .sheet-actions {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .sheet-actions button {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: 900;
+      min-height: 46px;
+    }
+
+    .sheet-actions .ghost {
+      background: rgba(255, 242, 247, 0.82);
+      color: var(--pink-dark);
+    }
+
+    .sheet-actions .primary {
+      background: var(--pink);
+      color: #fff;
+    }
+
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
@@ -674,6 +827,29 @@
     </section>
     <button id="more" class="more" type="button" hidden>더 보기</button>
   </main>
+  <div id="ownedSheet" class="owned-sheet" aria-hidden="true">
+    <section class="owned-sheet-card" role="dialog" aria-modal="true" aria-labelledby="ownedSheetTitle">
+      <div class="sheet-head">
+        <h2 id="ownedSheetTitle">내 굿즈에 추가</h2>
+        <button id="closeOwnedSheet" class="sheet-close" type="button" aria-label="닫기">×</button>
+      </div>
+      <div class="sheet-item">
+        <div id="sheetThumb" class="sheet-thumb"><span>이미지</span></div>
+        <div>
+          <div id="sheetName" class="sheet-name">굿즈 이름</div>
+          <div id="sheetMeta" class="sheet-meta">선택한 DB 정보가 내 기기에만 저장돼요</div>
+        </div>
+      </div>
+      <label class="sheet-field">
+        <span>넣을 폴더</span>
+        <select id="sheetFolder" aria-label="굿즈를 넣을 폴더"></select>
+      </label>
+      <div class="sheet-actions">
+        <button id="sheetNewFolder" class="ghost" type="button">새 폴더</button>
+        <button id="confirmOwnedAdd" class="primary" type="button">추가하기</button>
+      </div>
+    </section>
+  </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
@@ -686,6 +862,7 @@
         folders: [],
         goods: [],
       },
+      pendingOwnedItem: null,
     };
 
     const $ = (id) => document.getElementById(id);
@@ -747,12 +924,15 @@
     function renderOwnedControls() {
       const select = $('ownedFolder');
       select.replaceChildren(...state.owned.folders.map((folder) => option(folder.name, folder.id)));
+      const sheetSelect = $('sheetFolder');
+      sheetSelect.replaceChildren(...state.owned.folders.map((folder) => option(folder.name, folder.id)));
+      sheetSelect.value = select.value || state.owned.folders[0]?.id || 'top';
       $('ownedCount').textContent = `${fmt.format(state.owned.goods.length)}개`;
       if (state.items.length) renderResults();
     }
 
-    function selectedFolder() {
-      const folderId = $('ownedFolder').value || state.owned.folders[0]?.id || 'top';
+    function selectedFolder(folderId = $('ownedFolder').value) {
+      folderId = folderId || state.owned.folders[0]?.id || 'top';
       return state.owned.folders.find((folder) => folder.id === folderId) || state.owned.folders[0];
     }
 
@@ -767,8 +947,8 @@
       return state.owned.goods.some((owned) => owned.folderId === folder.id && owned.catalogKey === key);
     }
 
-    function addOwned(item) {
-      const folder = selectedFolder();
+    function addOwned(item, folderId = $('ownedFolder').value) {
+      const folder = selectedFolder(folderId);
       if (!folder) return;
       const key = ownedKeyFor(item);
       const existing = state.owned.goods.find((owned) => owned.folderId === folder.id && owned.catalogKey === key);
@@ -805,7 +985,7 @@
       saveOwned();
     }
 
-    function createFolder() {
+    function createFolder(targetSelectId = 'ownedFolder') {
       const raw = prompt('새 폴더 이름을 입력해 주세요', '새 굿즈 폴더');
       const name = (raw || '').trim();
       if (!name) return;
@@ -815,8 +995,38 @@
       };
       state.owned.folders.unshift(folder);
       saveOwned();
+      $(targetSelectId).value = folder.id;
       $('ownedFolder').value = folder.id;
+      $('sheetFolder').value = folder.id;
       showToast(`${name} 폴더를 만들었어요`);
+    }
+
+    function openOwnedSheet(item) {
+      state.pendingOwnedItem = item;
+      const name = item.name_ko || item.name_ja || item.name_en || '이름 없음';
+      const meta = [item.source_store, compactDate(item.release_date), price(item)].filter(Boolean).join(' · ');
+      $('sheetName').textContent = name;
+      $('sheetMeta').textContent = meta || '선택한 DB 정보가 내 기기에만 저장돼요';
+      $('sheetFolder').value = $('ownedFolder').value || state.owned.folders[0]?.id || 'top';
+      $('sheetThumb').innerHTML = item.image_url
+        ? `<img src="${escapeAttr(item.image_url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'이미지 없음'}))">`
+        : '<span>이미지 없음</span>';
+      $('ownedSheet').classList.add('open');
+      $('ownedSheet').setAttribute('aria-hidden', 'false');
+    }
+
+    function closeOwnedSheet() {
+      state.pendingOwnedItem = null;
+      $('ownedSheet').classList.remove('open');
+      $('ownedSheet').setAttribute('aria-hidden', 'true');
+    }
+
+    function confirmOwnedAdd() {
+      if (!state.pendingOwnedItem) return closeOwnedSheet();
+      const folderId = $('sheetFolder').value || state.owned.folders[0]?.id || 'top';
+      $('ownedFolder').value = folderId;
+      addOwned(state.pendingOwnedItem, folderId);
+      closeOwnedSheet();
     }
 
     function showOwnedList() {
@@ -974,7 +1184,7 @@
           <button class="add-owned${added ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}">${addLabel}</button>
         </div>
       `;
-      card.querySelector('.add-owned').addEventListener('click', () => addOwned(item));
+      card.querySelector('.add-owned').addEventListener('click', () => openOwnedSheet(item));
       return card;
     }
 
@@ -1006,9 +1216,19 @@
     $('storeFilter').addEventListener('change', () => applyFilters(true));
     $('imageFilter').addEventListener('change', () => applyFilters(true));
     $('ownedFolder').addEventListener('change', renderResults);
-    $('newFolder').addEventListener('click', createFolder);
+    $('newFolder').addEventListener('click', () => createFolder('ownedFolder'));
     $('openOwned').addEventListener('click', showOwnedList);
     $('clearOwned').addEventListener('click', clearOwned);
+    $('closeOwnedSheet').addEventListener('click', closeOwnedSheet);
+    $('ownedSheet').addEventListener('click', (event) => {
+      if (event.target === $('ownedSheet')) closeOwnedSheet();
+    });
+    $('sheetFolder').addEventListener('change', () => {
+      $('ownedFolder').value = $('sheetFolder').value;
+      renderResults();
+    });
+    $('sheetNewFolder').addEventListener('click', () => createFolder('sheetFolder'));
+    $('confirmOwnedAdd').addEventListener('click', confirmOwnedAdd);
     $('more').addEventListener('click', () => {
       state.visible += 80;
       renderResults();
