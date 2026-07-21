@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import urllib.parse
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -20,6 +22,62 @@ REQUESTED = DATA / "requested_special_goods_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
 SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
+
+OFFICIAL_SEARCH_TEMPLATES = {
+    "애니메이트": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
+    "엔스카이": "https://www.enskyshop.com/products/list?name={query}",
+    "굿스마일컴퍼니": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D={query}",
+    "코토부키야": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword={query}",
+    "Movic": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword={query}",
+    "FuRyu": "https://furyuprize.com/search?keyword={query}",
+    "Taito": "https://www.taito.co.jp/prize?keyword={query}",
+    "AmiAmi": "https://www.amiami.jp/top/search/list?s_keywords={query}",
+    "Cospa": "https://www.cospa.com/cospa/itemlist/keyword/{query}",
+    "메가하우스": "https://www.megahobby.jp/?s={query}",
+    "반다이": "https://p-bandai.jp/search/?q={query}",
+    "점프 캐릭터즈 스토어": "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword={query}",
+    "무기와라스토어": "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword={query}",
+    "Banpresto": "https://bsp-prize.jp/search/?keyword={query}",
+    "SEGA": "https://segaplaza.jp/search/?word={query}",
+    "치이카와 마켓": "https://chiikawamarket.jp/search?q={query}",
+    "치이카와 모구모구 혼포": "https://chiikawamogumogu.shop/search?q={query}",
+    "치이카와 온라인 쿠지": "https://online-kuji.chiikawamarket.jp/search?q={query}",
+    "Re-ment": "https://www.re-ment.co.jp/?s={query}",
+    "Stellive Store": "https://stellive.fanding.kr/search?keyword={query}",
+    "JYP SHOP": "https://en.thejypshop.com/product/search.html?keyword={query}",
+    "산리오": "https://shop.sanrio.co.jp/search?keyword={query}",
+    "디즈니 스토어": "https://store.disney.co.jp/search?q={query}",
+    "가샤폰": "https://gashapon.jp/search/?q={query}",
+    "MINISO": "https://www.miniso.com/search?keyword={query}",
+    "MINISO 중국": "https://www.miniso.com/search?keyword={query}",
+    "ALTER": "https://www.google.com/search?q=site%3Aalter-web.jp%20{query}",
+    "Phat! Company": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D={query}",
+    "Bandai Premium": "https://p-bandai.jp/search/?q={query}",
+    "Hololive Production Official Shop": "https://shop.hololivepro.com/en/search?q={query}",
+    "SM STORE": "https://global.shop.smtown.com/search?q={query}",
+    "YG SELECT": "https://en.ygselect.com/product/search.html?keyword={query}",
+    "귀멸의 칼날 공식": "https://www.google.com/search?q=site%3Awebshop-global.ufotable.co.jp%20{query}",
+    "카도카와": "https://www.amiami.com/eng/search/list/?s_keywords={query}%20KADOKAWA",
+    "Algonavis": "https://bushiroad-store.com/search?q={query}",
+    "Hobby Max International": "https://www.amiami.com/eng/search/list/?s_keywords={query}%20HOBBY%20MAX",
+    "STARSHIP STORE": "https://www.starship-square.com/product/search.html?keyword={query}",
+    "CUBE STORE": "https://www.google.com/search?q=site%3Acubee.co.kr%20{query}",
+    "IST STORE": "https://www.google.com/search?q=site%3Ashop.weverse.io%20{query}",
+    "KQ FELLAZ": "https://www.google.com/search?q=site%3Akqshop.kr%20{query}",
+    "롯데웰푸드": "https://www.google.com/search?q=site%3Alottewellfood.com%20{query}",
+    "점프 숍": "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword={query}",
+    "이세계아이돌 공식 굿즈": "https://www.google.com/search?q=site%3Awithmuulive.com%20{query}",
+    "이세계아이돌 팝업스토어": "https://www.google.com/search?q=site%3Awithmuulive.com%20{query}",
+    "치이카와 중국 팝업스토어": "https://www.google.com/search?q=site%3Ax.com%2Fchiikawa_kouhou%20{query}",
+    "치이카와샵 용산": "https://www.google.com/search?q=site%3Ax.com%2Fchiikawashop_kr%20{query}",
+}
+
+LICENSED_RETAILER_STORES = {"AmiAmi"}
+DISCOVERY_PRIORITY = {
+    "official_search_url_available": 10,
+    "licensed_retailer_search_review": 20,
+    "manual_official_research": 40,
+}
 
 PUBLIC_FIELDS = [
     "catalog_index",
@@ -93,6 +151,84 @@ def copy_report_summary(path: Path, key: str) -> dict[str, Any]:
     return {"public_report": f"data/{path.name}", **summary}
 
 
+def discovery_query(item: dict[str, Any]) -> str:
+    for field in ("name_ja", "name_ko", "name_en"):
+        value = str(item.get(field) or "").strip()
+        if value:
+            return value
+    return ""
+
+
+def discovery_workflow(item: dict[str, Any]) -> str:
+    store = str(item.get("source_store") or "")
+    if store in LICENSED_RETAILER_STORES:
+        return "licensed_retailer_search_review"
+    if store in OFFICIAL_SEARCH_TEMPLATES:
+        return "official_search_url_available"
+    return "manual_official_research"
+
+
+def discovery_search_url(item: dict[str, Any], query: str) -> str | None:
+    template = OFFICIAL_SEARCH_TEMPLATES.get(str(item.get("source_store") or ""))
+    if not template or not query:
+        return None
+    return template.format(query=urllib.parse.quote(query))
+
+
+def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int = 120) -> dict[str, Any]:
+    queue: list[dict[str, Any]] = []
+    for row_number, item in enumerate(items):
+        if present(item.get("source_url")):
+            continue
+        query = discovery_query(item)
+        workflow = discovery_workflow(item)
+        source_store = str(item.get("source_store") or "")
+        web_query = " ".join(part for part in (query, source_store, "official", "公式 商品画像") if part)
+        queue.append(
+            {
+                "priority": DISCOVERY_PRIORITY[workflow],
+                "workflow": workflow,
+                "row_index": item.get("catalog_index", row_number),
+                "source_store": item.get("source_store"),
+                "affiliation": item.get("affiliation"),
+                "category": item.get("category"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "official_search_url": discovery_search_url(item, query),
+                "web_search_url": "https://www.google.com/search?q=" + urllib.parse.quote(web_query),
+                "recommended_next_action": "find_exact_product_detail_url_then_import_image",
+            }
+        )
+
+    queue.sort(
+        key=lambda row: (
+            row["priority"],
+            str(row.get("source_store") or ""),
+            str(row.get("affiliation") or ""),
+            str(row.get("category") or ""),
+            str(row.get("name_ja") or row.get("name_ko") or ""),
+        )
+    )
+    by_workflow = Counter(str(item.get("workflow") or "") for item in queue)
+    by_store = Counter(str(item.get("source_store") or "") for item in queue)
+    return {
+        "schema_version": 1,
+        "summary": {
+            "source_discovery_rows": len(queue),
+            "published_sample_rows": min(sample_rows, len(queue)),
+            "stale_excluded_rows": 0,
+            "by_workflow": by_workflow.most_common(),
+            "top_source_stores": by_store.most_common(30),
+        },
+        "instructions": [
+            "Public work queue for catalog rows that need exact source URLs or image enrichment.",
+            "Open official_search_url or web_search_url, verify an exact product detail page, then review source_url/image_url updates.",
+            "Do not auto-apply uncertain matches; use manual review before changing the catalog database.",
+        ],
+        "items": queue[:sample_rows],
+    }
+
+
 def validate_public_files(paths: list[Path]) -> list[str]:
     findings: list[str] = []
     for path in paths:
@@ -120,6 +256,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     missing = missing_counts(items)
     cov = coverage(missing, rows, ["source_url", "image_url", "release_date"])
     generated_at = now_utc()
+    source_discovery = build_source_discovery_public(items)
 
     public_meta = load_json(PUBLIC_META, {})
     public_meta.update(
@@ -193,8 +330,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["generic_source_cleanup_queue"] = copy_report_summary(GENERIC_SOURCE, "generic_source")
         if SOURCE_DETAIL.exists():
             target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
-        if SOURCE_DISCOVERY.exists():
-            target["source_discovery_queue"] = copy_report_summary(SOURCE_DISCOVERY, "source_discovery")
+        target["source_discovery_queue"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY.name}",
+            **source_discovery["summary"],
+        }
 
     public_files = [
         PUBLIC_CATALOG,
@@ -213,6 +352,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         raise ValueError("public safety validation failed: " + "; ".join(findings))
 
     if write:
+        write_json(SOURCE_DISCOVERY, source_discovery)
         write_json(PUBLIC_META, public_meta)
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)
@@ -228,6 +368,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(QUALITY.relative_to(ROOT)),
             str(IMAGE_BACKLOG.relative_to(ROOT)),
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY.relative_to(ROOT)),
         ],
     }
 
