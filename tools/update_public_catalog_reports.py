@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import urllib.parse
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -345,6 +346,54 @@ def discovery_workflow(item: dict[str, Any]) -> str:
     return "manual_official_research"
 
 
+def source_discovery_policy(workflow: str) -> dict[str, Any]:
+    policies = {
+        "official_search_url_available": {
+            "confidence": "official_search",
+            "evidence_required": "exact official product detail URL on the expected official domain",
+            "auto_apply_enabled": False,
+            "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+        },
+        "licensed_retailer_search_review": {
+            "confidence": "licensed_retailer_review",
+            "evidence_required": "trusted licensed retailer product detail URL when official source is unavailable",
+            "auto_apply_enabled": False,
+            "acceptance_rule": "retailer page must show matching product identity and should not be a broad search/listing page",
+        },
+        "manual_official_research": {
+            "confidence": "manual_research",
+            "evidence_required": "manual official or rights-holder source confirmation",
+            "auto_apply_enabled": False,
+            "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence",
+        },
+    }
+    return policies.get(
+        workflow,
+        {
+            "confidence": "unknown",
+            "evidence_required": "trusted exact product evidence",
+            "auto_apply_enabled": False,
+            "acceptance_rule": "manual review required",
+        },
+    )
+
+
+def allowed_source_domains(source_store: str) -> list[str]:
+    template = OFFICIAL_SEARCH_TEMPLATES.get(source_store)
+    domains: set[str] = set()
+    if template:
+        netloc = urllib.parse.urlparse(template).netloc.lower()
+        if netloc and "google." not in netloc:
+            domains.add(netloc)
+        decoded = urllib.parse.unquote(template)
+        for match in re.finditer(r"site:([A-Za-z0-9_.-]+)", decoded):
+            domains.add(match.group(1).lower())
+    if source_store in LICENSED_RETAILER_STORES:
+        domains.add("amiami.jp")
+        domains.add("amiami.com")
+    return sorted(domains)
+
+
 def discovery_search_url(item: dict[str, Any], query: str) -> str | None:
     template = OFFICIAL_SEARCH_TEMPLATES.get(str(item.get("source_store") or ""))
     if not template or not query:
@@ -360,11 +409,13 @@ def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int 
         query = discovery_query(item)
         workflow = discovery_workflow(item)
         source_store = str(item.get("source_store") or "")
+        policy = source_discovery_policy(workflow)
         web_query = " ".join(part for part in (query, source_store, "official", "公式 商品画像") if part)
         queue.append(
             {
                 "priority": DISCOVERY_PRIORITY[workflow],
                 "workflow": workflow,
+                "confidence": policy["confidence"],
                 "row_index": item.get("catalog_index", row_number),
                 "source_store": item.get("source_store"),
                 "affiliation": item.get("affiliation"),
@@ -373,6 +424,10 @@ def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int 
                 "name_ja": item.get("name_ja"),
                 "official_search_url": discovery_search_url(item, query),
                 "web_search_url": "https://www.google.com/search?q=" + urllib.parse.quote(web_query),
+                "allowed_source_domains": allowed_source_domains(source_store),
+                "evidence_required": policy["evidence_required"],
+                "auto_apply_enabled": policy["auto_apply_enabled"],
+                "acceptance_rule": policy["acceptance_rule"],
                 "recommended_next_action": "find_exact_product_detail_url_then_import_image",
             }
         )
@@ -388,6 +443,9 @@ def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int 
     )
     by_workflow = Counter(str(item.get("workflow") or "") for item in queue)
     by_store = Counter(str(item.get("source_store") or "") for item in queue)
+    by_confidence = Counter(str(item.get("confidence") or "") for item in queue)
+    domainless_rows = sum(1 for item in queue if not item.get("allowed_source_domains"))
+    published_items = queue[:sample_rows]
     return {
         "schema_version": 1,
         "summary": {
@@ -395,14 +453,20 @@ def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int 
             "published_sample_rows": min(sample_rows, len(queue)),
             "stale_excluded_rows": 0,
             "by_workflow": by_workflow.most_common(),
+            "by_confidence": by_confidence.most_common(),
+            "domainless_review_rows": domainless_rows,
+            "published_domainless_review_rows": sum(
+                1 for item in published_items if not item.get("allowed_source_domains")
+            ),
             "top_source_stores": by_store.most_common(30),
         },
+        "workflow_policies": {workflow: source_discovery_policy(workflow) for workflow in sorted(by_workflow)},
         "instructions": [
             "Public work queue for catalog rows that need exact source URLs or image enrichment.",
             "Open official_search_url or web_search_url, verify an exact product detail page, then review source_url/image_url updates.",
             "Do not auto-apply uncertain matches; use manual review before changing the catalog database.",
         ],
-        "items": queue[:sample_rows],
+        "items": published_items,
     }
 
 
@@ -1963,6 +2027,37 @@ def validate_report_consistency(
 
     if source_summary.get("source_discovery_rows") != missing["source_url"]:
         findings.append("source_discovery_rows does not match missing source_url count")
+    source_items = source_discovery.get("items", [])
+    source_workflow_policies = source_discovery.get("workflow_policies", {})
+    if not isinstance(source_workflow_policies, dict) or not source_workflow_policies:
+        findings.append("source_discovery.workflow_policies is missing")
+    if source_summary.get("published_domainless_review_rows") != sum(
+        1 for item in source_items if isinstance(item, dict) and not item.get("allowed_source_domains")
+    ):
+        findings.append("source_discovery.published_domainless_review_rows does not match published items")
+    required_source_discovery_fields = {
+        "priority",
+        "workflow",
+        "confidence",
+        "row_index",
+        "source_store",
+        "official_search_url",
+        "web_search_url",
+        "allowed_source_domains",
+        "evidence_required",
+        "auto_apply_enabled",
+        "acceptance_rule",
+        "recommended_next_action",
+    }
+    for item in source_items:
+        if not isinstance(item, dict):
+            findings.append("source_discovery.items contains non-object row")
+            continue
+        missing_source_fields = required_source_discovery_fields - set(item)
+        if missing_source_fields:
+            findings.append(f"source discovery row missing fields: {sorted(missing_source_fields)}")
+        if item.get("auto_apply_enabled") is not False:
+            findings.append(f"source discovery row enables auto apply: {item.get('row_index')}")
     if image_summary.get("missing_image_rows") != missing["image_url"]:
         findings.append("image_enrichment missing_image_rows does not match missing image_url count")
     image_workflow_total = sum(

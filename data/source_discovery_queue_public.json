@@ -18,6 +18,22 @@
         5
       ]
     ],
+    "by_confidence": [
+      [
+        "official_search",
+        630
+      ],
+      [
+        "licensed_retailer_review",
+        12
+      ],
+      [
+        "manual_research",
+        5
+      ]
+    ],
+    "domainless_review_rows": 5,
+    "published_domainless_review_rows": 0,
     "top_source_stores": [
       [
         "애니메이트",
@@ -141,6 +157,26 @@
       ]
     ]
   },
+  "workflow_policies": {
+    "licensed_retailer_search_review": {
+      "confidence": "licensed_retailer_review",
+      "evidence_required": "trusted licensed retailer product detail URL when official source is unavailable",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "retailer page must show matching product identity and should not be a broad search/listing page"
+    },
+    "manual_official_research": {
+      "confidence": "manual_research",
+      "evidence_required": "manual official or rights-holder source confirmation",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence"
+    },
+    "official_search_url_available": {
+      "confidence": "official_search",
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+    }
+  },
   "instructions": [
     "Public work queue for catalog rows that need exact source URLs or image enrichment.",
     "Open official_search_url or web_search_url, verify an exact product detail page, then review source_url/image_url updates.",
@@ -150,6 +186,7 @@
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1443,
       "source_store": "ALTER",
       "affiliation": "메이드 인 어비스",
@@ -158,11 +195,18 @@
       "name_ja": "1/7スケール リコ",
       "official_search_url": "https://www.google.com/search?q=site%3Aalter-web.jp%201/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%AA%E3%82%B3",
       "web_search_url": "https://www.google.com/search?q=1/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%AA%E3%82%B3%20ALTER%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "alter-web.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1836,
       "source_store": "Bandai Premium",
       "affiliation": "원피스",
@@ -171,11 +215,18 @@
       "name_ja": "ONE PIECE サンジ トートバッグ",
       "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
       "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Bandai%20Premium%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "p-bandai.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1840,
       "source_store": "Bandai Premium",
       "affiliation": "원피스",
@@ -184,11 +235,18 @@
       "name_ja": "ONE PIECE チョッパー マグカップ",
       "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
       "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20Bandai%20Premium%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "p-bandai.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1835,
       "source_store": "Bandai Premium",
       "affiliation": "원피스",
@@ -197,11 +255,18 @@
       "name_ja": "ONE PIECE ナミ タオル",
       "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%8A%E3%83%9F%20%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%83%8A%E3%83%9F%20%E3%82%BF%E3%82%AA%E3%83%AB%20Bandai%20Premium%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "p-bandai.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2290,
       "source_store": "CUBE STORE",
       "affiliation": "(여자)아이들",
@@ -210,11 +275,18 @@
       "name_ja": null,
       "official_search_url": "https://www.google.com/search?q=site%3Acubee.co.kr%20%28%EC%97%AC%EC%9E%90%29%EC%95%84%EC%9D%B4%EB%93%A4%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=%28%EC%97%AC%EC%9E%90%29%EC%95%84%EC%9D%B4%EB%93%A4%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20CUBE%20STORE%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "cubee.co.kr"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1826,
       "source_store": "Cospa",
       "affiliation": "귀멸의 칼날",
@@ -223,11 +295,18 @@
       "name_ja": "鬼滅の刃 我妻善逸 マイクロファイバータオル",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8%20%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8%20%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%82%BF%E3%82%AA%E3%83%AB%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1820,
       "source_store": "Cospa",
       "affiliation": "나의 히어로 아카데미아",
@@ -236,11 +315,18 @@
       "name_ja": "僕のヒーローアカデミア オールマイト トートバッグ",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
       "web_search_url": "https://www.google.com/search?q=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1637,
       "source_store": "Cospa",
       "affiliation": "메이드 인 어비스",
@@ -249,11 +335,18 @@
       "name_ja": "メイドインアビス アクリルスタンド (ボンドルド)",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89%29",
       "web_search_url": "https://www.google.com/search?q=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89%29%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1666,
       "source_store": "Cospa",
       "affiliation": "원피스",
@@ -262,11 +355,18 @@
       "name_ja": "ONE PIECE モザイクアクリルスタンド (ゾロ)",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/ONE%20PIECE%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%BE%E3%83%AD%29",
       "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%BE%E3%83%AD%29%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1806,
       "source_store": "Cospa",
       "affiliation": "장송의 프리렌",
@@ -275,11 +375,18 @@
       "name_ja": "葬送のフリーレン ヒンメル トートバッグ",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
       "web_search_url": "https://www.google.com/search?q=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1786,
       "source_store": "Cospa",
       "affiliation": "주술회전",
@@ -288,11 +395,18 @@
       "name_ja": "呪術廻戦 七海建人 トートバッグ",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
       "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1631,
       "source_store": "Cospa",
       "affiliation": "주술회전",
@@ -301,11 +415,18 @@
       "name_ja": "呪術廻戦 モザイクアートアクリルスタンド (五条悟)",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%BC%E3%83%88%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BA%94%E6%9D%A1%E6%82%9F%29",
       "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%BC%E3%83%88%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BA%94%E6%9D%A1%E6%82%9F%29%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1671,
       "source_store": "Cospa",
       "affiliation": "체인소 맨",
@@ -314,11 +435,18 @@
       "name_ja": "チェンソーマン モザイクアクリルスタンド (マキマ)",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%AD%E3%83%9E%29",
       "web_search_url": "https://www.google.com/search?q=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%AD%E3%83%9E%29%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1851,
       "source_store": "Cospa",
       "affiliation": "체인소 맨",
@@ -327,11 +455,18 @@
       "name_ja": "チェンソーマン パワー マイクロファイバータオル",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%91%E3%83%AF%E3%83%BC%20%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%91%E3%83%AF%E3%83%BC%20%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%82%BF%E3%82%AA%E3%83%AB%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1780,
       "source_store": "Cospa",
       "affiliation": "헌터X헌터",
@@ -340,11 +475,18 @@
       "name_ja": "HUNTER×HUNTER ヒソカ トートバッグ",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/HUNTER%C3%97HUNTER%20%E3%83%92%E3%82%BD%E3%82%AB%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
       "web_search_url": "https://www.google.com/search?q=HUNTER%C3%97HUNTER%20%E3%83%92%E3%82%BD%E3%82%AB%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1779,
       "source_store": "Cospa",
       "affiliation": "헌터X헌터",
@@ -353,11 +495,18 @@
       "name_ja": "HUNTER×HUNTER レオリオ マイクロファイバータオル",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/HUNTER%C3%97HUNTER%20%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%20%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=HUNTER%C3%97HUNTER%20%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%20%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%82%BF%E3%82%AA%E3%83%AB%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1254,
       "source_store": "FuRyu",
       "affiliation": "나의 히어로 아카데미아",
@@ -366,11 +515,18 @@
       "name_ja": "ちょこのせプレミアムフィギュア 爆豪勝己",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1253,
       "source_store": "FuRyu",
       "affiliation": "나의 히어로 아카데미아",
@@ -379,11 +535,18 @@
       "name_ja": "ちょこのせプレミアムフィギュア 緑谷出久",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1255,
       "source_store": "FuRyu",
       "affiliation": "나의 히어로 아카데미아",
@@ -392,11 +555,18 @@
       "name_ja": "ちょこのせプレミアムフィギュア 轟焦凍",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1259,
       "source_store": "FuRyu",
       "affiliation": "나의 히어로 아카데미아",
@@ -405,11 +575,18 @@
       "name_ja": "ぬーどるストッパーフィギュア オールマイト",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88",
       "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1260,
       "source_store": "FuRyu",
       "affiliation": "나의 히어로 아카데미아",
@@ -418,11 +595,18 @@
       "name_ja": "ぬーどるストッパーフィギュア トガヒミコ",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3",
       "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1257,
       "source_store": "FuRyu",
       "affiliation": "나의 히어로 아카데미아",
@@ -431,11 +615,18 @@
       "name_ja": "ぬーどるストッパーフィギュア 爆豪勝己",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
       "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1256,
       "source_store": "FuRyu",
       "affiliation": "나의 히어로 아카데미아",
@@ -444,11 +635,18 @@
       "name_ja": "ぬーどるストッパーフィギュア 緑谷出久",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
       "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1258,
       "source_store": "FuRyu",
       "affiliation": "나의 히어로 아카데미아",
@@ -457,11 +655,18 @@
       "name_ja": "ぬーどるストッパーフィギュア 轟焦凍",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D",
       "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1472,
       "source_store": "FuRyu",
       "affiliation": "단간론파",
@@ -470,11 +675,18 @@
       "name_ja": "ちょこのせ プレミアム 日向創",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%97%A5%E5%90%91%E5%89%B5",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%97%A5%E5%90%91%E5%89%B5%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1471,
       "source_store": "FuRyu",
       "affiliation": "단간론파",
@@ -483,11 +695,18 @@
       "name_ja": "ちょこのせ プレミアム 狛枝凪斗",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1470,
       "source_store": "FuRyu",
       "affiliation": "단간론파",
@@ -496,11 +715,18 @@
       "name_ja": "ヌードルストッパー モノクマ",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
       "web_search_url": "https://www.google.com/search?q=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1426,
       "source_store": "FuRyu",
       "affiliation": "메이드 인 어비스",
@@ -509,11 +735,18 @@
       "name_ja": "ちょこのせプレミアムフィギュア ナナチ",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%8A%E3%83%8A%E3%83%81",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%8A%E3%83%8A%E3%83%81%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1427,
       "source_store": "FuRyu",
       "affiliation": "메이드 인 어비스",
@@ -522,11 +755,18 @@
       "name_ja": "ちょこのせプレミアムフィギュア ミーティ",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%9F%E3%83%BC%E3%83%86%E3%82%A3",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%9F%E3%83%BC%E3%83%86%E3%82%A3%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1425,
       "source_store": "FuRyu",
       "affiliation": "메이드 인 어비스",
@@ -535,11 +775,18 @@
       "name_ja": "ヌードルストッパーフィギュア リコ",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%AA%E3%82%B3",
       "web_search_url": "https://www.google.com/search?q=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%AA%E3%82%B3%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1907,
       "source_store": "FuRyu",
       "affiliation": "봇치 더 록",
@@ -548,11 +795,18 @@
       "name_ja": "Noodle Stopper 後藤ひとり",
       "official_search_url": "https://furyuprize.com/search?keyword=Noodle%20Stopper%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
       "web_search_url": "https://www.google.com/search?q=Noodle%20Stopper%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1889,
       "source_store": "FuRyu",
       "affiliation": "블루록",
@@ -561,11 +815,18 @@
       "name_ja": "Desktop Cute 潔世一",
       "official_search_url": "https://furyuprize.com/search?keyword=Desktop%20Cute%20%E6%BD%94%E4%B8%96%E4%B8%80",
       "web_search_url": "https://www.google.com/search?q=Desktop%20Cute%20%E6%BD%94%E4%B8%96%E4%B8%80%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1890,
       "source_store": "FuRyu",
       "affiliation": "블루록",
@@ -574,11 +835,18 @@
       "name_ja": "Noodle Stopper カイザー",
       "official_search_url": "https://furyuprize.com/search?keyword=Noodle%20Stopper%20%E3%82%AB%E3%82%A4%E3%82%B6%E3%83%BC",
       "web_search_url": "https://www.google.com/search?q=Noodle%20Stopper%20%E3%82%AB%E3%82%A4%E3%82%B6%E3%83%BC%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1921,
       "source_store": "FuRyu",
       "affiliation": "체인소 맨",
@@ -587,11 +855,18 @@
       "name_ja": "ちょこのせプレミアム 桂木サンタ",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%A1%82%E6%9C%A8%E3%82%B5%E3%83%B3%E3%82%BF",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%A1%82%E6%9C%A8%E3%82%B5%E3%83%B3%E3%82%BF%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1184,
       "source_store": "FuRyu",
       "affiliation": "하츠네 미쿠",
@@ -600,11 +875,18 @@
       "name_ja": "ブレイクタイムコレクション 初音ミク",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF",
       "web_search_url": "https://www.google.com/search?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1327,
       "source_store": "FuRyu",
       "affiliation": "헌터X헌터",
@@ -613,11 +895,18 @@
       "name_ja": "Break Time Collection クラピカ",
       "official_search_url": "https://furyuprize.com/search?keyword=Break%20Time%20Collection%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB",
       "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1326,
       "source_store": "FuRyu",
       "affiliation": "헌터X헌터",
@@ -626,11 +915,18 @@
       "name_ja": "ちょこのせプレミアムフィギュア キルア＝ゾルディック",
       "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%20FuRyu%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "furyuprize.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1437,
       "source_store": "Hobby Max International",
       "affiliation": "메이드 인 어비스",
@@ -639,11 +935,18 @@
       "name_ja": "1/6スケール ナナチ & ミーティ",
       "official_search_url": "https://www.amiami.com/eng/search/list/?s_keywords=1/6%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%8A%E3%83%8A%E3%83%81%20%26%20%E3%83%9F%E3%83%BC%E3%83%86%E3%82%A3%20HOBBY%20MAX",
       "web_search_url": "https://www.google.com/search?q=1/6%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%8A%E3%83%8A%E3%83%81%20%26%20%E3%83%9F%E3%83%BC%E3%83%86%E3%82%A3%20Hobby%20Max%20International%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.amiami.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2334,
       "source_store": "Hololive Production Official Shop",
       "affiliation": "홀로라이브",
@@ -652,11 +955,18 @@
       "name_ja": null,
       "official_search_url": "https://shop.hololivepro.com/en/search?q=%ED%99%80%EB%A1%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%BD%94%EB%B0%94%EC%95%BC%EC%8B%9C%20%EC%BD%94%ED%86%A0%EB%84%A4%29",
       "web_search_url": "https://www.google.com/search?q=%ED%99%80%EB%A1%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%BD%94%EB%B0%94%EC%95%BC%EC%8B%9C%20%EC%BD%94%ED%86%A0%EB%84%A4%29%20Hololive%20Production%20Official%20Shop%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "shop.hololivepro.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2305,
       "source_store": "IST STORE",
       "affiliation": "THE BOYZ",
@@ -665,11 +975,18 @@
       "name_ja": null,
       "official_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io%20THE%20BOYZ%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=THE%20BOYZ%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20IST%20STORE%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "shop.weverse.io"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2293,
       "source_store": "JYP SHOP",
       "affiliation": "ITZY",
@@ -678,11 +995,18 @@
       "name_ja": null,
       "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=ITZY%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=ITZY%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20JYP%20SHOP%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "en.thejypshop.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2309,
       "source_store": "JYP SHOP",
       "affiliation": "NMIXX",
@@ -691,11 +1015,18 @@
       "name_ja": null,
       "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=NMIXX%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=NMIXX%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20JYP%20SHOP%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "en.thejypshop.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2296,
       "source_store": "JYP SHOP",
       "affiliation": "Stray Kids",
@@ -704,11 +1035,18 @@
       "name_ja": null,
       "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=Stray%20Kids%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=Stray%20Kids%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20JYP%20SHOP%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "en.thejypshop.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2282,
       "source_store": "JYP SHOP",
       "affiliation": "TWICE",
@@ -717,11 +1055,18 @@
       "name_ja": null,
       "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=TWICE%20%EC%8A%AC%EB%A1%9C%EA%B1%B4",
       "web_search_url": "https://www.google.com/search?q=TWICE%20%EC%8A%AC%EB%A1%9C%EA%B1%B4%20JYP%20SHOP%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "en.thejypshop.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2280,
       "source_store": "JYP SHOP",
       "affiliation": "TWICE",
@@ -730,11 +1075,18 @@
       "name_ja": null,
       "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=TWICE%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=TWICE%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20JYP%20SHOP%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "en.thejypshop.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2303,
       "source_store": "KQ FELLAZ",
       "affiliation": "ATEEZ",
@@ -743,11 +1095,18 @@
       "name_ja": null,
       "official_search_url": "https://www.google.com/search?q=site%3Akqshop.kr%20ATEEZ%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=ATEEZ%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20KQ%20FELLAZ%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "kqshop.kr"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1844,
       "source_store": "MINISO",
       "affiliation": "원피스",
@@ -756,11 +1115,18 @@
       "name_ja": "MINISO x ONE PIECE Blind Box",
       "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Blind%20Box",
       "web_search_url": "https://www.google.com/search?q=MINISO%20x%20ONE%20PIECE%20Blind%20Box%20MINISO%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1841,
       "source_store": "MINISO",
       "affiliation": "원피스",
@@ -769,11 +1135,18 @@
       "name_ja": "MINISO x ONE PIECE Shopping Bag",
       "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Shopping%20Bag",
       "web_search_url": "https://www.google.com/search?q=MINISO%20x%20ONE%20PIECE%20Shopping%20Bag%20MINISO%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1843,
       "source_store": "MINISO",
       "affiliation": "원피스",
@@ -782,11 +1155,18 @@
       "name_ja": "MINISO x ONE PIECE Acrylic Scene Standee Surprise Box",
       "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Acrylic%20Scene%20Standee%20Surprise%20Box",
       "web_search_url": "https://www.google.com/search?q=MINISO%20x%20ONE%20PIECE%20Acrylic%20Scene%20Standee%20Surprise%20Box%20MINISO%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1842,
       "source_store": "MINISO",
       "affiliation": "원피스",
@@ -795,11 +1175,18 @@
       "name_ja": "MINISO x ONE PIECE Big-head Cute Plush Pendant",
       "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Big-head%20Cute%20Plush%20Pendant",
       "web_search_url": "https://www.google.com/search?q=MINISO%20x%20ONE%20PIECE%20Big-head%20Cute%20Plush%20Pendant%20MINISO%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 991,
       "source_store": "MINISO 중국",
       "affiliation": "치이카와",
@@ -808,11 +1195,18 @@
       "name_ja": "ちいかわ × MINISO アクリルキーホルダー (中国コラボ)",
       "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29%20MINISO%20%EC%A4%91%EA%B5%AD%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 989,
       "source_store": "MINISO 중국",
       "affiliation": "치이카와",
@@ -821,11 +1215,18 @@
       "name_ja": "うさぎ × MINISO ぬいぐるみ (中国コラボ)",
       "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%86%E3%81%95%E3%81%8E%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29",
       "web_search_url": "https://www.google.com/search?q=%E3%81%86%E3%81%95%E3%81%8E%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29%20MINISO%20%EC%A4%91%EA%B5%AD%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 993,
       "source_store": "MINISO 중국",
       "affiliation": "치이카와",
@@ -834,11 +1235,18 @@
       "name_ja": "くりまんじゅう × MINISO ぬいぐるみ (中国コラボ)",
       "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%8F%E3%82%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29",
       "web_search_url": "https://www.google.com/search?q=%E3%81%8F%E3%82%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29%20MINISO%20%EC%A4%91%EA%B5%AD%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 987,
       "source_store": "MINISO 중국",
       "affiliation": "치이카와",
@@ -847,11 +1255,18 @@
       "name_ja": "ちいかわ × MINISO ぬいぐるみ (中国コラボ)",
       "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29%20MINISO%20%EC%A4%91%EA%B5%AD%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 988,
       "source_store": "MINISO 중국",
       "affiliation": "치이카와",
@@ -860,11 +1275,18 @@
       "name_ja": "ハチワレ × MINISO ぬいぐるみ (中国コラボ)",
       "official_search_url": "https://www.miniso.com/search?keyword=%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29",
       "web_search_url": "https://www.google.com/search?q=%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29%20MINISO%20%EC%A4%91%EA%B5%AD%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 992,
       "source_store": "MINISO 중국",
       "affiliation": "치이카와",
@@ -873,11 +1295,18 @@
       "name_ja": "モモンガ × MINISO ぬいぐるみ (中国コラボ)",
       "official_search_url": "https://www.miniso.com/search?keyword=%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29",
       "web_search_url": "https://www.google.com/search?q=%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29%20MINISO%20%EC%A4%91%EA%B5%AD%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 990,
       "source_store": "MINISO 중국",
       "affiliation": "치이카와",
@@ -886,11 +1315,18 @@
       "name_ja": "ちいかわ × MINISO ブラインドボックス (中国コラボ)",
       "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%83%96%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%89%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%83%96%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%89%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29%20MINISO%20%EC%A4%91%EA%B5%AD%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.miniso.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1730,
       "source_store": "Movic",
       "affiliation": "귀멸의 칼날",
@@ -899,11 +1335,18 @@
       "name_ja": "鬼滅の刃 BIG缶バッジ 炭治郎",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%82%AD%E6%B2%BB%E9%83%8E",
       "web_search_url": "https://www.google.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%82%AD%E6%B2%BB%E9%83%8E%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1729,
       "source_store": "Movic",
       "affiliation": "귀멸의 칼날",
@@ -912,11 +1355,18 @@
       "name_ja": "鬼滅の刃 メタリック缶バッジ 冨岡義勇",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87",
       "web_search_url": "https://www.google.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1728,
       "source_store": "Movic",
       "affiliation": "귀멸의 칼날",
@@ -925,11 +1375,18 @@
       "name_ja": "鬼滅の刃 メタリック缶バッジ 煉獄杏寿郎",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E",
       "web_search_url": "https://www.google.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1830,
       "source_store": "Movic",
       "affiliation": "귀멸의 칼날",
@@ -938,11 +1395,18 @@
       "name_ja": "鬼滅の刃 時透無一郎 衣装替えタオル",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E6%99%82%E9%80%8F%E7%84%A1%E4%B8%80%E9%83%8E%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E6%99%82%E9%80%8F%E7%84%A1%E4%B8%80%E9%83%8E%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E3%82%BF%E3%82%AA%E3%83%AB%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1718,
       "source_store": "Movic",
       "affiliation": "나의 히어로 아카데미아",
@@ -951,11 +1415,18 @@
       "name_ja": "僕のヒーローアカデミア BIG缶バッジ デク",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%87%E3%82%AF",
       "web_search_url": "https://www.google.com/search?q=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%87%E3%82%AF%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1717,
       "source_store": "Movic",
       "affiliation": "나의 히어로 아카데미아",
@@ -964,11 +1435,18 @@
       "name_ja": "僕のヒーローアカデミア メタリック缶バッジ オールマイト",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88",
       "web_search_url": "https://www.google.com/search?q=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1819,
       "source_store": "Movic",
       "affiliation": "나의 히어로 아카데미아",
@@ -977,11 +1455,18 @@
       "name_ja": "僕のヒーローアカデミア 轟焦凍 学園シリーズ タオル",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1798,
       "source_store": "Movic",
       "affiliation": "단간론파",
@@ -990,11 +1475,18 @@
       "name_ja": "ダンガンロンパ 苗木誠 学園シリーズ マグカップ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
       "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1702,
       "source_store": "Movic",
       "affiliation": "단간론파",
@@ -1003,11 +1495,18 @@
       "name_ja": "ダンガンロンパ クリアファイルA4 モノクマ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
       "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1640,
       "source_store": "Movic",
       "affiliation": "단간론파",
@@ -1016,11 +1515,18 @@
       "name_ja": "ダンガンロンパ アクリルスタンド (モノクマ)",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
       "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1698,
       "source_store": "Movic",
       "affiliation": "단간론파",
@@ -1029,11 +1535,18 @@
       "name_ja": "ダンガンロンパ トレーディング缶バッジ 苗木誠",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E8%8B%97%E6%9C%A8%E8%AA%A0",
       "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1699,
       "source_store": "Movic",
       "affiliation": "단간론파",
@@ -1042,11 +1555,18 @@
       "name_ja": "ダンガンロンパ トレーディング缶バッジ 霧切響子",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90",
       "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1700,
       "source_store": "Movic",
       "affiliation": "단간론파",
@@ -1055,11 +1575,18 @@
       "name_ja": "ダンガンロンパ メタリック缶バッジ モノクマ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
       "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1799,
       "source_store": "Movic",
       "affiliation": "단간론파",
@@ -1068,11 +1595,18 @@
       "name_ja": "ダンガンロンパ 霧切響子 学園シリーズ タオル",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1796,
       "source_store": "Movic",
       "affiliation": "메이드 인 어비스",
@@ -1081,11 +1615,18 @@
       "name_ja": "メイドインアビス ファプタ トートバッグ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%83%95%E3%82%A1%E3%83%97%E3%82%BF%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
       "web_search_url": "https://www.google.com/search?q=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%83%95%E3%82%A1%E3%83%97%E3%82%BF%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1694,
       "source_store": "Movic",
       "affiliation": "메이드 인 어비스",
@@ -1094,11 +1635,18 @@
       "name_ja": "メイドインアビス BIG缶バッジ ボンドルド",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89",
       "web_search_url": "https://www.google.com/search?q=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1693,
       "source_store": "Movic",
       "affiliation": "메이드 인 어비스",
@@ -1107,11 +1655,18 @@
       "name_ja": "メイドインアビス メタリック缶バッジ ナナチ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%8A%E3%83%8A%E3%83%81",
       "web_search_url": "https://www.google.com/search?q=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%8A%E3%83%8A%E3%83%81%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1664,
       "source_store": "Movic",
       "affiliation": "원피스",
@@ -1120,11 +1675,18 @@
       "name_ja": "ONE PIECE アクリルスタンド (トラファルガー・ロー)",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=ONE%20PIECE%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%88%E3%83%A9%E3%83%95%E3%82%A1%E3%83%AB%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%AD%E3%83%BC%29",
       "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%88%E3%83%A9%E3%83%95%E3%82%A1%E3%83%AB%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%AD%E3%83%BC%29%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1663,
       "source_store": "Movic",
       "affiliation": "원피스",
@@ -1133,11 +1695,18 @@
       "name_ja": "ONE PIECE アクリルスタンド (ポートガス・D・エース)",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=ONE%20PIECE%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9D%E3%83%BC%E3%83%88%E3%82%AC%E3%82%B9%E3%83%BBD%E3%83%BB%E3%82%A8%E3%83%BC%E3%82%B9%29",
       "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9D%E3%83%BC%E3%83%88%E3%82%AC%E3%82%B9%E3%83%BBD%E3%83%BB%E3%82%A8%E3%83%BC%E3%82%B9%29%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1741,
       "source_store": "Movic",
       "affiliation": "원피스",
@@ -1146,11 +1715,18 @@
       "name_ja": "ONE PIECE メタリック缶バッジ エース",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=ONE%20PIECE%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%A8%E3%83%BC%E3%82%B9",
       "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%A8%E3%83%BC%E3%82%B9%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1742,
       "source_store": "Movic",
       "affiliation": "원피스",
@@ -1159,11 +1735,18 @@
       "name_ja": "ONE PIECE メタリック缶バッジ トラファルガー・ロー",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=ONE%20PIECE%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%88%E3%83%A9%E3%83%95%E3%82%A1%E3%83%AB%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%AD%E3%83%BC",
       "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%88%E3%83%A9%E3%83%95%E3%82%A1%E3%83%AB%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%AD%E3%83%BC%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1709,
       "source_store": "Movic",
       "affiliation": "장송의 프리렌",
@@ -1172,11 +1755,18 @@
       "name_ja": "葬送のフリーレン BIG缶バッジ フリーレン",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
       "web_search_url": "https://www.google.com/search?q=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1708,
       "source_store": "Movic",
       "affiliation": "장송의 프리렌",
@@ -1185,11 +1775,18 @@
       "name_ja": "葬送のフリーレン メタリック缶バッジ ヒンメル",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1628,
       "source_store": "Movic",
       "affiliation": "주술회전",
@@ -1198,11 +1795,18 @@
       "name_ja": "呪術廻戦 アクリルスタンド (七海建人)",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA%29",
       "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA%29%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1629,
       "source_store": "Movic",
       "affiliation": "주술회전",
@@ -1211,11 +1815,18 @@
       "name_ja": "呪術廻戦 アクリルスタンド (両面宿儺)",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA%29",
       "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA%29%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1684,
       "source_store": "Movic",
       "affiliation": "주술회전",
@@ -1224,11 +1835,18 @@
       "name_ja": "呪術廻戦 BIG缶バッジ 両面宿儺",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA",
       "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1683,
       "source_store": "Movic",
       "affiliation": "주술회전",
@@ -1237,11 +1855,18 @@
       "name_ja": "呪術廻戦 メタリック缶バッジ 五条悟",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E4%BA%94%E6%9D%A1%E6%82%9F",
       "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E4%BA%94%E6%9D%A1%E6%82%9F%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1787,
       "source_store": "Movic",
       "affiliation": "주술회전",
@@ -1250,11 +1875,18 @@
       "name_ja": "呪術廻戦 両面宿儺 衣装替えタオル",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E3%82%BF%E3%82%AA%E3%83%AB%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1784,
       "source_store": "Movic",
       "affiliation": "주술회전",
@@ -1263,11 +1895,18 @@
       "name_ja": "呪術廻戦 釘崎野薔薇 学園シリーズ タオル",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB",
       "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1755,
       "source_store": "Movic",
       "affiliation": "체인소 맨",
@@ -1276,11 +1915,18 @@
       "name_ja": "チェンソーマン BIG缶バッジ マキマ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%9E%E3%82%AD%E3%83%9E",
       "web_search_url": "https://www.google.com/search?q=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%9E%E3%82%AD%E3%83%9E%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1754,
       "source_store": "Movic",
       "affiliation": "체인소 맨",
@@ -1289,11 +1935,18 @@
       "name_ja": "チェンソーマン メタリック缶バッジ デンジ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%87%E3%83%B3%E3%82%B8",
       "web_search_url": "https://www.google.com/search?q=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%87%E3%83%B3%E3%82%B8%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1778,
       "source_store": "Movic",
       "affiliation": "헌터X헌터",
@@ -1302,11 +1955,18 @@
       "name_ja": "HUNTER×HUNTER クラピカ マグカップ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=HUNTER%C3%97HUNTER%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
       "web_search_url": "https://www.google.com/search?q=HUNTER%C3%97HUNTER%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1621,
       "source_store": "Movic",
       "affiliation": "헌터X헌터",
@@ -1315,11 +1975,18 @@
       "name_ja": "HUNTER×HUNTER アクリルスタンド (ヒソカ)",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%92%E3%82%BD%E3%82%AB%29",
       "web_search_url": "https://www.google.com/search?q=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%92%E3%82%BD%E3%82%AB%29%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1622,
       "source_store": "Movic",
       "affiliation": "헌터X헌터",
@@ -1328,11 +1995,18 @@
       "name_ja": "HUNTER×HUNTER トレーディングアクリルキーホルダー (幻影旅団)",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=HUNTER%C3%97HUNTER%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E5%B9%BB%E5%BD%B1%E6%97%85%E5%9B%A3%29",
       "web_search_url": "https://www.google.com/search?q=HUNTER%C3%97HUNTER%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E5%B9%BB%E5%BD%B1%E6%97%85%E5%9B%A3%29%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1676,
       "source_store": "Movic",
       "affiliation": "헌터X헌터",
@@ -1341,11 +2015,18 @@
       "name_ja": "HUNTER×HUNTER BIG缶バッジ ヒソカ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=HUNTER%C3%97HUNTER%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%92%E3%82%BD%E3%82%AB",
       "web_search_url": "https://www.google.com/search?q=HUNTER%C3%97HUNTER%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%92%E3%82%BD%E3%82%AB%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1675,
       "source_store": "Movic",
       "affiliation": "헌터X헌터",
@@ -1354,11 +2035,18 @@
       "name_ja": "HUNTER×HUNTER メタリック缶バッジ クラピカ",
       "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=HUNTER%C3%97HUNTER%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB",
       "web_search_url": "https://www.google.com/search?q=HUNTER%C3%97HUNTER%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20Movic%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.movic.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1442,
       "source_store": "Phat! Company",
       "affiliation": "메이드 인 어비스",
@@ -1367,11 +2055,18 @@
       "name_ja": "1/7スケール ナナチ",
       "official_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=1/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%8A%E3%83%8A%E3%83%81",
       "web_search_url": "https://www.google.com/search?q=1/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%8A%E3%83%8A%E3%83%81%20Phat%21%20Company%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.goodsmile.info"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1441,
       "source_store": "Phat! Company",
       "affiliation": "메이드 인 어비스",
@@ -1380,11 +2075,18 @@
       "name_ja": "1/7スケール ボンドルド",
       "official_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=1/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89",
       "web_search_url": "https://www.google.com/search?q=1/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89%20Phat%21%20Company%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.goodsmile.info"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1874,
       "source_store": "Re-ment",
       "affiliation": "SPY×FAMILY",
@@ -1393,11 +2095,18 @@
       "name_ja": "リーメント SPY×FAMILY デスクコレクション",
       "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20SPY%C3%97FAMILY%20%E3%83%87%E3%82%B9%E3%82%AF%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3",
       "web_search_url": "https://www.google.com/search?q=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20SPY%C3%97FAMILY%20%E3%83%87%E3%82%B9%E3%82%AF%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20Re-ment%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.re-ment.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1917,
       "source_store": "Re-ment",
       "affiliation": "봇치 더 록",
@@ -1406,11 +2115,18 @@
       "name_ja": "リーメント ぼっち・ざ・ろっく! 結束バンドライブ",
       "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E3%81%BC%E3%81%A3%E3%81%A1%E3%83%BB%E3%81%96%E3%83%BB%E3%82%8D%E3%81%A3%E3%81%8F%21%20%E7%B5%90%E6%9D%9F%E3%83%90%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96",
       "web_search_url": "https://www.google.com/search?q=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E3%81%BC%E3%81%A3%E3%81%A1%E3%83%BB%E3%81%96%E3%83%BB%E3%82%8D%E3%81%A3%E3%81%8F%21%20%E7%B5%90%E6%9D%9F%E3%83%90%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96%20Re-ment%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.re-ment.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1941,
       "source_store": "Re-ment",
       "affiliation": "원피스",
@@ -1419,11 +2135,18 @@
       "name_ja": "リーメント ONE PIECE ワールドコレクション",
       "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20ONE%20PIECE%20%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3",
       "web_search_url": "https://www.google.com/search?q=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20ONE%20PIECE%20%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20Re-ment%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.re-ment.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1529,
       "source_store": "Re-ment",
       "affiliation": "장송의 프리렌",
@@ -1432,11 +2155,18 @@
       "name_ja": "リーメント フリーレン ミニチュアコレクション",
       "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%9F%E3%83%8B%E3%83%81%E3%83%A5%E3%82%A2%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3",
       "web_search_url": "https://www.google.com/search?q=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%9F%E3%83%8B%E3%83%81%E3%83%A5%E3%82%A2%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20Re-ment%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.re-ment.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1396,
       "source_store": "Re-ment",
       "affiliation": "주술회전",
@@ -1445,11 +2175,18 @@
       "name_ja": "リーメント 呪術廻戦 デスクでまったり呪術師",
       "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%87%E3%82%B9%E3%82%AF%E3%81%A7%E3%81%BE%E3%81%A3%E3%81%9F%E3%82%8A%E5%91%AA%E8%A1%93%E5%B8%AB",
       "web_search_url": "https://www.google.com/search?q=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%87%E3%82%B9%E3%82%AF%E3%81%A7%E3%81%BE%E3%81%A3%E3%81%9F%E3%82%8A%E5%91%AA%E8%A1%93%E5%B8%AB%20Re-ment%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.re-ment.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1183,
       "source_store": "SEGA",
       "affiliation": "하츠네 미쿠",
@@ -1458,11 +2195,18 @@
       "name_ja": "ちょこのせプレミアムフィギュア 鏡音リン",
       "official_search_url": "https://segaplaza.jp/search/?word=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%8F%A1%E9%9F%B3%E3%83%AA%E3%83%B3",
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%8F%A1%E9%9F%B3%E3%83%AA%E3%83%B3%20SEGA%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "segaplaza.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2300,
       "source_store": "SM STORE",
       "affiliation": "NCT",
@@ -1471,11 +2215,18 @@
       "name_ja": null,
       "official_search_url": "https://global.shop.smtown.com/search?q=NCT%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=NCT%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20SM%20STORE%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "global.shop.smtown.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2314,
       "source_store": "SM STORE",
       "affiliation": "Red Velvet",
@@ -1484,11 +2235,18 @@
       "name_ja": null,
       "official_search_url": "https://global.shop.smtown.com/search?q=Red%20Velvet%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=Red%20Velvet%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20SM%20STORE%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "global.shop.smtown.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2287,
       "source_store": "SM STORE",
       "affiliation": "aespa",
@@ -1497,11 +2255,18 @@
       "name_ja": null,
       "official_search_url": "https://global.shop.smtown.com/search?q=aespa%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=aespa%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20SM%20STORE%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "global.shop.smtown.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 2284,
       "source_store": "STARSHIP STORE",
       "affiliation": "IVE",
@@ -1510,11 +2275,18 @@
       "name_ja": null,
       "official_search_url": "https://www.starship-square.com/product/search.html?keyword=IVE%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
       "web_search_url": "https://www.google.com/search?q=IVE%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20STARSHIP%20STORE%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.starship-square.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1872,
       "source_store": "Taito",
       "affiliation": "SPY×FAMILY",
@@ -1523,11 +2295,18 @@
       "name_ja": "ふわぷち アーニャ・フォージャー",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%81%B5%E3%82%8F%E3%81%B7%E3%81%A1%20%E3%82%A2%E3%83%BC%E3%83%8B%E3%83%A3%E3%83%BB%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC",
       "web_search_url": "https://www.google.com/search?q=%E3%81%B5%E3%82%8F%E3%81%B7%E3%81%A1%20%E3%82%A2%E3%83%BC%E3%83%8B%E3%83%A3%E3%83%BB%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1266,
       "source_store": "Taito",
       "affiliation": "나의 히어로 아카데미아",
@@ -1536,11 +2315,18 @@
       "name_ja": "Desktop Cuteフィギュア トガヒミコ",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3",
       "web_search_url": "https://www.google.com/search?q=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1267,
       "source_store": "Taito",
       "affiliation": "나의 히어로 아카데미아",
@@ -1549,11 +2335,18 @@
       "name_ja": "Desktop Cuteフィギュア 八百万百",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E5%85%AB%E7%99%BE%E4%B8%87%E7%99%BE",
       "web_search_url": "https://www.google.com/search?q=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E5%85%AB%E7%99%BE%E4%B8%87%E7%99%BE%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1265,
       "source_store": "Taito",
       "affiliation": "나의 히어로 아카데미아",
@@ -1562,11 +2355,18 @@
       "name_ja": "Desktop Cuteフィギュア 麗日お茶子",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%BA%97%E6%97%A5%E3%81%8A%E8%8C%B6%E5%AD%90",
       "web_search_url": "https://www.google.com/search?q=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%BA%97%E6%97%A5%E3%81%8A%E8%8C%B6%E5%AD%90%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1467,
       "source_store": "Taito",
       "affiliation": "단간론파",
@@ -1575,11 +2375,18 @@
       "name_ja": "デスクトップキュート モノクマ",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1469,
       "source_store": "Taito",
       "affiliation": "단간론파",
@@ -1588,11 +2395,18 @@
       "name_ja": "デスクトップキュート 最原終一",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E6%9C%80%E5%8E%9F%E7%B5%82%E4%B8%80",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E6%9C%80%E5%8E%9F%E7%B5%82%E4%B8%80%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1468,
       "source_store": "Taito",
       "affiliation": "단간론파",
@@ -1601,11 +2415,18 @@
       "name_ja": "デスクトップキュート 狛枝凪斗",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1421,
       "source_store": "Taito",
       "affiliation": "메이드 인 어비스",
@@ -1614,11 +2435,18 @@
       "name_ja": "デスクトップキュート リコ",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%AA%E3%82%B3",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%AA%E3%82%B3%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1422,
       "source_store": "Taito",
       "affiliation": "메이드 인 어비스",
@@ -1627,11 +2455,18 @@
       "name_ja": "デスクトップキュート レグ",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%AC%E3%82%B0",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%AC%E3%82%B0%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1378,
       "source_store": "Taito",
       "affiliation": "주술회전",
@@ -1640,11 +2475,18 @@
       "name_ja": "デスクトップキューティーフィギュア 七海建人",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1376,
       "source_store": "Taito",
       "affiliation": "주술회전",
@@ -1653,11 +2495,18 @@
       "name_ja": "デスクトップキューティーフィギュア 五条悟",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E4%BA%94%E6%9D%A1%E6%82%9F",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E4%BA%94%E6%9D%A1%E6%82%9F%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1377,
       "source_store": "Taito",
       "affiliation": "주술회전",
@@ -1666,11 +2515,18 @@
       "name_ja": "デスクトップキューティーフィギュア 虎杖悠仁",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1320,
       "source_store": "Taito",
       "affiliation": "헌터X헌터",
@@ -1679,11 +2535,18 @@
       "name_ja": "デスクトップキューティーフィギュア キルア＝ゾルディック",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1321,
       "source_store": "Taito",
       "affiliation": "헌터X헌터",
@@ -1692,11 +2555,18 @@
       "name_ja": "デスクトップキューティーフィギュア クラピカ",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     },
     {
       "priority": 10,
       "workflow": "official_search_url_available",
+      "confidence": "official_search",
       "row_index": 1319,
       "source_store": "Taito",
       "affiliation": "헌터X헌터",
@@ -1705,6 +2575,12 @@
       "name_ja": "デスクトップキューティーフィギュア ゴン＝フリークス",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.taito.co.jp"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "recommended_next_action": "find_exact_product_detail_url_then_import_image"
     }
   ]
