@@ -117,9 +117,11 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
         "by_suggested_family": family_counts.most_common(),
         "by_suggested_color": color_counts.most_common(),
         "by_suggested_color_group": color_group_counts.most_common(),
+        "folder_color_palette_count": len(folder_color_palette),
         "folder_visual_token_count": len(folder_visual_tokens),
         "folder_template_count": len(rows),
         "folder_icon_family_count": len(folder_icon_catalog),
+        "folder_icon_option_count": sum(int(row.get("icon_count") or 0) for row in folder_icon_catalog),
         "auto_apply_enabled": False,
     }
     return {
