@@ -1296,10 +1296,12 @@
             <div class="quality-cell"><b id="qualityRelease">-</b><span>발매일</span></div>
           </div>
           <p class="quality-note">이미지는 있는데 출처가 비어 있는 우선 보강 항목 <b id="qualityGapCount">-</b>개</p>
+          <p class="quality-note">이미지 누락 <b id="imageMissingCount">-</b>개 · 자동 후보 <b id="imageProviderCount">-</b>개 · 상세 URL 필요 <b id="imageGenericSourceCount">-</b>개</p>
           <div id="qualityGapList" class="quality-list" aria-live="polite">
             <div class="loading"><span class="spinner"></span>품질 리포트 확인 중</div>
           </div>
           <a class="kuji-more" href="data/catalog_quality_public.json" target="_blank" rel="noopener noreferrer">전체 리포트 열기</a>
+          <a class="kuji-more" href="data/catalog_image_backlog_public.json" target="_blank" rel="noopener noreferrer">이미지 백로그 열기</a>
         </aside>
       </div>
     </section>
@@ -1888,6 +1890,10 @@
         ? gaps.has_image_missing_source
         : (Array.isArray(gaps.has_image_missing_source_sample) ? gaps.has_image_missing_source_sample : []);
       $('qualityGapCount').textContent = fmt.format(gaps.has_image_missing_source_count || rows.length || 0);
+      const imageBacklog = report.image_backlog || {};
+      $('imageMissingCount').textContent = fmt.format(imageBacklog.missing_images || report.missing?.image_url || 0);
+      $('imageProviderCount').textContent = fmt.format(imageBacklog.provider_candidate_items || 0);
+      $('imageGenericSourceCount').textContent = fmt.format(imageBacklog.missing_with_generic_source_url || 0);
 
       const list = $('qualityGapList');
       if (!rows.length) {
@@ -1919,6 +1925,9 @@
         $('qualityImage').textContent = '-';
         $('qualityRelease').textContent = '-';
         $('qualityGapCount').textContent = '-';
+        $('imageMissingCount').textContent = '-';
+        $('imageProviderCount').textContent = '-';
+        $('imageGenericSourceCount').textContent = '-';
         $('qualityGapList').innerHTML = `<div class="empty">품질 리포트를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
       }
     }
