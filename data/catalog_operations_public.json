@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:10:16Z",
+  "generated_at": "2026-07-21T20:13:56Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -603,6 +603,10 @@
       "public_report": "data/danganronpa_goodsmile_probe_public.json"
     },
     {
+      "key": "danganronpa_prize_probe",
+      "public_report": "data/danganronpa_prize_probe_public.json"
+    },
+    {
       "key": "image_enrichment_batches",
       "public_report": "data/catalog_image_enrichment_batches_public.json"
     },
@@ -661,6 +665,14 @@
       "target_rows": 3,
       "review_rows": 3,
       "recommended_next_action": "Review Good Smile probe misses before attempting automatic source/image attachment."
+    },
+    {
+      "priority": 17,
+      "workstream": "danganronpa_prize_probe",
+      "public_report": "data/danganronpa_prize_probe_public.json",
+      "target_rows": 6,
+      "no_provider_candidate_rows": 6,
+      "recommended_next_action": "Route Taito/FuRyu API misses to manual historical official-source review."
     },
     {
       "priority": 18,

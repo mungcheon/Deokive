@@ -27,6 +27,7 @@ REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
 DANGANRONPA_MISSING_MEDIA = DATA / "danganronpa_missing_media_public.json"
 DANGANRONPA_GOODSMILE_PROBE = DATA / "danganronpa_goodsmile_probe_public.json"
+DANGANRONPA_PRIZE_PROBE = DATA / "danganronpa_prize_probe_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 GENERIC_SOURCE_PATCH_CANDIDATES = DATA / "generic_source_patch_candidates_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
@@ -1137,6 +1138,10 @@ def build_operations_public(
         load_json(DANGANRONPA_GOODSMILE_PROBE, {}) if DANGANRONPA_GOODSMILE_PROBE.exists() else {}
     )
     danganronpa_goodsmile_probe_summary = danganronpa_goodsmile_probe.get("summary", {})
+    danganronpa_prize_probe = (
+        load_json(DANGANRONPA_PRIZE_PROBE, {}) if DANGANRONPA_PRIZE_PROBE.exists() else {}
+    )
+    danganronpa_prize_probe_summary = danganronpa_prize_probe.get("summary", {})
 
     priority_fields = ["source_url", "image_url", "release_date", "official_price_jpy", "barcode"]
     store_totals: dict[str, dict[str, Any]] = defaultdict(lambda: {"rows": 0, **{field: 0 for field in priority_fields}})
@@ -1247,6 +1252,14 @@ def build_operations_public(
             "review_rows": danganronpa_goodsmile_probe_summary.get("goodsmile_com_review_rows", 0),
             "recommended_next_action": "Review Good Smile probe misses before attempting automatic source/image attachment.",
         } if danganronpa_goodsmile_probe_summary else None,
+        {
+            "priority": 17,
+            "workstream": "danganronpa_prize_probe",
+            "public_report": f"data/{DANGANRONPA_PRIZE_PROBE.name}",
+            "target_rows": danganronpa_prize_probe_summary.get("target_rows", 0),
+            "no_provider_candidate_rows": danganronpa_prize_probe_summary.get("no_provider_candidate_rows", 0),
+            "recommended_next_action": "Route Taito/FuRyu API misses to manual historical official-source review.",
+        } if danganronpa_prize_probe_summary else None,
         {
             "priority": 18,
             "workstream": "image_url_attachment",
@@ -1419,6 +1432,7 @@ def build_operations_public(
             {"key": "requested_focus_enrichment", "public_report": f"data/{REQUESTED_FOCUS.name}"},
             {"key": "danganronpa_missing_media", "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}"},
             {"key": "danganronpa_goodsmile_probe", "public_report": f"data/{DANGANRONPA_GOODSMILE_PROBE.name}"},
+            {"key": "danganronpa_prize_probe", "public_report": f"data/{DANGANRONPA_PRIZE_PROBE.name}"},
             {"key": "image_enrichment_batches", "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}"},
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
@@ -3010,6 +3024,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["danganronpa_goodsmile_probe"] = copy_report_summary(
                 DANGANRONPA_GOODSMILE_PROBE, "danganronpa_goodsmile_probe"
             )
+        if DANGANRONPA_PRIZE_PROBE.exists():
+            target["danganronpa_prize_probe"] = copy_report_summary(
+                DANGANRONPA_PRIZE_PROBE, "danganronpa_prize_probe"
+            )
         if SOURCE_DETAIL.exists():
             target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
         target["source_discovery_queue"] = {
@@ -3077,6 +3095,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         REQUESTED_FOCUS,
         DANGANRONPA_MISSING_MEDIA,
         DANGANRONPA_GOODSMILE_PROBE,
+        DANGANRONPA_PRIZE_PROBE,
         GENERIC_SOURCE,
         GENERIC_SOURCE_PATCH_CANDIDATES,
         SOURCE_DETAIL,
