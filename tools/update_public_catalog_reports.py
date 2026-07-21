@@ -21,6 +21,7 @@ IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
 DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 DEDUPLICATION_REVIEW_BATCHES = DATA / "catalog_deduplication_review_batches_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
+ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_public.json"
 ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
@@ -453,6 +454,7 @@ def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int 
     by_confidence = Counter(str(item.get("confidence") or "") for item in queue)
     domainless_rows = sum(1 for item in queue if not item.get("allowed_source_domains"))
     published_items = queue[:sample_rows]
+
     return {
         "schema_version": 1,
         "summary": {
@@ -1136,6 +1138,10 @@ def build_operations_public(
     )
     dedupe_review_batches_summary = dedupe_review_batches.get("summary", {})
     animation_summary = animation_categories["summary"]
+    animation_review_batches = (
+        load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
+    )
+    animation_review_batches_summary = animation_review_batches.get("summary", {})
     kuji_summary = ichiban_kuji_history["summary"]
     ichiban_kuji_metadata_probe = (
         load_json(ICHIIBAN_KUJI_METADATA_PROBE, {}) if ICHIIBAN_KUJI_METADATA_PROBE.exists() else {}
@@ -1363,6 +1369,15 @@ def build_operations_public(
             "unknown_category_rows": animation_summary.get("unknown_category_rows", 0),
             "recommended_next_action": "Use taxonomy_review_queue and folder_visual_tokens for app folder colors, icons, and category cleanup.",
         },
+        {
+            "priority": 61,
+            "workstream": "animation_category_review_batches",
+            "public_report": f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
+            "batch_count": animation_review_batches_summary.get("batch_count", 0),
+            "source_rows": animation_review_batches_summary.get("source_rows", 0),
+            "folder_visual_token_count": animation_review_batches_summary.get("folder_visual_token_count", 0),
+            "recommended_next_action": "Review category batches before applying folder mappings; keep color order grouped by the palette.",
+        } if animation_review_batches_summary else None,
     ]
     next_actions = [item for item in next_actions if item is not None]
     workstream_scorecard = [
@@ -1451,6 +1466,14 @@ def build_operations_public(
             "auto_apply_enabled": False,
         },
         {
+            "workstream": "animation_category_review_batches",
+            "status": "manual_review" if animation_review_batches_summary.get("source_rows", 0) else "clear",
+            "open_rows": animation_review_batches_summary.get("source_rows", 0),
+            "primary_report": f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
+            "next_step": "review_batched_taxonomy_folder_visual_decisions",
+            "auto_apply_enabled": animation_review_batches_summary.get("auto_apply_enabled", False),
+        } if animation_review_batches_summary else None,
+        {
             "workstream": "generic_source_patch_candidates",
             "status": "candidate_review" if generic_patch_summary.get("candidate_rows", 0) else "clear",
             "open_rows": generic_patch_summary.get("candidate_rows", 0),
@@ -1459,6 +1482,20 @@ def build_operations_public(
             "auto_apply_enabled": generic_patch_summary.get("auto_apply_enabled", False),
         },
     ]
+
+    open_review_queues = {
+        "source_discovery_rows": source_summary.get("source_discovery_rows", 0),
+        "image_missing_rows": image_summary.get("missing_image_rows", 0),
+        "dedupe_groups": dedupe_summary.get("duplicate_groups", 0),
+        "animation_unknown_categories": animation_summary.get("unknown_category_count", 0),
+        "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
+        "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
+        "generic_source_patch_candidate_rows": generic_patch_summary.get("candidate_rows", 0),
+        "requested_focus_open_rows": requested_focus_summary.get("open_rows", 0),
+        "danganronpa_missing_media_rows": danganronpa_media_summary.get("missing_media_rows", 0),
+    }
+    if animation_review_batches_summary:
+        open_review_queues["animation_category_review_rows"] = animation_review_batches_summary.get("source_rows", 0)
 
     return {
         "schema_version": 1,
@@ -1474,17 +1511,7 @@ def build_operations_public(
                 "barcode": missing.get("barcode", 0),
                 "name_ja": missing.get("name_ja", 0),
             },
-            "open_review_queues": {
-                "source_discovery_rows": source_summary.get("source_discovery_rows", 0),
-                "image_missing_rows": image_summary.get("missing_image_rows", 0),
-                "dedupe_groups": dedupe_summary.get("duplicate_groups", 0),
-                "animation_unknown_categories": animation_summary.get("unknown_category_count", 0),
-                "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
-                "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
-                "generic_source_patch_candidate_rows": generic_patch_summary.get("candidate_rows", 0),
-                "requested_focus_open_rows": requested_focus_summary.get("open_rows", 0),
-                "danganronpa_missing_media_rows": danganronpa_media_summary.get("missing_media_rows", 0),
-            },
+            "open_review_queues": open_review_queues,
             "top_store_priority_score": store_priority_matrix[0]["priority_score"] if store_priority_matrix else 0,
         },
         "quality_gates": quality_gates,
@@ -1505,6 +1532,7 @@ def build_operations_public(
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
             {"key": "deduplication_review_batches", "public_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}"},
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
+            {"key": "animation_category_review_batches", "public_report": f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}"},
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
             {"key": "ichiban_kuji_metadata_probe", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}"},
             {"key": "agent_work_queue", "public_report": f"data/{AGENT_WORK_QUEUE.name}"},
@@ -1548,6 +1576,9 @@ def build_agent_work_queue_public(
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
     gotouchi_report = load_json(GOTOUCHI, {}) if GOTOUCHI.exists() else {}
+    animation_review_batches = (
+        load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
+    )
 
     def generic_source_review_summary(source_store: str) -> dict[str, int]:
         items = [
@@ -1840,23 +1871,42 @@ def build_agent_work_queue_public(
             ],
         )
 
-    unknown_categories = animation_categories.get("unknown_categories", [])
-    if unknown_categories:
-        add_batch(
-            agent_id="agent-animation-taxonomy",
-            workstream="animation_category_review",
-            priority=140,
-            title="애니메이션 굿즈 미분류 카테고리 정리",
-            public_report=ANIMATION_CATEGORIES,
-            rows=int(animation_categories.get("summary", {}).get("unknown_category_count") or 0),
-            recommended_action="Map unknown categories to app folder families and visual tokens.",
-            acceptance_criteria=[
-                "Folder color hints follow folder_color_palette sort order.",
-                "Icon choices use existing icon keys from folder_visual_tokens.",
-                "Category changes remain review-only until app navigation impact is checked.",
-            ],
-            samples=[row for row in unknown_categories if isinstance(row, dict)],
-        )
+    review_batches = [batch for batch in animation_review_batches.get("batches", []) if isinstance(batch, dict)]
+    if review_batches:
+        for review_batch in review_batches[:4]:
+            add_batch(
+                agent_id="agent-animation-taxonomy",
+                workstream="animation_category_review",
+                priority=140 + int(review_batch.get("priority") or 99),
+                title=f"애니메이션 굿즈 카테고리 검수: {review_batch.get('batch_id')}",
+                public_report=ANIMATION_CATEGORY_REVIEW_BATCHES,
+                rows=int(review_batch.get("row_count") or 0),
+                recommended_action=str(review_batch.get("recommended_action") or "Map category batches to app folders."),
+                acceptance_criteria=[
+                    "Folder color hints follow folder_color_palette sort order.",
+                    "Icon choices use existing icon keys from folder_visual_tokens.",
+                    "Category changes remain review-only until app navigation impact is checked.",
+                ],
+                samples=[row for row in review_batch.get("categories", []) if isinstance(row, dict)],
+            )
+    else:
+        unknown_categories = animation_categories.get("unknown_categories", [])
+        if unknown_categories:
+            add_batch(
+                agent_id="agent-animation-taxonomy",
+                workstream="animation_category_review",
+                priority=140,
+                title="애니메이션 굿즈 미분류 카테고리 정리",
+                public_report=ANIMATION_CATEGORIES,
+                rows=int(animation_categories.get("summary", {}).get("unknown_category_count") or 0),
+                recommended_action="Map unknown categories to app folder families and visual tokens.",
+                acceptance_criteria=[
+                    "Folder color hints follow folder_color_palette sort order.",
+                    "Icon choices use existing icon keys from folder_visual_tokens.",
+                    "Category changes remain review-only until app navigation impact is checked.",
+                ],
+                samples=[row for row in unknown_categories if isinstance(row, dict)],
+            )
 
     batches.sort(key=lambda row: (row["priority"], -row["rows"], row["batch_id"]))
     by_workstream = Counter(str(batch["workstream"]) for batch in batches)
@@ -2751,6 +2801,12 @@ def validate_report_consistency(
         "requested_focus_open_rows": requested_focus_summary.get("open_rows", 0),
         "danganronpa_missing_media_rows": danganronpa_media_summary.get("missing_media_rows", 0),
     }
+    animation_review_batches = (
+        load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
+    )
+    animation_review_summary = animation_review_batches.get("summary", {})
+    if animation_review_summary:
+        expected_open_queues["animation_category_review_rows"] = animation_review_summary.get("source_rows", 0)
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
     taxonomy_review_queue = animation_categories.get("taxonomy_review_queue", [])
@@ -2874,6 +2930,7 @@ def validate_report_consistency(
         f"data/{METADATA_BACKLOG.name}",
         f"data/{DEDUPLICATION.name}",
         f"data/{ANIMATION_CATEGORIES.name}",
+        f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
         f"data/{GENERIC_SOURCE.name}",
         f"data/{GOTOUCHI.name}",
@@ -3126,6 +3183,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
         }
+        if ANIMATION_CATEGORY_REVIEW_BATCHES.exists():
+            target["animation_category_review_batches"] = copy_report_summary(
+                ANIMATION_CATEGORY_REVIEW_BATCHES, "animation_category_review_batches"
+            )
         target["ichiban_kuji_history"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
             **ichiban_kuji_history["summary"],

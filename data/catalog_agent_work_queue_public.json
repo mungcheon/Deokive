@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:38:39Z",
+  "generated_at": "2026-07-21T20:41:53Z",
   "summary": {
-    "batch_count": 65,
-    "summed_batch_rows": 23783,
+    "batch_count": 66,
+    "summed_batch_rows": 24203,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -43,11 +43,11 @@
         2
       ],
       [
-        "gotouchi_official_candidate_review",
-        1
+        "animation_category_review",
+        2
       ],
       [
-        "animation_category_review",
+        "gotouchi_official_candidate_review",
         1
       ]
     ],
@@ -85,11 +85,11 @@
         3
       ],
       [
-        "agent-gotouchi-review",
-        1
+        "agent-animation-taxonomy",
+        2
       ],
       [
-        "agent-animation-taxonomy",
+        "agent-gotouchi-review",
         1
       ]
     ],
@@ -102,7 +102,8 @@
       "ichiban_missing_price_rows": 365,
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 5717,
-      "danganronpa_missing_media_rows": 34
+      "danganronpa_missing_media_rows": 34,
+      "animation_category_review_rows": 428
     }
   },
   "top_next_batches": [
@@ -5694,14 +5695,14 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "140-agent-animation-taxonomy-65",
+      "batch_id": "160-agent-animation-taxonomy-65",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
-      "priority": 140,
-      "title": "애니메이션 굿즈 미분류 카테고리 정리",
-      "public_report": "data/animation_goods_categories_public.json",
-      "rows": 8,
-      "recommended_action": "Map unknown categories to app folder families and visual tokens.",
+      "priority": 160,
+      "title": "애니메이션 굿즈 카테고리 검수: animation-taxonomy-review-001",
+      "public_report": "data/animation_category_review_batches_public.json",
+      "rows": 145,
+      "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
       "acceptance_criteria": [
         "Folder color hints follow folder_color_palette sort order.",
         "Icon choices use existing icon keys from folder_visual_tokens.",
@@ -5733,7 +5734,9 @@
             "一番くじ 呪術廻戦 死滅回游 ～弐～ - E賞 日車寛見 ビッグアクリルスタンド",
             "一番くじ 呪術廻戦 死滅回游 ～弐～ - F賞 レジィ・スター ビッグアクリルスタンド",
             "一番くじ 呪術廻戦 死滅回游 ～壱～ - A賞 禪院真希・禪院真依 ビッグアクリルスタンド"
-          ]
+          ],
+          "recommended_action": "Split this broad category by product name first, then map reviewed rows into app folders.",
+          "auto_apply_enabled": false
         },
         {
           "category": "포스터",
@@ -5760,7 +5763,9 @@
             "一番くじ 呪術廻戦 渋谷事変 ～壱～ - N賞 クリアポスター",
             "一番くじ 呪術廻戦 ～肆～ - F賞 クリアポスター",
             "一番くじ 僕のヒーローアカデミア -幸せの上に- - H賞 クリアポスター"
-          ]
+          ],
+          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
+          "auto_apply_enabled": false
         },
         {
           "category": "참",
@@ -5787,7 +5792,9 @@
             "一番くじ 僕のヒーローアカデミア -連なる星霜- - G賞 メタルチャーム",
             "一番くじ 僕のヒーローアカデミア -連なる星霜- - G賞 メタルチャーム",
             "一番くじ 僕のヒーローアカデミア ー正義のかたちー - F賞 ストラップホルダーチャーム"
-          ]
+          ],
+          "recommended_action": "Review sample names and map the category to the suggested folder only when product type is clear.",
+          "auto_apply_enabled": false
         },
         {
           "category": "캡슐토이",
@@ -5809,8 +5816,29 @@
             "스윙 피규어 미도리야 이즈쿠",
             "캡슐 피규어 컬렉션 제2탄 호크스",
             "캡슐 피규어 컬렉션 제3탄 토가 히미코"
-          ]
-        },
+          ],
+          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "taxonomy_mapping_required",
+      "next_machine_step": "map_category_to_folder_color_and_icon"
+    },
+    {
+      "batch_id": "180-agent-animation-taxonomy-66",
+      "agent_id": "agent-animation-taxonomy",
+      "workstream": "animation_category_review",
+      "priority": 180,
+      "title": "애니메이션 굿즈 카테고리 검수: animation-taxonomy-review-002",
+      "public_report": "data/animation_category_review_batches_public.json",
+      "rows": 283,
+      "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
+      "acceptance_criteria": [
+        "Folder color hints follow folder_color_palette sort order.",
+        "Icon choices use existing icon keys from folder_visual_tokens.",
+        "Category changes remain review-only until app navigation impact is checked."
+      ],
+      "sample_items": [
         {
           "category": "컵",
           "rows": 5,
@@ -5833,7 +5861,9 @@
             "一番くじ 僕のヒーローアカデミア NEXT GENERATIONS！ feat.SMASH RISING - G賞 グラス",
             "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス",
             "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス"
-          ]
+          ],
+          "recommended_action": "Review sample names and map the category to the suggested folder only when product type is clear.",
+          "auto_apply_enabled": false
         },
         {
           "category": "식품",
@@ -5853,7 +5883,9 @@
           "review_reason": "Food items should stay separate from character goods but use daily goods visual treatment.",
           "sample_names": [
             "최애의 아이 생초코 초코링"
-          ]
+          ],
+          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
+          "auto_apply_enabled": false
         },
         {
           "category": "굿즈",
@@ -5880,7 +5912,9 @@
             "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - H賞 キャンバス風ボード",
             "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - J賞 ステーショナリーコレクション",
             "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - ラストワン賞 アーマード・オールマイト MASTERLISE EXTRA"
-          ]
+          ],
+          "recommended_action": "Split this broad category by product name first, then map reviewed rows into app folders.",
+          "auto_apply_enabled": false
         },
         {
           "category": "기타 굿즈",
@@ -5902,7 +5936,9 @@
             "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
             "장송의 프리렌 부쿠부 굿즈",
             "단간론파 부쿠부 굿즈"
-          ]
+          ],
+          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
+          "auto_apply_enabled": false
         }
       ],
       "review_state": "taxonomy_mapping_required",
