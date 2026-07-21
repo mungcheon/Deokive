@@ -53,6 +53,17 @@ class BuildRequestedFocusReviewBatchesPublicTest(unittest.TestCase):
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_catalog_changes"])
         self.assertGreaterEqual(report["summary"]["batch_count"], 1)
+        template_fields = [
+            item["catalog_field_import_template"]["field"]
+            for batch in report["batches"]
+            for item in batch.get("items", [])
+            if isinstance(item.get("catalog_field_import_template"), dict)
+        ]
+        self.assertEqual(report["summary"]["field_patch_template_count"], len(template_fields))
+        self.assertGreater(report["summary"]["field_patch_template_count"], 0)
+        template_counts = dict(report["summary"]["field_patch_template_counts"])
+        self.assertEqual(template_counts["source_url"], template_fields.count("source_url"))
+        self.assertEqual(template_counts["image_url"], template_fields.count("image_url"))
         danganronpa_batches = [
             batch for batch in report["batches"] if batch["topic_id"] == "danganronpa"
         ]

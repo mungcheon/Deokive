@@ -340,6 +340,15 @@ def build_report(
     )
     by_topic = Counter(str(batch.get("topic_id") or "") for batch in batches)
     by_field = Counter(str(batch.get("missing_field") or "") for batch in batches)
+    field_patch_template_counts: Counter[str] = Counter()
+    for batch in batches:
+        for item in batch.get("items") or []:
+            if not isinstance(item, dict):
+                continue
+            template = item.get("catalog_field_import_template")
+            if isinstance(template, dict) and template.get("field"):
+                field_patch_template_counts[str(template["field"])] += 1
+
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -352,6 +361,8 @@ def build_report(
             "review_row_count": sum(int(batch.get("row_count") or 0) for batch in batches),
             "by_topic": by_topic.most_common(),
             "by_missing_field": by_field.most_common(),
+            "field_patch_template_count": sum(field_patch_template_counts.values()),
+            "field_patch_template_counts": field_patch_template_counts.most_common(),
             "auto_apply_enabled": False,
         },
         "topic_summaries": topic_summaries,
