@@ -41,7 +41,7 @@ WORKFLOWS = {
         "public_action_queue": DATA / "catalog_metadata_action_queue_public.json",
         "public_action_rows_key": "queued_missing_cells",
         "public_action_batches_key": "action_batch_count",
-        "public_action_next_step": "fill_confirmed_metadata_patch_templates",
+        "public_action_next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
     },
     "source_discovery": {
         "confirmed": SERVER / "source_discovery_confirmed_rows.json",

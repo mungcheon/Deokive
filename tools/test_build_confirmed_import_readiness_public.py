@@ -19,6 +19,14 @@ def _write_json(path: Path, payload) -> Path:
 class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
     def test_default_workflows_include_source_discovery_import_path(self) -> None:
         self.assertIn("source_discovery", readiness.WORKFLOWS)
+        metadata = readiness.WORKFLOWS["catalog_field"]
+        self.assertEqual(metadata["public_action_queue"].name, "catalog_metadata_action_queue_public.json")
+        self.assertEqual(metadata["public_action_rows_key"], "queued_missing_cells")
+        self.assertEqual(
+            metadata["public_action_next_step"],
+            "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
+        )
+
         workflow = readiness.WORKFLOWS["source_discovery"]
 
         self.assertEqual(workflow["confirmed"].name, "source_discovery_confirmed_rows.json")
@@ -74,6 +82,17 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
             dedupe["public_action_next_step"],
             "fill_confirmed_deduplication_decisions_then_run_import_confirmed_deduplication_rows",
         )
+
+    def test_public_action_next_steps_reference_existing_importers(self) -> None:
+        tools_dir = Path(__file__).resolve().parent
+        for workflow_name, workflow in readiness.WORKFLOWS.items():
+            next_step = workflow.get("public_action_next_step")
+            if not next_step:
+                continue
+            marker = "then_run_"
+            self.assertIn(marker, next_step, workflow_name)
+            importer_name = next_step.split(marker, 1)[1]
+            self.assertTrue((tools_dir / f"{importer_name}.py").exists(), workflow_name)
 
     def test_template_candidates_are_public_without_row_details(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
