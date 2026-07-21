@@ -50,6 +50,11 @@
   <script>
     (async function bootDeokive() {
       const host = window.location.hostname;
+      if (host === 'mungcheon.github.io' && window.location.pathname.startsWith('/Deokive')) {
+        window.location.replace('http://deokive.kro.kr/' + window.location.search + window.location.hash);
+        return;
+      }
+
       const isLocalHost =
         host === 'localhost' ||
         host === '127.0.0.1' ||
