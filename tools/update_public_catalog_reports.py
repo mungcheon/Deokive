@@ -25,6 +25,7 @@ ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
+DANGANRONPA_MISSING_MEDIA = DATA / "danganronpa_missing_media_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 GENERIC_SOURCE_PATCH_CANDIDATES = DATA / "generic_source_patch_candidates_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
@@ -964,6 +965,148 @@ def build_requested_focus_enrichment_public(
     }
 
 
+def build_danganronpa_missing_media_public(items: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
+    terms = ["\ub2e8\uac04\ub860\ud30c", "\u30c0\u30f3\u30ac\u30f3\u30ed\u30f3\u30d1", "Danganronpa"]
+    store_policies = {
+        "\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8": {
+            "source_kind": "official_manufacturer",
+            "allowed_source_domains": ["www.goodsmile.info", "www.goodsmile.com"],
+            "search_template": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D={query}",
+            "confidence": "official_search",
+        },
+        "\ucf54\ud1a0\ubd80\ud0a4\uc57c": {
+            "source_kind": "official_manufacturer",
+            "allowed_source_domains": ["shop.kotobukiya.co.jp", "www.kotobukiya.co.jp"],
+            "search_template": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword={query}",
+            "confidence": "official_search",
+        },
+        "Taito": {
+            "source_kind": "official_prize",
+            "allowed_source_domains": ["www.taito.co.jp"],
+            "search_template": "https://www.taito.co.jp/prize?keyword={query}",
+            "confidence": "official_search",
+        },
+        "FuRyu": {
+            "source_kind": "official_prize",
+            "allowed_source_domains": ["furyuprize.com"],
+            "search_template": "https://furyuprize.com/search?keyword={query}",
+            "confidence": "official_search",
+        },
+        "\uc5d4\uc2a4\uce74\uc774": {
+            "source_kind": "official_manufacturer",
+            "allowed_source_domains": ["www.enskyshop.com", "www.ensky.co.jp"],
+            "search_template": "https://www.enskyshop.com/products/list?name={query}",
+            "confidence": "official_search",
+        },
+        "Movic": {
+            "source_kind": "official_manufacturer",
+            "allowed_source_domains": ["www.movic.jp"],
+            "search_template": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword={query}",
+            "confidence": "official_search",
+        },
+        "\uc560\ub2c8\uba54\uc774\ud2b8": {
+            "source_kind": "licensed_retailer",
+            "allowed_source_domains": ["www.animate-onlineshop.jp"],
+            "search_template": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
+            "confidence": "licensed_retailer_review",
+        },
+        "AmiAmi": {
+            "source_kind": "licensed_retailer",
+            "allowed_source_domains": ["www.amiami.jp", "www.amiami.com"],
+            "search_template": "https://www.amiami.jp/top/search/list?s_keywords={query}",
+            "confidence": "licensed_retailer_review",
+        },
+    }
+
+    def is_danganronpa(item: dict[str, Any]) -> bool:
+        haystack = json.dumps(item, ensure_ascii=False).lower()
+        return any(term.lower() in haystack for term in terms)
+
+    def query_for(item: dict[str, Any]) -> str:
+        title = str(item.get("name_ja") or item.get("name_ko") or "")
+        if "\u30c0\u30f3\u30ac\u30f3\u30ed\u30f3\u30d1" not in title:
+            title = f"\u30c0\u30f3\u30ac\u30f3\u30ed\u30f3\u30d1 {title}".strip()
+        return title
+
+    rows = [
+        item
+        for item in items
+        if is_danganronpa(item) and (not present(item.get("image_url")) or not present(item.get("source_url")))
+    ]
+    queue: list[dict[str, Any]] = []
+    for item in sorted(rows, key=lambda row: int(row.get("catalog_index") or 0)):
+        store = str(item.get("source_store") or "unknown")
+        policy = store_policies.get(store, {})
+        query = query_for(item)
+        search_template = policy.get("search_template")
+        official_search_url = (
+            str(search_template).format(query=urllib.parse.quote(query)) if search_template else discovery_search_url(item, query)
+        )
+        missing_fields = [
+            field
+            for field in ("source_url", "image_url", "release_date", "barcode")
+            if not present(item.get(field))
+        ]
+        queue.append(
+            {
+                "priority": 10 if policy.get("source_kind") == "official_manufacturer" else 20,
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "category": item.get("category"),
+                "character_name": item.get("character_name"),
+                "sub_series": item.get("sub_series"),
+                "source_store": store,
+                "source_kind": policy.get("source_kind", "manual_review"),
+                "confidence": policy.get("confidence", "manual_research"),
+                "missing_fields": missing_fields,
+                "official_search_url": official_search_url,
+                "web_search_url": "https://www.google.com/search?q="
+                + urllib.parse.quote(f"{query} {store} \u753b\u50cf \u5546\u54c1"),
+                "allowed_source_domains": policy.get("allowed_source_domains", []),
+                "evidence_required": [
+                    "exact product title or product-line title matches the catalog row",
+                    "source page shows an official or licensed product image",
+                    "source_url must be a product/detail/search-result page specific enough to re-find the item",
+                    "image_url must come from the same accepted source page or an official product CDN",
+                ],
+                "acceptance_rule": "manual_review_required_before_catalog_patch",
+                "auto_apply_enabled": False,
+                "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch",
+            }
+        )
+
+    by_store = Counter(str(row.get("source_store") or "unknown") for row in queue)
+    by_source_kind = Counter(str(row.get("source_kind") or "unknown") for row in queue)
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "scope": "danganronpa_missing_source_and_image_queue",
+        "summary": {
+            "missing_media_rows": len(queue),
+            "missing_source_url_rows": sum(1 for row in queue if "source_url" in row.get("missing_fields", [])),
+            "missing_image_url_rows": sum(1 for row in queue if "image_url" in row.get("missing_fields", [])),
+            "official_search_rows": sum(1 for row in queue if row.get("source_kind") == "official_manufacturer"),
+            "official_prize_search_rows": sum(1 for row in queue if row.get("source_kind") == "official_prize"),
+            "licensed_retailer_review_rows": sum(1 for row in queue if row.get("source_kind") == "licensed_retailer"),
+            "by_source_store": by_store.most_common(),
+            "by_source_kind": by_source_kind.most_common(),
+            "auto_apply_enabled": False,
+        },
+        "items": queue,
+        "instructions": [
+            "Work these Danganronpa rows before broad image enrichment because every row lacks both source_url and image_url.",
+            "Use official manufacturer or prize pages first; licensed retailers require extra identity review.",
+            "Do not attach images from marketplaces, blogs, or resale listings unless separately promoted into a trusted-source policy.",
+        ],
+        "automation_policy": {
+            "auto_apply_catalog_changes": False,
+            "requires_manual_review": True,
+            "private_collection_storage": "local_device_only",
+        },
+    }
+
+
 def build_operations_public(
     generated_at: str,
     items: list[dict[str, Any]],
@@ -978,6 +1121,7 @@ def build_operations_public(
     ichiban_kuji_history: dict[str, Any],
     generic_source_patch_candidates: dict[str, Any],
     requested_focus: dict[str, Any],
+    danganronpa_missing_media: dict[str, Any],
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     image_summary = image_enrichment_batches["summary"]
@@ -987,6 +1131,7 @@ def build_operations_public(
     metadata_summary = metadata_backlog["summary"]
     generic_patch_summary = generic_source_patch_candidates["summary"]
     requested_focus_summary = requested_focus["summary"]
+    danganronpa_media_summary = danganronpa_missing_media["summary"]
 
     priority_fields = ["source_url", "image_url", "release_date", "official_price_jpy", "barcode"]
     store_totals: dict[str, dict[str, Any]] = defaultdict(lambda: {"rows": 0, **{field: 0 for field in priority_fields}})
@@ -1083,6 +1228,14 @@ def build_operations_public(
         },
         {
             "priority": 15,
+            "workstream": "danganronpa_missing_media",
+            "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
+            "open_rows": danganronpa_media_summary.get("missing_media_rows", 0),
+            "official_search_rows": danganronpa_media_summary.get("official_search_rows", 0),
+            "recommended_next_action": "Verify exact Danganronpa source pages and attach source_url/image_url patches.",
+        },
+        {
+            "priority": 18,
             "workstream": "image_url_attachment",
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
             "ready_rows": image_summary.get("source_url_ready_rows", 0),
@@ -1158,6 +1311,14 @@ def build_operations_public(
             "auto_apply_enabled": False,
         },
         {
+            "workstream": "danganronpa_missing_media",
+            "status": "open" if danganronpa_media_summary.get("missing_media_rows", 0) else "clear",
+            "open_rows": danganronpa_media_summary.get("missing_media_rows", 0),
+            "primary_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
+            "next_step": "verify_danganronpa_exact_source_pages",
+            "auto_apply_enabled": danganronpa_media_summary.get("auto_apply_enabled", False),
+        },
+        {
             "workstream": "image_enrichment",
             "status": "blocked" if image_summary.get("missing_image_rows", 0) else "clear",
             "open_rows": image_summary.get("missing_image_rows", 0),
@@ -1230,6 +1391,7 @@ def build_operations_public(
                 "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
                 "generic_source_patch_candidate_rows": generic_patch_summary.get("candidate_rows", 0),
                 "requested_focus_open_rows": requested_focus_summary.get("open_rows", 0),
+                "danganronpa_missing_media_rows": danganronpa_media_summary.get("missing_media_rows", 0),
             },
             "top_store_priority_score": store_priority_matrix[0]["priority_score"] if store_priority_matrix else 0,
         },
@@ -1241,6 +1403,7 @@ def build_operations_public(
             {"key": "image_backlog", "public_report": f"data/{IMAGE_BACKLOG.name}"},
             {"key": "generic_source_patch_candidates", "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}"},
             {"key": "requested_focus_enrichment", "public_report": f"data/{REQUESTED_FOCUS.name}"},
+            {"key": "danganronpa_missing_media", "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}"},
             {"key": "image_enrichment_batches", "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}"},
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
@@ -1283,6 +1446,7 @@ def build_agent_work_queue_public(
     ichiban_kuji_history: dict[str, Any],
     operations: dict[str, Any],
     requested_focus: dict[str, Any],
+    danganronpa_missing_media: dict[str, Any],
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -1391,6 +1555,28 @@ def build_agent_work_queue_public(
         batch["review_state"] = review_state
         batch["next_machine_step"] = next_machine_step_for_state(review_state)
         batches.append(batch)
+
+    danganronpa_items = danganronpa_missing_media.get("items", [])
+    danganronpa_by_store: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for item in danganronpa_items:
+        if isinstance(item, dict):
+            danganronpa_by_store[str(item.get("source_store") or "unknown")].append(item)
+    for store, store_items in sorted(danganronpa_by_store.items(), key=lambda pair: (-len(pair[1]), pair[0])):
+        add_batch(
+            agent_id="agent-danganronpa-media",
+            workstream="danganronpa_missing_media",
+            priority=12,
+            title=f"단간론파 {store} 소스/이미지 보강",
+            public_report=DANGANRONPA_MISSING_MEDIA,
+            rows=len(store_items),
+            recommended_action="verify exact official or licensed source pages before preparing image/source patch",
+            acceptance_criteria=[
+                "Every accepted candidate must match the exact product or product-line identity.",
+                "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+                "No marketplace or resale image may be imported through this queue.",
+            ],
+            samples=store_items[:8],
+        )
 
     for topic in requested_focus.get("topics", []):
         open_rows = int(topic.get("open_rows") or 0)
@@ -2263,6 +2449,7 @@ def validate_report_consistency(
     ichiban_kuji_history: dict[str, Any],
     generic_source_patch_candidates: dict[str, Any],
     requested_focus: dict[str, Any],
+    danganronpa_missing_media: dict[str, Any],
     operations: dict[str, Any],
     agent_work_queue: dict[str, Any],
 ) -> list[str]:
@@ -2275,6 +2462,7 @@ def validate_report_consistency(
     kuji_summary = ichiban_kuji_history["summary"]
     generic_patch_summary = generic_source_patch_candidates["summary"]
     requested_focus_summary = requested_focus["summary"]
+    danganronpa_media_summary = danganronpa_missing_media["summary"]
     operations_summary = operations["summary"]
     open_queues = operations_summary["open_review_queues"]
     agent_summary = agent_work_queue["summary"]
@@ -2355,6 +2543,38 @@ def validate_report_consistency(
         if topic.get("auto_apply_enabled") is not False:
             findings.append(f"requested focus topic enables auto apply: {topic.get('topic_id')}")
 
+    danganronpa_items = danganronpa_missing_media.get("items", [])
+    if danganronpa_media_summary.get("missing_media_rows") != len(danganronpa_items):
+        findings.append("danganronpa_missing_media.missing_media_rows does not match item length")
+    if danganronpa_media_summary.get("auto_apply_enabled") is not False:
+        findings.append("danganronpa_missing_media enables auto apply")
+    required_danganronpa_fields = {
+        "catalog_index",
+        "name_ko",
+        "name_ja",
+        "source_store",
+        "source_kind",
+        "missing_fields",
+        "official_search_url",
+        "web_search_url",
+        "allowed_source_domains",
+        "evidence_required",
+        "acceptance_rule",
+        "auto_apply_enabled",
+        "recommended_next_action",
+    }
+    for item in danganronpa_items:
+        if not isinstance(item, dict):
+            findings.append("danganronpa_missing_media.items contains non-object row")
+            continue
+        missing_danganronpa_fields = required_danganronpa_fields - set(item)
+        if missing_danganronpa_fields:
+            findings.append(f"danganronpa missing media item missing fields: {sorted(missing_danganronpa_fields)}")
+        if item.get("auto_apply_enabled") is not False:
+            findings.append(f"danganronpa missing media row enables auto apply: {item.get('catalog_index')}")
+        if "source_url" not in item.get("missing_fields", []) or "image_url" not in item.get("missing_fields", []):
+            findings.append(f"danganronpa missing media row lacks source/image missing markers: {item.get('catalog_index')}")
+
     if source_summary.get("source_discovery_rows") != missing["source_url"]:
         findings.append("source_discovery_rows does not match missing source_url count")
     source_items = source_discovery.get("items", [])
@@ -2432,6 +2652,7 @@ def validate_report_consistency(
         "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
         "generic_source_patch_candidate_rows": generic_patch_summary.get("candidate_rows", 0),
         "requested_focus_open_rows": requested_focus_summary.get("open_rows", 0),
+        "danganronpa_missing_media_rows": danganronpa_media_summary.get("missing_media_rows", 0),
     }
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
@@ -2560,6 +2781,7 @@ def validate_report_consistency(
         f"data/{GENERIC_SOURCE.name}",
         f"data/{GOTOUCHI.name}",
         f"data/{REQUESTED_FOCUS.name}",
+        f"data/{DANGANRONPA_MISSING_MEDIA.name}",
     }
     required_batch_fields = {
         "batch_id",
@@ -2651,6 +2873,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     generic_source_patch_candidates = build_generic_source_patch_candidates_public(generated_at)
     requested_report = load_json(REQUESTED, {}) if REQUESTED.exists() else {}
     requested_focus = build_requested_focus_enrichment_public(items, requested_report, generated_at)
+    danganronpa_missing_media = build_danganronpa_missing_media_public(items, generated_at)
     patch_candidate_items = generic_source_patch_candidates.get("items", [])
     patch_candidate_summary = generic_source_patch_candidates.get("summary", {})
     if patch_candidate_summary.get("candidate_rows") != len(patch_candidate_items):
@@ -2671,6 +2894,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_history,
         generic_source_patch_candidates,
         requested_focus,
+        danganronpa_missing_media,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -2682,6 +2906,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_history,
         operations,
         requested_focus,
+        danganronpa_missing_media,
     )
 
     public_meta = load_json(PUBLIC_META, {})
@@ -2762,6 +2987,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{REQUESTED_FOCUS.name}",
             **requested_focus["summary"],
         }
+        target["danganronpa_missing_media"] = {
+            "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
+            **danganronpa_missing_media["summary"],
+        }
         if SOURCE_DETAIL.exists():
             target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
         target["source_discovery_queue"] = {
@@ -2808,6 +3037,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_history,
         generic_source_patch_candidates,
         requested_focus,
+        danganronpa_missing_media,
         operations,
         agent_work_queue,
     )
@@ -2826,6 +3056,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         GOTOUCHI,
         REQUESTED,
         REQUESTED_FOCUS,
+        DANGANRONPA_MISSING_MEDIA,
         GENERIC_SOURCE,
         GENERIC_SOURCE_PATCH_CANDIDATES,
         SOURCE_DETAIL,
@@ -2854,6 +3085,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_CANDIDATES, image_candidates)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
+        write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
 
     return {
         "write": write,
@@ -2867,6 +3099,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
+            str(DANGANRONPA_MISSING_MEDIA.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),

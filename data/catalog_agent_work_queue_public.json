@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:00:45Z",
+  "generated_at": "2026-07-21T20:05:41Z",
   "summary": {
-    "batch_count": 57,
-    "summed_batch_rows": 23749,
+    "batch_count": 65,
+    "summed_batch_rows": 23783,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -17,6 +17,10 @@
       [
         "deduplication_review",
         10
+      ],
+      [
+        "danganronpa_missing_media",
+        8
       ],
       [
         "image_url_attachment",
@@ -65,6 +69,10 @@
         10
       ],
       [
+        "agent-danganronpa-media",
+        8
+      ],
+      [
         "agent-source-image",
         8
       ],
@@ -93,12 +101,13 @@
       "ichiban_missing_release_date_rows": 16,
       "ichiban_missing_price_rows": 365,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 5717
+      "requested_focus_open_rows": 5717,
+      "danganronpa_missing_media_rows": 34
     }
   },
   "top_next_batches": [
     {
-      "batch_id": "010-agent-requested-focus-01",
+      "batch_id": "010-agent-requested-focus-09",
       "agent_id": "agent-requested-focus",
       "workstream": "requested_focus_enrichment",
       "priority": 10,
@@ -109,7 +118,95 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-05",
+      "batch_id": "012-agent-danganronpa-media-01",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "rows": 9,
+      "title": "단간론파 애니메이트 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-02",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "rows": 7,
+      "title": "단간론파 Movic 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-03",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "rows": 6,
+      "title": "단간론파 엔스카이 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-04",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "rows": 3,
+      "title": "단간론파 FuRyu 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-05",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "rows": 3,
+      "title": "단간론파 Taito 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-06",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "rows": 3,
+      "title": "단간론파 굿스마일컴퍼니 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-07",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "rows": 2,
+      "title": "단간론파 코토부키야 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-08",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "rows": 1,
+      "title": "단간론파 AmiAmi 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "015-agent-generic-source-cleanup-13",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -125,116 +222,6 @@
         "weak_or_low_confidence_rows": 3,
         "no_candidate_rows": 42
       }
-    },
-    {
-      "batch_id": "015-agent-generic-source-cleanup-06",
-      "agent_id": "agent-generic-source-cleanup",
-      "workstream": "generic_source_url_cleanup",
-      "priority": 15,
-      "rows": 3,
-      "title": "Weverse Shop 이미지 보강 (replace_generic_source_then_extract_image)",
-      "public_report": "data/generic_source_cleanup_public.json",
-      "review_state": "exact_source_discovery_required",
-      "next_machine_step": "find_exact_official_product_source_url",
-      "review_summary": {
-        "review_rows": 3,
-        "candidate_rows": 0,
-        "manual_confirmed_rows": 0,
-        "weak_or_low_confidence_rows": 0,
-        "no_candidate_rows": 3
-      }
-    },
-    {
-      "batch_id": "015-agent-generic-source-cleanup-07",
-      "agent_id": "agent-generic-source-cleanup",
-      "workstream": "generic_source_url_cleanup",
-      "priority": 15,
-      "rows": 2,
-      "title": "포켓몬 센터 이미지 보강 (replace_generic_source_then_extract_image)",
-      "public_report": "data/generic_source_cleanup_public.json",
-      "review_state": "exact_source_discovery_required",
-      "next_machine_step": "find_exact_official_product_source_url",
-      "review_summary": {
-        "review_rows": 2,
-        "candidate_rows": 0,
-        "manual_confirmed_rows": 0,
-        "weak_or_low_confidence_rows": 0,
-        "no_candidate_rows": 2
-      }
-    },
-    {
-      "batch_id": "018-agent-gotouchi-review-08",
-      "agent_id": "agent-gotouchi-review",
-      "workstream": "gotouchi_official_candidate_review",
-      "priority": 18,
-      "rows": 23,
-      "title": "ご当地ちいかわ 공식(API) 이미지 보강 (review_gotouchi_official_candidates)",
-      "public_report": "data/gotouchi_chiikawa_image_candidates_public.json",
-      "review_state": "official_candidate_mismatch_review_required",
-      "next_machine_step": "review_official_candidates_before_import",
-      "review_summary": {
-        "rows_checked": 26,
-        "exact_type_candidate_rows": 0,
-        "motif_only_type_mismatch_rows": 16,
-        "no_official_candidate_rows": 6,
-        "attached_representative_rows": 3,
-        "visual_mismatch_rows": 1
-      }
-    },
-    {
-      "batch_id": "020-agent-source-image-09",
-      "agent_id": "agent-source-image",
-      "workstream": "image_url_attachment",
-      "priority": 20,
-      "rows": 148,
-      "title": "애니메이트 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "review_state": "source_discovery_then_image_attachment",
-      "next_machine_step": "find_source_url_before_image_import"
-    },
-    {
-      "batch_id": "020-agent-source-image-10",
-      "agent_id": "agent-source-image",
-      "workstream": "image_url_attachment",
-      "priority": 20,
-      "rows": 142,
-      "title": "엔스카이 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "review_state": "source_discovery_then_image_attachment",
-      "next_machine_step": "find_source_url_before_image_import"
-    },
-    {
-      "batch_id": "020-agent-requested-focus-02",
-      "agent_id": "agent-requested-focus",
-      "workstream": "requested_focus_enrichment",
-      "priority": 20,
-      "rows": 117,
-      "title": "요청 우선 보강: 단간론파 굿즈",
-      "public_report": "data/requested_focus_enrichment_public.json",
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "020-agent-source-image-11",
-      "agent_id": "agent-source-image",
-      "workstream": "image_url_attachment",
-      "priority": 20,
-      "rows": 57,
-      "title": "굿스마일컴퍼니 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "review_state": "source_discovery_then_image_attachment",
-      "next_machine_step": "find_source_url_before_image_import"
-    },
-    {
-      "batch_id": "020-agent-source-image-12",
-      "agent_id": "agent-source-image",
-      "workstream": "image_url_attachment",
-      "priority": 20,
-      "rows": 44,
-      "title": "코토부키야 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "review_state": "source_discovery_then_image_attachment",
-      "next_machine_step": "find_source_url_before_image_import"
     }
   ],
   "instructions": [
@@ -244,7 +231,7 @@
   ],
   "batches": [
     {
-      "batch_id": "010-agent-requested-focus-01",
+      "batch_id": "010-agent-requested-focus-09",
       "agent_id": "agent-requested-focus",
       "workstream": "requested_focus_enrichment",
       "priority": 10,
@@ -343,7 +330,1227 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-05",
+      "batch_id": "012-agent-danganronpa-media-01",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "title": "단간론파 애니메이트 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "rows": 9,
+      "recommended_action": "verify exact official or licensed source pages before preparing image/source patch",
+      "acceptance_criteria": [
+        "Every accepted candidate must match the exact product or product-line identity.",
+        "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+        "No marketplace or resale image may be imported through this queue."
+      ],
+      "sample_items": [
+        {
+          "priority": 20,
+          "catalog_index": 1703,
+          "name_ko": "단간론파 클리어 파일 세트 희망봉 학원",
+          "name_ja": "ダンガンロンパ クリアファイルセット 希望ヶ峰学園",
+          "category": "문구",
+          "character_name": "나에기 마코토",
+          "sub_series": "클리어 파일 세트",
+          "source_store": "애니메이트",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 1802,
+          "name_ko": "단간론파 히나타 하지메 클리어 보틀",
+          "name_ja": "ダンガンロンパ 日向創 クリアボトル",
+          "category": "생활잡화",
+          "character_name": "히나타 하지메",
+          "sub_series": "학원 시리즈",
+          "source_store": "애니메이트",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E6%97%A5%E5%90%91%E5%89%B5%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E6%97%A5%E5%90%91%E5%89%B5%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 2077,
+          "name_ko": "단간론파 캔뱃지 (모노쿠마)",
+          "name_ja": "ダンガンロンパ 缶バッジ (モノクマ)",
+          "category": "캔뱃지",
+          "character_name": "모노쿠마",
+          "sub_series": null,
+          "source_store": "애니메이트",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 2080,
+          "name_ko": "단간론파 키링 (코마에다)",
+          "name_ja": "ダンガンロンパ キーホルダー (狛枝)",
+          "category": "키링",
+          "character_name": "코마에다 나기토",
+          "sub_series": null,
+          "source_store": "애니메이트",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E7%8B%9B%E6%9E%9D%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E7%8B%9B%E6%9E%9D%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 2081,
+          "name_ko": "단간론파 클리어 파일 (V3 캐스트)",
+          "name_ja": "ダンガンロンパ クリアファイル (V3キャスト)",
+          "category": "문구",
+          "character_name": "혼합",
+          "sub_series": "클리어파일",
+          "source_store": "애니메이트",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20%28V3%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20%28V3%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 2082,
+          "name_ko": "단간론파 머그컵 (모노쿠마)",
+          "name_ja": "ダンガンロンパ マグカップ (モノクマ)",
+          "category": "머그컵",
+          "character_name": "모노쿠마",
+          "sub_series": null,
+          "source_store": "애니메이트",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 2083,
+          "name_ko": "단간론파 러버 마스코트 (모노쿠마)",
+          "name_ja": "ダンガンロンパ ラバーマスコット (モノクマ)",
+          "category": "마스코트",
+          "character_name": "모노쿠마",
+          "sub_series": null,
+          "source_store": "애니메이트",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 2084,
+          "name_ko": "단간론파 러버 마스코트 (코마에다)",
+          "name_ja": "ダンガンロンパ ラバーマスコット (狛枝)",
+          "category": "마스코트",
+          "character_name": "코마에다 나기토",
+          "sub_series": null,
+          "source_store": "애니메이트",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%8B%9B%E6%9E%9D%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%8B%9B%E6%9E%9D%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-02",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "title": "단간론파 Movic 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "rows": 7,
+      "recommended_action": "verify exact official or licensed source pages before preparing image/source patch",
+      "acceptance_criteria": [
+        "Every accepted candidate must match the exact product or product-line identity.",
+        "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+        "No marketplace or resale image may be imported through this queue."
+      ],
+      "sample_items": [
+        {
+          "priority": 10,
+          "catalog_index": 1640,
+          "name_ko": "단간론파 아크릴 스탠드 (모노쿠마)",
+          "name_ja": "ダンガンロンパ アクリルスタンド (モノクマ)",
+          "category": "아크릴 스탠드",
+          "character_name": "모노쿠마",
+          "sub_series": "아크릴 스탠드",
+          "source_store": "Movic",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20Movic%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.movic.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1698,
+          "name_ko": "단간론파 트레이딩 캔뱃지 나에기 마코토",
+          "name_ja": "ダンガンロンパ トレーディング缶バッジ 苗木誠",
+          "category": "캔뱃지",
+          "character_name": "나에기 마코토",
+          "sub_series": "트레이딩 캔뱃지",
+          "source_store": "Movic",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E8%8B%97%E6%9C%A8%E8%AA%A0",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20Movic%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.movic.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1699,
+          "name_ko": "단간론파 트레이딩 캔뱃지 키리기리 쿄코",
+          "name_ja": "ダンガンロンパ トレーディング缶バッジ 霧切響子",
+          "category": "캔뱃지",
+          "character_name": "키리기리 쿄코",
+          "sub_series": "트레이딩 캔뱃지",
+          "source_store": "Movic",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90%20Movic%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.movic.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1700,
+          "name_ko": "단간론파 메탈릭 캔뱃지 모노쿠마",
+          "name_ja": "ダンガンロンパ メタリック缶バッジ モノクマ",
+          "category": "캔뱃지",
+          "character_name": "모노쿠마",
+          "sub_series": "메탈릭 캔뱃지",
+          "source_store": "Movic",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Movic%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.movic.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1702,
+          "name_ko": "단간론파 클리어 파일 A4 모노쿠마",
+          "name_ja": "ダンガンロンパ クリアファイルA4 モノクマ",
+          "category": "문구",
+          "character_name": "모노쿠마",
+          "sub_series": "클리어 파일 A4",
+          "source_store": "Movic",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Movic%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.movic.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1798,
+          "name_ko": "단간론파 나에기 학원 시리즈 머그컵",
+          "name_ja": "ダンガンロンパ 苗木誠 学園シリーズ マグカップ",
+          "category": "머그컵",
+          "character_name": "나에기 마코토",
+          "sub_series": "학원 시리즈",
+          "source_store": "Movic",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20Movic%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.movic.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1799,
+          "name_ko": "단간론파 키리기리 학원 시리즈 타올",
+          "name_ja": "ダンガンロンパ 霧切響子 学園シリーズ タオル",
+          "category": "타월",
+          "character_name": "키리기리 쿄코",
+          "sub_series": "학원 시리즈",
+          "source_store": "Movic",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB%20Movic%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.movic.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-03",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "title": "단간론파 엔스카이 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "rows": 6,
+      "recommended_action": "verify exact official or licensed source pages before preparing image/source patch",
+      "acceptance_criteria": [
+        "Every accepted candidate must match the exact product or product-line identity.",
+        "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+        "No marketplace or resale image may be imported through this queue."
+      ],
+      "sample_items": [
+        {
+          "priority": 10,
+          "catalog_index": 1473,
+          "name_ko": "오만쥬 니기니기 마스코트 모노쿠마",
+          "name_ja": "おまんじゅう にぎにぎマスコット モノクマ",
+          "category": "마스코트",
+          "character_name": "모노쿠마",
+          "sub_series": "오만쥬 니기니기 마스코트",
+          "source_store": "엔스카이",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.enskyshop.com",
+            "www.ensky.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1474,
+          "name_ko": "오만쥬 니기니기 마스코트 나에기 마코토",
+          "name_ja": "おまんじゅう にぎにぎマスコット 苗木誠",
+          "category": "마스코트",
+          "character_name": "나에기 마코토",
+          "sub_series": "오만쥬 니기니기 마스코트",
+          "source_store": "엔스카이",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E8%8B%97%E6%9C%A8%E8%AA%A0",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.enskyshop.com",
+            "www.ensky.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1475,
+          "name_ko": "오만쥬 니기니기 마스코트 코마에다 나기토",
+          "name_ja": "おまんじゅう にぎにぎマスコット 狛枝凪斗",
+          "category": "마스코트",
+          "character_name": "코마에다 나기토",
+          "sub_series": "오만쥬 니기니기 마스코트",
+          "source_store": "엔스카이",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.enskyshop.com",
+            "www.ensky.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1476,
+          "name_ko": "오만쥬 니기니기 마스코트 히나타 하지메",
+          "name_ja": "おまんじゅう にぎにぎマスコット 日向創",
+          "category": "마스코트",
+          "character_name": "히나타 하지메",
+          "sub_series": "오만쥬 니기니기 마스코트",
+          "source_store": "엔스카이",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E6%97%A5%E5%90%91%E5%89%B5%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.enskyshop.com",
+            "www.ensky.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1477,
+          "name_ko": "치비누이 사이하라 슈이치",
+          "name_ja": "ちびぬい 最原終一",
+          "category": "인형",
+          "character_name": "사이하라 슈이치",
+          "sub_series": "치비누이",
+          "source_store": "엔스카이",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E6%9C%80%E5%8E%9F%E7%B5%82%E4%B8%80",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E6%9C%80%E5%8E%9F%E7%B5%82%E4%B8%80%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.enskyshop.com",
+            "www.ensky.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1478,
+          "name_ko": "치비누이 오우마 코키치",
+          "name_ja": "ちびぬい 王馬小吉",
+          "category": "인형",
+          "character_name": "오우마 코키치",
+          "sub_series": "치비누이",
+          "source_store": "엔스카이",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E7%8E%8B%E9%A6%AC%E5%B0%8F%E5%90%89",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E7%8E%8B%E9%A6%AC%E5%B0%8F%E5%90%89%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.enskyshop.com",
+            "www.ensky.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-04",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "title": "단간론파 FuRyu 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "rows": 3,
+      "recommended_action": "verify exact official or licensed source pages before preparing image/source patch",
+      "acceptance_criteria": [
+        "Every accepted candidate must match the exact product or product-line identity.",
+        "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+        "No marketplace or resale image may be imported through this queue."
+      ],
+      "sample_items": [
+        {
+          "priority": 20,
+          "catalog_index": 1470,
+          "name_ko": "Noodle Stopper 모노쿠마",
+          "name_ja": "ヌードルストッパー モノクマ",
+          "category": "피규어",
+          "character_name": "모노쿠마",
+          "sub_series": "Noodle Stopper",
+          "source_store": "FuRyu",
+          "source_kind": "official_prize",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://furyuprize.com/search?keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20FuRyu%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "furyuprize.com"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 1471,
+          "name_ko": "Chokonose Premium 코마에다 나기토",
+          "name_ja": "ちょこのせ プレミアム 狛枝凪斗",
+          "category": "피규어",
+          "character_name": "코마에다 나기토",
+          "sub_series": "Chokonose",
+          "source_store": "FuRyu",
+          "source_kind": "official_prize",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://furyuprize.com/search?keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20FuRyu%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "furyuprize.com"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 1472,
+          "name_ko": "Chokonose Premium 히나타 하지메",
+          "name_ja": "ちょこのせ プレミアム 日向創",
+          "category": "피규어",
+          "character_name": "히나타 하지메",
+          "sub_series": "Chokonose",
+          "source_store": "FuRyu",
+          "source_kind": "official_prize",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://furyuprize.com/search?keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%97%A5%E5%90%91%E5%89%B5%20FuRyu%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "furyuprize.com"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-05",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "title": "단간론파 Taito 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "rows": 3,
+      "recommended_action": "verify exact official or licensed source pages before preparing image/source patch",
+      "acceptance_criteria": [
+        "Every accepted candidate must match the exact product or product-line identity.",
+        "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+        "No marketplace or resale image may be imported through this queue."
+      ],
+      "sample_items": [
+        {
+          "priority": 20,
+          "catalog_index": 1467,
+          "name_ko": "Desktop Cute 모노쿠마",
+          "name_ja": "デスクトップキュート モノクマ",
+          "category": "피규어",
+          "character_name": "모노쿠마",
+          "sub_series": "Desktop Cute",
+          "source_store": "Taito",
+          "source_kind": "official_prize",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Taito%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.taito.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 1468,
+          "name_ko": "Desktop Cute 코마에다 나기토",
+          "name_ja": "デスクトップキュート 狛枝凪斗",
+          "category": "피규어",
+          "character_name": "코마에다 나기토",
+          "sub_series": "Desktop Cute",
+          "source_store": "Taito",
+          "source_kind": "official_prize",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20Taito%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.taito.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 20,
+          "catalog_index": 1469,
+          "name_ko": "Desktop Cute 사이하라 슈이치",
+          "name_ja": "デスクトップキュート 最原終一",
+          "category": "피규어",
+          "character_name": "사이하라 슈이치",
+          "sub_series": "Desktop Cute",
+          "source_store": "Taito",
+          "source_kind": "official_prize",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E6%9C%80%E5%8E%9F%E7%B5%82%E4%B8%80",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E6%9C%80%E5%8E%9F%E7%B5%82%E4%B8%80%20Taito%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.taito.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-06",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "title": "단간론파 굿스마일컴퍼니 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "rows": 3,
+      "recommended_action": "verify exact official or licensed source pages before preparing image/source patch",
+      "acceptance_criteria": [
+        "Every accepted candidate must match the exact product or product-line identity.",
+        "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+        "No marketplace or resale image may be imported through this queue."
+      ],
+      "sample_items": [
+        {
+          "priority": 10,
+          "catalog_index": 1447,
+          "name_ko": "넨도로이드 토가미 뱌쿠야",
+          "name_ja": "ねんどろいど 十神白夜",
+          "category": "피규어",
+          "character_name": "토가미 뱌쿠야",
+          "sub_series": "넨도로이드",
+          "source_store": "굿스마일컴퍼니",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%AD%E3%82%93%E3%81%A9%E3%82%8D%E3%81%84%E3%81%A9%20%E5%8D%81%E7%A5%9E%E7%99%BD%E5%A4%9C",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%AD%E3%82%93%E3%81%A9%E3%82%8D%E3%81%84%E3%81%A9%20%E5%8D%81%E7%A5%9E%E7%99%BD%E5%A4%9C%20%EA%B5%BF%EC%8A%A4%EB%A7%88%EC%9D%BC%EC%BB%B4%ED%8D%BC%EB%8B%88%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.goodsmile.info",
+            "www.goodsmile.com"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1454,
+          "name_ko": "넨도로이드 모모타 카이토",
+          "name_ja": "ねんどろいど 百田解斗",
+          "category": "피규어",
+          "character_name": "모모타 카이토",
+          "sub_series": "넨도로이드",
+          "source_store": "굿스마일컴퍼니",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%AD%E3%82%93%E3%81%A9%E3%82%8D%E3%81%84%E3%81%A9%20%E7%99%BE%E7%94%B0%E8%A7%A3%E6%96%97",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%AD%E3%82%93%E3%81%A9%E3%82%8D%E3%81%84%E3%81%A9%20%E7%99%BE%E7%94%B0%E8%A7%A3%E6%96%97%20%EA%B5%BF%EC%8A%A4%EB%A7%88%EC%9D%BC%EC%BB%B4%ED%8D%BC%EB%8B%88%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.goodsmile.info",
+            "www.goodsmile.com"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1455,
+          "name_ko": "POP UP PARADE 모노쿠마",
+          "name_ja": "POP UP PARADE モノクマ",
+          "category": "피규어",
+          "character_name": "모노쿠마",
+          "sub_series": "POP UP PARADE",
+          "source_store": "굿스마일컴퍼니",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20POP%20UP%20PARADE%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20POP%20UP%20PARADE%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20%EA%B5%BF%EC%8A%A4%EB%A7%88%EC%9D%BC%EC%BB%B4%ED%8D%BC%EB%8B%88%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.goodsmile.info",
+            "www.goodsmile.com"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-07",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "title": "단간론파 코토부키야 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "rows": 2,
+      "recommended_action": "verify exact official or licensed source pages before preparing image/source patch",
+      "acceptance_criteria": [
+        "Every accepted candidate must match the exact product or product-line identity.",
+        "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+        "No marketplace or resale image may be imported through this queue."
+      ],
+      "sample_items": [
+        {
+          "priority": 10,
+          "catalog_index": 1458,
+          "name_ko": "ARTFX J 나에기 마코토",
+          "name_ja": "ARTFX J 苗木誠",
+          "category": "피규어",
+          "character_name": "나에기 마코토",
+          "sub_series": "ARTFX J",
+          "source_store": "코토부키야",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20ARTFX%20J%20%E8%8B%97%E6%9C%A8%E8%AA%A0",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20ARTFX%20J%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20%EC%BD%94%ED%86%A0%EB%B6%80%ED%82%A4%EC%95%BC%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "shop.kotobukiya.co.jp",
+            "www.kotobukiya.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        },
+        {
+          "priority": 10,
+          "catalog_index": 1459,
+          "name_ko": "ARTFX J 키리기리 쿄코",
+          "name_ja": "ARTFX J 霧切響子",
+          "category": "피규어",
+          "character_name": "키리기리 쿄코",
+          "sub_series": "ARTFX J",
+          "source_store": "코토부키야",
+          "source_kind": "official_manufacturer",
+          "confidence": "official_search",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20ARTFX%20J%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20ARTFX%20J%20%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90%20%EC%BD%94%ED%86%A0%EB%B6%80%ED%82%A4%EC%95%BC%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "shop.kotobukiya.co.jp",
+            "www.kotobukiya.co.jp"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "012-agent-danganronpa-media-08",
+      "agent_id": "agent-danganronpa-media",
+      "workstream": "danganronpa_missing_media",
+      "priority": 12,
+      "title": "단간론파 AmiAmi 소스/이미지 보강",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "rows": 1,
+      "recommended_action": "verify exact official or licensed source pages before preparing image/source patch",
+      "acceptance_criteria": [
+        "Every accepted candidate must match the exact product or product-line identity.",
+        "source_url and image_url must come from allowed_source_domains or an explicitly reviewed trusted source.",
+        "No marketplace or resale image may be imported through this queue."
+      ],
+      "sample_items": [
+        {
+          "priority": 20,
+          "catalog_index": 1704,
+          "name_ko": "단간론파 일러스트 카드 컬렉션 코마에다",
+          "name_ja": "ダンガンロンパ イラストカードコレクション 狛枝",
+          "category": "문구",
+          "character_name": "코마에다 나기토",
+          "sub_series": "일러스트 카드 컬렉션",
+          "source_store": "AmiAmi",
+          "source_kind": "licensed_retailer",
+          "confidence": "licensed_retailer_review",
+          "missing_fields": [
+            "source_url",
+            "image_url",
+            "release_date",
+            "barcode"
+          ],
+          "official_search_url": "https://www.amiami.jp/top/search/list?s_keywords=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E7%8B%9B%E6%9E%9D",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E7%8B%9B%E6%9E%9D%20AmiAmi%20%E7%94%BB%E5%83%8F%20%E5%95%86%E5%93%81",
+          "allowed_source_domains": [
+            "www.amiami.jp",
+            "www.amiami.com"
+          ],
+          "evidence_required": [
+            "exact product title or product-line title matches the catalog row",
+            "source page shows an official or licensed product image",
+            "source_url must be a product/detail/search-result page specific enough to re-find the item",
+            "image_url must come from the same accepted source page or an official product CDN"
+          ],
+          "acceptance_rule": "manual_review_required_before_catalog_patch",
+          "auto_apply_enabled": false,
+          "recommended_next_action": "verify exact source page, then prepare source_url and image_url patch"
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "015-agent-generic-source-cleanup-13",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -449,7 +1656,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-06",
+      "batch_id": "015-agent-generic-source-cleanup-14",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -505,7 +1712,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-07",
+      "batch_id": "015-agent-generic-source-cleanup-15",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -551,7 +1758,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-08",
+      "batch_id": "018-agent-gotouchi-review-16",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -658,7 +1865,7 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "020-agent-source-image-09",
+      "batch_id": "020-agent-source-image-17",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -757,7 +1964,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-10",
+      "batch_id": "020-agent-source-image-18",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -856,7 +2063,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-requested-focus-02",
+      "batch_id": "020-agent-requested-focus-10",
       "agent_id": "agent-requested-focus",
       "workstream": "requested_focus_enrichment",
       "priority": 20,
@@ -955,7 +2162,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-11",
+      "batch_id": "020-agent-source-image-19",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -1054,7 +2261,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-12",
+      "batch_id": "020-agent-source-image-20",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -1153,7 +2360,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-13",
+      "batch_id": "020-agent-source-image-21",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -1252,7 +2459,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-14",
+      "batch_id": "020-agent-source-image-22",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -1351,7 +2558,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-15",
+      "batch_id": "020-agent-source-image-23",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -1450,7 +2657,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-16",
+      "batch_id": "020-agent-source-image-24",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -1549,7 +2756,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "030-agent-requested-focus-03",
+      "batch_id": "030-agent-requested-focus-11",
       "agent_id": "agent-requested-focus",
       "workstream": "requested_focus_enrichment",
       "priority": 30,
@@ -1648,7 +2855,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-source-discovery-17",
+      "batch_id": "030-agent-source-discovery-25",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -1747,7 +2954,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-18",
+      "batch_id": "030-agent-source-discovery-26",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -1846,7 +3053,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-19",
+      "batch_id": "030-agent-source-discovery-27",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -1945,7 +3152,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-20",
+      "batch_id": "030-agent-source-discovery-28",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -2044,7 +3251,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-21",
+      "batch_id": "030-agent-source-discovery-29",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -2133,7 +3340,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-22",
+      "batch_id": "030-agent-source-discovery-30",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -2202,7 +3409,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-23",
+      "batch_id": "030-agent-source-discovery-31",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -2271,7 +3478,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-24",
+      "batch_id": "030-agent-source-discovery-32",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -2330,7 +3537,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-25",
+      "batch_id": "030-agent-source-discovery-33",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -2379,7 +3586,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-26",
+      "batch_id": "030-agent-source-discovery-34",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -2428,7 +3635,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "050-agent-requested-focus-04",
+      "batch_id": "050-agent-requested-focus-12",
       "agent_id": "agent-requested-focus",
       "workstream": "requested_focus_enrichment",
       "priority": 50,
@@ -2527,7 +3734,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "060-agent-metadata-27",
+      "batch_id": "060-agent-metadata-35",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -2626,7 +3833,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-28",
+      "batch_id": "060-agent-metadata-36",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -2725,7 +3932,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-29",
+      "batch_id": "060-agent-metadata-37",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -2824,7 +4031,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-30",
+      "batch_id": "060-agent-metadata-38",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -2923,7 +4130,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-31",
+      "batch_id": "060-agent-metadata-39",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -3022,7 +4229,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-32",
+      "batch_id": "060-agent-metadata-40",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -3121,7 +4328,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-33",
+      "batch_id": "060-agent-metadata-41",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -3220,7 +4427,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-34",
+      "batch_id": "060-agent-metadata-42",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -3319,7 +4526,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-35",
+      "batch_id": "060-agent-metadata-43",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -3418,7 +4625,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-36",
+      "batch_id": "060-agent-metadata-44",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -3517,7 +4724,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-37",
+      "batch_id": "090-agent-dedupe-45",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3556,7 +4763,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-38",
+      "batch_id": "090-agent-dedupe-46",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3595,7 +4802,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-39",
+      "batch_id": "090-agent-dedupe-47",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3634,7 +4841,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-40",
+      "batch_id": "090-agent-dedupe-48",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3673,7 +4880,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-41",
+      "batch_id": "090-agent-dedupe-49",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3712,7 +4919,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-42",
+      "batch_id": "090-agent-dedupe-50",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3751,7 +4958,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-43",
+      "batch_id": "090-agent-dedupe-51",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3790,7 +4997,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-44",
+      "batch_id": "090-agent-dedupe-52",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3829,7 +5036,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-45",
+      "batch_id": "090-agent-dedupe-53",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3868,7 +5075,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-46",
+      "batch_id": "090-agent-dedupe-54",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -3907,7 +5114,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "110-agent-ichiban-kuji-47",
+      "batch_id": "110-agent-ichiban-kuji-55",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_release_date",
       "priority": 110,
@@ -3965,7 +5172,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "110-agent-ichiban-kuji-48",
+      "batch_id": "110-agent-ichiban-kuji-56",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_release_date",
       "priority": 110,
@@ -4023,7 +5230,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-49",
+      "batch_id": "120-agent-ichiban-kuji-57",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -4081,7 +5288,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-50",
+      "batch_id": "120-agent-ichiban-kuji-58",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -4139,7 +5346,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-51",
+      "batch_id": "120-agent-ichiban-kuji-59",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -4197,7 +5404,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-52",
+      "batch_id": "120-agent-ichiban-kuji-60",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -4255,7 +5462,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-53",
+      "batch_id": "120-agent-ichiban-kuji-61",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -4313,7 +5520,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-54",
+      "batch_id": "120-agent-ichiban-kuji-62",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -4371,7 +5578,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-55",
+      "batch_id": "120-agent-ichiban-kuji-63",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -4429,7 +5636,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-56",
+      "batch_id": "120-agent-ichiban-kuji-64",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -4487,7 +5694,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "140-agent-animation-taxonomy-57",
+      "batch_id": "140-agent-animation-taxonomy-65",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
       "priority": 140,

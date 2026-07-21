@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:00:45Z",
+  "generated_at": "2026-07-21T20:05:41Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -24,7 +24,8 @@
       "ichiban_missing_release_date_rows": 16,
       "ichiban_missing_price_rows": 365,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 5717
+      "requested_focus_open_rows": 5717,
+      "danganronpa_missing_media_rows": 34
     },
     "top_store_priority_score": 1832.0
   },
@@ -75,6 +76,14 @@
       "open_rows": 647,
       "primary_report": "data/source_discovery_queue_public.json",
       "next_step": "find_exact_official_source_url",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "danganronpa_missing_media",
+      "status": "open",
+      "open_rows": 34,
+      "primary_report": "data/danganronpa_missing_media_public.json",
+      "next_step": "verify_danganronpa_exact_source_pages",
       "auto_apply_enabled": false
     },
     {
@@ -586,6 +595,10 @@
       "public_report": "data/requested_focus_enrichment_public.json"
     },
     {
+      "key": "danganronpa_missing_media",
+      "public_report": "data/danganronpa_missing_media_public.json"
+    },
+    {
       "key": "image_enrichment_batches",
       "public_report": "data/catalog_image_enrichment_batches_public.json"
     },
@@ -631,6 +644,14 @@
     },
     {
       "priority": 15,
+      "workstream": "danganronpa_missing_media",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "open_rows": 34,
+      "official_search_rows": 18,
+      "recommended_next_action": "Verify exact Danganronpa source pages and attach source_url/image_url patches."
+    },
+    {
+      "priority": 18,
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "ready_rows": 0,
