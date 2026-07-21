@@ -93,7 +93,7 @@ WORKFLOWS = {
         "public_action_queue": DATA / "ichiban_kuji_metadata_action_queue_public.json",
         "public_action_rows_key": "queued_catalog_item_rows",
         "public_action_batches_key": "action_batch_count",
-        "public_action_next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+        "public_action_next_step": "fill_confirmed_ichiban_campaign_patch_templates_then_run_import_confirmed_ichiban_metadata_rows",
     },
     "animation_category": {
         "confirmed": SERVER / "animation_category_confirmed_rows.json",
