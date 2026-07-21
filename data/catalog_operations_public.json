@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "generated_at": "2026-07-21T18:57:09Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -24,6 +25,38 @@
       "ichiban_missing_price_rows": 365
     }
   },
+  "quality_gates": [
+    {
+      "key": "source_url_coverage",
+      "status": "pass",
+      "value": 0.9641,
+      "target": 0.95
+    },
+    {
+      "key": "image_url_coverage",
+      "status": "pass",
+      "value": 0.9601,
+      "target": 0.95
+    },
+    {
+      "key": "release_date_coverage",
+      "status": "pass",
+      "value": 0.9215,
+      "target": 0.9
+    },
+    {
+      "key": "source_discovery_backlog",
+      "status": "warn",
+      "value": 647,
+      "target": 0
+    },
+    {
+      "key": "manual_dedupe_backlog",
+      "status": "warn",
+      "value": 109,
+      "target": 0
+    }
+  ],
   "reports": [
     {
       "key": "quality",
@@ -115,6 +148,7 @@
     "public_only": true,
     "auto_apply_catalog_changes": false,
     "requires_manual_review_for_imports": true,
+    "scheduled_refresh": "Daily at 04:20 KST via GitHub Actions plus manual workflow_dispatch.",
     "reason": "This report coordinates public queues; it does not mutate catalog data by itself."
   }
 }

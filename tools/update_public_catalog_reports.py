@@ -488,6 +488,7 @@ def build_image_enrichment_batches_public(
 
 
 def build_operations_public(
+    generated_at: str,
     rows: int,
     missing: dict[str, int],
     cov: dict[str, float],
@@ -504,6 +505,39 @@ def build_operations_public(
     animation_summary = animation_categories["summary"]
     kuji_summary = ichiban_kuji_history["summary"]
     metadata_summary = metadata_backlog["summary"]
+
+    quality_gates = [
+        {
+            "key": "source_url_coverage",
+            "status": "pass" if cov.get("source_url", 0) >= 0.95 else "warn",
+            "value": cov.get("source_url", 0),
+            "target": 0.95,
+        },
+        {
+            "key": "image_url_coverage",
+            "status": "pass" if cov.get("image_url", 0) >= 0.95 else "warn",
+            "value": cov.get("image_url", 0),
+            "target": 0.95,
+        },
+        {
+            "key": "release_date_coverage",
+            "status": "pass" if cov.get("release_date", 0) >= 0.9 else "warn",
+            "value": cov.get("release_date", 0),
+            "target": 0.9,
+        },
+        {
+            "key": "source_discovery_backlog",
+            "status": "warn" if source_summary.get("source_discovery_rows", 0) else "pass",
+            "value": source_summary.get("source_discovery_rows", 0),
+            "target": 0,
+        },
+        {
+            "key": "manual_dedupe_backlog",
+            "status": "warn" if dedupe_summary.get("duplicate_groups", 0) else "pass",
+            "value": dedupe_summary.get("duplicate_groups", 0),
+            "target": 0,
+        },
+    ]
 
     next_actions = [
         {
@@ -554,6 +588,7 @@ def build_operations_public(
 
     return {
         "schema_version": 1,
+        "generated_at": generated_at,
         "summary": {
             "catalog_rows": rows,
             "coverage": cov,
@@ -574,6 +609,7 @@ def build_operations_public(
                 "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
             },
         },
+        "quality_gates": quality_gates,
         "reports": [
             {"key": "quality", "public_report": f"data/{QUALITY.name}"},
             {"key": "image_backlog", "public_report": f"data/{IMAGE_BACKLOG.name}"},
@@ -589,6 +625,7 @@ def build_operations_public(
             "public_only": True,
             "auto_apply_catalog_changes": False,
             "requires_manual_review_for_imports": True,
+            "scheduled_refresh": "Daily at 04:20 KST via GitHub Actions plus manual workflow_dispatch.",
             "reason": "This report coordinates public queues; it does not mutate catalog data by itself.",
         },
     }
@@ -1044,6 +1081,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     animation_categories = build_animation_categories_public(items)
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
     operations = build_operations_public(
+        generated_at,
         rows,
         missing,
         cov,
