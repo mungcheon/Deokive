@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff2f7">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <title>Deokive Catalog</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fff2f7;
+      --surface: rgba(255, 255, 255, 0.86);
+      --surface-strong: #ffffff;
+      --ink: #2c2430;
+      --muted: #806b78;
+      --line: rgba(255, 126, 178, 0.24);
+      --pink: #ff63a7;
+      --pink-dark: #c64c84;
+      --mint: #2db9a3;
+      --blue: #4e78ff;
+      --yellow: #f7c948;
+      --shadow: 0 18px 50px rgba(198, 76, 132, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif;
+      letter-spacing: 0;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      margin: 0 auto;
+      max-width: 1180px;
+      padding: 18px 18px 36px;
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      min-height: 48px;
+    }
+
+    .brand {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .mark {
+      align-items: center;
+      background: var(--pink);
+      border-radius: 14px;
+      box-shadow: 0 8px 22px rgba(255, 99, 167, 0.28);
+      color: #fff;
+      display: grid;
+      flex: 0 0 auto;
+      font-size: 20px;
+      font-weight: 900;
+      height: 40px;
+      place-items: center;
+      width: 40px;
+    }
+
+    h1 {
+      font-size: 22px;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    .home-link {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--pink-dark);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 800;
+      gap: 6px;
+      min-height: 38px;
+      padding: 0 14px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .hero {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      margin-top: 24px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .summary {
+      padding: 22px;
+    }
+
+    .summary h2 {
+      font-size: 30px;
+      line-height: 1.18;
+      margin: 0;
+    }
+
+    .summary p {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 640px;
+    }
+
+    .stats {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: var(--surface-strong);
+      border: 1px solid rgba(255, 126, 178, 0.18);
+      border-radius: 18px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    .stat b {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 750;
+      margin-top: 8px;
+    }
+
+    .insight {
+      padding: 18px;
+    }
+
+    .insight h3 {
+      font-size: 15px;
+      margin: 0 0 12px;
+    }
+
+    .bar {
+      align-items: center;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 84px 1fr 40px;
+      margin-top: 9px;
+    }
+
+    .bar span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .track {
+      background: rgba(198, 76, 132, 0.12);
+      border-radius: 999px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .fill {
+      background: var(--pink);
+      border-radius: inherit;
+      height: 100%;
+      min-width: 4px;
+    }
+
+    .toolbar {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(220px, 1fr) repeat(3, minmax(150px, 190px));
+      margin-top: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .field,
+    .select {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      display: flex;
+      min-height: 48px;
+      overflow: hidden;
+      padding: 0 14px;
+    }
+
+    .field input,
+    .select select {
+      background: transparent;
+      border: 0;
+      color: var(--ink);
+      min-width: 0;
+      outline: 0;
+      width: 100%;
+    }
+
+    .field input::placeholder {
+      color: rgba(128, 107, 120, 0.72);
+    }
+
+    .select select {
+      appearance: none;
+      cursor: pointer;
+      font-weight: 750;
+    }
+
+    .results-head {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin: 18px 2px 10px;
+    }
+
+    .results-head h2 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    }
+
+    .card {
+      background: var(--surface-strong);
+      border: 1px solid rgba(255, 126, 178, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 10px 24px rgba(198, 76, 132, 0.08);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      overflow: hidden;
+    }
+
+    .thumb {
+      align-items: center;
+      aspect-ratio: 1 / 1;
+      background: #fff8fb;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .thumb img {
+      height: 100%;
+      object-fit: contain;
+      padding: 10px;
+      width: 100%;
+    }
+
+    .placeholder {
+      color: rgba(198, 76, 132, 0.58);
+      font-size: 13px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(255, 126, 178, 0.28);
+      border-radius: 999px;
+      color: var(--pink-dark);
+      font-size: 11px;
+      font-weight: 900;
+      left: 10px;
+      max-width: calc(100% - 20px);
+      overflow: hidden;
+      padding: 5px 8px;
+      position: absolute;
+      text-overflow: ellipsis;
+      top: 10px;
+      white-space: nowrap;
+    }
+
+    .body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 10px;
+      padding: 13px;
+    }
+
+    .name {
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.38;
+      margin: 0;
+    }
+
+    .meta {
+      color: var(--muted);
+      display: grid;
+      font-size: 12px;
+      font-weight: 700;
+      gap: 5px;
+      line-height: 1.35;
+      margin-top: auto;
+    }
+
+    .source {
+      align-items: center;
+      border-top: 1px solid rgba(255, 126, 178, 0.16);
+      color: var(--pink-dark);
+      display: flex;
+      font-size: 12px;
+      font-weight: 850;
+      justify-content: space-between;
+      padding: 11px 13px 13px;
+      text-decoration: none;
+    }
+
+    .source[aria-disabled="true"] {
+      color: rgba(128, 107, 120, 0.65);
+      pointer-events: none;
+    }
+
+    .more {
+      background: var(--pink);
+      border: 0;
+      border-radius: 999px;
+      box-shadow: 0 14px 28px rgba(255, 99, 167, 0.22);
+      color: #fff;
+      cursor: pointer;
+      display: block;
+      font-weight: 900;
+      margin: 18px auto 0;
+      min-height: 46px;
+      padding: 0 24px;
+    }
+
+    .empty {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px dashed var(--line);
+      border-radius: 22px;
+      color: var(--muted);
+      font-weight: 800;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .loading {
+      align-items: center;
+      color: var(--pink-dark);
+      display: flex;
+      font-weight: 900;
+      gap: 10px;
+      justify-content: center;
+      min-height: 220px;
+    }
+
+    .spinner {
+      animation: spin 0.8s linear infinite;
+      border: 3px solid rgba(255, 99, 167, 0.18);
+      border-top-color: var(--pink);
+      border-radius: 999px;
+      height: 24px;
+      width: 24px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .field {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .shell {
+        padding: 14px 12px 28px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      .summary h2 {
+        font-size: 24px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .body {
+        padding: 11px;
+      }
+
+      .name {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topbar" aria-label="상단">
+      <div class="brand">
+        <div class="mark">D</div>
+        <div>
+          <h1>Deokive Catalog</h1>
+          <div class="subtitle" id="updated">공개 카탈로그 불러오는 중</div>
+        </div>
+      </div>
+      <a class="home-link" href="./">홈</a>
+    </nav>
+
+    <section class="hero">
+      <div class="panel summary">
+        <h2>굿즈 DB를 빠르게 찾고 확인해요</h2>
+        <p>GitHub Pages에 공개된 카탈로그 스냅샷입니다. 개인 폴더, 메모, 계정, 기기 정보는 포함하지 않고 상품 식별에 필요한 공개 정보만 보여줍니다.</p>
+        <div class="stats" aria-label="카탈로그 통계">
+          <div class="stat"><b id="statRows">-</b><span>전체 굿즈</span></div>
+          <div class="stat"><b id="statImages">-</b><span>이미지 있음</span></div>
+          <div class="stat"><b id="statSources">-</b><span>출처 있음</span></div>
+          <div class="stat"><b id="statStores">-</b><span>스토어 수</span></div>
+        </div>
+      </div>
+      <aside class="panel insight">
+        <h3>많은 카테고리</h3>
+        <div id="categoryBars"></div>
+      </aside>
+    </section>
+
+    <section class="toolbar" aria-label="검색과 필터">
+      <label class="field">
+        <input id="search" type="search" placeholder="이름, 시리즈, 캐릭터, 바코드 검색" autocomplete="off">
+      </label>
+      <label class="select">
+        <select id="categoryFilter" aria-label="카테고리"></select>
+      </label>
+      <label class="select">
+        <select id="storeFilter" aria-label="스토어"></select>
+      </label>
+      <label class="select">
+        <select id="imageFilter" aria-label="이미지 상태">
+          <option value="all">이미지 전체</option>
+          <option value="with">이미지 있음</option>
+          <option value="missing">이미지 없음</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="results-head">
+      <h2>검색 결과</h2>
+      <div class="count" id="resultCount">-</div>
+    </section>
+    <section id="results" class="grid" aria-live="polite">
+      <div class="loading"><span class="spinner"></span>카탈로그를 불러오는 중</div>
+    </section>
+    <button id="more" class="more" type="button" hidden>더 보기</button>
+  </main>
+
+  <script>
+    const state = {
+      items: [],
+      filtered: [],
+      visible: 80,
+      meta: null,
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const fmt = new Intl.NumberFormat('ko-KR');
+    const collator = new Intl.Collator('ko-KR');
+
+    function text(value) {
+      return value == null ? '' : String(value);
+    }
+
+    function compactDate(value) {
+      if (!value) return '';
+      return String(value).replaceAll('-', '.');
+    }
+
+    function price(item) {
+      if (item.official_price_jpy) return `¥${fmt.format(item.official_price_jpy)}`;
+      if (item.official_price_krw) return `${fmt.format(item.official_price_krw)}원`;
+      return '';
+    }
+
+    function option(label, value = label) {
+      const node = document.createElement('option');
+      node.value = value;
+      node.textContent = label;
+      return node;
+    }
+
+    function countBy(items, field) {
+      const map = new Map();
+      for (const item of items) {
+        const key = text(item[field]) || '미분류';
+        map.set(key, (map.get(key) || 0) + 1);
+      }
+      return [...map.entries()].sort((a, b) => b[1] - a[1] || collator.compare(a[0], b[0]));
+    }
+
+    function populateFilters() {
+      const category = $('categoryFilter');
+      const store = $('storeFilter');
+      category.replaceChildren(option('카테고리 전체', 'all'));
+      store.replaceChildren(option('스토어 전체', 'all'));
+      for (const [name] of countBy(state.items, 'category')) category.append(option(name));
+      for (const [name] of countBy(state.items, 'source_store')) store.append(option(name));
+    }
+
+    function updateStats() {
+      const rows = state.items.length;
+      const images = state.items.filter((item) => item.image_url).length;
+      const sources = state.items.filter((item) => item.source_url).length;
+      const stores = new Set(state.items.map((item) => text(item.source_store)).filter(Boolean)).size;
+      $('statRows').textContent = fmt.format(rows);
+      $('statImages').textContent = fmt.format(images);
+      $('statSources').textContent = fmt.format(sources);
+      $('statStores').textContent = fmt.format(stores);
+
+      const bars = $('categoryBars');
+      const top = countBy(state.items, 'category').slice(0, 6);
+      const max = top[0]?.[1] || 1;
+      bars.replaceChildren(...top.map(([name, count]) => {
+        const row = document.createElement('div');
+        row.className = 'bar';
+        row.innerHTML = `<span title="${escapeAttr(name)}">${escapeHtml(name)}</span><div class="track"><div class="fill" style="width:${Math.max(4, Math.round(count / max * 100))}%"></div></div><span>${fmt.format(count)}</span>`;
+        return row;
+      }));
+
+      if (state.meta?.generated_at) {
+        $('updated').textContent = `마지막 공개 스냅샷 ${state.meta.generated_at.replace('T', ' ').replace('Z', ' UTC')}`;
+      }
+    }
+
+    function escapeHtml(value) {
+      return text(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      }[char]));
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replace(/`/g, '&#96;');
+    }
+
+    function searchable(item) {
+      return [
+        item.name_ko,
+        item.name_ja,
+        item.name_en,
+        item.series_name,
+        item.sub_series,
+        item.affiliation,
+        item.character_name,
+        item.category,
+        item.source_store,
+        item.barcode,
+      ].map(text).join(' ').toLowerCase();
+    }
+
+    function applyFilters(resetVisible = true) {
+      const query = $('search').value.trim().toLowerCase();
+      const category = $('categoryFilter').value;
+      const store = $('storeFilter').value;
+      const image = $('imageFilter').value;
+      if (resetVisible) state.visible = 80;
+
+      state.filtered = state.items.filter((item) => {
+        if (query && !item._search.includes(query)) return false;
+        if (category !== 'all' && text(item.category) !== category) return false;
+        if (store !== 'all' && text(item.source_store) !== store) return false;
+        if (image === 'with' && !item.image_url) return false;
+        if (image === 'missing' && item.image_url) return false;
+        return true;
+      });
+      renderResults();
+    }
+
+    function renderResults() {
+      const results = $('results');
+      const rows = state.filtered.slice(0, state.visible);
+      $('resultCount').textContent = `${fmt.format(state.filtered.length)}개`;
+      $('more').hidden = state.visible >= state.filtered.length;
+
+      if (!rows.length) {
+        results.className = '';
+        results.innerHTML = '<div class="empty">조건에 맞는 굿즈가 없어요.</div>';
+        return;
+      }
+
+      results.className = 'grid';
+      const fragment = document.createDocumentFragment();
+      for (const item of rows) fragment.append(renderCard(item));
+      results.replaceChildren(fragment);
+    }
+
+    function renderCard(item) {
+      const card = document.createElement('article');
+      card.className = 'card';
+      const name = item.name_ko || item.name_ja || item.name_en || '이름 없음';
+      const secondName = item.name_ja && item.name_ja !== name ? item.name_ja : '';
+      const sourceLabel = item.source_url ? '출처 열기' : '출처 없음';
+      card.innerHTML = `
+        <div class="thumb">
+          <div class="badge">${escapeHtml(item.category || '미분류')}</div>
+          ${item.image_url ? `<img loading="lazy" src="${escapeAttr(item.image_url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',textContent:'이미지 확인 필요'}))">` : '<div class="placeholder">이미지 없음</div>'}
+        </div>
+        <div class="body">
+          <h3 class="name">${escapeHtml(name)}</h3>
+          <div class="meta">
+            ${secondName ? `<span>${escapeHtml(secondName)}</span>` : ''}
+            <span>${escapeHtml([item.affiliation, item.character_name].filter(Boolean).join(' · ') || '캐릭터 정보 없음')}</span>
+            <span>${escapeHtml([item.source_store, compactDate(item.release_date), price(item)].filter(Boolean).join(' · ') || '상세 정보 확인 필요')}</span>
+          </div>
+        </div>
+        <a class="source" href="${escapeAttr(item.source_url || '#')}" target="_blank" rel="noopener noreferrer" aria-disabled="${item.source_url ? 'false' : 'true'}">
+          <span>${sourceLabel}</span><span>↗</span>
+        </a>
+      `;
+      return card;
+    }
+
+    async function init() {
+      try {
+        const response = await fetch('data/catalog_public.json?v=925a48a', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload = await response.json();
+        state.meta = payload.meta || {};
+        state.items = (payload.items || []).map((item) => ({ ...item, _search: searchable(item) }));
+        state.filtered = state.items;
+        populateFilters();
+        updateStats();
+        applyFilters(false);
+      } catch (error) {
+        $('updated').textContent = '카탈로그 로딩 실패';
+        $('results').className = '';
+        $('results').innerHTML = `<div class="empty">공개 카탈로그를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
+      }
+    }
+
+    let timer = null;
+    $('search').addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => applyFilters(true), 120);
+    });
+    $('categoryFilter').addEventListener('change', () => applyFilters(true));
+    $('storeFilter').addEventListener('change', () => applyFilters(true));
+    $('imageFilter').addEventListener('change', () => applyFilters(true));
+    $('more').addEventListener('click', () => {
+      state.visible += 80;
+      renderResults();
+    });
+
+    init();
+  </script>
+</body>
+</html>
