@@ -29,6 +29,7 @@ SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
+AGENT_WORK_QUEUE = DATA / "catalog_agent_work_queue_public.json"
 
 OFFICIAL_SEARCH_TEMPLATES = {
     "애니메이트": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
@@ -667,6 +668,7 @@ def build_operations_public(
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
+            {"key": "agent_work_queue", "public_report": f"data/{AGENT_WORK_QUEUE.name}"},
         ],
         "next_actions": next_actions,
         "automation_policy": {
@@ -675,6 +677,229 @@ def build_operations_public(
             "requires_manual_review_for_imports": True,
             "scheduled_refresh": "Daily at 04:20 KST via GitHub Actions plus manual workflow_dispatch.",
             "reason": "This report coordinates public queues; it does not mutate catalog data by itself.",
+        },
+    }
+
+
+def compact_sample(item: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "catalog_index": item.get("catalog_index") or item.get("row_index"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "series_name": item.get("series_name"),
+        "category": item.get("category"),
+        "source_store": item.get("source_store"),
+        "source_url": item.get("source_url"),
+        "official_search_url": item.get("official_search_url"),
+    }
+
+
+def build_agent_work_queue_public(
+    generated_at: str,
+    source_discovery: dict[str, Any],
+    metadata_backlog: dict[str, Any],
+    image_enrichment_batches: dict[str, Any],
+    deduplication: dict[str, Any],
+    animation_categories: dict[str, Any],
+    ichiban_kuji_history: dict[str, Any],
+    operations: dict[str, Any],
+) -> dict[str, Any]:
+    batches: list[dict[str, Any]] = []
+
+    def add_batch(
+        *,
+        agent_id: str,
+        workstream: str,
+        priority: int,
+        title: str,
+        public_report: Path,
+        rows: int,
+        recommended_action: str,
+        acceptance_criteria: list[str],
+        samples: list[dict[str, Any]],
+    ) -> None:
+        if rows <= 0:
+            return
+        batches.append(
+            {
+                "batch_id": f"{priority:03d}-{agent_id}-{len(batches) + 1:02d}",
+                "agent_id": agent_id,
+                "workstream": workstream,
+                "priority": priority,
+                "title": title,
+                "public_report": f"data/{public_report.name}",
+                "rows": rows,
+                "recommended_action": recommended_action,
+                "acceptance_criteria": acceptance_criteria,
+                "sample_items": samples[:8],
+            }
+        )
+
+    for group in image_enrichment_batches.get("groups", [])[:12]:
+        workflow = str(group.get("workflow") or "")
+        agent_id = "agent-image-existing-source" if workflow == "extract_from_existing_source_url" else "agent-source-image"
+        add_batch(
+            agent_id=agent_id,
+            workstream="image_url_attachment",
+            priority=int(group.get("priority") or 99),
+            title=f"{group.get('source_store')} 이미지 보강 ({workflow})",
+            public_report=IMAGE_ENRICHMENT_BATCHES,
+            rows=int(group.get("missing_image_rows") or 0),
+            recommended_action=str(group.get("recommended_action") or "review image candidates"),
+            acceptance_criteria=[
+                "Exact product identity is verified before importing image_url.",
+                "Rows without source_url must receive an exact source_url before image_url is accepted.",
+                "No marketplace or unrelated stock image is imported without matching product evidence.",
+            ],
+            samples=[compact_sample(item) for item in group.get("sample_items", []) if isinstance(item, dict)],
+        )
+
+    source_items = [item for item in source_discovery.get("items", []) if isinstance(item, dict)]
+    source_grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for item in source_items:
+        source_grouped[(str(item.get("workflow") or ""), str(item.get("source_store") or "unknown"))].append(item)
+    for (workflow, store), items in sorted(
+        source_grouped.items(),
+        key=lambda pair: (DISCOVERY_PRIORITY.get(pair[0][0], 99), -len(pair[1]), pair[0][1]),
+    )[:10]:
+        add_batch(
+            agent_id="agent-source-discovery",
+            workstream="source_url_discovery",
+            priority=20 + DISCOVERY_PRIORITY.get(workflow, 99),
+            title=f"{store} 출처 URL 탐색 ({workflow})",
+            public_report=SOURCE_DISCOVERY,
+            rows=len(items),
+            recommended_action="Find exact official product detail URLs and prepare source_url updates.",
+            acceptance_criteria=[
+                "Candidate URL is an exact official or trusted licensed product/detail page.",
+                "Product title and image/metadata match the catalog row.",
+                "Generic search/listing pages stay in review and are not imported as final source_url.",
+            ],
+            samples=[compact_sample(item) for item in items],
+        )
+
+    for group in metadata_backlog.get("groups", [])[:10]:
+        add_batch(
+            agent_id="agent-metadata",
+            workstream="metadata_backlog",
+            priority=60,
+            title=f"{group.get('source_store')} {group.get('field')} 누락 보강",
+            public_report=METADATA_BACKLOG,
+            rows=int(group.get("missing_rows") or 0),
+            recommended_action=str(group.get("recommended_action") or "verify missing metadata"),
+            acceptance_criteria=[
+                "Dates, prices, names, and barcodes are copied only from official or trusted evidence.",
+                "Every proposed update includes catalog_index and source evidence.",
+                "Unverified inferred metadata remains in the review queue.",
+            ],
+            samples=[compact_sample(item) for item in group.get("sample_items", []) if isinstance(item, dict)],
+        )
+
+    for group in deduplication.get("groups", [])[:10]:
+        add_batch(
+            agent_id="agent-dedupe",
+            workstream="deduplication_review",
+            priority=80 + DEDUPLICATION_KEY_PRIORITY.get(str(group.get("key_type")), 99),
+            title=f"중복 후보 검토: {group.get('key_type')}",
+            public_report=DEDUPLICATION,
+            rows=len(group.get("rows") or []),
+            recommended_action="Review keep/drop suggestions and prepare a manual-only dedupe decision.",
+            acceptance_criteria=[
+                "Variants, alternate prizes, and campaign-specific rows are preserved.",
+                "Only evidence-backed exact duplicates are proposed for merge/delete.",
+                "Auto-delete remains disabled.",
+            ],
+            samples=[compact_sample(item) for item in group.get("rows", []) if isinstance(item, dict)],
+        )
+
+    for group in ichiban_kuji_history.get("missing_release_date_campaigns", [])[:6]:
+        add_batch(
+            agent_id="agent-ichiban-kuji",
+            workstream="ichiban_kuji_release_date",
+            priority=110,
+            title=f"이치방쿠지 발매일 확인: {group.get('slug') or group.get('title')}",
+            public_report=ICHIIBAN_KUJI_HISTORY,
+            rows=int(group.get("catalog_item_rows") or 0),
+            recommended_action="Verify official campaign date before applying release_date to linked rows.",
+            acceptance_criteria=[
+                "Official 1kuji campaign page or captured official campaign data confirms the date.",
+                "All updated catalog rows belong to the same campaign group.",
+            ],
+            samples=[
+                {
+                    "catalog_index": index,
+                    "name_ko": name,
+                    "source_url": group.get("url"),
+                }
+                for index, name in zip(group.get("sample_catalog_indexes", []), group.get("sample_names", []))
+            ],
+        )
+
+    for group in ichiban_kuji_history.get("missing_official_price_jpy_campaigns", [])[:8]:
+        add_batch(
+            agent_id="agent-ichiban-kuji",
+            workstream="ichiban_kuji_price",
+            priority=120,
+            title=f"이치방쿠지 가격 확인: {group.get('slug') or group.get('title')}",
+            public_report=ICHIIBAN_KUJI_HISTORY,
+            rows=int(group.get("catalog_item_rows") or 0),
+            recommended_action="Verify official campaign price before applying official_price_jpy.",
+            acceptance_criteria=[
+                "Price is confirmed from official 1kuji campaign data.",
+                "Non-prize collateral and campaign rows are not assigned a price unless evidence applies.",
+            ],
+            samples=[
+                {
+                    "catalog_index": index,
+                    "name_ko": name,
+                    "source_url": group.get("url"),
+                }
+                for index, name in zip(group.get("sample_catalog_indexes", []), group.get("sample_names", []))
+            ],
+        )
+
+    unknown_categories = animation_categories.get("unknown_categories", [])
+    if unknown_categories:
+        add_batch(
+            agent_id="agent-animation-taxonomy",
+            workstream="animation_category_review",
+            priority=140,
+            title="애니메이션 굿즈 미분류 카테고리 정리",
+            public_report=ANIMATION_CATEGORIES,
+            rows=int(animation_categories.get("summary", {}).get("unknown_category_count") or 0),
+            recommended_action="Map unknown categories to app folder families and visual tokens.",
+            acceptance_criteria=[
+                "Folder color hints follow folder_color_palette sort order.",
+                "Icon choices use existing icon keys from folder_visual_tokens.",
+                "Category changes remain review-only until app navigation impact is checked.",
+            ],
+            samples=[row for row in unknown_categories if isinstance(row, dict)],
+        )
+
+    batches.sort(key=lambda row: (row["priority"], -row["rows"], row["batch_id"]))
+    by_workstream = Counter(str(batch["workstream"]) for batch in batches)
+    by_agent = Counter(str(batch["agent_id"]) for batch in batches)
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "summary": {
+            "batch_count": len(batches),
+            "summed_batch_rows": sum(int(batch.get("rows") or 0) for batch in batches),
+            "by_workstream": by_workstream.most_common(),
+            "by_agent": by_agent.most_common(),
+            "open_review_queues": operations["summary"]["open_review_queues"],
+        },
+        "instructions": [
+            "Agent-ready public work queue generated from the public catalog reports.",
+            "Use this file to split DB cleanup across agents without exposing private local data.",
+            "Every proposed catalog mutation still needs exact source evidence and review before import.",
+        ],
+        "batches": batches[:80],
+        "automation_policy": {
+            "public_only": True,
+            "auto_apply_catalog_changes": False,
+            "safe_for_github_pages": True,
+            "reason": "This queue coordinates work; it does not contain credentials or private ownership data.",
         },
     }
 
@@ -1213,6 +1438,16 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_categories,
         ichiban_kuji_history,
     )
+    agent_work_queue = build_agent_work_queue_public(
+        generated_at,
+        source_discovery,
+        metadata_backlog,
+        image_enrichment_batches,
+        deduplication,
+        animation_categories,
+        ichiban_kuji_history,
+        operations,
+    )
 
     public_meta = load_json(PUBLIC_META, {})
     public_meta.update(
@@ -1314,6 +1549,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
         }
+        target["agent_work_queue"] = {
+            "public_report": f"data/{AGENT_WORK_QUEUE.name}",
+            **agent_work_queue["summary"],
+        }
 
     consistency_findings = validate_report_consistency(
         rows,
@@ -1346,6 +1585,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         METADATA_BACKLOG,
         IMAGE_ENRICHMENT_BATCHES,
         OPERATIONS_REPORT,
+        AGENT_WORK_QUEUE,
     ]
     findings = validate_public_files([path for path in public_files if path.exists()])
     if findings:
@@ -1359,6 +1599,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
         write_json(OPERATIONS_REPORT, operations)
+        write_json(AGENT_WORK_QUEUE, agent_work_queue)
         write_json(PUBLIC_META, public_meta)
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)
@@ -1381,6 +1622,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),
+            str(AGENT_WORK_QUEUE.relative_to(ROOT)),
         ],
     }
 
