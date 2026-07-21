@@ -19,6 +19,7 @@ QUALITY = DATA / "catalog_quality_public.json"
 IMAGE_BACKLOG = DATA / "catalog_image_backlog_public.json"
 IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
 DEDUPLICATION = DATA / "catalog_deduplication_public.json"
+DEDUPLICATION_REVIEW_BATCHES = DATA / "catalog_deduplication_review_batches_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
@@ -1130,6 +1131,10 @@ def build_operations_public(
     source_summary = source_discovery["summary"]
     image_summary = image_enrichment_batches["summary"]
     dedupe_summary = deduplication["summary"]
+    dedupe_review_batches = (
+        load_json(DEDUPLICATION_REVIEW_BATCHES, {}) if DEDUPLICATION_REVIEW_BATCHES.exists() else {}
+    )
+    dedupe_review_batches_summary = dedupe_review_batches.get("summary", {})
     animation_summary = animation_categories["summary"]
     kuji_summary = ichiban_kuji_history["summary"]
     ichiban_kuji_metadata_probe = (
@@ -1321,6 +1326,17 @@ def build_operations_public(
             "recommended_next_action": "Review duplicates manually; automatic deletion remains disabled.",
         },
         {
+            "priority": 41,
+            "workstream": "deduplication_review_batches",
+            "public_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}",
+            "batch_count": dedupe_review_batches_summary.get("batch_count", 0),
+            "source_groups": dedupe_review_batches_summary.get("source_groups", 0),
+            "high_review_confidence_groups": dict(dedupe_review_batches_summary.get("by_review_confidence", [])).get(
+                "high_review_confidence", 0
+            ),
+            "recommended_next_action": "Work dedupe review batches in priority order; record explicit decisions before any catalog mutation.",
+        } if dedupe_review_batches_summary else None,
+        {
             "priority": 50,
             "workstream": "ichiban_kuji_history",
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
@@ -1398,6 +1414,14 @@ def build_operations_public(
             "next_step": "review_risk_ranked_duplicate_groups",
             "auto_apply_enabled": False,
         },
+        {
+            "workstream": "deduplication_review_batches",
+            "status": "manual_review" if dedupe_review_batches_summary.get("source_groups", 0) else "clear",
+            "open_rows": dedupe_review_batches_summary.get("source_groups", 0),
+            "primary_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}",
+            "next_step": "record_manual_keep_drop_decisions",
+            "auto_apply_enabled": False,
+        } if dedupe_review_batches_summary else None,
         {
             "workstream": "ichiban_kuji_history",
             "status": "open" if kuji_summary.get("campaign_metadata_review_queue_rows", 0) else "clear",
@@ -1479,6 +1503,7 @@ def build_operations_public(
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
+            {"key": "deduplication_review_batches", "public_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}"},
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
             {"key": "ichiban_kuji_metadata_probe", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}"},
@@ -3093,6 +3118,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{DEDUPLICATION.name}",
             **deduplication["summary"],
         }
+        if DEDUPLICATION_REVIEW_BATCHES.exists():
+            target["deduplication_review_batches"] = copy_report_summary(
+                DEDUPLICATION_REVIEW_BATCHES, "deduplication_review_batches"
+            )
         target["animation_category_review"] = {
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
@@ -3139,6 +3168,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         IMAGE_BACKLOG,
         IMAGE_CANDIDATES,
         DEDUPLICATION,
+        DEDUPLICATION_REVIEW_BATCHES,
         ANIMATION_CATEGORIES,
         ICHIIBAN_KUJI_HISTORY,
         ICHIIBAN_KUJI_METADATA_PROBE,

@@ -1,0 +1,4358 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-21T20:33:28Z",
+  "scope": "catalog_public_deduplication_review_batches",
+  "summary": {
+    "source_groups": 80,
+    "batch_count": 7,
+    "batch_size": 12,
+    "by_review_risk": [
+      [
+        "strong_identity_review",
+        66
+      ],
+      [
+        "variant_risk_review",
+        8
+      ],
+      [
+        "image_identity_review",
+        4
+      ],
+      [
+        "source_identity_review",
+        2
+      ]
+    ],
+    "by_review_confidence": [
+      [
+        "high_review_confidence",
+        42
+      ],
+      [
+        "manual_identity_check",
+        24
+      ],
+      [
+        "variant_caution",
+        8
+      ],
+      [
+        "medium_review_confidence",
+        6
+      ]
+    ],
+    "by_key_type": [
+      [
+        "barcode",
+        74
+      ],
+      [
+        "image_url",
+        4
+      ],
+      [
+        "source_url",
+        2
+      ]
+    ],
+    "auto_delete_enabled": false
+  },
+  "batches": [
+    {
+      "batch_id": "dedupe-review-001",
+      "priority": 10,
+      "group_count": 12,
+      "review_risk_counts": [
+        [
+          "strong_identity_review",
+          12
+        ]
+      ],
+      "review_confidence_counts": [
+        [
+          "manual_identity_check",
+          8
+        ],
+        [
+          "high_review_confidence",
+          4
+        ]
+      ],
+      "key_type_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
+      "groups": [
+        {
+          "key_type": "barcode",
+          "key": "4513750146349",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 78,
+          "drop_catalog_indexes": [
+            916
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 78,
+              "name_ko": "치이카와 모치코로린 (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4513750146349",
+              "source_url": "https://chiikawamarket.jp/ko/products/4513750146349",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4513750146349_4513750112627.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 916,
+              "name_ko": "치이카와 모치코로링 (치이카와)",
+              "name_ja": "ちいかわ もちころりん ちいかわ",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4513750146349",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%93%E3%82%8D%E3%82%8A%E3%82%93+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2599420/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2217014_01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4550621606519",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 17889,
+          "drop_catalog_indexes": [
+            2076
+          ],
+          "row_count": 2,
+          "stores": [
+            "Movic",
+            "애니메이트"
+          ],
+          "categories": [
+            "아크릴 스탠드"
+          ],
+          "shared_name_token_ratio": 0.2,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 2076,
+              "name_ko": "단간론파 아크릴 스탠드 (키리기리 쿄코)",
+              "name_ja": "ダンガンロンパ アクリルスタンド (霧切響子)",
+              "source_store": "애니메이트",
+              "category": "아크릴 스탠드",
+              "barcode": "4550621606519",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91+%E5%B8%8C%E6%9C%9B%E3%81%AE%E5%AD%A6%E5%9C%92%E3%81%A8%E7%B5%B6%E6%9C%9B%E3%81%AE%E9%AB%98%E6%A0%A1%E7%94%9F+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%EF%BC%8F%E9%9C%A7%E5%88%87%E9%9F%BF%E5%AD%90/pd/3418901/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621606519_1_1772708705.jpg&width=400&height=400&square=1",
+              "richness": 12
+            },
+            {
+              "catalog_index": 17889,
+              "name_ko": "Movic ダンガンロンパ 希望の学園と絶望の高校生 アクリルスタンド／霧切響子",
+              "name_ja": "ダンガンロンパ 希望の学園と絶望の高校生 アクリルスタンド／霧切響子",
+              "source_store": "Movic",
+              "category": "아크릴 스탠드",
+              "barcode": "4550621606519",
+              "source_url": "https://www.movic.jp/shop/g/g02330-00350-00625/",
+              "image_url": "https://www.movic.jp/img/goods/L/02330-00350-00625-l.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4550621606564",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 17894,
+          "drop_catalog_indexes": [
+            2075
+          ],
+          "row_count": 2,
+          "stores": [
+            "Movic",
+            "애니메이트"
+          ],
+          "categories": [
+            "아크릴 스탠드"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 2075,
+              "name_ko": "단간론파 아크릴 스탠드 (코마에다 나기토)",
+              "name_ja": "ダンガンロンパ アクリルスタンド (狛枝凪斗)",
+              "source_store": "애니메이트",
+              "category": "아크릴 스탠드",
+              "barcode": "4550621606564",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%912+%E3%81%95%E3%82%88%E3%81%AA%E3%82%89%E7%B5%B6%E6%9C%9B%E5%AD%A6%E5%9C%92+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%EF%BC%8F%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97/pd/3418906/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621606564_1_1772708707.jpg&width=400&height=400&square=1",
+              "richness": 12
+            },
+            {
+              "catalog_index": 17894,
+              "name_ko": "Movic スーパーダンガンロンパ2 さよなら絶望学園 アクリルスタンド／狛枝凪斗",
+              "name_ja": "スーパーダンガンロンパ2 さよなら絶望学園 アクリルスタンド／狛枝凪斗",
+              "source_store": "Movic",
+              "category": "아크릴 스탠드",
+              "barcode": "4550621606564",
+              "source_url": "https://www.movic.jp/shop/g/g02330-00350-00630/",
+              "image_url": "https://www.movic.jp/img/goods/L/02330-00350-00630-l.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4570189195898",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3710,
+          "drop_catalog_indexes": [
+            367
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "의류"
+          ],
+          "shared_name_token_ratio": 0.4444,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 367,
+              "name_ko": "치이카와 파크 스니커즈 양말 (하치와레/라이트블루)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "의류",
+              "barcode": "4570189195898",
+              "source_url": "https://chiikawamarket.jp/ko/products/4570189195898",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189195898_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3710,
+              "name_ko": "치이카와 파크 스니커즈 양말 (가르마 / 라이트 블루)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "의류",
+              "barcode": "4570189195898",
+              "source_url": "https://chiikawamarket.jp/ko/products/4570189195898",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189195898_1.jpg?v=1776259556",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4570189195942",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3714,
+          "drop_catalog_indexes": [
+            366
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "의류"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 366,
+              "name_ko": "치이카와 파크 스니커즈 양말 (시사/오렌지)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "의류",
+              "barcode": "4570189195942",
+              "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189195942_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3714,
+              "name_ko": "치이카와 파크 스니커즈 양말 (시사 / 오렌지)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "의류",
+              "barcode": "4570189195942",
+              "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189195942_1.jpg?v=1776259596",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4570189201551",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3722,
+          "drop_catalog_indexes": [
+            365
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "의류"
+          ],
+          "shared_name_token_ratio": 0.8333,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 365,
+              "name_ko": "치이카와 파크 키즈 T셔츠 (화이트)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "의류",
+              "barcode": "4570189201551",
+              "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189201551_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3722,
+              "name_ko": "치이카와 파크 키즈 T셔츠 (집합 / 화이트)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "의류",
+              "barcode": "4570189201551",
+              "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189201551_1.jpg?v=1776257761",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609351603",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 597,
+          "drop_catalog_indexes": [
+            3619
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 597,
+              "name_ko": "치이카와 파크 폭신폭신 축 늘어진 인형 (무챠우맨)",
+              "name_ja": "ちいかわパーク ふかふか軸のびのび人形 (むちゃうマン)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609351603",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609351603",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609351603_1_cb808b0a-126a-47d8-8dc5-c072d6ddd36e.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3619,
+              "name_ko": "치이카와 파크 폭신폭신 축 늘어진 인형 (무챠우맨)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609351603",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609351603",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351603_1_cb808b0a-126a-47d8-8dc5-c072d6ddd36e.jpg?v=1774957180",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609351610",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 598,
+          "drop_catalog_indexes": [
+            3618
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 598,
+              "name_ko": "치이카와 파크 폭신폭신 축 늘어진 인형 (오데)",
+              "name_ja": "ちいかわパーク ふかふか軸のびのび人形 (オデ)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609351610",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609351610",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609351610_1_474dda8e-a30c-409b-b3aa-95c02f942937.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3618,
+              "name_ko": "치이카와 파크 폭신폭신 축 늘어진 인형 (오데)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609351610",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609351610",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351610_1_474dda8e-a30c-409b-b3aa-95c02f942937.jpg?v=1774957157",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609351658",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3606,
+          "drop_catalog_indexes": [
+            171
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 171,
+              "name_ko": "치이카와 파크 인형 S (복어)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609351658",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609351658",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609351658_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3606,
+              "name_ko": "치이카와 파크 인형 S (복어)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609351658",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609351658",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351658_1.jpg?v=1774854223",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359074",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 581,
+          "drop_catalog_indexes": [
+            3645
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 581,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (치이카와)",
+              "name_ja": "ちいかわパーク ふわころ人形 S (ちいかわ)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609359074",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359074",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359074_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3645,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359074",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359074",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359074_1.jpg?v=1774938830",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359081",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 582,
+          "drop_catalog_indexes": [
+            3644
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 582,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (하치와레)",
+              "name_ja": "ちいかわパーク ふわころ人形 S (ハチワレ)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609359081",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359081_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3644,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (가르마)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359081",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359081_1.jpg?v=1774939046",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359098",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 583,
+          "drop_catalog_indexes": [
+            3643
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 583,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (우사기)",
+              "name_ja": "ちいかわパーク ふわころ人形 S (うさぎ)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609359098",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359098",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359098_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3643,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (토끼)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359098",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359098",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359098_1.jpg?v=1774939084",
+              "richness": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch_id": "dedupe-review-002",
+      "priority": 10,
+      "group_count": 12,
+      "review_risk_counts": [
+        [
+          "strong_identity_review",
+          12
+        ]
+      ],
+      "review_confidence_counts": [
+        [
+          "manual_identity_check",
+          7
+        ],
+        [
+          "high_review_confidence",
+          5
+        ]
+      ],
+      "key_type_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
+      "groups": [
+        {
+          "key_type": "barcode",
+          "key": "4571609359104",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 584,
+          "drop_catalog_indexes": [
+            3642
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 584,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (모몽가)",
+              "name_ja": "ちいかわパーク ふわころ人形 S (モモンガ)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609359104",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359104",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359104_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3642,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (하늘다람쥐)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359104",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359104",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359104_1.jpg?v=1774939096",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359111",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 585,
+          "drop_catalog_indexes": [
+            3641
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 585,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (쿠리만쥬)",
+              "name_ja": "ちいかわパーク ふわころ人形 S (くりまんじゅう)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609359111",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359111",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359111_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3641,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (밤만쥬)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359111",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359111",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359111_1.jpg?v=1774939106",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359128",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 586,
+          "drop_catalog_indexes": [
+            3639
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 586,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (시사)",
+              "name_ja": "ちいかわパーク ふわころ人形 S (シーサー)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609359128",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359128",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359128_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3639,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (시사)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359128",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359128",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359128_1.jpg?v=1774939116",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359135",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 587,
+          "drop_catalog_indexes": [
+            3640
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 587,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (랏코)",
+              "name_ja": "ちいかわパーク ふわころ人形 S (ラッコ)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609359135",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359135",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359135_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3640,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (해달)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359135",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359135",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359135_1.jpg?v=1774939125",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359142",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 588,
+          "drop_catalog_indexes": [
+            3638
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 588,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (고서점)",
+              "name_ja": "ちいかわパーク ふわころ人形 S (古本屋)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609359142",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359142",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359142_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3638,
+              "name_ko": "치이카와 파크 푸와코로 인형 S (헌책방)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359142",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359142",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359142_1.jpg?v=1774939137",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609362555",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 599,
+          "drop_catalog_indexes": [
+            3616
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 599,
+              "name_ko": "치이카와 파크 안기 인형 쿠션 (치이카와의 곰 인형)",
+              "name_ja": "ちいかわパーク 抱き人形クッション (ちいかわの熊人形)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609362555",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609362555",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609362555_1_1d8c023e-046d-4821-8506-71c9129fb924.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3616,
+              "name_ko": "치이카와 파크 안기 인형 쿠션 (치이카와의 곰 인형)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609362555",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609362555",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609362555_1_1d8c023e-046d-4821-8506-71c9129fb924.jpg?v=1774955979",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609362562",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 600,
+          "drop_catalog_indexes": [
+            3617
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 600,
+              "name_ko": "치이카와 파크 안기 인형 쿠션 (장수풍뎅이)",
+              "name_ja": "ちいかわパーク 抱き人形クッション (カブトムシ)",
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609362562",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609362562",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609362562_1_4b79ea04-b365-4b5b-89ef-dd682f2b15f8.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3617,
+              "name_ko": "치이카와 파크 안기 인형 쿠션 (장수풍뎅이)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609362562",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609362562",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609362562_1_4b79ea04-b365-4b5b-89ef-dd682f2b15f8.jpg?v=1774956013",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609367710",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3443,
+          "drop_catalog_indexes": [
+            370
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "식기"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 370,
+              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "식기",
+              "barcode": "4571609367710",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367710",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367710_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3443,
+              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "식기",
+              "barcode": "4571609367710",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367710",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367710_1.jpg?v=1776303567",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609367727",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3445,
+          "drop_catalog_indexes": [
+            371
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "식기"
+          ],
+          "shared_name_token_ratio": 0.7143,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 371,
+              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (하치와레)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "식기",
+              "barcode": "4571609367727",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367727",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367727_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3445,
+              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (가르마)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "식기",
+              "barcode": "4571609367727",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367727",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367727_1.jpg?v=1776303590",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609367734",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3442,
+          "drop_catalog_indexes": [
+            372
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "식기"
+          ],
+          "shared_name_token_ratio": 0.7143,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 372,
+              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (우사기)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "식기",
+              "barcode": "4571609367734",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367734",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367734_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3442,
+              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (토끼)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "식기",
+              "barcode": "4571609367734",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367734",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367734_1.jpg?v=1776303602",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609367741",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3444,
+          "drop_catalog_indexes": [
+            373
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "식기"
+          ],
+          "shared_name_token_ratio": 0.7143,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 373,
+              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (모몽가)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "식기",
+              "barcode": "4571609367741",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367741",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367741_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3444,
+              "name_ko": "치이카와 파크 얼굴 멜라민 플레이트 (하늘다람쥐)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "식기",
+              "barcode": "4571609367741",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367741",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367741_1.jpg?v=1776303614",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609367796",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3441,
+          "drop_catalog_indexes": [
+            374
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "식기"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 374,
+              "name_ko": "치이카와 파크 꼬마 얼굴 멜라민 플레이트 (고블린)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "식기",
+              "barcode": "4571609367796",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367796",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609367796_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3441,
+              "name_ko": "치이카와 파크 꼬마 얼굴 멜라민 플레이트 (고블린)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "식기",
+              "barcode": "4571609367796",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609367796",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367796_1.jpg?v=1776303630",
+              "richness": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch_id": "dedupe-review-003",
+      "priority": 10,
+      "group_count": 12,
+      "review_risk_counts": [
+        [
+          "strong_identity_review",
+          12
+        ]
+      ],
+      "review_confidence_counts": [
+        [
+          "high_review_confidence",
+          11
+        ],
+        [
+          "manual_identity_check",
+          1
+        ]
+      ],
+      "key_type_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
+      "groups": [
+        {
+          "key_type": "barcode",
+          "key": "4571609370895",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 790,
+          "drop_catalog_indexes": [
+            236
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "same_image_url",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 236,
+              "name_ko": "치이카와 파크 인형 (나무)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609370895",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609370895",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609370895_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 790,
+              "name_ko": "치이카와 파크 인형 (나무)",
+              "name_ja": "ちいかわ パーク ぬいぐるみ (木)",
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609370895",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609370895",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609370895_1.jpg",
+              "richness": 14
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385097",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3461,
+          "drop_catalog_indexes": [
+            237
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 237,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385097",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385097",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385097_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3461,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385097",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385097",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385097_1.jpg?v=1776299053",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385103",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3463,
+          "drop_catalog_indexes": [
+            238
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.75,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 238,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (하치와레)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385103",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385103",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385103_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3463,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (가르마)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385103",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385103",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385103_1.jpg?v=1776299127",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385110",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3462,
+          "drop_catalog_indexes": [
+            239
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.75,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 239,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (우사기)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385110",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385110",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385110_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3462,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (토끼)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385110",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385110",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385110_1.jpg?v=1776299153",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385127",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3464,
+          "drop_catalog_indexes": [
+            240
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.75,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 240,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (모몽가)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385127",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385127",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385127_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3464,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (하늘다람쥐)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385127",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385127",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385127_1.jpg?v=1776299177",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385134",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3458,
+          "drop_catalog_indexes": [
+            241
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.75,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 241,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (쿠리만쥬)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385134",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385134",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385134_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3458,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (밤만쥬)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385134",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385134",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385134_1.jpg?v=1776299200",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385141",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3457,
+          "drop_catalog_indexes": [
+            242
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 242,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (시사)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385141",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385141",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385141_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3457,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (시사)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385141",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385141",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385141_1.jpg?v=1776299223",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385158",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3459,
+          "drop_catalog_indexes": [
+            243
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.75,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 243,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (라코)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385158",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385158",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385158_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3459,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (해달)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385158",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385158",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385158_1.jpg?v=1776299244",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385165",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3460,
+          "drop_catalog_indexes": [
+            244
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 244,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (헌책방)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385165",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385165",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385165_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3460,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (헌책방)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385165",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385165",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385165_1.jpg?v=1776299264",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609385172",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3455,
+          "drop_catalog_indexes": [
+            245
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 245,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (오데)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "인형",
+              "barcode": "4571609385172",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385172",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609385172_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3455,
+              "name_ko": "치이카와 파크 리버시블 폭신폭신 인형 베레모 (오데)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609385172",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609385172",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385172_1.jpg?v=1776299286",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437730",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3669,
+          "drop_catalog_indexes": [
+            318
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 318,
+              "name_ko": "치이카와 파크 피규어 키링 (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437730",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437730",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437730_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3669,
+              "name_ko": "치이카와 파크 피규어 키링 (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437730",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437730",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437730_1.jpg?v=1776254626",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437747",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3672,
+          "drop_catalog_indexes": [
+            319
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.6667,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 319,
+              "name_ko": "치이카와 파크 피규어 키링 (하치와레)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437747",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437747",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437747_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3672,
+              "name_ko": "치이카와 파크 피규어 키링 (가르마)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437747",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437747",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437747_1.jpg?v=1776254635",
+              "richness": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch_id": "dedupe-review-004",
+      "priority": 10,
+      "group_count": 12,
+      "review_risk_counts": [
+        [
+          "strong_identity_review",
+          12
+        ]
+      ],
+      "review_confidence_counts": [
+        [
+          "high_review_confidence",
+          12
+        ]
+      ],
+      "key_type_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
+      "groups": [
+        {
+          "key_type": "barcode",
+          "key": "4573256437754",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3670,
+          "drop_catalog_indexes": [
+            320
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.6667,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 320,
+              "name_ko": "치이카와 파크 피규어 키링 (우사기)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437754",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437754",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437754_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3670,
+              "name_ko": "치이카와 파크 피규어 키링 (토끼)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437754",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437754",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437754_1.jpg?v=1776254687",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437761",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3675,
+          "drop_catalog_indexes": [
+            321
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.6667,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 321,
+              "name_ko": "치이카와 파크 피규어 키링 (모몽가)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437761",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437761",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437761_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3675,
+              "name_ko": "치이카와 파크 피규어 키링 (하늘다람쥐)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437761",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437761",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437761_1.jpg?v=1776254695",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437778",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3674,
+          "drop_catalog_indexes": [
+            322
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 322,
+              "name_ko": "치이카와 파크 피규어 키링 (시사)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437778",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437778",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437778_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3674,
+              "name_ko": "치이카와 파크 피규어 키링 (시사)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437778",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437778",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437778_1.jpg?v=1776254702",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437785",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3673,
+          "drop_catalog_indexes": [
+            323
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.6667,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 323,
+              "name_ko": "치이카와 파크 피규어 키링 (쿠리만쥬)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437785",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437785",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437785_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3673,
+              "name_ko": "치이카와 파크 피규어 키링 (밤만쥬)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437785",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437785",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437785_1.jpg?v=1776254709",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437792",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3676,
+          "drop_catalog_indexes": [
+            324
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.6667,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 324,
+              "name_ko": "치이카와 파크 피규어 키링 (라코)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437792",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437792",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437792_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3676,
+              "name_ko": "치이카와 파크 피규어 키링 (해달)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437792",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437792",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437792_1.jpg?v=1776254716",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437808",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3678,
+          "drop_catalog_indexes": [
+            325
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 325,
+              "name_ko": "치이카와 파크 피규어 키링 (헌책방)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437808",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437808",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437808_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3678,
+              "name_ko": "치이카와 파크 피규어 키링 (헌책방)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437808",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437808",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437808_1.jpg?v=1776254725",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437815",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 2764,
+          "drop_catalog_indexes": [
+            326
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.6667,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 326,
+              "name_ko": "치이카와 파크 피규어 키링 (아노코)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437815",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437815",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437815_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 2764,
+              "name_ko": "치이카와 파크 피규어 키링 (그 아이)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437815",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437815",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437815_1.jpg?v=1776254733",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437822",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3679,
+          "drop_catalog_indexes": [
+            327
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.6667,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 327,
+              "name_ko": "치이카와 파크 피규어 키링 (카부토무시)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437822",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437822",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437822_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3679,
+              "name_ko": "치이카와 파크 피규어 키링 (투구벌레)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437822",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437822",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437822_1.jpg?v=1776254743",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437839",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3677,
+          "drop_catalog_indexes": [
+            328
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 328,
+              "name_ko": "치이카와 파크 피규어 키링 (별)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437839",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437839",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437839_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3677,
+              "name_ko": "치이카와 파크 피규어 키링 (별)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437839",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437839",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437839_1.jpg?v=1776254750",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437846",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3680,
+          "drop_catalog_indexes": [
+            329
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.8571,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 329,
+              "name_ko": "치이카와 파크 피규어 키링 (강한 녀석)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437846",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437846",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437846_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3680,
+              "name_ko": "치이카와 파크 피규어 키링 (크고 강한 녀석)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437846",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437846",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437846_1.jpg?v=1776254758",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437853",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3682,
+          "drop_catalog_indexes": [
+            330
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 330,
+              "name_ko": "치이카와 파크 피규어 키링 (포쉐트 갑옷씨)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437853",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437853",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437853_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3682,
+              "name_ko": "치이카와 파크 피규어 키링 (포쉐트 갑옷씨)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437853",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437853",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437853_1.jpg?v=1776254766",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437860",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3681,
+          "drop_catalog_indexes": [
+            331
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.5714,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 331,
+              "name_ko": "치이카와 파크 피규어 키링 (회색 아이)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437860",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437860",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437860_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3681,
+              "name_ko": "치이카와 파크 피규어 키링 (회색아이)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437860",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437860",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437860_1.jpg?v=1776254774",
+              "richness": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch_id": "dedupe-review-005",
+      "priority": 10,
+      "group_count": 12,
+      "review_risk_counts": [
+        [
+          "strong_identity_review",
+          12
+        ]
+      ],
+      "review_confidence_counts": [
+        [
+          "high_review_confidence",
+          6
+        ],
+        [
+          "manual_identity_check",
+          6
+        ]
+      ],
+      "key_type_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
+      "groups": [
+        {
+          "key_type": "barcode",
+          "key": "4573256437877",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3684,
+          "drop_catalog_indexes": [
+            332
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 332,
+              "name_ko": "치이카와 파크 피규어 키링 (키메라)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437877",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437877",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437877_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3684,
+              "name_ko": "치이카와 파크 피규어 키링 (키메라)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437877",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437877",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437877_1.jpg?v=1776254787",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437884",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3686,
+          "drop_catalog_indexes": [
+            333
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 333,
+              "name_ko": "치이카와 파크 피규어 키링 (고블린)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437884",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437884",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437884_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3686,
+              "name_ko": "치이카와 파크 피규어 키링 (고블린)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437884",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437884",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437884_1.jpg?v=1776254795",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437891",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3683,
+          "drop_catalog_indexes": [
+            334
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 334,
+              "name_ko": "치이카와 파크 피규어 키링 (오데)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437891",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437891",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437891_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3683,
+              "name_ko": "치이카와 파크 피규어 키링 (오데)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437891",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437891",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437891_1.jpg?v=1776254805",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437907",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3685,
+          "drop_catalog_indexes": [
+            335
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 335,
+              "name_ko": "치이카와 파크 피규어 키링 (꿀맛맨)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437907",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437907",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437907_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3685,
+              "name_ko": "치이카와 파크 피규어 키링 (꿀맛맨)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437907",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437907",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437907_1.jpg?v=1776254813",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437914",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3687,
+          "drop_catalog_indexes": [
+            337
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 0.7143,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 337,
+              "name_ko": "치이카와 파크 라이트 키링 (파자마 우사기)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437914",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437914",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437914_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3687,
+              "name_ko": "치이카와 파크 라이트 키링 (파자마 토끼)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437914",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437914",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437914_1.jpg?v=1776254925",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4573256437921",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 3689,
+          "drop_catalog_indexes": [
+            336
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 336,
+              "name_ko": "치이카와 파크 라이트 키링 (별)",
+              "name_ja": null,
+              "source_store": "치이카와 파크",
+              "category": "키링",
+              "barcode": "4573256437921",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437921",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4573256437921_1.jpg",
+              "richness": 12
+            },
+            {
+              "catalog_index": 3689,
+              "name_ko": "치이카와 파크 라이트 키링 (별)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "키링",
+              "barcode": "4573256437921",
+              "source_url": "https://chiikawamarket.jp/ko/products/4573256437921",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437921_1.jpg?v=1776254943",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917828",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 904,
+          "drop_catalog_indexes": [
+            10050
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 904,
+              "name_ko": "치이카와 모치토 인형 S (치이카와)",
+              "name_ja": "ちいかわ もちっとぬいぐるみS（ちいかわ）",
+              "source_store": "애니메이트",
+              "category": "인형",
+              "barcode": "4582662917828",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%EF%BC%88%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277616/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277616_01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 10050,
+              "name_ko": "치이카와 모칫토 인형 S (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4582662917828",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917828",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917828_1.jpg?v=1665977379",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917835",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 905,
+          "drop_catalog_indexes": [
+            10047
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 905,
+              "name_ko": "치이카와 모치토 인형 S (하치와레)",
+              "name_ja": "ちいかわ もちっとぬいぐるみS（ハチワレ）",
+              "source_store": "애니메이트",
+              "category": "인형",
+              "barcode": "4582662917835",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%EF%BC%88%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277617/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277617_01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 10047,
+              "name_ko": "치이카와 모칫토 인형 S (하치와레)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4582662917835",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917835",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917835_1.jpg?v=1665977423",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917842",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 906,
+          "drop_catalog_indexes": [
+            10049
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 906,
+              "name_ko": "치이카와 모치토 인형 S (우사기)",
+              "name_ja": "ちいかわ もちっとぬいぐるみS（うさぎ）",
+              "source_store": "애니메이트",
+              "category": "인형",
+              "barcode": "4582662917842",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%EF%BC%88%E3%81%86%E3%81%95%E3%81%8E%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277618/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277618_01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 10049,
+              "name_ko": "치이카와 모칫토 인형 S (우사기)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4582662917842",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917842",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917842_1.jpg?v=1665977273",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917859",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 907,
+          "drop_catalog_indexes": [
+            10048
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 907,
+              "name_ko": "치이카와 모치토 인형 S (쿠리만쥬)",
+              "name_ja": "ちいかわ もちっとぬいぐるみS（くりまんじゅう）",
+              "source_store": "애니메이트",
+              "category": "인형",
+              "barcode": "4582662917859",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%EF%BC%88%E3%81%8F%E3%82%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277619/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277619_01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 10048,
+              "name_ko": "치이카와 모칫토 인형 S (쿠리만쥬)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4582662917859",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917859",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917859_1.jpg?v=1665977357",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917866",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 908,
+          "drop_catalog_indexes": [
+            10046
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 908,
+              "name_ko": "치이카와 모치토 인형 S (모몽가)",
+              "name_ja": "ちいかわ もちっとぬいぐるみS（モモンガ）",
+              "source_store": "애니메이트",
+              "category": "인형",
+              "barcode": "4582662917866",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%EF%BC%88%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277620/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277620_01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 10046,
+              "name_ko": "치이카와 모칫토 인형 S (모몽가)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4582662917866",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917866",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917866_1.jpg?v=1665977445",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917873",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 767,
+          "drop_catalog_indexes": [
+            910
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "shared_name_token_ratio": 0.25,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 767,
+              "name_ko": "치이카와 모칫토 쁘띠 미니 마스코트 (치이카와)",
+              "name_ja": "ちいかわ もちっとプティ ミニマスコット (ちいかわ)",
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4582662917873",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917873",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/products/4582662917873_1.jpg",
+              "richness": 14
+            },
+            {
+              "catalog_index": 910,
+              "name_ko": "치이카와 모치토 푸치미니 마스코트 (치이카와)",
+              "name_ja": "ちいかわ もちっとぷちミニマスコット（ちいかわ）",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4582662917873",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%B7%E3%81%A1%E3%83%9F%E3%83%8B%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277622/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277622_01.jpg",
+              "richness": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch_id": "dedupe-review-006",
+      "priority": 10,
+      "group_count": 12,
+      "review_risk_counts": [
+        [
+          "strong_identity_review",
+          6
+        ],
+        [
+          "image_identity_review",
+          4
+        ],
+        [
+          "source_identity_review",
+          2
+        ]
+      ],
+      "review_confidence_counts": [
+        [
+          "medium_review_confidence",
+          6
+        ],
+        [
+          "high_review_confidence",
+          4
+        ],
+        [
+          "manual_identity_check",
+          2
+        ]
+      ],
+      "key_type_counts": [
+        [
+          "barcode",
+          6
+        ],
+        [
+          "image_url",
+          4
+        ],
+        [
+          "source_url",
+          2
+        ]
+      ],
+      "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
+      "groups": [
+        {
+          "key_type": "barcode",
+          "key": "4582662917880",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 766,
+          "drop_catalog_indexes": [
+            911
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "shared_name_token_ratio": 0.4,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 766,
+              "name_ko": "치이카와 모칫토 쁘띠 미니 마스코트 (하치와레)",
+              "name_ja": "ちいかわ もちっとプティ ミニマスコット (ハチワレ)",
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4582662917880",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917880",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/products/4582662917880_1.jpg",
+              "richness": 14
+            },
+            {
+              "catalog_index": 911,
+              "name_ko": "치이카와 모치토 푸치미니 마스코트 (하치와레)",
+              "name_ja": "ちいかわ もちっとぷちミニマスコット（ハチワレ）",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4582662917880",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%B7%E3%81%A1%E3%83%9F%E3%83%8B%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277623/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277623_01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917897",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 765,
+          "drop_catalog_indexes": [
+            912
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "shared_name_token_ratio": 0.4,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 765,
+              "name_ko": "치이카와 모칫토 쁘띠 미니 마스코트 (우사기)",
+              "name_ja": "ちいかわ もちっとプティ ミニマスコット (うさぎ)",
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4582662917897",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917897",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/products/4582662917897_1.jpg",
+              "richness": 14
+            },
+            {
+              "catalog_index": 912,
+              "name_ko": "치이카와 모치토 푸치미니 마스코트 (우사기)",
+              "name_ja": "ちいかわ もちっとぷちミニマスコット（うさぎ）",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4582662917897",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%B7%E3%81%A1%E3%83%9F%E3%83%8B%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%81%86%E3%81%95%E3%81%8E%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277624/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277624_01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917903",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 764,
+          "drop_catalog_indexes": [
+            913
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "shared_name_token_ratio": 0.1667,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 764,
+              "name_ko": "치이카와 모칫토 쁘띠 미니 마스코트 (쿠리만쥬)",
+              "name_ja": "ちいかわ もちっとプティ ミニマスコット (クリまんじゅう)",
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4582662917903",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917903",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/products/4582662917903_1.jpg",
+              "richness": 14
+            },
+            {
+              "catalog_index": 913,
+              "name_ko": "치이카와 모치토 푸치미니 마스코트 (쿠리만쥬)",
+              "name_ja": "ちいかわ もちっとぷちミニマスコット（くりまんじゅう）",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4582662917903",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%B7%E3%81%A1%E3%83%9F%E3%83%8B%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%81%8F%E3%82%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277625/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277625_01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662917910",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 763,
+          "drop_catalog_indexes": [
+            914
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "shared_name_token_ratio": 0.4,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 763,
+              "name_ko": "치이카와 모칫토 쁘띠 미니 마스코트 (모몽가)",
+              "name_ja": "ちいかわ もちっとプティ ミニマスコット (モモンガ)",
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4582662917910",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917910",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/products/4582662917910_1.jpg",
+              "richness": 14
+            },
+            {
+              "catalog_index": 914,
+              "name_ko": "치이카와 모치토 푸치미니 마스코트 (모몽가)",
+              "name_ja": "ちいかわ もちっとぷちミニマスコット（モモンガ）",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4582662917910",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%B7%E3%81%A1%E3%83%9F%E3%83%8B%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277626/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277626_01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662919914",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "manual_identity_check",
+          "keep_catalog_index": 909,
+          "drop_catalog_indexes": [
+            10045
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Compare product identity manually before any catalog patch.",
+          "rows": [
+            {
+              "catalog_index": 909,
+              "name_ko": "치이카와 모치토 인형 S (시사)",
+              "name_ja": "ちいかわ もちっとぬいぐるみS（シーサー）",
+              "source_store": "애니메이트",
+              "category": "인형",
+              "barcode": "4582662919914",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%EF%BC%88%E3%82%B7%E3%83%BC%E3%82%B5%E3%83%BC%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277621/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277621_01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 10045,
+              "name_ko": "치이카와 모칫토 인형 S (시사)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4582662919914",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662919914",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662919914_1.jpg?v=1665977401",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662919921",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 762,
+          "drop_catalog_indexes": [
+            915
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "shared_name_token_ratio": 0.4,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "rows": [
+            {
+              "catalog_index": 762,
+              "name_ko": "치이카와 모칫토 쁘띠 미니 마스코트 (시사)",
+              "name_ja": "ちいかわ もちっとプティ ミニマスコット (シーサー)",
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4582662919921",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662919921",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/products/4582662919921_1.jpg",
+              "richness": 14
+            },
+            {
+              "catalog_index": 915,
+              "name_ko": "치이카와 모치토 푸치미니 마스코트 (시사)",
+              "name_ja": "ちいかわ もちっとぷちミニマスコット（シーサー）",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4582662919921",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%B7%E3%81%A1%E3%83%9F%E3%83%8B%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%82%B7%E3%83%BC%E3%82%B5%E3%83%BC%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277627/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277627_01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "source_url",
+          "key": "https://fanding.kr/@stellive/shop|스텔라이브 단체 아크릴 스탠드 세트",
+          "review_priority": 20,
+          "review_risk": "source_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 2379,
+          "drop_catalog_indexes": [
+            17627
+          ],
+          "row_count": 2,
+          "stores": [
+            "Stellive Store"
+          ],
+          "categories": [
+            "아크릴 스탠드"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "source_url",
+            "same_source_url",
+            "same_image_url"
+          ],
+          "recommended_action": "Check whether the shared source page contains variants before merging anything.",
+          "rows": [
+            {
+              "catalog_index": 2379,
+              "name_ko": "스텔라이브 단체 아크릴 스탠드 세트",
+              "name_ja": null,
+              "source_store": "Stellive Store",
+              "category": "아크릴 스탠드",
+              "barcode": null,
+              "source_url": "https://fanding.kr/@stellive/shop",
+              "image_url": "https://dcjnmis8jxmbl.cloudfront.net/upload/image/product/2025/01/20/PdzK4TbDeyOEg37C.webp",
+              "richness": 9
+            },
+            {
+              "catalog_index": 17627,
+              "name_ko": "스텔라이브 단체 아크릴 스탠드 세트",
+              "name_ja": null,
+              "source_store": "Stellive Store",
+              "category": "아크릴 스탠드",
+              "barcode": null,
+              "source_url": "https://fanding.kr/@stellive/shop",
+              "image_url": "https://dcjnmis8jxmbl.cloudfront.net/upload/image/product/2025/01/20/PdzK4TbDeyOEg37C.webp",
+              "richness": 8
+            }
+          ]
+        },
+        {
+          "key_type": "source_url",
+          "key": "https://www.jp-api.com/contents/nod62|ご当地 ちいかわ",
+          "review_priority": 20,
+          "review_risk": "source_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17817,
+          "drop_catalog_indexes": [
+            17924
+          ],
+          "row_count": 2,
+          "stores": [
+            "ご当地ちいかわ 공식(API)"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "source_url",
+            "same_source_url"
+          ],
+          "recommended_action": "Check whether the shared source page contains variants before merging anything.",
+          "rows": [
+            {
+              "catalog_index": 17817,
+              "name_ko": "치이카와 지역 한정 시리즈",
+              "name_ja": "ご当地 ちいかわ",
+              "source_store": "ご当地ちいかわ 공식(API)",
+              "category": "키링",
+              "barcode": null,
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_510411_0_b.png",
+              "richness": 11
+            },
+            {
+              "catalog_index": 17924,
+              "name_ko": "치이카와 지역 한정 시리즈",
+              "name_ja": "ご当地 ちいかわ",
+              "source_store": "ご当地ちいかわ 공식(API)",
+              "category": "키링",
+              "barcode": null,
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_549952_0_b.png",
+              "richness": 10
+            }
+          ]
+        },
+        {
+          "key_type": "image_url",
+          "key": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg|g賞 ガラス皿",
+          "review_priority": 30,
+          "review_risk": "image_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17743,
+          "drop_catalog_indexes": [
+            17763
+          ],
+          "row_count": 2,
+          "stores": [
+            "이치방쿠지"
+          ],
+          "categories": [
+            "굿즈"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "image_url",
+            "same_image_url"
+          ],
+          "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "rows": [
+            {
+              "catalog_index": 17743,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 JOJO'S ASSEMBLE - G賞 ガラス皿",
+              "name_ja": "G賞 ガラス皿",
+              "source_store": "이치방쿠지",
+              "category": "굿즈",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/jojo_10",
+              "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 17763,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 JOJO'S ASSEMBLE - G賞 ガラス皿",
+              "name_ja": "G賞 ガラス皿",
+              "source_store": "이치방쿠지",
+              "category": "굿즈",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/jojo_9",
+              "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "image_url",
+          "key": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg|h賞 タオル",
+          "review_priority": 30,
+          "review_risk": "image_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17744,
+          "drop_catalog_indexes": [
+            17764
+          ],
+          "row_count": 2,
+          "stores": [
+            "이치방쿠지"
+          ],
+          "categories": [
+            "타월"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "image_url",
+            "same_image_url"
+          ],
+          "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "rows": [
+            {
+              "catalog_index": 17744,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 JOJO'S ASSEMBLE - H賞 タオル",
+              "name_ja": "H賞 タオル",
+              "source_store": "이치방쿠지",
+              "category": "타월",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/jojo_10",
+              "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 17764,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 JOJO'S ASSEMBLE - H賞 タオル",
+              "name_ja": "H賞 タオル",
+              "source_store": "이치방쿠지",
+              "category": "타월",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/jojo_9",
+              "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "image_url",
+          "key": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg|f賞 グラス",
+          "review_priority": 30,
+          "review_risk": "image_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17786,
+          "drop_catalog_indexes": [
+            17790
+          ],
+          "row_count": 2,
+          "stores": [
+            "이치방쿠지"
+          ],
+          "categories": [
+            "컵"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "image_url",
+            "same_image_url"
+          ],
+          "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "rows": [
+            {
+              "catalog_index": 17786,
+              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス",
+              "name_ja": "F賞 グラス",
+              "source_store": "이치방쿠지",
+              "category": "컵",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/myhero16",
+              "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 17790,
+              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス",
+              "name_ja": "F賞 グラス",
+              "source_store": "이치방쿠지",
+              "category": "컵",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/myhero19",
+              "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "image_url",
+          "key": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg|g賞 タオル",
+          "review_priority": 30,
+          "review_risk": "image_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17787,
+          "drop_catalog_indexes": [
+            17791
+          ],
+          "row_count": 2,
+          "stores": [
+            "이치방쿠지"
+          ],
+          "categories": [
+            "타월"
+          ],
+          "shared_name_token_ratio": 1.0,
+          "evidence": [
+            "image_url",
+            "same_image_url"
+          ],
+          "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "rows": [
+            {
+              "catalog_index": 17787,
+              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - G賞 タオル",
+              "name_ja": "G賞 タオル",
+              "source_store": "이치방쿠지",
+              "category": "타월",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/myhero16",
+              "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 17791,
+              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - G賞 タオル",
+              "name_ja": "G賞 タオル",
+              "source_store": "이치방쿠지",
+              "category": "타월",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/myhero19",
+              "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg",
+              "richness": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch_id": "dedupe-review-007",
+      "priority": 40,
+      "group_count": 8,
+      "review_risk_counts": [
+        [
+          "variant_risk_review",
+          8
+        ]
+      ],
+      "review_confidence_counts": [
+        [
+          "variant_caution",
+          8
+        ]
+      ],
+      "key_type_counts": [
+        [
+          "barcode",
+          8
+        ]
+      ],
+      "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
+      "groups": [
+        {
+          "key_type": "barcode",
+          "key": "4513750146387",
+          "review_priority": 40,
+          "review_risk": "variant_risk_review",
+          "review_confidence": "variant_caution",
+          "keep_catalog_index": 917,
+          "drop_catalog_indexes": [
+            5709
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트",
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "category_mismatch",
+            "multi_store"
+          ],
+          "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "rows": [
+            {
+              "catalog_index": 917,
+              "name_ko": "치이카와 모치코로링 (쿠리만쥬)",
+              "name_ja": "ちいかわ もちころりん くりまんじゅう",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4513750146387",
+              "source_url": "https://www.animate-onlineshop.jp/products/detail.php?product_id=2599424",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2599424_01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 5709,
+              "name_ko": "치이카와 모치코로린 (쿠리만쥬)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4513750146387",
+              "source_url": "https://chiikawamarket.jp/ko/products/4513750146387",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4513750146387_4513750112665.jpg?v=1716176271",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4513750146394",
+          "review_priority": 40,
+          "review_risk": "variant_risk_review",
+          "review_confidence": "variant_caution",
+          "keep_catalog_index": 918,
+          "drop_catalog_indexes": [
+            6020
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트",
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "category_mismatch",
+            "multi_store"
+          ],
+          "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "rows": [
+            {
+              "catalog_index": 918,
+              "name_ko": "치이카와 모치코로링 (시사)",
+              "name_ja": "ちいかわ もちころりん シーサー",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4513750146394",
+              "source_url": "https://www.animate-onlineshop.jp/products/detail.php?product_id=2599425",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2599425_01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 6020,
+              "name_ko": "치이카와 모치코로린 (시사)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4513750146394",
+              "source_url": "https://chiikawamarket.jp/ko/products/4513750146394",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4513750146394_4513750112672.jpg?v=1716176377",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4570117920592",
+          "review_priority": 40,
+          "review_risk": "variant_risk_review",
+          "review_confidence": "variant_caution",
+          "keep_catalog_index": 919,
+          "drop_catalog_indexes": [
+            293
+          ],
+          "row_count": 2,
+          "stores": [
+            "Bandai Candy",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "소프비",
+            "피규어"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "category_mismatch",
+            "multi_store"
+          ],
+          "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "rows": [
+            {
+              "catalog_index": 293,
+              "name_ko": "치이카와 모치리코로링",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "피규어",
+              "barcode": "4570117920592",
+              "source_url": "https://chiikawamarket.jp/ko/products/4570117920592",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570117920592_0.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 919,
+              "name_ko": "치이카와 못치리코로링 소프비 (치이카와)",
+              "name_ja": "もっちりころりん♪ ちいかわ",
+              "source_store": "Bandai Candy",
+              "category": "소프비",
+              "barcode": "4570117920592",
+              "source_url": "https://www.bandai.co.jp/candy/products/2026/4570117920592000.html",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/3139005_01.jpg",
+              "richness": 14
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609351641",
+          "review_priority": 40,
+          "review_risk": "variant_risk_review",
+          "review_confidence": "variant_caution",
+          "keep_catalog_index": 601,
+          "drop_catalog_indexes": [
+            3607
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "마스코트",
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "category_mismatch",
+            "multi_store"
+          ],
+          "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "rows": [
+            {
+              "catalog_index": 601,
+              "name_ko": "치이카와 파크 마스코트 (복어)",
+              "name_ja": "ちいかわパーク マスコット (フグ)",
+              "source_store": "치이카와 파크",
+              "category": "마스코트",
+              "barcode": "4571609351641",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609351641",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609351641_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3607,
+              "name_ko": "치이카와 파크 마스코트 (복어)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609351641",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609351641",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351641_1.jpg?v=1774854238",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359159",
+          "review_priority": 40,
+          "review_risk": "variant_risk_review",
+          "review_confidence": "variant_caution",
+          "keep_catalog_index": 589,
+          "drop_catalog_indexes": [
+            3636
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "마스코트",
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "category_mismatch",
+            "multi_store"
+          ],
+          "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "rows": [
+            {
+              "catalog_index": 589,
+              "name_ko": "치이카와 파크 푸와코로 마스코트 (치이카와)",
+              "name_ja": "ちいかわパーク ふわころマスコット (ちいかわ)",
+              "source_store": "치이카와 파크",
+              "category": "마스코트",
+              "barcode": "4571609359159",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359159",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359159_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3636,
+              "name_ko": "치이카와 파크 푸와코로 마스코트 (치이카와)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359159",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359159",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359159_1.jpg?v=1774939162",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359166",
+          "review_priority": 40,
+          "review_risk": "variant_risk_review",
+          "review_confidence": "variant_caution",
+          "keep_catalog_index": 590,
+          "drop_catalog_indexes": [
+            3637
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "마스코트",
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "category_mismatch",
+            "multi_store"
+          ],
+          "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "rows": [
+            {
+              "catalog_index": 590,
+              "name_ko": "치이카와 파크 푸와코로 마스코트 (하치와레)",
+              "name_ja": "ちいかわパーク ふわころマスコット (ハチワレ)",
+              "source_store": "치이카와 파크",
+              "category": "마스코트",
+              "barcode": "4571609359166",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359166",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359166_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3637,
+              "name_ko": "치이카와 파크 푸와코로 마스코트 (가르마)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359166",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359166",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359166_1.jpg?v=1774939172",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359173",
+          "review_priority": 40,
+          "review_risk": "variant_risk_review",
+          "review_confidence": "variant_caution",
+          "keep_catalog_index": 591,
+          "drop_catalog_indexes": [
+            3634
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "마스코트",
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "category_mismatch",
+            "multi_store"
+          ],
+          "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "rows": [
+            {
+              "catalog_index": 591,
+              "name_ko": "치이카와 파크 푸와코로 마스코트 (우사기)",
+              "name_ja": "ちいかわパーク ふわころマスコット (うさぎ)",
+              "source_store": "치이카와 파크",
+              "category": "마스코트",
+              "barcode": "4571609359173",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359173",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359173_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3634,
+              "name_ko": "치이카와 파크 푸와코로 마스코트 (토끼)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359173",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359173",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359173_1.jpg?v=1774939182",
+              "richness": 13
+            }
+          ]
+        },
+        {
+          "key_type": "barcode",
+          "key": "4571609359180",
+          "review_priority": 40,
+          "review_risk": "variant_risk_review",
+          "review_confidence": "variant_caution",
+          "keep_catalog_index": 592,
+          "drop_catalog_indexes": [
+            3635
+          ],
+          "row_count": 2,
+          "stores": [
+            "치이카와 마켓",
+            "치이카와 파크"
+          ],
+          "categories": [
+            "마스코트",
+            "인형"
+          ],
+          "shared_name_token_ratio": 0.0,
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "same_source_url",
+            "category_mismatch",
+            "multi_store"
+          ],
+          "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "rows": [
+            {
+              "catalog_index": 592,
+              "name_ko": "치이카와 파크 푸와코로 마스코트 (모몽가)",
+              "name_ja": "ちいかわパーク ふわころマスコット (モモンガ)",
+              "source_store": "치이카와 파크",
+              "category": "마스코트",
+              "barcode": "4571609359180",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359180",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609359180_1.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 3635,
+              "name_ko": "치이카와 파크 푸와코로 마스코트 (하늘다람쥐)",
+              "name_ja": null,
+              "source_store": "치이카와 마켓",
+              "category": "인형",
+              "barcode": "4571609359180",
+              "source_url": "https://chiikawamarket.jp/ko/products/4571609359180",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359180_1.jpg?v=1774939193",
+              "richness": 13
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "automation_policy": {
+    "auto_delete": false,
+    "auto_merge": false,
+    "requires_manual_review": true,
+    "reason": "Shared barcode/source/image evidence can represent reissues, variants, or retailer duplicates."
+  },
+  "instructions": [
+    "Review batches in priority order.",
+    "A suggested drop row is not a deletion command.",
+    "Keep/drop decisions should be recorded in a separate confirmed queue before mutating catalog data."
+  ]
+}

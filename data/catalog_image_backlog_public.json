@@ -2812,5 +2812,62 @@
       ]
     ],
     "auto_apply_enabled": false
+  },
+  "deduplication_review_batches": {
+    "public_report": "data/catalog_deduplication_review_batches_public.json",
+    "source_groups": 80,
+    "batch_count": 7,
+    "batch_size": 12,
+    "by_review_risk": [
+      [
+        "strong_identity_review",
+        66
+      ],
+      [
+        "variant_risk_review",
+        8
+      ],
+      [
+        "image_identity_review",
+        4
+      ],
+      [
+        "source_identity_review",
+        2
+      ]
+    ],
+    "by_review_confidence": [
+      [
+        "high_review_confidence",
+        42
+      ],
+      [
+        "manual_identity_check",
+        24
+      ],
+      [
+        "variant_caution",
+        8
+      ],
+      [
+        "medium_review_confidence",
+        6
+      ]
+    ],
+    "by_key_type": [
+      [
+        "barcode",
+        74
+      ],
+      [
+        "image_url",
+        4
+      ],
+      [
+        "source_url",
+        2
+      ]
+    ],
+    "auto_delete_enabled": false
   }
 }

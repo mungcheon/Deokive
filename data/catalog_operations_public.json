@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:30:37Z",
+  "generated_at": "2026-07-21T20:34:06Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -108,6 +108,14 @@
       "open_rows": 109,
       "primary_report": "data/catalog_deduplication_public.json",
       "next_step": "review_risk_ranked_duplicate_groups",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "deduplication_review_batches",
+      "status": "manual_review",
+      "open_rows": 80,
+      "primary_report": "data/catalog_deduplication_review_batches_public.json",
+      "next_step": "record_manual_keep_drop_decisions",
       "auto_apply_enabled": false
     },
     {
@@ -635,6 +643,10 @@
       "public_report": "data/catalog_deduplication_public.json"
     },
     {
+      "key": "deduplication_review_batches",
+      "public_report": "data/catalog_deduplication_review_batches_public.json"
+    },
+    {
       "key": "animation_categories",
       "public_report": "data/animation_goods_categories_public.json"
     },
@@ -746,6 +758,15 @@
       "public_report": "data/catalog_deduplication_public.json",
       "review_groups": 109,
       "recommended_next_action": "Review duplicates manually; automatic deletion remains disabled."
+    },
+    {
+      "priority": 41,
+      "workstream": "deduplication_review_batches",
+      "public_report": "data/catalog_deduplication_review_batches_public.json",
+      "batch_count": 7,
+      "source_groups": 80,
+      "high_review_confidence_groups": 42,
+      "recommended_next_action": "Work dedupe review batches in priority order; record explicit decisions before any catalog mutation."
     },
     {
       "priority": 50,
