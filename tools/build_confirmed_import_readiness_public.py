@@ -51,7 +51,7 @@ WORKFLOWS = {
         "public_action_queue": DATA / "source_discovery_action_queue_public.json",
         "public_action_rows_key": "queued_source_rows",
         "public_action_batches_key": "action_batch_count",
-        "public_action_next_step": "confirm_source_url_templates",
+        "public_action_next_step": "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
     },
     "catalog_image": {
         "confirmed": SERVER / "catalog_image_confirmed_rows.json",

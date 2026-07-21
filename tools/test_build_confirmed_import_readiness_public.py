@@ -25,6 +25,10 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(workflow["template"].name, "source_discovery_confirmed_rows.template.json")
         self.assertEqual(workflow["report"].name, "source_discovery_confirmed_import_report.json")
         self.assertEqual(workflow["public_workstream"], "source_discovery_source_urls")
+        self.assertEqual(
+            workflow["public_action_next_step"],
+            "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
+        )
 
         image = readiness.WORKFLOWS["catalog_image"]
         self.assertEqual(image["public_action_queue"].name, "catalog_image_attachment_action_queue_public.json")
