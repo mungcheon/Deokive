@@ -978,6 +978,14 @@ def build_requested_focus_enrichment_public(
     }
 
 
+def slugify_public_id(value: Any) -> str:
+    text = re.sub(r"[^a-z0-9]+", "_", str(value or "").strip().lower()).strip("_")
+    if text:
+        return text[:48]
+    encoded = str(value or "unknown").encode("utf-8", errors="ignore")
+    return f"store_{sum(encoded) % 10000:04d}"
+
+
 def build_danganronpa_missing_media_public(items: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
     terms = ["\ub2e8\uac04\ub860\ud30c", "\u30c0\u30f3\u30ac\u30f3\u30ed\u30f3\u30d1", "Danganronpa"]
     store_policies = {
@@ -1091,12 +1099,39 @@ def build_danganronpa_missing_media_public(items: list[dict[str, Any]], generate
 
     by_store = Counter(str(row.get("source_store") or "unknown") for row in queue)
     by_source_kind = Counter(str(row.get("source_kind") or "unknown") for row in queue)
+    grouped: dict[tuple[int, str], list[dict[str, Any]]] = defaultdict(list)
+    for row in queue:
+        grouped[(int(row.get("priority") or 99), str(row.get("source_store") or "unknown"))].append(row)
+    review_batches: list[dict[str, Any]] = []
+    for batch_rank, ((priority, store), rows_for_store) in enumerate(sorted(grouped.items()), start=1):
+        rows_for_store = sorted(rows_for_store, key=lambda row: int(row.get("catalog_index") or 0))
+        source_kind = str(rows_for_store[0].get("source_kind") or "manual_review") if rows_for_store else "manual_review"
+        review_batches.append(
+            {
+                "batch_id": f"danganronpa_media_{batch_rank:02d}_{slugify_public_id(store)}",
+                "batch_rank": batch_rank,
+                "priority": priority,
+                "source_store": store,
+                "source_kind": source_kind,
+                "rows": len(rows_for_store),
+                "catalog_indexes": [row.get("catalog_index") for row in rows_for_store],
+                "allowed_source_domains": rows_for_store[0].get("allowed_source_domains", []) if rows_for_store else [],
+                "first_official_search_url": rows_for_store[0].get("official_search_url") if rows_for_store else None,
+                "recommended_next_action": (
+                    "Open the official search URLs in this batch, confirm exact product identity, "
+                    "then prepare reviewed source_url/image_url patches."
+                ),
+                "acceptance_rule": "manual_review_required_before_catalog_patch",
+                "auto_apply_enabled": False,
+            }
+        )
     return {
         "schema_version": 1,
         "generated_at": generated_at,
         "scope": "danganronpa_missing_source_and_image_queue",
         "summary": {
             "missing_media_rows": len(queue),
+            "review_batch_count": len(review_batches),
             "missing_source_url_rows": sum(1 for row in queue if "source_url" in row.get("missing_fields", [])),
             "missing_image_url_rows": sum(1 for row in queue if "image_url" in row.get("missing_fields", [])),
             "official_search_rows": sum(1 for row in queue if row.get("source_kind") == "official_manufacturer"),
@@ -1107,8 +1142,10 @@ def build_danganronpa_missing_media_public(items: list[dict[str, Any]], generate
             "auto_apply_enabled": False,
         },
         "items": queue,
+        "review_batches": review_batches,
         "instructions": [
             "Work these Danganronpa rows before broad image enrichment because every row lacks both source_url and image_url.",
+            "Process review_batches in batch_rank order so official manufacturer batches are cleared before retailer-only rows.",
             "Use official manufacturer or prize pages first; licensed retailers require extra identity review.",
             "Do not attach images from marketplaces, blogs, or resale listings unless separately promoted into a trusted-source policy.",
         ],

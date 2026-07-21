@@ -56,9 +56,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         danganronpa_media = reports.load_json(reports.DANGANRONPA_MISSING_MEDIA)
         danganronpa_summary = danganronpa_media.get("summary", {})
         danganronpa_items = danganronpa_media.get("items", [])
+        danganronpa_batches = danganronpa_media.get("review_batches", [])
         self.assertIs(danganronpa_summary.get("auto_apply_enabled"), False)
         self.assertEqual(danganronpa_summary.get("missing_media_rows"), len(danganronpa_items))
+        self.assertEqual(danganronpa_summary.get("review_batch_count"), len(danganronpa_batches))
+        self.assertEqual(
+            danganronpa_summary.get("missing_media_rows"),
+            sum(int(batch.get("rows") or 0) for batch in danganronpa_batches),
+        )
         self.assertTrue(all(item.get("auto_apply_enabled") is False for item in danganronpa_items))
+        self.assertTrue(all(batch.get("auto_apply_enabled") is False for batch in danganronpa_batches))
 
     def test_published_reports_expose_home_catalog_work_blocks(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)
