@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "catalog_rows": 18040,
+    "coverage": {
+      "source_url": 0.9641,
+      "image_url": 0.9601,
+      "release_date": 0.9215
+    },
+    "missing": {
+      "source_url": 647,
+      "image_url": 720,
+      "release_date": 1416,
+      "official_price_jpy": 584,
+      "barcode": 7744,
+      "name_ja": 9964
+    },
+    "open_review_queues": {
+      "source_discovery_rows": 647,
+      "image_missing_rows": 720,
+      "dedupe_groups": 109,
+      "animation_unknown_categories": 8,
+      "ichiban_missing_release_date_rows": 16,
+      "ichiban_missing_price_rows": 365
+    }
+  },
+  "reports": [
+    {
+      "key": "quality",
+      "public_report": "data/catalog_quality_public.json"
+    },
+    {
+      "key": "image_backlog",
+      "public_report": "data/catalog_image_backlog_public.json"
+    },
+    {
+      "key": "image_enrichment_batches",
+      "public_report": "data/catalog_image_enrichment_batches_public.json"
+    },
+    {
+      "key": "source_discovery",
+      "public_report": "data/source_discovery_queue_public.json"
+    },
+    {
+      "key": "metadata_backlog",
+      "public_report": "data/catalog_metadata_backlog_public.json"
+    },
+    {
+      "key": "deduplication",
+      "public_report": "data/catalog_deduplication_public.json"
+    },
+    {
+      "key": "animation_categories",
+      "public_report": "data/animation_goods_categories_public.json"
+    },
+    {
+      "key": "ichiban_kuji_history",
+      "public_report": "data/ichiban_kuji_history_public.json"
+    }
+  ],
+  "next_actions": [
+    {
+      "priority": 10,
+      "workstream": "image_url_attachment",
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "ready_rows": 73,
+      "blocked_rows": 642,
+      "recommended_next_action": "Process source_url-ready image rows before broad web search."
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery",
+      "public_report": "data/source_discovery_queue_public.json",
+      "ready_rows": 647,
+      "recommended_next_action": "Find exact official detail pages for rows missing source_url."
+    },
+    {
+      "priority": 30,
+      "workstream": "metadata_backlog",
+      "public_report": "data/catalog_metadata_backlog_public.json",
+      "tracked_fields": [
+        "source_url",
+        "image_url",
+        "release_date",
+        "official_price_jpy",
+        "barcode",
+        "name_ja"
+      ],
+      "recommended_next_action": "Use store/field groups to fill release dates, prices, barcodes, and names with evidence."
+    },
+    {
+      "priority": 40,
+      "workstream": "deduplication_review",
+      "public_report": "data/catalog_deduplication_public.json",
+      "review_groups": 109,
+      "recommended_next_action": "Review duplicates manually; automatic deletion remains disabled."
+    },
+    {
+      "priority": 50,
+      "workstream": "ichiban_kuji_history",
+      "public_report": "data/ichiban_kuji_history_public.json",
+      "missing_release_date_campaign_groups": 2,
+      "missing_price_campaign_groups": 42,
+      "recommended_next_action": "Verify official campaign pages before applying inferred dates or prices."
+    },
+    {
+      "priority": 60,
+      "workstream": "animation_folder_visuals",
+      "public_report": "data/animation_goods_categories_public.json",
+      "category_count": 29,
+      "recommended_next_action": "Use folder_visual_tokens for app folder colors and icon options."
+    }
+  ],
+  "automation_policy": {
+    "public_only": true,
+    "auto_apply_catalog_changes": false,
+    "requires_manual_review_for_imports": true,
+    "reason": "This report coordinates public queues; it does not mutate catalog data by itself."
+  }
+}

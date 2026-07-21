@@ -28,6 +28,7 @@ SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
 SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
+OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
 
 OFFICIAL_SEARCH_TEMPLATES = {
     "애니메이트": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
@@ -486,6 +487,113 @@ def build_image_enrichment_batches_public(
     }
 
 
+def build_operations_public(
+    rows: int,
+    missing: dict[str, int],
+    cov: dict[str, float],
+    source_discovery: dict[str, Any],
+    metadata_backlog: dict[str, Any],
+    image_enrichment_batches: dict[str, Any],
+    deduplication: dict[str, Any],
+    animation_categories: dict[str, Any],
+    ichiban_kuji_history: dict[str, Any],
+) -> dict[str, Any]:
+    source_summary = source_discovery["summary"]
+    image_summary = image_enrichment_batches["summary"]
+    dedupe_summary = deduplication["summary"]
+    animation_summary = animation_categories["summary"]
+    kuji_summary = ichiban_kuji_history["summary"]
+    metadata_summary = metadata_backlog["summary"]
+
+    next_actions = [
+        {
+            "priority": 10,
+            "workstream": "image_url_attachment",
+            "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
+            "ready_rows": image_summary.get("source_url_ready_rows", 0),
+            "blocked_rows": image_summary.get("needs_source_discovery_rows", 0),
+            "recommended_next_action": "Process source_url-ready image rows before broad web search.",
+        },
+        {
+            "priority": 20,
+            "workstream": "source_discovery",
+            "public_report": f"data/{SOURCE_DISCOVERY.name}",
+            "ready_rows": source_summary.get("source_discovery_rows", 0),
+            "recommended_next_action": "Find exact official detail pages for rows missing source_url.",
+        },
+        {
+            "priority": 30,
+            "workstream": "metadata_backlog",
+            "public_report": f"data/{METADATA_BACKLOG.name}",
+            "tracked_fields": metadata_summary.get("tracked_fields", []),
+            "recommended_next_action": "Use store/field groups to fill release dates, prices, barcodes, and names with evidence.",
+        },
+        {
+            "priority": 40,
+            "workstream": "deduplication_review",
+            "public_report": f"data/{DEDUPLICATION.name}",
+            "review_groups": dedupe_summary.get("duplicate_groups", 0),
+            "recommended_next_action": "Review duplicates manually; automatic deletion remains disabled.",
+        },
+        {
+            "priority": 50,
+            "workstream": "ichiban_kuji_history",
+            "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+            "missing_release_date_campaign_groups": kuji_summary.get("missing_release_date_campaign_groups", 0),
+            "missing_price_campaign_groups": kuji_summary.get("missing_official_price_jpy_campaign_groups", 0),
+            "recommended_next_action": "Verify official campaign pages before applying inferred dates or prices.",
+        },
+        {
+            "priority": 60,
+            "workstream": "animation_folder_visuals",
+            "public_report": f"data/{ANIMATION_CATEGORIES.name}",
+            "category_count": animation_summary.get("category_count", 0),
+            "recommended_next_action": "Use folder_visual_tokens for app folder colors and icon options.",
+        },
+    ]
+
+    return {
+        "schema_version": 1,
+        "summary": {
+            "catalog_rows": rows,
+            "coverage": cov,
+            "missing": {
+                "source_url": missing.get("source_url", 0),
+                "image_url": missing.get("image_url", 0),
+                "release_date": missing.get("release_date", 0),
+                "official_price_jpy": missing.get("official_price_jpy", 0),
+                "barcode": missing.get("barcode", 0),
+                "name_ja": missing.get("name_ja", 0),
+            },
+            "open_review_queues": {
+                "source_discovery_rows": source_summary.get("source_discovery_rows", 0),
+                "image_missing_rows": image_summary.get("missing_image_rows", 0),
+                "dedupe_groups": dedupe_summary.get("duplicate_groups", 0),
+                "animation_unknown_categories": animation_summary.get("unknown_category_count", 0),
+                "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
+                "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
+            },
+        },
+        "reports": [
+            {"key": "quality", "public_report": f"data/{QUALITY.name}"},
+            {"key": "image_backlog", "public_report": f"data/{IMAGE_BACKLOG.name}"},
+            {"key": "image_enrichment_batches", "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}"},
+            {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
+            {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
+            {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
+            {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
+            {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
+        ],
+        "next_actions": next_actions,
+        "automation_policy": {
+            "public_only": True,
+            "auto_apply_catalog_changes": False,
+            "requires_manual_review_for_imports": True,
+            "reason": "This report coordinates public queues; it does not mutate catalog data by itself.",
+        },
+    }
+
+
 def normalize_text_key(value: Any) -> str:
     return str(value or "").strip().lower()
 
@@ -935,6 +1043,17 @@ def update_reports(write: bool) -> dict[str, Any]:
     deduplication = build_deduplication_public(items)
     animation_categories = build_animation_categories_public(items)
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
+    operations = build_operations_public(
+        rows,
+        missing,
+        cov,
+        source_discovery,
+        metadata_backlog,
+        image_enrichment_batches,
+        deduplication,
+        animation_categories,
+        ichiban_kuji_history,
+    )
 
     public_meta = load_json(PUBLIC_META, {})
     public_meta.update(
@@ -1032,6 +1151,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
             **ichiban_kuji_history["summary"],
         }
+        target["operations"] = {
+            "public_report": f"data/{OPERATIONS_REPORT.name}",
+            **operations["summary"]["open_review_queues"],
+        }
 
     public_files = [
         PUBLIC_CATALOG,
@@ -1049,6 +1172,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         SOURCE_DISCOVERY,
         METADATA_BACKLOG,
         IMAGE_ENRICHMENT_BATCHES,
+        OPERATIONS_REPORT,
     ]
     findings = validate_public_files([path for path in public_files if path.exists()])
     if findings:
@@ -1061,6 +1185,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(DEDUPLICATION, deduplication)
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
+        write_json(OPERATIONS_REPORT, operations)
         write_json(PUBLIC_META, public_meta)
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)
@@ -1082,6 +1207,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DEDUPLICATION.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
+            str(OPERATIONS_REPORT.relative_to(ROOT)),
         ],
     }
 

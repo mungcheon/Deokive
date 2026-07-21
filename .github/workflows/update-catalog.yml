@@ -39,7 +39,8 @@ jobs:
             data/catalog_metadata_backlog_public.json \
             data/catalog_deduplication_public.json \
             data/animation_goods_categories_public.json \
-            data/ichiban_kuji_history_public.json
+            data/ichiban_kuji_history_public.json \
+            data/catalog_operations_public.json
           if git diff --cached --quiet; then
             echo "No public catalog report changes."
           else
