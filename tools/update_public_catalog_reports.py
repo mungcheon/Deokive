@@ -25,6 +25,7 @@ ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_pu
 ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
+ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES = DATA / "ichiban_kuji_metadata_review_batches_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
@@ -1152,6 +1153,12 @@ def build_operations_public(
         load_json(ICHIIBAN_KUJI_METADATA_PROBE, {}) if ICHIIBAN_KUJI_METADATA_PROBE.exists() else {}
     )
     ichiban_kuji_metadata_probe_summary = ichiban_kuji_metadata_probe.get("summary", {})
+    ichiban_kuji_metadata_review_batches = (
+        load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {})
+        if ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.exists()
+        else {}
+    )
+    ichiban_kuji_metadata_review_batches_summary = ichiban_kuji_metadata_review_batches.get("summary", {})
     metadata_summary = metadata_backlog["summary"]
     generic_patch_summary = generic_source_patch_candidates["summary"]
     requested_focus_summary = requested_focus["summary"]
@@ -1375,6 +1382,15 @@ def build_operations_public(
             "recommended_next_action": "Keep Ichiban Kuji date/price gaps blocked unless a labeled official source is found.",
         } if ichiban_kuji_metadata_probe_summary else None,
         {
+            "priority": 52,
+            "workstream": "ichiban_kuji_metadata_review_batches",
+            "public_report": f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
+            "batch_count": ichiban_kuji_metadata_review_batches_summary.get("batch_count", 0),
+            "source_campaigns": ichiban_kuji_metadata_review_batches_summary.get("source_campaigns", 0),
+            "catalog_item_rows": ichiban_kuji_metadata_review_batches_summary.get("catalog_item_rows", 0),
+            "recommended_next_action": "Review batched 1kuji campaign metadata evidence before applying release dates or prices.",
+        } if ichiban_kuji_metadata_review_batches_summary else None,
+        {
             "priority": 60,
             "workstream": "animation_folder_visuals",
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
@@ -1479,6 +1495,14 @@ def build_operations_public(
             "auto_apply_enabled": ichiban_kuji_metadata_probe_summary.get("auto_apply_enabled", False),
         } if ichiban_kuji_metadata_probe_summary else None,
         {
+            "workstream": "ichiban_kuji_metadata_review_batches",
+            "status": "manual_review" if ichiban_kuji_metadata_review_batches_summary.get("source_campaigns", 0) else "clear",
+            "open_rows": ichiban_kuji_metadata_review_batches_summary.get("catalog_item_rows", 0),
+            "primary_report": f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
+            "next_step": "verify_batched_ichiban_campaign_metadata",
+            "auto_apply_enabled": ichiban_kuji_metadata_review_batches_summary.get("auto_apply_enabled", False),
+        } if ichiban_kuji_metadata_review_batches_summary else None,
+        {
             "workstream": "animation_taxonomy",
             "status": "manual_review" if animation_summary.get("unknown_category_rows", 0) else "clear",
             "open_rows": animation_summary.get("unknown_category_rows", 0),
@@ -1557,6 +1581,7 @@ def build_operations_public(
             {"key": "animation_category_review_batches", "public_report": f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}"},
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
             {"key": "ichiban_kuji_metadata_probe", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}"},
+            {"key": "ichiban_kuji_metadata_review_batches", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}"},
             {"key": "agent_work_queue", "public_report": f"data/{AGENT_WORK_QUEUE.name}"},
         ],
         "next_actions": next_actions,
@@ -1600,6 +1625,11 @@ def build_agent_work_queue_public(
     gotouchi_report = load_json(GOTOUCHI, {}) if GOTOUCHI.exists() else {}
     source_review_batches = (
         load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}) if SOURCE_DISCOVERY_REVIEW_BATCHES.exists() else {}
+    )
+    ichiban_metadata_review_batches = (
+        load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {})
+        if ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.exists()
+        else {}
     )
     animation_review_batches = (
         load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
@@ -1874,51 +1904,97 @@ def build_agent_work_queue_public(
             samples=[compact_sample(item) for item in group.get("rows", []) if isinstance(item, dict)],
         )
 
-    for group in ichiban_kuji_history.get("missing_release_date_campaigns", [])[:6]:
-        add_batch(
-            agent_id="agent-ichiban-kuji",
-            workstream="ichiban_kuji_release_date",
-            priority=110,
-            title=f"이치방쿠지 발매일 확인: {group.get('slug') or group.get('title')}",
-            public_report=ICHIIBAN_KUJI_HISTORY,
-            rows=int(group.get("catalog_item_rows") or 0),
-            recommended_action="Verify official campaign date before applying release_date to linked rows.",
-            acceptance_criteria=[
-                "Official 1kuji campaign page or captured official campaign data confirms the date.",
-                "All updated catalog rows belong to the same campaign group.",
-            ],
-            samples=[
-                {
-                    "catalog_index": index,
-                    "name_ko": name,
-                    "source_url": group.get("url"),
-                }
-                for index, name in zip(group.get("sample_catalog_indexes", []), group.get("sample_names", []))
-            ],
-        )
+    ichiban_review_batch_rows = [
+        batch for batch in ichiban_metadata_review_batches.get("batches", []) if isinstance(batch, dict)
+    ]
+    if ichiban_review_batch_rows:
+        for review_batch in ichiban_review_batch_rows[:8]:
+            workflows = {
+                str(workflow)
+                for workflow, _ in review_batch.get("workflow_counts", [])
+                if workflow
+            }
+            if workflows == {"release_date_review"}:
+                workstream = "ichiban_kuji_release_date"
+            elif workflows == {"price_review"}:
+                workstream = "ichiban_kuji_price"
+            else:
+                workstream = "ichiban_kuji_metadata"
+            add_batch(
+                agent_id="agent-ichiban-kuji",
+                workstream=workstream,
+                priority=100 + int(review_batch.get("priority") or 99),
+                title=f"이치방쿠지 메타데이터 검수: {review_batch.get('batch_id')}",
+                public_report=ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES,
+                rows=int(review_batch.get("catalog_item_rows") or 0),
+                recommended_action=str(
+                    review_batch.get("recommended_action")
+                    or "Verify official campaign metadata before applying catalog updates."
+                ),
+                acceptance_criteria=[
+                    "Official 1kuji campaign page or captured official evidence confirms the value.",
+                    "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
+                    "All updated catalog rows belong to the reviewed campaign group.",
+                ],
+                samples=[
+                    {
+                        "catalog_index": index,
+                        "name_ko": name,
+                        "source_url": campaign.get("url"),
+                    }
+                    for campaign in review_batch.get("campaigns", [])
+                    if isinstance(campaign, dict)
+                    for index, name in zip(
+                        campaign.get("sample_catalog_indexes", []), campaign.get("sample_names", [])
+                    )
+                ],
+            )
+    else:
+        for group in ichiban_kuji_history.get("missing_release_date_campaigns", [])[:6]:
+            add_batch(
+                agent_id="agent-ichiban-kuji",
+                workstream="ichiban_kuji_release_date",
+                priority=110,
+                title=f"이치방쿠지 발매일 확인: {group.get('slug') or group.get('title')}",
+                public_report=ICHIIBAN_KUJI_HISTORY,
+                rows=int(group.get("catalog_item_rows") or 0),
+                recommended_action="Verify official campaign date before applying release_date to linked rows.",
+                acceptance_criteria=[
+                    "Official 1kuji campaign page or captured official campaign data confirms the date.",
+                    "All updated catalog rows belong to the same campaign group.",
+                ],
+                samples=[
+                    {
+                        "catalog_index": index,
+                        "name_ko": name,
+                        "source_url": group.get("url"),
+                    }
+                    for index, name in zip(group.get("sample_catalog_indexes", []), group.get("sample_names", []))
+                ],
+            )
 
-    for group in ichiban_kuji_history.get("missing_official_price_jpy_campaigns", [])[:8]:
-        add_batch(
-            agent_id="agent-ichiban-kuji",
-            workstream="ichiban_kuji_price",
-            priority=120,
-            title=f"이치방쿠지 가격 확인: {group.get('slug') or group.get('title')}",
-            public_report=ICHIIBAN_KUJI_HISTORY,
-            rows=int(group.get("catalog_item_rows") or 0),
-            recommended_action="Verify official campaign price before applying official_price_jpy.",
-            acceptance_criteria=[
-                "Price is confirmed from official 1kuji campaign data.",
-                "Non-prize collateral and campaign rows are not assigned a price unless evidence applies.",
-            ],
-            samples=[
-                {
-                    "catalog_index": index,
-                    "name_ko": name,
-                    "source_url": group.get("url"),
-                }
-                for index, name in zip(group.get("sample_catalog_indexes", []), group.get("sample_names", []))
-            ],
-        )
+        for group in ichiban_kuji_history.get("missing_official_price_jpy_campaigns", [])[:8]:
+            add_batch(
+                agent_id="agent-ichiban-kuji",
+                workstream="ichiban_kuji_price",
+                priority=120,
+                title=f"이치방쿠지 가격 확인: {group.get('slug') or group.get('title')}",
+                public_report=ICHIIBAN_KUJI_HISTORY,
+                rows=int(group.get("catalog_item_rows") or 0),
+                recommended_action="Verify official campaign price before applying official_price_jpy.",
+                acceptance_criteria=[
+                    "Price is confirmed from official 1kuji campaign data.",
+                    "Non-prize collateral and campaign rows are not assigned a price unless evidence applies.",
+                ],
+                samples=[
+                    {
+                        "catalog_index": index,
+                        "name_ko": name,
+                        "source_url": group.get("url"),
+                    }
+                    for index, name in zip(group.get("sample_catalog_indexes", []), group.get("sample_names", []))
+                ],
+            )
 
     review_batches = [batch for batch in animation_review_batches.get("batches", []) if isinstance(batch, dict)]
     if review_batches:
@@ -2982,6 +3058,7 @@ def validate_report_consistency(
         f"data/{ANIMATION_CATEGORIES.name}",
         f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+        f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
         f"data/{GENERIC_SOURCE.name}",
         f"data/{GOTOUCHI.name}",
         f"data/{REQUESTED_FOCUS.name}",
@@ -3249,6 +3326,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["ichiban_kuji_metadata_probe"] = copy_report_summary(
                 ICHIIBAN_KUJI_METADATA_PROBE, "ichiban_kuji_metadata_probe"
             )
+        if ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.exists():
+            target["ichiban_kuji_metadata_review_batches"] = copy_report_summary(
+                ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, "ichiban_kuji_metadata_review_batches"
+            )
         target["operations"] = {
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
@@ -3287,6 +3368,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ANIMATION_CATEGORIES,
         ICHIIBAN_KUJI_HISTORY,
         ICHIIBAN_KUJI_METADATA_PROBE,
+        ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES,
         GOTOUCHI,
         REQUESTED,
         REQUESTED_FOCUS,

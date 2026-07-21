@@ -2435,8 +2435,8 @@
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 68,
-    "summed_batch_rows": 24383,
+    "batch_count": 64,
+    "summed_batch_rows": 24654,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2461,7 +2461,7 @@
       ],
       [
         "ichiban_kuji_price",
-        8
+        5
       ],
       [
         "requested_focus_enrichment",
@@ -2472,15 +2472,15 @@
         3
       ],
       [
-        "ichiban_kuji_release_date",
-        2
-      ],
-      [
         "animation_category_review",
         2
       ],
       [
         "gotouchi_official_candidate_review",
+        1
+      ],
+      [
+        "ichiban_kuji_metadata",
         1
       ]
     ],
@@ -2498,16 +2498,16 @@
         10
       ],
       [
-        "agent-ichiban-kuji",
-        10
-      ],
-      [
         "agent-danganronpa-media",
         8
       ],
       [
         "agent-source-image",
         8
+      ],
+      [
+        "agent-ichiban-kuji",
+        6
       ],
       [
         "agent-requested-focus",
@@ -3126,6 +3126,36 @@
       [
         "licensed_retailer_review_required",
         1
+      ]
+    ],
+    "auto_apply_enabled": false
+  },
+  "ichiban_kuji_metadata_review_batches": {
+    "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+    "source_campaigns": 44,
+    "catalog_item_rows": 381,
+    "batch_count": 6,
+    "batch_size": 8,
+    "missing_release_date_rows": 16,
+    "missing_official_price_jpy_rows": 365,
+    "by_workflow": [
+      [
+        "price_review",
+        42
+      ],
+      [
+        "release_date_review",
+        2
+      ]
+    ],
+    "by_missing_field": [
+      [
+        "official_price_jpy",
+        42
+      ],
+      [
+        "release_date",
+        2
       ]
     ],
     "auto_apply_enabled": false

@@ -1,0 +1,1739 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-21T20:49:04Z",
+  "scope": "ichiban_kuji_metadata_review_batches",
+  "summary": {
+    "source_campaigns": 44,
+    "catalog_item_rows": 381,
+    "batch_count": 6,
+    "batch_size": 8,
+    "missing_release_date_rows": 16,
+    "missing_official_price_jpy_rows": 365,
+    "by_workflow": [
+      [
+        "price_review",
+        42
+      ],
+      [
+        "release_date_review",
+        2
+      ]
+    ],
+    "by_missing_field": [
+      [
+        "official_price_jpy",
+        42
+      ],
+      [
+        "release_date",
+        2
+      ]
+    ],
+    "auto_apply_enabled": false
+  },
+  "instructions": [
+    "Review batches in priority order.",
+    "Use only labeled official 1kuji campaign metadata or captured official evidence.",
+    "Do not apply unlabeled dates, double-chance dates, or inferred historical prices."
+  ],
+  "batches": [
+    {
+      "batch_id": "ichiban-metadata-review-001",
+      "priority": 10,
+      "campaign_count": 8,
+      "catalog_item_rows": 59,
+      "workflow_counts": [
+        [
+          "price_review",
+          6
+        ],
+        [
+          "release_date_review",
+          2
+        ]
+      ],
+      "missing_field_counts": [
+        [
+          "official_price_jpy",
+          6
+        ],
+        [
+          "release_date",
+          2
+        ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page",
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+      "campaigns": [
+        {
+          "group_key": "https://1kuji.com/products/jujutsu-o",
+          "url": "https://1kuji.com/products/jujutsu-o",
+          "slug": "jujutsu-o",
+          "title": "一番くじ 呪術廻戦 －オンライン－",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "release_date"
+          ],
+          "review_priority": 10,
+          "workflow": "release_date_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            14193,
+            14194,
+            14195,
+            14196,
+            14197,
+            14198,
+            14199,
+            14200
+          ],
+          "sample_names": [
+            "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
+            "一番くじ 呪術廻戦 －オンライン－ - B賞 伏黒恵ビジュアルクロス",
+            "一番くじ 呪術廻戦 －オンライン－ - C賞 釘崎野薔薇ビジュアルクロス",
+            "一番くじ 呪術廻戦 －オンライン－ - D賞 五条悟ビジュアルクロス",
+            "一番くじ 呪術廻戦 －オンライン－ - E賞 クリアボトル",
+            "一番くじ 呪術廻戦 －オンライン－ - F賞 アクリルスタンド",
+            "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
+            "一番くじ 呪術廻戦 －オンライン－ - ラストワン賞 ビジュアルタオル"
+          ],
+          "next_machine_step": "verify_labeled_official_release_date",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/myhero_o5",
+          "url": "https://1kuji.com/products/myhero_o5",
+          "slug": "myhero_o5",
+          "title": "一番くじ 僕のヴィランアカデミア",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "release_date"
+          ],
+          "review_priority": 10,
+          "workflow": "release_date_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            17067,
+            17068,
+            17069,
+            17070,
+            17071,
+            17072,
+            17073,
+            17074
+          ],
+          "sample_names": [
+            "一番くじ 僕のヴィランアカデミア - A賞 死柄木弔;MASTERLISE",
+            "一番くじ 僕のヴィランアカデミア - B賞 荼毘;MASTERLISE",
+            "一番くじ 僕のヴィランアカデミア - C賞 トガヒミコ;MASTERLISE",
+            "一番くじ 僕のヴィランアカデミア - D賞 トゥワイス;MASTERLISE",
+            "一番くじ 僕のヴィランアカデミア - E賞 タンブラー",
+            "一番くじ 僕のヴィランアカデミア - F賞 タオル",
+            "一番くじ 僕のヴィランアカデミア - G賞 ラバーチャーム",
+            "一番くじ 僕のヴィランアカデミア - ラストワン賞 トガヒミコ;MASTERLISE ラストワンver."
+          ],
+          "next_machine_step": "verify_labeled_official_release_date",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/10",
+          "url": "https://1kuji.com/products/10",
+          "slug": "10",
+          "title": "一番くじドラゴンボールＺ限界突破編",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16816,
+            16817,
+            16818,
+            16819,
+            16820,
+            16821,
+            16822
+          ],
+          "sample_names": [
+            "一番くじドラゴンボールＺ限界突破編 - 大猿フィギュア賞",
+            "一番くじドラゴンボールＺ限界突破編 - 限界突破！フィギュア賞",
+            "一番くじドラゴンボールＺ限界突破編 - 飲茶セット賞",
+            "一番くじドラゴンボールＺ限界突破編 - 魔封波小物入れ賞",
+            "一番くじドラゴンボールＺ限界突破編 - ソフビ貯金箱賞",
+            "一番くじドラゴンボールＺ限界突破編 - ホイポイカプセルボールペン賞",
+            "一番くじドラゴンボールＺ限界突破編 - メモスタンド賞"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/38",
+          "url": "https://1kuji.com/products/38",
+          "slug": "38",
+          "title": "一番くじ機動戦士ガンダム00",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            17583,
+            17584,
+            17585,
+            17586,
+            17587,
+            17588,
+            17589
+          ],
+          "sample_names": [
+            "一番くじ機動戦士ガンダム00 - ヘッドディスプレイ賞",
+            "一番くじ機動戦士ガンダム00 - 王 留美フィギュア賞",
+            "一番くじ機動戦士ガンダム00 - ハロぬいぐるみ賞",
+            "一番くじ機動戦士ガンダム00 - バスタオル賞",
+            "一番くじ機動戦士ガンダム00 - タンブラー賞",
+            "一番くじ機動戦士ガンダム00 - ポスター賞",
+            "一番くじ機動戦士ガンダム00 - ネックペン賞"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/49",
+          "url": "https://1kuji.com/products/49",
+          "slug": "49",
+          "title": "一番くじテレビアニメ「ワンピース」",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16216,
+            16217,
+            16218,
+            16219,
+            16220,
+            16221,
+            16222,
+            16223
+          ],
+          "sample_names": [
+            "一番くじテレビアニメ「ワンピース」 - サウザンド・サニー号賞",
+            "一番くじテレビアニメ「ワンピース」 - ルフィフィギュア賞",
+            "一番くじテレビアニメ「ワンピース」 - フランキーフィギュア賞",
+            "一番くじテレビアニメ「ワンピース」 - チョッパーぬいぐるみ賞",
+            "一番くじテレビアニメ「ワンピース」 - ファスナー付きクリアケース賞",
+            "一番くじテレビアニメ「ワンピース」 - レリーフ名刺ケース賞",
+            "一番くじテレビアニメ「ワンピース」 - チョッパーペン賞",
+            "一番くじテレビアニメ「ワンピース」 - ボールチェーン付きマスコット賞"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/53",
+          "url": "https://1kuji.com/products/53",
+          "slug": "53",
+          "title": "一番くじドラゴンボール 摩訶不思議アドベンチャー編",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16809,
+            16810,
+            16811,
+            16812,
+            16813,
+            16814,
+            16815
+          ],
+          "sample_names": [
+            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ａ賞 亀仙人フィギュア",
+            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｂ賞 ブルマフィギュア",
+            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｃ賞 四星球クッション",
+            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｄ賞 孫悟空ソフビ",
+            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｅ賞 カリン塔ペン",
+            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｆ賞 天下一メモスタンド",
+            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｇ賞 ぬいぐるみ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/64",
+          "url": "https://1kuji.com/products/64",
+          "slug": "64",
+          "title": "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            17576,
+            17577,
+            17578,
+            17579,
+            17580,
+            17581,
+            17582
+          ],
+          "sample_names": [
+            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - A賞 シャア胸像型バンク",
+            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - B賞 赤い彗星アズナぶる×2",
+            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - C賞 測ったなシャア！メジャー",
+            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - D賞 悩ましのクッション",
+            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - E賞 メモスタンド",
+            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - F賞 ライバルおめん",
+            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - G賞 ロングタオル"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/71",
+          "url": "https://1kuji.com/products/71",
+          "slug": "71",
+          "title": "一番くじワンピース～スリラーバーク編～",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16209,
+            16210,
+            16211,
+            16212,
+            16213,
+            16214,
+            16215
+          ],
+          "sample_names": [
+            "一番くじワンピース～スリラーバーク編～ - A賞 オーズ ビッグソフビ",
+            "一番くじワンピース～スリラーバーク編～ - B賞 モンキー･D･ルフィ（ナイトメアVer.）フィギュア",
+            "一番くじワンピース～スリラーバーク編～ - C賞 チョッパー ぬいぐるみ",
+            "一番くじワンピース～スリラーバーク編～ - D賞 クマシー ぬいぐるみ",
+            "一番くじワンピース～スリラーバーク編～ - E賞 ネガティブ メモスタンド",
+            "一番くじワンピース～スリラーバーク編～ - F賞 キーホルダー",
+            "一番くじワンピース～スリラーバーク編～ - G賞 バンダナ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        }
+      ]
+    },
+    {
+      "batch_id": "ichiban-metadata-review-002",
+      "priority": 20,
+      "campaign_count": 8,
+      "catalog_item_rows": 63,
+      "workflow_counts": [
+        [
+          "price_review",
+          8
+        ]
+      ],
+      "missing_field_counts": [
+        [
+          "official_price_jpy",
+          8
+        ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page",
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+      "campaigns": [
+        {
+          "group_key": "https://1kuji.com/products/73",
+          "url": "https://1kuji.com/products/73",
+          "slug": "73",
+          "title": "一番くじドラゴンボールＺ～サイヤ人襲来編～",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16802,
+            16803,
+            16804,
+            16805,
+            16806,
+            16807,
+            16808
+          ],
+          "sample_names": [
+            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - A賞 丸型宇宙船＆悟空",
+            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｂ賞 バーダックフィギュア",
+            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - C賞 幼少べジータフィギュア",
+            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｄ賞 クッション",
+            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｅ賞 スカウタークリップボード",
+            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｆ賞 サイヤ人テープ",
+            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｇ賞 しっぽストラップ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/89",
+          "url": "https://1kuji.com/products/89",
+          "slug": "89",
+          "title": "一番くじドラゴンボールZ～ナメック星編～",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16795,
+            16796,
+            16797,
+            16798,
+            16799,
+            16800,
+            16801
+          ],
+          "sample_names": [
+            "一番くじドラゴンボールZ～ナメック星編～ - フリーザフィギュア賞",
+            "一番くじドラゴンボールZ～ナメック星編～ - 悟空フィギュア賞",
+            "一番くじドラゴンボールZ～ナメック星編～ - べジータフィギュア賞",
+            "一番くじドラゴンボールZ～ナメック星編～ - スカウター型メジャー賞",
+            "一番くじドラゴンボールZ～ナメック星編～ - ソフビ貯金箱賞",
+            "一番くじドラゴンボールZ～ナメック星編～ - グラス賞",
+            "一番くじドラゴンボールZ～ナメック星編～ - ギニュー特戦隊フィギュア賞"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/cho-gyojin",
+          "url": "https://1kuji.com/products/cho-gyojin",
+          "slug": "cho-gyojin",
+          "title": "一番くじ チョッパー「行くぞ！魚人島」",
+          "catalog_item_rows": 9,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16073,
+            16074,
+            16075,
+            16076,
+            16077,
+            16078,
+            16079,
+            16080
+          ],
+          "sample_names": [
+            "一番くじ チョッパー「行くぞ！魚人島」 - A賞 ビッグソフィビフィギュア",
+            "一番くじ チョッパー「行くぞ！魚人島」 - B賞 土鍋",
+            "一番くじ チョッパー「行くぞ！魚人島」 - C賞 ヒストリーフィギュア「魚人島」",
+            "一番くじ チョッパー「行くぞ！魚人島」 - D賞 ジンベエぬいぐるみ",
+            "一番くじ チョッパー「行くぞ！魚人島」 - E賞 2色ボールペン&ステーショナリー",
+            "一番くじ チョッパー「行くぞ！魚人島」 - F賞 食器コレクション",
+            "一番くじ チョッパー「行くぞ！魚人島」 - G賞 フィギュア付きベルトストラップ",
+            "一番くじ チョッパー「行くぞ！魚人島」 - H賞 ちびきゅんキャラ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/cho-history",
+          "url": "https://1kuji.com/products/cho-history",
+          "slug": "cho-history",
+          "title": "一番くじ ヒストリー オブ チョッパー",
+          "catalog_item_rows": 12,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16111,
+            16112,
+            16113,
+            16114,
+            16115,
+            16116,
+            16117,
+            16118
+          ],
+          "sample_names": [
+            "一番くじ ヒストリー オブ チョッパー - A賞 フェイスクッション",
+            "一番くじ ヒストリー オブ チョッパー - B賞 ヒストリーフィギュア「ドラム王国」編",
+            "一番くじ ヒストリー オブ チョッパー - C賞 ヒストリーフィギュア「アラバスタ」編",
+            "一番くじ ヒストリー オブ チョッパー - D賞 ヒストリーフィギュア「スカイピア」編",
+            "一番くじ ヒストリー オブ チョッパー - E賞 ヒストリーフィギュア「スリラーバーク」編",
+            "一番くじ ヒストリー オブ チョッパー - F賞 ヒストリーフィギュア「シャボンディ諸島」編",
+            "一番くじ ヒストリー オブ チョッパー - G賞 チョッパー×クマシーぬいぐるみ",
+            "一番くじ ヒストリー オブ チョッパー - H賞 インテリアハンガー"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/cho6-DM",
+          "url": "https://1kuji.com/products/cho6-DM",
+          "slug": "cho6-DM",
+          "title": "一番くじ チョッパー&クリーチャー",
+          "catalog_item_rows": 10,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16020,
+            16021,
+            16022,
+            16023,
+            16024,
+            16025,
+            16026,
+            16027
+          ],
+          "sample_names": [
+            "一番くじ チョッパー&クリーチャー - A賞 チョッパー&クリーチャーフィギュア～サウスバード～",
+            "一番くじ チョッパー&クリーチャー - B賞 チョッパー&クリーチャーフィギュア～ハイキングベア～",
+            "一番くじ チョッパー&クリーチャー - C賞 チョッパー&クリーチャーフィギュア～クンフージュゴン～",
+            "一番くじ チョッパー&クリーチャー - D賞 チョッパー&クリーチャーフィギュア～偽チョッパー～",
+            "一番くじ チョッパー&クリーチャー - E賞 きゅんぐるみ『ワンピース』～チョッパー&クリーチャー～",
+            "一番くじ チョッパー&クリーチャー - F賞 アートプレート",
+            "一番くじ チョッパー&クリーチャー - G賞 チェーンストラップ",
+            "一番くじ チョッパー&クリーチャー - H賞 フェイスタオル"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/chotwo",
+          "url": "https://1kuji.com/products/chotwo",
+          "slug": "chotwo",
+          "title": "一番くじチョッパー ～サウザンド・サニー号～",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16201,
+            16202,
+            16203,
+            16204,
+            16205,
+            16206,
+            16207,
+            16208
+          ],
+          "sample_names": [
+            "一番くじチョッパー ～サウザンド・サニー号～ - A賞 ジャンボクッション",
+            "一番くじチョッパー ～サウザンド・サニー号～ - B賞 ジオラマフィギュア",
+            "一番くじチョッパー ～サウザンド・サニー号～ - C賞 サニー号ぬいぐるみ",
+            "一番くじチョッパー ～サウザンド・サニー号～ - D賞 折りたたみ傘",
+            "一番くじチョッパー ～サウザンド・サニー号～ - E賞 クリアチャームストラップ",
+            "一番くじチョッパー ～サウザンド・サニー号～ - F賞 マグカップ",
+            "一番くじチョッパー ～サウザンド・サニー号～ - G賞 フロートペン＆クリアファイル",
+            "一番くじチョッパー ～サウザンド・サニー号～ - H賞 ウェットティッシュ＆ステッカー"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/db_android",
+          "url": "https://1kuji.com/products/db_android",
+          "slug": "db_android",
+          "title": "一番くじ ドラゴンボール THE ANDROID BATTLE with ドラゴンボール ファイターズ",
+          "catalog_item_rows": 1,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16629
+          ],
+          "sample_names": [
+            "一番くじ ドラゴンボール THE ANDROID BATTLE with ドラゴンボール ファイターズ - ダブルチャンスキャンペーン"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/dbkai",
+          "url": "https://1kuji.com/products/dbkai",
+          "slug": "dbkai",
+          "title": "一番くじドラゴンボール改～激突編～",
+          "catalog_item_rows": 9,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16786,
+            16787,
+            16788,
+            16789,
+            16790,
+            16791,
+            16792,
+            16793
+          ],
+          "sample_names": [
+            "一番くじドラゴンボール改～激突編～ - 神龍チャンスキャンペーン",
+            "一番くじドラゴンボール改～激突編～ - Ｓ賞 ピッコロフィギュア",
+            "一番くじドラゴンボール改～激突編～ - Ａ賞 出でよ！神龍フィギュア",
+            "一番くじドラゴンボール改～激突編～ - Ｂ賞 界王挙！孫悟空フィギュア",
+            "一番くじドラゴンボール改～激突編～ - Ｃ賞 スポーツタオル",
+            "一番くじドラゴンボール改～激突編～ - Ｄ賞 クリップホルダー",
+            "一番くじドラゴンボール改～激突編～ - Ｅ賞 仙豆壷型湯のみ",
+            "一番くじドラゴンボール改～激突編～ - Ｆ賞 ドラゴンボール型スーパーボール"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        }
+      ]
+    },
+    {
+      "batch_id": "ichiban-metadata-review-003",
+      "priority": 20,
+      "campaign_count": 8,
+      "catalog_item_rows": 66,
+      "workflow_counts": [
+        [
+          "price_review",
+          8
+        ]
+      ],
+      "missing_field_counts": [
+        [
+          "official_price_jpy",
+          8
+        ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page",
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+      "campaigns": [
+        {
+          "group_key": "https://1kuji.com/products/dbkai_ks",
+          "url": "https://1kuji.com/products/dbkai_ks",
+          "slug": "dbkai_ks",
+          "title": "一番くじ ドラゴンボール改～最高レベルの決戦編～",
+          "catalog_item_rows": 9,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16770,
+            16771,
+            16772,
+            16773,
+            16774,
+            16775,
+            16776,
+            16777
+          ],
+          "sample_names": [
+            "一番くじ ドラゴンボール改～最高レベルの決戦編～ - A賞 孫悟空&神龍フィギュア",
+            "一番くじ ドラゴンボール改～最高レベルの決戦編～ - B賞 完全体セルフィギュア",
+            "一番くじ ドラゴンボール改～最高レベルの決戦編～ - C賞 超ベジータフィギュア",
+            "一番くじ ドラゴンボール改～最高レベルの決戦編～ - D賞 超孫悟飯フィギュア",
+            "一番くじ ドラゴンボール改～最高レベルの決戦編～ - E賞 陶器タンブラー",
+            "一番くじ ドラゴンボール改～最高レベルの決戦編～ - F賞 ロングタオル",
+            "一番くじ ドラゴンボール改～最高レベルの決戦編～ - G賞 デザインバッグ",
+            "一番くじ ドラゴンボール改～最高レベルの決戦編～ - H賞 根付"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/dbkai_taiketsuhen",
+          "url": "https://1kuji.com/products/dbkai_taiketsuhen",
+          "slug": "dbkai_taiketsuhen",
+          "title": "一番くじ ドラゴンボール改～対決編～",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16779,
+            16780,
+            16781,
+            16782,
+            16783,
+            16784,
+            16785
+          ],
+          "sample_names": [
+            "一番くじ ドラゴンボール改～対決編～ - A賞 大猿べジータvs孫悟空フィギュア",
+            "一番くじ ドラゴンボール改～対決編～ - B賞 どんぶりセット",
+            "一番くじ ドラゴンボール改～対決編～ - C賞 ホイポイBIGクッション",
+            "一番くじ ドラゴンボール改～対決編～ - D賞 スープも飲めちゃうカップ",
+            "一番くじ ドラゴンボール改～対決編～ - E賞 ホイポイカトラリー",
+            "一番くじ ドラゴンボール改～対決編～ - F賞 ハンディ手帳",
+            "一番くじ ドラゴンボール改～対決編～ - G賞 フリーザ4形態フィギュア"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/gundam30th",
+          "url": "https://1kuji.com/products/gundam30th",
+          "slug": "gundam30th",
+          "title": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            17568,
+            17569,
+            17570,
+            17571,
+            17572,
+            17573,
+            17574,
+            17575
+          ],
+          "sample_names": [
+            "機動戦士ガンダム 30th ANNIVERSARY 一番くじ - ガンダムヘッドバンク賞",
+            "機動戦士ガンダム 30th ANNIVERSARY 一番くじ - ガンダムフィギュア賞",
+            "機動戦士ガンダム 30th ANNIVERSARY 一番くじ - ハロぬいぐるみ賞",
+            "機動戦士ガンダム 30th ANNIVERSARY 一番くじ - タオル賞",
+            "機動戦士ガンダム 30th ANNIVERSARY 一番くじ - 湯のみ賞",
+            "機動戦士ガンダム 30th ANNIVERSARY 一番くじ - ソフビ貯金箱賞",
+            "機動戦士ガンダム 30th ANNIVERSARY 一番くじ - ボールペン賞",
+            "機動戦士ガンダム 30th ANNIVERSARY 一番くじ - ジオラマフィギュア賞"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/gundam_ft",
+          "url": "https://1kuji.com/products/gundam_ft",
+          "slug": "gundam_ft",
+          "title": "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～",
+          "catalog_item_rows": 9,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            17559,
+            17560,
+            17561,
+            17562,
+            17563,
+            17564,
+            17565,
+            17566
+          ],
+          "sample_names": [
+            "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～ - A賞 ガンダムビッグソフビ",
+            "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～ - B賞 シャアヘルメット＆マスクディスプレイ",
+            "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～ - C賞 ハロロングクッション",
+            "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～ - D賞 モビルスーツどんぶり",
+            "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～ - E賞 マフラータオル",
+            "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～ - F賞 胸像バンク",
+            "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～ - G賞 ハードカバーノート",
+            "一番くじ 機動戦士ガンダム～ガンダム再び立つ！編～ - H賞 ちびきゅんキャラ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/gundam_uc",
+          "url": "https://1kuji.com/products/gundam_uc",
+          "slug": "gundam_uc",
+          "title": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+          "catalog_item_rows": 9,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            17550,
+            17551,
+            17552,
+            17553,
+            17554,
+            17555,
+            17556,
+            17557
+          ],
+          "sample_names": [
+            "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ - ｼｬｱ専用ｻﾞｸﾋﾞｯｸﾞｿﾌﾋﾞ賞",
+            "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ - ﾕﾆｺｰﾝｶﾞﾝﾀﾞﾑﾍｯﾄﾞﾃﾞｨｽﾌﾟﾚｲ賞",
+            "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ - 赤い彗星ﾊﾛぬいぐるみ賞",
+            "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ - モビルスーツデフォルメフィギュア賞",
+            "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ - マスクデザインタオル賞",
+            "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ - 宇宙世紀湯のみ賞",
+            "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ - ちびきゅんｷｬﾗ賞",
+            "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ - コレクションストラップ賞"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/j3",
+          "url": "https://1kuji.com/products/j3",
+          "slug": "j3",
+          "title": "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            15110,
+            15111,
+            15112,
+            15113,
+            15114,
+            15115,
+            15116
+          ],
+          "sample_names": [
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ａ賞 仗助＆クレイジー・ダイヤモンドフィギュア",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｄ賞 ハーヴェストコイン“スタンド”",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｅ賞 ヘブンズ・ドアッ！ノート",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｆ賞 ジョジョバッヂ",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｇ賞 グラス",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｂ賞 キラークイーンフィギュア",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｃ賞 バッド・カンパニーBOX"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/jo",
+          "url": "https://1kuji.com/products/jo",
+          "slug": "jo",
+          "title": "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            15103,
+            15104,
+            15105,
+            15106,
+            15107,
+            15108,
+            15109
+          ],
+          "sample_names": [
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ａ賞 仗助＆クレイジー・ダイヤモンドフィギュア",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｂ賞 キラークイーンフィギュア",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｃ賞 バッド・カンパニーBOX",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｄ賞 ハーヴェストコイン“スタンド”",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｅ賞 ヘブンズ・ドアッ！ノート",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｆ賞 ジョジョバッヂ",
+            "一番くじジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない - Ｇ賞 グラス"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/jojo4-2",
+          "url": "https://1kuji.com/products/jojo4-2",
+          "slug": "jojo4-2",
+          "title": "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2",
+          "catalog_item_rows": 10,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            15067,
+            15068,
+            15069,
+            15070,
+            15071,
+            15072,
+            15073,
+            15074
+          ],
+          "sample_names": [
+            "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2 - A賞 クレイジー・ダイヤモンドフィギュア",
+            "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2 - B賞 キラークイーンフィギュア",
+            "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2 - C賞 プランター風猫草小物入れ",
+            "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2 - D賞 トニオさんのパスタ皿",
+            "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2 - E賞 ランチバッグ",
+            "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2 - F賞 杜王町名所スタンプ",
+            "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2 - G賞 奇妙なマルチクリップ",
+            "一番くじ ジョジョの奇妙な冒険第四部 ダイヤモンドは砕けない ACT2 - H賞 群体スタンドマグネット"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        }
+      ]
+    },
+    {
+      "batch_id": "ichiban-metadata-review-004",
+      "priority": 20,
+      "campaign_count": 8,
+      "catalog_item_rows": 72,
+      "workflow_counts": [
+        [
+          "price_review",
+          8
+        ]
+      ],
+      "missing_field_counts": [
+        [
+          "official_price_jpy",
+          8
+        ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page",
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+      "campaigns": [
+        {
+          "group_key": "https://1kuji.com/products/jojo_anniv",
+          "url": "https://1kuji.com/products/jojo_anniv",
+          "slug": "jojo_anniv",
+          "title": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ",
+          "catalog_item_rows": 11,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            15077,
+            15078,
+            15079,
+            15080,
+            15081,
+            15082,
+            15083,
+            15084
+          ],
+          "sample_names": [
+            "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - A賞 ジョナサン・ジョースター アニバーサリーフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - B賞 ジョセフ・ジョースター アニバーサリーフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - C賞 空条承太郎 アニバーサリーフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - D賞 東方仗助 アニバーサリーフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - E賞 ジョルノ・ジョバァーナ アニバーサリーフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - F賞 空条徐倫 アニバーサリーフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - G賞 ジョニィ・ジョースター アニバーサリーフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - H賞 アニバーサリーグラス"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/jojo_dai3bu",
+          "url": "https://1kuji.com/products/jojo_dai3bu",
+          "slug": "jojo_dai3bu",
+          "title": "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            15088,
+            15089,
+            15090,
+            15091,
+            15092,
+            15093,
+            15094,
+            15095
+          ],
+          "sample_names": [
+            "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～ - A賞 DIOフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～ - B賞 ザ・ワールドスタンドフィギュア",
+            "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～ - C賞 クリーム亜空間マルチボックス",
+            "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～ - D賞 ダービーズポーカーセット",
+            "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～ - E賞 トト神ノート",
+            "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～ - F賞 奇妙なプルバックカー",
+            "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～ - G賞 デザインストラップ",
+            "一番くじ ジョジョの奇妙な冒険 第三部 スターダストクルセイダース～BLACK SIDE～ - H賞 グラス"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/jojo_dai5bu",
+          "url": "https://1kuji.com/products/jojo_dai5bu",
+          "slug": "jojo_dai5bu",
+          "title": "一番くじジョジョの奇妙な冒険 第五部 黄金の風",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            15096,
+            15097,
+            15098,
+            15099,
+            15100,
+            15101,
+            15102
+          ],
+          "sample_names": [
+            "一番くじジョジョの奇妙な冒険 第五部 黄金の風 - A賞 ジョルノ・ジョバァーナ＆ゴールド･エクスペリエンスフィギュア",
+            "一番くじジョジョの奇妙な冒険 第五部 黄金の風 - B賞 ディアボロ'sスタンドフィギュア",
+            "一番くじジョジョの奇妙な冒険 第五部 黄金の風 - C賞 ミスタの弁当箱",
+            "一番くじジョジョの奇妙な冒険 第五部 黄金の風 - D賞 アバッキオ'sスタンドクロック",
+            "一番くじジョジョの奇妙な冒険 第五部 黄金の風 - E賞 携帯ストラップ",
+            "一番くじジョジョの奇妙な冒険 第五部 黄金の風 - F賞 ハードカバーノート＆シール",
+            "一番くじジョジョの奇妙な冒険 第五部 黄金の風 - G賞 グラス"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/kirby7",
+          "url": "https://1kuji.com/products/kirby7",
+          "slug": "kirby7",
+          "title": "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～",
+          "catalog_item_rows": 9,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            14466,
+            14467,
+            14468,
+            14469,
+            14470,
+            14471,
+            14472,
+            14473
+          ],
+          "sample_names": [
+            "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～ - A賞 ぽよぽよ桜餅かーびぃぬいぐるみ",
+            "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～ - B賞 まったりかーびぃちゃぶ台",
+            "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～ - C賞 ひんやり冷茶ポット",
+            "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～ - D賞 はらぺこ和皿",
+            "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～ - E賞 ゆったり冷茶グラス",
+            "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～ - F賞 ちょこんと和菓子かーびぃチャーム",
+            "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～ - G賞 はんなり和風デザインタオル",
+            "一番くじ 星のカービィ ふわふ和コレクション～ぽよぽよ日和～ - 最後の1個を引くと付いてくる！ラストワン賞 ぽよぽよ桜餅かーびぃぬいぐるみ すやすやver."
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/naru",
+          "url": "https://1kuji.com/products/naru",
+          "slug": "naru",
+          "title": "一番くじNARUTO-ナルト- 疾風伝",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            14329,
+            14330,
+            14331,
+            14332,
+            14333,
+            14334,
+            14335,
+            14336
+          ],
+          "sample_names": [
+            "一番くじNARUTO-ナルト- 疾風伝 - A賞 ナルトフィギュア",
+            "一番くじNARUTO-ナルト- 疾風伝 - B賞 サスケフィギュア",
+            "一番くじNARUTO-ナルト- 疾風伝 - C賞 カカシフィギュア",
+            "一番くじNARUTO-ナルト- 疾風伝 - Ｄ賞 クッション",
+            "一番くじNARUTO-ナルト- 疾風伝 - Ｅ賞 湯のみ",
+            "一番くじNARUTO-ナルト- 疾風伝 - Ｆ賞 クリアファイルセット",
+            "一番くじNARUTO-ナルト- 疾風伝 - Ｇ賞 木ノ葉根付＆千社札",
+            "一番くじNARUTO-ナルト- 疾風伝 - H賞 うちはと“暁”根付＆千社札"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep10-1",
+          "url": "https://1kuji.com/products/onep10-1",
+          "slug": "onep10-1",
+          "title": "一番くじ ワンピース ROMANCE DAWN for the new world～前編～",
+          "catalog_item_rows": 10,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16082,
+            16083,
+            16084,
+            16085,
+            16086,
+            16087,
+            16088,
+            16089
+          ],
+          "sample_names": [
+            "一番くじ ワンピース ROMANCE DAWN for the new world～前編～ - A賞 サニー号フィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～前編～ - B賞 ゾロフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～前編～ - C賞 サンジフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～前編～ - D賞 フランキーフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～前編～ - E賞 ブルックフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～前編～ - F賞 クッション",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～前編～ - G賞 カードスタンドフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～前編～ - H賞 グラス"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep10-2",
+          "url": "https://1kuji.com/products/onep10-2",
+          "slug": "onep10-2",
+          "title": "一番くじ ワンピース ROMANCE DAWN for the new world～後編～",
+          "catalog_item_rows": 10,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16050,
+            16051,
+            16052,
+            16053,
+            16054,
+            16055,
+            16056,
+            16057
+          ],
+          "sample_names": [
+            "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ - A賞 海賊旗ビッグブランケット",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ - B賞 ルフィフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ - C賞 ナミフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ - D賞 ロビンフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ - E賞 ウソップ＆チョッパーフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ - F賞 クッション",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ - G賞 カードスタンドフィギュア",
+            "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ - H賞 グラス"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep11",
+          "url": "https://1kuji.com/products/onep11",
+          "slug": "onep11",
+          "title": "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～",
+          "catalog_item_rows": 9,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16041,
+            16042,
+            16043,
+            16044,
+            16045,
+            16046,
+            16047,
+            16048
+          ],
+          "sample_names": [
+            "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～ - A賞 エドワード・ニューゲートフィギュア",
+            "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～ - B賞 モビー・ディック号ぬいぐるみ",
+            "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～ - C賞 ドリームクッション",
+            "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～ - D賞 フェイスタオル",
+            "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～ - E賞 カードスタンドフィギュア",
+            "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～ - F賞 グラス",
+            "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～ - G賞 アートノート",
+            "一番くじ ワンピース ～The Legend of EDWARD・NEWGATE編～ - H賞 カラビナ付きマスコット"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        }
+      ]
+    },
+    {
+      "batch_id": "ichiban-metadata-review-005",
+      "priority": 20,
+      "campaign_count": 8,
+      "catalog_item_rows": 73,
+      "workflow_counts": [
+        [
+          "price_review",
+          8
+        ]
+      ],
+      "missing_field_counts": [
+        [
+          "official_price_jpy",
+          8
+        ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page",
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+      "campaigns": [
+        {
+          "group_key": "https://1kuji.com/products/onep12",
+          "url": "https://1kuji.com/products/onep12",
+          "slug": "onep12",
+          "title": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～",
+          "catalog_item_rows": 11,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16030,
+            16031,
+            16032,
+            16033,
+            16034,
+            16035,
+            16036,
+            16037
+          ],
+          "sample_names": [
+            "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - A賞 ゴール・D・ロジャーフィギュア",
+            "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - B賞 モンキー・D・ルフィフィギュア",
+            "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - C賞 ラブーンぬいぐるみ",
+            "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - D賞 クッション",
+            "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - E賞 フェイスタオル",
+            "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - F賞 カードスタンドフィギュア",
+            "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - G賞 グラス",
+            "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - H賞 クリアファイル&ステッカー"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep14",
+          "url": "https://1kuji.com/products/onep14",
+          "slug": "onep14",
+          "title": "一番くじ ワンピースメモリーズ",
+          "catalog_item_rows": 11,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            15989,
+            15990,
+            15991,
+            15992,
+            15993,
+            15994,
+            15995,
+            15996
+          ],
+          "sample_names": [
+            "一番くじ ワンピースメモリーズ - A賞 ルフィ＆シャンクスフィギュア",
+            "一番くじ ワンピースメモリーズ - B賞 ロジャーフィギュア",
+            "一番くじ ワンピースメモリーズ - C賞 エースフィギュア",
+            "一番くじ ワンピースメモリーズ - D賞 クッション",
+            "一番くじ ワンピースメモリーズ - E賞 タオル",
+            "一番くじ ワンピースメモリーズ - F賞 クリエイションズフィギュア",
+            "一番くじ ワンピースメモリーズ - G賞 湯のみ",
+            "一番くじ ワンピースメモリーズ - H賞 クリアファイル【3枚セット】"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep4",
+          "url": "https://1kuji.com/products/onep4",
+          "slug": "onep4",
+          "title": "一番くじワンピース～マリンフォード編～",
+          "catalog_item_rows": 9,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16179,
+            16180,
+            16181,
+            16182,
+            16183,
+            16184,
+            16185,
+            16186
+          ],
+          "sample_names": [
+            "一番くじワンピース～マリンフォード編～ - A賞 火拳のエースフィギュア",
+            "一番くじワンピース～マリンフォード編～ - B賞 エドワード・ニューゲートフィギュア",
+            "一番くじワンピース～マリンフォード編～ - C賞 チョッパーTシャツぬいぐるみ",
+            "一番くじワンピース～マリンフォード編～ - D賞 ジャンボタオル",
+            "一番くじワンピース～マリンフォード編～ - E賞 BIG サイズカップ",
+            "一番くじワンピース～マリンフォード編～ - F賞 カードスタンドフィギュア",
+            "一番くじワンピース～マリンフォード編～ - G賞 アートノート",
+            "一番くじワンピース～マリンフォード編～ - H賞 クリアファイルセット"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep5",
+          "url": "https://1kuji.com/products/onep5",
+          "slug": "onep5",
+          "title": "一番くじワンピース ～マリンフォード編 スペシャルエディション～",
+          "catalog_item_rows": 7,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16172,
+            16173,
+            16174,
+            16175,
+            16176,
+            16177,
+            16178
+          ],
+          "sample_names": [
+            "一番くじワンピース ～マリンフォード編 スペシャルエディション～ - A賞 火拳のエースフィギュア",
+            "一番くじワンピース ～マリンフォード編 スペシャルエディション～ - B賞 エドワード・ニューゲートフィギュア",
+            "一番くじワンピース ～マリンフォード編 スペシャルエディション～ - C賞 ジャンボタオル",
+            "一番くじワンピース ～マリンフォード編 スペシャルエディション～ - D賞 ルフィ&エースセット",
+            "一番くじワンピース ～マリンフォード編 スペシャルエディション～ - E賞 ワールドコレクタブルフィギュア",
+            "一番くじワンピース ～マリンフォード編 スペシャルエディション～ - F賞 クリアファイルセット",
+            "一番くじワンピース ～マリンフォード編 スペシャルエディション～ - G賞 デザインストラップ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep6",
+          "url": "https://1kuji.com/products/onep6",
+          "slug": "onep6",
+          "title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16141,
+            16142,
+            16143,
+            16144,
+            16145,
+            16146,
+            16147,
+            16148
+          ],
+          "sample_names": [
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - D賞 スポーツタオル",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - E賞 カードスタンドフィギュア",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - F賞 湯のみ",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - G賞 見開きメモ帳",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - H賞 デザインストラップ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep7",
+          "url": "https://1kuji.com/products/onep7",
+          "slug": "onep7",
+          "title": "一番くじ ワンピース ～新時代幕開け編～",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16133,
+            16134,
+            16135,
+            16136,
+            16137,
+            16138,
+            16139,
+            16140
+          ],
+          "sample_names": [
+            "一番くじ ワンピース ～新時代幕開け編～ - A賞 トラファルガー・ロー フィギュア",
+            "一番くじ ワンピース ～新時代幕開け編～ - B賞 ユースタス・“キャプテン”キッド フィギュア",
+            "一番くじ ワンピース ～新時代幕開け編～ - C賞 モンキー・D・ルフィ フィギュア",
+            "一番くじ ワンピース ～新時代幕開け編～ - D賞 シルバーズ・レイリー フィギュア",
+            "一番くじ ワンピース ～新時代幕開け編～ - E賞 カレー皿",
+            "一番くじ ワンピース ～新時代幕開け編～ - F賞 カードスタンドフィギュア",
+            "一番くじ ワンピース ～新時代幕開け編～ - G賞 グラスマグ",
+            "一番くじ ワンピース ～新時代幕開け編～ - H賞 帆船ストラップ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep8",
+          "url": "https://1kuji.com/products/onep8",
+          "slug": "onep8",
+          "title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "catalog_item_rows": 8,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16103,
+            16104,
+            16105,
+            16106,
+            16107,
+            16108,
+            16109,
+            16110
+          ],
+          "sample_names": [
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - D賞 スポーツタオル",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - E賞 カードスタンドフィギュア",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - F賞 湯のみ",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - G賞 見開きメモ帳",
+            "一番くじ ワンピース ～マリンフォード最終決戦編～ - H賞 デザインストラップ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep9",
+          "url": "https://1kuji.com/products/onep9",
+          "slug": "onep9",
+          "title": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション",
+          "catalog_item_rows": 11,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16092,
+            16093,
+            16094,
+            16095,
+            16096,
+            16097,
+            16098,
+            16099
+          ],
+          "sample_names": [
+            "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - A賞 トラファルガー・ローフィギュア",
+            "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - B賞 ユースタス・“キャプテン”キッドフィギュア",
+            "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - C賞 ルフィフィギュア～THE GRANDLINE MEN スペシャルver.～",
+            "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - D賞 シャンクスフィギュア～THE GRANDLINE MEN スペシャルver.～",
+            "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - E賞 チョッパークッション",
+            "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - F賞 ワールドコレクタブルフィギュア",
+            "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - G賞 ロングタオル",
+            "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - H賞 帆船ストラップ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        }
+      ]
+    },
+    {
+      "batch_id": "ichiban-metadata-review-006",
+      "priority": 20,
+      "campaign_count": 4,
+      "catalog_item_rows": 48,
+      "workflow_counts": [
+        [
+          "price_review",
+          4
+        ]
+      ],
+      "missing_field_counts": [
+        [
+          "official_price_jpy",
+          4
+        ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page",
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+      "campaigns": [
+        {
+          "group_key": "https://1kuji.com/products/onep_kyun_1",
+          "url": "https://1kuji.com/products/onep_kyun_1",
+          "slug": "onep_kyun_1",
+          "title": "一番くじきゅんキャラわーるど ワンピース",
+          "catalog_item_rows": 12,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16149,
+            16150,
+            16151,
+            16152,
+            16153,
+            16154,
+            16155,
+            16156
+          ],
+          "sample_names": [
+            "一番くじきゅんキャラわーるど ワンピース - A賞 でかきゅんキャラ「わたあめチョッパー」",
+            "一番くじきゅんキャラわーるど ワンピース - B賞 ルフィ～シャボンディ諸島ver.～",
+            "一番くじきゅんキャラわーるど ワンピース - C賞 ゾロ～シャボンディ諸島ver.～",
+            "一番くじきゅんキャラわーるど ワンピース - D賞 ナミ～シャボンディ諸島ver.～",
+            "一番くじきゅんキャラわーるど ワンピース - E賞 ウソップ～シャボンディ諸島ver.～",
+            "一番くじきゅんキャラわーるど ワンピース - F賞 サンジ～シャボンディ諸島ver.～",
+            "一番くじきゅんキャラわーるど ワンピース - G賞 ロビン～シャボンディ諸島ver.～",
+            "一番くじきゅんキャラわーるど ワンピース - H賞 フランキー～シャボンディ諸島ver.～"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep_kyun_2",
+          "url": "https://1kuji.com/products/onep_kyun_2",
+          "slug": "onep_kyun_2",
+          "title": "一番くじきゅんキャラわーるど ワンピース～王下七武海編～",
+          "catalog_item_rows": 10,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16123,
+            16124,
+            16125,
+            16126,
+            16127,
+            16128,
+            16129,
+            16130
+          ],
+          "sample_names": [
+            "一番くじきゅんキャラわーるど ワンピース～王下七武海編～ - A賞 きゅんキャラ「くま」",
+            "一番くじきゅんキャラわーるど ワンピース～王下七武海編～ - B賞 きゅんキャラ「モリア」",
+            "一番くじきゅんキャラわーるど ワンピース～王下七武海編～ - C賞 きゅんキャラ「ハンコック」",
+            "一番くじきゅんキャラわーるど ワンピース～王下七武海編～ - D賞 きゅんキャラ「ミホーク」",
+            "一番くじきゅんキャラわーるど ワンピース～王下七武海編～ - E賞 きゅんキャラ「ティーチ」",
+            "一番くじきゅんキャラわーるど ワンピース～王下七武海編～ - F賞 きゅんキャラ「ドフラミンゴ」",
+            "一番くじきゅんキャラわーるど ワンピース～王下七武海編～ - G賞 きゅんキャラ「ジンベエ」",
+            "一番くじきゅんキャラわーるど ワンピース～王下七武海編～ - H賞 バンダナ"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onep_kyun_3",
+          "url": "https://1kuji.com/products/onep_kyun_3",
+          "slug": "onep_kyun_3",
+          "title": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～",
+          "catalog_item_rows": 13,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16060,
+            16061,
+            16062,
+            16063,
+            16064,
+            16065,
+            16066,
+            16067
+          ],
+          "sample_names": [
+            "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - A賞 きゅんキャラ「エドワード・ニューゲート」",
+            "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - B賞 きゅんキャラ「マルコ」",
+            "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - C賞 きゅんキャラ「ポートガス・D・エース」",
+            "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - D賞 きゅんキャラ「シャンクス」",
+            "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - E賞 きゅんキャラ「ベン・ベックマン」",
+            "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - F賞 きゅんキャラ「ヤソップ」",
+            "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - G賞 きゅんキャラ「ルフィ～コートver.～」",
+            "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - H賞 ラバーキーホルダー"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        },
+        {
+          "group_key": "https://1kuji.com/products/onepfilm_2",
+          "url": "https://1kuji.com/products/onepfilm_2",
+          "slug": "onepfilm_2",
+          "title": "一番くじワンピースフィルム～ストロングワールド～",
+          "catalog_item_rows": 13,
+          "missing_fields": [
+            "official_price_jpy"
+          ],
+          "review_priority": 20,
+          "workflow": "price_review",
+          "source_evidence_required": "official_1kuji_campaign_page",
+          "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+          "sample_catalog_indexes": [
+            16188,
+            16189,
+            16190,
+            16191,
+            16192,
+            16193,
+            16194,
+            16195
+          ],
+          "sample_names": [
+            "一番くじワンピースフィルム～ストロングワールド～ - A賞 ルフィフィギュア",
+            "一番くじワンピースフィルム～ストロングワールド～ - B賞 フランキーフィギュア",
+            "一番くじワンピースフィルム～ストロングワールド～ - C賞 ウソップ＆チョッパーフィギュア",
+            "一番くじワンピースフィルム～ストロングワールド～ - D賞 ゾロフィギュア",
+            "一番くじワンピースフィルム～ストロングワールド～ - E賞 サンジフィギュア",
+            "一番くじワンピースフィルム～ストロングワールド～ - F賞 ナミフィギュア",
+            "一番くじワンピースフィルム～ストロングワールド～ - G賞 ロビンフィギュア",
+            "一番くじワンピースフィルム～ストロングワールド～ - H賞 ブルックフィギュア"
+          ],
+          "next_machine_step": "verify_labeled_official_price_jpy",
+          "auto_apply_enabled": false
+        }
+      ]
+    }
+  ],
+  "automation_policy": {
+    "auto_apply_release_date": false,
+    "auto_apply_official_price_jpy": false,
+    "requires_manual_review": true,
+    "reason": "Historical 1kuji pages can expose unlabeled campaign dates and prices that are unsafe to import automatically."
+  }
+}

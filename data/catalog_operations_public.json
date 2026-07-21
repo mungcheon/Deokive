@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:46:00Z",
+  "generated_at": "2026-07-21T20:50:47Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -141,6 +141,14 @@
       "open_rows": 381,
       "primary_report": "data/ichiban_kuji_metadata_probe_public.json",
       "next_step": "find_labeled_official_ichiban_metadata_evidence",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "ichiban_kuji_metadata_review_batches",
+      "status": "manual_review",
+      "open_rows": 381,
+      "primary_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "next_step": "verify_batched_ichiban_campaign_metadata",
       "auto_apply_enabled": false
     },
     {
@@ -684,6 +692,10 @@
       "public_report": "data/ichiban_kuji_metadata_probe_public.json"
     },
     {
+      "key": "ichiban_kuji_metadata_review_batches",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json"
+    },
+    {
       "key": "agent_work_queue",
       "public_report": "data/catalog_agent_work_queue_public.json"
     }
@@ -828,6 +840,15 @@
         ]
       ],
       "recommended_next_action": "Keep Ichiban Kuji date/price gaps blocked unless a labeled official source is found."
+    },
+    {
+      "priority": 52,
+      "workstream": "ichiban_kuji_metadata_review_batches",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "batch_count": 6,
+      "source_campaigns": 44,
+      "catalog_item_rows": 381,
+      "recommended_next_action": "Review batched 1kuji campaign metadata evidence before applying release dates or prices."
     },
     {
       "priority": 60,

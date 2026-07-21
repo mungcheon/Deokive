@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:46:00Z",
+  "generated_at": "2026-07-21T20:50:47Z",
   "summary": {
-    "batch_count": 68,
-    "summed_batch_rows": 24383,
+    "batch_count": 64,
+    "summed_batch_rows": 24654,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -28,7 +28,7 @@
       ],
       [
         "ichiban_kuji_price",
-        8
+        5
       ],
       [
         "requested_focus_enrichment",
@@ -39,15 +39,15 @@
         3
       ],
       [
-        "ichiban_kuji_release_date",
-        2
-      ],
-      [
         "animation_category_review",
         2
       ],
       [
         "gotouchi_official_candidate_review",
+        1
+      ],
+      [
+        "ichiban_kuji_metadata",
         1
       ]
     ],
@@ -65,16 +65,16 @@
         10
       ],
       [
-        "agent-ichiban-kuji",
-        10
-      ],
-      [
         "agent-danganronpa-media",
         8
       ],
       [
         "agent-source-image",
         8
+      ],
+      [
+        "agent-ichiban-kuji",
+        6
       ],
       [
         "agent-requested-focus",
@@ -5525,15 +5525,16 @@
     {
       "batch_id": "110-agent-ichiban-kuji-57",
       "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_release_date",
+      "workstream": "ichiban_kuji_metadata",
       "priority": 110,
-      "title": "이치방쿠지 발매일 확인: jujutsu-o",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 8,
-      "recommended_action": "Verify official campaign date before applying release_date to linked rows.",
+      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-001",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "rows": 59,
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
       "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official campaign data confirms the date.",
-        "All updated catalog rows belong to the same campaign group."
+        "Official 1kuji campaign page or captured official evidence confirms the value.",
+        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
+        "All updated catalog rows belong to the reviewed campaign group."
       ],
       "sample_items": [
         {
@@ -5581,365 +5582,18 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "110-agent-ichiban-kuji-58",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_release_date",
-      "priority": 110,
-      "title": "이치방쿠지 발매일 확인: myhero_o5",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 8,
-      "recommended_action": "Verify official campaign date before applying release_date to linked rows.",
-      "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official campaign data confirms the date.",
-        "All updated catalog rows belong to the same campaign group."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 17067,
-          "name_ko": "一番くじ 僕のヴィランアカデミア - A賞 死柄木弔;MASTERLISE",
-          "source_url": "https://1kuji.com/products/myhero_o5"
-        },
-        {
-          "catalog_index": 17068,
-          "name_ko": "一番くじ 僕のヴィランアカデミア - B賞 荼毘;MASTERLISE",
-          "source_url": "https://1kuji.com/products/myhero_o5"
-        },
-        {
-          "catalog_index": 17069,
-          "name_ko": "一番くじ 僕のヴィランアカデミア - C賞 トガヒミコ;MASTERLISE",
-          "source_url": "https://1kuji.com/products/myhero_o5"
-        },
-        {
-          "catalog_index": 17070,
-          "name_ko": "一番くじ 僕のヴィランアカデミア - D賞 トゥワイス;MASTERLISE",
-          "source_url": "https://1kuji.com/products/myhero_o5"
-        },
-        {
-          "catalog_index": 17071,
-          "name_ko": "一番くじ 僕のヴィランアカデミア - E賞 タンブラー",
-          "source_url": "https://1kuji.com/products/myhero_o5"
-        },
-        {
-          "catalog_index": 17072,
-          "name_ko": "一番くじ 僕のヴィランアカデミア - F賞 タオル",
-          "source_url": "https://1kuji.com/products/myhero_o5"
-        },
-        {
-          "catalog_index": 17073,
-          "name_ko": "一番くじ 僕のヴィランアカデミア - G賞 ラバーチャーム",
-          "source_url": "https://1kuji.com/products/myhero_o5"
-        },
-        {
-          "catalog_index": 17074,
-          "name_ko": "一番くじ 僕のヴィランアカデミア - ラストワン賞 トガヒミコ;MASTERLISE ラストワンver.",
-          "source_url": "https://1kuji.com/products/myhero_o5"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-59",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 가격 확인: onep_kyun_3",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 13,
-      "recommended_action": "Verify official campaign price before applying official_price_jpy.",
-      "acceptance_criteria": [
-        "Price is confirmed from official 1kuji campaign data.",
-        "Non-prize collateral and campaign rows are not assigned a price unless evidence applies."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16060,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - A賞 きゅんキャラ「エドワード・ニューゲート」",
-          "source_url": "https://1kuji.com/products/onep_kyun_3"
-        },
-        {
-          "catalog_index": 16061,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - B賞 きゅんキャラ「マルコ」",
-          "source_url": "https://1kuji.com/products/onep_kyun_3"
-        },
-        {
-          "catalog_index": 16062,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - C賞 きゅんキャラ「ポートガス・D・エース」",
-          "source_url": "https://1kuji.com/products/onep_kyun_3"
-        },
-        {
-          "catalog_index": 16063,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - D賞 きゅんキャラ「シャンクス」",
-          "source_url": "https://1kuji.com/products/onep_kyun_3"
-        },
-        {
-          "catalog_index": 16064,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - E賞 きゅんキャラ「ベン・ベックマン」",
-          "source_url": "https://1kuji.com/products/onep_kyun_3"
-        },
-        {
-          "catalog_index": 16065,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - F賞 きゅんキャラ「ヤソップ」",
-          "source_url": "https://1kuji.com/products/onep_kyun_3"
-        },
-        {
-          "catalog_index": 16066,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - G賞 きゅんキャラ「ルフィ～コートver.～」",
-          "source_url": "https://1kuji.com/products/onep_kyun_3"
-        },
-        {
-          "catalog_index": 16067,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - H賞 ラバーキーホルダー",
-          "source_url": "https://1kuji.com/products/onep_kyun_3"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-60",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 가격 확인: onepfilm_2",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 13,
-      "recommended_action": "Verify official campaign price before applying official_price_jpy.",
-      "acceptance_criteria": [
-        "Price is confirmed from official 1kuji campaign data.",
-        "Non-prize collateral and campaign rows are not assigned a price unless evidence applies."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16188,
-          "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - A賞 ルフィフィギュア",
-          "source_url": "https://1kuji.com/products/onepfilm_2"
-        },
-        {
-          "catalog_index": 16189,
-          "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - B賞 フランキーフィギュア",
-          "source_url": "https://1kuji.com/products/onepfilm_2"
-        },
-        {
-          "catalog_index": 16190,
-          "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - C賞 ウソップ＆チョッパーフィギュア",
-          "source_url": "https://1kuji.com/products/onepfilm_2"
-        },
-        {
-          "catalog_index": 16191,
-          "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - D賞 ゾロフィギュア",
-          "source_url": "https://1kuji.com/products/onepfilm_2"
-        },
-        {
-          "catalog_index": 16192,
-          "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - E賞 サンジフィギュア",
-          "source_url": "https://1kuji.com/products/onepfilm_2"
-        },
-        {
-          "catalog_index": 16193,
-          "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - F賞 ナミフィギュア",
-          "source_url": "https://1kuji.com/products/onepfilm_2"
-        },
-        {
-          "catalog_index": 16194,
-          "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - G賞 ロビンフィギュア",
-          "source_url": "https://1kuji.com/products/onepfilm_2"
-        },
-        {
-          "catalog_index": 16195,
-          "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - H賞 ブルックフィギュア",
-          "source_url": "https://1kuji.com/products/onepfilm_2"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
       "batch_id": "120-agent-ichiban-kuji-61",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
-      "title": "이치방쿠지 가격 확인: cho-history",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 12,
-      "recommended_action": "Verify official campaign price before applying official_price_jpy.",
+      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-005",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "rows": 73,
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
       "acceptance_criteria": [
-        "Price is confirmed from official 1kuji campaign data.",
-        "Non-prize collateral and campaign rows are not assigned a price unless evidence applies."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16111,
-          "name_ko": "一番くじ ヒストリー オブ チョッパー - A賞 フェイスクッション",
-          "source_url": "https://1kuji.com/products/cho-history"
-        },
-        {
-          "catalog_index": 16112,
-          "name_ko": "一番くじ ヒストリー オブ チョッパー - B賞 ヒストリーフィギュア「ドラム王国」編",
-          "source_url": "https://1kuji.com/products/cho-history"
-        },
-        {
-          "catalog_index": 16113,
-          "name_ko": "一番くじ ヒストリー オブ チョッパー - C賞 ヒストリーフィギュア「アラバスタ」編",
-          "source_url": "https://1kuji.com/products/cho-history"
-        },
-        {
-          "catalog_index": 16114,
-          "name_ko": "一番くじ ヒストリー オブ チョッパー - D賞 ヒストリーフィギュア「スカイピア」編",
-          "source_url": "https://1kuji.com/products/cho-history"
-        },
-        {
-          "catalog_index": 16115,
-          "name_ko": "一番くじ ヒストリー オブ チョッパー - E賞 ヒストリーフィギュア「スリラーバーク」編",
-          "source_url": "https://1kuji.com/products/cho-history"
-        },
-        {
-          "catalog_index": 16116,
-          "name_ko": "一番くじ ヒストリー オブ チョッパー - F賞 ヒストリーフィギュア「シャボンディ諸島」編",
-          "source_url": "https://1kuji.com/products/cho-history"
-        },
-        {
-          "catalog_index": 16117,
-          "name_ko": "一番くじ ヒストリー オブ チョッパー - G賞 チョッパー×クマシーぬいぐるみ",
-          "source_url": "https://1kuji.com/products/cho-history"
-        },
-        {
-          "catalog_index": 16118,
-          "name_ko": "一番くじ ヒストリー オブ チョッパー - H賞 インテリアハンガー",
-          "source_url": "https://1kuji.com/products/cho-history"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-62",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 가격 확인: onep_kyun_1",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 12,
-      "recommended_action": "Verify official campaign price before applying official_price_jpy.",
-      "acceptance_criteria": [
-        "Price is confirmed from official 1kuji campaign data.",
-        "Non-prize collateral and campaign rows are not assigned a price unless evidence applies."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16149,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - A賞 でかきゅんキャラ「わたあめチョッパー」",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16150,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - B賞 ルフィ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16151,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - C賞 ゾロ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16152,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - D賞 ナミ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16153,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - E賞 ウソップ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16154,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - F賞 サンジ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16155,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - G賞 ロビン～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16156,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - H賞 フランキー～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-63",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 가격 확인: jojo_anniv",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 11,
-      "recommended_action": "Verify official campaign price before applying official_price_jpy.",
-      "acceptance_criteria": [
-        "Price is confirmed from official 1kuji campaign data.",
-        "Non-prize collateral and campaign rows are not assigned a price unless evidence applies."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 15077,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - A賞 ジョナサン・ジョースター アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15078,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - B賞 ジョセフ・ジョースター アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15079,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - C賞 空条承太郎 アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15080,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - D賞 東方仗助 アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15081,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - E賞 ジョルノ・ジョバァーナ アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15082,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - F賞 空条徐倫 アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15083,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - G賞 ジョニィ・ジョースター アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15084,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - H賞 アニバーサリーグラス",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-64",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 가격 확인: onep12",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 11,
-      "recommended_action": "Verify official campaign price before applying official_price_jpy.",
-      "acceptance_criteria": [
-        "Price is confirmed from official 1kuji campaign data.",
-        "Non-prize collateral and campaign rows are not assigned a price unless evidence applies."
+        "Official 1kuji campaign page or captured official evidence confirms the value.",
+        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
+        "All updated catalog rows belong to the reviewed campaign group."
       ],
       "sample_items": [
         {
@@ -5987,123 +5641,243 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-65",
+      "batch_id": "120-agent-ichiban-kuji-60",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
-      "title": "이치방쿠지 가격 확인: onep14",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 11,
-      "recommended_action": "Verify official campaign price before applying official_price_jpy.",
+      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-004",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "rows": 72,
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
       "acceptance_criteria": [
-        "Price is confirmed from official 1kuji campaign data.",
-        "Non-prize collateral and campaign rows are not assigned a price unless evidence applies."
+        "Official 1kuji campaign page or captured official evidence confirms the value.",
+        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
+        "All updated catalog rows belong to the reviewed campaign group."
       ],
       "sample_items": [
         {
-          "catalog_index": 15989,
-          "name_ko": "一番くじ ワンピースメモリーズ - A賞 ルフィ＆シャンクスフィギュア",
-          "source_url": "https://1kuji.com/products/onep14"
+          "catalog_index": 15077,
+          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - A賞 ジョナサン・ジョースター アニバーサリーフィギュア",
+          "source_url": "https://1kuji.com/products/jojo_anniv"
         },
         {
-          "catalog_index": 15990,
-          "name_ko": "一番くじ ワンピースメモリーズ - B賞 ロジャーフィギュア",
-          "source_url": "https://1kuji.com/products/onep14"
+          "catalog_index": 15078,
+          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - B賞 ジョセフ・ジョースター アニバーサリーフィギュア",
+          "source_url": "https://1kuji.com/products/jojo_anniv"
         },
         {
-          "catalog_index": 15991,
-          "name_ko": "一番くじ ワンピースメモリーズ - C賞 エースフィギュア",
-          "source_url": "https://1kuji.com/products/onep14"
+          "catalog_index": 15079,
+          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - C賞 空条承太郎 アニバーサリーフィギュア",
+          "source_url": "https://1kuji.com/products/jojo_anniv"
         },
         {
-          "catalog_index": 15992,
-          "name_ko": "一番くじ ワンピースメモリーズ - D賞 クッション",
-          "source_url": "https://1kuji.com/products/onep14"
+          "catalog_index": 15080,
+          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - D賞 東方仗助 アニバーサリーフィギュア",
+          "source_url": "https://1kuji.com/products/jojo_anniv"
         },
         {
-          "catalog_index": 15993,
-          "name_ko": "一番くじ ワンピースメモリーズ - E賞 タオル",
-          "source_url": "https://1kuji.com/products/onep14"
+          "catalog_index": 15081,
+          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - E賞 ジョルノ・ジョバァーナ アニバーサリーフィギュア",
+          "source_url": "https://1kuji.com/products/jojo_anniv"
         },
         {
-          "catalog_index": 15994,
-          "name_ko": "一番くじ ワンピースメモリーズ - F賞 クリエイションズフィギュア",
-          "source_url": "https://1kuji.com/products/onep14"
+          "catalog_index": 15082,
+          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - F賞 空条徐倫 アニバーサリーフィギュア",
+          "source_url": "https://1kuji.com/products/jojo_anniv"
         },
         {
-          "catalog_index": 15995,
-          "name_ko": "一番くじ ワンピースメモリーズ - G賞 湯のみ",
-          "source_url": "https://1kuji.com/products/onep14"
+          "catalog_index": 15083,
+          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - G賞 ジョニィ・ジョースター アニバーサリーフィギュア",
+          "source_url": "https://1kuji.com/products/jojo_anniv"
         },
         {
-          "catalog_index": 15996,
-          "name_ko": "一番くじ ワンピースメモリーズ - H賞 クリアファイル【3枚セット】",
-          "source_url": "https://1kuji.com/products/onep14"
+          "catalog_index": 15084,
+          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - H賞 アニバーサリーグラス",
+          "source_url": "https://1kuji.com/products/jojo_anniv"
         }
       ],
       "review_state": "official_campaign_evidence_required",
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-66",
+      "batch_id": "120-agent-ichiban-kuji-59",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
-      "title": "이치방쿠지 가격 확인: onep9",
-      "public_report": "data/ichiban_kuji_history_public.json",
-      "rows": 11,
-      "recommended_action": "Verify official campaign price before applying official_price_jpy.",
+      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-003",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "rows": 66,
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
       "acceptance_criteria": [
-        "Price is confirmed from official 1kuji campaign data.",
-        "Non-prize collateral and campaign rows are not assigned a price unless evidence applies."
+        "Official 1kuji campaign page or captured official evidence confirms the value.",
+        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
+        "All updated catalog rows belong to the reviewed campaign group."
       ],
       "sample_items": [
         {
-          "catalog_index": 16092,
-          "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - A賞 トラファルガー・ローフィギュア",
-          "source_url": "https://1kuji.com/products/onep9"
+          "catalog_index": 16770,
+          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - A賞 孫悟空&神龍フィギュア",
+          "source_url": "https://1kuji.com/products/dbkai_ks"
         },
         {
-          "catalog_index": 16093,
-          "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - B賞 ユースタス・“キャプテン”キッドフィギュア",
-          "source_url": "https://1kuji.com/products/onep9"
+          "catalog_index": 16771,
+          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - B賞 完全体セルフィギュア",
+          "source_url": "https://1kuji.com/products/dbkai_ks"
         },
         {
-          "catalog_index": 16094,
-          "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - C賞 ルフィフィギュア～THE GRANDLINE MEN スペシャルver.～",
-          "source_url": "https://1kuji.com/products/onep9"
+          "catalog_index": 16772,
+          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - C賞 超ベジータフィギュア",
+          "source_url": "https://1kuji.com/products/dbkai_ks"
         },
         {
-          "catalog_index": 16095,
-          "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - D賞 シャンクスフィギュア～THE GRANDLINE MEN スペシャルver.～",
-          "source_url": "https://1kuji.com/products/onep9"
+          "catalog_index": 16773,
+          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - D賞 超孫悟飯フィギュア",
+          "source_url": "https://1kuji.com/products/dbkai_ks"
         },
         {
-          "catalog_index": 16096,
-          "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - E賞 チョッパークッション",
-          "source_url": "https://1kuji.com/products/onep9"
+          "catalog_index": 16774,
+          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - E賞 陶器タンブラー",
+          "source_url": "https://1kuji.com/products/dbkai_ks"
         },
         {
-          "catalog_index": 16097,
-          "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - F賞 ワールドコレクタブルフィギュア",
-          "source_url": "https://1kuji.com/products/onep9"
+          "catalog_index": 16775,
+          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - F賞 ロングタオル",
+          "source_url": "https://1kuji.com/products/dbkai_ks"
         },
         {
-          "catalog_index": 16098,
-          "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - G賞 ロングタオル",
-          "source_url": "https://1kuji.com/products/onep9"
+          "catalog_index": 16776,
+          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - G賞 デザインバッグ",
+          "source_url": "https://1kuji.com/products/dbkai_ks"
         },
         {
-          "catalog_index": 16099,
-          "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - H賞 帆船ストラップ",
-          "source_url": "https://1kuji.com/products/onep9"
+          "catalog_index": 16777,
+          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - H賞 根付",
+          "source_url": "https://1kuji.com/products/dbkai_ks"
         }
       ],
       "review_state": "official_campaign_evidence_required",
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "160-agent-animation-taxonomy-67",
+      "batch_id": "120-agent-ichiban-kuji-58",
+      "agent_id": "agent-ichiban-kuji",
+      "workstream": "ichiban_kuji_price",
+      "priority": 120,
+      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-002",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "rows": 63,
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+      "acceptance_criteria": [
+        "Official 1kuji campaign page or captured official evidence confirms the value.",
+        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
+        "All updated catalog rows belong to the reviewed campaign group."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 16802,
+          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - A賞 丸型宇宙船＆悟空",
+          "source_url": "https://1kuji.com/products/73"
+        },
+        {
+          "catalog_index": 16803,
+          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｂ賞 バーダックフィギュア",
+          "source_url": "https://1kuji.com/products/73"
+        },
+        {
+          "catalog_index": 16804,
+          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - C賞 幼少べジータフィギュア",
+          "source_url": "https://1kuji.com/products/73"
+        },
+        {
+          "catalog_index": 16805,
+          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｄ賞 クッション",
+          "source_url": "https://1kuji.com/products/73"
+        },
+        {
+          "catalog_index": 16806,
+          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｅ賞 スカウタークリップボード",
+          "source_url": "https://1kuji.com/products/73"
+        },
+        {
+          "catalog_index": 16807,
+          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｆ賞 サイヤ人テープ",
+          "source_url": "https://1kuji.com/products/73"
+        },
+        {
+          "catalog_index": 16808,
+          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｇ賞 しっぽストラップ",
+          "source_url": "https://1kuji.com/products/73"
+        },
+        {
+          "catalog_index": 16795,
+          "name_ko": "一番くじドラゴンボールZ～ナメック星編～ - フリーザフィギュア賞",
+          "source_url": "https://1kuji.com/products/89"
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
+      "batch_id": "120-agent-ichiban-kuji-62",
+      "agent_id": "agent-ichiban-kuji",
+      "workstream": "ichiban_kuji_price",
+      "priority": 120,
+      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-006",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "rows": 48,
+      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+      "acceptance_criteria": [
+        "Official 1kuji campaign page or captured official evidence confirms the value.",
+        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
+        "All updated catalog rows belong to the reviewed campaign group."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 16149,
+          "name_ko": "一番くじきゅんキャラわーるど ワンピース - A賞 でかきゅんキャラ「わたあめチョッパー」",
+          "source_url": "https://1kuji.com/products/onep_kyun_1"
+        },
+        {
+          "catalog_index": 16150,
+          "name_ko": "一番くじきゅんキャラわーるど ワンピース - B賞 ルフィ～シャボンディ諸島ver.～",
+          "source_url": "https://1kuji.com/products/onep_kyun_1"
+        },
+        {
+          "catalog_index": 16151,
+          "name_ko": "一番くじきゅんキャラわーるど ワンピース - C賞 ゾロ～シャボンディ諸島ver.～",
+          "source_url": "https://1kuji.com/products/onep_kyun_1"
+        },
+        {
+          "catalog_index": 16152,
+          "name_ko": "一番くじきゅんキャラわーるど ワンピース - D賞 ナミ～シャボンディ諸島ver.～",
+          "source_url": "https://1kuji.com/products/onep_kyun_1"
+        },
+        {
+          "catalog_index": 16153,
+          "name_ko": "一番くじきゅんキャラわーるど ワンピース - E賞 ウソップ～シャボンディ諸島ver.～",
+          "source_url": "https://1kuji.com/products/onep_kyun_1"
+        },
+        {
+          "catalog_index": 16154,
+          "name_ko": "一番くじきゅんキャラわーるど ワンピース - F賞 サンジ～シャボンディ諸島ver.～",
+          "source_url": "https://1kuji.com/products/onep_kyun_1"
+        },
+        {
+          "catalog_index": 16155,
+          "name_ko": "一番くじきゅんキャラわーるど ワンピース - G賞 ロビン～シャボンディ諸島ver.～",
+          "source_url": "https://1kuji.com/products/onep_kyun_1"
+        },
+        {
+          "catalog_index": 16156,
+          "name_ko": "一番くじきゅんキャラわーるど ワンピース - H賞 フランキー～シャボンディ諸島ver.～",
+          "source_url": "https://1kuji.com/products/onep_kyun_1"
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
+      "batch_id": "160-agent-animation-taxonomy-63",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
       "priority": 160,
@@ -6233,7 +6007,7 @@
       "next_machine_step": "map_category_to_folder_color_and_icon"
     },
     {
-      "batch_id": "180-agent-animation-taxonomy-68",
+      "batch_id": "180-agent-animation-taxonomy-64",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
       "priority": 180,
