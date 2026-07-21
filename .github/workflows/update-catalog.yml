@@ -1,0 +1,42 @@
+name: Update public catalog reports
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily 04:20 KST
+    - cron: "20 19 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-public-reports:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Refresh public catalog reports
+        run: python tools/update_public_catalog_reports.py --write
+
+      - name: Validate generated public files
+        run: python tools/update_public_catalog_reports.py
+
+      - name: Commit public report updates
+        run: |
+          git config user.name "deokive-catalog-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add \
+            data/catalog_public_meta.json \
+            data/catalog_quality_public.json \
+            data/catalog_image_backlog_public.json \
+            data/catalog_image_candidate_review_public.json
+          if git diff --cached --quiet; then
+            echo "No public catalog report changes."
+          else
+            git commit -m "chore: refresh public catalog reports"
+            git push
+          fi
