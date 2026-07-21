@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T23:43:10Z",
+  "generated_at": "2026-07-21T23:45:13Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 11832,
+    "summed_batch_rows": 10983,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -123,7 +123,7 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
-      "confirmed_import_template_rows": 1996,
+      "confirmed_import_template_rows": 1147,
       "confirmed_import_action_queue_rows": 2518,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 40,
@@ -3065,7 +3065,7 @@
       "priority": 19,
       "title": "Confirmed import readiness review",
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
-      "rows": 4514,
+      "rows": 3665,
       "recommended_action": "Review pending/blocked confirmed imports before any catalog write.",
       "acceptance_criteria": [
         "Do not expose row-level private candidate details in public reports.",
@@ -3122,13 +3122,13 @@
         {
           "workflow": "catalog_image",
           "public_workstream": "exact_image_urls",
-          "status": "confirmed_file_empty",
-          "confirmed_file_exists": true,
-          "template_file_exists": true,
-          "import_report_exists": true,
+          "status": "public_action_queue_ready_for_confirmation",
+          "confirmed_file_exists": false,
+          "template_file_exists": false,
+          "import_report_exists": false,
           "confirmed_items": 0,
           "manual_confirmed_true": 0,
-          "template_items": 500,
+          "template_items": 0,
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/catalog_image_attachment_action_queue_public.json",
@@ -3139,19 +3139,19 @@
           "skipped_rows": 0,
           "duplicates": 0,
           "skip_reason_counts": [],
-          "next_action": "Mark exact reviewed rows manual_confirmed=true or regenerate from the latest template.",
+          "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
           "auto_apply_enabled": false
         },
         {
           "workflow": "focus_image",
           "public_workstream": "requested_focus_image_urls",
-          "status": "template_ready_for_manual_confirmation",
+          "status": "public_action_queue_ready_for_confirmation",
           "confirmed_file_exists": false,
-          "template_file_exists": true,
+          "template_file_exists": false,
           "import_report_exists": false,
           "confirmed_items": 0,
           "manual_confirmed_true": 0,
-          "template_items": 349,
+          "template_items": 0,
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/requested_focus_action_queue_public.json",
@@ -3162,7 +3162,7 @@
           "skipped_rows": 0,
           "duplicates": 0,
           "skip_reason_counts": [],
-          "next_action": "Review template candidates and copy exact matches into the confirmed file.",
+          "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
           "auto_apply_enabled": false
         },
         {

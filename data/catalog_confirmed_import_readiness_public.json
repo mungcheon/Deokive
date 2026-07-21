@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T23:43:07Z",
+  "generated_at": "2026-07-21T23:45:10Z",
   "scope": "public_confirmed_import_readiness",
   "summary": {
     "workflow_count": 11,
-    "confirmed_files": 3,
-    "template_items": 1996,
+    "confirmed_files": 2,
+    "template_items": 1147,
     "public_action_queue_rows": 2518,
     "public_action_queue_batches": 75,
     "manual_confirmed_true": 0,
@@ -16,19 +16,19 @@
     "blocked_confirmed_rows": 0,
     "by_status": [
       [
-        "confirmed_file_empty",
-        3
-      ],
-      [
-        "template_ready_for_manual_confirmation",
-        3
-      ],
-      [
         "public_action_queue_ready_for_confirmation",
-        3
+        5
+      ],
+      [
+        "confirmed_file_empty",
+        2
       ],
       [
         "no_current_candidates",
+        2
+      ],
+      [
+        "template_ready_for_manual_confirmation",
         2
       ]
     ],
@@ -130,13 +130,13 @@
     {
       "workflow": "catalog_image",
       "public_workstream": "exact_image_urls",
-      "status": "confirmed_file_empty",
-      "confirmed_file_exists": true,
-      "template_file_exists": true,
-      "import_report_exists": true,
+      "status": "public_action_queue_ready_for_confirmation",
+      "confirmed_file_exists": false,
+      "template_file_exists": false,
+      "import_report_exists": false,
       "confirmed_items": 0,
       "manual_confirmed_true": 0,
-      "template_items": 500,
+      "template_items": 0,
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/catalog_image_attachment_action_queue_public.json",
@@ -147,19 +147,19 @@
       "skipped_rows": 0,
       "duplicates": 0,
       "skip_reason_counts": [],
-      "next_action": "Mark exact reviewed rows manual_confirmed=true or regenerate from the latest template.",
+      "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
       "auto_apply_enabled": false
     },
     {
       "workflow": "focus_image",
       "public_workstream": "requested_focus_image_urls",
-      "status": "template_ready_for_manual_confirmation",
+      "status": "public_action_queue_ready_for_confirmation",
       "confirmed_file_exists": false,
-      "template_file_exists": true,
+      "template_file_exists": false,
       "import_report_exists": false,
       "confirmed_items": 0,
       "manual_confirmed_true": 0,
-      "template_items": 349,
+      "template_items": 0,
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/requested_focus_action_queue_public.json",
@@ -170,7 +170,7 @@
       "skipped_rows": 0,
       "duplicates": 0,
       "skip_reason_counts": [],
-      "next_action": "Review template candidates and copy exact matches into the confirmed file.",
+      "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
       "auto_apply_enabled": false
     },
     {

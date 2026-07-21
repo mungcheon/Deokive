@@ -9,6 +9,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import build_confirmed_import_readiness_public as readiness
+import import_confirmed_animation_category_rows
+import import_confirmed_deduplication_rows
+import import_confirmed_ichiban_metadata_rows
+import import_confirmed_image_attachment_rows
+import import_confirmed_metadata_rows
+import import_confirmed_requested_focus_rows
+import import_confirmed_source_discovery_rows
 
 
 def _write_json(path: Path, payload) -> Path:
@@ -39,6 +46,9 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         )
 
         image = readiness.WORKFLOWS["catalog_image"]
+        self.assertEqual(image["confirmed"].name, "catalog_image_attachment_confirmed_rows.json")
+        self.assertEqual(image["template"].name, "catalog_image_attachment_confirmed_rows.template.json")
+        self.assertEqual(image["report"].name, "catalog_image_attachment_confirmed_import_report.json")
         self.assertEqual(image["public_action_queue"].name, "catalog_image_attachment_action_queue_public.json")
         self.assertEqual(image["public_action_rows_key"], "queued_image_rows")
         self.assertEqual(
@@ -47,6 +57,9 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         )
 
         focus = readiness.WORKFLOWS["focus_image"]
+        self.assertEqual(focus["confirmed"].name, "requested_focus_confirmed_rows.json")
+        self.assertEqual(focus["template"].name, "requested_focus_confirmed_rows.template.json")
+        self.assertEqual(focus["report"].name, "requested_focus_confirmed_import_report.json")
         self.assertEqual(focus["public_action_queue"].name, "requested_focus_action_queue_public.json")
         self.assertEqual(focus["public_action_rows_key"], "queued_action_rows")
         self.assertEqual(
@@ -93,6 +106,23 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
             self.assertIn(marker, next_step, workflow_name)
             importer_name = next_step.split(marker, 1)[1]
             self.assertTrue((tools_dir / f"{importer_name}.py").exists(), workflow_name)
+
+    def test_readiness_paths_match_importer_defaults(self) -> None:
+        expected = {
+            "catalog_field": import_confirmed_metadata_rows,
+            "source_discovery": import_confirmed_source_discovery_rows,
+            "catalog_image": import_confirmed_image_attachment_rows,
+            "focus_image": import_confirmed_requested_focus_rows,
+            "ichiban_metadata": import_confirmed_ichiban_metadata_rows,
+            "animation_category": import_confirmed_animation_category_rows,
+            "deduplication": import_confirmed_deduplication_rows,
+        }
+
+        for workflow_name, importer in expected.items():
+            workflow = readiness.WORKFLOWS[workflow_name]
+            self.assertEqual(workflow["confirmed"], importer.DEFAULT_QUEUE, workflow_name)
+            self.assertEqual(workflow["template"], importer.FALLBACK_QUEUE, workflow_name)
+            self.assertEqual(workflow["report"], importer.DEFAULT_REPORT, workflow_name)
 
     def test_template_candidates_are_public_without_row_details(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
