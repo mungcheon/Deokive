@@ -734,6 +734,39 @@ def build_agent_work_queue_public(
     operations: dict[str, Any],
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
+    generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
+    gotouchi_report = load_json(GOTOUCHI, {}) if GOTOUCHI.exists() else {}
+
+    def generic_source_review_summary(source_store: str) -> dict[str, int]:
+        items = [
+            item
+            for item in generic_source_report.get("items", [])
+            if isinstance(item, dict) and str(item.get("source_store") or "") == source_store
+        ]
+        candidate_statuses = Counter(str(item.get("candidate_status") or "no_candidate_report") for item in items)
+        return {
+            "review_rows": len(items),
+            "candidate_rows": sum(1 for item in items if item.get("candidate_source_url")),
+            "manual_confirmed_rows": sum(1 for item in items if item.get("manual_confirmed") is True),
+            "weak_or_low_confidence_rows": sum(
+                1
+                for item in items
+                if item.get("candidate_status") in {"weak_manual_review_candidate", "low_confidence_candidate"}
+            ),
+            "no_candidate_rows": candidate_statuses.get("no_candidate_report", 0),
+        }
+
+    def gotouchi_review_summary() -> dict[str, int]:
+        summary = gotouchi_report.get("summary", {}) if isinstance(gotouchi_report, dict) else {}
+        keys = (
+            "rows_checked",
+            "exact_type_candidate_rows",
+            "motif_only_type_mismatch_rows",
+            "no_official_candidate_rows",
+            "attached_representative_rows",
+            "visual_mismatch_rows",
+        )
+        return {key: int(summary.get(key) or 0) for key in keys}
 
     def add_batch(
         *,
@@ -746,23 +779,25 @@ def build_agent_work_queue_public(
         recommended_action: str,
         acceptance_criteria: list[str],
         samples: list[dict[str, Any]],
+        review_summary: dict[str, int] | None = None,
     ) -> None:
         if rows <= 0:
             return
-        batches.append(
-            {
-                "batch_id": f"{priority:03d}-{agent_id}-{len(batches) + 1:02d}",
-                "agent_id": agent_id,
-                "workstream": workstream,
-                "priority": priority,
-                "title": title,
-                "public_report": f"data/{public_report.name}",
-                "rows": rows,
-                "recommended_action": recommended_action,
-                "acceptance_criteria": acceptance_criteria,
-                "sample_items": samples[:8],
-            }
-        )
+        batch = {
+            "batch_id": f"{priority:03d}-{agent_id}-{len(batches) + 1:02d}",
+            "agent_id": agent_id,
+            "workstream": workstream,
+            "priority": priority,
+            "title": title,
+            "public_report": f"data/{public_report.name}",
+            "rows": rows,
+            "recommended_action": recommended_action,
+            "acceptance_criteria": acceptance_criteria,
+            "sample_items": samples[:8],
+        }
+        if review_summary is not None:
+            batch["review_summary"] = review_summary
+        batches.append(batch)
 
     for group in image_enrichment_batches.get("groups", [])[:12]:
         workflow = str(group.get("workflow") or "")
@@ -796,6 +831,13 @@ def build_agent_work_queue_public(
                 "No marketplace or unrelated stock image is imported without matching product evidence.",
             ],
             samples=[compact_sample(item) for item in group.get("sample_items", []) if isinstance(item, dict)],
+            review_summary=(
+                generic_source_review_summary(str(group.get("source_store") or ""))
+                if workflow == "replace_generic_source_then_extract_image"
+                else gotouchi_review_summary()
+                if workflow == "review_gotouchi_official_candidates"
+                else None
+            ),
         )
 
     source_items = [item for item in source_discovery.get("items", []) if isinstance(item, dict)]
@@ -932,6 +974,7 @@ def build_agent_work_queue_public(
             "rows": batch["rows"],
             "title": batch["title"],
             "public_report": batch["public_report"],
+            **({"review_summary": batch["review_summary"]} if "review_summary" in batch else {}),
         }
         for batch in batches[:10]
     ]
@@ -1498,6 +1541,7 @@ def validate_report_consistency(
             "rows": batch["rows"],
             "title": batch["title"],
             "public_report": batch["public_report"],
+            **({"review_summary": batch["review_summary"]} if "review_summary" in batch else {}),
         }
         for batch in batches[:10]
     ]
@@ -1543,6 +1587,12 @@ def validate_report_consistency(
             findings.append(f"agent_work_queue batch missing acceptance criteria: {batch_id}")
         if not isinstance(batch.get("sample_items"), list):
             findings.append(f"agent_work_queue batch sample_items is not a list: {batch_id}")
+        if batch.get("workstream") in {"generic_source_url_cleanup", "gotouchi_official_candidate_review"}:
+            review_summary = batch.get("review_summary")
+            if not isinstance(review_summary, dict) or not review_summary:
+                findings.append(f"agent_work_queue batch missing review_summary: {batch_id}")
+            elif any(not isinstance(value, int) or value < 0 for value in review_summary.values()):
+                findings.append(f"agent_work_queue batch review_summary has invalid counts: {batch_id}")
 
     return findings
 
