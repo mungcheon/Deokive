@@ -189,6 +189,73 @@ CANONICAL_CATEGORY_SUGGESTIONS = {
     "기타 굿즈": "액세서리",
 }
 
+UNKNOWN_CATEGORY_REVIEW_SUGGESTIONS = {
+    "굿즈": {
+        "suggested_family": "other",
+        "suggested_category": "기타 굿즈",
+        "color_hint": "neutral",
+        "primary_icon_key": "category",
+        "review_priority": 70,
+        "reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
+    },
+    "아크릴": {
+        "suggested_family": "acrylic",
+        "suggested_category": "아크릴 스탠드",
+        "color_hint": "blue",
+        "primary_icon_key": "view_carousel",
+        "review_priority": 20,
+        "reason": "Most acrylic goods should be split into acrylic stand/keyholder/card after name review.",
+    },
+    "참": {
+        "suggested_family": "keyring",
+        "suggested_category": "키링",
+        "color_hint": "yellow",
+        "primary_icon_key": "local_offer",
+        "review_priority": 30,
+        "reason": "Charm items usually behave like keyrings in the app folder model.",
+    },
+    "포스터": {
+        "suggested_family": "display_goods",
+        "suggested_category": "포스터",
+        "color_hint": "indigo",
+        "primary_icon_key": "photo",
+        "review_priority": 25,
+        "reason": "Poster is a display goods folder, but should remain distinct from bromide/photo cards.",
+    },
+    "컵": {
+        "suggested_family": "daily_goods",
+        "suggested_category": "머그컵",
+        "color_hint": "green",
+        "primary_icon_key": "inventory",
+        "review_priority": 40,
+        "reason": "Cup items fit daily goods; verify whether they are mugs, tumblers, or glassware.",
+    },
+    "캡슐토이": {
+        "suggested_family": "figure",
+        "suggested_category": "캡슐토이",
+        "color_hint": "mint",
+        "primary_icon_key": "toys",
+        "review_priority": 35,
+        "reason": "Capsule toy is usually a small figure/miniature product family.",
+    },
+    "기타 굿즈": {
+        "suggested_family": "other",
+        "suggested_category": "기타 굿즈",
+        "color_hint": "neutral",
+        "primary_icon_key": "category",
+        "review_priority": 80,
+        "reason": "Already a catch-all category; keep broad unless names clearly identify a better folder.",
+    },
+    "식품": {
+        "suggested_family": "daily_goods",
+        "suggested_category": "식품",
+        "color_hint": "green",
+        "primary_icon_key": "inventory",
+        "review_priority": 50,
+        "reason": "Food items should stay separate from character goods but use daily goods visual treatment.",
+    },
+}
+
 PUBLIC_FIELDS = [
     "catalog_index",
     "name_ko",
@@ -670,7 +737,8 @@ def build_operations_public(
             "workstream": "animation_folder_visuals",
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             "category_count": animation_summary.get("category_count", 0),
-            "recommended_next_action": "Use folder_visual_tokens for app folder colors and icon options.",
+            "unknown_category_rows": animation_summary.get("unknown_category_rows", 0),
+            "recommended_next_action": "Use taxonomy_review_queue and folder_visual_tokens for app folder colors, icons, and category cleanup.",
         },
     ]
 
@@ -1399,11 +1467,51 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
             }
         )
 
-    unknown_categories = [
-        {"category": category, "rows": count}
-        for category, count in by_category.most_common()
-        if category_family(category) == "other"
-    ]
+    unknown_categories = []
+    for category, count in by_category.most_common():
+        if category_family(category) != "other":
+            continue
+        suggestion = UNKNOWN_CATEGORY_REVIEW_SUGGESTIONS.get(
+            category,
+            {
+                "suggested_family": "other",
+                "suggested_category": category,
+                "color_hint": "neutral",
+                "primary_icon_key": "category",
+                "review_priority": 90,
+                "reason": "No exact mapping exists yet; keep in manual taxonomy review.",
+            },
+        )
+        color_hint = str(suggestion["color_hint"])
+        affected = [item for item in rows if str(item.get("category") or "") == category]
+        unknown_categories.append(
+            {
+                "category": category,
+                "rows": count,
+                "review_priority": suggestion["review_priority"],
+                "suggested_family": suggestion["suggested_family"],
+                "suggested_category": suggestion["suggested_category"],
+                "suggested_color_hint": color_hint,
+                "suggested_color_hex": next(
+                    (row["color_hex"] for row in FOLDER_COLOR_PALETTE if row["color_hint"] == color_hint),
+                    FAMILY_VISUALS["other"]["color_hex"],
+                ),
+                "suggested_color_sort_order": color_sort_order(color_hint),
+                "suggested_primary_icon_key": suggestion["primary_icon_key"],
+                "suggested_icon_options": FAMILY_ICON_OPTIONS.get(
+                    str(suggestion["suggested_family"]), FAMILY_ICON_OPTIONS["other"]
+                ),
+                "review_reason": suggestion["reason"],
+                "sample_names": [item.get("name_ko") for item in affected[:8]],
+            }
+        )
+    unknown_categories.sort(
+        key=lambda row: (
+            int(row.get("review_priority") or 99),
+            int(row.get("suggested_color_sort_order") or 999),
+            str(row.get("category") or ""),
+        )
+    )
 
     return {
         "schema_version": 1,
@@ -1411,6 +1519,7 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
             "animation_goods_rows": len(rows),
             "category_count": len(by_category),
             "unknown_category_count": len(unknown_categories),
+            "unknown_category_rows": sum(int(row.get("rows") or 0) for row in unknown_categories),
             "normalization_suggestion_count": len(suggestions),
             "missing_image_rows": sum(1 for item in rows if not present(item.get("image_url"))),
             "missing_source_url_rows": sum(1 for item in rows if not present(item.get("source_url"))),
@@ -1426,6 +1535,7 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
         "top_sub_series": counter_rows(by_sub_series, ("sub_series",), 80),
         "normalization_suggestions": suggestions,
         "unknown_categories": unknown_categories[:80],
+        "taxonomy_review_queue": unknown_categories[:80],
         "automation_policy": {
             "auto_apply_category_changes": False,
             "requires_manual_review": True,
@@ -1688,6 +1798,33 @@ def validate_report_consistency(
     }
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
+    taxonomy_review_queue = animation_categories.get("taxonomy_review_queue", [])
+    unknown_categories = animation_categories.get("unknown_categories", [])
+    if taxonomy_review_queue != unknown_categories:
+        findings.append("animation_categories.taxonomy_review_queue does not match unknown_categories")
+    if animation_summary.get("unknown_category_rows") != sum(
+        int(row.get("rows") or 0) for row in taxonomy_review_queue if isinstance(row, dict)
+    ):
+        findings.append("animation_categories.unknown_category_rows does not match taxonomy review queue")
+    for row in taxonomy_review_queue:
+        if not isinstance(row, dict):
+            findings.append("animation_categories.taxonomy_review_queue contains non-object row")
+            continue
+        required_taxonomy_fields = {
+            "category",
+            "rows",
+            "review_priority",
+            "suggested_family",
+            "suggested_category",
+            "suggested_color_hint",
+            "suggested_color_hex",
+            "suggested_primary_icon_key",
+            "suggested_icon_options",
+            "review_reason",
+        }
+        missing_taxonomy_fields = required_taxonomy_fields - set(row)
+        if missing_taxonomy_fields:
+            findings.append(f"animation taxonomy row missing fields: {sorted(missing_taxonomy_fields)}")
 
     store_matrix = operations.get("store_priority_matrix", [])
     if store_matrix:
