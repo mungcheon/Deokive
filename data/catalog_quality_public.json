@@ -3343,17 +3343,18 @@
     "image_attachment_action_rows": 25,
     "ichiban_metadata_action_campaigns": 32,
     "metadata_action_missing_cells": 1362,
-    "animation_category_review_rows": 428
+    "animation_category_review_rows": 428,
+    "animation_category_action_rows": 428
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 80,
-    "summed_batch_rows": 11669,
+    "summed_batch_rows": 11104,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
         "requested_focus_review_batches",
-        16
+        15
       ],
       [
         "requested_focus_action_queue",
@@ -3388,6 +3389,10 @@
         3
       ],
       [
+        "animation_category_action_queue",
+        2
+      ],
+      [
         "gotouchi_official_candidate_review",
         1
       ],
@@ -3398,16 +3403,12 @@
       [
         "ichiban_kuji_metadata_action_queue",
         1
-      ],
-      [
-        "metadata_action_queue",
-        1
       ]
     ],
     "by_agent": [
       [
         "agent-requested-focus-detail",
-        16
+        15
       ],
       [
         "agent-requested-focus-action",
@@ -3442,6 +3443,10 @@
         3
       ],
       [
+        "agent-animation-category-action",
+        2
+      ],
+      [
         "agent-gotouchi-review",
         1
       ],
@@ -3451,10 +3456,6 @@
       ],
       [
         "agent-ichiban-action",
-        1
-      ],
-      [
-        "agent-metadata-action",
         1
       ]
     ],
@@ -3478,7 +3479,8 @@
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
       "metadata_action_missing_cells": 1362,
-      "animation_category_review_rows": 428
+      "animation_category_review_rows": 428,
+      "animation_category_action_rows": 428
     }
   },
   "generic_source_patch_candidates": {
@@ -4447,11 +4449,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 14,
+    "action_count": 15,
     "blocked_action_count": 1,
-    "manual_review_action_count": 12,
+    "manual_review_action_count": 13,
     "pending_import_action_count": 0,
-    "total_action_rows": 35254,
+    "total_action_rows": 35682,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -4472,7 +4474,8 @@
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
       "metadata_action_missing_cells": 1362,
-      "animation_category_review_rows": 428
+      "animation_category_review_rows": 428,
+      "animation_category_action_rows": 428
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
@@ -5047,6 +5050,69 @@
       [
         "source_url",
         647
+      ]
+    ],
+    "auto_apply_enabled": false
+  },
+  "animation_category_action_queue": {
+    "public_report": "data/animation_category_action_queue_public.json",
+    "actionable_categories": 8,
+    "queued_categories": 8,
+    "actionable_catalog_rows": 428,
+    "queued_catalog_rows": 428,
+    "action_batch_count": 2,
+    "batch_size": 6,
+    "max_categories": 24,
+    "by_suggested_family": [
+      [
+        "daily_goods",
+        2
+      ],
+      [
+        "other",
+        2
+      ],
+      [
+        "acrylic",
+        1
+      ],
+      [
+        "display_goods",
+        1
+      ],
+      [
+        "keyring",
+        1
+      ],
+      [
+        "figure",
+        1
+      ]
+    ],
+    "by_color_group": [
+      [
+        "green",
+        2
+      ],
+      [
+        "neutral",
+        2
+      ],
+      [
+        "blue",
+        1
+      ],
+      [
+        "violet",
+        1
+      ],
+      [
+        "yellow",
+        1
+      ],
+      [
+        "teal",
+        1
       ]
     ],
     "auto_apply_enabled": false

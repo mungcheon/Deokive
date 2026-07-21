@@ -23,6 +23,7 @@ DEDUPLICATION_REVIEW_BATCHES = DATA / "catalog_deduplication_review_batches_publ
 DEDUPLICATION_ACTION_QUEUE = DATA / "catalog_deduplication_action_queue_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_public.json"
+ANIMATION_CATEGORY_ACTION_QUEUE = DATA / "animation_category_action_queue_public.json"
 ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
@@ -1307,6 +1308,10 @@ def build_operations_public(
         load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
     )
     animation_review_batches_summary = animation_review_batches.get("summary", {})
+    animation_action_queue = (
+        load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
+    )
+    animation_action_queue_summary = animation_action_queue.get("summary", {})
     kuji_summary = ichiban_kuji_history["summary"]
     ichiban_kuji_metadata_probe = (
         load_json(ICHIIBAN_KUJI_METADATA_PROBE, {}) if ICHIIBAN_KUJI_METADATA_PROBE.exists() else {}
@@ -1684,6 +1689,15 @@ def build_operations_public(
             "folder_visual_token_count": animation_review_batches_summary.get("folder_visual_token_count", 0),
             "recommended_next_action": "Review category batches before applying folder mappings; keep color order grouped by the palette.",
         } if animation_review_batches_summary else None,
+        {
+            "priority": 62,
+            "workstream": "animation_category_action_queue",
+            "public_report": f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}",
+            "queued_categories": animation_action_queue_summary.get("queued_categories", 0),
+            "queued_catalog_rows": animation_action_queue_summary.get("queued_catalog_rows", 0),
+            "action_batch_count": animation_action_queue_summary.get("action_batch_count", 0),
+            "recommended_next_action": "Confirm category mapping templates before catalog or folder mutation.",
+        } if animation_action_queue_summary else None,
     ]
     next_actions = [item for item in next_actions if item is not None]
     workstream_scorecard = [
@@ -1860,6 +1874,14 @@ def build_operations_public(
             "auto_apply_enabled": animation_review_batches_summary.get("auto_apply_enabled", False),
         } if animation_review_batches_summary else None,
         {
+            "workstream": "animation_category_action_queue",
+            "status": "manual_review" if animation_action_queue_summary.get("queued_catalog_rows", 0) else "clear",
+            "open_rows": animation_action_queue_summary.get("queued_catalog_rows", 0),
+            "primary_report": f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}",
+            "next_step": "fill_confirmed_animation_category_mapping_templates",
+            "auto_apply_enabled": animation_action_queue_summary.get("auto_apply_enabled", False),
+        } if animation_action_queue_summary else None,
+        {
             "workstream": "generic_source_patch_candidates",
             "status": "candidate_review" if generic_patch_summary.get("candidate_rows", 0) else "clear",
             "open_rows": generic_patch_summary.get("candidate_rows", 0),
@@ -1908,6 +1930,10 @@ def build_operations_public(
         )
     if animation_review_batches_summary:
         open_review_queues["animation_category_review_rows"] = animation_review_batches_summary.get("source_rows", 0)
+    if animation_action_queue_summary:
+        open_review_queues["animation_category_action_rows"] = animation_action_queue_summary.get(
+            "queued_catalog_rows", 0
+        )
 
     return {
         "schema_version": 1,
@@ -1952,6 +1978,7 @@ def build_operations_public(
             {"key": "deduplication_action_queue", "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}"},
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
             {"key": "animation_category_review_batches", "public_report": f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}"},
+            {"key": "animation_category_action_queue", "public_report": f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}"},
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
             {"key": "ichiban_kuji_metadata_probe", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}"},
             {"key": "ichiban_kuji_metadata_review_batches", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}"},
@@ -2030,6 +2057,9 @@ def build_agent_work_queue_public(
     animation_review_batches = (
         load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
     )
+    animation_action_queue = (
+        load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
+    )
 
     def generic_source_review_summary(source_store: str) -> dict[str, int]:
         items = [
@@ -2095,6 +2125,8 @@ def build_agent_work_queue_public(
             return "official_campaign_evidence_required"
         if workstream == "animation_category_review":
             return "taxonomy_mapping_required"
+        if workstream == "animation_category_action_queue":
+            return "manual_category_mapping_confirmation_required"
         return "manual_review_required"
 
     def next_machine_step_for_state(review_state: str) -> str:
@@ -2113,6 +2145,7 @@ def build_agent_work_queue_public(
             "official_campaign_evidence_required": "verify_ichiban_campaign_page",
             "manual_official_campaign_metadata_confirmation_required": "fill_confirmed_ichiban_campaign_patch_templates",
             "taxonomy_mapping_required": "map_category_to_folder_color_and_icon",
+            "manual_category_mapping_confirmation_required": "fill_confirmed_animation_category_mapping_templates",
         }.get(review_state, "manual_review")
 
     def add_batch(
@@ -2600,6 +2633,24 @@ def build_agent_work_queue_public(
                     for index, name in zip(group.get("sample_catalog_indexes", []), group.get("sample_names", []))
                 ],
             )
+
+    animation_action_batches = [batch for batch in animation_action_queue.get("batches", []) if isinstance(batch, dict)]
+    for action_index, action_batch in enumerate(animation_action_batches[:4]):
+        add_batch(
+            agent_id="agent-animation-category-action",
+            workstream="animation_category_action_queue",
+            priority=22 + action_index,
+            title=f"애니메이션 카테고리 매핑 템플릿 확인: {action_batch.get('batch_id')}",
+            public_report=ANIMATION_CATEGORY_ACTION_QUEUE,
+            rows=int(action_batch.get("affected_catalog_rows") or 0),
+            recommended_action="Confirm source category to folder/category mapping templates before catalog mutation.",
+            acceptance_criteria=[
+                "Each category_mapping_template remains manual_confirmed=false until sample names are reviewed.",
+                "Broad source categories are split before one folder mapping is applied.",
+                "Folder color and icon keys already exist in app visual catalogs.",
+            ],
+            samples=[row for row in action_batch.get("categories", []) if isinstance(row, dict)],
+        )
 
     review_batches = [batch for batch in animation_review_batches.get("batches", []) if isinstance(batch, dict)]
     if review_batches:
@@ -3606,6 +3657,12 @@ def validate_report_consistency(
         expected_open_queues["dedupe_action_groups"] = dedupe_action_summary.get("queued_groups", 0)
     if animation_review_summary:
         expected_open_queues["animation_category_review_rows"] = animation_review_summary.get("source_rows", 0)
+    animation_action_queue = (
+        load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
+    )
+    animation_action_summary = animation_action_queue.get("summary", {})
+    if animation_action_summary:
+        expected_open_queues["animation_category_action_rows"] = animation_action_summary.get("queued_catalog_rows", 0)
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
     taxonomy_review_queue = animation_categories.get("taxonomy_review_queue", [])
@@ -3736,6 +3793,7 @@ def validate_report_consistency(
         f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
         f"data/{ANIMATION_CATEGORIES.name}",
         f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
+        f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}",
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
@@ -3776,6 +3834,7 @@ def validate_report_consistency(
         "official_campaign_evidence_required",
         "manual_official_campaign_metadata_confirmation_required",
         "taxonomy_mapping_required",
+        "manual_category_mapping_confirmation_required",
         "manual_review_required",
     }
     allowed_next_machine_steps = {
@@ -3793,6 +3852,7 @@ def validate_report_consistency(
         "verify_ichiban_campaign_page",
         "fill_confirmed_ichiban_campaign_patch_templates",
         "map_category_to_folder_color_and_icon",
+        "fill_confirmed_animation_category_mapping_templates",
         "manual_review",
     }
     for batch in batches:
@@ -4039,6 +4099,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["animation_category_review_batches"] = copy_report_summary(
                 ANIMATION_CATEGORY_REVIEW_BATCHES, "animation_category_review_batches"
             )
+        if ANIMATION_CATEGORY_ACTION_QUEUE.exists():
+            target["animation_category_action_queue"] = copy_report_summary(
+                ANIMATION_CATEGORY_ACTION_QUEUE, "animation_category_action_queue"
+            )
         target["ichiban_kuji_history"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
             **ichiban_kuji_history["summary"],
@@ -4115,6 +4179,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         METADATA_BACKLOG,
         METADATA_REVIEW_BATCHES,
         METADATA_ACTION_QUEUE,
+        ANIMATION_CATEGORY_ACTION_QUEUE,
         CONFIRMED_IMPORT_READINESS,
         EXECUTION_PLAN,
         IMAGE_ENRICHMENT_BATCHES,
@@ -4168,6 +4233,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DEDUPLICATION.relative_to(ROOT)),
             str(DEDUPLICATION_ACTION_QUEUE.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
+            str(ANIMATION_CATEGORY_ACTION_QUEUE.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),

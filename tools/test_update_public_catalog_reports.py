@@ -24,6 +24,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/requested_focus_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_confirmed_import_readiness_public.json", updated_files)
         self.assertIn("data/catalog_execution_plan_public.json", updated_files)
+        self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
 
     def test_published_reports_keep_manual_review_guards(self):
@@ -117,15 +118,22 @@ class PublicCatalogReportTests(unittest.TestCase):
         open_queues = operations.get("summary", {}).get("open_review_queues", {})
         confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
         readiness_summary = confirmed_readiness.get("summary", {})
+        animation_action = reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)
+        animation_action_summary = animation_action.get("summary", {})
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
         self.assertIn(f"data/{reports.AGENT_WORK_QUEUE.name}", next_action_reports)
         self.assertIn(f"data/{reports.EXECUTION_PLAN.name}", next_action_reports)
         self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
+        self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("animation_category_action_rows"),
+            animation_action_summary.get("queued_catalog_rows"),
         )
 
 

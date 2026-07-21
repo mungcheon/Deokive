@@ -110,6 +110,7 @@ def build_plan() -> dict[str, Any]:
     kuji_batches = _load("ichiban_kuji_metadata_review_batches_public.json")
     kuji_action_queue = _load("ichiban_kuji_metadata_action_queue_public.json")
     animation_batches = _load("animation_category_review_batches_public.json")
+    animation_action_queue = _load("animation_category_action_queue_public.json")
     confirmed_readiness = _load("catalog_confirmed_import_readiness_public.json")
 
     operations_summary = _summary(operations)
@@ -129,6 +130,7 @@ def build_plan() -> dict[str, Any]:
     kuji_summary = _summary(kuji_batches)
     kuji_action_summary = _summary(kuji_action_queue)
     animation_summary = _summary(animation_batches)
+    animation_action_summary = _summary(animation_action_queue)
     confirmed_summary = _summary(confirmed_readiness)
 
     actions: list[dict[str, Any]] = []
@@ -413,6 +415,26 @@ def build_plan() -> dict[str, Any]:
             evidence={
                 "batch_count": _count(animation_summary, "batch_count"),
                 "folder_visual_token_count": _count(animation_summary, "folder_visual_token_count"),
+            },
+        )
+    )
+
+    actions.append(
+        _action(
+            priority=69,
+            workstream="animation_category_action_queue",
+            public_report="data/animation_category_action_queue_public.json",
+            status="manual_review",
+            rows=_count(animation_action_summary, "queued_catalog_rows"),
+            command="Confirm animation category-to-folder mapping templates before catalog mutation.",
+            next_step="fill_confirmed_animation_category_mapping_templates",
+            blocker="Folder/category mappings remain manual-only until sample names confirm product type.",
+            evidence={
+                "actionable_categories": _count(animation_action_summary, "actionable_categories"),
+                "queued_categories": _count(animation_action_summary, "queued_categories"),
+                "queued_catalog_rows": _count(animation_action_summary, "queued_catalog_rows"),
+                "action_batch_count": _count(animation_action_summary, "action_batch_count"),
+                "by_suggested_family": animation_action_summary.get("by_suggested_family", []),
             },
         )
     )

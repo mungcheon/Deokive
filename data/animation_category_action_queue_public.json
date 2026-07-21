@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-21T23:16:00Z",
+  "scope": "animation_category_action_queue",
+  "summary": {
+    "actionable_categories": 8,
+    "queued_categories": 8,
+    "actionable_catalog_rows": 428,
+    "queued_catalog_rows": 428,
+    "action_batch_count": 2,
+    "batch_size": 6,
+    "max_categories": 24,
+    "by_suggested_family": [
+      [
+        "daily_goods",
+        2
+      ],
+      [
+        "other",
+        2
+      ],
+      [
+        "acrylic",
+        1
+      ],
+      [
+        "display_goods",
+        1
+      ],
+      [
+        "keyring",
+        1
+      ],
+      [
+        "figure",
+        1
+      ]
+    ],
+    "by_color_group": [
+      [
+        "green",
+        2
+      ],
+      [
+        "neutral",
+        2
+      ],
+      [
+        "blue",
+        1
+      ],
+      [
+        "violet",
+        1
+      ],
+      [
+        "yellow",
+        1
+      ],
+      [
+        "teal",
+        1
+      ]
+    ],
+    "auto_apply_enabled": false
+  },
+  "batches": [
+    {
+      "batch_id": "animation-category-action-001",
+      "priority": 20,
+      "category_count": 6,
+      "affected_catalog_rows": 151,
+      "family_counts": [
+        [
+          "daily_goods",
+          2
+        ],
+        [
+          "acrylic",
+          1
+        ],
+        [
+          "display_goods",
+          1
+        ],
+        [
+          "keyring",
+          1
+        ],
+        [
+          "figure",
+          1
+        ]
+      ],
+      "color_group_counts": [
+        [
+          "green",
+          2
+        ],
+        [
+          "blue",
+          1
+        ],
+        [
+          "violet",
+          1
+        ],
+        [
+          "yellow",
+          1
+        ],
+        [
+          "teal",
+          1
+        ]
+      ],
+      "review_state": "manual_category_mapping_confirmation_required",
+      "next_machine_step": "fill_confirmed_animation_category_mapping_templates",
+      "categories": [
+        {
+          "category": "아크릴",
+          "rows": 97,
+          "review_priority": 20,
+          "suggested_family": "acrylic",
+          "suggested_category": "아크릴 스탠드",
+          "suggested_color_group": "blue",
+          "suggested_color_hint": "sky",
+          "suggested_primary_icon_key": "view_carousel",
+          "review_reason": "Most acrylic goods should be split into acrylic stand/keyholder/card after name review.",
+          "sample_names": [
+            "一番くじ 葬送のフリーレン - F賞 きゅんキャラアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - A賞 虎杖悠仁 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - B賞 伏黒恵 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - C賞 秤金次 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - D賞 星綺羅羅 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - E賞 日車寛見 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - F賞 レジィ・スター ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～壱～ - A賞 禪院真希・禪院真依 ビッグアクリルスタンド"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "source_category": "아크릴",
+            "target_category": "아크릴 스탠드",
+            "target_family": "acrylic",
+            "folder_name": "아크릴 스탠드",
+            "folder_color_hex": "0xFF7DB7FF",
+            "folder_color_hint": "sky",
+            "folder_color_group": "blue",
+            "folder_color_sort_order": 220,
+            "folder_icon_key": "view_carousel",
+            "folder_icon_options": [
+              "view_carousel",
+              "acrylic_stand",
+              "standee",
+              "acrylic_keyring",
+              "display_case",
+              "frame",
+              "photo_album",
+              "grid"
+            ],
+            "affected_catalog_rows": 97,
+            "blocked_until": "category_mapping_manually_confirmed",
+            "review_evidence_required": [
+              "sample_names_match_target_product_type",
+              "broad_categories_are_split_before_mapping",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "category": "포스터",
+          "rows": 22,
+          "review_priority": 25,
+          "suggested_family": "display_goods",
+          "suggested_category": "포스터",
+          "suggested_color_group": "violet",
+          "suggested_color_hint": "indigo",
+          "suggested_primary_icon_key": "photo",
+          "review_reason": "Poster is a display goods folder, but should remain distinct from bromide/photo cards.",
+          "sample_names": [
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - I賞 歴代ビジュアルクリアポスター",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - K賞 クリアポスター",
+            "一番くじ 呪術廻戦 死滅回游 ～壱～ - L賞 クリアポスター",
+            "一番くじ 呪術廻戦 5th anniversary - I賞 歴代キービジュアルポスター",
+            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - F賞 クリアポスター",
+            "一番くじ 呪術廻戦 渋谷事変 ～壱～ - N賞 クリアポスター",
+            "一番くじ 呪術廻戦 ～肆～ - F賞 クリアポスター",
+            "一番くじ 僕のヒーローアカデミア -幸せの上に- - H賞 クリアポスター"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "source_category": "포스터",
+            "target_category": "포스터",
+            "target_family": "display_goods",
+            "folder_name": "포스터",
+            "folder_color_hex": "0xFF4F46E5",
+            "folder_color_hint": "indigo",
+            "folder_color_group": "violet",
+            "folder_color_sort_order": 250,
+            "folder_icon_key": "photo",
+            "folder_icon_options": [
+              "photo",
+              "poster",
+              "collections",
+              "wallpaper",
+              "image",
+              "frame",
+              "panorama",
+              "slideshow"
+            ],
+            "affected_catalog_rows": 22,
+            "blocked_until": "category_mapping_manually_confirmed",
+            "review_evidence_required": [
+              "sample_names_match_target_product_type",
+              "broad_categories_are_split_before_mapping",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "category": "참",
+          "rows": 23,
+          "review_priority": 30,
+          "suggested_family": "keyring",
+          "suggested_category": "키링",
+          "suggested_color_group": "yellow",
+          "suggested_color_hint": "amber",
+          "suggested_primary_icon_key": "local_offer",
+          "review_reason": "Charm items usually behave like keyrings in the app folder model.",
+          "sample_names": [
+            "一番くじ 呪術廻戦 死滅回游 ～壱～ - K賞 コガネ ラバーチャーム",
+            "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - F賞 ラバーチャーム",
+            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - H賞 ラバーチャーム",
+            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - H賞 ラバーチャーム",
+            "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - G賞 ラバーチャーム",
+            "一番くじ 僕のヒーローアカデミア -連なる星霜- - G賞 メタルチャーム",
+            "一番くじ 僕のヒーローアカデミア -連なる星霜- - G賞 メタルチャーム",
+            "一番くじ 僕のヒーローアカデミア ー正義のかたちー - F賞 ストラップホルダーチャーム"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "source_category": "참",
+            "target_category": "키링",
+            "target_family": "keyring",
+            "folder_name": "키링",
+            "folder_color_hex": "0xFFFFC857",
+            "folder_color_hint": "amber",
+            "folder_color_group": "yellow",
+            "folder_color_sort_order": 100,
+            "folder_icon_key": "local_offer",
+            "folder_icon_options": [
+              "local_offer",
+              "keyring",
+              "acrylic_keyring",
+              "tag",
+              "loyalty",
+              "label_tag",
+              "ticket",
+              "activity"
+            ],
+            "affected_catalog_rows": 23,
+            "blocked_until": "category_mapping_manually_confirmed",
+            "review_evidence_required": [
+              "sample_names_match_target_product_type",
+              "broad_categories_are_split_before_mapping",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "category": "캡슐토이",
+          "rows": 3,
+          "review_priority": 35,
+          "suggested_family": "figure",
+          "suggested_category": "캡슐토이",
+          "suggested_color_group": "teal",
+          "suggested_color_hint": "teal",
+          "suggested_primary_icon_key": "toys",
+          "review_reason": "Capsule toy is usually a small figure/miniature product family.",
+          "sample_names": [
+            "스윙 피규어 미도리야 이즈쿠",
+            "캡슐 피규어 컬렉션 제2탄 호크스",
+            "캡슐 피규어 컬렉션 제3탄 토가 히미코"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "source_category": "캡슐토이",
+            "target_category": "캡슐토이",
+            "target_family": "figure",
+            "folder_name": "캡슐토이",
+            "folder_color_hex": "0xFF14B8A6",
+            "folder_color_hint": "teal",
+            "folder_color_group": "teal",
+            "folder_color_sort_order": 200,
+            "folder_icon_key": "toys",
+            "folder_icon_options": [
+              "toys",
+              "figure",
+              "miniature",
+              "smart_toy",
+              "extension",
+              "blind_box",
+              "lottery_prize",
+              "casino"
+            ],
+            "affected_catalog_rows": 3,
+            "blocked_until": "category_mapping_manually_confirmed",
+            "review_evidence_required": [
+              "sample_names_match_target_product_type",
+              "broad_categories_are_split_before_mapping",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "category": "컵",
+          "rows": 5,
+          "review_priority": 40,
+          "suggested_family": "daily_goods",
+          "suggested_category": "머그컵",
+          "suggested_color_group": "green",
+          "suggested_color_hint": "emerald",
+          "suggested_primary_icon_key": "inventory",
+          "review_reason": "Cup items fit daily goods; verify whether they are mugs, tumblers, or glassware.",
+          "sample_names": [
+            "一番くじ 劇場版 呪術廻戦 0 ～顕現～ - D賞 グラス",
+            "一番くじ 僕のヒーローアカデミア Let you down - E賞 グラス",
+            "一番くじ 僕のヒーローアカデミア NEXT GENERATIONS！ feat.SMASH RISING - G賞 グラス",
+            "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス",
+            "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "source_category": "컵",
+            "target_category": "머그컵",
+            "target_family": "daily_goods",
+            "folder_name": "머그컵",
+            "folder_color_hex": "0xFF10B981",
+            "folder_color_hint": "emerald",
+            "folder_color_group": "green",
+            "folder_color_sort_order": 180,
+            "folder_icon_key": "inventory",
+            "folder_icon_options": [
+              "inventory",
+              "bag",
+              "pouch",
+              "coffee_mug",
+              "basket",
+              "backpack",
+              "gift",
+              "storefront"
+            ],
+            "affected_catalog_rows": 5,
+            "blocked_until": "category_mapping_manually_confirmed",
+            "review_evidence_required": [
+              "sample_names_match_target_product_type",
+              "broad_categories_are_split_before_mapping",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "category": "식품",
+          "rows": 1,
+          "review_priority": 50,
+          "suggested_family": "daily_goods",
+          "suggested_category": "식품",
+          "suggested_color_group": "green",
+          "suggested_color_hint": "emerald",
+          "suggested_primary_icon_key": "inventory",
+          "review_reason": "Food items should stay separate from character goods but use daily goods visual treatment.",
+          "sample_names": [
+            "최애의 아이 생초코 초코링"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "source_category": "식품",
+            "target_category": "식품",
+            "target_family": "daily_goods",
+            "folder_name": "식품",
+            "folder_color_hex": "0xFF10B981",
+            "folder_color_hint": "emerald",
+            "folder_color_group": "green",
+            "folder_color_sort_order": 180,
+            "folder_icon_key": "inventory",
+            "folder_icon_options": [
+              "inventory",
+              "bag",
+              "pouch",
+              "coffee_mug",
+              "basket",
+              "backpack",
+              "gift",
+              "storefront"
+            ],
+            "affected_catalog_rows": 1,
+            "blocked_until": "category_mapping_manually_confirmed",
+            "review_evidence_required": [
+              "sample_names_match_target_product_type",
+              "broad_categories_are_split_before_mapping",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          },
+          "auto_apply_enabled": false
+        }
+      ]
+    },
+    {
+      "batch_id": "animation-category-action-002",
+      "priority": 70,
+      "category_count": 2,
+      "affected_catalog_rows": 277,
+      "family_counts": [
+        [
+          "other",
+          2
+        ]
+      ],
+      "color_group_counts": [
+        [
+          "neutral",
+          2
+        ]
+      ],
+      "review_state": "manual_category_mapping_confirmation_required",
+      "next_machine_step": "fill_confirmed_animation_category_mapping_templates",
+      "categories": [
+        {
+          "category": "굿즈",
+          "rows": 274,
+          "review_priority": 70,
+          "suggested_family": "other",
+          "suggested_category": "기타 굿즈",
+          "suggested_color_group": "neutral",
+          "suggested_color_hint": "neutral",
+          "suggested_primary_icon_key": "category",
+          "review_reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
+          "sample_names": [
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - A賞 緑谷出久 MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - B賞 死柄木弔 MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - C賞 爆豪勝己 MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - D賞 ステイン MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - E賞 峰田実 MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - H賞 キャンバス風ボード",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - J賞 ステーショナリーコレクション",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - ラストワン賞 アーマード・オールマイト MASTERLISE EXTRA"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "source_category": "굿즈",
+            "target_category": "기타 굿즈",
+            "target_family": "other",
+            "folder_name": "기타 굿즈",
+            "folder_color_hex": "0xFF9CA3AF",
+            "folder_color_hint": "neutral",
+            "folder_color_group": "neutral",
+            "folder_color_sort_order": 300,
+            "folder_icon_key": "category",
+            "folder_icon_options": [
+              "category",
+              "folder",
+              "folder_special",
+              "inventory",
+              "package",
+              "archive",
+              "source",
+              "dashboard"
+            ],
+            "affected_catalog_rows": 274,
+            "blocked_until": "category_mapping_manually_confirmed",
+            "review_evidence_required": [
+              "sample_names_match_target_product_type",
+              "broad_categories_are_split_before_mapping",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "category": "기타 굿즈",
+          "rows": 3,
+          "review_priority": 80,
+          "suggested_family": "other",
+          "suggested_category": "기타 굿즈",
+          "suggested_color_group": "neutral",
+          "suggested_color_hint": "neutral",
+          "suggested_primary_icon_key": "category",
+          "review_reason": "Already a catch-all category; keep broad unless names clearly identify a better folder.",
+          "sample_names": [
+            "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
+            "장송의 프리렌 부쿠부 굿즈",
+            "단간론파 부쿠부 굿즈"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "source_category": "기타 굿즈",
+            "target_category": "기타 굿즈",
+            "target_family": "other",
+            "folder_name": "기타 굿즈",
+            "folder_color_hex": "0xFF9CA3AF",
+            "folder_color_hint": "neutral",
+            "folder_color_group": "neutral",
+            "folder_color_sort_order": 300,
+            "folder_icon_key": "category",
+            "folder_icon_options": [
+              "category",
+              "folder",
+              "folder_special",
+              "inventory",
+              "package",
+              "archive",
+              "source",
+              "dashboard"
+            ],
+            "affected_catalog_rows": 3,
+            "blocked_until": "category_mapping_manually_confirmed",
+            "review_evidence_required": [
+              "sample_names_match_target_product_type",
+              "broad_categories_are_split_before_mapping",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          },
+          "auto_apply_enabled": false
+        }
+      ]
+    }
+  ],
+  "automation_policy": {
+    "auto_apply_category_changes": false,
+    "auto_create_folders": false,
+    "requires_manual_review": true,
+    "reason": "Category mappings affect app navigation and user-facing folders."
+  },
+  "instructions": [
+    "Confirm each category_mapping_template before any catalog mutation.",
+    "Split broad source categories such as acrylic before applying a single folder mapping.",
+    "Keep folder colors ordered by color_group/sort_order so similar colors remain grouped."
+  ]
+}

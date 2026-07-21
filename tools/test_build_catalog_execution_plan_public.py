@@ -99,6 +99,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "animation_category_review_batches_public.json": {
                 "summary": {"source_rows": 0}
             },
+            "animation_category_action_queue_public.json": {
+                "summary": {
+                    "actionable_categories": 2,
+                    "queued_categories": 2,
+                    "queued_catalog_rows": 12,
+                    "action_batch_count": 1,
+                    "by_suggested_family": [["acrylic", 1], ["keyring", 1]],
+                }
+            },
             "catalog_confirmed_import_readiness_public.json": {
                 "summary": {
                     "template_items": 3,
@@ -177,6 +186,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(kuji_action["rows"], 1)
         self.assertEqual(kuji_action["evidence"]["queued_catalog_item_rows"], 8)
+        animation_action = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "animation_category_action_queue"
+        )
+        self.assertEqual(animation_action["rows"], 12)
+        self.assertEqual(animation_action["evidence"]["queued_categories"], 2)
 
     def test_pending_import_rows_are_prioritized(self) -> None:
         payloads = {

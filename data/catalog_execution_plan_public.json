@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T23:07:04Z",
+  "generated_at": "2026-07-21T23:16:35Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 14,
+    "action_count": 15,
     "blocked_action_count": 1,
-    "manual_review_action_count": 12,
+    "manual_review_action_count": 13,
     "pending_import_action_count": 0,
-    "total_action_rows": 35254,
+    "total_action_rows": 35682,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -28,7 +28,8 @@
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
       "metadata_action_missing_cells": 1362,
-      "animation_category_review_rows": 428
+      "animation_category_review_rows": 428,
+      "animation_category_action_rows": 428
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
@@ -474,6 +475,49 @@
           [
             "release_date",
             2
+          ]
+        ]
+      }
+    },
+    {
+      "priority": 69,
+      "workstream": "animation_category_action_queue",
+      "public_report": "data/animation_category_action_queue_public.json",
+      "status": "manual_review",
+      "rows": 428,
+      "command": "Confirm animation category-to-folder mapping templates before catalog mutation.",
+      "next_step": "fill_confirmed_animation_category_mapping_templates",
+      "blocker": "Folder/category mappings remain manual-only until sample names confirm product type.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "actionable_categories": 8,
+        "queued_categories": 8,
+        "queued_catalog_rows": 428,
+        "action_batch_count": 2,
+        "by_suggested_family": [
+          [
+            "daily_goods",
+            2
+          ],
+          [
+            "other",
+            2
+          ],
+          [
+            "acrylic",
+            1
+          ],
+          [
+            "display_goods",
+            1
+          ],
+          [
+            "keyring",
+            1
+          ],
+          [
+            "figure",
+            1
           ]
         ]
       }

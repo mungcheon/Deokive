@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T23:07:04Z",
+  "generated_at": "2026-07-21T23:16:35Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -36,7 +36,8 @@
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
       "metadata_action_missing_cells": 1362,
-      "animation_category_review_rows": 428
+      "animation_category_review_rows": 428,
+      "animation_category_action_rows": 428
     },
     "top_store_priority_score": 1832.0
   },
@@ -239,6 +240,14 @@
       "open_rows": 428,
       "primary_report": "data/animation_category_review_batches_public.json",
       "next_step": "review_batched_taxonomy_folder_visual_decisions",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "animation_category_action_queue",
+      "status": "manual_review",
+      "open_rows": 428,
+      "primary_report": "data/animation_category_action_queue_public.json",
+      "next_step": "fill_confirmed_animation_category_mapping_templates",
       "auto_apply_enabled": false
     },
     {
@@ -782,6 +791,10 @@
       "public_report": "data/animation_category_review_batches_public.json"
     },
     {
+      "key": "animation_category_action_queue",
+      "public_report": "data/animation_category_action_queue_public.json"
+    },
+    {
       "key": "ichiban_kuji_history",
       "public_report": "data/ichiban_kuji_history_public.json"
     },
@@ -809,9 +822,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 14,
+      "action_count": 15,
       "blocked_action_count": 1,
-      "manual_review_action_count": 12,
+      "manual_review_action_count": 13,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -1055,6 +1068,15 @@
       "source_rows": 428,
       "folder_visual_token_count": 29,
       "recommended_next_action": "Review category batches before applying folder mappings; keep color order grouped by the palette."
+    },
+    {
+      "priority": 62,
+      "workstream": "animation_category_action_queue",
+      "public_report": "data/animation_category_action_queue_public.json",
+      "queued_categories": 8,
+      "queued_catalog_rows": 428,
+      "action_batch_count": 2,
+      "recommended_next_action": "Confirm category mapping templates before catalog or folder mutation."
     }
   ],
   "automation_policy": {
