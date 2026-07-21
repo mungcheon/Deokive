@@ -522,6 +522,7 @@ def build_operations_public(
     deduplication: dict[str, Any],
     animation_categories: dict[str, Any],
     ichiban_kuji_history: dict[str, Any],
+    generic_source_patch_candidates: dict[str, Any],
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     image_summary = image_enrichment_batches["summary"]
@@ -529,6 +530,7 @@ def build_operations_public(
     animation_summary = animation_categories["summary"]
     kuji_summary = ichiban_kuji_history["summary"]
     metadata_summary = metadata_backlog["summary"]
+    generic_patch_summary = generic_source_patch_candidates["summary"]
 
     priority_fields = ["source_url", "image_url", "release_date", "official_price_jpy", "barcode"]
     store_totals: dict[str, dict[str, Any]] = defaultdict(lambda: {"rows": 0, **{field: 0 for field in priority_fields}})
@@ -626,6 +628,15 @@ def build_operations_public(
             "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import.",
         },
         {
+            "priority": 12,
+            "workstream": "generic_source_patch_candidates",
+            "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}",
+            "candidate_rows": generic_patch_summary.get("candidate_rows", 0),
+            "manual_confirmed_rows": generic_patch_summary.get("manual_confirmed_rows", 0),
+            "auto_apply_enabled": generic_patch_summary.get("auto_apply_enabled", False),
+            "recommended_next_action": "Review weak generic storefront candidates before preparing any catalog patch.",
+        },
+        {
             "priority": 20,
             "workstream": "source_discovery",
             "public_report": f"data/{SOURCE_DISCOVERY.name}",
@@ -684,6 +695,7 @@ def build_operations_public(
                 "animation_unknown_categories": animation_summary.get("unknown_category_count", 0),
                 "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
                 "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
+                "generic_source_patch_candidate_rows": generic_patch_summary.get("candidate_rows", 0),
             },
             "top_store_priority_score": store_priority_matrix[0]["priority_score"] if store_priority_matrix else 0,
         },
@@ -692,6 +704,7 @@ def build_operations_public(
         "reports": [
             {"key": "quality", "public_report": f"data/{QUALITY.name}"},
             {"key": "image_backlog", "public_report": f"data/{IMAGE_BACKLOG.name}"},
+            {"key": "generic_source_patch_candidates", "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}"},
             {"key": "image_enrichment_batches", "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}"},
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
@@ -1558,6 +1571,7 @@ def validate_report_consistency(
     deduplication: dict[str, Any],
     animation_categories: dict[str, Any],
     ichiban_kuji_history: dict[str, Any],
+    generic_source_patch_candidates: dict[str, Any],
     operations: dict[str, Any],
     agent_work_queue: dict[str, Any],
 ) -> list[str]:
@@ -1568,6 +1582,7 @@ def validate_report_consistency(
     dedupe_summary = deduplication["summary"]
     animation_summary = animation_categories["summary"]
     kuji_summary = ichiban_kuji_history["summary"]
+    generic_patch_summary = generic_source_patch_candidates["summary"]
     operations_summary = operations["summary"]
     open_queues = operations_summary["open_review_queues"]
     agent_summary = agent_work_queue["summary"]
@@ -1616,6 +1631,7 @@ def validate_report_consistency(
         "animation_unknown_categories": animation_summary.get("unknown_category_count", 0),
         "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
         "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
+        "generic_source_patch_candidate_rows": generic_patch_summary.get("candidate_rows", 0),
     }
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
@@ -1758,6 +1774,13 @@ def update_reports(write: bool) -> dict[str, Any]:
     deduplication = build_deduplication_public(items)
     animation_categories = build_animation_categories_public(items)
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
+    generic_source_patch_candidates = build_generic_source_patch_candidates_public(generated_at)
+    patch_candidate_items = generic_source_patch_candidates.get("items", [])
+    patch_candidate_summary = generic_source_patch_candidates.get("summary", {})
+    if patch_candidate_summary.get("candidate_rows") != len(patch_candidate_items):
+        raise ValueError("generic source patch candidate count does not match item count")
+    if patch_candidate_summary.get("auto_apply_enabled") is not False:
+        raise ValueError("generic source patch candidates must stay manual-review only")
     operations = build_operations_public(
         generated_at,
         items,
@@ -1770,6 +1793,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         deduplication,
         animation_categories,
         ichiban_kuji_history,
+        generic_source_patch_candidates,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -1844,13 +1868,6 @@ def update_reports(write: bool) -> dict[str, Any]:
 
     image_candidates = load_json(IMAGE_CANDIDATES, {})
     image_candidates.setdefault("summary", {})
-    generic_source_patch_candidates = build_generic_source_patch_candidates_public(generated_at)
-    patch_candidate_items = generic_source_patch_candidates.get("items", [])
-    patch_candidate_summary = generic_source_patch_candidates.get("summary", {})
-    if patch_candidate_summary.get("candidate_rows") != len(patch_candidate_items):
-        raise ValueError("generic source patch candidate count does not match item count")
-    if patch_candidate_summary.get("auto_apply_enabled") is not False:
-        raise ValueError("generic source patch candidates must stay manual-review only")
 
     for target in (quality, image_backlog, image_candidates):
         if GOTOUCHI.exists():
@@ -1907,6 +1924,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         deduplication,
         animation_categories,
         ichiban_kuji_history,
+        generic_source_patch_candidates,
         operations,
         agent_work_queue,
     )

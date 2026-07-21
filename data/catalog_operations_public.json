@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T19:31:10Z",
+  "generated_at": "2026-07-21T19:33:46Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -22,7 +22,8 @@
       "dedupe_groups": 109,
       "animation_unknown_categories": 8,
       "ichiban_missing_release_date_rows": 16,
-      "ichiban_missing_price_rows": 365
+      "ichiban_missing_price_rows": 365,
+      "generic_source_patch_candidate_rows": 3
     },
     "top_store_priority_score": 1832.0
   },
@@ -510,6 +511,10 @@
       "public_report": "data/catalog_image_backlog_public.json"
     },
     {
+      "key": "generic_source_patch_candidates",
+      "public_report": "data/generic_source_patch_candidates_public.json"
+    },
+    {
       "key": "image_enrichment_batches",
       "public_report": "data/catalog_image_enrichment_batches_public.json"
     },
@@ -554,6 +559,15 @@
       "gotouchi_official_review_rows": 23,
       "blocked_rows": 642,
       "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import."
+    },
+    {
+      "priority": 12,
+      "workstream": "generic_source_patch_candidates",
+      "public_report": "data/generic_source_patch_candidates_public.json",
+      "candidate_rows": 3,
+      "manual_confirmed_rows": 0,
+      "auto_apply_enabled": false,
+      "recommended_next_action": "Review weak generic storefront candidates before preparing any catalog patch."
     },
     {
       "priority": 20,
