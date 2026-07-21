@@ -164,33 +164,33 @@ FAMILY_VISUALS = {
 }
 
 FOLDER_COLOR_PALETTE = [
-    {"color_hint": "red", "color_hex": "0xFFD64562", "sort_order": 10},
-    {"color_hint": "coral", "color_hex": "0xFFFF6B6B", "sort_order": 20},
-    {"color_hint": "orange", "color_hex": "0xFFFF9F43", "sort_order": 30},
-    {"color_hint": "yellow", "color_hex": "0xFFFFD84D", "sort_order": 40},
-    {"color_hint": "lime", "color_hex": "0xFFA3E635", "sort_order": 50},
-    {"color_hint": "green", "color_hex": "0xFF42A866", "sort_order": 60},
-    {"color_hint": "mint", "color_hex": "0xFF28D6C8", "sort_order": 70},
-    {"color_hint": "cyan", "color_hex": "0xFF22D3EE", "sort_order": 80},
-    {"color_hint": "blue", "color_hex": "0xFF5BA7F7", "sort_order": 90},
-    {"color_hint": "indigo", "color_hex": "0xFF4F46E5", "sort_order": 100},
-    {"color_hint": "purple", "color_hex": "0xFFA78BFA", "sort_order": 110},
-    {"color_hint": "pink", "color_hex": "0xFFFF8FC3", "sort_order": 120},
-    {"color_hint": "neutral", "color_hex": "0xFF9CA3AF", "sort_order": 130},
+    {"color_hint": "red", "color_hex": "0xFFD64562", "sort_order": 10, "color_group": "warm"},
+    {"color_hint": "coral", "color_hex": "0xFFFF6B6B", "sort_order": 20, "color_group": "warm"},
+    {"color_hint": "orange", "color_hex": "0xFFFF9F43", "sort_order": 30, "color_group": "warm"},
+    {"color_hint": "yellow", "color_hex": "0xFFFFD84D", "sort_order": 40, "color_group": "warm"},
+    {"color_hint": "lime", "color_hex": "0xFFA3E635", "sort_order": 50, "color_group": "green"},
+    {"color_hint": "green", "color_hex": "0xFF42A866", "sort_order": 60, "color_group": "green"},
+    {"color_hint": "mint", "color_hex": "0xFF28D6C8", "sort_order": 70, "color_group": "cool"},
+    {"color_hint": "cyan", "color_hex": "0xFF22D3EE", "sort_order": 80, "color_group": "cool"},
+    {"color_hint": "blue", "color_hex": "0xFF5BA7F7", "sort_order": 90, "color_group": "cool"},
+    {"color_hint": "indigo", "color_hex": "0xFF4F46E5", "sort_order": 100, "color_group": "cool"},
+    {"color_hint": "purple", "color_hex": "0xFFA78BFA", "sort_order": 110, "color_group": "violet"},
+    {"color_hint": "pink", "color_hex": "0xFFFF8FC3", "sort_order": 120, "color_group": "violet"},
+    {"color_hint": "neutral", "color_hex": "0xFF9CA3AF", "sort_order": 130, "color_group": "neutral"},
 ]
 
 FAMILY_ICON_OPTIONS = {
-    "figure": ["toys", "view_in_ar", "emoji_objects"],
-    "plush": ["face", "sentiment_satisfied", "favorite"],
-    "badge": ["badge", "stars", "workspace_premium"],
-    "acrylic": ["view_carousel", "layers", "photo_library"],
-    "keyring": ["local_offer", "vpn_key", "sell"],
-    "stationery": ["sticky_note", "edit_note", "article"],
-    "daily_goods": ["inventory", "shopping_bag", "widgets"],
-    "display_goods": ["photo", "collections", "wallpaper"],
-    "apparel": ["style", "checkroom", "dry_cleaning"],
-    "fan_goods": ["celebration", "campaign", "favorite"],
-    "other": ["category", "folder", "apps"],
+    "figure": ["toys", "view_in_ar", "emoji_objects", "smart_toy", "interests", "extension"],
+    "plush": ["face", "sentiment_satisfied", "favorite", "emoji_emotions", "volunteer_activism", "child_care"],
+    "badge": ["badge", "stars", "workspace_premium", "verified", "military_tech", "new_releases"],
+    "acrylic": ["view_carousel", "layers", "photo_library", "dashboard_customize", "filter_frames", "crop_portrait"],
+    "keyring": ["local_offer", "vpn_key", "sell", "loyalty", "label", "key"],
+    "stationery": ["sticky_note", "edit_note", "article", "draw", "description", "book"],
+    "daily_goods": ["inventory", "shopping_bag", "widgets", "local_cafe", "redeem", "backpack"],
+    "display_goods": ["photo", "collections", "wallpaper", "image", "perm_media", "panorama"],
+    "apparel": ["style", "checkroom", "dry_cleaning", "apparel", "laundry", "accessibility_new"],
+    "fan_goods": ["celebration", "campaign", "favorite", "flare", "auto_awesome", "waving_hand"],
+    "other": ["category", "folder", "apps", "widgets", "inventory_2", "more_horiz"],
 }
 
 CANONICAL_CATEGORY_SUGGESTIONS = {
@@ -2571,6 +2571,13 @@ def color_sort_order(color_hint: str) -> int:
     return 999
 
 
+def color_group(color_hint: str) -> str:
+    for row in FOLDER_COLOR_PALETTE:
+        if row["color_hint"] == color_hint:
+            return str(row.get("color_group") or "neutral")
+    return "neutral"
+
+
 def folder_visual_token(category: str, family: str, rows: int) -> dict[str, Any]:
     visual = FAMILY_VISUALS.get(family, FAMILY_VISUALS["other"])
     return {
@@ -2579,6 +2586,7 @@ def folder_visual_token(category: str, family: str, rows: int) -> dict[str, Any]
         "rows": rows,
         "color_hint": visual["color_hint"],
         "color_hex": visual["color_hex"],
+        "color_group": color_group(visual["color_hint"]),
         "color_sort_order": color_sort_order(visual["color_hint"]),
         "primary_icon_key": visual["icon_key"],
         "icon_options": FAMILY_ICON_OPTIONS.get(family, FAMILY_ICON_OPTIONS["other"]),
@@ -2689,6 +2697,7 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
                     (row["color_hex"] for row in FOLDER_COLOR_PALETTE if row["color_hint"] == color_hint),
                     FAMILY_VISUALS["other"]["color_hex"],
                 ),
+                "suggested_color_group": color_group(color_hint),
                 "suggested_color_sort_order": color_sort_order(color_hint),
                 "suggested_primary_icon_key": suggestion["primary_icon_key"],
                 "suggested_icon_options": FAMILY_ICON_OPTIONS.get(

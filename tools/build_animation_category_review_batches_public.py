@@ -39,6 +39,7 @@ def _compact_row(row: dict[str, Any]) -> dict[str, Any]:
         "family": row.get("suggested_family"),
         "color_hint": row.get("suggested_color_hint"),
         "color_hex": row.get("suggested_color_hex"),
+        "color_group": row.get("suggested_color_group"),
         "color_sort_order": row.get("suggested_color_sort_order"),
         "primary_icon_key": row.get("suggested_primary_icon_key"),
         "icon_options": row.get("suggested_icon_options") or [],
@@ -53,6 +54,7 @@ def _compact_row(row: dict[str, Any]) -> dict[str, Any]:
         "suggested_category": suggested_category,
         "suggested_color_hint": row.get("suggested_color_hint"),
         "suggested_color_hex": row.get("suggested_color_hex"),
+        "suggested_color_group": row.get("suggested_color_group"),
         "suggested_color_sort_order": row.get("suggested_color_sort_order"),
         "suggested_primary_icon_key": row.get("suggested_primary_icon_key"),
         "suggested_icon_options": row.get("suggested_icon_options") or [],
@@ -77,11 +79,15 @@ def _recommended_action(row: dict[str, Any], rows: int) -> str:
 
 def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_size: int = 4) -> dict[str, Any]:
     rows = [_compact_row(row) for row in sorted(queue, key=lambda row: (_priority(row), str(row.get("category") or "")))]
+    folder_color_palette = source.get("folder_color_palette") or []
+    folder_visual_tokens = source.get("folder_visual_tokens") or []
+    folder_icon_catalog = _folder_icon_catalog(folder_visual_tokens)
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(rows), batch_size):
         batch_rows = rows[offset : offset + batch_size]
         family_counts = Counter(str(row.get("suggested_family") or "") for row in batch_rows)
         color_counts = Counter(str(row.get("suggested_color_hint") or "") for row in batch_rows)
+        color_group_counts = Counter(str(row.get("suggested_color_group") or "neutral") for row in batch_rows)
         folder_templates = [row.get("folder_template") for row in batch_rows if isinstance(row.get("folder_template"), dict)]
         batches.append(
             {
@@ -91,6 +97,7 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
                 "row_count": sum(int(row.get("rows") or 0) for row in batch_rows),
                 "suggested_family_counts": family_counts.most_common(),
                 "suggested_color_counts": color_counts.most_common(),
+                "suggested_color_group_counts": color_group_counts.most_common(),
                 "folder_templates": folder_templates,
                 "folder_creation_blocked_until": "category_mapping_manually_confirmed",
                 "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
@@ -101,6 +108,7 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
     total_rows = sum(int(row.get("rows") or 0) for row in rows)
     family_counts = Counter(str(row.get("suggested_family") or "") for row in rows)
     color_counts = Counter(str(row.get("suggested_color_hint") or "") for row in rows)
+    color_group_counts = Counter(str(row.get("suggested_color_group") or "neutral") for row in rows)
     summary = {
         "source_categories": len(queue),
         "source_rows": total_rows,
@@ -108,8 +116,10 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
         "batch_size": batch_size,
         "by_suggested_family": family_counts.most_common(),
         "by_suggested_color": color_counts.most_common(),
-        "folder_visual_token_count": len(source.get("folder_visual_tokens") or []),
+        "by_suggested_color_group": color_group_counts.most_common(),
+        "folder_visual_token_count": len(folder_visual_tokens),
         "folder_template_count": len(rows),
+        "folder_icon_family_count": len(folder_icon_catalog),
         "auto_apply_enabled": False,
     }
     return {
@@ -117,8 +127,12 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
         "generated_at": _now_utc(),
         "scope": "animation_goods_taxonomy_review_batches",
         "summary": summary,
-        "folder_color_palette": source.get("folder_color_palette") or [],
-        "folder_visual_tokens": source.get("folder_visual_tokens") or [],
+        "folder_color_palette": sorted(
+            [row for row in folder_color_palette if isinstance(row, dict)],
+            key=lambda row: int(row.get("sort_order") or 999),
+        ),
+        "folder_visual_tokens": folder_visual_tokens,
+        "folder_icon_catalog": folder_icon_catalog,
         "batches": batches,
         "automation_policy": {
             "auto_apply_category_changes": False,
@@ -132,6 +146,32 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
             "Keep color sorting by folder_color_palette so similar colors stay grouped in the app.",
         ],
     }
+
+
+def _folder_icon_catalog(folder_visual_tokens: list[Any]) -> list[dict[str, Any]]:
+    by_family: dict[str, set[str]] = {}
+    primary_icons: dict[str, str] = {}
+    for token in folder_visual_tokens:
+        if not isinstance(token, dict):
+            continue
+        family = str(token.get("family") or "other")
+        options = by_family.setdefault(family, set())
+        primary = str(token.get("primary_icon_key") or "")
+        if primary and family not in primary_icons:
+            primary_icons[family] = primary
+        for icon in token.get("icon_options") or []:
+            if isinstance(icon, str) and icon:
+                options.add(icon)
+    return [
+        {
+            "family": family,
+            "primary_icon_key": primary_icons.get(family) or sorted(icons)[0],
+            "icon_options": sorted(icons),
+            "icon_count": len(icons),
+        }
+        for family, icons in sorted(by_family.items())
+        if icons
+    ]
 
 
 def main() -> int:
