@@ -74,6 +74,19 @@ class PublicCatalogReportTests(unittest.TestCase):
 
         blocker_rows = sum(int(row.get("rows") or 0) for row in image_batches.get("blocker_summary", []))
         self.assertEqual(blocker_rows, image_batches["summary"]["missing_image_rows"])
+        image_review_batches = image_batches.get("review_batches", [])
+        self.assertEqual(image_batches["summary"]["review_batch_count"], len(image_review_batches))
+        self.assertEqual(
+            sum(int(batch.get("missing_image_rows") or 0) for batch in image_review_batches),
+            sum(int(group.get("missing_image_rows") or 0) for group in image_batches.get("groups", [])),
+        )
+        self.assertTrue(all(batch.get("auto_apply_enabled") is False for batch in image_review_batches))
+        self.assertTrue(
+            all(
+                len({group.get("workflow") for group in batch.get("groups", []) if isinstance(group, dict)}) <= 1
+                for batch in image_review_batches
+            )
+        )
 
         batches = agent_queue.get("batches", [])
         top_batches = agent_queue.get("top_next_batches", [])

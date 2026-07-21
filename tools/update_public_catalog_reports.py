@@ -755,6 +755,50 @@ def build_image_enrichment_batches_public(
         )
         if by_workflow.get(workflow, 0)
     ]
+    review_batches: list[dict[str, Any]] = []
+    groups_by_workflow: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for group in groups:
+        groups_by_workflow[str(group.get("workflow") or "manual_image_research")].append(group)
+    ordered_workflows = sorted(
+        groups_by_workflow,
+        key=lambda workflow: (
+            workflow_priority.get(workflow, 99),
+            -sum(int(group.get("missing_image_rows") or 0) for group in groups_by_workflow[workflow]),
+            workflow,
+        ),
+    )
+    for workflow in ordered_workflows:
+        workflow_groups = groups_by_workflow[workflow]
+        for offset in range(0, len(workflow_groups), 8):
+            batch_groups = workflow_groups[offset : offset + 8]
+            step = workflow_steps.get(workflow, workflow_steps["manual_image_research"])
+            store_rows = Counter(
+                str(group.get("source_store") or "unknown")
+                for group in batch_groups
+                for _ in range(int(group.get("missing_image_rows") or 0))
+            )
+            review_batches.append(
+                {
+                    "batch_id": f"image-enrichment-review-{len(review_batches) + 1:03d}",
+                    "priority": min(int(group.get("priority") or 99) for group in batch_groups),
+                    "workflow": workflow,
+                    "workflow_counts": [(workflow, len(batch_groups))],
+                    "top_source_stores": store_rows.most_common(8),
+                    "group_count": len(batch_groups),
+                    "missing_image_rows": sum(int(group.get("missing_image_rows") or 0) for group in batch_groups),
+                    "blocked_until": step.get("state"),
+                    "next_machine_step": step.get("next_step"),
+                    "public_report": step.get("public_report"),
+                    "acceptance_criteria": [
+                        "exact product source_url is available before importing image_url",
+                        "image_url comes from the accepted source page or trusted official CDN",
+                        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
+                        "generic storefront URLs are replaced before image extraction",
+                    ],
+                    "auto_apply_enabled": False,
+                    "groups": batch_groups,
+                }
+            )
     return {
         "schema_version": 1,
         "summary": {
@@ -765,11 +809,13 @@ def build_image_enrichment_batches_public(
             "needs_source_discovery_rows": by_workflow.get("find_source_then_extract_image", 0),
             "manual_image_research_rows": by_workflow.get("manual_image_research", 0),
             "published_group_rows": len(groups),
+            "review_batch_count": len(review_batches),
             "top_source_stores": by_store.most_common(30),
             "by_workflow": by_workflow.most_common(),
         },
         "workflow_steps": workflow_steps,
         "blocker_summary": blocker_summary,
+        "review_batches": review_batches,
         "instructions": [
             "Public image enrichment batches grouped by readiness and source store.",
             "Rows with source_url should be attempted first because identity evidence already exists.",
