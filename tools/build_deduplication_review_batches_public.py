@@ -85,20 +85,35 @@ def _compact_group(group: dict[str, Any]) -> dict[str, Any]:
     stores = sorted({str(row.get("source_store") or "") for row in rows if row.get("source_store")})
     categories = sorted({str(row.get("category") or "") for row in rows if row.get("category")})
     confidence = _review_confidence(group)
+    keep_index = group.get("keep_catalog_index")
+    drop_indexes = group.get("drop_catalog_indexes") or []
+    decision_template = {
+        "manual_confirmed": False,
+        "manual_note": "",
+        "key_type": group.get("key_type"),
+        "key": group.get("key"),
+        "review_confidence": confidence,
+        "keep_catalog_index": keep_index,
+        "drop_catalog_indexes": drop_indexes,
+        "decision": "review_required",
+        "requires_same_sellable_product": True,
+        "requires_variant_difference_disproved": confidence == "variant_caution",
+    }
     return {
         "key_type": group.get("key_type"),
         "key": group.get("key"),
         "review_priority": group.get("review_priority"),
         "review_risk": group.get("review_risk"),
         "review_confidence": confidence,
-        "keep_catalog_index": group.get("keep_catalog_index"),
-        "drop_catalog_indexes": group.get("drop_catalog_indexes") or [],
+        "keep_catalog_index": keep_index,
+        "drop_catalog_indexes": drop_indexes,
         "row_count": len(rows),
         "stores": stores,
         "categories": categories,
         "shared_name_token_ratio": _shared_name_token_ratio(rows),
         "evidence": group.get("evidence") or [],
         "recommended_action": _recommended_action(group, confidence),
+        "dedupe_decision_template": decision_template,
         "rows": rows,
     }
 
@@ -178,6 +193,15 @@ def build_report(groups: list[dict[str, Any]], *, batch_size: int = 12) -> dict[
                 "key_type_counts": key_type_counts.most_common(),
                 "merge_blocker_counts": blocker_counts.most_common(),
                 "identity_checklist": checklist,
+                "dedupe_decision_template_fields": [
+                    "manual_confirmed",
+                    "key_type",
+                    "key",
+                    "keep_catalog_index",
+                    "drop_catalog_indexes",
+                    "decision",
+                    "manual_note",
+                ],
                 "blocked_until": "explicit_manual_keep_drop_confirmation",
                 "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
                 "groups": batch_groups,
@@ -198,6 +222,7 @@ def build_report(groups: list[dict[str, Any]], *, batch_size: int = 12) -> dict[
             "by_review_risk": risk_counts.most_common(),
             "by_review_confidence": confidence_counts.most_common(),
             "by_key_type": key_type_counts.most_common(),
+            "decision_template_count": len(compact_groups),
             "auto_delete_enabled": False,
         },
         "batches": batches,

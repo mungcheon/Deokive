@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T21:43:30Z",
+  "generated_at": "2026-07-21T22:01:06Z",
   "scope": "catalog_public_deduplication_review_batches",
   "summary": {
     "source_groups": 80,
@@ -56,6 +56,7 @@
         2
       ]
     ],
+    "decision_template_count": 80,
     "auto_delete_enabled": false
   },
   "batches": [
@@ -103,6 +104,15 @@
         "multi_store_rows_are_same_product_not_retailer_specific_variant",
         "source_page_is_not_a_variant_or_lineup_page"
       ],
+      "dedupe_decision_template_fields": [
+        "manual_confirmed",
+        "key_type",
+        "key",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "decision",
+        "manual_note"
+      ],
       "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
@@ -131,6 +141,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4513750146349",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 78,
+            "drop_catalog_indexes": [
+              916
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 78,
@@ -194,6 +218,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4550621606519",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 17889,
+            "drop_catalog_indexes": [
+              2076
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 2076,
@@ -257,6 +295,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4550621606564",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 17894,
+            "drop_catalog_indexes": [
+              2075
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 2075,
@@ -321,6 +373,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4570189195898",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3710,
+            "drop_catalog_indexes": [
+              367
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 367,
@@ -385,6 +451,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4570189195942",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3714,
+            "drop_catalog_indexes": [
+              366
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 366,
@@ -449,6 +529,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4570189201551",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3722,
+            "drop_catalog_indexes": [
+              365
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 365,
@@ -513,6 +607,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609351603",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 597,
+            "drop_catalog_indexes": [
+              3619
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 597,
@@ -578,6 +686,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609351610",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 598,
+            "drop_catalog_indexes": [
+              3618
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 598,
@@ -643,6 +765,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609351658",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3606,
+            "drop_catalog_indexes": [
+              171
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 171,
@@ -707,6 +843,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359074",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 581,
+            "drop_catalog_indexes": [
+              3645
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 581,
@@ -772,6 +922,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359081",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 582,
+            "drop_catalog_indexes": [
+              3644
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 582,
@@ -837,6 +1001,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359098",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 583,
+            "drop_catalog_indexes": [
+              3643
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 583,
@@ -922,6 +1100,15 @@
         "multi_store_rows_are_same_product_not_retailer_specific_variant",
         "source_page_is_not_a_variant_or_lineup_page"
       ],
+      "dedupe_decision_template_fields": [
+        "manual_confirmed",
+        "key_type",
+        "key",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "decision",
+        "manual_note"
+      ],
       "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
@@ -951,6 +1138,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359104",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 584,
+            "drop_catalog_indexes": [
+              3642
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 584,
@@ -1016,6 +1217,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359111",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 585,
+            "drop_catalog_indexes": [
+              3641
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 585,
@@ -1081,6 +1296,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359128",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 586,
+            "drop_catalog_indexes": [
+              3639
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 586,
@@ -1146,6 +1375,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359135",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 587,
+            "drop_catalog_indexes": [
+              3640
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 587,
@@ -1211,6 +1454,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359142",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 588,
+            "drop_catalog_indexes": [
+              3638
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 588,
@@ -1276,6 +1533,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609362555",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 599,
+            "drop_catalog_indexes": [
+              3616
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 599,
@@ -1341,6 +1612,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609362562",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 600,
+            "drop_catalog_indexes": [
+              3617
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 600,
@@ -1406,6 +1691,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609367710",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3443,
+            "drop_catalog_indexes": [
+              370
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 370,
@@ -1470,6 +1769,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609367727",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3445,
+            "drop_catalog_indexes": [
+              371
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 371,
@@ -1534,6 +1847,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609367734",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3442,
+            "drop_catalog_indexes": [
+              372
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 372,
@@ -1598,6 +1925,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609367741",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3444,
+            "drop_catalog_indexes": [
+              373
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 373,
@@ -1662,6 +2003,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609367796",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3441,
+            "drop_catalog_indexes": [
+              374
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 374,
@@ -1747,6 +2102,15 @@
         "shared_image_is_not_a_placeholder_or_lineup_image",
         "source_page_is_not_a_variant_or_lineup_page"
       ],
+      "dedupe_decision_template_fields": [
+        "manual_confirmed",
+        "key_type",
+        "key",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "decision",
+        "manual_note"
+      ],
       "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
@@ -1777,6 +2141,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609370895",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 790,
+            "drop_catalog_indexes": [
+              236
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 236,
@@ -1843,6 +2221,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385097",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3461,
+            "drop_catalog_indexes": [
+              237
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 237,
@@ -1907,6 +2299,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385103",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3463,
+            "drop_catalog_indexes": [
+              238
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 238,
@@ -1971,6 +2377,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385110",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3462,
+            "drop_catalog_indexes": [
+              239
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 239,
@@ -2035,6 +2455,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385127",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3464,
+            "drop_catalog_indexes": [
+              240
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 240,
@@ -2099,6 +2533,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385134",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3458,
+            "drop_catalog_indexes": [
+              241
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 241,
@@ -2163,6 +2611,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385141",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3457,
+            "drop_catalog_indexes": [
+              242
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 242,
@@ -2227,6 +2689,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385158",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3459,
+            "drop_catalog_indexes": [
+              243
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 243,
@@ -2291,6 +2767,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385165",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3460,
+            "drop_catalog_indexes": [
+              244
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 244,
@@ -2355,6 +2845,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609385172",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3455,
+            "drop_catalog_indexes": [
+              245
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 245,
@@ -2419,6 +2923,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437730",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3669,
+            "drop_catalog_indexes": [
+              318
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 318,
@@ -2483,6 +3001,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437747",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3672,
+            "drop_catalog_indexes": [
+              319
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 319,
@@ -2559,6 +3091,15 @@
         "multi_store_rows_are_same_product_not_retailer_specific_variant",
         "source_page_is_not_a_variant_or_lineup_page"
       ],
+      "dedupe_decision_template_fields": [
+        "manual_confirmed",
+        "key_type",
+        "key",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "decision",
+        "manual_note"
+      ],
       "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
@@ -2588,6 +3129,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437754",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3670,
+            "drop_catalog_indexes": [
+              320
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 320,
@@ -2652,6 +3207,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437761",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3675,
+            "drop_catalog_indexes": [
+              321
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 321,
@@ -2716,6 +3285,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437778",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3674,
+            "drop_catalog_indexes": [
+              322
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 322,
@@ -2780,6 +3363,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437785",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3673,
+            "drop_catalog_indexes": [
+              323
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 323,
@@ -2844,6 +3441,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437792",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3676,
+            "drop_catalog_indexes": [
+              324
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 324,
@@ -2908,6 +3519,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437808",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3678,
+            "drop_catalog_indexes": [
+              325
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 325,
@@ -2972,6 +3597,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437815",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 2764,
+            "drop_catalog_indexes": [
+              326
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 326,
@@ -3036,6 +3675,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437822",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3679,
+            "drop_catalog_indexes": [
+              327
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 327,
@@ -3100,6 +3753,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437839",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3677,
+            "drop_catalog_indexes": [
+              328
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 328,
@@ -3164,6 +3831,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437846",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3680,
+            "drop_catalog_indexes": [
+              329
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 329,
@@ -3228,6 +3909,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437853",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3682,
+            "drop_catalog_indexes": [
+              330
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 330,
@@ -3292,6 +3987,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437860",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3681,
+            "drop_catalog_indexes": [
+              331
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 331,
@@ -3376,6 +4085,15 @@
         "multi_store_rows_are_same_product_not_retailer_specific_variant",
         "source_page_is_not_a_variant_or_lineup_page"
       ],
+      "dedupe_decision_template_fields": [
+        "manual_confirmed",
+        "key_type",
+        "key",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "decision",
+        "manual_note"
+      ],
       "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
@@ -3405,6 +4123,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437877",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3684,
+            "drop_catalog_indexes": [
+              332
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 332,
@@ -3469,6 +4201,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437884",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3686,
+            "drop_catalog_indexes": [
+              333
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 333,
@@ -3533,6 +4279,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437891",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3683,
+            "drop_catalog_indexes": [
+              334
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 334,
@@ -3597,6 +4357,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437907",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3685,
+            "drop_catalog_indexes": [
+              335
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 335,
@@ -3661,6 +4435,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437914",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3687,
+            "drop_catalog_indexes": [
+              337
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 337,
@@ -3725,6 +4513,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4573256437921",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 3689,
+            "drop_catalog_indexes": [
+              336
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 336,
@@ -3788,6 +4590,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917828",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 904,
+            "drop_catalog_indexes": [
+              10050
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 904,
@@ -3851,6 +4667,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917835",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 905,
+            "drop_catalog_indexes": [
+              10047
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 905,
@@ -3914,6 +4744,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917842",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 906,
+            "drop_catalog_indexes": [
+              10049
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 906,
@@ -3977,6 +4821,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917859",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 907,
+            "drop_catalog_indexes": [
+              10048
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 907,
@@ -4040,6 +4898,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917866",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 908,
+            "drop_catalog_indexes": [
+              10046
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 908,
@@ -4103,6 +4975,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917873",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 767,
+            "drop_catalog_indexes": [
+              910
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 767,
@@ -4212,6 +5098,15 @@
         "shared_image_is_not_a_placeholder_or_lineup_image",
         "source_page_is_not_a_variant_or_lineup_page"
       ],
+      "dedupe_decision_template_fields": [
+        "manual_confirmed",
+        "key_type",
+        "key",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "decision",
+        "manual_note"
+      ],
       "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
@@ -4240,6 +5135,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917880",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 766,
+            "drop_catalog_indexes": [
+              911
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 766,
@@ -4302,6 +5211,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917897",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 765,
+            "drop_catalog_indexes": [
+              912
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 765,
@@ -4364,6 +5287,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917903",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 764,
+            "drop_catalog_indexes": [
+              913
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 764,
@@ -4427,6 +5364,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917910",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 763,
+            "drop_catalog_indexes": [
+              914
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 763,
@@ -4489,6 +5440,20 @@
             "multi_store"
           ],
           "recommended_action": "Compare product identity manually before any catalog patch.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662919914",
+            "review_confidence": "manual_identity_check",
+            "keep_catalog_index": 909,
+            "drop_catalog_indexes": [
+              10045
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 909,
@@ -4552,6 +5517,20 @@
             "multi_store"
           ],
           "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662919921",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 762,
+            "drop_catalog_indexes": [
+              915
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 762,
@@ -4613,6 +5592,20 @@
             "same_image_url"
           ],
           "recommended_action": "Check whether the shared source page contains variants before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "source_url",
+            "key": "https://fanding.kr/@stellive/shop|스텔라이브 단체 아크릴 스탠드 세트",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 2379,
+            "drop_catalog_indexes": [
+              17627
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 2379,
@@ -4673,6 +5666,20 @@
             "same_source_url"
           ],
           "recommended_action": "Check whether the shared source page contains variants before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "source_url",
+            "key": "https://www.jp-api.com/contents/nod62|ご当地 ちいかわ",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17817,
+            "drop_catalog_indexes": [
+              17924
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 17817,
@@ -4732,6 +5739,20 @@
             "same_image_url"
           ],
           "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "image_url",
+            "key": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg|g賞 ガラス皿",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17743,
+            "drop_catalog_indexes": [
+              17763
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 17743,
@@ -4791,6 +5812,20 @@
             "same_image_url"
           ],
           "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "image_url",
+            "key": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg|h賞 タオル",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17744,
+            "drop_catalog_indexes": [
+              17764
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 17744,
@@ -4850,6 +5885,20 @@
             "same_image_url"
           ],
           "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "image_url",
+            "key": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg|f賞 グラス",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17786,
+            "drop_catalog_indexes": [
+              17790
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 17786,
@@ -4909,6 +5958,20 @@
             "same_image_url"
           ],
           "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "image_url",
+            "key": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg|g賞 タオル",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17787,
+            "drop_catalog_indexes": [
+              17791
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
           "rows": [
             {
               "catalog_index": 17787,
@@ -4992,6 +6055,15 @@
         "preserve_rows_unless_variant_difference_is_disproved",
         "source_page_is_not_a_variant_or_lineup_page"
       ],
+      "dedupe_decision_template_fields": [
+        "manual_confirmed",
+        "key_type",
+        "key",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "decision",
+        "manual_note"
+      ],
       "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
@@ -5022,6 +6094,20 @@
             "multi_store"
           ],
           "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4513750146387",
+            "review_confidence": "variant_caution",
+            "keep_catalog_index": 917,
+            "drop_catalog_indexes": [
+              5709
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": true
+          },
           "rows": [
             {
               "catalog_index": 917,
@@ -5089,6 +6175,20 @@
             "multi_store"
           ],
           "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4513750146394",
+            "review_confidence": "variant_caution",
+            "keep_catalog_index": 918,
+            "drop_catalog_indexes": [
+              6020
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": true
+          },
           "rows": [
             {
               "catalog_index": 918,
@@ -5156,6 +6256,20 @@
             "multi_store"
           ],
           "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4570117920592",
+            "review_confidence": "variant_caution",
+            "keep_catalog_index": 919,
+            "drop_catalog_indexes": [
+              293
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": true
+          },
           "rows": [
             {
               "catalog_index": 293,
@@ -5224,6 +6338,20 @@
             "multi_store"
           ],
           "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609351641",
+            "review_confidence": "variant_caution",
+            "keep_catalog_index": 601,
+            "drop_catalog_indexes": [
+              3607
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": true
+          },
           "rows": [
             {
               "catalog_index": 601,
@@ -5293,6 +6421,20 @@
             "multi_store"
           ],
           "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359159",
+            "review_confidence": "variant_caution",
+            "keep_catalog_index": 589,
+            "drop_catalog_indexes": [
+              3636
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": true
+          },
           "rows": [
             {
               "catalog_index": 589,
@@ -5362,6 +6504,20 @@
             "multi_store"
           ],
           "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359166",
+            "review_confidence": "variant_caution",
+            "keep_catalog_index": 590,
+            "drop_catalog_indexes": [
+              3637
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": true
+          },
           "rows": [
             {
               "catalog_index": 590,
@@ -5431,6 +6587,20 @@
             "multi_store"
           ],
           "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359173",
+            "review_confidence": "variant_caution",
+            "keep_catalog_index": 591,
+            "drop_catalog_indexes": [
+              3634
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": true
+          },
           "rows": [
             {
               "catalog_index": 591,
@@ -5500,6 +6670,20 @@
             "multi_store"
           ],
           "recommended_action": "Preserve as separate variants unless source evidence proves the rows are the same sellable product.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4571609359180",
+            "review_confidence": "variant_caution",
+            "keep_catalog_index": 592,
+            "drop_catalog_indexes": [
+              3635
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": true
+          },
           "rows": [
             {
               "catalog_index": 592,
