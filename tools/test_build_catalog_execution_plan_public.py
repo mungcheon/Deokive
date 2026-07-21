@@ -69,6 +69,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "ichiban_kuji_metadata_review_batches_public.json": {
                 "summary": {"catalog_item_rows": 0}
             },
+            "ichiban_kuji_metadata_action_queue_public.json": {
+                "summary": {
+                    "actionable_campaigns": 1,
+                    "queued_action_campaigns": 1,
+                    "queued_catalog_item_rows": 8,
+                    "action_batch_count": 1,
+                    "field_patch_template_counts": [["release_date", 1]],
+                }
+            },
             "animation_category_review_batches_public.json": {
                 "summary": {"source_rows": 0}
             },
@@ -123,6 +132,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(dedupe_action["rows"], 2)
         self.assertEqual(dedupe_action["evidence"]["actionable_groups"], 2)
+        kuji_action = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "ichiban_kuji_metadata_action_queue"
+        )
+        self.assertEqual(kuji_action["rows"], 1)
+        self.assertEqual(kuji_action["evidence"]["queued_catalog_item_rows"], 8)
 
     def test_pending_import_rows_are_prioritized(self) -> None:
         payloads = {

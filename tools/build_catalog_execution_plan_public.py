@@ -106,6 +106,7 @@ def build_plan() -> dict[str, Any]:
     dedupe_batches = _load("catalog_deduplication_review_batches_public.json")
     dedupe_action_queue = _load("catalog_deduplication_action_queue_public.json")
     kuji_batches = _load("ichiban_kuji_metadata_review_batches_public.json")
+    kuji_action_queue = _load("ichiban_kuji_metadata_action_queue_public.json")
     animation_batches = _load("animation_category_review_batches_public.json")
     confirmed_readiness = _load("catalog_confirmed_import_readiness_public.json")
 
@@ -122,6 +123,7 @@ def build_plan() -> dict[str, Any]:
     dedupe_summary = _summary(dedupe_batches)
     dedupe_action_summary = _summary(dedupe_action_queue)
     kuji_summary = _summary(kuji_batches)
+    kuji_action_summary = _summary(kuji_action_queue)
     animation_summary = _summary(animation_batches)
     confirmed_summary = _summary(confirmed_readiness)
 
@@ -324,6 +326,26 @@ def build_plan() -> dict[str, Any]:
             evidence={
                 "batch_count": _count(kuji_summary, "batch_count"),
                 "source_campaigns": _count(kuji_summary, "source_campaigns"),
+            },
+        )
+    )
+
+    actions.append(
+        _action(
+            priority=61,
+            workstream="ichiban_kuji_metadata_action_queue",
+            public_report="data/ichiban_kuji_metadata_action_queue_public.json",
+            status="manual_review",
+            rows=_count(kuji_action_summary, "queued_action_campaigns"),
+            command="Confirm labeled official 1kuji release dates and prices, then fill campaign patch templates.",
+            next_step="fill_confirmed_ichiban_campaign_patch_templates",
+            blocker="Historical 1kuji metadata is manual-only until official campaign evidence is confirmed.",
+            evidence={
+                "actionable_campaigns": _count(kuji_action_summary, "actionable_campaigns"),
+                "queued_action_campaigns": _count(kuji_action_summary, "queued_action_campaigns"),
+                "queued_catalog_item_rows": _count(kuji_action_summary, "queued_catalog_item_rows"),
+                "action_batch_count": _count(kuji_action_summary, "action_batch_count"),
+                "field_patch_template_counts": kuji_action_summary.get("field_patch_template_counts", []),
             },
         )
     )

@@ -27,6 +27,7 @@ ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
 ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES = DATA / "ichiban_kuji_metadata_review_batches_public.json"
+ICHIIBAN_KUJI_METADATA_ACTION_QUEUE = DATA / "ichiban_kuji_metadata_action_queue_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
@@ -1311,6 +1312,12 @@ def build_operations_public(
         else {}
     )
     ichiban_kuji_metadata_review_batches_summary = ichiban_kuji_metadata_review_batches.get("summary", {})
+    ichiban_kuji_metadata_action_queue = (
+        load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {})
+        if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists()
+        else {}
+    )
+    ichiban_kuji_metadata_action_queue_summary = ichiban_kuji_metadata_action_queue.get("summary", {})
     metadata_summary = metadata_backlog["summary"]
     metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
     metadata_review_batches_summary = metadata_review_batches.get("summary", {})
@@ -1624,6 +1631,15 @@ def build_operations_public(
             "recommended_next_action": "Review batched 1kuji campaign metadata evidence before applying release dates or prices.",
         } if ichiban_kuji_metadata_review_batches_summary else None,
         {
+            "priority": 53,
+            "workstream": "ichiban_kuji_metadata_action_queue",
+            "public_report": f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
+            "queued_action_campaigns": ichiban_kuji_metadata_action_queue_summary.get("queued_action_campaigns", 0),
+            "queued_catalog_item_rows": ichiban_kuji_metadata_action_queue_summary.get("queued_catalog_item_rows", 0),
+            "action_batch_count": ichiban_kuji_metadata_action_queue_summary.get("action_batch_count", 0),
+            "recommended_next_action": "Work confirmed official 1kuji campaign metadata templates before broader historical research.",
+        } if ichiban_kuji_metadata_action_queue_summary else None,
+        {
             "priority": 60,
             "workstream": "animation_folder_visuals",
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
@@ -1776,6 +1792,14 @@ def build_operations_public(
             "auto_apply_enabled": ichiban_kuji_metadata_review_batches_summary.get("auto_apply_enabled", False),
         } if ichiban_kuji_metadata_review_batches_summary else None,
         {
+            "workstream": "ichiban_kuji_metadata_action_queue",
+            "status": "manual_review" if ichiban_kuji_metadata_action_queue_summary.get("queued_action_campaigns", 0) else "clear",
+            "open_rows": ichiban_kuji_metadata_action_queue_summary.get("queued_action_campaigns", 0),
+            "primary_report": f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
+            "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+            "auto_apply_enabled": ichiban_kuji_metadata_action_queue_summary.get("auto_apply_enabled", False),
+        } if ichiban_kuji_metadata_action_queue_summary else None,
+        {
             "workstream": "animation_taxonomy",
             "status": "manual_review" if animation_summary.get("unknown_category_rows", 0) else "clear",
             "open_rows": animation_summary.get("unknown_category_rows", 0),
@@ -1825,6 +1849,10 @@ def build_operations_public(
         open_review_queues["requested_focus_action_rows"] = requested_focus_action_queue_summary.get("queued_action_rows", 0)
     if image_action_queue_summary:
         open_review_queues["image_attachment_action_rows"] = image_action_queue_summary.get("queued_image_rows", 0)
+    if ichiban_kuji_metadata_action_queue_summary:
+        open_review_queues["ichiban_metadata_action_campaigns"] = ichiban_kuji_metadata_action_queue_summary.get(
+            "queued_action_campaigns", 0
+        )
     if animation_review_batches_summary:
         open_review_queues["animation_category_review_rows"] = animation_review_batches_summary.get("source_rows", 0)
 
@@ -1936,6 +1964,11 @@ def build_agent_work_queue_public(
         if ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.exists()
         else {}
     )
+    ichiban_metadata_action_queue = (
+        load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {})
+        if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists()
+        else {}
+    )
     animation_review_batches = (
         load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
     )
@@ -1995,6 +2028,8 @@ def build_agent_work_queue_public(
         if workstream == "deduplication_review":
             return "manual_dedupe_review_required"
         if workstream.startswith("ichiban_kuji"):
+            if workstream == "ichiban_kuji_metadata_action_queue":
+                return "manual_official_campaign_metadata_confirmation_required"
             return "official_campaign_evidence_required"
         if workstream == "animation_category_review":
             return "taxonomy_mapping_required"
@@ -2012,6 +2047,7 @@ def build_agent_work_queue_public(
             "metadata_evidence_required": "collect_official_metadata_evidence",
             "manual_dedupe_review_required": "compare_duplicate_group_evidence",
             "official_campaign_evidence_required": "verify_ichiban_campaign_page",
+            "manual_official_campaign_metadata_confirmation_required": "fill_confirmed_ichiban_campaign_patch_templates",
             "taxonomy_mapping_required": "map_category_to_folder_color_and_icon",
         }.get(review_state, "manual_review")
 
@@ -2350,6 +2386,25 @@ def build_agent_work_queue_public(
     ichiban_review_batch_rows = [
         batch for batch in ichiban_metadata_review_batches.get("batches", []) if isinstance(batch, dict)
     ]
+    ichiban_action_batches = [
+        batch for batch in ichiban_metadata_action_queue.get("batches", []) if isinstance(batch, dict)
+    ]
+    for action_batch in ichiban_action_batches[:6]:
+        add_batch(
+            agent_id="agent-ichiban-action",
+            workstream="ichiban_kuji_metadata_action_queue",
+            priority=18 + int(action_batch.get("priority") or 99),
+            title=f"Ichiban Kuji metadata action {action_batch.get('batch_id')}",
+            public_report=ICHIIBAN_KUJI_METADATA_ACTION_QUEUE,
+            rows=int(action_batch.get("campaign_count") or 0),
+            recommended_action=str(action_batch.get("recommended_action") or "fill confirmed 1kuji metadata templates"),
+            acceptance_criteria=[
+                "Use only labeled official 1kuji campaign metadata or captured official evidence.",
+                "Fill release_date or official_price_jpy templates only after manual confirmation.",
+                "Auto-apply remains disabled for historical campaign metadata.",
+            ],
+            samples=[campaign for campaign in action_batch.get("campaigns", []) if isinstance(campaign, dict)],
+        )
     if ichiban_review_batch_rows:
         for review_batch in ichiban_review_batch_rows[:8]:
             workflows = {
@@ -3417,6 +3472,14 @@ def validate_report_consistency(
     image_action_summary = image_action_queue.get("summary", {})
     if image_action_summary:
         expected_open_queues["image_attachment_action_rows"] = image_action_summary.get("queued_image_rows", 0)
+    ichiban_action_queue = (
+        load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}) if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists() else {}
+    )
+    ichiban_action_summary = ichiban_action_queue.get("summary", {})
+    if ichiban_action_summary:
+        expected_open_queues["ichiban_metadata_action_campaigns"] = ichiban_action_summary.get(
+            "queued_action_campaigns", 0
+        )
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     dedupe_action_summary = dedupe_action_queue.get("summary", {})
     if dedupe_action_summary:
@@ -3553,6 +3616,7 @@ def validate_report_consistency(
         f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
+        f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
         f"data/{GENERIC_SOURCE.name}",
         f"data/{GOTOUCHI.name}",
         f"data/{REQUESTED_FOCUS.name}",
@@ -3586,6 +3650,7 @@ def validate_report_consistency(
         "metadata_evidence_required",
         "manual_dedupe_review_required",
         "official_campaign_evidence_required",
+        "manual_official_campaign_metadata_confirmation_required",
         "taxonomy_mapping_required",
         "manual_review_required",
     }
@@ -3600,6 +3665,7 @@ def validate_report_consistency(
         "collect_official_metadata_evidence",
         "compare_duplicate_group_evidence",
         "verify_ichiban_campaign_page",
+        "fill_confirmed_ichiban_campaign_patch_templates",
         "map_category_to_folder_color_and_icon",
         "manual_review",
     }
@@ -3853,6 +3919,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["ichiban_kuji_metadata_review_batches"] = copy_report_summary(
                 ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, "ichiban_kuji_metadata_review_batches"
             )
+        if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists():
+            target["ichiban_kuji_metadata_action_queue"] = copy_report_summary(
+                ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, "ichiban_kuji_metadata_action_queue"
+            )
         target["operations"] = {
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
@@ -3894,6 +3964,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ICHIIBAN_KUJI_HISTORY,
         ICHIIBAN_KUJI_METADATA_PROBE,
         ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES,
+        ICHIIBAN_KUJI_METADATA_ACTION_QUEUE,
         GOTOUCHI,
         REQUESTED,
         REQUESTED_FOCUS,
@@ -3962,6 +4033,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DEDUPLICATION_ACTION_QUEUE.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),
             str(AGENT_WORK_QUEUE.relative_to(ROOT)),
         ],

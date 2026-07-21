@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:41:22Z",
+  "generated_at": "2026-07-21T22:45:37Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -32,6 +32,7 @@
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
       "image_attachment_action_rows": 25,
+      "ichiban_metadata_action_campaigns": 32,
       "animation_category_review_rows": 428
     },
     "top_store_priority_score": 1832.0
@@ -195,6 +196,14 @@
       "open_rows": 381,
       "primary_report": "data/ichiban_kuji_metadata_review_batches_public.json",
       "next_step": "verify_batched_ichiban_campaign_metadata",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "ichiban_kuji_metadata_action_queue",
+      "status": "manual_review",
+      "open_rows": 32,
+      "primary_report": "data/ichiban_kuji_metadata_action_queue_public.json",
+      "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "auto_apply_enabled": false
     },
     {
@@ -777,9 +786,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 11,
+      "action_count": 12,
       "blocked_action_count": 1,
-      "manual_review_action_count": 9,
+      "manual_review_action_count": 10,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -977,6 +986,15 @@
       "source_campaigns": 44,
       "catalog_item_rows": 381,
       "recommended_next_action": "Review batched 1kuji campaign metadata evidence before applying release dates or prices."
+    },
+    {
+      "priority": 53,
+      "workstream": "ichiban_kuji_metadata_action_queue",
+      "public_report": "data/ichiban_kuji_metadata_action_queue_public.json",
+      "queued_action_campaigns": 32,
+      "queued_catalog_item_rows": 260,
+      "action_batch_count": 4,
+      "recommended_next_action": "Work confirmed official 1kuji campaign metadata templates before broader historical research."
     },
     {
       "priority": 60,
