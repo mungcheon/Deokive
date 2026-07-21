@@ -451,11 +451,12 @@
     .card-actions {
       border-top: 1px solid rgba(255, 126, 178, 0.16);
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 0.9fr 1fr 1fr;
     }
 
     .source,
-    .add-owned {
+    .quick-owned,
+    .choose-owned {
       align-items: center;
       background: transparent;
       border: 0;
@@ -474,12 +475,18 @@
       pointer-events: none;
     }
 
-    .add-owned {
+    .quick-owned,
+    .choose-owned {
       border-left: 1px solid rgba(255, 126, 178, 0.16);
       cursor: pointer;
     }
 
-    .add-owned.added {
+    .quick-owned {
+      color: var(--mint);
+    }
+
+    .quick-owned.added,
+    .choose-owned.added {
       color: var(--mint);
     }
 
@@ -933,7 +940,8 @@
         grid-template-columns: 1fr;
       }
 
-      .add-owned {
+      .quick-owned,
+      .choose-owned {
         border-left: 0;
         border-top: 1px solid rgba(255, 126, 178, 0.16);
       }
@@ -1460,8 +1468,10 @@
       const name = item.name_ko || item.name_ja || item.name_en || '이름 없음';
       const secondName = item.name_ja && item.name_ja !== name ? item.name_ja : '';
       const sourceLabel = item.source_url ? '출처 열기' : '출처 없음';
-      const added = isOwnedInSelectedFolder(item);
-      const addLabel = added ? '선택 폴더에 있음' : '내 굿즈로 추가';
+      const selectedAdded = isOwnedInSelectedFolder(item);
+      const topAdded = state.owned.goods.some((owned) => owned.folderId === topFolder().id && owned.catalogKey === ownedKeyFor(item));
+      const chooseLabel = selectedAdded ? '선택 폴더에 있음' : '폴더 선택';
+      const quickLabel = topAdded ? '맨 위에 있음' : '맨 위 추가';
       card.innerHTML = `
         <div class="thumb">
           <div class="badge">${escapeHtml(item.category || '미분류')}</div>
@@ -1477,10 +1487,12 @@
         </div>
         <div class="card-actions">
           <a class="source" href="${escapeAttr(item.source_url || '#')}" target="_blank" rel="noopener noreferrer" aria-disabled="${item.source_url ? 'false' : 'true'}">${sourceLabel}</a>
-          <button class="add-owned${added ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="이 DB 항목을 내 보유 굿즈로 복사">${addLabel}</button>
+          <button class="quick-owned${topAdded ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="가장 상단 폴더에 바로 추가">${quickLabel}</button>
+          <button class="choose-owned${selectedAdded ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="폴더를 지정해서 내 보유 굿즈로 복사">${chooseLabel}</button>
         </div>
       `;
-      card.querySelector('.add-owned').addEventListener('click', () => openOwnedSheet(item));
+      card.querySelector('.quick-owned').addEventListener('click', () => addOwned(item, topFolder().id));
+      card.querySelector('.choose-owned').addEventListener('click', () => openOwnedSheet(item));
       return card;
     }
 
