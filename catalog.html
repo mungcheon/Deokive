@@ -314,25 +314,55 @@
       margin-top: 10px;
     }
 
-    .quality-item {
+    .scorecard-list {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0 4px;
+    }
+
+    .quality-item,
+    .scorecard-item {
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(255, 126, 178, 0.14);
       border-radius: 14px;
       padding: 10px;
     }
 
-    .quality-item strong {
+    .quality-item strong,
+    .scorecard-item strong {
       display: block;
       font-size: 12px;
       line-height: 1.35;
     }
 
-    .quality-item span {
+    .quality-item span,
+    .scorecard-item span {
       color: var(--muted);
       display: block;
       font-size: 11px;
       font-weight: 750;
       margin-top: 4px;
+    }
+
+    .scorecard-item {
+      display: grid;
+      gap: 4px;
+    }
+
+    .scorecard-item strong {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .scorecard-badge {
+      background: rgba(255, 126, 178, 0.13);
+      border-radius: 999px;
+      color: var(--pink-dark);
+      font-size: 10px;
+      font-weight: 900;
+      padding: 4px 7px;
+      white-space: nowrap;
     }
 
     .collection-copy {
@@ -1351,6 +1381,9 @@
           <div id="qualityGapList" class="quality-list" aria-live="polite">
             <div class="loading"><span class="spinner"></span>품질 리포트 확인 중</div>
           </div>
+          <div id="operationsScorecard" class="scorecard-list" aria-live="polite">
+            <div class="loading"><span class="spinner"></span>작업 스코어카드 확인 중</div>
+          </div>
           <a class="kuji-more" href="data/catalog_operations_public.json" target="_blank" rel="noopener noreferrer">운영 요약 열기</a>
           <a class="kuji-more" href="data/catalog_quality_public.json" target="_blank" rel="noopener noreferrer">전체 리포트 열기</a>
           <a class="kuji-more" href="data/catalog_image_backlog_public.json" target="_blank" rel="noopener noreferrer">이미지 백로그 열기</a>
@@ -1453,6 +1486,7 @@
       pendingOwnedItem: null,
       kujiCampaigns: [],
       qualityReport: null,
+      operationsReport: null,
     };
 
     const $ = (id) => document.getElementById(id);
@@ -2000,6 +2034,7 @@
       $('imageMissingCount').textContent = fmt.format(imageBacklog.missing_images || report.missing?.image_url || 0);
       $('imageProviderCount').textContent = fmt.format(imageBacklog.provider_candidate_items || 0);
       $('imageGenericSourceCount').textContent = fmt.format(imageBacklog.missing_with_generic_source_url || 0);
+      renderOperationsScorecard();
 
       const list = $('qualityGapList');
       if (!rows.length) {
@@ -2020,11 +2055,52 @@
       list.replaceChildren(fragment);
     }
 
+    function scorecardLabel(workstream) {
+      return {
+        source_discovery: '출처 탐색',
+        image_enrichment: '이미지 보강',
+        metadata_backlog: '메타데이터',
+        deduplication: '중복 검토',
+        ichiban_kuji_history: '이치방쿠지',
+        animation_taxonomy: '애니 분류',
+        generic_source_patch_candidates: '출처 후보',
+      }[workstream] || workstream;
+    }
+
+    function renderOperationsScorecard() {
+      const container = $('operationsScorecard');
+      if (!container) return;
+      const rows = Array.isArray(state.operationsReport?.workstream_scorecard)
+        ? state.operationsReport.workstream_scorecard
+        : [];
+      if (!rows.length) {
+        container.innerHTML = '<div class="empty">작업 스코어카드를 불러오지 못했어요.</div>';
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      for (const row of rows.slice(0, 4)) {
+        const item = document.createElement('div');
+        item.className = 'scorecard-item';
+        item.innerHTML = `
+          <strong>${escapeHtml(scorecardLabel(row.workstream))}<span class="scorecard-badge">${escapeHtml(row.status || 'open')}</span></strong>
+          <span>${fmt.format(Number(row.open_rows) || 0)}건 · ${escapeHtml(row.next_step || 'review')}</span>
+        `;
+        fragment.append(item);
+      }
+      container.replaceChildren(fragment);
+    }
+
     async function loadQualityReport() {
       try {
-        const response = await fetch('data/catalog_quality_public.json?v=20260722-quality-report', { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        state.qualityReport = await response.json();
+        const [qualityResponse, operationsResponse] = await Promise.all([
+          fetch('data/catalog_quality_public.json?v=20260722-quality-report', { cache: 'no-store' }),
+          fetch('data/catalog_operations_public.json?v=20260722-workstream-scorecard', { cache: 'no-store' }),
+        ]);
+        if (!qualityResponse.ok) throw new Error(`quality HTTP ${qualityResponse.status}`);
+        if (!operationsResponse.ok) throw new Error(`operations HTTP ${operationsResponse.status}`);
+        state.qualityReport = await qualityResponse.json();
+        state.operationsReport = await operationsResponse.json();
         renderQualityReport();
       } catch (error) {
         $('qualitySource').textContent = '-';
@@ -2035,6 +2111,7 @@
         $('imageProviderCount').textContent = '-';
         $('imageGenericSourceCount').textContent = '-';
         $('qualityGapList').innerHTML = `<div class="empty">품질 리포트를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
+        $('operationsScorecard').innerHTML = `<div class="empty">작업 스코어카드를 불러오지 못했어요.</div>`;
       }
     }
 
