@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:50:47Z",
+  "generated_at": "2026-07-21T20:54:35Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -109,6 +109,14 @@
       "open_rows": 21075,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "metadata_review_batches",
+      "status": "manual_review",
+      "open_rows": 21075,
+      "primary_report": "data/catalog_metadata_review_batches_public.json",
+      "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
     },
     {
@@ -668,6 +676,10 @@
       "public_report": "data/catalog_metadata_backlog_public.json"
     },
     {
+      "key": "metadata_review_batches",
+      "public_report": "data/catalog_metadata_review_batches_public.json"
+    },
+    {
       "key": "deduplication",
       "public_report": "data/catalog_deduplication_public.json"
     },
@@ -796,6 +808,15 @@
       ],
       "field_review_queue_rows": 6,
       "recommended_next_action": "Use field_review_queue before store groups to fill release dates, prices, barcodes, and names with evidence."
+    },
+    {
+      "priority": 31,
+      "workstream": "metadata_review_batches",
+      "public_report": "data/catalog_metadata_review_batches_public.json",
+      "batch_count": 30,
+      "field_store_group_count": 351,
+      "missing_cell_count": 21075,
+      "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
       "priority": 40,

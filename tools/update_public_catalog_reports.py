@@ -39,6 +39,7 @@ SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
 SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
+METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
 AGENT_WORK_QUEUE = DATA / "catalog_agent_work_queue_public.json"
@@ -1160,6 +1161,8 @@ def build_operations_public(
     )
     ichiban_kuji_metadata_review_batches_summary = ichiban_kuji_metadata_review_batches.get("summary", {})
     metadata_summary = metadata_backlog["summary"]
+    metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
+    metadata_review_batches_summary = metadata_review_batches.get("summary", {})
     generic_patch_summary = generic_source_patch_candidates["summary"]
     requested_focus_summary = requested_focus["summary"]
     danganronpa_media_summary = danganronpa_missing_media["summary"]
@@ -1345,6 +1348,15 @@ def build_operations_public(
             "recommended_next_action": "Use field_review_queue before store groups to fill release dates, prices, barcodes, and names with evidence.",
         },
         {
+            "priority": 31,
+            "workstream": "metadata_review_batches",
+            "public_report": f"data/{METADATA_REVIEW_BATCHES.name}",
+            "batch_count": metadata_review_batches_summary.get("batch_count", 0),
+            "field_store_group_count": metadata_review_batches_summary.get("field_store_group_count", 0),
+            "missing_cell_count": metadata_review_batches_summary.get("missing_cell_count", 0),
+            "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup.",
+        } if metadata_review_batches_summary else None,
+        {
             "priority": 40,
             "workstream": "deduplication_review",
             "public_report": f"data/{DEDUPLICATION.name}",
@@ -1458,6 +1470,14 @@ def build_operations_public(
             "next_step": "review_field_evidence_policy",
             "auto_apply_enabled": False,
         },
+        {
+            "workstream": "metadata_review_batches",
+            "status": "manual_review" if metadata_review_batches_summary.get("missing_cell_count", 0) else "clear",
+            "open_rows": metadata_review_batches_summary.get("missing_cell_count", 0),
+            "primary_report": f"data/{METADATA_REVIEW_BATCHES.name}",
+            "next_step": "work_full_metadata_review_batches",
+            "auto_apply_enabled": metadata_review_batches_summary.get("auto_apply_enabled", False),
+        } if metadata_review_batches_summary else None,
         {
             "workstream": "deduplication",
             "status": "manual_review" if dedupe_summary.get("duplicate_groups", 0) else "clear",
@@ -1575,6 +1595,7 @@ def build_operations_public(
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
+            {"key": "metadata_review_batches", "public_report": f"data/{METADATA_REVIEW_BATCHES.name}"},
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
             {"key": "deduplication_review_batches", "public_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}"},
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
@@ -1626,6 +1647,7 @@ def build_agent_work_queue_public(
     source_review_batches = (
         load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}) if SOURCE_DISCOVERY_REVIEW_BATCHES.exists() else {}
     )
+    metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
     ichiban_metadata_review_batches = (
         load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {})
         if ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.exists()
@@ -1870,22 +1892,47 @@ def build_agent_work_queue_public(
                 samples=[compact_sample(item) for item in items],
             )
 
-    for group in metadata_backlog.get("groups", [])[:10]:
-        add_batch(
-            agent_id="agent-metadata",
-            workstream="metadata_backlog",
-            priority=60,
-            title=f"{group.get('source_store')} {group.get('field')} 누락 보강",
-            public_report=METADATA_BACKLOG,
-            rows=int(group.get("missing_rows") or 0),
-            recommended_action=str(group.get("recommended_action") or "verify missing metadata"),
-            acceptance_criteria=[
-                "Dates, prices, names, and barcodes are copied only from official or trusted evidence.",
-                "Every proposed update includes catalog_index and source evidence.",
-                "Unverified inferred metadata remains in the review queue.",
-            ],
-            samples=[compact_sample(item) for item in group.get("sample_items", []) if isinstance(item, dict)],
-        )
+    metadata_review_batch_rows = [batch for batch in metadata_review_batches.get("batches", []) if isinstance(batch, dict)]
+    if metadata_review_batch_rows:
+        for metadata_batch in metadata_review_batch_rows[:12]:
+            add_batch(
+                agent_id="agent-metadata",
+                workstream="metadata_backlog",
+                priority=40 + int(metadata_batch.get("priority") or 99),
+                title=f"메타데이터 검수: {metadata_batch.get('batch_id')}",
+                public_report=METADATA_REVIEW_BATCHES,
+                rows=int(metadata_batch.get("missing_cell_count") or 0),
+                recommended_action=str(metadata_batch.get("recommended_action") or "verify missing metadata"),
+                acceptance_criteria=[
+                    "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
+                    "Every proposed update includes catalog_index and source evidence.",
+                    "Unverified inferred metadata remains in the review queue.",
+                ],
+                samples=[
+                    compact_sample(item)
+                    for group in metadata_batch.get("groups", [])
+                    if isinstance(group, dict)
+                    for item in group.get("sample_items", [])
+                    if isinstance(item, dict)
+                ],
+            )
+    else:
+        for group in metadata_backlog.get("groups", [])[:10]:
+            add_batch(
+                agent_id="agent-metadata",
+                workstream="metadata_backlog",
+                priority=60,
+                title=f"{group.get('source_store')} {group.get('field')} 누락 보강",
+                public_report=METADATA_BACKLOG,
+                rows=int(group.get("missing_rows") or 0),
+                recommended_action=str(group.get("recommended_action") or "verify missing metadata"),
+                acceptance_criteria=[
+                    "Dates, prices, names, and barcodes are copied only from official or trusted evidence.",
+                    "Every proposed update includes catalog_index and source evidence.",
+                    "Unverified inferred metadata remains in the review queue.",
+                ],
+                samples=[compact_sample(item) for item in group.get("sample_items", []) if isinstance(item, dict)],
+            )
 
     for group in deduplication.get("groups", [])[:10]:
         add_batch(
@@ -3054,6 +3101,7 @@ def validate_report_consistency(
         f"data/{SOURCE_DISCOVERY.name}",
         f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
         f"data/{METADATA_BACKLOG.name}",
+        f"data/{METADATA_REVIEW_BATCHES.name}",
         f"data/{DEDUPLICATION.name}",
         f"data/{ANIMATION_CATEGORIES.name}",
         f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
@@ -3298,6 +3346,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{METADATA_BACKLOG.name}",
             **metadata_backlog["summary"],
         }
+        if METADATA_REVIEW_BATCHES.exists():
+            target["metadata_review_batches"] = copy_report_summary(METADATA_REVIEW_BATCHES, "metadata_review_batches")
         target["image_enrichment_batches"] = {
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
             **image_enrichment_batches["summary"],
@@ -3382,6 +3432,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         SOURCE_DISCOVERY,
         SOURCE_DISCOVERY_REVIEW_BATCHES,
         METADATA_BACKLOG,
+        METADATA_REVIEW_BATCHES,
         IMAGE_ENRICHMENT_BATCHES,
         OPERATIONS_REPORT,
         AGENT_WORK_QUEUE,
