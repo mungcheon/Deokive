@@ -19,6 +19,8 @@ IMAGE_BACKLOG = DATA / "catalog_image_backlog_public.json"
 IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
 DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
+ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
+ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
@@ -496,6 +498,126 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
     }
 
 
+def year_of(value: Any) -> str:
+    text = str(value or "").strip()
+    return text[:4] if len(text) >= 4 and text[:4].isdigit() else "unknown"
+
+
+def is_ichiban_kuji_item(item: dict[str, Any]) -> bool:
+    haystack = " ".join(
+        str(item.get(field) or "")
+        for field in ("source_url", "source_store", "series_name", "sub_series", "name_ko", "name_ja")
+    )
+    return "1kuji.com" in haystack or "一番くじ" in haystack or "이치방쿠지" in haystack
+
+
+def campaign_slug(url: Any) -> str:
+    text = str(url or "").strip().rstrip("/")
+    if not text:
+        return ""
+    return text.split("/")[-1]
+
+
+def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, Any]:
+    campaigns = load_json(ICHIIBAN_KUJI_CAMPAIGNS, [])
+    if not isinstance(campaigns, list):
+        campaigns = []
+    campaign_rows = [row for row in campaigns if isinstance(row, dict)]
+    kuji_items = [item for item in items if is_ichiban_kuji_item(item)]
+
+    campaign_by_url = {str(row.get("url") or "").rstrip("/"): row for row in campaign_rows}
+    campaign_urls_in_catalog = {
+        str(item.get("source_url") or "").rstrip("/")
+        for item in kuji_items
+        if "1kuji.com/products/" in str(item.get("source_url") or "")
+    }
+    campaign_with_catalog_rows = sorted(url for url in campaign_by_url if url in campaign_urls_in_catalog)
+    missing_catalog_campaigns = sorted(url for url in campaign_by_url if url not in campaign_urls_in_catalog)
+
+    by_campaign: Counter[str] = Counter()
+    for item in kuji_items:
+        url = str(item.get("source_url") or "").rstrip("/")
+        if "1kuji.com/products/" in url:
+            by_campaign[url] += 1
+
+    by_campaign_year = Counter(year_of(row.get("release_date")) for row in campaign_rows)
+    by_item_year = Counter(year_of(item.get("release_date")) for item in kuji_items)
+    by_category = Counter(str(item.get("category") or "미분류") for item in kuji_items)
+    by_sub_series = Counter(str(item.get("sub_series") or "미분류") for item in kuji_items)
+    missing_release = [item for item in kuji_items if not present(item.get("release_date"))]
+    missing_price = [item for item in kuji_items if not present(item.get("official_price_jpy"))]
+
+    latest_campaigns = sorted(
+        campaign_rows,
+        key=lambda row: str(row.get("release_date") or ""),
+        reverse=True,
+    )[:20]
+
+    return {
+        "schema_version": 1,
+        "summary": {
+            "campaign_rows": len(campaign_rows),
+            "catalog_kuji_item_rows": len(kuji_items),
+            "campaigns_with_catalog_items": len(campaign_with_catalog_rows),
+            "campaigns_without_catalog_items": len(missing_catalog_campaigns),
+            "missing_release_date_rows": len(missing_release),
+            "missing_official_price_jpy_rows": len(missing_price),
+            "image_coverage": round(
+                (len(kuji_items) - sum(1 for item in kuji_items if not present(item.get("image_url")))) / len(kuji_items),
+                4,
+            )
+            if kuji_items
+            else 0.0,
+            "source_url_coverage": round(
+                (len(kuji_items) - sum(1 for item in kuji_items if not present(item.get("source_url")))) / len(kuji_items),
+                4,
+            )
+            if kuji_items
+            else 0.0,
+        },
+        "campaigns_by_year": counter_rows(by_campaign_year, ("year",), 40),
+        "catalog_items_by_year": counter_rows(by_item_year, ("year",), 40),
+        "top_categories": counter_rows(by_category, ("category",), 40),
+        "top_prize_labels": counter_rows(by_sub_series, ("sub_series",), 80),
+        "top_campaigns_by_item_count": [
+            {
+                "url": url,
+                "slug": campaign_slug(url),
+                "title": campaign_by_url.get(url, {}).get("title"),
+                "release_date": campaign_by_url.get(url, {}).get("release_date"),
+                "catalog_item_rows": count,
+            }
+            for url, count in by_campaign.most_common(80)
+        ],
+        "latest_campaigns": latest_campaigns,
+        "missing_catalog_campaign_samples": [
+            {
+                "url": url,
+                "slug": campaign_slug(url),
+                "title": campaign_by_url.get(url, {}).get("title"),
+                "release_date": campaign_by_url.get(url, {}).get("release_date"),
+            }
+            for url in missing_catalog_campaigns[:80]
+        ],
+        "missing_release_date_samples": [
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "series_name": item.get("series_name"),
+                "sub_series": item.get("sub_series"),
+                "source_url": item.get("source_url"),
+            }
+            for item in missing_release[:80]
+        ],
+        "automation_policy": {
+            "auto_import_campaigns": False,
+            "requires_manual_review": True,
+            "reason": "Campaign-level pages and prize rows are tracked separately; missing catalog links should be reviewed before import.",
+        },
+    }
+
+
 def validate_public_files(paths: list[Path]) -> list[str]:
     findings: list[str] = []
     for path in paths:
@@ -526,6 +648,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     source_discovery = build_source_discovery_public(items)
     deduplication = build_deduplication_public(items)
     animation_categories = build_animation_categories_public(items)
+    ichiban_kuji_history = build_ichiban_kuji_history_public(items)
 
     public_meta = load_json(PUBLIC_META, {})
     public_meta.update(
@@ -611,6 +734,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
         }
+        target["ichiban_kuji_history"] = {
+            "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+            **ichiban_kuji_history["summary"],
+        }
 
     public_files = [
         PUBLIC_CATALOG,
@@ -620,6 +747,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         IMAGE_CANDIDATES,
         DEDUPLICATION,
         ANIMATION_CATEGORIES,
+        ICHIIBAN_KUJI_HISTORY,
         GOTOUCHI,
         REQUESTED,
         GENERIC_SOURCE,
@@ -634,6 +762,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(SOURCE_DISCOVERY, source_discovery)
         write_json(DEDUPLICATION, deduplication)
         write_json(ANIMATION_CATEGORIES, animation_categories)
+        write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
         write_json(PUBLIC_META, public_meta)
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)
@@ -652,6 +781,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
         ],
     }
 
