@@ -29,6 +29,7 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
     def test_default_workflows_include_public_action_only_metadata_paths(self) -> None:
         self.assertIn("ichiban_metadata", readiness.WORKFLOWS)
         self.assertIn("animation_category", readiness.WORKFLOWS)
+        self.assertIn("deduplication", readiness.WORKFLOWS)
 
         ichiban = readiness.WORKFLOWS["ichiban_metadata"]
         self.assertEqual(ichiban["public_action_queue"].name, "ichiban_kuji_metadata_action_queue_public.json")
@@ -41,6 +42,14 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(
             animation["public_action_next_step"],
             "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
+        )
+
+        dedupe = readiness.WORKFLOWS["deduplication"]
+        self.assertEqual(dedupe["public_action_queue"].name, "catalog_deduplication_action_queue_public.json")
+        self.assertEqual(dedupe["public_action_rows_key"], "queued_groups")
+        self.assertEqual(
+            dedupe["public_action_next_step"],
+            "fill_confirmed_deduplication_decisions_then_run_import_confirmed_deduplication_rows",
         )
 
     def test_template_candidates_are_public_without_row_details(self) -> None:

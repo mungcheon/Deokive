@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T23:23:34Z",
+  "generated_at": "2026-07-21T23:26:20Z",
   "scope": "public_confirmed_import_readiness",
   "summary": {
-    "workflow_count": 10,
+    "workflow_count": 11,
     "confirmed_files": 3,
     "template_items": 1996,
-    "public_action_queue_rows": 2478,
-    "public_action_queue_batches": 71,
+    "public_action_queue_rows": 2518,
+    "public_action_queue_batches": 75,
     "manual_confirmed_true": 0,
     "updated_rows": 0,
     "skipped_rows": 0,
@@ -24,11 +24,11 @@
         3
       ],
       [
-        "no_current_candidates",
-        2
+        "public_action_queue_ready_for_confirmation",
+        3
       ],
       [
-        "public_action_queue_ready_for_confirmation",
+        "no_current_candidates",
         2
       ]
     ],
@@ -258,6 +258,29 @@
       "public_action_rows": 428,
       "public_action_batches": 2,
       "public_action_next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
+      "updated_rows": 0,
+      "skipped_rows": 0,
+      "duplicates": 0,
+      "skip_reason_counts": [],
+      "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
+      "auto_apply_enabled": false
+    },
+    {
+      "workflow": "deduplication",
+      "public_workstream": "catalog_deduplication",
+      "status": "public_action_queue_ready_for_confirmation",
+      "confirmed_file_exists": false,
+      "template_file_exists": false,
+      "import_report_exists": false,
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "public_action_queue_exists": true,
+      "public_action_queue_report": "data/catalog_deduplication_action_queue_public.json",
+      "public_action_rows": 40,
+      "public_action_batches": 4,
+      "public_action_next_step": "fill_confirmed_deduplication_decisions_then_run_import_confirmed_deduplication_rows",
       "updated_rows": 0,
       "skipped_rows": 0,
       "duplicates": 0,
