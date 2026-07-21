@@ -10,13 +10,13 @@ import build_requested_focus_review_batches_public as batches
 
 
 class BuildRequestedFocusReviewBatchesPublicTest(unittest.TestCase):
-    def test_build_report_batches_requested_focus_rows_without_auto_apply(self) -> None:
+    def test_build_report_batches_requested_focus_rows_with_import_templates(self) -> None:
         catalog = [
             {
                 "catalog_index": 1,
-                "name_ko": "단간론파 누이",
-                "name_ja": "ダンガンロンパ ぬい",
-                "category": "인형",
+                "name_ko": "Danganronpa Nui",
+                "name_ja": "Danganronpa Nui JP",
+                "category": "Plush",
                 "source_store": "Movic",
                 "source_url": "",
                 "image_url": "",
@@ -26,10 +26,10 @@ class BuildRequestedFocusReviewBatchesPublicTest(unittest.TestCase):
             },
             {
                 "catalog_index": 2,
-                "name_ko": "마법소녀의 마녀재판 인형",
-                "name_ja": "魔法少女ノ魔女裁判 ぬいぐるみ",
-                "category": "인형",
-                "source_store": "애니메이트",
+                "name_ko": "Maho Saba Plush",
+                "name_ja": "Maho Saba Plush JP",
+                "category": "Plush",
+                "source_store": "Animate",
                 "source_url": "https://example.test/item",
                 "image_url": "https://example.test/item.jpg",
                 "release_date": "2026-01",
@@ -39,9 +39,9 @@ class BuildRequestedFocusReviewBatchesPublicTest(unittest.TestCase):
         ]
         requested = [
             {
-                "request_label": "단간론파 누이",
+                "request_label": "Danganronpa Nui",
                 "status": "already_present",
-                "matched_name_ko": "단간론파 누이",
+                "matched_name_ko": "Danganronpa Nui",
                 "has_candidate_image": False,
                 "existing_count": 1,
                 "review_note": "image still needs review",
@@ -57,20 +57,30 @@ class BuildRequestedFocusReviewBatchesPublicTest(unittest.TestCase):
             batch for batch in report["batches"] if batch["topic_id"] == "danganronpa"
         ]
         self.assertTrue(danganronpa_batches)
-        self.assertIn(
-            "source_url",
-            {batch["missing_field"] for batch in danganronpa_batches},
-        )
+        self.assertIn("source_url", {batch["missing_field"] for batch in danganronpa_batches})
         self.assertTrue(all(batch["auto_apply_enabled"] is False for batch in report["batches"]))
+
+        source_batch = next(batch for batch in danganronpa_batches if batch["missing_field"] == "source_url")
+        self.assertIn("manual_value", source_batch["catalog_field_import_template_fields"])
+        source_template = source_batch["items"][0]["catalog_field_import_template"]
+        self.assertEqual(source_template["field"], "source_url")
+        self.assertFalse(source_template["manual_confirmed"])
+        self.assertEqual(source_template["blocked_until"], "exact_product_source_url_confirmed")
+        self.assertTrue(source_template["requires_exact_source_url"])
+
+        image_batch = next(batch for batch in danganronpa_batches if batch["missing_field"] == "image_url")
+        image_template = image_batch["items"][0]["catalog_field_import_template"]
+        self.assertEqual(image_template["field"], "image_url")
+        self.assertEqual(image_template["blocked_until"], "exact_product_source_url_confirmed")
 
     def test_requested_special_goods_matches_catalog_by_requested_name(self) -> None:
         catalog = [
             {
                 "catalog_index": 10,
-                "name_ko": "팝팀애픽 부쿠부 그림체 굿즈",
-                "name_ja": "ポプテピピック 大川ぶくぶ 絵柄 グッズ",
-                "category": "기타 굿즈",
-                "source_store": "검색 추가",
+                "name_ko": "Pop Team Epic Bukubu Goods",
+                "name_ja": "Pop Team Epic Bukubu Goods JP",
+                "category": "Other Goods",
+                "source_store": "Manual Review",
                 "source_url": "https://example.test/pop",
                 "image_url": "https://example.test/pop.jpg",
                 "release_date": "",
@@ -80,8 +90,8 @@ class BuildRequestedFocusReviewBatchesPublicTest(unittest.TestCase):
         ]
         requested = [
             {
-                "request_label": "팝팀애픽 부쿠부 그림체 굿즈",
-                "matched_name_ko": "팝팀애픽 부쿠부 그림체 굿즈",
+                "request_label": "Pop Team Epic Bukubu Goods",
+                "matched_name_ko": "Pop Team Epic Bukubu Goods",
                 "status": "already_present",
                 "has_candidate_image": True,
                 "existing_count": 1,
@@ -95,6 +105,11 @@ class BuildRequestedFocusReviewBatchesPublicTest(unittest.TestCase):
 
         self.assertEqual(topic["catalog_rows"], 1)
         self.assertEqual(topic["field_missing_totals"]["release_date"], 1)
+        release_batch = next(batch for batch in report["batches"] if batch["missing_field"] == "release_date")
+        release_template = release_batch["items"][0]["catalog_field_import_template"]
+        self.assertEqual(release_template["field"], "release_date")
+        self.assertTrue(release_template["requires_labeled_official_evidence"])
+        self.assertEqual(release_template["evidence_url"], "https://example.test/pop")
 
 
 if __name__ == "__main__":

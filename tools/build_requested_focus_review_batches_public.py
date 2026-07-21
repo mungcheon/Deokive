@@ -138,6 +138,7 @@ def _request_catalog_matches(
 
 
 def _compact_item(item: dict[str, Any], *, missing_field: str) -> dict[str, Any]:
+    source_url = item.get("source_url") if _present(item.get("source_url")) else ""
     return {
         "catalog_index": item.get("catalog_index"),
         "missing_field": missing_field,
@@ -151,7 +152,31 @@ def _compact_item(item: dict[str, Any], *, missing_field: str) -> dict[str, Any]
         "release_date": item.get("release_date"),
         "official_price_jpy": item.get("official_price_jpy"),
         "barcode": item.get("barcode"),
+        "catalog_field_import_template": _catalog_field_import_template(item, missing_field, source_url),
         "auto_apply_enabled": False,
+    }
+
+
+def _catalog_field_import_template(item: dict[str, Any], missing_field: str, source_url: Any) -> dict[str, Any]:
+    source_url_text = str(source_url or "").strip()
+    evidence_url = source_url_text if source_url_text else ""
+    blocked_until = "manual_official_evidence_confirmed"
+    if missing_field == "source_url":
+        blocked_until = "exact_product_source_url_confirmed"
+        evidence_url = ""
+    elif missing_field == "image_url" and not source_url_text:
+        blocked_until = "exact_product_source_url_confirmed"
+    return {
+        "manual_confirmed": False,
+        "manual_note": "",
+        "row_index": item.get("catalog_index"),
+        "field": missing_field,
+        "manual_value": "",
+        "evidence_url": evidence_url,
+        "candidate_source_url": source_url_text,
+        "requires_exact_source_url": missing_field in {"source_url", "image_url"},
+        "requires_labeled_official_evidence": missing_field in {"release_date", "official_price_jpy", "barcode", "name_ja"},
+        "blocked_until": blocked_until,
     }
 
 
@@ -260,6 +285,14 @@ def build_report(
                         "review_state": "manual_evidence_review_required",
                         "next_machine_step": _next_step_for_field(field),
                         "recommended_action": _next_step_for_field(field),
+                        "catalog_field_import_template_fields": [
+                            "manual_confirmed",
+                            "row_index",
+                            "field",
+                            "manual_value",
+                            "evidence_url",
+                            "candidate_source_url",
+                        ],
                         "category_counts": categories.most_common(),
                         "items": [_compact_item(row, missing_field=field) for row in batch_rows],
                         "auto_apply_enabled": False,
