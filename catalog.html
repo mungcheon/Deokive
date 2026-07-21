@@ -1007,11 +1007,38 @@
       font-size: 12px;
       font-weight: 900;
       justify-content: space-between;
+      gap: 8px;
     }
 
     .owned-card-foot a {
       color: inherit;
       text-decoration: none;
+    }
+
+    .owned-card-tools {
+      align-items: center;
+      display: flex;
+      gap: 6px;
+    }
+
+    .owned-card-tools button {
+      align-items: center;
+      background: #fff;
+      border: 1px solid rgba(255, 126, 178, 0.24);
+      border-radius: 999px;
+      color: var(--pink-dark);
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 950;
+      height: 28px;
+      justify-content: center;
+      min-width: 28px;
+      padding: 0 9px;
+    }
+
+    .owned-card-tools button.danger {
+      color: #9f224d;
     }
 
     .sheet-head {
@@ -1624,10 +1651,6 @@
     }
 
     function showOwnedList() {
-      if (!state.owned.goods.length) {
-        showToast('아직 저장된 굿즈가 없어요');
-        return;
-      }
       renderOwnedLibrary();
       $('ownedLibrary').classList.add('open');
       $('ownedLibrary').setAttribute('aria-hidden', 'false');
@@ -1674,12 +1697,41 @@
           </div>
           <div class="owned-card-foot">
             <span>수량 ${fmt.format(owned.quantity || 1)}</span>
-            ${owned.item?.source_url ? `<a href="${escapeAttr(owned.item.source_url)}" target="_blank" rel="noopener noreferrer">출처</a>` : '<span>로컬 저장</span>'}
+            <div class="owned-card-tools">
+              <button type="button" data-owned-action="dec" data-owned-id="${escapeAttr(owned.id)}" aria-label="${escapeAttr(name)} 수량 줄이기">-</button>
+              <button type="button" data-owned-action="inc" data-owned-id="${escapeAttr(owned.id)}" aria-label="${escapeAttr(name)} 수량 늘리기">+</button>
+              ${owned.item?.source_url ? `<a href="${escapeAttr(owned.item.source_url)}" target="_blank" rel="noopener noreferrer">출처</a>` : '<span>로컬</span>'}
+              <button class="danger" type="button" data-owned-action="remove" data-owned-id="${escapeAttr(owned.id)}" aria-label="${escapeAttr(name)} 삭제">삭제</button>
+            </div>
           </div>
         `;
         fragment.append(card);
       }
       grid.replaceChildren(fragment);
+    }
+
+    function updateOwnedQuantity(ownedId, delta) {
+      const owned = state.owned.goods.find((item) => item.id === ownedId);
+      if (!owned) return;
+      const next = (owned.quantity || 1) + delta;
+      if (next <= 0) {
+        removeOwned(ownedId, false);
+        return;
+      }
+      owned.quantity = next;
+      owned.updatedAt = new Date().toISOString();
+      saveOwned();
+      showToast(`수량을 ${fmt.format(next)}개로 바꿨어요`);
+    }
+
+    function removeOwned(ownedId, ask = true) {
+      const owned = state.owned.goods.find((item) => item.id === ownedId);
+      if (!owned) return;
+      const name = owned.item?.name_ko || owned.item?.name_ja || '이 굿즈';
+      if (ask && !confirm(`${name}을(를) 내 보유 목록에서 삭제할까요?`)) return;
+      state.owned.goods = state.owned.goods.filter((item) => item.id !== ownedId);
+      saveOwned();
+      showToast('보유 목록에서 삭제했어요');
     }
 
     function clearOwned() {
@@ -1973,6 +2025,12 @@
     $('closeOwnedLibrary').addEventListener('click', closeOwnedLibrary);
     $('ownedLibrary').addEventListener('click', (event) => {
       if (event.target === $('ownedLibrary')) closeOwnedLibrary();
+      const actionButton = event.target.closest('[data-owned-action]');
+      if (!actionButton) return;
+      const ownedId = actionButton.dataset.ownedId;
+      if (actionButton.dataset.ownedAction === 'inc') updateOwnedQuantity(ownedId, 1);
+      if (actionButton.dataset.ownedAction === 'dec') updateOwnedQuantity(ownedId, -1);
+      if (actionButton.dataset.ownedAction === 'remove') removeOwned(ownedId);
     });
     $('libraryFolder').addEventListener('change', renderOwnedLibrary);
     $('libraryNewFolder').addEventListener('click', () => createFolder('libraryFolder'));
