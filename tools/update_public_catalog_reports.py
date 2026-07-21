@@ -26,6 +26,7 @@ GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
 DANGANRONPA_MISSING_MEDIA = DATA / "danganronpa_missing_media_public.json"
+DANGANRONPA_GOODSMILE_PROBE = DATA / "danganronpa_goodsmile_probe_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 GENERIC_SOURCE_PATCH_CANDIDATES = DATA / "generic_source_patch_candidates_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
@@ -1132,6 +1133,10 @@ def build_operations_public(
     generic_patch_summary = generic_source_patch_candidates["summary"]
     requested_focus_summary = requested_focus["summary"]
     danganronpa_media_summary = danganronpa_missing_media["summary"]
+    danganronpa_goodsmile_probe = (
+        load_json(DANGANRONPA_GOODSMILE_PROBE, {}) if DANGANRONPA_GOODSMILE_PROBE.exists() else {}
+    )
+    danganronpa_goodsmile_probe_summary = danganronpa_goodsmile_probe.get("summary", {})
 
     priority_fields = ["source_url", "image_url", "release_date", "official_price_jpy", "barcode"]
     store_totals: dict[str, dict[str, Any]] = defaultdict(lambda: {"rows": 0, **{field: 0 for field in priority_fields}})
@@ -1235,6 +1240,14 @@ def build_operations_public(
             "recommended_next_action": "Verify exact Danganronpa source pages and attach source_url/image_url patches.",
         },
         {
+            "priority": 16,
+            "workstream": "danganronpa_goodsmile_probe",
+            "public_report": f"data/{DANGANRONPA_GOODSMILE_PROBE.name}",
+            "target_rows": danganronpa_goodsmile_probe_summary.get("target_rows", 0),
+            "review_rows": danganronpa_goodsmile_probe_summary.get("goodsmile_com_review_rows", 0),
+            "recommended_next_action": "Review Good Smile probe misses before attempting automatic source/image attachment.",
+        } if danganronpa_goodsmile_probe_summary else None,
+        {
             "priority": 18,
             "workstream": "image_url_attachment",
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
@@ -1293,6 +1306,7 @@ def build_operations_public(
             "recommended_next_action": "Use taxonomy_review_queue and folder_visual_tokens for app folder colors, icons, and category cleanup.",
         },
     ]
+    next_actions = [item for item in next_actions if item is not None]
     workstream_scorecard = [
         {
             "workstream": "requested_focus_enrichment",
@@ -1404,6 +1418,7 @@ def build_operations_public(
             {"key": "generic_source_patch_candidates", "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}"},
             {"key": "requested_focus_enrichment", "public_report": f"data/{REQUESTED_FOCUS.name}"},
             {"key": "danganronpa_missing_media", "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}"},
+            {"key": "danganronpa_goodsmile_probe", "public_report": f"data/{DANGANRONPA_GOODSMILE_PROBE.name}"},
             {"key": "image_enrichment_batches", "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}"},
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
@@ -2991,6 +3006,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
             **danganronpa_missing_media["summary"],
         }
+        if DANGANRONPA_GOODSMILE_PROBE.exists():
+            target["danganronpa_goodsmile_probe"] = copy_report_summary(
+                DANGANRONPA_GOODSMILE_PROBE, "danganronpa_goodsmile_probe"
+            )
         if SOURCE_DETAIL.exists():
             target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
         target["source_discovery_queue"] = {
@@ -3057,6 +3076,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         REQUESTED,
         REQUESTED_FOCUS,
         DANGANRONPA_MISSING_MEDIA,
+        DANGANRONPA_GOODSMILE_PROBE,
         GENERIC_SOURCE,
         GENERIC_SOURCE_PATCH_CANDIDATES,
         SOURCE_DETAIL,
