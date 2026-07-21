@@ -85,6 +85,26 @@ WORKFLOWS = {
         "report": SERVER / "ichiban_kuji_sub_series_confirmed_import_report.json",
         "public_workstream": "ichiban_kuji_sub_series",
     },
+    "ichiban_metadata": {
+        "confirmed": SERVER / "ichiban_kuji_metadata_confirmed_rows.json",
+        "template": SERVER / "ichiban_kuji_metadata_confirmed_rows.template.json",
+        "report": SERVER / "ichiban_kuji_metadata_confirmed_import_report.json",
+        "public_workstream": "ichiban_kuji_metadata",
+        "public_action_queue": DATA / "ichiban_kuji_metadata_action_queue_public.json",
+        "public_action_rows_key": "queued_catalog_item_rows",
+        "public_action_batches_key": "action_batch_count",
+        "public_action_next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+    },
+    "animation_category": {
+        "confirmed": SERVER / "animation_category_confirmed_rows.json",
+        "template": SERVER / "animation_category_confirmed_rows.template.json",
+        "report": SERVER / "animation_category_confirmed_import_report.json",
+        "public_workstream": "animation_category_mapping",
+        "public_action_queue": DATA / "animation_category_action_queue_public.json",
+        "public_action_rows_key": "queued_catalog_rows",
+        "public_action_batches_key": "action_batch_count",
+        "public_action_next_step": "fill_confirmed_animation_category_mapping_templates",
+    },
 }
 
 

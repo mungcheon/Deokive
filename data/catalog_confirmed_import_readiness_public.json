@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T23:07:01Z",
+  "generated_at": "2026-07-21T23:19:31Z",
   "scope": "public_confirmed_import_readiness",
   "summary": {
-    "workflow_count": 8,
+    "workflow_count": 10,
     "confirmed_files": 3,
     "template_items": 1996,
-    "public_action_queue_rows": 1790,
-    "public_action_queue_batches": 65,
+    "public_action_queue_rows": 2478,
+    "public_action_queue_batches": 71,
     "manual_confirmed_true": 0,
     "updated_rows": 0,
     "skipped_rows": 0,
@@ -25,6 +25,10 @@
       ],
       [
         "no_current_candidates",
+        2
+      ],
+      [
+        "public_action_queue_ready_for_confirmation",
         2
       ]
     ],
@@ -213,6 +217,52 @@
       "duplicates": 0,
       "skip_reason_counts": [],
       "next_action": "Generate or refresh the matching candidate/template queue.",
+      "auto_apply_enabled": false
+    },
+    {
+      "workflow": "ichiban_metadata",
+      "public_workstream": "ichiban_kuji_metadata",
+      "status": "public_action_queue_ready_for_confirmation",
+      "confirmed_file_exists": false,
+      "template_file_exists": false,
+      "import_report_exists": false,
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "public_action_queue_exists": true,
+      "public_action_queue_report": "data/ichiban_kuji_metadata_action_queue_public.json",
+      "public_action_rows": 260,
+      "public_action_batches": 4,
+      "public_action_next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+      "updated_rows": 0,
+      "skipped_rows": 0,
+      "duplicates": 0,
+      "skip_reason_counts": [],
+      "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
+      "auto_apply_enabled": false
+    },
+    {
+      "workflow": "animation_category",
+      "public_workstream": "animation_category_mapping",
+      "status": "public_action_queue_ready_for_confirmation",
+      "confirmed_file_exists": false,
+      "template_file_exists": false,
+      "import_report_exists": false,
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "public_action_queue_exists": true,
+      "public_action_queue_report": "data/animation_category_action_queue_public.json",
+      "public_action_rows": 428,
+      "public_action_batches": 2,
+      "public_action_next_step": "fill_confirmed_animation_category_mapping_templates",
+      "updated_rows": 0,
+      "skipped_rows": 0,
+      "duplicates": 0,
+      "skip_reason_counts": [],
+      "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
       "auto_apply_enabled": false
     }
   ],

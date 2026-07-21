@@ -26,6 +26,20 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(workflow["report"].name, "source_discovery_confirmed_import_report.json")
         self.assertEqual(workflow["public_workstream"], "source_discovery_source_urls")
 
+    def test_default_workflows_include_public_action_only_metadata_paths(self) -> None:
+        self.assertIn("ichiban_metadata", readiness.WORKFLOWS)
+        self.assertIn("animation_category", readiness.WORKFLOWS)
+
+        ichiban = readiness.WORKFLOWS["ichiban_metadata"]
+        self.assertEqual(ichiban["public_action_queue"].name, "ichiban_kuji_metadata_action_queue_public.json")
+        self.assertEqual(ichiban["public_action_rows_key"], "queued_catalog_item_rows")
+        self.assertEqual(ichiban["public_action_next_step"], "fill_confirmed_ichiban_campaign_patch_templates")
+
+        animation = readiness.WORKFLOWS["animation_category"]
+        self.assertEqual(animation["public_action_queue"].name, "animation_category_action_queue_public.json")
+        self.assertEqual(animation["public_action_rows_key"], "queued_catalog_rows")
+        self.assertEqual(animation["public_action_next_step"], "fill_confirmed_animation_category_mapping_templates")
+
     def test_template_candidates_are_public_without_row_details(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
