@@ -768,6 +768,45 @@ def build_agent_work_queue_public(
         )
         return {key: int(summary.get(key) or 0) for key in keys}
 
+    def review_state_for_batch(workstream: str, review_summary: dict[str, int] | None = None) -> str:
+        if workstream == "generic_source_url_cleanup":
+            if review_summary and review_summary.get("manual_confirmed_rows", 0) > 0:
+                return "manual_confirmed_candidates_ready"
+            if review_summary and review_summary.get("candidate_rows", 0) > 0:
+                return "candidate_review_required"
+            return "exact_source_discovery_required"
+        if workstream == "gotouchi_official_candidate_review":
+            if review_summary and review_summary.get("exact_type_candidate_rows", 0) > 0:
+                return "official_exact_candidate_review_required"
+            return "official_candidate_mismatch_review_required"
+        if workstream == "image_url_attachment":
+            return "source_discovery_then_image_attachment"
+        if workstream == "source_url_discovery":
+            return "exact_source_discovery_required"
+        if workstream == "metadata_backlog":
+            return "metadata_evidence_required"
+        if workstream == "deduplication_review":
+            return "manual_dedupe_review_required"
+        if workstream.startswith("ichiban_kuji"):
+            return "official_campaign_evidence_required"
+        if workstream == "animation_category_review":
+            return "taxonomy_mapping_required"
+        return "manual_review_required"
+
+    def next_machine_step_for_state(review_state: str) -> str:
+        return {
+            "manual_confirmed_candidates_ready": "prepare_reviewed_catalog_patch",
+            "candidate_review_required": "open_candidate_report_and_verify_exact_product_identity",
+            "exact_source_discovery_required": "find_exact_official_product_source_url",
+            "official_exact_candidate_review_required": "verify_official_candidate_image_matches_row_type",
+            "official_candidate_mismatch_review_required": "review_official_candidates_before_import",
+            "source_discovery_then_image_attachment": "find_source_url_before_image_import",
+            "metadata_evidence_required": "collect_official_metadata_evidence",
+            "manual_dedupe_review_required": "compare_duplicate_group_evidence",
+            "official_campaign_evidence_required": "verify_ichiban_campaign_page",
+            "taxonomy_mapping_required": "map_category_to_folder_color_and_icon",
+        }.get(review_state, "manual_review")
+
     def add_batch(
         *,
         agent_id: str,
@@ -797,6 +836,9 @@ def build_agent_work_queue_public(
         }
         if review_summary is not None:
             batch["review_summary"] = review_summary
+        review_state = review_state_for_batch(workstream, review_summary)
+        batch["review_state"] = review_state
+        batch["next_machine_step"] = next_machine_step_for_state(review_state)
         batches.append(batch)
 
     for group in image_enrichment_batches.get("groups", [])[:12]:
@@ -974,6 +1016,8 @@ def build_agent_work_queue_public(
             "rows": batch["rows"],
             "title": batch["title"],
             "public_report": batch["public_report"],
+            "review_state": batch["review_state"],
+            "next_machine_step": batch["next_machine_step"],
             **({"review_summary": batch["review_summary"]} if "review_summary" in batch else {}),
         }
         for batch in batches[:10]
@@ -1541,6 +1585,8 @@ def validate_report_consistency(
             "rows": batch["rows"],
             "title": batch["title"],
             "public_report": batch["public_report"],
+            "review_state": batch["review_state"],
+            "next_machine_step": batch["next_machine_step"],
             **({"review_summary": batch["review_summary"]} if "review_summary" in batch else {}),
         }
         for batch in batches[:10]
@@ -1569,6 +1615,34 @@ def validate_report_consistency(
         "recommended_action",
         "acceptance_criteria",
         "sample_items",
+        "review_state",
+        "next_machine_step",
+    }
+    allowed_review_states = {
+        "manual_confirmed_candidates_ready",
+        "candidate_review_required",
+        "exact_source_discovery_required",
+        "official_exact_candidate_review_required",
+        "official_candidate_mismatch_review_required",
+        "source_discovery_then_image_attachment",
+        "metadata_evidence_required",
+        "manual_dedupe_review_required",
+        "official_campaign_evidence_required",
+        "taxonomy_mapping_required",
+        "manual_review_required",
+    }
+    allowed_next_machine_steps = {
+        "prepare_reviewed_catalog_patch",
+        "open_candidate_report_and_verify_exact_product_identity",
+        "find_exact_official_product_source_url",
+        "verify_official_candidate_image_matches_row_type",
+        "review_official_candidates_before_import",
+        "find_source_url_before_image_import",
+        "collect_official_metadata_evidence",
+        "compare_duplicate_group_evidence",
+        "verify_ichiban_campaign_page",
+        "map_category_to_folder_color_and_icon",
+        "manual_review",
     }
     for batch in batches:
         missing_fields = required_batch_fields - set(batch)
@@ -1587,6 +1661,10 @@ def validate_report_consistency(
             findings.append(f"agent_work_queue batch missing acceptance criteria: {batch_id}")
         if not isinstance(batch.get("sample_items"), list):
             findings.append(f"agent_work_queue batch sample_items is not a list: {batch_id}")
+        if batch.get("review_state") not in allowed_review_states:
+            findings.append(f"agent_work_queue batch has unsupported review_state: {batch_id}")
+        if batch.get("next_machine_step") not in allowed_next_machine_steps:
+            findings.append(f"agent_work_queue batch has unsupported next_machine_step: {batch_id}")
         if batch.get("workstream") in {"generic_source_url_cleanup", "gotouchi_official_candidate_review"}:
             review_summary = batch.get("review_summary")
             if not isinstance(review_summary, dict) or not review_summary:

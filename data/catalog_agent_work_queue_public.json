@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T19:27:13Z",
+  "generated_at": "2026-07-21T19:29:12Z",
   "summary": {
     "batch_count": 53,
     "summed_batch_rows": 18032,
@@ -95,6 +95,8 @@
       "rows": 45,
       "title": "Stellive Store 이미지 보강 (replace_generic_source_then_extract_image)",
       "public_report": "data/generic_source_cleanup_public.json",
+      "review_state": "candidate_review_required",
+      "next_machine_step": "open_candidate_report_and_verify_exact_product_identity",
       "review_summary": {
         "review_rows": 45,
         "candidate_rows": 3,
@@ -111,6 +113,8 @@
       "rows": 3,
       "title": "Weverse Shop 이미지 보강 (replace_generic_source_then_extract_image)",
       "public_report": "data/generic_source_cleanup_public.json",
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url",
       "review_summary": {
         "review_rows": 3,
         "candidate_rows": 0,
@@ -127,6 +131,8 @@
       "rows": 2,
       "title": "포켓몬 센터 이미지 보강 (replace_generic_source_then_extract_image)",
       "public_report": "data/generic_source_cleanup_public.json",
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url",
       "review_summary": {
         "review_rows": 2,
         "candidate_rows": 0,
@@ -143,6 +149,8 @@
       "rows": 23,
       "title": "ご当地ちいかわ 공식(API) 이미지 보강 (review_gotouchi_official_candidates)",
       "public_report": "data/gotouchi_chiikawa_image_candidates_public.json",
+      "review_state": "official_candidate_mismatch_review_required",
+      "next_machine_step": "review_official_candidates_before_import",
       "review_summary": {
         "rows_checked": 26,
         "exact_type_candidate_rows": 0,
@@ -159,7 +167,9 @@
       "priority": 20,
       "rows": 148,
       "title": "애니메이트 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json"
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-06",
@@ -168,7 +178,9 @@
       "priority": 20,
       "rows": 142,
       "title": "엔스카이 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json"
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-07",
@@ -177,7 +189,9 @@
       "priority": 20,
       "rows": 57,
       "title": "굿스마일컴퍼니 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json"
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-08",
@@ -186,7 +200,9 @@
       "priority": 20,
       "rows": 44,
       "title": "코토부키야 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json"
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-09",
@@ -195,7 +211,9 @@
       "priority": 20,
       "rows": 36,
       "title": "Movic 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json"
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-10",
@@ -204,7 +222,9 @@
       "priority": 20,
       "rows": 23,
       "title": "점프 캐릭터즈 스토어 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json"
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     }
   ],
   "instructions": [
@@ -315,7 +335,9 @@
         "manual_confirmed_rows": 0,
         "weak_or_low_confidence_rows": 3,
         "no_candidate_rows": 42
-      }
+      },
+      "review_state": "candidate_review_required",
+      "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
       "batch_id": "015-agent-generic-source-cleanup-02",
@@ -369,7 +391,9 @@
         "manual_confirmed_rows": 0,
         "weak_or_low_confidence_rows": 0,
         "no_candidate_rows": 3
-      }
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "015-agent-generic-source-cleanup-03",
@@ -413,7 +437,9 @@
         "manual_confirmed_rows": 0,
         "weak_or_low_confidence_rows": 0,
         "no_candidate_rows": 2
-      }
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "018-agent-gotouchi-review-04",
@@ -518,7 +544,9 @@
         "no_official_candidate_rows": 6,
         "attached_representative_rows": 3,
         "visual_mismatch_rows": 1
-      }
+      },
+      "review_state": "official_candidate_mismatch_review_required",
+      "next_machine_step": "review_official_candidates_before_import"
     },
     {
       "batch_id": "020-agent-source-image-05",
@@ -615,7 +643,9 @@
           "source_url": null,
           "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
         }
-      ]
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-06",
@@ -712,7 +742,9 @@
           "source_url": null,
           "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
         }
-      ]
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-07",
@@ -809,7 +841,9 @@
           "source_url": null,
           "official_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF"
         }
-      ]
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-08",
@@ -906,7 +940,9 @@
           "source_url": null,
           "official_search_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=ARTFX%20J%20%E3%83%AA%E3%82%B3%20%26%20%E3%83%AC%E3%82%B0"
         }
-      ]
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-09",
@@ -1003,7 +1039,9 @@
           "source_url": null,
           "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=HUNTER%C3%97HUNTER%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB"
         }
-      ]
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-10",
@@ -1100,7 +1138,9 @@
           "source_url": null,
           "official_search_url": "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword=ONE%20PIECE%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%AB%E3%83%95%E3%82%A3%20%E3%82%AE%E3%82%A25"
         }
-      ]
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-11",
@@ -1197,7 +1237,9 @@
           "source_url": null,
           "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88"
         }
-      ]
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-source-image-12",
@@ -1294,7 +1336,9 @@
           "source_url": null,
           "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81"
         }
-      ]
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "030-agent-source-discovery-13",
@@ -1391,7 +1435,9 @@
           "source_url": null,
           "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-14",
@@ -1488,7 +1534,9 @@
           "source_url": null,
           "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-15",
@@ -1585,7 +1633,9 @@
           "source_url": null,
           "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%AA%E3%82%B3"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-16",
@@ -1682,7 +1732,9 @@
           "source_url": null,
           "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%AD%E3%83%9E%29"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-17",
@@ -1769,7 +1821,9 @@
           "source_url": null,
           "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%83%96%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%89%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-18",
@@ -1836,7 +1890,9 @@
           "source_url": null,
           "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=TWICE%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-19",
@@ -1903,7 +1959,9 @@
           "source_url": null,
           "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%87%E3%82%B9%E3%82%AF%E3%81%A7%E3%81%BE%E3%81%A3%E3%81%9F%E3%82%8A%E5%91%AA%E8%A1%93%E5%B8%AB"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-20",
@@ -1960,7 +2018,9 @@
           "source_url": null,
           "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Big-head%20Cute%20Plush%20Pendant"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-21",
@@ -2007,7 +2067,9 @@
           "source_url": null,
           "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%8A%E3%83%9F%20%E3%82%BF%E3%82%AA%E3%83%AB"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-22",
@@ -2054,7 +2116,9 @@
           "source_url": null,
           "official_search_url": "https://global.shop.smtown.com/search?q=aespa%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
         }
-      ]
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "060-agent-metadata-23",
@@ -2151,7 +2215,9 @@
           "source_url": "https://chiikawamarket.jp/ko/products/4996855134068",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-24",
@@ -2248,7 +2314,9 @@
           "source_url": "https://1kuji.com/products/chiikawa",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-25",
@@ -2345,7 +2413,9 @@
           "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-26",
@@ -2442,7 +2512,9 @@
           "source_url": "https://1kuji.com/products/naru",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-27",
@@ -2539,7 +2611,9 @@
           "source_url": "https://www.enskyshop.com/products/detail/31151",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-28",
@@ -2636,7 +2710,9 @@
           "source_url": "https://www.enskyshop.com/products/detail/31151",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-29",
@@ -2733,7 +2809,9 @@
           "source_url": "https://www.goodsmile.com/ja/product/56346/",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-30",
@@ -2830,7 +2908,9 @@
           "source_url": null,
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-31",
@@ -2927,7 +3007,9 @@
           "source_url": null,
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "060-agent-metadata-32",
@@ -3024,7 +3106,9 @@
           "source_url": null,
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-33",
@@ -3061,7 +3145,9 @@
           "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%93%E3%82%8D%E3%82%8A%E3%82%93+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2599420/",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-34",
@@ -3098,7 +3184,9 @@
           "source_url": "https://chiikawamarket.jp/ko/products/4513750146387",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-35",
@@ -3135,7 +3223,9 @@
           "source_url": "https://chiikawamarket.jp/ko/products/4513750146394",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-36",
@@ -3172,7 +3262,9 @@
           "source_url": "https://www.movic.jp/shop/g/g02330-00350-00625/",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-37",
@@ -3209,7 +3301,9 @@
           "source_url": "https://www.movic.jp/shop/g/g02330-00350-00630/",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-38",
@@ -3246,7 +3340,9 @@
           "source_url": "https://www.bandai.co.jp/candy/products/2026/4570117920592000.html",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-39",
@@ -3283,7 +3379,9 @@
           "source_url": "https://chiikawamarket.jp/ko/products/4570189195898",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-40",
@@ -3320,7 +3418,9 @@
           "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-41",
@@ -3357,7 +3457,9 @@
           "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "090-agent-dedupe-42",
@@ -3394,7 +3496,9 @@
           "source_url": "https://chiikawamarket.jp/ko/products/4571609351603",
           "official_search_url": null
         }
-      ]
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
       "batch_id": "110-agent-ichiban-kuji-43",
@@ -3450,7 +3554,9 @@
           "name_ko": "一番くじ 呪術廻戦 －オンライン－ - ラストワン賞 ビジュアルタオル",
           "source_url": "https://1kuji.com/products/jujutsu-o"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "110-agent-ichiban-kuji-44",
@@ -3506,7 +3612,9 @@
           "name_ko": "一番くじ 僕のヴィランアカデミア - ラストワン賞 トガヒミコ;MASTERLISE ラストワンver.",
           "source_url": "https://1kuji.com/products/myhero_o5"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "120-agent-ichiban-kuji-45",
@@ -3562,7 +3670,9 @@
           "name_ko": "一番くじきゅんキャラわーるど ワンピース～海賊旗の下に～ - H賞 ラバーキーホルダー",
           "source_url": "https://1kuji.com/products/onep_kyun_3"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "120-agent-ichiban-kuji-46",
@@ -3618,7 +3728,9 @@
           "name_ko": "一番くじワンピースフィルム～ストロングワールド～ - H賞 ブルックフィギュア",
           "source_url": "https://1kuji.com/products/onepfilm_2"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "120-agent-ichiban-kuji-47",
@@ -3674,7 +3786,9 @@
           "name_ko": "一番くじ ヒストリー オブ チョッパー - H賞 インテリアハンガー",
           "source_url": "https://1kuji.com/products/cho-history"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "120-agent-ichiban-kuji-48",
@@ -3730,7 +3844,9 @@
           "name_ko": "一番くじきゅんキャラわーるど ワンピース - H賞 フランキー～シャボンディ諸島ver.～",
           "source_url": "https://1kuji.com/products/onep_kyun_1"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "120-agent-ichiban-kuji-49",
@@ -3786,7 +3902,9 @@
           "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - H賞 アニバーサリーグラス",
           "source_url": "https://1kuji.com/products/jojo_anniv"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "120-agent-ichiban-kuji-50",
@@ -3842,7 +3960,9 @@
           "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - H賞 クリアファイル&ステッカー",
           "source_url": "https://1kuji.com/products/onep12"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "120-agent-ichiban-kuji-51",
@@ -3898,7 +4018,9 @@
           "name_ko": "一番くじ ワンピースメモリーズ - H賞 クリアファイル【3枚セット】",
           "source_url": "https://1kuji.com/products/onep14"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "120-agent-ichiban-kuji-52",
@@ -3954,7 +4076,9 @@
           "name_ko": "一番くじ ワンピース-新時代幕開け編-スペシャルエディション - H賞 帆船ストラップ",
           "source_url": "https://1kuji.com/products/onep9"
         }
-      ]
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "140-agent-animation-taxonomy-53",
@@ -4003,7 +4127,9 @@
           "category": "식품",
           "rows": 1
         }
-      ]
+      ],
+      "review_state": "taxonomy_mapping_required",
+      "next_machine_step": "map_category_to_folder_color_and_icon"
     }
   ],
   "automation_policy": {
