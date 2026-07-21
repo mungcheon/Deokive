@@ -1,0 +1,52 @@
+name: deokive
+publish_to: 'none'
+description: Deokive web archive app with PWA support.
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  file_picker: ^10.3.10
+  hive_ce_flutter: ^2.3.4
+  google_sign_in: ^6.3.0
+  image_picker: ^1.1.2
+  provider: ^6.1.5+1
+  url_launcher: ^6.3.1
+  fl_chart: ^0.69.0
+  share_plus: ^10.1.2
+  http: ^1.2.2
+  google_fonts: ^6.2.1
+  image: ^4.2.0
+  crypto: ^3.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/avatar/body/
+    - assets/avatar/background/
+    - assets/avatar/hair/
+    - assets/avatar/accessory/
+    - lib/logo.png
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Bold.otf
+          weight: 700
