@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-21T19:31:10Z",
+  "scope": "generic_source_review_patch_candidates",
+  "summary": {
+    "candidate_rows": 3,
+    "manual_confirmed_rows": 0,
+    "weak_candidate_rows": 1,
+    "low_confidence_candidate_rows": 2,
+    "auto_apply_enabled": false,
+    "source_report": "data/generic_source_cleanup_public.json",
+    "by_candidate_status": [
+      [
+        "low_confidence_candidate",
+        2
+      ],
+      [
+        "weak_manual_review_candidate",
+        1
+      ]
+    ],
+    "by_confidence": [
+      [
+        "low",
+        2
+      ],
+      [
+        "weak",
+        1
+      ]
+    ]
+  },
+  "items": [
+    {
+      "catalog_index": 2325,
+      "name_ko": "스텔라이브 1주년 뱃지 세트",
+      "name_ja": null,
+      "source_store": "Stellive Store",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "candidate_source_url": "https://fanding.kr/@stellive/shop/3700",
+      "candidate_image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
+      "candidate_title": "S.S.Stellive 메탈 뱃지",
+      "candidate_score": 0.2733,
+      "candidate_status": "low_confidence_candidate",
+      "confidence": "low",
+      "proposed_fields": {
+        "source_url": "https://fanding.kr/@stellive/shop/3700",
+        "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp"
+      },
+      "review_required": true,
+      "review_checks": [
+        "Candidate title must describe the exact same goods item or set.",
+        "Candidate image must visually match the catalog item, not only the same brand/store.",
+        "Generic storefront source_url must be replaced only after exact product identity is confirmed."
+      ]
+    },
+    {
+      "catalog_index": 2407,
+      "name_ko": "아카네 리제 데뷔 2주년 아크릴 스탠드",
+      "name_ja": null,
+      "source_store": "Stellive Store",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "candidate_source_url": "https://fanding.kr/@stellive/shop/55",
+      "candidate_image_url": "https://uploads.cdn.fanding.com/upload/image/funding/2023/09/27/8KCuOE72LrfFmJdk.webp",
+      "candidate_title": "2023 리제 아크릴 스탠드",
+      "candidate_score": 0.63,
+      "candidate_status": "weak_manual_review_candidate",
+      "confidence": "weak",
+      "proposed_fields": {
+        "source_url": "https://fanding.kr/@stellive/shop/55",
+        "image_url": "https://uploads.cdn.fanding.com/upload/image/funding/2023/09/27/8KCuOE72LrfFmJdk.webp"
+      },
+      "review_required": true,
+      "review_checks": [
+        "Candidate title must describe the exact same goods item or set.",
+        "Candidate image must visually match the catalog item, not only the same brand/store.",
+        "Generic storefront source_url must be replaced only after exact product identity is confirmed."
+      ]
+    },
+    {
+      "catalog_index": 2454,
+      "name_ko": "스텔라이브 2주년 단체 굿즈 박스",
+      "name_ja": null,
+      "source_store": "Stellive Store",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "candidate_source_url": "https://fanding.kr/@stellive/shop/33",
+      "candidate_image_url": "https://uploads.cdn.fanding.com/upload/image/funding/2023/03/13/y21D3X0bkYUacf5u.webp",
+      "candidate_title": "스텔라이브 키캡 세트",
+      "candidate_score": 0.2373,
+      "candidate_status": "low_confidence_candidate",
+      "confidence": "low",
+      "proposed_fields": {
+        "source_url": "https://fanding.kr/@stellive/shop/33",
+        "image_url": "https://uploads.cdn.fanding.com/upload/image/funding/2023/03/13/y21D3X0bkYUacf5u.webp"
+      },
+      "review_required": true,
+      "review_checks": [
+        "Candidate title must describe the exact same goods item or set.",
+        "Candidate image must visually match the catalog item, not only the same brand/store.",
+        "Generic storefront source_url must be replaced only after exact product identity is confirmed."
+      ]
+    }
+  ],
+  "automation_policy": {
+    "public_only": true,
+    "auto_apply_catalog_changes": false,
+    "requires_manual_review": true,
+    "reason": "These candidates came from generic storefront cleanup and may be related but not exact."
+  }
+}

@@ -24,6 +24,7 @@ ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
+GENERIC_SOURCE_PATCH_CANDIDATES = DATA / "generic_source_patch_candidates_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
 SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
@@ -1049,6 +1050,72 @@ def build_agent_work_queue_public(
     }
 
 
+def build_generic_source_patch_candidates_public(generated_at: str) -> dict[str, Any]:
+    generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
+    items: list[dict[str, Any]] = []
+    for item in generic_source_report.get("items", []):
+        if not isinstance(item, dict) or not item.get("candidate_source_url"):
+            continue
+        candidate_status = str(item.get("candidate_status") or "candidate_review_required")
+        confidence = (
+            "manual_confirmed"
+            if item.get("manual_confirmed") is True
+            else "weak"
+            if candidate_status == "weak_manual_review_candidate"
+            else "low"
+        )
+        items.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "source_store": item.get("source_store"),
+                "current_source_url": item.get("current_source_url"),
+                "candidate_source_url": item.get("candidate_source_url"),
+                "candidate_image_url": item.get("candidate_image_url"),
+                "candidate_title": item.get("candidate_title"),
+                "candidate_score": item.get("candidate_score"),
+                "candidate_status": candidate_status,
+                "confidence": confidence,
+                "proposed_fields": {
+                    "source_url": item.get("candidate_source_url"),
+                    "image_url": item.get("candidate_image_url"),
+                },
+                "review_required": True,
+                "review_checks": [
+                    "Candidate title must describe the exact same goods item or set.",
+                    "Candidate image must visually match the catalog item, not only the same brand/store.",
+                    "Generic storefront source_url must be replaced only after exact product identity is confirmed.",
+                ],
+            }
+        )
+
+    by_status = Counter(str(item.get("candidate_status") or "") for item in items)
+    by_confidence = Counter(str(item.get("confidence") or "") for item in items)
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "scope": "generic_source_review_patch_candidates",
+        "summary": {
+            "candidate_rows": len(items),
+            "manual_confirmed_rows": by_confidence.get("manual_confirmed", 0),
+            "weak_candidate_rows": by_confidence.get("weak", 0),
+            "low_confidence_candidate_rows": by_confidence.get("low", 0),
+            "auto_apply_enabled": False,
+            "source_report": f"data/{GENERIC_SOURCE.name}",
+            "by_candidate_status": by_status.most_common(),
+            "by_confidence": by_confidence.most_common(),
+        },
+        "items": items,
+        "automation_policy": {
+            "public_only": True,
+            "auto_apply_catalog_changes": False,
+            "requires_manual_review": True,
+            "reason": "These candidates came from generic storefront cleanup and may be related but not exact.",
+        },
+    }
+
+
 def normalize_text_key(value: Any) -> str:
     return str(value or "").strip().lower()
 
@@ -1777,6 +1844,13 @@ def update_reports(write: bool) -> dict[str, Any]:
 
     image_candidates = load_json(IMAGE_CANDIDATES, {})
     image_candidates.setdefault("summary", {})
+    generic_source_patch_candidates = build_generic_source_patch_candidates_public(generated_at)
+    patch_candidate_items = generic_source_patch_candidates.get("items", [])
+    patch_candidate_summary = generic_source_patch_candidates.get("summary", {})
+    if patch_candidate_summary.get("candidate_rows") != len(patch_candidate_items):
+        raise ValueError("generic source patch candidate count does not match item count")
+    if patch_candidate_summary.get("auto_apply_enabled") is not False:
+        raise ValueError("generic source patch candidates must stay manual-review only")
 
     for target in (quality, image_backlog, image_candidates):
         if GOTOUCHI.exists():
@@ -1785,6 +1859,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["requested_special_goods_review"] = copy_report_summary(REQUESTED, "requested")
         if GENERIC_SOURCE.exists():
             target["generic_source_cleanup_queue"] = copy_report_summary(GENERIC_SOURCE, "generic_source")
+        target["generic_source_patch_candidates"] = {
+            "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}",
+            **generic_source_patch_candidates["summary"],
+        }
         if SOURCE_DETAIL.exists():
             target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
         target["source_discovery_queue"] = {
@@ -1847,6 +1925,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         GOTOUCHI,
         REQUESTED,
         GENERIC_SOURCE,
+        GENERIC_SOURCE_PATCH_CANDIDATES,
         SOURCE_DETAIL,
         SOURCE_DISCOVERY,
         METADATA_BACKLOG,
@@ -1871,6 +1950,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)
         write_json(IMAGE_CANDIDATES, image_candidates)
+        write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
 
     return {
         "write": write,
@@ -1882,6 +1962,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(QUALITY.relative_to(ROOT)),
             str(IMAGE_BACKLOG.relative_to(ROOT)),
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
+            str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),
