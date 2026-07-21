@@ -653,6 +653,31 @@ def image_workflow(item: dict[str, Any]) -> str:
     return "manual_image_research"
 
 
+def image_import_template(item: dict[str, Any], workflow: str) -> dict[str, Any]:
+    source_url = item.get("source_url") if present(item.get("source_url")) else ""
+    search_url = discovery_search_url(item, discovery_query(item))
+    exact_source_ready = workflow == "extract_from_existing_source_url"
+    return {
+        "manual_confirmed": False,
+        "manual_note": "",
+        "row_index": item.get("catalog_index"),
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": source_url if exact_source_ready else "",
+        "candidate_source_url": source_url if exact_source_ready else "",
+        "source_store": item.get("source_store"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "category": item.get("category"),
+        "affiliation": item.get("affiliation"),
+        "source_search_url": search_url,
+        "workflow": workflow,
+        "requires_exact_source_url": not exact_source_ready,
+        "requires_representative_image_flag": workflow in {"manual_image_research", "review_gotouchi_official_candidates"},
+        "blocked_until": "exact_product_source_url_confirmed" if not exact_source_ready else "manual_image_url_confirmed",
+    }
+
+
 def build_image_enrichment_batches_public(
     items: list[dict[str, Any]], sample_groups: int = 80, sample_items: int = 10
 ) -> dict[str, Any]:
@@ -700,6 +725,7 @@ def build_image_enrichment_batches_public(
                         "category": item.get("category"),
                         "source_url": item.get("source_url"),
                         "official_search_url": discovery_search_url(item, discovery_query(item)),
+                        "catalog_field_import_template": image_import_template(item, workflow),
                     }
                     for item in samples
                 ],
@@ -789,6 +815,14 @@ def build_image_enrichment_batches_public(
                     "blocked_until": step.get("state"),
                     "next_machine_step": step.get("next_step"),
                     "public_report": step.get("public_report"),
+                    "catalog_field_import_template_fields": [
+                        "manual_confirmed",
+                        "row_index",
+                        "field",
+                        "manual_value",
+                        "evidence_url",
+                        "candidate_source_url",
+                    ],
                     "acceptance_criteria": [
                         "exact product source_url is available before importing image_url",
                         "image_url comes from the accepted source page or trusted official CDN",
@@ -810,6 +844,9 @@ def build_image_enrichment_batches_public(
             "manual_image_research_rows": by_workflow.get("manual_image_research", 0),
             "published_group_rows": len(groups),
             "review_batch_count": len(review_batches),
+            "sample_image_import_template_count": sum(
+                len(group.get("sample_items") or []) for group in groups
+            ),
             "top_source_stores": by_store.most_common(30),
             "by_workflow": by_workflow.most_common(),
         },

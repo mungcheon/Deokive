@@ -81,11 +81,25 @@ class PublicCatalogReportTests(unittest.TestCase):
             sum(int(group.get("missing_image_rows") or 0) for group in image_batches.get("groups", [])),
         )
         self.assertTrue(all(batch.get("auto_apply_enabled") is False for batch in image_review_batches))
+        self.assertGreater(image_batches["summary"].get("sample_image_import_template_count", 0), 0)
         self.assertTrue(
             all(
                 len({group.get("workflow") for group in batch.get("groups", []) if isinstance(group, dict)}) <= 1
                 for batch in image_review_batches
             )
+        )
+        sample_templates = [
+            item.get("catalog_field_import_template")
+            for group in image_batches.get("groups", [])
+            for item in group.get("sample_items", [])
+            if isinstance(item, dict)
+        ]
+        self.assertGreater(len(sample_templates), 0)
+        self.assertTrue(all(isinstance(template, dict) for template in sample_templates))
+        self.assertTrue(all(template.get("field") == "image_url" for template in sample_templates))
+        self.assertTrue(all(template.get("manual_confirmed") is False for template in sample_templates))
+        self.assertTrue(
+            any(template.get("blocked_until") == "exact_product_source_url_confirmed" for template in sample_templates)
         )
 
         batches = agent_queue.get("batches", [])
