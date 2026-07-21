@@ -1,0 +1,902 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-21T17:32:24Z",
+  "scope": "public_catalog_image_candidate_review",
+  "summary": {
+    "pilot_store_count": 3,
+    "pilot_processed_rows": 75,
+    "pilot_filled_rows": 0,
+    "missing_images": 723,
+    "provider_candidate_items": 496,
+    "manual_or_blocked_items": 228
+  },
+  "pilots": [
+    {
+      "source_store": "?????",
+      "processed_rows": 20,
+      "filled": 0,
+      "reason_counts": [
+        [
+          "best_candidate_rejected",
+          16
+        ],
+        [
+          "no_provider_candidates",
+          3
+        ],
+        [
+          "random_broad_requires_manual_variant_confirmation",
+          1
+        ]
+      ],
+      "rejection_reason_counts": [
+        [
+          "ambiguous_close_candidates",
+          15
+        ],
+        [
+          "none",
+          4
+        ],
+        [
+          "failed_safety_checks",
+          1
+        ]
+      ],
+      "rows_with_candidates": 16,
+      "safe_candidate_rejected_rows": 16,
+      "samples": [
+        {
+          "row_index": 1031,
+          "name_ko": "원피스 봉제 인형 (토니토니 쵸파)",
+          "affiliation": "원피스",
+          "query": "ワンピース ぬいぐるみ チョッパー",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match"
+          ],
+          "candidate_count": 6,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.7857,
+          "top_candidates": [
+            {
+              "title": "【グッズ－腕輪】ONE PIECE のっかりぬいぐるみバンド トニートニー・チョッパー",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA%EF%BC%8D%E8%85%95%E8%BC%AA%E3%80%91ONE+PIECE+%E3%81%AE%E3%81%A3%E3%81%8B%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%90%E3%83%B3%E3%83%89+%E3%83%88%E3%83%8B%E3%83%BC%E3%83%88%E3%83%8B%E3%83%BC%E3%83%BB%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC/pd/1691247/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=08281507_5d661a31b3f58.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 0.7857
+            },
+            {
+              "title": "【グッズ-キーホルダー】ONE PIECE エッグヘッド編withCATアイマスク付きぬいぐるみキーホルダー／チョッパー",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%E3%80%91ONE+PIECE+%E3%82%A8%E3%83%83%E3%82%B0%E3%83%98%E3%83%83%E3%83%89%E7%B7%A8withCAT%E3%82%A2%E3%82%A4%E3%83%9E%E3%82%B9%E3%82%AF%E4%BB%98%E3%81%8D%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%EF%BC%8F%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC/pd/3356165/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621542763_1_1766117112.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 0.7857
+            },
+            {
+              "title": "【グッズ-キーホルダー】ONE PIECE withCATアイマスク付きぬいぐるみキーホルダー／チョッパー",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%E3%80%91ONE+PIECE+withCAT%E3%82%A2%E3%82%A4%E3%83%9E%E3%82%B9%E3%82%AF%E4%BB%98%E3%81%8D%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%EF%BC%8F%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC/pd/3296168/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621505607_1_1761883504.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 0.7857
+            }
+          ]
+        },
+        {
+          "row_index": 1033,
+          "name_ko": "원피스 클리어 파일 (밀짚모자 일당)",
+          "affiliation": "원피스",
+          "query": "ワンピース クリアファイル",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 1,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-クリアファイル】ワンピース クリアファイル-ゆるスタ第2弾-",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-%E3%82%86%E3%82%8B%E3%82%B9%E3%82%BF%E7%AC%AC2%E5%BC%BE-/pd/2938835/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4901772423959_1_1724040338.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】ワンピース スリムクリアファイルコレクション-ゆるスタ第1弾-",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9+%E3%82%B9%E3%83%AA%E3%83%A0%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3-%E3%82%86%E3%82%8B%E3%82%B9%E3%82%BF%E7%AC%AC1%E5%BC%BE-/pd/2445411/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4901772413585_2_1711361337.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】ワンピース 新モノグラム Ａ４クリアファイル",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9+%E6%96%B0%E3%83%A2%E3%83%8E%E3%82%B0%E3%83%A9%E3%83%A0+%EF%BC%A1%EF%BC%94%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB/pd/2996209/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4582530049965_1_1731038865.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1034,
+          "name_ko": "원피스 캔뱃지 (랜덤 1팩)",
+          "affiliation": "원피스",
+          "query": "ワンピース 缶バッジ",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 1,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-バッチ】ワンピース MEGA CAT PROJECT ニャンピースニャーン！お名前缶バッジコレクション",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9+MEGA+CAT+PROJECT+%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9%E3%83%8B%E3%83%A3%E3%83%BC%E3%83%B3%EF%BC%81%E3%81%8A%E5%90%8D%E5%89%8D%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/pd/3363698/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=01061814_695cd293a4ef1.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-バッチ】ワンピース 缶バッジコレクション-ゆるスタ第2弾-",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3-%E3%82%86%E3%82%8B%E3%82%B9%E3%82%BF%E7%AC%AC2%E5%BC%BE-/pd/2938804/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4901772423645_1_1724040444.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-バッチ】ワンピース 缶バッジコレクション-ゆるスタ第1弾-",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3-%E3%82%86%E3%82%8B%E3%82%B9%E3%82%BF%E7%AC%AC1%E5%BC%BE-/pd/2445412/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4901772413592_2_1711361142.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1037,
+          "name_ko": "주술회전 캔뱃지 (랜덤)",
+          "affiliation": "주술회전",
+          "query": "呪術廻戦 缶バッジ",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 2,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-バッチ】呪術廻戦　第3期 缶バッジ／伏黒　恵",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%E3%80%80%E7%AC%AC3%E6%9C%9F+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%EF%BC%8F%E4%BC%8F%E9%BB%92%E3%80%80%E6%81%B5/pd/3438129/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621630705_1_1774584311.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-バッチ】呪術廻戦　第3期 缶バッジ／乙骨　憂太",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%E3%80%80%E7%AC%AC3%E6%9C%9F+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%EF%BC%8F%E4%B9%99%E9%AA%A8%E3%80%80%E6%86%82%E5%A4%AA/pd/3438130/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621630712_1_1774584327.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-バッチ】呪術廻戦 死滅回游 ちょこんとのっかり 缶バッジ",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E6%AD%BB%E6%BB%85%E5%9B%9E%E6%B8%B8+%E3%81%A1%E3%82%87%E3%81%93%E3%82%93%E3%81%A8%E3%81%AE%E3%81%A3%E3%81%8B%E3%82%8A+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8/pd/3421053/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4582770050264_2_1773054306.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1038,
+          "name_ko": "주술회전 클리어 파일 (메인 비주얼)",
+          "affiliation": "주술회전",
+          "query": "呪術廻戦 クリアファイル",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 2,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-クリアファイル】呪術廻戦 死滅回游 前編 クリアファイル OPver. B",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E6%AD%BB%E6%BB%85%E5%9B%9E%E6%B8%B8+%E5%89%8D%E7%B7%A8+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+OPver.+B/pd/3427086/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580869782621_1_1773633906.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】呪術廻戦 死滅回游 前編 クリアファイル OPver. C",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E6%AD%BB%E6%BB%85%E5%9B%9E%E6%B8%B8+%E5%89%8D%E7%B7%A8+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+OPver.+C/pd/3427087/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580869782638_1_1773633906.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】呪術廻戦 死滅回游 前編 クリアファイル OPver. A",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E6%AD%BB%E6%BB%85%E5%9B%9E%E6%B8%B8+%E5%89%8D%E7%B7%A8+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+OPver.+A/pd/3427085/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580869782614_1_1773633906.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1039,
+          "name_ko": "주술회전 머그컵",
+          "affiliation": "주술회전",
+          "query": "呪術廻戦 マグカップ",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 2,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-マグカップ】アニメ『呪術廻戦』5周年 ビジュアル第1弾 マグカップ",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%E3%80%8F5%E5%91%A8%E5%B9%B4+%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E7%AC%AC1%E5%BC%BE+%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97/pd/3357441/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4570119480261_1_1766117114.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-マグカップ】アニメ『呪術廻戦』5周年 ビジュアル第2弾 マグカップ",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%E3%80%8F5%E5%91%A8%E5%B9%B4+%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E7%AC%AC2%E5%BC%BE+%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97/pd/3357471/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580869780276_1_1766117108.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-マグカップ】呪術廻戦 マグカップ Morning ver.",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97+Morning+ver./pd/3150033/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4570179759635_1_1749560707.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1043,
+          "name_ko": "체인소맨 봉제 인형 (포치타)",
+          "affiliation": "체인소맨",
+          "query": "チェンソーマン ぬいぐるみ ポチタ",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 14,
+          "best_score_overlap": 2,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-マスコット】チェンソーマン ちょこんと！ぬいぐるみマスコット（ポチタ）",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A1%E3%82%87%E3%81%93%E3%82%93%E3%81%A8%EF%BC%81%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%83%9D%E3%83%81%E3%82%BF%EF%BC%89/pd/3345650/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4571622863084_2_1765425910.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-ぬいぐるみ】劇場版『チェンソーマン レゼ篇』 ふわコロりんBIG F ポチタ",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E3%81%B5%E3%82%8F%E3%82%B3%E3%83%AD%E3%82%8A%E3%82%93BIG+F+%E3%83%9D%E3%83%81%E3%82%BF/pd/3292599/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4571617079612_1_1761563115.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-ぬいぐるみ】劇場版『チェンソーマン レゼ篇』 ふわコロりんMsize F ポチタ",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E3%81%B5%E3%82%8F%E3%82%B3%E3%83%AD%E3%82%8A%E3%82%93Msize+F+%E3%83%9D%E3%83%81%E3%82%BF/pd/3292591/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4571617079537_1_1761563108.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1044,
+          "name_ko": "체인소맨 캔뱃지 (랜덤)",
+          "affiliation": "체인소맨",
+          "query": "チェンソーマン 缶バッジ",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 2,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-バッチ】劇場版『チェンソーマン レゼ篇』 缶バッジ Bbox 【まねきねこコラボ】",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8+Bbox+%E3%80%90%E3%81%BE%E3%81%AD%E3%81%8D%E3%81%AD%E3%81%93%E3%82%B3%E3%83%A9%E3%83%9C%E3%80%91/pd/3256298/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=10861123_1_1757675111.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-バッチ】劇場版『チェンソーマン レゼ篇』 缶バッジ Abox 【まねきねこコラボ】",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8+Abox+%E3%80%90%E3%81%BE%E3%81%AD%E3%81%8D%E3%81%AD%E3%81%93%E3%82%B3%E3%83%A9%E3%83%9C%E3%80%91/pd/3256297/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=10861122_1_1757675113.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-バッチ】劇場版『チェンソーマン レゼ篇』 缶バッジコレクション／場面写",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%EF%BC%8F%E5%A0%B4%E9%9D%A2%E5%86%99/pd/3484626/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621637711_1_1779102306.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1045,
+          "name_ko": "체인소맨 클리어 파일",
+          "affiliation": "체인소맨",
+          "query": "チェンソーマン クリアファイル",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 2,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-クリアファイル】劇場版『チェンソーマン レゼ篇』 クリアファイル／レゼA　場面写",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%EF%BC%8F%E3%83%AC%E3%82%BCA%E3%80%80%E5%A0%B4%E9%9D%A2%E5%86%99/pd/3484599/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621637643_1_1779102307.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】劇場版『チェンソーマン レゼ篇』 クリアファイル／デンジ・レゼ　場面写",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%EF%BC%8F%E3%83%87%E3%83%B3%E3%82%B8%E3%83%BB%E3%83%AC%E3%82%BC%E3%80%80%E5%A0%B4%E9%9D%A2%E5%86%99/pd/3484601/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621637667_1_1779102303.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】劇場版『チェンソーマン レゼ篇』 クリアファイル／レゼB　場面写",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%EF%BC%8F%E3%83%AC%E3%82%BCB%E3%80%80%E5%A0%B4%E9%9D%A2%E5%86%99/pd/3484600/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621637650_1_1779102307.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1050,
+          "name_ko": "진격의 거인 캔뱃지 (랜덤)",
+          "affiliation": "진격의 거인",
+          "query": "進撃の巨人 缶バッジ",
+          "reason": "random_broad_requires_manual_variant_confirmation",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": null,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1051,
+          "name_ko": "진격의 거인 클리어 파일",
+          "affiliation": "진격의 거인",
+          "query": "進撃の巨人 クリアファイル",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 2,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-クリアファイル】TVアニメ『進撃の巨人』The Final Season クリアファイル リヴァイ(Nemophila)",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%E3%80%8FThe+Final+Season+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%28Nemophila%29/pd/3523349/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4522776883398_1_1782705916.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】TVアニメ『進撃の巨人』The Final Season クリアファイル エレン・イェーガー(Nemophila)",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%E3%80%8FThe+Final+Season+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+%E3%82%A8%E3%83%AC%E3%83%B3%E3%83%BB%E3%82%A4%E3%82%A7%E3%83%BC%E3%82%AC%E3%83%BC%28Nemophila%29/pd/3523348/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4522776883381_1_1782705913.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】TVアニメ『進撃の巨人』 執事衣装 クリアファイル 2種セット（ハンジ・リヴァイ）【再販】",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%E3%80%8F+%E5%9F%B7%E4%BA%8B%E8%A1%A3%E8%A3%85+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+2%E7%A8%AE%E3%82%BB%E3%83%83%E3%83%88%EF%BC%88%E3%83%8F%E3%83%B3%E3%82%B8%E3%83%BB%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/3508783/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11045138_1_1781237113.jpg&width=400&height=400&square=1",
+              "score_overlap": 2,
+              "score_similarity": 1.0
+            }
+          ]
+        },
+        {
+          "row_index": 1061,
+          "name_ko": "나루토 클리어 파일",
+          "affiliation": "나루토",
+          "query": "NARUTO クリアファイル",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "ambiguous_close_candidates",
+          "failed_checks": [],
+          "candidate_count": 40,
+          "best_score_overlap": 1,
+          "best_score_similarity": 1.0,
+          "top_candidates": [
+            {
+              "title": "【グッズ-クリアファイル】NARUTO-ナルト- 疾風伝 クリアファイル イタチ・サスケ【再販】",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91NARUTO-%E3%83%8A%E3%83%AB%E3%83%88-+%E7%96%BE%E9%A2%A8%E4%BC%9D+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+%E3%82%A4%E3%82%BF%E3%83%81%E3%83%BB%E3%82%B5%E3%82%B9%E3%82%B1%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/3528628/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11060253_1_1783051509.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】NARUTO-ナルト- 疾風伝 クリアファイル ミナト・ナルト【再販】",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91NARUTO-%E3%83%8A%E3%83%AB%E3%83%88-+%E7%96%BE%E9%A2%A8%E4%BC%9D+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+%E3%83%9F%E3%83%8A%E3%83%88%E3%83%BB%E3%83%8A%E3%83%AB%E3%83%88%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/3528626/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11060251_1_1783051508.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            },
+            {
+              "title": "【グッズ-クリアファイル】NARUTO-ナルト- 疾風伝 クリアファイル ナルト&サスケ【再販】",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91NARUTO-%E3%83%8A%E3%83%AB%E3%83%88-+%E7%96%BE%E9%A2%A8%E4%BC%9D+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+%E3%83%8A%E3%83%AB%E3%83%88%26%E3%82%B5%E3%82%B9%E3%82%B1%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/3528614/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11060239_1_1783051506.jpg&width=400&height=400&square=1",
+              "score_overlap": 1,
+              "score_similarity": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source_store": "???????",
+      "processed_rows": 30,
+      "filled": 0,
+      "reason_counts": [
+        [
+          "no_provider_candidates",
+          30
+        ]
+      ],
+      "rejection_reason_counts": [
+        [
+          "none",
+          30
+        ]
+      ],
+      "rows_with_candidates": 0,
+      "safe_candidate_rejected_rows": 0,
+      "samples": [
+        {
+          "row_index": 1408,
+          "name_ko": "POP UP PARADE 리코",
+          "affiliation": "메이드 인 어비스",
+          "query": "POP UP PARADE リコ",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1409,
+          "name_ko": "POP UP PARADE 레그",
+          "affiliation": "메이드 인 어비스",
+          "query": "POP UP PARADE レグ",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1447,
+          "name_ko": "넨도로이드 토가미 뱌쿠야",
+          "affiliation": "단간론파",
+          "query": "ねんどろいど 十神白夜",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1454,
+          "name_ko": "넨도로이드 모모타 카이토",
+          "affiliation": "단간론파",
+          "query": "ねんどろいど 百田解斗",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1455,
+          "name_ko": "POP UP PARADE 모노쿠마",
+          "affiliation": "단간론파",
+          "query": "POP UP PARADE モノクマ",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1485,
+          "name_ko": "넨도로이드 아이젠",
+          "affiliation": "장송의 프리렌",
+          "query": "ねんどろいど アイゼン",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1486,
+          "name_ko": "넨도로이드 하이터",
+          "affiliation": "장송의 프리렌",
+          "query": "ねんどろいど ハイター",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1489,
+          "name_ko": "POP UP PARADE 슈타르크",
+          "affiliation": "장송의 프리렌",
+          "query": "POP UP PARADE シュタルク",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1530,
+          "name_ko": "하츠네 미쿠 러버 스트랩 (매지컬 미라이 2023)",
+          "affiliation": "하츠네 미쿠",
+          "query": "初音ミク ラバーストラップ (マジカルミライ2023)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1603,
+          "name_ko": "하츠네 미쿠 아크릴 스탠드 (매지컬 미라이 2024)",
+          "affiliation": "하츠네 미쿠",
+          "query": "初音ミク アクリルスタンド (マジカルミライ 2024)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1604,
+          "name_ko": "하츠네 미쿠 아크릴 스탠드 (벚꽃 미쿠)",
+          "affiliation": "하츠네 미쿠",
+          "query": "初音ミク アクリルスタンド (桜ミク)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1605,
+          "name_ko": "카가미네 린 아크릴 스탠드 (매지컬 미라이)",
+          "affiliation": "하츠네 미쿠",
+          "query": "鏡音リン アクリルスタンド (マジカルミライ)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        }
+      ]
+    },
+    {
+      "source_store": "????",
+      "processed_rows": 25,
+      "filled": 0,
+      "reason_counts": [
+        [
+          "no_provider_candidates",
+          22
+        ],
+        [
+          "best_candidate_rejected",
+          3
+        ]
+      ],
+      "rejection_reason_counts": [
+        [
+          "none",
+          22
+        ],
+        [
+          "failed_safety_checks",
+          3
+        ]
+      ],
+      "rows_with_candidates": 3,
+      "safe_candidate_rejected_rows": 3,
+      "samples": [
+        {
+          "row_index": 922,
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ ラバーストラップ (うさぎ)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 924,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 925,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 926,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 928,
+          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ アクリルスタンド (ハチワレ)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 8,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.6875,
+          "top_candidates": [
+            {
+              "title": "カラフルピーチ アクリルスタンド からぴちピクニック / なおきり",
+              "source_url": "https://www.enskyshop.com/products/detail/30779",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/1219111914_6944b622d9a76.jpg",
+              "score_overlap": 1,
+              "score_similarity": 0.6875
+            },
+            {
+              "title": "LIMBUS COMPANY リバーシブルアルカナアクリルスタンド /(12)グレゴール",
+              "source_url": "https://www.enskyshop.com/products/detail/31622",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/0330135654_69ca02968a3f3.jpg",
+              "score_overlap": 0,
+              "score_similarity": 0.5625
+            },
+            {
+              "title": "アニメ「ハイキュー!!」 アクリルスタンド5 /(3)黒尾鉄朗",
+              "source_url": "https://www.enskyshop.com/products/detail/31337",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/0306100142_69aa277650c74.jpg",
+              "score_overlap": 0,
+              "score_similarity": 0.5625
+            }
+          ]
+        },
+        {
+          "row_index": 929,
+          "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ アクリルスタンド (うさぎ)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 8,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.6667,
+          "top_candidates": [
+            {
+              "title": "カラフルピーチ アクリルスタンド からぴちピクニック / なおきり",
+              "source_url": "https://www.enskyshop.com/products/detail/30779",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/1219111914_6944b622d9a76.jpg",
+              "score_overlap": 1,
+              "score_similarity": 0.6667
+            },
+            {
+              "title": "LIMBUS COMPANY リバーシブルアルカナアクリルスタンド /(12)グレゴール",
+              "source_url": "https://www.enskyshop.com/products/detail/31622",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/0330135654_69ca02968a3f3.jpg",
+              "score_overlap": 0,
+              "score_similarity": 0.5333
+            },
+            {
+              "title": "LIMBUS COMPANY リバーシブルアルカナアクリルスタンド /(1)イサン",
+              "source_url": "https://www.enskyshop.com/products/detail/31611",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/0330134040_69c9fec89c3ed.jpg",
+              "score_overlap": 0,
+              "score_similarity": 0.5333
+            }
+          ]
+        },
+        {
+          "row_index": 930,
+          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 931,
+          "name_ko": "치이카와 스탠드 미니 (모몽가)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ スタンドミニ (モモンガ)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.5833,
+          "top_candidates": [
+            {
+              "title": "ちいかわ キラキラクリアカードコレクションガム ◆通常版◆【1BOX 16パック入り】",
+              "source_url": "https://www.enskyshop.com/products/detail/31151",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/0212101825_698d2a616d61e.jpg",
+              "score_overlap": 1,
+              "score_similarity": 0.5833
+            },
+            {
+              "title": "ちいかわ マグネットコレクションガム2【1BOX 14パック入り】",
+              "source_url": "https://www.enskyshop.com/products/detail/30726",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/1210094551_6938c2bfcd299.jpg",
+              "score_overlap": 1,
+              "score_similarity": 0.5
+            },
+            {
+              "title": "ちいかわ バラエティカード ガムつき【1BOX 16パック入り】",
+              "source_url": "https://www.enskyshop.com/products/detail/24195",
+              "image_url": "https://www.enskyshop.com/html/upload/save_image/1009115056_6705ef9038c9b.jpg",
+              "score_overlap": 1,
+              "score_similarity": 0.5
+            }
+          ]
+        },
+        {
+          "row_index": 932,
+          "name_ko": "치이카와 트레이딩 아크릴 키홀더 (라부라부)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ トレーディングアクリルキーホルダー (らぶらぶシリーズ)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 933,
+          "name_ko": "치이카와 아크릴 피규어 (라부라부 시리즈)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ アクリルフィギュア (らぶらぶシリーズ)",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        },
+        {
+          "row_index": 1190,
+          "name_ko": "치비누이 카가미네 린",
+          "affiliation": "하츠네 미쿠",
+          "query": "ちびぬい 鏡音リン",
+          "reason": "no_provider_candidates",
+          "rejection_reason": null,
+          "failed_checks": [],
+          "candidate_count": 0,
+          "best_score_overlap": null,
+          "best_score_similarity": null,
+          "top_candidates": []
+        }
+      ]
+    }
+  ],
+  "next_actions": [
+    "?????: ambiguous_close_candidates rows need product-specific line/variant selection before image attachment.",
+    "???????: provider returned no candidates for pilot rows; improve Good Smile search/index source before auto attachment.",
+    "????: provider returned no safe fills in pilot; inspect sitemap matching and title normalization.",
+    "Generic storefront source_url rows, especially Fanding/Stellive, need exact product URL replacement before image extraction."
+  ],
+  "privacy": {
+    "contains_user_accounts": false,
+    "contains_local_folders": false,
+    "contains_private_memos": false,
+    "contains_device_profiles": false,
+    "contains_server_tokens": false
+  }
+}
