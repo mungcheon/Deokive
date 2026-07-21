@@ -2,8 +2,9 @@
   "schema_version": 1,
   "summary": {
     "missing_image_rows": 720,
-    "source_url_ready_rows": 23,
+    "source_url_ready_rows": 0,
     "generic_source_url_rows": 50,
+    "gotouchi_official_review_rows": 23,
     "needs_source_discovery_rows": 642,
     "manual_image_research_rows": 5,
     "published_group_rows": 46,
@@ -139,7 +140,7 @@
         50
       ],
       [
-        "extract_from_existing_source_url",
+        "review_gotouchi_official_candidates",
         23
       ],
       [
@@ -152,109 +153,10 @@
     "Public image enrichment batches grouped by readiness and source store.",
     "Rows with source_url should be attempted first because identity evidence already exists.",
     "Generic storefront source_url rows must be replaced with exact product URLs before image import.",
+    "Gotouchi rows use the separate official motif candidate report before any image import.",
     "Rows without source_url must attach an exact source URL before image_url is imported."
   ],
   "groups": [
-    {
-      "workflow": "extract_from_existing_source_url",
-      "source_store": "ご当地ちいかわ 공식(API)",
-      "missing_image_rows": 23,
-      "priority": 10,
-      "recommended_action": "crawl verified source_url and review extracted product image",
-      "official_search_available": false,
-      "sample_items": [
-        {
-          "catalog_index": 936,
-          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
-          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
-          "series_name": "ご当地",
-          "category": "아크릴 키링",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 937,
-          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
-          "name_ja": "うさぎ ご当地マスコット (浅草)",
-          "series_name": "ご当地",
-          "category": "마스코트",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 938,
-          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
-          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
-          "series_name": "ご当地",
-          "category": "타월",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 941,
-          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
-          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
-          "series_name": "ご当地",
-          "category": "마스코트",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 942,
-          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
-          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
-          "series_name": "ご当地",
-          "category": "아크릴 키링",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 943,
-          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
-          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
-          "series_name": "ご当地",
-          "category": "타월",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 944,
-          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
-          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
-          "series_name": "ご当地",
-          "category": "마스코트",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 945,
-          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
-          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
-          "series_name": "ご当地",
-          "category": "마스코트",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 946,
-          "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
-          "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
-          "series_name": "ご当地",
-          "category": "아크릴 키링",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 950,
-          "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
-          "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
-          "series_name": "ご当地",
-          "category": "타월",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null
-        }
-      ]
-    },
     {
       "workflow": "replace_generic_source_then_extract_image",
       "source_store": "Stellive Store",
@@ -262,6 +164,7 @@
       "priority": 15,
       "recommended_action": "replace generic storefront URL with exact product URL before image import",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2325,
@@ -362,6 +265,7 @@
       "priority": 15,
       "recommended_action": "replace generic storefront URL with exact product URL before image import",
       "official_search_available": false,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 17613,
@@ -399,6 +303,7 @@
       "priority": 15,
       "recommended_action": "replace generic storefront URL with exact product URL before image import",
       "official_search_available": false,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1098,
@@ -421,12 +326,114 @@
       ]
     },
     {
+      "workflow": "review_gotouchi_official_candidates",
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "missing_image_rows": 23,
+      "priority": 18,
+      "recommended_action": "review gotouchi official motif candidates; do not import motif-only type mismatches",
+      "official_search_available": false,
+      "candidate_review_report": "data/gotouchi_chiikawa_image_candidates_public.json",
+      "sample_items": [
+        {
+          "catalog_index": 936,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "series_name": "ご当地",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 937,
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 938,
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+          "series_name": "ご当地",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 941,
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 942,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "series_name": "ご当地",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 943,
+          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+          "series_name": "ご当地",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 944,
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 945,
+          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 946,
+          "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+          "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+          "series_name": "ご当地",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 950,
+          "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+          "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+          "series_name": "ご当地",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null
+        }
+      ]
+    },
+    {
       "workflow": "find_source_then_extract_image",
       "source_store": "애니메이트",
       "missing_image_rows": 148,
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1031,
@@ -527,6 +534,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 922,
@@ -627,6 +635,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1408,
@@ -727,6 +736,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1302,
@@ -827,6 +837,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1621,
@@ -927,6 +938,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1291,
@@ -1027,6 +1039,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1184,
@@ -1127,6 +1140,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1265,
@@ -1227,6 +1241,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2204,
@@ -1327,6 +1342,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 972,
@@ -1427,6 +1443,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1016,
@@ -1527,6 +1544,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1680,
@@ -1627,6 +1645,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1631,
@@ -1727,6 +1746,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1026,
@@ -1827,6 +1847,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1400,
@@ -1918,6 +1939,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 987,
@@ -1991,6 +2013,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1092,
@@ -2055,6 +2078,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2280,
@@ -2110,6 +2134,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1396,
@@ -2165,6 +2190,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 994,
@@ -2220,6 +2246,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1841,
@@ -2266,6 +2293,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1261,
@@ -2312,6 +2340,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1108,
@@ -2358,6 +2387,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2319,
@@ -2404,6 +2434,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1835,
@@ -2441,6 +2472,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2287,
@@ -2478,6 +2510,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2018,
@@ -2515,6 +2548,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1441,
@@ -2543,6 +2577,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2306,
@@ -2571,6 +2606,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2323,
@@ -2599,6 +2635,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2322,
@@ -2627,6 +2664,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1443,
@@ -2646,6 +2684,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2290,
@@ -2665,6 +2704,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1437,
@@ -2684,6 +2724,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2334,
@@ -2703,6 +2744,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2305,
@@ -2722,6 +2764,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2303,
@@ -2741,6 +2784,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 1183,
@@ -2760,6 +2804,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2284,
@@ -2779,6 +2824,7 @@
       "priority": 20,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "official_search_available": true,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2047,
@@ -2798,6 +2844,7 @@
       "priority": 40,
       "recommended_action": "manual web research with source verification required",
       "official_search_available": false,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2316,
@@ -2835,6 +2882,7 @@
       "priority": 40,
       "recommended_action": "manual web research with source verification required",
       "official_search_available": false,
+      "candidate_review_report": null,
       "sample_items": [
         {
           "catalog_index": 2415,

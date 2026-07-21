@@ -419,6 +419,8 @@ def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: in
 
 
 def image_workflow(item: dict[str, Any]) -> str:
+    if str(item.get("source_store") or "") == "ご当地ちいかわ 공식(API)":
+        return "review_gotouchi_official_candidates"
     if present(item.get("source_url")):
         if normalize_url_key(item.get("source_url")) in {normalize_url_key(url) for url in GENERIC_STOREFRONT_URLS}:
             return "replace_generic_source_then_extract_image"
@@ -439,6 +441,7 @@ def build_image_enrichment_batches_public(
     workflow_priority = {
         "extract_from_existing_source_url": 10,
         "replace_generic_source_then_extract_image": 15,
+        "review_gotouchi_official_candidates": 18,
         "find_source_then_extract_image": 20,
         "manual_image_research": 40,
     }
@@ -457,10 +460,14 @@ def build_image_enrichment_batches_public(
                 "recommended_action": {
                     "extract_from_existing_source_url": "crawl verified source_url and review extracted product image",
                     "replace_generic_source_then_extract_image": "replace generic storefront URL with exact product URL before image import",
+                    "review_gotouchi_official_candidates": "review gotouchi official motif candidates; do not import motif-only type mismatches",
                     "find_source_then_extract_image": "find exact official product page, then attach source_url and image_url",
                     "manual_image_research": "manual web research with source verification required",
                 }.get(workflow, "manual review required"),
                 "official_search_available": store in OFFICIAL_SEARCH_TEMPLATES,
+                "candidate_review_report": f"data/{GOTOUCHI.name}"
+                if workflow == "review_gotouchi_official_candidates" and GOTOUCHI.exists()
+                else None,
                 "sample_items": [
                     {
                         "catalog_index": item.get("catalog_index"),
@@ -484,6 +491,7 @@ def build_image_enrichment_batches_public(
             "missing_image_rows": len(missing),
             "source_url_ready_rows": by_workflow.get("extract_from_existing_source_url", 0),
             "generic_source_url_rows": by_workflow.get("replace_generic_source_then_extract_image", 0),
+            "gotouchi_official_review_rows": by_workflow.get("review_gotouchi_official_candidates", 0),
             "needs_source_discovery_rows": by_workflow.get("find_source_then_extract_image", 0),
             "manual_image_research_rows": by_workflow.get("manual_image_research", 0),
             "published_group_rows": len(groups),
@@ -494,6 +502,7 @@ def build_image_enrichment_batches_public(
             "Public image enrichment batches grouped by readiness and source store.",
             "Rows with source_url should be attempted first because identity evidence already exists.",
             "Generic storefront source_url rows must be replaced with exact product URLs before image import.",
+            "Gotouchi rows use the separate official motif candidate report before any image import.",
             "Rows without source_url must attach an exact source URL before image_url is imported.",
         ],
         "groups": groups,
@@ -611,8 +620,9 @@ def build_operations_public(
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
             "ready_rows": image_summary.get("source_url_ready_rows", 0),
             "generic_source_url_rows": image_summary.get("generic_source_url_rows", 0),
+            "gotouchi_official_review_rows": image_summary.get("gotouchi_official_review_rows", 0),
             "blocked_rows": image_summary.get("needs_source_discovery_rows", 0),
-            "recommended_next_action": "Process exact source_url-ready image rows first; replace generic storefront URLs before image import.",
+            "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import.",
         },
         {
             "priority": 20,
@@ -762,6 +772,9 @@ def build_agent_work_queue_public(
         elif workflow == "replace_generic_source_then_extract_image":
             agent_id = "agent-generic-source-cleanup"
             workstream = "generic_source_url_cleanup"
+        elif workflow == "review_gotouchi_official_candidates":
+            agent_id = "agent-gotouchi-review"
+            workstream = "gotouchi_official_candidate_review"
         else:
             agent_id = "agent-source-image"
             workstream = "image_url_attachment"
@@ -1430,6 +1443,7 @@ def validate_report_consistency(
         for key in (
             "source_url_ready_rows",
             "generic_source_url_rows",
+            "gotouchi_official_review_rows",
             "needs_source_discovery_rows",
             "manual_image_research_rows",
         )
