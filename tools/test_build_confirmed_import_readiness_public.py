@@ -26,6 +26,14 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(workflow["report"].name, "source_discovery_confirmed_import_report.json")
         self.assertEqual(workflow["public_workstream"], "source_discovery_source_urls")
 
+        image = readiness.WORKFLOWS["catalog_image"]
+        self.assertEqual(image["public_action_queue"].name, "catalog_image_attachment_action_queue_public.json")
+        self.assertEqual(image["public_action_rows_key"], "queued_image_rows")
+        self.assertEqual(
+            image["public_action_next_step"],
+            "confirm_exact_image_url_templates_then_run_import_confirmed_image_attachment_rows",
+        )
+
     def test_default_workflows_include_public_action_only_metadata_paths(self) -> None:
         self.assertIn("ichiban_metadata", readiness.WORKFLOWS)
         self.assertIn("animation_category", readiness.WORKFLOWS)

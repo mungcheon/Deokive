@@ -61,7 +61,7 @@ WORKFLOWS = {
         "public_action_queue": DATA / "catalog_image_attachment_action_queue_public.json",
         "public_action_rows_key": "queued_image_rows",
         "public_action_batches_key": "action_batch_count",
-        "public_action_next_step": "confirm_exact_image_url_templates",
+        "public_action_next_step": "confirm_exact_image_url_templates_then_run_import_confirmed_image_attachment_rows",
     },
     "focus_image": {
         "confirmed": SERVER / "focus_image_confirmed_rows.json",
