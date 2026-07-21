@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T17:32:24Z",
+  "generated_at": "2026-07-21T17:39:57Z",
   "scope": "public_catalog_image_candidate_review",
   "summary": {
-    "pilot_store_count": 3,
-    "pilot_processed_rows": 75,
+    "pilot_store_count": 4,
+    "pilot_processed_rows": 101,
     "pilot_filled_rows": 0,
     "missing_images": 723,
     "provider_candidate_items": 496,
@@ -12,7 +12,7 @@
   },
   "pilots": [
     {
-      "source_store": "?????",
+      "source_store": "애니메이트",
       "processed_rows": 20,
       "filled": 0,
       "reason_counts": [
@@ -449,7 +449,7 @@
       ]
     },
     {
-      "source_store": "???????",
+      "source_store": "굿스마일컴퍼니",
       "processed_rows": 30,
       "filled": 0,
       "reason_counts": [
@@ -626,7 +626,7 @@
       ]
     },
     {
-      "source_store": "????",
+      "source_store": "엔스카이",
       "processed_rows": 25,
       "filled": 0,
       "reason_counts": [
@@ -884,12 +884,495 @@
           "top_candidates": []
         }
       ]
+    },
+    {
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "processed_rows": 26,
+      "filled": 0,
+      "reason_counts": [
+        [
+          "best_candidate_rejected",
+          26
+        ]
+      ],
+      "rejection_reason_counts": [
+        [
+          "failed_safety_checks",
+          26
+        ]
+      ],
+      "rows_with_candidates": 26,
+      "safe_candidate_rejected_rows": 26,
+      "samples": [
+        {
+          "row_index": 936,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "goods_type_compatible",
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.3158,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわベーカリー）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000006",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_7ce9909b-59f2-4177-a1df-39d7ef23125a.png?v=1772696878",
+              "score_overlap": 1,
+              "score_similarity": 0.3158
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 1,
+              "score_similarity": 0.2105
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬②）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000002",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/2_4x_ac16aa05-5c57-42bd-b311-d6d65b5d185c.png?v=1772696774",
+              "score_overlap": 1,
+              "score_similarity": 0.2105
+            }
+          ]
+        },
+        {
+          "row_index": 937,
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "affiliation": "치이카와",
+          "query": "うさぎ ご当地マスコット (浅草)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 0,
+          "best_score_similarity": 0.3846,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 0,
+              "score_similarity": 0.3846
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわレストラン）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000007",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_36cd2f1b-593f-48fa-99aa-8409bf200dab.png?v=1772696903",
+              "score_overlap": 0,
+              "score_similarity": 0.1538
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬②）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000002",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/2_4x_ac16aa05-5c57-42bd-b311-d6d65b5d185c.png?v=1772696774",
+              "score_overlap": 0,
+              "score_similarity": 0.0769
+            }
+          ]
+        },
+        {
+          "row_index": 938,
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ ご当地ミニタオル (東京)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "goods_type_compatible",
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.2857,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 1,
+              "score_similarity": 0.2857
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬②）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000002",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/2_4x_ac16aa05-5c57-42bd-b311-d6d65b5d185c.png?v=1772696774",
+              "score_overlap": 1,
+              "score_similarity": 0.2857
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬①）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000001",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/1_4x_b8eb139a-2ee6-41a9-8e23-3429e5f95f23.png?v=1772696697",
+              "score_overlap": 1,
+              "score_similarity": 0.2857
+            }
+          ]
+        },
+        {
+          "row_index": 941,
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "affiliation": "치이카와",
+          "query": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 0,
+          "best_score_similarity": 0.3125,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 0,
+              "score_similarity": 0.3125
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（BOXで大人買い）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000008",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/BOX_6f28694d-6e85-4c98-a1aa-ea03c581a401.png?v=1772696936",
+              "score_overlap": 0,
+              "score_similarity": 0.125
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわレストラン）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000007",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_36cd2f1b-593f-48fa-99aa-8409bf200dab.png?v=1772696903",
+              "score_overlap": 0,
+              "score_similarity": 0.125
+            }
+          ]
+        },
+        {
+          "row_index": 942,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "goods_type_compatible",
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.2857,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわベーカリー）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000006",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_7ce9909b-59f2-4177-a1df-39d7ef23125a.png?v=1772696878",
+              "score_overlap": 1,
+              "score_similarity": 0.2857
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（BOXで大人買い）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000008",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/BOX_6f28694d-6e85-4c98-a1aa-ea03c581a401.png?v=1772696936",
+              "score_overlap": 1,
+              "score_similarity": 0.2381
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 1,
+              "score_similarity": 0.1905
+            }
+          ]
+        },
+        {
+          "row_index": 943,
+          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ ご当地ミニタオル (大阪)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "goods_type_compatible",
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.3571,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（BOXで大人買い）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000008",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/BOX_6f28694d-6e85-4c98-a1aa-ea03c581a401.png?v=1772696936",
+              "score_overlap": 1,
+              "score_similarity": 0.3571
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 1,
+              "score_similarity": 0.2857
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬②）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000002",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/2_4x_ac16aa05-5c57-42bd-b311-d6d65b5d185c.png?v=1772696774",
+              "score_overlap": 1,
+              "score_similarity": 0.2857
+            }
+          ]
+        },
+        {
+          "row_index": 944,
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.5625,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 1,
+              "score_similarity": 0.5625
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわレストラン）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000007",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_36cd2f1b-593f-48fa-99aa-8409bf200dab.png?v=1772696903",
+              "score_overlap": 1,
+              "score_similarity": 0.375
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬②）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000002",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/2_4x_ac16aa05-5c57-42bd-b311-d6d65b5d185c.png?v=1772696774",
+              "score_overlap": 1,
+              "score_similarity": 0.3125
+            }
+          ]
+        },
+        {
+          "row_index": 945,
+          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+          "affiliation": "치이카와",
+          "query": "ハチワレ ご当地マスコット (京都 舞妓)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 0,
+          "best_score_similarity": 0.3125,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 0,
+              "score_similarity": 0.3125
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわレストラン）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000007",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_36cd2f1b-593f-48fa-99aa-8409bf200dab.png?v=1772696903",
+              "score_overlap": 0,
+              "score_similarity": 0.1875
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬②）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000002",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/2_4x_ac16aa05-5c57-42bd-b311-d6d65b5d185c.png?v=1772696774",
+              "score_overlap": 0,
+              "score_similarity": 0.0625
+            }
+          ]
+        },
+        {
+          "row_index": 946,
+          "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+          "affiliation": "치이카와",
+          "query": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "goods_type_compatible",
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 0,
+          "best_score_similarity": 0.1053,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわベーカリー）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000006",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_7ce9909b-59f2-4177-a1df-39d7ef23125a.png?v=1772696878",
+              "score_overlap": 0,
+              "score_similarity": 0.1053
+            },
+            {
+              "title": "치이카와 캔 뱃지 (야ー!)",
+              "source_url": "https://chiikawamarket.jp/ko/products/4589468434511",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/000000000009_1.jpg?v=1655032696",
+              "score_overlap": 0,
+              "score_similarity": 0.0526
+            },
+            {
+              "title": "치이카와 클리어 파일 (야ー!)",
+              "source_url": "https://chiikawamarket.jp/ko/products/4589468434580",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/000000000022_1.jpg?v=1655032712",
+              "score_overlap": 0,
+              "score_similarity": 0.0526
+            }
+          ]
+        },
+        {
+          "row_index": 947,
+          "name_ko": "치이카와 ご当地 마스코트 (홋카이도 곰)",
+          "affiliation": "치이카와",
+          "query": "ちいかわ ご当地マスコット (北海道 ヒグマ)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 1,
+          "best_score_similarity": 0.5294,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 1,
+              "score_similarity": 0.5294
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわレストラン）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000007",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_36cd2f1b-593f-48fa-99aa-8409bf200dab.png?v=1772696903",
+              "score_overlap": 1,
+              "score_similarity": 0.3529
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬②）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000002",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/2_4x_ac16aa05-5c57-42bd-b311-d6d65b5d185c.png?v=1772696774",
+              "score_overlap": 1,
+              "score_similarity": 0.2941
+            }
+          ]
+        },
+        {
+          "row_index": 948,
+          "name_ko": "하치와레 ご当地 마스코트 (홋카이도 우유)",
+          "affiliation": "치이카와",
+          "query": "ハチワレ ご当地マスコット (北海道 牛乳)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 0,
+          "best_score_similarity": 0.2941,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 0,
+              "score_similarity": 0.2941
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわレストラン）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000007",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_36cd2f1b-593f-48fa-99aa-8409bf200dab.png?v=1772696903",
+              "score_overlap": 0,
+              "score_similarity": 0.1765
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（報酬②）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000002",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/2_4x_ac16aa05-5c57-42bd-b311-d6d65b5d185c.png?v=1772696774",
+              "score_overlap": 0,
+              "score_similarity": 0.0588
+            }
+          ]
+        },
+        {
+          "row_index": 949,
+          "name_ko": "우사기 ご当地 마스코트 (홋카이도 게)",
+          "affiliation": "치이카와",
+          "query": "うさぎ ご当地マスコット (北海道 カニ)",
+          "reason": "best_candidate_rejected",
+          "rejection_reason": "failed_safety_checks",
+          "failed_checks": [
+            "all_distinctive_token_match",
+            "parenthetical_terms_match"
+          ],
+          "candidate_count": 9685,
+          "best_score_overlap": 0,
+          "best_score_similarity": 0.3125,
+          "top_candidates": [
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（マスコット）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000004",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_a3efaf50-0821-44aa-b873-9c5235b204ca.png?v=1772696838",
+              "score_overlap": 0,
+              "score_similarity": 0.3125
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわレストラン）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000007",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_36cd2f1b-593f-48fa-99aa-8409bf200dab.png?v=1772696903",
+              "score_overlap": 0,
+              "score_similarity": 0.125
+            },
+            {
+              "title": "【送料込み】ちいかわ えらべるギフト（ちいかわベーカリー）",
+              "source_url": "https://chiikawamarket.jp/ko/products/1001001000006",
+              "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4x_7ce9909b-59f2-4177-a1df-39d7ef23125a.png?v=1772696878",
+              "score_overlap": 0,
+              "score_similarity": 0.125
+            }
+          ]
+        }
+      ]
     }
   ],
   "next_actions": [
-    "?????: ambiguous_close_candidates rows need product-specific line/variant selection before image attachment.",
-    "???????: provider returned no candidates for pilot rows; improve Good Smile search/index source before auto attachment.",
-    "????: provider returned no safe fills in pilot; inspect sitemap matching and title normalization.",
+    "굿스마일컴퍼니: product rows still need exact official product URL discovery before image attachment.",
+    "애니메이트: ambiguous_close_candidates rows need product-specific line/variant selection before image attachment.",
+    "엔스카이: inspect sitemap matching and title normalization before automatic image attachment.",
+    "ご当地ちいかわ: API official overview confirms the line, but per-item images need API page item matching or official post mapping.",
     "Generic storefront source_url rows, especially Fanding/Stellive, need exact product URL replacement before image extraction."
   ],
   "privacy": {
