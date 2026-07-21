@@ -36,6 +36,7 @@ GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 GENERIC_SOURCE_PATCH_CANDIDATES = DATA / "generic_source_patch_candidates_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
 SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
+SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
@@ -1131,6 +1132,10 @@ def build_operations_public(
     danganronpa_missing_media: dict[str, Any],
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
+    source_review_batches = (
+        load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}) if SOURCE_DISCOVERY_REVIEW_BATCHES.exists() else {}
+    )
+    source_review_batches_summary = source_review_batches.get("summary", {})
     image_summary = image_enrichment_batches["summary"]
     dedupe_summary = deduplication["summary"]
     dedupe_review_batches = (
@@ -1317,6 +1322,14 @@ def build_operations_public(
             "recommended_next_action": "Find exact official detail pages for rows missing source_url.",
         },
         {
+            "priority": 21,
+            "workstream": "source_discovery_review_batches",
+            "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
+            "batch_count": source_review_batches_summary.get("batch_count", 0),
+            "source_discovery_rows": source_review_batches_summary.get("source_discovery_rows", 0),
+            "recommended_next_action": "Assign full source discovery batches by store/workflow before image imports.",
+        } if source_review_batches_summary else None,
+        {
             "priority": 30,
             "workstream": "metadata_backlog",
             "public_report": f"data/{METADATA_BACKLOG.name}",
@@ -1397,6 +1410,14 @@ def build_operations_public(
             "next_step": "find_exact_official_source_url",
             "auto_apply_enabled": False,
         },
+        {
+            "workstream": "source_discovery_review_batches",
+            "status": "open" if source_review_batches_summary.get("source_discovery_rows", 0) else "clear",
+            "open_rows": source_review_batches_summary.get("source_discovery_rows", 0),
+            "primary_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
+            "next_step": "work_source_discovery_batches_by_store",
+            "auto_apply_enabled": source_review_batches_summary.get("auto_apply_enabled", False),
+        } if source_review_batches_summary else None,
         {
             "workstream": "danganronpa_missing_media",
             "status": "open" if danganronpa_media_summary.get("missing_media_rows", 0) else "clear",
@@ -1528,6 +1549,7 @@ def build_operations_public(
             {"key": "danganronpa_source_detail_probe", "public_report": f"data/{DANGANRONPA_SOURCE_DETAIL_PROBE.name}"},
             {"key": "image_enrichment_batches", "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}"},
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
+            {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
             {"key": "deduplication_review_batches", "public_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}"},
@@ -1576,6 +1598,9 @@ def build_agent_work_queue_public(
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
     gotouchi_report = load_json(GOTOUCHI, {}) if GOTOUCHI.exists() else {}
+    source_review_batches = (
+        load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}) if SOURCE_DISCOVERY_REVIEW_BATCHES.exists() else {}
+    )
     animation_review_batches = (
         load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
     )
@@ -1767,29 +1792,53 @@ def build_agent_work_queue_public(
             ),
         )
 
-    source_items = [item for item in source_discovery.get("items", []) if isinstance(item, dict)]
-    source_grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
-    for item in source_items:
-        source_grouped[(str(item.get("workflow") or ""), str(item.get("source_store") or "unknown"))].append(item)
-    for (workflow, store), items in sorted(
-        source_grouped.items(),
-        key=lambda pair: (DISCOVERY_PRIORITY.get(pair[0][0], 99), -len(pair[1]), pair[0][1]),
-    )[:10]:
-        add_batch(
-            agent_id="agent-source-discovery",
-            workstream="source_url_discovery",
-            priority=20 + DISCOVERY_PRIORITY.get(workflow, 99),
-            title=f"{store} 출처 URL 탐색 ({workflow})",
-            public_report=SOURCE_DISCOVERY,
-            rows=len(items),
-            recommended_action="Find exact official product detail URLs and prepare source_url updates.",
-            acceptance_criteria=[
-                "Candidate URL is an exact official or trusted licensed product/detail page.",
-                "Product title and image/metadata match the catalog row.",
-                "Generic search/listing pages stay in review and are not imported as final source_url.",
-            ],
-            samples=[compact_sample(item) for item in items],
-        )
+    source_review_batch_rows = [batch for batch in source_review_batches.get("batches", []) if isinstance(batch, dict)]
+    if source_review_batch_rows:
+        for source_batch in source_review_batch_rows[:12]:
+            workflow = str(source_batch.get("workflow") or "")
+            store = str(source_batch.get("source_store") or "unknown")
+            add_batch(
+                agent_id="agent-source-discovery",
+                workstream="source_url_discovery",
+                priority=20 + int(source_batch.get("priority") or DISCOVERY_PRIORITY.get(workflow, 99)),
+                title=f"{store} 출처 URL 탐색: {source_batch.get('batch_id')}",
+                public_report=SOURCE_DISCOVERY_REVIEW_BATCHES,
+                rows=int(source_batch.get("row_count") or 0),
+                recommended_action=str(
+                    source_batch.get("recommended_action")
+                    or "Find exact official product detail URLs and prepare source_url updates."
+                ),
+                acceptance_criteria=[
+                    "Candidate URL is an exact official or trusted licensed product/detail page.",
+                    "Product title and image/metadata match the catalog row.",
+                    "Generic search/listing pages stay in review and are not imported as final source_url.",
+                ],
+                samples=[compact_sample(item) for item in source_batch.get("items", []) if isinstance(item, dict)],
+            )
+    else:
+        source_items = [item for item in source_discovery.get("items", []) if isinstance(item, dict)]
+        source_grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+        for item in source_items:
+            source_grouped[(str(item.get("workflow") or ""), str(item.get("source_store") or "unknown"))].append(item)
+        for (workflow, store), items in sorted(
+            source_grouped.items(),
+            key=lambda pair: (DISCOVERY_PRIORITY.get(pair[0][0], 99), -len(pair[1]), pair[0][1]),
+        )[:10]:
+            add_batch(
+                agent_id="agent-source-discovery",
+                workstream="source_url_discovery",
+                priority=20 + DISCOVERY_PRIORITY.get(workflow, 99),
+                title=f"{store} 출처 URL 탐색 ({workflow})",
+                public_report=SOURCE_DISCOVERY,
+                rows=len(items),
+                recommended_action="Find exact official product detail URLs and prepare source_url updates.",
+                acceptance_criteria=[
+                    "Candidate URL is an exact official or trusted licensed product/detail page.",
+                    "Product title and image/metadata match the catalog row.",
+                    "Generic search/listing pages stay in review and are not imported as final source_url.",
+                ],
+                samples=[compact_sample(item) for item in items],
+            )
 
     for group in metadata_backlog.get("groups", [])[:10]:
         add_batch(
@@ -2927,6 +2976,7 @@ def validate_report_consistency(
     allowed_reports = {
         f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
         f"data/{SOURCE_DISCOVERY.name}",
+        f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
         f"data/{METADATA_BACKLOG.name}",
         f"data/{DEDUPLICATION.name}",
         f"data/{ANIMATION_CATEGORIES.name}",
@@ -3163,6 +3213,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{SOURCE_DISCOVERY.name}",
             **source_discovery["summary"],
         }
+        if SOURCE_DISCOVERY_REVIEW_BATCHES.exists():
+            target["source_discovery_review_batches"] = copy_report_summary(
+                SOURCE_DISCOVERY_REVIEW_BATCHES, "source_discovery_review_batches"
+            )
         target["metadata_backlog"] = {
             "public_report": f"data/{METADATA_BACKLOG.name}",
             **metadata_backlog["summary"],
@@ -3244,6 +3298,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         GENERIC_SOURCE_PATCH_CANDIDATES,
         SOURCE_DETAIL,
         SOURCE_DISCOVERY,
+        SOURCE_DISCOVERY_REVIEW_BATCHES,
         METADATA_BACKLOG,
         IMAGE_ENRICHMENT_BATCHES,
         OPERATIONS_REPORT,

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:41:53Z",
+  "generated_at": "2026-07-21T20:46:00Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -77,6 +77,14 @@
       "open_rows": 647,
       "primary_report": "data/source_discovery_queue_public.json",
       "next_step": "find_exact_official_source_url",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "source_discovery_review_batches",
+      "status": "open",
+      "open_rows": 647,
+      "primary_report": "data/source_discovery_review_batches_public.json",
+      "next_step": "work_source_discovery_batches_by_store",
       "auto_apply_enabled": false
     },
     {
@@ -644,6 +652,10 @@
       "public_report": "data/source_discovery_queue_public.json"
     },
     {
+      "key": "source_discovery_review_batches",
+      "public_report": "data/source_discovery_review_batches_public.json"
+    },
+    {
       "key": "metadata_backlog",
       "public_report": "data/catalog_metadata_backlog_public.json"
     },
@@ -749,6 +761,14 @@
       "public_report": "data/source_discovery_queue_public.json",
       "ready_rows": 647,
       "recommended_next_action": "Find exact official detail pages for rows missing source_url."
+    },
+    {
+      "priority": 21,
+      "workstream": "source_discovery_review_batches",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "batch_count": 56,
+      "source_discovery_rows": 647,
+      "recommended_next_action": "Assign full source discovery batches by store/workflow before image imports."
     },
     {
       "priority": 30,

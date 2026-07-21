@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:41:53Z",
+  "generated_at": "2026-07-21T20:46:00Z",
   "summary": {
-    "batch_count": 66,
-    "summed_batch_rows": 24203,
+    "batch_count": 68,
+    "summed_batch_rows": 24383,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
         "source_url_discovery",
-        10
+        12
       ],
       [
         "metadata_backlog",
@@ -54,7 +54,7 @@
     "by_agent": [
       [
         "agent-source-discovery",
-        10
+        12
       ],
       [
         "agent-metadata",
@@ -2860,10 +2860,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "Movic 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 36,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "애니메이트 출처 URL 탐색: source-discovery-001",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -2871,84 +2871,84 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1730,
-          "name_ko": "귀멸의 칼날 빅 캔뱃지 탄지로",
-          "name_ja": "鬼滅の刃 BIG缶バッジ 炭治郎",
+          "catalog_index": 1067,
+          "name_ko": "SPY×FAMILY 캔뱃지 (랜덤)",
+          "name_ja": null,
           "series_name": null,
           "category": "캔뱃지",
-          "source_store": "Movic",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%82%AD%E6%B2%BB%E9%83%8E"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=SPY%C3%97FAMILY%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
         },
         {
-          "catalog_index": 1729,
-          "name_ko": "귀멸의 칼날 메탈릭 캔뱃지 토미오카 기유",
-          "name_ja": "鬼滅の刃 メタリック缶バッジ 冨岡義勇",
+          "catalog_index": 1134,
+          "name_ko": "강철의 연금술사 아크릴 스탠드 (알폰스)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B0%95%EC%B2%A0%EC%9D%98%20%EC%97%B0%EA%B8%88%EC%88%A0%EC%82%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%95%8C%ED%8F%B0%EC%8A%A4%29"
+        },
+        {
+          "catalog_index": 1133,
+          "name_ko": "강철의 연금술사 아크릴 스탠드 (에드워드)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B0%95%EC%B2%A0%EC%9D%98%20%EC%97%B0%EA%B8%88%EC%88%A0%EC%82%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%97%90%EB%93%9C%EC%9B%8C%EB%93%9C%29"
+        },
+        {
+          "catalog_index": 1734,
+          "name_ko": "귀멸의 칼날 클리어 파일 세트 주 9종",
+          "name_ja": "鬼滅の刃 クリアファイルセット 柱9種",
+          "series_name": null,
+          "category": "문구",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E6%9F%B19%E7%A8%AE"
+        },
+        {
+          "catalog_index": 1831,
+          "name_ko": "귀멸의 칼날 카페 클리어 보틀",
+          "name_ja": "鬼滅の刃 カフェコラボ クリアボトル",
+          "series_name": null,
+          "category": "생활잡화",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB"
+        },
+        {
+          "catalog_index": 1657,
+          "name_ko": "귀멸의 칼날 트레이딩 아크릴 키 홀더 (학원 시리즈)",
+          "name_ja": "鬼滅の刃 トレーディングアクリルキーホルダー (学園シリーズ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29"
+        },
+        {
+          "catalog_index": 1731,
+          "name_ko": "귀멸의 칼날 의상 변경 캔뱃지 네즈코",
+          "name_ja": "鬼滅の刃 衣装替え缶バッジ 禰豆子",
           "series_name": null,
           "category": "캔뱃지",
-          "source_store": "Movic",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%A6%B0%E8%B1%86%E5%AD%90"
         },
         {
-          "catalog_index": 1728,
-          "name_ko": "귀멸의 칼날 메탈릭 캔뱃지 렌고쿠 쿄쥬로",
-          "name_ja": "鬼滅の刃 メタリック缶バッジ 煉獄杏寿郎",
+          "catalog_index": 1061,
+          "name_ko": "나루토 클리어 파일",
+          "name_ja": null,
           "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "Movic",
+          "category": "문구",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E"
-        },
-        {
-          "catalog_index": 1830,
-          "name_ko": "귀멸의 칼날 무이치로 의상 변경 타올",
-          "name_ja": "鬼滅の刃 時透無一郎 衣装替えタオル",
-          "series_name": null,
-          "category": "타월",
-          "source_store": "Movic",
-          "source_url": null,
-          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E6%99%82%E9%80%8F%E7%84%A1%E4%B8%80%E9%83%8E%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E3%82%BF%E3%82%AA%E3%83%AB"
-        },
-        {
-          "catalog_index": 1718,
-          "name_ko": "나의 히어로 아카데미아 빅 캔뱃지 데쿠",
-          "name_ja": "僕のヒーローアカデミア BIG缶バッジ デク",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "Movic",
-          "source_url": null,
-          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%87%E3%82%AF"
-        },
-        {
-          "catalog_index": 1717,
-          "name_ko": "나의 히어로 아카데미아 메탈릭 캔뱃지 올마이트",
-          "name_ja": "僕のヒーローアカデミア メタリック缶バッジ オールマイト",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "Movic",
-          "source_url": null,
-          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88"
-        },
-        {
-          "catalog_index": 1819,
-          "name_ko": "나의 히어로 아카데미아 토도로키 학원 타올",
-          "name_ja": "僕のヒーローアカデミア 轟焦凍 学園シリーズ タオル",
-          "series_name": null,
-          "category": "타월",
-          "source_store": "Movic",
-          "source_url": null,
-          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%BF%E3%82%AA%E3%83%AB"
-        },
-        {
-          "catalog_index": 1798,
-          "name_ko": "단간론파 나에기 학원 시리즈 머그컵",
-          "name_ja": "ダンガンロンパ 苗木誠 学園シリーズ マグカップ",
-          "series_name": null,
-          "category": "머그컵",
-          "source_store": "Movic",
-          "source_url": null,
-          "official_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E8%8B%97%E6%9C%A8%E8%AA%A0%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%82%98%EB%A3%A8%ED%86%A0%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -2959,10 +2959,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "FuRyu 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 21,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "애니메이트 출처 URL 탐색: source-discovery-002",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -2970,84 +2970,84 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1254,
-          "name_ko": "쵸코노세 프리미엄 피규어 바쿠고 카츠키",
-          "name_ja": "ちょこのせプレミアムフィギュア 爆豪勝己",
+          "catalog_index": 1071,
+          "name_ko": "도쿄 리벤저스 캔뱃지 (랜덤)",
+          "name_ja": null,
           "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
+          "category": "캔뱃지",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%8F%84%EC%BF%84%20%EB%A6%AC%EB%B2%A4%EC%A0%80%EC%8A%A4%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
         },
         {
-          "catalog_index": 1253,
-          "name_ko": "쵸코노세 프리미엄 피규어 미도리야 이즈쿠",
-          "name_ja": "ちょこのせプレミアムフィギュア 緑谷出久",
+          "catalog_index": 2037,
+          "name_ko": "리제로 트레이딩 아크릴 (렘 의상시리즈)",
+          "name_ja": "Re:ゼロ トレーディングアクリル (レム衣装)",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=Re%3A%E3%82%BC%E3%83%AD%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%20%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29"
         },
         {
-          "catalog_index": 1255,
-          "name_ko": "쵸코노세 프리미엄 피규어 토도로키 쇼토",
-          "name_ja": "ちょこのせプレミアムフィギュア 轟焦凍",
+          "catalog_index": 1695,
+          "name_ko": "메이드 인 어비스 클리어 파일 A4 리코&레그",
+          "name_ja": "メイドインアビス クリアファイルA4 リコ＆レグ",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
+          "category": "문구",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%AA%E3%82%B3%EF%BC%86%E3%83%AC%E3%82%B0"
         },
         {
-          "catalog_index": 1259,
-          "name_ko": "누들 스토퍼 피규어 올마이트",
-          "name_ja": "ぬーどるストッパーフィギュア オールマイト",
+          "catalog_index": 1797,
+          "name_ko": "메이드 인 어비스 보가만 클리어 보틀",
+          "name_ja": "メイドインアビス ボンドルド クリアボトル",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
+          "category": "생활잡화",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB"
         },
         {
-          "catalog_index": 1260,
-          "name_ko": "누들 스토퍼 피규어 토가 히미코",
-          "name_ja": "ぬーどるストッパーフィギュア トガヒミコ",
+          "catalog_index": 1795,
+          "name_ko": "메이드 인 어비스 나나치 마이크로 화이버 타올",
+          "name_ja": "メイドインアビス ナナチ マイクロファイバータオル",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
+          "category": "타월",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%83%8A%E3%83%8A%E3%83%81%20%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%82%BF%E3%82%AA%E3%83%AB"
         },
         {
-          "catalog_index": 1257,
-          "name_ko": "누들 스토퍼 피규어 바쿠고 카츠키",
-          "name_ja": "ぬーどるストッパーフィギュア 爆豪勝己",
+          "catalog_index": 2127,
+          "name_ko": "명탐정 코난 머그컵 (실루엣)",
+          "name_ja": "名探偵コナン マグカップ (シルエット)",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
+          "category": "머그컵",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%90%8D%E6%8E%A2%E5%81%B5%E3%82%B3%E3%83%8A%E3%83%B3%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%28%E3%82%B7%E3%83%AB%E3%82%A8%E3%83%83%E3%83%88%29"
         },
         {
-          "catalog_index": 1256,
-          "name_ko": "누들 스토퍼 피규어 미도리야 이즈쿠",
-          "name_ja": "ぬーどるストッパーフィギュア 緑谷出久",
+          "catalog_index": 2129,
+          "name_ko": "명탐정 코난 클리어 파일 (아무로&아카이)",
+          "name_ja": "名探偵コナン クリアファイル (安室&赤井)",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
+          "category": "문구",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%90%8D%E6%8E%A2%E5%81%B5%E3%82%B3%E3%83%8A%E3%83%B3%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20%28%E5%AE%89%E5%AE%A4%26%E8%B5%A4%E4%BA%95%29"
         },
         {
-          "catalog_index": 1258,
-          "name_ko": "누들 스토퍼 피규어 토도로키 쇼토",
-          "name_ja": "ぬーどるストッパーフィギュア 轟焦凍",
+          "catalog_index": 1090,
+          "name_ko": "명탐정 코난 봉제 인형 (코난)",
+          "name_ja": null,
           "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
+          "category": "인형",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%AA%85%ED%83%90%EC%A0%95%20%EC%BD%94%EB%82%9C%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EC%BD%94%EB%82%9C%29"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -3058,10 +3058,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "Taito 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 15,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "애니메이트 출처 URL 탐색: source-discovery-003",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -3069,84 +3069,84 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1872,
-          "name_ko": "후와푸치 아냐 포저",
-          "name_ja": "ふわぷち アーニャ・フォージャー",
+          "catalog_index": 2100,
+          "name_ko": "슈타인즈게이트 러버 스트랩 (오카베)",
+          "name_ja": "シュタインズ・ゲート ラバーストラップ (岡部)",
           "series_name": null,
-          "category": "인형",
-          "source_store": "Taito",
+          "category": "키링",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%81%B5%E3%82%8F%E3%81%B7%E3%81%A1%20%E3%82%A2%E3%83%BC%E3%83%8B%E3%83%A3%E3%83%BB%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E5%B2%A1%E9%83%A8%29"
         },
         {
-          "catalog_index": 1266,
-          "name_ko": "데스크탑 큐트 피규어 토가 히미코",
-          "name_ja": "Desktop Cuteフィギュア トガヒミコ",
+          "catalog_index": 2101,
+          "name_ko": "슈타인즈게이트 러버 스트랩 (크리스)",
+          "name_ja": "シュタインズ・ゲート ラバーストラップ (紅莉栖)",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
+          "category": "키링",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E7%B4%85%E8%8E%89%E6%A0%96%29"
         },
         {
-          "catalog_index": 1267,
-          "name_ko": "데스크탑 큐트 피규어 야오요로즈 모모",
-          "name_ja": "Desktop Cuteフィギュア 八百万百",
+          "catalog_index": 2176,
+          "name_ko": "스킵과 로퍼 아크릴 스탠드 (무카이 유즈키)",
+          "name_ja": "スキップとローファー アクリルスタンド (向井結月)",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E5%85%AB%E7%99%BE%E4%B8%87%E7%99%BE"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B9%E3%82%AD%E3%83%83%E3%83%97%E3%81%A8%E3%83%AD%E3%83%BC%E3%83%95%E3%82%A1%E3%83%BC%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E5%90%91%E4%BA%95%E7%B5%90%E6%9C%88%29"
         },
         {
-          "catalog_index": 1265,
-          "name_ko": "데스크탑 큐트 피규어 우라라카 오챠코",
-          "name_ja": "Desktop Cuteフィギュア 麗日お茶子",
+          "catalog_index": 2177,
+          "name_ko": "스킵과 로퍼 아크릴 스탠드 (시바 마카토)",
+          "name_ja": "スキップとローファー アクリルスタンド (柴山誠)",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%BA%97%E6%97%A5%E3%81%8A%E8%8C%B6%E5%AD%90"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B9%E3%82%AD%E3%83%83%E3%83%97%E3%81%A8%E3%83%AD%E3%83%BC%E3%83%95%E3%82%A1%E3%83%BC%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%9F%B4%E5%B1%B1%E8%AA%A0%29"
         },
         {
-          "catalog_index": 1467,
-          "name_ko": "Desktop Cute 모노쿠마",
-          "name_ja": "デスクトップキュート モノクマ",
+          "catalog_index": 2184,
+          "name_ko": "스킵과 로퍼 러버 스트랩 (랜덤)",
+          "name_ja": "スキップとローファー ラバーストラップ",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
+          "category": "키링",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B9%E3%82%AD%E3%83%83%E3%83%97%E3%81%A8%E3%83%AD%E3%83%BC%E3%83%95%E3%82%A1%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
         },
         {
-          "catalog_index": 1469,
-          "name_ko": "Desktop Cute 사이하라 슈이치",
-          "name_ja": "デスクトップキュート 最原終一",
+          "catalog_index": 1083,
+          "name_ko": "슬램덩크 아크릴 스탠드 (강백호)",
+          "name_ja": "SLAM DUNK アクリルスタンド (桜木花道)",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E6%9C%80%E5%8E%9F%E7%B5%82%E4%B8%80"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=SLAM%20DUNK%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29"
         },
         {
-          "catalog_index": 1468,
-          "name_ko": "Desktop Cute 코마에다 나기토",
-          "name_ja": "デスクトップキュート 狛枝凪斗",
+          "catalog_index": 1084,
+          "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
+          "name_ja": null,
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%9C%ED%83%9C%EC%9B%85%29"
         },
         {
-          "catalog_index": 1421,
-          "name_ko": "Desktop Cute 리코",
-          "name_ja": "デスクトップキュート リコ",
+          "catalog_index": 1085,
+          "name_ko": "슬램덩크 캔뱃지 (북산 멤버 랜덤)",
+          "name_ja": null,
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
+          "category": "캔뱃지",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%AA%E3%82%B3"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%B6%81%EC%82%B0%20%EB%A9%A4%EB%B2%84%20%EB%9E%9C%EB%8D%A4%29"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -3157,10 +3157,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "Cospa 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 11,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "애니메이트 출처 URL 탐색: source-discovery-004",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -3168,84 +3168,84 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1826,
-          "name_ko": "귀멸의 칼날 젠이츠 마이크로 화이버 타올",
-          "name_ja": "鬼滅の刃 我妻善逸 マイクロファイバータオル",
+          "catalog_index": 2197,
+          "name_ko": "이루마군 키링 (알리)",
+          "name_ja": "魔入りました！入間くん キーホルダー (アリ)",
           "series_name": null,
-          "category": "타월",
-          "source_store": "Cospa",
+          "category": "키링",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8%20%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%82%BF%E3%82%AA%E3%83%AB"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%A2%E3%83%AA%29"
         },
         {
-          "catalog_index": 1820,
-          "name_ko": "나의 히어로 아카데미아 올마이트 토트백",
-          "name_ja": "僕のヒーローアカデミア オールマイト トートバッグ",
+          "catalog_index": 1711,
+          "name_ko": "장송의 프리렌 클리어 파일 세트 용사 일행",
+          "name_ja": "葬送のフリーレン クリアファイルセット 勇者一行",
           "series_name": null,
-          "category": "가방",
-          "source_store": "Cospa",
+          "category": "문구",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%8B%87%E8%80%85%E4%B8%80%E8%A1%8C"
         },
         {
-          "catalog_index": 1637,
-          "name_ko": "메이드 인 어비스 아크릴 스탠드 (보가만)",
-          "name_ja": "メイドインアビス アクリルスタンド (ボンドルド)",
+          "catalog_index": 1807,
+          "name_ko": "장송의 프리렌 카페 클리어 보틀",
+          "name_ja": "葬送のフリーレン カフェコラボ クリアボトル",
+          "series_name": null,
+          "category": "생활잡화",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB"
+        },
+        {
+          "catalog_index": 1649,
+          "name_ko": "장송의 프리렌 트레이딩 아크릴 키 홀더 (의상 변경)",
+          "name_ja": "葬送のフリーレン トレーディングアクリルキーホルダー (衣装変更ver.)",
           "series_name": null,
           "category": "아크릴 스탠드",
-          "source_store": "Cospa",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29"
         },
         {
-          "catalog_index": 1666,
-          "name_ko": "원피스 모자이크 아크릴 스탠드 (조로)",
-          "name_ja": "ONE PIECE モザイクアクリルスタンド (ゾロ)",
+          "catalog_index": 2070,
+          "name_ko": "전생슬 러버 마스코트 (리무루)",
+          "name_ja": "転スラ ラバーマスコット (リムル)",
+          "series_name": null,
+          "category": "마스코트",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E3%83%AA%E3%83%A0%E3%83%AB%29"
+        },
+        {
+          "catalog_index": 2072,
+          "name_ko": "전생슬 클리어 파일 (템페스트 연방국)",
+          "name_ja": "転スラ クリアファイル",
+          "series_name": null,
+          "category": "문구",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"
+        },
+        {
+          "catalog_index": 2067,
+          "name_ko": "전생슬 아크릴 스탠드 (디아블로)",
+          "name_ja": "転スラ アクリルスタンド (ディアブロ)",
           "series_name": null,
           "category": "아크릴 스탠드",
-          "source_store": "Cospa",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/ONE%20PIECE%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%BE%E3%83%AD%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%87%E3%82%A3%E3%82%A2%E3%83%96%E3%83%AD%29"
         },
         {
-          "catalog_index": 1806,
-          "name_ko": "장송의 프리렌 히멜 토트백",
-          "name_ja": "葬送のフリーレン ヒンメル トートバッグ",
-          "series_name": null,
-          "category": "가방",
-          "source_store": "Cospa",
-          "source_url": null,
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0"
-        },
-        {
-          "catalog_index": 1786,
-          "name_ko": "주술회전 나나미 켄토 토트백",
-          "name_ja": "呪術廻戦 七海建人 トートバッグ",
-          "series_name": null,
-          "category": "가방",
-          "source_store": "Cospa",
-          "source_url": null,
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0"
-        },
-        {
-          "catalog_index": 1631,
-          "name_ko": "주술회전 모자이크 아트 아크릴 스탠드 (고죠 사토루)",
-          "name_ja": "呪術廻戦 モザイクアートアクリルスタンド (五条悟)",
+          "catalog_index": 2064,
+          "name_ko": "전생슬 아크릴 스탠드 (밀림)",
+          "name_ja": "転スラ アクリルスタンド (ミリム)",
           "series_name": null,
           "category": "아크릴 스탠드",
-          "source_store": "Cospa",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%BC%E3%83%88%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BA%94%E6%9D%A1%E6%82%9F%29"
-        },
-        {
-          "catalog_index": 1671,
-          "name_ko": "체인소 맨 모자이크 아크릴 스탠드 (마키마)",
-          "name_ja": "チェンソーマン モザイクアクリルスタンド (マキマ)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "Cospa",
-          "source_url": null,
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A2%E3%82%B6%E3%82%A4%E3%82%AF%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%AD%E3%83%9E%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9F%E3%83%AA%E3%83%A0%29"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -3256,10 +3256,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "MINISO 중국 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 7,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "애니메이트 출처 URL 탐색: source-discovery-005",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -3267,143 +3267,84 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 991,
-          "name_ko": "치이카와 x 미니소 아크릴 키링 (중국 콜라보)",
-          "name_ja": "ちいかわ × MINISO アクリルキーホルダー (中国コラボ)",
+          "catalog_index": 1968,
+          "name_ko": "진격의 거인 러버 마스코트 (리바이)",
+          "name_ja": "進撃の巨人 ラバーマスコット (リヴァイ)",
           "series_name": null,
-          "category": "아크릴 키링",
-          "source_store": "MINISO 중국",
+          "category": "마스코트",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%29"
         },
         {
-          "catalog_index": 989,
-          "name_ko": "우사기 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "うさぎ × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "MINISO 중국",
-          "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%86%E3%81%95%E3%81%8E%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29"
-        },
-        {
-          "catalog_index": 993,
-          "name_ko": "쿠리만쥬 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "くりまんじゅう × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "MINISO 중국",
-          "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%8F%E3%82%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29"
-        },
-        {
-          "catalog_index": 987,
-          "name_ko": "치이카와 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "ちいかわ × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "MINISO 중국",
-          "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29"
-        },
-        {
-          "catalog_index": 988,
-          "name_ko": "하치와레 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "ハチワレ × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "MINISO 중국",
-          "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29"
-        },
-        {
-          "catalog_index": 992,
-          "name_ko": "모몽가 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "モモンガ × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "MINISO 중국",
-          "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%20%C3%97%20MINISO%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29"
-        },
-        {
-          "catalog_index": 990,
-          "name_ko": "치이카와 x 미니소 블라인드 박스 (중국 콜라보)",
-          "name_ja": "ちいかわ × MINISO ブラインドボックス (中国コラボ)",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": "MINISO 중국",
-          "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20MINISO%20%E3%83%96%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%89%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%20%28%E4%B8%AD%E5%9B%BD%E3%82%B3%E3%83%A9%E3%83%9C%29"
-        }
-      ],
-      "review_state": "exact_source_discovery_required",
-      "next_machine_step": "find_exact_official_product_source_url"
-    },
-    {
-      "batch_id": "030-agent-source-discovery-30",
-      "agent_id": "agent-source-discovery",
-      "workstream": "source_url_discovery",
-      "priority": 30,
-      "title": "JYP SHOP 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 5,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
-      "acceptance_criteria": [
-        "Candidate URL is an exact official or trusted licensed product/detail page.",
-        "Product title and image/metadata match the catalog row.",
-        "Generic search/listing pages stay in review and are not imported as final source_url."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2293,
-          "name_ko": "ITZY 포토카드 (랜덤)",
+          "catalog_index": 1051,
+          "name_ko": "진격의 거인 클리어 파일",
           "name_ja": null,
           "series_name": null,
-          "category": "포토카드",
-          "source_store": "JYP SHOP",
+          "category": "문구",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=ITZY%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A7%84%EA%B2%A9%EC%9D%98%20%EA%B1%B0%EC%9D%B8%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
         },
         {
-          "catalog_index": 2309,
-          "name_ko": "NMIXX 포토카드 (랜덤)",
-          "name_ja": null,
+          "catalog_index": 1974,
+          "name_ko": "진격의 거인 디포르메 아크릴 마스코트 (조사병단)",
+          "name_ja": "進撃の巨人 デフォルメアクリルマスコット",
           "series_name": null,
-          "category": "포토카드",
-          "source_store": "JYP SHOP",
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=NMIXX%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88"
         },
         {
-          "catalog_index": 2296,
-          "name_ko": "Stray Kids 포토카드 (랜덤)",
-          "name_ja": null,
+          "catalog_index": 1975,
+          "name_ko": "Mensore 리바이 봉제 인형",
+          "name_ja": "メンソーレ リヴァイ ぬいぐるみ",
           "series_name": null,
-          "category": "포토카드",
-          "source_store": "JYP SHOP",
+          "category": "인형",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=Stray%20Kids%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AC%20%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF"
         },
         {
-          "catalog_index": 2282,
-          "name_ko": "TWICE 슬로건",
-          "name_ja": null,
+          "catalog_index": 1964,
+          "name_ko": "진격의 거인 캔뱃지 세트 (조사병단)",
+          "name_ja": "進撃の巨人 缶バッジセット (調査兵団)",
           "series_name": null,
-          "category": "슬로건",
-          "source_store": "JYP SHOP",
+          "category": "캔뱃지",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=TWICE%20%EC%8A%AC%EB%A1%9C%EA%B1%B4"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%E3%82%BB%E3%83%83%E3%83%88%20%28%E8%AA%BF%E6%9F%BB%E5%85%B5%E5%9B%A3%29"
         },
         {
-          "catalog_index": 2280,
-          "name_ko": "TWICE 포토카드 (랜덤)",
+          "catalog_index": 1050,
+          "name_ko": "진격의 거인 캔뱃지 (랜덤)",
           "name_ja": null,
           "series_name": null,
-          "category": "포토카드",
-          "source_store": "JYP SHOP",
+          "category": "캔뱃지",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://en.thejypshop.com/product/search.html?keyword=TWICE%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A7%84%EA%B2%A9%EC%9D%98%20%EA%B1%B0%EC%9D%B8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
+        },
+        {
+          "catalog_index": 2237,
+          "name_ko": "짱구는 못말려 파우치 (신짱)",
+          "name_ja": "クレヨンしんちゃん ポーチ",
+          "series_name": null,
+          "category": "가방",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%83%9D%E3%83%BC%E3%83%81"
+        },
+        {
+          "catalog_index": 2232,
+          "name_ko": "짱구는 못말려 머그컵 (노하라 가족)",
+          "name_ja": "クレヨンしんちゃん マグカップ",
+          "series_name": null,
+          "category": "머그컵",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -3414,10 +3355,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "Re-ment 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 5,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "엔스카이 출처 URL 탐색: source-discovery-007",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -3425,54 +3366,84 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1874,
-          "name_ko": "리멘트 SPY FAMILY 데스크 컬렉션",
-          "name_ja": "リーメント SPY×FAMILY デスクコレクション",
+          "catalog_index": 1277,
+          "name_ko": "치비누이 Vol.2 키리시마 에이지로",
+          "name_ja": "ちびぬいマスコット Vol.2 切島鋭児郎",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Re-ment",
+          "category": "인형",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20SPY%C3%97FAMILY%20%E3%83%87%E3%82%B9%E3%82%AF%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20Vol.2%20%E5%88%87%E5%B3%B6%E9%8B%AD%E5%85%90%E9%83%8E"
         },
         {
-          "catalog_index": 1917,
-          "name_ko": "리멘트 봇치 결속밴드 라이브",
-          "name_ja": "リーメント ぼっち・ざ・ろっく! 結束バンドライブ",
+          "catalog_index": 1271,
+          "name_ko": "누이푸페 자수 데님 토도로키 쇼토",
+          "name_ja": "ぬいぷぺ 刺繍デニム 轟焦凍",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Re-ment",
+          "category": "인형",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E3%81%BC%E3%81%A3%E3%81%A1%E3%83%BB%E3%81%96%E3%83%BB%E3%82%8D%E3%81%A3%E3%81%8F%21%20%E7%B5%90%E6%9D%9F%E3%83%90%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E8%BD%9F%E7%84%A6%E5%87%8D"
         },
         {
-          "catalog_index": 1941,
-          "name_ko": "리멘트 원피스 월드 컬렉션",
-          "name_ja": "リーメント ONE PIECE ワールドコレクション",
+          "catalog_index": 1715,
+          "name_ko": "나의 히어로 아카데미아 트레이딩 캔뱃지 바쿠고 카츠키",
+          "name_ja": "僕のヒーローアカデミア トレーディング缶バッジ 爆豪勝己",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Re-ment",
+          "category": "캔뱃지",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20ONE%20PIECE%20%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1"
         },
         {
-          "catalog_index": 1529,
-          "name_ko": "Re-ment 프리렌 미니어처 컬렉션",
-          "name_ja": "リーメント フリーレン ミニチュアコレクション",
+          "catalog_index": 1714,
+          "name_ko": "나의 히어로 아카데미아 트레이딩 캔뱃지 미도리야 이즈쿠",
+          "name_ja": "僕のヒーローアカデミア トレーディング缶バッジ 緑谷出久",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Re-ment",
+          "category": "캔뱃지",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%9F%E3%83%8B%E3%83%81%E3%83%A5%E3%82%A2%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85"
         },
         {
-          "catalog_index": 1396,
-          "name_ko": "Re-ment 주술회전 데스크 미니어처",
-          "name_ja": "リーメント 呪術廻戦 デスクでまったり呪術師",
+          "catalog_index": 1716,
+          "name_ko": "나의 히어로 아카데미아 트레이딩 캔뱃지 토도로키 쇼토",
+          "name_ja": "僕のヒーローアカデミア トレーディング缶バッジ 轟焦凍",
           "series_name": null,
-          "category": "피규어",
-          "source_store": "Re-ment",
+          "category": "캔뱃지",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.re-ment.co.jp/?s=%E3%83%AA%E3%83%BC%E3%83%A1%E3%83%B3%E3%83%88%20%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%87%E3%82%B9%E3%82%AF%E3%81%A7%E3%81%BE%E3%81%A3%E3%81%9F%E3%82%8A%E5%91%AA%E8%A1%93%E5%B8%AB"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E8%BD%9F%E7%84%A6%E5%87%8D"
+        },
+        {
+          "catalog_index": 1542,
+          "name_ko": "올마이트 러버 스트랩",
+          "name_ja": "オールマイト ラバーストラップ",
+          "series_name": null,
+          "category": "키링",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "catalog_index": 1541,
+          "name_ko": "다비 메탈릭 러버 스트랩",
+          "name_ja": "荼毘 メタリックラバーストラップ",
+          "series_name": null,
+          "category": "키링",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "catalog_index": 1539,
+          "name_ko": "토도로키 쇼토 러버 스트랩",
+          "name_ja": "轟焦凍 ラバーストラップ",
+          "series_name": null,
+          "category": "키링",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -3483,10 +3454,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "MINISO 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 4,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "엔스카이 출처 URL 탐색: source-discovery-008",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -3494,44 +3465,84 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1844,
-          "name_ko": "MINISO 원피스 블라인드 박스",
-          "name_ja": "MINISO x ONE PIECE Blind Box",
+          "catalog_index": 1916,
+          "name_ko": "캔뱃지 봇치 더 록",
+          "name_ja": "缶バッジ ぼっち・ざ・ろっく! コレクション",
           "series_name": null,
-          "category": "블라인드 박스",
-          "source_store": "MINISO",
+          "category": "캔뱃지",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Blind%20Box"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%81%BC%E3%81%A3%E3%81%A1%E3%83%BB%E3%81%96%E3%83%BB%E3%82%8D%E3%81%A3%E3%81%8F%21%20%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3"
         },
         {
-          "catalog_index": 1841,
-          "name_ko": "MINISO 원피스 쇼핑백",
-          "name_ja": "MINISO x ONE PIECE Shopping Bag",
+          "catalog_index": 1915,
+          "name_ko": "러버 스트랩 결속밴드",
+          "name_ja": "ラバーストラップ 結束バンドコレクション",
           "series_name": null,
-          "category": "쇼핑백",
-          "source_store": "MINISO",
+          "category": "키링",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Shopping%20Bag"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%E7%B5%90%E6%9D%9F%E3%83%90%E3%83%B3%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3"
         },
         {
-          "catalog_index": 1843,
-          "name_ko": "MINISO 원피스 아크릴 신 스탠디 서프라이즈 박스",
-          "name_ja": "MINISO x ONE PIECE Acrylic Scene Standee Surprise Box",
+          "catalog_index": 1893,
+          "name_ko": "오만쥬 니기니기 블루록",
+          "name_ja": "おまんじゅうにぎにぎマスコット ブルーロック",
           "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "MINISO",
+          "category": "마스코트",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Acrylic%20Scene%20Standee%20Surprise%20Box"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%96%E3%83%AB%E3%83%BC%E3%83%AD%E3%83%83%E3%82%AF"
         },
         {
-          "catalog_index": 1842,
-          "name_ko": "MINISO 원피스 빅헤드 큐트 플러시 펜던트",
-          "name_ja": "MINISO x ONE PIECE Big-head Cute Plush Pendant",
+          "catalog_index": 1894,
+          "name_ko": "노루캬라 마스코트 블루록",
+          "name_ja": "のるキャラマスコット ブルーロック",
           "series_name": null,
-          "category": "인형",
-          "source_store": "MINISO",
+          "category": "마스코트",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://www.miniso.com/search?keyword=MINISO%20x%20ONE%20PIECE%20Big-head%20Cute%20Plush%20Pendant"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AE%E3%82%8B%E3%82%AD%E3%83%A3%E3%83%A9%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%96%E3%83%AB%E3%83%BC%E3%83%AD%E3%83%83%E3%82%AF"
+        },
+        {
+          "catalog_index": 1897,
+          "name_ko": "캔뱃지 블루록",
+          "name_ja": "缶バッジ ブルーロックコレクション",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%96%E3%83%AB%E3%83%BC%E3%83%AD%E3%83%83%E3%82%AF%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3"
+        },
+        {
+          "catalog_index": 1896,
+          "name_ko": "러버 스트랩 블루록",
+          "name_ja": "ラバーストラップ ブルーロックコレクション",
+          "series_name": null,
+          "category": "키링",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%E3%83%96%E3%83%AB%E3%83%BC%E3%83%AD%E3%83%83%E3%82%AF%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3"
+        },
+        {
+          "catalog_index": 1939,
+          "name_ko": "오만쥬 니기니기 원피스",
+          "name_ja": "おまんじゅうにぎにぎマスコット ONE PIECE",
+          "series_name": null,
+          "category": "마스코트",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20ONE%20PIECE"
+        },
+        {
+          "catalog_index": 1940,
+          "name_ko": "노루캬라 마스코트 원피스",
+          "name_ja": "のるキャラマスコット ONE PIECE",
+          "series_name": null,
+          "category": "마스코트",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AE%E3%82%8B%E3%82%AD%E3%83%A3%E3%83%A9%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20ONE%20PIECE"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -3542,10 +3553,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "Bandai Premium 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 3,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "엔스카이 출처 URL 탐색: source-discovery-009",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -3553,34 +3564,84 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1836,
-          "name_ko": "원피스 상디 토트백",
-          "name_ja": "ONE PIECE サンジ トートバッグ",
+          "catalog_index": 1582,
+          "name_ko": "롤로노아 조로 러버 스트랩",
+          "name_ja": "ロロノア・ゾロ ラバーストラップ",
           "series_name": null,
-          "category": "가방",
-          "source_store": "Bandai Premium",
+          "category": "키링",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%AD%E3%83%AD%E3%83%8E%E3%82%A2%E3%83%BB%E3%82%BE%E3%83%AD%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
         },
         {
-          "catalog_index": 1840,
-          "name_ko": "원피스 쵸파 머그컵",
-          "name_ja": "ONE PIECE チョッパー マグカップ",
+          "catalog_index": 1710,
+          "name_ko": "장송의 프리렌 클리어 파일 A4 프리렌",
+          "name_ja": "葬送のフリーレン クリアファイルA4 フリーレン",
           "series_name": null,
-          "category": "머그컵",
-          "source_store": "Bandai Premium",
+          "category": "문구",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3"
         },
         {
-          "catalog_index": 1835,
-          "name_ko": "원피스 나미 타올",
-          "name_ja": "ONE PIECE ナミ タオル",
+          "catalog_index": 1646,
+          "name_ko": "장송의 프리렌 아크릴 스탠드 (슈타르크)",
+          "name_ja": "葬送のフリーレン アクリルスタンド (シュタルク)",
           "series_name": null,
-          "category": "타월",
-          "source_store": "Bandai Premium",
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%8A%E3%83%9F%20%E3%82%BF%E3%82%AA%E3%83%AB"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%29"
+        },
+        {
+          "catalog_index": 1647,
+          "name_ko": "장송의 프리렌 아크릴 스탠드 (히멜)",
+          "name_ja": "葬送のフリーレン アクリルスタンド (ヒンメル)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%29"
+        },
+        {
+          "catalog_index": 1645,
+          "name_ko": "장송의 프리렌 아크릴 스탠드 (펀)",
+          "name_ja": "葬送のフリーレン アクリルスタンド (フェルン)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%29"
+        },
+        {
+          "catalog_index": 1648,
+          "name_ko": "장송의 프리렌 빅 아크릴 스탠드 (프리렌)",
+          "name_ja": "葬送のフリーレン ビッグアクリルスタンド (フリーレン)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%29"
+        },
+        {
+          "catalog_index": 1525,
+          "name_ko": "타피누이 펀",
+          "name_ja": "たぴぬい フェルン",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3"
+        },
+        {
+          "catalog_index": 1524,
+          "name_ko": "타피누이 프리렌",
+          "name_ja": "たぴぬい フリーレン",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -3591,10 +3652,10 @@
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
-      "title": "SM STORE 출처 URL 탐색 (official_search_url_available)",
-      "public_report": "data/source_discovery_queue_public.json",
-      "rows": 3,
-      "recommended_action": "Find exact official product detail URLs and prepare source_url updates.",
+      "title": "엔스카이 출처 URL 탐색: source-discovery-010",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "acceptance_criteria": [
         "Candidate URL is an exact official or trusted licensed product/detail page.",
         "Product title and image/metadata match the catalog row.",
@@ -3602,34 +3663,381 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 2300,
-          "name_ko": "NCT 포토카드 (랜덤)",
-          "name_ja": null,
+          "catalog_index": 1626,
+          "name_ko": "주술회전 아크릴 스탠드 (후시구로 메구미)",
+          "name_ja": "呪術廻戦 アクリルスタンド (伏黒恵)",
           "series_name": null,
-          "category": "포토카드",
-          "source_store": "SM STORE",
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://global.shop.smtown.com/search?q=NCT%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BC%8F%E9%BB%92%E6%81%B5%29"
         },
         {
-          "catalog_index": 2314,
-          "name_ko": "Red Velvet 포토카드 (랜덤)",
-          "name_ja": null,
+          "catalog_index": 1633,
+          "name_ko": "주술회전 스탠드 미니 (이타도리 일상)",
+          "name_ja": "呪術廻戦 スタンドミニ (虎杖 日常ver.)",
           "series_name": null,
-          "category": "포토카드",
-          "source_store": "SM STORE",
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
           "source_url": null,
-          "official_search_url": "https://global.shop.smtown.com/search?q=Red%20Velvet%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E8%99%8E%E6%9D%96%20%E6%97%A5%E5%B8%B8ver.%29"
         },
         {
-          "catalog_index": 2287,
-          "name_ko": "aespa 포토카드 (랜덤)",
+          "catalog_index": 1630,
+          "name_ko": "주술회전 빅 아크릴 스탠드 (게토 스구루)",
+          "name_ja": "呪術廻戦 ビッグアクリルスタンド (夏油傑)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E5%A4%8F%E6%B2%B9%E5%82%91%29"
+        },
+        {
+          "catalog_index": 1789,
+          "name_ko": "주술회전 판다 우치와",
+          "name_ja": "呪術廻戦 パンダ うちわ",
+          "series_name": null,
+          "category": "응원용품",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%91%E3%83%B3%E3%83%80%20%E3%81%86%E3%81%A1%E3%82%8F"
+        },
+        {
+          "catalog_index": 1392,
+          "name_ko": "치비누이 게토 스구루",
+          "name_ja": "ちびぬい 夏油傑",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E5%A4%8F%E6%B2%B9%E5%82%91"
+        },
+        {
+          "catalog_index": 1393,
+          "name_ko": "누이푸페 고죠 사토루",
+          "name_ja": "ぬいぺぺ 五条悟",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%BA%E3%81%BA%20%E4%BA%94%E6%9D%A1%E6%82%9F"
+        },
+        {
+          "catalog_index": 1682,
+          "name_ko": "주술회전 트레이딩 캔뱃지 후시구로 메구미",
+          "name_ja": "呪術廻戦 トレーディング缶バッジ 伏黒恵",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E4%BC%8F%E9%BB%92%E6%81%B5"
+        },
+        {
+          "catalog_index": 1681,
+          "name_ko": "주술회전 트레이딩 캔뱃지 이타도리 유지",
+          "name_ja": "呪術廻戦 トレーディング缶バッジ 虎杖悠仁",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81"
+        }
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "030-agent-source-discovery-35",
+      "agent_id": "agent-source-discovery",
+      "workstream": "source_url_discovery",
+      "priority": 30,
+      "title": "엔스카이 출처 URL 탐색: source-discovery-011",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 25,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "acceptance_criteria": [
+        "Candidate URL is an exact official or trusted licensed product/detail page.",
+        "Product title and image/metadata match the catalog row.",
+        "Generic search/listing pages stay in review and are not imported as final source_url."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 928,
+          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+          "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+        },
+        {
+          "catalog_index": 933,
+          "name_ko": "치이카와 아크릴 피규어 (라부라부 시리즈)",
+          "name_ja": "ちいかわ アクリルフィギュア (らぶらぶシリーズ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%28%E3%82%89%E3%81%B6%E3%82%89%E3%81%B6%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29"
+        },
+        {
+          "catalog_index": 931,
+          "name_ko": "치이카와 스탠드 미니 (모몽가)",
+          "name_ja": "ちいかわ スタンドミニ (モモンガ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+        },
+        {
+          "catalog_index": 932,
+          "name_ko": "치이카와 트레이딩 아크릴 키홀더 (라부라부)",
+          "name_ja": "ちいかわ トレーディングアクリルキーホルダー (らぶらぶシリーズ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%89%E3%81%B6%E3%82%89%E3%81%B6%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29"
+        },
+        {
+          "catalog_index": 930,
+          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+          "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+        },
+        {
+          "catalog_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+        },
+        {
+          "catalog_index": 924,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+        },
+        {
+          "catalog_index": 925,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+        }
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "030-agent-source-discovery-30",
+      "agent_id": "agent-source-discovery",
+      "workstream": "source_url_discovery",
+      "priority": 30,
+      "title": "애니메이트 출처 URL 탐색: source-discovery-006",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 23,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "acceptance_criteria": [
+        "Candidate URL is an exact official or trusted licensed product/detail page.",
+        "Product title and image/metadata match the catalog row.",
+        "Generic search/listing pages stay in review and are not imported as final source_url."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1759,
+          "name_ko": "체인소 맨 클리어 파일 세트 공안 4과",
+          "name_ja": "チェンソーマン クリアファイルセット 公安4課",
+          "series_name": null,
+          "category": "문구",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%85%AC%E5%AE%894%E8%AA%B2"
+        },
+        {
+          "catalog_index": 1855,
+          "name_ko": "체인소 맨 카페 클리어 보틀",
+          "name_ja": "チェンソーマン カフェコラボ クリアボトル",
+          "series_name": null,
+          "category": "생활잡화",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB"
+        },
+        {
+          "catalog_index": 1756,
+          "name_ko": "체인소 맨 의상 변경 캔뱃지 파워",
+          "name_ja": "チェンソーマン 衣装替え缶バッジ パワー",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%91%E3%83%AF%E3%83%BC"
+        },
+        {
+          "catalog_index": 1045,
+          "name_ko": "체인소맨 클리어 파일",
           "name_ja": null,
           "series_name": null,
-          "category": "포토카드",
-          "source_store": "SM STORE",
+          "category": "문구",
+          "source_store": "애니메이트",
           "source_url": null,
-          "official_search_url": "https://global.shop.smtown.com/search?q=aespa%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29"
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
+        },
+        {
+          "catalog_index": 1043,
+          "name_ko": "체인소맨 봉제 인형 (포치타)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%8F%AC%EC%B9%98%ED%83%80%29"
+        },
+        {
+          "catalog_index": 1044,
+          "name_ko": "체인소맨 캔뱃지 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
+        },
+        {
+          "catalog_index": 2000,
+          "name_ko": "최애의 아이 디포르메 러버 마스코트",
+          "name_ja": "推しの子 デフォルメラバーマスコット",
+          "series_name": null,
+          "category": "마스코트",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88"
+        },
+        {
+          "catalog_index": 1075,
+          "name_ko": "최애의 아이 클리어 파일",
+          "name_ja": null,
+          "series_name": null,
+          "category": "문구",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B5%9C%EC%95%A0%EC%9D%98%20%EC%95%84%EC%9D%B4%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
+        }
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "030-agent-source-discovery-36",
+      "agent_id": "agent-source-discovery",
+      "workstream": "source_url_discovery",
+      "priority": 30,
+      "title": "엔스카이 출처 URL 탐색: source-discovery-012",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 17,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "acceptance_criteria": [
+        "Candidate URL is an exact official or trusted licensed product/detail page.",
+        "Product title and image/metadata match the catalog row.",
+        "Generic search/listing pages stay in review and are not imported as final source_url."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1619,
+          "name_ko": "헌터X헌터 아크릴 스탠드 (쿠라피카)",
+          "name_ja": "HUNTER×HUNTER アクリルスタンド (クラピカ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%29"
+        },
+        {
+          "catalog_index": 1620,
+          "name_ko": "헌터X헌터 아크릴 스탠드 (레오리오)",
+          "name_ja": "HUNTER×HUNTER アクリルスタンド (レオリオ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%29"
+        },
+        {
+          "catalog_index": 1623,
+          "name_ko": "헌터X헌터 빅 아크릴 스탠드 (키루아)",
+          "name_ja": "HUNTER×HUNTER ビッグアクリルスタンド (キルア)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AD%E3%83%AB%E3%82%A2%29"
+        },
+        {
+          "catalog_index": 1333,
+          "name_ko": "치비누이 곤 프릭스",
+          "name_ja": "ちびぐるみ ゴン＝フリークス",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%90%E3%82%8B%E3%81%BF%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
+        },
+        {
+          "catalog_index": 1334,
+          "name_ko": "치비누이 키루아 조르딕",
+          "name_ja": "ちびぬい キルア＝ゾルディック",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        },
+        {
+          "catalog_index": 1335,
+          "name_ko": "치비누이 쿠라피카",
+          "name_ja": "ちびぬい クラピカ",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB"
+        },
+        {
+          "catalog_index": 1336,
+          "name_ko": "치비누이 레오리오",
+          "name_ja": "ちびぬい レオリオ",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA"
+        },
+        {
+          "catalog_index": 1338,
+          "name_ko": "누이푸페 키루아 조르딕",
+          "name_ja": "ぬいぺぺ キルア＝ゾルディック",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%BA%E3%81%BA%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -3735,7 +4143,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "060-agent-metadata-35",
+      "batch_id": "060-agent-metadata-37",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -3834,7 +4242,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-36",
+      "batch_id": "060-agent-metadata-38",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -3933,7 +4341,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-37",
+      "batch_id": "060-agent-metadata-39",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -4032,7 +4440,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-38",
+      "batch_id": "060-agent-metadata-40",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -4131,7 +4539,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-39",
+      "batch_id": "060-agent-metadata-41",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -4230,7 +4638,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-40",
+      "batch_id": "060-agent-metadata-42",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -4329,7 +4737,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-41",
+      "batch_id": "060-agent-metadata-43",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -4428,7 +4836,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-42",
+      "batch_id": "060-agent-metadata-44",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -4527,7 +4935,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-43",
+      "batch_id": "060-agent-metadata-45",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -4626,7 +5034,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-44",
+      "batch_id": "060-agent-metadata-46",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -4725,7 +5133,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-45",
+      "batch_id": "090-agent-dedupe-47",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -4764,7 +5172,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-46",
+      "batch_id": "090-agent-dedupe-48",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -4803,7 +5211,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-47",
+      "batch_id": "090-agent-dedupe-49",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -4842,7 +5250,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-48",
+      "batch_id": "090-agent-dedupe-50",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -4881,7 +5289,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-49",
+      "batch_id": "090-agent-dedupe-51",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -4920,7 +5328,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-50",
+      "batch_id": "090-agent-dedupe-52",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -4959,7 +5367,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-51",
+      "batch_id": "090-agent-dedupe-53",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -4998,7 +5406,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-52",
+      "batch_id": "090-agent-dedupe-54",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -5037,7 +5445,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-53",
+      "batch_id": "090-agent-dedupe-55",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -5076,7 +5484,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-54",
+      "batch_id": "090-agent-dedupe-56",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -5115,7 +5523,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "110-agent-ichiban-kuji-55",
+      "batch_id": "110-agent-ichiban-kuji-57",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_release_date",
       "priority": 110,
@@ -5173,7 +5581,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "110-agent-ichiban-kuji-56",
+      "batch_id": "110-agent-ichiban-kuji-58",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_release_date",
       "priority": 110,
@@ -5231,7 +5639,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-57",
+      "batch_id": "120-agent-ichiban-kuji-59",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -5289,7 +5697,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-58",
+      "batch_id": "120-agent-ichiban-kuji-60",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -5347,7 +5755,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-59",
+      "batch_id": "120-agent-ichiban-kuji-61",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -5405,7 +5813,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-60",
+      "batch_id": "120-agent-ichiban-kuji-62",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -5463,7 +5871,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-61",
+      "batch_id": "120-agent-ichiban-kuji-63",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -5521,7 +5929,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-62",
+      "batch_id": "120-agent-ichiban-kuji-64",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -5579,7 +5987,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-63",
+      "batch_id": "120-agent-ichiban-kuji-65",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -5637,7 +6045,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-64",
+      "batch_id": "120-agent-ichiban-kuji-66",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -5695,7 +6103,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "160-agent-animation-taxonomy-65",
+      "batch_id": "160-agent-animation-taxonomy-67",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
       "priority": 160,
@@ -5825,7 +6233,7 @@
       "next_machine_step": "map_category_to_folder_color_and_icon"
     },
     {
-      "batch_id": "180-agent-animation-taxonomy-66",
+      "batch_id": "180-agent-animation-taxonomy-68",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
       "priority": 180,
