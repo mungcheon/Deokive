@@ -17,6 +17,7 @@ except Exception:
 
 ROOT = Path(__file__).resolve().parent.parent
 SERVER = ROOT / "server"
+DATA = ROOT / "data"
 DEFAULT_OUTPUT = ROOT / "data" / "catalog_confirmed_import_readiness_public.json"
 
 WORKFLOWS = {
@@ -37,24 +38,40 @@ WORKFLOWS = {
         "template": SERVER / "catalog_field_confirmed_rows.template.json",
         "report": SERVER / "catalog_field_confirmed_import_report.json",
         "public_workstream": "metadata_field_values",
+        "public_action_queue": DATA / "catalog_metadata_action_queue_public.json",
+        "public_action_rows_key": "queued_missing_cells",
+        "public_action_batches_key": "action_batch_count",
+        "public_action_next_step": "fill_confirmed_metadata_patch_templates",
     },
     "source_discovery": {
         "confirmed": SERVER / "source_discovery_confirmed_rows.json",
         "template": SERVER / "source_discovery_confirmed_rows.template.json",
         "report": SERVER / "source_discovery_confirmed_import_report.json",
         "public_workstream": "source_discovery_source_urls",
+        "public_action_queue": DATA / "source_discovery_action_queue_public.json",
+        "public_action_rows_key": "queued_source_rows",
+        "public_action_batches_key": "action_batch_count",
+        "public_action_next_step": "confirm_source_url_templates",
     },
     "catalog_image": {
         "confirmed": SERVER / "catalog_image_confirmed_rows.json",
         "template": SERVER / "catalog_image_confirmed_rows.template.json",
         "report": SERVER / "catalog_image_confirmed_import_report.json",
         "public_workstream": "exact_image_urls",
+        "public_action_queue": DATA / "catalog_image_attachment_action_queue_public.json",
+        "public_action_rows_key": "queued_image_rows",
+        "public_action_batches_key": "action_batch_count",
+        "public_action_next_step": "confirm_exact_image_url_templates",
     },
     "focus_image": {
         "confirmed": SERVER / "focus_image_confirmed_rows.json",
         "template": SERVER / "focus_image_confirmed_rows.template.json",
         "report": SERVER / "focus_image_confirmed_import_report.json",
         "public_workstream": "requested_focus_image_urls",
+        "public_action_queue": DATA / "requested_focus_action_queue_public.json",
+        "public_action_rows_key": "queued_action_rows",
+        "public_action_batches_key": "action_batch_count",
+        "public_action_next_step": "confirm_requested_focus_templates",
     },
     "ichiban_ocr": {
         "confirmed": SERVER / "ichiban_kuji_ocr_confirmed_rows.json",
@@ -109,6 +126,24 @@ def _report_count(report: Any, *keys: str) -> int:
     return 0
 
 
+def _summary_count(summary: Any, key: str | None) -> int:
+    if not key or not isinstance(summary, dict):
+        return 0
+    value = summary.get(key)
+    if isinstance(value, int) and not isinstance(value, bool):
+        return value
+    return 0
+
+
+def _display_path(path: Path | None) -> str | None:
+    if path is None:
+        return None
+    try:
+        return str(path.relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return str(path).replace("\\", "/")
+
+
 def _skip_reason_counts(report: Any) -> list[tuple[str, int]]:
     if not isinstance(report, dict):
         return []
@@ -129,6 +164,7 @@ def _status(
     confirmed_exists: bool,
     confirmed_true: int,
     template_items: int,
+    public_action_rows: int,
     updated_rows: int,
     skipped_rows: int,
     duplicates: int,
@@ -143,6 +179,8 @@ def _status(
         return "confirmed_file_empty"
     if template_items:
         return "template_ready_for_manual_confirmation"
+    if public_action_rows:
+        return "public_action_queue_ready_for_confirmation"
     return "no_current_candidates"
 
 
@@ -153,9 +191,14 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
         confirmed_path = Path(config["confirmed"])
         template_path = Path(config["template"])
         report_path = Path(config["report"])
+        action_queue_path = Path(config["public_action_queue"]) if config.get("public_action_queue") else None
         confirmed_items = _items(_read_json(confirmed_path))
         template_items = _items(_read_json(template_path))
         report = _read_json(report_path)
+        action_queue = _read_json(action_queue_path) if action_queue_path else None
+        action_summary = action_queue.get("summary", {}) if isinstance(action_queue, dict) else {}
+        public_action_rows = _summary_count(action_summary, config.get("public_action_rows_key"))
+        public_action_batches = _summary_count(action_summary, config.get("public_action_batches_key"))
         confirmed_true = sum(1 for item in confirmed_items if _confirmed(item.get("manual_confirmed")))
         template_confirmed_true = sum(1 for item in template_items if _confirmed(item.get("manual_confirmed")))
         updated_rows = _report_count(report, "updated_rows", "updated", "created_rows")
@@ -165,6 +208,7 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
             confirmed_exists=confirmed_path.exists(),
             confirmed_true=confirmed_true,
             template_items=len(template_items),
+            public_action_rows=public_action_rows,
             updated_rows=updated_rows,
             skipped_rows=skipped_rows,
             duplicates=duplicates,
@@ -181,6 +225,11 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
                 "manual_confirmed_true": confirmed_true,
                 "template_items": len(template_items),
                 "template_manual_confirmed_true": template_confirmed_true,
+                "public_action_queue_exists": bool(action_queue_path and action_queue_path.exists()),
+                "public_action_queue_report": _display_path(action_queue_path),
+                "public_action_rows": public_action_rows,
+                "public_action_batches": public_action_batches,
+                "public_action_next_step": config.get("public_action_next_step"),
                 "updated_rows": updated_rows,
                 "skipped_rows": skipped_rows,
                 "duplicates": duplicates,
@@ -199,6 +248,8 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
             "workflow_count": len(rows),
             "confirmed_files": sum(1 for row in rows if row["confirmed_file_exists"]),
             "template_items": sum(int(row["template_items"]) for row in rows),
+            "public_action_queue_rows": sum(int(row["public_action_rows"]) for row in rows),
+            "public_action_queue_batches": sum(int(row["public_action_batches"]) for row in rows),
             "manual_confirmed_true": sum(int(row["manual_confirmed_true"]) for row in rows),
             "updated_rows": sum(int(row["updated_rows"]) for row in rows),
             "skipped_rows": sum(int(row["skipped_rows"]) for row in rows),
@@ -220,6 +271,7 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
         "instructions": [
             "This public report exposes counts and workflow readiness only; it omits private row-level candidate details.",
             "Rows become importable only after manual_confirmed=true and a dry-run import report passes safety checks.",
+            "Public action queue rows identify manually confirmable source/image/metadata templates; row-level details stay in the source queue report.",
             "Use this to decide whether image/source/metadata import queues are blocked, pending, or already imported.",
         ],
         "automation_policy": {
@@ -238,6 +290,7 @@ def _next_action(status: str) -> str:
         "confirmed_rows_pending_import": "Run the guarded import dry-run, then write only if safety checks pass.",
         "confirmed_file_empty": "Mark exact reviewed rows manual_confirmed=true or regenerate from the latest template.",
         "template_ready_for_manual_confirmation": "Review template candidates and copy exact matches into the confirmed file.",
+        "public_action_queue_ready_for_confirmation": "Use the linked public action queue to prepare exact confirmed rows.",
         "no_current_candidates": "Generate or refresh the matching candidate/template queue.",
     }.get(status, "Review workflow state manually.")
 

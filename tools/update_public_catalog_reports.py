@@ -1540,6 +1540,8 @@ def build_operations_public(
             "ready_or_pending_import_rows": confirmed_import_readiness_summary.get("ready_or_pending_import_rows", 0),
             "blocked_confirmed_rows": confirmed_import_readiness_summary.get("blocked_confirmed_rows", 0),
             "template_items": confirmed_import_readiness_summary.get("template_items", 0),
+            "public_action_queue_rows": confirmed_import_readiness_summary.get("public_action_queue_rows", 0),
+            "public_action_queue_batches": confirmed_import_readiness_summary.get("public_action_queue_batches", 0),
             "recommended_next_action": "Review confirmed import readiness before attempting source/image/metadata writes.",
         } if confirmed_import_readiness_summary else None,
         {
@@ -1880,6 +1882,9 @@ def build_operations_public(
     }
     if confirmed_import_readiness_summary:
         open_review_queues["confirmed_import_template_rows"] = confirmed_import_readiness_summary.get("template_items", 0)
+        open_review_queues["confirmed_import_action_queue_rows"] = confirmed_import_readiness_summary.get(
+            "public_action_queue_rows", 0
+        )
         open_review_queues["confirmed_import_pending_rows"] = confirmed_import_readiness_summary.get(
             "ready_or_pending_import_rows", 0
         )
@@ -2255,6 +2260,7 @@ def build_agent_work_queue_public(
         for row in readiness_workflows
         if int(row.get("manual_confirmed_true") or 0) > 0
         or int(row.get("template_items") or 0) > 0
+        or int(row.get("public_action_rows") or 0) > 0
     ]
     if pending_or_blocked:
         add_batch(
@@ -2264,7 +2270,9 @@ def build_agent_work_queue_public(
             title="Confirmed import readiness review",
             public_report=CONFIRMED_IMPORT_READINESS,
             rows=sum(
-                int(row.get("manual_confirmed_true") or 0) + int(row.get("template_items") or 0)
+                int(row.get("manual_confirmed_true") or 0)
+                + int(row.get("template_items") or 0)
+                + int(row.get("public_action_rows") or 0)
                 for row in pending_or_blocked
             ),
             recommended_action="Review pending/blocked confirmed imports before any catalog write.",
@@ -3551,6 +3559,9 @@ def validate_report_consistency(
     if confirmed_import_readiness_summary:
         expected_open_queues["confirmed_import_template_rows"] = confirmed_import_readiness_summary.get(
             "template_items", 0
+        )
+        expected_open_queues["confirmed_import_action_queue_rows"] = confirmed_import_readiness_summary.get(
+            "public_action_queue_rows", 0
         )
         expected_open_queues["confirmed_import_pending_rows"] = confirmed_import_readiness_summary.get(
             "ready_or_pending_import_rows", 0

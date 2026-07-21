@@ -114,12 +114,19 @@ class PublicCatalogReportTests(unittest.TestCase):
         scorecard_reports = {row.get("primary_report") for row in operations.get("workstream_scorecard", [])}
         next_action_reports = {row.get("public_report") for row in operations.get("next_actions", [])}
         report_links = {row.get("public_report") for row in operations.get("reports", [])}
+        open_queues = operations.get("summary", {}).get("open_review_queues", {})
+        confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
+        readiness_summary = confirmed_readiness.get("summary", {})
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
         self.assertIn(f"data/{reports.AGENT_WORK_QUEUE.name}", next_action_reports)
         self.assertIn(f"data/{reports.EXECUTION_PLAN.name}", next_action_reports)
         self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
+        self.assertEqual(
+            open_queues.get("confirmed_import_action_queue_rows"),
+            readiness_summary.get("public_action_queue_rows"),
+        )
 
 
 if __name__ == "__main__":

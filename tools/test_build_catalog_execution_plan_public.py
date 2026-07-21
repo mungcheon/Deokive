@@ -102,6 +102,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "catalog_confirmed_import_readiness_public.json": {
                 "summary": {
                     "template_items": 3,
+                    "public_action_queue_rows": 6,
+                    "public_action_queue_batches": 2,
                     "ready_or_pending_import_rows": 0,
                     "blocked_confirmed_rows": 0,
                 }
@@ -115,7 +117,10 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         first = report["actions"][0]
         self.assertEqual(first["workstream"], "confirmed_import_readiness")
         self.assertEqual(first["status"], "needs_manual_confirmation")
+        self.assertEqual(first["rows"], 9)
         self.assertIn("manual_confirmed=true", first["blocker"])
+        self.assertEqual(first["evidence"]["public_action_queue_rows"], 6)
+        self.assertEqual(first["evidence"]["public_action_queue_batches"], 2)
         requested = next(
             action
             for action in report["actions"]

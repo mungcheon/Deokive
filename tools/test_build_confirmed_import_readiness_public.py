@@ -57,6 +57,47 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
             "omitted_from_public_report",
         )
 
+    def test_public_action_queue_counts_are_summarized_without_row_details(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            workflows = {
+                "catalog_field": {
+                    "confirmed": root / "metadata_confirmed.json",
+                    "template": root / "metadata.template.json",
+                    "report": root / "metadata_report.json",
+                    "public_workstream": "metadata_field_values",
+                    "public_action_queue": _write_json(
+                        root / "metadata_action.json",
+                        {
+                            "summary": {
+                                "queued_missing_cells": 12,
+                                "action_batch_count": 2,
+                            },
+                            "batches": [
+                                {
+                                    "batch_id": "private-row-details",
+                                    "groups": [{"catalog_indexes": [1, 2, 3]}],
+                                }
+                            ],
+                        },
+                    ),
+                    "public_action_rows_key": "queued_missing_cells",
+                    "public_action_batches_key": "action_batch_count",
+                    "public_action_next_step": "fill_confirmed_metadata_patch_templates",
+                }
+            }
+
+            report = readiness.build_report(workflows)
+
+        workflow = report["workflows"][0]
+        self.assertEqual(workflow["status"], "public_action_queue_ready_for_confirmation")
+        self.assertEqual(workflow["public_action_rows"], 12)
+        self.assertEqual(workflow["public_action_batches"], 2)
+        self.assertEqual(report["summary"]["public_action_queue_rows"], 12)
+        self.assertEqual(report["summary"]["public_action_queue_batches"], 2)
+        self.assertNotIn("batches", workflow)
+        self.assertNotIn("groups", workflow)
+
     def test_confirmed_blocked_rows_summarize_skip_reasons(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

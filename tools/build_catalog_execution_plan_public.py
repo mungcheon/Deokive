@@ -140,22 +140,27 @@ def build_plan() -> dict[str, Any]:
     pending_import_rows = _count(confirmed_summary, "ready_or_pending_import_rows")
     blocked_confirmed_rows = _count(confirmed_summary, "blocked_confirmed_rows")
     template_items = _count(confirmed_summary, "template_items")
+    public_action_queue_rows = _count(confirmed_summary, "public_action_queue_rows")
+    public_action_queue_batches = _count(confirmed_summary, "public_action_queue_batches")
+    confirmation_rows = template_items + public_action_queue_rows
     actions.append(
         _action(
             priority=5,
             workstream="confirmed_import_readiness",
             public_report="data/catalog_confirmed_import_readiness_public.json",
             status="pending_import" if pending_import_rows else "needs_manual_confirmation",
-            rows=pending_import_rows or template_items,
+            rows=pending_import_rows or confirmation_rows,
             command=(
                 "Run the matching guarded import dry-run, then write only manually confirmed exact rows."
                 if pending_import_rows
-                else "Review templates and mark exact rows manual_confirmed=true before importing."
+                else "Review templates/action queues and mark exact rows manual_confirmed=true before importing."
             ),
             next_step="confirm_exact_rows_then_run_guarded_import",
             blocker=None if pending_import_rows else "No public workflow has manual_confirmed=true rows yet.",
             evidence={
                 "template_items": template_items,
+                "public_action_queue_rows": public_action_queue_rows,
+                "public_action_queue_batches": public_action_queue_batches,
                 "ready_or_pending_import_rows": pending_import_rows,
                 "blocked_confirmed_rows": blocked_confirmed_rows,
             },
