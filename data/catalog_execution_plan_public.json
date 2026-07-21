@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:23:33Z",
+  "generated_at": "2026-07-21T22:28:57Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 9,
+    "action_count": 10,
     "blocked_action_count": 1,
-    "manual_review_action_count": 7,
+    "manual_review_action_count": 8,
     "pending_import_action_count": 0,
-    "total_action_rows": 31765,
+    "total_action_rows": 31805,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -20,6 +20,7 @@
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1996,
       "confirmed_import_pending_rows": 0,
+      "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
       "animation_category_review_rows": 428
@@ -288,6 +289,42 @@
           [
             "medium_review_confidence",
             6
+          ]
+        ]
+      }
+    },
+    {
+      "priority": 51,
+      "workstream": "deduplication_action_queue",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "status": "manual_review",
+      "rows": 40,
+      "command": "Review high/medium-confidence duplicate groups before variant-risk dedupe work.",
+      "next_step": "record_manual_keep_drop_decisions_for_safe_dedupe_groups",
+      "blocker": "Auto-merge and auto-delete remain disabled; every group needs explicit confirmation.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "actionable_groups": 48,
+        "queued_groups": 40,
+        "action_batch_count": 4,
+        "by_review_confidence": [
+          [
+            "high_review_confidence",
+            42
+          ],
+          [
+            "medium_review_confidence",
+            6
+          ]
+        ],
+        "excluded_review_confidence": [
+          [
+            "manual_identity_check",
+            24
+          ],
+          [
+            "variant_caution",
+            8
           ]
         ]
       }

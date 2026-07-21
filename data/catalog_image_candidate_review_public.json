@@ -2031,6 +2031,7 @@
     "danganronpa_missing_media_rows": 34,
     "confirmed_import_template_rows": 1996,
     "confirmed_import_pending_rows": 0,
+    "dedupe_action_groups": 40,
     "requested_focus_review_rows": 6275,
     "requested_focus_action_rows": 163,
     "animation_category_review_rows": 428
@@ -2038,7 +2039,7 @@
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 80,
-    "summed_batch_rows": 11479,
+    "summed_batch_rows": 11503,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2074,7 +2075,7 @@
         3
       ],
       [
-        "deduplication_review",
+        "deduplication_action_queue",
         3
       ],
       [
@@ -2120,7 +2121,7 @@
         3
       ],
       [
-        "agent-dedupe",
+        "agent-dedupe-action",
         3
       ],
       [
@@ -2144,6 +2145,7 @@
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1996,
       "confirmed_import_pending_rows": 0,
+      "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
       "animation_category_review_rows": 428
@@ -3103,11 +3105,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 9,
+    "action_count": 10,
     "blocked_action_count": 1,
-    "manual_review_action_count": 7,
+    "manual_review_action_count": 8,
     "pending_import_action_count": 0,
-    "total_action_rows": 31765,
+    "total_action_rows": 31805,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -3120,6 +3122,7 @@
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1996,
       "confirmed_import_pending_rows": 0,
+      "dedupe_action_groups": 40,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
       "animation_category_review_rows": 428
@@ -3178,5 +3181,49 @@
       ]
     ],
     "auto_apply_enabled": false
+  },
+  "deduplication_action_queue": {
+    "public_report": "data/catalog_deduplication_action_queue_public.json",
+    "actionable_groups": 48,
+    "queued_groups": 40,
+    "action_batch_count": 4,
+    "batch_size": 10,
+    "max_groups": 40,
+    "by_review_confidence": [
+      [
+        "high_review_confidence",
+        42
+      ],
+      [
+        "medium_review_confidence",
+        6
+      ]
+    ],
+    "by_key_type": [
+      [
+        "barcode",
+        42
+      ],
+      [
+        "image_url",
+        4
+      ],
+      [
+        "source_url",
+        2
+      ]
+    ],
+    "excluded_review_confidence": [
+      [
+        "manual_identity_check",
+        24
+      ],
+      [
+        "variant_caution",
+        8
+      ]
+    ],
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false
   }
 }

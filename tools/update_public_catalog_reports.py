@@ -20,6 +20,7 @@ IMAGE_BACKLOG = DATA / "catalog_image_backlog_public.json"
 IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
 DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 DEDUPLICATION_REVIEW_BATCHES = DATA / "catalog_deduplication_review_batches_public.json"
+DEDUPLICATION_ACTION_QUEUE = DATA / "catalog_deduplication_action_queue_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_public.json"
 ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
@@ -1268,6 +1269,8 @@ def build_operations_public(
         load_json(DEDUPLICATION_REVIEW_BATCHES, {}) if DEDUPLICATION_REVIEW_BATCHES.exists() else {}
     )
     dedupe_review_batches_summary = dedupe_review_batches.get("summary", {})
+    dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
+    dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
     animation_summary = animation_categories["summary"]
     animation_review_batches = (
         load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
@@ -1551,6 +1554,15 @@ def build_operations_public(
             "recommended_next_action": "Work dedupe review batches in priority order; record explicit decisions before any catalog mutation.",
         } if dedupe_review_batches_summary else None,
         {
+            "priority": 42,
+            "workstream": "deduplication_action_queue",
+            "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            "actionable_groups": dedupe_action_queue_summary.get("actionable_groups", 0),
+            "queued_groups": dedupe_action_queue_summary.get("queued_groups", 0),
+            "action_batch_count": dedupe_action_queue_summary.get("action_batch_count", 0),
+            "recommended_next_action": "Review high/medium-confidence duplicate groups before variant-risk dedupe work.",
+        } if dedupe_action_queue_summary else None,
+        {
             "priority": 50,
             "workstream": "ichiban_kuji_history",
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
@@ -1687,6 +1699,14 @@ def build_operations_public(
             "auto_apply_enabled": False,
         } if dedupe_review_batches_summary else None,
         {
+            "workstream": "deduplication_action_queue",
+            "status": "manual_review" if dedupe_action_queue_summary.get("queued_groups", 0) else "clear",
+            "open_rows": dedupe_action_queue_summary.get("queued_groups", 0),
+            "primary_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            "next_step": "review_high_medium_confidence_dedupe_first",
+            "auto_apply_enabled": dedupe_action_queue_summary.get("auto_delete_enabled", False),
+        } if dedupe_action_queue_summary else None,
+        {
             "workstream": "ichiban_kuji_history",
             "status": "open" if kuji_summary.get("campaign_metadata_review_queue_rows", 0) else "clear",
             "open_rows": kuji_summary.get("campaign_metadata_review_queue_rows", 0),
@@ -1756,6 +1776,8 @@ def build_operations_public(
         open_review_queues["confirmed_import_pending_rows"] = confirmed_import_readiness_summary.get(
             "ready_or_pending_import_rows", 0
         )
+    if dedupe_action_queue_summary:
+        open_review_queues["dedupe_action_groups"] = dedupe_action_queue_summary.get("queued_groups", 0)
     if requested_focus_review_batches_summary:
         open_review_queues["requested_focus_review_rows"] = requested_focus_review_batches_summary.get("review_row_count", 0)
     if requested_focus_action_queue_summary:
@@ -1802,6 +1824,7 @@ def build_operations_public(
             {"key": "confirmed_import_readiness", "public_report": f"data/{CONFIRMED_IMPORT_READINESS.name}"},
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
             {"key": "deduplication_review_batches", "public_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}"},
+            {"key": "deduplication_action_queue", "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}"},
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
             {"key": "animation_category_review_batches", "public_report": f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}"},
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
@@ -1857,6 +1880,7 @@ def build_agent_work_queue_public(
     requested_focus_action_queue = (
         load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
     )
+    dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
     confirmed_import_readiness = (
         load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
@@ -2219,6 +2243,24 @@ def build_agent_work_queue_public(
                 ],
                 samples=[compact_sample(item) for item in group.get("sample_items", []) if isinstance(item, dict)],
             )
+
+    dedupe_action_batches = [batch for batch in dedupe_action_queue.get("batches", []) if isinstance(batch, dict)]
+    for action_batch in dedupe_action_batches[:6]:
+        add_batch(
+            agent_id="agent-dedupe-action",
+            workstream="deduplication_action_queue",
+            priority=75 + int(action_batch.get("priority") or 99),
+            title=f"Safe dedupe action {action_batch.get('batch_id')}",
+            public_report=DEDUPLICATION_ACTION_QUEUE,
+            rows=int(action_batch.get("group_count") or 0),
+            recommended_action=str(action_batch.get("recommended_action") or "record manual dedupe decisions"),
+            acceptance_criteria=[
+                "Only high/medium-confidence groups are included in this queue.",
+                "Every accepted group still needs an explicit manual keep/drop decision.",
+                "Auto-merge and auto-delete remain disabled.",
+            ],
+            samples=[group for group in action_batch.get("groups", []) if isinstance(group, dict)],
+        )
 
     for group in deduplication.get("groups", [])[:10]:
         add_batch(
@@ -3298,6 +3340,10 @@ def validate_report_consistency(
         expected_open_queues["requested_focus_action_rows"] = requested_focus_action_summary.get(
             "queued_action_rows", 0
         )
+    dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
+    dedupe_action_summary = dedupe_action_queue.get("summary", {})
+    if dedupe_action_summary:
+        expected_open_queues["dedupe_action_groups"] = dedupe_action_summary.get("queued_groups", 0)
     if animation_review_summary:
         expected_open_queues["animation_category_review_rows"] = animation_review_summary.get("source_rows", 0)
     if open_queues != expected_open_queues:
@@ -3425,6 +3471,7 @@ def validate_report_consistency(
         f"data/{METADATA_REVIEW_BATCHES.name}",
         f"data/{CONFIRMED_IMPORT_READINESS.name}",
         f"data/{DEDUPLICATION.name}",
+        f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
         f"data/{ANIMATION_CATEGORIES.name}",
         f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
@@ -3698,6 +3745,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["deduplication_review_batches"] = copy_report_summary(
                 DEDUPLICATION_REVIEW_BATCHES, "deduplication_review_batches"
             )
+        if DEDUPLICATION_ACTION_QUEUE.exists():
+            target["deduplication_action_queue"] = copy_report_summary(
+                DEDUPLICATION_ACTION_QUEUE, "deduplication_action_queue"
+            )
         target["animation_category_review"] = {
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
@@ -3753,6 +3804,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         IMAGE_CANDIDATES,
         DEDUPLICATION,
         DEDUPLICATION_REVIEW_BATCHES,
+        DEDUPLICATION_ACTION_QUEUE,
         ANIMATION_CATEGORIES,
         ICHIIBAN_KUJI_HISTORY,
         ICHIIBAN_KUJI_METADATA_PROBE,
@@ -3821,6 +3873,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(EXECUTION_PLAN.relative_to(ROOT)),
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
+            str(DEDUPLICATION_ACTION_QUEUE.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),

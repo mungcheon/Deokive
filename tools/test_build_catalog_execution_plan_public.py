@@ -49,6 +49,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "catalog_deduplication_review_batches_public.json": {
                 "summary": {"source_groups": 1, "batch_count": 1}
             },
+            "catalog_deduplication_action_queue_public.json": {
+                "summary": {
+                    "actionable_groups": 2,
+                    "queued_groups": 2,
+                    "action_batch_count": 1,
+                    "by_review_confidence": [["high_review_confidence", 2]],
+                    "excluded_review_confidence": [["variant_caution", 1]],
+                }
+            },
             "ichiban_kuji_metadata_review_batches_public.json": {
                 "summary": {"catalog_item_rows": 0}
             },
@@ -91,6 +100,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(action_queue["evidence"]["barcode_template_rows_excluded"], 3)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
+        dedupe_action = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "deduplication_action_queue"
+        )
+        self.assertEqual(dedupe_action["rows"], 2)
+        self.assertEqual(dedupe_action["evidence"]["actionable_groups"], 2)
 
     def test_pending_import_rows_are_prioritized(self) -> None:
         payloads = {

@@ -103,6 +103,7 @@ def build_plan() -> dict[str, Any]:
     requested_batches = _load("requested_focus_review_batches_public.json")
     requested_action_queue = _load("requested_focus_action_queue_public.json")
     dedupe_batches = _load("catalog_deduplication_review_batches_public.json")
+    dedupe_action_queue = _load("catalog_deduplication_action_queue_public.json")
     kuji_batches = _load("ichiban_kuji_metadata_review_batches_public.json")
     animation_batches = _load("animation_category_review_batches_public.json")
     confirmed_readiness = _load("catalog_confirmed_import_readiness_public.json")
@@ -117,6 +118,7 @@ def build_plan() -> dict[str, Any]:
     requested_summary = _summary(requested_batches)
     requested_action_summary = _summary(requested_action_queue)
     dedupe_summary = _summary(dedupe_batches)
+    dedupe_action_summary = _summary(dedupe_action_queue)
     kuji_summary = _summary(kuji_batches)
     animation_summary = _summary(animation_batches)
     confirmed_summary = _summary(confirmed_readiness)
@@ -263,6 +265,26 @@ def build_plan() -> dict[str, Any]:
             evidence={
                 "batch_count": _count(dedupe_summary, "batch_count"),
                 "by_review_confidence": dedupe_summary.get("by_review_confidence", []),
+            },
+        )
+    )
+
+    actions.append(
+        _action(
+            priority=51,
+            workstream="deduplication_action_queue",
+            public_report="data/catalog_deduplication_action_queue_public.json",
+            status="manual_review",
+            rows=_count(dedupe_action_summary, "queued_groups"),
+            command="Review high/medium-confidence duplicate groups before variant-risk dedupe work.",
+            next_step="record_manual_keep_drop_decisions_for_safe_dedupe_groups",
+            blocker="Auto-merge and auto-delete remain disabled; every group needs explicit confirmation.",
+            evidence={
+                "actionable_groups": _count(dedupe_action_summary, "actionable_groups"),
+                "queued_groups": _count(dedupe_action_summary, "queued_groups"),
+                "action_batch_count": _count(dedupe_action_summary, "action_batch_count"),
+                "by_review_confidence": dedupe_action_summary.get("by_review_confidence", []),
+                "excluded_review_confidence": dedupe_action_summary.get("excluded_review_confidence", []),
             },
         )
     )
