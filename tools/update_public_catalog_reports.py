@@ -18,6 +18,7 @@ QUALITY = DATA / "catalog_quality_public.json"
 IMAGE_BACKLOG = DATA / "catalog_image_backlog_public.json"
 IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
 DEDUPLICATION = DATA / "catalog_deduplication_public.json"
+ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
@@ -83,6 +84,64 @@ DEDUPLICATION_KEY_PRIORITY = {
     "barcode": 10,
     "source_url": 20,
     "image_url": 30,
+}
+
+ANIMATION_STORES = {
+    "AmiAmi",
+    "Cospa",
+    "FuRyu",
+    "Movic",
+    "Re-ment",
+    "Taito",
+    "굿스마일컴퍼니",
+    "귀멸의 칼날 공식",
+    "메가하우스",
+    "무기와라스토어",
+    "반다이",
+    "애니메이트",
+    "엔스카이",
+    "점프 캐릭터즈 스토어",
+    "점프 숍",
+    "카도카와",
+    "코토부키야",
+}
+
+CATEGORY_FAMILIES = {
+    "figure": {"피규어", "미니어처", "리플리카"},
+    "plush": {"인형", "마스코트"},
+    "badge": {"캔뱃지"},
+    "acrylic": {"아크릴 스탠드"},
+    "keyring": {"키링"},
+    "stationery": {"문구", "클리어파일", "카드", "트레이딩 카드", "스티커"},
+    "daily_goods": {"머그컵", "타월", "가방", "생활잡화", "액세서리", "클리어 보틀", "파우치"},
+    "display_goods": {"태피스트리"},
+    "apparel": {"의류"},
+    "fan_goods": {"응원용품", "응원봉"},
+}
+
+FAMILY_VISUALS = {
+    "figure": {"icon_key": "toys", "color_hint": "mint", "color_hex": "0xFF28D6C8"},
+    "plush": {"icon_key": "face", "color_hint": "pink", "color_hex": "0xFFFF8FC3"},
+    "badge": {"icon_key": "badge", "color_hint": "red", "color_hex": "0xFFD64562"},
+    "acrylic": {"icon_key": "view_carousel", "color_hint": "blue", "color_hex": "0xFF5BA7F7"},
+    "keyring": {"icon_key": "local_offer", "color_hint": "yellow", "color_hex": "0xFFFFD84D"},
+    "stationery": {"icon_key": "sticky_note", "color_hint": "purple", "color_hex": "0xFFA78BFA"},
+    "daily_goods": {"icon_key": "inventory", "color_hint": "green", "color_hex": "0xFF42A866"},
+    "display_goods": {"icon_key": "photo", "color_hint": "indigo", "color_hex": "0xFF4F46E5"},
+    "apparel": {"icon_key": "style", "color_hint": "neutral", "color_hex": "0xFF6B7280"},
+    "fan_goods": {"icon_key": "celebration", "color_hint": "orange", "color_hex": "0xFFFF9F43"},
+    "other": {"icon_key": "category", "color_hint": "neutral", "color_hex": "0xFF9CA3AF"},
+}
+
+CANONICAL_CATEGORY_SUGGESTIONS = {
+    "클리어파일": "문구",
+    "카드": "문구",
+    "미니어처": "피규어",
+    "트레이딩 카드": "문구",
+    "스티커": "문구",
+    "클리어 보틀": "생활잡화",
+    "파우치": "가방",
+    "기타 굿즈": "액세서리",
 }
 
 PUBLIC_FIELDS = [
@@ -332,6 +391,111 @@ def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int =
     }
 
 
+def category_family(category: str) -> str:
+    for family, values in CATEGORY_FAMILIES.items():
+        if category in values:
+            return family
+    return "other"
+
+
+def counter_rows(counter: Counter[Any], keys: tuple[str, ...], limit: int) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for values, count in counter.most_common(limit):
+        if not isinstance(values, tuple):
+            values = (values,)
+        item = {key: value for key, value in zip(keys, values)}
+        item["rows"] = count
+        rows.append(item)
+    return rows
+
+
+def is_animation_goods(item: dict[str, Any]) -> bool:
+    if str(item.get("source_store") or "") in ANIMATION_STORES:
+        return True
+    affiliation = str(item.get("affiliation") or "")
+    series = str(item.get("series_name") or "")
+    return any(token in affiliation or token in series for token in ("단간론파", "주술회전", "헌터헌터", "프리렌", "최애의아이", "나의 히어로"))
+
+
+def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, Any]:
+    rows = [item for item in items if is_animation_goods(item)]
+    by_category = Counter(str(item.get("category") or "미분류") for item in rows)
+    by_family = Counter(category_family(str(item.get("category") or "")) for item in rows)
+    by_store_category = Counter(
+        (str(item.get("source_store") or ""), str(item.get("category") or "미분류")) for item in rows
+    )
+    missing_image_by_category = Counter(
+        str(item.get("category") or "미분류") for item in rows if not present(item.get("image_url"))
+    )
+    missing_source_by_category = Counter(
+        str(item.get("category") or "미분류") for item in rows if not present(item.get("source_url"))
+    )
+    by_sub_series = Counter(str(item.get("sub_series") or "") for item in rows if present(item.get("sub_series")))
+
+    category_visuals = []
+    for category, count in by_category.most_common(120):
+        family = category_family(category)
+        visual = FAMILY_VISUALS.get(family, FAMILY_VISUALS["other"])
+        category_visuals.append(
+            {
+                "category": category,
+                "family": family,
+                "rows": count,
+                "recommended_icon_key": visual["icon_key"],
+                "recommended_color_hint": visual["color_hint"],
+                "recommended_color_hex": visual["color_hex"],
+            }
+        )
+
+    suggestions = []
+    for category, canonical in CANONICAL_CATEGORY_SUGGESTIONS.items():
+        affected = [item for item in rows if item.get("category") == category]
+        if not affected:
+            continue
+        suggestions.append(
+            {
+                "category": category,
+                "suggested_category": canonical,
+                "rows": len(affected),
+                "risk": "medium",
+                "reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+                "sample_names": [item.get("name_ko") for item in affected[:8]],
+            }
+        )
+
+    unknown_categories = [
+        {"category": category, "rows": count}
+        for category, count in by_category.most_common()
+        if category_family(category) == "other"
+    ]
+
+    return {
+        "schema_version": 1,
+        "summary": {
+            "animation_goods_rows": len(rows),
+            "category_count": len(by_category),
+            "unknown_category_count": len(unknown_categories),
+            "normalization_suggestion_count": len(suggestions),
+            "missing_image_rows": sum(1 for item in rows if not present(item.get("image_url"))),
+            "missing_source_url_rows": sum(1 for item in rows if not present(item.get("source_url"))),
+        },
+        "category_families": counter_rows(by_family, ("family",), 40),
+        "categories": counter_rows(by_category, ("category",), 120),
+        "category_visuals": category_visuals,
+        "top_store_categories": counter_rows(by_store_category, ("source_store", "category"), 120),
+        "missing_image_by_category": counter_rows(missing_image_by_category, ("category",), 60),
+        "missing_source_url_by_category": counter_rows(missing_source_by_category, ("category",), 60),
+        "top_sub_series": counter_rows(by_sub_series, ("sub_series",), 80),
+        "normalization_suggestions": suggestions,
+        "unknown_categories": unknown_categories[:80],
+        "automation_policy": {
+            "auto_apply_category_changes": False,
+            "requires_manual_review": True,
+            "reason": "Category changes affect app navigation and folder semantics; this public report is a review queue.",
+        },
+    }
+
+
 def validate_public_files(paths: list[Path]) -> list[str]:
     findings: list[str] = []
     for path in paths:
@@ -361,6 +525,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     generated_at = now_utc()
     source_discovery = build_source_discovery_public(items)
     deduplication = build_deduplication_public(items)
+    animation_categories = build_animation_categories_public(items)
 
     public_meta = load_json(PUBLIC_META, {})
     public_meta.update(
@@ -442,6 +607,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{DEDUPLICATION.name}",
             **deduplication["summary"],
         }
+        target["animation_category_review"] = {
+            "public_report": f"data/{ANIMATION_CATEGORIES.name}",
+            **animation_categories["summary"],
+        }
 
     public_files = [
         PUBLIC_CATALOG,
@@ -450,6 +619,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         IMAGE_BACKLOG,
         IMAGE_CANDIDATES,
         DEDUPLICATION,
+        ANIMATION_CATEGORIES,
         GOTOUCHI,
         REQUESTED,
         GENERIC_SOURCE,
@@ -463,6 +633,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     if write:
         write_json(SOURCE_DISCOVERY, source_discovery)
         write_json(DEDUPLICATION, deduplication)
+        write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(PUBLIC_META, public_meta)
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)
@@ -480,6 +651,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
+            str(ANIMATION_CATEGORIES.relative_to(ROOT)),
         ],
     }
 
