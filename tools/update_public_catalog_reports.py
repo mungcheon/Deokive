@@ -728,9 +728,10 @@ def build_operations_public(
             "priority": 50,
             "workstream": "ichiban_kuji_history",
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+            "campaign_metadata_review_queue_rows": kuji_summary.get("campaign_metadata_review_queue_rows", 0),
             "missing_release_date_campaign_groups": kuji_summary.get("missing_release_date_campaign_groups", 0),
             "missing_price_campaign_groups": kuji_summary.get("missing_official_price_jpy_campaign_groups", 0),
-            "recommended_next_action": "Verify official campaign pages before applying inferred dates or prices.",
+            "recommended_next_action": "Use campaign_metadata_review_queue to verify official pages before applying dates or prices.",
         },
         {
             "priority": 60,
@@ -1632,6 +1633,42 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
 
     missing_release_groups = grouped_item_backlog(missing_release)
     missing_price_groups = grouped_item_backlog(missing_price)
+    campaign_metadata_review_by_key: dict[str, dict[str, Any]] = {}
+
+    def merge_campaign_metadata_review(groups: list[dict[str, Any]], field: str, priority: int) -> None:
+        for group in groups:
+            key = str(group.get("group_key") or "")
+            if key not in campaign_metadata_review_by_key:
+                campaign_metadata_review_by_key[key] = {
+                    "group_key": key,
+                    "url": group.get("url"),
+                    "slug": group.get("slug"),
+                    "title": group.get("title"),
+                    "release_date": group.get("release_date"),
+                    "catalog_item_rows": group.get("catalog_item_rows", 0),
+                    "missing_fields": [],
+                    "review_priority": priority,
+                    "sample_catalog_indexes": group.get("sample_catalog_indexes", []),
+                    "sample_names": group.get("sample_names", []),
+                    "source_evidence_required": "official_1kuji_campaign_page",
+                    "recommended_action": "Verify official campaign page before applying missing campaign metadata.",
+                }
+            row = campaign_metadata_review_by_key[key]
+            if field not in row["missing_fields"]:
+                row["missing_fields"].append(field)
+            row["review_priority"] = min(int(row.get("review_priority") or priority), priority)
+
+    merge_campaign_metadata_review(missing_release_groups, "release_date", 10)
+    merge_campaign_metadata_review(missing_price_groups, "official_price_jpy", 20)
+    campaign_metadata_review_queue = sorted(
+        campaign_metadata_review_by_key.values(),
+        key=lambda row: (
+            int(row.get("review_priority") or 99),
+            -len(row.get("missing_fields") or []),
+            -int(row.get("catalog_item_rows") or 0),
+            str(row.get("slug") or row.get("group_key") or ""),
+        ),
+    )
 
     latest_campaigns = sorted(
         campaign_rows,
@@ -1650,6 +1687,7 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
             "missing_release_date_campaign_groups": len(missing_release_groups),
             "missing_official_price_jpy_rows": len(missing_price),
             "missing_official_price_jpy_campaign_groups": len(missing_price_groups),
+            "campaign_metadata_review_queue_rows": len(campaign_metadata_review_queue),
             "image_coverage": round(
                 (len(kuji_items) - sum(1 for item in kuji_items if not present(item.get("image_url")))) / len(kuji_items),
                 4,
@@ -1700,6 +1738,7 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
         ],
         "missing_release_date_campaigns": missing_release_groups,
         "missing_official_price_jpy_campaigns": missing_price_groups,
+        "campaign_metadata_review_queue": campaign_metadata_review_queue[:120],
         "automation_policy": {
             "auto_import_campaigns": False,
             "requires_manual_review": True,
@@ -1825,6 +1864,29 @@ def validate_report_consistency(
         missing_taxonomy_fields = required_taxonomy_fields - set(row)
         if missing_taxonomy_fields:
             findings.append(f"animation taxonomy row missing fields: {sorted(missing_taxonomy_fields)}")
+
+    campaign_metadata_review_queue = ichiban_kuji_history.get("campaign_metadata_review_queue", [])
+    if kuji_summary.get("campaign_metadata_review_queue_rows") != len(campaign_metadata_review_queue):
+        findings.append("ichiban_kuji_history.campaign_metadata_review_queue_rows does not match queue")
+    for row in campaign_metadata_review_queue:
+        if not isinstance(row, dict):
+            findings.append("ichiban_kuji_history.campaign_metadata_review_queue contains non-object row")
+            continue
+        required_campaign_fields = {
+            "group_key",
+            "slug",
+            "title",
+            "catalog_item_rows",
+            "missing_fields",
+            "review_priority",
+            "source_evidence_required",
+            "recommended_action",
+        }
+        missing_campaign_fields = required_campaign_fields - set(row)
+        if missing_campaign_fields:
+            findings.append(f"ichiban metadata review row missing fields: {sorted(missing_campaign_fields)}")
+        if not isinstance(row.get("missing_fields"), list) or not row.get("missing_fields"):
+            findings.append("ichiban metadata review row has no missing_fields")
 
     store_matrix = operations.get("store_priority_matrix", [])
     if store_matrix:
