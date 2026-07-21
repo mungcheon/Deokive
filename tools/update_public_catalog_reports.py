@@ -1347,6 +1347,7 @@ def validate_report_consistency(
     animation_categories: dict[str, Any],
     ichiban_kuji_history: dict[str, Any],
     operations: dict[str, Any],
+    agent_work_queue: dict[str, Any],
 ) -> list[str]:
     findings: list[str] = []
     source_summary = source_discovery["summary"]
@@ -1357,6 +1358,8 @@ def validate_report_consistency(
     kuji_summary = ichiban_kuji_history["summary"]
     operations_summary = operations["summary"]
     open_queues = operations_summary["open_review_queues"]
+    agent_summary = agent_work_queue["summary"]
+    batches = agent_work_queue.get("batches", [])
 
     expected_missing = {
         "source_url": missing["source_url"],
@@ -1405,6 +1408,58 @@ def validate_report_consistency(
             findings.append("operations.store_priority_matrix is not sorted by descending priority_score")
         if operations_summary.get("top_store_priority_score") != store_matrix[0].get("priority_score"):
             findings.append("operations.top_store_priority_score does not match first store priority")
+
+    if agent_summary.get("open_review_queues") != expected_open_queues:
+        findings.append("agent_work_queue.open_review_queues does not match source report summaries")
+    if agent_summary.get("batch_count") != len(batches):
+        findings.append("agent_work_queue.batch_count does not match published batches")
+    if agent_summary.get("summed_batch_rows") != sum(int(batch.get("rows", 0)) for batch in batches):
+        findings.append("agent_work_queue.summed_batch_rows does not match published batches")
+    if agent_summary.get("by_workstream") != Counter(str(batch.get("workstream") or "") for batch in batches).most_common():
+        findings.append("agent_work_queue.by_workstream does not match published batches")
+    if agent_summary.get("by_agent") != Counter(str(batch.get("agent_id") or "") for batch in batches).most_common():
+        findings.append("agent_work_queue.by_agent does not match published batches")
+    batch_priorities = [int(batch.get("priority", 999)) for batch in batches]
+    if batch_priorities != sorted(batch_priorities):
+        findings.append("agent_work_queue.batches are not sorted by ascending priority")
+    seen_batch_ids: set[str] = set()
+    allowed_reports = {
+        f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
+        f"data/{SOURCE_DISCOVERY.name}",
+        f"data/{METADATA_BACKLOG.name}",
+        f"data/{DEDUPLICATION.name}",
+        f"data/{ANIMATION_CATEGORIES.name}",
+        f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+    }
+    required_batch_fields = {
+        "batch_id",
+        "agent_id",
+        "workstream",
+        "priority",
+        "title",
+        "public_report",
+        "rows",
+        "recommended_action",
+        "acceptance_criteria",
+        "sample_items",
+    }
+    for batch in batches:
+        missing_fields = required_batch_fields - set(batch)
+        if missing_fields:
+            findings.append(f"agent_work_queue batch missing fields: {sorted(missing_fields)}")
+            continue
+        batch_id = str(batch.get("batch_id") or "")
+        if batch_id in seen_batch_ids:
+            findings.append(f"agent_work_queue duplicate batch_id: {batch_id}")
+        seen_batch_ids.add(batch_id)
+        if batch.get("public_report") not in allowed_reports:
+            findings.append(f"agent_work_queue has unsupported public_report: {batch.get('public_report')}")
+        if int(batch.get("rows") or 0) <= 0:
+            findings.append(f"agent_work_queue batch has non-positive rows: {batch_id}")
+        if not isinstance(batch.get("acceptance_criteria"), list) or not batch.get("acceptance_criteria"):
+            findings.append(f"agent_work_queue batch missing acceptance criteria: {batch_id}")
+        if not isinstance(batch.get("sample_items"), list):
+            findings.append(f"agent_work_queue batch sample_items is not a list: {batch_id}")
 
     return findings
 
@@ -1564,6 +1619,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_categories,
         ichiban_kuji_history,
         operations,
+        agent_work_queue,
     )
     if consistency_findings:
         raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))
