@@ -27,6 +27,7 @@ Future<bool> showCatalogGoodsImportFlow(
   final entry = await showGoodsCatalogPicker(
     context,
     catalog: appState.curatedCatalogEntries,
+    ownedCountBuilder: (entry) => _ownedCountForCatalogEntry(appState, entry),
     actionLabel: '추가',
   );
   if (entry == null || !context.mounted) return false;
@@ -113,7 +114,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
   AppState appState, {
   FolderItem? initialFolder,
 }) async {
-  final folders = appState.owningFolders;
+  final folders = _sortedImportTargetFolders(appState, initialFolder);
   if (folders.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('먼저 굿즈를 담을 폴더를 만들어 주세요.')),
@@ -121,7 +122,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
     return null;
   }
 
-  String selectedId = initialFolder?.id ?? folders.first.id;
+  String selectedId = folders.first.id;
 
   return showModalBottomSheet<FolderItem>(
     context: context,
@@ -261,6 +262,54 @@ GoodsItem _goodsItemFromCatalogEntry({
     imageBytesList: imageBytes == null ? const [] : [imageBytes],
     isFavorite: false,
   );
+}
+
+List<FolderItem> _sortedImportTargetFolders(
+  AppState appState,
+  FolderItem? initialFolder,
+) {
+  final source = appState.owningFolders;
+  if (source.isEmpty) return const [];
+
+  final originalIndexById = <String, int>{};
+  for (var index = 0; index < source.length; index++) {
+    originalIndexById[source[index].id] = index;
+  }
+
+  return [...source]..sort((a, b) {
+      if (initialFolder != null) {
+        if (a.id == initialFolder.id && b.id != initialFolder.id) return -1;
+        if (b.id == initialFolder.id && a.id != initialFolder.id) return 1;
+      }
+
+      final aTopLevel = a.parentId == null ? 0 : 1;
+      final bTopLevel = b.parentId == null ? 0 : 1;
+      if (aTopLevel != bTopLevel) {
+        return aTopLevel.compareTo(bTopLevel);
+      }
+
+      final aGroup = a.isGroup ? 1 : 0;
+      final bGroup = b.isGroup ? 1 : 0;
+      if (aGroup != bGroup) return aGroup.compareTo(bGroup);
+
+      return (originalIndexById[a.id] ?? 0)
+          .compareTo(originalIndexById[b.id] ?? 0);
+    });
+}
+
+int _ownedCountForCatalogEntry(AppState appState, GoodsCatalogEntry entry) {
+  final catalogName = entry.nameKo.trim();
+  final catalogBarcode = entry.barcode?.trim() ?? '';
+  var count = 0;
+
+  for (final item in appState.goodsItems) {
+    final sameName = catalogName.isNotEmpty && item.name.trim() == catalogName;
+    final sameBarcode = catalogBarcode.isNotEmpty &&
+        (item.barcode?.trim() ?? '') == catalogBarcode;
+    if (sameName || sameBarcode) count += item.quantity;
+  }
+
+  return count;
 }
 
 DateTime? _parseCatalogReleaseDate(String? raw) {

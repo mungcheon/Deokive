@@ -73,6 +73,7 @@ Future<GoodsCatalogEntry?> showGoodsCatalogPicker(
   BuildContext context, {
   required List<GoodsCatalogEntry> catalog,
   String initialQuery = '',
+  int Function(GoodsCatalogEntry entry)? ownedCountBuilder,
   String actionLabel = '선택',
 }) {
   return showDialog<GoodsCatalogEntry>(
@@ -81,6 +82,7 @@ Future<GoodsCatalogEntry?> showGoodsCatalogPicker(
       catalog: catalog,
       initialQuery: initialQuery,
       actionLabel: actionLabel,
+      ownedCountBuilder: ownedCountBuilder,
     ),
   );
 }
@@ -91,11 +93,13 @@ class _GoodsCatalogPickerDialog extends StatefulWidget {
   final List<GoodsCatalogEntry> catalog;
   final String initialQuery;
   final String actionLabel;
+  final int Function(GoodsCatalogEntry entry)? ownedCountBuilder;
 
   const _GoodsCatalogPickerDialog({
     required this.catalog,
     required this.initialQuery,
     required this.actionLabel,
+    this.ownedCountBuilder,
   });
 
   @override
@@ -235,6 +239,8 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
                           itemBuilder: (context, i) => _CatalogRow(
                             entry: results[i],
                             actionLabel: widget.actionLabel,
+                            ownedCount:
+                                widget.ownedCountBuilder?.call(results[i]) ?? 0,
                           ),
                         ),
             ),
@@ -273,10 +279,12 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
 class _CatalogRow extends StatelessWidget {
   final GoodsCatalogEntry entry;
   final String actionLabel;
+  final int ownedCount;
 
   const _CatalogRow({
     required this.entry,
     required this.actionLabel,
+    required this.ownedCount,
   });
 
   @override
@@ -335,6 +343,28 @@ class _CatalogRow extends StatelessWidget {
                         fontSize: 11,
                         color:
                             theme.colorScheme.onSurface.withValues(alpha: 0.45),
+                      ),
+                    ),
+                  ],
+                  if (ownedCount > 0) ...[
+                    const SizedBox(height: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color:
+                            theme.colorScheme.primary.withValues(alpha: 0.10),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Text(
+                        '이미 $ownedCount개 보유 중',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w800,
+                          color: theme.colorScheme.primary,
+                        ),
                       ),
                     ),
                   ],
