@@ -1174,6 +1174,52 @@ def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int =
         for key in dedupe_keys(item):
             key_to_indices.setdefault(key, []).append(index)
 
+    def dedupe_review_metadata(key_type: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
+        categories = {str(row.get("category") or "") for row in rows if row.get("category")}
+        stores = {str(row.get("source_store") or "") for row in rows if row.get("source_store")}
+        image_urls = {str(row.get("image_url") or "") for row in rows if row.get("image_url")}
+        source_urls = {str(row.get("source_url") or "") for row in rows if row.get("source_url")}
+        barcodes = {str(row.get("barcode") or "") for row in rows if row.get("barcode")}
+        evidence: list[str] = [key_type]
+        if len(barcodes) == 1 and barcodes:
+            evidence.append("same_barcode")
+        if len(source_urls) == 1 and source_urls:
+            evidence.append("same_source_url")
+        if len(image_urls) == 1 and image_urls:
+            evidence.append("same_image_url")
+        if len(categories) > 1:
+            evidence.append("category_mismatch")
+        if len(stores) > 1:
+            evidence.append("multi_store")
+
+        if "category_mismatch" in evidence:
+            review_risk = "variant_risk_review"
+            recommended_action = "Compare product type/category before any merge; preserve variants if category is truly different."
+            review_priority = 40
+        elif key_type == "barcode" and "same_barcode" in evidence:
+            review_risk = "strong_identity_review"
+            recommended_action = "Verify names/images match the same product, then prefer the richer official row as keep."
+            review_priority = 10
+        elif key_type.startswith("source_url") and "same_source_url" in evidence:
+            review_risk = "source_identity_review"
+            recommended_action = "Verify rows point to the same product detail page before merge."
+            review_priority = 20
+        elif key_type.startswith("image_url") and "same_image_url" in evidence:
+            review_risk = "image_identity_review"
+            recommended_action = "Check that the shared image is not a reused lineup/placeholder image before merge."
+            review_priority = 30
+        else:
+            review_risk = "manual_identity_review"
+            recommended_action = "Review all evidence manually before proposing keep/drop."
+            review_priority = 50
+
+        return {
+            "review_priority": review_priority,
+            "review_risk": review_risk,
+            "evidence": evidence,
+            "recommended_action": recommended_action,
+        }
+
     seen_groups: set[tuple[int, ...]] = set()
     groups: list[dict[str, Any]] = []
     duplicate_rows: set[int] = set()
@@ -1191,33 +1237,38 @@ def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int =
         keep = max(unique_indices, key=lambda idx: (row_richness(items[idx]), -idx))
         drops = [idx for idx in unique_indices if idx != keep]
         duplicate_rows.update(drops)
+        group_rows = [
+            {
+                "catalog_index": item.get("catalog_index", idx),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "source_store": item.get("source_store"),
+                "category": item.get("category"),
+                "barcode": item.get("barcode"),
+                "source_url": item.get("source_url"),
+                "image_url": item.get("image_url"),
+                "richness": row_richness(item),
+            }
+            for idx in unique_indices
+            for item in [items[idx]]
+        ]
+        review_metadata = dedupe_review_metadata(key[0], group_rows)
         groups.append(
             {
                 "key_type": key[0],
                 "key": key[1],
                 "keep_catalog_index": items[keep].get("catalog_index", keep),
                 "drop_catalog_indexes": [items[idx].get("catalog_index", idx) for idx in drops],
-                "rows": [
-                    {
-                        "catalog_index": item.get("catalog_index", idx),
-                        "name_ko": item.get("name_ko"),
-                        "name_ja": item.get("name_ja"),
-                        "source_store": item.get("source_store"),
-                        "category": item.get("category"),
-                        "barcode": item.get("barcode"),
-                        "source_url": item.get("source_url"),
-                        "image_url": item.get("image_url"),
-                        "richness": row_richness(item),
-                    }
-                    for idx in unique_indices
-                    for item in [items[idx]]
-                ],
+                **review_metadata,
+                "rows": group_rows,
             }
         )
 
     by_key_type = Counter(group["key_type"] for group in groups)
+    by_review_risk = Counter(group["review_risk"] for group in groups)
     groups.sort(
         key=lambda group: (
+            int(group.get("review_priority") or 99),
             DEDUPLICATION_KEY_PRIORITY.get(str(group.get("key_type")), 99),
             -len(group.get("rows") or []),
             str(group.get("key") or ""),
@@ -1231,6 +1282,8 @@ def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int =
             "duplicate_rows": len(duplicate_rows),
             "published_groups": min(sample_groups, len(groups)),
             "by_key_type": by_key_type.most_common(),
+            "by_review_risk": by_review_risk.most_common(),
+            "top_review_risk": groups[0]["review_risk"] if groups else None,
         },
         "automation_policy": {
             "auto_delete": False,
