@@ -27,6 +27,7 @@ GENERIC_SOURCE = DATA / "generic_source_cleanup_public.json"
 SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
 SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
+IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 
 OFFICIAL_SEARCH_TEMPLATES = {
     "애니메이트": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
@@ -374,6 +375,82 @@ def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: in
             "Public backlog grouped by missing field and source store.",
             "Use this before source/image crawling so agents work on the largest safe gaps first.",
             "Do not infer dates, prices, barcodes, or names without official or trusted source evidence.",
+        ],
+        "groups": groups,
+    }
+
+
+def image_workflow(item: dict[str, Any]) -> str:
+    if present(item.get("source_url")):
+        return "extract_from_existing_source_url"
+    if str(item.get("source_store") or "") in OFFICIAL_SEARCH_TEMPLATES:
+        return "find_source_then_extract_image"
+    return "manual_image_research"
+
+
+def build_image_enrichment_batches_public(
+    items: list[dict[str, Any]], sample_groups: int = 80, sample_items: int = 10
+) -> dict[str, Any]:
+    missing = [item for item in items if not present(item.get("image_url"))]
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for item in missing:
+        grouped[(image_workflow(item), str(item.get("source_store") or "unknown"))].append(item)
+
+    workflow_priority = {
+        "extract_from_existing_source_url": 10,
+        "find_source_then_extract_image": 20,
+        "manual_image_research": 40,
+    }
+    groups: list[dict[str, Any]] = []
+    for (workflow, store), group_items in sorted(
+        grouped.items(),
+        key=lambda pair: (workflow_priority.get(pair[0][0], 99), -len(pair[1]), pair[0][1]),
+    )[:sample_groups]:
+        samples = group_items[:sample_items]
+        groups.append(
+            {
+                "workflow": workflow,
+                "source_store": store,
+                "missing_image_rows": len(group_items),
+                "priority": workflow_priority.get(workflow, 99),
+                "recommended_action": {
+                    "extract_from_existing_source_url": "crawl verified source_url and review extracted product image",
+                    "find_source_then_extract_image": "find exact official product page, then attach source_url and image_url",
+                    "manual_image_research": "manual web research with source verification required",
+                }.get(workflow, "manual review required"),
+                "official_search_available": store in OFFICIAL_SEARCH_TEMPLATES,
+                "sample_items": [
+                    {
+                        "catalog_index": item.get("catalog_index"),
+                        "name_ko": item.get("name_ko"),
+                        "name_ja": item.get("name_ja"),
+                        "series_name": item.get("series_name"),
+                        "category": item.get("category"),
+                        "source_url": item.get("source_url"),
+                        "official_search_url": discovery_search_url(item, discovery_query(item)),
+                    }
+                    for item in samples
+                ],
+            }
+        )
+
+    by_workflow = Counter(image_workflow(item) for item in missing)
+    by_store = Counter(str(item.get("source_store") or "unknown") for item in missing)
+    return {
+        "schema_version": 1,
+        "summary": {
+            "missing_image_rows": len(missing),
+            "source_url_ready_rows": by_workflow.get("extract_from_existing_source_url", 0),
+            "needs_source_discovery_rows": by_workflow.get("find_source_then_extract_image", 0),
+            "manual_image_research_rows": by_workflow.get("manual_image_research", 0),
+            "published_group_rows": len(groups),
+            "top_source_stores": by_store.most_common(30),
+            "by_workflow": by_workflow.most_common(),
+        },
+        "instructions": [
+            "Public image enrichment batches grouped by readiness and source store.",
+            "Rows with source_url should be attempted first because identity evidence already exists.",
+            "Rows without source_url must attach an exact source URL before image_url is imported.",
         ],
         "groups": groups,
     }
@@ -791,6 +868,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     generated_at = now_utc()
     source_discovery = build_source_discovery_public(items)
     metadata_backlog = build_metadata_backlog_public(items)
+    image_enrichment_batches = build_image_enrichment_batches_public(items)
     deduplication = build_deduplication_public(items)
     animation_categories = build_animation_categories_public(items)
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
@@ -875,6 +953,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{METADATA_BACKLOG.name}",
             **metadata_backlog["summary"],
         }
+        target["image_enrichment_batches"] = {
+            "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
+            **image_enrichment_batches["summary"],
+        }
         target["deduplication_review"] = {
             "public_report": f"data/{DEDUPLICATION.name}",
             **deduplication["summary"],
@@ -903,6 +985,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         SOURCE_DETAIL,
         SOURCE_DISCOVERY,
         METADATA_BACKLOG,
+        IMAGE_ENRICHMENT_BATCHES,
     ]
     findings = validate_public_files([path for path in public_files if path.exists()])
     if findings:
@@ -911,6 +994,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     if write:
         write_json(SOURCE_DISCOVERY, source_discovery)
         write_json(METADATA_BACKLOG, metadata_backlog)
+        write_json(IMAGE_ENRICHMENT_BATCHES, image_enrichment_batches)
         write_json(DEDUPLICATION, deduplication)
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
@@ -931,6 +1015,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
+            str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
