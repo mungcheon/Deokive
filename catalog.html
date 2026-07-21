@@ -10,7 +10,7 @@
     :root {
       color-scheme: light;
       --bg: #fff2f7;
-      --surface: rgba(255, 255, 255, 0.86);
+      --surface: rgba(255, 255, 255, 0.88);
       --surface-strong: #ffffff;
       --ink: #2c2430;
       --muted: #806b78;
@@ -18,14 +18,10 @@
       --pink: #ff63a7;
       --pink-dark: #c64c84;
       --mint: #2db9a3;
-      --blue: #4e78ff;
-      --yellow: #f7c948;
       --shadow: 0 18px 50px rgba(198, 76, 132, 0.16);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html,
     body {
@@ -118,8 +114,13 @@
     .hero {
       display: grid;
       gap: 14px;
-      grid-template-columns: minmax(0, 1fr) 340px;
+      grid-template-columns: minmax(0, 1fr) 360px;
       margin-top: 24px;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 14px;
     }
 
     .panel {
@@ -178,13 +179,78 @@
       margin-top: 8px;
     }
 
+    .collection,
     .insight {
       padding: 18px;
     }
 
+    .collection h3,
     .insight h3 {
       font-size: 15px;
       margin: 0 0 12px;
+    }
+
+    .collection-copy {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: -2px 0 14px;
+    }
+
+    .folder-row {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr auto;
+    }
+
+    .folder-row select,
+    .folder-row button,
+    .collection-actions button {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      min-height: 42px;
+    }
+
+    .folder-row select {
+      background: #fff;
+      color: var(--ink);
+      min-width: 0;
+      padding: 0 11px;
+    }
+
+    .folder-row button,
+    .collection-actions button {
+      background: var(--pink);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 900;
+      padding: 0 13px;
+    }
+
+    .collection-actions {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 10px;
+    }
+
+    .collection-actions button.secondary {
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--pink-dark);
+    }
+
+    .owned-summary {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 126, 178, 0.18);
+      border-radius: 16px;
+      color: var(--muted);
+      display: flex;
+      font-size: 12px;
+      font-weight: 850;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding: 11px 12px;
     }
 
     .bar {
@@ -232,7 +298,7 @@
     .field,
     .select {
       align-items: center;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.92);
       border: 1px solid var(--line);
       border-radius: 18px;
       display: flex;
@@ -363,21 +429,39 @@
       margin-top: auto;
     }
 
-    .source {
-      align-items: center;
+    .card-actions {
       border-top: 1px solid rgba(255, 126, 178, 0.16);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .source,
+    .add-owned {
+      align-items: center;
+      background: transparent;
+      border: 0;
       color: var(--pink-dark);
       display: flex;
       font-size: 12px;
-      font-weight: 850;
-      justify-content: space-between;
-      padding: 11px 13px 13px;
+      font-weight: 900;
+      justify-content: center;
+      min-height: 44px;
+      padding: 11px 10px 13px;
       text-decoration: none;
     }
 
     .source[aria-disabled="true"] {
       color: rgba(128, 107, 120, 0.65);
       pointer-events: none;
+    }
+
+    .add-owned {
+      border-left: 1px solid rgba(255, 126, 178, 0.16);
+      cursor: pointer;
+    }
+
+    .add-owned.added {
+      color: var(--mint);
     }
 
     .more {
@@ -421,6 +505,30 @@
       border-radius: 999px;
       height: 24px;
       width: 24px;
+    }
+
+    .toast {
+      background: rgba(44, 36, 48, 0.92);
+      border-radius: 999px;
+      bottom: calc(18px + env(safe-area-inset-bottom));
+      box-shadow: 0 14px 34px rgba(44, 36, 48, 0.2);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 850;
+      left: 50%;
+      max-width: calc(100% - 28px);
+      opacity: 0;
+      padding: 12px 16px;
+      pointer-events: none;
+      position: fixed;
+      transform: translate(-50%, 12px);
+      transition: opacity 180ms ease, transform 180ms ease;
+      z-index: 20;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
     }
 
     @keyframes spin {
@@ -478,6 +586,15 @@
       .name {
         font-size: 13px;
       }
+
+      .card-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .add-owned {
+        border-left: 0;
+        border-top: 1px solid rgba(255, 126, 178, 0.16);
+      }
     }
   </style>
 </head>
@@ -496,19 +613,37 @@
 
     <section class="hero">
       <div class="panel summary">
-        <h2>굿즈 DB를 빠르게 찾고 확인해요</h2>
-        <p>GitHub Pages에 공개된 카탈로그 스냅샷입니다. 개인 폴더, 메모, 계정, 기기 정보는 포함하지 않고 상품 식별에 필요한 공개 정보만 보여줍니다.</p>
+        <h2>굿즈 DB를 빠르게 찾고 내 보유 목록에 담아요</h2>
+        <p>GitHub Pages에 공개된 카탈로그 목록입니다. 개인 폴더, 메모, 계정, 기기 정보는 포함하지 않고 상품 공개 정보만 보여줍니다.</p>
         <div class="stats" aria-label="카탈로그 통계">
           <div class="stat"><b id="statRows">-</b><span>전체 굿즈</span></div>
           <div class="stat"><b id="statImages">-</b><span>이미지 있음</span></div>
           <div class="stat"><b id="statSources">-</b><span>출처 있음</span></div>
-          <div class="stat"><b id="statStores">-</b><span>스토어 수</span></div>
+          <div class="stat"><b id="statStores">-</b><span>스토어</span></div>
         </div>
       </div>
-      <aside class="panel insight">
-        <h3>많은 카테고리</h3>
-        <div id="categoryBars"></div>
-      </aside>
+      <div class="side-stack">
+        <aside class="panel collection">
+          <h3>내 보유 굿즈로 추가</h3>
+          <p class="collection-copy">검색 결과의 추가 버튼을 누르면 선택한 폴더에 개인 보유 굿즈로 저장돼요. 이 정보는 이 기기에만 남습니다.</p>
+          <div class="folder-row">
+            <select id="ownedFolder" aria-label="추가할 폴더"></select>
+            <button id="newFolder" type="button">폴더</button>
+          </div>
+          <div class="collection-actions">
+            <button id="openOwned" class="secondary" type="button">보유 목록</button>
+            <button id="clearOwned" class="secondary" type="button">초기화</button>
+          </div>
+          <div class="owned-summary">
+            <span>저장된 굿즈</span>
+            <strong id="ownedCount">0개</strong>
+          </div>
+        </aside>
+        <aside class="panel insight">
+          <h3>많은 카테고리</h3>
+          <div id="categoryBars"></div>
+        </aside>
+      </div>
     </section>
 
     <section class="toolbar" aria-label="검색과 필터">
@@ -539,6 +674,7 @@
     </section>
     <button id="more" class="more" type="button" hidden>더 보기</button>
   </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
     const state = {
@@ -546,11 +682,16 @@
       filtered: [],
       visible: 80,
       meta: null,
+      owned: {
+        folders: [],
+        goods: [],
+      },
     };
 
     const $ = (id) => document.getElementById(id);
     const fmt = new Intl.NumberFormat('ko-KR');
     const collator = new Intl.Collator('ko-KR');
+    const ownedStorageKey = 'deokive_owned_goods_v1';
 
     function text(value) {
       return value == null ? '' : String(value);
@@ -583,6 +724,135 @@
       return [...map.entries()].sort((a, b) => b[1] - a[1] || collator.compare(a[0], b[0]));
     }
 
+    function loadOwned() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(ownedStorageKey) || '{}');
+        state.owned = {
+          folders: Array.isArray(parsed.folders) && parsed.folders.length
+            ? parsed.folders
+            : [{ id: 'top', name: '내 굿즈' }],
+          goods: Array.isArray(parsed.goods) ? parsed.goods : [],
+        };
+      } catch (_) {
+        state.owned = { folders: [{ id: 'top', name: '내 굿즈' }], goods: [] };
+      }
+      renderOwnedControls();
+    }
+
+    function saveOwned() {
+      localStorage.setItem(ownedStorageKey, JSON.stringify(state.owned));
+      renderOwnedControls();
+    }
+
+    function renderOwnedControls() {
+      const select = $('ownedFolder');
+      select.replaceChildren(...state.owned.folders.map((folder) => option(folder.name, folder.id)));
+      $('ownedCount').textContent = `${fmt.format(state.owned.goods.length)}개`;
+      if (state.items.length) renderResults();
+    }
+
+    function selectedFolder() {
+      const folderId = $('ownedFolder').value || state.owned.folders[0]?.id || 'top';
+      return state.owned.folders.find((folder) => folder.id === folderId) || state.owned.folders[0];
+    }
+
+    function ownedKeyFor(item) {
+      return text(item.catalog_index || item.barcode || item.name_ko || item.name_ja);
+    }
+
+    function isOwnedInSelectedFolder(item) {
+      const folder = selectedFolder();
+      if (!folder) return false;
+      const key = ownedKeyFor(item);
+      return state.owned.goods.some((owned) => owned.folderId === folder.id && owned.catalogKey === key);
+    }
+
+    function addOwned(item) {
+      const folder = selectedFolder();
+      if (!folder) return;
+      const key = ownedKeyFor(item);
+      const existing = state.owned.goods.find((owned) => owned.folderId === folder.id && owned.catalogKey === key);
+      if (existing) {
+        existing.quantity += 1;
+        existing.updatedAt = new Date().toISOString();
+        showToast(`${folder.name}에 이미 있어서 수량을 1 늘렸어요`);
+      } else {
+        state.owned.goods.unshift({
+          id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+          folderId: folder.id,
+          catalogKey: key,
+          quantity: 1,
+          addedAt: new Date().toISOString(),
+          item: {
+            catalog_index: item.catalog_index,
+            name_ko: item.name_ko,
+            name_ja: item.name_ja,
+            category: item.category,
+            character_name: item.character_name,
+            affiliation: item.affiliation,
+            series_name: item.series_name,
+            sub_series: item.sub_series,
+            official_price_jpy: item.official_price_jpy,
+            image_url: item.image_url,
+            source_url: item.source_url,
+            source_store: item.source_store,
+            release_date: item.release_date,
+            barcode: item.barcode,
+          },
+        });
+        showToast(`${folder.name}에 추가했어요`);
+      }
+      saveOwned();
+    }
+
+    function createFolder() {
+      const raw = prompt('새 폴더 이름을 입력해 주세요', '새 굿즈 폴더');
+      const name = (raw || '').trim();
+      if (!name) return;
+      const folder = {
+        id: `folder-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        name,
+      };
+      state.owned.folders.unshift(folder);
+      saveOwned();
+      $('ownedFolder').value = folder.id;
+      showToast(`${name} 폴더를 만들었어요`);
+    }
+
+    function showOwnedList() {
+      if (!state.owned.goods.length) {
+        showToast('아직 저장된 굿즈가 없어요');
+        return;
+      }
+      const folderNameById = new Map(state.owned.folders.map((folder) => [folder.id, folder.name]));
+      const lines = state.owned.goods.slice(0, 30).map((owned, index) => {
+        const name = owned.item?.name_ko || owned.item?.name_ja || '이름 없음';
+        const folder = folderNameById.get(owned.folderId) || '내 굿즈';
+        return `${index + 1}. [${folder}] ${name} x${owned.quantity}`;
+      });
+      alert(`${lines.join('\n')}${state.owned.goods.length > 30 ? '\n...' : ''}`);
+    }
+
+    function clearOwned() {
+      if (!state.owned.goods.length) {
+        showToast('초기화할 보유 굿즈가 없어요');
+        return;
+      }
+      if (!confirm('이 기기에 저장된 보유 굿즈 목록을 모두 지울까요?')) return;
+      state.owned.goods = [];
+      saveOwned();
+      showToast('보유 굿즈 목록을 비웠어요');
+    }
+
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = $('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
     function populateFilters() {
       const category = $('categoryFilter');
       const store = $('storeFilter');
@@ -613,7 +883,7 @@
       }));
 
       if (state.meta?.generated_at) {
-        $('updated').textContent = `마지막 공개 스냅샷 ${state.meta.generated_at.replace('T', ' ').replace('Z', ' UTC')}`;
+        $('updated').textContent = `마지막 공개 업데이트 ${state.meta.generated_at.replace('T', ' ').replace('Z', ' UTC')}`;
       }
     }
 
@@ -668,7 +938,7 @@
 
       if (!rows.length) {
         results.className = '';
-        results.innerHTML = '<div class="empty">조건에 맞는 굿즈가 없어요.</div>';
+        results.innerHTML = '<div class="empty">조건에 맞는 굿즈가 없어요</div>';
         return;
       }
 
@@ -684,6 +954,8 @@
       const name = item.name_ko || item.name_ja || item.name_en || '이름 없음';
       const secondName = item.name_ja && item.name_ja !== name ? item.name_ja : '';
       const sourceLabel = item.source_url ? '출처 열기' : '출처 없음';
+      const added = isOwnedInSelectedFolder(item);
+      const addLabel = added ? '추가됨' : '내 굿즈 추가';
       card.innerHTML = `
         <div class="thumb">
           <div class="badge">${escapeHtml(item.category || '미분류')}</div>
@@ -697,16 +969,19 @@
             <span>${escapeHtml([item.source_store, compactDate(item.release_date), price(item)].filter(Boolean).join(' · ') || '상세 정보 확인 필요')}</span>
           </div>
         </div>
-        <a class="source" href="${escapeAttr(item.source_url || '#')}" target="_blank" rel="noopener noreferrer" aria-disabled="${item.source_url ? 'false' : 'true'}">
-          <span>${sourceLabel}</span><span>↗</span>
-        </a>
+        <div class="card-actions">
+          <a class="source" href="${escapeAttr(item.source_url || '#')}" target="_blank" rel="noopener noreferrer" aria-disabled="${item.source_url ? 'false' : 'true'}">${sourceLabel}</a>
+          <button class="add-owned${added ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}">${addLabel}</button>
+        </div>
       `;
+      card.querySelector('.add-owned').addEventListener('click', () => addOwned(item));
       return card;
     }
 
     async function init() {
+      loadOwned();
       try {
-        const response = await fetch('data/catalog_public.json?v=925a48a', { cache: 'no-store' });
+        const response = await fetch('data/catalog_public.json?v=20260721-owned-add', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const payload = await response.json();
         state.meta = payload.meta || {};
@@ -730,6 +1005,10 @@
     $('categoryFilter').addEventListener('change', () => applyFilters(true));
     $('storeFilter').addEventListener('change', () => applyFilters(true));
     $('imageFilter').addEventListener('change', () => applyFilters(true));
+    $('ownedFolder').addEventListener('change', renderResults);
+    $('newFolder').addEventListener('click', createFolder);
+    $('openOwned').addEventListener('click', showOwnedList);
+    $('clearOwned').addEventListener('click', clearOwned);
     $('more').addEventListener('click', () => {
       state.visible += 80;
       renderResults();
