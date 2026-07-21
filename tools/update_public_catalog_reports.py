@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import urllib.parse
-from collections import Counter
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -547,6 +547,46 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
     missing_release = [item for item in kuji_items if not present(item.get("release_date"))]
     missing_price = [item for item in kuji_items if not present(item.get("official_price_jpy"))]
 
+    def item_group_key(item: dict[str, Any]) -> str:
+        url = str(item.get("source_url") or "").strip().rstrip("/")
+        if "1kuji.com/products/" in url:
+            return url
+        series = str(item.get("series_name") or "").strip()
+        if series:
+            return f"series:{series}"
+        return "unknown"
+
+    def grouped_item_backlog(backlog_items: list[dict[str, Any]], max_groups: int = 80) -> list[dict[str, Any]]:
+        grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        for item in backlog_items:
+            grouped[item_group_key(item)].append(item)
+
+        rows: list[dict[str, Any]] = []
+        for key, group_items in sorted(grouped.items(), key=lambda pair: (-len(pair[1]), pair[0]))[:max_groups]:
+            url = key if key.startswith("http") else ""
+            campaign = campaign_by_url.get(url, {})
+            sample_items = group_items[:8]
+            rows.append(
+                {
+                    "group_key": key,
+                    "url": url or None,
+                    "slug": campaign_slug(url),
+                    "title": campaign.get("title") or sample_items[0].get("series_name"),
+                    "release_date": campaign.get("release_date"),
+                    "catalog_item_rows": len(group_items),
+                    "sample_catalog_indexes": [item.get("catalog_index") for item in sample_items],
+                    "sample_names": [
+                        item.get("name_ko") or item.get("name_ja") or item.get("name_en")
+                        for item in sample_items
+                    ],
+                    "review_action": "verify campaign detail page before applying inferred metadata",
+                }
+            )
+        return rows
+
+    missing_release_groups = grouped_item_backlog(missing_release)
+    missing_price_groups = grouped_item_backlog(missing_price)
+
     latest_campaigns = sorted(
         campaign_rows,
         key=lambda row: str(row.get("release_date") or ""),
@@ -561,7 +601,9 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
             "campaigns_with_catalog_items": len(campaign_with_catalog_rows),
             "campaigns_without_catalog_items": len(missing_catalog_campaigns),
             "missing_release_date_rows": len(missing_release),
+            "missing_release_date_campaign_groups": len(missing_release_groups),
             "missing_official_price_jpy_rows": len(missing_price),
+            "missing_official_price_jpy_campaign_groups": len(missing_price_groups),
             "image_coverage": round(
                 (len(kuji_items) - sum(1 for item in kuji_items if not present(item.get("image_url")))) / len(kuji_items),
                 4,
@@ -610,6 +652,8 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
             }
             for item in missing_release[:80]
         ],
+        "missing_release_date_campaigns": missing_release_groups,
+        "missing_official_price_jpy_campaigns": missing_price_groups,
         "automation_policy": {
             "auto_import_campaigns": False,
             "requires_manual_review": True,
