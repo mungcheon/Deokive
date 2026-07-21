@@ -86,7 +86,9 @@ DISCOVERY_PRIORITY = {
 DEDUPLICATION_KEY_PRIORITY = {
     "barcode": 10,
     "source_url": 20,
+    "source_url_normalized_name": 25,
     "image_url": 30,
+    "image_url_normalized_name": 35,
 }
 
 ANIMATION_STORES = {
@@ -381,6 +383,16 @@ def normalize_text_key(value: Any) -> str:
     return str(value or "").strip().lower()
 
 
+def normalize_dedupe_name(value: Any) -> str:
+    text = normalize_text_key(value)
+    drop_chars = " \t\r\n-_/\\.,，、・:：;；'\"`´[](){}<>【】「」『』（）［］〈〉《》"
+    return "".join(char for char in text if char not in drop_chars)
+
+
+def normalize_url_key(value: Any) -> str:
+    return normalize_text_key(value).rstrip("/")
+
+
 def row_richness(item: dict[str, Any]) -> int:
     return sum(1 for field in PUBLIC_FIELDS if present(item.get(field)))
 
@@ -388,16 +400,21 @@ def row_richness(item: dict[str, Any]) -> int:
 def dedupe_keys(item: dict[str, Any]) -> list[tuple[str, str]]:
     keys: list[tuple[str, str]] = []
     name = normalize_text_key(item.get("name_ja") or item.get("name_ko"))
+    normalized_name = normalize_dedupe_name(item.get("name_ja") or item.get("name_ko"))
     barcode = normalize_text_key(item.get("barcode"))
     if barcode:
         keys.append(("barcode", barcode))
-    source_url = normalize_text_key(item.get("source_url"))
+    source_url = normalize_url_key(item.get("source_url"))
     if source_url and len(name) >= 6:
         keys.append(("source_url", f"{source_url}|{name}"))
-    image_url = normalize_text_key(item.get("image_url"))
+    if source_url and len(normalized_name) >= 6 and normalized_name != name:
+        keys.append(("source_url_normalized_name", f"{source_url}|{normalized_name}"))
+    image_url = normalize_url_key(item.get("image_url"))
     if image_url:
         if len(name) >= 6:
             keys.append(("image_url", f"{image_url}|{name}"))
+        if len(normalized_name) >= 6 and normalized_name != name:
+            keys.append(("image_url_normalized_name", f"{image_url}|{normalized_name}"))
     return keys
 
 
@@ -469,6 +486,8 @@ def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int =
             "auto_delete": False,
             "requires_manual_review": True,
             "reason": "Shared barcode/source/image evidence can still represent variants; public report is a review queue only.",
+            "normalization": "Names are normalized only when barcode/source_url/image_url evidence is shared.",
+            "excluded": "Broad same-name matches across different campaign URLs are excluded because they often represent legitimate variants.",
         },
         "groups": groups[:sample_groups],
     }

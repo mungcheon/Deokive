@@ -23,7 +23,9 @@
   "automation_policy": {
     "auto_delete": false,
     "requires_manual_review": true,
-    "reason": "Shared barcode/source/image evidence can still represent variants; public report is a review queue only."
+    "reason": "Shared barcode/source/image evidence can still represent variants; public report is a review queue only.",
+    "normalization": "Names are normalized only when barcode/source_url/image_url evidence is shared.",
+    "excluded": "Broad same-name matches across different campaign URLs are excluded because they often represent legitimate variants."
   },
   "groups": [
     {
