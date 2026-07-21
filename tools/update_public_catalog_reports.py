@@ -1112,6 +1112,78 @@ def validate_public_files(paths: list[Path]) -> list[str]:
     return findings
 
 
+def validate_report_consistency(
+    rows: int,
+    missing: dict[str, int],
+    source_discovery: dict[str, Any],
+    metadata_backlog: dict[str, Any],
+    image_enrichment_batches: dict[str, Any],
+    deduplication: dict[str, Any],
+    animation_categories: dict[str, Any],
+    ichiban_kuji_history: dict[str, Any],
+    operations: dict[str, Any],
+) -> list[str]:
+    findings: list[str] = []
+    source_summary = source_discovery["summary"]
+    metadata_summary = metadata_backlog["summary"]
+    image_summary = image_enrichment_batches["summary"]
+    dedupe_summary = deduplication["summary"]
+    animation_summary = animation_categories["summary"]
+    kuji_summary = ichiban_kuji_history["summary"]
+    operations_summary = operations["summary"]
+    open_queues = operations_summary["open_review_queues"]
+
+    expected_missing = {
+        "source_url": missing["source_url"],
+        "image_url": missing["image_url"],
+        "release_date": missing["release_date"],
+        "official_price_jpy": missing["official_price_jpy"],
+        "barcode": missing["barcode"],
+        "name_ja": missing["name_ja"],
+    }
+    if operations_summary.get("catalog_rows") != rows:
+        findings.append("operations.catalog_rows does not match public catalog row count")
+    if operations_summary.get("missing") != expected_missing:
+        findings.append("operations.missing does not match generated missing counts")
+
+    field_totals = metadata_summary.get("field_missing_totals", {})
+    for field, expected in expected_missing.items():
+        if field_totals.get(field) != expected:
+            findings.append(f"metadata_backlog.field_missing_totals.{field} does not match missing counts")
+
+    if source_summary.get("source_discovery_rows") != missing["source_url"]:
+        findings.append("source_discovery_rows does not match missing source_url count")
+    if image_summary.get("missing_image_rows") != missing["image_url"]:
+        findings.append("image_enrichment missing_image_rows does not match missing image_url count")
+    image_workflow_total = sum(
+        int(image_summary.get(key, 0))
+        for key in ("source_url_ready_rows", "needs_source_discovery_rows", "manual_image_research_rows")
+    )
+    if image_workflow_total != image_summary.get("missing_image_rows"):
+        findings.append("image_enrichment workflow totals do not sum to missing_image_rows")
+
+    expected_open_queues = {
+        "source_discovery_rows": source_summary.get("source_discovery_rows", 0),
+        "image_missing_rows": image_summary.get("missing_image_rows", 0),
+        "dedupe_groups": dedupe_summary.get("duplicate_groups", 0),
+        "animation_unknown_categories": animation_summary.get("unknown_category_count", 0),
+        "ichiban_missing_release_date_rows": kuji_summary.get("missing_release_date_rows", 0),
+        "ichiban_missing_price_rows": kuji_summary.get("missing_official_price_jpy_rows", 0),
+    }
+    if open_queues != expected_open_queues:
+        findings.append("operations.open_review_queues does not match source report summaries")
+
+    store_matrix = operations.get("store_priority_matrix", [])
+    if store_matrix:
+        scores = [row.get("priority_score", 0) for row in store_matrix]
+        if scores != sorted(scores, reverse=True):
+            findings.append("operations.store_priority_matrix is not sorted by descending priority_score")
+        if operations_summary.get("top_store_priority_score") != store_matrix[0].get("priority_score"):
+            findings.append("operations.top_store_priority_score does not match first store priority")
+
+    return findings
+
+
 def update_reports(write: bool) -> dict[str, Any]:
     catalog = load_json(PUBLIC_CATALOG)
     if not isinstance(catalog, dict) or not isinstance(catalog.get("items"), list):
@@ -1242,6 +1314,20 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
         }
+
+    consistency_findings = validate_report_consistency(
+        rows,
+        missing,
+        source_discovery,
+        metadata_backlog,
+        image_enrichment_batches,
+        deduplication,
+        animation_categories,
+        ichiban_kuji_history,
+        operations,
+    )
+    if consistency_findings:
+        raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))
 
     public_files = [
         PUBLIC_CATALOG,

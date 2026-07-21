@@ -406,6 +406,26 @@
       padding: 0 13px;
     }
 
+    .folder-hint {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(255, 126, 178, 0.15);
+      border-radius: 14px;
+      color: var(--muted);
+      display: flex;
+      font-size: 11px;
+      font-weight: 850;
+      gap: 8px;
+      line-height: 1.45;
+      margin-top: 8px;
+      padding: 9px 11px;
+    }
+
+    .folder-hint b {
+      color: var(--pink-dark);
+      white-space: nowrap;
+    }
+
     .collection-actions {
       display: grid;
       gap: 8px;
@@ -1282,6 +1302,9 @@
             <select id="ownedFolder" aria-label="추가할 폴더"></select>
             <button id="newFolder" type="button">폴더</button>
           </div>
+          <div id="folderHint" class="folder-hint" aria-live="polite">
+            <b>저장 위치</b><span>추가하기는 맨 위 폴더, 폴더 지정은 선택한 폴더로 들어가요.</span>
+          </div>
           <div class="collection-actions">
             <button id="openOwned" class="secondary" type="button">보유 목록</button>
             <button id="clearOwned" class="secondary" type="button">초기화</button>
@@ -1512,8 +1535,25 @@
           : 'all';
       }
       $('ownedCount').textContent = `${fmt.format(state.owned.goods.length)}개`;
+      updateOwnedFolderHint();
       renderLatestOwned();
       if (state.items.length) renderResults();
+    }
+
+    function updateOwnedFolderHint() {
+      const top = topFolder();
+      const selected = selectedFolder();
+      const topCount = state.owned.goods.filter((owned) => owned.folderId === top.id).length;
+      const selectedCount = selected
+        ? state.owned.goods.filter((owned) => owned.folderId === selected.id).length
+        : 0;
+      $('folderHint').innerHTML = `
+        <b>저장 위치</b>
+        <span>추가하기는 ${escapeHtml(top.name)}로 바로 저장 · 폴더 지정은 ${escapeHtml(selected?.name || top.name)}에 저장 (${fmt.format(selectedCount)}개)</span>
+      `;
+      if (top.id !== selected?.id && topCount) {
+        $('folderHint').querySelector('span').append(` · 맨 위 폴더 ${fmt.format(topCount)}개`);
+      }
     }
 
     function renderLatestOwned() {
@@ -1865,7 +1905,7 @@
       const selectedAdded = isOwnedInSelectedFolder(item);
       const topAdded = state.owned.goods.some((owned) => owned.folderId === topFolder().id && owned.catalogKey === ownedKeyFor(item));
       const chooseLabel = selectedAdded ? '선택 폴더에 있음' : '폴더 지정';
-      const quickLabel = topAdded ? '맨 위에 있음' : '추가하기';
+      const quickLabel = topAdded ? '맨 위에 있음' : '내 굿즈 추가';
       card.innerHTML = `
         <div class="thumb">
           <div class="badge">${escapeHtml(item.category || '미분류')}</div>
@@ -2025,7 +2065,10 @@
     $('categoryFilter').addEventListener('change', () => applyFilters(true));
     $('storeFilter').addEventListener('change', () => applyFilters(true));
     $('imageFilter').addEventListener('change', () => applyFilters(true));
-    $('ownedFolder').addEventListener('change', renderResults);
+    $('ownedFolder').addEventListener('change', () => {
+      updateOwnedFolderHint();
+      renderResults();
+    });
     $('newFolder').addEventListener('click', () => createFolder('ownedFolder'));
     $('openOwned').addEventListener('click', showOwnedList);
     $('clearOwned').addEventListener('click', clearOwned);
