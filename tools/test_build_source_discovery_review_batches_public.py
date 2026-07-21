@@ -55,6 +55,12 @@ class BuildSourceDiscoveryReviewBatchesPublicTest(unittest.TestCase):
             "<exact_product_detail_url>",
         )
         self.assertFalse(report["batches"][0]["items"][0]["source_patch_template"]["manual_confirmed"])
+        self.assertIn("manual_value", report["batches"][0]["catalog_field_import_template_fields"])
+        import_template = report["batches"][0]["items"][0]["catalog_field_import_template"]
+        self.assertEqual(import_template["field"], "source_url")
+        self.assertEqual(import_template["row_index"], 1)
+        self.assertEqual(import_template["manual_value"], "")
+        self.assertFalse(import_template["manual_confirmed"])
         self.assertEqual(report["batches"][1]["workflow"], "licensed_retailer_search_review")
         self.assertTrue(all(batch["auto_apply_enabled"] is False for batch in report["batches"]))
 

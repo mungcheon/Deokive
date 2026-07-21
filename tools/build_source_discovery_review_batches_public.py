@@ -34,6 +34,22 @@ def _load_items(path: Path) -> list[dict[str, Any]]:
 
 def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
     catalog_index = item.get("row_index")
+    import_template = {
+        "manual_confirmed": False,
+        "manual_note": "",
+        "row_index": catalog_index,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": item.get("official_search_url") or item.get("web_search_url") or "",
+        "candidate_source_url": "",
+        "source_store": item.get("source_store"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "category": item.get("category"),
+        "affiliation": item.get("affiliation"),
+        "acceptance_criteria": item.get("acceptance_rule"),
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+    }
     return {
         "catalog_index": catalog_index,
         "source_store": item.get("source_store"),
@@ -53,6 +69,7 @@ def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
             "manual_confirmed": False,
             "requires_exact_identity_match": True,
         },
+        "catalog_field_import_template": import_template,
         "blocked_until": "exact_product_detail_source_url_confirmed",
         "auto_apply_enabled": False,
     }
@@ -124,6 +141,14 @@ def build_report(items: list[dict[str, Any]], *, batch_size: int = 25) -> dict[s
                         "image_url",
                         "evidence_url",
                         "manual_confirmed",
+                    ],
+                    "catalog_field_import_template_fields": [
+                        "manual_confirmed",
+                        "row_index",
+                        "field",
+                        "manual_value",
+                        "evidence_url",
+                        "candidate_source_url",
                     ],
                     "blocked_until": "exact_product_detail_source_url_confirmed",
                     "recommended_action": "Find exact product/detail source URLs before any image_url import.",
