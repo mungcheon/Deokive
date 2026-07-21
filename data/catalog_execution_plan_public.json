@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:18:59Z",
+  "generated_at": "2026-07-21T22:23:33Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 8,
+    "action_count": 9,
     "blocked_action_count": 1,
-    "manual_review_action_count": 6,
+    "manual_review_action_count": 7,
     "pending_import_action_count": 0,
-    "total_action_rows": 31602,
+    "total_action_rows": 31765,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -21,6 +21,7 @@
       "confirmed_import_template_rows": 1996,
       "confirmed_import_pending_rows": 0,
       "requested_focus_review_rows": 6275,
+      "requested_focus_action_rows": 163,
       "animation_category_review_rows": 428
     },
     "requested_focus_actionable_template_rows": 600,
@@ -133,6 +134,63 @@
         ],
         "actionable_non_barcode_template_rows": 600,
         "barcode_template_rows": 5674
+      }
+    },
+    {
+      "priority": 11,
+      "workstream": "requested_focus_action_queue",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "status": "manual_review",
+      "rows": 163,
+      "command": "Work the non-barcode requested-focus action queue before long barcode research.",
+      "next_step": "review_actionable_source_image_date_price_name_batches",
+      "blocker": "Exact source evidence is still required before catalog mutation.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "actionable_template_rows": 600,
+        "queued_action_rows": 163,
+        "action_batch_count": 24,
+        "barcode_template_rows_excluded": 5674,
+        "field_counts": [
+          [
+            "official_price_jpy",
+            399
+          ],
+          [
+            "release_date",
+            132
+          ],
+          [
+            "source_url",
+            34
+          ],
+          [
+            "image_url",
+            34
+          ],
+          [
+            "name_ja",
+            1
+          ]
+        ],
+        "topic_counts": [
+          [
+            "ichiban_kuji",
+            382
+          ],
+          [
+            "danganronpa",
+            162
+          ],
+          [
+            "requested_special_goods",
+            42
+          ],
+          [
+            "bokubu_style",
+            14
+          ]
+        ]
       }
     },
     {

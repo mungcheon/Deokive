@@ -1,14 +1,18 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:19:05Z",
+  "generated_at": "2026-07-21T22:23:42Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 11767,
+    "summed_batch_rows": 11479,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
         "requested_focus_review_batches",
         16
+      ],
+      [
+        "requested_focus_action_queue",
+        12
       ],
       [
         "source_url_discovery",
@@ -17,10 +21,6 @@
       [
         "metadata_backlog",
         12
-      ],
-      [
-        "deduplication_review",
-        10
       ],
       [
         "danganronpa_missing_media",
@@ -35,11 +35,11 @@
         4
       ],
       [
-        "ichiban_kuji_price",
-        4
+        "generic_source_url_cleanup",
+        3
       ],
       [
-        "generic_source_url_cleanup",
+        "deduplication_review",
         3
       ],
       [
@@ -49,16 +49,16 @@
       [
         "confirmed_import_readiness",
         1
-      ],
-      [
-        "ichiban_kuji_metadata",
-        1
       ]
     ],
     "by_agent": [
       [
         "agent-requested-focus-detail",
         16
+      ],
+      [
+        "agent-requested-focus-action",
+        12
       ],
       [
         "agent-source-discovery",
@@ -69,10 +69,6 @@
         12
       ],
       [
-        "agent-dedupe",
-        10
-      ],
-      [
         "agent-danganronpa-media",
         8
       ],
@@ -81,15 +77,15 @@
         8
       ],
       [
-        "agent-ichiban-kuji",
-        5
-      ],
-      [
         "agent-requested-focus",
         4
       ],
       [
         "agent-generic-source-cleanup",
+        3
+      ],
+      [
+        "agent-dedupe",
         3
       ],
       [
@@ -114,6 +110,7 @@
       "confirmed_import_template_rows": 1996,
       "confirmed_import_pending_rows": 0,
       "requested_focus_review_rows": 6275,
+      "requested_focus_action_rows": 163,
       "animation_category_review_rows": 428
     }
   },
@@ -130,6 +127,94 @@
       "next_machine_step": "manual_review"
     },
     {
+      "batch_id": "010-agent-requested-focus-action-29",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "rows": 9,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-30",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "rows": 7,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-31",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "rows": 6,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-32",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "rows": 3,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-33",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "rows": 3,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-34",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "rows": 3,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-35",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "rows": 2,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-36",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "rows": 1,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
       "batch_id": "012-agent-danganronpa-media-01",
       "agent_id": "agent-danganronpa-media",
       "workstream": "danganronpa_missing_media",
@@ -139,101 +224,6 @@
       "public_report": "data/danganronpa_missing_media_public.json",
       "review_state": "manual_review_required",
       "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "012-agent-danganronpa-media-02",
-      "agent_id": "agent-danganronpa-media",
-      "workstream": "danganronpa_missing_media",
-      "priority": 12,
-      "rows": 7,
-      "title": "단간론파 Movic 소스/이미지 보강",
-      "public_report": "data/danganronpa_missing_media_public.json",
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "012-agent-danganronpa-media-03",
-      "agent_id": "agent-danganronpa-media",
-      "workstream": "danganronpa_missing_media",
-      "priority": 12,
-      "rows": 6,
-      "title": "단간론파 엔스카이 소스/이미지 보강",
-      "public_report": "data/danganronpa_missing_media_public.json",
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "012-agent-danganronpa-media-04",
-      "agent_id": "agent-danganronpa-media",
-      "workstream": "danganronpa_missing_media",
-      "priority": 12,
-      "rows": 3,
-      "title": "단간론파 FuRyu 소스/이미지 보강",
-      "public_report": "data/danganronpa_missing_media_public.json",
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "012-agent-danganronpa-media-05",
-      "agent_id": "agent-danganronpa-media",
-      "workstream": "danganronpa_missing_media",
-      "priority": 12,
-      "rows": 3,
-      "title": "단간론파 Taito 소스/이미지 보강",
-      "public_report": "data/danganronpa_missing_media_public.json",
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "012-agent-danganronpa-media-06",
-      "agent_id": "agent-danganronpa-media",
-      "workstream": "danganronpa_missing_media",
-      "priority": 12,
-      "rows": 3,
-      "title": "단간론파 굿스마일컴퍼니 소스/이미지 보강",
-      "public_report": "data/danganronpa_missing_media_public.json",
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "012-agent-danganronpa-media-07",
-      "agent_id": "agent-danganronpa-media",
-      "workstream": "danganronpa_missing_media",
-      "priority": 12,
-      "rows": 2,
-      "title": "단간론파 코토부키야 소스/이미지 보강",
-      "public_report": "data/danganronpa_missing_media_public.json",
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "012-agent-danganronpa-media-08",
-      "agent_id": "agent-danganronpa-media",
-      "workstream": "danganronpa_missing_media",
-      "priority": 12,
-      "rows": 1,
-      "title": "단간론파 AmiAmi 소스/이미지 보강",
-      "public_report": "data/danganronpa_missing_media_public.json",
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "015-agent-generic-source-cleanup-30",
-      "agent_id": "agent-generic-source-cleanup",
-      "workstream": "generic_source_url_cleanup",
-      "priority": 15,
-      "rows": 45,
-      "title": "Stellive Store 이미지 보강 (replace_generic_source_then_extract_image)",
-      "public_report": "data/generic_source_cleanup_public.json",
-      "review_state": "candidate_review_required",
-      "next_machine_step": "open_candidate_report_and_verify_exact_product_identity",
-      "review_summary": {
-        "review_rows": 45,
-        "candidate_rows": 3,
-        "manual_confirmed_rows": 0,
-        "weak_or_low_confidence_rows": 3,
-        "no_candidate_rows": 42
-      }
     }
   ],
   "instructions": [
@@ -336,6 +326,1148 @@
           "source_store": "Movic",
           "source_url": "https://www.movic.jp/shop/pages/withcat.aspx",
           "official_search_url": null
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-29",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 9,
+      "recommended_action": "find_exact_official_or_trusted_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1703,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 클리어 파일 세트 희망봉 학원",
+          "name_ja": "ダンガンロンパ クリアファイルセット 希望ヶ峰学園",
+          "series_name": null,
+          "category": "문구",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 660,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1703,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1802,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 히나타 하지메 클리어 보틀",
+          "name_ja": "ダンガンロンパ 日向創 クリアボトル",
+          "series_name": null,
+          "category": "생활잡화",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1650,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1802,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2077,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 캔뱃지 (모노쿠마)",
+          "name_ja": "ダンガンロンパ 缶バッジ (モノクマ)",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 440,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2077,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2080,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 키링 (코마에다)",
+          "name_ja": "ダンガンロンパ キーホルダー (狛枝)",
+          "series_name": null,
+          "category": "키링",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 770,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2080,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2081,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 클리어 파일 (V3 캐스트)",
+          "name_ja": "ダンガンロンパ クリアファイル (V3キャスト)",
+          "series_name": null,
+          "category": "문구",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 440,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2081,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2082,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 머그컵 (모노쿠마)",
+          "name_ja": "ダンガンロンパ マグカップ (モノクマ)",
+          "series_name": null,
+          "category": "머그컵",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1650,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2082,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2083,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 러버 마스코트 (모노쿠마)",
+          "name_ja": "ダンガンロンパ ラバーマスコット (モノクマ)",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 660,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2083,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2084,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 러버 마스코트 (코마에다)",
+          "name_ja": "ダンガンロンパ ラバーマスコット (狛枝)",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 660,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2084,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-30",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 7,
+      "recommended_action": "find_exact_official_or_trusted_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1640,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 아크릴 스탠드 (모노쿠마)",
+          "name_ja": "ダンガンロンパ アクリルスタンド (モノクマ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1320,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1640,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1698,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 트레이딩 캔뱃지 나에기 마코토",
+          "name_ja": "ダンガンロンパ トレーディング缶バッジ 苗木誠",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 550,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1698,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1699,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 트레이딩 캔뱃지 키리기리 쿄코",
+          "name_ja": "ダンガンロンパ トレーディング缶バッジ 霧切響子",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 550,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1699,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1700,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 메탈릭 캔뱃지 모노쿠마",
+          "name_ja": "ダンガンロンパ メタリック缶バッジ モノクマ",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 660,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1700,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1702,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 클리어 파일 A4 모노쿠마",
+          "name_ja": "ダンガンロンパ クリアファイルA4 モノクマ",
+          "series_name": null,
+          "category": "문구",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 440,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1702,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1798,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 나에기 학원 시리즈 머그컵",
+          "name_ja": "ダンガンロンパ 苗木誠 学園シリーズ マグカップ",
+          "series_name": null,
+          "category": "머그컵",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1980,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1798,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1799,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 키리기리 학원 시리즈 타올",
+          "name_ja": "ダンガンロンパ 霧切響子 学園シリーズ タオル",
+          "series_name": null,
+          "category": "타월",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1650,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1799,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-31",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 6,
+      "recommended_action": "find_exact_official_or_trusted_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1473,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "엔스카이",
+          "name_ko": "오만쥬 니기니기 마스코트 모노쿠마",
+          "name_ja": "おまんじゅう にぎにぎマスコット モノクマ",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1100,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1473,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1474,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "엔스카이",
+          "name_ko": "오만쥬 니기니기 마스코트 나에기 마코토",
+          "name_ja": "おまんじゅう にぎにぎマスコット 苗木誠",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1100,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1474,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1475,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "엔스카이",
+          "name_ko": "오만쥬 니기니기 마스코트 코마에다 나기토",
+          "name_ja": "おまんじゅう にぎにぎマスコット 狛枝凪斗",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1100,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1475,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1476,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "엔스카이",
+          "name_ko": "오만쥬 니기니기 마스코트 히나타 하지메",
+          "name_ja": "おまんじゅう にぎにぎマスコット 日向創",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1100,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1476,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1477,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "엔스카이",
+          "name_ko": "치비누이 사이하라 슈이치",
+          "name_ja": "ちびぬい 最原終一",
+          "series_name": null,
+          "category": "인형",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 3300,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1477,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1478,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "엔스카이",
+          "name_ko": "치비누이 오우마 코키치",
+          "name_ja": "ちびぬい 王馬小吉",
+          "series_name": null,
+          "category": "인형",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 3300,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1478,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-32",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 3,
+      "recommended_action": "find_exact_official_or_trusted_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1470,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "FuRyu",
+          "name_ko": "Noodle Stopper 모노쿠마",
+          "name_ja": "ヌードルストッパー モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2800,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1470,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1471,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "FuRyu",
+          "name_ko": "Chokonose Premium 코마에다 나기토",
+          "name_ja": "ちょこのせ プレミアム 狛枝凪斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2800,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1471,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1472,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "FuRyu",
+          "name_ko": "Chokonose Premium 히나타 하지메",
+          "name_ja": "ちょこのせ プレミアム 日向創",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2800,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1472,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-33",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 3,
+      "recommended_action": "find_exact_official_or_trusted_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1467,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Taito",
+          "name_ko": "Desktop Cute 모노쿠마",
+          "name_ja": "デスクトップキュート モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2200,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1467,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1468,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Taito",
+          "name_ko": "Desktop Cute 코마에다 나기토",
+          "name_ja": "デスクトップキュート 狛枝凪斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2500,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1468,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1469,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "Taito",
+          "name_ko": "Desktop Cute 사이하라 슈이치",
+          "name_ja": "デスクトップキュート 最原終一",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2500,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1469,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-34",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 3,
+      "recommended_action": "find_exact_official_or_trusted_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1447,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "굿스마일컴퍼니",
+          "name_ko": "넨도로이드 토가미 뱌쿠야",
+          "name_ja": "ねんどろいど 十神白夜",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 4500,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1447,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1454,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "굿스마일컴퍼니",
+          "name_ko": "넨도로이드 모모타 카이토",
+          "name_ja": "ねんどろいど 百田解斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 5000,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1454,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1455,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "굿스마일컴퍼니",
+          "name_ko": "POP UP PARADE 모노쿠마",
+          "name_ja": "POP UP PARADE モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 4500,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1455,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-35",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "find_exact_official_or_trusted_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1458,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "코토부키야",
+          "name_ko": "ARTFX J 나에기 마코토",
+          "name_ja": "ARTFX J 苗木誠",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 9800,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1458,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1459,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "코토부키야",
+          "name_ko": "ARTFX J 키리기리 쿄코",
+          "name_ja": "ARTFX J 霧切響子",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 9800,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1459,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "010-agent-requested-focus-action-36",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 10,
+      "title": "danganronpa source_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 1,
+      "recommended_action": "find_exact_official_or_trusted_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1704,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "source_url",
+          "source_store": "AmiAmi",
+          "name_ko": "단간론파 일러스트 카드 컬렉션 코마에다",
+          "name_ja": "ダンガンロンパ イラストカードコレクション 狛枝",
+          "series_name": null,
+          "category": "문구",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 440,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1704,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "find_exact_official_or_trusted_source_url",
+          "recommended_action": "find_exact_official_or_trusted_source_url",
+          "auto_apply_enabled": false
         }
       ],
       "review_state": "manual_review_required",
@@ -1562,7 +2694,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-30",
+      "batch_id": "015-agent-generic-source-cleanup-42",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -1668,7 +2800,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-31",
+      "batch_id": "015-agent-generic-source-cleanup-43",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -1724,7 +2856,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-32",
+      "batch_id": "015-agent-generic-source-cleanup-44",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -1797,7 +2929,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-33",
+      "batch_id": "018-agent-gotouchi-review-45",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -1904,7 +3036,7 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "019-agent-confirmed-import-29",
+      "batch_id": "019-agent-confirmed-import-41",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -1995,7 +3127,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-34",
+      "batch_id": "020-agent-source-image-46",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2094,7 +3226,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-35",
+      "batch_id": "020-agent-source-image-47",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2292,7 +3424,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-36",
+      "batch_id": "020-agent-source-image-48",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2391,7 +3523,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-37",
+      "batch_id": "020-agent-source-image-49",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2490,7 +3622,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-38",
+      "batch_id": "020-agent-source-image-50",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2589,7 +3721,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-39",
+      "batch_id": "020-agent-source-image-51",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2688,7 +3820,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-40",
+      "batch_id": "020-agent-source-image-52",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2787,7 +3919,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-41",
+      "batch_id": "020-agent-source-image-53",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2884,6 +4016,802 @@
       ],
       "review_state": "source_discovery_then_image_attachment",
       "next_machine_step": "find_source_url_before_image_import"
+    },
+    {
+      "batch_id": "020-agent-requested-focus-action-37",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 20,
+      "title": "danganronpa image_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 9,
+      "recommended_action": "extract_image_from_exact_reviewed_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1703,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 클리어 파일 세트 희망봉 학원",
+          "name_ja": "ダンガンロンパ クリアファイルセット 希望ヶ峰学園",
+          "series_name": null,
+          "category": "문구",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 660,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1703,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1802,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 히나타 하지메 클리어 보틀",
+          "name_ja": "ダンガンロンパ 日向創 クリアボトル",
+          "series_name": null,
+          "category": "생활잡화",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1650,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1802,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2077,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 캔뱃지 (모노쿠마)",
+          "name_ja": "ダンガンロンパ 缶バッジ (モノクマ)",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 440,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2077,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2080,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 키링 (코마에다)",
+          "name_ja": "ダンガンロンパ キーホルダー (狛枝)",
+          "series_name": null,
+          "category": "키링",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 770,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2080,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2081,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 클리어 파일 (V3 캐스트)",
+          "name_ja": "ダンガンロンパ クリアファイル (V3キャスト)",
+          "series_name": null,
+          "category": "문구",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 440,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2081,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2082,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 머그컵 (모노쿠마)",
+          "name_ja": "ダンガンロンパ マグカップ (モノクマ)",
+          "series_name": null,
+          "category": "머그컵",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1650,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2082,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2083,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 러버 마스코트 (모노쿠마)",
+          "name_ja": "ダンガンロンパ ラバーマスコット (モノクマ)",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 660,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2083,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2084,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "애니메이트",
+          "name_ko": "단간론파 러버 마스코트 (코마에다)",
+          "name_ja": "ダンガンロンパ ラバーマスコット (狛枝)",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 660,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2084,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "020-agent-requested-focus-action-38",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 20,
+      "title": "danganronpa image_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 7,
+      "recommended_action": "extract_image_from_exact_reviewed_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1640,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 아크릴 스탠드 (모노쿠마)",
+          "name_ja": "ダンガンロンパ アクリルスタンド (モノクマ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1320,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1640,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1698,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 트레이딩 캔뱃지 나에기 마코토",
+          "name_ja": "ダンガンロンパ トレーディング缶バッジ 苗木誠",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 550,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1698,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1699,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 트레이딩 캔뱃지 키리기리 쿄코",
+          "name_ja": "ダンガンロンパ トレーディング缶バッジ 霧切響子",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 550,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1699,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1700,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 메탈릭 캔뱃지 모노쿠마",
+          "name_ja": "ダンガンロンパ メタリック缶バッジ モノクマ",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 660,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1700,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1702,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 클리어 파일 A4 모노쿠마",
+          "name_ja": "ダンガンロンパ クリアファイルA4 モノクマ",
+          "series_name": null,
+          "category": "문구",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 440,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1702,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1798,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 나에기 학원 시리즈 머그컵",
+          "name_ja": "ダンガンロンパ 苗木誠 学園シリーズ マグカップ",
+          "series_name": null,
+          "category": "머그컵",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1980,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1798,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1799,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "Movic",
+          "name_ko": "단간론파 키리기리 학원 시리즈 타올",
+          "name_ja": "ダンガンロンパ 霧切響子 学園シリーズ タオル",
+          "series_name": null,
+          "category": "타월",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1650,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1799,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "020-agent-requested-focus-action-39",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 20,
+      "title": "danganronpa image_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 6,
+      "recommended_action": "extract_image_from_exact_reviewed_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1473,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "엔스카이",
+          "name_ko": "오만쥬 니기니기 마스코트 모노쿠마",
+          "name_ja": "おまんじゅう にぎにぎマスコット モノクマ",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1100,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1473,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1474,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "엔스카이",
+          "name_ko": "오만쥬 니기니기 마스코트 나에기 마코토",
+          "name_ja": "おまんじゅう にぎにぎマスコット 苗木誠",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1100,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1474,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1475,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "엔스카이",
+          "name_ko": "오만쥬 니기니기 마스코트 코마에다 나기토",
+          "name_ja": "おまんじゅう にぎにぎマスコット 狛枝凪斗",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1100,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1475,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1476,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "엔스카이",
+          "name_ko": "오만쥬 니기니기 마스코트 히나타 하지메",
+          "name_ja": "おまんじゅう にぎにぎマスコット 日向創",
+          "series_name": null,
+          "category": "마스코트",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 1100,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1476,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1477,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "엔스카이",
+          "name_ko": "치비누이 사이하라 슈이치",
+          "name_ja": "ちびぬい 最原終一",
+          "series_name": null,
+          "category": "인형",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 3300,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1477,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1478,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "엔스카이",
+          "name_ko": "치비누이 오우마 코키치",
+          "name_ja": "ちびぬい 王馬小吉",
+          "series_name": null,
+          "category": "인형",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 3300,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1478,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "020-agent-requested-focus-action-40",
+      "agent_id": "agent-requested-focus-action",
+      "workstream": "requested_focus_action_queue",
+      "priority": 20,
+      "title": "danganronpa image_url actionable review",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "rows": 3,
+      "recommended_action": "extract_image_from_exact_reviewed_source_url",
+      "acceptance_criteria": [
+        "Review non-barcode fields before long barcode research.",
+        "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1470,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "FuRyu",
+          "name_ko": "Noodle Stopper 모노쿠마",
+          "name_ja": "ヌードルストッパー モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2800,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1470,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1471,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "FuRyu",
+          "name_ko": "Chokonose Premium 코마에다 나기토",
+          "name_ja": "ちょこのせ プレミアム 狛枝凪斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2800,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1471,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1472,
+          "topic_id": "danganronpa",
+          "topic_label": "단간론파 굿즈",
+          "missing_field": "image_url",
+          "source_store": "FuRyu",
+          "name_ko": "Chokonose Premium 히나타 하지메",
+          "name_ja": "ちょこのせ プレミアム 日向創",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null,
+          "release_date": null,
+          "official_price_jpy": 2800,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1472,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "requires_exact_source_url": true,
+            "requires_labeled_official_evidence": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "next_machine_step": "extract_image_from_exact_reviewed_source_url",
+          "recommended_action": "extract_image_from_exact_reviewed_source_url",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
     },
     {
       "batch_id": "030-agent-requested-focus-11",
@@ -2985,7 +4913,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-source-discovery-42",
+      "batch_id": "030-agent-source-discovery-54",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3084,7 +5012,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-43",
+      "batch_id": "030-agent-source-discovery-55",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3183,7 +5111,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-44",
+      "batch_id": "030-agent-source-discovery-56",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3282,7 +5210,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-45",
+      "batch_id": "030-agent-source-discovery-57",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3381,7 +5309,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-46",
+      "batch_id": "030-agent-source-discovery-58",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3480,7 +5408,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-48",
+      "batch_id": "030-agent-source-discovery-60",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3579,7 +5507,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-49",
+      "batch_id": "030-agent-source-discovery-61",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3678,7 +5606,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-50",
+      "batch_id": "030-agent-source-discovery-62",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3777,7 +5705,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-51",
+      "batch_id": "030-agent-source-discovery-63",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3876,7 +5804,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-52",
+      "batch_id": "030-agent-source-discovery-64",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3975,7 +5903,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-47",
+      "batch_id": "030-agent-source-discovery-59",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -4074,7 +6002,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-53",
+      "batch_id": "030-agent-source-discovery-65",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -6267,7 +8195,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-54",
+      "batch_id": "050-agent-metadata-66",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -6366,7 +8294,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-57",
+      "batch_id": "050-agent-metadata-69",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -6465,7 +8393,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-55",
+      "batch_id": "050-agent-metadata-67",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -6663,7 +8591,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-56",
+      "batch_id": "050-agent-metadata-68",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -6762,7 +8690,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-61",
+      "batch_id": "060-agent-metadata-73",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -6861,7 +8789,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-58",
+      "batch_id": "060-agent-metadata-70",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -6960,7 +8888,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-59",
+      "batch_id": "060-agent-metadata-71",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -7059,7 +8987,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-60",
+      "batch_id": "060-agent-metadata-72",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -7158,7 +9086,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-62",
+      "batch_id": "070-agent-metadata-74",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -7257,7 +9185,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-63",
+      "batch_id": "070-agent-metadata-75",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -7356,7 +9284,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-64",
+      "batch_id": "070-agent-metadata-76",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -7455,7 +9383,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-65",
+      "batch_id": "070-agent-metadata-77",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -7554,7 +9482,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-66",
+      "batch_id": "090-agent-dedupe-78",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -7593,7 +9521,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-67",
+      "batch_id": "090-agent-dedupe-79",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -7632,7 +9560,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-68",
+      "batch_id": "090-agent-dedupe-80",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -7669,574 +9597,6 @@
       ],
       "review_state": "manual_dedupe_review_required",
       "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-69",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 367,
-          "name_ko": "치이카와 파크 스니커즈 양말 (하치와레/라이트블루)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "의류",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189195898",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 3710,
-          "name_ko": "치이카와 파크 스니커즈 양말 (가르마 / 라이트 블루)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "의류",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189195898",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-70",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 366,
-          "name_ko": "치이카와 파크 스니커즈 양말 (시사/오렌지)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "의류",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 3714,
-          "name_ko": "치이카와 파크 스니커즈 양말 (시사 / 오렌지)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "의류",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-71",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 365,
-          "name_ko": "치이카와 파크 키즈 T셔츠 (화이트)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "의류",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 3722,
-          "name_ko": "치이카와 파크 키즈 T셔츠 (집합 / 화이트)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "의류",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-72",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 597,
-          "name_ko": "치이카와 파크 폭신폭신 축 늘어진 인형 (무챠우맨)",
-          "name_ja": "ちいかわパーク ふかふか軸のびのび人形 (むちゃうマン)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609351603",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 3619,
-          "name_ko": "치이카와 파크 폭신폭신 축 늘어진 인형 (무챠우맨)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609351603",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-73",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 598,
-          "name_ko": "치이카와 파크 폭신폭신 축 늘어진 인형 (오데)",
-          "name_ja": "ちいかわパーク ふかふか軸のびのび人形 (オデ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609351610",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 3618,
-          "name_ko": "치이카와 파크 폭신폭신 축 늘어진 인형 (오데)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609351610",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-74",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 171,
-          "name_ko": "치이카와 파크 인형 S (복어)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609351658",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 3606,
-          "name_ko": "치이카와 파크 인형 S (복어)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609351658",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-75",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 581,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (치이카와)",
-          "name_ja": "ちいかわパーク ふわころ人形 S (ちいかわ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359074",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 3645,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (치이카와)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359074",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "110-agent-ichiban-kuji-76",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_metadata",
-      "priority": 110,
-      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-001",
-      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
-      "rows": 59,
-      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
-      "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official evidence confirms the value.",
-        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
-        "All updated catalog rows belong to the reviewed campaign group."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 14193,
-          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
-          "source_url": "https://1kuji.com/products/jujutsu-o"
-        },
-        {
-          "catalog_index": 14194,
-          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - B賞 伏黒恵ビジュアルクロス",
-          "source_url": "https://1kuji.com/products/jujutsu-o"
-        },
-        {
-          "catalog_index": 14195,
-          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - C賞 釘崎野薔薇ビジュアルクロス",
-          "source_url": "https://1kuji.com/products/jujutsu-o"
-        },
-        {
-          "catalog_index": 14196,
-          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - D賞 五条悟ビジュアルクロス",
-          "source_url": "https://1kuji.com/products/jujutsu-o"
-        },
-        {
-          "catalog_index": 14197,
-          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - E賞 クリアボトル",
-          "source_url": "https://1kuji.com/products/jujutsu-o"
-        },
-        {
-          "catalog_index": 14198,
-          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - F賞 アクリルスタンド",
-          "source_url": "https://1kuji.com/products/jujutsu-o"
-        },
-        {
-          "catalog_index": 14199,
-          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
-          "source_url": "https://1kuji.com/products/jujutsu-o"
-        },
-        {
-          "catalog_index": 14200,
-          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - ラストワン賞 ビジュアルタオル",
-          "source_url": "https://1kuji.com/products/jujutsu-o"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-80",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-005",
-      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
-      "rows": 73,
-      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
-      "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official evidence confirms the value.",
-        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
-        "All updated catalog rows belong to the reviewed campaign group."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16030,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - A賞 ゴール・D・ロジャーフィギュア",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16031,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - B賞 モンキー・D・ルフィフィギュア",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16032,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - C賞 ラブーンぬいぐるみ",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16033,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - D賞 クッション",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16034,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - E賞 フェイスタオル",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16035,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - F賞 カードスタンドフィギュア",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16036,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - G賞 グラス",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16037,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - H賞 クリアファイル&ステッカー",
-          "source_url": "https://1kuji.com/products/onep12"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-79",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-004",
-      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
-      "rows": 72,
-      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
-      "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official evidence confirms the value.",
-        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
-        "All updated catalog rows belong to the reviewed campaign group."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 15077,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - A賞 ジョナサン・ジョースター アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15078,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - B賞 ジョセフ・ジョースター アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15079,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - C賞 空条承太郎 アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15080,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - D賞 東方仗助 アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15081,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - E賞 ジョルノ・ジョバァーナ アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15082,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - F賞 空条徐倫 アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15083,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - G賞 ジョニィ・ジョースター アニバーサリーフィギュア",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        },
-        {
-          "catalog_index": 15084,
-          "name_ko": "一番くじ ジョジョの奇妙な冒険 アニバーサリーズ - H賞 アニバーサリーグラス",
-          "source_url": "https://1kuji.com/products/jojo_anniv"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-78",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-003",
-      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
-      "rows": 66,
-      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
-      "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official evidence confirms the value.",
-        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
-        "All updated catalog rows belong to the reviewed campaign group."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16770,
-          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - A賞 孫悟空&神龍フィギュア",
-          "source_url": "https://1kuji.com/products/dbkai_ks"
-        },
-        {
-          "catalog_index": 16771,
-          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - B賞 完全体セルフィギュア",
-          "source_url": "https://1kuji.com/products/dbkai_ks"
-        },
-        {
-          "catalog_index": 16772,
-          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - C賞 超ベジータフィギュア",
-          "source_url": "https://1kuji.com/products/dbkai_ks"
-        },
-        {
-          "catalog_index": 16773,
-          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - D賞 超孫悟飯フィギュア",
-          "source_url": "https://1kuji.com/products/dbkai_ks"
-        },
-        {
-          "catalog_index": 16774,
-          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - E賞 陶器タンブラー",
-          "source_url": "https://1kuji.com/products/dbkai_ks"
-        },
-        {
-          "catalog_index": 16775,
-          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - F賞 ロングタオル",
-          "source_url": "https://1kuji.com/products/dbkai_ks"
-        },
-        {
-          "catalog_index": 16776,
-          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - G賞 デザインバッグ",
-          "source_url": "https://1kuji.com/products/dbkai_ks"
-        },
-        {
-          "catalog_index": 16777,
-          "name_ko": "一番くじ ドラゴンボール改～最高レベルの決戦編～ - H賞 根付",
-          "source_url": "https://1kuji.com/products/dbkai_ks"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-77",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-002",
-      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
-      "rows": 63,
-      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
-      "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official evidence confirms the value.",
-        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
-        "All updated catalog rows belong to the reviewed campaign group."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16802,
-          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - A賞 丸型宇宙船＆悟空",
-          "source_url": "https://1kuji.com/products/73"
-        },
-        {
-          "catalog_index": 16803,
-          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｂ賞 バーダックフィギュア",
-          "source_url": "https://1kuji.com/products/73"
-        },
-        {
-          "catalog_index": 16804,
-          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - C賞 幼少べジータフィギュア",
-          "source_url": "https://1kuji.com/products/73"
-        },
-        {
-          "catalog_index": 16805,
-          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｄ賞 クッション",
-          "source_url": "https://1kuji.com/products/73"
-        },
-        {
-          "catalog_index": 16806,
-          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｅ賞 スカウタークリップボード",
-          "source_url": "https://1kuji.com/products/73"
-        },
-        {
-          "catalog_index": 16807,
-          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｆ賞 サイヤ人テープ",
-          "source_url": "https://1kuji.com/products/73"
-        },
-        {
-          "catalog_index": 16808,
-          "name_ko": "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｇ賞 しっぽストラップ",
-          "source_url": "https://1kuji.com/products/73"
-        },
-        {
-          "catalog_index": 16795,
-          "name_ko": "一番くじドラゴンボールZ～ナメック星編～ - フリーザフィギュア賞",
-          "source_url": "https://1kuji.com/products/89"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
     }
   ],
   "automation_policy": {

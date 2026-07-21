@@ -30,6 +30,7 @@ GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
 REQUESTED_FOCUS_REVIEW_BATCHES = DATA / "requested_focus_review_batches_public.json"
+REQUESTED_FOCUS_ACTION_QUEUE = DATA / "requested_focus_action_queue_public.json"
 DANGANRONPA_MISSING_MEDIA = DATA / "danganronpa_missing_media_public.json"
 DANGANRONPA_GOODSMILE_PROBE = DATA / "danganronpa_goodsmile_probe_public.json"
 DANGANRONPA_PRIZE_PROBE = DATA / "danganronpa_prize_probe_public.json"
@@ -1297,7 +1298,14 @@ def build_operations_public(
     requested_focus_review_batches = (
         load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}) if REQUESTED_FOCUS_REVIEW_BATCHES.exists() else {}
     )
+    requested_focus_action_queue = (
+        load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
+    )
     requested_focus_review_batches_summary = requested_focus_review_batches.get("summary", {})
+    requested_focus_action_queue = (
+        load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
+    )
+    requested_focus_action_queue_summary = requested_focus_action_queue.get("summary", {})
     danganronpa_media_summary = danganronpa_missing_media["summary"]
     danganronpa_goodsmile_probe = (
         load_json(DANGANRONPA_GOODSMILE_PROBE, {}) if DANGANRONPA_GOODSMILE_PROBE.exists() else {}
@@ -1422,6 +1430,15 @@ def build_operations_public(
             "review_row_count": requested_focus_review_batches_summary.get("review_row_count", 0),
             "recommended_next_action": "Work user-requested focus batches by topic, missing field, and source store.",
         } if requested_focus_review_batches_summary else None,
+        {
+            "priority": 12,
+            "workstream": "requested_focus_action_queue",
+            "public_report": f"data/{REQUESTED_FOCUS_ACTION_QUEUE.name}",
+            "actionable_template_rows": requested_focus_action_queue_summary.get("actionable_template_rows", 0),
+            "queued_action_rows": requested_focus_action_queue_summary.get("queued_action_rows", 0),
+            "action_batch_count": requested_focus_action_queue_summary.get("action_batch_count", 0),
+            "recommended_next_action": "Work non-barcode requested-focus rows before long barcode research.",
+        } if requested_focus_action_queue_summary else None,
         {
             "priority": 15,
             "workstream": "danganronpa_missing_media",
@@ -1598,6 +1615,14 @@ def build_operations_public(
             "auto_apply_enabled": requested_focus_review_batches_summary.get("auto_apply_enabled", False),
         } if requested_focus_review_batches_summary else None,
         {
+            "workstream": "requested_focus_action_queue",
+            "status": "manual_review" if requested_focus_action_queue_summary.get("action_batch_count", 0) else "clear",
+            "open_rows": requested_focus_action_queue_summary.get("queued_action_rows", 0),
+            "primary_report": f"data/{REQUESTED_FOCUS_ACTION_QUEUE.name}",
+            "next_step": "work_non_barcode_requested_focus_batches_first",
+            "auto_apply_enabled": requested_focus_action_queue_summary.get("auto_apply_enabled", False),
+        } if requested_focus_action_queue_summary else None,
+        {
             "workstream": "source_discovery",
             "status": "open" if source_summary.get("source_discovery_rows", 0) else "clear",
             "open_rows": source_summary.get("source_discovery_rows", 0),
@@ -1733,6 +1758,8 @@ def build_operations_public(
         )
     if requested_focus_review_batches_summary:
         open_review_queues["requested_focus_review_rows"] = requested_focus_review_batches_summary.get("review_row_count", 0)
+    if requested_focus_action_queue_summary:
+        open_review_queues["requested_focus_action_rows"] = requested_focus_action_queue_summary.get("queued_action_rows", 0)
     if animation_review_batches_summary:
         open_review_queues["animation_category_review_rows"] = animation_review_batches_summary.get("source_rows", 0)
 
@@ -1826,6 +1853,9 @@ def build_agent_work_queue_public(
     )
     requested_focus_review_batches = (
         load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}) if REQUESTED_FOCUS_REVIEW_BATCHES.exists() else {}
+    )
+    requested_focus_action_queue = (
+        load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
     )
     metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
     confirmed_import_readiness = (
@@ -2007,6 +2037,27 @@ def build_agent_work_queue_public(
                     "Prepare reviewed catalog patches only; auto-apply remains disabled.",
                 ],
                 samples=[item for item in focus_batch.get("items", []) if isinstance(item, dict)],
+            )
+
+    requested_focus_action_batches = [
+        batch for batch in requested_focus_action_queue.get("batches", []) if isinstance(batch, dict)
+    ]
+    if requested_focus_action_batches:
+        for action_batch in requested_focus_action_batches[:12]:
+            add_batch(
+                agent_id="agent-requested-focus-action",
+                workstream="requested_focus_action_queue",
+                priority=int(action_batch.get("priority") or 99),
+                title=f"{action_batch.get('topic_id')} {action_batch.get('missing_field')} actionable review",
+                public_report=REQUESTED_FOCUS_ACTION_QUEUE,
+                rows=int(action_batch.get("row_count") or 0),
+                recommended_action=str(action_batch.get("recommended_action") or "review requested focus action batch"),
+                acceptance_criteria=[
+                    "Review non-barcode fields before long barcode research.",
+                    "Confirm every source, image, date, price, or Japanese name against exact evidence.",
+                    "Prepare reviewed catalog patches only; auto-apply remains disabled.",
+                ],
+                samples=[item for item in action_batch.get("items", []) if isinstance(item, dict)],
             )
 
     readiness_workflows = [
@@ -3239,6 +3290,14 @@ def validate_report_consistency(
         )
     if requested_focus_review_summary:
         expected_open_queues["requested_focus_review_rows"] = requested_focus_review_summary.get("review_row_count", 0)
+    requested_focus_action_queue = (
+        load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
+    )
+    requested_focus_action_summary = requested_focus_action_queue.get("summary", {})
+    if requested_focus_action_summary:
+        expected_open_queues["requested_focus_action_rows"] = requested_focus_action_summary.get(
+            "queued_action_rows", 0
+        )
     if animation_review_summary:
         expected_open_queues["animation_category_review_rows"] = animation_review_summary.get("source_rows", 0)
     if open_queues != expected_open_queues:
@@ -3374,6 +3433,7 @@ def validate_report_consistency(
         f"data/{GOTOUCHI.name}",
         f"data/{REQUESTED_FOCUS.name}",
         f"data/{REQUESTED_FOCUS_REVIEW_BATCHES.name}",
+        f"data/{REQUESTED_FOCUS_ACTION_QUEUE.name}",
         f"data/{DANGANRONPA_MISSING_MEDIA.name}",
     }
     required_batch_fields = {
@@ -3584,6 +3644,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["requested_focus_review_batches"] = copy_report_summary(
                 REQUESTED_FOCUS_REVIEW_BATCHES, "requested_focus_review_batches"
             )
+        if REQUESTED_FOCUS_ACTION_QUEUE.exists():
+            target["requested_focus_action_queue"] = copy_report_summary(
+                REQUESTED_FOCUS_ACTION_QUEUE, "requested_focus_action_queue"
+            )
         target["danganronpa_missing_media"] = {
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
             **danganronpa_missing_media["summary"],
@@ -3697,6 +3761,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         REQUESTED,
         REQUESTED_FOCUS,
         REQUESTED_FOCUS_REVIEW_BATCHES,
+        REQUESTED_FOCUS_ACTION_QUEUE,
         DANGANRONPA_MISSING_MEDIA,
         DANGANRONPA_GOODSMILE_PROBE,
         DANGANRONPA_PRIZE_PROBE,
@@ -3748,6 +3813,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
             str(REQUESTED_FOCUS_REVIEW_BATCHES.relative_to(ROOT)),
+            str(REQUESTED_FOCUS_ACTION_QUEUE.relative_to(ROOT)),
             str(DANGANRONPA_MISSING_MEDIA.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),

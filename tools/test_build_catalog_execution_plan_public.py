@@ -37,6 +37,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     ],
                 }
             },
+            "requested_focus_action_queue_public.json": {
+                "summary": {
+                    "actionable_template_rows": 2,
+                    "queued_action_rows": 2,
+                    "action_batch_count": 1,
+                    "barcode_template_rows_excluded": 3,
+                    "field_counts": [["source_url", 1], ["image_url", 1]],
+                }
+            },
             "catalog_deduplication_review_batches_public.json": {
                 "summary": {"source_groups": 1, "batch_count": 1}
             },
@@ -72,6 +81,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["requested_focus_barcode_template_rows"], 3)
         self.assertEqual(requested["evidence"]["actionable_non_barcode_template_rows"], 2)
         self.assertEqual(requested["evidence"]["barcode_template_rows"], 3)
+        action_queue = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "requested_focus_action_queue"
+        )
+        self.assertEqual(action_queue["priority"], 11)
+        self.assertEqual(action_queue["rows"], 2)
+        self.assertEqual(action_queue["evidence"]["barcode_template_rows_excluded"], 3)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
 

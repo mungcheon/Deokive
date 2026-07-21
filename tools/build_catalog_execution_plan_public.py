@@ -101,6 +101,7 @@ def build_plan() -> dict[str, Any]:
     source_batches = _load("source_discovery_review_batches_public.json")
     metadata_batches = _load("catalog_metadata_review_batches_public.json")
     requested_batches = _load("requested_focus_review_batches_public.json")
+    requested_action_queue = _load("requested_focus_action_queue_public.json")
     dedupe_batches = _load("catalog_deduplication_review_batches_public.json")
     kuji_batches = _load("ichiban_kuji_metadata_review_batches_public.json")
     animation_batches = _load("animation_category_review_batches_public.json")
@@ -114,6 +115,7 @@ def build_plan() -> dict[str, Any]:
     source_summary = _summary(source_batches)
     metadata_summary = _summary(metadata_batches)
     requested_summary = _summary(requested_batches)
+    requested_action_summary = _summary(requested_action_queue)
     dedupe_summary = _summary(dedupe_batches)
     kuji_summary = _summary(kuji_batches)
     animation_summary = _summary(animation_batches)
@@ -168,6 +170,27 @@ def build_plan() -> dict[str, Any]:
                 "field_patch_template_counts": requested_summary.get("field_patch_template_counts", []),
                 "actionable_non_barcode_template_rows": requested_actionable_template_rows,
                 "barcode_template_rows": requested_barcode_template_rows,
+            },
+        )
+    )
+
+    actions.append(
+        _action(
+            priority=11,
+            workstream="requested_focus_action_queue",
+            public_report="data/requested_focus_action_queue_public.json",
+            status="manual_review",
+            rows=_count(requested_action_summary, "queued_action_rows"),
+            command="Work the non-barcode requested-focus action queue before long barcode research.",
+            next_step="review_actionable_source_image_date_price_name_batches",
+            blocker="Exact source evidence is still required before catalog mutation.",
+            evidence={
+                "actionable_template_rows": _count(requested_action_summary, "actionable_template_rows"),
+                "queued_action_rows": _count(requested_action_summary, "queued_action_rows"),
+                "action_batch_count": _count(requested_action_summary, "action_batch_count"),
+                "barcode_template_rows_excluded": _count(requested_action_summary, "barcode_template_rows_excluded"),
+                "field_counts": requested_action_summary.get("field_counts", []),
+                "topic_counts": requested_action_summary.get("topic_counts", []),
             },
         )
     )

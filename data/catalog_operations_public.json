@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:19:05Z",
+  "generated_at": "2026-07-21T22:23:42Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -29,6 +29,7 @@
       "confirmed_import_template_rows": 1996,
       "confirmed_import_pending_rows": 0,
       "requested_focus_review_rows": 6275,
+      "requested_focus_action_rows": 163,
       "animation_category_review_rows": 428
     },
     "top_store_priority_score": 1832.0
@@ -80,6 +81,14 @@
       "open_rows": 6275,
       "primary_report": "data/requested_focus_review_batches_public.json",
       "next_step": "work_requested_focus_batches_by_topic_field_store",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "requested_focus_action_queue",
+      "status": "manual_review",
+      "open_rows": 163,
+      "primary_report": "data/requested_focus_action_queue_public.json",
+      "next_step": "work_non_barcode_requested_focus_batches_first",
       "auto_apply_enabled": false
     },
     {
@@ -746,9 +755,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 8,
+      "action_count": 9,
       "blocked_action_count": 1,
-      "manual_review_action_count": 6,
+      "manual_review_action_count": 7,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -766,6 +775,15 @@
       "batch_count": 313,
       "review_row_count": 6275,
       "recommended_next_action": "Work user-requested focus batches by topic, missing field, and source store."
+    },
+    {
+      "priority": 12,
+      "workstream": "requested_focus_action_queue",
+      "public_report": "data/requested_focus_action_queue_public.json",
+      "actionable_template_rows": 600,
+      "queued_action_rows": 163,
+      "action_batch_count": 24,
+      "recommended_next_action": "Work non-barcode requested-focus rows before long barcode research."
     },
     {
       "priority": 15,
