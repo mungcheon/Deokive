@@ -55,6 +55,19 @@ class BuildIchibanKujiMetadataReviewBatchesPublicTest(unittest.TestCase):
         self.assertFalse(report["automation_policy"]["auto_apply_official_price_jpy"])
         self.assertEqual(report["batches"][0]["campaigns"][0]["workflow"], "release_date_review")
         self.assertEqual(report["batches"][1]["campaigns"][0]["workflow"], "price_review")
+        self.assertEqual(report["batches"][0]["blocked_until"], "manual_official_evidence_confirmed")
+        self.assertIn(
+            "double_chance_or_unlabeled_dates_are_not_used_as_release_date",
+            report["batches"][0]["evidence_checklist"],
+        )
+        self.assertIn(
+            "price_is_labeled_as_kuji_draw_price_or_official_price",
+            report["batches"][1]["evidence_checklist"],
+        )
+        self.assertIn(
+            "campaign_title_matches_catalog_series",
+            report["batches"][0]["campaigns"][0]["evidence_checklist"],
+        )
 
 
 if __name__ == "__main__":

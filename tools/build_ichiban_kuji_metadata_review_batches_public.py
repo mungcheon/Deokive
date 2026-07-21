@@ -48,6 +48,30 @@ def _next_step(workflow: str) -> str:
     return "review_official_campaign_metadata"
 
 
+def _evidence_checklist(workflow: str) -> list[str]:
+    checklist = [
+        "official_1kuji_campaign_page_or_captured_official_archive",
+        "campaign_title_matches_catalog_series",
+        "sample_catalog_indexes_all_share_the_same_campaign_url",
+    ]
+    if workflow in {"release_date_review", "release_and_price_review"}:
+        checklist.extend(
+            [
+                "release_date_is_labeled_as_campaign_release_or_start_date",
+                "double_chance_or_unlabeled_dates_are_not_used_as_release_date",
+            ]
+        )
+    if workflow in {"price_review", "release_and_price_review"}:
+        checklist.extend(
+            [
+                "price_is_labeled_as_kuji_draw_price_or_official_price",
+                "tax_status_or_currency_is_preserved_when_visible",
+                "historical_or_inferred_prices_are_not_used_without_official_label",
+            ]
+        )
+    return checklist
+
+
 def _compact_row(row: dict[str, Any]) -> dict[str, Any]:
     workflow = _workflow(row)
     return {
@@ -64,6 +88,7 @@ def _compact_row(row: dict[str, Any]) -> dict[str, Any]:
         "sample_catalog_indexes": row.get("sample_catalog_indexes") or [],
         "sample_names": row.get("sample_names") or [],
         "next_machine_step": _next_step(workflow),
+        "evidence_checklist": _evidence_checklist(workflow),
         "auto_apply_enabled": False,
     }
 
@@ -75,6 +100,7 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
         batch_rows = rows[offset : offset + batch_size]
         workflows = Counter(str(row.get("workflow") or "") for row in batch_rows)
         missing_fields = Counter(field for row in batch_rows for field in row.get("missing_fields") or [])
+        evidence = sorted({item for row in batch_rows for item in row.get("evidence_checklist", [])})
         batches.append(
             {
                 "batch_id": f"ichiban-metadata-review-{len(batches) + 1:03d}",
@@ -86,6 +112,8 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
                 "review_state": "official_campaign_evidence_required",
                 "next_machine_step": "verify_ichiban_campaign_page",
                 "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
+                "evidence_checklist": evidence,
+                "blocked_until": "manual_official_evidence_confirmed",
                 "campaigns": batch_rows,
             }
         )
