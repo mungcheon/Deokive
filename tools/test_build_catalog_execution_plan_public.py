@@ -26,7 +26,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                 "summary": {"missing_cell_count": 20, "batch_count": 2, "field_missing_totals": {"barcode": 20}}
             },
             "requested_focus_review_batches_public.json": {
-                "summary": {"review_row_count": 5, "batch_count": 1}
+                "summary": {
+                    "review_row_count": 5,
+                    "batch_count": 1,
+                    "field_patch_template_count": 5,
+                    "field_patch_template_counts": [
+                        ["barcode", 3],
+                        ["source_url", 1],
+                        ["image_url", 1],
+                    ],
+                }
             },
             "catalog_deduplication_review_batches_public.json": {
                 "summary": {"source_groups": 1, "batch_count": 1}
@@ -54,6 +63,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(first["workstream"], "confirmed_import_readiness")
         self.assertEqual(first["status"], "needs_manual_confirmation")
         self.assertIn("manual_confirmed=true", first["blocker"])
+        requested = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "requested_focus_review_batches"
+        )
+        self.assertEqual(report["summary"]["requested_focus_actionable_template_rows"], 2)
+        self.assertEqual(report["summary"]["requested_focus_barcode_template_rows"], 3)
+        self.assertEqual(requested["evidence"]["actionable_non_barcode_template_rows"], 2)
+        self.assertEqual(requested["evidence"]["barcode_template_rows"], 3)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
 

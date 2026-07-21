@@ -46,6 +46,28 @@ def _count(summary: dict[str, Any], key: str) -> int:
         return 0
 
 
+def _pair_counts(value: Any) -> dict[str, int]:
+    if isinstance(value, dict):
+        raw_items = value.items()
+    elif isinstance(value, list):
+        raw_items = value
+    else:
+        return {}
+
+    counts: dict[str, int] = {}
+    for item in raw_items:
+        if not isinstance(item, (list, tuple)) or len(item) != 2:
+            continue
+        key, raw_count = item
+        try:
+            count = int(raw_count or 0)
+        except (TypeError, ValueError):
+            count = 0
+        if count > 0:
+            counts[str(key)] = count
+    return counts
+
+
 def _action(
     *,
     priority: int,
@@ -98,6 +120,11 @@ def build_plan() -> dict[str, Any]:
     confirmed_summary = _summary(confirmed_readiness)
 
     actions: list[dict[str, Any]] = []
+    requested_template_counts = _pair_counts(requested_summary.get("field_patch_template_counts", []))
+    requested_barcode_template_rows = requested_template_counts.get("barcode", 0)
+    requested_actionable_template_rows = sum(
+        count for field, count in requested_template_counts.items() if field != "barcode"
+    )
     pending_import_rows = _count(confirmed_summary, "ready_or_pending_import_rows")
     blocked_confirmed_rows = _count(confirmed_summary, "blocked_confirmed_rows")
     template_items = _count(confirmed_summary, "template_items")
@@ -137,6 +164,10 @@ def build_plan() -> dict[str, Any]:
                 "batch_count": _count(requested_summary, "batch_count"),
                 "by_topic": requested_summary.get("by_topic", []),
                 "by_missing_field": requested_summary.get("by_missing_field", []),
+                "field_patch_template_count": _count(requested_summary, "field_patch_template_count"),
+                "field_patch_template_counts": requested_summary.get("field_patch_template_counts", []),
+                "actionable_non_barcode_template_rows": requested_actionable_template_rows,
+                "barcode_template_rows": requested_barcode_template_rows,
             },
         )
     )
@@ -260,6 +291,8 @@ def build_plan() -> dict[str, Any]:
             "pending_import_action_count": sum(1 for action in actions if action["status"] == "pending_import"),
             "total_action_rows": sum(int(action.get("rows") or 0) for action in actions),
             "open_review_queues": open_queues,
+            "requested_focus_actionable_template_rows": requested_actionable_template_rows,
+            "requested_focus_barcode_template_rows": requested_barcode_template_rows,
             "auto_apply_enabled": False,
         },
         "actions": actions,
