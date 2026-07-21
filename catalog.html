@@ -586,6 +586,165 @@
       transform: translateY(0);
     }
 
+    .owned-library {
+      background: rgba(44, 36, 48, 0.24);
+      display: grid;
+      inset: 0;
+      opacity: 0;
+      padding: 18px;
+      place-items: center;
+      pointer-events: none;
+      position: fixed;
+      transition: opacity 180ms ease;
+      z-index: 19;
+    }
+
+    .owned-library.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .owned-library-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(44, 36, 48, 0.22);
+      display: grid;
+      gap: 14px;
+      max-height: min(760px, calc(100vh - 36px));
+      max-width: 720px;
+      overflow: hidden;
+      padding: 18px;
+      transform: translateY(10px) scale(0.98);
+      transition: transform 180ms ease;
+      width: 100%;
+    }
+
+    .owned-library.open .owned-library-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .library-head {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .library-head h2 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .library-controls {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr auto;
+    }
+
+    .library-controls select,
+    .library-controls button {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      min-height: 44px;
+    }
+
+    .library-controls select {
+      background: #fff;
+      color: var(--ink);
+      min-width: 0;
+      padding: 0 12px;
+    }
+
+    .library-controls button {
+      background: rgba(255, 242, 247, 0.82);
+      color: var(--pink-dark);
+      cursor: pointer;
+      font-weight: 900;
+      padding: 0 14px;
+    }
+
+    .library-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      min-height: 120px;
+      overflow: auto;
+      padding: 2px 2px 4px;
+    }
+
+    .owned-card {
+      background: #fff8fb;
+      border: 1px solid rgba(255, 126, 178, 0.18);
+      border-radius: 18px;
+      display: grid;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .owned-card-top {
+      align-items: center;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 52px 1fr;
+      min-width: 0;
+    }
+
+    .owned-card-thumb {
+      align-items: center;
+      background: #fff;
+      border: 1px solid rgba(255, 126, 178, 0.16);
+      border-radius: 14px;
+      display: flex;
+      height: 52px;
+      justify-content: center;
+      overflow: hidden;
+      width: 52px;
+    }
+
+    .owned-card-thumb img {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .owned-card-thumb span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .owned-card-name {
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.32;
+      min-width: 0;
+    }
+
+    .owned-card-meta {
+      color: var(--muted);
+      display: grid;
+      font-size: 11px;
+      font-weight: 750;
+      gap: 4px;
+      line-height: 1.35;
+    }
+
+    .owned-card-foot {
+      align-items: center;
+      color: var(--pink-dark);
+      display: flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: space-between;
+    }
+
+    .owned-card-foot a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     .sheet-head {
       align-items: center;
       display: flex;
@@ -782,6 +941,10 @@
       .sheet-actions {
         grid-template-columns: 1fr;
       }
+
+      .library-controls {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -892,6 +1055,19 @@
       </div>
     </section>
   </div>
+  <div id="ownedLibrary" class="owned-library" aria-hidden="true">
+    <section class="owned-library-card" role="dialog" aria-modal="true" aria-labelledby="ownedLibraryTitle">
+      <div class="library-head">
+        <h2 id="ownedLibraryTitle">내 보유 굿즈</h2>
+        <button id="closeOwnedLibrary" class="sheet-close" type="button" aria-label="닫기">×</button>
+      </div>
+      <div class="library-controls">
+        <select id="libraryFolder" aria-label="보유 굿즈 폴더 필터"></select>
+        <button id="libraryNewFolder" type="button">폴더 만들기</button>
+      </div>
+      <div id="ownedLibraryGrid" class="library-grid"></div>
+    </section>
+  </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
@@ -961,6 +1137,7 @@
     function saveOwned() {
       localStorage.setItem(ownedStorageKey, JSON.stringify(state.owned));
       renderOwnedControls();
+      if ($('ownedLibrary').classList.contains('open')) renderOwnedLibrary();
     }
 
     function renderOwnedControls() {
@@ -976,6 +1153,17 @@
       sheetSelect.value = state.owned.folders.some((folder) => folder.id === selectedSheetFolder)
         ? selectedSheetFolder
         : select.value || state.owned.folders[0]?.id || 'top';
+      const librarySelect = $('libraryFolder');
+      if (librarySelect) {
+        const selectedLibraryFolder = librarySelect.value || 'all';
+        librarySelect.replaceChildren(
+          option('전체 폴더', 'all'),
+          ...state.owned.folders.map((folder) => option(folder.name, folder.id)),
+        );
+        librarySelect.value = selectedLibraryFolder === 'all' || state.owned.folders.some((folder) => folder.id === selectedLibraryFolder)
+          ? selectedLibraryFolder
+          : 'all';
+      }
       $('ownedCount').textContent = `${fmt.format(state.owned.goods.length)}개`;
       if (state.items.length) renderResults();
     }
@@ -1097,13 +1285,58 @@
         showToast('아직 저장된 굿즈가 없어요');
         return;
       }
+      renderOwnedLibrary();
+      $('ownedLibrary').classList.add('open');
+      $('ownedLibrary').setAttribute('aria-hidden', 'false');
+    }
+
+    function closeOwnedLibrary() {
+      $('ownedLibrary').classList.remove('open');
+      $('ownedLibrary').setAttribute('aria-hidden', 'true');
+    }
+
+    function renderOwnedLibrary() {
+      const grid = $('ownedLibraryGrid');
+      const folderFilter = $('libraryFolder').value || 'all';
       const folderNameById = new Map(state.owned.folders.map((folder) => [folder.id, folder.name]));
-      const lines = state.owned.goods.slice(0, 30).map((owned, index) => {
+      const goods = state.owned.goods.filter((owned) => folderFilter === 'all' || owned.folderId === folderFilter);
+      if (!goods.length) {
+        grid.innerHTML = '<div class="empty">이 폴더에 저장된 굿즈가 없어요</div>';
+        return;
+      }
+      const fragment = document.createDocumentFragment();
+      for (const owned of goods) {
         const name = owned.item?.name_ko || owned.item?.name_ja || '이름 없음';
         const folder = folderNameById.get(owned.folderId) || '내 굿즈';
-        return `${index + 1}. [${folder}] ${name} x${owned.quantity}`;
-      });
-      alert(`${lines.join('\n')}${state.owned.goods.length > 30 ? '\n...' : ''}`);
+        const meta = [
+          folder,
+          owned.item?.category,
+          owned.item?.source_store,
+          compactDate(owned.item?.release_date),
+        ].filter(Boolean).join(' · ');
+        const card = document.createElement('article');
+        card.className = 'owned-card';
+        card.innerHTML = `
+          <div class="owned-card-top">
+            <div class="owned-card-thumb">
+              ${owned.item?.image_url ? `<img src="${escapeAttr(owned.item.image_url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'이미지 없음'}))">` : '<span>이미지 없음</span>'}
+            </div>
+            <div>
+              <div class="owned-card-name">${escapeHtml(name)}</div>
+              <div class="owned-card-meta">
+                <span>${escapeHtml(meta || 'DB에서 추가한 굿즈')}</span>
+                <span>${escapeHtml([owned.item?.character_name, price(owned.item || {})].filter(Boolean).join(' · ') || '세부 정보 없음')}</span>
+              </div>
+            </div>
+          </div>
+          <div class="owned-card-foot">
+            <span>수량 ${fmt.format(owned.quantity || 1)}</span>
+            ${owned.item?.source_url ? `<a href="${escapeAttr(owned.item.source_url)}" target="_blank" rel="noopener noreferrer">출처</a>` : '<span>로컬 저장</span>'}
+          </div>
+        `;
+        fragment.append(card);
+      }
+      grid.replaceChildren(fragment);
     }
 
     function clearOwned() {
@@ -1282,6 +1515,12 @@
     $('newFolder').addEventListener('click', () => createFolder('ownedFolder'));
     $('openOwned').addEventListener('click', showOwnedList);
     $('clearOwned').addEventListener('click', clearOwned);
+    $('closeOwnedLibrary').addEventListener('click', closeOwnedLibrary);
+    $('ownedLibrary').addEventListener('click', (event) => {
+      if (event.target === $('ownedLibrary')) closeOwnedLibrary();
+    });
+    $('libraryFolder').addEventListener('change', renderOwnedLibrary);
+    $('libraryNewFolder').addEventListener('click', () => createFolder('libraryFolder'));
     $('closeOwnedSheet').addEventListener('click', closeOwnedSheet);
     $('ownedSheet').addEventListener('click', (event) => {
       if (event.target === $('ownedSheet')) closeOwnedSheet();
