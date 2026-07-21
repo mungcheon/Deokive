@@ -6,6 +6,7 @@ import '../l10n/app_strings.dart';
 import '../models/badge_item.dart';
 import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
+import '../utils/catalog_goods_importer.dart';
 import '../widgets/deokive_avatar.dart';
 import '../widgets/deokive_header_title.dart';
 import '../widgets/showcase_background.dart';
@@ -65,8 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
             .where((p) => p.tag == BoardPostTag.notice)
             .toList()
           ..sort((a, b) => b.date.compareTo(a.date));
-        final marqueeTitles =
-            noticeSorted.take(5).map((p) => p.title).toList();
+        final marqueeTitles = noticeSorted.take(5).map((p) => p.title).toList();
 
         // Tutorial slides — replaces the news/notice banner until live content
         // is in place. Each slide doubles as a feature walkthrough.
@@ -77,8 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'icon': Icons.folder_special_rounded,
             'detailTitle': '굿즈를 폴더에 정리해 보세요',
             'detailDate': '사용 가이드',
-            'detailContent':
-                '1. 하단 탭 [폴더]로 이동\n'
+            'detailContent': '1. 하단 탭 [폴더]로 이동\n'
                 '2. 우측 상단 + 버튼으로 새 폴더 생성 (캐릭터·IP 단위 추천)\n'
                 '3. 폴더 안에서 + 버튼으로 굿즈 추가\n\n'
                 '👉 사고 싶은 아이템은 위시리스트 폴더에 따로 모아두면 결제 추적과 분리돼서 편해요.',
@@ -89,8 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'icon': Icons.qr_code_scanner_rounded,
             'detailTitle': '바코드로 굿즈를 빠르게 등록',
             'detailDate': '사용 가이드',
-            'detailContent':
-                '1. 폴더 안에서 굿즈 추가 → [바코드 스캔] 선택\n'
+            'detailContent': '1. 폴더 안에서 굿즈 추가 → [바코드 스캔] 선택\n'
                 '2. 카메라를 박스 바코드에 비추기\n'
                 '3. 카탈로그 매칭이 되면 이름·정가·이미지가 자동으로 채워져요\n\n'
                 '👉 카탈로그에 없는 신상품도 직접 정보를 입력해 추가하면 다음부터 같은 바코드가 자동 인식돼요.',
@@ -101,8 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'icon': Icons.image_search_rounded,
             'detailTitle': '이미지로 비슷한 굿즈 찾기',
             'detailDate': '사용 가이드',
-            'detailContent':
-                '1. 굿즈 추가 화면에서 [이미지 검색] 선택\n'
+            'detailContent': '1. 굿즈 추가 화면에서 [이미지 검색] 선택\n'
                 '2. 갤러리 또는 카메라로 굿즈 사진 선택\n'
                 '3. 카탈로그 전체와 비교해 비슷한 아이템 5개가 추천돼요\n\n'
                 '👉 박스에서 꺼낸 정면 사진이 가장 정확하게 매칭됩니다.',
@@ -113,8 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'icon': Icons.workspace_premium_rounded,
             'detailTitle': '뱃지를 모아 등급을 올려보세요',
             'detailDate': '사용 가이드',
-            'detailContent':
-                '굿즈 등록 수, 폴더 다양성, 출석 등 다양한 조건으로 뱃지가 잠금 해제돼요.\n\n'
+            'detailContent': '굿즈 등록 수, 폴더 다양성, 출석 등 다양한 조건으로 뱃지가 잠금 해제돼요.\n\n'
                 '획득한 뱃지는 홈 화면 프로필 카드 위 전시대에 장착할 수 있고, '
                 '레벨이 올라갈수록 전시대 배경이 더 화려해져요.\n\n'
                 '👉 홈 → 뱃지 카드를 눌러 전체 컬렉션 확인.',
@@ -125,8 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'icon': Icons.forum_rounded,
             'detailTitle': '게시판에서 다른 덕후들과 소통',
             'detailDate': '사용 가이드',
-            'detailContent':
-                '게시판 탭에서는 세 가지를 할 수 있어요.\n\n'
+            'detailContent': '게시판 탭에서는 세 가지를 할 수 있어요.\n\n'
                 '• 자유게시판: 정보봇이 자동으로 가져오는 공식 X 계정의 굿즈 소식 + 직접 작성하는 일반 글\n'
                 '• 글 저장소: 내가 쓴 글과 좋아요·북마크한 글을 모아 보기\n'
                 '• 행사 일정: 캘린더로 팝업·전시·이벤트 일정 확인\n\n'
@@ -138,8 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'icon': Icons.face_retouching_natural_rounded,
             'detailTitle': '아바타와 프로필을 꾸며 보세요',
             'detailDate': '사용 가이드',
-            'detailContent':
-                '홈 화면 프로필 카드의 아바타를 탭하면 편집기로 이동합니다.\n\n'
+            'detailContent': '홈 화면 프로필 카드의 아바타를 탭하면 편집기로 이동합니다.\n\n'
                 '머리 스타일·의상 색·모자·망토·소품 등을 자유롭게 조합할 수 있고, '
                 '뱃지 등급이 오를수록 더 화려한 전시대 배경이 자동으로 열립니다.\n\n'
                 '👉 친구의 프로필 코드를 입력해서 서로의 컬렉션을 구경할 수도 있어요 (예정).',
@@ -171,6 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
+              const SizedBox(height: 18),
+              _CatalogImportPanel(appState: appState, palette: palette),
               const SizedBox(height: 24),
               const Text(
                 '덕카이브 시작 가이드',
@@ -206,12 +202,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (_) => NewsDetailScreen(
-                                          title:
-                                              slide['detailTitle'] as String,
-                                          date:
-                                              slide['detailDate'] as String,
-                                          content: slide['detailContent']
-                                              as String,
+                                          title: slide['detailTitle'] as String,
+                                          date: slide['detailDate'] as String,
+                                          content:
+                                              slide['detailContent'] as String,
                                         ),
                                       ),
                                     );
@@ -267,6 +261,204 @@ String _truncateNickname(String name) {
   return String.fromCharCodes(name.runes.take(15));
 }
 
+class _CatalogImportPanel extends StatelessWidget {
+  final AppState appState;
+  final DeokivePalette palette;
+
+  const _CatalogImportPanel({
+    required this.appState,
+    required this.palette,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final entries = appState.curatedCatalogEntries;
+    final imageEntries = entries
+        .where((entry) => (entry.imageUrl ?? '').trim().isNotEmpty)
+        .take(4)
+        .toList();
+    final categoryCount = {
+      for (final entry in entries)
+        if (entry.normalizedCategory.trim().isNotEmpty)
+          entry.normalizedCategory.trim(),
+    }.length;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: palette.primary.withValues(alpha: 0.14),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.dataset_outlined,
+                  color: palette.primary,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '굿즈 DB',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      '공개 카탈로그에서 찾아 내 폴더에 저장',
+                      style: TextStyle(fontSize: 12.5),
+                    ),
+                  ],
+                ),
+              ),
+              FilledButton.icon(
+                onPressed: () => showCatalogGoodsImportFlow(context),
+                icon: const Icon(Icons.add_rounded, size: 18),
+                label: const Text('추가'),
+                style: FilledButton.styleFrom(
+                  visualDensity: VisualDensity.compact,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              _CatalogMetricChip(
+                label: 'DB',
+                value: '${entries.length}',
+                color: palette.primary,
+              ),
+              const SizedBox(width: 8),
+              _CatalogMetricChip(
+                label: '분류',
+                value: '$categoryCount',
+                color: palette.accent,
+              ),
+              const Spacer(),
+              SizedBox(
+                width: 118,
+                height: 42,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    for (var i = 0; i < imageEntries.length; i++)
+                      Positioned(
+                        left: i * 25,
+                        child:
+                            _CatalogThumb(imageUrl: imageEntries[i].imageUrl),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CatalogMetricChip extends StatelessWidget {
+  final String label;
+  final String value;
+  final Color color;
+
+  const _CatalogMetricChip({
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CatalogThumb extends StatelessWidget {
+  final String? imageUrl;
+
+  const _CatalogThumb({required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final placeholder = Container(
+      width: 42,
+      height: 42,
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surfaceContainerHighest,
+        shape: BoxShape.circle,
+        border: Border.all(color: theme.colorScheme.surface, width: 2),
+      ),
+      child: const Icon(Icons.inventory_2_outlined, size: 18),
+    );
+
+    final url = imageUrl;
+    if (url == null || url.trim().isEmpty) return placeholder;
+    return Container(
+      width: 42,
+      height: 42,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: theme.colorScheme.surface, width: 2),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Image.network(
+        url.replaceAll('&amp;', '&').replaceFirst(RegExp(r'^//'), 'https://'),
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => placeholder,
+      ),
+    );
+  }
+}
+
 class _MapleProfileCard extends StatelessWidget {
   final AppState appState;
   final DeokivePalette palette;
@@ -277,7 +469,8 @@ class _MapleProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isLoggedIn = appState.isLoggedIn;
-    final folderCount = appState.folders.where((f) => !f.isSystemWishlist).length;
+    final folderCount =
+        appState.folders.where((f) => !f.isSystemWishlist).length;
     final goodsCount = appState.totalGoodsCount;
     final badgeCount = appState.totalUnlockedBadgeCount;
     final profileLevel = appState.totalUnlockedBadgeLevel;
@@ -677,7 +870,6 @@ class _EmptyEmblemSlot extends StatelessWidget {
   }
 }
 
-
 // ── Banner widgets ──────────────────────────────────────────────────────
 
 class _BannerArrowButton extends StatelessWidget {
@@ -835,8 +1027,7 @@ class _NoticeMarqueeState extends State<_NoticeMarquee>
         child: Row(
           children: [
             const SizedBox(width: 12),
-            const Icon(Icons.campaign_rounded,
-                color: Colors.white, size: 18),
+            const Icon(Icons.campaign_rounded, color: Colors.white, size: 18),
             const SizedBox(width: 8),
             Expanded(
               child: ClipRect(

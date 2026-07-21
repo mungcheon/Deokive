@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:50:20Z",
+  "generated_at": "2026-07-21T22:59:08Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 8897,
+    "summed_batch_rows": 9879,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -43,15 +43,19 @@
         3
       ],
       [
-        "ichiban_kuji_metadata_action_queue",
-        2
-      ],
-      [
         "gotouchi_official_candidate_review",
         1
       ],
       [
         "confirmed_import_readiness",
+        1
+      ],
+      [
+        "ichiban_kuji_metadata_action_queue",
+        1
+      ],
+      [
+        "metadata_action_queue",
         1
       ]
     ],
@@ -93,15 +97,19 @@
         3
       ],
       [
-        "agent-ichiban-action",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
       [
         "agent-confirmed-import",
+        1
+      ],
+      [
+        "agent-ichiban-action",
+        1
+      ],
+      [
+        "agent-metadata-action",
         1
       ]
     ],
@@ -123,6 +131,7 @@
       "source_discovery_action_rows": 240,
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
+      "metadata_action_missing_cells": 1362,
       "animation_category_review_rows": 428
     }
   },
@@ -11160,7 +11169,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "038-agent-ichiban-action-106",
+      "batch_id": "038-agent-ichiban-action-110",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -12773,556 +12782,103 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "048-agent-ichiban-action-107",
-      "agent_id": "agent-ichiban-action",
-      "workstream": "ichiban_kuji_metadata_action_queue",
-      "priority": 48,
-      "title": "Ichiban Kuji metadata action ichiban-metadata-action-002",
-      "public_report": "data/ichiban_kuji_metadata_action_queue_public.json",
-      "rows": 8,
-      "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+      "batch_id": "045-agent-metadata-action-80",
+      "agent_id": "agent-metadata-action",
+      "workstream": "metadata_action_queue",
+      "priority": 45,
+      "title": "Metadata action metadata-action-001",
+      "public_report": "data/catalog_metadata_action_queue_public.json",
+      "rows": 990,
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
       "acceptance_criteria": [
-        "Use only labeled official 1kuji campaign metadata or captured official evidence.",
-        "Fill release_date or official_price_jpy templates only after manual confirmation.",
-        "Auto-apply remains disabled for historical campaign metadata."
+        "Only release_date, official_price_jpy, and name_ja groups are included here.",
+        "Every value requires official or trusted evidence before import.",
+        "Barcode, source_url, and image_url remain in their dedicated queues."
       ],
       "sample_items": [
         {
-          "group_key": "https://1kuji.com/products/73",
-          "url": "https://1kuji.com/products/73",
-          "slug": "73",
-          "title": "一番くじドラゴンボールＺ～サイヤ人襲来編～",
-          "catalog_item_rows": 7,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16802,
-            16803,
-            16804,
-            16805,
-            16806,
-            16807,
-            16808
-          ],
-          "sample_names": [
-            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - A賞 丸型宇宙船＆悟空",
-            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｂ賞 バーダックフィギュア",
-            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - C賞 幼少べジータフィギュア",
-            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｄ賞 クッション",
-            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｅ賞 スカウタークリップボード",
-            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｆ賞 サイヤ人テープ",
-            "一番くじドラゴンボールＺ～サイヤ人襲来編～ - Ｇ賞 しっぽストラップ"
-          ],
-          "campaign_field_patch_templates": [
-            {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/73",
-              "campaign_slug": "73",
-              "campaign_title": "一番くじドラゴンボールＺ～サイヤ人襲来編～",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 7,
-              "target_catalog_indexes_sample": [
-                16802,
-                16803,
-                16804,
-                16805,
-                16806,
-                16807,
-                16808
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
-            }
-          ],
-          "auto_apply_enabled": false
+          "catalog_index": 920,
+          "name_ko": "치이카와 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ ラバーストラップ (ちいかわ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": "https://www.enskyshop.com/products/detail/24195",
+          "official_search_url": null
         },
         {
-          "group_key": "https://1kuji.com/products/89",
-          "url": "https://1kuji.com/products/89",
-          "slug": "89",
-          "title": "一番くじドラゴンボールZ～ナメック星編～",
-          "catalog_item_rows": 7,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16795,
-            16796,
-            16797,
-            16798,
-            16799,
-            16800,
-            16801
-          ],
-          "sample_names": [
-            "一番くじドラゴンボールZ～ナメック星編～ - フリーザフィギュア賞",
-            "一番くじドラゴンボールZ～ナメック星編～ - 悟空フィギュア賞",
-            "一番くじドラゴンボールZ～ナメック星編～ - べジータフィギュア賞",
-            "一番くじドラゴンボールZ～ナメック星編～ - スカウター型メジャー賞",
-            "一番くじドラゴンボールZ～ナメック星編～ - ソフビ貯金箱賞",
-            "一番くじドラゴンボールZ～ナメック星編～ - グラス賞",
-            "一番くじドラゴンボールZ～ナメック星編～ - ギニュー特戦隊フィギュア賞"
-          ],
-          "campaign_field_patch_templates": [
-            {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/89",
-              "campaign_slug": "89",
-              "campaign_title": "一番くじドラゴンボールZ～ナメック星編～",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 7,
-              "target_catalog_indexes_sample": [
-                16795,
-                16796,
-                16797,
-                16798,
-                16799,
-                16800,
-                16801
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
-            }
-          ],
-          "auto_apply_enabled": false
+          "catalog_index": 921,
+          "name_ko": "치이카와 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ ラバーストラップ (ハチワレ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": "https://www.enskyshop.com/products/detail/29520",
+          "official_search_url": null
         },
         {
-          "group_key": "https://1kuji.com/products/cho-gyojin",
-          "url": "https://1kuji.com/products/cho-gyojin",
-          "slug": "cho-gyojin",
-          "title": "一番くじ チョッパー「行くぞ！魚人島」",
-          "catalog_item_rows": 9,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16073,
-            16074,
-            16075,
-            16076,
-            16077,
-            16078,
-            16079,
-            16080
-          ],
-          "sample_names": [
-            "一番くじ チョッパー「行くぞ！魚人島」 - A賞 ビッグソフィビフィギュア",
-            "一番くじ チョッパー「行くぞ！魚人島」 - B賞 土鍋",
-            "一番くじ チョッパー「行くぞ！魚人島」 - C賞 ヒストリーフィギュア「魚人島」",
-            "一番くじ チョッパー「行くぞ！魚人島」 - D賞 ジンベエぬいぐるみ",
-            "一番くじ チョッパー「行くぞ！魚人島」 - E賞 2色ボールペン&ステーショナリー",
-            "一番くじ チョッパー「行くぞ！魚人島」 - F賞 食器コレクション",
-            "一番くじ チョッパー「行くぞ！魚人島」 - G賞 フィギュア付きベルトストラップ",
-            "一番くじ チョッパー「行くぞ！魚人島」 - H賞 ちびきゅんキャラ"
-          ],
-          "campaign_field_patch_templates": [
-            {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/cho-gyojin",
-              "campaign_slug": "cho-gyojin",
-              "campaign_title": "一番くじ チョッパー「行くぞ！魚人島」",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 9,
-              "target_catalog_indexes_sample": [
-                16073,
-                16074,
-                16075,
-                16076,
-                16077,
-                16078,
-                16079,
-                16080
-              ],
-              "requires_full_campaign_index_expansion": true,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
-            }
-          ],
-          "auto_apply_enabled": false
+          "catalog_index": 922,
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": null
         },
         {
-          "group_key": "https://1kuji.com/products/cho-history",
-          "url": "https://1kuji.com/products/cho-history",
-          "slug": "cho-history",
-          "title": "一番くじ ヒストリー オブ チョッパー",
-          "catalog_item_rows": 12,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16111,
-            16112,
-            16113,
-            16114,
-            16115,
-            16116,
-            16117,
-            16118
-          ],
-          "sample_names": [
-            "一番くじ ヒストリー オブ チョッパー - A賞 フェイスクッション",
-            "一番くじ ヒストリー オブ チョッパー - B賞 ヒストリーフィギュア「ドラム王国」編",
-            "一番くじ ヒストリー オブ チョッパー - C賞 ヒストリーフィギュア「アラバスタ」編",
-            "一番くじ ヒストリー オブ チョッパー - D賞 ヒストリーフィギュア「スカイピア」編",
-            "一番くじ ヒストリー オブ チョッパー - E賞 ヒストリーフィギュア「スリラーバーク」編",
-            "一番くじ ヒストリー オブ チョッパー - F賞 ヒストリーフィギュア「シャボンディ諸島」編",
-            "一番くじ ヒストリー オブ チョッパー - G賞 チョッパー×クマシーぬいぐるみ",
-            "一番くじ ヒストリー オブ チョッパー - H賞 インテリアハンガー"
-          ],
-          "campaign_field_patch_templates": [
-            {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/cho-history",
-              "campaign_slug": "cho-history",
-              "campaign_title": "一番くじ ヒストリー オブ チョッパー",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 12,
-              "target_catalog_indexes_sample": [
-                16111,
-                16112,
-                16113,
-                16114,
-                16115,
-                16116,
-                16117,
-                16118
-              ],
-              "requires_full_campaign_index_expansion": true,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
-            }
-          ],
-          "auto_apply_enabled": false
+          "catalog_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": null
         },
         {
-          "group_key": "https://1kuji.com/products/cho6-DM",
-          "url": "https://1kuji.com/products/cho6-DM",
-          "slug": "cho6-DM",
-          "title": "一番くじ チョッパー&クリーチャー",
-          "catalog_item_rows": 10,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16020,
-            16021,
-            16022,
-            16023,
-            16024,
-            16025,
-            16026,
-            16027
-          ],
-          "sample_names": [
-            "一番くじ チョッパー&クリーチャー - A賞 チョッパー&クリーチャーフィギュア～サウスバード～",
-            "一番くじ チョッパー&クリーチャー - B賞 チョッパー&クリーチャーフィギュア～ハイキングベア～",
-            "一番くじ チョッパー&クリーチャー - C賞 チョッパー&クリーチャーフィギュア～クンフージュゴン～",
-            "一番くじ チョッパー&クリーチャー - D賞 チョッパー&クリーチャーフィギュア～偽チョッパー～",
-            "一番くじ チョッパー&クリーチャー - E賞 きゅんぐるみ『ワンピース』～チョッパー&クリーチャー～",
-            "一番くじ チョッパー&クリーチャー - F賞 アートプレート",
-            "一番くじ チョッパー&クリーチャー - G賞 チェーンストラップ",
-            "一番くじ チョッパー&クリーチャー - H賞 フェイスタオル"
-          ],
-          "campaign_field_patch_templates": [
-            {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/cho6-DM",
-              "campaign_slug": "cho6-DM",
-              "campaign_title": "一番くじ チョッパー&クリーチャー",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 10,
-              "target_catalog_indexes_sample": [
-                16020,
-                16021,
-                16022,
-                16023,
-                16024,
-                16025,
-                16026,
-                16027
-              ],
-              "requires_full_campaign_index_expansion": true,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
-            }
-          ],
-          "auto_apply_enabled": false
+          "catalog_index": 924,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": null
         },
         {
-          "group_key": "https://1kuji.com/products/chotwo",
-          "url": "https://1kuji.com/products/chotwo",
-          "slug": "chotwo",
-          "title": "一番くじチョッパー ～サウザンド・サニー号～",
-          "catalog_item_rows": 8,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16201,
-            16202,
-            16203,
-            16204,
-            16205,
-            16206,
-            16207,
-            16208
-          ],
-          "sample_names": [
-            "一番くじチョッパー ～サウザンド・サニー号～ - A賞 ジャンボクッション",
-            "一番くじチョッパー ～サウザンド・サニー号～ - B賞 ジオラマフィギュア",
-            "一番くじチョッパー ～サウザンド・サニー号～ - C賞 サニー号ぬいぐるみ",
-            "一番くじチョッパー ～サウザンド・サニー号～ - D賞 折りたたみ傘",
-            "一番くじチョッパー ～サウザンド・サニー号～ - E賞 クリアチャームストラップ",
-            "一番くじチョッパー ～サウザンド・サニー号～ - F賞 マグカップ",
-            "一番くじチョッパー ～サウザンド・サニー号～ - G賞 フロートペン＆クリアファイル",
-            "一番くじチョッパー ～サウザンド・サニー号～ - H賞 ウェットティッシュ＆ステッカー"
-          ],
-          "campaign_field_patch_templates": [
-            {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/chotwo",
-              "campaign_slug": "chotwo",
-              "campaign_title": "一番くじチョッパー ～サウザンド・サニー号～",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 8,
-              "target_catalog_indexes_sample": [
-                16201,
-                16202,
-                16203,
-                16204,
-                16205,
-                16206,
-                16207,
-                16208
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
-            }
-          ],
-          "auto_apply_enabled": false
+          "catalog_index": 925,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": null
         },
         {
-          "group_key": "https://1kuji.com/products/db_android",
-          "url": "https://1kuji.com/products/db_android",
-          "slug": "db_android",
-          "title": "一番くじ ドラゴンボール THE ANDROID BATTLE with ドラゴンボール ファイターズ",
-          "catalog_item_rows": 1,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16629
-          ],
-          "sample_names": [
-            "一番くじ ドラゴンボール THE ANDROID BATTLE with ドラゴンボール ファイターズ - ダブルチャンスキャンペーン"
-          ],
-          "campaign_field_patch_templates": [
-            {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/db_android",
-              "campaign_slug": "db_android",
-              "campaign_title": "一番くじ ドラゴンボール THE ANDROID BATTLE with ドラゴンボール ファイターズ",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 1,
-              "target_catalog_indexes_sample": [
-                16629
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
-            }
-          ],
-          "auto_apply_enabled": false
+          "catalog_index": 926,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": null
         },
         {
-          "group_key": "https://1kuji.com/products/dbkai",
-          "url": "https://1kuji.com/products/dbkai",
-          "slug": "dbkai",
-          "title": "一番くじドラゴンボール改～激突編～",
-          "catalog_item_rows": 9,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16786,
-            16787,
-            16788,
-            16789,
-            16790,
-            16791,
-            16792,
-            16793
-          ],
-          "sample_names": [
-            "一番くじドラゴンボール改～激突編～ - 神龍チャンスキャンペーン",
-            "一番くじドラゴンボール改～激突編～ - Ｓ賞 ピッコロフィギュア",
-            "一番くじドラゴンボール改～激突編～ - Ａ賞 出でよ！神龍フィギュア",
-            "一番くじドラゴンボール改～激突編～ - Ｂ賞 界王挙！孫悟空フィギュア",
-            "一番くじドラゴンボール改～激突編～ - Ｃ賞 スポーツタオル",
-            "一番くじドラゴンボール改～激突編～ - Ｄ賞 クリップホルダー",
-            "一番くじドラゴンボール改～激突編～ - Ｅ賞 仙豆壷型湯のみ",
-            "一番くじドラゴンボール改～激突編～ - Ｆ賞 ドラゴンボール型スーパーボール"
-          ],
-          "campaign_field_patch_templates": [
-            {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/dbkai",
-              "campaign_slug": "dbkai",
-              "campaign_title": "一番くじドラゴンボール改～激突編～",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 9,
-              "target_catalog_indexes_sample": [
-                16786,
-                16787,
-                16788,
-                16789,
-                16790,
-                16791,
-                16792,
-                16793
-              ],
-              "requires_full_campaign_index_expansion": true,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
-            }
-          ],
-          "auto_apply_enabled": false
+          "catalog_index": 927,
+          "name_ko": "치이카와 아크릴 스탠드 (치이카와)",
+          "name_ja": "ちいかわ アクリルスタンド (ちいかわ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": null,
+          "source_url": "https://www.enskyshop.com/products/detail/31151",
+          "official_search_url": null
         }
       ],
-      "review_state": "manual_official_campaign_metadata_confirmation_required",
-      "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates"
     }
   ],
   "automation_policy": {

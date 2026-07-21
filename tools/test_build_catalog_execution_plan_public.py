@@ -41,6 +41,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "catalog_metadata_review_batches_public.json": {
                 "summary": {"missing_cell_count": 20, "batch_count": 2, "field_missing_totals": {"barcode": 20}}
             },
+            "catalog_metadata_action_queue_public.json": {
+                "summary": {
+                    "actionable_group_count": 2,
+                    "queued_group_count": 2,
+                    "actionable_missing_cells": 8,
+                    "queued_missing_cells": 8,
+                    "action_batch_count": 1,
+                    "field_counts": [["release_date", 1], ["name_ja", 1]],
+                }
+            },
             "requested_focus_review_batches_public.json": {
                 "summary": {
                     "review_row_count": 5,
@@ -141,6 +151,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(image_action["priority"], 31)
         self.assertEqual(image_action["rows"], 2)
         self.assertEqual(image_action["evidence"]["actionable_image_rows"], 2)
+        metadata_action = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "metadata_action_queue"
+        )
+        self.assertEqual(metadata_action["rows"], 8)
+        self.assertEqual(metadata_action["evidence"]["actionable_missing_cells"], 8)
         dedupe_action = next(
             action
             for action in report["actions"]

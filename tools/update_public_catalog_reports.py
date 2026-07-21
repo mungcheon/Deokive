@@ -45,6 +45,7 @@ SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public
 SOURCE_DISCOVERY_ACTION_QUEUE = DATA / "source_discovery_action_queue_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
+METADATA_ACTION_QUEUE = DATA / "catalog_metadata_action_queue_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 IMAGE_ATTACHMENT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
 CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.json"
@@ -1326,6 +1327,8 @@ def build_operations_public(
     metadata_summary = metadata_backlog["summary"]
     metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
     metadata_review_batches_summary = metadata_review_batches.get("summary", {})
+    metadata_action_queue = load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
+    metadata_action_queue_summary = metadata_action_queue.get("summary", {})
     confirmed_import_readiness = (
         load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
     )
@@ -1590,6 +1593,15 @@ def build_operations_public(
             "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup.",
         } if metadata_review_batches_summary else None,
         {
+            "priority": 32,
+            "workstream": "metadata_action_queue",
+            "public_report": f"data/{METADATA_ACTION_QUEUE.name}",
+            "queued_group_count": metadata_action_queue_summary.get("queued_group_count", 0),
+            "queued_missing_cells": metadata_action_queue_summary.get("queued_missing_cells", 0),
+            "action_batch_count": metadata_action_queue_summary.get("action_batch_count", 0),
+            "recommended_next_action": "Work release date, price, and Japanese title groups before broad barcode research.",
+        } if metadata_action_queue_summary else None,
+        {
             "priority": 40,
             "workstream": "deduplication_review",
             "public_report": f"data/{DEDUPLICATION.name}",
@@ -1762,6 +1774,14 @@ def build_operations_public(
             "auto_apply_enabled": metadata_review_batches_summary.get("auto_apply_enabled", False),
         } if metadata_review_batches_summary else None,
         {
+            "workstream": "metadata_action_queue",
+            "status": "manual_review" if metadata_action_queue_summary.get("queued_missing_cells", 0) else "clear",
+            "open_rows": metadata_action_queue_summary.get("queued_missing_cells", 0),
+            "primary_report": f"data/{METADATA_ACTION_QUEUE.name}",
+            "next_step": "fill_confirmed_metadata_patch_templates",
+            "auto_apply_enabled": metadata_action_queue_summary.get("auto_apply_enabled", False),
+        } if metadata_action_queue_summary else None,
+        {
             "workstream": "deduplication",
             "status": "manual_review" if dedupe_summary.get("duplicate_groups", 0) else "clear",
             "open_rows": dedupe_summary.get("duplicate_groups", 0),
@@ -1877,6 +1897,10 @@ def build_operations_public(
         open_review_queues["ichiban_metadata_action_campaigns"] = ichiban_kuji_metadata_action_queue_summary.get(
             "queued_action_campaigns", 0
         )
+    if metadata_action_queue_summary:
+        open_review_queues["metadata_action_missing_cells"] = metadata_action_queue_summary.get(
+            "queued_missing_cells", 0
+        )
     if animation_review_batches_summary:
         open_review_queues["animation_category_review_rows"] = animation_review_batches_summary.get("source_rows", 0)
 
@@ -1916,6 +1940,7 @@ def build_operations_public(
             {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
             {"key": "metadata_review_batches", "public_report": f"data/{METADATA_REVIEW_BATCHES.name}"},
+            {"key": "metadata_action_queue", "public_report": f"data/{METADATA_ACTION_QUEUE.name}"},
             {"key": "confirmed_import_readiness", "public_report": f"data/{CONFIRMED_IMPORT_READINESS.name}"},
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
             {"key": "deduplication_review_batches", "public_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}"},
@@ -1983,6 +2008,7 @@ def build_agent_work_queue_public(
     )
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
+    metadata_action_queue = load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
     confirmed_import_readiness = (
         load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
     )
@@ -2052,6 +2078,8 @@ def build_agent_work_queue_public(
             return "exact_source_discovery_required"
         if workstream == "metadata_backlog":
             return "metadata_evidence_required"
+        if workstream == "metadata_action_queue":
+            return "manual_metadata_evidence_confirmation_required"
         if workstream == "confirmed_import_readiness":
             return "manual_review_required"
         if workstream == "deduplication_review":
@@ -2075,6 +2103,7 @@ def build_agent_work_queue_public(
             "image_evidence_confirmation_required": "confirm_source_then_fill_image_url_templates",
             "source_evidence_confirmation_required": "confirm_exact_source_url_then_fill_source_templates",
             "metadata_evidence_required": "collect_official_metadata_evidence",
+            "manual_metadata_evidence_confirmation_required": "fill_confirmed_metadata_patch_templates",
             "manual_dedupe_review_required": "compare_duplicate_group_evidence",
             "official_campaign_evidence_required": "verify_ichiban_campaign_page",
             "manual_official_campaign_metadata_confirmation_required": "fill_confirmed_ichiban_campaign_patch_templates",
@@ -2354,6 +2383,29 @@ def build_agent_work_queue_public(
             )
 
     metadata_review_batch_rows = [batch for batch in metadata_review_batches.get("batches", []) if isinstance(batch, dict)]
+    metadata_action_batches = [batch for batch in metadata_action_queue.get("batches", []) if isinstance(batch, dict)]
+    for action_batch in metadata_action_batches[:8]:
+        add_batch(
+            agent_id="agent-metadata-action",
+            workstream="metadata_action_queue",
+            priority=35 + int(action_batch.get("priority") or 99),
+            title=f"Metadata action {action_batch.get('batch_id')}",
+            public_report=METADATA_ACTION_QUEUE,
+            rows=int(action_batch.get("missing_cell_count") or 0),
+            recommended_action=str(action_batch.get("recommended_action") or "fill confirmed metadata templates"),
+            acceptance_criteria=[
+                "Only release_date, official_price_jpy, and name_ja groups are included here.",
+                "Every value requires official or trusted evidence before import.",
+                "Barcode, source_url, and image_url remain in their dedicated queues.",
+            ],
+            samples=[
+                compact_sample(item)
+                for group in action_batch.get("groups", [])
+                if isinstance(group, dict)
+                for item in group.get("sample_items", [])
+                if isinstance(item, dict)
+            ],
+        )
     if metadata_review_batch_rows:
         for metadata_batch in metadata_review_batch_rows[:12]:
             add_batch(
@@ -3519,6 +3571,10 @@ def validate_report_consistency(
     source_action_summary = source_action_queue.get("summary", {})
     if source_action_summary:
         expected_open_queues["source_discovery_action_rows"] = source_action_summary.get("queued_source_rows", 0)
+    metadata_action_queue = load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
+    metadata_action_summary = metadata_action_queue.get("summary", {})
+    if metadata_action_summary:
+        expected_open_queues["metadata_action_missing_cells"] = metadata_action_summary.get("queued_missing_cells", 0)
     image_action_queue = (
         load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
     )
@@ -3663,6 +3719,7 @@ def validate_report_consistency(
         f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
         f"data/{METADATA_BACKLOG.name}",
         f"data/{METADATA_REVIEW_BATCHES.name}",
+        f"data/{METADATA_ACTION_QUEUE.name}",
         f"data/{CONFIRMED_IMPORT_READINESS.name}",
         f"data/{DEDUPLICATION.name}",
         f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
@@ -3703,6 +3760,7 @@ def validate_report_consistency(
         "image_evidence_confirmation_required",
         "source_evidence_confirmation_required",
         "metadata_evidence_required",
+        "manual_metadata_evidence_confirmation_required",
         "manual_dedupe_review_required",
         "official_campaign_evidence_required",
         "manual_official_campaign_metadata_confirmation_required",
@@ -3719,6 +3777,7 @@ def validate_report_consistency(
         "confirm_source_then_fill_image_url_templates",
         "confirm_exact_source_url_then_fill_source_templates",
         "collect_official_metadata_evidence",
+        "fill_confirmed_metadata_patch_templates",
         "compare_duplicate_group_evidence",
         "verify_ichiban_campaign_page",
         "fill_confirmed_ichiban_campaign_patch_templates",
@@ -3937,6 +3996,8 @@ def update_reports(write: bool) -> dict[str, Any]:
         }
         if METADATA_REVIEW_BATCHES.exists():
             target["metadata_review_batches"] = copy_report_summary(METADATA_REVIEW_BATCHES, "metadata_review_batches")
+        if METADATA_ACTION_QUEUE.exists():
+            target["metadata_action_queue"] = copy_report_summary(METADATA_ACTION_QUEUE, "metadata_action_queue")
         if CONFIRMED_IMPORT_READINESS.exists():
             target["confirmed_import_readiness"] = copy_report_summary(
                 CONFIRMED_IMPORT_READINESS, "confirmed_import_readiness"
@@ -4042,6 +4103,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         SOURCE_DISCOVERY_ACTION_QUEUE,
         METADATA_BACKLOG,
         METADATA_REVIEW_BATCHES,
+        METADATA_ACTION_QUEUE,
         CONFIRMED_IMPORT_READINESS,
         EXECUTION_PLAN,
         IMAGE_ENRICHMENT_BATCHES,
@@ -4088,6 +4150,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_ACTION_QUEUE.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
+            str(METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(CONFIRMED_IMPORT_READINESS.relative_to(ROOT)),
             str(EXECUTION_PLAN.relative_to(ROOT)),
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),

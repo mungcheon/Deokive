@@ -1,17 +1,13 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../models/folder_item.dart';
-import '../models/goods_catalog_entry.dart';
 import '../models/goods_item.dart';
 import '../state/app_state.dart';
 import '../utils/csv_exporter.dart';
+import '../utils/catalog_goods_importer.dart';
 import '../theme/deokive_palette.dart';
 import '../widgets/deokive_header_title.dart';
-import '../widgets/goods_name_search_field.dart';
 import 'add_goods_screen.dart';
 import 'folder_detail_screen.dart';
 import 'folder_editor_screen.dart';
@@ -391,205 +387,12 @@ class _FoldersScreenState extends State<FoldersScreen> {
   }
 
   Future<void> openAddGoodsFromCatalog(BuildContext context) async {
-    final appState = context.read<AppState>();
-    if (!appState.isLoggedIn) {
-      _showLoginRequired();
-      return;
-    }
-
-    final entry = await showGoodsCatalogPicker(
+    await showCatalogGoodsImportFlow(
       context,
-      catalog: appState.curatedCatalogEntries,
-      actionLabel: '추가',
-    );
-    if (entry == null || !context.mounted) return;
-
-    final targetFolder = await _pickTargetFolderForCatalogImport(
-      context,
-      appState,
       initialFolder: selectedFolder != null && !selectedFolder!.isGroup
           ? selectedFolder
           : null,
     );
-    if (targetFolder == null || !context.mounted) return;
-
-    final imageBytes = await _downloadCatalogImage(entry);
-    if (!context.mounted) return;
-
-    final item = _goodsItemFromCatalogEntry(
-      appState: appState,
-      entry: entry,
-      folder: targetFolder,
-      imageBytes: imageBytes,
-    );
-    appState.addGoods(item);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text("'${entry.nameKo}'을(를) ${targetFolder.name}에 추가했어요."),
-      ),
-    );
-  }
-
-  Future<FolderItem?> _pickTargetFolderForCatalogImport(
-    BuildContext context,
-    AppState appState, {
-    FolderItem? initialFolder,
-  }) async {
-    final folders = appState.owningFolders;
-    if (folders.isEmpty) return null;
-    String selectedId = initialFolder?.id ?? folders.first.id;
-
-    return showModalBottomSheet<FolderItem>(
-      context: context,
-      showDragHandle: true,
-      builder: (sheetContext) {
-        return StatefulBuilder(
-          builder: (context, setSheetState) {
-            final selectedFolder = folders.firstWhere(
-              (folder) => folder.id == selectedId,
-              orElse: () => folders.first,
-            );
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '넣을 폴더 선택',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Flexible(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: folders.length,
-                        itemBuilder: (context, index) {
-                          final folder = folders[index];
-                          return RadioListTile<String>(
-                            value: folder.id,
-                            groupValue: selectedId,
-                            onChanged: (value) {
-                              if (value == null) return;
-                              setSheetState(() => selectedId = value);
-                            },
-                            secondary: Icon(folder.icon, color: folder.color),
-                            title: Text(folder.name),
-                            subtitle: Text(
-                              '${appState.goodsCountForFolder(folder.id)}개 보관 중',
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 48,
-                      child: FilledButton.icon(
-                        onPressed: () =>
-                            Navigator.pop(sheetContext, selectedFolder),
-                        icon: const Icon(Icons.add_rounded),
-                        label: const Text('이 폴더에 추가'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  GoodsItem _goodsItemFromCatalogEntry({
-    required AppState appState,
-    required GoodsCatalogEntry entry,
-    required FolderItem folder,
-    Uint8List? imageBytes,
-  }) {
-    final officialPrice = entry.officialPriceJpy ?? entry.officialPriceKrw;
-    final officialCurrency =
-        entry.officialPriceJpy != null ? Currency.jpy : Currency.krw;
-    final category = entry.normalizedCategory.trim().isEmpty
-        ? '기타'
-        : entry.normalizedCategory.trim();
-
-    return GoodsItem(
-      id: appState.makeId(),
-      folderId: folder.id,
-      name: entry.nameKo.trim(),
-      category: category,
-      kind: entry.subSeries?.trim().isEmpty ?? true
-          ? null
-          : entry.subSeries!.trim(),
-      quantity: 1,
-      officialPrice: officialPrice,
-      paidPrice: null,
-      priceCurrencyCode: appState.displayCurrency.code,
-      officialPriceCurrencyCode: officialCurrency.code,
-      purchaseDate: null,
-      isPreorder: false,
-      itemCondition: ItemCondition.unopened,
-      seriesName: entry.seriesName?.trim() ?? '',
-      characterName: entry.characterName.trim(),
-      affiliation:
-          entry.affiliation.trim().isEmpty ? null : entry.affiliation.trim(),
-      companyName:
-          entry.sourceStore.trim().isEmpty ? null : entry.sourceStore.trim(),
-      purchasePlace: null,
-      releaseDate: _parseCatalogReleaseDate(entry.releaseDate),
-      memo: entry.sourceUrl?.trim().isEmpty ?? true
-          ? 'DB에서 추가'
-          : 'DB에서 추가\n출처: ${entry.sourceUrl!.trim()}',
-      plannedShippingDate: null,
-      status: '미개봉',
-      purchaseState: PurchaseState.owned,
-      wishlistTargetFolderId: null,
-      barcode:
-          entry.barcode?.trim().isEmpty ?? true ? null : entry.barcode!.trim(),
-      storageLocation: null,
-      imageBytesList: imageBytes == null ? const [] : [imageBytes],
-      isFavorite: false,
-    );
-  }
-
-  DateTime? _parseCatalogReleaseDate(String? raw) {
-    final value = raw?.trim();
-    if (value == null || value.isEmpty) return null;
-    return DateTime.tryParse(value) ??
-        DateTime.tryParse('$value-01') ??
-        DateTime.tryParse('$value-01-01');
-  }
-
-  Future<Uint8List?> _downloadCatalogImage(GoodsCatalogEntry entry) async {
-    var url = entry.imageUrl?.trim() ?? '';
-    if (url.isEmpty) return null;
-    url = url.replaceAll('&amp;', '&');
-    if (url.startsWith('//')) url = 'https:$url';
-    if (!url.startsWith('http')) return null;
-
-    try {
-      final response = await http.get(
-        Uri.parse(url),
-        headers: const {
-          'User-Agent': 'Mozilla/5.0 Deokive/1.0',
-          'Accept': 'image/*,*/*',
-        },
-      ).timeout(const Duration(seconds: 8));
-      if (response.statusCode != 200 || response.bodyBytes.isEmpty) {
-        return null;
-      }
-      return response.bodyBytes;
-    } catch (_) {
-      return null;
-    }
   }
 
   @override

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:50:20Z",
+  "generated_at": "2026-07-21T22:59:08Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -34,6 +34,7 @@
       "source_discovery_action_rows": 240,
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
+      "metadata_action_missing_cells": 1362,
       "animation_category_review_rows": 428
     },
     "top_store_priority_score": 1832.0
@@ -157,6 +158,14 @@
       "open_rows": 21075,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "metadata_action_queue",
+      "status": "manual_review",
+      "open_rows": 1362,
+      "primary_report": "data/catalog_metadata_action_queue_public.json",
+      "next_step": "fill_confirmed_metadata_patch_templates",
       "auto_apply_enabled": false
     },
     {
@@ -744,6 +753,10 @@
       "public_report": "data/catalog_metadata_review_batches_public.json"
     },
     {
+      "key": "metadata_action_queue",
+      "public_report": "data/catalog_metadata_action_queue_public.json"
+    },
+    {
       "key": "confirmed_import_readiness",
       "public_report": "data/catalog_confirmed_import_readiness_public.json"
     },
@@ -795,9 +808,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 13,
+      "action_count": 14,
       "blocked_action_count": 1,
-      "manual_review_action_count": 11,
+      "manual_review_action_count": 12,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -942,6 +955,15 @@
       "field_store_group_count": 351,
       "missing_cell_count": 21075,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
+    },
+    {
+      "priority": 32,
+      "workstream": "metadata_action_queue",
+      "public_report": "data/catalog_metadata_action_queue_public.json",
+      "queued_group_count": 48,
+      "queued_missing_cells": 1362,
+      "action_batch_count": 4,
+      "recommended_next_action": "Work release date, price, and Japanese title groups before broad barcode research."
     },
     {
       "priority": 40,

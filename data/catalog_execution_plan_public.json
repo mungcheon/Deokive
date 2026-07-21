@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:50:20Z",
+  "generated_at": "2026-07-21T22:59:08Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 13,
+    "action_count": 14,
     "blocked_action_count": 1,
-    "manual_review_action_count": 11,
+    "manual_review_action_count": 12,
     "pending_import_action_count": 0,
-    "total_action_rows": 32102,
+    "total_action_rows": 33464,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -26,6 +26,7 @@
       "source_discovery_action_rows": 240,
       "image_attachment_action_rows": 25,
       "ichiban_metadata_action_campaigns": 32,
+      "metadata_action_missing_cells": 1362,
       "animation_category_review_rows": 428
     },
     "requested_focus_actionable_template_rows": 600,
@@ -330,6 +331,38 @@
           "image_url": 720,
           "source_url": 647
         }
+      }
+    },
+    {
+      "priority": 41,
+      "workstream": "metadata_action_queue",
+      "public_report": "data/catalog_metadata_action_queue_public.json",
+      "status": "manual_review",
+      "rows": 1362,
+      "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
+      "next_step": "fill_confirmed_metadata_patch_templates",
+      "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "actionable_group_count": 166,
+        "queued_group_count": 48,
+        "actionable_missing_cells": 11964,
+        "queued_missing_cells": 1362,
+        "action_batch_count": 4,
+        "field_counts": [
+          [
+            "release_date",
+            83
+          ],
+          [
+            "name_ja",
+            42
+          ],
+          [
+            "official_price_jpy",
+            41
+          ]
+        ]
       }
     },
     {

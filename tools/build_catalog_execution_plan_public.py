@@ -102,6 +102,7 @@ def build_plan() -> dict[str, Any]:
     source_batches = _load("source_discovery_review_batches_public.json")
     source_action_queue = _load("source_discovery_action_queue_public.json")
     metadata_batches = _load("catalog_metadata_review_batches_public.json")
+    metadata_action_queue = _load("catalog_metadata_action_queue_public.json")
     requested_batches = _load("requested_focus_review_batches_public.json")
     requested_action_queue = _load("requested_focus_action_queue_public.json")
     dedupe_batches = _load("catalog_deduplication_review_batches_public.json")
@@ -120,6 +121,7 @@ def build_plan() -> dict[str, Any]:
     source_summary = _summary(source_batches)
     source_action_summary = _summary(source_action_queue)
     metadata_summary = _summary(metadata_batches)
+    metadata_action_summary = _summary(metadata_action_queue)
     requested_summary = _summary(requested_batches)
     requested_action_summary = _summary(requested_action_queue)
     dedupe_summary = _summary(dedupe_batches)
@@ -294,6 +296,27 @@ def build_plan() -> dict[str, Any]:
             evidence={
                 "batch_count": _count(metadata_summary, "batch_count"),
                 "field_missing_totals": metadata_summary.get("field_missing_totals", {}),
+            },
+        )
+    )
+
+    actions.append(
+        _action(
+            priority=41,
+            workstream="metadata_action_queue",
+            public_report="data/catalog_metadata_action_queue_public.json",
+            status="manual_review",
+            rows=_count(metadata_action_summary, "queued_missing_cells"),
+            command="Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
+            next_step="fill_confirmed_metadata_patch_templates",
+            blocker="Auto metadata import is disabled; every field/store group needs evidence.",
+            evidence={
+                "actionable_group_count": _count(metadata_action_summary, "actionable_group_count"),
+                "queued_group_count": _count(metadata_action_summary, "queued_group_count"),
+                "actionable_missing_cells": _count(metadata_action_summary, "actionable_missing_cells"),
+                "queued_missing_cells": _count(metadata_action_summary, "queued_missing_cells"),
+                "action_batch_count": _count(metadata_action_summary, "action_batch_count"),
+                "field_counts": metadata_action_summary.get("field_counts", []),
             },
         )
     )
