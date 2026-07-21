@@ -179,8 +179,371 @@
         8
       ]
     ],
-    "published_group_rows": 120
+    "published_group_rows": 120,
+    "field_review_queue_rows": 6
   },
+  "field_review_queue": [
+    {
+      "field": "name_ja",
+      "missing_rows": 9964,
+      "priority_score": 9964,
+      "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
+      "top_source_stores": [
+        {
+          "source_store": "치이카와 마켓",
+          "missing_rows": 9455
+        },
+        {
+          "source_store": "Stellive Store",
+          "missing_rows": 99
+        },
+        {
+          "source_store": "나가노 마켓",
+          "missing_rows": 79
+        },
+        {
+          "source_store": "애니메이트",
+          "missing_rows": 63
+        },
+        {
+          "source_store": "치이카와 파크",
+          "missing_rows": 62
+        },
+        {
+          "source_store": "Weverse Shop",
+          "missing_rows": 33
+        },
+        {
+          "source_store": "닌텐도 스토어",
+          "missing_rows": 16
+        },
+        {
+          "source_store": "MINISO",
+          "missing_rows": 14
+        },
+        {
+          "source_store": "JYP SHOP",
+          "missing_rows": 13
+        },
+        {
+          "source_store": "Hololive Production Official Shop",
+          "missing_rows": 10
+        },
+        {
+          "source_store": "YG SELECT",
+          "missing_rows": 10
+        },
+        {
+          "source_store": "반다이",
+          "missing_rows": 10
+        }
+      ]
+    },
+    {
+      "field": "barcode",
+      "missing_rows": 7744,
+      "priority_score": 7744,
+      "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
+      "top_source_stores": [
+        {
+          "source_store": "이치방쿠지",
+          "missing_rows": 5546
+        },
+        {
+          "source_store": "치이카와 온라인 쿠지",
+          "missing_rows": 677
+        },
+        {
+          "source_store": "엔스카이",
+          "missing_rows": 229
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "missing_rows": 213
+        },
+        {
+          "source_store": "애니메이트",
+          "missing_rows": 174
+        },
+        {
+          "source_store": "Stellive Store",
+          "missing_rows": 100
+        },
+        {
+          "source_store": "Banpresto",
+          "missing_rows": 99
+        },
+        {
+          "source_store": "코토부키야",
+          "missing_rows": 48
+        },
+        {
+          "source_store": "Movic",
+          "missing_rows": 42
+        },
+        {
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "missing_rows": 39
+        },
+        {
+          "source_store": "FuRyu",
+          "missing_rows": 36
+        },
+        {
+          "source_store": "Taito",
+          "missing_rows": 34
+        }
+      ]
+    },
+    {
+      "field": "release_date",
+      "missing_rows": 1416,
+      "priority_score": 1416,
+      "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
+      "top_source_stores": [
+        {
+          "source_store": "엔스카이",
+          "missing_rows": 227
+        },
+        {
+          "source_store": "애니메이트",
+          "missing_rows": 191
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "missing_rows": 114
+        },
+        {
+          "source_store": "Stellive Store",
+          "missing_rows": 95
+        },
+        {
+          "source_store": "Banpresto",
+          "missing_rows": 84
+        },
+        {
+          "source_store": "Movic",
+          "missing_rows": 74
+        },
+        {
+          "source_store": "코토부키야",
+          "missing_rows": 50
+        },
+        {
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "missing_rows": 39
+        },
+        {
+          "source_store": "FuRyu",
+          "missing_rows": 34
+        },
+        {
+          "source_store": "Weverse Shop",
+          "missing_rows": 32
+        },
+        {
+          "source_store": "Taito",
+          "missing_rows": 26
+        },
+        {
+          "source_store": "점프 캐릭터즈 스토어",
+          "missing_rows": 24
+        }
+      ]
+    },
+    {
+      "field": "image_url",
+      "missing_rows": 720,
+      "priority_score": 720,
+      "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
+      "top_source_stores": [
+        {
+          "source_store": "애니메이트",
+          "missing_rows": 148
+        },
+        {
+          "source_store": "엔스카이",
+          "missing_rows": 142
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "missing_rows": 57
+        },
+        {
+          "source_store": "Stellive Store",
+          "missing_rows": 45
+        },
+        {
+          "source_store": "코토부키야",
+          "missing_rows": 44
+        },
+        {
+          "source_store": "Movic",
+          "missing_rows": 36
+        },
+        {
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "missing_rows": 23
+        },
+        {
+          "source_store": "점프 캐릭터즈 스토어",
+          "missing_rows": 23
+        },
+        {
+          "source_store": "FuRyu",
+          "missing_rows": 21
+        },
+        {
+          "source_store": "Taito",
+          "missing_rows": 15
+        },
+        {
+          "source_store": "무기와라스토어",
+          "missing_rows": 15
+        },
+        {
+          "source_store": "치이카와 중국 팝업스토어",
+          "missing_rows": 15
+        }
+      ]
+    },
+    {
+      "field": "source_url",
+      "missing_rows": 647,
+      "priority_score": 647,
+      "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
+      "top_source_stores": [
+        {
+          "source_store": "애니메이트",
+          "missing_rows": 148
+        },
+        {
+          "source_store": "엔스카이",
+          "missing_rows": 142
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "missing_rows": 57
+        },
+        {
+          "source_store": "코토부키야",
+          "missing_rows": 44
+        },
+        {
+          "source_store": "Movic",
+          "missing_rows": 36
+        },
+        {
+          "source_store": "점프 캐릭터즈 스토어",
+          "missing_rows": 23
+        },
+        {
+          "source_store": "FuRyu",
+          "missing_rows": 21
+        },
+        {
+          "source_store": "Taito",
+          "missing_rows": 15
+        },
+        {
+          "source_store": "무기와라스토어",
+          "missing_rows": 15
+        },
+        {
+          "source_store": "치이카와 중국 팝업스토어",
+          "missing_rows": 15
+        },
+        {
+          "source_store": "귀멸의 칼날 공식",
+          "missing_rows": 13
+        },
+        {
+          "source_store": "AmiAmi",
+          "missing_rows": 12
+        }
+      ]
+    },
+    {
+      "field": "official_price_jpy",
+      "missing_rows": 584,
+      "priority_score": 584,
+      "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "retailer_price_or_prize_price_confusion",
+      "top_source_stores": [
+        {
+          "source_store": "이치방쿠지",
+          "missing_rows": 365
+        },
+        {
+          "source_store": "Stellive Store",
+          "missing_rows": 100
+        },
+        {
+          "source_store": "MINISO",
+          "missing_rows": 18
+        },
+        {
+          "source_store": "치이카와 중국 팝업스토어",
+          "missing_rows": 15
+        },
+        {
+          "source_store": "치이카와 온라인 쿠지",
+          "missing_rows": 14
+        },
+        {
+          "source_store": "MINISO 중국",
+          "missing_rows": 7
+        },
+        {
+          "source_store": "Fanding",
+          "missing_rows": 5
+        },
+        {
+          "source_store": "치이카와샵 용산",
+          "missing_rows": 5
+        },
+        {
+          "source_store": "TAPIOCA online shop",
+          "missing_rows": 4
+        },
+        {
+          "source_store": "이세계아이돌 공식 굿즈",
+          "missing_rows": 4
+        },
+        {
+          "source_store": "EDITH",
+          "missing_rows": 3
+        },
+        {
+          "source_store": "Taito",
+          "missing_rows": 3
+        }
+      ]
+    }
+  ],
   "instructions": [
     "Public backlog grouped by missing field and source store.",
     "Use this before source/image crawling so agents work on the largest safe gaps first.",
@@ -193,6 +556,10 @@
       "missing_rows": 9455,
       "priority_score": 9455,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         1,
         2,
@@ -284,6 +651,10 @@
       "missing_rows": 5546,
       "priority_score": 5546,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1014,
         11579,
@@ -375,6 +746,10 @@
       "missing_rows": 677,
       "priority_score": 677,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         631,
         632,
@@ -466,6 +841,10 @@
       "missing_rows": 365,
       "priority_score": 365,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "retailer_price_or_prize_price_confusion",
       "sample_catalog_indexes": [
         14329,
         14330,
@@ -557,6 +936,10 @@
       "missing_rows": 229,
       "priority_score": 229,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         920,
         921,
@@ -648,6 +1031,10 @@
       "missing_rows": 227,
       "priority_score": 227,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         920,
         921,
@@ -739,6 +1126,10 @@
       "missing_rows": 213,
       "priority_score": 213,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1137,
         1138,
@@ -830,6 +1221,10 @@
       "missing_rows": 191,
       "priority_score": 191,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1024,
         1025,
@@ -921,6 +1316,10 @@
       "missing_rows": 174,
       "priority_score": 174,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1024,
         1025,
@@ -1012,6 +1411,10 @@
       "missing_rows": 148,
       "priority_score": 148,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1031,
         1033,
@@ -1103,6 +1506,10 @@
       "missing_rows": 148,
       "priority_score": 148,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1031,
         1033,
@@ -1194,6 +1601,10 @@
       "missing_rows": 142,
       "priority_score": 142,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         922,
         923,
@@ -1285,6 +1696,10 @@
       "missing_rows": 142,
       "priority_score": 142,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         922,
         923,
@@ -1376,6 +1791,10 @@
       "missing_rows": 114,
       "priority_score": 114,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1137,
         1138,
@@ -1467,6 +1886,10 @@
       "missing_rows": 100,
       "priority_score": 100,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2324,
         2325,
@@ -1558,6 +1981,10 @@
       "missing_rows": 100,
       "priority_score": 100,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "retailer_price_or_prize_price_confusion",
       "sample_catalog_indexes": [
         2324,
         2325,
@@ -1649,6 +2076,10 @@
       "missing_rows": 99,
       "priority_score": 99,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1177,
         1178,
@@ -1740,6 +2171,10 @@
       "missing_rows": 99,
       "priority_score": 99,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         2324,
         2325,
@@ -1831,6 +2266,10 @@
       "missing_rows": 95,
       "priority_score": 95,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2324,
         2325,
@@ -1922,6 +2361,10 @@
       "missing_rows": 84,
       "priority_score": 84,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1179,
         1180,
@@ -2013,6 +2456,10 @@
       "missing_rows": 79,
       "priority_score": 79,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         180,
         181,
@@ -2104,6 +2551,10 @@
       "missing_rows": 74,
       "priority_score": 74,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1621,
         1622,
@@ -2195,6 +2646,10 @@
       "missing_rows": 63,
       "priority_score": 63,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         1024,
         1025,
@@ -2286,6 +2741,10 @@
       "missing_rows": 62,
       "priority_score": 62,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         47,
         48,
@@ -2377,6 +2836,10 @@
       "missing_rows": 57,
       "priority_score": 57,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1408,
         1409,
@@ -2468,6 +2931,10 @@
       "missing_rows": 57,
       "priority_score": 57,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1408,
         1409,
@@ -2559,6 +3026,10 @@
       "missing_rows": 50,
       "priority_score": 50,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1158,
         1159,
@@ -2650,6 +3121,10 @@
       "missing_rows": 48,
       "priority_score": 48,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1158,
         1159,
@@ -2741,6 +3216,10 @@
       "missing_rows": 45,
       "priority_score": 45,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         2325,
         2352,
@@ -2832,6 +3311,10 @@
       "missing_rows": 44,
       "priority_score": 44,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1302,
         1303,
@@ -2923,6 +3406,10 @@
       "missing_rows": 44,
       "priority_score": 44,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1302,
         1303,
@@ -3014,6 +3501,10 @@
       "missing_rows": 42,
       "priority_score": 42,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1621,
         1622,
@@ -3105,6 +3596,10 @@
       "missing_rows": 39,
       "priority_score": 39,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         934,
         935,
@@ -3196,6 +3691,10 @@
       "missing_rows": 39,
       "priority_score": 39,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         934,
         935,
@@ -3287,6 +3786,10 @@
       "missing_rows": 36,
       "priority_score": 36,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1166,
         1167,
@@ -3378,6 +3881,10 @@
       "missing_rows": 36,
       "priority_score": 36,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1621,
         1622,
@@ -3469,6 +3976,10 @@
       "missing_rows": 36,
       "priority_score": 36,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1621,
         1622,
@@ -3560,6 +4071,10 @@
       "missing_rows": 34,
       "priority_score": 34,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1160,
         1161,
@@ -3651,6 +4166,10 @@
       "missing_rows": 34,
       "priority_score": 34,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1167,
         1168,
@@ -3742,6 +4261,10 @@
       "missing_rows": 33,
       "priority_score": 33,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2272,
         2291,
@@ -3833,6 +4356,10 @@
       "missing_rows": 33,
       "priority_score": 33,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         2272,
         2291,
@@ -3924,6 +4451,10 @@
       "missing_rows": 32,
       "priority_score": 32,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2272,
         17596,
@@ -4015,6 +4546,10 @@
       "missing_rows": 26,
       "priority_score": 26,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1160,
         1161,
@@ -4106,6 +4641,10 @@
       "missing_rows": 25,
       "priority_score": 25,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         11613,
         11614,
@@ -4197,6 +4736,10 @@
       "missing_rows": 24,
       "priority_score": 24,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1291,
         1292,
@@ -4288,6 +4831,10 @@
       "missing_rows": 24,
       "priority_score": 24,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1291,
         1292,
@@ -4379,6 +4926,10 @@
       "missing_rows": 23,
       "priority_score": 23,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         936,
         937,
@@ -4470,6 +5021,10 @@
       "missing_rows": 23,
       "priority_score": 23,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1291,
         1292,
@@ -4561,6 +5116,10 @@
       "missing_rows": 23,
       "priority_score": 23,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1291,
         1292,
@@ -4652,6 +5211,10 @@
       "missing_rows": 22,
       "priority_score": 22,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1397,
         1398,
@@ -4743,6 +5306,10 @@
       "missing_rows": 22,
       "priority_score": 22,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         602,
         603,
@@ -4834,6 +5401,10 @@
       "missing_rows": 21,
       "priority_score": 21,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1184,
         1253,
@@ -4925,6 +5496,10 @@
       "missing_rows": 21,
       "priority_score": 21,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1184,
         1253,
@@ -5016,6 +5591,10 @@
       "missing_rows": 20,
       "priority_score": 20,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         398,
         399,
@@ -5107,6 +5686,10 @@
       "missing_rows": 19,
       "priority_score": 19,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2328,
         2329,
@@ -5198,6 +5781,10 @@
       "missing_rows": 19,
       "priority_score": 19,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2474,
         17628,
@@ -5289,6 +5876,10 @@
       "missing_rows": 19,
       "priority_score": 19,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2328,
         2329,
@@ -5380,6 +5971,10 @@
       "missing_rows": 19,
       "priority_score": 19,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2474,
         17628,
@@ -5471,6 +6066,10 @@
       "missing_rows": 18,
       "priority_score": 18,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1841,
         1842,
@@ -5562,6 +6161,10 @@
       "missing_rows": 18,
       "priority_score": 18,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "retailer_price_or_prize_price_confusion",
       "sample_catalog_indexes": [
         1841,
         1842,
@@ -5653,6 +6256,10 @@
       "missing_rows": 18,
       "priority_score": 18,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1841,
         1842,
@@ -5744,6 +6351,10 @@
       "missing_rows": 16,
       "priority_score": 16,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1169,
         1322,
@@ -5835,6 +6446,10 @@
       "missing_rows": 16,
       "priority_score": 16,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         17628,
         17629,
@@ -5926,6 +6541,10 @@
       "missing_rows": 16,
       "priority_score": 16,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1169,
         1322,
@@ -6017,6 +6636,10 @@
       "missing_rows": 16,
       "priority_score": 16,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         14193,
         14194,
@@ -6108,6 +6731,10 @@
       "missing_rows": 16,
       "priority_score": 16,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1098,
         1099,
@@ -6199,6 +6826,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         999,
         1000,
@@ -6290,6 +6921,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2204,
         2205,
@@ -6381,6 +7016,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         972,
         973,
@@ -6472,6 +7111,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1265,
         1266,
@@ -6563,6 +7206,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         2204,
         2205,
@@ -6654,6 +7301,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         972,
         973,
@@ -6745,6 +7396,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "retailer_price_or_prize_price_confusion",
       "sample_catalog_indexes": [
         972,
         973,
@@ -6836,6 +7491,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         999,
         1000,
@@ -6927,6 +7586,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2204,
         2205,
@@ -7018,6 +7681,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         972,
         973,
@@ -7109,6 +7776,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1265,
         1266,
@@ -7200,6 +7871,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         2204,
         2205,
@@ -7291,6 +7966,10 @@
       "missing_rows": 15,
       "priority_score": 15,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         972,
         973,
@@ -7382,6 +8061,10 @@
       "missing_rows": 14,
       "priority_score": 14,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1631,
         1637,
@@ -7473,6 +8156,10 @@
       "missing_rows": 14,
       "priority_score": 14,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1015,
         1016,
@@ -7564,6 +8251,10 @@
       "missing_rows": 14,
       "priority_score": 14,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         2489,
         2490,
@@ -7655,6 +8346,10 @@
       "missing_rows": 14,
       "priority_score": 14,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "retailer_price_or_prize_price_confusion",
       "sample_catalog_indexes": [
         631,
         632,
@@ -7746,6 +8441,10 @@
       "missing_rows": 14,
       "priority_score": 14,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1631,
         1637,
@@ -7837,6 +8536,10 @@
       "missing_rows": 14,
       "priority_score": 14,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1015,
         1016,
@@ -7928,6 +8631,10 @@
       "missing_rows": 14,
       "priority_score": 14,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         631,
         632,
@@ -8019,6 +8726,10 @@
       "missing_rows": 13,
       "priority_score": 13,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2279,
         2280,
@@ -8110,6 +8821,10 @@
       "missing_rows": 13,
       "priority_score": 13,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1195,
         1196,
@@ -8201,6 +8916,10 @@
       "missing_rows": 13,
       "priority_score": 13,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1016,
         1017,
@@ -8292,6 +9011,10 @@
       "missing_rows": 13,
       "priority_score": 13,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         2279,
         2280,
@@ -8383,6 +9106,10 @@
       "missing_rows": 13,
       "priority_score": 13,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2279,
         2280,
@@ -8474,6 +9201,10 @@
       "missing_rows": 13,
       "priority_score": 13,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1195,
         1196,
@@ -8565,6 +9296,10 @@
       "missing_rows": 13,
       "priority_score": 13,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1016,
         1017,
@@ -8656,6 +9391,10 @@
       "missing_rows": 12,
       "priority_score": 12,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1680,
         1690,
@@ -8747,6 +9486,10 @@
       "missing_rows": 12,
       "priority_score": 12,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1680,
         1690,
@@ -8838,6 +9581,10 @@
       "missing_rows": 11,
       "priority_score": 11,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1026,
         1027,
@@ -8929,6 +9676,10 @@
       "missing_rows": 11,
       "priority_score": 11,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1631,
         1637,
@@ -9020,6 +9771,10 @@
       "missing_rows": 11,
       "priority_score": 11,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1026,
         1027,
@@ -9111,6 +9866,10 @@
       "missing_rows": 11,
       "priority_score": 11,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1026,
         1027,
@@ -9202,6 +9961,10 @@
       "missing_rows": 11,
       "priority_score": 11,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1631,
         1637,
@@ -9293,6 +10056,10 @@
       "missing_rows": 11,
       "priority_score": 11,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1026,
         1027,
@@ -9384,6 +10151,10 @@
       "missing_rows": 10,
       "priority_score": 10,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2273,
         2274,
@@ -9475,6 +10246,10 @@
       "missing_rows": 10,
       "priority_score": 10,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         2329,
         2330,
@@ -9566,6 +10341,10 @@
       "missing_rows": 10,
       "priority_score": 10,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         2273,
         2274,
@@ -9657,6 +10436,10 @@
       "missing_rows": 10,
       "priority_score": 10,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         1027,
         1028,
@@ -9748,6 +10531,10 @@
       "missing_rows": 10,
       "priority_score": 10,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2273,
         2274,
@@ -9839,6 +10626,10 @@
       "missing_rows": 10,
       "priority_score": 10,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         276,
         277,
@@ -9930,6 +10721,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2341,
         2342,
@@ -10021,6 +10816,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1181,
         1182,
@@ -10112,6 +10911,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         2286,
         2287,
@@ -10203,6 +11006,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "fill only when barcode is shown by official or trusted retailer data",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
         1124,
         1125,
@@ -10294,6 +11101,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
       "sample_catalog_indexes": [
         1400,
         1401,
@@ -10385,6 +11196,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         2286,
         2287,
@@ -10476,6 +11291,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "verify original Japanese product title from official listing",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
       "sample_catalog_indexes": [
         276,
         277,
@@ -10567,6 +11386,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2341,
         2342,
@@ -10658,6 +11481,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1181,
         1182,
@@ -10749,6 +11576,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         2286,
         2287,
@@ -10840,6 +11671,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1124,
         1125,
@@ -10931,6 +11766,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "verify official detail page metadata before importing",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
         1400,
         1401,
@@ -11022,6 +11861,10 @@
       "missing_rows": 9,
       "priority_score": 9,
       "recommended_action": "find exact official product page and attach source_url/image_url together",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
       "sample_catalog_indexes": [
         1400,
         1401,

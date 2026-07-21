@@ -418,6 +418,56 @@ def metadata_action(field: str) -> str:
     return "manual review required"
 
 
+def metadata_evidence_policy(field: str) -> dict[str, Any]:
+    policies = {
+        "source_url": {
+            "evidence_required": "exact official or trusted licensed product detail page",
+            "auto_apply_enabled": False,
+            "next_step": "source_url_discovery",
+            "risk": "identity_mismatch",
+        },
+        "image_url": {
+            "evidence_required": "product image from exact source_url after identity verification",
+            "auto_apply_enabled": False,
+            "next_step": "source_then_image_import",
+            "risk": "wrong_product_image",
+        },
+        "release_date": {
+            "evidence_required": "official product or campaign page showing release/sale date",
+            "auto_apply_enabled": False,
+            "next_step": "official_metadata_extraction",
+            "risk": "campaign_or_reissue_date_confusion",
+        },
+        "official_price_jpy": {
+            "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+            "auto_apply_enabled": False,
+            "next_step": "official_metadata_extraction",
+            "risk": "retailer_price_or_prize_price_confusion",
+        },
+        "barcode": {
+            "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+            "auto_apply_enabled": False,
+            "next_step": "barcode_evidence_review",
+            "risk": "shared_variant_or_box_barcode",
+        },
+        "name_ja": {
+            "evidence_required": "original Japanese title from official or trusted listing",
+            "auto_apply_enabled": False,
+            "next_step": "official_title_review",
+            "risk": "translated_or_inferred_title",
+        },
+    }
+    return policies.get(
+        field,
+        {
+            "evidence_required": "trusted source evidence",
+            "auto_apply_enabled": False,
+            "next_step": "manual_review",
+            "risk": "unknown_field_policy",
+        },
+    )
+
+
 def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: int = 120) -> dict[str, Any]:
     tracked_fields = [
         "source_url",
@@ -453,6 +503,7 @@ def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: in
                 "missing_rows": len(group_items),
                 "priority_score": len(group_items),
                 "recommended_action": metadata_action(field),
+                **metadata_evidence_policy(field),
                 "sample_catalog_indexes": [item.get("catalog_index") for item in samples],
                 "sample_items": [
                     {
@@ -469,6 +520,29 @@ def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: in
             }
         )
 
+    field_review_queue = []
+    for field, total in field_totals.most_common():
+        policy = metadata_evidence_policy(field)
+        top_stores = [
+            {
+                "source_store": store,
+                "missing_rows": len(group_items),
+            }
+            for (group_field, store), group_items in by_field_store.items()
+            if group_field == field
+        ]
+        top_stores.sort(key=lambda row: (-int(row["missing_rows"]), str(row["source_store"])))
+        field_review_queue.append(
+            {
+                "field": field,
+                "missing_rows": total,
+                "priority_score": total,
+                "recommended_action": metadata_action(field),
+                **policy,
+                "top_source_stores": top_stores[:12],
+            }
+        )
+
     return {
         "schema_version": 1,
         "summary": {
@@ -476,7 +550,9 @@ def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: in
             "field_missing_totals": dict(field_totals),
             "store_rows_with_any_missing_metadata": store_totals.most_common(40),
             "published_group_rows": len(groups),
+            "field_review_queue_rows": len(field_review_queue),
         },
+        "field_review_queue": field_review_queue,
         "instructions": [
             "Public backlog grouped by missing field and source store.",
             "Use this before source/image crawling so agents work on the largest safe gaps first.",
@@ -764,7 +840,8 @@ def build_operations_public(
             "workstream": "metadata_backlog",
             "public_report": f"data/{METADATA_BACKLOG.name}",
             "tracked_fields": metadata_summary.get("tracked_fields", []),
-            "recommended_next_action": "Use store/field groups to fill release dates, prices, barcodes, and names with evidence.",
+            "field_review_queue_rows": metadata_summary.get("field_review_queue_rows", 0),
+            "recommended_next_action": "Use field_review_queue before store groups to fill release dates, prices, barcodes, and names with evidence.",
         },
         {
             "priority": 40,
@@ -1857,6 +1934,32 @@ def validate_report_consistency(
     for field, expected in expected_missing.items():
         if field_totals.get(field) != expected:
             findings.append(f"metadata_backlog.field_missing_totals.{field} does not match missing counts")
+    field_review_queue = metadata_backlog.get("field_review_queue", [])
+    if metadata_summary.get("field_review_queue_rows") != len(field_review_queue):
+        findings.append("metadata_backlog.field_review_queue_rows does not match queue length")
+    queue_field_totals = {row.get("field"): row.get("missing_rows") for row in field_review_queue if isinstance(row, dict)}
+    for field, expected in field_totals.items():
+        if queue_field_totals.get(field) != expected:
+            findings.append(f"metadata_backlog.field_review_queue.{field} does not match field totals")
+    required_metadata_policy_fields = {
+        "field",
+        "missing_rows",
+        "recommended_action",
+        "evidence_required",
+        "auto_apply_enabled",
+        "next_step",
+        "risk",
+        "top_source_stores",
+    }
+    for row in field_review_queue:
+        if not isinstance(row, dict):
+            findings.append("metadata_backlog.field_review_queue contains non-object row")
+            continue
+        missing_policy_fields = required_metadata_policy_fields - set(row)
+        if missing_policy_fields:
+            findings.append(f"metadata field review row missing fields: {sorted(missing_policy_fields)}")
+        if row.get("auto_apply_enabled") is not False:
+            findings.append(f"metadata field review row enables auto apply: {row.get('field')}")
 
     if source_summary.get("source_discovery_rows") != missing["source_url"]:
         findings.append("source_discovery_rows does not match missing source_url count")
