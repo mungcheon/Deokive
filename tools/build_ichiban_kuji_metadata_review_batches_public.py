@@ -74,23 +74,58 @@ def _evidence_checklist(workflow: str) -> list[str]:
 
 def _compact_row(row: dict[str, Any]) -> dict[str, Any]:
     workflow = _workflow(row)
+    sample_indexes = row.get("sample_catalog_indexes") or []
+    catalog_item_rows = int(row.get("catalog_item_rows") or 0)
     return {
         "group_key": row.get("group_key"),
         "url": row.get("url"),
         "slug": row.get("slug"),
         "title": row.get("title"),
-        "catalog_item_rows": int(row.get("catalog_item_rows") or 0),
+        "catalog_item_rows": catalog_item_rows,
         "missing_fields": row.get("missing_fields") or [],
         "review_priority": int(row.get("review_priority") or 999),
         "workflow": workflow,
         "source_evidence_required": row.get("source_evidence_required"),
         "recommended_action": row.get("recommended_action"),
-        "sample_catalog_indexes": row.get("sample_catalog_indexes") or [],
+        "sample_catalog_indexes": sample_indexes,
         "sample_names": row.get("sample_names") or [],
         "next_machine_step": _next_step(workflow),
         "evidence_checklist": _evidence_checklist(workflow),
+        "campaign_field_patch_templates": _campaign_field_patch_templates(row, workflow, sample_indexes, catalog_item_rows),
         "auto_apply_enabled": False,
     }
+
+
+def _campaign_field_patch_templates(
+    row: dict[str, Any],
+    workflow: str,
+    sample_indexes: list[Any],
+    catalog_item_rows: int,
+) -> list[dict[str, Any]]:
+    templates: list[dict[str, Any]] = []
+    for field in row.get("missing_fields") or []:
+        field_name = str(field)
+        if field_name not in {"release_date", "official_price_jpy"}:
+            continue
+        templates.append(
+            {
+                "manual_confirmed": False,
+                "manual_note": "",
+                "field": field_name,
+                "manual_value": "",
+                "evidence_url": row.get("url"),
+                "campaign_slug": row.get("slug"),
+                "campaign_title": row.get("title"),
+                "workflow": workflow,
+                "target_scope": "all_catalog_rows_for_campaign_url",
+                "target_catalog_item_rows": catalog_item_rows,
+                "target_catalog_indexes_sample": sample_indexes,
+                "requires_full_campaign_index_expansion": len(sample_indexes) < catalog_item_rows,
+                "requires_labeled_official_evidence": True,
+                "blocked_until": "manual_official_evidence_confirmed",
+            }
+        )
+    return templates
 
 
 def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_size: int = 8) -> dict[str, Any]:
@@ -101,6 +136,14 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
         workflows = Counter(str(row.get("workflow") or "") for row in batch_rows)
         missing_fields = Counter(field for row in batch_rows for field in row.get("missing_fields") or [])
         evidence = sorted({item for row in batch_rows for item in row.get("evidence_checklist", [])})
+        patch_template_fields = sorted(
+            {
+                template["field"]
+                for row in batch_rows
+                for template in row.get("campaign_field_patch_templates") or []
+                if isinstance(template, dict) and template.get("field")
+            }
+        )
         batches.append(
             {
                 "batch_id": f"ichiban-metadata-review-{len(batches) + 1:03d}",
@@ -113,6 +156,7 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
                 "next_machine_step": "verify_ichiban_campaign_page",
                 "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
                 "evidence_checklist": evidence,
+                "campaign_field_patch_template_fields": patch_template_fields,
                 "blocked_until": "manual_official_evidence_confirmed",
                 "campaigns": batch_rows,
             }
@@ -120,6 +164,12 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
 
     workflow_counts = Counter(str(row.get("workflow") or "") for row in rows)
     missing_field_counts = Counter(field for row in rows for field in row.get("missing_fields") or [])
+    patch_template_counts = Counter(
+        template["field"]
+        for row in rows
+        for template in row.get("campaign_field_patch_templates") or []
+        if isinstance(template, dict) and template.get("field")
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -133,6 +183,8 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
             "missing_official_price_jpy_rows": source.get("summary", {}).get("missing_official_price_jpy_rows", 0),
             "by_workflow": workflow_counts.most_common(),
             "by_missing_field": missing_field_counts.most_common(),
+            "field_patch_template_count": sum(patch_template_counts.values()),
+            "field_patch_template_counts": patch_template_counts.most_common(),
             "auto_apply_enabled": False,
         },
         "instructions": [
