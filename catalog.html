@@ -1884,7 +1884,9 @@
       $('qualityRelease').textContent = formatPercent(coverage.release_date);
 
       const gaps = report.high_priority_gaps || {};
-      const rows = Array.isArray(gaps.has_image_missing_source_sample) ? gaps.has_image_missing_source_sample : [];
+      const rows = Array.isArray(gaps.has_image_missing_source)
+        ? gaps.has_image_missing_source
+        : (Array.isArray(gaps.has_image_missing_source_sample) ? gaps.has_image_missing_source_sample : []);
       $('qualityGapCount').textContent = fmt.format(gaps.has_image_missing_source_count || rows.length || 0);
 
       const list = $('qualityGapList');
