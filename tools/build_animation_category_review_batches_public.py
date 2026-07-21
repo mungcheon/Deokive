@@ -34,6 +34,17 @@ def _priority(row: dict[str, Any]) -> int:
 def _compact_row(row: dict[str, Any]) -> dict[str, Any]:
     suggested_category = str(row.get("suggested_category") or row.get("category") or "")
     rows = int(row.get("rows") or 0)
+    folder_template = {
+        "folder_name": suggested_category,
+        "family": row.get("suggested_family"),
+        "color_hint": row.get("suggested_color_hint"),
+        "color_hex": row.get("suggested_color_hex"),
+        "color_sort_order": row.get("suggested_color_sort_order"),
+        "primary_icon_key": row.get("suggested_primary_icon_key"),
+        "icon_options": row.get("suggested_icon_options") or [],
+        "source_category": row.get("category"),
+        "requires_manual_review": True,
+    }
     return {
         "category": row.get("category"),
         "rows": rows,
@@ -47,6 +58,8 @@ def _compact_row(row: dict[str, Any]) -> dict[str, Any]:
         "suggested_icon_options": row.get("suggested_icon_options") or [],
         "review_reason": row.get("review_reason"),
         "sample_names": row.get("sample_names") or [],
+        "folder_template": folder_template,
+        "folder_creation_blocked_until": "category_mapping_manually_confirmed",
         "recommended_action": _recommended_action(row, rows),
         "auto_apply_enabled": False,
     }
@@ -69,6 +82,7 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
         batch_rows = rows[offset : offset + batch_size]
         family_counts = Counter(str(row.get("suggested_family") or "") for row in batch_rows)
         color_counts = Counter(str(row.get("suggested_color_hint") or "") for row in batch_rows)
+        folder_templates = [row.get("folder_template") for row in batch_rows if isinstance(row.get("folder_template"), dict)]
         batches.append(
             {
                 "batch_id": f"animation-taxonomy-review-{len(batches) + 1:03d}",
@@ -77,6 +91,8 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
                 "row_count": sum(int(row.get("rows") or 0) for row in batch_rows),
                 "suggested_family_counts": family_counts.most_common(),
                 "suggested_color_counts": color_counts.most_common(),
+                "folder_templates": folder_templates,
+                "folder_creation_blocked_until": "category_mapping_manually_confirmed",
                 "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
                 "categories": batch_rows,
             }
@@ -93,6 +109,7 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
         "by_suggested_family": family_counts.most_common(),
         "by_suggested_color": color_counts.most_common(),
         "folder_visual_token_count": len(source.get("folder_visual_tokens") or []),
+        "folder_template_count": len(rows),
         "auto_apply_enabled": False,
     }
     return {

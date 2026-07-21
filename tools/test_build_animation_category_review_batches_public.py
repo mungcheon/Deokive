@@ -58,8 +58,18 @@ class BuildAnimationCategoryReviewBatchesPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_rows"], 120)
         self.assertEqual(report["summary"]["batch_count"], 2)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
+        self.assertEqual(report["summary"]["folder_template_count"], 2)
         self.assertFalse(report["automation_policy"]["auto_apply_category_changes"])
         self.assertFalse(report["automation_policy"]["auto_apply_folder_visuals"])
+        self.assertEqual(
+            report["batches"][0]["folder_creation_blocked_until"],
+            "category_mapping_manually_confirmed",
+        )
+        self.assertEqual(
+            report["batches"][0]["categories"][0]["folder_template"]["primary_icon_key"],
+            "view_carousel",
+        )
+        self.assertEqual(report["batches"][1]["folder_templates"][0]["color_sort_order"], 40)
         self.assertEqual(report["batches"][0]["categories"][0]["category"], "아크릴")
         self.assertEqual(report["batches"][1]["categories"][0]["suggested_color_hint"], "yellow")
 
