@@ -43,6 +43,7 @@ METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.json"
+EXECUTION_PLAN = DATA / "catalog_execution_plan_public.json"
 OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
 AGENT_WORK_QUEUE = DATA / "catalog_agent_work_queue_public.json"
 
@@ -1169,6 +1170,8 @@ def build_operations_public(
         load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
     )
     confirmed_import_readiness_summary = confirmed_import_readiness.get("summary", {})
+    execution_plan = load_json(EXECUTION_PLAN, {}) if EXECUTION_PLAN.exists() else {}
+    execution_plan_summary = execution_plan.get("summary", {})
     generic_patch_summary = generic_source_patch_candidates["summary"]
     requested_focus_summary = requested_focus["summary"]
     requested_focus_review_batches = (
@@ -1274,6 +1277,15 @@ def build_operations_public(
             "public_report": f"data/{AGENT_WORK_QUEUE.name}",
             "recommended_next_action": "Open top_next_batches and assign the first image/source batches before broad metadata work.",
         },
+        {
+            "priority": 6,
+            "workstream": "execution_plan",
+            "public_report": f"data/{EXECUTION_PLAN.name}",
+            "action_count": execution_plan_summary.get("action_count", 0),
+            "blocked_action_count": execution_plan_summary.get("blocked_action_count", 0),
+            "manual_review_action_count": execution_plan_summary.get("manual_review_action_count", 0),
+            "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step.",
+        } if execution_plan_summary else None,
         {
             "priority": 10,
             "workstream": "requested_focus_enrichment",
@@ -1627,6 +1639,7 @@ def build_operations_public(
         "reports": [
             {"key": "quality", "public_report": f"data/{QUALITY.name}"},
             {"key": "image_backlog", "public_report": f"data/{IMAGE_BACKLOG.name}"},
+            {"key": "execution_plan", "public_report": f"data/{EXECUTION_PLAN.name}"},
             {"key": "generic_source_patch_candidates", "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}"},
             {"key": "requested_focus_enrichment", "public_report": f"data/{REQUESTED_FOCUS.name}"},
             {"key": "requested_focus_review_batches", "public_report": f"data/{REQUESTED_FOCUS_REVIEW_BATCHES.name}"},
@@ -3478,6 +3491,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["confirmed_import_readiness"] = copy_report_summary(
                 CONFIRMED_IMPORT_READINESS, "confirmed_import_readiness"
             )
+        if EXECUTION_PLAN.exists():
+            target["execution_plan"] = copy_report_summary(EXECUTION_PLAN, "execution_plan")
         target["image_enrichment_batches"] = {
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
             **image_enrichment_batches["summary"],
@@ -3565,6 +3580,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         METADATA_BACKLOG,
         METADATA_REVIEW_BATCHES,
         CONFIRMED_IMPORT_READINESS,
+        EXECUTION_PLAN,
         IMAGE_ENRICHMENT_BATCHES,
         OPERATIONS_REPORT,
         AGENT_WORK_QUEUE,
@@ -3607,6 +3623,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
             str(CONFIRMED_IMPORT_READINESS.relative_to(ROOT)),
+            str(EXECUTION_PLAN.relative_to(ROOT)),
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),

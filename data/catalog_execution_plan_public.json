@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-21T21:09:55Z",
+  "scope": "public_catalog_cleanup_execution_plan",
+  "summary": {
+    "action_count": 8,
+    "blocked_action_count": 1,
+    "manual_review_action_count": 6,
+    "pending_import_action_count": 0,
+    "total_action_rows": 30955,
+    "open_review_queues": {
+      "source_discovery_rows": 647,
+      "image_missing_rows": 720,
+      "dedupe_groups": 109,
+      "animation_unknown_categories": 8,
+      "ichiban_missing_release_date_rows": 16,
+      "ichiban_missing_price_rows": 365,
+      "generic_source_patch_candidate_rows": 3,
+      "requested_focus_open_rows": 5717,
+      "danganronpa_missing_media_rows": 34,
+      "confirmed_import_template_rows": 1349,
+      "confirmed_import_pending_rows": 0,
+      "requested_focus_review_rows": 6275,
+      "animation_category_review_rows": 428
+    },
+    "auto_apply_enabled": false
+  },
+  "actions": [
+    {
+      "priority": 5,
+      "workstream": "confirmed_import_readiness",
+      "public_report": "data/catalog_confirmed_import_readiness_public.json",
+      "status": "needs_manual_confirmation",
+      "rows": 1349,
+      "command": "Review templates and mark exact rows manual_confirmed=true before importing.",
+      "next_step": "confirm_exact_rows_then_run_guarded_import",
+      "blocker": "No public workflow has manual_confirmed=true rows yet.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "template_items": 1349,
+        "ready_or_pending_import_rows": 0,
+        "blocked_confirmed_rows": 0
+      }
+    },
+    {
+      "priority": 10,
+      "workstream": "requested_focus_review_batches",
+      "public_report": "data/requested_focus_review_batches_public.json",
+      "status": "manual_review",
+      "rows": 6275,
+      "command": "Work batches by topic, missing field, and source store; prepare reviewed patches only.",
+      "next_step": "prioritize_user_requested_topics",
+      "blocker": "Exact source evidence is required before catalog mutation.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "batch_count": 313,
+        "by_topic": [
+          [
+            "ichiban_kuji",
+            200
+          ],
+          [
+            "requested_special_goods",
+            48
+          ],
+          [
+            "danganronpa",
+            47
+          ],
+          [
+            "bokubu_style",
+            18
+          ]
+        ],
+        "by_missing_field": [
+          [
+            "barcode",
+            228
+          ],
+          [
+            "official_price_jpy",
+            35
+          ],
+          [
+            "release_date",
+            32
+          ],
+          [
+            "source_url",
+            8
+          ],
+          [
+            "image_url",
+            8
+          ],
+          [
+            "requested_item_evidence",
+            1
+          ],
+          [
+            "name_ja",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_review_batches",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "status": "manual_review",
+      "rows": 647,
+      "command": "Find exact official/detail source URLs for rows missing source_url.",
+      "next_step": "attach_exact_source_url_before_image_import",
+      "blocker": "Rows without exact source_url cannot safely import images.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "batch_count": 56,
+        "by_workflow": [
+          [
+            "official_search_url_available",
+            630
+          ],
+          [
+            "licensed_retailer_search_review",
+            12
+          ],
+          [
+            "manual_official_research",
+            5
+          ]
+        ]
+      }
+    },
+    {
+      "priority": 30,
+      "workstream": "image_url_attachment",
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "status": "blocked",
+      "rows": 720,
+      "command": "Extract images only after exact source_url evidence is confirmed.",
+      "next_step": "resolve_source_url_blockers_then_extract_images",
+      "blocker": "No exact source_url-ready image rows are currently published.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "source_url_ready_rows": 0,
+        "generic_source_url_rows": 50,
+        "needs_source_discovery_rows": 642,
+        "gotouchi_official_review_rows": 23
+      }
+    },
+    {
+      "priority": 40,
+      "workstream": "metadata_review_batches",
+      "public_report": "data/catalog_metadata_review_batches_public.json",
+      "status": "manual_review",
+      "rows": 21075,
+      "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
+      "next_step": "work_field_store_metadata_batches",
+      "blocker": "Broad metadata updates require field-specific evidence policies.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "batch_count": 30,
+        "field_missing_totals": {
+          "name_ja": 9964,
+          "release_date": 1416,
+          "barcode": 7744,
+          "official_price_jpy": 584,
+          "image_url": 720,
+          "source_url": 647
+        }
+      }
+    },
+    {
+      "priority": 50,
+      "workstream": "deduplication_review",
+      "public_report": "data/catalog_deduplication_review_batches_public.json",
+      "status": "manual_review",
+      "rows": 80,
+      "command": "Review duplicate groups and record explicit keep/drop decisions before deletion.",
+      "next_step": "compare_duplicate_group_evidence",
+      "blocker": "auto_delete_enabled is false; variant risk requires manual decisions.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "batch_count": 7,
+        "by_review_confidence": [
+          [
+            "high_review_confidence",
+            42
+          ],
+          [
+            "manual_identity_check",
+            24
+          ],
+          [
+            "variant_caution",
+            8
+          ],
+          [
+            "medium_review_confidence",
+            6
+          ]
+        ]
+      }
+    },
+    {
+      "priority": 60,
+      "workstream": "ichiban_kuji_metadata",
+      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
+      "status": "manual_review",
+      "rows": 381,
+      "command": "Verify official 1kuji campaign pages before applying release dates or prices.",
+      "next_step": "review_batched_1kuji_campaign_metadata",
+      "blocker": "Old campaign date/price gaps remain blocked without labeled official evidence.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "batch_count": 6,
+        "source_campaigns": 44
+      }
+    },
+    {
+      "priority": 70,
+      "workstream": "animation_category_review",
+      "public_report": "data/animation_category_review_batches_public.json",
+      "status": "manual_review",
+      "rows": 428,
+      "command": "Map unknown animation categories to reviewed app folder visual tokens.",
+      "next_step": "apply_reviewed_category_and_folder_visual_mappings",
+      "blocker": "Category changes can affect app navigation and must be reviewed.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "batch_count": 2,
+        "folder_visual_token_count": 29
+      }
+    }
+  ],
+  "instructions": [
+    "Use actions in priority order to keep DB cleanup work aligned with public reports.",
+    "Commands are workflow descriptions, not auto-executed mutations.",
+    "Catalog writes remain disabled until exact source evidence or manual_confirmed=true rows exist."
+  ],
+  "automation_policy": {
+    "public_only": true,
+    "auto_apply_catalog_changes": false,
+    "requires_manual_review": true
+  }
+}

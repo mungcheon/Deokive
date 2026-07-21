@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T21:06:45Z",
+  "generated_at": "2026-07-21T21:10:00Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -647,6 +647,10 @@
       "public_report": "data/catalog_image_backlog_public.json"
     },
     {
+      "key": "execution_plan",
+      "public_report": "data/catalog_execution_plan_public.json"
+    },
+    {
       "key": "generic_source_patch_candidates",
       "public_report": "data/generic_source_patch_candidates_public.json"
     },
@@ -737,6 +741,15 @@
       "workstream": "agent_work_queue",
       "public_report": "data/catalog_agent_work_queue_public.json",
       "recommended_next_action": "Open top_next_batches and assign the first image/source batches before broad metadata work."
+    },
+    {
+      "priority": 6,
+      "workstream": "execution_plan",
+      "public_report": "data/catalog_execution_plan_public.json",
+      "action_count": 8,
+      "blocked_action_count": 1,
+      "manual_review_action_count": 6,
+      "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
       "priority": 10,
