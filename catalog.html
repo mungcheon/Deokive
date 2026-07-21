@@ -185,9 +185,88 @@
     }
 
     .collection h3,
-    .insight h3 {
+    .insight h3,
+    .kuji-panel h3 {
       font-size: 15px;
       margin: 0 0 12px;
+    }
+
+    .kuji-panel {
+      padding: 18px;
+    }
+
+    .kuji-copy {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: -2px 0 12px;
+    }
+
+    .kuji-stats {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 12px;
+    }
+
+    .kuji-stat {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 126, 178, 0.16);
+      border-radius: 14px;
+      padding: 10px;
+    }
+
+    .kuji-stat b {
+      display: block;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .kuji-stat span {
+      color: var(--muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      margin-top: 6px;
+    }
+
+    .kuji-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .kuji-item {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 126, 178, 0.16);
+      border-radius: 14px;
+      display: block;
+      min-width: 0;
+      padding: 10px;
+      text-decoration: none;
+    }
+
+    .kuji-item strong {
+      display: block;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .kuji-item span {
+      color: var(--muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      margin-top: 5px;
+    }
+
+    .kuji-more {
+      color: var(--pink-dark);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 850;
+      margin-top: 12px;
+      text-decoration: none;
     }
 
     .collection-copy {
@@ -1130,6 +1209,18 @@
           <h3>많은 카테고리</h3>
           <div id="categoryBars"></div>
         </aside>
+        <aside class="panel kuji-panel">
+          <h3>이치방쿠지 캠페인</h3>
+          <p class="kuji-copy">공식 1kuji.com 캠페인 DB를 별도로 정리했어요. 최신 발매일이 있는 항목을 먼저 보여줍니다.</p>
+          <div class="kuji-stats" aria-label="이치방쿠지 통계">
+            <div class="kuji-stat"><b id="kujiRows">-</b><span>공식 캠페인</span></div>
+            <div class="kuji-stat"><b id="kujiDated">-</b><span>날짜 확인</span></div>
+          </div>
+          <div id="kujiList" class="kuji-list" aria-live="polite">
+            <div class="loading"><span class="spinner"></span>쿠지 DB 확인 중</div>
+          </div>
+          <a class="kuji-more" href="data/ichiban_kuji_campaigns.json" target="_blank" rel="noopener noreferrer">전체 JSON 열기</a>
+        </aside>
       </div>
     </section>
 
@@ -1214,6 +1305,7 @@
         goods: [],
       },
       pendingOwnedItem: null,
+      kujiCampaigns: [],
     };
 
     const $ = (id) => document.getElementById(id);
@@ -1651,8 +1743,55 @@
       return card;
     }
 
+    function renderKujiCampaigns() {
+      const rows = state.kujiCampaigns;
+      const dated = rows.filter((item) => item.release_date);
+      $('kujiRows').textContent = fmt.format(rows.length);
+      $('kujiDated').textContent = fmt.format(dated.length);
+
+      const list = $('kujiList');
+      if (!rows.length) {
+        list.innerHTML = '<div class="empty">이치방쿠지 DB를 아직 불러오지 못했어요</div>';
+        return;
+      }
+
+      const latest = [...rows]
+        .filter((item) => item.release_date)
+        .sort((a, b) => text(b.release_date).localeCompare(text(a.release_date)))
+        .slice(0, 5);
+      const fragment = document.createDocumentFragment();
+      for (const item of latest) {
+        const link = document.createElement('a');
+        link.className = 'kuji-item';
+        link.href = item.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.innerHTML = `
+          <strong>${escapeHtml(item.title || '이치방쿠지 캠페인')}</strong>
+          <span>${escapeHtml([compactDate(item.release_date), item.source_category].filter(Boolean).join(' · ') || '날짜 확인 필요')}</span>
+        `;
+        fragment.append(link);
+      }
+      list.replaceChildren(fragment);
+    }
+
+    async function loadKujiCampaigns() {
+      try {
+        const response = await fetch('data/ichiban_kuji_campaigns.json?v=20260722-kuji-campaigns', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const rows = await response.json();
+        state.kujiCampaigns = Array.isArray(rows) ? rows : [];
+        renderKujiCampaigns();
+      } catch (error) {
+        $('kujiRows').textContent = '-';
+        $('kujiDated').textContent = '-';
+        $('kujiList').innerHTML = `<div class="empty">쿠지 DB를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
+      }
+    }
+
     async function init() {
       loadOwned();
+      loadKujiCampaigns();
       try {
         const response = await fetch('data/catalog_public.json?v=20260722-owned-flow', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
