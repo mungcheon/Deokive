@@ -38,6 +38,14 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
             "confirm_exact_image_url_templates_then_run_import_confirmed_image_attachment_rows",
         )
 
+        focus = readiness.WORKFLOWS["focus_image"]
+        self.assertEqual(focus["public_action_queue"].name, "requested_focus_action_queue_public.json")
+        self.assertEqual(focus["public_action_rows_key"], "queued_action_rows")
+        self.assertEqual(
+            focus["public_action_next_step"],
+            "confirm_requested_focus_templates_then_run_import_confirmed_requested_focus_rows",
+        )
+
     def test_default_workflows_include_public_action_only_metadata_paths(self) -> None:
         self.assertIn("ichiban_metadata", readiness.WORKFLOWS)
         self.assertIn("animation_category", readiness.WORKFLOWS)

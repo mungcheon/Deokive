@@ -71,7 +71,7 @@ WORKFLOWS = {
         "public_action_queue": DATA / "requested_focus_action_queue_public.json",
         "public_action_rows_key": "queued_action_rows",
         "public_action_batches_key": "action_batch_count",
-        "public_action_next_step": "confirm_requested_focus_templates",
+        "public_action_next_step": "confirm_requested_focus_templates_then_run_import_confirmed_requested_focus_rows",
     },
     "ichiban_ocr": {
         "confirmed": SERVER / "ichiban_kuji_ocr_confirmed_rows.json",
