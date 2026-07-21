@@ -38,7 +38,10 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         animation = readiness.WORKFLOWS["animation_category"]
         self.assertEqual(animation["public_action_queue"].name, "animation_category_action_queue_public.json")
         self.assertEqual(animation["public_action_rows_key"], "queued_catalog_rows")
-        self.assertEqual(animation["public_action_next_step"], "fill_confirmed_animation_category_mapping_templates")
+        self.assertEqual(
+            animation["public_action_next_step"],
+            "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
+        )
 
     def test_template_candidates_are_public_without_row_details(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

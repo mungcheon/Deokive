@@ -103,7 +103,7 @@ WORKFLOWS = {
         "public_action_queue": DATA / "animation_category_action_queue_public.json",
         "public_action_rows_key": "queued_catalog_rows",
         "public_action_batches_key": "action_batch_count",
-        "public_action_next_step": "fill_confirmed_animation_category_mapping_templates",
+        "public_action_next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
     },
 }
 
