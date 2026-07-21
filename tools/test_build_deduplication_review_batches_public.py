@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import sys
 import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import build_deduplication_review_batches_public as batches
 
@@ -44,6 +48,15 @@ class BuildDeduplicationReviewBatchesPublicTest(unittest.TestCase):
         self.assertFalse(report["automation_policy"]["auto_merge"])
         self.assertEqual(report["batches"][0]["groups"][0]["review_confidence"], "high_review_confidence")
         self.assertEqual(report["batches"][1]["groups"][0]["review_confidence"], "variant_caution")
+        self.assertEqual(report["batches"][0]["blocked_until"], "explicit_manual_keep_drop_confirmation")
+        self.assertFalse(report["batches"][0]["groups"][0]["auto_merge_enabled"])
+        self.assertFalse(report["batches"][0]["groups"][0]["auto_delete_enabled"])
+        self.assertIn("barcode_matches_all_rows", report["batches"][0]["identity_checklist"])
+        self.assertIn(
+            "preserve_rows_unless_variant_difference_is_disproved",
+            report["batches"][1]["groups"][0]["identity_checklist"],
+        )
+        self.assertIn("category_mismatch", report["batches"][1]["groups"][0]["merge_blockers"])
         self.assertIn("not a deletion command", report["instructions"][1])
 
 

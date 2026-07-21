@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T20:33:28Z",
+  "generated_at": "2026-07-21T21:43:30Z",
   "scope": "catalog_public_deduplication_review_batches",
   "summary": {
     "source_groups": 80,
@@ -85,6 +85,25 @@
           12
         ]
       ],
+      "merge_blocker_counts": [
+        [
+          "multi_store_variant_or_retailer_review",
+          12
+        ],
+        [
+          "manual_identity_confirmation_required",
+          8
+        ]
+      ],
+      "identity_checklist": [
+        "barcode_matches_all_rows",
+        "compare_product_images_for_same_sellable_item",
+        "compare_product_titles_and_character_names",
+        "confirm_keep_drop_decision_in_a_separate_review_queue",
+        "multi_store_rows_are_same_product_not_retailer_specific_variant",
+        "source_page_is_not_a_variant_or_lineup_page"
+      ],
+      "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
         {
@@ -135,7 +154,20 @@
               "image_url": "https://www.animate-onlineshop.jp/products_pict/2217014_01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -185,7 +217,20 @@
               "image_url": "https://www.movic.jp/img/goods/L/02330-00350-00625-l.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -235,7 +280,20 @@
               "image_url": "https://www.movic.jp/img/goods/L/02330-00350-00630-l.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -286,7 +344,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189195898_1.jpg?v=1776259556",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -337,7 +408,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189195942_1.jpg?v=1776259596",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -388,7 +472,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189201551_1.jpg?v=1776257761",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -439,7 +536,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351603_1_cb808b0a-126a-47d8-8dc5-c072d6ddd36e.jpg?v=1774957180",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -490,7 +601,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351610_1_474dda8e-a30c-409b-b3aa-95c02f942937.jpg?v=1774957157",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -541,7 +666,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351658_1.jpg?v=1774854223",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -592,7 +730,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359074_1.jpg?v=1774938830",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -643,7 +795,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359081_1.jpg?v=1774939046",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -694,7 +860,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359098_1.jpg?v=1774939084",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         }
       ]
     },
@@ -724,6 +904,25 @@
           12
         ]
       ],
+      "merge_blocker_counts": [
+        [
+          "multi_store_variant_or_retailer_review",
+          12
+        ],
+        [
+          "manual_identity_confirmation_required",
+          7
+        ]
+      ],
+      "identity_checklist": [
+        "barcode_matches_all_rows",
+        "compare_product_images_for_same_sellable_item",
+        "compare_product_titles_and_character_names",
+        "confirm_keep_drop_decision_in_a_separate_review_queue",
+        "multi_store_rows_are_same_product_not_retailer_specific_variant",
+        "source_page_is_not_a_variant_or_lineup_page"
+      ],
+      "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
         {
@@ -775,7 +974,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359104_1.jpg?v=1774939096",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -826,7 +1039,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359111_1.jpg?v=1774939106",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -877,7 +1104,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359128_1.jpg?v=1774939116",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -928,7 +1169,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359135_1.jpg?v=1774939125",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -979,7 +1234,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359142_1.jpg?v=1774939137",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1030,7 +1299,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609362555_1_1d8c023e-046d-4821-8506-71c9129fb924.jpg?v=1774955979",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1081,7 +1364,21 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609362562_1_4b79ea04-b365-4b5b-89ef-dd682f2b15f8.jpg?v=1774956013",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1132,7 +1429,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367710_1.jpg?v=1776303567",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1183,7 +1493,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367727_1.jpg?v=1776303590",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1234,7 +1557,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367734_1.jpg?v=1776303602",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1285,7 +1621,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367741_1.jpg?v=1776303614",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1336,7 +1685,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367796_1.jpg?v=1776303630",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         }
       ]
     },
@@ -1366,6 +1728,26 @@
           12
         ]
       ],
+      "merge_blocker_counts": [
+        [
+          "multi_store_variant_or_retailer_review",
+          12
+        ],
+        [
+          "manual_identity_confirmation_required",
+          1
+        ]
+      ],
+      "identity_checklist": [
+        "barcode_matches_all_rows",
+        "compare_product_images_for_same_sellable_item",
+        "compare_product_titles_and_character_names",
+        "confirm_keep_drop_decision_in_a_separate_review_queue",
+        "multi_store_rows_are_same_product_not_retailer_specific_variant",
+        "shared_image_is_not_a_placeholder_or_lineup_image",
+        "source_page_is_not_a_variant_or_lineup_page"
+      ],
+      "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
         {
@@ -1418,7 +1800,22 @@
               "image_url": "https://chiikawamarket.jp/cdn/shop/files/4571609370895_1.jpg",
               "richness": 14
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "shared_image_is_not_a_placeholder_or_lineup_image",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1469,7 +1866,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385097_1.jpg?v=1776299053",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1520,7 +1930,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385103_1.jpg?v=1776299127",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1571,7 +1994,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385110_1.jpg?v=1776299153",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1622,7 +2058,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385127_1.jpg?v=1776299177",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1673,7 +2122,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385134_1.jpg?v=1776299200",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1724,7 +2186,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385141_1.jpg?v=1776299223",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1775,7 +2250,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385158_1.jpg?v=1776299244",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1826,7 +2314,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385165_1.jpg?v=1776299264",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1877,7 +2378,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385172_1.jpg?v=1776299286",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1928,7 +2442,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437730_1.jpg?v=1776254626",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -1979,7 +2506,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437747_1.jpg?v=1776254635",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         }
       ]
     },
@@ -2005,6 +2545,21 @@
           12
         ]
       ],
+      "merge_blocker_counts": [
+        [
+          "multi_store_variant_or_retailer_review",
+          12
+        ]
+      ],
+      "identity_checklist": [
+        "barcode_matches_all_rows",
+        "compare_product_images_for_same_sellable_item",
+        "compare_product_titles_and_character_names",
+        "confirm_keep_drop_decision_in_a_separate_review_queue",
+        "multi_store_rows_are_same_product_not_retailer_specific_variant",
+        "source_page_is_not_a_variant_or_lineup_page"
+      ],
+      "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
         {
@@ -2056,7 +2611,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437754_1.jpg?v=1776254687",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2107,7 +2675,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437761_1.jpg?v=1776254695",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2158,7 +2739,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437778_1.jpg?v=1776254702",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2209,7 +2803,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437785_1.jpg?v=1776254709",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2260,7 +2867,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437792_1.jpg?v=1776254716",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2311,7 +2931,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437808_1.jpg?v=1776254725",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2362,7 +2995,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437815_1.jpg?v=1776254733",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2413,7 +3059,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437822_1.jpg?v=1776254743",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2464,7 +3123,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437839_1.jpg?v=1776254750",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2515,7 +3187,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437846_1.jpg?v=1776254758",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2566,7 +3251,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437853_1.jpg?v=1776254766",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2617,7 +3315,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437860_1.jpg?v=1776254774",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         }
       ]
     },
@@ -2647,6 +3358,25 @@
           12
         ]
       ],
+      "merge_blocker_counts": [
+        [
+          "multi_store_variant_or_retailer_review",
+          12
+        ],
+        [
+          "manual_identity_confirmation_required",
+          6
+        ]
+      ],
+      "identity_checklist": [
+        "barcode_matches_all_rows",
+        "compare_product_images_for_same_sellable_item",
+        "compare_product_titles_and_character_names",
+        "confirm_keep_drop_decision_in_a_separate_review_queue",
+        "multi_store_rows_are_same_product_not_retailer_specific_variant",
+        "source_page_is_not_a_variant_or_lineup_page"
+      ],
+      "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
         {
@@ -2698,7 +3428,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437877_1.jpg?v=1776254787",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2749,7 +3492,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437884_1.jpg?v=1776254795",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2800,7 +3556,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437891_1.jpg?v=1776254805",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2851,7 +3620,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437907_1.jpg?v=1776254813",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2902,7 +3684,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437914_1.jpg?v=1776254925",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -2953,7 +3748,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4573256437921_1.jpg?v=1776254943",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3003,7 +3811,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917828_1.jpg?v=1665977379",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3053,7 +3874,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917835_1.jpg?v=1665977423",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3103,7 +3937,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917842_1.jpg?v=1665977273",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3153,7 +4000,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917859_1.jpg?v=1665977357",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3203,7 +4063,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662917866_1.jpg?v=1665977445",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3253,7 +4126,20 @@
               "image_url": "https://www.animate-onlineshop.jp/products_pict/2277622_01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         }
       ]
     },
@@ -3303,6 +4189,30 @@
           2
         ]
       ],
+      "merge_blocker_counts": [
+        [
+          "multi_store_variant_or_retailer_review",
+          6
+        ],
+        [
+          "shared_source_or_image_may_represent_lineup",
+          6
+        ],
+        [
+          "manual_identity_confirmation_required",
+          2
+        ]
+      ],
+      "identity_checklist": [
+        "barcode_matches_all_rows",
+        "compare_product_images_for_same_sellable_item",
+        "compare_product_titles_and_character_names",
+        "confirm_keep_drop_decision_in_a_separate_review_queue",
+        "multi_store_rows_are_same_product_not_retailer_specific_variant",
+        "shared_image_is_not_a_placeholder_or_lineup_image",
+        "source_page_is_not_a_variant_or_lineup_page"
+      ],
+      "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
         {
@@ -3353,7 +4263,19 @@
               "image_url": "https://www.animate-onlineshop.jp/products_pict/2277623_01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3403,7 +4325,19 @@
               "image_url": "https://www.animate-onlineshop.jp/products_pict/2277624_01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3453,7 +4387,20 @@
               "image_url": "https://www.animate-onlineshop.jp/products_pict/2277625_01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3503,7 +4450,19 @@
               "image_url": "https://www.animate-onlineshop.jp/products_pict/2277626_01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3553,7 +4512,20 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/products/4582662919914_1.jpg?v=1665977401",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -3603,7 +4575,19 @@
               "image_url": "https://www.animate-onlineshop.jp/products_pict/2277627_01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "source_url",
@@ -3652,7 +4636,19 @@
               "image_url": "https://dcjnmis8jxmbl.cloudfront.net/upload/image/product/2025/01/20/PdzK4TbDeyOEg37C.webp",
               "richness": 8
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "source_url",
@@ -3700,7 +4696,18 @@
               "image_url": "https://www.jp-api.com/images/tphoto_549952_0_b.png",
               "richness": 10
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "source_page_is_not_a_variant_or_lineup_page"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "image_url",
@@ -3748,7 +4755,18 @@
               "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "image_url",
@@ -3796,7 +4814,18 @@
               "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "image_url",
@@ -3844,7 +4873,18 @@
               "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "image_url",
@@ -3892,7 +4932,18 @@
               "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         }
       ]
     },
@@ -3918,6 +4969,30 @@
           8
         ]
       ],
+      "merge_blocker_counts": [
+        [
+          "manual_identity_confirmation_required",
+          8
+        ],
+        [
+          "category_mismatch",
+          8
+        ],
+        [
+          "multi_store_variant_or_retailer_review",
+          8
+        ]
+      ],
+      "identity_checklist": [
+        "barcode_matches_all_rows",
+        "compare_product_images_for_same_sellable_item",
+        "compare_product_titles_and_character_names",
+        "confirm_keep_drop_decision_in_a_separate_review_queue",
+        "multi_store_rows_are_same_product_not_retailer_specific_variant",
+        "preserve_rows_unless_variant_difference_is_disproved",
+        "source_page_is_not_a_variant_or_lineup_page"
+      ],
+      "blocked_until": "explicit_manual_keep_drop_confirmation",
       "recommended_action": "Review every group manually and write explicit keep/drop decisions before any catalog mutation.",
       "groups": [
         {
@@ -3970,7 +5045,22 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4513750146387_4513750112665.jpg?v=1716176271",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant",
+            "preserve_rows_unless_variant_difference_is_disproved"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "category_mismatch",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -4022,7 +5112,22 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4513750146394_4513750112672.jpg?v=1716176377",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant",
+            "preserve_rows_unless_variant_difference_is_disproved"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "category_mismatch",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -4074,7 +5179,22 @@
               "image_url": "https://www.animate-onlineshop.jp/products_pict/3139005_01.jpg",
               "richness": 14
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant",
+            "preserve_rows_unless_variant_difference_is_disproved"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "category_mismatch",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -4127,7 +5247,23 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351641_1.jpg?v=1774854238",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant",
+            "preserve_rows_unless_variant_difference_is_disproved"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "category_mismatch",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -4180,7 +5316,23 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359159_1.jpg?v=1774939162",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant",
+            "preserve_rows_unless_variant_difference_is_disproved"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "category_mismatch",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -4233,7 +5385,23 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359166_1.jpg?v=1774939172",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant",
+            "preserve_rows_unless_variant_difference_is_disproved"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "category_mismatch",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -4286,7 +5454,23 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359173_1.jpg?v=1774939182",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant",
+            "preserve_rows_unless_variant_difference_is_disproved"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "category_mismatch",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         },
         {
           "key_type": "barcode",
@@ -4339,7 +5523,23 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609359180_1.jpg?v=1774939193",
               "richness": 13
             }
-          ]
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant",
+            "preserve_rows_unless_variant_difference_is_disproved"
+          ],
+          "merge_blockers": [
+            "manual_identity_confirmation_required",
+            "category_mismatch",
+            "multi_store_variant_or_retailer_review"
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
         }
       ]
     }
