@@ -253,6 +253,25 @@
       padding: 11px 12px;
     }
 
+    .save-note {
+      background: #fff8fb;
+      border: 1px solid rgba(255, 126, 178, 0.18);
+      border-radius: 16px;
+      color: var(--muted);
+      display: grid;
+      font-size: 12px;
+      font-weight: 750;
+      gap: 6px;
+      line-height: 1.45;
+      margin-top: 12px;
+      padding: 12px;
+    }
+
+    .save-note b {
+      color: var(--ink);
+      font-size: 13px;
+    }
+
     .bar {
       align-items: center;
       display: grid;
@@ -640,6 +659,17 @@
       margin-top: 4px;
     }
 
+    .sheet-note {
+      background: #fff8fb;
+      border: 1px solid rgba(255, 126, 178, 0.18);
+      border-radius: 16px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      padding: 12px;
+    }
+
     .sheet-field {
       display: grid;
       gap: 8px;
@@ -663,7 +693,7 @@
     .sheet-actions {
       display: grid;
       gap: 8px;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1.15fr;
     }
 
     .sheet-actions button {
@@ -748,6 +778,10 @@
         border-left: 0;
         border-top: 1px solid rgba(255, 126, 178, 0.16);
       }
+
+      .sheet-actions {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -766,8 +800,8 @@
 
     <section class="hero">
       <div class="panel summary">
-        <h2>굿즈 DB를 빠르게 찾고 내 보유 목록에 담아요</h2>
-        <p>GitHub Pages에 공개된 카탈로그 목록입니다. 개인 폴더, 메모, 계정, 기기 정보는 포함하지 않고 상품 공개 정보만 보여줍니다.</p>
+        <h2>굿즈 DB에서 찾아서 내 보유 굿즈로 추가해요</h2>
+        <p>GitHub Pages에 공개된 카탈로그 목록입니다. 검색한 DB 항목은 버튼 한 번으로 내 굿즈 카드가 되고, 개인 폴더와 보유 목록은 이 기기에만 저장됩니다.</p>
         <div class="stats" aria-label="카탈로그 통계">
           <div class="stat"><b id="statRows">-</b><span>전체 굿즈</span></div>
           <div class="stat"><b id="statImages">-</b><span>이미지 있음</span></div>
@@ -777,8 +811,8 @@
       </div>
       <div class="side-stack">
         <aside class="panel collection">
-          <h3>내 보유 굿즈로 추가</h3>
-          <p class="collection-copy">검색 결과의 추가 버튼을 누르면 선택한 폴더에 개인 보유 굿즈로 저장돼요. 이 정보는 이 기기에만 남습니다.</p>
+          <h3>DB에서 골라 내 굿즈 만들기</h3>
+          <p class="collection-copy">검색 결과의 추가 버튼을 누르면 공개 DB 정보가 개인 보유 굿즈로 복사돼요. 폴더를 고르거나, 가장 위 폴더에 바로 넣을 수 있어요.</p>
           <div class="folder-row">
             <select id="ownedFolder" aria-label="추가할 폴더"></select>
             <button id="newFolder" type="button">폴더</button>
@@ -790,6 +824,10 @@
           <div class="owned-summary">
             <span>저장된 굿즈</span>
             <strong id="ownedCount">0개</strong>
+          </div>
+          <div class="save-note">
+            <b>저장 방식</b>
+            <span>상품명, 이미지, 출처 같은 공개 정보만 복사하고 수량은 내 기기에서만 관리해요.</span>
           </div>
         </aside>
         <aside class="panel insight">
@@ -840,13 +878,17 @@
           <div id="sheetMeta" class="sheet-meta">선택한 DB 정보가 내 기기에만 저장돼요</div>
         </div>
       </div>
+      <div class="sheet-note">
+        이 DB 항목을 개인 보유 굿즈 카드로 만들어요. 이미 같은 폴더에 있으면 새로 만들지 않고 수량만 1 늘어납니다.
+      </div>
       <label class="sheet-field">
         <span>넣을 폴더</span>
         <select id="sheetFolder" aria-label="굿즈를 넣을 폴더"></select>
       </label>
       <div class="sheet-actions">
         <button id="sheetNewFolder" class="ghost" type="button">새 폴더</button>
-        <button id="confirmOwnedAdd" class="primary" type="button">추가하기</button>
+        <button id="addToTopFolder" class="ghost" type="button">맨 위 폴더</button>
+        <button id="confirmOwnedAdd" class="primary" type="button">선택 폴더에 추가</button>
       </div>
     </section>
   </div>
@@ -923,12 +965,23 @@
 
     function renderOwnedControls() {
       const select = $('ownedFolder');
+      const selectedOwnedFolder = select.value;
       select.replaceChildren(...state.owned.folders.map((folder) => option(folder.name, folder.id)));
+      select.value = state.owned.folders.some((folder) => folder.id === selectedOwnedFolder)
+        ? selectedOwnedFolder
+        : state.owned.folders[0]?.id || 'top';
       const sheetSelect = $('sheetFolder');
+      const selectedSheetFolder = sheetSelect.value || select.value;
       sheetSelect.replaceChildren(...state.owned.folders.map((folder) => option(folder.name, folder.id)));
-      sheetSelect.value = select.value || state.owned.folders[0]?.id || 'top';
+      sheetSelect.value = state.owned.folders.some((folder) => folder.id === selectedSheetFolder)
+        ? selectedSheetFolder
+        : select.value || state.owned.folders[0]?.id || 'top';
       $('ownedCount').textContent = `${fmt.format(state.owned.goods.length)}개`;
       if (state.items.length) renderResults();
+    }
+
+    function topFolder() {
+      return state.owned.folders[0] || { id: 'top', name: '내 굿즈' };
     }
 
     function selectedFolder(folderId = $('ownedFolder').value) {
@@ -978,6 +1031,7 @@
             source_store: item.source_store,
             release_date: item.release_date,
             barcode: item.barcode,
+            copied_from: 'public_catalog',
           },
         });
         showToast(`${folder.name}에 추가했어요`);
@@ -1026,6 +1080,15 @@
       const folderId = $('sheetFolder').value || state.owned.folders[0]?.id || 'top';
       $('ownedFolder').value = folderId;
       addOwned(state.pendingOwnedItem, folderId);
+      closeOwnedSheet();
+    }
+
+    function addPendingToTopFolder() {
+      if (!state.pendingOwnedItem) return closeOwnedSheet();
+      const folder = topFolder();
+      $('ownedFolder').value = folder.id;
+      $('sheetFolder').value = folder.id;
+      addOwned(state.pendingOwnedItem, folder.id);
       closeOwnedSheet();
     }
 
@@ -1165,7 +1228,7 @@
       const secondName = item.name_ja && item.name_ja !== name ? item.name_ja : '';
       const sourceLabel = item.source_url ? '출처 열기' : '출처 없음';
       const added = isOwnedInSelectedFolder(item);
-      const addLabel = added ? '추가됨' : '내 굿즈 추가';
+      const addLabel = added ? '선택 폴더에 있음' : '내 굿즈로 추가';
       card.innerHTML = `
         <div class="thumb">
           <div class="badge">${escapeHtml(item.category || '미분류')}</div>
@@ -1181,7 +1244,7 @@
         </div>
         <div class="card-actions">
           <a class="source" href="${escapeAttr(item.source_url || '#')}" target="_blank" rel="noopener noreferrer" aria-disabled="${item.source_url ? 'false' : 'true'}">${sourceLabel}</a>
-          <button class="add-owned${added ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}">${addLabel}</button>
+          <button class="add-owned${added ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="이 DB 항목을 내 보유 굿즈로 복사">${addLabel}</button>
         </div>
       `;
       card.querySelector('.add-owned').addEventListener('click', () => openOwnedSheet(item));
@@ -1228,6 +1291,7 @@
       renderResults();
     });
     $('sheetNewFolder').addEventListener('click', () => createFolder('sheetFolder'));
+    $('addToTopFolder').addEventListener('click', addPendingToTopFolder);
     $('confirmOwnedAdd').addEventListener('click', confirmOwnedAdd);
     $('more').addEventListener('click', () => {
       state.visible += 80;
