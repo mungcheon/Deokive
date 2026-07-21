@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T21:02:24Z",
+  "generated_at": "2026-07-21T21:06:45Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -26,6 +26,8 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
+      "confirmed_import_template_rows": 1349,
+      "confirmed_import_pending_rows": 0,
       "requested_focus_review_rows": 6275,
       "animation_category_review_rows": 428
     },
@@ -693,6 +695,10 @@
       "public_report": "data/catalog_metadata_review_batches_public.json"
     },
     {
+      "key": "confirmed_import_readiness",
+      "public_report": "data/catalog_confirmed_import_readiness_public.json"
+    },
+    {
       "key": "deduplication",
       "public_report": "data/catalog_deduplication_public.json"
     },
@@ -790,6 +796,15 @@
       "gotouchi_official_review_rows": 23,
       "blocked_rows": 642,
       "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import."
+    },
+    {
+      "priority": 19,
+      "workstream": "confirmed_import_readiness",
+      "public_report": "data/catalog_confirmed_import_readiness_public.json",
+      "ready_or_pending_import_rows": 0,
+      "blocked_confirmed_rows": 0,
+      "template_items": 1349,
+      "recommended_next_action": "Review confirmed import readiness before attempting source/image/metadata writes."
     },
     {
       "priority": 12,

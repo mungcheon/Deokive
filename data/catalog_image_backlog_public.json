@@ -2431,13 +2431,15 @@
     "generic_source_patch_candidate_rows": 3,
     "requested_focus_open_rows": 5717,
     "danganronpa_missing_media_rows": 34,
+    "confirmed_import_template_rows": 1349,
+    "confirmed_import_pending_rows": 0,
     "requested_focus_review_rows": 6275,
     "animation_category_review_rows": 428
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 80,
-    "summed_batch_rows": 9819,
+    "summed_batch_rows": 11120,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2465,11 +2467,11 @@
         8
       ],
       [
-        "ichiban_kuji_price",
-        5
+        "requested_focus_enrichment",
+        4
       ],
       [
-        "requested_focus_enrichment",
+        "ichiban_kuji_price",
         4
       ],
       [
@@ -2478,6 +2480,10 @@
       ],
       [
         "gotouchi_official_candidate_review",
+        1
+      ],
+      [
+        "confirmed_import_readiness",
         1
       ],
       [
@@ -2512,7 +2518,7 @@
       ],
       [
         "agent-ichiban-kuji",
-        6
+        5
       ],
       [
         "agent-requested-focus",
@@ -2524,6 +2530,10 @@
       ],
       [
         "agent-gotouchi-review",
+        1
+      ],
+      [
+        "agent-confirmed-import",
         1
       ]
     ],
@@ -2537,6 +2547,8 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
+      "confirmed_import_template_rows": 1349,
+      "confirmed_import_pending_rows": 0,
       "requested_focus_review_rows": 6275,
       "animation_category_review_rows": 428
     }
@@ -3402,6 +3414,33 @@
       [
         "name_ja",
         1
+      ]
+    ],
+    "auto_apply_enabled": false
+  },
+  "confirmed_import_readiness": {
+    "public_report": "data/catalog_confirmed_import_readiness_public.json",
+    "workflow_count": 7,
+    "confirmed_files": 3,
+    "template_items": 1349,
+    "manual_confirmed_true": 0,
+    "updated_rows": 0,
+    "skipped_rows": 0,
+    "duplicates": 0,
+    "ready_or_pending_import_rows": 0,
+    "blocked_confirmed_rows": 0,
+    "by_status": [
+      [
+        "confirmed_file_empty",
+        3
+      ],
+      [
+        "no_current_candidates",
+        2
+      ],
+      [
+        "template_ready_for_manual_confirmation",
+        2
       ]
     ],
     "auto_apply_enabled": false

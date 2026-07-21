@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T21:02:24Z",
+  "generated_at": "2026-07-21T21:06:45Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 9819,
+    "summed_batch_rows": 11120,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -31,11 +31,11 @@
         8
       ],
       [
-        "ichiban_kuji_price",
-        5
+        "requested_focus_enrichment",
+        4
       ],
       [
-        "requested_focus_enrichment",
+        "ichiban_kuji_price",
         4
       ],
       [
@@ -44,6 +44,10 @@
       ],
       [
         "gotouchi_official_candidate_review",
+        1
+      ],
+      [
+        "confirmed_import_readiness",
         1
       ],
       [
@@ -78,7 +82,7 @@
       ],
       [
         "agent-ichiban-kuji",
-        6
+        5
       ],
       [
         "agent-requested-focus",
@@ -90,6 +94,10 @@
       ],
       [
         "agent-gotouchi-review",
+        1
+      ],
+      [
+        "agent-confirmed-import",
         1
       ]
     ],
@@ -103,6 +111,8 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
+      "confirmed_import_template_rows": 1349,
+      "confirmed_import_pending_rows": 0,
       "requested_focus_review_rows": 6275,
       "animation_category_review_rows": 428
     }
@@ -208,7 +218,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-29",
+      "batch_id": "015-agent-generic-source-cleanup-30",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -1552,7 +1562,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-29",
+      "batch_id": "015-agent-generic-source-cleanup-30",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -1658,7 +1668,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-30",
+      "batch_id": "015-agent-generic-source-cleanup-31",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -1714,7 +1724,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-31",
+      "batch_id": "015-agent-generic-source-cleanup-32",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -1787,7 +1797,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-32",
+      "batch_id": "018-agent-gotouchi-review-33",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -1894,7 +1904,80 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "020-agent-source-image-33",
+      "batch_id": "019-agent-confirmed-import-29",
+      "agent_id": "agent-confirmed-import",
+      "workstream": "confirmed_import_readiness",
+      "priority": 19,
+      "title": "Confirmed import readiness review",
+      "public_report": "data/catalog_confirmed_import_readiness_public.json",
+      "rows": 1349,
+      "recommended_action": "Review pending/blocked confirmed imports before any catalog write.",
+      "acceptance_criteria": [
+        "Do not expose row-level private candidate details in public reports.",
+        "Run guarded dry-runs before writing confirmed source, image, or metadata rows.",
+        "Only manually confirmed exact matches may be imported."
+      ],
+      "sample_items": [
+        {
+          "workflow": "catalog_field",
+          "public_workstream": "metadata_field_values",
+          "status": "template_ready_for_manual_confirmation",
+          "confirmed_file_exists": false,
+          "template_file_exists": true,
+          "import_report_exists": true,
+          "confirmed_items": 0,
+          "manual_confirmed_true": 0,
+          "template_items": 500,
+          "template_manual_confirmed_true": 0,
+          "updated_rows": 0,
+          "skipped_rows": 0,
+          "duplicates": 0,
+          "skip_reason_counts": [],
+          "next_action": "Review template candidates and copy exact matches into the confirmed file.",
+          "auto_apply_enabled": false
+        },
+        {
+          "workflow": "catalog_image",
+          "public_workstream": "exact_image_urls",
+          "status": "confirmed_file_empty",
+          "confirmed_file_exists": true,
+          "template_file_exists": true,
+          "import_report_exists": true,
+          "confirmed_items": 0,
+          "manual_confirmed_true": 0,
+          "template_items": 500,
+          "template_manual_confirmed_true": 0,
+          "updated_rows": 0,
+          "skipped_rows": 0,
+          "duplicates": 0,
+          "skip_reason_counts": [],
+          "next_action": "Mark exact reviewed rows manual_confirmed=true or regenerate from the latest template.",
+          "auto_apply_enabled": false
+        },
+        {
+          "workflow": "focus_image",
+          "public_workstream": "requested_focus_image_urls",
+          "status": "template_ready_for_manual_confirmation",
+          "confirmed_file_exists": false,
+          "template_file_exists": true,
+          "import_report_exists": false,
+          "confirmed_items": 0,
+          "manual_confirmed_true": 0,
+          "template_items": 349,
+          "template_manual_confirmed_true": 0,
+          "updated_rows": 0,
+          "skipped_rows": 0,
+          "duplicates": 0,
+          "skip_reason_counts": [],
+          "next_action": "Review template candidates and copy exact matches into the confirmed file.",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "020-agent-source-image-34",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -1993,7 +2076,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-34",
+      "batch_id": "020-agent-source-image-35",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2191,7 +2274,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-35",
+      "batch_id": "020-agent-source-image-36",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2290,7 +2373,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-36",
+      "batch_id": "020-agent-source-image-37",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2389,7 +2472,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-37",
+      "batch_id": "020-agent-source-image-38",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2488,7 +2571,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-38",
+      "batch_id": "020-agent-source-image-39",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2587,7 +2670,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-39",
+      "batch_id": "020-agent-source-image-40",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2686,7 +2769,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-40",
+      "batch_id": "020-agent-source-image-41",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -2884,7 +2967,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-source-discovery-41",
+      "batch_id": "030-agent-source-discovery-42",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -2983,7 +3066,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-42",
+      "batch_id": "030-agent-source-discovery-43",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3082,7 +3165,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-43",
+      "batch_id": "030-agent-source-discovery-44",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3181,7 +3264,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-44",
+      "batch_id": "030-agent-source-discovery-45",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3280,7 +3363,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-45",
+      "batch_id": "030-agent-source-discovery-46",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3379,7 +3462,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-47",
+      "batch_id": "030-agent-source-discovery-48",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3478,7 +3561,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-48",
+      "batch_id": "030-agent-source-discovery-49",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3577,7 +3660,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-49",
+      "batch_id": "030-agent-source-discovery-50",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3676,7 +3759,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-50",
+      "batch_id": "030-agent-source-discovery-51",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3775,7 +3858,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-51",
+      "batch_id": "030-agent-source-discovery-52",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3874,7 +3957,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-46",
+      "batch_id": "030-agent-source-discovery-47",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -3973,7 +4056,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-52",
+      "batch_id": "030-agent-source-discovery-53",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -5362,7 +5445,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-53",
+      "batch_id": "050-agent-metadata-54",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -5461,7 +5544,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-56",
+      "batch_id": "050-agent-metadata-57",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -5560,7 +5643,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-54",
+      "batch_id": "050-agent-metadata-55",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -5758,7 +5841,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-55",
+      "batch_id": "050-agent-metadata-56",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -5857,7 +5940,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-60",
+      "batch_id": "060-agent-metadata-61",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -5956,7 +6039,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-57",
+      "batch_id": "060-agent-metadata-58",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -6055,7 +6138,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-58",
+      "batch_id": "060-agent-metadata-59",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -6154,7 +6237,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-59",
+      "batch_id": "060-agent-metadata-60",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -6253,7 +6336,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-61",
+      "batch_id": "070-agent-metadata-62",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -6352,7 +6435,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-62",
+      "batch_id": "070-agent-metadata-63",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -6451,7 +6534,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-63",
+      "batch_id": "070-agent-metadata-64",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -6550,7 +6633,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-64",
+      "batch_id": "070-agent-metadata-65",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -6649,7 +6732,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-65",
+      "batch_id": "090-agent-dedupe-66",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -6688,7 +6771,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-66",
+      "batch_id": "090-agent-dedupe-67",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -6727,7 +6810,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-67",
+      "batch_id": "090-agent-dedupe-68",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -6766,7 +6849,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-68",
+      "batch_id": "090-agent-dedupe-69",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -6805,7 +6888,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-69",
+      "batch_id": "090-agent-dedupe-70",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -6844,7 +6927,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-70",
+      "batch_id": "090-agent-dedupe-71",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -6883,7 +6966,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-71",
+      "batch_id": "090-agent-dedupe-72",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -6922,7 +7005,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-72",
+      "batch_id": "090-agent-dedupe-73",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -6961,7 +7044,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-73",
+      "batch_id": "090-agent-dedupe-74",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -7000,7 +7083,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-74",
+      "batch_id": "090-agent-dedupe-75",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -7039,7 +7122,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "110-agent-ichiban-kuji-75",
+      "batch_id": "110-agent-ichiban-kuji-76",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_metadata",
       "priority": 110,
@@ -7098,7 +7181,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-79",
+      "batch_id": "120-agent-ichiban-kuji-80",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -7157,7 +7240,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-78",
+      "batch_id": "120-agent-ichiban-kuji-79",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -7216,7 +7299,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-77",
+      "batch_id": "120-agent-ichiban-kuji-78",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -7275,7 +7358,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-76",
+      "batch_id": "120-agent-ichiban-kuji-77",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -7328,65 +7411,6 @@
           "catalog_index": 16795,
           "name_ko": "一番くじドラゴンボールZ～ナメック星編～ - フリーザフィギュア賞",
           "source_url": "https://1kuji.com/products/89"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-80",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-006",
-      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
-      "rows": 48,
-      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
-      "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official evidence confirms the value.",
-        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
-        "All updated catalog rows belong to the reviewed campaign group."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16149,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - A賞 でかきゅんキャラ「わたあめチョッパー」",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16150,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - B賞 ルフィ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16151,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - C賞 ゾロ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16152,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - D賞 ナミ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16153,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - E賞 ウソップ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16154,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - F賞 サンジ～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16155,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - G賞 ロビン～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
-        },
-        {
-          "catalog_index": 16156,
-          "name_ko": "一番くじきゅんキャラわーるど ワンピース - H賞 フランキー～シャボンディ諸島ver.～",
-          "source_url": "https://1kuji.com/products/onep_kyun_1"
         }
       ],
       "review_state": "official_campaign_evidence_required",

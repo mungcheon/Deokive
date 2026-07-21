@@ -42,6 +42,7 @@ SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
+CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.json"
 OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
 AGENT_WORK_QUEUE = DATA / "catalog_agent_work_queue_public.json"
 
@@ -1164,6 +1165,10 @@ def build_operations_public(
     metadata_summary = metadata_backlog["summary"]
     metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
     metadata_review_batches_summary = metadata_review_batches.get("summary", {})
+    confirmed_import_readiness = (
+        load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
+    )
+    confirmed_import_readiness_summary = confirmed_import_readiness.get("summary", {})
     generic_patch_summary = generic_source_patch_candidates["summary"]
     requested_focus_summary = requested_focus["summary"]
     requested_focus_review_batches = (
@@ -1328,6 +1333,15 @@ def build_operations_public(
             "blocked_rows": image_summary.get("needs_source_discovery_rows", 0),
             "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import.",
         },
+        {
+            "priority": 19,
+            "workstream": "confirmed_import_readiness",
+            "public_report": f"data/{CONFIRMED_IMPORT_READINESS.name}",
+            "ready_or_pending_import_rows": confirmed_import_readiness_summary.get("ready_or_pending_import_rows", 0),
+            "blocked_confirmed_rows": confirmed_import_readiness_summary.get("blocked_confirmed_rows", 0),
+            "template_items": confirmed_import_readiness_summary.get("template_items", 0),
+            "recommended_next_action": "Review confirmed import readiness before attempting source/image/metadata writes.",
+        } if confirmed_import_readiness_summary else None,
         {
             "priority": 12,
             "workstream": "generic_source_patch_candidates",
@@ -1580,6 +1594,11 @@ def build_operations_public(
         "requested_focus_open_rows": requested_focus_summary.get("open_rows", 0),
         "danganronpa_missing_media_rows": danganronpa_media_summary.get("missing_media_rows", 0),
     }
+    if confirmed_import_readiness_summary:
+        open_review_queues["confirmed_import_template_rows"] = confirmed_import_readiness_summary.get("template_items", 0)
+        open_review_queues["confirmed_import_pending_rows"] = confirmed_import_readiness_summary.get(
+            "ready_or_pending_import_rows", 0
+        )
     if requested_focus_review_batches_summary:
         open_review_queues["requested_focus_review_rows"] = requested_focus_review_batches_summary.get("review_row_count", 0)
     if animation_review_batches_summary:
@@ -1620,6 +1639,7 @@ def build_operations_public(
             {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
             {"key": "metadata_review_batches", "public_report": f"data/{METADATA_REVIEW_BATCHES.name}"},
+            {"key": "confirmed_import_readiness", "public_report": f"data/{CONFIRMED_IMPORT_READINESS.name}"},
             {"key": "deduplication", "public_report": f"data/{DEDUPLICATION.name}"},
             {"key": "deduplication_review_batches", "public_report": f"data/{DEDUPLICATION_REVIEW_BATCHES.name}"},
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
@@ -1675,6 +1695,9 @@ def build_agent_work_queue_public(
         load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}) if REQUESTED_FOCUS_REVIEW_BATCHES.exists() else {}
     )
     metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
+    confirmed_import_readiness = (
+        load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
+    )
     ichiban_metadata_review_batches = (
         load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {})
         if ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.exists()
@@ -1732,6 +1755,8 @@ def build_agent_work_queue_public(
             return "exact_source_discovery_required"
         if workstream == "metadata_backlog":
             return "metadata_evidence_required"
+        if workstream == "confirmed_import_readiness":
+            return "manual_review_required"
         if workstream == "deduplication_review":
             return "manual_dedupe_review_required"
         if workstream.startswith("ichiban_kuji"):
@@ -1850,6 +1875,35 @@ def build_agent_work_queue_public(
                 ],
                 samples=[item for item in focus_batch.get("items", []) if isinstance(item, dict)],
             )
+
+    readiness_workflows = [
+        row for row in confirmed_import_readiness.get("workflows", []) if isinstance(row, dict)
+    ]
+    pending_or_blocked = [
+        row
+        for row in readiness_workflows
+        if int(row.get("manual_confirmed_true") or 0) > 0
+        or int(row.get("template_items") or 0) > 0
+    ]
+    if pending_or_blocked:
+        add_batch(
+            agent_id="agent-confirmed-import",
+            workstream="confirmed_import_readiness",
+            priority=19,
+            title="Confirmed import readiness review",
+            public_report=CONFIRMED_IMPORT_READINESS,
+            rows=sum(
+                int(row.get("manual_confirmed_true") or 0) + int(row.get("template_items") or 0)
+                for row in pending_or_blocked
+            ),
+            recommended_action="Review pending/blocked confirmed imports before any catalog write.",
+            acceptance_criteria=[
+                "Do not expose row-level private candidate details in public reports.",
+                "Run guarded dry-runs before writing confirmed source, image, or metadata rows.",
+                "Only manually confirmed exact matches may be imported.",
+            ],
+            samples=pending_or_blocked,
+        )
 
     for group in image_enrichment_batches.get("groups", [])[:12]:
         workflow = str(group.get("workflow") or "")
@@ -3030,6 +3084,17 @@ def validate_report_consistency(
         load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}) if REQUESTED_FOCUS_REVIEW_BATCHES.exists() else {}
     )
     requested_focus_review_summary = requested_focus_review_batches.get("summary", {})
+    confirmed_import_readiness = (
+        load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
+    )
+    confirmed_import_readiness_summary = confirmed_import_readiness.get("summary", {})
+    if confirmed_import_readiness_summary:
+        expected_open_queues["confirmed_import_template_rows"] = confirmed_import_readiness_summary.get(
+            "template_items", 0
+        )
+        expected_open_queues["confirmed_import_pending_rows"] = confirmed_import_readiness_summary.get(
+            "ready_or_pending_import_rows", 0
+        )
     if requested_focus_review_summary:
         expected_open_queues["requested_focus_review_rows"] = requested_focus_review_summary.get("review_row_count", 0)
     if animation_review_summary:
@@ -3157,6 +3222,7 @@ def validate_report_consistency(
         f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
         f"data/{METADATA_BACKLOG.name}",
         f"data/{METADATA_REVIEW_BATCHES.name}",
+        f"data/{CONFIRMED_IMPORT_READINESS.name}",
         f"data/{DEDUPLICATION.name}",
         f"data/{ANIMATION_CATEGORIES.name}",
         f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
@@ -3408,6 +3474,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         }
         if METADATA_REVIEW_BATCHES.exists():
             target["metadata_review_batches"] = copy_report_summary(METADATA_REVIEW_BATCHES, "metadata_review_batches")
+        if CONFIRMED_IMPORT_READINESS.exists():
+            target["confirmed_import_readiness"] = copy_report_summary(
+                CONFIRMED_IMPORT_READINESS, "confirmed_import_readiness"
+            )
         target["image_enrichment_batches"] = {
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
             **image_enrichment_batches["summary"],
@@ -3494,6 +3564,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         SOURCE_DISCOVERY_REVIEW_BATCHES,
         METADATA_BACKLOG,
         METADATA_REVIEW_BATCHES,
+        CONFIRMED_IMPORT_READINESS,
         IMAGE_ENRICHMENT_BATCHES,
         OPERATIONS_REPORT,
         AGENT_WORK_QUEUE,
@@ -3535,6 +3606,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DANGANRONPA_MISSING_MEDIA.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
+            str(CONFIRMED_IMPORT_READINESS.relative_to(ROOT)),
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
