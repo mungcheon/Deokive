@@ -198,6 +198,39 @@
       margin: -2px 0 14px;
     }
 
+    .flow-steps {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 14px;
+    }
+
+    .flow-step {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 126, 178, 0.16);
+      border-radius: 15px;
+      color: var(--muted);
+      display: grid;
+      font-size: 12px;
+      font-weight: 800;
+      gap: 9px;
+      grid-template-columns: 28px 1fr;
+      min-height: 42px;
+      padding: 8px 10px;
+    }
+
+    .flow-step b {
+      align-items: center;
+      background: var(--pink);
+      border-radius: 999px;
+      color: #fff;
+      display: inline-flex;
+      font-size: 12px;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
+    }
+
     .folder-row {
       display: grid;
       gap: 8px;
@@ -251,6 +284,84 @@
       justify-content: space-between;
       margin-top: 12px;
       padding: 11px 12px;
+    }
+
+    .latest-owned {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .latest-owned-item {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(255, 126, 178, 0.16);
+      border-radius: 16px;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: 42px 1fr auto;
+      min-width: 0;
+      padding: 8px;
+    }
+
+    .latest-owned-thumb {
+      align-items: center;
+      background: #fff8fb;
+      border-radius: 12px;
+      display: flex;
+      height: 42px;
+      justify-content: center;
+      overflow: hidden;
+      width: 42px;
+    }
+
+    .latest-owned-thumb img {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .latest-owned-thumb span {
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .latest-owned-name {
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .latest-owned-folder {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      margin-top: 2px;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .latest-owned-qty {
+      color: var(--pink-dark);
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .latest-owned-empty {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 10px 0 0;
     }
 
     .save-note {
@@ -451,7 +562,7 @@
     .card-actions {
       border-top: 1px solid rgba(255, 126, 178, 0.16);
       display: grid;
-      grid-template-columns: 0.9fr 1fr 1fr;
+      grid-template-columns: 0.86fr 1.07fr 1.07fr;
     }
 
     .source,
@@ -488,6 +599,12 @@
     .quick-owned.added,
     .choose-owned.added {
       color: var(--mint);
+    }
+
+    .quick-owned.added::before,
+    .choose-owned.added::before {
+      content: "✓";
+      margin-right: 4px;
     }
 
     .more {
@@ -983,7 +1100,12 @@
       <div class="side-stack">
         <aside class="panel collection">
           <h3>DB에서 골라 내 굿즈 만들기</h3>
-          <p class="collection-copy">검색 결과의 추가 버튼을 누르면 공개 DB 정보가 개인 보유 굿즈로 복사돼요. 폴더를 고르거나, 가장 위 폴더에 바로 넣을 수 있어요.</p>
+          <p class="collection-copy">검색 결과에서 추가하기를 누르면 공개 DB 정보가 내 보유 굿즈 카드로 복사돼요. 폴더를 지정하지 않으면 가장 위 폴더에 바로 들어갑니다.</p>
+          <div class="flow-steps" aria-label="DB 굿즈 추가 흐름">
+            <div class="flow-step"><b>1</b><span>아래 검색창에서 굿즈 이름, 시리즈, 캐릭터를 찾기</span></div>
+            <div class="flow-step"><b>2</b><span>추가하기는 맨 위 폴더에 바로 저장, 폴더 지정은 원하는 폴더 선택</span></div>
+            <div class="flow-step"><b>3</b><span>이미 같은 폴더에 있으면 새 카드 대신 수량만 1 증가</span></div>
+          </div>
           <div class="folder-row">
             <select id="ownedFolder" aria-label="추가할 폴더"></select>
             <button id="newFolder" type="button">폴더</button>
@@ -995,6 +1117,9 @@
           <div class="owned-summary">
             <span>저장된 굿즈</span>
             <strong id="ownedCount">0개</strong>
+          </div>
+          <div id="latestOwned" class="latest-owned" aria-live="polite">
+            <p class="latest-owned-empty">아직 추가한 굿즈가 없어요. 검색 결과에서 추가하기를 눌러 보세요.</p>
           </div>
           <div class="save-note">
             <b>저장 방식</b>
@@ -1050,7 +1175,7 @@
         </div>
       </div>
       <div class="sheet-note">
-        이 DB 항목을 개인 보유 굿즈 카드로 만들어요. 이미 같은 폴더에 있으면 새로 만들지 않고 수량만 1 늘어납니다.
+        선택한 DB 항목의 이름, 이미지, 카테고리, 출처를 복사해 개인 보유 굿즈 카드로 만들어요. 이미 같은 폴더에 있으면 수량만 1 늘어납니다.
       </div>
       <label class="sheet-field">
         <span>넣을 폴더</span>
@@ -1058,7 +1183,7 @@
       </label>
       <div class="sheet-actions">
         <button id="sheetNewFolder" class="ghost" type="button">새 폴더</button>
-        <button id="addToTopFolder" class="ghost" type="button">맨 위 폴더</button>
+        <button id="addToTopFolder" class="ghost" type="button">맨 위에 추가</button>
         <button id="confirmOwnedAdd" class="primary" type="button">선택 폴더에 추가</button>
       </div>
     </section>
@@ -1173,7 +1298,37 @@
           : 'all';
       }
       $('ownedCount').textContent = `${fmt.format(state.owned.goods.length)}개`;
+      renderLatestOwned();
       if (state.items.length) renderResults();
+    }
+
+    function renderLatestOwned() {
+      const host = $('latestOwned');
+      if (!host) return;
+      if (!state.owned.goods.length) {
+        host.innerHTML = '<p class="latest-owned-empty">아직 추가한 굿즈가 없어요. 검색 결과에서 추가하기를 눌러 보세요.</p>';
+        return;
+      }
+      const folderNameById = new Map(state.owned.folders.map((folder) => [folder.id, folder.name]));
+      const fragment = document.createDocumentFragment();
+      for (const owned of state.owned.goods.slice(0, 3)) {
+        const name = owned.item?.name_ko || owned.item?.name_ja || '이름 없음';
+        const folder = folderNameById.get(owned.folderId) || '내 굿즈';
+        const row = document.createElement('div');
+        row.className = 'latest-owned-item';
+        row.innerHTML = `
+          <div class="latest-owned-thumb">
+            ${owned.item?.image_url ? `<img src="${escapeAttr(owned.item.image_url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'이미지 없음'}))">` : '<span>이미지 없음</span>'}
+          </div>
+          <div>
+            <div class="latest-owned-name">${escapeHtml(name)}</div>
+            <div class="latest-owned-folder">${escapeHtml(folder)}</div>
+          </div>
+          <div class="latest-owned-qty">x${fmt.format(owned.quantity || 1)}</div>
+        `;
+        fragment.append(row);
+      }
+      host.replaceChildren(fragment);
     }
 
     function topFolder() {
@@ -1204,7 +1359,7 @@
       if (existing) {
         existing.quantity += 1;
         existing.updatedAt = new Date().toISOString();
-        showToast(`${folder.name}에 이미 있어서 수량을 1 늘렸어요`);
+        showToast(`${folder.name}에 이미 있어 수량을 1 늘렸어요`);
       } else {
         state.owned.goods.unshift({
           id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
@@ -1470,8 +1625,8 @@
       const sourceLabel = item.source_url ? '출처 열기' : '출처 없음';
       const selectedAdded = isOwnedInSelectedFolder(item);
       const topAdded = state.owned.goods.some((owned) => owned.folderId === topFolder().id && owned.catalogKey === ownedKeyFor(item));
-      const chooseLabel = selectedAdded ? '선택 폴더에 있음' : '폴더 선택';
-      const quickLabel = topAdded ? '맨 위에 있음' : '맨 위 추가';
+      const chooseLabel = selectedAdded ? '선택 폴더에 있음' : '폴더 지정';
+      const quickLabel = topAdded ? '맨 위에 있음' : '추가하기';
       card.innerHTML = `
         <div class="thumb">
           <div class="badge">${escapeHtml(item.category || '미분류')}</div>
@@ -1487,8 +1642,8 @@
         </div>
         <div class="card-actions">
           <a class="source" href="${escapeAttr(item.source_url || '#')}" target="_blank" rel="noopener noreferrer" aria-disabled="${item.source_url ? 'false' : 'true'}">${sourceLabel}</a>
-          <button class="quick-owned${topAdded ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="가장 상단 폴더에 바로 추가">${quickLabel}</button>
-          <button class="choose-owned${selectedAdded ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="폴더를 지정해서 내 보유 굿즈로 복사">${chooseLabel}</button>
+          <button class="quick-owned${topAdded ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="가장 상단 폴더에 바로 굿즈로 추가">${quickLabel}</button>
+          <button class="choose-owned${selectedAdded ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="어느 폴더에 넣을지 지정해서 굿즈로 추가">${chooseLabel}</button>
         </div>
       `;
       card.querySelector('.quick-owned').addEventListener('click', () => addOwned(item, topFolder().id));
@@ -1499,7 +1654,7 @@
     async function init() {
       loadOwned();
       try {
-        const response = await fetch('data/catalog_public.json?v=20260721-owned-add', { cache: 'no-store' });
+        const response = await fetch('data/catalog_public.json?v=20260722-owned-flow', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const payload = await response.json();
         state.meta = payload.meta || {};
