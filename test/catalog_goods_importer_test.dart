@@ -123,8 +123,7 @@ void main() {
     expect(item.imageUrl, 'https://example.com/catalog/source.jpg');
   });
 
-  test('catalog import can keep bundled image reference after loading bytes',
-      () {
+  test('catalog import keeps remote image reference after loading bytes', () {
     final appState = AppState();
     final folder = FolderItem(
       id: 'top-folder',
@@ -149,7 +148,7 @@ void main() {
     );
 
     expect(item.imageBytesList.single, [1, 2, 3]);
-    expect(item.imageUrl, 'assets/catalog/cache/sample.jpg');
+    expect(item.imageUrl, 'https://example.com/catalog/source.jpg');
   });
 
   test('catalog import can load a bundled catalog image for saving', () async {

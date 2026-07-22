@@ -166,8 +166,8 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.80,
-        minChildSize: 0.48,
+        initialChildSize: 0.82,
+        minChildSize: 0.62,
         maxChildSize: 0.98,
         builder: (context, scrollController) {
           return StatefulBuilder(
@@ -475,10 +475,7 @@ GoodsItem goodsItemFromCatalogEntry({
         entry.barcode?.trim().isEmpty ?? true ? null : entry.barcode!.trim(),
     storageLocation: null,
     imageBytesList: imageBytes == null ? const [] : [imageBytes],
-    imageUrl: catalogEntryImageReference(
-      entry,
-      preferLocalAsset: imageBytes != null,
-    ),
+    imageUrl: catalogEntryImageReference(entry, preferLocalAsset: false),
     isFavorite: false,
   );
 }

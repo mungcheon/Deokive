@@ -1886,7 +1886,7 @@ class AppState extends ChangeNotifier {
 
   bool _needsCatalogImageReferenceBackfill(String? value) {
     final imageUrl = value?.trim() ?? '';
-    return imageUrl.isEmpty;
+    return imageUrl.isEmpty || imageUrl.startsWith('assets/catalog_images/');
   }
 
   String _catalogBackfillNameKey(String value) {
@@ -1894,15 +1894,16 @@ class AppState extends ChangeNotifier {
   }
 
   String? _catalogEntryImageReference(GoodsCatalogEntry entry) {
-    final localPath = entry.localImagePath?.trim() ?? '';
-    if (localPath.isNotEmpty) return localPath;
-
     final remoteUrl = entry.imageUrl?.trim() ?? '';
-    if (remoteUrl.isEmpty) return null;
-    return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
-          RegExp(r'^//'),
-          'https://',
-        );
+    if (remoteUrl.isNotEmpty) {
+      return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
+            RegExp(r'^//'),
+            'https://',
+          );
+    }
+
+    final localPath = entry.localImagePath?.trim() ?? '';
+    return localPath.isEmpty ? null : localPath;
   }
 
   /// Pull the shared board from the server and replace the local list with
