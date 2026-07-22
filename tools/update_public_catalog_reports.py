@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import audit_public_catalog_image_assets
+import build_image_source_url_confirmed_template_public
 import build_missing_image_priority_public
 
 
@@ -77,6 +78,7 @@ METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 METADATA_ACTION_QUEUE = DATA / "catalog_metadata_action_queue_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 IMAGE_ATTACHMENT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
+IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE = DATA / "catalog_image_source_url_confirmed_template_public.json"
 MISSING_IMAGE_ACTIONABILITY = DATA / "catalog_missing_image_actionability_public.json"
 CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.json"
 EXECUTION_PLAN = DATA / "catalog_execution_plan_public.json"
@@ -5088,11 +5090,17 @@ def update_reports(write: bool) -> dict[str, Any]:
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 
+    image_attachment_action_queue = load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {})
+    image_source_url_confirmed_template = build_image_source_url_confirmed_template_public.build_template(
+        image_attachment_action_queue,
+        generated_at=generated_at,
+    )
+
     execution_plan = build_plan_from_reports(
         {
             "catalog_operations_public.json": operations,
             "catalog_image_enrichment_batches_public.json": image_enrichment_batches,
-            "catalog_image_attachment_action_queue_public.json": load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}),
+            "catalog_image_attachment_action_queue_public.json": image_attachment_action_queue,
             "source_discovery_review_batches_public.json": load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}),
             "source_discovery_action_queue_public.json": load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}),
             "ensky_cache_candidate_action_queue_public.json": load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {}),
@@ -5244,6 +5252,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["stellive_fanding_candidates"] = copy_report_summary(
                 STELLIVE_FANDING_CANDIDATES, "stellive_fanding_candidates"
             )
+        target["image_source_url_confirmed_template"] = {
+            "public_report": f"data/{IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.name}",
+            **image_source_url_confirmed_template["summary"],
+        }
         target["requested_focus_enrichment"] = {
             "public_report": f"data/{REQUESTED_FOCUS.name}",
             **requested_focus["summary"],
@@ -5465,6 +5477,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_CANDIDATES, image_candidates)
         write_json(IMAGE_ASSET_AUDIT, image_asset_audit)
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority)
+        write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
@@ -5496,6 +5509,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(STELLIVE_FANDING_CANDIDATES.relative_to(ROOT)),
             str(GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
+            str(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
