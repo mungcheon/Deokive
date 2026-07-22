@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T09:02:13Z",
+  "generated_at": "2026-07-22T09:07:44Z",
   "summary": {
     "catalog_rows": 20392,
     "coverage": {
@@ -58,7 +58,9 @@
       "animation_category_direct_mapping_categories": 0,
       "animation_category_name_split_rows": 374,
       "animation_category_name_split_candidates": 18,
-      "animation_category_name_split_unmatched_catalog_rows": 3143
+      "animation_category_name_split_unmatched_catalog_rows": 3143,
+      "animation_category_unmatched_keyword_rows": 3143,
+      "animation_category_unmatched_keyword_candidates": 49
     },
     "top_store_priority_score": 1832.0
   },
@@ -885,6 +887,16 @@
       "auto_apply_enabled": false
     },
     {
+      "workstream": "animation_category_unmatched_keyword_review",
+      "status": "manual_review",
+      "open_rows": 3143,
+      "source_categories": 3,
+      "token_candidate_count": 49,
+      "primary_report": "data/animation_category_unmatched_keyword_review_public.json",
+      "next_step": "review_unmatched_animation_keyword_candidates",
+      "auto_apply_enabled": false
+    },
+    {
       "workstream": "generic_source_patch_candidates",
       "status": "candidate_review",
       "open_rows": 3,
@@ -1431,6 +1443,10 @@
     {
       "key": "animation_category_split_review",
       "public_report": "data/animation_category_split_review_public.json"
+    },
+    {
+      "key": "animation_category_unmatched_keyword_review",
+      "public_report": "data/animation_category_unmatched_keyword_review_public.json"
     },
     {
       "key": "ichiban_kuji_history",
@@ -2334,6 +2350,16 @@
       "unmatched_catalog_rows": 3143,
       "auto_apply_enabled": false,
       "recommended_next_action": "Confirm name-level split templates before changing broad goods categories."
+    },
+    {
+      "priority": 64,
+      "workstream": "animation_category_unmatched_keyword_review",
+      "public_report": "data/animation_category_unmatched_keyword_review_public.json",
+      "source_categories": 3,
+      "unmatched_rows": 3143,
+      "token_candidate_count": 49,
+      "auto_apply_enabled": false,
+      "recommended_next_action": "Review unmatched broad-category tokens before adding more split keywords."
     }
   ],
   "automation_policy": {

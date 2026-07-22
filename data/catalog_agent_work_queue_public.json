@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T09:02:13Z",
+  "generated_at": "2026-07-22T09:07:44Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 25330,
+    "summed_batch_rows": 28233,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -15,12 +15,12 @@
         12
       ],
       [
-        "requested_focus_review_batches",
+        "source_discovery_action_queue",
         10
       ],
       [
-        "source_discovery_action_queue",
-        10
+        "requested_focus_review_batches",
+        9
       ],
       [
         "danganronpa_missing_media",
@@ -47,6 +47,10 @@
         3
       ],
       [
+        "animation_category_unmatched_keyword_review",
+        2
+      ],
+      [
         "gotouchi_official_candidate_review",
         1
       ],
@@ -56,10 +60,6 @@
       ],
       [
         "animation_category_action_queue",
-        1
-      ],
-      [
-        "ichiban_kuji_metadata_action_queue",
         1
       ]
     ],
@@ -73,12 +73,12 @@
         12
       ],
       [
-        "agent-requested-focus-detail",
+        "agent-source-action",
         10
       ],
       [
-        "agent-source-action",
-        10
+        "agent-requested-focus-detail",
+        9
       ],
       [
         "agent-danganronpa-media",
@@ -105,6 +105,10 @@
         3
       ],
       [
+        "agent-animation-keyword-review",
+        2
+      ],
+      [
         "agent-gotouchi-review",
         1
       ],
@@ -114,10 +118,6 @@
       ],
       [
         "agent-animation-category-action",
-        1
-      ],
-      [
-        "agent-ichiban-action",
         1
       ]
     ],
@@ -163,7 +163,9 @@
       "animation_category_direct_mapping_categories": 0,
       "animation_category_name_split_rows": 374,
       "animation_category_name_split_candidates": 18,
-      "animation_category_name_split_unmatched_catalog_rows": 3143
+      "animation_category_name_split_unmatched_catalog_rows": 3143,
+      "animation_category_unmatched_keyword_rows": 3143,
+      "animation_category_unmatched_keyword_candidates": 49
     }
   },
   "top_next_batches": [
@@ -14518,833 +14520,780 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "038-agent-ichiban-action-118",
-      "agent_id": "agent-ichiban-action",
-      "workstream": "ichiban_kuji_metadata_action_queue",
-      "priority": 38,
-      "title": "Ichiban Kuji metadata action ichiban-metadata-action-001",
-      "public_report": "data/ichiban_kuji_metadata_action_queue_public.json",
-      "rows": 8,
-      "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+      "batch_id": "034-agent-animation-keyword-review-134",
+      "agent_id": "agent-animation-keyword-review",
+      "workstream": "animation_category_unmatched_keyword_review",
+      "priority": 34,
+      "title": "애니메이션 미매칭 키워드 후보 검수: 굿즈",
+      "public_report": "data/animation_category_unmatched_keyword_review_public.json",
+      "rows": 2918,
+      "recommended_action": "Review token candidates and promote only product-type keywords into split rules.",
       "acceptance_criteria": [
-        "Use only labeled official 1kuji campaign metadata or captured official evidence.",
-        "Fill release_date or official_price_jpy templates only after manual confirmation.",
-        "Auto-apply remains disabled for historical campaign metadata."
+        "Token candidates remain manual_confirmed=false until sample rows are checked.",
+        "Series names, character names, and store-only tokens are not promoted as product categories.",
+        "Accepted keywords map to an existing app folder color and icon family."
       ],
       "sample_items": [
         {
-          "group_key": "https://1kuji.com/products/jujutsu-o",
-          "url": "https://1kuji.com/products/jujutsu-o",
-          "slug": "jujutsu-o",
-          "title": "一番くじ 呪術廻戦 －オンライン－",
-          "catalog_item_rows": 8,
-          "missing_fields": [
-            "release_date"
-          ],
-          "workflow": "release_date_review",
-          "review_priority": 10,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_release_date",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "release_date_is_labeled_as_campaign_release_or_start_date",
-            "double_chance_or_unlabeled_dates_are_not_used_as_release_date"
-          ],
-          "sample_catalog_indexes": [
-            14193,
-            14194,
-            14195,
-            14196,
-            14197,
-            14198,
-            14199,
-            14200
-          ],
-          "sample_names": [
-            "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - B賞 伏黒恵ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - C賞 釘崎野薔薇ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - D賞 五条悟ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - E賞 クリアボトル",
-            "一番くじ 呪術廻戦 －オンライン－ - F賞 アクリルスタンド",
-            "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
-            "一番くじ 呪術廻戦 －オンライン－ - ラストワン賞 ビジュアルタオル"
-          ],
-          "campaign_field_patch_templates": [
+          "token": "이치방쿠지",
+          "row_count": 2094,
+          "sample_rows": [
             {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "release_date",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/jujutsu-o",
-              "campaign_slug": "jujutsu-o",
-              "campaign_title": "一番くじ 呪術廻戦 －オンライン－",
-              "workflow": "release_date_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 8,
-              "target_catalog_indexes_sample": [
-                14193,
-                14194,
-                14195,
-                14196,
-                14197,
-                14198,
-                14199,
-                14200
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "catalog_index": 11586,
+              "name_ko": "一番くじ ちいかわ - ラストワン賞 ラグマット",
+              "name_ja": "ラストワン賞 ラグマット",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ",
+              "sub_series": "ラストワン賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11591,
+              "name_ko": "一番くじ ちいかわ ～SWEETS SHOP～ - E賞 アイスクリーム屋さんの食器コレクション",
+              "name_ja": "E賞 アイスクリーム屋さんの食器コレクション",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～SWEETS SHOP～",
+              "sub_series": "E賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11594,
+              "name_ko": "一番くじ ちいかわ ～SWEETS SHOP～ - ラストワン賞 大きいアイスクリームの幸せクッション",
+              "name_ja": "ラストワン賞 大きいアイスクリームの幸せクッション",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～SWEETS SHOP～",
+              "sub_series": "ラストワン賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11595,
+              "name_ko": "一番くじ ちいかわ ～みんなでラーメン～ - A賞 一緒にいただきます♪ヌードルタイマー",
+              "name_ja": "A賞 一緒にいただきます♪ヌードルタイマー",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～みんなでラーメン～",
+              "sub_series": "A賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11601,
+              "name_ko": "一番くじ ちいかわ ～みんなでラーメン～ - G賞 ラバーコレクション",
+              "name_ja": "G賞 ラバーコレクション",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～みんなでラーメン～",
+              "sub_series": "G賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11603,
+              "name_ko": "一番くじ ちいかわ ～みんなでラーメン～ - ラストワン賞 「郎」ティッシュケース",
+              "name_ja": "ラストワン賞 「郎」ティッシュケース",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～みんなでラーメン～",
+              "sub_series": "ラストワン賞",
+              "source_store": "이치방쿠지"
             }
           ],
-          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
-          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
-          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
-          "auto_apply_enabled": false
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "group_key": "https://1kuji.com/products/myhero_o5",
-          "url": "https://1kuji.com/products/myhero_o5",
-          "slug": "myhero_o5",
-          "title": "一番くじ 僕のヴィランアカデミア",
-          "catalog_item_rows": 8,
-          "missing_fields": [
-            "release_date"
-          ],
-          "workflow": "release_date_review",
-          "review_priority": 10,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_release_date",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "release_date_is_labeled_as_campaign_release_or_start_date",
-            "double_chance_or_unlabeled_dates_are_not_used_as_release_date"
-          ],
-          "sample_catalog_indexes": [
-            17067,
-            17068,
-            17069,
-            17070,
-            17071,
-            17072,
-            17073,
-            17074
-          ],
-          "sample_names": [
-            "一番くじ 僕のヴィランアカデミア - A賞 死柄木弔;MASTERLISE",
-            "一番くじ 僕のヴィランアカデミア - B賞 荼毘;MASTERLISE",
-            "一番くじ 僕のヴィランアカデミア - C賞 トガヒミコ;MASTERLISE",
-            "一番くじ 僕のヴィランアカデミア - D賞 トゥワイス;MASTERLISE",
-            "一番くじ 僕のヴィランアカデミア - E賞 タンブラー",
-            "一番くじ 僕のヴィランアカデミア - F賞 タオル",
-            "一番くじ 僕のヴィランアカデミア - G賞 ラバーチャーム",
-            "一番くじ 僕のヴィランアカデミア - ラストワン賞 トガヒミコ;MASTERLISE ラストワンver."
-          ],
-          "campaign_field_patch_templates": [
+          "token": "一番",
+          "row_count": 2090,
+          "sample_rows": [
             {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "release_date",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/myhero_o5",
-              "campaign_slug": "myhero_o5",
-              "campaign_title": "一番くじ 僕のヴィランアカデミア",
-              "workflow": "release_date_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 8,
-              "target_catalog_indexes_sample": [
-                17067,
-                17068,
-                17069,
-                17070,
-                17071,
-                17072,
-                17073,
-                17074
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "catalog_index": 3794,
+              "name_ko": "치이카와 슷파이만 치이카와 제일",
+              "name_ja": "ちいかわ スッパイマン ちいかわ一番",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 11586,
+              "name_ko": "一番くじ ちいかわ - ラストワン賞 ラグマット",
+              "name_ja": "ラストワン賞 ラグマット",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ",
+              "sub_series": "ラストワン賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11591,
+              "name_ko": "一番くじ ちいかわ ～SWEETS SHOP～ - E賞 アイスクリーム屋さんの食器コレクション",
+              "name_ja": "E賞 アイスクリーム屋さんの食器コレクション",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～SWEETS SHOP～",
+              "sub_series": "E賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11594,
+              "name_ko": "一番くじ ちいかわ ～SWEETS SHOP～ - ラストワン賞 大きいアイスクリームの幸せクッション",
+              "name_ja": "ラストワン賞 大きいアイスクリームの幸せクッション",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～SWEETS SHOP～",
+              "sub_series": "ラストワン賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11595,
+              "name_ko": "一番くじ ちいかわ ～みんなでラーメン～ - A賞 一緒にいただきます♪ヌードルタイマー",
+              "name_ja": "A賞 一緒にいただきます♪ヌードルタイマー",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～みんなでラーメン～",
+              "sub_series": "A賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 11601,
+              "name_ko": "一番くじ ちいかわ ～みんなでラーメン～ - G賞 ラバーコレクション",
+              "name_ja": "G賞 ラバーコレクション",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～みんなでラーメン～",
+              "sub_series": "G賞",
+              "source_store": "이치방쿠지"
             }
           ],
-          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
-          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
-          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
-          "auto_apply_enabled": false
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "group_key": "https://1kuji.com/products/10",
-          "url": "https://1kuji.com/products/10",
-          "slug": "10",
-          "title": "一番くじドラゴンボールＺ限界突破編",
-          "catalog_item_rows": 7,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16816,
-            16817,
-            16818,
-            16819,
-            16820,
-            16821,
-            16822
-          ],
-          "sample_names": [
-            "一番くじドラゴンボールＺ限界突破編 - 大猿フィギュア賞",
-            "一番くじドラゴンボールＺ限界突破編 - 限界突破！フィギュア賞",
-            "一番くじドラゴンボールＺ限界突破編 - 飲茶セット賞",
-            "一番くじドラゴンボールＺ限界突破編 - 魔封波小物入れ賞",
-            "一番くじドラゴンボールＺ限界突破編 - ソフビ貯金箱賞",
-            "一番くじドラゴンボールＺ限界突破編 - ホイポイカプセルボールペン賞",
-            "一番くじドラゴンボールＺ限界突破編 - メモスタンド賞"
-          ],
-          "campaign_field_patch_templates": [
+          "token": "치이카와",
+          "row_count": 812,
+          "sample_rows": [
             {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/10",
-              "campaign_slug": "10",
-              "campaign_title": "一番くじドラゴンボールＺ限界突破編",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 7,
-              "target_catalog_indexes_sample": [
-                16816,
-                16817,
-                16818,
-                16819,
-                16820,
-                16821,
-                16822
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "catalog_index": 2532,
+              "name_ko": "치이카와 영화 \"치이카와\" 시루코 샌드",
+              "name_ja": "ちいかわ 映画ちいかわ しるこサンド",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2546,
+              "name_ko": "치이카와 그 시절의 카메라 (토끼 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（うさぎ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2547,
+              "name_ko": "치이카와 그 시절의 카메라 (가르마 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（ハチワレ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2548,
+              "name_ko": "치이카와 그 시절의 카메라 (치이카와 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（ちいかわ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2549,
+              "name_ko": "치이카와 그 시절의 카메라 (모두)",
+              "name_ja": "ちいかわ あのころのカメラ（みんな）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2605,
+              "name_ko": "치이카와 영화 \"치이카와\" 슈슈 모두 라이트 옐로",
+              "name_ja": "ちいかわ 映画ちいかわ シュシュ みんな ライトイエロー",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
             }
           ],
-          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
-          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
-          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
-          "auto_apply_enabled": false
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "group_key": "https://1kuji.com/products/38",
-          "url": "https://1kuji.com/products/38",
-          "slug": "38",
-          "title": "一番くじ機動戦士ガンダム00",
-          "catalog_item_rows": 7,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            17583,
-            17584,
-            17585,
-            17586,
-            17587,
-            17588,
-            17589
-          ],
-          "sample_names": [
-            "一番くじ機動戦士ガンダム00 - ヘッドディスプレイ賞",
-            "一番くじ機動戦士ガンダム00 - 王 留美フィギュア賞",
-            "一番くじ機動戦士ガンダム00 - ハロぬいぐるみ賞",
-            "一番くじ機動戦士ガンダム00 - バスタオル賞",
-            "一番くじ機動戦士ガンダム00 - タンブラー賞",
-            "一番くじ機動戦士ガンダム00 - ポスター賞",
-            "一番くじ機動戦士ガンダム00 - ネックペン賞"
-          ],
-          "campaign_field_patch_templates": [
+          "token": "공식",
+          "row_count": 805,
+          "sample_rows": [
             {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/38",
-              "campaign_slug": "38",
-              "campaign_title": "一番くじ機動戦士ガンダム00",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 7,
-              "target_catalog_indexes_sample": [
-                17583,
-                17584,
-                17585,
-                17586,
-                17587,
-                17588,
-                17589
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "catalog_index": 2532,
+              "name_ko": "치이카와 영화 \"치이카와\" 시루코 샌드",
+              "name_ja": "ちいかわ 映画ちいかわ しるこサンド",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2546,
+              "name_ko": "치이카와 그 시절의 카메라 (토끼 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（うさぎ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2547,
+              "name_ko": "치이카와 그 시절의 카메라 (가르마 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（ハチワレ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2548,
+              "name_ko": "치이카와 그 시절의 카메라 (치이카와 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（ちいかわ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2549,
+              "name_ko": "치이카와 그 시절의 카메라 (모두)",
+              "name_ja": "ちいかわ あのころのカメラ（みんな）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2605,
+              "name_ko": "치이카와 영화 \"치이카와\" 슈슈 모두 라이트 옐로",
+              "name_ja": "ちいかわ 映画ちいかわ シュシュ みんな ライトイエロー",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
             }
           ],
-          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
-          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
-          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
-          "auto_apply_enabled": false
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "group_key": "https://1kuji.com/products/49",
-          "url": "https://1kuji.com/products/49",
-          "slug": "49",
-          "title": "一番くじテレビアニメ「ワンピース」",
-          "catalog_item_rows": 8,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16216,
-            16217,
-            16218,
-            16219,
-            16220,
-            16221,
-            16222,
-            16223
-          ],
-          "sample_names": [
-            "一番くじテレビアニメ「ワンピース」 - サウザンド・サニー号賞",
-            "一番くじテレビアニメ「ワンピース」 - ルフィフィギュア賞",
-            "一番くじテレビアニメ「ワンピース」 - フランキーフィギュア賞",
-            "一番くじテレビアニメ「ワンピース」 - チョッパーぬいぐるみ賞",
-            "一番くじテレビアニメ「ワンピース」 - ファスナー付きクリアケース賞",
-            "一番くじテレビアニメ「ワンピース」 - レリーフ名刺ケース賞",
-            "一番くじテレビアニメ「ワンピース」 - チョッパーペン賞",
-            "一番くじテレビアニメ「ワンピース」 - ボールチェーン付きマスコット賞"
-          ],
-          "campaign_field_patch_templates": [
+          "token": "마켓",
+          "row_count": 805,
+          "sample_rows": [
             {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/49",
-              "campaign_slug": "49",
-              "campaign_title": "一番くじテレビアニメ「ワンピース」",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 8,
-              "target_catalog_indexes_sample": [
-                16216,
-                16217,
-                16218,
-                16219,
-                16220,
-                16221,
-                16222,
-                16223
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "catalog_index": 2532,
+              "name_ko": "치이카와 영화 \"치이카와\" 시루코 샌드",
+              "name_ja": "ちいかわ 映画ちいかわ しるこサンド",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2546,
+              "name_ko": "치이카와 그 시절의 카메라 (토끼 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（うさぎ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2547,
+              "name_ko": "치이카와 그 시절의 카메라 (가르마 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（ハチワレ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2548,
+              "name_ko": "치이카와 그 시절의 카메라 (치이카와 브이)",
+              "name_ja": "ちいかわ あのころのカメラ（ちいかわ ピース）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2549,
+              "name_ko": "치이카와 그 시절의 카메라 (모두)",
+              "name_ja": "ちいかわ あのころのカメラ（みんな）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2605,
+              "name_ko": "치이카와 영화 \"치이카와\" 슈슈 모두 라이트 옐로",
+              "name_ja": "ちいかわ 映画ちいかわ シュシュ みんな ライトイエロー",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
             }
           ],
-          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
-          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
-          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
-          "auto_apply_enabled": false
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "group_key": "https://1kuji.com/products/53",
-          "url": "https://1kuji.com/products/53",
-          "slug": "53",
-          "title": "一番くじドラゴンボール 摩訶不思議アドベンチャー編",
-          "catalog_item_rows": 7,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16809,
-            16810,
-            16811,
-            16812,
-            16813,
-            16814,
-            16815
-          ],
-          "sample_names": [
-            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ａ賞 亀仙人フィギュア",
-            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｂ賞 ブルマフィギュア",
-            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｃ賞 四星球クッション",
-            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｄ賞 孫悟空ソフビ",
-            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｅ賞 カリン塔ペン",
-            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｆ賞 天下一メモスタンド",
-            "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｇ賞 ぬいぐるみ"
-          ],
-          "campaign_field_patch_templates": [
+          "token": "ワンピース",
+          "row_count": 382,
+          "sample_rows": [
             {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/53",
-              "campaign_slug": "53",
-              "campaign_title": "一番くじドラゴンボール 摩訶不思議アドベンチャー編",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 7,
-              "target_catalog_indexes_sample": [
-                16809,
-                16810,
-                16811,
-                16812,
-                16813,
-                16814,
-                16815
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "catalog_index": 12273,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - A賞 モンキー・D・ルフィ 魂豪示像",
+              "name_ja": "A賞 モンキー・D・ルフィ 魂豪示像",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "A賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12275,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - C賞 モンキー・D・ルフィ 海賊王におれはなる!!!! Revible Moment",
+              "name_ja": "C賞 モンキー・D・ルフィ 海賊王におれはなる!!!! Revible Moment",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "C賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12276,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - D賞 モンキー・D・ルフィ ギア5 ONDIMENSION",
+              "name_ja": "D賞 モンキー・D・ルフィ ギア5 ONDIMENSION",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "D賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12277,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - E賞 はこにわーるど（1/2）",
+              "name_ja": "E賞 はこにわーるど（1/2）",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "E賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12281,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - I賞 デスクアソート（1/10）",
+              "name_ja": "I賞 デスクアソート（1/10）",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "I賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12350,
+              "name_ko": "一番くじ ワンピース 赤髪海賊団 - E賞 はこにわーるど（1/2）",
+              "name_ja": "E賞 はこにわーるど（1/2）",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース 赤髪海賊団",
+              "sub_series": "E賞",
+              "source_store": "이치방쿠지"
             }
           ],
-          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
-          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
-          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
-          "auto_apply_enabled": false
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "group_key": "https://1kuji.com/products/64",
-          "url": "https://1kuji.com/products/64",
-          "slug": "64",
-          "title": "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～",
-          "catalog_item_rows": 7,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            17576,
-            17577,
-            17578,
-            17579,
-            17580,
-            17581,
-            17582
-          ],
-          "sample_names": [
-            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - A賞 シャア胸像型バンク",
-            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - B賞 赤い彗星アズナぶる×2",
-            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - C賞 測ったなシャア！メジャー",
-            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - D賞 悩ましのクッション",
-            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - E賞 メモスタンド",
-            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - F賞 ライバルおめん",
-            "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - G賞 ロングタオル"
-          ],
-          "campaign_field_patch_templates": [
+          "token": "ドラゴンボール",
+          "row_count": 229,
+          "sample_rows": [
             {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/64",
-              "campaign_slug": "64",
-              "campaign_title": "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 7,
-              "target_catalog_indexes_sample": [
-                17576,
-                17577,
-                17578,
-                17579,
-                17580,
-                17581,
-                17582
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "catalog_index": 12370,
+              "name_ko": "一番くじ ドラゴンボール EX 対決!レッドリボン軍 - E賞 DRAGON ARCHIVES（1/4）",
+              "name_ja": "E賞 DRAGON ARCHIVES（1/4）",
+              "category": "굿즈",
+              "affiliation": "드래곤볼",
+              "series_name": "一番くじ ドラゴンボール EX 対決!レッドリボン軍",
+              "sub_series": "E賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12374,
+              "name_ko": "一番くじ ドラゴンボール EX 対決!レッドリボン軍 - I賞 ビジュアルシート（1/6）",
+              "name_ja": "I賞 ビジュアルシート（1/6）",
+              "category": "굿즈",
+              "affiliation": "드래곤볼",
+              "series_name": "一番くじ ドラゴンボール EX 対決!レッドリボン軍",
+              "sub_series": "I賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12450,
+              "name_ko": "一番くじ ドラゴンボール THE CHRONICLE OF GOKU - ラストワン賞 大猿悟空 SOFVICS",
+              "name_ja": "ラストワン賞 大猿悟空 SOFVICS",
+              "category": "굿즈",
+              "affiliation": "드래곤볼",
+              "series_name": "一番くじ ドラゴンボール THE CHRONICLE OF GOKU",
+              "sub_series": "ラストワン賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12887,
+              "name_ko": "一番くじ ドラゴンボール Fantastic Adventure 2 - B賞 孫悟飯の急須",
+              "name_ja": "B賞 孫悟飯の急須",
+              "category": "굿즈",
+              "affiliation": "드래곤볼",
+              "series_name": "一番くじ ドラゴンボール Fantastic Adventure 2",
+              "sub_series": "B賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12889,
+              "name_ko": "一番くじ ドラゴンボール Fantastic Adventure 2 - D賞 ブルマの万年カレンダー",
+              "name_ja": "D賞 ブルマの万年カレンダー",
+              "category": "굿즈",
+              "affiliation": "드래곤볼",
+              "series_name": "一番くじ ドラゴンボール Fantastic Adventure 2",
+              "sub_series": "D賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12890,
+              "name_ko": "一番くじ ドラゴンボール Fantastic Adventure 2 - E賞 陶器コレクション（1/4）",
+              "name_ja": "E賞 陶器コレクション（1/4）",
+              "category": "굿즈",
+              "affiliation": "드래곤볼",
+              "series_name": "一番くじ ドラゴンボール Fantastic Adventure 2",
+              "sub_series": "E賞",
+              "source_store": "이치방쿠지"
             }
           ],
-          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
-          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
-          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
-          "auto_apply_enabled": false
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "group_key": "https://1kuji.com/products/71",
-          "url": "https://1kuji.com/products/71",
-          "slug": "71",
-          "title": "一番くじワンピース～スリラーバーク編～",
-          "catalog_item_rows": 7,
-          "missing_fields": [
-            "official_price_jpy"
-          ],
-          "workflow": "price_review",
-          "review_priority": 20,
-          "source_evidence_required": "official_1kuji_campaign_page",
-          "next_machine_step": "verify_labeled_official_price_jpy",
-          "evidence_checklist": [
-            "official_1kuji_campaign_page_or_captured_official_archive",
-            "campaign_title_matches_catalog_series",
-            "sample_catalog_indexes_all_share_the_same_campaign_url",
-            "price_is_labeled_as_kuji_draw_price_or_official_price",
-            "tax_status_or_currency_is_preserved_when_visible",
-            "historical_or_inferred_prices_are_not_used_without_official_label"
-          ],
-          "sample_catalog_indexes": [
-            16209,
-            16210,
-            16211,
-            16212,
-            16213,
-            16214,
-            16215
-          ],
-          "sample_names": [
-            "一番くじワンピース～スリラーバーク編～ - A賞 オーズ ビッグソフビ",
-            "一番くじワンピース～スリラーバーク編～ - B賞 モンキー･D･ルフィ（ナイトメアVer.）フィギュア",
-            "一番くじワンピース～スリラーバーク編～ - C賞 チョッパー ぬいぐるみ",
-            "一番くじワンピース～スリラーバーク編～ - D賞 クマシー ぬいぐるみ",
-            "一番くじワンピース～スリラーバーク編～ - E賞 ネガティブ メモスタンド",
-            "一番くじワンピース～スリラーバーク編～ - F賞 キーホルダー",
-            "一番くじワンピース～スリラーバーク編～ - G賞 バンダナ"
-          ],
-          "campaign_field_patch_templates": [
+          "token": "ラバーコレクション",
+          "row_count": 142,
+          "sample_rows": [
             {
-              "manual_confirmed": false,
-              "manual_note": "",
-              "field": "official_price_jpy",
-              "manual_value": "",
-              "evidence_url": "https://1kuji.com/products/71",
-              "campaign_slug": "71",
-              "campaign_title": "一番くじワンピース～スリラーバーク編～",
-              "workflow": "price_review",
-              "target_scope": "all_catalog_rows_for_campaign_url",
-              "target_catalog_item_rows": 7,
-              "target_catalog_indexes_sample": [
-                16209,
-                16210,
-                16211,
-                16212,
-                16213,
-                16214,
-                16215
-              ],
-              "requires_full_campaign_index_expansion": false,
-              "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "catalog_index": 11601,
+              "name_ko": "一番くじ ちいかわ ～みんなでラーメン～ - G賞 ラバーコレクション",
+              "name_ja": "G賞 ラバーコレクション",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "一番くじ ちいかわ ～みんなでラーメン～",
+              "sub_series": "G賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12299,
+              "name_ko": "一番くじ HUNTER×HUNTER ZAOLDYECK FAMILY - H賞 ラバーコレクション（1/8）",
+              "name_ja": "H賞 ラバーコレクション（1/8）",
+              "category": "굿즈",
+              "affiliation": "헌터X헌터",
+              "series_name": "一番くじ HUNTER×HUNTER ZAOLDYECK FAMILY",
+              "sub_series": "H賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12326,
+              "name_ko": "一番くじ おジャ魔女どれみ～WELCOME MAHO堂～ - F賞 お役立ちラバーコレクション（1/7）",
+              "name_ja": "F賞 お役立ちラバーコレクション（1/7）",
+              "category": "굿즈",
+              "affiliation": "오자마조 도레미",
+              "series_name": "一番くじ おジャ魔女どれみ～WELCOME MAHO堂～",
+              "sub_series": "F賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12333,
+              "name_ko": "一番くじ スーパーマリオ with YOSHI - E賞 ラバーコレクション（1/6）",
+              "name_ja": "E賞 ラバーコレクション（1/6）",
+              "category": "굿즈",
+              "affiliation": "슈퍼마리오",
+              "series_name": "一番くじ スーパーマリオ with YOSHI",
+              "sub_series": "E賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12458,
+              "name_ko": "一番くじ 家庭教師ヒットマンREBORN! リング争奪戦 - H賞 ラバーコレクション（1/12）",
+              "name_ja": "H賞 ラバーコレクション（1/12）",
+              "category": "굿즈",
+              "affiliation": "가정교사 히트맨 REBORN!",
+              "series_name": "一番くじ 家庭教師ヒットマンREBORN! リング争奪戦",
+              "sub_series": "H賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12502,
+              "name_ko": "一番くじ アイカツ！～私のアツいアイドル活動！～ - G賞 べんりなラバーコレクション（1/8）",
+              "name_ja": "G賞 べんりなラバーコレクション（1/8）",
+              "category": "굿즈",
+              "affiliation": "아이카츠",
+              "series_name": "一番くじ アイカツ！～私のアツいアイドル活動！～",
+              "sub_series": "G賞",
+              "source_store": "이치방쿠지"
             }
           ],
-          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
-          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
-          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
-          "auto_apply_enabled": false
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         }
       ],
-      "review_state": "manual_official_campaign_metadata_confirmation_required",
-      "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
+      "review_summary": {
+        "unmatched_rows": 2918,
+        "token_candidate_count": 20,
+        "source_category_rows": 4101
+      },
+      "review_state": "manual_keyword_candidate_review_required",
+      "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "040-agent-requested-focus-detail-22",
-      "agent_id": "agent-requested-focus-detail",
-      "workstream": "requested_focus_review_batches",
-      "priority": 40,
-      "title": "단간론파 굿즈 image_url review",
-      "public_report": "data/requested_focus_review_batches_public.json",
-      "rows": 9,
-      "recommended_action": "extract_image_from_exact_reviewed_source_url",
+      "batch_id": "035-agent-animation-keyword-review-135",
+      "agent_id": "agent-animation-keyword-review",
+      "workstream": "animation_category_unmatched_keyword_review",
+      "priority": 35,
+      "title": "애니메이션 미매칭 키워드 후보 검수: 기타 굿즈",
+      "public_report": "data/animation_category_unmatched_keyword_review_public.json",
+      "rows": 2,
+      "recommended_action": "Review token candidates and promote only product-type keywords into split rules.",
       "acceptance_criteria": [
-        "Verify each candidate against exact official or trusted source evidence.",
-        "Keep private collection ownership data on the local device only.",
-        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+        "Token candidates remain manual_confirmed=false until sample rows are checked.",
+        "Series names, character names, and store-only tokens are not promoted as product categories.",
+        "Accepted keywords map to an existing app folder color and icon family."
       ],
       "sample_items": [
         {
-          "catalog_index": 1703,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 클리어 파일 세트 희망봉 학원",
-          "name_ja": "ダンガンロンパ クリアファイルセット 希望ヶ峰学園",
-          "series_name": null,
-          "category": "문구",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 660,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1703,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
+          "token": "사용자",
+          "row_count": 2,
+          "sample_rows": [
+            {
+              "catalog_index": 17810,
+              "name_ko": "치이카와 모구모구 혼포 굿즈",
+              "name_ja": "ちいかわ もぐもぐ本舗 グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "모구모구 혼포 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 모구모구 혼포"
+            },
+            {
+              "catalog_index": 17811,
+              "name_ko": "치이카와 치이카와 포켓 굿즈",
+              "name_ja": "ちいかわぽけっと グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이포케 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 포켓"
+            }
+          ],
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "catalog_index": 1802,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 히나타 하지메 클리어 보틀",
-          "name_ja": "ダンガンロンパ 日向創 クリアボトル",
-          "series_name": null,
-          "category": "생활잡화",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1650,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1802,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
+          "token": "요청",
+          "row_count": 2,
+          "sample_rows": [
+            {
+              "catalog_index": 17810,
+              "name_ko": "치이카와 모구모구 혼포 굿즈",
+              "name_ja": "ちいかわ もぐもぐ本舗 グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "모구모구 혼포 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 모구모구 혼포"
+            },
+            {
+              "catalog_index": 17811,
+              "name_ko": "치이카와 치이카와 포켓 굿즈",
+              "name_ja": "ちいかわぽけっと グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이포케 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 포켓"
+            }
+          ],
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "catalog_index": 2077,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 캔뱃지 (모노쿠마)",
-          "name_ja": "ダンガンロンパ 缶バッジ (モノクマ)",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 440,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2077,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
+          "token": "추가",
+          "row_count": 2,
+          "sample_rows": [
+            {
+              "catalog_index": 17810,
+              "name_ko": "치이카와 모구모구 혼포 굿즈",
+              "name_ja": "ちいかわ もぐもぐ本舗 グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "모구모구 혼포 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 모구모구 혼포"
+            },
+            {
+              "catalog_index": 17811,
+              "name_ko": "치이카와 치이카와 포켓 굿즈",
+              "name_ja": "ちいかわぽけっと グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이포케 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 포켓"
+            }
+          ],
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "catalog_index": 2080,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 키링 (코마에다)",
-          "name_ja": "ダンガンロンパ キーホルダー (狛枝)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 770,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2080,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
+          "token": "치이카와",
+          "row_count": 2,
+          "sample_rows": [
+            {
+              "catalog_index": 17810,
+              "name_ko": "치이카와 모구모구 혼포 굿즈",
+              "name_ja": "ちいかわ もぐもぐ本舗 グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "모구모구 혼포 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 모구모구 혼포"
+            },
+            {
+              "catalog_index": 17811,
+              "name_ko": "치이카와 치이카와 포켓 굿즈",
+              "name_ja": "ちいかわぽけっと グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이포케 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 포켓"
+            }
+          ],
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "catalog_index": 2081,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 클리어 파일 (V3 캐스트)",
-          "name_ja": "ダンガンロンパ クリアファイル (V3キャスト)",
-          "series_name": null,
-          "category": "문구",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 440,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2081,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
+          "token": "本舗",
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "catalog_index": 17810,
+              "name_ko": "치이카와 모구모구 혼포 굿즈",
+              "name_ja": "ちいかわ もぐもぐ本舗 グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "모구모구 혼포 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 모구모구 혼포"
+            }
+          ],
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "catalog_index": 2082,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 머그컵 (모노쿠마)",
-          "name_ja": "ダンガンロンパ マグカップ (モノクマ)",
-          "series_name": null,
-          "category": "머그컵",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1650,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2082,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
+          "token": "모구모구",
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "catalog_index": 17810,
+              "name_ko": "치이카와 모구모구 혼포 굿즈",
+              "name_ja": "ちいかわ もぐもぐ本舗 グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "모구모구 혼포 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 모구모구 혼포"
+            }
+          ],
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "catalog_index": 2083,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 러버 마스코트 (모노쿠마)",
-          "name_ja": "ダンガンロンパ ラバーマスコット (モノクマ)",
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 660,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2083,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
+          "token": "치이포케",
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "catalog_index": 17811,
+              "name_ko": "치이카와 치이카와 포켓 굿즈",
+              "name_ja": "ちいかわぽけっと グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이포케 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 포켓"
+            }
+          ],
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "catalog_index": 2084,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 러버 마스코트 (코마에다)",
-          "name_ja": "ダンガンロンパ ラバーマスコット (狛枝)",
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 660,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2084,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
+          "token": "포켓",
+          "row_count": 1,
+          "sample_rows": [
+            {
+              "catalog_index": 17811,
+              "name_ko": "치이카와 치이카와 포켓 굿즈",
+              "name_ja": "ちいかわぽけっと グッズ",
+              "category": "기타 굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이포케 치이카와",
+              "sub_series": "사용자 요청 추가",
+              "source_store": "치이카와 포켓"
+            }
+          ],
+          "manual_confirmed": false,
+          "suggested_use": "review_as_keyword_candidate"
         }
       ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
+      "review_summary": {
+        "unmatched_rows": 2,
+        "token_candidate_count": 9,
+        "source_category_rows": 11
+      },
+      "review_state": "manual_keyword_candidate_review_required",
+      "next_machine_step": "review_unmatched_animation_keyword_candidates"
     }
   ],
   "automation_policy": {

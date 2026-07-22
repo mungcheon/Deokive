@@ -100,6 +100,7 @@ jobs:
           python tools/build_requested_focus_action_queue_public.py
           python tools/build_animation_category_action_queue_public.py
           python tools/build_animation_category_split_review_public.py
+          python tools/build_animation_category_unmatched_keyword_review_public.py
 
       - name: Refresh public catalog reports
         run: |
@@ -152,6 +153,7 @@ jobs:
             data/animation_category_review_batches_public.json \
             data/animation_category_action_queue_public.json \
             data/animation_category_split_review_public.json \
+            data/animation_category_unmatched_keyword_review_public.json \
             data/ichiban_kuji_history_public.json \
             data/ichiban_kuji_metadata_review_batches_public.json \
             data/ichiban_kuji_metadata_action_queue_public.json \
