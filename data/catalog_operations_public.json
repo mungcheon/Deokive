@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T07:07:42Z",
+  "generated_at": "2026-07-22T08:54:19Z",
   "summary": {
     "catalog_rows": 20392,
     "coverage": {
@@ -55,7 +55,9 @@
       "animation_category_review_rows": 374,
       "animation_category_action_rows": 374,
       "animation_category_split_review_categories": 3,
-      "animation_category_direct_mapping_categories": 0
+      "animation_category_direct_mapping_categories": 0,
+      "animation_category_name_split_rows": 374,
+      "animation_category_name_split_candidates": 4
     },
     "top_store_priority_score": 1832.0
   },
@@ -867,6 +869,18 @@
       "auto_apply_enabled": false
     },
     {
+      "workstream": "animation_category_split_review",
+      "status": "manual_review",
+      "open_rows": 374,
+      "split_review_categories": 3,
+      "candidate_split_rules": 4,
+      "matched_sample_names": 16,
+      "unmatched_sample_names": 3,
+      "primary_report": "data/animation_category_split_review_public.json",
+      "next_step": "confirm_animation_category_name_split_templates",
+      "auto_apply_enabled": false
+    },
+    {
       "workstream": "generic_source_patch_candidates",
       "status": "candidate_review",
       "open_rows": 3,
@@ -1409,6 +1423,10 @@
     {
       "key": "animation_category_action_queue",
       "public_report": "data/animation_category_action_queue_public.json"
+    },
+    {
+      "key": "animation_category_split_review",
+      "public_report": "data/animation_category_split_review_public.json"
     },
     {
       "key": "ichiban_kuji_history",
@@ -2297,6 +2315,18 @@
       "app_folder_icon_option_count": 211,
       "app_folder_palette_sorted_by_family": true,
       "recommended_next_action": "Split broad animation categories before confirming direct category-to-folder mappings."
+    },
+    {
+      "priority": 63,
+      "workstream": "animation_category_split_review",
+      "public_report": "data/animation_category_split_review_public.json",
+      "split_review_categories": 3,
+      "affected_catalog_rows": 374,
+      "candidate_split_rules": 4,
+      "matched_sample_names": 16,
+      "unmatched_sample_names": 3,
+      "auto_apply_enabled": false,
+      "recommended_next_action": "Confirm name-level split templates before changing broad goods categories."
     }
   ],
   "automation_policy": {

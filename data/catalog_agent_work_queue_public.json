@@ -1,15 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T07:07:42Z",
+  "generated_at": "2026-07-22T08:54:19Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 24973,
+    "summed_batch_rows": 25330,
     "top_next_batch_count": 10,
     "by_workstream": [
-      [
-        "requested_focus_review_batches",
-        13
-      ],
       [
         "requested_focus_action_queue",
         12
@@ -17,6 +13,10 @@
       [
         "source_url_discovery",
         12
+      ],
+      [
+        "requested_focus_review_batches",
+        10
       ],
       [
         "source_discovery_action_queue",
@@ -43,6 +43,10 @@
         3
       ],
       [
+        "animation_category_split_review",
+        3
+      ],
+      [
         "gotouchi_official_candidate_review",
         1
       ],
@@ -61,16 +65,16 @@
     ],
     "by_agent": [
       [
-        "agent-requested-focus-detail",
-        13
-      ],
-      [
         "agent-requested-focus-action",
         12
       ],
       [
         "agent-source-discovery",
         12
+      ],
+      [
+        "agent-requested-focus-detail",
+        10
       ],
       [
         "agent-source-action",
@@ -94,6 +98,10 @@
       ],
       [
         "agent-generic-source-cleanup",
+        3
+      ],
+      [
+        "agent-animation-category-split",
         3
       ],
       [
@@ -152,7 +160,9 @@
       "animation_category_review_rows": 374,
       "animation_category_action_rows": 374,
       "animation_category_split_review_categories": 3,
-      "animation_category_direct_mapping_categories": 0
+      "animation_category_direct_mapping_categories": 0,
+      "animation_category_name_split_rows": 374,
+      "animation_category_name_split_candidates": 4
     }
   },
   "top_next_batches": [
@@ -6067,6 +6077,306 @@
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
     },
     {
+      "batch_id": "026-agent-animation-category-split-131",
+      "agent_id": "agent-animation-category-split",
+      "workstream": "animation_category_split_review",
+      "priority": 26,
+      "title": "애니메이션 이름별 세부 분류 확인: 굿즈",
+      "public_report": "data/animation_category_split_review_public.json",
+      "rows": 274,
+      "recommended_action": "Confirm name keyword templates before applying broad category split rules to catalog rows.",
+      "acceptance_criteria": [
+        "Each name_level_split_template remains manual_confirmed=false until item names are reviewed.",
+        "Same prize-letter variants remain separate catalog rows when the official campaign has multiple types.",
+        "Unmatched samples stay blocked until a safer keyword or official category is confirmed."
+      ],
+      "sample_items": [
+        {
+          "rule_id": "figure",
+          "target_category": "피규어",
+          "target_family": "figure",
+          "folder_color_group": "green",
+          "folder_color_hint": "mint",
+          "folder_icon_key": "toys",
+          "match_keywords": [
+            "フィギュア",
+            "MASTERLISE",
+            "figure",
+            "피규어",
+            "넨도로이드",
+            "ねんどろいど"
+          ],
+          "matched_sample_count": 6,
+          "matched_sample_names": [
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - A賞 緑谷出久 MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - B賞 死柄木弔 MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - C賞 爆豪勝己 MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - D賞 ステイン MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - E賞 峰田実 MASTERLISE",
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - ラストワン賞 アーマード・オールマイト MASTERLISE EXTRA"
+          ],
+          "name_level_split_template": {
+            "manual_confirmed": false,
+            "source_category": "굿즈",
+            "match_keywords": [
+              "フィギュア",
+              "MASTERLISE",
+              "figure",
+              "피규어",
+              "넨도로이드",
+              "ねんどろいど"
+            ],
+            "target_category": "피규어",
+            "target_family": "figure",
+            "folder_name": "피규어",
+            "folder_color_hex": "0xFF63D6A8",
+            "folder_color_hint": "mint",
+            "folder_color_group": "green",
+            "folder_color_sort_order": 430,
+            "folder_icon_key": "toys",
+            "folder_icon_options": [
+              "toys",
+              "view_in_ar",
+              "emoji_events",
+              "category"
+            ],
+            "matched_sample_count": 6,
+            "matched_sample_names": [
+              "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - A賞 緑谷出久 MASTERLISE",
+              "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - B賞 死柄木弔 MASTERLISE",
+              "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - C賞 爆豪勝己 MASTERLISE",
+              "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - D賞 ステイン MASTERLISE",
+              "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - E賞 峰田実 MASTERLISE",
+              "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - ラストワン賞 アーマード・オールマイト MASTERLISE EXTRA"
+            ],
+            "blocked_until": "name_level_split_manually_confirmed",
+            "review_evidence_required": [
+              "keywords_match_actual_goods_type",
+              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
+              "broad_source_category_is_not_applied_as_one_folder",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          }
+        },
+        {
+          "rule_id": "stationery",
+          "target_category": "문구",
+          "target_family": "stationery",
+          "folder_color_group": "purple",
+          "folder_color_hint": "lavender",
+          "folder_icon_key": "sticky_note_2",
+          "match_keywords": [
+            "ステーショナリー",
+            "クリアファイル",
+            "ステッカー",
+            "ポストカード",
+            "シール",
+            "문구",
+            "스티커",
+            "카드",
+            "file"
+          ],
+          "matched_sample_count": 1,
+          "matched_sample_names": [
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - J賞 ステーショナリーコレクション"
+          ],
+          "name_level_split_template": {
+            "manual_confirmed": false,
+            "source_category": "굿즈",
+            "match_keywords": [
+              "ステーショナリー",
+              "クリアファイル",
+              "ステッカー",
+              "ポストカード",
+              "シール",
+              "문구",
+              "스티커",
+              "카드",
+              "file"
+            ],
+            "target_category": "문구",
+            "target_family": "stationery",
+            "folder_name": "문구",
+            "folder_color_hex": "0xFFB9A7FF",
+            "folder_color_hint": "lavender",
+            "folder_color_group": "purple",
+            "folder_color_sort_order": 620,
+            "folder_icon_key": "sticky_note_2",
+            "folder_icon_options": [
+              "sticky_note_2",
+              "edit_note",
+              "article",
+              "category"
+            ],
+            "matched_sample_count": 1,
+            "matched_sample_names": [
+              "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - J賞 ステーショナリーコレクション"
+            ],
+            "blocked_until": "name_level_split_manually_confirmed",
+            "review_evidence_required": [
+              "keywords_match_actual_goods_type",
+              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
+              "broad_source_category_is_not_applied_as_one_folder",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          }
+        },
+        {
+          "rule_id": "board",
+          "target_category": "보드",
+          "target_family": "display",
+          "folder_color_group": "neutral",
+          "folder_color_hint": "stone",
+          "folder_icon_key": "dashboard",
+          "match_keywords": [
+            "ボード",
+            "보드",
+            "board",
+            "キャンバス"
+          ],
+          "matched_sample_count": 1,
+          "matched_sample_names": [
+            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - H賞 キャンバス風ボード"
+          ],
+          "name_level_split_template": {
+            "manual_confirmed": false,
+            "source_category": "굿즈",
+            "match_keywords": [
+              "ボード",
+              "보드",
+              "board",
+              "キャンバス"
+            ],
+            "target_category": "보드",
+            "target_family": "display",
+            "folder_name": "보드",
+            "folder_color_hex": "0xFFB8B8C7",
+            "folder_color_hint": "stone",
+            "folder_color_group": "neutral",
+            "folder_color_sort_order": 130,
+            "folder_icon_key": "dashboard",
+            "folder_icon_options": [
+              "dashboard",
+              "wallpaper",
+              "photo_size_select_actual",
+              "category"
+            ],
+            "matched_sample_count": 1,
+            "matched_sample_names": [
+              "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - H賞 キャンバス風ボード"
+            ],
+            "blocked_until": "name_level_split_manually_confirmed",
+            "review_evidence_required": [
+              "keywords_match_actual_goods_type",
+              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
+              "broad_source_category_is_not_applied_as_one_folder",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          }
+        }
+      ],
+      "review_summary": {
+        "split_candidate_count": 3,
+        "matched_sample_count": 8,
+        "unmatched_sample_count": 0
+      },
+      "review_state": "manual_name_level_split_confirmation_required",
+      "next_machine_step": "confirm_animation_category_name_split_templates"
+    },
+    {
+      "batch_id": "027-agent-animation-category-split-132",
+      "agent_id": "agent-animation-category-split",
+      "workstream": "animation_category_split_review",
+      "priority": 27,
+      "title": "애니메이션 이름별 세부 분류 확인: 아크릴",
+      "public_report": "data/animation_category_split_review_public.json",
+      "rows": 97,
+      "recommended_action": "Confirm name keyword templates before applying broad category split rules to catalog rows.",
+      "acceptance_criteria": [
+        "Each name_level_split_template remains manual_confirmed=false until item names are reviewed.",
+        "Same prize-letter variants remain separate catalog rows when the official campaign has multiple types.",
+        "Unmatched samples stay blocked until a safer keyword or official category is confirmed."
+      ],
+      "sample_items": [
+        {
+          "rule_id": "acrylic_stand",
+          "target_category": "아크릴 스탠드",
+          "target_family": "acrylic",
+          "folder_color_group": "blue",
+          "folder_color_hint": "sky",
+          "folder_icon_key": "view_carousel",
+          "match_keywords": [
+            "アクリルスタンド",
+            "アクスタ",
+            "아크릴 스탠드",
+            "acrylic stand",
+            "stand"
+          ],
+          "matched_sample_count": 8,
+          "matched_sample_names": [
+            "一番くじ 葬送のフリーレン - F賞 きゅんキャラアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - A賞 虎杖悠仁 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - B賞 伏黒恵 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - C賞 秤金次 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - D賞 星綺羅羅 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - E賞 日車寛見 ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - F賞 レジィ・スター ビッグアクリルスタンド",
+            "一番くじ 呪術廻戦 死滅回游 ～壱～ - A賞 禪院真希・禪院真依 ビッグアクリルスタンド"
+          ],
+          "name_level_split_template": {
+            "manual_confirmed": false,
+            "source_category": "아크릴",
+            "match_keywords": [
+              "アクリルスタンド",
+              "アクスタ",
+              "아크릴 스탠드",
+              "acrylic stand",
+              "stand"
+            ],
+            "target_category": "아크릴 스탠드",
+            "target_family": "acrylic",
+            "folder_name": "아크릴 스탠드",
+            "folder_color_hex": "0xFF7DB7FF",
+            "folder_color_hint": "sky",
+            "folder_color_group": "blue",
+            "folder_color_sort_order": 220,
+            "folder_icon_key": "view_carousel",
+            "folder_icon_options": [
+              "view_carousel",
+              "crop_portrait",
+              "badge",
+              "category"
+            ],
+            "matched_sample_count": 8,
+            "matched_sample_names": [
+              "一番くじ 葬送のフリーレン - F賞 きゅんキャラアクリルスタンド",
+              "一番くじ 呪術廻戦 死滅回游 ～弐～ - A賞 虎杖悠仁 ビッグアクリルスタンド",
+              "一番くじ 呪術廻戦 死滅回游 ～弐～ - B賞 伏黒恵 ビッグアクリルスタンド",
+              "一番くじ 呪術廻戦 死滅回游 ～弐～ - C賞 秤金次 ビッグアクリルスタンド",
+              "一番くじ 呪術廻戦 死滅回游 ～弐～ - D賞 星綺羅羅 ビッグアクリルスタンド",
+              "一番くじ 呪術廻戦 死滅回游 ～弐～ - E賞 日車寛見 ビッグアクリルスタンド",
+              "一番くじ 呪術廻戦 死滅回游 ～弐～ - F賞 レジィ・スター ビッグアクリルスタンド",
+              "一番くじ 呪術廻戦 死滅回游 ～壱～ - A賞 禪院真希・禪院真依 ビッグアクリルスタンド"
+            ],
+            "blocked_until": "name_level_split_manually_confirmed",
+            "review_evidence_required": [
+              "keywords_match_actual_goods_type",
+              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
+              "broad_source_category_is_not_applied_as_one_folder",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          }
+        }
+      ],
+      "review_summary": {
+        "split_candidate_count": 1,
+        "matched_sample_count": 8,
+        "unmatched_sample_count": 0
+      },
+      "review_state": "manual_name_level_split_confirmation_required",
+      "next_machine_step": "confirm_animation_category_name_split_templates"
+    },
+    {
       "batch_id": "028-agent-source-action-61",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
@@ -9617,6 +9927,29 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
+      "batch_id": "028-agent-animation-category-split-133",
+      "agent_id": "agent-animation-category-split",
+      "workstream": "animation_category_split_review",
+      "priority": 28,
+      "title": "애니메이션 이름별 세부 분류 확인: 기타 굿즈",
+      "public_report": "data/animation_category_split_review_public.json",
+      "rows": 3,
+      "recommended_action": "Confirm name keyword templates before applying broad category split rules to catalog rows.",
+      "acceptance_criteria": [
+        "Each name_level_split_template remains manual_confirmed=false until item names are reviewed.",
+        "Same prize-letter variants remain separate catalog rows when the official campaign has multiple types.",
+        "Unmatched samples stay blocked until a safer keyword or official category is confirmed."
+      ],
+      "sample_items": [],
+      "review_summary": {
+        "split_candidate_count": 0,
+        "matched_sample_count": 0,
+        "unmatched_sample_count": 3
+      },
+      "review_state": "manual_name_level_split_confirmation_required",
+      "next_machine_step": "confirm_animation_category_name_split_templates"
+    },
+    {
       "batch_id": "030-agent-requested-focus-11",
       "agent_id": "agent-requested-focus",
       "workstream": "requested_focus_enrichment",
@@ -13158,522 +13491,6 @@
             "requires_exact_source_url": true,
             "requires_labeled_official_evidence": false,
             "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "040-agent-requested-focus-detail-23",
-      "agent_id": "agent-requested-focus-detail",
-      "workstream": "requested_focus_review_batches",
-      "priority": 40,
-      "title": "단간론파 굿즈 image_url review",
-      "public_report": "data/requested_focus_review_batches_public.json",
-      "rows": 7,
-      "recommended_action": "extract_image_from_exact_reviewed_source_url",
-      "acceptance_criteria": [
-        "Verify each candidate against exact official or trusted source evidence.",
-        "Keep private collection ownership data on the local device only.",
-        "Prepare reviewed catalog patches only; auto-apply remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1640,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 아크릴 스탠드 (모노쿠마)",
-          "name_ja": "ダンガンロンパ アクリルスタンド (モノクマ)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "Movic",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1320,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1640,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1698,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 트레이딩 캔뱃지 나에기 마코토",
-          "name_ja": "ダンガンロンパ トレーディング缶バッジ 苗木誠",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "Movic",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 550,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1698,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1699,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 트레이딩 캔뱃지 키리기리 쿄코",
-          "name_ja": "ダンガンロンパ トレーディング缶バッジ 霧切響子",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "Movic",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 550,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1699,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1700,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 메탈릭 캔뱃지 모노쿠마",
-          "name_ja": "ダンガンロンパ メタリック缶バッジ モノクマ",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "Movic",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 660,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1700,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1702,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 클리어 파일 A4 모노쿠마",
-          "name_ja": "ダンガンロンパ クリアファイルA4 モノクマ",
-          "series_name": null,
-          "category": "문구",
-          "source_store": "Movic",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 440,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1702,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1798,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 나에기 학원 시리즈 머그컵",
-          "name_ja": "ダンガンロンパ 苗木誠 学園シリーズ マグカップ",
-          "series_name": null,
-          "category": "머그컵",
-          "source_store": "Movic",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1980,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1798,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1799,
-          "missing_field": "image_url",
-          "name_ko": "단간론파 키리기리 학원 시리즈 타올",
-          "name_ja": "ダンガンロンパ 霧切響子 学園シリーズ タオル",
-          "series_name": null,
-          "category": "타월",
-          "source_store": "Movic",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1650,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1799,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "040-agent-requested-focus-detail-24",
-      "agent_id": "agent-requested-focus-detail",
-      "workstream": "requested_focus_review_batches",
-      "priority": 40,
-      "title": "단간론파 굿즈 image_url review",
-      "public_report": "data/requested_focus_review_batches_public.json",
-      "rows": 6,
-      "recommended_action": "extract_image_from_exact_reviewed_source_url",
-      "acceptance_criteria": [
-        "Verify each candidate against exact official or trusted source evidence.",
-        "Keep private collection ownership data on the local device only.",
-        "Prepare reviewed catalog patches only; auto-apply remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1473,
-          "missing_field": "image_url",
-          "name_ko": "오만쥬 니기니기 마스코트 모노쿠마",
-          "name_ja": "おまんじゅう にぎにぎマスコット モノクマ",
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1100,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1473,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1474,
-          "missing_field": "image_url",
-          "name_ko": "오만쥬 니기니기 마스코트 나에기 마코토",
-          "name_ja": "おまんじゅう にぎにぎマスコット 苗木誠",
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1100,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1474,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1475,
-          "missing_field": "image_url",
-          "name_ko": "오만쥬 니기니기 마스코트 코마에다 나기토",
-          "name_ja": "おまんじゅう にぎにぎマスコット 狛枝凪斗",
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1100,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1475,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1476,
-          "missing_field": "image_url",
-          "name_ko": "오만쥬 니기니기 마스코트 히나타 하지메",
-          "name_ja": "おまんじゅう にぎにぎマスコット 日向創",
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 1100,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1476,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1477,
-          "missing_field": "image_url",
-          "name_ko": "치비누이 사이하라 슈이치",
-          "name_ja": "ちびぬい 最原終一",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 3300,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1477,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1478,
-          "missing_field": "image_url",
-          "name_ko": "치비누이 오우마 코키치",
-          "name_ja": "ちびぬい 王馬小吉",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 3300,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1478,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "040-agent-requested-focus-detail-25",
-      "agent_id": "agent-requested-focus-detail",
-      "workstream": "requested_focus_review_batches",
-      "priority": 40,
-      "title": "사용자 요청 특별 리스트 release_date review",
-      "public_report": "data/requested_focus_review_batches_public.json",
-      "rows": 4,
-      "recommended_action": "verify_release_date_from_official_campaign_or_product_page",
-      "acceptance_criteria": [
-        "Verify each candidate against exact official or trusted source evidence.",
-        "Keep private collection ownership data on the local device only.",
-        "Prepare reviewed catalog patches only; auto-apply remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 17812,
-          "missing_field": "release_date",
-          "name_ko": "단간론파 쿠루미타피누이 Vol.1",
-          "name_ja": "ダンガンロンパ くるみたぴぬい Vol.1",
-          "series_name": "단간론파 쿠루미타피누이 버전1",
-          "category": "인형",
-          "source_store": "TAPIOCA online shop",
-          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-          "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580831925254_1_1764821109.jpg&width=1200&height=630",
-          "release_date": null,
-          "official_price_jpy": null,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 17812,
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-            "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-            "requires_exact_source_url": false,
-            "requires_labeled_official_evidence": true,
-            "blocked_until": "manual_official_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 17813,
-          "missing_field": "release_date",
-          "name_ko": "단간론파 쿠루미타피누이 Vol.2",
-          "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
-          "series_name": "단간론파 쿠루미타피누이 버전2",
-          "category": "인형",
-          "source_store": "TAPIOCA online shop",
-          "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-          "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif",
-          "release_date": null,
-          "official_price_jpy": null,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 17813,
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-            "candidate_source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-            "requires_exact_source_url": false,
-            "requires_labeled_official_evidence": true,
-            "blocked_until": "manual_official_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 17866,
-          "missing_field": "release_date",
-          "name_ko": "주술회전 쿠루미타피누이",
-          "name_ja": "呪術廻戦 くるみたぴぬい",
-          "series_name": "주술회전 타피누이",
-          "category": "인형",
-          "source_store": "TAPIOCA online shop",
-          "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-          "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg",
-          "release_date": null,
-          "official_price_jpy": null,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 17866,
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-            "candidate_source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-            "requires_exact_source_url": false,
-            "requires_labeled_official_evidence": true,
-            "blocked_until": "manual_official_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 17814,
-          "missing_field": "release_date",
-          "name_ko": "헌터헌터 쿠루미타피누이",
-          "name_ja": "HUNTER×HUNTER くるみたぴぬい",
-          "series_name": "헌터헌터 타피누이",
-          "category": "인형",
-          "source_store": "TAPIOCA online shop",
-          "source_url": "https://jp.mercari.com/item/m69892974117",
-          "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275",
-          "release_date": null,
-          "official_price_jpy": null,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 17814,
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "https://jp.mercari.com/item/m69892974117",
-            "candidate_source_url": "https://jp.mercari.com/item/m69892974117",
-            "requires_exact_source_url": false,
-            "requires_labeled_official_evidence": true,
-            "blocked_until": "manual_official_evidence_confirmed"
           },
           "auto_apply_enabled": false
         }

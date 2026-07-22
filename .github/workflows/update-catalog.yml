@@ -99,6 +99,7 @@ jobs:
           python tools/build_ichiban_kuji_metadata_fast_review_public.py --write
           python tools/build_requested_focus_action_queue_public.py
           python tools/build_animation_category_action_queue_public.py
+          python tools/build_animation_category_split_review_public.py
 
       - name: Refresh public catalog reports
         run: |
@@ -150,6 +151,7 @@ jobs:
             data/animation_goods_categories_public.json \
             data/animation_category_review_batches_public.json \
             data/animation_category_action_queue_public.json \
+            data/animation_category_split_review_public.json \
             data/ichiban_kuji_history_public.json \
             data/ichiban_kuji_metadata_review_batches_public.json \
             data/ichiban_kuji_metadata_action_queue_public.json \

@@ -41,6 +41,7 @@ DEDUPLICATION_FAST_REVIEW = DATA / "catalog_deduplication_fast_review_public.jso
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_public.json"
 ANIMATION_CATEGORY_ACTION_QUEUE = DATA / "animation_category_action_queue_public.json"
+ANIMATION_CATEGORY_SPLIT_REVIEW = DATA / "animation_category_split_review_public.json"
 ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
@@ -1537,6 +1538,10 @@ def build_operations_public(
         load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
     )
     animation_action_queue_summary = animation_action_queue.get("summary", {})
+    animation_split_review = (
+        load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
+    )
+    animation_split_review_summary = animation_split_review.get("summary", {})
     kuji_summary = ichiban_kuji_history["summary"]
     ichiban_kuji_metadata_probe = (
         load_json(ICHIIBAN_KUJI_METADATA_PROBE, {}) if ICHIIBAN_KUJI_METADATA_PROBE.exists() else {}
@@ -1986,6 +1991,18 @@ def build_operations_public(
             ),
             "recommended_next_action": "Split broad animation categories before confirming direct category-to-folder mappings.",
         } if animation_action_queue_summary else None,
+        {
+            "priority": 63,
+            "workstream": "animation_category_split_review",
+            "public_report": f"data/{ANIMATION_CATEGORY_SPLIT_REVIEW.name}",
+            "split_review_categories": animation_split_review_summary.get("split_review_categories", 0),
+            "affected_catalog_rows": animation_split_review_summary.get("affected_catalog_rows", 0),
+            "candidate_split_rules": animation_split_review_summary.get("candidate_split_rules", 0),
+            "matched_sample_names": animation_split_review_summary.get("matched_sample_names", 0),
+            "unmatched_sample_names": animation_split_review_summary.get("unmatched_sample_names", 0),
+            "auto_apply_enabled": animation_split_review_summary.get("auto_apply_enabled", False),
+            "recommended_next_action": "Confirm name-level split templates before changing broad goods categories.",
+        } if animation_split_review_summary else None,
     ]
     next_actions = [item for item in next_actions if item is not None]
     workstream_scorecard = [
@@ -2224,6 +2241,18 @@ def build_operations_public(
             "auto_apply_enabled": animation_action_queue_summary.get("auto_apply_enabled", False),
         } if animation_action_queue_summary else None,
         {
+            "workstream": "animation_category_split_review",
+            "status": "manual_review" if animation_split_review_summary.get("affected_catalog_rows", 0) else "clear",
+            "open_rows": animation_split_review_summary.get("affected_catalog_rows", 0),
+            "split_review_categories": animation_split_review_summary.get("split_review_categories", 0),
+            "candidate_split_rules": animation_split_review_summary.get("candidate_split_rules", 0),
+            "matched_sample_names": animation_split_review_summary.get("matched_sample_names", 0),
+            "unmatched_sample_names": animation_split_review_summary.get("unmatched_sample_names", 0),
+            "primary_report": f"data/{ANIMATION_CATEGORY_SPLIT_REVIEW.name}",
+            "next_step": "confirm_animation_category_name_split_templates",
+            "auto_apply_enabled": animation_split_review_summary.get("auto_apply_enabled", False),
+        } if animation_split_review_summary else None,
+        {
             "workstream": "generic_source_patch_candidates",
             "status": "candidate_review" if generic_patch_summary.get("candidate_rows", 0) else "clear",
             "open_rows": generic_patch_summary.get("candidate_rows", 0),
@@ -2328,6 +2357,13 @@ def build_operations_public(
         open_review_queues["animation_category_direct_mapping_categories"] = animation_action_queue_summary.get(
             "direct_mapping_categories", 0
         )
+    if animation_split_review_summary:
+        open_review_queues["animation_category_name_split_rows"] = animation_split_review_summary.get(
+            "affected_catalog_rows", 0
+        )
+        open_review_queues["animation_category_name_split_candidates"] = animation_split_review_summary.get(
+            "candidate_split_rules", 0
+        )
 
     return {
         "schema_version": 1,
@@ -2373,6 +2409,7 @@ def build_operations_public(
             {"key": "animation_categories", "public_report": f"data/{ANIMATION_CATEGORIES.name}"},
             {"key": "animation_category_review_batches", "public_report": f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}"},
             {"key": "animation_category_action_queue", "public_report": f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}"},
+            {"key": "animation_category_split_review", "public_report": f"data/{ANIMATION_CATEGORY_SPLIT_REVIEW.name}"},
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
             {"key": "ichiban_kuji_metadata_probe", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}"},
             {"key": "ichiban_kuji_metadata_review_batches", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}"},
@@ -2464,6 +2501,9 @@ def build_agent_work_queue_public(
     animation_action_queue = (
         load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
     )
+    animation_split_review = (
+        load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
+    )
 
     def generic_source_review_summary(source_store: str) -> dict[str, int]:
         items = [
@@ -2531,6 +2571,8 @@ def build_agent_work_queue_public(
             return "taxonomy_mapping_required"
         if workstream == "animation_category_action_queue":
             return "manual_category_mapping_confirmation_required"
+        if workstream == "animation_category_split_review":
+            return "manual_name_level_split_confirmation_required"
         return "manual_review_required"
 
     def next_machine_step_for_state(review_state: str) -> str:
@@ -2550,6 +2592,7 @@ def build_agent_work_queue_public(
             "manual_official_campaign_metadata_confirmation_required": "fill_confirmed_ichiban_campaign_patch_templates",
             "taxonomy_mapping_required": "map_category_to_folder_color_and_icon",
             "manual_category_mapping_confirmation_required": "fill_confirmed_animation_category_mapping_templates",
+            "manual_name_level_split_confirmation_required": "confirm_animation_category_name_split_templates",
         }.get(review_state, "manual_review")
 
     def add_batch(
@@ -3065,6 +3108,33 @@ def build_agent_work_queue_public(
                 "split_review_categories": mapping_mode_counts.get("name_level_split_review_required", 0),
                 "direct_mapping_categories": mapping_mode_counts.get("direct_category_mapping_review", 0),
                 "category_count": int(action_batch.get("category_count") or 0),
+            },
+        )
+
+    animation_split_items = [
+        row for row in animation_split_review.get("review_items", []) if isinstance(row, dict)
+    ]
+    for split_index, split_item in enumerate(animation_split_items[:4]):
+        add_batch(
+            agent_id="agent-animation-category-split",
+            workstream="animation_category_split_review",
+            priority=26 + split_index,
+            title=f"애니메이션 이름별 세부 분류 확인: {split_item.get('source_category')}",
+            public_report=ANIMATION_CATEGORY_SPLIT_REVIEW,
+            rows=int(split_item.get("affected_catalog_rows") or 0),
+            recommended_action=(
+                "Confirm name keyword templates before applying broad category split rules to catalog rows."
+            ),
+            acceptance_criteria=[
+                "Each name_level_split_template remains manual_confirmed=false until item names are reviewed.",
+                "Same prize-letter variants remain separate catalog rows when the official campaign has multiple types.",
+                "Unmatched samples stay blocked until a safer keyword or official category is confirmed.",
+            ],
+            samples=[candidate for candidate in split_item.get("split_candidates", []) if isinstance(candidate, dict)],
+            review_summary={
+                "split_candidate_count": int(split_item.get("split_candidate_count") or 0),
+                "matched_sample_count": int(split_item.get("matched_sample_count") or 0),
+                "unmatched_sample_count": int(split_item.get("unmatched_sample_count") or 0),
             },
         )
 
@@ -4186,6 +4256,17 @@ def validate_report_consistency(
         expected_open_queues["animation_category_direct_mapping_categories"] = animation_action_summary.get(
             "direct_mapping_categories", 0
         )
+    animation_split_review = (
+        load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
+    )
+    animation_split_summary = animation_split_review.get("summary", {})
+    if animation_split_summary:
+        expected_open_queues["animation_category_name_split_rows"] = animation_split_summary.get(
+            "affected_catalog_rows", 0
+        )
+        expected_open_queues["animation_category_name_split_candidates"] = animation_split_summary.get(
+            "candidate_split_rules", 0
+        )
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
     taxonomy_review_queue = animation_categories.get("taxonomy_review_queue", [])
@@ -4317,6 +4398,7 @@ def validate_report_consistency(
         f"data/{ANIMATION_CATEGORIES.name}",
         f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
         f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}",
+        f"data/{ANIMATION_CATEGORY_SPLIT_REVIEW.name}",
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
@@ -4358,6 +4440,7 @@ def validate_report_consistency(
         "manual_official_campaign_metadata_confirmation_required",
         "taxonomy_mapping_required",
         "manual_category_mapping_confirmation_required",
+        "manual_name_level_split_confirmation_required",
         "manual_review_required",
     }
     allowed_next_machine_steps = {
@@ -4376,6 +4459,7 @@ def validate_report_consistency(
         "fill_confirmed_ichiban_campaign_patch_templates",
         "map_category_to_folder_color_and_icon",
         "fill_confirmed_animation_category_mapping_templates",
+        "confirm_animation_category_name_split_templates",
         "manual_review",
     }
     for batch in batches:
@@ -4724,6 +4808,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["animation_category_action_queue"] = copy_report_summary(
                 ANIMATION_CATEGORY_ACTION_QUEUE, "animation_category_action_queue"
             )
+        if ANIMATION_CATEGORY_SPLIT_REVIEW.exists():
+            target["animation_category_split_review"] = copy_report_summary(
+                ANIMATION_CATEGORY_SPLIT_REVIEW, "animation_category_split_review"
+            )
         target["ichiban_kuji_history"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
             **ichiban_kuji_history["summary"],
@@ -4843,6 +4931,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DEDUPLICATION_FAST_REVIEW.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_ACTION_QUEUE.relative_to(ROOT)),
+            str(ANIMATION_CATEGORY_SPLIT_REVIEW.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_FAST_REVIEW.relative_to(ROOT)),

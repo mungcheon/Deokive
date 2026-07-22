@@ -47,6 +47,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/gotouchi_representative_image_attachment_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
+        self.assertIn("data/animation_category_split_review_public.json", updated_files)
 
         quality = reports.load_json(reports.QUALITY)
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
@@ -401,20 +402,37 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         animation_action = reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)
         animation_action_summary = animation_action.get("summary", {})
+        animation_split = reports.load_json(reports.ANIMATION_CATEGORY_SPLIT_REVIEW)
+        animation_split_summary = animation_split.get("summary", {})
         animation_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
             if row.get("workstream") == "animation_category_action_queue"
+        )
+        animation_split_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "animation_category_split_review"
         )
         animation_next_action = next(
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "animation_category_action_queue"
         )
+        animation_split_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "animation_category_split_review"
+        )
         animation_agent_batches = [
             batch
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "animation_category_action_queue"
+        ]
+        animation_split_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "animation_category_split_review"
         ]
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
@@ -423,6 +441,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.EXECUTION_PLAN.name}", next_action_reports)
         self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
+        self.assertIn(f"data/{reports.ANIMATION_CATEGORY_SPLIT_REVIEW.name}", report_links)
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
@@ -622,6 +641,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_action_summary.get("direct_mapping_categories"),
         )
         self.assertEqual(
+            open_queues.get("animation_category_name_split_rows"),
+            animation_split_summary.get("affected_catalog_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("animation_category_name_split_candidates"),
+            animation_split_summary.get("candidate_split_rules"),
+        )
+        self.assertEqual(
             animation_scorecard.get("split_review_categories"),
             animation_action_summary.get("split_review_categories"),
         )
@@ -640,11 +667,27 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_next_action.get("app_folder_icon_option_count"),
             animation_action_summary.get("app_folder_icon_option_count"),
         )
+        self.assertEqual(
+            animation_split_scorecard.get("candidate_split_rules"),
+            animation_split_summary.get("candidate_split_rules"),
+        )
+        self.assertEqual(
+            animation_split_next_action.get("matched_sample_names"),
+            animation_split_summary.get("matched_sample_names"),
+        )
+        self.assertFalse(animation_split_summary.get("auto_apply_enabled"))
         self.assertGreater(len(animation_agent_batches), 0)
+        self.assertGreater(len(animation_split_agent_batches), 0)
         self.assertTrue(
             all(
                 "split_review_categories" in batch.get("review_summary", {})
                 for batch in animation_agent_batches
+            )
+        )
+        self.assertTrue(
+            all(
+                "split_candidate_count" in batch.get("review_summary", {})
+                for batch in animation_split_agent_batches
             )
         )
 
