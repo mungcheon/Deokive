@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T17:31:39Z",
+  "generated_at": "2026-07-22T17:35:49Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 18,
+    "action_count": 19,
     "blocked_action_count": 1,
-    "manual_review_action_count": 16,
+    "manual_review_action_count": 17,
     "pending_import_action_count": 0,
-    "total_action_rows": 33069,
+    "total_action_rows": 33496,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -82,6 +82,9 @@
     "image_action_source_url_update_template_rows": 50,
     "image_action_image_url_ready_rows": 0,
     "image_action_workstream_count": 4,
+    "source_focus_template_rows": 427,
+    "source_focus_template_work_order_pack_count": 24,
+    "source_focus_template_next_pack_rows": 20,
     "animation_split_review_categories": 3,
     "animation_candidate_split_rules": 21,
     "animation_split_matched_catalog_rows": 2283,
@@ -255,6 +258,29 @@
             14
           ]
         ]
+      }
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_focus_template",
+      "public_report": "data/source_discovery_focus_confirmed_template_public.json",
+      "status": "manual_review",
+      "rows": 427,
+      "command": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack.",
+      "next_step": "work_source_focus_template_work_order_top_to_bottom",
+      "blocker": "Imports stay dry-run only until exact product URLs are manually confirmed.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "template_items": 427,
+        "work_order_pack_count": 24,
+        "next_focus_pack_id": "source-discovery-focus-001",
+        "next_source_store": "애니메이트",
+        "next_target_category": "아크릴 스탠드",
+        "next_focus_pack_rows": 20,
+        "next_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+        "manual_confirmed_rows": 0,
+        "dry_run_updated_rows": 0,
+        "dry_run_skipped_rows": 427
       }
     },
     {

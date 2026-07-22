@@ -56,6 +56,23 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "excluded_review_state_rows": [["manual_official_research_required", 2]],
                 }
             },
+            "source_discovery_focus_confirmed_template_public.json": {
+                "summary": {
+                    "template_items": 8,
+                    "manual_confirmed_rows": 0,
+                    "work_order_pack_count": 2,
+                    "next_focus_pack_id": "source-discovery-focus-001",
+                    "next_source_store": "Animate",
+                    "next_target_category": "Acrylic stand",
+                    "next_focus_pack_rows": 4,
+                    "next_official_search_url": "https://animate.example/search?q=stand",
+                    "auto_apply_enabled": False,
+                }
+            },
+            "source_discovery_focus_template_import_dry_run_public.json": {
+                "updated_rows": 0,
+                "skipped_rows": 8,
+            },
             "catalog_metadata_review_batches_public.json": {
                 "summary": {"missing_cell_count": 20, "batch_count": 2, "field_missing_totals": {"barcode": 20}}
             },
@@ -233,6 +250,23 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(source_action["priority"], 21)
         self.assertEqual(source_action["rows"], 4)
         self.assertEqual(source_action["evidence"]["actionable_source_rows"], 8)
+        source_focus = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "source_discovery_focus_template"
+        )
+        self.assertEqual(source_focus["priority"], 20)
+        self.assertEqual(source_focus["rows"], 8)
+        self.assertEqual(source_focus["next_step"], "work_source_focus_template_work_order_top_to_bottom")
+        self.assertEqual(source_focus["evidence"]["work_order_pack_count"], 2)
+        self.assertEqual(source_focus["evidence"]["next_focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(source_focus["evidence"]["next_source_store"], "Animate")
+        self.assertEqual(source_focus["evidence"]["next_target_category"], "Acrylic stand")
+        self.assertEqual(source_focus["evidence"]["next_focus_pack_rows"], 4)
+        self.assertEqual(source_focus["evidence"]["dry_run_skipped_rows"], 8)
+        self.assertEqual(report["summary"]["source_focus_template_rows"], 8)
+        self.assertEqual(report["summary"]["source_focus_template_work_order_pack_count"], 2)
+        self.assertEqual(report["summary"]["source_focus_template_next_pack_rows"], 4)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
         image_action = next(

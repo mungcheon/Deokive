@@ -101,6 +101,8 @@ def _build_plan(load_report) -> dict[str, Any]:
     image_action_queue = load_report("catalog_image_attachment_action_queue_public.json")
     source_batches = load_report("source_discovery_review_batches_public.json")
     source_action_queue = load_report("source_discovery_action_queue_public.json")
+    source_focus_template = load_report("source_discovery_focus_confirmed_template_public.json")
+    source_focus_template_import = load_report("source_discovery_focus_template_import_dry_run_public.json")
     source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
     ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
     metadata_batches = load_report("catalog_metadata_review_batches_public.json")
@@ -127,6 +129,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     image_action_summary = _summary(image_action_queue)
     source_summary = _summary(source_batches)
     source_action_summary = _summary(source_action_queue)
+    source_focus_template_summary = _summary(source_focus_template)
     source_detail_candidate_action_summary = _summary(source_detail_candidate_action_queue)
     ensky_cache_candidate_action_summary = _summary(ensky_cache_candidate_action_queue)
     metadata_summary = _summary(metadata_batches)
@@ -248,6 +251,32 @@ def _build_plan(load_report) -> dict[str, Any]:
             },
         )
     )
+
+    if source_focus_template_summary:
+        actions.append(
+            _action(
+                priority=20,
+                workstream="source_discovery_focus_template",
+                public_report="data/source_discovery_focus_confirmed_template_public.json",
+                status="manual_review",
+                rows=_count(source_focus_template_summary, "template_items"),
+                command="Open the focus template work_order and confirm exact product source URLs for the next store/category pack.",
+                next_step="work_source_focus_template_work_order_top_to_bottom",
+                blocker="Imports stay dry-run only until exact product URLs are manually confirmed.",
+                evidence={
+                    "template_items": _count(source_focus_template_summary, "template_items"),
+                    "work_order_pack_count": _count(source_focus_template_summary, "work_order_pack_count"),
+                    "next_focus_pack_id": source_focus_template_summary.get("next_focus_pack_id"),
+                    "next_source_store": source_focus_template_summary.get("next_source_store"),
+                    "next_target_category": source_focus_template_summary.get("next_target_category"),
+                    "next_focus_pack_rows": _count(source_focus_template_summary, "next_focus_pack_rows"),
+                    "next_official_search_url": source_focus_template_summary.get("next_official_search_url"),
+                    "manual_confirmed_rows": _count(source_focus_template_summary, "manual_confirmed_rows"),
+                    "dry_run_updated_rows": _count(source_focus_template_import, "updated_rows"),
+                    "dry_run_skipped_rows": _count(source_focus_template_import, "skipped_rows"),
+                },
+            )
+        )
 
     actions.append(
         _action(
@@ -689,6 +718,13 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "image_action_image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
             "image_action_workstream_count": _count(image_action_summary, "workstream_count"),
+            "source_focus_template_rows": _count(source_focus_template_summary, "template_items"),
+            "source_focus_template_work_order_pack_count": _count(
+                source_focus_template_summary, "work_order_pack_count"
+            ),
+            "source_focus_template_next_pack_rows": _count(
+                source_focus_template_summary, "next_focus_pack_rows"
+            ),
             "animation_split_review_categories": _count(animation_split_summary, "split_review_categories"),
             "animation_candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
             "animation_split_matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
