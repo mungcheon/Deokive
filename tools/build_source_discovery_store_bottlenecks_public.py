@@ -29,6 +29,13 @@ def counter_rows(counter: Counter[str], field: str, limit: int = 30) -> list[dic
     return [{field: key, "rows": value} for key, value in counter.most_common(limit) if key]
 
 
+def top_counter_key(counter: Counter[str]) -> str | None:
+    for key, _count in counter.most_common(1):
+        if key:
+            return key
+    return None
+
+
 def compact_sample(item: dict[str, Any]) -> dict[str, Any]:
     return {
         "catalog_index": item.get("catalog_index"),
@@ -86,10 +93,17 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             {"domain": domain, "rows": count}
             for domain, count in bucket["allowed_source_domains"].most_common(8)
         ]
+        first_batch_id = next((batch_id for batch_id in bucket["batch_ids"] if batch_id), None)
+        top_category = top_counter_key(bucket["category_rows"])
+        top_domain = allowed_domains[0]["domain"] if allowed_domains else None
         stores.append(
             {
                 "source_store": bucket["source_store"],
                 "rows": bucket["rows"],
+                "impact_rank_hint": bucket["rows"],
+                "first_batch_id": first_batch_id,
+                "top_category": top_category,
+                "top_allowed_source_domain": top_domain,
                 "batch_count": len([batch_id for batch_id in bucket["batch_ids"] if batch_id]),
                 "batch_ids": [batch_id for batch_id in bucket["batch_ids"] if batch_id][:12],
                 "workflow_rows": counter_rows(bucket["workflow_rows"], "workflow"),
@@ -100,12 +114,16 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
                 "next_step": "open_official_search_and_confirm_exact_product_source_url"
                 if allowed_domains
                 else "manual_domain_research_before_source_url_import",
+                "recommended_work_mode": "single_store_batch_review",
+                "recommended_batch_focus": f"{bucket['source_store']} / {top_category or 'mixed'}",
                 "sample_items": bucket["sample_items"],
                 "auto_apply_enabled": False,
             }
         )
     stores.sort(key=lambda row: (-int(row["rows"]), str(row["source_store"])))
     domainless_rows = sum(int(row["rows"]) for row in stores if not row["has_allowed_source_domain"])
+    top_5_rows = sum(int(row["rows"]) for row in stores[:5])
+    top_10_rows = sum(int(row["rows"]) for row in stores[:10])
     summary = action_queue.get("summary") if isinstance(action_queue.get("summary"), dict) else {}
 
     return {
@@ -118,6 +136,14 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             "store_count": len(stores),
             "top_store_rows": stores[0]["rows"] if stores else 0,
             "top_store": stores[0]["source_store"] if stores else None,
+            "top_5_store_rows": top_5_rows,
+            "top_5_store_coverage": round(top_5_rows / int(summary.get("queued_source_rows") or total_items), 4)
+            if int(summary.get("queued_source_rows") or total_items)
+            else 0,
+            "top_10_store_rows": top_10_rows,
+            "top_10_store_coverage": round(top_10_rows / int(summary.get("queued_source_rows") or total_items), 4)
+            if int(summary.get("queued_source_rows") or total_items)
+            else 0,
             "domainless_store_rows": domainless_rows,
             "stores_without_allowed_domain": sum(1 for row in stores if not row["has_allowed_source_domain"]),
             "auto_apply_enabled": False,
