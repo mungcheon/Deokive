@@ -1858,10 +1858,10 @@
   "source_detail_candidate_probe": {
     "public_report": "data/source_detail_probe_public.json",
     "source_queue_rows": 445,
-    "report_count": 19,
+    "report_count": 22,
     "stores_scanned": 10,
-    "scanned_rows": 1639,
-    "processed_rows": 744,
+    "scanned_rows": 1680,
+    "processed_rows": 785,
     "unique_processed_store_row_pairs": 445,
     "exact_candidate_rows": 0,
     "candidate_review_rows": 15,
@@ -2488,6 +2488,7 @@
     "source_discovery_unqueued_actionable_rows": 0,
     "source_detail_candidate_action_rows": 15,
     "source_detail_candidate_manual_confirmed_rows": 0,
+    "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
     "ensky_cache_candidate_action_rows": 54,
     "ensky_cache_candidate_manual_confirmed_rows": 0,
     "image_attachment_action_rows": 73,
@@ -2684,6 +2685,7 @@
       "source_discovery_unqueued_actionable_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
+      "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
       "ensky_cache_candidate_action_rows": 54,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
       "image_attachment_action_rows": 73,
@@ -3669,6 +3671,7 @@
       "source_discovery_unqueued_actionable_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
+      "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
       "ensky_cache_candidate_action_rows": 54,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
       "image_attachment_action_rows": 73,
@@ -5446,6 +5449,7 @@
     "batch_size": 10,
     "manual_confirmed_true": 0,
     "safe_source_image_pair_rows": 15,
+    "manual_confirmation_shortlist_rows": 0,
     "identity_warning_rows": 13,
     "identity_warning_missing_display_image_rows": 10,
     "unflagged_missing_display_image_candidate_rows": 2,
@@ -5455,6 +5459,16 @@
     "stale_candidate_rows": 0,
     "identity_matched_candidate_rows": 15,
     "near_or_better_candidate_rows": 2,
+    "by_manual_confirmation_shortlist": [
+      [
+        "ready_for_priority_manual_confirmation",
+        0
+      ],
+      [
+        "requires_deeper_identity_review",
+        15
+      ]
+    ],
     "ambiguous_or_weaker_candidate_rows": 13,
     "by_source_store": [
       [
