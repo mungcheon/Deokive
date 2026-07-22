@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T11:15:13Z",
+  "generated_at": "2026-07-22T11:21:21Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 17,
+    "action_count": 18,
     "blocked_action_count": 1,
-    "manual_review_action_count": 15,
+    "manual_review_action_count": 16,
     "pending_import_action_count": 0,
-    "total_action_rows": 42533,
+    "total_action_rows": 42548,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -299,6 +299,62 @@
           [
             "licensed_retailer_search_review",
             12
+          ]
+        ]
+      }
+    },
+    {
+      "priority": 22,
+      "workstream": "source_detail_candidate_action_queue",
+      "public_report": "data/source_detail_candidate_action_queue_public.json",
+      "status": "manual_review",
+      "rows": 15,
+      "command": "Review exact-looking product/detail candidates that already include source and image URLs.",
+      "next_step": "manual_confirm_source_image_pair_then_fill_templates",
+      "blocker": "Candidate source/image pairs can still be wrong variants; manual identity review is required.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "candidate_action_rows": 15,
+        "safe_source_image_pair_rows": 15,
+        "near_or_better_candidate_rows": 2,
+        "ambiguous_or_weaker_candidate_rows": 13,
+        "manual_confirmed_true": 0,
+        "by_source_store": [
+          [
+            "애니메이트",
+            13
+          ],
+          [
+            "굿스마일컴퍼니",
+            2
+          ]
+        ],
+        "by_review_risk": [
+          [
+            "ambiguous_candidate_review",
+            13
+          ],
+          [
+            "near_single_candidate_review",
+            2
+          ]
+        ],
+        "by_candidate_count_bucket": [
+          [
+            "large_candidate_set",
+            6
+          ],
+          [
+            "small_candidate_set",
+            5
+          ],
+          [
+            "single_candidate",
+            2
+          ],
+          [
+            "near_single_candidate",
+            2
           ]
         ]
       }

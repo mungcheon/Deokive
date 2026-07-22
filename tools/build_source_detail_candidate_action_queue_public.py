@@ -31,6 +31,19 @@ def counter_rows(rows: list[dict[str, Any]], field: str) -> list[list[Any]]:
     return [[key, value] for key, value in counts.most_common()]
 
 
+def candidate_count_bucket(row: dict[str, Any]) -> str:
+    candidate_count = int(row.get("candidate_count") or 0)
+    if candidate_count <= 0:
+        return "no_candidate_count"
+    if candidate_count == 1:
+        return "single_candidate"
+    if candidate_count <= 3:
+        return "near_single_candidate"
+    if candidate_count <= 10:
+        return "small_candidate_set"
+    return "large_candidate_set"
+
+
 def candidate_risk(row: dict[str, Any]) -> str:
     score = row.get("score")
     try:
@@ -59,6 +72,7 @@ def compact_item(row: dict[str, Any]) -> dict[str, Any]:
         "query": row.get("query"),
         "candidate_status": row.get("status"),
         "candidate_count": row.get("candidate_count"),
+        "candidate_count_bucket": candidate_count_bucket(row),
         "candidate_source_url": row.get("candidate_source_url"),
         "candidate_title": row.get("candidate_title"),
         "candidate_image_url": row.get("candidate_image_url"),
@@ -67,6 +81,12 @@ def compact_item(row: dict[str, Any]) -> dict[str, Any]:
         "safe_source_image_pair": row.get("safe_source_image_pair"),
         "source_report": row.get("source_report"),
         "review_risk": risk,
+        "review_priority": {
+            "strong_single_candidate_review": 10,
+            "near_single_candidate_review": 20,
+            "ambiguous_candidate_review": 30,
+            "weak_candidate_review": 40,
+        }.get(risk, 99),
         "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
         "source_patch_template": {
             "manual_confirmed": False,
@@ -125,6 +145,8 @@ def build_report(source_detail_probe: dict[str, Any], *, generated_at: str | Non
                 "recommended_action": "Review candidate identity and set manual_confirmed only for exact product matches.",
                 "by_source_store": counter_rows(chunk, "source_store"),
                 "by_review_risk": counter_rows(chunk, "review_risk"),
+                "by_candidate_count_bucket": counter_rows(chunk, "candidate_count_bucket"),
+                "safe_source_image_pair_rows": sum(1 for item in chunk if item.get("safe_source_image_pair") is True),
                 "items": chunk,
                 "auto_apply_enabled": False,
             }
@@ -139,8 +161,22 @@ def build_report(source_detail_probe: dict[str, Any], *, generated_at: str | Non
             "action_batch_count": len(batches),
             "batch_size": batch_size,
             "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
+            "safe_source_image_pair_rows": sum(1 for item in items if item.get("safe_source_image_pair") is True),
+            "near_or_better_candidate_rows": sum(
+                1
+                for item in items
+                if item.get("review_risk")
+                in {"strong_single_candidate_review", "near_single_candidate_review"}
+            ),
+            "ambiguous_or_weaker_candidate_rows": sum(
+                1
+                for item in items
+                if item.get("review_risk")
+                not in {"strong_single_candidate_review", "near_single_candidate_review"}
+            ),
             "by_source_store": counter_rows(items, "source_store"),
             "by_review_risk": counter_rows(items, "review_risk"),
+            "by_candidate_count_bucket": counter_rows(items, "candidate_count_bucket"),
             "auto_apply_enabled": False,
         },
         "instructions": [

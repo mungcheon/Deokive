@@ -1,12 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T09:37:28Z",
+  "generated_at": "2026-07-22T11:21:16Z",
   "scope": "source_detail_candidate_action_queue",
   "summary": {
     "candidate_action_rows": 15,
     "action_batch_count": 2,
     "batch_size": 10,
     "manual_confirmed_true": 0,
+    "safe_source_image_pair_rows": 15,
+    "near_or_better_candidate_rows": 2,
+    "ambiguous_or_weaker_candidate_rows": 13,
     "by_source_store": [
       [
         "애니메이트",
@@ -24,6 +27,24 @@
       ],
       [
         "near_single_candidate_review",
+        2
+      ]
+    ],
+    "by_candidate_count_bucket": [
+      [
+        "large_candidate_set",
+        6
+      ],
+      [
+        "small_candidate_set",
+        5
+      ],
+      [
+        "single_candidate",
+        2
+      ],
+      [
+        "near_single_candidate",
         2
       ]
     ],
@@ -62,6 +83,25 @@
           2
         ]
       ],
+      "by_candidate_count_bucket": [
+        [
+          "large_candidate_set",
+          4
+        ],
+        [
+          "small_candidate_set",
+          3
+        ],
+        [
+          "single_candidate",
+          2
+        ],
+        [
+          "near_single_candidate",
+          1
+        ]
+      ],
+      "safe_source_image_pair_rows": 10,
       "items": [
         {
           "manual_confirmed": false,
@@ -73,6 +113,7 @@
           "query": "POP UP PARADE モノクマ",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 1,
+          "candidate_count_bucket": "single_candidate",
           "candidate_source_url": "https://www.goodsmile.info/ja/product/11254/",
           "candidate_title": "POP UP PARADE 江ノ島盾子",
           "candidate_image_url": "https://images.goodsmile.info/cgm/images/product/20210524/11254/85060/thumb/dc5ea4d680e266b40cbd039b45aa858e.jpg",
@@ -85,6 +126,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "near_single_candidate_review",
+          "review_priority": 20,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -126,6 +168,7 @@
           "query": "クレヨンしんちゃん トレーディング缶バッジ",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 2,
+          "candidate_count_bucket": "near_single_candidate",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%90%E3%83%83%E3%83%81%E3%80%91%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%C3%97%E3%83%92%E3%83%97%E3%83%8E%E3%82%B7%E3%82%B9%E3%83%9E%E3%82%A4%E3%82%AF-Division+RapBattle-+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8+TypeA/pd/3125996/",
           "candidate_title": "【グッズ-バッチ】クレヨンしんちゃん×ヒプノシスマイク-Division RapBattle- トレーディング缶バッジ TypeA",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549502203374_1_1746191113.jpg&width=400&height=400&square=1",
@@ -137,6 +180,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "near_single_candidate_review",
+          "review_priority": 20,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -178,6 +222,7 @@
           "query": "ねんどろいど 真人",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 1,
+          "candidate_count_bucket": "single_candidate",
           "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
           "candidate_title": "呪術廻戦 ねんどろいどぷらす アクリルキーチェーン 宿儺/真人/七海建人/夏油傑/漏瑚",
           "candidate_image_url": "https://images.goodsmile.info/cgm/images/product/20211116/12005/92118/thumb/28d719e5056784537e73028721e05f66.jpg",
@@ -188,6 +233,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -229,6 +275,7 @@
           "query": "推しの子 アクリルスタンド (あかね)",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 40,
+          "candidate_count_bucket": "large_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91%E3%80%8F+%E3%82%8C%E3%81%A8%E3%81%BD%E3%81%B7+%E7%AC%AC2%E5%BC%BE+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%28%E5%85%A88%E7%A8%AE%29%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD/pd/3415376/",
           "candidate_title": "【グッズ-スタンドポップ】TVアニメ『【推しの子】』 れとぽぷ 第2弾 アクリルスタンド(全8種)黒川あかね",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580878435853_1_1772449510.jpg&width=400&height=400&square=1",
@@ -239,6 +286,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -280,6 +328,7 @@
           "query": "転スラ クリアファイル",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 40,
+          "candidate_count_bucket": "large_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E8%BB%A2%E7%94%9F%E3%81%97%E3%81%9F%E3%82%89%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0%E3%81%A0%E3%81%A3%E3%81%9F%E4%BB%B6%E3%80%8D+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%E3%80%90%E3%83%91%E3%82%A4%E3%83%AC%E3%83%BC%E3%83%84ver.%E3%80%91%E3%80%90A%E3%80%91/pd/3341081/",
           "candidate_title": "【グッズ-クリアファイル】TVアニメ「転生したらスライムだった件」 描き下ろしクリアファイルセット【パイレーツver.】【A】",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573699533426_1_1764907507.jpg&width=400&height=400&square=1",
@@ -290,6 +339,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -331,6 +381,7 @@
           "query": "転スラ タペストリー (リムル)",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 21,
+          "candidate_count_bucket": "large_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88+%E8%BB%A2%E7%94%9F%E3%81%97%E3%81%9F%E3%82%89%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0%E3%81%A0%E3%81%A3%E3%81%9F%E4%BB%B6+%E7%B4%85%E8%93%AE%E3%81%AE%E7%B5%86%E7%B7%A8+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97B2%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC+%E3%83%AA%E3%83%A0%E3%83%AB/pd/2272204/",
           "candidate_title": "【グッズ-タペストリー】劇場版 転生したらスライムだった件 紅蓮の絆編 描き下ろしB2タペストリー リムル",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4589499118268_1_1685441162.jpg&width=400&height=400&square=1",
@@ -342,6 +393,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -383,6 +435,7 @@
           "query": "魔入りました！入間くん キーホルダー (アリ)",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 40,
+          "candidate_count_bucket": "large_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%E3%80%91%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%21%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%E3%82%A6%E3%82%A1%E3%83%A9%E3%82%AF+%E3%82%AF%E3%83%A9%E3%83%A9/pd/1949451/",
           "candidate_title": "【グッズ-キーホルダー】魔入りました!入間くん アクリルキーホルダー ウァラク クララ",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550451036722_1.jpg&width=400&height=400&square=1",
@@ -394,6 +447,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -435,6 +489,7 @@
           "query": "魔入りました！入間くん イラストカード",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 6,
+          "candidate_count_bucket": "small_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AB%E3%83%BC%E3%83%89%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%E3%80%8D+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%82%BB%E3%83%83%E3%83%88%E3%80%90%E9%9B%A8%E3%81%AE%E6%97%A5ver.%E3%80%91/pd/3188246/",
           "candidate_title": "【グッズ-カード】アニメ「魔入りました！入間くん」 描き下ろしイラストカードセット【雨の日ver.】",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573613728020_1_1753761908.jpg&width=400&height=400&square=1",
@@ -446,6 +501,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -487,6 +543,7 @@
           "query": "クレヨンしんちゃん マグカップ",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 8,
+          "candidate_count_bucket": "small_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%80%91TOMORROW+X+TOGETHER+%7C+%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93+%E3%82%A2%E3%83%BC%E3%83%88%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/pd/2448295/",
           "candidate_title": "【グッズ-マグネット】TOMORROW X TOGETHER | クレヨンしんちゃん アートフレームコレクション",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4545403566136_2_1711685188.jpg&width=400&height=400&square=1",
@@ -497,6 +554,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -538,6 +596,7 @@
           "query": "クレヨンしんちゃん クリアファイル",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 5,
+          "candidate_count_bucket": "small_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%C3%97%E3%83%92%E3%83%97%E3%83%8E%E3%82%B7%E3%82%B9%E3%83%9E%E3%82%A4%E3%82%AF+%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+%E2%91%A0%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93in%E3%82%A4%E3%82%B1%E3%83%96%E3%82%AF%E3%83%AD%E3%83%87%E3%82%A3%E3%83%93%E3%82%B8%E3%83%A7%E3%83%B3/pd/2604061/",
           "candidate_title": "【グッズ-クリアファイル】クレヨンしんちゃん×ヒプノシスマイク クリアファイル ①しんちゃんinイケブクロディビジョン",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4970381684396_1_1716372365.jpg&width=400&height=400&square=1",
@@ -549,6 +608,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -602,6 +662,21 @@
           5
         ]
       ],
+      "by_candidate_count_bucket": [
+        [
+          "large_candidate_set",
+          2
+        ],
+        [
+          "small_candidate_set",
+          2
+        ],
+        [
+          "near_single_candidate",
+          1
+        ]
+      ],
+      "safe_source_image_pair_rows": 5,
       "items": [
         {
           "manual_confirmed": false,
@@ -613,6 +688,7 @@
           "query": "クレヨンしんちゃん Tシャツ",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 23,
+          "candidate_count_bucket": "large_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-T%E3%82%B7%E3%83%A3%E3%83%84%E3%80%91%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93++OMOCHABOKO+%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E4%BB%98%E3%81%8DT%E3%82%B7%E3%83%A3%E3%83%84%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93M/pd/1795295/",
           "candidate_title": "【グッズ-Tシャツ】クレヨンしんちゃん  OMOCHABOKO ポケット付きTシャツしんちゃんM",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549660544104_1.jpg&width=400&height=400&square=1",
@@ -624,6 +700,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -665,6 +742,7 @@
           "query": "クレヨンしんちゃん ポーチ",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 14,
+          "candidate_count_bucket": "large_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9D%E3%83%BC%E3%83%81%E3%80%91TOMORROW+X+TOGETHER+%7C+%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93+%E3%82%A4%E3%83%A4%E3%83%95%E3%82%A9%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%81+01+SOOBIN/pd/2421757/",
           "candidate_title": "【グッズ-ポーチ】TOMORROW X TOGETHER | クレヨンしんちゃん イヤフォンポーチ 01 SOOBIN",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4545403566143_1_1709028390.jpg&width=400&height=400&square=1",
@@ -676,6 +754,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -717,6 +796,7 @@
           "query": "オーバーロード クリアファイル",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 8,
+          "candidate_count_bucket": "small_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%80%91%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89+%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+%E3%83%91%E3%83%BC%E3%83%97%E3%83%AB/pd/2895289/",
           "candidate_title": "【グッズ-クリアファイル】オーバーロード シングルクリアファイル パープル",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550451238706_1_1718273148.jpg&width=400&height=400&square=1",
@@ -728,6 +808,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -769,6 +850,7 @@
           "query": "オーバーロード マグカップ",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 9,
+          "candidate_count_bucket": "small_candidate_set",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8C%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%E3%80%8D%E8%81%96%E7%8E%8B%E5%9B%BD%E7%B7%A8+%E3%83%A2%E3%83%A2%E3%83%B3%26%E3%82%A2%E3%82%A4%E3%83%B3%E3%82%BA+%E3%83%81%E3%82%A7%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97/pd/3026433/",
           "candidate_title": "【グッズ-マグカップ】劇場版「オーバーロード」聖王国編 モモン&アインズ チェンジングマグカップ",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4571622775134_2_1734408334.jpg&width=400&height=400&square=1",
@@ -780,6 +862,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,
@@ -821,6 +904,7 @@
           "query": "オーバーロード トレーディングカード",
           "candidate_status": "candidate_review_needed",
           "candidate_count": 2,
+          "candidate_count_bucket": "near_single_candidate",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AB%E3%83%BC%E3%83%89%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8C%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%E3%80%8D%E8%81%96%E7%8E%8B%E5%9B%BD%E7%B7%A8+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AB%E3%83%BC%E3%83%89/pd/3026428/",
           "candidate_title": "【グッズ-カード】劇場版「オーバーロード」聖王国編 トレーディングアクリルカード",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4571622775004_2_1734408534.jpg&width=400&height=400&square=1",
@@ -831,6 +915,7 @@
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
+          "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
           "source_patch_template": {
             "manual_confirmed": false,

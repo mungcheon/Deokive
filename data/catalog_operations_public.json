@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T11:15:08Z",
+  "generated_at": "2026-07-22T11:21:16Z",
   "summary": {
     "catalog_rows": 20392,
     "coverage": {
@@ -772,6 +772,9 @@
       "open_rows": 15,
       "action_batch_count": 2,
       "manual_confirmed_true": 0,
+      "safe_source_image_pair_rows": 15,
+      "near_or_better_candidate_rows": 2,
+      "ambiguous_or_weaker_candidate_rows": 13,
       "by_source_store": [
         [
           "애니메이트",
@@ -789,6 +792,24 @@
         ],
         [
           "near_single_candidate_review",
+          2
+        ]
+      ],
+      "by_candidate_count_bucket": [
+        [
+          "large_candidate_set",
+          6
+        ],
+        [
+          "small_candidate_set",
+          5
+        ],
+        [
+          "single_candidate",
+          2
+        ],
+        [
+          "near_single_candidate",
           2
         ]
       ],
@@ -2032,9 +2053,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 17,
+      "action_count": 18,
       "blocked_action_count": 1,
-      "manual_review_action_count": 15,
+      "manual_review_action_count": 16,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -2903,6 +2924,9 @@
       "candidate_action_rows": 15,
       "action_batch_count": 2,
       "manual_confirmed_true": 0,
+      "safe_source_image_pair_rows": 15,
+      "near_or_better_candidate_rows": 2,
+      "ambiguous_or_weaker_candidate_rows": 13,
       "by_source_store": [
         [
           "애니메이트",
@@ -2920,6 +2944,24 @@
         ],
         [
           "near_single_candidate_review",
+          2
+        ]
+      ],
+      "by_candidate_count_bucket": [
+        [
+          "large_candidate_set",
+          6
+        ],
+        [
+          "small_candidate_set",
+          5
+        ],
+        [
+          "single_candidate",
+          2
+        ],
+        [
+          "near_single_candidate",
           2
         ]
       ],

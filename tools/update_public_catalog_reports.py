@@ -1928,8 +1928,20 @@ def build_operations_public(
             "candidate_action_rows": source_detail_candidate_action_queue_summary.get("candidate_action_rows", 0),
             "action_batch_count": source_detail_candidate_action_queue_summary.get("action_batch_count", 0),
             "manual_confirmed_true": source_detail_candidate_action_queue_summary.get("manual_confirmed_true", 0),
+            "safe_source_image_pair_rows": source_detail_candidate_action_queue_summary.get(
+                "safe_source_image_pair_rows", 0
+            ),
+            "near_or_better_candidate_rows": source_detail_candidate_action_queue_summary.get(
+                "near_or_better_candidate_rows", 0
+            ),
+            "ambiguous_or_weaker_candidate_rows": source_detail_candidate_action_queue_summary.get(
+                "ambiguous_or_weaker_candidate_rows", 0
+            ),
             "by_source_store": source_detail_candidate_action_queue_summary.get("by_source_store", []),
             "by_review_risk": source_detail_candidate_action_queue_summary.get("by_review_risk", []),
+            "by_candidate_count_bucket": source_detail_candidate_action_queue_summary.get(
+                "by_candidate_count_bucket", []
+            ),
             "auto_apply_enabled": source_detail_candidate_action_queue_summary.get("auto_apply_enabled", False),
             "recommended_next_action": "Confirm exact candidate identity before filling source_url and image_url templates.",
         } if source_detail_candidate_action_queue_summary else None,
@@ -2209,8 +2221,20 @@ def build_operations_public(
             "open_rows": source_detail_candidate_action_queue_summary.get("candidate_action_rows", 0),
             "action_batch_count": source_detail_candidate_action_queue_summary.get("action_batch_count", 0),
             "manual_confirmed_true": source_detail_candidate_action_queue_summary.get("manual_confirmed_true", 0),
+            "safe_source_image_pair_rows": source_detail_candidate_action_queue_summary.get(
+                "safe_source_image_pair_rows", 0
+            ),
+            "near_or_better_candidate_rows": source_detail_candidate_action_queue_summary.get(
+                "near_or_better_candidate_rows", 0
+            ),
+            "ambiguous_or_weaker_candidate_rows": source_detail_candidate_action_queue_summary.get(
+                "ambiguous_or_weaker_candidate_rows", 0
+            ),
             "by_source_store": source_detail_candidate_action_queue_summary.get("by_source_store", []),
             "by_review_risk": source_detail_candidate_action_queue_summary.get("by_review_risk", []),
+            "by_candidate_count_bucket": source_detail_candidate_action_queue_summary.get(
+                "by_candidate_count_bucket", []
+            ),
             "primary_report": f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}",
             "next_step": "confirm_candidate_identity_then_fill_source_and_image_templates",
             "auto_apply_enabled": source_detail_candidate_action_queue_summary.get("auto_apply_enabled", False),

@@ -101,6 +101,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     image_action_queue = load_report("catalog_image_attachment_action_queue_public.json")
     source_batches = load_report("source_discovery_review_batches_public.json")
     source_action_queue = load_report("source_discovery_action_queue_public.json")
+    source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
     ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
     metadata_batches = load_report("catalog_metadata_review_batches_public.json")
     metadata_action_queue = load_report("catalog_metadata_action_queue_public.json")
@@ -126,6 +127,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     image_action_summary = _summary(image_action_queue)
     source_summary = _summary(source_batches)
     source_action_summary = _summary(source_action_queue)
+    source_detail_candidate_action_summary = _summary(source_detail_candidate_action_queue)
     ensky_cache_candidate_action_summary = _summary(ensky_cache_candidate_action_queue)
     metadata_summary = _summary(metadata_batches)
     metadata_action_summary = _summary(metadata_action_queue)
@@ -266,6 +268,42 @@ def _build_plan(load_report) -> dict[str, Any]:
             },
         )
     )
+
+    if source_detail_candidate_action_summary:
+        actions.append(
+            _action(
+                priority=22,
+                workstream="source_detail_candidate_action_queue",
+                public_report="data/source_detail_candidate_action_queue_public.json",
+                status="manual_review",
+                rows=_count(source_detail_candidate_action_summary, "candidate_action_rows"),
+                command="Review exact-looking product/detail candidates that already include source and image URLs.",
+                next_step="manual_confirm_source_image_pair_then_fill_templates",
+                blocker="Candidate source/image pairs can still be wrong variants; manual identity review is required.",
+                evidence={
+                    "candidate_action_rows": _count(
+                        source_detail_candidate_action_summary, "candidate_action_rows"
+                    ),
+                    "safe_source_image_pair_rows": _count(
+                        source_detail_candidate_action_summary, "safe_source_image_pair_rows"
+                    ),
+                    "near_or_better_candidate_rows": _count(
+                        source_detail_candidate_action_summary, "near_or_better_candidate_rows"
+                    ),
+                    "ambiguous_or_weaker_candidate_rows": _count(
+                        source_detail_candidate_action_summary, "ambiguous_or_weaker_candidate_rows"
+                    ),
+                    "manual_confirmed_true": _count(
+                        source_detail_candidate_action_summary, "manual_confirmed_true"
+                    ),
+                    "by_source_store": source_detail_candidate_action_summary.get("by_source_store", []),
+                    "by_review_risk": source_detail_candidate_action_summary.get("by_review_risk", []),
+                    "by_candidate_count_bucket": source_detail_candidate_action_summary.get(
+                        "by_candidate_count_bucket", []
+                    ),
+                },
+            )
+        )
 
     if ensky_cache_candidate_action_summary:
         actions.append(
