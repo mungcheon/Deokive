@@ -113,6 +113,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     metadata_action_queue = load_report("catalog_metadata_action_queue_public.json")
     requested_batches = load_report("requested_focus_review_batches_public.json")
     requested_action_queue = load_report("requested_focus_action_queue_public.json")
+    danganronpa_missing_media = load_report("danganronpa_missing_media_public.json")
     dedupe_batches = load_report("catalog_deduplication_review_batches_public.json")
     dedupe_action_queue = load_report("catalog_deduplication_action_queue_public.json")
     dedupe_fast_review = load_report("catalog_deduplication_fast_review_public.json")
@@ -148,6 +149,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_next_focus_pack_summary = _summary(source_next_focus_pack)
     requested_summary = _summary(requested_batches)
     requested_action_summary = _summary(requested_action_queue)
+    danganronpa_media_summary = _summary(danganronpa_missing_media)
     dedupe_summary = _summary(dedupe_batches)
     dedupe_action_summary = _summary(dedupe_action_queue)
     dedupe_fast_summary = _summary(dedupe_fast_review)
@@ -247,6 +249,35 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "barcode_template_rows_excluded": _count(requested_action_summary, "barcode_template_rows_excluded"),
                 "field_counts": requested_action_summary.get("field_counts", []),
                 "topic_counts": requested_action_summary.get("topic_counts", []),
+            },
+        )
+    )
+
+    actions.append(
+        _action(
+            priority=12,
+            workstream="danganronpa_missing_media",
+            public_report="data/danganronpa_missing_media_public.json",
+            status="manual_review",
+            rows=_count(danganronpa_media_summary, "missing_media_rows"),
+            command=(
+                "Review Danganronpa rows missing both source and image evidence; fill exact official or licensed "
+                "source URLs before attaching images."
+            ),
+            next_step="work_danganronpa_missing_media_review_batches",
+            blocker="Exact official or licensed source evidence is required before catalog mutation.",
+            evidence={
+                "missing_media_rows": _count(danganronpa_media_summary, "missing_media_rows"),
+                "missing_image_url_rows": _count(danganronpa_media_summary, "missing_image_url_rows"),
+                "missing_source_url_rows": _count(danganronpa_media_summary, "missing_source_url_rows"),
+                "review_batch_count": _count(danganronpa_media_summary, "review_batch_count"),
+                "official_search_rows": _count(danganronpa_media_summary, "official_search_rows"),
+                "licensed_retailer_review_rows": _count(
+                    danganronpa_media_summary, "licensed_retailer_review_rows"
+                ),
+                "official_prize_search_rows": _count(danganronpa_media_summary, "official_prize_search_rows"),
+                "by_source_store": danganronpa_media_summary.get("by_source_store", []),
+                "by_source_kind": danganronpa_media_summary.get("by_source_kind", []),
             },
         )
     )
@@ -939,6 +970,21 @@ def _build_plan(load_report) -> dict[str, Any]:
             "open_review_queues": open_queues,
             "requested_focus_actionable_template_rows": requested_actionable_template_rows,
             "requested_focus_barcode_template_rows": requested_barcode_template_rows,
+            "danganronpa_missing_media_rows": _count(danganronpa_media_summary, "missing_media_rows"),
+            "danganronpa_missing_image_url_rows": _count(danganronpa_media_summary, "missing_image_url_rows"),
+            "danganronpa_missing_source_url_rows": _count(
+                danganronpa_media_summary, "missing_source_url_rows"
+            ),
+            "danganronpa_missing_media_review_batch_count": _count(
+                danganronpa_media_summary, "review_batch_count"
+            ),
+            "danganronpa_official_search_rows": _count(danganronpa_media_summary, "official_search_rows"),
+            "danganronpa_licensed_retailer_review_rows": _count(
+                danganronpa_media_summary, "licensed_retailer_review_rows"
+            ),
+            "danganronpa_official_prize_search_rows": _count(
+                danganronpa_media_summary, "official_prize_search_rows"
+            ),
             "ichiban_campaign_rows": _count(kuji_history_summary, "campaign_rows"),
             "ichiban_catalog_kuji_item_rows": _count(kuji_history_summary, "catalog_kuji_item_rows"),
             "ichiban_campaigns_with_catalog_items": _count(

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T22:08:54Z",
+  "generated_at": "2026-07-22T22:18:37Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 23,
+    "action_count": 24,
     "blocked_action_count": 1,
-    "manual_review_action_count": 20,
+    "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 33595,
+    "total_action_rows": 33629,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -76,6 +76,13 @@
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
+    "danganronpa_missing_media_rows": 34,
+    "danganronpa_missing_image_url_rows": 34,
+    "danganronpa_missing_source_url_rows": 34,
+    "danganronpa_missing_media_review_batch_count": 8,
+    "danganronpa_official_search_rows": 18,
+    "danganronpa_licensed_retailer_review_rows": 10,
+    "danganronpa_official_prize_search_rows": 6,
     "ichiban_campaign_rows": 614,
     "ichiban_catalog_kuji_item_rows": 7899,
     "ichiban_campaigns_with_catalog_items": 576,
@@ -293,6 +300,74 @@
           [
             "bokubu_style",
             14
+          ]
+        ]
+      }
+    },
+    {
+      "priority": 12,
+      "workstream": "danganronpa_missing_media",
+      "public_report": "data/danganronpa_missing_media_public.json",
+      "status": "manual_review",
+      "rows": 34,
+      "command": "Review Danganronpa rows missing both source and image evidence; fill exact official or licensed source URLs before attaching images.",
+      "next_step": "work_danganronpa_missing_media_review_batches",
+      "blocker": "Exact official or licensed source evidence is required before catalog mutation.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "missing_media_rows": 34,
+        "missing_image_url_rows": 34,
+        "missing_source_url_rows": 34,
+        "review_batch_count": 8,
+        "official_search_rows": 18,
+        "licensed_retailer_review_rows": 10,
+        "official_prize_search_rows": 6,
+        "by_source_store": [
+          [
+            "애니메이트",
+            9
+          ],
+          [
+            "Movic",
+            7
+          ],
+          [
+            "엔스카이",
+            6
+          ],
+          [
+            "굿스마일컴퍼니",
+            3
+          ],
+          [
+            "Taito",
+            3
+          ],
+          [
+            "FuRyu",
+            3
+          ],
+          [
+            "코토부키야",
+            2
+          ],
+          [
+            "AmiAmi",
+            1
+          ]
+        ],
+        "by_source_kind": [
+          [
+            "official_manufacturer",
+            18
+          ],
+          [
+            "licensed_retailer",
+            10
+          ],
+          [
+            "official_prize",
+            6
           ]
         ]
       }

@@ -175,6 +175,23 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "field_counts": [["source_url", 1], ["image_url", 1]],
                 }
             },
+            "danganronpa_missing_media_public.json": {
+                "summary": {
+                    "missing_media_rows": 4,
+                    "missing_image_url_rows": 4,
+                    "missing_source_url_rows": 4,
+                    "review_batch_count": 2,
+                    "official_search_rows": 2,
+                    "licensed_retailer_review_rows": 1,
+                    "official_prize_search_rows": 1,
+                    "by_source_store": [["Movic", 2], ["Taito", 1], ["AmiAmi", 1]],
+                    "by_source_kind": [
+                        ["official_manufacturer", 2],
+                        ["official_prize", 1],
+                        ["licensed_retailer", 1],
+                    ],
+                }
+            },
             "catalog_deduplication_review_batches_public.json": {
                 "summary": {"source_groups": 1, "batch_count": 1}
             },
@@ -370,6 +387,27 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(action_queue["priority"], 11)
         self.assertEqual(action_queue["rows"], 2)
         self.assertEqual(action_queue["evidence"]["barcode_template_rows_excluded"], 3)
+        danganronpa = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "danganronpa_missing_media"
+        )
+        self.assertEqual(danganronpa["priority"], 12)
+        self.assertEqual(danganronpa["rows"], 4)
+        self.assertEqual(danganronpa["evidence"]["missing_image_url_rows"], 4)
+        self.assertEqual(danganronpa["evidence"]["missing_source_url_rows"], 4)
+        self.assertEqual(danganronpa["evidence"]["review_batch_count"], 2)
+        self.assertEqual(danganronpa["evidence"]["official_search_rows"], 2)
+        self.assertEqual(danganronpa["evidence"]["licensed_retailer_review_rows"], 1)
+        self.assertEqual(danganronpa["evidence"]["official_prize_search_rows"], 1)
+        self.assertEqual(danganronpa["evidence"]["by_source_store"][0], ["Movic", 2])
+        self.assertEqual(report["summary"]["danganronpa_missing_media_rows"], 4)
+        self.assertEqual(report["summary"]["danganronpa_missing_image_url_rows"], 4)
+        self.assertEqual(report["summary"]["danganronpa_missing_source_url_rows"], 4)
+        self.assertEqual(report["summary"]["danganronpa_missing_media_review_batch_count"], 2)
+        self.assertEqual(report["summary"]["danganronpa_official_search_rows"], 2)
+        self.assertEqual(report["summary"]["danganronpa_licensed_retailer_review_rows"], 1)
+        self.assertEqual(report["summary"]["danganronpa_official_prize_search_rows"], 1)
         source_action = next(
             action
             for action in report["actions"]
