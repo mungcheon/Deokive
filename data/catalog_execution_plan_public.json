@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T22:06:09Z",
+  "generated_at": "2026-07-22T22:08:54Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 23,
@@ -76,6 +76,13 @@
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
+    "ichiban_campaign_rows": 614,
+    "ichiban_catalog_kuji_item_rows": 7899,
+    "ichiban_campaigns_with_catalog_items": 576,
+    "ichiban_campaigns_without_catalog_items": 38,
+    "ichiban_campaign_metadata_review_queue_rows": 42,
+    "ichiban_missing_release_date_campaign_groups": 1,
+    "ichiban_missing_official_price_jpy_campaign_groups": 41,
     "ichiban_zero_price_exception_policy_pass": true,
     "ichiban_multi_item_prize_label_groups": 416,
     "ichiban_prize_policy_review_batch_count": 39,
@@ -1339,7 +1346,12 @@
       "auto_apply_enabled": false,
       "evidence": {
         "batch_count": 6,
-        "source_campaigns": 44
+        "source_campaigns": 44,
+        "campaign_rows": 614,
+        "campaigns_without_catalog_items": 38,
+        "missing_release_date_rows": 8,
+        "missing_official_price_jpy_rows": 350,
+        "campaign_metadata_review_queue_rows": 42
       }
     },
     {
@@ -1356,6 +1368,8 @@
         "actionable_campaigns": 44,
         "queued_action_campaigns": 44,
         "queued_catalog_item_rows": 381,
+        "missing_release_date_campaign_groups": 1,
+        "missing_official_price_jpy_campaign_groups": 41,
         "action_batch_count": 6,
         "field_patch_template_counts": [
           [

@@ -210,6 +210,19 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "ichiban_kuji_metadata_review_batches_public.json": {
                 "summary": {"catalog_item_rows": 0}
             },
+            "ichiban_kuji_history_public.json": {
+                "summary": {
+                    "campaign_rows": 14,
+                    "catalog_kuji_item_rows": 20,
+                    "campaigns_with_catalog_items": 11,
+                    "campaigns_without_catalog_items": 3,
+                    "missing_release_date_rows": 2,
+                    "missing_release_date_campaign_groups": 1,
+                    "missing_official_price_jpy_rows": 7,
+                    "missing_official_price_jpy_campaign_groups": 2,
+                    "campaign_metadata_review_queue_rows": 3,
+                }
+            },
             "ichiban_kuji_metadata_action_queue_public.json": {
                 "summary": {
                     "actionable_campaigns": 1,
@@ -493,8 +506,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(kuji_action["rows"], 1)
         self.assertEqual(kuji_action["evidence"]["queued_catalog_item_rows"], 8)
+        self.assertEqual(kuji_action["evidence"]["missing_release_date_campaign_groups"], 1)
+        self.assertEqual(kuji_action["evidence"]["missing_official_price_jpy_campaign_groups"], 2)
         self.assertEqual(kuji_action["evidence"]["work_order_steps"], 1)
         self.assertEqual(kuji_action["evidence"]["work_order_lanes"], ["confirm_release_dates"])
+        self.assertEqual(report["summary"]["ichiban_campaign_rows"], 14)
+        self.assertEqual(report["summary"]["ichiban_catalog_kuji_item_rows"], 20)
+        self.assertEqual(report["summary"]["ichiban_campaigns_without_catalog_items"], 3)
+        self.assertEqual(report["summary"]["ichiban_campaign_metadata_review_queue_rows"], 3)
+        self.assertEqual(report["summary"]["ichiban_missing_release_date_campaign_groups"], 1)
+        self.assertEqual(report["summary"]["ichiban_missing_official_price_jpy_campaign_groups"], 2)
         kuji_name_image = next(
             action
             for action in report["actions"]

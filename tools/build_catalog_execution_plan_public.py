@@ -116,6 +116,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     dedupe_batches = load_report("catalog_deduplication_review_batches_public.json")
     dedupe_action_queue = load_report("catalog_deduplication_action_queue_public.json")
     dedupe_fast_review = load_report("catalog_deduplication_fast_review_public.json")
+    kuji_history = load_report("ichiban_kuji_history_public.json")
     kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
     kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
     kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
@@ -150,6 +151,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     dedupe_summary = _summary(dedupe_batches)
     dedupe_action_summary = _summary(dedupe_action_queue)
     dedupe_fast_summary = _summary(dedupe_fast_review)
+    kuji_history_summary = _summary(kuji_history)
     dedupe_fast_breakdowns = dedupe_fast_review.get("breakdowns")
     if not isinstance(dedupe_fast_breakdowns, dict):
         dedupe_fast_breakdowns = {}
@@ -698,6 +700,19 @@ def _build_plan(load_report) -> dict[str, Any]:
             evidence={
                 "batch_count": _count(kuji_summary, "batch_count"),
                 "source_campaigns": _count(kuji_summary, "source_campaigns"),
+                "campaign_rows": _count(kuji_history_summary, "campaign_rows"),
+                "campaigns_without_catalog_items": _count(
+                    kuji_history_summary, "campaigns_without_catalog_items"
+                ),
+                "missing_release_date_rows": _count(
+                    kuji_history_summary, "missing_release_date_rows"
+                ),
+                "missing_official_price_jpy_rows": _count(
+                    kuji_history_summary, "missing_official_price_jpy_rows"
+                ),
+                "campaign_metadata_review_queue_rows": _count(
+                    kuji_history_summary, "campaign_metadata_review_queue_rows"
+                ),
             },
         )
     )
@@ -716,6 +731,12 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "actionable_campaigns": _count(kuji_action_summary, "actionable_campaigns"),
                 "queued_action_campaigns": _count(kuji_action_summary, "queued_action_campaigns"),
                 "queued_catalog_item_rows": _count(kuji_action_summary, "queued_catalog_item_rows"),
+                "missing_release_date_campaign_groups": _count(
+                    kuji_history_summary, "missing_release_date_campaign_groups"
+                ),
+                "missing_official_price_jpy_campaign_groups": _count(
+                    kuji_history_summary, "missing_official_price_jpy_campaign_groups"
+                ),
                 "action_batch_count": _count(kuji_action_summary, "action_batch_count"),
                 "field_patch_template_counts": kuji_action_summary.get("field_patch_template_counts", []),
                 "work_order_steps": _count(kuji_action_summary, "work_order_steps"),
@@ -918,6 +939,23 @@ def _build_plan(load_report) -> dict[str, Any]:
             "open_review_queues": open_queues,
             "requested_focus_actionable_template_rows": requested_actionable_template_rows,
             "requested_focus_barcode_template_rows": requested_barcode_template_rows,
+            "ichiban_campaign_rows": _count(kuji_history_summary, "campaign_rows"),
+            "ichiban_catalog_kuji_item_rows": _count(kuji_history_summary, "catalog_kuji_item_rows"),
+            "ichiban_campaigns_with_catalog_items": _count(
+                kuji_history_summary, "campaigns_with_catalog_items"
+            ),
+            "ichiban_campaigns_without_catalog_items": _count(
+                kuji_history_summary, "campaigns_without_catalog_items"
+            ),
+            "ichiban_campaign_metadata_review_queue_rows": _count(
+                kuji_history_summary, "campaign_metadata_review_queue_rows"
+            ),
+            "ichiban_missing_release_date_campaign_groups": _count(
+                kuji_history_summary, "missing_release_date_campaign_groups"
+            ),
+            "ichiban_missing_official_price_jpy_campaign_groups": _count(
+                kuji_history_summary, "missing_official_price_jpy_campaign_groups"
+            ),
             "ichiban_zero_price_exception_policy_pass": bool(
                 kuji_policy_summary.get("zero_price_exception_policy_pass")
             ),
