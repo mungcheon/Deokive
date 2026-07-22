@@ -705,7 +705,7 @@ def image_import_template(item: dict[str, Any], workflow: str) -> dict[str, Any]
 
 
 def build_image_enrichment_batches_public(
-    items: list[dict[str, Any]], sample_groups: int = 80, sample_items: int = 10
+    items: list[dict[str, Any]], sample_groups: int = 80, sample_items: int = 100
 ) -> dict[str, Any]:
     missing = [item for item in items if not present(item.get("image_url"))]
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)

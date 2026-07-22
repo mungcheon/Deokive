@@ -124,6 +124,30 @@ class PublicCatalogReportTests(unittest.TestCase):
             1,
         )
 
+    def test_image_actionable_groups_publish_enough_samples_for_action_queue(self):
+        items = [
+            {
+                "catalog_index": index,
+                "name_ko": f"스텔라이브 샘플 {index}",
+                "category": "캔뱃지",
+                "source_store": "Stellive Store",
+                "source_url": "https://fanding.kr/@stellive/shop",
+                "image_url": None,
+            }
+            for index in range(12)
+        ]
+
+        image_batches = reports.build_image_enrichment_batches_public(items)
+        group = image_batches["groups"][0]
+
+        self.assertEqual(group["workflow"], "replace_generic_source_then_extract_image")
+        self.assertEqual(group["missing_image_rows"], 12)
+        self.assertEqual(len(group["sample_items"]), 12)
+        self.assertEqual(
+            image_batches["summary"]["sample_image_import_template_count"],
+            image_batches["summary"]["generic_source_url_rows"],
+        )
+
     def test_published_reports_expose_home_catalog_work_blocks(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         image_batches = reports.load_json(reports.IMAGE_ENRICHMENT_BATCHES)

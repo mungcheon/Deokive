@@ -2289,7 +2289,7 @@
     "manual_image_research_rows": 5,
     "published_group_rows": 46,
     "review_batch_count": 8,
-    "sample_image_import_template_count": 249,
+    "sample_image_import_template_count": 630,
     "top_source_stores": [
       [
         "애니메이트",
@@ -2456,9 +2456,9 @@
     "source_discovery_action_rows": 240,
     "source_discovery_actionable_rows": 642,
     "source_discovery_unqueued_actionable_rows": 402,
-    "image_attachment_action_rows": 25,
+    "image_attachment_action_rows": 73,
     "image_attachment_actionable_rows": 73,
-    "image_attachment_unqueued_actionable_rows": 48,
+    "image_attachment_unqueued_actionable_rows": 0,
     "ichiban_metadata_action_campaigns": 32,
     "ichiban_metadata_actionable_campaigns": 44,
     "ichiban_metadata_unqueued_action_campaigns": 12,
@@ -2476,15 +2476,15 @@
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 80,
-    "summed_batch_rows": 10983,
+    "summed_batch_rows": 11021,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
-        "requested_focus_review_batches",
-        15
+        "requested_focus_action_queue",
+        12
       ],
       [
-        "requested_focus_action_queue",
+        "requested_focus_review_batches",
         12
       ],
       [
@@ -2505,7 +2505,7 @@
       ],
       [
         "image_attachment_action_queue",
-        4
+        7
       ],
       [
         "requested_focus_enrichment",
@@ -2534,11 +2534,11 @@
     ],
     "by_agent": [
       [
-        "agent-requested-focus-detail",
-        15
+        "agent-requested-focus-action",
+        12
       ],
       [
-        "agent-requested-focus-action",
+        "agent-requested-focus-detail",
         12
       ],
       [
@@ -2559,7 +2559,7 @@
       ],
       [
         "agent-image-action",
-        4
+        7
       ],
       [
         "agent-requested-focus",
@@ -2610,9 +2610,9 @@
       "source_discovery_action_rows": 240,
       "source_discovery_actionable_rows": 642,
       "source_discovery_unqueued_actionable_rows": 402,
-      "image_attachment_action_rows": 25,
+      "image_attachment_action_rows": 73,
       "image_attachment_actionable_rows": 73,
-      "image_attachment_unqueued_actionable_rows": 48,
+      "image_attachment_unqueued_actionable_rows": 0,
       "ichiban_metadata_action_campaigns": 32,
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 12,
@@ -3735,31 +3735,31 @@
   "image_attachment_action_queue": {
     "public_report": "data/catalog_image_attachment_action_queue_public.json",
     "actionable_image_rows": 73,
-    "queued_image_rows": 25,
-    "unqueued_actionable_image_rows": 48,
-    "sample_queue_coverage": 0.3425,
-    "action_batch_count": 4,
-    "sample_action_item_rows": 25,
+    "queued_image_rows": 73,
+    "unqueued_actionable_image_rows": 0,
+    "sample_queue_coverage": 1.0,
+    "action_batch_count": 7,
+    "sample_action_item_rows": 73,
     "batch_size": 20,
     "max_batches": 18,
     "by_workflow": [
       [
         "replace_generic_source_then_extract_image",
-        15
+        50
       ],
       [
         "review_gotouchi_official_candidates",
-        10
+        23
       ]
     ],
     "by_source_store": [
       [
         "Stellive Store",
-        10
+        45
       ],
       [
         "ご当地ちいかわ 공식(API)",
-        10
+        23
       ],
       [
         "Weverse Shop",

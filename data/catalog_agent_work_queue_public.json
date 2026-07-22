@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T01:14:15Z",
+  "generated_at": "2026-07-22T01:22:17Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 10983,
+    "summed_batch_rows": 11021,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
-        "requested_focus_review_batches",
-        15
+        "requested_focus_action_queue",
+        12
       ],
       [
-        "requested_focus_action_queue",
+        "requested_focus_review_batches",
         12
       ],
       [
@@ -32,7 +32,7 @@
       ],
       [
         "image_attachment_action_queue",
-        4
+        7
       ],
       [
         "requested_focus_enrichment",
@@ -61,11 +61,11 @@
     ],
     "by_agent": [
       [
-        "agent-requested-focus-detail",
-        15
+        "agent-requested-focus-action",
+        12
       ],
       [
-        "agent-requested-focus-action",
+        "agent-requested-focus-detail",
         12
       ],
       [
@@ -86,7 +86,7 @@
       ],
       [
         "agent-image-action",
-        4
+        7
       ],
       [
         "agent-requested-focus",
@@ -137,9 +137,9 @@
       "source_discovery_action_rows": 240,
       "source_discovery_actionable_rows": 642,
       "source_discovery_unqueued_actionable_rows": 402,
-      "image_attachment_action_rows": 25,
+      "image_attachment_action_rows": 73,
       "image_attachment_actionable_rows": 73,
-      "image_attachment_unqueued_actionable_rows": 48,
+      "image_attachment_unqueued_actionable_rows": 0,
       "ichiban_metadata_action_campaigns": 32,
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 12,
@@ -2735,7 +2735,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-46",
+      "batch_id": "015-agent-generic-source-cleanup-49",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -2841,7 +2841,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-47",
+      "batch_id": "015-agent-generic-source-cleanup-50",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -2897,7 +2897,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-48",
+      "batch_id": "015-agent-generic-source-cleanup-51",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -2970,7 +2970,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-49",
+      "batch_id": "018-agent-gotouchi-review-52",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -3077,7 +3077,7 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "019-agent-confirmed-import-45",
+      "batch_id": "019-agent-confirmed-import-48",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -3257,7 +3257,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-50",
+      "batch_id": "020-agent-source-image-53",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3356,7 +3356,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-51",
+      "batch_id": "020-agent-source-image-54",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3554,7 +3554,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-52",
+      "batch_id": "020-agent-source-image-55",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3653,7 +3653,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-53",
+      "batch_id": "020-agent-source-image-56",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3752,7 +3752,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-54",
+      "batch_id": "020-agent-source-image-57",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3851,7 +3851,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-55",
+      "batch_id": "020-agent-source-image-58",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -3950,7 +3950,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-56",
+      "batch_id": "020-agent-source-image-59",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -4049,112 +4049,13 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-57",
-      "agent_id": "agent-source-image",
-      "workstream": "image_url_attachment",
-      "priority": 20,
-      "title": "Taito 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "rows": 15,
-      "recommended_action": "find exact official product page, then attach source_url and image_url",
-      "acceptance_criteria": [
-        "Exact product identity is verified before importing image_url.",
-        "Rows without source_url must receive an exact source_url before image_url is accepted.",
-        "No marketplace or unrelated stock image is imported without matching product evidence."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1265,
-          "name_ko": "데스크탑 큐트 피규어 우라라카 오챠코",
-          "name_ja": "Desktop Cuteフィギュア 麗日お茶子",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%BA%97%E6%97%A5%E3%81%8A%E8%8C%B6%E5%AD%90"
-        },
-        {
-          "catalog_index": 1266,
-          "name_ko": "데스크탑 큐트 피규어 토가 히미코",
-          "name_ja": "Desktop Cuteフィギュア トガヒミコ",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3"
-        },
-        {
-          "catalog_index": 1267,
-          "name_ko": "데스크탑 큐트 피규어 야오요로즈 모모",
-          "name_ja": "Desktop Cuteフィギュア 八百万百",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E5%85%AB%E7%99%BE%E4%B8%87%E7%99%BE"
-        },
-        {
-          "catalog_index": 1319,
-          "name_ko": "Desktop Cute 곤 프릭스",
-          "name_ja": "デスクトップキューティーフィギュア ゴン＝フリークス",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
-        },
-        {
-          "catalog_index": 1320,
-          "name_ko": "Desktop Cute 키루아 조르딕",
-          "name_ja": "デスクトップキューティーフィギュア キルア＝ゾルディック",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
-        },
-        {
-          "catalog_index": 1321,
-          "name_ko": "Desktop Cute 쿠라피카",
-          "name_ja": "デスクトップキューティーフィギュア クラピカ",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB"
-        },
-        {
-          "catalog_index": 1376,
-          "name_ko": "Desktop Cute 고죠 사토루",
-          "name_ja": "デスクトップキューティーフィギュア 五条悟",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E4%BA%94%E6%9D%A1%E6%82%9F"
-        },
-        {
-          "catalog_index": 1377,
-          "name_ko": "Desktop Cute 이타도리 유지",
-          "name_ja": "デスクトップキューティーフィギュア 虎杖悠仁",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81"
-        }
-      ],
-      "review_state": "source_discovery_then_image_attachment",
-      "next_machine_step": "find_source_url_before_image_import"
-    },
-    {
       "batch_id": "020-agent-image-action-41",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
       "title": "Stellive Store image attachment action",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
-      "rows": 10,
+      "rows": 20,
       "recommended_action": "Replace generic storefront URL with exact product page before image import.",
       "acceptance_criteria": [
         "Confirm exact product identity before filling image_url.",
@@ -4421,6 +4322,380 @@
       ],
       "review_state": "image_evidence_confirmation_required",
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
+      "batch_id": "020-agent-image-action-42",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_action_queue",
+      "priority": 20,
+      "title": "Stellive Store image attachment action",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 20,
+      "recommended_action": "Replace generic storefront URL with exact product page before image import.",
+      "acceptance_criteria": [
+        "Confirm exact product identity before filling image_url.",
+        "Use official or trusted product image evidence, not resale or generic listing images.",
+        "Prepare reviewed image templates only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2413,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2413,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2414,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 봉제 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2414,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2416,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 클리어 파일 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2416,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 클리어 파일 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2422,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "네네코 마시로 데뷔 1주년 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2422,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "네네코 마시로 데뷔 1주년 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2433,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 생일 굿즈 박스",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2433,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 생일 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2434,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 마스코트 봉제 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2434,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 마스코트 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2435,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 토트백",
+          "name_ja": null,
+          "series_name": null,
+          "category": "의류",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2435,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 토트백",
+            "name_ja": null,
+            "category": "의류",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2436,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 클리어 파일 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2436,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 클리어 파일 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "image_evidence_confirmation_required",
+      "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
+      "batch_id": "020-agent-source-image-60",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "title": "Taito 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "rows": 15,
+      "recommended_action": "find exact official product page, then attach source_url and image_url",
+      "acceptance_criteria": [
+        "Exact product identity is verified before importing image_url.",
+        "Rows without source_url must receive an exact source_url before image_url is accepted.",
+        "No marketplace or unrelated stock image is imported without matching product evidence."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1265,
+          "name_ko": "데스크탑 큐트 피규어 우라라카 오챠코",
+          "name_ja": "Desktop Cuteフィギュア 麗日お茶子",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%BA%97%E6%97%A5%E3%81%8A%E8%8C%B6%E5%AD%90"
+        },
+        {
+          "catalog_index": 1266,
+          "name_ko": "데스크탑 큐트 피규어 토가 히미코",
+          "name_ja": "Desktop Cuteフィギュア トガヒミコ",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3"
+        },
+        {
+          "catalog_index": 1267,
+          "name_ko": "데스크탑 큐트 피규어 야오요로즈 모모",
+          "name_ja": "Desktop Cuteフィギュア 八百万百",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E5%85%AB%E7%99%BE%E4%B8%87%E7%99%BE"
+        },
+        {
+          "catalog_index": 1319,
+          "name_ko": "Desktop Cute 곤 프릭스",
+          "name_ja": "デスクトップキューティーフィギュア ゴン＝フリークス",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
+        },
+        {
+          "catalog_index": 1320,
+          "name_ko": "Desktop Cute 키루아 조르딕",
+          "name_ja": "デスクトップキューティーフィギュア キルア＝ゾルディック",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        },
+        {
+          "catalog_index": 1321,
+          "name_ko": "Desktop Cute 쿠라피카",
+          "name_ja": "デスクトップキューティーフィギュア クラピカ",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB"
+        },
+        {
+          "catalog_index": 1376,
+          "name_ko": "Desktop Cute 고죠 사토루",
+          "name_ja": "デスクトップキューティーフィギュア 五条悟",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E4%BA%94%E6%9D%A1%E6%82%9F"
+        },
+        {
+          "catalog_index": 1377,
+          "name_ko": "Desktop Cute 이타도리 유지",
+          "name_ja": "デスクトップキューティーフィギュア 虎杖悠仁",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81"
+        }
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     },
     {
       "batch_id": "020-agent-requested-focus-action-37",
@@ -5110,7 +5385,186 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-image-action-42",
+      "batch_id": "020-agent-image-action-43",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_action_queue",
+      "priority": 20,
+      "title": "Stellive Store image attachment action",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 5,
+      "recommended_action": "Replace generic storefront URL with exact product page before image import.",
+      "acceptance_criteria": [
+        "Confirm exact product identity before filling image_url.",
+        "Use official or trusted product image evidence, not resale or generic listing images.",
+        "Prepare reviewed image templates only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2459,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "후야 데뷔 굿즈 박스",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2459,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 데뷔 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2460,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "후야 첫 생일 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2460,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 첫 생일 기념 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2461,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "후야 마스코트 봉제 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2461,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 마스코트 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2462,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "후야 아크릴 키링",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2462,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 아크릴 키링",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2464,
+          "workflow": "replace_generic_source_then_extract_image",
+          "source_store": "Stellive Store",
+          "name_ko": "후야 클리어 파일 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2464,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 클리어 파일 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "source_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "workflow": "replace_generic_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "image_evidence_confirmation_required",
+      "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
+      "batch_id": "020-agent-image-action-44",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -5334,7 +5788,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-image-action-43",
+      "batch_id": "020-agent-image-action-45",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -5417,7 +5871,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "022-agent-animation-category-action-120",
+      "batch_id": "022-agent-animation-category-action-123",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -5756,7 +6210,7 @@
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
     },
     {
-      "batch_id": "023-agent-animation-category-action-121",
+      "batch_id": "023-agent-animation-category-action-124",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 23,
@@ -5885,7 +6339,7 @@
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
     },
     {
-      "batch_id": "028-agent-source-action-58",
+      "batch_id": "028-agent-source-action-61",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -6240,7 +6694,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-59",
+      "batch_id": "028-agent-source-action-62",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -6595,7 +7049,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-61",
+      "batch_id": "028-agent-source-action-64",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -6950,7 +7404,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-63",
+      "batch_id": "028-agent-source-action-66",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -7305,7 +7759,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-60",
+      "batch_id": "028-agent-source-action-63",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -7660,7 +8114,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-62",
+      "batch_id": "028-agent-source-action-65",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -8015,7 +8469,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-65",
+      "batch_id": "028-agent-source-action-68",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -8370,7 +8824,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-66",
+      "batch_id": "028-agent-source-action-69",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -8725,7 +9179,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-67",
+      "batch_id": "028-agent-source-action-70",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -9080,7 +9534,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-64",
+      "batch_id": "028-agent-source-action-67",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -9240,7 +9694,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-source-discovery-68",
+      "batch_id": "030-agent-source-discovery-71",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -9339,7 +9793,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-69",
+      "batch_id": "030-agent-source-discovery-72",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -9438,7 +9892,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-70",
+      "batch_id": "030-agent-source-discovery-73",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -9537,7 +9991,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-71",
+      "batch_id": "030-agent-source-discovery-74",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -9636,7 +10090,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-72",
+      "batch_id": "030-agent-source-discovery-75",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -9735,7 +10189,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-74",
+      "batch_id": "030-agent-source-discovery-77",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -9834,7 +10288,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-75",
+      "batch_id": "030-agent-source-discovery-78",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -9933,7 +10387,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-76",
+      "batch_id": "030-agent-source-discovery-79",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -10032,7 +10486,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-77",
+      "batch_id": "030-agent-source-discovery-80",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -10131,7 +10585,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-78",
+      "batch_id": "030-agent-source-discovery-81",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -10230,7 +10684,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-73",
+      "batch_id": "030-agent-source-discovery-76",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -10329,112 +10783,13 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-79",
-      "agent_id": "agent-source-discovery",
-      "workstream": "source_url_discovery",
-      "priority": 30,
-      "title": "엔스카이 출처 URL 탐색: source-discovery-012",
-      "public_report": "data/source_discovery_review_batches_public.json",
-      "rows": 17,
-      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
-      "acceptance_criteria": [
-        "Candidate URL is an exact official or trusted licensed product/detail page.",
-        "Product title and image/metadata match the catalog row.",
-        "Generic search/listing pages stay in review and are not imported as final source_url."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1619,
-          "name_ko": "헌터X헌터 아크릴 스탠드 (쿠라피카)",
-          "name_ja": "HUNTER×HUNTER アクリルスタンド (クラピカ)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%29"
-        },
-        {
-          "catalog_index": 1620,
-          "name_ko": "헌터X헌터 아크릴 스탠드 (레오리오)",
-          "name_ja": "HUNTER×HUNTER アクリルスタンド (レオリオ)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%29"
-        },
-        {
-          "catalog_index": 1623,
-          "name_ko": "헌터X헌터 빅 아크릴 스탠드 (키루아)",
-          "name_ja": "HUNTER×HUNTER ビッグアクリルスタンド (キルア)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AD%E3%83%AB%E3%82%A2%29"
-        },
-        {
-          "catalog_index": 1333,
-          "name_ko": "치비누이 곤 프릭스",
-          "name_ja": "ちびぐるみ ゴン＝フリークス",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%90%E3%82%8B%E3%81%BF%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
-        },
-        {
-          "catalog_index": 1334,
-          "name_ko": "치비누이 키루아 조르딕",
-          "name_ja": "ちびぬい キルア＝ゾルディック",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
-        },
-        {
-          "catalog_index": 1335,
-          "name_ko": "치비누이 쿠라피카",
-          "name_ja": "ちびぬい クラピカ",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB"
-        },
-        {
-          "catalog_index": 1336,
-          "name_ko": "치비누이 레오리오",
-          "name_ja": "ちびぬい レオリオ",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA"
-        },
-        {
-          "catalog_index": 1338,
-          "name_ko": "누이푸페 키루아 조르딕",
-          "name_ja": "ぬいぺぺ キルア＝ゾルディック",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "엔스카이",
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%BA%E3%81%BA%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
-        }
-      ],
-      "review_state": "exact_source_discovery_required",
-      "next_machine_step": "find_exact_official_product_source_url"
-    },
-    {
-      "batch_id": "030-agent-image-action-44",
+      "batch_id": "030-agent-image-action-46",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 30,
       "title": "ご当地ちいかわ 공식(API) image attachment action",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
-      "rows": 10,
+      "rows": 20,
       "recommended_action": "Confirm motif candidate matches product type before image import.",
       "acceptance_criteria": [
         "Confirm exact product identity before filling image_url.",
@@ -10701,6 +11056,105 @@
       ],
       "review_state": "image_evidence_confirmation_required",
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
+      "batch_id": "030-agent-source-discovery-82",
+      "agent_id": "agent-source-discovery",
+      "workstream": "source_url_discovery",
+      "priority": 30,
+      "title": "엔스카이 출처 URL 탐색: source-discovery-012",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 17,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "acceptance_criteria": [
+        "Candidate URL is an exact official or trusted licensed product/detail page.",
+        "Product title and image/metadata match the catalog row.",
+        "Generic search/listing pages stay in review and are not imported as final source_url."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1619,
+          "name_ko": "헌터X헌터 아크릴 스탠드 (쿠라피카)",
+          "name_ja": "HUNTER×HUNTER アクリルスタンド (クラピカ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%29"
+        },
+        {
+          "catalog_index": 1620,
+          "name_ko": "헌터X헌터 아크릴 스탠드 (레오리오)",
+          "name_ja": "HUNTER×HUNTER アクリルスタンド (レオリオ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%29"
+        },
+        {
+          "catalog_index": 1623,
+          "name_ko": "헌터X헌터 빅 아크릴 스탠드 (키루아)",
+          "name_ja": "HUNTER×HUNTER ビッグアクリルスタンド (キルア)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AD%E3%83%AB%E3%82%A2%29"
+        },
+        {
+          "catalog_index": 1333,
+          "name_ko": "치비누이 곤 프릭스",
+          "name_ja": "ちびぐるみ ゴン＝フリークス",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%90%E3%82%8B%E3%81%BF%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
+        },
+        {
+          "catalog_index": 1334,
+          "name_ko": "치비누이 키루아 조르딕",
+          "name_ja": "ちびぬい キルア＝ゾルディック",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        },
+        {
+          "catalog_index": 1335,
+          "name_ko": "치비누이 쿠라피카",
+          "name_ja": "ちびぬい クラピカ",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB"
+        },
+        {
+          "catalog_index": 1336,
+          "name_ko": "치비누이 레오리오",
+          "name_ja": "ちびぬい レオリオ",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA"
+        },
+        {
+          "catalog_index": 1338,
+          "name_ko": "누이푸페 키루아 조르딕",
+          "name_ja": "ぬいぺぺ キルア＝ゾルディック",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "엔스카이",
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%BA%E3%81%BA%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        }
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-requested-focus-detail-14",
@@ -11327,6 +11781,121 @@
       "next_machine_step": "manual_review"
     },
     {
+      "batch_id": "030-agent-image-action-47",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_action_queue",
+      "priority": 30,
+      "title": "ご当地ちいかわ 공식(API) image attachment action",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 3,
+      "recommended_action": "Confirm motif candidate matches product type before image import.",
+      "acceptance_criteria": [
+        "Confirm exact product identity before filling image_url.",
+        "Use official or trusted product image evidence, not resale or generic listing images.",
+        "Prepare reviewed image templates only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 969,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 러버 마그넷 (오사카)",
+          "name_ja": "ちいかわ ご当地ラバーマグネット (大阪)",
+          "series_name": "ご当地",
+          "category": "마그넷",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 969,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 러버 마그넷 (오사카)",
+            "name_ja": "ちいかわ ご当地ラバーマグネット (大阪)",
+            "category": "마그넷",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 970,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 캔뱃지 (교토)",
+          "name_ja": "ちいかわ ご当地缶バッジ (京都)",
+          "series_name": "ご当地",
+          "category": "캔뱃지",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 970,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 캔뱃지 (교토)",
+            "name_ja": "ちいかわ ご当地缶バッジ (京都)",
+            "category": "캔뱃지",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 971,
+          "workflow": "review_gotouchi_official_candidates",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "하치와레 ご当地 캔뱃지 (홋카이도)",
+          "name_ja": "ハチワレ ご当地缶バッジ (北海道)",
+          "series_name": "ご当地",
+          "category": "캔뱃지",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 971,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "하치와레 ご当地 캔뱃지 (홋카이도)",
+            "name_ja": "ハチワレ ご当地缶バッジ (北海道)",
+            "category": "캔뱃지",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "image_evidence_confirmation_required",
+      "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
       "batch_id": "030-agent-requested-focus-detail-17",
       "agent_id": "agent-requested-focus-detail",
       "workstream": "requested_focus_review_batches",
@@ -11746,7 +12315,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "038-agent-ichiban-action-110",
+      "batch_id": "038-agent-ichiban-action-113",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -12917,333 +13486,6 @@
             "manual_confirmed": false,
             "manual_note": "",
             "row_index": 1478,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "040-agent-requested-focus-detail-25",
-      "agent_id": "agent-requested-focus-detail",
-      "workstream": "requested_focus_review_batches",
-      "priority": 40,
-      "title": "사용자 요청 특별 리스트 release_date review",
-      "public_report": "data/requested_focus_review_batches_public.json",
-      "rows": 4,
-      "recommended_action": "verify_release_date_from_official_campaign_or_product_page",
-      "acceptance_criteria": [
-        "Verify each candidate against exact official or trusted source evidence.",
-        "Keep private collection ownership data on the local device only.",
-        "Prepare reviewed catalog patches only; auto-apply remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 17812,
-          "missing_field": "release_date",
-          "name_ko": "단간론파 쿠루미타피누이 Vol.1",
-          "name_ja": "ダンガンロンパ くるみたぴぬい Vol.1",
-          "series_name": "단간론파 쿠루미타피누이 버전1",
-          "category": "인형",
-          "source_store": "TAPIOCA online shop",
-          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-          "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580831925254_1_1764821109.jpg&width=1200&height=630",
-          "release_date": null,
-          "official_price_jpy": null,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 17812,
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-            "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-            "requires_exact_source_url": false,
-            "requires_labeled_official_evidence": true,
-            "blocked_until": "manual_official_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 17813,
-          "missing_field": "release_date",
-          "name_ko": "단간론파 쿠루미타피누이 Vol.2",
-          "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
-          "series_name": "단간론파 쿠루미타피누이 버전2",
-          "category": "인형",
-          "source_store": "TAPIOCA online shop",
-          "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-          "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif",
-          "release_date": null,
-          "official_price_jpy": null,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 17813,
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-            "candidate_source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-            "requires_exact_source_url": false,
-            "requires_labeled_official_evidence": true,
-            "blocked_until": "manual_official_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 17866,
-          "missing_field": "release_date",
-          "name_ko": "주술회전 쿠루미타피누이",
-          "name_ja": "呪術廻戦 くるみたぴぬい",
-          "series_name": "주술회전 타피누이",
-          "category": "인형",
-          "source_store": "TAPIOCA online shop",
-          "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-          "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg",
-          "release_date": null,
-          "official_price_jpy": null,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 17866,
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-            "candidate_source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-            "requires_exact_source_url": false,
-            "requires_labeled_official_evidence": true,
-            "blocked_until": "manual_official_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 17814,
-          "missing_field": "release_date",
-          "name_ko": "헌터헌터 쿠루미타피누이",
-          "name_ja": "HUNTER×HUNTER くるみたぴぬい",
-          "series_name": "헌터헌터 타피누이",
-          "category": "인형",
-          "source_store": "TAPIOCA online shop",
-          "source_url": "https://jp.mercari.com/item/m69892974117",
-          "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275",
-          "release_date": null,
-          "official_price_jpy": null,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 17814,
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "https://jp.mercari.com/item/m69892974117",
-            "candidate_source_url": "https://jp.mercari.com/item/m69892974117",
-            "requires_exact_source_url": false,
-            "requires_labeled_official_evidence": true,
-            "blocked_until": "manual_official_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "040-agent-requested-focus-detail-26",
-      "agent_id": "agent-requested-focus-detail",
-      "workstream": "requested_focus_review_batches",
-      "priority": 40,
-      "title": "단간론파 굿즈 image_url review",
-      "public_report": "data/requested_focus_review_batches_public.json",
-      "rows": 3,
-      "recommended_action": "extract_image_from_exact_reviewed_source_url",
-      "acceptance_criteria": [
-        "Verify each candidate against exact official or trusted source evidence.",
-        "Keep private collection ownership data on the local device only.",
-        "Prepare reviewed catalog patches only; auto-apply remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1470,
-          "missing_field": "image_url",
-          "name_ko": "Noodle Stopper 모노쿠마",
-          "name_ja": "ヌードルストッパー モノクマ",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 2800,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1470,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1471,
-          "missing_field": "image_url",
-          "name_ko": "Chokonose Premium 코마에다 나기토",
-          "name_ja": "ちょこのせ プレミアム 狛枝凪斗",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 2800,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1471,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1472,
-          "missing_field": "image_url",
-          "name_ko": "Chokonose Premium 히나타 하지메",
-          "name_ja": "ちょこのせ プレミアム 日向創",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": "FuRyu",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 2800,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1472,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "040-agent-requested-focus-detail-27",
-      "agent_id": "agent-requested-focus-detail",
-      "workstream": "requested_focus_review_batches",
-      "priority": 40,
-      "title": "단간론파 굿즈 image_url review",
-      "public_report": "data/requested_focus_review_batches_public.json",
-      "rows": 3,
-      "recommended_action": "extract_image_from_exact_reviewed_source_url",
-      "acceptance_criteria": [
-        "Verify each candidate against exact official or trusted source evidence.",
-        "Keep private collection ownership data on the local device only.",
-        "Prepare reviewed catalog patches only; auto-apply remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1467,
-          "missing_field": "image_url",
-          "name_ko": "Desktop Cute 모노쿠마",
-          "name_ja": "デスクトップキュート モノクマ",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 2200,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1467,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1468,
-          "missing_field": "image_url",
-          "name_ko": "Desktop Cute 코마에다 나기토",
-          "name_ja": "デスクトップキュート 狛枝凪斗",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 2500,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1468,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "",
-            "candidate_source_url": "",
-            "requires_exact_source_url": true,
-            "requires_labeled_official_evidence": false,
-            "blocked_until": "exact_product_source_url_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1469,
-          "missing_field": "image_url",
-          "name_ko": "Desktop Cute 사이하라 슈이치",
-          "name_ja": "デスクトップキュート 最原終一",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": "Taito",
-          "source_url": null,
-          "image_url": null,
-          "release_date": null,
-          "official_price_jpy": 2500,
-          "barcode": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1469,
             "field": "image_url",
             "manual_value": "",
             "evidence_url": "",
