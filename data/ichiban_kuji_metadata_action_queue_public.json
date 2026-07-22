@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T01:30:32Z",
+  "generated_at": "2026-07-22T01:52:03Z",
   "scope": "ichiban_kuji_metadata_action_queue",
   "summary": {
     "actionable_campaigns": 44,
@@ -38,7 +38,8 @@
   "instructions": [
     "Work this queue before broad historical 1kuji research.",
     "Use only labeled official 1kuji campaign pages or captured official evidence.",
-    "Fill templates only after manual confirmation; no campaign metadata is auto-applied."
+    "Fill templates only after manual confirmation; no campaign metadata is auto-applied.",
+    "Copy server/ichiban_kuji_metadata_confirmed_rows.template.json to server/ichiban_kuji_metadata_confirmed_rows.json, fill manual_value and confirmation flags, then run tools/import_confirmed_ichiban_metadata_rows.py."
   ],
   "batches": [
     {
@@ -80,6 +81,10 @@
       "review_state": "manual_official_campaign_metadata_confirmation_required",
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
       "campaigns": [
         {
           "group_key": "https://1kuji.com/products/jujutsu-o",
@@ -148,6 +153,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -217,6 +226,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -284,6 +297,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -351,6 +368,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -421,6 +442,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -488,6 +513,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -555,6 +584,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -622,6 +655,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         }
       ],
@@ -654,6 +691,10 @@
       "review_state": "manual_official_campaign_metadata_confirmation_required",
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
       "campaigns": [
         {
           "group_key": "https://1kuji.com/products/73",
@@ -720,6 +761,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -787,6 +832,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -857,6 +906,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -927,6 +980,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -997,6 +1054,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1067,6 +1128,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1116,6 +1181,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1186,6 +1255,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         }
       ],
@@ -1218,6 +1291,10 @@
       "review_state": "manual_official_campaign_metadata_confirmation_required",
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
       "campaigns": [
         {
           "group_key": "https://1kuji.com/products/dbkai_ks",
@@ -1287,6 +1364,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1354,6 +1435,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1424,6 +1509,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1494,6 +1583,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1564,6 +1657,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1631,6 +1728,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1698,6 +1799,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1768,6 +1873,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         }
       ],
@@ -1800,6 +1909,10 @@
       "review_state": "manual_official_campaign_metadata_confirmation_required",
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
       "campaigns": [
         {
           "group_key": "https://1kuji.com/products/jojo_anniv",
@@ -1869,6 +1982,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -1939,6 +2056,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2006,6 +2127,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2076,6 +2201,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2146,6 +2275,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2216,6 +2349,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2286,6 +2423,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2356,6 +2497,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         }
       ],
@@ -2388,6 +2533,10 @@
       "review_state": "manual_official_campaign_metadata_confirmation_required",
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
       "campaigns": [
         {
           "group_key": "https://1kuji.com/products/onep12",
@@ -2457,6 +2606,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2527,6 +2680,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2597,6 +2754,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2664,6 +2825,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2734,6 +2899,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2804,6 +2973,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2874,6 +3047,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -2944,6 +3121,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         }
       ],
@@ -2976,6 +3157,10 @@
       "review_state": "manual_official_campaign_metadata_confirmation_required",
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
       "campaigns": [
         {
           "group_key": "https://1kuji.com/products/onep_kyun_1",
@@ -3045,6 +3230,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -3115,6 +3304,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -3185,6 +3378,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -3255,6 +3452,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         }
       ],
@@ -3264,6 +3465,10 @@
   "automation_policy": {
     "auto_apply_release_date": false,
     "auto_apply_official_price_jpy": false,
-    "requires_manual_review": true
+    "requires_manual_review": true,
+    "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+    "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+    "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+    "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed"
   }
 }

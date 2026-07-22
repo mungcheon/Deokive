@@ -60,6 +60,22 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
             report["batches"][0]["review_state"],
             "manual_official_campaign_metadata_confirmation_required",
         )
+        self.assertEqual(
+            report["automation_policy"]["manual_confirmation_template"],
+            "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+        )
+        self.assertEqual(
+            report["automation_policy"]["import_tool"],
+            "tools/import_confirmed_ichiban_metadata_rows.py",
+        )
+        self.assertEqual(
+            report["batches"][0]["unblocks_when"],
+            "labeled_official_1kuji_campaign_metadata_confirmed",
+        )
+        self.assertEqual(
+            report["batches"][0]["campaigns"][0]["confirmed_queue"],
+            "server/ichiban_kuji_metadata_confirmed_rows.json",
+        )
 
     def test_max_campaigns_caps_published_queue_not_actionable_summary(self) -> None:
         review = {

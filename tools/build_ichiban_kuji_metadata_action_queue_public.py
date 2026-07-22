@@ -26,6 +26,11 @@ WORKFLOW_PRIORITY = {
     "metadata_review": 90,
 }
 
+CONFIRMED_TEMPLATE = "server/ichiban_kuji_metadata_confirmed_rows.template.json"
+CONFIRMED_QUEUE = "server/ichiban_kuji_metadata_confirmed_rows.json"
+IMPORT_TOOL = "tools/import_confirmed_ichiban_metadata_rows.py"
+UNBLOCKS_WHEN = "labeled_official_1kuji_campaign_metadata_confirmed"
+
 
 def _now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -65,6 +70,10 @@ def _compact_campaign(campaign: dict[str, Any], batch: dict[str, Any]) -> dict[s
         "sample_catalog_indexes": campaign.get("sample_catalog_indexes") or [],
         "sample_names": campaign.get("sample_names") or [],
         "campaign_field_patch_templates": templates,
+        "manual_confirmation_template": CONFIRMED_TEMPLATE,
+        "confirmed_queue": CONFIRMED_QUEUE,
+        "import_tool": IMPORT_TOOL,
+        "unblocks_when": UNBLOCKS_WHEN,
         "auto_apply_enabled": False,
     }
 
@@ -117,6 +126,10 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
                 "review_state": "manual_official_campaign_metadata_confirmation_required",
                 "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
                 "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
+                "manual_confirmation_template": CONFIRMED_TEMPLATE,
+                "confirmed_queue": CONFIRMED_QUEUE,
+                "import_tool": IMPORT_TOOL,
+                "unblocks_when": UNBLOCKS_WHEN,
                 "campaigns": chunk,
                 "auto_apply_enabled": False,
             }
@@ -151,12 +164,17 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
             "Work this queue before broad historical 1kuji research.",
             "Use only labeled official 1kuji campaign pages or captured official evidence.",
             "Fill templates only after manual confirmation; no campaign metadata is auto-applied.",
+            f"Copy {CONFIRMED_TEMPLATE} to {CONFIRMED_QUEUE}, fill manual_value and confirmation flags, then run {IMPORT_TOOL}.",
         ],
         "batches": batches,
         "automation_policy": {
             "auto_apply_release_date": False,
             "auto_apply_official_price_jpy": False,
             "requires_manual_review": True,
+            "manual_confirmation_template": CONFIRMED_TEMPLATE,
+            "confirmed_queue": CONFIRMED_QUEUE,
+            "import_tool": IMPORT_TOOL,
+            "unblocks_when": UNBLOCKS_WHEN,
         },
     }
 
