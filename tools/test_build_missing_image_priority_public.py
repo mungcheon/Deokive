@@ -24,6 +24,14 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertEqual(summary["stale_queue_index_matches"], 0)
         self.assertEqual(summary["unmatched_catalog_missing_rows"], 0)
         self.assertIs(summary["auto_apply_enabled"], False)
+        self.assertEqual(
+            sum(row["rows"] for row in report["breakdowns"]["by_source_url_state"]),
+            summary["missing_image_rows"],
+        )
+        self.assertEqual(
+            report["next_action_queues"]["source_discovery_first"]["rows"],
+            summary["missing_source_url_rows"],
+        )
         self.assertGreater(len(report["focus_groups"]), 0)
         self.assertGreater(len(report["breakdowns"]["by_source_store"]), 0)
         self.assertTrue(report["automation_policy"]["requires_exact_product_identity"])
@@ -38,6 +46,7 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
                     "source_store": "FuRyu",
                     "affiliation": "작품",
                     "category": "피규어",
+                    "source_url": "https://example.com/product/a",
                 },
                 {
                     "catalog_index": 2,
@@ -66,6 +75,7 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
                     "automation_safety": "candidate_provider_script_required",
                     "priority": 10,
                     "search_url": "https://example.com/search",
+                    "source_url_is_product_detail": True,
                 }
             ]
         }
@@ -75,6 +85,12 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertEqual(report["summary"]["missing_image_rows"], 1)
         self.assertEqual(report["summary"]["queue_matched_rows"], 1)
         self.assertEqual(report["summary"]["high_priority_rows"], 1)
+        self.assertEqual(report["summary"]["product_source_url_rows"], 1)
+        self.assertEqual(
+            report["breakdowns"]["by_source_url_state"][0],
+            {"source_url_state": "product_detail_source_url", "rows": 1},
+        )
+        self.assertEqual(report["next_action_queues"]["image_attachment_ready"]["rows"], 1)
         self.assertEqual(report["focus_groups"][0]["rows"], 1)
         self.assertEqual(
             report["focus_groups"][0]["recommended_workflow"],

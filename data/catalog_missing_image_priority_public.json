@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T15:41:19Z",
+  "generated_at": "2026-07-22T19:40:45Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
     "missing_image_rows": 720,
@@ -504,7 +504,35 @@
         "automation_safety": "detail_page_validation_required",
         "rows": 1
       }
+    ],
+    "by_source_url_state": [
+      {
+        "source_url_state": "missing_source_url",
+        "rows": 647
+      },
+      {
+        "source_url_state": "generic_source_url",
+        "rows": 50
+      },
+      {
+        "source_url_state": "unclassified_source_url",
+        "rows": 23
+      }
     ]
+  },
+  "next_action_queues": {
+    "source_discovery_first": {
+      "rows": 647,
+      "reason": "Attach exact product source URLs before image candidates can be trusted."
+    },
+    "replace_generic_source_then_attach_image": {
+      "rows": 50,
+      "reason": "Generic storefront URLs need exact product detail pages before image attachment."
+    },
+    "image_attachment_ready": {
+      "rows": 0,
+      "reason": "Exact product source URLs are present; prioritize image extraction or manual image confirmation."
+    }
   },
   "focus_groups": [
     {

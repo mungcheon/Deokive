@@ -75,6 +75,16 @@ def counter_rows(counter: Counter[str], field: str, limit: int = 40) -> list[dic
     return [{field: key, "rows": count} for key, count in counter.most_common(limit)]
 
 
+def source_url_state(item: dict[str, Any], queue_row: dict[str, Any] | None) -> str:
+    if not present(item.get("source_url")):
+        return "missing_source_url"
+    if (queue_row or {}).get("source_url_is_generic"):
+        return "generic_source_url"
+    if (queue_row or {}).get("source_url_is_product_detail"):
+        return "product_detail_source_url"
+    return "unclassified_source_url"
+
+
 def build_report(
     catalog: dict[str, Any],
     queue: dict[str, Any],
@@ -90,6 +100,7 @@ def build_report(
     by_category: Counter[str] = Counter()
     by_strategy: Counter[str] = Counter()
     by_automation_safety: Counter[str] = Counter()
+    by_source_url_state: Counter[str] = Counter()
     source_affiliation: dict[tuple[str, str], int] = defaultdict(int)
 
     queue_matched_rows = 0
@@ -126,13 +137,15 @@ def build_report(
         by_category[category] += 1
         by_strategy[strategy] += 1
         by_automation_safety[automation_safety] += 1
+        state = source_url_state(item, queue_row)
+        by_source_url_state[state] += 1
         source_affiliation[(source_store, affiliation)] += 1
 
-        if not present(item.get("source_url")):
+        if state == "missing_source_url":
             missing_source_url_rows += 1
-        elif (queue_row or {}).get("source_url_is_generic"):
+        elif state == "generic_source_url":
             generic_source_url_rows += 1
-        elif (queue_row or {}).get("source_url_is_product_detail"):
+        elif state == "product_detail_source_url":
             product_source_url_rows += 1
 
         priority = int((queue_row or {}).get("priority") or 999)
@@ -175,6 +188,21 @@ def build_report(
             "by_category": counter_rows(by_category, "category"),
             "by_strategy": counter_rows(by_strategy, "strategy"),
             "by_automation_safety": counter_rows(by_automation_safety, "automation_safety"),
+            "by_source_url_state": counter_rows(by_source_url_state, "source_url_state"),
+        },
+        "next_action_queues": {
+            "source_discovery_first": {
+                "rows": missing_source_url_rows,
+                "reason": "Attach exact product source URLs before image candidates can be trusted.",
+            },
+            "replace_generic_source_then_attach_image": {
+                "rows": generic_source_url_rows,
+                "reason": "Generic storefront URLs need exact product detail pages before image attachment.",
+            },
+            "image_attachment_ready": {
+                "rows": product_source_url_rows,
+                "reason": "Exact product source URLs are present; prioritize image extraction or manual image confirmation.",
+            },
         },
         "focus_groups": focus_groups,
         "high_priority_samples": [
