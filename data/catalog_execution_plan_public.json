@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T18:20:57Z",
+  "generated_at": "2026-07-22T18:30:57Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 21,
+    "action_count": 22,
     "blocked_action_count": 1,
-    "manual_review_action_count": 18,
+    "manual_review_action_count": 19,
     "pending_import_action_count": 0,
-    "total_action_rows": 33554,
+    "total_action_rows": 33563,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -68,7 +68,9 @@
       "animation_category_unmatched_keyword_candidates": 49,
       "animation_category_unmatched_keyword_product_type_candidates": 6,
       "ichiban_prize_name_image_review_rows": 38,
-      "ichiban_prize_multi_item_rank_groups": 416
+      "ichiban_prize_multi_item_rank_groups": 416,
+      "ichiban_prize_name_image_patch_candidate_rows": 9,
+      "ichiban_prize_name_image_patch_blocked_rows": 29
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
@@ -82,6 +84,8 @@
     "ichiban_prize_name_image_name_structure_review_rows": 38,
     "ichiban_prize_name_image_image_identity_review_rows": 0,
     "ichiban_prize_name_image_multi_item_groups": 416,
+    "ichiban_prize_name_image_patch_candidate_rows": 9,
+    "ichiban_prize_name_image_patch_blocked_rows": 29,
     "dedupe_fast_review_groups": 42,
     "dedupe_fast_review_same_source_url_groups": 38,
     "image_action_source_url_update_required_rows": 50,
@@ -1037,6 +1041,25 @@
             1
           ]
         ]
+      }
+    },
+    {
+      "priority": 46,
+      "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
+      "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
+      "status": "manual_review",
+      "rows": 9,
+      "command": "Manual-confirm exact official 1kuji name/image patch candidates before catalog mutation.",
+      "next_step": "mark_exact_candidates_manual_confirmed_then_import",
+      "blocker": "Auto-apply is disabled; exact-image matches still need human confirmation before catalog writes.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "review_rows": 38,
+        "candidate_rows": 9,
+        "exact_image_match_rows": 9,
+        "strong_name_match_rows": 0,
+        "blocked_rows": 29,
+        "fetch_failure_urls": 0
       }
     },
     {

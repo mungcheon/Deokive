@@ -206,6 +206,21 @@ class PublicCatalogReportTests(unittest.TestCase):
                 prize_name_image_summary.get("multi_item_prize_rank_groups"),
             )
             self.assertIs(quality["ichiban_kuji_prize_name_image_review"]["auto_apply_enabled"], False)
+        if reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.exists():
+            patch_candidates = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES)
+            patch_candidates_summary = patch_candidates.get("summary", {})
+            self.assertEqual(
+                quality["ichiban_kuji_prize_name_image_patch_candidates"]["candidate_rows"],
+                patch_candidates_summary.get("candidate_rows"),
+            )
+            self.assertEqual(
+                quality["ichiban_kuji_prize_name_image_patch_candidates"]["blocked_rows"],
+                patch_candidates_summary.get("blocked_rows"),
+            )
+            self.assertIs(
+                quality["ichiban_kuji_prize_name_image_patch_candidates"]["auto_apply_enabled"],
+                False,
+            )
 
     def test_all_public_json_files_are_parseable_and_safe_for_pages(self):
         public_files = reports.discover_public_json_files()
@@ -546,6 +561,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         ichiban_prize_audit_summary = ichiban_prize_audit.get("summary", {})
         ichiban_prize_name_image = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW)
         ichiban_prize_name_image_summary = ichiban_prize_name_image.get("summary", {})
+        ichiban_prize_name_image_patch = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES)
+        ichiban_prize_name_image_patch_summary = ichiban_prize_name_image_patch.get("summary", {})
         ichiban_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
@@ -570,6 +587,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "ichiban_kuji_prize_name_image_review"
+        )
+        ichiban_prize_name_image_patch_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "ichiban_kuji_prize_name_image_patch_candidates"
+        )
+        ichiban_prize_name_image_patch_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "ichiban_kuji_prize_name_image_patch_candidates"
         )
         animation_action = reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)
         animation_action_summary = animation_action.get("summary", {})
@@ -631,6 +658,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.name}", report_links)
         self.assertIn(f"data/{reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}", report_links)
         self.assertIn(f"data/{reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}", report_links)
+        self.assertIn(f"data/{reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}", report_links)
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
@@ -967,6 +995,22 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             ichiban_prize_name_image_next_action.get("image_identity_review_rows"),
             ichiban_prize_name_image_summary.get("image_identity_review_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_prize_name_image_patch_candidate_rows"),
+            ichiban_prize_name_image_patch_summary.get("candidate_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_prize_name_image_patch_blocked_rows"),
+            ichiban_prize_name_image_patch_summary.get("blocked_rows"),
+        )
+        self.assertEqual(
+            ichiban_prize_name_image_patch_scorecard.get("open_rows"),
+            ichiban_prize_name_image_patch_summary.get("candidate_rows"),
+        )
+        self.assertEqual(
+            ichiban_prize_name_image_patch_next_action.get("exact_image_match_rows"),
+            ichiban_prize_name_image_patch_summary.get("exact_image_match_rows"),
         )
         self.assertEqual(
             open_queues.get("animation_category_action_rows"),

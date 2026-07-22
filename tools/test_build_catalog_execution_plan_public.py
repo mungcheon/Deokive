@@ -175,6 +175,17 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "auto_apply_enabled": False,
                 }
             },
+            "ichiban_kuji_prize_name_image_patch_candidates_public.json": {
+                "summary": {
+                    "review_rows": 2,
+                    "candidate_rows": 1,
+                    "exact_image_match_rows": 1,
+                    "strong_name_match_rows": 0,
+                    "blocked_rows": 1,
+                    "fetch_failure_urls": 0,
+                    "auto_apply_enabled": False,
+                }
+            },
             "ichiban_kuji_prize_policy_audit_public.json": {
                 "summary": {
                     "kuji_rows": 20,
@@ -368,6 +379,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(kuji_name_image["evidence"]["multi_item_prize_rank_groups"], 1)
         self.assertEqual(report["summary"]["ichiban_prize_name_image_review_rows"], 2)
         self.assertEqual(report["summary"]["ichiban_prize_name_image_multi_item_groups"], 1)
+        kuji_name_image_patch = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "ichiban_kuji_prize_name_image_patch_candidates"
+        )
+        self.assertEqual(kuji_name_image_patch["priority"], 46)
+        self.assertEqual(kuji_name_image_patch["rows"], 1)
+        self.assertEqual(kuji_name_image_patch["evidence"]["exact_image_match_rows"], 1)
+        self.assertEqual(kuji_name_image_patch["evidence"]["blocked_rows"], 1)
+        self.assertEqual(report["summary"]["ichiban_prize_name_image_patch_candidate_rows"], 1)
         kuji_policy = next(
             action
             for action in report["actions"]

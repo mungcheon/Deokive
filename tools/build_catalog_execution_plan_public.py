@@ -117,6 +117,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
     kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
     kuji_name_image = load_report("ichiban_kuji_prize_name_image_review_public.json")
+    kuji_name_image_patch = load_report("ichiban_kuji_prize_name_image_patch_candidates_public.json")
     animation_batches = load_report("animation_category_review_batches_public.json")
     animation_action_queue = load_report("animation_category_action_queue_public.json")
     animation_split_review = load_report("animation_category_split_review_public.json")
@@ -149,6 +150,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_action_summary = _summary(kuji_action_queue)
     kuji_policy_summary = _summary(kuji_policy)
     kuji_name_image_summary = _summary(kuji_name_image)
+    kuji_name_image_patch_summary = _summary(kuji_name_image_patch)
     animation_summary = _summary(animation_batches)
     animation_action_summary = _summary(animation_action_queue)
     animation_split_summary = _summary(animation_split_review)
@@ -549,6 +551,29 @@ def _build_plan(load_report) -> dict[str, Any]:
             )
         )
 
+    if kuji_name_image_patch_summary:
+        candidate_rows = _count(kuji_name_image_patch_summary, "candidate_rows")
+        actions.append(
+            _action(
+                priority=46,
+                workstream="ichiban_kuji_prize_name_image_patch_candidates",
+                public_report="data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
+                status="manual_review" if candidate_rows else "clear",
+                rows=candidate_rows,
+                command="Manual-confirm exact official 1kuji name/image patch candidates before catalog mutation.",
+                next_step="mark_exact_candidates_manual_confirmed_then_import",
+                blocker="Auto-apply is disabled; exact-image matches still need human confirmation before catalog writes.",
+                evidence={
+                    "review_rows": _count(kuji_name_image_patch_summary, "review_rows"),
+                    "candidate_rows": candidate_rows,
+                    "exact_image_match_rows": _count(kuji_name_image_patch_summary, "exact_image_match_rows"),
+                    "strong_name_match_rows": _count(kuji_name_image_patch_summary, "strong_name_match_rows"),
+                    "blocked_rows": _count(kuji_name_image_patch_summary, "blocked_rows"),
+                    "fetch_failure_urls": _count(kuji_name_image_patch_summary, "fetch_failure_urls"),
+                },
+            )
+        )
+
     actions.append(
         _action(
             priority=50,
@@ -791,6 +816,12 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "ichiban_prize_name_image_multi_item_groups": _count(
                 kuji_name_image_summary, "multi_item_prize_rank_groups"
+            ),
+            "ichiban_prize_name_image_patch_candidate_rows": _count(
+                kuji_name_image_patch_summary, "candidate_rows"
+            ),
+            "ichiban_prize_name_image_patch_blocked_rows": _count(
+                kuji_name_image_patch_summary, "blocked_rows"
             ),
             "dedupe_fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
             "dedupe_fast_review_same_source_url_groups": _count(
