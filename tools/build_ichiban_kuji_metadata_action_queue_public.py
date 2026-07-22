@@ -165,7 +165,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--max-campaigns", type=int, default=32)
+    parser.add_argument("--max-campaigns", type=int, default=64)
     parser.add_argument("--batch-size", type=int, default=8)
     args = parser.parse_args()
 
