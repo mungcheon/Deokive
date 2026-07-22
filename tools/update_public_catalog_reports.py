@@ -100,6 +100,8 @@ OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
 AGENT_WORK_QUEUE = DATA / "catalog_agent_work_queue_public.json"
 APP_FOLDER_VISUAL_AUDIT = ROOT / "server" / "app_folder_visual_catalog_audit.json"
 
+MAX_AGENT_WORK_QUEUE_BATCHES = 160
+
 OFFICIAL_SEARCH_TEMPLATES = {
     "애니메이트": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
     "엔스카이": "https://www.enskyshop.com/products/list?name={query}",
@@ -3224,6 +3226,21 @@ def build_agent_work_queue_public(
         if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists()
         else {}
     )
+    ichiban_prize_policy_audit = (
+        load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {})
+        if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists()
+        else {}
+    )
+    ichiban_prize_name_image_review = (
+        load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, {})
+        if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists()
+        else {}
+    )
+    ichiban_prize_name_image_patch_candidates = (
+        load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, {})
+        if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.exists()
+        else {}
+    )
     animation_review_batches = (
         load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
     )
@@ -3300,11 +3317,19 @@ def build_agent_work_queue_public(
             return "manual_review_required"
         if workstream == "danganronpa_missing_media":
             return "source_and_image_evidence_required"
+        if workstream == "deduplication_action_queue":
+            return "manual_dedupe_action_confirmation_required"
         if workstream == "deduplication_review":
             return "manual_dedupe_review_required"
         if workstream.startswith("ichiban_kuji"):
             if workstream == "ichiban_kuji_metadata_action_queue":
                 return "manual_official_campaign_metadata_confirmation_required"
+            if workstream == "ichiban_kuji_prize_policy_audit":
+                return "manual_official_prize_variant_confirmation_required"
+            if workstream == "ichiban_kuji_prize_name_image_review":
+                return "manual_prize_name_structure_confirmation_required"
+            if workstream == "ichiban_kuji_prize_name_image_patch_candidates":
+                return "manual_prize_image_patch_confirmation_required"
             return "official_campaign_evidence_required"
         if workstream == "animation_category_review":
             return "taxonomy_mapping_required"
@@ -3329,9 +3354,13 @@ def build_agent_work_queue_public(
             "source_evidence_confirmation_required": "confirm_exact_source_url_then_fill_source_templates",
             "metadata_evidence_required": "collect_official_metadata_evidence",
             "manual_metadata_evidence_confirmation_required": "fill_confirmed_metadata_patch_templates",
+            "manual_dedupe_action_confirmation_required": "confirm_manual_keep_drop_dedupe_decisions",
             "manual_dedupe_review_required": "compare_duplicate_group_evidence",
             "official_campaign_evidence_required": "verify_ichiban_campaign_page",
             "manual_official_campaign_metadata_confirmation_required": "fill_confirmed_ichiban_campaign_patch_templates",
+            "manual_official_prize_variant_confirmation_required": "verify_ichiban_prize_variants_against_campaign_lineup",
+            "manual_prize_name_structure_confirmation_required": "confirm_ichiban_prize_name_structure_templates",
+            "manual_prize_image_patch_confirmation_required": "confirm_ichiban_prize_image_patch_templates",
             "taxonomy_mapping_required": "map_category_to_folder_color_and_icon",
             "manual_category_mapping_confirmation_required": "fill_confirmed_animation_category_mapping_templates",
             "manual_name_level_split_confirmation_required": "confirm_animation_category_name_split_templates",
@@ -3867,6 +3896,77 @@ def build_agent_work_queue_public(
                 ],
             )
 
+    for review_batch in [
+        batch for batch in ichiban_prize_policy_audit.get("review_batches", []) if isinstance(batch, dict)
+    ][:8]:
+        add_batch(
+            agent_id="agent-ichiban-prize-policy",
+            workstream="ichiban_kuji_prize_policy_audit",
+            priority=55 + int(review_batch.get("priority") or 99),
+            title=f"Ichiban Kuji prize policy review {review_batch.get('batch_id')}",
+            public_report=ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT,
+            rows=int(review_batch.get("catalog_item_rows") or 0),
+            recommended_action=str(
+                review_batch.get("recommended_action")
+                or "Verify same-prize variants and repeated campaign names against official 1kuji lineup pages."
+            ),
+            acceptance_criteria=[
+                "Same prize-letter variants stay separate when the official campaign lists multiple items.",
+                "Repeated names across different campaign URLs are treated as possible reissues until verified.",
+                "Last One and Double Chance price exceptions remain zero-price rows.",
+            ],
+            samples=[group for group in review_batch.get("groups", []) if isinstance(group, dict)],
+            review_summary={
+                "workflow": str(review_batch.get("workflow") or ""),
+                "group_count": int(review_batch.get("group_count") or 0),
+                "catalog_item_rows": int(review_batch.get("catalog_item_rows") or 0),
+            },
+        )
+
+    ichiban_name_review_rows = [
+        row for row in ichiban_prize_name_image_review.get("review_rows", []) if isinstance(row, dict)
+    ]
+    if ichiban_name_review_rows:
+        add_batch(
+            agent_id="agent-ichiban-prize-name-image",
+            workstream="ichiban_kuji_prize_name_image_review",
+            priority=56,
+            title="Ichiban Kuji prize name/image structure review",
+            public_report=ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW,
+            rows=len(ichiban_name_review_rows),
+            recommended_action=(
+                "Confirm each prize display name includes campaign, prize rank, prize item, and variant detail."
+            ),
+            acceptance_criteria=[
+                "Display names include the release name, prize rank, and prize item name.",
+                "Same-prize multi-item rows include numbering, character, color, or item-type detail.",
+                "Images are only changed when same campaign, prize rank, and variant identity all match.",
+            ],
+            samples=ichiban_name_review_rows,
+            review_summary=ichiban_prize_name_image_review.get("summary", {}),
+        )
+
+    ichiban_patch_candidates = [
+        row for row in ichiban_prize_name_image_patch_candidates.get("candidates", []) if isinstance(row, dict)
+    ]
+    if ichiban_patch_candidates:
+        add_batch(
+            agent_id="agent-ichiban-prize-name-image",
+            workstream="ichiban_kuji_prize_name_image_patch_candidates",
+            priority=57,
+            title="Ichiban Kuji prize image/name patch candidates",
+            public_report=ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES,
+            rows=len(ichiban_patch_candidates),
+            recommended_action="Review exact image matches and confirm only safe catalog patch templates.",
+            acceptance_criteria=[
+                "candidate image URL must match the same official campaign prize and item variant.",
+                "field_changes must not erase variant details or collapse distinct prize rows.",
+                "catalog_patch_template stays manual_confirmed=false until reviewed.",
+            ],
+            samples=ichiban_patch_candidates,
+            review_summary=ichiban_prize_name_image_patch_candidates.get("summary", {}),
+        )
+
     animation_action_batches = [batch for batch in animation_action_queue.get("batches", []) if isinstance(batch, dict)]
     for action_index, action_batch in enumerate(animation_action_batches[:4]):
         mapping_mode_counts = Counter(
@@ -3994,7 +4094,7 @@ def build_agent_work_queue_public(
             )
 
     batches.sort(key=lambda row: (row["priority"], -row["rows"], row["batch_id"]))
-    published_batches = batches[:96]
+    published_batches = batches[:MAX_AGENT_WORK_QUEUE_BATCHES]
     by_workstream = Counter(str(batch["workstream"]) for batch in published_batches)
     by_agent = Counter(str(batch["agent_id"]) for batch in published_batches)
     confirmed_summary = confirmed_import_readiness.get("summary", {})
@@ -4023,6 +4123,7 @@ def build_agent_work_queue_public(
         "generated_at": generated_at,
         "summary": {
             "batch_count": len(published_batches),
+            "max_published_batches": MAX_AGENT_WORK_QUEUE_BATCHES,
             "summed_batch_rows": sum(int(batch.get("rows") or 0) for batch in published_batches),
             "top_next_batch_count": len(top_next_batches),
             "by_workstream": by_workstream.most_common(),
@@ -5380,6 +5481,9 @@ def validate_report_consistency(
         f"data/{ICHIIBAN_KUJI_HISTORY.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
+        f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}",
+        f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}",
+        f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}",
         f"data/{GENERIC_SOURCE.name}",
         f"data/{GOTOUCHI.name}",
         f"data/{REQUESTED_FOCUS.name}",
@@ -5414,9 +5518,13 @@ def validate_report_consistency(
         "source_evidence_confirmation_required",
         "metadata_evidence_required",
         "manual_metadata_evidence_confirmation_required",
+        "manual_dedupe_action_confirmation_required",
         "manual_dedupe_review_required",
         "official_campaign_evidence_required",
         "manual_official_campaign_metadata_confirmation_required",
+        "manual_official_prize_variant_confirmation_required",
+        "manual_prize_name_structure_confirmation_required",
+        "manual_prize_image_patch_confirmation_required",
         "taxonomy_mapping_required",
         "manual_category_mapping_confirmation_required",
         "manual_name_level_split_confirmation_required",
@@ -5435,9 +5543,13 @@ def validate_report_consistency(
         "confirm_exact_source_url_then_fill_source_templates",
         "collect_official_metadata_evidence",
         "fill_confirmed_metadata_patch_templates",
+        "confirm_manual_keep_drop_dedupe_decisions",
         "compare_duplicate_group_evidence",
         "verify_ichiban_campaign_page",
         "fill_confirmed_ichiban_campaign_patch_templates",
+        "verify_ichiban_prize_variants_against_campaign_lineup",
+        "confirm_ichiban_prize_name_structure_templates",
+        "confirm_ichiban_prize_image_patch_templates",
         "map_category_to_folder_color_and_icon",
         "fill_confirmed_animation_category_mapping_templates",
         "confirm_animation_category_name_split_templates",

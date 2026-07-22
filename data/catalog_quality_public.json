@@ -3427,8 +3427,9 @@
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 96,
-    "summed_batch_rows": 20180,
+    "batch_count": 151,
+    "max_published_batches": 160,
+    "summed_batch_rows": 25512,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3444,7 +3445,15 @@
         12
       ],
       [
+        "metadata_backlog",
+        12
+      ],
+      [
         "source_discovery_action_queue",
+        10
+      ],
+      [
+        "deduplication_review",
         10
       ],
       [
@@ -3456,12 +3465,32 @@
         8
       ],
       [
+        "metadata_action_queue",
+        8
+      ],
+      [
+        "ichiban_kuji_prize_policy_audit",
+        8
+      ],
+      [
         "image_attachment_action_queue",
         7
       ],
       [
+        "ichiban_kuji_metadata_action_queue",
+        6
+      ],
+      [
+        "deduplication_action_queue",
+        5
+      ],
+      [
+        "ichiban_kuji_price",
+        5
+      ],
+      [
         "requested_focus_enrichment",
-        3
+        4
       ],
       [
         "generic_source_url_cleanup",
@@ -3473,10 +3502,6 @@
       ],
       [
         "animation_category_unmatched_keyword_review",
-        3
-      ],
-      [
-        "metadata_action_queue",
         3
       ],
       [
@@ -3500,7 +3525,19 @@
         1
       ],
       [
-        "ichiban_kuji_metadata_action_queue",
+        "ichiban_kuji_prize_name_image_review",
+        1
+      ],
+      [
+        "ichiban_kuji_prize_name_image_patch_candidates",
+        1
+      ],
+      [
+        "ichiban_kuji_metadata",
+        1
+      ],
+      [
+        "animation_category_review",
         1
       ]
     ],
@@ -3518,7 +3555,15 @@
         12
       ],
       [
+        "agent-metadata",
+        12
+      ],
+      [
         "agent-source-action",
+        10
+      ],
+      [
+        "agent-dedupe",
         10
       ],
       [
@@ -3530,19 +3575,35 @@
         8
       ],
       [
+        "agent-ichiban-action",
+        8
+      ],
+      [
+        "agent-metadata-action",
+        8
+      ],
+      [
+        "agent-ichiban-prize-policy",
+        8
+      ],
+      [
         "agent-image-action",
         7
       ],
       [
+        "agent-ichiban-kuji",
+        6
+      ],
+      [
+        "agent-dedupe-action",
+        5
+      ],
+      [
         "agent-requested-focus",
-        3
+        4
       ],
       [
         "agent-generic-source-cleanup",
-        3
-      ],
-      [
-        "agent-ichiban-action",
         3
       ],
       [
@@ -3554,11 +3615,11 @@
         3
       ],
       [
-        "agent-metadata-action",
-        3
+        "agent-source-detail-candidate",
+        2
       ],
       [
-        "agent-source-detail-candidate",
+        "agent-ichiban-prize-name-image",
         2
       ],
       [
@@ -3571,6 +3632,10 @@
       ],
       [
         "agent-animation-category-action",
+        1
+      ],
+      [
+        "agent-animation-taxonomy",
         1
       ]
     ],

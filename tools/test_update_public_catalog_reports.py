@@ -461,6 +461,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         top_batches = agent_queue.get("top_next_batches", [])
         confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
         self.assertGreater(len(batches), 0)
+        self.assertLessEqual(len(batches), reports.MAX_AGENT_WORK_QUEUE_BATCHES)
+        self.assertEqual(agent_queue["summary"]["max_published_batches"], reports.MAX_AGENT_WORK_QUEUE_BATCHES)
         self.assertEqual(agent_queue["summary"]["top_next_batch_count"], len(top_batches))
         self.assertEqual(
             [batch["batch_id"] for batch in top_batches],
@@ -698,6 +700,26 @@ class PublicCatalogReportTests(unittest.TestCase):
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "animation_category_unmatched_keyword_review"
         ]
+        dedupe_action_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "deduplication_action_queue"
+        ]
+        ichiban_prize_policy_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "ichiban_kuji_prize_policy_audit"
+        ]
+        ichiban_prize_name_image_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "ichiban_kuji_prize_name_image_review"
+        ]
+        ichiban_prize_name_image_patch_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "ichiban_kuji_prize_name_image_patch_candidates"
+        ]
         danganronpa_agent_batches = [
             batch
             for batch in agent_queue.get("batches", [])
@@ -728,6 +750,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             {batch.get("next_machine_step") for batch in danganronpa_agent_batches},
             {"confirm_exact_source_then_fill_image_url_templates"},
         )
+        self.assertGreater(len(dedupe_action_agent_batches), 0)
+        self.assertEqual(
+            {batch.get("review_state") for batch in dedupe_action_agent_batches},
+            {"manual_dedupe_action_confirmation_required"},
+        )
+        self.assertEqual(
+            {batch.get("next_machine_step") for batch in dedupe_action_agent_batches},
+            {"confirm_manual_keep_drop_dedupe_decisions"},
+        )
+        self.assertGreater(len(ichiban_prize_policy_agent_batches), 0)
+        self.assertGreater(len(ichiban_prize_name_image_agent_batches), 0)
+        self.assertGreater(len(ichiban_prize_name_image_patch_agent_batches), 0)
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
