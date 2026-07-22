@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T10:09:36Z",
+  "generated_at": "2026-07-22T15:15:29Z",
   "scope": "ensky_cache_candidate_action_queue",
   "summary": {
     "candidate_action_rows": 54,
     "action_batch_count": 6,
     "batch_size": 10,
     "manual_confirmed_true": 0,
+    "identity_warning_rows": 54,
     "by_affiliation": [
       [
         "원피스",
@@ -79,6 +80,20 @@
         2
       ]
     ],
+    "by_candidate_identity_flag": [
+      [
+        "candidate_title_product_type_mismatch",
+        45
+      ],
+      [
+        "candidate_title_multi_variant_or_lineup",
+        40
+      ],
+      [
+        "candidate_title_box_or_assortment",
+        12
+      ]
+    ],
     "auto_apply_enabled": false
   },
   "instructions": [
@@ -131,6 +146,20 @@
           1
         ]
       ],
+      "by_candidate_identity_flag": [
+        [
+          "candidate_title_box_or_assortment",
+          8
+        ],
+        [
+          "candidate_title_product_type_mismatch",
+          6
+        ],
+        [
+          "candidate_title_multi_variant_or_lineup",
+          6
+        ]
+      ],
       "items": [
         {
           "manual_confirmed": false,
@@ -143,6 +172,10 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 46,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ちいかわ mitamemoチケットファイル2【1BOX 14個入り】",
@@ -152,6 +185,10 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -162,6 +199,10 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -172,6 +213,10 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -182,6 +227,9 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -192,6 +240,9 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -223,7 +274,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -237,6 +288,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 46,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ちいかわ mitamemoチケットファイル2【1BOX 14個入り】",
@@ -246,6 +301,10 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -256,6 +315,10 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -266,6 +329,10 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -276,6 +343,9 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -286,6 +356,9 @@
               "score": 20,
               "matched_tokens": [
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -317,7 +390,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -331,6 +404,11 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 23,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「葬送のフリーレン」 EMOCA2【1BOX 16パック入り】",
@@ -341,6 +419,10 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -352,6 +434,10 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -363,6 +449,10 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -374,6 +464,9 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -385,6 +478,9 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             }
           ],
@@ -416,7 +512,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -430,6 +526,11 @@
           "category": "문구",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 23,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「葬送のフリーレン」 EMOCA2【1BOX 16パック入り】",
@@ -440,6 +541,10 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -451,6 +556,10 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -462,6 +571,10 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -473,6 +586,10 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -484,6 +601,9 @@
               "matched_tokens": [
                 "フリーレン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             }
           ],
@@ -515,7 +635,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -529,6 +649,9 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 17,
+          "candidate_identity_flags": [
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ONE PIECE ジグソーパズル まめパズルダイカット 40ピース【ルフィ】MA-D01",
@@ -540,6 +663,9 @@
                 "one",
                 "piece",
                 "ルフィ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -551,6 +677,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -562,6 +691,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -573,6 +705,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -584,6 +719,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -615,7 +753,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -629,6 +767,9 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 17,
+          "candidate_identity_flags": [
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ONE PIECE ジグソーパズル まめパズルダイカット 40ピース【ゾロ】MA-D02",
@@ -640,6 +781,9 @@
                 "one",
                 "piece",
                 "ゾロ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -651,6 +795,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -662,6 +809,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -673,6 +823,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -684,6 +837,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -715,7 +871,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -729,6 +885,10 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 16,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_multi_variant_or_lineup"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『Fate/strange Fake』 おまんじゅうにぎにぎマスコット【1BOX 8箱入り】",
@@ -739,6 +899,10 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -750,6 +914,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -761,6 +928,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -772,6 +942,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -783,6 +956,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -814,7 +990,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -828,6 +1004,10 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 16,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_multi_variant_or_lineup"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『Fate/strange Fake』 おまんじゅうにぎにぎマスコット【1BOX 8箱入り】",
@@ -838,6 +1018,10 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -849,6 +1033,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -860,6 +1047,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -871,6 +1061,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -882,6 +1075,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -913,7 +1109,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -927,6 +1123,10 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 16,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_multi_variant_or_lineup"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『Fate/strange Fake』 おまんじゅうにぎにぎマスコット【1BOX 8箱入り】",
@@ -937,6 +1137,10 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -948,6 +1152,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -959,6 +1166,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -970,6 +1180,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -981,6 +1194,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -1012,7 +1228,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1026,6 +1242,10 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 16,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_multi_variant_or_lineup"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『Fate/strange Fake』 おまんじゅうにぎにぎマスコット【1BOX 8箱入り】",
@@ -1036,6 +1256,10 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1047,6 +1271,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -1058,6 +1285,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -1069,6 +1299,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             },
             {
@@ -1080,6 +1313,9 @@
               "matched_tokens": [
                 "おまんじゅう",
                 "にぎにぎマスコット"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -1111,7 +1347,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         }
       ],
@@ -1157,6 +1393,16 @@
           1
         ]
       ],
+      "by_candidate_identity_flag": [
+        [
+          "candidate_title_product_type_mismatch",
+          9
+        ],
+        [
+          "candidate_title_multi_variant_or_lineup",
+          5
+        ]
+      ],
       "items": [
         {
           "manual_confirmed": false,
@@ -1169,6 +1415,9 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 13,
+          "candidate_identity_flags": [
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ONE PIECE ジグソーパズル まめパズルダイカット 40ピース【ナミ】MA-D03",
@@ -1180,6 +1429,9 @@
                 "one",
                 "piece",
                 "ナミ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1191,6 +1443,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1202,6 +1457,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1213,6 +1471,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1224,6 +1485,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -1255,7 +1519,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1269,6 +1533,9 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 13,
+          "candidate_identity_flags": [
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ONE PIECE ジグソーパズル まめパズルダイカット 40ピース【サンジ】MA-D05",
@@ -1280,6 +1547,9 @@
                 "one",
                 "piece",
                 "サンジ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1291,6 +1561,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1302,6 +1575,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1313,6 +1589,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1324,6 +1603,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -1355,7 +1637,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1369,6 +1651,9 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 13,
+          "candidate_identity_flags": [
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ONE PIECE ジグソーパズル まめパズルダイカット 40ピース【ルフィ】MA-D01",
@@ -1380,6 +1665,9 @@
                 "one",
                 "piece",
                 "ルフィ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1391,6 +1679,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1402,6 +1693,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1413,6 +1707,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1424,6 +1721,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -1455,7 +1755,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1469,6 +1769,9 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 13,
+          "candidate_identity_flags": [
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ONE PIECE FILM RED ジグソーパズル1000ピース【麦わらの一味(FES)】1000-589",
@@ -1479,6 +1782,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1490,6 +1796,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1501,6 +1810,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1512,6 +1824,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1523,6 +1838,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -1554,7 +1872,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1568,6 +1886,9 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 13,
+          "candidate_identity_flags": [
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ONE PIECE FILM RED ジグソーパズル1000ピース【麦わらの一味(FES)】1000-589",
@@ -1578,6 +1899,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1589,6 +1913,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1600,6 +1927,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1611,6 +1941,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -1622,6 +1955,9 @@
               "matched_tokens": [
                 "one",
                 "piece"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -1653,7 +1989,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1667,6 +2003,9 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 10,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 PAPER THEATER(ペーパーシアター) / 虎杖悠仁 PT-226X",
@@ -1677,6 +2016,9 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1688,6 +2030,9 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1699,6 +2044,9 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1710,6 +2058,9 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1721,6 +2072,9 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -1752,7 +2106,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1766,6 +2120,10 @@
           "category": "캔뱃지",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 10,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 PAPER THEATER(ペーパーシアター) / 虎杖悠仁 PT-226X",
@@ -1776,6 +2134,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1787,6 +2149,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1798,6 +2164,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1809,6 +2179,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1820,6 +2194,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -1851,7 +2229,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1865,6 +2243,10 @@
           "category": "머그컵",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 10,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 PAPER THEATER(ペーパーシアター) / 虎杖悠仁 PT-226X",
@@ -1875,6 +2257,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1886,6 +2272,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1897,6 +2287,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1908,6 +2302,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1919,6 +2317,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "虎杖悠仁"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -1950,7 +2352,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -1964,6 +2366,10 @@
           "category": "문구",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 9,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 PAPER THEATER(ペーパーシアター) / 五条悟 PT-227X",
@@ -1974,6 +2380,10 @@
               "matched_tokens": [
                 "五条",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1985,6 +2395,10 @@
               "matched_tokens": [
                 "五条",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -1996,6 +2410,10 @@
               "matched_tokens": [
                 "五条",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2007,6 +2425,9 @@
               "matched_tokens": [
                 "五条",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -2018,6 +2439,10 @@
               "matched_tokens": [
                 "五条",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2049,7 +2474,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2063,6 +2488,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 8,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 PAPER THEATER(ペーパーシアター) / 五条悟 PT-227X",
@@ -2073,6 +2502,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2084,6 +2517,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2095,6 +2532,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2106,6 +2547,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2117,6 +2562,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2148,7 +2597,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         }
       ],
@@ -2202,6 +2651,16 @@
           1
         ]
       ],
+      "by_candidate_identity_flag": [
+        [
+          "candidate_title_multi_variant_or_lineup",
+          10
+        ],
+        [
+          "candidate_title_product_type_mismatch",
+          9
+        ]
+      ],
       "items": [
         {
           "manual_confirmed": false,
@@ -2214,6 +2673,10 @@
           "category": "문구",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 8,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 PAPER THEATER(ペーパーシアター) / 五条悟 PT-227X",
@@ -2224,6 +2687,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2235,6 +2702,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2246,6 +2717,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2257,6 +2732,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2268,6 +2747,10 @@
               "matched_tokens": [
                 "五条悟",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2299,7 +2782,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2313,6 +2796,10 @@
           "category": "캔뱃지",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 6,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『僕のヒーローアカデミア』 PAPER SHADOW ART mini(ペーパーシャドーアート ミニ) / 轟焦凍 SA-M45",
@@ -2323,6 +2810,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "轟焦凍"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2334,6 +2825,9 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "轟焦凍"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -2345,6 +2839,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "轟焦凍"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2356,6 +2854,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "轟焦凍"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2367,6 +2869,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "轟焦凍"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2398,7 +2904,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2412,6 +2918,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 6,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 ちみけもますこっと /(2)伏黒恵",
@@ -2422,6 +2932,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2433,6 +2947,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2444,6 +2962,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2455,6 +2977,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2466,6 +2992,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2497,7 +3027,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2511,6 +3041,10 @@
           "category": "캔뱃지",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 6,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 ちみけもますこっと /(2)伏黒恵",
@@ -2521,6 +3055,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2532,6 +3070,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2543,6 +3085,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2554,6 +3100,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2565,6 +3115,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2596,7 +3150,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2610,6 +3164,10 @@
           "category": "머그컵",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 6,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 ちみけもますこっと /(2)伏黒恵",
@@ -2620,6 +3178,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2631,6 +3193,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2642,6 +3208,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2653,6 +3223,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2664,6 +3238,10 @@
               "matched_tokens": [
                 "伏黒恵",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2695,7 +3273,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2709,6 +3287,10 @@
           "category": "캔뱃지",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 5,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『僕のヒーローアカデミア』 PAPER SHADOW ART mini(ペーパーシャドーアート ミニ) / 爆豪勝己 SA-M43",
@@ -2719,6 +3301,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "爆豪勝己"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2730,6 +3316,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "爆豪勝己"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2741,6 +3331,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "爆豪勝己"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2752,6 +3346,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "爆豪勝己"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2763,6 +3361,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "爆豪勝己"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2794,7 +3396,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2808,6 +3410,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 5,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ「呪術廻戦」 PAPER THEATER(ペーパーシアター) / 夏油傑・真人 PT-229X",
@@ -2818,6 +3424,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "夏油傑"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2829,6 +3439,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "夏油傑"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2840,6 +3454,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "夏油傑"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2851,6 +3469,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "夏油傑"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2862,6 +3484,10 @@
               "matched_tokens": [
                 "呪術廻戦",
                 "夏油傑"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2893,7 +3519,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2907,6 +3533,10 @@
           "category": "캔뱃지",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 4,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『僕のヒーローアカデミア』 PAPER SHADOW ART mini(ペーパーシャドーアート ミニ) / 緑谷出久 SA-M42",
@@ -2917,6 +3547,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "緑谷出久"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2928,6 +3562,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "緑谷出久"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2939,6 +3577,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "緑谷出久"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -2950,6 +3592,10 @@
               "matched_tokens": [
                 "僕のヒーローアカデミア",
                 "緑谷出久"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -2981,7 +3627,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -2995,6 +3641,10 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 4,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ワンピース PAPER SHADOW ART mini(ペーパーシャドーアート ミニ) / ロロノア・ゾロ SA-M12",
@@ -3005,6 +3655,10 @@
               "matched_tokens": [
                 "ゾロ",
                 "ロロノア"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3016,6 +3670,10 @@
               "matched_tokens": [
                 "ゾロ",
                 "ロロノア"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3027,6 +3685,10 @@
               "matched_tokens": [
                 "ゾロ",
                 "ロロノア"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3038,6 +3700,9 @@
               "matched_tokens": [
                 "ゾロ",
                 "ロロノア"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -3069,7 +3734,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3083,6 +3748,9 @@
           "category": "인형",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 4,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ワンピース PAPER SHADOW ART mini(ペーパーシャドーアート ミニ) / モンキー・D・ルフィ SA-M11",
@@ -3093,6 +3761,9 @@
               "matched_tokens": [
                 "モンキー",
                 "ルフィ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3104,6 +3775,9 @@
               "matched_tokens": [
                 "モンキー",
                 "ルフィ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3115,6 +3789,9 @@
               "matched_tokens": [
                 "モンキー",
                 "ルフィ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3126,6 +3803,9 @@
               "matched_tokens": [
                 "モンキー",
                 "ルフィ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -3157,7 +3837,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         }
       ],
@@ -3215,6 +3895,20 @@
           1
         ]
       ],
+      "by_candidate_identity_flag": [
+        [
+          "candidate_title_product_type_mismatch",
+          9
+        ],
+        [
+          "candidate_title_multi_variant_or_lineup",
+          7
+        ],
+        [
+          "candidate_title_box_or_assortment",
+          3
+        ]
+      ],
       "items": [
         {
           "manual_confirmed": false,
@@ -3227,6 +3921,9 @@
           "category": "인형",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 3,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ワンピース PAPER SHADOW ART mini(ペーパーシャドーアート ミニ) / トニートニー・チョッパー SA-M14",
@@ -3237,6 +3934,9 @@
               "matched_tokens": [
                 "チョッパー",
                 "トニートニー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3248,6 +3948,9 @@
               "matched_tokens": [
                 "チョッパー",
                 "トニートニー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3259,6 +3962,9 @@
               "matched_tokens": [
                 "チョッパー",
                 "トニートニー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -3290,7 +3996,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3304,6 +4010,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 3,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『葬送のフリーレン』 PAPER SHADOW ART mini (ペーパーシャドーアート ミニ) / フェルン SA-M74",
@@ -3314,6 +4024,10 @@
               "matched_tokens": [
                 "フェルン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3325,6 +4039,9 @@
               "matched_tokens": [
                 "フェルン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -3336,6 +4053,9 @@
               "matched_tokens": [
                 "フェルン",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -3367,7 +4087,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3381,6 +4101,10 @@
           "category": "응원용품",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 3,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "「劇場版 呪術廻戦 0」 アクリルスタンド /(4)パンダ",
@@ -3391,6 +4115,10 @@
               "matched_tokens": [
                 "パンダ",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3402,6 +4130,10 @@
               "matched_tokens": [
                 "パンダ",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3413,6 +4145,10 @@
               "matched_tokens": [
                 "パンダ",
                 "呪術廻戦"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -3444,7 +4180,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3458,6 +4194,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 3,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "チェンソーマン ちみけもますこっと /(4)パワー",
@@ -3468,6 +4208,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "パワー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3479,6 +4223,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "パワー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3490,6 +4238,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "パワー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -3521,7 +4273,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3535,6 +4287,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 3,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "チェンソーマン ちみけもますこっと /(3)早川アキ",
@@ -3545,6 +4301,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "早川アキ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3556,6 +4316,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "早川アキ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3567,6 +4331,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "早川アキ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -3598,7 +4366,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3612,6 +4380,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 3,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "チェンソーマン ちみけもますこっと /(4)パワー",
@@ -3622,6 +4394,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "パワー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3633,6 +4409,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "パワー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3644,6 +4424,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "パワー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -3675,7 +4459,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3689,6 +4473,10 @@
           "category": "응원용품",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 3,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "劇場版『チェンソーマン レゼ篇』 クリアシール /(1)ポチタ",
@@ -3699,6 +4487,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "ポチタ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3710,6 +4502,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "ポチタ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -3721,6 +4517,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "ポチタ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -3752,7 +4552,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3766,6 +4566,10 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ぼっち・ざ・ろっく! ジグソーパズル1000ピース 【結束バンド】1000T-354",
@@ -3776,6 +4580,9 @@
               "matched_tokens": [
                 "ぼっち",
                 "ろっく"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -3787,6 +4594,10 @@
               "matched_tokens": [
                 "ぼっち",
                 "ろっく"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             }
           ],
@@ -3818,7 +4629,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3832,6 +4643,10 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ぼっち・ざ・ろっく! ジグソーパズル1000ピース 【結束バンド】1000T-354",
@@ -3842,6 +4657,9 @@
               "matched_tokens": [
                 "ぼっち",
                 "ろっく"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -3853,6 +4671,10 @@
               "matched_tokens": [
                 "ぼっち",
                 "ろっく"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             }
           ],
@@ -3884,7 +4706,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -3898,6 +4720,10 @@
           "category": "캔뱃지",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ぼっち・ざ・ろっく! ジグソーパズル1000ピース 【結束バンド】1000T-354",
@@ -3908,6 +4734,9 @@
               "matched_tokens": [
                 "ぼっち",
                 "ろっく"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             },
             {
@@ -3919,6 +4748,10 @@
               "matched_tokens": [
                 "ぼっち",
                 "ろっく"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment"
               ]
             }
           ],
@@ -3950,7 +4783,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         }
       ],
@@ -3992,6 +4825,16 @@
           5
         ]
       ],
+      "by_candidate_identity_flag": [
+        [
+          "candidate_title_multi_variant_or_lineup",
+          10
+        ],
+        [
+          "candidate_title_product_type_mismatch",
+          9
+        ]
+      ],
       "items": [
         {
           "manual_confirmed": false,
@@ -4004,6 +4847,10 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ワンピース PAPER THEATER(ペーパーシアター) / トラファルガー・ロー PT-158X",
@@ -4014,6 +4861,10 @@
               "matched_tokens": [
                 "トラファルガー",
                 "ロー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4025,6 +4876,10 @@
               "matched_tokens": [
                 "トラファルガー",
                 "ロー"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4056,7 +4911,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4070,6 +4925,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『葬送のフリーレン』 PAPER SHADOW ART mini (ペーパーシャドーアート ミニ) / シュタルク SA-M75",
@@ -4080,6 +4939,10 @@
               "matched_tokens": [
                 "シュタルク",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4091,6 +4954,9 @@
               "matched_tokens": [
                 "シュタルク",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -4122,7 +4988,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4136,6 +5002,10 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "チェンソーマン ちみけもますこっと /(1)デンジ",
@@ -4146,6 +5016,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "デンジ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4157,6 +5031,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "デンジ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4188,7 +5066,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4202,6 +5080,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "チェンソーマン ちみけもますこっと /(2)マキマ",
@@ -4212,6 +5094,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "マキマ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4223,6 +5109,10 @@
               "matched_tokens": [
                 "チェンソーマン",
                 "マキマ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4254,7 +5144,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4268,6 +5158,10 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ちいかわ ダイカットうちわ / うさぎ(5)",
@@ -4278,6 +5172,10 @@
               "matched_tokens": [
                 "うさぎ",
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4289,6 +5187,10 @@
               "matched_tokens": [
                 "うさぎ",
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4320,7 +5222,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4334,6 +5236,10 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ちいかわ ダイカットうちわ / モモンガ(4)",
@@ -4344,6 +5250,10 @@
               "matched_tokens": [
                 "ちいかわ",
                 "モモンガ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4355,6 +5265,10 @@
               "matched_tokens": [
                 "ちいかわ",
                 "モモンガ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4386,7 +5300,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4400,6 +5314,10 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ちいかわ ダイカットうちわ / ハチワレ(5)",
@@ -4410,6 +5328,10 @@
               "matched_tokens": [
                 "ちいかわ",
                 "ハチワレ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4421,6 +5343,10 @@
               "matched_tokens": [
                 "ちいかわ",
                 "ハチワレ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4452,7 +5378,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4466,6 +5392,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ちいかわ ダイカットうちわ / ハチワレ(5)",
@@ -4476,6 +5406,10 @@
               "matched_tokens": [
                 "ちいかわ",
                 "ハチワレ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4487,6 +5421,10 @@
               "matched_tokens": [
                 "ちいかわ",
                 "ハチワレ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4518,7 +5456,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4532,6 +5470,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ちいかわ ダイカットうちわ / うさぎ(5)",
@@ -4542,6 +5484,10 @@
               "matched_tokens": [
                 "うさぎ",
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4553,6 +5499,10 @@
               "matched_tokens": [
                 "うさぎ",
                 "ちいかわ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4584,7 +5534,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4598,6 +5548,9 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 2,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ちいかわ ダイカットうちわ / モモンガ(4)",
@@ -4608,6 +5561,9 @@
               "matched_tokens": [
                 "ちいかわ",
                 "モモンガ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             },
             {
@@ -4619,6 +5575,9 @@
               "matched_tokens": [
                 "ちいかわ",
                 "モモンガ"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4650,7 +5609,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         }
       ],
@@ -4692,6 +5651,20 @@
           1
         ]
       ],
+      "by_candidate_identity_flag": [
+        [
+          "candidate_title_product_type_mismatch",
+          3
+        ],
+        [
+          "candidate_title_multi_variant_or_lineup",
+          2
+        ],
+        [
+          "candidate_title_box_or_assortment",
+          1
+        ]
+      ],
       "items": [
         {
           "manual_confirmed": false,
@@ -4704,6 +5677,10 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 1,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ワンピース PAPER THEATER(ペーパーシアター) / ニコ・ロビン PT-388",
@@ -4714,6 +5691,10 @@
               "matched_tokens": [
                 "ニコ",
                 "ロビン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4745,7 +5726,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4759,6 +5740,9 @@
           "category": "키링",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 1,
+          "candidate_identity_flags": [
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "ワンピース ジグソーパズル300ピース【肖像画『ポートガス・D・エース』】300-1399",
@@ -4769,6 +5753,9 @@
               "matched_tokens": [
                 "エース",
                 "ポートガス"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch"
               ]
             }
           ],
@@ -4800,7 +5787,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4814,6 +5801,10 @@
           "category": "아크릴 스탠드",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 1,
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_lineup",
+            "candidate_title_product_type_mismatch"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『葬送のフリーレン』 PAPER SHADOW ART mini (ペーパーシャドーアート ミニ) / ヒンメル SA-M73",
@@ -4824,6 +5815,10 @@
               "matched_tokens": [
                 "ヒンメル",
                 "葬送のフリーレン"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_multi_variant_or_lineup"
               ]
             }
           ],
@@ -4855,7 +5850,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         },
         {
@@ -4869,6 +5864,9 @@
           "category": "마스코트",
           "candidate_status": "broad_cache_candidate",
           "candidate_count": 1,
+          "candidate_identity_flags": [
+            "candidate_title_box_or_assortment"
+          ],
           "top_candidates": [
             {
               "candidate_title": "TVアニメ『キルアオ』 おまんじゅうにぎにぎマスコット【1BOX 6箱入り】",
@@ -4879,6 +5877,9 @@
               "matched_tokens": [
                 "おまんじゅうにぎにぎマスコット",
                 "キルア"
+              ],
+              "candidate_identity_flags": [
+                "candidate_title_box_or_assortment"
               ]
             }
           ],
@@ -4910,7 +5911,7 @@
             "Candidate image must be the product image from the accepted Ensky product page.",
             "Leave manual_confirmed false for related goods, wrong characters, wrong goods type, or broad brand-only matches."
           ],
-          "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+          "recommended_action": "recheck_ensky_candidate_identity_before_source_or_image_patch",
           "auto_apply_enabled": false
         }
       ],

@@ -57,6 +57,55 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["top_candidates"][0]["candidate_source_url"], "https://www.enskyshop.com/products/detail/1")
         self.assertIn("exact product", item["acceptance_criteria"][0])
 
+    def test_build_report_flags_product_type_and_box_candidates(self) -> None:
+        cache_coverage = {
+            "items": [
+                {
+                    "catalog_index": 3,
+                    "name_ko": "Chiikawa acrylic stand",
+                    "name_ja": "ちいかわ アクリルスタンド (ちいかわ)",
+                    "source_store": "엔스카이",
+                    "affiliation": "ちいかわ",
+                    "category": "アクリルスタンド",
+                    "status": "broad_cache_candidate",
+                    "candidate_count": 1,
+                    "top_candidates": [
+                        {
+                            "title": "ちいかわ mitamemoチケットファイル2【1BOX 14個入り】",
+                            "source_url": "https://www.enskyshop.com/products/detail/28997",
+                            "image_url": "https://www.enskyshop.com/html/upload/save_image/a.jpg",
+                            "safe_exact_match": False,
+                            "score": 20,
+                            "matched_tokens": ["ちいかわ"],
+                        }
+                    ],
+                }
+            ]
+        }
+
+        report = queue.build_report(cache_coverage, generated_at="2026-07-22T00:00:00Z", batch_size=10)
+
+        item = report["batches"][0]["items"][0]
+        self.assertEqual(report["summary"]["identity_warning_rows"], 1)
+        self.assertEqual(
+            dict(report["summary"]["by_candidate_identity_flag"]),
+            {
+                "candidate_title_product_type_mismatch": 1,
+                "candidate_title_box_or_assortment": 1,
+            },
+        )
+        self.assertEqual(
+            item["recommended_action"],
+            "recheck_ensky_candidate_identity_before_source_or_image_patch",
+        )
+        self.assertEqual(
+            item["top_candidates"][0]["candidate_identity_flags"],
+            [
+                "candidate_title_product_type_mismatch",
+                "candidate_title_box_or_assortment",
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
