@@ -14,6 +14,7 @@ import import_confirmed_dedupe_decisions
 import import_confirmed_ichiban_metadata_rows
 import import_confirmed_image_attachment_rows
 import import_confirmed_metadata_rows
+import import_confirmed_official_detail_matches
 import import_confirmed_requested_focus_rows
 import import_confirmed_source_discovery_rows
 
@@ -35,6 +36,14 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         )
 
         workflow = readiness.WORKFLOWS["source_discovery"]
+
+        official = readiness.WORKFLOWS["official_detail"]
+        self.assertEqual(official["public_action_queue"].name, "official_detail_review_batches_public.json")
+        self.assertEqual(official["public_action_rows_key"], "reviewable_seed_rows")
+        self.assertEqual(
+            official["public_action_next_step"],
+            "confirm_official_detail_candidates_then_run_import_confirmed_official_detail_matches",
+        )
 
         self.assertEqual(workflow["confirmed"].name, "source_discovery_confirmed_rows.json")
         self.assertEqual(workflow["template"].name, "source_discovery_confirmed_rows.template.json")
@@ -109,6 +118,7 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
 
     def test_readiness_paths_match_importer_defaults(self) -> None:
         expected = {
+            "official_detail": import_confirmed_official_detail_matches,
             "catalog_field": import_confirmed_metadata_rows,
             "source_discovery": import_confirmed_source_discovery_rows,
             "catalog_image": import_confirmed_image_attachment_rows,
@@ -195,6 +205,31 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["public_action_queue_batches"], 2)
         self.assertNotIn("batches", workflow)
         self.assertNotIn("groups", workflow)
+
+    def test_public_action_queue_takes_priority_over_empty_confirmed_file(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            workflows = {
+                "official_detail": {
+                    "confirmed": _write_json(root / "official_confirmed.json", {"items": []}),
+                    "template": root / "official.template.json",
+                    "report": root / "official_report.json",
+                    "public_workstream": "official_detail_source_image",
+                    "public_action_queue": _write_json(
+                        root / "official_action.json",
+                        {"summary": {"reviewable_seed_rows": 3}},
+                    ),
+                    "public_action_rows_key": "reviewable_seed_rows",
+                    "public_action_next_step": "confirm_official_detail_candidates_then_run_import_confirmed_official_detail_matches",
+                }
+            }
+
+            report = readiness.build_report(workflows)
+
+        workflow = report["workflows"][0]
+        self.assertEqual(workflow["status"], "public_action_queue_ready_for_confirmation")
+        self.assertTrue(workflow["confirmed_file_exists"])
+        self.assertEqual(workflow["public_action_rows"], 3)
 
     def test_confirmed_blocked_rows_summarize_skip_reasons(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

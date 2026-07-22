@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T15:33:53Z",
+  "generated_at": "2026-07-22T15:41:19Z",
   "summary": {
     "batch_count": 96,
-    "summed_batch_rows": 29798,
+    "summed_batch_rows": 20288,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -156,7 +156,7 @@
       "requested_focus_open_rows": 8070,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1147,
-      "confirmed_import_action_queue_rows": 14136,
+      "confirmed_import_action_queue_rows": 4626,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
@@ -3129,7 +3129,7 @@
       "priority": 19,
       "title": "Confirmed import readiness review",
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
-      "rows": 15283,
+      "rows": 5773,
       "recommended_action": "Review pending/blocked confirmed imports before any catalog write.",
       "acceptance_criteria": [
         "Do not expose row-level private candidate details in public reports.",
@@ -3137,6 +3137,29 @@
         "Only manually confirmed exact matches may be imported."
       ],
       "sample_items": [
+        {
+          "workflow": "official_detail",
+          "public_workstream": "official_detail_source_image",
+          "status": "public_action_queue_ready_for_confirmation",
+          "confirmed_file_exists": true,
+          "template_file_exists": true,
+          "import_report_exists": true,
+          "confirmed_items": 0,
+          "manual_confirmed_true": 0,
+          "template_items": 0,
+          "template_manual_confirmed_true": 0,
+          "public_action_queue_exists": true,
+          "public_action_queue_report": "data/official_detail_review_batches_public.json",
+          "public_action_rows": 3,
+          "public_action_batches": 0,
+          "public_action_next_step": "confirm_official_detail_candidates_then_run_import_confirmed_official_detail_matches",
+          "updated_rows": 0,
+          "skipped_rows": 0,
+          "duplicates": 0,
+          "skip_reason_counts": [],
+          "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
+          "auto_apply_enabled": false
+        },
         {
           "workflow": "catalog_field",
           "public_workstream": "metadata_field_values",
@@ -3150,7 +3173,7 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
-          "public_action_rows": 11964,
+          "public_action_rows": 2505,
           "public_action_batches": 14,
           "public_action_next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
           "updated_rows": 0,
@@ -3265,8 +3288,8 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/animation_category_action_queue_public.json",
-          "public_action_rows": 428,
-          "public_action_batches": 2,
+          "public_action_rows": 374,
+          "public_action_batches": 1,
           "public_action_next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
           "updated_rows": 0,
           "skipped_rows": 0,

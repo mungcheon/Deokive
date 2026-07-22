@@ -27,6 +27,9 @@ WORKFLOWS = {
         "template": SERVER / "official_detail_match_confirmed_rows.template.json",
         "report": SERVER / "official_detail_match_import_report.json",
         "public_workstream": "official_detail_source_image",
+        "public_action_queue": DATA / "official_detail_review_batches_public.json",
+        "public_action_rows_key": "reviewable_seed_rows",
+        "public_action_next_step": "confirm_official_detail_candidates_then_run_import_confirmed_official_detail_matches",
     },
     "storefront": {
         "confirmed": SERVER / "storefront_match_confirmed_rows.json",
@@ -206,12 +209,12 @@ def _status(
         return "confirmed_rows_blocked"
     if confirmed_true:
         return "confirmed_rows_pending_import"
-    if confirmed_exists:
-        return "confirmed_file_empty"
     if template_items:
         return "template_ready_for_manual_confirmation"
     if public_action_rows:
         return "public_action_queue_ready_for_confirmation"
+    if confirmed_exists:
+        return "confirmed_file_empty"
     return "no_current_candidates"
 
 

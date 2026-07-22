@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T02:08:18Z",
+  "generated_at": "2026-07-22T15:39:57Z",
   "scope": "public_confirmed_import_readiness",
   "summary": {
     "workflow_count": 11,
     "confirmed_files": 2,
     "template_items": 1147,
-    "public_action_queue_rows": 14136,
-    "public_action_queue_batches": 181,
+    "public_action_queue_rows": 4626,
+    "public_action_queue_batches": 180,
     "manual_confirmed_true": 0,
     "updated_rows": 0,
     "skipped_rows": 0,
@@ -17,11 +17,7 @@
     "by_status": [
       [
         "public_action_queue_ready_for_confirmation",
-        5
-      ],
-      [
-        "confirmed_file_empty",
-        2
+        6
       ],
       [
         "no_current_candidates",
@@ -30,6 +26,10 @@
       [
         "template_ready_for_manual_confirmation",
         2
+      ],
+      [
+        "confirmed_file_empty",
+        1
       ]
     ],
     "auto_apply_enabled": false
@@ -38,7 +38,7 @@
     {
       "workflow": "official_detail",
       "public_workstream": "official_detail_source_image",
-      "status": "confirmed_file_empty",
+      "status": "public_action_queue_ready_for_confirmation",
       "confirmed_file_exists": true,
       "template_file_exists": true,
       "import_report_exists": true,
@@ -46,16 +46,16 @@
       "manual_confirmed_true": 0,
       "template_items": 0,
       "template_manual_confirmed_true": 0,
-      "public_action_queue_exists": false,
-      "public_action_queue_report": null,
-      "public_action_rows": 0,
+      "public_action_queue_exists": true,
+      "public_action_queue_report": "data/official_detail_review_batches_public.json",
+      "public_action_rows": 3,
       "public_action_batches": 0,
-      "public_action_next_step": null,
+      "public_action_next_step": "confirm_official_detail_candidates_then_run_import_confirmed_official_detail_matches",
       "updated_rows": 0,
       "skipped_rows": 0,
       "duplicates": 0,
       "skip_reason_counts": [],
-      "next_action": "Mark exact reviewed rows manual_confirmed=true or regenerate from the latest template.",
+      "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
       "auto_apply_enabled": false
     },
     {
@@ -94,7 +94,7 @@
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
-      "public_action_rows": 11964,
+      "public_action_rows": 2505,
       "public_action_batches": 14,
       "public_action_next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
       "updated_rows": 0,
@@ -255,8 +255,8 @@
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/animation_category_action_queue_public.json",
-      "public_action_rows": 428,
-      "public_action_batches": 2,
+      "public_action_rows": 374,
+      "public_action_batches": 1,
       "public_action_next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
       "updated_rows": 0,
       "skipped_rows": 0,
