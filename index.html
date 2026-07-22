@@ -51,20 +51,32 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
-  <script src="flutter_bootstrap.js?v=20260722-cachefix1" async></script>
   <script>
-    window.addEventListener('load', async function () {
-      if (!('serviceWorker' in navigator)) return;
+    async function clearDeokiveWebCache() {
       try {
-        const regs = await navigator.serviceWorker.getRegistrations();
-        for (const reg of regs) {
-          await reg.unregister();
+        if ('serviceWorker' in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          for (const reg of regs) {
+            await reg.unregister();
+          }
         }
         if ('caches' in window) {
           const keys = await caches.keys();
           await Promise.all(keys.map((key) => caches.delete(key)));
         }
       } catch (_) {}
+    }
+
+    function loadDeokiveApp() {
+      const script = document.createElement('script');
+      script.src = 'flutter_bootstrap.js?v=20260722-nosw2';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    window.addEventListener('DOMContentLoaded', async function () {
+      await clearDeokiveWebCache();
+      loadDeokiveApp();
     });
   </script>
 </body>
