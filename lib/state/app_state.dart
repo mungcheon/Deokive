@@ -1849,7 +1849,7 @@ class AppState extends ChangeNotifier {
     final entriesByBarcode = <String, GoodsCatalogEntry>{};
     final entriesByName = <String, GoodsCatalogEntry>{};
     for (final entry in curatedCatalogEntries) {
-      final imageUrl = _normalizedCatalogRemoteImageUrl(entry);
+      final imageUrl = _catalogEntryImageReference(entry);
       if (imageUrl == null) continue;
 
       final barcode = entry.barcode?.trim() ?? '';
@@ -1875,7 +1875,7 @@ class AppState extends ChangeNotifier {
           matchedByBarcode ?? entriesByName[_catalogBackfillNameKey(item.name)];
       if (entry == null) continue;
 
-      final imageUrl = _normalizedCatalogRemoteImageUrl(entry);
+      final imageUrl = _catalogEntryImageReference(entry);
       if (imageUrl == null || imageUrl == item.imageUrl) continue;
 
       goodsItems[index] = item.copyWith(imageUrl: imageUrl);
@@ -1886,15 +1886,17 @@ class AppState extends ChangeNotifier {
 
   bool _needsCatalogImageReferenceBackfill(String? value) {
     final imageUrl = value?.trim() ?? '';
-    if (imageUrl.isEmpty) return true;
-    return imageUrl.startsWith('assets/catalog_images/');
+    return imageUrl.isEmpty;
   }
 
   String _catalogBackfillNameKey(String value) {
     return value.trim().replaceAll(RegExp(r'\s+'), ' ').toLowerCase();
   }
 
-  String? _normalizedCatalogRemoteImageUrl(GoodsCatalogEntry entry) {
+  String? _catalogEntryImageReference(GoodsCatalogEntry entry) {
+    final localPath = entry.localImagePath?.trim() ?? '';
+    if (localPath.isNotEmpty) return localPath;
+
     final remoteUrl = entry.imageUrl?.trim() ?? '';
     if (remoteUrl.isEmpty) return null;
     return remoteUrl.replaceAll('&amp;', '&').replaceFirst(

@@ -166,8 +166,8 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.8,
-        minChildSize: 0.5,
+        initialChildSize: 0.86,
+        minChildSize: 0.78,
         maxChildSize: 0.95,
         builder: (context, scrollController) {
           return StatefulBuilder(
@@ -589,6 +589,9 @@ Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
 
 @visibleForTesting
 String? catalogEntryImageReference(GoodsCatalogEntry entry) {
+  final localPath = entry.localImagePath?.trim() ?? '';
+  if (localPath.isNotEmpty) return localPath;
+
   final remoteUrl = entry.imageUrl?.trim() ?? '';
   if (remoteUrl.isNotEmpty) {
     return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
@@ -596,7 +599,5 @@ String? catalogEntryImageReference(GoodsCatalogEntry entry) {
           'https://',
         );
   }
-  final localPath = entry.localImagePath?.trim() ?? '';
-  if (localPath.isNotEmpty) return localPath;
   return null;
 }

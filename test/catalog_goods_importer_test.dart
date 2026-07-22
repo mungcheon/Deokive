@@ -94,7 +94,7 @@ void main() {
     expect(restored.imageUrl, item.imageUrl);
   });
 
-  test('catalog import prefers remote image references for saved goods', () {
+  test('catalog import prefers bundled image references for saved goods', () {
     final appState = AppState();
     final folder = FolderItem(
       id: 'top-folder',
@@ -117,7 +117,7 @@ void main() {
       folder: folder,
     );
 
-    expect(item.imageUrl, 'https://example.com/catalog/source.jpg');
+    expect(item.imageUrl, 'assets/catalog/cache/sample.jpg');
   });
 
   test('catalog import can load a bundled catalog image for saving', () async {
