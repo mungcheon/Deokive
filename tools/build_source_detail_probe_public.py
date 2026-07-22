@@ -171,6 +171,7 @@ def build_report(paths: list[Path], *, generated_at: str | None = None, candidat
             "processed_rows": row.get("processed_rows_reported_single_store_only"),
             "result_rows": row.get("result_rows"),
             "failure_count": row.get("failure_count"),
+            "provider_temporary_unavailable_failures": row.get("provider_temporary_unavailable_failures"),
             "exact_candidate_rows": row.get("exact_candidate_rows"),
             "candidate_review_rows": row.get("candidate_review_rows"),
             "no_candidate_rows": row.get("no_candidate_rows"),
@@ -197,6 +198,9 @@ def build_report(paths: list[Path], *, generated_at: str | None = None, candidat
             "candidate_review_rows": summary.get("candidate_review_rows_reported", 0),
             "unique_review_candidate_rows": summary.get("unique_review_candidate_store_row_pairs", 0),
             "failure_count": summary.get("failure_count", 0),
+            "provider_temporary_unavailable_stores": summary.get(
+                "provider_temporary_unavailable_stores", []
+            ),
             "time_budget_exhausted_reports": summary.get("time_budget_exhausted_reports", 0),
             "rate_limit_skipped_stores": summary.get("rate_limit_skipped_stores", []),
             "published_candidate_rows": len(candidates),
