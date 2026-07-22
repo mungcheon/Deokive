@@ -344,6 +344,12 @@ def build() -> dict[str, Any]:
             "template_items": public_focus_template_summary.get("template_items"),
             "template_confirmed_rows": public_focus_template_summary.get("manual_confirmed_rows")
             or public_actionability_summary.get("source_discovery_focus_template_confirmed_rows"),
+            "next_focus_pack_id": public_focus_template_summary.get("next_focus_pack_id"),
+            "next_source_store": public_focus_template_summary.get("next_source_store"),
+            "next_target_category": public_focus_template_summary.get("next_target_category"),
+            "next_focus_pack_rows": public_focus_template_summary.get("next_focus_pack_rows"),
+            "next_official_search_url": public_focus_template_summary.get("next_official_search_url"),
+            "work_order_pack_count": public_focus_template_summary.get("work_order_pack_count"),
             "template_import_updated_rows": public_focus_template_import.get("updated_rows"),
             "template_import_skipped_rows": public_focus_template_import.get("skipped_rows"),
             "template_import_skip_reason_counts": public_focus_template_import.get("skip_reason_counts"),
@@ -1212,6 +1218,12 @@ def build() -> dict[str, Any]:
                 "template_confirmed_rows": public_actionability_summary.get(
                     "source_discovery_focus_template_confirmed_rows"
                 ),
+                "next_focus_pack_id": public_focus_template_summary.get("next_focus_pack_id"),
+                "next_source_store": public_focus_template_summary.get("next_source_store"),
+                "next_target_category": public_focus_template_summary.get("next_target_category"),
+                "next_focus_pack_rows": public_focus_template_summary.get("next_focus_pack_rows"),
+                "next_official_search_url": public_focus_template_summary.get("next_official_search_url"),
+                "work_order_pack_count": public_focus_template_summary.get("work_order_pack_count"),
                 "template_import_updated_rows": public_actionability_summary.get(
                     "source_discovery_focus_template_dry_run_updated_rows"
                 ),

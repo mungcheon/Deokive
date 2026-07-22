@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T17:00:02Z",
+  "generated_at": "2026-07-22T17:31:37Z",
   "summary": {
     "catalog_rows": 20391,
     "coverage": {
@@ -41,6 +41,9 @@
       "source_discovery_actionable_rows": 642,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 5,
+      "source_discovery_focus_template_rows": 427,
+      "source_discovery_focus_template_work_order_packs": 24,
+      "source_discovery_focus_template_dry_run_skipped_rows": 427,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
       "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
@@ -152,6 +155,23 @@
       "open_rows": 647,
       "primary_report": "data/source_discovery_queue_public.json",
       "next_step": "find_exact_official_source_url",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "source_discovery_focus_template",
+      "status": "manual_review",
+      "open_rows": 427,
+      "work_order_pack_count": 24,
+      "next_focus_pack_id": "source-discovery-focus-001",
+      "next_source_store": "애니메이트",
+      "next_target_category": "아크릴 스탠드",
+      "next_focus_pack_rows": 20,
+      "next_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+      "template_confirmed_rows": 0,
+      "dry_run_updated_rows": 0,
+      "dry_run_skipped_rows": 427,
+      "primary_report": "data/source_discovery_focus_confirmed_template_public.json",
+      "next_step": "work_source_focus_template_work_order_top_to_bottom",
       "auto_apply_enabled": false
     },
     {
@@ -2188,6 +2208,10 @@
       "public_report": "data/source_discovery_review_batches_public.json"
     },
     {
+      "key": "source_discovery_focus_template",
+      "public_report": "data/source_discovery_focus_confirmed_template_public.json"
+    },
+    {
       "key": "ensky_cache_candidate_action_queue",
       "public_report": "data/ensky_cache_candidate_action_queue_public.json"
     },
@@ -2580,6 +2604,21 @@
       "public_report": "data/source_discovery_queue_public.json",
       "ready_rows": 647,
       "recommended_next_action": "Find exact official detail pages for rows missing source_url."
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_focus_template",
+      "public_report": "data/source_discovery_focus_confirmed_template_public.json",
+      "template_items": 427,
+      "work_order_pack_count": 24,
+      "next_focus_pack_id": "source-discovery-focus-001",
+      "next_source_store": "애니메이트",
+      "next_target_category": "아크릴 스탠드",
+      "next_focus_pack_rows": 20,
+      "next_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+      "dry_run_updated_rows": 0,
+      "dry_run_skipped_rows": 427,
+      "recommended_next_action": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack."
     },
     {
       "priority": 21,

@@ -433,6 +433,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         source_action = reports.load_json(reports.SOURCE_DISCOVERY_ACTION_QUEUE)
         source_action_summary = source_action.get("summary", {})
+        source_focus_template = reports.load_json(reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE)
+        source_focus_template_summary = source_focus_template.get("summary", {})
+        source_focus_template_import = reports.load_json(reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT)
         ensky_cache_action = reports.load_json(reports.ENSKY_CACHE_CANDIDATE_ACTION_QUEUE)
         ensky_cache_action_summary = ensky_cache_action.get("summary", {})
         source_detail_action = reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)
@@ -441,6 +444,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("workstream_scorecard", [])
             if row.get("workstream") == "source_discovery_action_queue"
+        )
+        source_focus_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "source_discovery_focus_template"
         )
         source_detail_scorecard = next(
             row
@@ -451,6 +459,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "source_discovery_action_queue"
+        )
+        source_focus_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "source_discovery_focus_template"
         )
         ensky_cache_next_action = next(
             row
@@ -569,6 +582,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
         self.assertIn(f"data/{reports.IMAGE_ASSET_AUDIT.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}", report_links)
+        self.assertIn(f"data/{reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_SPLIT_REVIEW.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.name}", report_links)
@@ -671,6 +685,33 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_action.get("top_source_store_workstreams"),
             expected_source_workstreams,
         )
+        self.assertEqual(
+            open_queues.get("source_discovery_focus_template_rows"),
+            source_focus_template_summary.get("template_items"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_focus_template_work_order_packs"),
+            source_focus_template_summary.get("work_order_pack_count"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_focus_template_dry_run_skipped_rows"),
+            source_focus_template_import.get("skipped_rows"),
+        )
+        for field in (
+            "next_focus_pack_id",
+            "next_source_store",
+            "next_target_category",
+            "next_focus_pack_rows",
+            "next_official_search_url",
+            "work_order_pack_count",
+        ):
+            self.assertEqual(source_focus_scorecard.get(field), source_focus_template_summary.get(field))
+            self.assertEqual(source_focus_next_action.get(field), source_focus_template_summary.get(field))
+        self.assertEqual(
+            source_focus_scorecard.get("dry_run_skipped_rows"),
+            source_focus_template_import.get("skipped_rows"),
+        )
+        self.assertFalse(source_focus_scorecard.get("auto_apply_enabled"))
         self.assertEqual(
             quality["source_discovery_action_queue"].get("top_source_store_workstreams"),
             expected_source_workstreams,

@@ -607,6 +607,12 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                         "summary": {
                             "template_items": 427,
                             "manual_confirmed_rows": 0,
+                            "work_order_pack_count": 24,
+                            "next_focus_pack_id": "source-discovery-focus-001",
+                            "next_source_store": "Animate",
+                            "next_target_category": "Acrylic stand",
+                            "next_focus_pack_rows": 20,
+                            "next_official_search_url": "https://animate.example/search?q=stand",
                         }
                     },
                 ),
@@ -974,6 +980,12 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(public_image_board["focus_pack_count"], 24)
         self.assertEqual(public_image_board["remaining_focus_review_rows"], 427)
         self.assertEqual(public_image_board["template_items"], 427)
+        self.assertEqual(public_image_board["work_order_pack_count"], 24)
+        self.assertEqual(public_image_board["next_focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(public_image_board["next_source_store"], "Animate")
+        self.assertEqual(public_image_board["next_target_category"], "Acrylic stand")
+        self.assertEqual(public_image_board["next_focus_pack_rows"], 20)
+        self.assertEqual(public_image_board["next_official_search_url"], "https://animate.example/search?q=stand")
         self.assertEqual(public_image_board["template_import_skipped_rows"], 427)
         self.assertEqual(public_image_board["image_attachment_template_items"], 73)
         self.assertEqual(public_image_board["image_attachment_template_source_update_required_rows"], 50)
