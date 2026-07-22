@@ -1,0 +1,165 @@
+from __future__ import annotations
+
+import argparse
+import json
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+INPUT = DATA / "catalog_deduplication_action_queue_public.json"
+OUTPUT = DATA / "catalog_deduplication_fast_review_public.json"
+
+
+def now_utc() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def iter_groups(action_queue: dict[str, Any]) -> list[dict[str, Any]]:
+    groups: list[dict[str, Any]] = []
+    for batch in action_queue.get("batches", []):
+        if not isinstance(batch, dict):
+            continue
+        for group in batch.get("groups") or []:
+            if isinstance(group, dict):
+                groups.append(group)
+    return groups
+
+
+def is_fast_review_group(group: dict[str, Any]) -> bool:
+    return (
+        group.get("review_confidence") == "high_review_confidence"
+        and group.get("key_type") == "barcode"
+        and bool(group.get("drop_catalog_indexes"))
+    )
+
+
+def compact_row(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "catalog_index": row.get("catalog_index"),
+        "name_ko": row.get("name_ko"),
+        "name_ja": row.get("name_ja"),
+        "source_store": row.get("source_store"),
+        "category": row.get("category"),
+        "barcode": row.get("barcode"),
+        "source_url": row.get("source_url"),
+        "image_url": row.get("image_url"),
+        "richness": row.get("richness"),
+    }
+
+
+def compact_group(group: dict[str, Any]) -> dict[str, Any]:
+    rows = [compact_row(row) for row in group.get("rows") or [] if isinstance(row, dict)]
+    decision_template = dict(group.get("dedupe_decision_template") or {})
+    decision_template.update(
+        {
+            "manual_confirmed": False,
+            "decision": "review_required",
+            "fast_review_lane": "same_barcode_high_confidence",
+        }
+    )
+    return {
+        "key_type": group.get("key_type"),
+        "key": group.get("key"),
+        "review_confidence": group.get("review_confidence"),
+        "review_risk": group.get("review_risk"),
+        "keep_catalog_index": group.get("keep_catalog_index"),
+        "drop_catalog_indexes": group.get("drop_catalog_indexes") or [],
+        "stores": group.get("stores") or [],
+        "categories": group.get("categories") or [],
+        "evidence": group.get("evidence") or [],
+        "merge_blockers": group.get("merge_blockers") or [],
+        "same_source_url": "same_source_url" in (group.get("evidence") or []),
+        "dedupe_decision_template": decision_template,
+        "rows": rows,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+    }
+
+
+def counter_rows(counter: Counter[str], field: str) -> list[dict[str, Any]]:
+    return [{field: key, "groups": value} for key, value in counter.most_common()]
+
+
+def build_report(action_queue: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
+    all_groups = iter_groups(action_queue)
+    fast_groups = [compact_group(group) for group in all_groups if is_fast_review_group(group)]
+    held_groups = [group for group in all_groups if not is_fast_review_group(group)]
+    by_store = Counter()
+    by_category = Counter()
+    by_blocker = Counter()
+    same_source_url_groups = 0
+    for group in fast_groups:
+        if group.get("same_source_url"):
+            same_source_url_groups += 1
+        for store in group.get("stores") or []:
+            by_store[str(store)] += 1
+        for category in group.get("categories") or []:
+            by_category[str(category)] += 1
+        blockers = group.get("merge_blockers") or ["none"]
+        for blocker in blockers:
+            by_blocker[str(blocker)] += 1
+
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at or now_utc(),
+        "scope": "catalog_deduplication_fast_review",
+        "summary": {
+            "fast_review_groups": len(fast_groups),
+            "held_for_later_groups": len(held_groups),
+            "same_source_url_groups": same_source_url_groups,
+            "manual_confirmed_true": 0,
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+        },
+        "breakdowns": {
+            "by_source_store": counter_rows(by_store, "source_store"),
+            "by_category": counter_rows(by_category, "category"),
+            "by_merge_blocker": counter_rows(by_blocker, "merge_blocker"),
+        },
+        "items": fast_groups,
+        "held_for_later_summary": {
+            "by_review_confidence": counter_rows(
+                Counter(str(group.get("review_confidence") or "") for group in held_groups),
+                "review_confidence",
+            ),
+            "by_key_type": counter_rows(Counter(str(group.get("key_type") or "") for group in held_groups), "key_type"),
+        },
+        "automation_policy": {
+            "auto_merge": False,
+            "auto_delete": False,
+            "requires_manual_review": True,
+            "requires_same_sellable_product": True,
+            "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+            "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+        },
+    }
+
+
+def write_report(report: dict[str, Any], path: Path = OUTPUT) -> None:
+    path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=Path, default=INPUT)
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--write", action="store_true")
+    args = parser.parse_args()
+
+    report = build_report(load_json(args.input))
+    if args.write:
+        write_report(report, args.output)
+    print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

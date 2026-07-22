@@ -37,6 +37,7 @@ STELLIVE_FANDING_CANDIDATES = DATA / "stellive_fanding_candidates_public.json"
 DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 DEDUPLICATION_REVIEW_BATCHES = DATA / "catalog_deduplication_review_batches_public.json"
 DEDUPLICATION_ACTION_QUEUE = DATA / "catalog_deduplication_action_queue_public.json"
+DEDUPLICATION_FAST_REVIEW = DATA / "catalog_deduplication_fast_review_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_public.json"
 ANIMATION_CATEGORY_ACTION_QUEUE = DATA / "animation_category_action_queue_public.json"
@@ -4706,6 +4707,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["deduplication_action_queue"] = copy_report_summary(
                 DEDUPLICATION_ACTION_QUEUE, "deduplication_action_queue"
             )
+        if DEDUPLICATION_FAST_REVIEW.exists():
+            target["deduplication_fast_review"] = copy_report_summary(
+                DEDUPLICATION_FAST_REVIEW, "deduplication_fast_review"
+            )
         target["animation_category_review"] = {
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
@@ -4830,6 +4835,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
             str(DEDUPLICATION_ACTION_QUEUE.relative_to(ROOT)),
+            str(DEDUPLICATION_FAST_REVIEW.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_ACTION_QUEUE.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
