@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T10:15:52Z",
+  "generated_at": "2026-07-22T10:46:18Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 16,
+    "action_count": 17,
     "blocked_action_count": 1,
-    "manual_review_action_count": 14,
+    "manual_review_action_count": 15,
     "pending_import_action_count": 0,
-    "total_action_rows": 42071,
+    "total_action_rows": 42533,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -61,6 +61,9 @@
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
+    "ichiban_zero_price_exception_policy_pass": true,
+    "ichiban_multi_item_prize_label_groups": 416,
+    "ichiban_reissue_duplicate_review_groups": 46,
     "auto_apply_enabled": false
   },
   "actions": [
@@ -932,6 +935,29 @@
             2
           ]
         ]
+      }
+    },
+    {
+      "priority": 62,
+      "workstream": "ichiban_kuji_prize_policy_audit",
+      "public_report": "data/ichiban_kuji_prize_policy_audit_public.json",
+      "status": "manual_review",
+      "rows": 462,
+      "command": "Apply confirmed last-one/double-chance zero-price fixes first; then review multi-variant prize labels and reissue duplicate candidates.",
+      "next_step": "review_ichiban_price_exceptions_then_variant_and_reissue_groups",
+      "blocker": "No zero-price violations remain; variant/reissue groups still need official campaign review before mutation.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "kuji_rows": 7899,
+        "zero_price_exception_policy_pass": true,
+        "last_one_rows": 533,
+        "last_one_nonzero_price_rows": 0,
+        "last_one_missing_price_rows": 0,
+        "double_chance_rows": 9,
+        "double_chance_nonzero_price_rows": 0,
+        "double_chance_missing_price_rows": 0,
+        "multi_item_prize_label_groups": 416,
+        "repeated_name_different_source_groups": 46
       }
     },
     {

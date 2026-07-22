@@ -14,7 +14,13 @@ DEFAULT_INPUT = DATA / "catalog_public.json"
 DEFAULT_OUTPUT = DATA / "ichiban_kuji_prize_policy_audit_public.json"
 
 LAST_ONE_TOKENS = ("ラストワン賞", "ラストワン", "last one", "last-one", "lastone")
-DOUBLE_CHANCE_TOKENS = ("ダブルチャンス", "double chance", "double-chance", "doublechance")
+DOUBLE_CHANCE_TOKENS = (
+    "ダブルチャンス賞",
+    "ダブルチャンス",
+    "double chance",
+    "double-chance",
+    "doublechance",
+)
 
 
 def now_utc() -> str:

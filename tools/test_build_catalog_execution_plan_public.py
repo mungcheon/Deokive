@@ -101,6 +101,20 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "field_patch_template_counts": [["release_date", 1]],
                 }
             },
+            "ichiban_kuji_prize_policy_audit_public.json": {
+                "summary": {
+                    "kuji_rows": 20,
+                    "last_one_rows": 2,
+                    "last_one_nonzero_price_rows": 0,
+                    "last_one_missing_price_rows": 0,
+                    "double_chance_rows": 1,
+                    "double_chance_nonzero_price_rows": 0,
+                    "double_chance_missing_price_rows": 0,
+                    "zero_price_exception_policy_pass": True,
+                    "multi_item_prize_label_groups": 4,
+                    "repeated_name_different_source_groups": 2,
+                }
+            },
             "animation_category_review_batches_public.json": {
                 "summary": {"source_rows": 0}
             },
@@ -198,6 +212,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(kuji_action["rows"], 1)
         self.assertEqual(kuji_action["evidence"]["queued_catalog_item_rows"], 8)
+        kuji_policy = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "ichiban_kuji_prize_policy_audit"
+        )
+        self.assertEqual(kuji_policy["rows"], 6)
+        self.assertTrue(kuji_policy["evidence"]["zero_price_exception_policy_pass"])
+        self.assertEqual(kuji_policy["evidence"]["multi_item_prize_label_groups"], 4)
+        self.assertEqual(report["summary"]["ichiban_multi_item_prize_label_groups"], 4)
+        self.assertEqual(report["summary"]["ichiban_reissue_duplicate_review_groups"], 2)
         animation_action = next(
             action
             for action in report["actions"]

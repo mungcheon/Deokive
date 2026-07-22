@@ -110,6 +110,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     dedupe_action_queue = load_report("catalog_deduplication_action_queue_public.json")
     kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
     kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
+    kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
     animation_batches = load_report("animation_category_review_batches_public.json")
     animation_action_queue = load_report("animation_category_action_queue_public.json")
     confirmed_readiness = load_report("catalog_confirmed_import_readiness_public.json")
@@ -131,6 +132,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     dedupe_action_summary = _summary(dedupe_action_queue)
     kuji_summary = _summary(kuji_batches)
     kuji_action_summary = _summary(kuji_action_queue)
+    kuji_policy_summary = _summary(kuji_policy)
     animation_summary = _summary(animation_batches)
     animation_action_summary = _summary(animation_action_queue)
     confirmed_summary = _summary(confirmed_readiness)
@@ -431,6 +433,52 @@ def _build_plan(load_report) -> dict[str, Any]:
         )
     )
 
+    kuji_price_violation_rows = _count(kuji_policy_summary, "last_one_nonzero_price_rows")
+    kuji_price_violation_rows += _count(kuji_policy_summary, "last_one_missing_price_rows")
+    kuji_price_violation_rows += _count(kuji_policy_summary, "double_chance_nonzero_price_rows")
+    kuji_price_violation_rows += _count(kuji_policy_summary, "double_chance_missing_price_rows")
+    kuji_variant_review_rows = _count(kuji_policy_summary, "multi_item_prize_label_groups")
+    kuji_reissue_review_rows = _count(kuji_policy_summary, "repeated_name_different_source_groups")
+    if kuji_price_violation_rows or kuji_variant_review_rows or kuji_reissue_review_rows:
+        actions.append(
+            _action(
+                priority=62,
+                workstream="ichiban_kuji_prize_policy_audit",
+                public_report="data/ichiban_kuji_prize_policy_audit_public.json",
+                status="manual_review",
+                rows=kuji_price_violation_rows or (kuji_variant_review_rows + kuji_reissue_review_rows),
+                command=(
+                    "Apply confirmed last-one/double-chance zero-price fixes first; then review multi-variant prize labels and reissue duplicate candidates."
+                ),
+                next_step="review_ichiban_price_exceptions_then_variant_and_reissue_groups",
+                blocker=None
+                if kuji_price_violation_rows
+                else "No zero-price violations remain; variant/reissue groups still need official campaign review before mutation.",
+                evidence={
+                    "kuji_rows": _count(kuji_policy_summary, "kuji_rows"),
+                    "zero_price_exception_policy_pass": bool(
+                        kuji_policy_summary.get("zero_price_exception_policy_pass")
+                    ),
+                    "last_one_rows": _count(kuji_policy_summary, "last_one_rows"),
+                    "last_one_nonzero_price_rows": _count(
+                        kuji_policy_summary, "last_one_nonzero_price_rows"
+                    ),
+                    "last_one_missing_price_rows": _count(
+                        kuji_policy_summary, "last_one_missing_price_rows"
+                    ),
+                    "double_chance_rows": _count(kuji_policy_summary, "double_chance_rows"),
+                    "double_chance_nonzero_price_rows": _count(
+                        kuji_policy_summary, "double_chance_nonzero_price_rows"
+                    ),
+                    "double_chance_missing_price_rows": _count(
+                        kuji_policy_summary, "double_chance_missing_price_rows"
+                    ),
+                    "multi_item_prize_label_groups": kuji_variant_review_rows,
+                    "repeated_name_different_source_groups": kuji_reissue_review_rows,
+                },
+            )
+        )
+
     actions.append(
         _action(
             priority=70,
@@ -483,6 +531,11 @@ def _build_plan(load_report) -> dict[str, Any]:
             "open_review_queues": open_queues,
             "requested_focus_actionable_template_rows": requested_actionable_template_rows,
             "requested_focus_barcode_template_rows": requested_barcode_template_rows,
+            "ichiban_zero_price_exception_policy_pass": bool(
+                kuji_policy_summary.get("zero_price_exception_policy_pass")
+            ),
+            "ichiban_multi_item_prize_label_groups": kuji_variant_review_rows,
+            "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
             "auto_apply_enabled": False,
         },
         "actions": actions,
