@@ -163,142 +163,149 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     context: context,
     showDragHandle: true,
     isScrollControlled: true,
-    constraints: BoxConstraints(
-      maxHeight: MediaQuery.sizeOf(context).height * 0.8,
-    ),
     builder: (sheetContext) {
-      return StatefulBuilder(
-        builder: (context, setSheetState) {
-          final selectedFolder = selectedId == null
-              ? null
-              : folders.firstWhere(
-                  (folder) => folder.id == selectedId,
-                  orElse: () => folders.first,
-                );
-          final destinationFolder = selectedKind == _CatalogImportKind.wishlist
-              ? wishlistFolder
-              : selectedFolder;
-          return SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'DB 굿즈 추가 위치',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '가지고 있는 굿즈는 폴더에, 사고 싶은 굿즈는 위시리스트에 담을 수 있어요.',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withValues(alpha: 0.58),
+      return DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: 0.8,
+        minChildSize: 0.5,
+        maxChildSize: 0.95,
+        builder: (context, scrollController) {
+          return StatefulBuilder(
+            builder: (context, setSheetState) {
+              final selectedFolder = selectedId == null
+                  ? null
+                  : folders.firstWhere(
+                      (folder) => folder.id == selectedId,
+                      orElse: () => folders.first,
+                    );
+              final destinationFolder =
+                  selectedKind == _CatalogImportKind.wishlist
+                      ? wishlistFolder
+                      : selectedFolder;
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'DB 굿즈 추가 위치',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
                         ),
-                  ),
-                  const SizedBox(height: 12),
-                  if (wishlistFolder != null)
-                    _CatalogImportDestinationTile(
-                      icon: Icons.favorite_border_rounded,
-                      iconColor: wishlistFolder.color,
-                      title: '위시리스트에 추가',
-                      subtitle: '구매가 0원, 상태 위시로 저장',
-                      selected: selectedKind == _CatalogImportKind.wishlist,
-                      onTap: () {
-                        setSheetState(() {
-                          selectedKind = _CatalogImportKind.wishlist;
-                        });
-                      },
-                    ),
-                  if (folders.isNotEmpty) ...[
-                    const SizedBox(height: 8),
-                    _CatalogImportDestinationTile(
-                      icon: Icons.inventory_2_rounded,
-                      iconColor: Theme.of(context).colorScheme.primary,
-                      title: '내 굿즈함에 추가',
-                      subtitle: selectedFolder == null
-                          ? '저장할 폴더를 선택해 주세요'
-                          : '${selectedFolder.name}에 정가 구매, 미개봉으로 저장',
-                      selected: selectedKind == _CatalogImportKind.owned,
-                      onTap: () {
-                        setSheetState(() {
-                          selectedKind = _CatalogImportKind.owned;
-                        });
-                      },
-                    ),
-                  ],
-                  const SizedBox(height: 8),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: folders.length,
-                      itemBuilder: (context, index) {
-                        final folder = folders[index];
-                        final folderType = folder.isGroup ? '그룹' : '폴더';
-                        final selected =
-                            selectedKind == _CatalogImportKind.owned &&
-                                folder.id == selectedId;
-                        final defaultLabel =
-                            index == 0 ? '기본 저장 위치' : folderType;
-                        return ListTile(
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '가지고 있는 굿즈는 폴더에, 사고 싶은 굿즈는 위시리스트에 담을 수 있어요.',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurface
+                                  .withValues(alpha: 0.58),
+                            ),
+                      ),
+                      const SizedBox(height: 12),
+                      if (wishlistFolder != null)
+                        _CatalogImportDestinationTile(
+                          icon: Icons.favorite_border_rounded,
+                          iconColor: wishlistFolder.color,
+                          title: '위시리스트에 추가',
+                          subtitle: '구매가 0원, 상태 위시로 저장',
+                          selected: selectedKind == _CatalogImportKind.wishlist,
+                          onTap: () {
+                            setSheetState(() {
+                              selectedKind = _CatalogImportKind.wishlist;
+                            });
+                          },
+                        ),
+                      if (folders.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        _CatalogImportDestinationTile(
+                          icon: Icons.inventory_2_rounded,
+                          iconColor: Theme.of(context).colorScheme.primary,
+                          title: '내 굿즈함에 추가',
+                          subtitle: selectedFolder == null
+                              ? '저장할 폴더를 선택해 주세요'
+                              : '${selectedFolder.name}에 정가 구매, 미개봉으로 저장',
+                          selected: selectedKind == _CatalogImportKind.owned,
                           onTap: () {
                             setSheetState(() {
                               selectedKind = _CatalogImportKind.owned;
-                              selectedId = folder.id;
                             });
                           },
-                          leading: Icon(folder.icon, color: folder.color),
-                          title: Text(folder.name),
-                          subtitle: Text(
-                            '$defaultLabel · 보유 ${appState.goodsCountForFolder(folder.id)}개',
-                          ),
-                          trailing: Icon(
-                            selected
-                                ? Icons.check_circle_rounded
-                                : Icons.circle_outlined,
-                            color: selected
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context)
-                                    .colorScheme
-                                    .onSurface
-                                    .withValues(alpha: 0.32),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: FilledButton.icon(
-                      onPressed: destinationFolder == null
-                          ? null
-                          : () => Navigator.pop(
-                                sheetContext,
-                                _CatalogImportDestination(
-                                  folder: destinationFolder,
-                                  addToWishlist: selectedKind ==
-                                      _CatalogImportKind.wishlist,
-                                  wishlistTargetFolder: selectedFolder,
-                                ),
+                        ),
+                      ],
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: ListView.builder(
+                          controller: scrollController,
+                          itemCount: folders.length,
+                          itemBuilder: (context, index) {
+                            final folder = folders[index];
+                            final folderType = folder.isGroup ? '그룹' : '폴더';
+                            final selected =
+                                selectedKind == _CatalogImportKind.owned &&
+                                    folder.id == selectedId;
+                            final defaultLabel =
+                                index == 0 ? '기본 저장 위치' : folderType;
+                            return ListTile(
+                              onTap: () {
+                                setSheetState(() {
+                                  selectedKind = _CatalogImportKind.owned;
+                                  selectedId = folder.id;
+                                });
+                              },
+                              leading: Icon(folder.icon, color: folder.color),
+                              title: Text(folder.name),
+                              subtitle: Text(
+                                '$defaultLabel · 보유 ${appState.goodsCountForFolder(folder.id)}개',
                               ),
-                      icon: const Icon(Icons.add_rounded),
-                      label: Text(
-                        selectedKind == _CatalogImportKind.wishlist
-                            ? '위시리스트에 추가'
-                            : '선택한 폴더에 추가',
+                              trailing: Icon(
+                                selected
+                                    ? Icons.check_circle_rounded
+                                    : Icons.circle_outlined,
+                                color: selected
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .onSurface
+                                        .withValues(alpha: 0.32),
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
+                      const SizedBox(height: 8),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: FilledButton.icon(
+                          onPressed: destinationFolder == null
+                              ? null
+                              : () => Navigator.pop(
+                                    sheetContext,
+                                    _CatalogImportDestination(
+                                      folder: destinationFolder,
+                                      addToWishlist: selectedKind ==
+                                          _CatalogImportKind.wishlist,
+                                      wishlistTargetFolder: selectedFolder,
+                                    ),
+                                  ),
+                          icon: const Icon(Icons.add_rounded),
+                          label: Text(
+                            selectedKind == _CatalogImportKind.wishlist
+                                ? '위시리스트에 추가'
+                                : '선택한 폴더에 추가',
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
+              );
+            },
           );
         },
       );
@@ -582,12 +589,14 @@ Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
 
 @visibleForTesting
 String? catalogEntryImageReference(GoodsCatalogEntry entry) {
+  final remoteUrl = entry.imageUrl?.trim() ?? '';
+  if (remoteUrl.isNotEmpty) {
+    return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
+          RegExp(r'^//'),
+          'https://',
+        );
+  }
   final localPath = entry.localImagePath?.trim() ?? '';
   if (localPath.isNotEmpty) return localPath;
-  final remoteUrl = entry.imageUrl?.trim() ?? '';
-  if (remoteUrl.isEmpty) return null;
-  return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
-        RegExp(r'^//'),
-        'https://',
-      );
+  return null;
 }

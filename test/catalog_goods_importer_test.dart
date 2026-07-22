@@ -94,6 +94,32 @@ void main() {
     expect(restored.imageUrl, item.imageUrl);
   });
 
+  test('catalog import prefers remote image references for saved goods', () {
+    final appState = AppState();
+    final folder = FolderItem(
+      id: 'top-folder',
+      name: 'Top goods',
+      icon: Icons.folder_rounded,
+      color: Colors.blue,
+    );
+    const entry = GoodsCatalogEntry(
+      nameKo: 'Remote preferred catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      sourceStore: 'official store',
+      localImagePath: 'assets/catalog/cache/sample.jpg',
+      imageUrl: 'https://example.com/catalog/source.jpg',
+    );
+
+    final item = goodsItemFromCatalogEntry(
+      appState: appState,
+      entry: entry,
+      folder: folder,
+    );
+
+    expect(item.imageUrl, 'https://example.com/catalog/source.jpg');
+  });
+
   test('catalog import can load a bundled catalog image for saving', () async {
     const entry = GoodsCatalogEntry(
       nameKo: 'Image catalog item',
