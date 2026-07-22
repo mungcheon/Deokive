@@ -990,6 +990,13 @@ class PublicCatalogReportTests(unittest.TestCase):
             dedupe_next_action.get("unqueued_actionable_groups"),
             dedupe_action_summary.get("unqueued_actionable_groups"),
         )
+        for field in (
+            "ichiban_reissue_review_groups",
+            "ichiban_probable_reissue_review_groups",
+            "ichiban_reissue_protected_groups",
+        ):
+            self.assertEqual(dedupe_scorecard.get(field), dedupe_action_summary.get(field))
+            self.assertEqual(dedupe_next_action.get(field), dedupe_action_summary.get(field))
         self.assertEqual(
             open_queues.get("ichiban_metadata_action_campaigns"),
             ichiban_action_summary.get("queued_action_campaigns"),

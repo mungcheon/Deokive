@@ -210,7 +210,34 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["ichiban_reissue_protected_groups"], 1)
         self.assertEqual(report["summary"]["ichiban_reissue_protected_rows"], 2)
+        self.assertEqual(report["summary"]["ichiban_reissue_review_groups"], 0)
+        self.assertEqual(report["summary"]["ichiban_probable_reissue_review_groups"], 0)
         self.assertEqual(report["batches"][0]["groups"][0]["key"], "ordinary-shared-barcode")
+
+    def test_ichiban_reissue_policy_counts_are_reported_even_without_queue_overlap(self) -> None:
+        report = queue.build_report(
+            {"batches": []},
+            ichiban_policy_audit={
+                "summary": {
+                    "repeated_name_different_source_groups": 46,
+                    "repeated_name_different_source_review_catalog_item_rows": 92,
+                    "probable_reissue_review_groups": 20,
+                },
+                "probable_reissue_review_groups": [
+                    {
+                        "has_reissue_signal": True,
+                        "sample_rows": [{"catalog_index": 1}, {"catalog_index": 2}],
+                    }
+                ],
+            },
+        )
+
+        self.assertEqual(report["summary"]["actionable_groups"], 0)
+        self.assertEqual(report["summary"]["ichiban_reissue_review_groups"], 46)
+        self.assertEqual(report["summary"]["ichiban_reissue_review_rows"], 92)
+        self.assertEqual(report["summary"]["ichiban_probable_reissue_review_groups"], 20)
+        self.assertEqual(report["summary"]["ichiban_probable_reissue_sample_rows"], 2)
+        self.assertEqual(report["summary"]["ichiban_reissue_protected_groups"], 0)
 
 
 if __name__ == "__main__":

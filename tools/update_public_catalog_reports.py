@@ -2221,6 +2221,14 @@ def build_operations_public(
             "unqueued_actionable_groups": dedupe_action_queue_summary.get("unqueued_actionable_groups", 0),
             "queue_coverage": dedupe_action_queue_summary.get("queue_coverage", 0),
             "action_batch_count": dedupe_action_queue_summary.get("action_batch_count", 0),
+            "ichiban_reissue_review_groups": dedupe_action_queue_summary.get("ichiban_reissue_review_groups", 0),
+            "ichiban_reissue_review_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_rows", 0),
+            "ichiban_probable_reissue_review_groups": dedupe_action_queue_summary.get(
+                "ichiban_probable_reissue_review_groups", 0
+            ),
+            "ichiban_reissue_protected_groups": dedupe_action_queue_summary.get(
+                "ichiban_reissue_protected_groups", 0
+            ),
             "recommended_next_action": "Review queued high/medium-confidence duplicate groups, then expand remaining actionable groups.",
         } if dedupe_action_queue_summary else None,
         {
@@ -2713,6 +2721,13 @@ def build_operations_public(
             "actionable_groups": dedupe_action_queue_summary.get("actionable_groups", 0),
             "unqueued_actionable_groups": dedupe_action_queue_summary.get("unqueued_actionable_groups", 0),
             "queue_coverage": dedupe_action_queue_summary.get("queue_coverage", 0),
+            "ichiban_reissue_review_groups": dedupe_action_queue_summary.get("ichiban_reissue_review_groups", 0),
+            "ichiban_probable_reissue_review_groups": dedupe_action_queue_summary.get(
+                "ichiban_probable_reissue_review_groups", 0
+            ),
+            "ichiban_reissue_protected_groups": dedupe_action_queue_summary.get(
+                "ichiban_reissue_protected_groups", 0
+            ),
             "primary_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
             "next_step": "review_high_medium_confidence_dedupe_first",
             "auto_apply_enabled": dedupe_action_queue_summary.get("auto_delete_enabled", False),

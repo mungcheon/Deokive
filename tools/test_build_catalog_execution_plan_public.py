@@ -176,6 +176,12 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "action_batch_count": 1,
                     "by_review_confidence": [["high_review_confidence", 2]],
                     "excluded_review_confidence": [["variant_caution", 1]],
+                    "ichiban_reissue_review_groups": 46,
+                    "ichiban_reissue_review_rows": 92,
+                    "ichiban_probable_reissue_review_groups": 20,
+                    "ichiban_probable_reissue_sample_rows": 8,
+                    "ichiban_reissue_protected_groups": 0,
+                    "ichiban_reissue_protected_rows": 0,
                 }
             },
             "catalog_deduplication_fast_review_public.json": {
@@ -432,12 +438,21 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(dedupe_action["evidence"]["actionable_groups"], 2)
         self.assertEqual(dedupe_action["evidence"]["fast_review_groups"], 2)
         self.assertEqual(dedupe_action["evidence"]["fast_review_same_source_url_groups"], 1)
+        self.assertEqual(dedupe_action["evidence"]["ichiban_reissue_review_groups"], 46)
+        self.assertEqual(
+            dedupe_action["evidence"]["ichiban_probable_reissue_review_groups"], 20
+        )
+        self.assertEqual(dedupe_action["evidence"]["ichiban_reissue_protected_groups"], 0)
         self.assertEqual(
             dedupe_action["evidence"]["fast_review_lanes"][0]["fast_review_lane"],
             "same_barcode_and_source_url",
         )
         self.assertEqual(report["summary"]["dedupe_fast_review_groups"], 2)
         self.assertEqual(report["summary"]["dedupe_fast_review_same_source_url_groups"], 1)
+        self.assertEqual(report["summary"]["dedupe_ichiban_reissue_review_groups"], 46)
+        self.assertEqual(
+            report["summary"]["dedupe_ichiban_probable_reissue_review_groups"], 20
+        )
         kuji_action = next(
             action
             for action in report["actions"]

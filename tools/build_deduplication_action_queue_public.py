@@ -75,6 +75,33 @@ def protected_ichiban_reissue_catalog_indexes(policy_audit: dict[str, Any] | Non
     return protected
 
 
+def ichiban_reissue_policy_summary(policy_audit: dict[str, Any] | None) -> dict[str, int]:
+    if not policy_audit:
+        return {
+            "ichiban_reissue_review_groups": 0,
+            "ichiban_reissue_review_rows": 0,
+            "ichiban_probable_reissue_review_groups": 0,
+        }
+    summary = policy_audit.get("summary") if isinstance(policy_audit.get("summary"), dict) else {}
+    probable_groups = policy_audit.get("probable_reissue_review_groups") or []
+    row_indexes: set[int] = set()
+    for group in probable_groups:
+        if not isinstance(group, dict):
+            continue
+        for row in group.get("sample_rows") or []:
+            if not isinstance(row, dict):
+                continue
+            catalog_index = row.get("catalog_index")
+            if isinstance(catalog_index, int):
+                row_indexes.add(catalog_index)
+    return {
+        "ichiban_reissue_review_groups": int(summary.get("repeated_name_different_source_groups") or 0),
+        "ichiban_reissue_review_rows": int(summary.get("repeated_name_different_source_review_catalog_item_rows") or 0),
+        "ichiban_probable_reissue_review_groups": int(summary.get("probable_reissue_review_groups") or 0),
+        "ichiban_probable_reissue_sample_rows": len(row_indexes),
+    }
+
+
 def _catalog_indexes(group: dict[str, Any]) -> set[int]:
     indexes: set[int] = set()
     for row in group.get("rows") or []:
@@ -210,6 +237,7 @@ def build_report(
     actionable: list[dict[str, Any]] = []
     excluded = Counter()
     protected_indexes = protected_ichiban_reissue_catalog_indexes(ichiban_policy_audit)
+    reissue_policy = ichiban_reissue_policy_summary(ichiban_policy_audit)
     protected_group_count = 0
     protected_row_indexes: set[int] = set()
 
@@ -286,6 +314,7 @@ def build_report(
             "by_review_confidence": _counter_pairs(actionable, "review_confidence"),
             "by_key_type": _counter_pairs(actionable, "key_type"),
             "excluded_review_confidence": _counter_to_pairs(excluded),
+            **reissue_policy,
             "ichiban_reissue_protected_groups": protected_group_count,
             "ichiban_reissue_protected_rows": len(protected_row_indexes),
             "auto_merge_enabled": False,

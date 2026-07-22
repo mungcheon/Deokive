@@ -646,6 +646,24 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "action_batch_count": _count(dedupe_action_summary, "action_batch_count"),
                 "by_review_confidence": dedupe_action_summary.get("by_review_confidence", []),
                 "excluded_review_confidence": dedupe_action_summary.get("excluded_review_confidence", []),
+                "ichiban_reissue_review_groups": _count(
+                    dedupe_action_summary, "ichiban_reissue_review_groups"
+                ),
+                "ichiban_reissue_review_rows": _count(
+                    dedupe_action_summary, "ichiban_reissue_review_rows"
+                ),
+                "ichiban_probable_reissue_review_groups": _count(
+                    dedupe_action_summary, "ichiban_probable_reissue_review_groups"
+                ),
+                "ichiban_probable_reissue_sample_rows": _count(
+                    dedupe_action_summary, "ichiban_probable_reissue_sample_rows"
+                ),
+                "ichiban_reissue_protected_groups": _count(
+                    dedupe_action_summary, "ichiban_reissue_protected_groups"
+                ),
+                "ichiban_reissue_protected_rows": _count(
+                    dedupe_action_summary, "ichiban_reissue_protected_rows"
+                ),
                 "fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
                 "fast_review_same_barcode_groups": _count(dedupe_fast_summary, "same_barcode_groups"),
                 "fast_review_same_source_url_groups": _count(dedupe_fast_summary, "same_source_url_groups"),
@@ -894,6 +912,12 @@ def _build_plan(load_report) -> dict[str, Any]:
             "dedupe_fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
             "dedupe_fast_review_same_source_url_groups": _count(
                 dedupe_fast_summary, "same_source_url_groups"
+            ),
+            "dedupe_ichiban_reissue_review_groups": _count(
+                dedupe_action_summary, "ichiban_reissue_review_groups"
+            ),
+            "dedupe_ichiban_probable_reissue_review_groups": _count(
+                dedupe_action_summary, "ichiban_probable_reissue_review_groups"
             ),
             "image_action_source_url_update_required_rows": _count(
                 image_action_summary, "source_url_update_required_rows"
