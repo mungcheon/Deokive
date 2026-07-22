@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T01:32:16Z",
+  "generated_at": "2026-07-22T02:15:05Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 11052,
+    "summed_batch_rows": 22670,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -124,7 +124,7 @@
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1147,
-      "confirmed_import_action_queue_rows": 2518,
+      "confirmed_import_action_queue_rows": 14136,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
@@ -3083,7 +3083,7 @@
       "priority": 19,
       "title": "Confirmed import readiness review",
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
-      "rows": 3665,
+      "rows": 15283,
       "recommended_action": "Review pending/blocked confirmed imports before any catalog write.",
       "acceptance_criteria": [
         "Do not expose row-level private candidate details in public reports.",
@@ -3104,8 +3104,8 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
-          "public_action_rows": 1362,
-          "public_action_batches": 4,
+          "public_action_rows": 11964,
+          "public_action_batches": 14,
           "public_action_next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
           "updated_rows": 0,
           "skipped_rows": 0,
@@ -3127,8 +3127,8 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/source_discovery_action_queue_public.json",
-          "public_action_rows": 240,
-          "public_action_batches": 33,
+          "public_action_rows": 642,
+          "public_action_batches": 61,
           "public_action_next_step": "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
           "updated_rows": 0,
           "skipped_rows": 0,
@@ -3150,8 +3150,8 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/catalog_image_attachment_action_queue_public.json",
-          "public_action_rows": 25,
-          "public_action_batches": 4,
+          "public_action_rows": 73,
+          "public_action_batches": 7,
           "public_action_next_step": "confirm_exact_image_url_templates_then_run_import_confirmed_image_attachment_rows",
           "updated_rows": 0,
           "skipped_rows": 0,
@@ -3173,8 +3173,8 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/requested_focus_action_queue_public.json",
-          "public_action_rows": 163,
-          "public_action_batches": 24,
+          "public_action_rows": 600,
+          "public_action_batches": 86,
           "public_action_next_step": "confirm_requested_focus_templates_then_run_import_confirmed_requested_focus_rows",
           "updated_rows": 0,
           "skipped_rows": 0,
@@ -3196,8 +3196,8 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/ichiban_kuji_metadata_action_queue_public.json",
-          "public_action_rows": 260,
-          "public_action_batches": 4,
+          "public_action_rows": 381,
+          "public_action_batches": 6,
           "public_action_next_step": "fill_confirmed_ichiban_campaign_patch_templates_then_run_import_confirmed_ichiban_metadata_rows",
           "updated_rows": 0,
           "skipped_rows": 0,
@@ -3242,9 +3242,9 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/catalog_deduplication_action_queue_public.json",
-          "public_action_rows": 40,
-          "public_action_batches": 4,
-          "public_action_next_step": "fill_confirmed_deduplication_decisions_then_run_import_confirmed_deduplication_rows",
+          "public_action_rows": 48,
+          "public_action_batches": 5,
+          "public_action_next_step": "fill_confirmed_deduplication_decisions_then_run_import_confirmed_dedupe_decisions",
           "updated_rows": 0,
           "skipped_rows": 0,
           "duplicates": 0,
@@ -5938,6 +5938,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -5993,6 +5997,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -6048,6 +6056,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -6098,6 +6110,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -6150,6 +6166,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -6198,6 +6218,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         }
       ],
@@ -6277,6 +6301,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -6327,6 +6355,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         }
       ],
@@ -12690,6 +12722,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -12759,6 +12795,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -12826,6 +12866,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -12893,6 +12937,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -12963,6 +13011,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -13030,6 +13082,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -13097,6 +13153,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -13164,6 +13224,10 @@
               "blocked_until": "manual_official_evidence_confirmed"
             }
           ],
+          "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+          "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+          "unblocks_when": "labeled_official_1kuji_campaign_metadata_confirmed",
           "auto_apply_enabled": false
         }
       ],

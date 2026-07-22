@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import build_confirmed_import_readiness_public as readiness
 import import_confirmed_animation_category_rows
-import import_confirmed_deduplication_rows
+import import_confirmed_dedupe_decisions
 import import_confirmed_ichiban_metadata_rows
 import import_confirmed_image_attachment_rows
 import import_confirmed_metadata_rows
@@ -93,7 +93,7 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(dedupe["public_action_rows_key"], "queued_groups")
         self.assertEqual(
             dedupe["public_action_next_step"],
-            "fill_confirmed_deduplication_decisions_then_run_import_confirmed_deduplication_rows",
+            "fill_confirmed_deduplication_decisions_then_run_import_confirmed_dedupe_decisions",
         )
 
     def test_public_action_next_steps_reference_existing_importers(self) -> None:
@@ -115,7 +115,7 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
             "focus_image": import_confirmed_requested_focus_rows,
             "ichiban_metadata": import_confirmed_ichiban_metadata_rows,
             "animation_category": import_confirmed_animation_category_rows,
-            "deduplication": import_confirmed_deduplication_rows,
+            "deduplication": import_confirmed_dedupe_decisions,
         }
 
         for workflow_name, importer in expected.items():

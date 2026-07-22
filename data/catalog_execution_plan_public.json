@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T23:45:13Z",
+  "generated_at": "2026-07-22T02:16:23Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 15,
     "blocked_action_count": 1,
     "manual_review_action_count": 13,
     "pending_import_action_count": 0,
-    "total_action_rows": 35561,
+    "total_action_rows": 58688,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -19,17 +19,35 @@
       "requested_focus_open_rows": 5717,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1147,
-      "confirmed_import_action_queue_rows": 2518,
+      "confirmed_import_action_queue_rows": 14136,
       "confirmed_import_pending_rows": 0,
-      "dedupe_action_groups": 40,
+      "dedupe_action_groups": 48,
+      "dedupe_actionable_groups": 48,
+      "dedupe_unqueued_actionable_groups": 0,
       "requested_focus_review_rows": 6275,
-      "requested_focus_action_rows": 163,
-      "source_discovery_action_rows": 240,
-      "image_attachment_action_rows": 25,
-      "ichiban_metadata_action_campaigns": 32,
-      "metadata_action_missing_cells": 1362,
+      "requested_focus_action_rows": 600,
+      "requested_focus_actionable_rows": 600,
+      "requested_focus_unqueued_actionable_rows": 0,
+      "requested_focus_barcode_template_rows_excluded": 5674,
+      "source_discovery_action_rows": 642,
+      "source_discovery_actionable_rows": 642,
+      "source_discovery_unqueued_actionable_rows": 0,
+      "image_attachment_action_rows": 73,
+      "image_attachment_actionable_rows": 73,
+      "image_attachment_unqueued_actionable_rows": 0,
+      "ichiban_metadata_action_campaigns": 44,
+      "ichiban_metadata_actionable_campaigns": 44,
+      "ichiban_metadata_unqueued_action_campaigns": 0,
+      "ichiban_metadata_queued_catalog_item_rows": 381,
+      "metadata_action_missing_cells": 11964,
+      "metadata_actionable_groups": 166,
+      "metadata_unqueued_actionable_groups": 0,
+      "metadata_actionable_missing_cells": 11964,
+      "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 428,
-      "animation_category_action_rows": 428
+      "animation_category_action_rows": 428,
+      "animation_category_split_review_categories": 3,
+      "animation_category_direct_mapping_categories": 5
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
@@ -41,15 +59,15 @@
       "workstream": "confirmed_import_readiness",
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
       "status": "needs_manual_confirmation",
-      "rows": 3665,
+      "rows": 15283,
       "command": "Review templates/action queues and mark exact rows manual_confirmed=true before importing.",
       "next_step": "confirm_exact_rows_then_run_guarded_import",
       "blocker": "No public workflow has manual_confirmed=true rows yet.",
       "auto_apply_enabled": false,
       "evidence": {
         "template_items": 1147,
-        "public_action_queue_rows": 2518,
-        "public_action_queue_batches": 75,
+        "public_action_queue_rows": 14136,
+        "public_action_queue_batches": 181,
         "ready_or_pending_import_rows": 0,
         "blocked_confirmed_rows": 0
       }
@@ -150,15 +168,15 @@
       "workstream": "requested_focus_action_queue",
       "public_report": "data/requested_focus_action_queue_public.json",
       "status": "manual_review",
-      "rows": 163,
+      "rows": 600,
       "command": "Work the non-barcode requested-focus action queue before long barcode research.",
       "next_step": "review_actionable_source_image_date_price_name_batches",
       "blocker": "Exact source evidence is still required before catalog mutation.",
       "auto_apply_enabled": false,
       "evidence": {
         "actionable_template_rows": 600,
-        "queued_action_rows": 163,
-        "action_batch_count": 24,
+        "queued_action_rows": 600,
+        "action_batch_count": 86,
         "barcode_template_rows_excluded": 5674,
         "field_counts": [
           [
@@ -235,15 +253,15 @@
       "workstream": "source_discovery_action_queue",
       "public_report": "data/source_discovery_action_queue_public.json",
       "status": "manual_review",
-      "rows": 240,
+      "rows": 642,
       "command": "Confirm exact product/detail URLs from official search paths before broad source research.",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "blocker": "Auto source import is disabled; every source_url needs exact product evidence.",
       "auto_apply_enabled": false,
       "evidence": {
         "actionable_source_rows": 642,
-        "queued_source_rows": 240,
-        "action_batch_count": 33,
+        "queued_source_rows": 642,
+        "action_batch_count": 61,
         "excluded_review_state_rows": [
           [
             "manual_official_research_required",
@@ -284,15 +302,15 @@
       "workstream": "image_attachment_action_queue",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "status": "manual_review",
-      "rows": 25,
+      "rows": 73,
       "command": "Work image attachment batches with exact product evidence before broad missing-image research.",
       "next_step": "confirm_source_then_fill_image_url_templates",
       "blocker": "Auto image import is disabled; every image URL needs reviewed product evidence.",
       "auto_apply_enabled": false,
       "evidence": {
         "actionable_image_rows": 73,
-        "queued_image_rows": 25,
-        "action_batch_count": 4,
+        "queued_image_rows": 73,
+        "action_batch_count": 7,
         "excluded_workflow_rows": [
           [
             "find_source_then_extract_image",
@@ -306,11 +324,11 @@
         "by_workflow": [
           [
             "replace_generic_source_then_extract_image",
-            15
+            50
           ],
           [
             "review_gotouchi_official_candidates",
-            10
+            23
           ]
         ]
       }
@@ -342,17 +360,17 @@
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 1362,
+      "rows": 11964,
       "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
       "next_step": "fill_confirmed_metadata_patch_templates",
       "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
       "auto_apply_enabled": false,
       "evidence": {
         "actionable_group_count": 166,
-        "queued_group_count": 48,
+        "queued_group_count": 166,
         "actionable_missing_cells": 11964,
-        "queued_missing_cells": 1362,
-        "action_batch_count": 4,
+        "queued_missing_cells": 11964,
+        "action_batch_count": 14,
         "field_counts": [
           [
             "release_date",
@@ -406,15 +424,15 @@
       "workstream": "deduplication_action_queue",
       "public_report": "data/catalog_deduplication_action_queue_public.json",
       "status": "manual_review",
-      "rows": 40,
+      "rows": 48,
       "command": "Review high/medium-confidence duplicate groups before variant-risk dedupe work.",
       "next_step": "record_manual_keep_drop_decisions_for_safe_dedupe_groups",
       "blocker": "Auto-merge and auto-delete remain disabled; every group needs explicit confirmation.",
       "auto_apply_enabled": false,
       "evidence": {
         "actionable_groups": 48,
-        "queued_groups": 40,
-        "action_batch_count": 4,
+        "queued_groups": 48,
+        "action_batch_count": 5,
         "by_review_confidence": [
           [
             "high_review_confidence",
@@ -457,16 +475,16 @@
       "workstream": "ichiban_kuji_metadata_action_queue",
       "public_report": "data/ichiban_kuji_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 32,
+      "rows": 44,
       "command": "Confirm labeled official 1kuji release dates and prices, then fill campaign patch templates.",
       "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "blocker": "Historical 1kuji metadata is manual-only until official campaign evidence is confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
         "actionable_campaigns": 44,
-        "queued_action_campaigns": 32,
-        "queued_catalog_item_rows": 260,
-        "action_batch_count": 4,
+        "queued_action_campaigns": 44,
+        "queued_catalog_item_rows": 381,
+        "action_batch_count": 6,
         "field_patch_template_counts": [
           [
             "official_price_jpy",

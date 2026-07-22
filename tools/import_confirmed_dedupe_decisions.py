@@ -158,6 +158,8 @@ def main() -> int:
         empty_report = {
             "write": args.write,
             "queue": str(args.queue),
+            "updated_rows": 0,
+            "skipped_rows": 0,
             "updated_decisions": 0,
             "skipped_decisions": 0,
             "updated": [],
@@ -175,6 +177,8 @@ def main() -> int:
     report = {
         "write": args.write,
         "queue": str(args.queue),
+        "updated_rows": len(result["updated"]),
+        "skipped_rows": len(result["skipped"]),
         "updated_decisions": len(result["updated"]),
         "skipped_decisions": len(result["skipped"]),
         "skip_reason_counts": skip_reasons.most_common(),

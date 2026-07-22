@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import import_confirmed_dedupe_decisions
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -106,14 +107,14 @@ WORKFLOWS = {
         "public_action_next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
     },
     "deduplication": {
-        "confirmed": SERVER / "catalog_deduplication_confirmed_rows.json",
-        "template": SERVER / "catalog_deduplication_confirmed_rows.template.json",
-        "report": SERVER / "catalog_deduplication_confirmed_import_report.json",
+        "confirmed": import_confirmed_dedupe_decisions.DEFAULT_QUEUE,
+        "template": import_confirmed_dedupe_decisions.FALLBACK_QUEUE,
+        "report": import_confirmed_dedupe_decisions.DEFAULT_REPORT,
         "public_workstream": "catalog_deduplication",
         "public_action_queue": DATA / "catalog_deduplication_action_queue_public.json",
         "public_action_rows_key": "queued_groups",
         "public_action_batches_key": "action_batch_count",
-        "public_action_next_step": "fill_confirmed_deduplication_decisions_then_run_import_confirmed_deduplication_rows",
+        "public_action_next_step": "fill_confirmed_deduplication_decisions_then_run_import_confirmed_dedupe_decisions",
     },
 }
 
