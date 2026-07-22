@@ -17,12 +17,12 @@ void main() {
       color: Colors.blue,
     );
     final entry = GoodsCatalogEntry(
-      nameKo: '일번쿠지 샘플 - A상 피규어',
+      nameKo: '이치방쿠지 샘플 - A상 피규어',
       nameJa: '一番くじ サンプル - A賞 フィギュア',
       category: '피규어',
       characterName: '샘플 캐릭터',
       affiliation: '샘플 작품',
-      seriesName: '일번쿠지 샘플',
+      seriesName: '이치방쿠지 샘플',
       subSeries: 'A상',
       officialPriceJpy: 790,
       barcode: '1234567890123',
@@ -46,12 +46,13 @@ void main() {
     expect(item.officialPriceCurrencyCode, Currency.jpy.code);
     expect(item.purchaseState, PurchaseState.owned);
     expect(item.itemCondition, ItemCondition.unopened);
-    expect(item.seriesName, '일번쿠지 샘플');
+    expect(item.seriesName, '이치방쿠지 샘플');
     expect(item.characterName, '샘플 캐릭터');
     expect(item.affiliation, '샘플 작품');
     expect(item.companyName, '이치방쿠지');
     expect(item.releaseDate, DateTime(2026, 1, 23));
     expect(item.barcode, '1234567890123');
+    expect(item.status, '미개봉');
     expect(item.memo, contains('DB에서 추가'));
     expect(item.memo, contains(entry.sourceUrl!));
   });

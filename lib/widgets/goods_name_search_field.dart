@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../models/goods_catalog_entry.dart';
 
-/// Goods-name input that opens a postcode-search-style picker dialog when
-/// tapped. The dialog has its own search bar and shows catalog matches with
-/// product images. Selecting a row fires `onCatalogSelected`; free-form
-/// typing is still supported via the trailing "직접 입력" button on the
-/// dialog (or by typing in the field directly when the dialog isn't open).
+/// Goods-name input that opens a catalog picker dialog when tapped.
+/// Selecting a row fills the form from the read-only public DB.
 class GoodsNameSearchField extends StatefulWidget {
   final TextEditingController controller;
   final List<GoodsCatalogEntry> catalog;
@@ -48,10 +45,10 @@ class _GoodsNameSearchFieldState extends State<GoodsNameSearchField> {
       onChanged: widget.onChanged,
       decoration: InputDecoration(
         labelText: '굿즈 이름 *',
-        helperText: '직접 입력하거나 돋보기를 눌러 카탈로그에서 검색하세요',
+        helperText: '직접 입력하거나 돋보기를 눌러 공개 DB에서 찾아보세요',
         prefixIcon: const Icon(Icons.inventory_2_outlined),
         suffixIcon: IconButton(
-          tooltip: '카탈로그 검색',
+          tooltip: '굿즈 DB 검색',
           icon: const Icon(Icons.search_rounded),
           onPressed: _openPicker,
         ),
@@ -66,8 +63,7 @@ class _GoodsNameSearchFieldState extends State<GoodsNameSearchField> {
   }
 }
 
-/// Open the catalog picker dialog standalone (without the text field).
-/// Useful when triggering catalog browse from an AppBar icon, etc.
+/// Open the catalog picker dialog standalone.
 /// Returns the picked entry, or null on cancel.
 Future<GoodsCatalogEntry?> showGoodsCatalogPicker(
   BuildContext context, {
@@ -86,8 +82,6 @@ Future<GoodsCatalogEntry?> showGoodsCatalogPicker(
     ),
   );
 }
-
-// ── Picker dialog ───────────────────────────────────────────────────────
 
 class _GoodsCatalogPickerDialog extends StatefulWidget {
   final List<GoodsCatalogEntry> catalog;
@@ -135,6 +129,8 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
     }
     if (entry.characterName.toLowerCase().contains(lower)) return true;
     if (entry.affiliation.toLowerCase().contains(lower)) return true;
+    if (entry.sourceStore.toLowerCase().contains(lower)) return true;
+    if ((entry.seriesName ?? '').toLowerCase().contains(lower)) return true;
     return false;
   }
 
@@ -142,8 +138,6 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final q = _query.trim();
-    // No cap — the result list is a lazy ListView.separated, so even a
-    // few thousand matches only build the rows actually on screen.
     final results = q.isEmpty
         ? const <GoodsCatalogEntry>[]
         : widget.catalog.where((e) => _matches(e, q)).toList();
@@ -163,12 +157,13 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      '굿즈 검색',
+                      '굿즈 DB 검색',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
                   IconButton(
+                    tooltip: '닫기',
                     icon: const Icon(Icons.close_rounded),
                     onPressed: () => Navigator.pop(context),
                   ),
@@ -182,12 +177,13 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
                 autofocus: true,
                 onChanged: (v) => setState(() => _query = v),
                 decoration: InputDecoration(
-                  hintText: '이름·캐릭터·소속으로 검색',
+                  hintText: '이름, 캐릭터, 작품, 판매처로 검색',
                   isDense: true,
                   prefixIcon: const Icon(Icons.search_rounded, size: 18),
                   suffixIcon: _query.isEmpty
                       ? null
                       : IconButton(
+                          tooltip: '검색어 지우기',
                           icon: const Icon(Icons.close_rounded, size: 16),
                           onPressed: () {
                             _searchController.clear();
@@ -207,7 +203,7 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
                       child: Padding(
                         padding: const EdgeInsets.all(24),
                         child: Text(
-                          '굿즈 이름이나 캐릭터를 검색해 보세요.',
+                          '갖고 있는 굿즈 이름이나 캐릭터를 검색해 보세요.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: theme.colorScheme.onSurface
@@ -252,7 +248,7 @@ class _GoodsCatalogPickerDialogState extends State<_GoodsCatalogPickerDialog> {
                   if (q.isNotEmpty)
                     Expanded(
                       child: Text(
-                        '결과 ${results.length}개',
+                        '검색 결과 ${results.length}개',
                         style: TextStyle(
                           color: theme.colorScheme.onSurface
                               .withValues(alpha: 0.6),

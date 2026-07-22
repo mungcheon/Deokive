@@ -18,7 +18,7 @@ Future<bool> showCatalogGoodsImportFlow(
   if (!appState.isLoggedIn) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('로그인이 필요합니다. 내 굿즈 추가는 개인 기기에 저장돼요.'),
+        content: Text('로그인이 필요합니다. 내 굿즈 정보는 이 기기에만 저장돼요.'),
       ),
     );
     return false;
@@ -91,7 +91,7 @@ Future<bool> _confirmDuplicateImport(
     context: context,
     builder: (dialogContext) {
       return AlertDialog(
-        title: const Text('이미 가지고 있는 굿즈예요'),
+        title: const Text('이미 보유 중인 굿즈예요'),
         content: Text(
           '"$pickedName"이(가) 이미 $folderLines에 있어요.\n그래도 하나 더 추가할까요?',
         ),
@@ -152,7 +152,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '처음 선택된 폴더에 바로 추가하거나, 원하는 폴더로 바꿀 수 있어요.',
+                    '가장 위 폴더가 기본 저장 위치예요. 원하는 폴더를 직접 지정할 수 있어요.',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -178,7 +178,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                           leading: Icon(folder.icon, color: folder.color),
                           title: Text(folder.name),
                           subtitle: Text(
-                            '$defaultLabel · ${appState.goodsCountForFolder(folder.id)}개 보관 중',
+                            '$defaultLabel · 보유 ${appState.goodsCountForFolder(folder.id)}개',
                           ),
                           trailing: Icon(
                             selected
@@ -203,7 +203,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                       onPressed: () =>
                           Navigator.pop(sheetContext, selectedFolder),
                       icon: const Icon(Icons.add_rounded),
-                      label: const Text('이 폴더에 추가'),
+                      label: const Text('선택한 폴더에 추가'),
                     ),
                   ),
                 ],

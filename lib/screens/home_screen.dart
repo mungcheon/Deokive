@@ -319,7 +319,7 @@ class _CatalogImportPanel extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      '공개 카탈로그에서 찾아 내 폴더에 저장',
+                      '공개 DB에서 찾아 내 폴더에 바로 추가해요',
                       style: TextStyle(fontSize: 12.5),
                     ),
                   ],
