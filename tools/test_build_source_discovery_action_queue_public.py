@@ -20,8 +20,32 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
                     "row_count": 2,
                     "next_machine_step": "open_search",
                     "items": [
-                        {"catalog_index": 2, "name_ko": "Badge", "category": "Badge"},
-                        {"catalog_index": 1, "name_ko": "Stand", "category": "Acrylic"},
+                        {
+                            "catalog_index": 2,
+                            "name_ko": "Badge",
+                            "category": "Badge",
+                            "source_patch_template": {
+                                "catalog_index": 2,
+                                "source_url": "<exact_product_detail_url>",
+                            },
+                            "catalog_field_import_template": {
+                                "row_index": 2,
+                                "field": "source_url",
+                            },
+                        },
+                        {
+                            "catalog_index": 1,
+                            "name_ko": "Stand",
+                            "category": "Acrylic",
+                            "source_patch_template": {
+                                "catalog_index": 1,
+                                "source_url": "<exact_product_detail_url>",
+                            },
+                            "catalog_field_import_template": {
+                                "row_index": 1,
+                                "field": "source_url",
+                            },
+                        },
                     ],
                 },
                 {
@@ -41,9 +65,16 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queued_source_rows"], 2)
         self.assertEqual(report["summary"]["unqueued_actionable_source_rows"], 0)
         self.assertEqual(report["summary"]["queue_coverage"], 1.0)
+        self.assertEqual(report["summary"]["source_patch_template_count"], 2)
+        self.assertEqual(report["summary"]["catalog_field_import_template_count"], 2)
+        self.assertEqual(report["summary"]["missing_template_item_count"], 0)
         self.assertEqual(dict(report["summary"]["excluded_review_state_rows"]), {"manual_official_research_required": 5})
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual([item["catalog_index"] for item in report["batches"][0]["items"]], [1, 2])
+        self.assertEqual(
+            report["batches"][0]["items"][0]["source_patch_template"]["catalog_index"],
+            1,
+        )
 
     def test_max_rows_caps_queue_not_actionable_summary(self) -> None:
         review = {
@@ -64,6 +95,8 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queued_source_rows"], 2)
         self.assertEqual(report["summary"]["unqueued_actionable_source_rows"], 1)
         self.assertEqual(report["summary"]["queue_coverage"], 0.6667)
+        self.assertEqual(report["summary"]["missing_template_item_count"], 2)
+        self.assertEqual(report["summary"]["missing_template_sample_catalog_indexes"], [1, 2])
         self.assertEqual(report["summary"]["action_batch_count"], 2)
 
 

@@ -94,6 +94,18 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
     published = action_items[:max_rows]
     unqueued_actionable_source_rows = max(actionable_source_rows - len(published), 0)
     queue_coverage = round(len(published) / actionable_source_rows, 4) if actionable_source_rows else 1.0
+    source_patch_template_count = sum(
+        1 for item in published if item.get("source_patch_template")
+    )
+    catalog_field_import_template_count = sum(
+        1 for item in published if item.get("catalog_field_import_template")
+    )
+    missing_template_items = [
+        item.get("catalog_index")
+        for item in published
+        if not item.get("source_patch_template")
+        or not item.get("catalog_field_import_template")
+    ]
 
     grouped: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
     for item in published:
@@ -144,6 +156,10 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "action_batch_count": len(batches),
             "batch_size": batch_size,
             "max_rows": max_rows,
+            "source_patch_template_count": source_patch_template_count,
+            "catalog_field_import_template_count": catalog_field_import_template_count,
+            "missing_template_item_count": len(missing_template_items),
+            "missing_template_sample_catalog_indexes": missing_template_items[:25],
             "by_review_state": _counter_pairs(action_items, "review_state"),
             "by_workflow": _counter_pairs(action_items, "workflow"),
             "by_source_store": _counter_pairs(action_items, "source_store")[:40],
