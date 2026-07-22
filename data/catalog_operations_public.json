@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T15:16:02Z",
+  "generated_at": "2026-07-22T15:33:53Z",
   "summary": {
     "catalog_rows": 20391,
     "coverage": {
@@ -43,6 +43,9 @@
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
       "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
+      "official_detail_review_rows": 3,
+      "official_detail_review_candidate_rows": 3,
+      "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 54,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
       "image_attachment_action_rows": 73,
@@ -817,6 +820,28 @@
       ],
       "primary_report": "data/source_detail_candidate_action_queue_public.json",
       "next_step": "confirm_candidate_identity_then_fill_source_and_image_templates",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "official_detail_review_batches",
+      "status": "manual_review",
+      "open_rows": 3,
+      "reviewable_candidate_rows": 3,
+      "manual_confirmed_true": 0,
+      "by_workflow": [
+        [
+          "manual_small_set_review",
+          3
+        ]
+      ],
+      "by_store": [
+        [
+          "애니메이트",
+          3
+        ]
+      ],
+      "primary_report": "data/official_detail_review_batches_public.json",
+      "next_step": "confirm_official_detail_candidates_before_import",
       "auto_apply_enabled": false
     },
     {
@@ -1976,6 +2001,10 @@
       "public_report": "data/source_detail_candidate_action_queue_public.json"
     },
     {
+      "key": "official_detail_review_batches",
+      "public_report": "data/official_detail_review_batches_public.json"
+    },
+    {
       "key": "metadata_backlog",
       "public_report": "data/catalog_metadata_backlog_public.json"
     },
@@ -2970,6 +2999,28 @@
       ],
       "auto_apply_enabled": false,
       "recommended_next_action": "Confirm exact candidate identity before filling source_url and image_url templates."
+    },
+    {
+      "priority": 25,
+      "workstream": "official_detail_review_batches",
+      "public_report": "data/official_detail_review_batches_public.json",
+      "reviewable_seed_rows": 3,
+      "reviewable_candidate_rows": 3,
+      "manual_confirmed_true": 0,
+      "by_workflow": [
+        [
+          "manual_small_set_review",
+          3
+        ]
+      ],
+      "by_store": [
+        [
+          "애니메이트",
+          3
+        ]
+      ],
+      "auto_apply_enabled": false,
+      "recommended_next_action": "Confirm official detail candidates before importing source_url and image_url."
     },
     {
       "priority": 30,

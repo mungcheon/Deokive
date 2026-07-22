@@ -71,6 +71,7 @@ SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public
 SOURCE_DISCOVERY_ACTION_QUEUE = DATA / "source_discovery_action_queue_public.json"
 SOURCE_DISCOVERY_STORE_BOTTLENECKS = DATA / "source_discovery_store_bottlenecks_public.json"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
+OFFICIAL_DETAIL_REVIEW_BATCHES = DATA / "official_detail_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 METADATA_ACTION_QUEUE = DATA / "catalog_metadata_action_queue_public.json"
@@ -1542,6 +1543,12 @@ def build_operations_public(
         else {}
     )
     source_detail_candidate_action_queue_summary = source_detail_candidate_action_queue.get("summary", {})
+    official_detail_review_batches = (
+        load_json(OFFICIAL_DETAIL_REVIEW_BATCHES, {})
+        if OFFICIAL_DETAIL_REVIEW_BATCHES.exists()
+        else {}
+    )
+    official_detail_review_batches_summary = official_detail_review_batches.get("summary", {})
     source_action_queue_summary = source_action_queue.get("summary", {})
     def compact_source_workstream(row: dict[str, Any]) -> dict[str, Any]:
         return {
@@ -1962,6 +1969,18 @@ def build_operations_public(
             "recommended_next_action": "Confirm exact candidate identity before filling source_url and image_url templates.",
         } if source_detail_candidate_action_queue_summary else None,
         {
+            "priority": 25,
+            "workstream": "official_detail_review_batches",
+            "public_report": f"data/{OFFICIAL_DETAIL_REVIEW_BATCHES.name}",
+            "reviewable_seed_rows": official_detail_review_batches_summary.get("reviewable_seed_rows", 0),
+            "reviewable_candidate_rows": official_detail_review_batches_summary.get("reviewable_candidate_rows", 0),
+            "manual_confirmed_true": official_detail_review_batches_summary.get("manual_confirmed_true", 0),
+            "by_workflow": official_detail_review_batches_summary.get("by_workflow", []),
+            "by_store": official_detail_review_batches_summary.get("by_store", []),
+            "auto_apply_enabled": official_detail_review_batches_summary.get("auto_apply_enabled", False),
+            "recommended_next_action": "Confirm official detail candidates before importing source_url and image_url.",
+        } if official_detail_review_batches_summary else None,
+        {
             "priority": 30,
             "workstream": "metadata_backlog",
             "public_report": f"data/{METADATA_BACKLOG.name}",
@@ -2271,6 +2290,18 @@ def build_operations_public(
             "auto_apply_enabled": source_detail_candidate_action_queue_summary.get("auto_apply_enabled", False),
         } if source_detail_candidate_action_queue_summary else None,
         {
+            "workstream": "official_detail_review_batches",
+            "status": "manual_review" if official_detail_review_batches_summary.get("reviewable_seed_rows", 0) else "clear",
+            "open_rows": official_detail_review_batches_summary.get("reviewable_seed_rows", 0),
+            "reviewable_candidate_rows": official_detail_review_batches_summary.get("reviewable_candidate_rows", 0),
+            "manual_confirmed_true": official_detail_review_batches_summary.get("manual_confirmed_true", 0),
+            "by_workflow": official_detail_review_batches_summary.get("by_workflow", []),
+            "by_store": official_detail_review_batches_summary.get("by_store", []),
+            "primary_report": f"data/{OFFICIAL_DETAIL_REVIEW_BATCHES.name}",
+            "next_step": "confirm_official_detail_candidates_before_import",
+            "auto_apply_enabled": official_detail_review_batches_summary.get("auto_apply_enabled", False),
+        } if official_detail_review_batches_summary else None,
+        {
             "workstream": "ensky_cache_candidate_action_queue",
             "status": "manual_review" if ensky_cache_candidate_action_queue_summary.get("candidate_action_rows", 0) else "clear",
             "open_rows": ensky_cache_candidate_action_queue_summary.get("candidate_action_rows", 0),
@@ -2550,6 +2581,16 @@ def build_operations_public(
         open_review_queues["source_detail_candidate_manual_confirmation_shortlist_rows"] = (
             source_detail_candidate_action_queue_summary.get("manual_confirmation_shortlist_rows", 0)
         )
+    if official_detail_review_batches_summary:
+        open_review_queues["official_detail_review_rows"] = (
+            official_detail_review_batches_summary.get("reviewable_seed_rows", 0)
+        )
+        open_review_queues["official_detail_review_candidate_rows"] = (
+            official_detail_review_batches_summary.get("reviewable_candidate_rows", 0)
+        )
+        open_review_queues["official_detail_review_manual_confirmed_rows"] = (
+            official_detail_review_batches_summary.get("manual_confirmed_true", 0)
+        )
     if ensky_cache_candidate_action_queue_summary:
         open_review_queues["ensky_cache_candidate_action_rows"] = ensky_cache_candidate_action_queue_summary.get(
             "candidate_action_rows", 0
@@ -2664,6 +2705,7 @@ def build_operations_public(
             {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
             {"key": "ensky_cache_candidate_action_queue", "public_report": f"data/{ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.name}"},
             {"key": "source_detail_candidate_action_queue", "public_report": f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}"},
+            {"key": "official_detail_review_batches", "public_report": f"data/{OFFICIAL_DETAIL_REVIEW_BATCHES.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
             {"key": "metadata_review_batches", "public_report": f"data/{METADATA_REVIEW_BATCHES.name}"},
             {"key": "metadata_action_queue", "public_report": f"data/{METADATA_ACTION_QUEUE.name}"},
@@ -4538,6 +4580,22 @@ def validate_report_consistency(
         expected_open_queues["source_detail_candidate_manual_confirmation_shortlist_rows"] = (
             source_detail_candidate_action_summary.get("manual_confirmation_shortlist_rows", 0)
         )
+    official_detail_review_batches = (
+        load_json(OFFICIAL_DETAIL_REVIEW_BATCHES, {})
+        if OFFICIAL_DETAIL_REVIEW_BATCHES.exists()
+        else {}
+    )
+    official_detail_review_summary = official_detail_review_batches.get("summary", {})
+    if official_detail_review_summary:
+        expected_open_queues["official_detail_review_rows"] = (
+            official_detail_review_summary.get("reviewable_seed_rows", 0)
+        )
+        expected_open_queues["official_detail_review_candidate_rows"] = (
+            official_detail_review_summary.get("reviewable_candidate_rows", 0)
+        )
+        expected_open_queues["official_detail_review_manual_confirmed_rows"] = (
+            official_detail_review_summary.get("manual_confirmed_true", 0)
+        )
     ensky_cache_candidate_action_queue = (
         load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {})
         if ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.exists()
@@ -5147,6 +5205,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["source_detail_candidate_action_queue"] = copy_report_summary(
                 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, "source_detail_candidate_action_queue"
             )
+        if OFFICIAL_DETAIL_REVIEW_BATCHES.exists():
+            target["official_detail_review_batches"] = copy_report_summary(
+                OFFICIAL_DETAIL_REVIEW_BATCHES, "official_detail_review_batches"
+            )
         target["source_discovery_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY.name}",
             **source_discovery["summary"],
@@ -5360,6 +5422,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_ACTION_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_STORE_BOTTLENECKS.relative_to(ROOT)),
             str(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.relative_to(ROOT)),
+            str(OFFICIAL_DETAIL_REVIEW_BATCHES.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
             str(METADATA_REVIEW_BATCHES.relative_to(ROOT)),
             str(METADATA_ACTION_QUEUE.relative_to(ROOT)),
