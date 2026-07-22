@@ -26,11 +26,15 @@ def present(value: Any) -> bool:
     return value is not None and str(value).strip() != ""
 
 
+def has_display_image(item: dict[str, Any]) -> bool:
+    return present(item.get("local_image_path")) or present(item.get("image_url"))
+
+
 def catalog_missing_rows(catalog: dict[str, Any]) -> list[dict[str, Any]]:
     items = catalog.get("items")
     if not isinstance(items, list):
         raise ValueError("catalog_public.json must contain an items list")
-    return [item for item in items if isinstance(item, dict) and not present(item.get("image_url"))]
+    return [item for item in items if isinstance(item, dict) and not has_display_image(item)]
 
 
 def queue_by_catalog_index(queue: dict[str, Any]) -> dict[int, dict[str, Any]]:
@@ -218,7 +222,7 @@ def build_report(
 def recommended_workflow(source_store: str, rows: int) -> str:
     if source_store in {"FuRyu", "Taito", "Banpresto", "SEGA"}:
         return "official_prize_provider_search_then_exact_detail_match"
-    if source_store in {"애니메이트", "Ensky", "Movic", "코토부키야"}:
+    if source_store in {"애니메이트", "엔스카이", "Movic", "코토부키야"}:
         return "official_storefront_search_then_exact_detail_match"
     if rows >= 20:
         return "batch_source_discovery_then_image_attachment_review"

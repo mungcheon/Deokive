@@ -74,6 +74,10 @@ def present(value: Any) -> bool:
     return value is not None and str(value).strip() != ""
 
 
+def has_display_image(item: dict[str, Any]) -> bool:
+    return present(item.get("local_image_path")) or present(item.get("image_url"))
+
+
 def catalog_items(catalog: dict[str, Any]) -> list[dict[str, Any]]:
     items = catalog.get("items")
     if not isinstance(items, list):
@@ -89,7 +93,7 @@ def queue_items(queue: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def missing_catalog_items(catalog: dict[str, Any]) -> list[dict[str, Any]]:
-    return [item for item in catalog_items(catalog) if not present(item.get("image_url"))]
+    return [item for item in catalog_items(catalog) if not has_display_image(item)]
 
 
 def queue_by_index(queue: dict[str, Any]) -> dict[int, dict[str, Any]]:

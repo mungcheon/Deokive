@@ -47,6 +47,14 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
                     "affiliation": "작품",
                     "category": "피규어",
                 },
+                {
+                    "catalog_index": 3,
+                    "name_ko": "캐시 이미지",
+                    "local_image_path": "assets/catalog_images/cached.webp",
+                    "source_store": "FuRyu",
+                    "affiliation": "작품",
+                    "category": "피규어",
+                },
             ]
         }
         queue = {

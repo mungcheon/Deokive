@@ -31,6 +31,12 @@ class MissingImageReportCoveragePublicTests(unittest.TestCase):
                     "source_store": "Unknown Store",
                     "image_url": None,
                 },
+                {
+                    "catalog_index": 4,
+                    "name_ko": "cached",
+                    "source_store": target.ANIMATE_STORE,
+                    "local_image_path": "assets/catalog_images/cached.webp",
+                },
             ]
         }
         queue = {
