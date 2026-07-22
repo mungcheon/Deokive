@@ -25,6 +25,7 @@ IMAGE_ASSET_AUDIT = DATA / "catalog_image_asset_audit_public.json"
 MISSING_IMAGE_PRIORITY = DATA / "catalog_missing_image_priority_public.json"
 ANIMATE_MISSING_IMAGE_SEARCH = DATA / "animate_missing_image_search_public.json"
 GOODSMILE_MISSING_IMAGE_SEARCH = DATA / "goodsmile_missing_image_search_public.json"
+KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH = DATA / "kotobukiya_movic_missing_image_search_public.json"
 ENSKY_CACHE_COVERAGE = DATA / "ensky_missing_image_cache_coverage_public.json"
 ENSKY_SEARCH_PAGE_PROBE = DATA / "ensky_search_page_probe_public.json"
 STELLIVE_FANDING_CANDIDATES = DATA / "stellive_fanding_candidates_public.json"
@@ -4585,6 +4586,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["goodsmile_missing_image_search"] = copy_report_summary(
                 GOODSMILE_MISSING_IMAGE_SEARCH, "goodsmile_missing_image_search"
             )
+        if KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH.exists():
+            target["kotobukiya_movic_missing_image_search"] = copy_report_summary(
+                KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH, "kotobukiya_movic_missing_image_search"
+            )
         if ENSKY_CACHE_COVERAGE.exists():
             target["ensky_cache_coverage"] = copy_report_summary(ENSKY_CACHE_COVERAGE, "ensky_cache_coverage")
         if ENSKY_SEARCH_PAGE_PROBE.exists():
@@ -4769,6 +4774,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(MISSING_IMAGE_PRIORITY.relative_to(ROOT)),
             str(ANIMATE_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(GOODSMILE_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
+            str(KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(ENSKY_CACHE_COVERAGE.relative_to(ROOT)),
             str(ENSKY_SEARCH_PAGE_PROBE.relative_to(ROOT)),
             str(STELLIVE_FANDING_CANDIDATES.relative_to(ROOT)),
