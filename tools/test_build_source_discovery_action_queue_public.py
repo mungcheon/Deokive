@@ -39,6 +39,8 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["actionable_source_rows"], 2)
         self.assertEqual(report["summary"]["queued_source_rows"], 2)
+        self.assertEqual(report["summary"]["unqueued_actionable_source_rows"], 0)
+        self.assertEqual(report["summary"]["queue_coverage"], 1.0)
         self.assertEqual(dict(report["summary"]["excluded_review_state_rows"]), {"manual_official_research_required": 5})
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual([item["catalog_index"] for item in report["batches"][0]["items"]], [1, 2])
@@ -60,6 +62,8 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["actionable_source_rows"], 3)
         self.assertEqual(report["summary"]["queued_source_rows"], 2)
+        self.assertEqual(report["summary"]["unqueued_actionable_source_rows"], 1)
+        self.assertEqual(report["summary"]["queue_coverage"], 0.6667)
         self.assertEqual(report["summary"]["action_batch_count"], 2)
 
 

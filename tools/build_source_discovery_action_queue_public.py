@@ -92,6 +92,8 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 240, batch_s
         )
     )
     published = action_items[:max_rows]
+    unqueued_actionable_source_rows = max(actionable_source_rows - len(published), 0)
+    queue_coverage = round(len(published) / actionable_source_rows, 4) if actionable_source_rows else 1.0
 
     grouped: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
     for item in published:
@@ -137,6 +139,8 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 240, batch_s
         "summary": {
             "actionable_source_rows": actionable_source_rows,
             "queued_source_rows": len(published),
+            "unqueued_actionable_source_rows": unqueued_actionable_source_rows,
+            "queue_coverage": queue_coverage,
             "action_batch_count": len(batches),
             "batch_size": batch_size,
             "max_rows": max_rows,

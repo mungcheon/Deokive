@@ -176,6 +176,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         readiness_summary = confirmed_readiness.get("summary", {})
         image_action = reports.load_json(reports.IMAGE_ATTACHMENT_ACTION_QUEUE)
         image_action_summary = image_action.get("summary", {})
+        source_action = reports.load_json(reports.SOURCE_DISCOVERY_ACTION_QUEUE)
+        source_action_summary = source_action.get("summary", {})
+        source_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "source_discovery_action_queue"
+        )
+        source_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "source_discovery_action_queue"
+        )
         image_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
@@ -241,6 +253,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             open_queues.get("image_attachment_action_rows"),
             image_action_summary.get("queued_image_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_action_rows"),
+            source_action_summary.get("queued_source_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_actionable_rows"),
+            source_action_summary.get("actionable_source_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_unqueued_actionable_rows"),
+            source_action_summary.get("unqueued_actionable_source_rows"),
+        )
+        self.assertEqual(
+            source_scorecard.get("queue_coverage"),
+            source_action_summary.get("queue_coverage"),
+        )
+        self.assertEqual(
+            source_next_action.get("unqueued_actionable_source_rows"),
+            source_action_summary.get("unqueued_actionable_source_rows"),
         )
         self.assertEqual(
             open_queues.get("image_attachment_actionable_rows"),

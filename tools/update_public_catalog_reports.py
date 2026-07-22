@@ -1581,8 +1581,10 @@ def build_operations_public(
             "public_report": f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
             "actionable_source_rows": source_action_queue_summary.get("actionable_source_rows", 0),
             "queued_source_rows": source_action_queue_summary.get("queued_source_rows", 0),
+            "unqueued_actionable_source_rows": source_action_queue_summary.get("unqueued_actionable_source_rows", 0),
+            "queue_coverage": source_action_queue_summary.get("queue_coverage", 0),
             "action_batch_count": source_action_queue_summary.get("action_batch_count", 0),
-            "recommended_next_action": "Work official-search source URL batches before broad manual source research.",
+            "recommended_next_action": "Work queued official-search source URL batches, then expand remaining actionable source rows.",
         } if source_action_queue_summary else None,
         {
             "priority": 30,
@@ -1757,6 +1759,9 @@ def build_operations_public(
             "workstream": "source_discovery_action_queue",
             "status": "manual_review" if source_action_queue_summary.get("queued_source_rows", 0) else "clear",
             "open_rows": source_action_queue_summary.get("queued_source_rows", 0),
+            "actionable_source_rows": source_action_queue_summary.get("actionable_source_rows", 0),
+            "unqueued_actionable_source_rows": source_action_queue_summary.get("unqueued_actionable_source_rows", 0),
+            "queue_coverage": source_action_queue_summary.get("queue_coverage", 0),
             "primary_report": f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
             "next_step": "confirm_exact_source_url_then_fill_source_templates",
             "auto_apply_enabled": source_action_queue_summary.get("auto_apply_enabled", False),
@@ -1946,6 +1951,12 @@ def build_operations_public(
         open_review_queues["requested_focus_action_rows"] = requested_focus_action_queue_summary.get("queued_action_rows", 0)
     if source_action_queue_summary:
         open_review_queues["source_discovery_action_rows"] = source_action_queue_summary.get("queued_source_rows", 0)
+        open_review_queues["source_discovery_actionable_rows"] = source_action_queue_summary.get(
+            "actionable_source_rows", 0
+        )
+        open_review_queues["source_discovery_unqueued_actionable_rows"] = source_action_queue_summary.get(
+            "unqueued_actionable_source_rows", 0
+        )
     if image_action_queue_summary:
         open_review_queues["image_attachment_action_rows"] = image_action_queue_summary.get("queued_image_rows", 0)
         open_review_queues["image_attachment_actionable_rows"] = image_action_queue_summary.get(
@@ -3739,6 +3750,12 @@ def validate_report_consistency(
     source_action_summary = source_action_queue.get("summary", {})
     if source_action_summary:
         expected_open_queues["source_discovery_action_rows"] = source_action_summary.get("queued_source_rows", 0)
+        expected_open_queues["source_discovery_actionable_rows"] = source_action_summary.get(
+            "actionable_source_rows", 0
+        )
+        expected_open_queues["source_discovery_unqueued_actionable_rows"] = source_action_summary.get(
+            "unqueued_actionable_source_rows", 0
+        )
     metadata_action_queue = load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
     metadata_action_summary = metadata_action_queue.get("summary", {})
     if metadata_action_summary:
