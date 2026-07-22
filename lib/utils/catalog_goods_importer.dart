@@ -166,9 +166,11 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.86,
-        minChildSize: 0.78,
-        maxChildSize: 0.95,
+        initialChildSize: 0.82,
+        minChildSize: 0.56,
+        maxChildSize: 0.98,
+        snap: true,
+        snapSizes: const [0.82, 0.98],
         builder: (context, scrollController) {
           return StatefulBuilder(
             builder: (context, setSheetState) {
@@ -560,6 +562,10 @@ Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
       final data = await rootBundle.load(localPath);
       return data.buffer.asUint8List();
     } catch (_) {
+      if (kIsWeb) {
+        final bytes = await _loadWebAssetBytes(localPath);
+        if (bytes != null) return bytes;
+      }
       // Fall back to the remote URL when a bundled cache file is unavailable.
     }
   }
@@ -573,6 +579,25 @@ Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
   try {
     final response = await http.get(
       Uri.parse(url),
+      headers: const {
+        'User-Agent': 'Mozilla/5.0 Deokive/1.0',
+        'Accept': 'image/*,*/*',
+      },
+    ).timeout(const Duration(seconds: 8));
+    if (response.statusCode != 200 || response.bodyBytes.isEmpty) {
+      return null;
+    }
+    return response.bodyBytes;
+  } catch (_) {
+    return null;
+  }
+}
+
+Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
+  if (!assetPath.startsWith('assets/')) return null;
+  try {
+    final response = await http.get(
+      Uri.base.resolve('assets/$assetPath'),
       headers: const {
         'User-Agent': 'Mozilla/5.0 Deokive/1.0',
         'Accept': 'image/*,*/*',

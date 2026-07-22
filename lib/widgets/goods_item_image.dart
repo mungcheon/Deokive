@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 import '../models/goods_item.dart';
 
@@ -31,13 +30,6 @@ class GoodsItemImage extends StatelessWidget {
             'https://',
           );
       if (_isNetworkUrl(normalizedImageUrl)) {
-        return Image.network(
-          normalizedImageUrl,
-          fit: fit,
-          errorBuilder: (_, __, ___) => _placeholder(),
-        );
-      }
-      if (kIsWeb) {
         return Image.network(
           normalizedImageUrl,
           fit: fit,

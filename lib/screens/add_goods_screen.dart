@@ -706,19 +706,24 @@ class _AddGoodsScreenState extends State<AddGoodsScreen> {
   }
 
   Future<Uint8List?> _downloadImageBytes(String url) async {
-    if (url.startsWith('assets/') && !kIsWeb) {
+    if (url.startsWith('assets/')) {
       try {
         final data = await rootBundle.load(url);
         return data.buffer.asUint8List();
       } catch (_) {
-        return null;
+        if (!kIsWeb) return null;
       }
     }
 
     try {
       final uri = Uri.parse(url);
+      final resolvedUri = uri.hasScheme
+          ? uri
+          : url.startsWith('assets/')
+              ? Uri.base.resolve('assets/$url')
+              : Uri.base.resolve(url);
       final response = await http.get(
-        uri.hasScheme ? uri : Uri.base.resolve(url),
+        resolvedUri,
         headers: const {
           'User-Agent': 'Mozilla/5.0 (Linux; Android) Deokive/1.0',
           'Accept': 'image/*,*/*',

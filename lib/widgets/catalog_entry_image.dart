@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 import '../models/goods_catalog_entry.dart';
 
@@ -53,23 +52,14 @@ class CatalogEntryImage extends StatelessWidget {
         height: height,
         placeholder: placeholder,
       );
-      if (kIsWeb) {
-        image = _RemoteCatalogImage(
-          imageUrl: localPath,
-          width: width,
-          height: height,
-          placeholder: remotePath.isEmpty ? placeholder : remoteFallback,
-        );
-      } else {
-        image = Image.asset(
-          localPath,
-          width: width,
-          height: height,
-          fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) =>
-              remotePath.isEmpty ? placeholder : remoteFallback,
-        );
-      }
+      image = Image.asset(
+        localPath,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) =>
+            remotePath.isEmpty ? placeholder : remoteFallback,
+      );
     } else {
       image = _RemoteCatalogImage(
         imageUrl: remotePath,
