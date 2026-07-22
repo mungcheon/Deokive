@@ -57,12 +57,17 @@ def compact_row(row: dict[str, Any]) -> dict[str, Any]:
 
 def compact_group(group: dict[str, Any]) -> dict[str, Any]:
     rows = [compact_row(row) for row in group.get("rows") or [] if isinstance(row, dict)]
+    evidence = group.get("evidence") or []
+    same_barcode = "same_barcode" in evidence
+    same_source_url = "same_source_url" in evidence
+    same_image_url = "same_image_url" in evidence
+    fast_review_lane = _fast_review_lane(same_barcode, same_source_url, same_image_url)
     decision_template = dict(group.get("dedupe_decision_template") or {})
     decision_template.update(
         {
             "manual_confirmed": False,
             "decision": "review_required",
-            "fast_review_lane": "same_barcode_high_confidence",
+            "fast_review_lane": fast_review_lane,
         }
     )
     return {
@@ -74,9 +79,12 @@ def compact_group(group: dict[str, Any]) -> dict[str, Any]:
         "drop_catalog_indexes": group.get("drop_catalog_indexes") or [],
         "stores": group.get("stores") or [],
         "categories": group.get("categories") or [],
-        "evidence": group.get("evidence") or [],
+        "evidence": evidence,
         "merge_blockers": group.get("merge_blockers") or [],
-        "same_source_url": "same_source_url" in (group.get("evidence") or []),
+        "same_barcode": same_barcode,
+        "same_source_url": same_source_url,
+        "same_image_url": same_image_url,
+        "fast_review_lane": fast_review_lane,
         "dedupe_decision_template": decision_template,
         "rows": rows,
         "auto_merge_enabled": False,
@@ -88,6 +96,18 @@ def counter_rows(counter: Counter[str], field: str) -> list[dict[str, Any]]:
     return [{field: key, "groups": value} for key, value in counter.most_common()]
 
 
+def _fast_review_lane(same_barcode: bool, same_source_url: bool, same_image_url: bool) -> str:
+    if same_barcode and same_source_url and same_image_url:
+        return "same_barcode_source_and_image"
+    if same_barcode and same_source_url:
+        return "same_barcode_and_source_url"
+    if same_barcode and same_image_url:
+        return "same_barcode_and_image_url"
+    if same_barcode:
+        return "same_barcode_high_confidence"
+    return "high_confidence_manual_review"
+
+
 def build_report(action_queue: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     all_groups = iter_groups(action_queue)
     fast_groups = [compact_group(group) for group in all_groups if is_fast_review_group(group)]
@@ -95,10 +115,18 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
     by_store = Counter()
     by_category = Counter()
     by_blocker = Counter()
+    by_fast_review_lane = Counter()
+    same_barcode_groups = 0
     same_source_url_groups = 0
+    same_image_url_groups = 0
     for group in fast_groups:
+        if group.get("same_barcode"):
+            same_barcode_groups += 1
         if group.get("same_source_url"):
             same_source_url_groups += 1
+        if group.get("same_image_url"):
+            same_image_url_groups += 1
+        by_fast_review_lane[str(group.get("fast_review_lane") or "unknown")] += 1
         for store in group.get("stores") or []:
             by_store[str(store)] += 1
         for category in group.get("categories") or []:
@@ -114,12 +142,15 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         "summary": {
             "fast_review_groups": len(fast_groups),
             "held_for_later_groups": len(held_groups),
+            "same_barcode_groups": same_barcode_groups,
             "same_source_url_groups": same_source_url_groups,
+            "same_image_url_groups": same_image_url_groups,
             "manual_confirmed_true": 0,
             "auto_merge_enabled": False,
             "auto_delete_enabled": False,
         },
         "breakdowns": {
+            "by_fast_review_lane": counter_rows(by_fast_review_lane, "fast_review_lane"),
             "by_source_store": counter_rows(by_store, "source_store"),
             "by_category": counter_rows(by_category, "category"),
             "by_merge_blocker": counter_rows(by_blocker, "merge_blocker"),

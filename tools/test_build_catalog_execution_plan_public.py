@@ -89,6 +89,20 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "excluded_review_confidence": [["variant_caution", 1]],
                 }
             },
+            "catalog_deduplication_fast_review_public.json": {
+                "summary": {
+                    "fast_review_groups": 2,
+                    "same_barcode_groups": 2,
+                    "same_source_url_groups": 1,
+                    "same_image_url_groups": 1,
+                },
+                "breakdowns": {
+                    "by_fast_review_lane": [
+                        {"fast_review_lane": "same_barcode_and_source_url", "groups": 1},
+                        {"fast_review_lane": "same_barcode_and_image_url", "groups": 1},
+                    ]
+                },
+            },
             "ichiban_kuji_metadata_review_batches_public.json": {
                 "summary": {"catalog_item_rows": 0}
             },
@@ -205,6 +219,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(dedupe_action["rows"], 2)
         self.assertEqual(dedupe_action["evidence"]["actionable_groups"], 2)
+        self.assertEqual(dedupe_action["evidence"]["fast_review_groups"], 2)
+        self.assertEqual(dedupe_action["evidence"]["fast_review_same_source_url_groups"], 1)
+        self.assertEqual(
+            dedupe_action["evidence"]["fast_review_lanes"][0]["fast_review_lane"],
+            "same_barcode_and_source_url",
+        )
+        self.assertEqual(report["summary"]["dedupe_fast_review_groups"], 2)
+        self.assertEqual(report["summary"]["dedupe_fast_review_same_source_url_groups"], 1)
         kuji_action = next(
             action
             for action in report["actions"]

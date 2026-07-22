@@ -108,6 +108,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     requested_action_queue = load_report("requested_focus_action_queue_public.json")
     dedupe_batches = load_report("catalog_deduplication_review_batches_public.json")
     dedupe_action_queue = load_report("catalog_deduplication_action_queue_public.json")
+    dedupe_fast_review = load_report("catalog_deduplication_fast_review_public.json")
     kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
     kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
     kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
@@ -130,6 +131,10 @@ def _build_plan(load_report) -> dict[str, Any]:
     requested_action_summary = _summary(requested_action_queue)
     dedupe_summary = _summary(dedupe_batches)
     dedupe_action_summary = _summary(dedupe_action_queue)
+    dedupe_fast_summary = _summary(dedupe_fast_review)
+    dedupe_fast_breakdowns = dedupe_fast_review.get("breakdowns")
+    if not isinstance(dedupe_fast_breakdowns, dict):
+        dedupe_fast_breakdowns = {}
     kuji_summary = _summary(kuji_batches)
     kuji_action_summary = _summary(kuji_action_queue)
     kuji_policy_summary = _summary(kuji_policy)
@@ -392,6 +397,11 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "action_batch_count": _count(dedupe_action_summary, "action_batch_count"),
                 "by_review_confidence": dedupe_action_summary.get("by_review_confidence", []),
                 "excluded_review_confidence": dedupe_action_summary.get("excluded_review_confidence", []),
+                "fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
+                "fast_review_same_barcode_groups": _count(dedupe_fast_summary, "same_barcode_groups"),
+                "fast_review_same_source_url_groups": _count(dedupe_fast_summary, "same_source_url_groups"),
+                "fast_review_same_image_url_groups": _count(dedupe_fast_summary, "same_image_url_groups"),
+                "fast_review_lanes": dedupe_fast_breakdowns.get("by_fast_review_lane", []),
             },
         )
     )
@@ -536,6 +546,10 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "ichiban_multi_item_prize_label_groups": kuji_variant_review_rows,
             "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
+            "dedupe_fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
+            "dedupe_fast_review_same_source_url_groups": _count(
+                dedupe_fast_summary, "same_source_url_groups"
+            ),
             "auto_apply_enabled": False,
         },
         "actions": actions,

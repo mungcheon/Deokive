@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import sys
 import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from build_deduplication_fast_review_public import build_report
 
@@ -45,12 +49,19 @@ class DeduplicationFastReviewTests(unittest.TestCase):
 
         self.assertEqual(report["summary"]["fast_review_groups"], 1)
         self.assertEqual(report["summary"]["held_for_later_groups"], 2)
+        self.assertEqual(report["summary"]["same_barcode_groups"], 1)
         self.assertEqual(report["summary"]["same_source_url_groups"], 1)
+        self.assertEqual(report["summary"]["same_image_url_groups"], 0)
         self.assertIs(report["summary"]["auto_delete_enabled"], False)
         self.assertIs(report["items"][0]["dedupe_decision_template"]["manual_confirmed"], False)
         self.assertEqual(
             report["items"][0]["dedupe_decision_template"]["fast_review_lane"],
-            "same_barcode_high_confidence",
+            "same_barcode_and_source_url",
+        )
+        self.assertEqual(report["items"][0]["fast_review_lane"], "same_barcode_and_source_url")
+        self.assertEqual(
+            report["breakdowns"]["by_fast_review_lane"],
+            [{"fast_review_lane": "same_barcode_and_source_url", "groups": 1}],
         )
         self.assertEqual(report["automation_policy"]["import_tool"], "tools/import_confirmed_dedupe_decisions.py")
 

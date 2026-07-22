@@ -1,16 +1,28 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T08:41:49Z",
+  "generated_at": "2026-07-22T10:50:14Z",
   "scope": "catalog_deduplication_fast_review",
   "summary": {
     "fast_review_groups": 42,
     "held_for_later_groups": 6,
+    "same_barcode_groups": 42,
     "same_source_url_groups": 38,
+    "same_image_url_groups": 0,
     "manual_confirmed_true": 0,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
   },
   "breakdowns": {
+    "by_fast_review_lane": [
+      {
+        "fast_review_lane": "same_barcode_and_source_url",
+        "groups": 38
+      },
+      {
+        "fast_review_lane": "same_barcode_high_confidence",
+        "groups": 4
+      }
+    ],
     "by_source_store": [
       {
         "source_store": "치이카와 마켓",
@@ -80,7 +92,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -94,7 +109,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -148,7 +163,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -162,7 +180,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -216,7 +234,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -230,7 +251,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -284,7 +305,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -298,7 +322,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -352,7 +376,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -366,7 +393,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -420,7 +447,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -434,7 +464,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -488,7 +518,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -502,7 +535,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -556,7 +589,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -570,7 +606,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -624,7 +660,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -638,7 +677,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -692,7 +731,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -706,7 +748,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -760,7 +802,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -774,7 +819,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -828,7 +873,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -842,7 +890,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -896,7 +944,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -910,7 +961,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -964,7 +1015,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -978,7 +1032,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1032,7 +1086,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1046,7 +1103,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1100,7 +1157,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1114,7 +1174,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1168,7 +1228,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1182,7 +1245,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1236,7 +1299,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1250,7 +1316,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1304,7 +1370,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1318,7 +1387,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1372,7 +1441,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1386,7 +1458,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1440,7 +1512,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1454,7 +1529,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1508,7 +1583,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1522,7 +1600,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1576,7 +1654,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1590,7 +1671,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1644,7 +1725,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1658,7 +1742,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1712,7 +1796,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1726,7 +1813,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1780,7 +1867,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1794,7 +1884,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1848,7 +1938,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1862,7 +1955,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1916,7 +2009,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1930,7 +2026,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -1984,7 +2080,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -1998,7 +2097,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2052,7 +2151,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2066,7 +2168,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2120,7 +2222,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2134,7 +2239,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2188,7 +2293,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2202,7 +2310,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2256,7 +2364,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2270,7 +2381,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2324,7 +2435,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2338,7 +2452,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2392,7 +2506,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2406,7 +2523,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2460,7 +2577,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2474,7 +2594,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2528,7 +2648,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2542,7 +2665,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2596,7 +2719,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": true,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_and_source_url",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2610,7 +2736,7 @@
         "decision": "review_required",
         "requires_same_sellable_product": true,
         "requires_variant_difference_disproved": false,
-        "fast_review_lane": "same_barcode_high_confidence"
+        "fast_review_lane": "same_barcode_and_source_url"
       },
       "rows": [
         {
@@ -2663,7 +2789,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": false,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_high_confidence",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2730,7 +2859,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": false,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_high_confidence",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2797,7 +2929,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": false,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_high_confidence",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",
@@ -2864,7 +2999,10 @@
       "merge_blockers": [
         "multi_store_variant_or_retailer_review"
       ],
+      "same_barcode": true,
       "same_source_url": false,
+      "same_image_url": false,
+      "fast_review_lane": "same_barcode_high_confidence",
       "dedupe_decision_template": {
         "manual_confirmed": false,
         "manual_note": "",

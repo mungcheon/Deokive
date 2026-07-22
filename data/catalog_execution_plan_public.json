@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T10:46:18Z",
+  "generated_at": "2026-07-22T10:50:56Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 17,
@@ -64,6 +64,8 @@
     "ichiban_zero_price_exception_policy_pass": true,
     "ichiban_multi_item_prize_label_groups": 416,
     "ichiban_reissue_duplicate_review_groups": 46,
+    "dedupe_fast_review_groups": 42,
+    "dedupe_fast_review_same_source_url_groups": 38,
     "auto_apply_enabled": false
   },
   "actions": [
@@ -892,6 +894,20 @@
             "variant_caution",
             8
           ]
+        ],
+        "fast_review_groups": 42,
+        "fast_review_same_barcode_groups": 42,
+        "fast_review_same_source_url_groups": 38,
+        "fast_review_same_image_url_groups": 0,
+        "fast_review_lanes": [
+          {
+            "fast_review_lane": "same_barcode_and_source_url",
+            "groups": 38
+          },
+          {
+            "fast_review_lane": "same_barcode_high_confidence",
+            "groups": 4
+          }
         ]
       }
     },
