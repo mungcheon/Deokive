@@ -11,6 +11,8 @@
   - Secondary: `server/catalog_image_enrichment_batch_plan.md`
 - `Public image recovery`: 720 public DB rows missing images, 427 focus-pack source rows -> `data/catalog_missing_image_actionability_public.json`
   - Secondary: `data/source_discovery_focus_confirmed_template_public.json`
+- `Public deduplication`: 104 duplicate review groups, 48 queued action groups -> `data/catalog_deduplication_public.json`
+  - Secondary: `data/catalog_deduplication_fast_review_public.json`
 - `Image path source review`: 82 review items, 82 rejected source candidates -> `server/image_path_source_url_review_queue.html`
 - `Source URL bottlenecks`: 747 missing source_url, 673 missing image+source -> `server/catalog_source_url_bottleneck_audit.md`
 - `Web image search candidates`: 0 web candidates, 0 safe consolidated candidates -> `server/web_image_search_candidates.json`

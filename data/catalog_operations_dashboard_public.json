@@ -2186,6 +2186,21 @@
       "image_attachment_template_dry_run_skipped_rows": 73,
       "auto_apply_enabled": false
     },
+    "public_deduplication": {
+      "duplicate_groups": 104,
+      "duplicate_rows": 104,
+      "actionable_groups": 48,
+      "queued_groups": 48,
+      "fast_review_groups": 42,
+      "held_for_later_groups": 6,
+      "template_items": 42,
+      "template_manual_confirmed_rows": 0,
+      "template_drop_candidate_rows": 42,
+      "template_import_updated_rows": 0,
+      "template_import_skipped_rows": 42,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
     "report_consistency_ok": true
   },
   "next_actions": [
@@ -2414,6 +2429,52 @@
       "image_attachment_template_import_updated_rows": 0,
       "image_attachment_template_import_skipped_rows": 73,
       "auto_apply_enabled": false
+    },
+    {
+      "area": "Public deduplication",
+      "artifact": "data/catalog_deduplication_public.json",
+      "markdown": "data/catalog_deduplication_confirmed_template_public.json",
+      "secondary_artifact": "data/catalog_deduplication_fast_review_public.json",
+      "primary_metric": 104,
+      "primary_label": "duplicate review groups",
+      "secondary_metric": 48,
+      "secondary_label": "queued action groups",
+      "status": "manual_confirmation_needed",
+      "next": "Confirm same sellable product before setting any dedupe template row to drop/merge; automatic deletion stays disabled.",
+      "quick_win_metric": 42,
+      "quick_win_label": "fast-review groups",
+      "template_items": 42,
+      "template_manual_confirmed_rows": 0,
+      "template_same_sellable_product_confirmed_rows": 0,
+      "template_drop_candidate_rows": 42,
+      "template_import_updated_rows": 0,
+      "template_import_skipped_rows": 42,
+      "by_review_risk": [
+        [
+          "strong_identity_review",
+          66
+        ],
+        [
+          "variant_risk_review",
+          36
+        ],
+        [
+          "source_identity_review",
+          2
+        ]
+      ],
+      "by_fast_review_lane": [
+        [
+          "same_barcode_and_source_url",
+          38
+        ],
+        [
+          "same_barcode_high_confidence",
+          4
+        ]
+      ],
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
     },
     {
       "area": "Image path source review",
@@ -4350,6 +4411,11 @@
     "public_source_focus_template": "data/source_discovery_focus_confirmed_template_public.json",
     "public_source_focus_template_import": "data/source_discovery_focus_template_import_dry_run_public.json",
     "public_image_attachment_template": "data/catalog_image_attachment_confirmed_template_public.json",
-    "public_image_attachment_template_import": "data/catalog_image_attachment_template_import_dry_run_public.json"
+    "public_image_attachment_template_import": "data/catalog_image_attachment_template_import_dry_run_public.json",
+    "public_deduplication": "data/catalog_deduplication_public.json",
+    "public_deduplication_action_queue": "data/catalog_deduplication_action_queue_public.json",
+    "public_deduplication_fast_review": "data/catalog_deduplication_fast_review_public.json",
+    "public_deduplication_confirmed_template": "data/catalog_deduplication_confirmed_template_public.json",
+    "public_deduplication_template_import": "data/catalog_deduplication_template_import_dry_run_public.json"
   }
 }

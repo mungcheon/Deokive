@@ -637,6 +637,56 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                         "skip_reason_counts": [["manual_confirmed_false", 73]],
                     },
                 ),
+                "public_deduplication": _write_json(
+                    root / "public_deduplication.json",
+                    {
+                        "summary": {
+                            "duplicate_groups": 104,
+                            "duplicate_rows": 104,
+                            "by_review_risk": [["strong_identity_review", 66]],
+                        }
+                    },
+                ),
+                "public_deduplication_action_queue": _write_json(
+                    root / "public_deduplication_action_queue.json",
+                    {
+                        "summary": {
+                            "actionable_groups": 48,
+                            "queued_groups": 48,
+                        }
+                    },
+                ),
+                "public_deduplication_fast_review": _write_json(
+                    root / "public_deduplication_fast_review.json",
+                    {
+                        "summary": {
+                            "fast_review_groups": 42,
+                            "held_for_later_groups": 6,
+                        }
+                    },
+                ),
+                "public_deduplication_confirmed_template": _write_json(
+                    root / "public_deduplication_confirmed_template.json",
+                    {
+                        "summary": {
+                            "template_items": 42,
+                            "manual_confirmed_rows": 0,
+                            "same_sellable_product_confirmed_rows": 0,
+                            "drop_candidate_rows": 42,
+                            "by_fast_review_lane": [["same_barcode_and_source_url", 38]],
+                            "auto_merge_enabled": False,
+                            "auto_delete_enabled": False,
+                        }
+                    },
+                ),
+                "public_deduplication_template_import": _write_json(
+                    root / "public_deduplication_template_import.json",
+                    {
+                        "updated_rows": 0,
+                        "skipped_rows": 42,
+                        "skip_reason_counts": [["manual_confirmed_false", 42]],
+                    },
+                ),
             }
 
             with patch.object(dashboard, "SOURCES", sources):
@@ -796,10 +846,17 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["public_image_recovery"]["image_attachment_template_representative_review_rows"], 23)
         self.assertEqual(payload["summary"]["public_image_recovery"]["image_attachment_template_dry_run_skipped_rows"], 73)
         self.assertEqual(payload["summary"]["public_image_recovery"]["auto_apply_enabled"], False)
+        self.assertEqual(payload["summary"]["public_deduplication"]["duplicate_groups"], 104)
+        self.assertEqual(payload["summary"]["public_deduplication"]["queued_groups"], 48)
+        self.assertEqual(payload["summary"]["public_deduplication"]["fast_review_groups"], 42)
+        self.assertEqual(payload["summary"]["public_deduplication"]["template_items"], 42)
+        self.assertEqual(payload["summary"]["public_deduplication"]["template_import_skipped_rows"], 42)
+        self.assertEqual(payload["summary"]["public_deduplication"]["auto_delete_enabled"], False)
         self.assertGreaterEqual(len(payload["workboards"]), 10)
         areas = [item["area"] for item in payload["workboards"]]
         self.assertIn("Field backfill", areas)
         self.assertIn("Public image recovery", areas)
+        self.assertIn("Public deduplication", areas)
         self.assertIn("Source URL bottlenecks", areas)
         self.assertIn("Web image search candidates", areas)
         self.assertIn("Agent image candidate imports", areas)
@@ -923,6 +980,14 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(public_image_board["image_attachment_template_representative_review_rows"], 23)
         self.assertEqual(public_image_board["image_attachment_template_import_skipped_rows"], 73)
         self.assertEqual(public_image_board["status"], "manual_source_confirmation_needed")
+        public_dedupe_board = next(item for item in payload["workboards"] if item["area"] == "Public deduplication")
+        self.assertEqual(public_dedupe_board["primary_metric"], 104)
+        self.assertEqual(public_dedupe_board["secondary_metric"], 48)
+        self.assertEqual(public_dedupe_board["quick_win_metric"], 42)
+        self.assertEqual(public_dedupe_board["template_items"], 42)
+        self.assertEqual(public_dedupe_board["template_import_skipped_rows"], 42)
+        self.assertEqual(public_dedupe_board["status"], "manual_confirmation_needed")
+        self.assertEqual(public_dedupe_board["auto_delete_enabled"], False)
         source_url_board = next(item for item in payload["workboards"] if item["area"] == "Source URL bottlenecks")
         self.assertEqual(source_url_board["primary_metric"], 8)
         self.assertEqual(source_url_board["secondary_metric"], 6)

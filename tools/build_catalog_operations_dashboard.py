@@ -88,6 +88,11 @@ SOURCES = {
     "public_source_focus_template_import": DATA / "source_discovery_focus_template_import_dry_run_public.json",
     "public_image_attachment_template": DATA / "catalog_image_attachment_confirmed_template_public.json",
     "public_image_attachment_template_import": DATA / "catalog_image_attachment_template_import_dry_run_public.json",
+    "public_deduplication": DATA / "catalog_deduplication_public.json",
+    "public_deduplication_action_queue": DATA / "catalog_deduplication_action_queue_public.json",
+    "public_deduplication_fast_review": DATA / "catalog_deduplication_fast_review_public.json",
+    "public_deduplication_confirmed_template": DATA / "catalog_deduplication_confirmed_template_public.json",
+    "public_deduplication_template_import": DATA / "catalog_deduplication_template_import_dry_run_public.json",
 }
 
 
@@ -230,6 +235,15 @@ def build() -> dict[str, Any]:
     public_image_attachment_template = data.get("public_image_attachment_template", {})
     public_image_attachment_template_summary = public_image_attachment_template.get("summary") or {}
     public_image_attachment_template_import = data.get("public_image_attachment_template_import", {})
+    public_deduplication = data.get("public_deduplication", {})
+    public_deduplication_summary = public_deduplication.get("summary") or {}
+    public_deduplication_action_queue = data.get("public_deduplication_action_queue", {})
+    public_deduplication_action_summary = public_deduplication_action_queue.get("summary") or {}
+    public_deduplication_fast_review = data.get("public_deduplication_fast_review", {})
+    public_deduplication_fast_summary = public_deduplication_fast_review.get("summary") or {}
+    public_deduplication_confirmed_template = data.get("public_deduplication_confirmed_template", {})
+    public_deduplication_template_summary = public_deduplication_confirmed_template.get("summary") or {}
+    public_deduplication_template_import = data.get("public_deduplication_template_import", {})
 
     workboards = [
         {
@@ -346,6 +360,34 @@ def build() -> dict[str, Any]:
             "image_attachment_template_import_updated_rows": public_image_attachment_template_import.get("updated_rows"),
             "image_attachment_template_import_skipped_rows": public_image_attachment_template_import.get("skipped_rows"),
             "auto_apply_enabled": public_actionability_summary.get("auto_apply_enabled"),
+        },
+        {
+            "area": "Public deduplication",
+            "artifact": "data/catalog_deduplication_public.json",
+            "markdown": "data/catalog_deduplication_confirmed_template_public.json",
+            "secondary_artifact": "data/catalog_deduplication_fast_review_public.json",
+            "primary_metric": public_deduplication_summary.get("duplicate_groups"),
+            "primary_label": "duplicate review groups",
+            "secondary_metric": public_deduplication_action_summary.get("queued_groups"),
+            "secondary_label": "queued action groups",
+            "status": "manual_confirmation_needed"
+            if public_deduplication_template_summary.get("template_items")
+            else ("review_needed" if public_deduplication_summary.get("duplicate_groups") else "clean"),
+            "next": "Confirm same sellable product before setting any dedupe template row to drop/merge; automatic deletion stays disabled.",
+            "quick_win_metric": public_deduplication_fast_summary.get("fast_review_groups"),
+            "quick_win_label": "fast-review groups",
+            "template_items": public_deduplication_template_summary.get("template_items"),
+            "template_manual_confirmed_rows": public_deduplication_template_summary.get("manual_confirmed_rows"),
+            "template_same_sellable_product_confirmed_rows": public_deduplication_template_summary.get(
+                "same_sellable_product_confirmed_rows"
+            ),
+            "template_drop_candidate_rows": public_deduplication_template_summary.get("drop_candidate_rows"),
+            "template_import_updated_rows": public_deduplication_template_import.get("updated_rows"),
+            "template_import_skipped_rows": public_deduplication_template_import.get("skipped_rows"),
+            "by_review_risk": public_deduplication_summary.get("by_review_risk"),
+            "by_fast_review_lane": public_deduplication_template_summary.get("by_fast_review_lane"),
+            "auto_merge_enabled": public_deduplication_template_summary.get("auto_merge_enabled"),
+            "auto_delete_enabled": public_deduplication_template_summary.get("auto_delete_enabled"),
         },
         {
             "area": "Image path source review",
@@ -1193,6 +1235,21 @@ def build() -> dict[str, Any]:
                     "image_attachment_template_dry_run_skipped_rows"
                 ),
                 "auto_apply_enabled": public_actionability_summary.get("auto_apply_enabled"),
+            },
+            "public_deduplication": {
+                "duplicate_groups": public_deduplication_summary.get("duplicate_groups"),
+                "duplicate_rows": public_deduplication_summary.get("duplicate_rows"),
+                "actionable_groups": public_deduplication_action_summary.get("actionable_groups"),
+                "queued_groups": public_deduplication_action_summary.get("queued_groups"),
+                "fast_review_groups": public_deduplication_fast_summary.get("fast_review_groups"),
+                "held_for_later_groups": public_deduplication_fast_summary.get("held_for_later_groups"),
+                "template_items": public_deduplication_template_summary.get("template_items"),
+                "template_manual_confirmed_rows": public_deduplication_template_summary.get("manual_confirmed_rows"),
+                "template_drop_candidate_rows": public_deduplication_template_summary.get("drop_candidate_rows"),
+                "template_import_updated_rows": public_deduplication_template_import.get("updated_rows"),
+                "template_import_skipped_rows": public_deduplication_template_import.get("skipped_rows"),
+                "auto_merge_enabled": public_deduplication_template_summary.get("auto_merge_enabled"),
+                "auto_delete_enabled": public_deduplication_template_summary.get("auto_delete_enabled"),
             },
             "report_consistency_ok": report_consistency.get("ok"),
         },

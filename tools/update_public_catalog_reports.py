@@ -39,6 +39,8 @@ DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 DEDUPLICATION_REVIEW_BATCHES = DATA / "catalog_deduplication_review_batches_public.json"
 DEDUPLICATION_ACTION_QUEUE = DATA / "catalog_deduplication_action_queue_public.json"
 DEDUPLICATION_FAST_REVIEW = DATA / "catalog_deduplication_fast_review_public.json"
+DEDUPLICATION_CONFIRMED_TEMPLATE = DATA / "catalog_deduplication_confirmed_template_public.json"
+DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN = DATA / "catalog_deduplication_template_import_dry_run_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_public.json"
 ANIMATION_CATEGORY_ACTION_QUEUE = DATA / "animation_category_action_queue_public.json"
@@ -458,6 +460,17 @@ def copy_report_summary(path: Path, key: str) -> dict[str, Any]:
     if not isinstance(summary, dict):
         summary = {}
     return {"public_report": f"data/{path.name}", **summary}
+
+
+def copy_import_dry_run(path: Path) -> dict[str, Any]:
+    data = load_json(path, {})
+    return {
+        "public_report": f"data/{path.name}",
+        "write": bool(data.get("write")) if isinstance(data, dict) else False,
+        "updated_rows": int(data.get("updated_rows") or 0) if isinstance(data, dict) else 0,
+        "skipped_rows": int(data.get("skipped_rows") or 0) if isinstance(data, dict) else 0,
+        "skip_reason_counts": data.get("skip_reason_counts") if isinstance(data, dict) else [],
+    }
 
 
 def discovery_query(item: dict[str, Any]) -> str:
@@ -5178,6 +5191,14 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["deduplication_fast_review"] = copy_report_summary(
                 DEDUPLICATION_FAST_REVIEW, "deduplication_fast_review"
             )
+        if DEDUPLICATION_CONFIRMED_TEMPLATE.exists():
+            target["deduplication_confirmed_template"] = copy_report_summary(
+                DEDUPLICATION_CONFIRMED_TEMPLATE, "deduplication_confirmed_template"
+            )
+        if DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.exists():
+            target["deduplication_template_import_dry_run"] = copy_import_dry_run(
+                DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN
+            )
         target["animation_category_review"] = {
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
@@ -5324,6 +5345,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DEDUPLICATION.relative_to(ROOT)),
             str(DEDUPLICATION_ACTION_QUEUE.relative_to(ROOT)),
             str(DEDUPLICATION_FAST_REVIEW.relative_to(ROOT)),
+            str(DEDUPLICATION_CONFIRMED_TEMPLATE.relative_to(ROOT)),
+            str(DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_ACTION_QUEUE.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_SPLIT_REVIEW.relative_to(ROOT)),

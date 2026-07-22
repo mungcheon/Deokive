@@ -127,6 +127,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
             self.assertEqual(quality["deduplication_fast_review"]["manual_confirmed_true"], 0)
             self.assertIs(quality["deduplication_fast_review"]["auto_delete_enabled"], False)
+        if reports.DEDUPLICATION_CONFIRMED_TEMPLATE.exists():
+            dedupe_template = reports.load_json(reports.DEDUPLICATION_CONFIRMED_TEMPLATE)
+            self.assertEqual(
+                quality["deduplication_confirmed_template"]["template_items"],
+                dedupe_template["summary"]["template_items"],
+            )
+            self.assertEqual(quality["deduplication_confirmed_template"]["manual_confirmed_rows"], 0)
+            self.assertIs(quality["deduplication_confirmed_template"]["auto_delete_enabled"], False)
+        if reports.DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.exists():
+            self.assertEqual(quality["deduplication_template_import_dry_run"]["updated_rows"], 0)
+            self.assertEqual(quality["deduplication_template_import_dry_run"]["skipped_rows"], 42)
+            self.assertIs(quality["deduplication_template_import_dry_run"]["write"], False)
         if reports.ICHIIBAN_KUJI_METADATA_FAST_REVIEW.exists():
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["fast_review_campaigns"], 20)
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["manual_confirmed_true"], 0)
