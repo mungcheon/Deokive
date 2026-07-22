@@ -883,6 +883,9 @@ class AppState extends ChangeNotifier {
           avatar['hasBackRibbon'] as bool? ?? avatarHasBackRibbon;
 
       _ensureDefaultFolder();
+      if (_backfillCatalogImageReferences()) {
+        await _saveAccountData();
+      }
     } catch (_) {
       folders.clear();
       goodsItems.clear();
@@ -1827,6 +1830,9 @@ class AppState extends ChangeNotifier {
       _lastCatalogUpdatedAt = meta.latestUpdatedAt;
       catalogSyncedAt = DateTime.now();
       catalogSyncError = null;
+      if (_backfillCatalogImageReferences()) {
+        await _saveAccountData();
+      }
       return items.length;
     } catch (e) {
       catalogSyncError = '$e';
@@ -1835,6 +1841,66 @@ class AppState extends ChangeNotifier {
       isSyncingCatalog = false;
       notifyListeners();
     }
+  }
+
+  bool _backfillCatalogImageReferences() {
+    if (goodsItems.isEmpty) return false;
+
+    final entriesByBarcode = <String, GoodsCatalogEntry>{};
+    final entriesByName = <String, GoodsCatalogEntry>{};
+    for (final entry in curatedCatalogEntries) {
+      final imageUrl = _normalizedCatalogRemoteImageUrl(entry);
+      if (imageUrl == null) continue;
+
+      final barcode = entry.barcode?.trim() ?? '';
+      if (barcode.isNotEmpty) {
+        entriesByBarcode.putIfAbsent(barcode, () => entry);
+      }
+
+      final nameKey = _catalogBackfillNameKey(entry.nameKo);
+      if (nameKey.isNotEmpty) {
+        entriesByName.putIfAbsent(nameKey, () => entry);
+      }
+    }
+
+    var changed = false;
+    for (var index = 0; index < goodsItems.length; index++) {
+      final item = goodsItems[index];
+      if (!_needsCatalogImageReferenceBackfill(item.imageUrl)) continue;
+
+      final barcode = item.barcode?.trim() ?? '';
+      final matchedByBarcode =
+          barcode.isEmpty ? null : entriesByBarcode[barcode];
+      final entry =
+          matchedByBarcode ?? entriesByName[_catalogBackfillNameKey(item.name)];
+      if (entry == null) continue;
+
+      final imageUrl = _normalizedCatalogRemoteImageUrl(entry);
+      if (imageUrl == null || imageUrl == item.imageUrl) continue;
+
+      goodsItems[index] = item.copyWith(imageUrl: imageUrl);
+      changed = true;
+    }
+    return changed;
+  }
+
+  bool _needsCatalogImageReferenceBackfill(String? value) {
+    final imageUrl = value?.trim() ?? '';
+    if (imageUrl.isEmpty) return true;
+    return imageUrl.startsWith('assets/catalog_images/');
+  }
+
+  String _catalogBackfillNameKey(String value) {
+    return value.trim().replaceAll(RegExp(r'\s+'), ' ').toLowerCase();
+  }
+
+  String? _normalizedCatalogRemoteImageUrl(GoodsCatalogEntry entry) {
+    final remoteUrl = entry.imageUrl?.trim() ?? '';
+    if (remoteUrl.isEmpty) return null;
+    return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
+          RegExp(r'^//'),
+          'https://',
+        );
   }
 
   /// Pull the shared board from the server and replace the local list with
