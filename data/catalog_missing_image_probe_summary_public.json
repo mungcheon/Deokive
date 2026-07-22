@@ -101,12 +101,34 @@
       "review_rows": 57,
       "changes_count": 0,
       "review_count": 57
+    },
+    "pokemon_center_2": {
+      "exists": true,
+      "updated_rows": 0,
+      "review_rows": 2,
+      "notes": [
+        "Pokemon plush/card rows return multiple same-score or generic expansion-pack candidates.",
+        "Keep review-only until exact size/product-line identity is confirmed."
+      ]
+    },
+    "weverse_shop_3": {
+      "exists": true,
+      "candidate_rows": 2,
+      "skipped_rows": 1,
+      "review_status_counts": {
+        "manual_review_only": 2
+      },
+      "notes": [
+        "SEVENTEEN and ILLIT generic photocard rows only produced broad or accessory candidates.",
+        "ZEROBASEONE was not found in the current Weverse settings artist list.",
+        "Keep review-only until exact sale detail pages are confirmed."
+      ]
     }
   },
   "next_actions": [
     "Use data/catalog_missing_image_work_queue_public.json as the canonical work queue for the remaining 720 image_url gaps.",
     "Do not attach images from generic storefront/source URLs until an exact product detail URL is confirmed.",
-    "Provider scripts currently found no safe automatic matches for sampled Animate, Ensky, Movic, Kotobukiya, FuRyu, and Good Smile rows; add stricter provider-specific matchers before writing those groups.",
+    "Provider scripts currently found no safe automatic matches for sampled Animate, Ensky, Movic, Kotobukiya, FuRyu, Good Smile, Pokemon Center, and Weverse rows; add stricter provider-specific matchers before writing those groups.",
     "Gotouchi Chiikawa rows have product-detail source URLs but existing candidate review marks most as motif/type mismatches; keep them review-only unless exact type and visual identity are confirmed.",
     "Keep jp-api gotouchi contents pages review-only; the official page contains many product images and cannot prove a row-level image without exact type/visual confirmation."
   ],
