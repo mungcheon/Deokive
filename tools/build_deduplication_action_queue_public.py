@@ -24,6 +24,10 @@ CONFIDENCE_PRIORITY = {
     "high_review_confidence": 10,
     "medium_review_confidence": 20,
 }
+CONFIRMED_TEMPLATE = "server/catalog_dedupe_confirmed_decisions.template.json"
+CONFIRMED_QUEUE = "server/catalog_dedupe_confirmed_decisions.json"
+IMPORT_TOOL = "tools/import_confirmed_dedupe_decisions.py"
+UNBLOCKS_WHEN = "explicit_manual_keep_drop_decision_confirmed"
 
 
 def _now_utc() -> str:
@@ -60,6 +64,10 @@ def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, An
         "identity_checklist": group.get("identity_checklist") or batch.get("identity_checklist") or [],
         "recommended_action": group.get("recommended_action") or batch.get("recommended_action"),
         "dedupe_decision_template": group.get("dedupe_decision_template") or {},
+        "manual_confirmation_template": CONFIRMED_TEMPLATE,
+        "confirmed_queue": CONFIRMED_QUEUE,
+        "import_tool": IMPORT_TOOL,
+        "unblocks_when": UNBLOCKS_WHEN,
         "rows": group.get("rows") or [],
         "auto_merge_enabled": False,
         "auto_delete_enabled": False,
@@ -108,6 +116,10 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 40, batch_
                 "review_state": "explicit_keep_drop_confirmation_required",
                 "next_machine_step": "record_manual_dedupe_decisions",
                 "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
+                "manual_confirmation_template": CONFIRMED_TEMPLATE,
+                "confirmed_queue": CONFIRMED_QUEUE,
+                "import_tool": IMPORT_TOOL,
+                "unblocks_when": UNBLOCKS_WHEN,
                 "review_confidence_counts": _counter_pairs(groups, "review_confidence"),
                 "key_type_counts": _counter_pairs(groups, "key_type"),
                 "review_risk_counts": _counter_pairs(groups, "review_risk"),
@@ -139,12 +151,17 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 40, batch_
             "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",
             "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",
             "Every accepted group needs an explicit manual keep/drop decision before mutation.",
+            f"Copy dedupe_decision_template rows into {CONFIRMED_QUEUE}, set manual_confirmed=true and decision=keep_drop_confirmed, then run {IMPORT_TOOL}.",
         ],
         "batches": batches,
         "automation_policy": {
             "auto_merge": False,
             "auto_delete": False,
             "requires_manual_review": True,
+            "manual_confirmation_template": CONFIRMED_TEMPLATE,
+            "confirmed_queue": CONFIRMED_QUEUE,
+            "import_tool": IMPORT_TOOL,
+            "unblocks_when": UNBLOCKS_WHEN,
         },
     }
 

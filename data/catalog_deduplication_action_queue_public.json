@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T01:28:57Z",
+  "generated_at": "2026-07-22T02:01:02Z",
   "scope": "catalog_deduplication_action_queue",
   "summary": {
     "actionable_groups": 48,
@@ -50,7 +50,8 @@
   "instructions": [
     "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",
     "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",
-    "Every accepted group needs an explicit manual keep/drop decision before mutation."
+    "Every accepted group needs an explicit manual keep/drop decision before mutation.",
+    "Copy dedupe_decision_template rows into server/catalog_dedupe_confirmed_decisions.json, set manual_confirmed=true and decision=keep_drop_confirmed, then run tools/import_confirmed_dedupe_decisions.py."
   ],
   "batches": [
     {
@@ -61,6 +62,10 @@
       "review_state": "explicit_keep_drop_confirmation_required",
       "next_machine_step": "record_manual_dedupe_decisions",
       "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
+      "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+      "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+      "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+      "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
       "review_confidence_counts": [
         [
           "high_review_confidence",
@@ -130,6 +135,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 367,
@@ -208,6 +217,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 366,
@@ -286,6 +299,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 365,
@@ -364,6 +381,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 171,
@@ -442,6 +463,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 370,
@@ -520,6 +545,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 371,
@@ -598,6 +627,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 372,
@@ -676,6 +709,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 373,
@@ -754,6 +791,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 374,
@@ -832,6 +873,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 237,
@@ -872,6 +917,10 @@
       "review_state": "explicit_keep_drop_confirmation_required",
       "next_machine_step": "record_manual_dedupe_decisions",
       "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
+      "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+      "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+      "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+      "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
       "review_confidence_counts": [
         [
           "high_review_confidence",
@@ -941,6 +990,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 238,
@@ -1019,6 +1072,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 239,
@@ -1097,6 +1154,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 240,
@@ -1175,6 +1236,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 241,
@@ -1253,6 +1318,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 242,
@@ -1331,6 +1400,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 243,
@@ -1409,6 +1482,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 244,
@@ -1487,6 +1564,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 245,
@@ -1565,6 +1646,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 318,
@@ -1643,6 +1728,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 319,
@@ -1683,6 +1772,10 @@
       "review_state": "explicit_keep_drop_confirmation_required",
       "next_machine_step": "record_manual_dedupe_decisions",
       "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
+      "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+      "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+      "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+      "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
       "review_confidence_counts": [
         [
           "high_review_confidence",
@@ -1752,6 +1845,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 320,
@@ -1830,6 +1927,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 321,
@@ -1908,6 +2009,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 322,
@@ -1986,6 +2091,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 323,
@@ -2064,6 +2173,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 324,
@@ -2142,6 +2255,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 325,
@@ -2220,6 +2337,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 326,
@@ -2298,6 +2419,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 327,
@@ -2376,6 +2501,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 328,
@@ -2454,6 +2583,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 329,
@@ -2494,6 +2627,10 @@
       "review_state": "explicit_keep_drop_confirmation_required",
       "next_machine_step": "record_manual_dedupe_decisions",
       "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
+      "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+      "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+      "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+      "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
       "review_confidence_counts": [
         [
           "high_review_confidence",
@@ -2563,6 +2700,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 330,
@@ -2641,6 +2782,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 331,
@@ -2719,6 +2864,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 332,
@@ -2797,6 +2946,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 333,
@@ -2875,6 +3028,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 334,
@@ -2953,6 +3110,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 335,
@@ -3031,6 +3192,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 337,
@@ -3109,6 +3274,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 336,
@@ -3185,6 +3354,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 766,
@@ -3261,6 +3434,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 765,
@@ -3301,6 +3478,10 @@
       "review_state": "explicit_keep_drop_confirmation_required",
       "next_machine_step": "record_manual_dedupe_decisions",
       "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
+      "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+      "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+      "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+      "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
       "review_confidence_counts": [
         [
           "medium_review_confidence",
@@ -3388,6 +3569,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 763,
@@ -3464,6 +3649,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 762,
@@ -3539,6 +3728,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 2379,
@@ -3612,6 +3805,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 17817,
@@ -3685,6 +3882,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 17743,
@@ -3758,6 +3959,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 17744,
@@ -3831,6 +4036,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 17786,
@@ -3904,6 +4113,10 @@
             "requires_same_sellable_product": true,
             "requires_variant_difference_disproved": false
           },
+          "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "unblocks_when": "explicit_manual_keep_drop_decision_confirmed",
           "rows": [
             {
               "catalog_index": 17787,
@@ -3940,6 +4153,10 @@
   "automation_policy": {
     "auto_merge": false,
     "auto_delete": false,
-    "requires_manual_review": true
+    "requires_manual_review": true,
+    "manual_confirmation_template": "server/catalog_dedupe_confirmed_decisions.template.json",
+    "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+    "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+    "unblocks_when": "explicit_manual_keep_drop_decision_confirmed"
   }
 }

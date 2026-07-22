@@ -69,6 +69,22 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
             report["batches"][0]["next_machine_step"],
             "record_manual_dedupe_decisions",
         )
+        self.assertEqual(
+            report["automation_policy"]["manual_confirmation_template"],
+            "server/catalog_dedupe_confirmed_decisions.template.json",
+        )
+        self.assertEqual(
+            report["automation_policy"]["import_tool"],
+            "tools/import_confirmed_dedupe_decisions.py",
+        )
+        self.assertEqual(
+            report["batches"][0]["unblocks_when"],
+            "explicit_manual_keep_drop_decision_confirmed",
+        )
+        self.assertEqual(
+            report["batches"][0]["groups"][0]["confirmed_queue"],
+            "server/catalog_dedupe_confirmed_decisions.json",
+        )
 
     def test_max_groups_caps_published_queue_only(self) -> None:
         review_batches = {
