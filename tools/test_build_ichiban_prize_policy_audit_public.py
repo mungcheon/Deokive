@@ -109,8 +109,33 @@ class BuildIchibanPrizePolicyAuditPublicTest(unittest.TestCase):
             ["explicit_reissue_token_or_numbered_url", "campaign_url_slug_number_suffix_family"],
         )
         self.assertEqual(report["next_actions"][0]["status"], "manual_fix_required")
-        self.assertEqual(report["next_actions"][1]["next_batch_id"], "ichiban-prize-policy-multi-item-001")
+        self.assertEqual(report["next_actions"][1]["workstream"], "numbered_variant_application")
+        self.assertEqual(report["next_actions"][1]["status"], "review_required")
+        self.assertEqual(report["next_actions"][2]["next_batch_id"], "ichiban-prize-policy-multi-item-001")
         self.assertFalse(report["summary"]["auto_apply_enabled"])
+
+    def test_includes_numbered_variant_application_evidence(self) -> None:
+        report = audit.build_report(
+            {"items": []},
+            generated_at="2026-07-22T00:00:00Z",
+            numbered_variant_application={
+                "write": True,
+                "source_prizes_considered": 409,
+                "applied_prizes": 409,
+                "updated_existing_rows": 409,
+                "created_variant_rows": 2518,
+                "skipped": [],
+            },
+        )
+
+        self.assertTrue(report["summary"]["numbered_variant_application_write"])
+        self.assertEqual(report["summary"]["numbered_variant_source_prizes_considered"], 409)
+        self.assertEqual(report["summary"]["numbered_variant_applied_prizes"], 409)
+        self.assertEqual(report["summary"]["numbered_variant_updated_existing_rows"], 409)
+        self.assertEqual(report["summary"]["numbered_variant_created_rows"], 2518)
+        self.assertEqual(report["summary"]["numbered_variant_application_skipped_rows"], 0)
+        self.assertEqual(report["numbered_variant_application"]["numbered_variant_created_rows"], 2518)
+        self.assertEqual(report["next_actions"][1]["status"], "applied")
 
 
 if __name__ == "__main__":

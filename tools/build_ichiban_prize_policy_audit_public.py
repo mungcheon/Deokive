@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "catalog_public.json"
 DEFAULT_OUTPUT = DATA / "ichiban_kuji_prize_policy_audit_public.json"
+DEFAULT_NUMBERED_VARIANT_APPLICATION = DATA / "ichiban_kuji_numbered_variant_application_public.json"
 REVIEW_BATCH_SIZE = 12
 
 LAST_ONE_TOKENS = ("ラストワン賞", "ラストワン", "last one", "last-one", "lastone")
@@ -185,7 +186,34 @@ def normalized_reissue_review_name(row: dict[str, Any]) -> str:
     return " ".join(name.split())
 
 
-def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
+def numbered_variant_application_summary(application: dict[str, Any] | None) -> dict[str, Any]:
+    if not application:
+        return {
+            "numbered_variant_application_report": None,
+            "numbered_variant_application_write": False,
+            "numbered_variant_source_prizes_considered": 0,
+            "numbered_variant_applied_prizes": 0,
+            "numbered_variant_updated_existing_rows": 0,
+            "numbered_variant_created_rows": 0,
+            "numbered_variant_application_skipped_rows": 0,
+        }
+    return {
+        "numbered_variant_application_report": "data/ichiban_kuji_numbered_variant_application_public.json",
+        "numbered_variant_application_write": bool(application.get("write")),
+        "numbered_variant_source_prizes_considered": int(application.get("source_prizes_considered") or 0),
+        "numbered_variant_applied_prizes": int(application.get("applied_prizes") or 0),
+        "numbered_variant_updated_existing_rows": int(application.get("updated_existing_rows") or 0),
+        "numbered_variant_created_rows": int(application.get("created_variant_rows") or 0),
+        "numbered_variant_application_skipped_rows": len(application.get("skipped") or []),
+    }
+
+
+def build_report(
+    catalog: dict[str, Any],
+    *,
+    generated_at: str | None = None,
+    numbered_variant_application: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     items = [row for row in catalog.get("items", []) if isinstance(row, dict)]
     kuji_rows = [row for row in items if is_ichiban_row(row)]
     last_one_rows = [row for row in kuji_rows if has_token(row, LAST_ONE_TOKENS)]
@@ -322,6 +350,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         double_chance_missing
     )
     review_batches = (multi_item_review_batches + repeated_name_review_batches)[:40]
+    numbered_application = numbered_variant_application_summary(numbered_variant_application)
 
     return {
         "schema_version": 1,
@@ -346,6 +375,18 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "numbered_variant_prize_label_groups": len(numbered_variant_groups),
             "incomplete_numbered_variant_prize_label_groups": len(incomplete_numbered_variant_groups),
             "numbered_variant_coverage_policy_pass": not incomplete_numbered_variant_groups,
+            "numbered_variant_application_write": numbered_application["numbered_variant_application_write"],
+            "numbered_variant_source_prizes_considered": numbered_application[
+                "numbered_variant_source_prizes_considered"
+            ],
+            "numbered_variant_applied_prizes": numbered_application["numbered_variant_applied_prizes"],
+            "numbered_variant_updated_existing_rows": numbered_application[
+                "numbered_variant_updated_existing_rows"
+            ],
+            "numbered_variant_created_rows": numbered_application["numbered_variant_created_rows"],
+            "numbered_variant_application_skipped_rows": numbered_application[
+                "numbered_variant_application_skipped_rows"
+            ],
             "repeated_name_different_source_groups": len(repeated_name_different_source_groups),
             "probable_reissue_review_groups": len(probable_reissue_review_groups),
             "reissue_signal_reason_counts": [
@@ -377,6 +418,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         },
         "last_one_price_violations": [compact_row(row) for row in last_one_nonzero + last_one_missing],
         "double_chance_price_violations": [compact_row(row) for row in double_chance_nonzero + double_chance_missing],
+        "numbered_variant_application": numbered_application,
         "multi_item_prize_label_groups": multi_item_prize_groups[:80],
         "numbered_variant_prize_label_groups": numbered_variant_groups[:80],
         "incomplete_numbered_variant_prize_label_groups": incomplete_numbered_variant_groups[:80],
@@ -393,6 +435,22 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             },
             {
                 "priority": 2,
+                "workstream": "numbered_variant_application",
+                "status": (
+                    "applied"
+                    if numbered_application["numbered_variant_application_write"]
+                    and numbered_application["numbered_variant_application_skipped_rows"] == 0
+                    else "review_required"
+                ),
+                "rows": numbered_application["numbered_variant_created_rows"],
+                "source_prizes_considered": numbered_application["numbered_variant_source_prizes_considered"],
+                "applied_prizes": numbered_application["numbered_variant_applied_prizes"],
+                "updated_existing_rows": numbered_application["numbered_variant_updated_existing_rows"],
+                "created_variant_rows": numbered_application["numbered_variant_created_rows"],
+                "recommended_next_action": "Treat numbered same-prize variants as applied; continue with unnumbered variant and reissue review.",
+            },
+            {
+                "priority": 3,
                 "workstream": "multi_item_prize_label_review",
                 "rows": len(multi_item_prize_groups),
                 "batch_count": len(multi_item_review_batches),
@@ -400,7 +458,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
                 "recommended_next_action": "Review same-prize-label groups against official lineup pages before adding missing variants.",
             },
             {
-                "priority": 3,
+                "priority": 4,
                 "workstream": "repeated_name_different_source_review",
                 "rows": len(repeated_name_different_source_groups),
                 "batch_count": len(repeated_name_review_batches),
@@ -416,10 +474,16 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--numbered-variant-application",
+        type=Path,
+        default=DEFAULT_NUMBERED_VARIANT_APPLICATION,
+    )
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(load_json(args.input))
+    application = load_json(args.numbered_variant_application) if args.numbered_variant_application.exists() else None
+    report = build_report(load_json(args.input), numbered_variant_application=application)
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))

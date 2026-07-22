@@ -203,6 +203,14 @@ class PublicCatalogReportTests(unittest.TestCase):
                 prize_audit["summary"]["numbered_variant_coverage_policy_pass"],
             )
             self.assertEqual(
+                quality["ichiban_kuji_prize_policy_audit"]["numbered_variant_created_rows"],
+                prize_audit["summary"]["numbered_variant_created_rows"],
+            )
+            self.assertEqual(
+                quality["ichiban_kuji_prize_policy_audit"]["numbered_variant_application_skipped_rows"],
+                prize_audit["summary"]["numbered_variant_application_skipped_rows"],
+            )
+            self.assertEqual(
                 quality["ichiban_kuji_prize_policy_audit"]["prize_policy_review_batch_count"],
                 prize_audit["summary"]["prize_policy_review_batch_count"],
             )

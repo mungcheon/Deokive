@@ -733,6 +733,24 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "numbered_variant_coverage_policy_pass": bool(
                         kuji_policy_summary.get("numbered_variant_coverage_policy_pass")
                     ),
+                    "numbered_variant_application_write": bool(
+                        kuji_policy_summary.get("numbered_variant_application_write")
+                    ),
+                    "numbered_variant_source_prizes_considered": _count(
+                        kuji_policy_summary, "numbered_variant_source_prizes_considered"
+                    ),
+                    "numbered_variant_applied_prizes": _count(
+                        kuji_policy_summary, "numbered_variant_applied_prizes"
+                    ),
+                    "numbered_variant_updated_existing_rows": _count(
+                        kuji_policy_summary, "numbered_variant_updated_existing_rows"
+                    ),
+                    "numbered_variant_created_rows": _count(
+                        kuji_policy_summary, "numbered_variant_created_rows"
+                    ),
+                    "numbered_variant_application_skipped_rows": _count(
+                        kuji_policy_summary, "numbered_variant_application_skipped_rows"
+                    ),
                     "last_one_rows": _count(kuji_policy_summary, "last_one_rows"),
                     "last_one_nonzero_price_rows": _count(
                         kuji_policy_summary, "last_one_nonzero_price_rows"
@@ -851,6 +869,10 @@ def _build_plan(load_report) -> dict[str, Any]:
                 kuji_policy_summary, "prize_policy_review_batch_count"
             ),
             "ichiban_incomplete_numbered_variant_prize_label_groups": kuji_incomplete_numbered_variant_rows,
+            "ichiban_numbered_variant_created_rows": _count(kuji_policy_summary, "numbered_variant_created_rows"),
+            "ichiban_numbered_variant_application_skipped_rows": _count(
+                kuji_policy_summary, "numbered_variant_application_skipped_rows"
+            ),
             "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
             "ichiban_probable_reissue_review_groups": kuji_probable_reissue_review_rows,
             "ichiban_prize_name_image_review_rows": _count(kuji_name_image_summary, "review_rows"),

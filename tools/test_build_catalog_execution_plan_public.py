@@ -241,6 +241,12 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "double_chance_nonzero_price_rows": 0,
                     "double_chance_missing_price_rows": 0,
                     "zero_price_exception_policy_pass": True,
+                    "numbered_variant_application_write": True,
+                    "numbered_variant_source_prizes_considered": 4,
+                    "numbered_variant_applied_prizes": 4,
+                    "numbered_variant_updated_existing_rows": 4,
+                    "numbered_variant_created_rows": 12,
+                    "numbered_variant_application_skipped_rows": 0,
                     "multi_item_prize_label_groups": 4,
                     "multi_item_prize_label_review_batch_count": 1,
                     "multi_item_prize_label_review_catalog_item_rows": 9,
@@ -471,11 +477,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(kuji_policy["rows"], 6)
         self.assertTrue(kuji_policy["evidence"]["zero_price_exception_policy_pass"])
+        self.assertTrue(kuji_policy["evidence"]["numbered_variant_application_write"])
+        self.assertEqual(kuji_policy["evidence"]["numbered_variant_created_rows"], 12)
+        self.assertEqual(kuji_policy["evidence"]["numbered_variant_application_skipped_rows"], 0)
         self.assertEqual(kuji_policy["evidence"]["multi_item_prize_label_groups"], 4)
         self.assertEqual(kuji_policy["evidence"]["multi_item_prize_label_review_batch_count"], 1)
         self.assertEqual(kuji_policy["evidence"]["repeated_name_different_source_review_batch_count"], 1)
         self.assertEqual(kuji_policy["evidence"]["prize_policy_review_batch_count"], 2)
         self.assertEqual(report["summary"]["ichiban_multi_item_prize_label_groups"], 4)
+        self.assertEqual(report["summary"]["ichiban_numbered_variant_created_rows"], 12)
+        self.assertEqual(report["summary"]["ichiban_numbered_variant_application_skipped_rows"], 0)
         self.assertEqual(report["summary"]["ichiban_prize_policy_review_batch_count"], 2)
         self.assertEqual(report["summary"]["ichiban_reissue_duplicate_review_groups"], 2)
         animation_action = next(

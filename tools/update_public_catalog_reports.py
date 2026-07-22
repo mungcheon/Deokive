@@ -2336,6 +2336,24 @@ def build_operations_public(
             "numbered_variant_coverage_policy_pass": ichiban_kuji_prize_policy_audit_summary.get(
                 "numbered_variant_coverage_policy_pass", False
             ),
+            "numbered_variant_application_write": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_application_write", False
+            ),
+            "numbered_variant_source_prizes_considered": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_source_prizes_considered", 0
+            ),
+            "numbered_variant_applied_prizes": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_applied_prizes", 0
+            ),
+            "numbered_variant_updated_existing_rows": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_updated_existing_rows", 0
+            ),
+            "numbered_variant_created_rows": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_created_rows", 0
+            ),
+            "numbered_variant_application_skipped_rows": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_application_skipped_rows", 0
+            ),
             "repeated_name_different_source_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "repeated_name_different_source_groups", 0
             ),
