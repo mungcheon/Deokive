@@ -27,6 +27,7 @@ ANIMATE_MISSING_IMAGE_SEARCH = DATA / "animate_missing_image_search_public.json"
 GOODSMILE_MISSING_IMAGE_SEARCH = DATA / "goodsmile_missing_image_search_public.json"
 KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH = DATA / "kotobukiya_movic_missing_image_search_public.json"
 JUMP_FURYU_TAITO_MISSING_IMAGE_SEARCH = DATA / "jump_furyu_taito_missing_image_search_public.json"
+SECONDARY_OFFICIAL_MISSING_IMAGE_SEARCH = DATA / "secondary_official_missing_image_search_public.json"
 MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY = DATA / "manual_missing_image_source_discovery_public.json"
 ENSKY_CACHE_COVERAGE = DATA / "ensky_missing_image_cache_coverage_public.json"
 ENSKY_SEARCH_PAGE_PROBE = DATA / "ensky_search_page_probe_public.json"
@@ -4596,6 +4597,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["jump_furyu_taito_missing_image_search"] = copy_report_summary(
                 JUMP_FURYU_TAITO_MISSING_IMAGE_SEARCH, "jump_furyu_taito_missing_image_search"
             )
+        if SECONDARY_OFFICIAL_MISSING_IMAGE_SEARCH.exists():
+            target["secondary_official_missing_image_search"] = copy_report_summary(
+                SECONDARY_OFFICIAL_MISSING_IMAGE_SEARCH, "secondary_official_missing_image_search"
+            )
         if MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY.exists():
             target["manual_missing_image_source_discovery"] = copy_report_summary(
                 MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY, "manual_missing_image_source_discovery"
@@ -4786,6 +4791,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(GOODSMILE_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(JUMP_FURYU_TAITO_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
+            str(SECONDARY_OFFICIAL_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY.relative_to(ROOT)),
             str(ENSKY_CACHE_COVERAGE.relative_to(ROOT)),
             str(ENSKY_SEARCH_PAGE_PROBE.relative_to(ROOT)),
