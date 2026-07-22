@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Deokive로 이동 중</title>
+  <meta http-equiv="refresh" content="0; url=/">
+  <title>Deokive 홈으로 이동 중</title>
   <style>
     :root {
       color-scheme: light;
@@ -80,26 +81,15 @@
     }
   </style>
   <script>
-    const isGithubProjectPage = location.hostname.endsWith("github.io");
-    const homePath = isGithubProjectPage ? "/Deokive/" : "/";
-    const target = `${location.origin}${homePath}`;
-
-    window.setTimeout(() => {
-      location.replace(target);
-    }, 1200);
-
-    window.addEventListener("DOMContentLoaded", () => {
-      const link = document.querySelector("[data-home-link]");
-      if (link) link.href = target;
-    });
+    window.location.replace("/");
   </script>
 </head>
 <body>
   <main>
     <div class="mark" aria-hidden="true"></div>
     <h1>Deokive 홈으로 이동 중이에요</h1>
-    <p>페이지 주소가 바뀌었거나 배포 직후라 잠깐 늦게 열릴 수 있어요. 곧 홈 화면으로 이동합니다.</p>
-    <a data-home-link href="/">홈으로 바로 가기</a>
+    <p>주소가 바뀌었거나 배포 직후 잠깐 경로를 찾지 못했어요. 홈 화면으로 바로 이동합니다.</p>
+    <a href="/">홈으로 바로 가기</a>
   </main>
 </body>
 </html>
