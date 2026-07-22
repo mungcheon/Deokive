@@ -29,6 +29,7 @@ KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH = DATA / "kotobukiya_movic_missing_image_s
 JUMP_FURYU_TAITO_MISSING_IMAGE_SEARCH = DATA / "jump_furyu_taito_missing_image_search_public.json"
 SECONDARY_OFFICIAL_MISSING_IMAGE_SEARCH = DATA / "secondary_official_missing_image_search_public.json"
 MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY = DATA / "manual_missing_image_source_discovery_public.json"
+MISSING_IMAGE_REPORT_COVERAGE = DATA / "catalog_missing_image_report_coverage_public.json"
 ENSKY_CACHE_COVERAGE = DATA / "ensky_missing_image_cache_coverage_public.json"
 ENSKY_SEARCH_PAGE_PROBE = DATA / "ensky_search_page_probe_public.json"
 STELLIVE_FANDING_CANDIDATES = DATA / "stellive_fanding_candidates_public.json"
@@ -4605,6 +4606,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["manual_missing_image_source_discovery"] = copy_report_summary(
                 MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY, "manual_missing_image_source_discovery"
             )
+        if MISSING_IMAGE_REPORT_COVERAGE.exists():
+            target["missing_image_report_coverage"] = copy_report_summary(
+                MISSING_IMAGE_REPORT_COVERAGE, "missing_image_report_coverage"
+            )
         if ENSKY_CACHE_COVERAGE.exists():
             target["ensky_cache_coverage"] = copy_report_summary(ENSKY_CACHE_COVERAGE, "ensky_cache_coverage")
         if ENSKY_SEARCH_PAGE_PROBE.exists():
@@ -4793,6 +4798,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(JUMP_FURYU_TAITO_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(SECONDARY_OFFICIAL_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY.relative_to(ROOT)),
+            str(MISSING_IMAGE_REPORT_COVERAGE.relative_to(ROOT)),
             str(ENSKY_CACHE_COVERAGE.relative_to(ROOT)),
             str(ENSKY_SEARCH_PAGE_PROBE.relative_to(ROOT)),
             str(STELLIVE_FANDING_CANDIDATES.relative_to(ROOT)),

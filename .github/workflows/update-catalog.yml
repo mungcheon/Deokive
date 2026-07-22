@@ -87,6 +87,7 @@ jobs:
           python tools/build_jump_furyu_taito_missing_image_search_public.py --write
           python tools/build_secondary_official_missing_image_search_public.py --write
           python tools/build_manual_missing_image_source_discovery_public.py --write
+          python tools/build_missing_image_report_coverage_public.py --write
           python tools/build_source_discovery_action_queue_public.py
           python tools/build_metadata_action_queue_public.py
           python tools/build_image_attachment_action_queue_public.py
@@ -122,6 +123,7 @@ jobs:
             data/jump_furyu_taito_missing_image_search_public.json \
             data/secondary_official_missing_image_search_public.json \
             data/manual_missing_image_source_discovery_public.json \
+            data/catalog_missing_image_report_coverage_public.json \
             data/ensky_missing_image_cache_coverage_public.json \
             data/ensky_search_page_probe_public.json \
             data/stellive_fanding_candidates_public.json \
