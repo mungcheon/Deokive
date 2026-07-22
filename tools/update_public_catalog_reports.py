@@ -5046,6 +5046,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(REQUESTED_FOCUS_REVIEW_BATCHES.relative_to(ROOT)),
             str(REQUESTED_FOCUS_ACTION_QUEUE.relative_to(ROOT)),
             str(DANGANRONPA_MISSING_MEDIA.relative_to(ROOT)),
+            str(SOURCE_DETAIL.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_ACTION_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_STORE_BOTTLENECKS.relative_to(ROOT)),

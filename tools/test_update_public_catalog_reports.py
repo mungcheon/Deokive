@@ -51,6 +51,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
         self.assertIn("data/animation_category_unmatched_keyword_review_public.json", updated_files)
+        self.assertIn("data/source_detail_probe_public.json", updated_files)
 
         quality = reports.load_json(reports.QUALITY)
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
@@ -98,6 +99,12 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertGreater(quality["source_discovery_store_bottlenecks"]["store_count"], 0)
             self.assertIs(quality["source_discovery_store_bottlenecks"]["auto_apply_enabled"], False)
+        if reports.SOURCE_DETAIL.exists():
+            self.assertEqual(
+                quality["source_detail_candidate_probe"]["candidate_review_rows"],
+                reports.load_json(reports.SOURCE_DETAIL)["summary"]["candidate_review_rows"],
+            )
+            self.assertIs(quality["source_detail_candidate_probe"]["auto_apply_enabled"], False)
         if reports.GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.exists():
             self.assertEqual(
                 quality["gotouchi_representative_image_attachment"]["representative_attachment_rows"],
