@@ -103,6 +103,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_action_queue = load_report("source_discovery_action_queue_public.json")
     source_focus_template = load_report("source_discovery_focus_confirmed_template_public.json")
     source_focus_template_import = load_report("source_discovery_focus_template_import_dry_run_public.json")
+    source_next_focus_fetch_audit = load_report("source_discovery_next_focus_pack_fetch_audit_public.json")
     source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
     ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
     metadata_batches = load_report("catalog_metadata_review_batches_public.json")
@@ -130,6 +131,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_summary = _summary(source_batches)
     source_action_summary = _summary(source_action_queue)
     source_focus_template_summary = _summary(source_focus_template)
+    source_next_focus_fetch_audit_summary = _summary(source_next_focus_fetch_audit)
     source_detail_candidate_action_summary = _summary(source_detail_candidate_action_queue)
     ensky_cache_candidate_action_summary = _summary(ensky_cache_candidate_action_queue)
     metadata_summary = _summary(metadata_batches)
@@ -274,6 +276,38 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "manual_confirmed_rows": _count(source_focus_template_summary, "manual_confirmed_rows"),
                     "dry_run_updated_rows": _count(source_focus_template_import, "updated_rows"),
                     "dry_run_skipped_rows": _count(source_focus_template_import, "skipped_rows"),
+                },
+            )
+        )
+
+    if source_next_focus_fetch_audit_summary:
+        fallback_required = bool(source_next_focus_fetch_audit_summary.get("fallback_web_search_required"))
+        actions.append(
+            _action(
+                priority=20,
+                workstream="source_discovery_next_focus_pack_fetch_audit",
+                public_report="data/source_discovery_next_focus_pack_fetch_audit_public.json",
+                status="fallback_required" if fallback_required else "manual_review",
+                rows=_count(source_next_focus_fetch_audit_summary, "official_search_unavailable_rows"),
+                command=(
+                    "Use web search, store archives, or alternate official entry points to find exact product detail URLs for the current focus pack."
+                    if fallback_required
+                    else "Review reachable official search results and confirm exact product detail URLs."
+                ),
+                next_step="resolve_unavailable_official_search_urls_before_source_import",
+                blocker=(
+                    "Current focus pack official_search_url values are not fetchable; do not import source_url/image_url from these search URLs."
+                    if fallback_required
+                    else "Manual identity confirmation is still required before import."
+                ),
+                evidence={
+                    "focus_pack_id": source_next_focus_fetch_audit_summary.get("focus_pack_id"),
+                    "pack_items": _count(source_next_focus_fetch_audit_summary, "pack_items"),
+                    "official_search_ok_rows": _count(source_next_focus_fetch_audit_summary, "official_search_ok_rows"),
+                    "official_search_unavailable_rows": _count(
+                        source_next_focus_fetch_audit_summary, "official_search_unavailable_rows"
+                    ),
+                    "status_counts": source_next_focus_fetch_audit_summary.get("status_counts", []),
                 },
             )
         )

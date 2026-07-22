@@ -73,6 +73,17 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                 "updated_rows": 0,
                 "skipped_rows": 8,
             },
+            "source_discovery_next_focus_pack_fetch_audit_public.json": {
+                "summary": {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "pack_items": 4,
+                    "official_search_ok_rows": 0,
+                    "official_search_unavailable_rows": 4,
+                    "status_counts": [["http_error_404", 4]],
+                    "fallback_web_search_required": True,
+                    "auto_apply_enabled": False,
+                }
+            },
             "catalog_metadata_review_batches_public.json": {
                 "summary": {"missing_cell_count": 20, "batch_count": 2, "field_missing_totals": {"barcode": 20}}
             },
@@ -267,6 +278,17 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_focus_template_rows"], 8)
         self.assertEqual(report["summary"]["source_focus_template_work_order_pack_count"], 2)
         self.assertEqual(report["summary"]["source_focus_template_next_pack_rows"], 4)
+        fetch_audit = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "source_discovery_next_focus_pack_fetch_audit"
+        )
+        self.assertEqual(fetch_audit["priority"], 20)
+        self.assertEqual(fetch_audit["status"], "fallback_required")
+        self.assertEqual(fetch_audit["rows"], 4)
+        self.assertIn("not fetchable", fetch_audit["blocker"])
+        self.assertEqual(fetch_audit["evidence"]["focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(fetch_audit["evidence"]["official_search_unavailable_rows"], 4)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
         image_action = next(

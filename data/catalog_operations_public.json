@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T17:41:19Z",
+  "generated_at": "2026-07-22T18:07:04Z",
   "summary": {
     "catalog_rows": 20391,
     "coverage": {
@@ -172,6 +172,24 @@
       "dry_run_skipped_rows": 427,
       "primary_report": "data/source_discovery_focus_confirmed_template_public.json",
       "next_step": "work_source_focus_template_work_order_top_to_bottom",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "source_discovery_next_focus_pack_fetch_audit",
+      "status": "fallback_required",
+      "open_rows": 20,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_items": 20,
+      "official_search_ok_rows": 0,
+      "official_search_unavailable_rows": 20,
+      "status_counts": [
+        [
+          "http_error_404",
+          20
+        ]
+      ],
+      "primary_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
+      "next_step": "resolve_unavailable_official_search_urls_before_source_import",
       "auto_apply_enabled": false
     },
     {
@@ -2619,6 +2637,17 @@
       "dry_run_updated_rows": 0,
       "dry_run_skipped_rows": 427,
       "recommended_next_action": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack."
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_next_focus_pack_fetch_audit",
+      "public_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_items": 20,
+      "official_search_ok_rows": 0,
+      "official_search_unavailable_rows": 20,
+      "fallback_web_search_required": true,
+      "recommended_next_action": "Use web search or store archives for the current focus pack before marking any source_url confirmed."
     },
     {
       "priority": 21,

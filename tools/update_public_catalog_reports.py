@@ -1589,6 +1589,12 @@ def build_operations_public(
         if SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT.exists()
         else {}
     )
+    source_next_focus_fetch_audit = (
+        load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists()
+        else {}
+    )
+    source_next_focus_fetch_audit_summary = source_next_focus_fetch_audit.get("summary", {})
     def compact_source_workstream(row: dict[str, Any]) -> dict[str, Any]:
         return {
             "source_store": row.get("source_store"),
@@ -1996,6 +2002,21 @@ def build_operations_public(
             "recommended_next_action": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack.",
         } if source_focus_template_summary else None,
         {
+            "priority": 20,
+            "workstream": "source_discovery_next_focus_pack_fetch_audit",
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.name}",
+            "focus_pack_id": source_next_focus_fetch_audit_summary.get("focus_pack_id"),
+            "pack_items": source_next_focus_fetch_audit_summary.get("pack_items", 0),
+            "official_search_ok_rows": source_next_focus_fetch_audit_summary.get("official_search_ok_rows", 0),
+            "official_search_unavailable_rows": source_next_focus_fetch_audit_summary.get(
+                "official_search_unavailable_rows", 0
+            ),
+            "fallback_web_search_required": source_next_focus_fetch_audit_summary.get(
+                "fallback_web_search_required", False
+            ),
+            "recommended_next_action": "Use web search or store archives for the current focus pack before marking any source_url confirmed.",
+        } if source_next_focus_fetch_audit_summary else None,
+        {
             "priority": 21,
             "workstream": "source_discovery_review_batches",
             "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
@@ -2367,6 +2388,25 @@ def build_operations_public(
             "next_step": "work_source_focus_template_work_order_top_to_bottom",
             "auto_apply_enabled": source_focus_template_summary.get("auto_apply_enabled", False),
         } if source_focus_template_summary else None,
+        {
+            "workstream": "source_discovery_next_focus_pack_fetch_audit",
+            "status": (
+                "fallback_required"
+                if source_next_focus_fetch_audit_summary.get("fallback_web_search_required")
+                else "ready_for_manual_review"
+            ),
+            "open_rows": source_next_focus_fetch_audit_summary.get("official_search_unavailable_rows", 0),
+            "focus_pack_id": source_next_focus_fetch_audit_summary.get("focus_pack_id"),
+            "pack_items": source_next_focus_fetch_audit_summary.get("pack_items", 0),
+            "official_search_ok_rows": source_next_focus_fetch_audit_summary.get("official_search_ok_rows", 0),
+            "official_search_unavailable_rows": source_next_focus_fetch_audit_summary.get(
+                "official_search_unavailable_rows", 0
+            ),
+            "status_counts": source_next_focus_fetch_audit_summary.get("status_counts", []),
+            "primary_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.name}",
+            "next_step": "resolve_unavailable_official_search_urls_before_source_import",
+            "auto_apply_enabled": source_next_focus_fetch_audit_summary.get("auto_apply_enabled", False),
+        } if source_next_focus_fetch_audit_summary else None,
         {
             "workstream": "source_discovery_review_batches",
             "status": "open" if source_review_batches_summary.get("source_discovery_rows", 0) else "clear",
@@ -5212,6 +5252,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             "catalog_image_attachment_action_queue_public.json": image_attachment_action_queue,
             "source_discovery_focus_confirmed_template_public.json": source_discovery_focus_template,
             "source_discovery_focus_template_import_dry_run_public.json": source_discovery_focus_template_import,
+            "source_discovery_next_focus_pack_fetch_audit_public.json": (
+                load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, {})
+                if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists()
+                else {}
+            ),
             "source_discovery_review_batches_public.json": load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}),
             "source_discovery_action_queue_public.json": load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}),
             "ensky_cache_candidate_action_queue_public.json": load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {}),

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T17:35:49Z",
+  "generated_at": "2026-07-22T18:07:07Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 19,
+    "action_count": 20,
     "blocked_action_count": 1,
     "manual_review_action_count": 17,
     "pending_import_action_count": 0,
-    "total_action_rows": 33496,
+    "total_action_rows": 33516,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -281,6 +281,29 @@
         "manual_confirmed_rows": 0,
         "dry_run_updated_rows": 0,
         "dry_run_skipped_rows": 427
+      }
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_next_focus_pack_fetch_audit",
+      "public_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
+      "status": "fallback_required",
+      "rows": 20,
+      "command": "Use web search, store archives, or alternate official entry points to find exact product detail URLs for the current focus pack.",
+      "next_step": "resolve_unavailable_official_search_urls_before_source_import",
+      "blocker": "Current focus pack official_search_url values are not fetchable; do not import source_url/image_url from these search URLs.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "focus_pack_id": "source-discovery-focus-001",
+        "pack_items": 20,
+        "official_search_ok_rows": 0,
+        "official_search_unavailable_rows": 20,
+        "status_counts": [
+          [
+            "http_error_404",
+            20
+          ]
+        ]
       }
     },
     {
