@@ -1685,6 +1685,9 @@ def build_operations_public(
         load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
     )
     animation_action_queue_summary = animation_action_queue.get("summary", {})
+    animation_action_queue_work_order = [
+        row for row in animation_action_queue.get("work_order", []) if isinstance(row, dict)
+    ]
     animation_split_review = (
         load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
     )
@@ -2381,6 +2384,11 @@ def build_operations_public(
             "action_batch_count": animation_action_queue_summary.get("action_batch_count", 0),
             "split_review_categories": animation_action_queue_summary.get("split_review_categories", 0),
             "direct_mapping_categories": animation_action_queue_summary.get("direct_mapping_categories", 0),
+            "work_order_steps": animation_action_queue_summary.get("work_order_steps", 0),
+            "work_order_lanes": animation_action_queue_summary.get("work_order_lanes", []),
+            "split_first_blocked_categories": animation_action_queue_summary.get(
+                "split_first_blocked_categories", []
+            ),
             "app_folder_color_count": animation_action_queue_summary.get("app_folder_color_count", 0),
             "app_folder_icon_option_count": animation_action_queue_summary.get("app_folder_icon_option_count", 0),
             "app_folder_palette_sorted_by_family": animation_action_queue_summary.get(
@@ -2792,8 +2800,17 @@ def build_operations_public(
             "open_rows": animation_action_queue_summary.get("queued_catalog_rows", 0),
             "split_review_categories": animation_action_queue_summary.get("split_review_categories", 0),
             "direct_mapping_categories": animation_action_queue_summary.get("direct_mapping_categories", 0),
+            "work_order_steps": animation_action_queue_summary.get("work_order_steps", 0),
+            "work_order_lanes": animation_action_queue_summary.get("work_order_lanes", []),
+            "split_first_blocked_categories": animation_action_queue_summary.get(
+                "split_first_blocked_categories", []
+            ),
             "primary_report": f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}",
-            "next_step": "fill_confirmed_animation_category_mapping_templates",
+            "next_step": (
+                animation_action_queue_work_order[0].get("next_step")
+                if animation_action_queue_work_order
+                else "fill_confirmed_animation_category_mapping_templates"
+            ),
             "app_folder_color_count": animation_action_queue_summary.get("app_folder_color_count", 0),
             "app_folder_icon_option_count": animation_action_queue_summary.get("app_folder_icon_option_count", 0),
             "app_folder_palette_sorted_by_family": animation_action_queue_summary.get(
@@ -3171,6 +3188,7 @@ def build_agent_work_queue_public(
     animation_action_queue = (
         load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
     )
+    animation_action_queue_summary = animation_action_queue.get("summary", {})
     animation_split_review = (
         load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
     )
@@ -3812,6 +3830,10 @@ def build_agent_work_queue_public(
                 "split_review_categories": mapping_mode_counts.get("name_level_split_review_required", 0),
                 "direct_mapping_categories": mapping_mode_counts.get("direct_category_mapping_review", 0),
                 "category_count": int(action_batch.get("category_count") or 0),
+                "work_order_lanes": animation_action_queue_summary.get("work_order_lanes", []),
+                "split_first_blocked_categories": animation_action_queue_summary.get(
+                    "split_first_blocked_categories", []
+                ),
             },
         )
 

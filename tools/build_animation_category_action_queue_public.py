@@ -243,6 +243,7 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
     all_rows = sum(int(row.get("rows") or 0) for row in rows)
     queued_rows = sum(int(row.get("rows") or 0) for row in queued)
     mapping_mode_counts = Counter(str(row.get("mapping_mode") or "") for row in rows)
+    work_order = _work_order(queued)
     summary = {
         "actionable_categories": len(rows),
         "queued_categories": len(queued),
@@ -262,9 +263,18 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
         "app_folder_palette_section_count": int(app_visual_catalog.get("palette_section_count") or 0),
         "app_folder_palette_sorted_by_family": bool(app_visual_catalog.get("palette_sorted_by_family")),
         "app_animation_visuals_covered": bool(app_visual_catalog.get("animation_visuals_covered")),
+        "work_order_steps": len(work_order),
+        "work_order_lanes": [
+            str(row.get("lane") or "") for row in work_order if str(row.get("lane") or "")
+        ],
+        "split_first_blocked_categories": [
+            category
+            for row in work_order
+            if row.get("lane") == "name_level_split_review"
+            for category in row.get("blocked_direct_mapping_categories", [])
+        ],
         "auto_apply_enabled": False,
     }
-    work_order = _work_order(queued)
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),

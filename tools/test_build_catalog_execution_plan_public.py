@@ -229,6 +229,9 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "split_review_categories": 2,
                     "direct_mapping_categories": 0,
                     "by_suggested_family": [["acrylic", 1], ["keyring", 1]],
+                    "work_order_steps": 1,
+                    "work_order_lanes": ["name_level_split_review"],
+                    "split_first_blocked_categories": ["Acrylic"],
                 }
             },
             "animation_category_split_review_public.json": {
@@ -432,6 +435,9 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(animation_action["rows"], 12)
         self.assertEqual(animation_action["evidence"]["queued_categories"], 2)
         self.assertEqual(animation_action["evidence"]["split_review_categories"], 2)
+        self.assertEqual(animation_action["evidence"]["work_order_steps"], 1)
+        self.assertEqual(animation_action["evidence"]["work_order_lanes"], ["name_level_split_review"])
+        self.assertEqual(animation_action["evidence"]["split_first_blocked_categories"], ["Acrylic"])
         self.assertEqual(animation_action["evidence"]["candidate_split_rules"], 5)
         self.assertEqual(animation_action["evidence"]["matched_catalog_rows"], 30)
         self.assertEqual(animation_action["evidence"]["unmatched_keyword_candidates"], 4)

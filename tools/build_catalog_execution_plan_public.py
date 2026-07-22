@@ -798,6 +798,11 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "by_suggested_family": animation_action_summary.get("by_suggested_family", []),
                 "split_review_categories": _count(animation_action_summary, "split_review_categories"),
                 "direct_mapping_categories": _count(animation_action_summary, "direct_mapping_categories"),
+                "work_order_steps": _count(animation_action_summary, "work_order_steps"),
+                "work_order_lanes": animation_action_summary.get("work_order_lanes", []),
+                "split_first_blocked_categories": animation_action_summary.get(
+                    "split_first_blocked_categories", []
+                ),
                 "candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
                 "matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
                 "unmatched_catalog_rows": _count(animation_split_summary, "unmatched_catalog_rows"),
