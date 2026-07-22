@@ -32,6 +32,28 @@ Future<bool> showCatalogGoodsImportFlow(
   );
   if (entry == null || !context.mounted) return false;
 
+  return showCatalogGoodsImportFlowForEntry(
+    context,
+    entry: entry,
+    initialFolder: initialFolder,
+  );
+}
+
+Future<bool> showCatalogGoodsImportFlowForEntry(
+  BuildContext context, {
+  required GoodsCatalogEntry entry,
+  FolderItem? initialFolder,
+}) async {
+  final appState = context.read<AppState>();
+  if (!appState.isLoggedIn) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('로그인이 필요합니다. 내 굿즈 정보는 이 기기에만 저장돼요.'),
+      ),
+    );
+    return false;
+  }
+
   final shouldContinue =
       await _confirmDuplicateImport(context, appState, entry);
   if (!shouldContinue || !context.mounted) return false;
@@ -239,7 +261,7 @@ GoodsItem goodsItemFromCatalogEntry({
         : entry.subSeries!.trim(),
     quantity: 1,
     officialPrice: officialPrice,
-    paidPrice: null,
+    paidPrice: officialPrice,
     priceCurrencyCode: appState.displayCurrency.code,
     officialPriceCurrencyCode: officialCurrency.code,
     purchaseDate: null,

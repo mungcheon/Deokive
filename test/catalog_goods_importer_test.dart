@@ -43,6 +43,7 @@ void main() {
     expect(item.kind, 'A상');
     expect(item.quantity, 1);
     expect(item.officialPrice, 790);
+    expect(item.paidPrice, 790);
     expect(item.officialPriceCurrencyCode, Currency.jpy.code);
     expect(item.purchaseState, PurchaseState.owned);
     expect(item.itemCondition, ItemCondition.unopened);

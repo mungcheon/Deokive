@@ -5,10 +5,10 @@ import '../models/folder_item.dart';
 import '../models/goods_item.dart';
 import '../state/app_state.dart';
 import '../utils/csv_exporter.dart';
-import '../utils/catalog_goods_importer.dart';
 import '../theme/deokive_palette.dart';
 import '../widgets/deokive_header_title.dart';
 import 'add_goods_screen.dart';
+import 'catalog_database_screen.dart';
 import 'folder_detail_screen.dart';
 import 'folder_editor_screen.dart';
 import 'goods_detail_screen.dart';
@@ -387,11 +387,15 @@ class _FoldersScreenState extends State<FoldersScreen> {
   }
 
   Future<void> openAddGoodsFromCatalog(BuildContext context) async {
-    await showCatalogGoodsImportFlow(
+    await Navigator.push(
       context,
-      initialFolder: selectedFolder != null && !selectedFolder!.isGroup
-          ? selectedFolder
-          : null,
+      MaterialPageRoute(
+        builder: (_) => CatalogDatabaseScreen(
+          initialFolder: selectedFolder != null && !selectedFolder!.isGroup
+              ? selectedFolder
+              : null,
+        ),
+      ),
     );
   }
 
@@ -492,7 +496,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
           ),
           _CircleFabAction(
             icon: Icons.manage_search_rounded,
-            label: 'DB에서 추가',
+            label: 'DB 보기',
             onTap: () async {
               setState(() {
                 fabExpanded = false;
@@ -536,7 +540,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
           ),
           _CircleFabAction(
             icon: Icons.manage_search_rounded,
-            label: 'DB에서 추가',
+            label: 'DB 보기',
             onTap: () async {
               setState(() {
                 fabExpanded = false;
@@ -559,7 +563,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
       actions: [
         _CircleFabAction(
           icon: Icons.manage_search_rounded,
-          label: 'DB에서 추가',
+          label: 'DB 보기',
           onTap: () async {
             setState(() {
               fabExpanded = false;

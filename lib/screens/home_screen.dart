@@ -7,12 +7,12 @@ import '../models/badge_item.dart';
 import '../models/goods_catalog_entry.dart';
 import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
-import '../utils/catalog_goods_importer.dart';
 import '../widgets/deokive_avatar.dart';
 import '../widgets/deokive_header_title.dart';
 import '../widgets/showcase_background.dart';
 import 'avatar_editor_screen.dart';
 import 'badge_screen.dart';
+import 'catalog_database_screen.dart';
 import 'news_detail_screen.dart';
 import 'stats_screen.dart' show StatsContent;
 
@@ -319,16 +319,23 @@ class _CatalogImportPanel extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      '공개 DB에서 찾아 내 폴더에 바로 추가해요',
+                      '전체 DB를 보고 검색해서 내 굿즈함에 추가해요',
                       style: TextStyle(fontSize: 12.5),
                     ),
                   ],
                 ),
               ),
               FilledButton.icon(
-                onPressed: () => showCatalogGoodsImportFlow(context),
-                icon: const Icon(Icons.add_rounded, size: 18),
-                label: const Text('추가'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const CatalogDatabaseScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.manage_search_rounded, size: 18),
+                label: const Text('DB 보기'),
                 style: FilledButton.styleFrom(
                   visualDensity: VisualDensity.compact,
                   padding: const EdgeInsets.symmetric(horizontal: 12),

@@ -26,6 +26,7 @@ class FolderDetailContent extends StatefulWidget {
 
 class _FolderDetailContentState extends State<FolderDetailContent> {
   bool selectionMode = false;
+  bool listViewMode = false;
   final Set<String> selectedIds = {};
   GoodsSortType? sortType;
 
@@ -123,7 +124,8 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                   onPressed: selectedFolderId == null
                       ? null
                       : () {
-                          appState.moveGoodsToFolder(selectedIds, selectedFolderId!);
+                          appState.moveGoodsToFolder(
+                              selectedIds, selectedFolderId!);
                           Navigator.pop(dialogContext);
                           exitSelectionMode();
                         },
@@ -205,6 +207,20 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                     onPressed: () => openGoodsSearch(appState),
                     icon: const Icon(Icons.search_rounded),
                   ),
+                  if (!selectionMode)
+                    IconButton(
+                      tooltip: listViewMode ? '격자형 보기' : '목록형 보기',
+                      onPressed: () {
+                        setState(() {
+                          listViewMode = !listViewMode;
+                        });
+                      },
+                      icon: Icon(
+                        listViewMode
+                            ? Icons.grid_view_rounded
+                            : Icons.view_list_rounded,
+                      ),
+                    ),
                   const Spacer(),
                   if (!selectionMode)
                     TextButton(
@@ -228,57 +244,57 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                         appState.setDefaultGoodsSortType(value);
                       },
                       itemBuilder: (context) => const [
-                      PopupMenuItem(
-                        value: GoodsSortType.nameAsc,
-                        child: Text('이름순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.seriesAsc,
-                        child: Text('시리즈순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.characterAsc,
-                        child: Text('캐릭터순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.categoryAsc,
-                        child: Text('카테고리순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.priceAsc,
-                        child: Text('가격 낮은 순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.priceDesc,
-                        child: Text('가격 높은 순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.quantityDesc,
-                        child: Text('수량 많은 순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.purchaseDateNewest,
-                        child: Text('구매일 최신순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.purchaseDateOldest,
-                        child: Text('구매일 오래된 순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.releaseDateNewest,
-                        child: Text('발매일 최신순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.releaseDateOldest,
-                        child: Text('발매일 오래된 순'),
-                      ),
-                      PopupMenuItem(
-                        value: GoodsSortType.favoritesFirst,
-                        child: Text('즐겨찾기 우선'),
-                      ),
-                    ],
-                    icon: const Icon(Icons.sort),
-                  ),
+                        PopupMenuItem(
+                          value: GoodsSortType.nameAsc,
+                          child: Text('이름순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.seriesAsc,
+                          child: Text('시리즈순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.characterAsc,
+                          child: Text('캐릭터순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.categoryAsc,
+                          child: Text('카테고리순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.priceAsc,
+                          child: Text('가격 낮은 순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.priceDesc,
+                          child: Text('가격 높은 순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.quantityDesc,
+                          child: Text('수량 많은 순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.purchaseDateNewest,
+                          child: Text('구매일 최신순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.purchaseDateOldest,
+                          child: Text('구매일 오래된 순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.releaseDateNewest,
+                          child: Text('발매일 최신순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.releaseDateOldest,
+                          child: Text('발매일 오래된 순'),
+                        ),
+                        PopupMenuItem(
+                          value: GoodsSortType.favoritesFirst,
+                          child: Text('즐겨찾기 우선'),
+                        ),
+                      ],
+                      icon: const Icon(Icons.sort),
+                    ),
                   if (selectionMode) ...[
                     TextButton(
                       onPressed: exitSelectionMode,
@@ -305,8 +321,9 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                       );
                     }),
                     IconButton(
-                      onPressed:
-                          selectedIds.isEmpty ? null : () => openMoveDialog(appState),
+                      onPressed: selectedIds.isEmpty
+                          ? null
+                          : () => openMoveDialog(appState),
                       icon: const Icon(Icons.drive_file_move_outline),
                     ),
                     IconButton(
@@ -327,25 +344,19 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                         style: TextStyle(fontSize: 16),
                       ),
                     )
-                  : Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1300),
-                        child: GridView.builder(
+                  : listViewMode
+                      ? ListView.separated(
                           padding: const EdgeInsets.all(16),
                           itemCount: items.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 220,
-                            mainAxisSpacing: 12,
-                            crossAxisSpacing: 12,
-                            childAspectRatio: 0.78,
-                          ),
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 10),
                           itemBuilder: (context, index) {
                             final item = items[index];
                             final selected = selectedIds.contains(item.id);
-
-                            return InkWell(
-                              borderRadius: BorderRadius.circular(18),
+                            return _GoodsListRow(
+                              item: item,
+                              selected: selected,
+                              selectionMode: selectionMode,
                               onTap: () {
                                 if (selectionMode) {
                                   toggleSelection(item.id);
@@ -353,132 +364,298 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (_) => GoodsDetailScreen(item: item),
+                                      builder: (_) =>
+                                          GoodsDetailScreen(item: item),
                                     ),
                                   );
                                 }
                               },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: colorScheme.surface,
+                              onFavoriteTap: () =>
+                                  appState.toggleFavorite(item.id),
+                            );
+                          },
+                        )
+                      : Center(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 1300),
+                            child: GridView.builder(
+                              padding: const EdgeInsets.all(16),
+                              itemCount: items.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 220,
+                                mainAxisSpacing: 12,
+                                crossAxisSpacing: 12,
+                                childAspectRatio: 0.78,
+                              ),
+                              itemBuilder: (context, index) {
+                                final item = items[index];
+                                final selected = selectedIds.contains(item.id);
+
+                                return InkWell(
                                   borderRadius: BorderRadius.circular(18),
-                                  border: Border.all(
-                                    color: selected
-                                        ? colorScheme.primary
-                                        : colorScheme.outline
-                                            .withValues(alpha: 0.25),
-                                    width: selected ? 2 : 1,
-                                  ),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
+                                  onTap: () {
+                                    if (selectionMode) {
+                                      toggleSelection(item.id);
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) =>
+                                              GoodsDetailScreen(item: item),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: colorScheme.surface,
+                                      borderRadius: BorderRadius.circular(18),
+                                      border: Border.all(
+                                        color: selected
+                                            ? colorScheme.primary
+                                            : colorScheme.outline
+                                                .withValues(alpha: 0.25),
+                                        width: selected ? 2 : 1,
+                                      ),
+                                    ),
+                                    child: Stack(
                                       children: [
-                                        AspectRatio(
-                                          aspectRatio: 1.0,
-                                          child: Container(
-                                            width: double.infinity,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              color: colorScheme
-                                                  .surfaceContainerHighest,
-                                              borderRadius:
-                                                  const BorderRadius.vertical(
-                                                top: Radius.circular(17),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            AspectRatio(
+                                              aspectRatio: 1.0,
+                                              child: Container(
+                                                width: double.infinity,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  color: colorScheme
+                                                      .surfaceContainerHighest,
+                                                  borderRadius:
+                                                      const BorderRadius
+                                                          .vertical(
+                                                    top: Radius.circular(17),
+                                                  ),
+                                                ),
+                                                child: item.imageBytes != null
+                                                    ? Image.memory(
+                                                        item.imageBytes!,
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                    : const Center(
+                                                        child: Icon(
+                                                          Icons.image_outlined,
+                                                          size: 34,
+                                                        ),
+                                                      ),
                                               ),
                                             ),
-                                            child: item.imageBytes != null
-                                                ? Image.memory(
-                                                    item.imageBytes!,
-                                                    fit: BoxFit.cover,
-                                                  )
-                                                : const Center(
-                                                    child: Icon(
-                                                      Icons.image_outlined,
-                                                      size: 34,
+                                            Expanded(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 8),
+                                                child: Center(
+                                                  child: Text(
+                                                    item.name,
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.center,
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 13,
+                                                    ).copyWith(
+                                                      color:
+                                                          colorScheme.onSurface,
                                                     ),
                                                   ),
-                                          ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 8),
-                                            child: Center(
-                                              child: Text(
-                                                item.name,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 13,
-                                                ).copyWith(
-                                                  color: colorScheme.onSurface,
+                                        if (!selectionMode)
+                                          Positioned(
+                                            top: 10,
+                                            right: 10,
+                                            child: GestureDetector(
+                                              onTap: () => appState
+                                                  .toggleFavorite(item.id),
+                                              child: CircleAvatar(
+                                                radius: 14,
+                                                backgroundColor: colorScheme
+                                                    .surface
+                                                    .withValues(alpha: 0.92),
+                                                child: Icon(
+                                                  item.isFavorite
+                                                      ? Icons.favorite
+                                                      : Icons.favorite_border,
+                                                  size: 16,
+                                                  color: item.isFavorite
+                                                      ? Colors.pink
+                                                      : colorScheme.onSurface
+                                                          .withValues(
+                                                              alpha: 0.6),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    if (!selectionMode)
-                                      Positioned(
-                                        top: 10,
-                                        right: 10,
-                                        child: GestureDetector(
-                                          onTap: () => appState.toggleFavorite(item.id),
-                                          child: CircleAvatar(
-                                            radius: 14,
-                                            backgroundColor: colorScheme.surface
-                                                .withValues(alpha: 0.92),
-                                            child: Icon(
-                                              item.isFavorite
-                                                  ? Icons.favorite
-                                                  : Icons.favorite_border,
-                                              size: 16,
-                                              color: item.isFavorite
-                                                  ? Colors.pink
-                                                  : colorScheme.onSurface
-                                                      .withValues(alpha: 0.6),
+                                        if (selectionMode)
+                                          Positioned(
+                                            top: 10,
+                                            right: 10,
+                                            child: CircleAvatar(
+                                              radius: 13,
+                                              backgroundColor: selected
+                                                  ? colorScheme.primary
+                                                  : colorScheme.surface,
+                                              child: Icon(
+                                                selected
+                                                    ? Icons.check
+                                                    : Icons.circle_outlined,
+                                                size: 16,
+                                                color: selected
+                                                    ? Colors.white
+                                                    : colorScheme.onSurface
+                                                        .withValues(alpha: 0.6),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                    if (selectionMode)
-                                      Positioned(
-                                        top: 10,
-                                        right: 10,
-                                        child: CircleAvatar(
-                                          radius: 13,
-                                          backgroundColor: selected
-                                              ? colorScheme.primary
-                                              : colorScheme.surface,
-                                          child: Icon(
-                                            selected
-                                                ? Icons.check
-                                                : Icons.circle_outlined,
-                                            size: 16,
-                                            color: selected
-                                                ? Colors.white
-                                                : colorScheme.onSurface
-                                                    .withValues(alpha: 0.6),
-                                          ),
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
             ),
           ],
         );
       },
+    );
+  }
+}
+
+class _GoodsListRow extends StatelessWidget {
+  final GoodsItem item;
+  final bool selected;
+  final bool selectionMode;
+  final VoidCallback onTap;
+  final VoidCallback onFavoriteTap;
+
+  const _GoodsListRow({
+    required this.item,
+    required this.selected,
+    required this.selectionMode,
+    required this.onTap,
+    required this.onFavoriteTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final subtitleParts = [
+      item.seriesName,
+      item.characterName,
+      item.category,
+    ].where((value) => value.trim().isNotEmpty).toList();
+
+    return Material(
+      color: colorScheme.surface,
+      borderRadius: BorderRadius.circular(18),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: selected
+                  ? colorScheme.primary
+                  : colorScheme.outline.withValues(alpha: 0.28),
+              width: selected ? 2 : 1,
+            ),
+          ),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(14),
+                child: Container(
+                  width: 64,
+                  height: 64,
+                  color: colorScheme.surfaceContainerHighest,
+                  child: item.imageBytes != null
+                      ? Image.memory(item.imageBytes!, fit: BoxFit.cover)
+                      : const Icon(Icons.image_outlined, size: 28),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 14.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      subtitleParts.isEmpty
+                          ? '상세 정보 없음'
+                          : subtitleParts.join(' · '),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 12.5,
+                        color: colorScheme.onSurface.withValues(alpha: 0.58),
+                      ),
+                    ),
+                    const SizedBox(height: 7),
+                    Text(
+                      '수량 ${item.quantity}개',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              if (selectionMode)
+                Icon(
+                  selected ? Icons.check_circle_rounded : Icons.circle_outlined,
+                  color: selected
+                      ? colorScheme.primary
+                      : colorScheme.onSurface.withValues(alpha: 0.42),
+                )
+              else
+                IconButton(
+                  tooltip: item.isFavorite ? '즐겨찾기 해제' : '즐겨찾기',
+                  onPressed: onFavoriteTap,
+                  icon: Icon(
+                    item.isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: item.isFavorite
+                        ? Colors.pink
+                        : colorScheme.onSurface.withValues(alpha: 0.56),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
