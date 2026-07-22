@@ -23,6 +23,7 @@ IMAGE_BACKLOG = DATA / "catalog_image_backlog_public.json"
 IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
 IMAGE_ASSET_AUDIT = DATA / "catalog_image_asset_audit_public.json"
 MISSING_IMAGE_PRIORITY = DATA / "catalog_missing_image_priority_public.json"
+ENSKY_CACHE_COVERAGE = DATA / "ensky_missing_image_cache_coverage_public.json"
 DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 DEDUPLICATION_REVIEW_BATCHES = DATA / "catalog_deduplication_review_batches_public.json"
 DEDUPLICATION_ACTION_QUEUE = DATA / "catalog_deduplication_action_queue_public.json"
@@ -4572,6 +4573,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{MISSING_IMAGE_PRIORITY.name}",
             **missing_image_priority["summary"],
         }
+        if ENSKY_CACHE_COVERAGE.exists():
+            target["ensky_cache_coverage"] = copy_report_summary(ENSKY_CACHE_COVERAGE, "ensky_cache_coverage")
         target["requested_focus_enrichment"] = {
             "public_report": f"data/{REQUESTED_FOCUS.name}",
             **requested_focus["summary"],
@@ -4746,6 +4749,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
             str(IMAGE_ASSET_AUDIT.relative_to(ROOT)),
             str(MISSING_IMAGE_PRIORITY.relative_to(ROOT)),
+            str(ENSKY_CACHE_COVERAGE.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
