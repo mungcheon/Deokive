@@ -13,6 +13,7 @@ import audit_public_catalog_image_assets
 import build_image_source_url_confirmed_template_public
 import build_missing_image_priority_public
 import build_source_discovery_next_focus_pack_public
+import import_confirmed_source_discovery_rows
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -75,6 +76,7 @@ SOURCE_DISCOVERY_STORE_BOTTLENECKS = DATA / "source_discovery_store_bottlenecks_
 SOURCE_DISCOVERY_FOCUS_TEMPLATE = DATA / "source_discovery_focus_confirmed_template_public.json"
 SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT = DATA / "source_discovery_focus_template_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT = DATA / "source_discovery_next_focus_pack_import_dry_run_public.json"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 OFFICIAL_DETAIL_REVIEW_BATCHES = DATA / "official_detail_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
@@ -479,6 +481,25 @@ def copy_import_dry_run(path: Path) -> dict[str, Any]:
         "updated_rows": int(data.get("updated_rows") or 0) if isinstance(data, dict) else 0,
         "skipped_rows": int(data.get("skipped_rows") or 0) if isinstance(data, dict) else 0,
         "skip_reason_counts": data.get("skip_reason_counts") if isinstance(data, dict) else [],
+    }
+
+
+def build_source_discovery_import_dry_run_public(
+    queue: dict[str, Any],
+    seed_rows: list[dict[str, Any]],
+    *,
+    queue_path: Path,
+) -> dict[str, Any]:
+    result = import_confirmed_source_discovery_rows.import_rows(queue, seed_rows)
+    skip_reasons = Counter(str(item.get("reason") or "unspecified") for item in result["skipped"])
+    return {
+        "write": False,
+        "queue": str(queue_path.relative_to(ROOT)).replace("\\", "/"),
+        "updated_rows": len(result["updated"]),
+        "skipped_rows": len(result["skipped"]),
+        "skip_reason_counts": skip_reasons.most_common(),
+        "updated": result["updated"],
+        "skipped_sample": result["skipped"][:100],
     }
 
 
@@ -5177,6 +5198,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_focus_template,
         generated_at=generated_at,
     )
+    source_discovery_next_focus_pack_import = build_source_discovery_import_dry_run_public(
+        source_discovery_next_focus_pack,
+        items,
+        queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_PACK,
+    )
 
     execution_plan = build_plan_from_reports(
         {
@@ -5295,6 +5321,13 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["source_discovery_next_focus_pack"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
             **source_discovery_next_focus_pack["summary"],
+        }
+        target["source_discovery_next_focus_pack_import_dry_run"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT.name}",
+            "write": source_discovery_next_focus_pack_import["write"],
+            "updated_rows": source_discovery_next_focus_pack_import["updated_rows"],
+            "skipped_rows": source_discovery_next_focus_pack_import["skipped_rows"],
+            "skip_reason_counts": source_discovery_next_focus_pack_import["skip_reason_counts"],
         }
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
             target["animate_missing_image_search"] = copy_report_summary(
@@ -5567,6 +5600,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
@@ -5600,6 +5634,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
