@@ -256,6 +256,16 @@ def manual_confirmation_shortlist(item: dict[str, Any]) -> bool:
     )
 
 
+def priority_manual_review_candidate(item: dict[str, Any]) -> bool:
+    catalog_state = item.get("current_catalog_state") or {}
+    return bool(
+        item.get("safe_source_image_pair") is True
+        and catalog_state.get("catalog_identity_matches") is True
+        and catalog_state.get("catalog_has_display_image") is False
+        and not item.get("candidate_identity_flags")
+    )
+
+
 def current_catalog_state(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
     try:
         index = int(row.get("catalog_index"))
@@ -344,12 +354,15 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
         "auto_apply_enabled": False,
     }
     item["manual_confirmation_shortlist"] = manual_confirmation_shortlist(item)
+    item["priority_manual_review_candidate"] = priority_manual_review_candidate(item)
     if catalog_state.get("catalog_has_display_image"):
         item["recommended_action"] = "skip_current_catalog_row_already_has_display_image"
     elif catalog_state.get("stale_candidate"):
         item["recommended_action"] = "refresh_candidate_before_manual_review"
     elif item["manual_confirmation_shortlist"]:
         item["recommended_action"] = "priority_manual_confirm_source_and_image_patch"
+    elif item["priority_manual_review_candidate"]:
+        item["recommended_action"] = "priority_manual_review_safe_source_image_candidate"
     elif identity_flags:
         item["recommended_action"] = "recheck_candidate_identity_before_source_or_image_patch"
     return item
@@ -393,10 +406,32 @@ def build_report(
                 "manual_confirmation_shortlist_rows": sum(
                     1 for item in chunk if item.get("manual_confirmation_shortlist") is True
                 ),
+                "priority_manual_review_candidate_rows": sum(
+                    1 for item in chunk if item.get("priority_manual_review_candidate") is True
+                ),
                 "items": chunk,
                 "auto_apply_enabled": False,
             }
         )
+    priority_review_candidates = [
+        {
+            "catalog_index": item.get("catalog_index"),
+            "source_store": item.get("source_store"),
+            "name_ko": item.get("name_ko"),
+            "name_ja": item.get("name_ja"),
+            "candidate_title": item.get("candidate_title"),
+            "candidate_source_url": item.get("candidate_source_url"),
+            "candidate_image_url": item.get("candidate_image_url"),
+            "review_risk": item.get("review_risk"),
+            "candidate_count_bucket": item.get("candidate_count_bucket"),
+            "recommended_action": item.get("recommended_action"),
+            "source_patch_template": item.get("source_patch_template"),
+            "image_patch_template": item.get("image_patch_template"),
+            "auto_apply_enabled": False,
+        }
+        for item in items
+        if item.get("priority_manual_review_candidate") is True
+    ]
 
     return {
         "schema_version": 1,
@@ -411,6 +446,7 @@ def build_report(
             "manual_confirmation_shortlist_rows": sum(
                 1 for item in items if item.get("manual_confirmation_shortlist") is True
             ),
+            "priority_manual_review_candidate_rows": len(priority_review_candidates),
             "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
             "identity_warning_missing_display_image_rows": sum(
                 1
@@ -449,6 +485,13 @@ def build_report(
                 ["ready_for_priority_manual_confirmation", sum(1 for item in items if item.get("manual_confirmation_shortlist") is True)],
                 ["requires_deeper_identity_review", sum(1 for item in items if item.get("manual_confirmation_shortlist") is not True)],
             ],
+            "by_priority_manual_review_candidate": [
+                ["safe_unflagged_missing_display_candidate", len(priority_review_candidates)],
+                [
+                    "not_priority_manual_review_candidate",
+                    sum(1 for item in items if item.get("priority_manual_review_candidate") is not True),
+                ],
+            ],
             "ambiguous_or_weaker_candidate_rows": sum(
                 1
                 for item in items
@@ -468,6 +511,7 @@ def build_report(
             "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image.",
             "candidate_identity_flags highlight high-risk title matches such as generic-only shared tokens, crossovers, or missing variant hints.",
         ],
+        "priority_manual_review_candidates": priority_review_candidates,
         "batches": batches,
         "automation_policy": {
             "auto_apply_source_url": False,

@@ -49,9 +49,14 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertEqual(report["summary"]["safe_source_image_pair_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 1)
+        self.assertEqual(report["summary"]["priority_manual_review_candidate_rows"], 1)
         self.assertEqual(
             report["summary"]["by_manual_confirmation_shortlist"],
             [["ready_for_priority_manual_confirmation", 1], ["requires_deeper_identity_review", 0]],
+        )
+        self.assertEqual(
+            report["summary"]["by_priority_manual_review_candidate"],
+            [["safe_unflagged_missing_display_candidate", 1], ["not_priority_manual_review_candidate", 0]],
         )
         self.assertEqual(report["summary"]["identity_warning_rows"], 0)
         self.assertEqual(report["summary"]["identity_warning_missing_display_image_rows"], 0)
@@ -70,10 +75,17 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["candidate_score"], 0.8)
         self.assertEqual(item["candidate_identity_flags"], [])
         self.assertTrue(item["manual_confirmation_shortlist"])
+        self.assertTrue(item["priority_manual_review_candidate"])
         self.assertEqual(item["review_priority"], 20)
         self.assertEqual(item["recommended_action"], "priority_manual_confirm_source_and_image_patch")
+        self.assertEqual(report["priority_manual_review_candidates"][0]["catalog_index"], 7)
+        self.assertEqual(
+            report["priority_manual_review_candidates"][0]["recommended_action"],
+            "priority_manual_confirm_source_and_image_patch",
+        )
         self.assertEqual(report["batches"][0]["safe_source_image_pair_rows"], 1)
         self.assertEqual(report["batches"][0]["manual_confirmation_shortlist_rows"], 1)
+        self.assertEqual(report["batches"][0]["priority_manual_review_candidate_rows"], 1)
         self.assertEqual(item["current_catalog_state"]["catalog_match_found"], True)
         self.assertEqual(item["current_catalog_state"]["catalog_has_display_image"], False)
         self.assertEqual(item["current_catalog_state"]["catalog_identity_matches"], True)
@@ -168,6 +180,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["identity_warning_rows"], 2)
         self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 0)
+        self.assertEqual(report["summary"]["priority_manual_review_candidate_rows"], 0)
+        self.assertEqual(report["priority_manual_review_candidates"], [])
         self.assertEqual(report["summary"]["identity_warning_missing_display_image_rows"], 2)
         self.assertEqual(report["summary"]["unflagged_missing_display_image_candidate_rows"], 0)
         self.assertEqual(

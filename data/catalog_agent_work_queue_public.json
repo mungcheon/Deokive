@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T15:47:36Z",
+  "generated_at": "2026-07-22T16:04:53Z",
   "summary": {
     "batch_count": 96,
     "summed_batch_rows": 20288,
@@ -173,6 +173,7 @@
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
       "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
+      "source_detail_candidate_priority_manual_review_rows": 1,
       "official_detail_review_rows": 3,
       "official_detail_review_candidate_rows": 3,
       "official_detail_review_manual_confirmed_rows": 0,
@@ -6385,7 +6386,7 @@
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
-          "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "recommended_action": "priority_manual_review_safe_source_image_candidate",
           "current_catalog_state": {
             "catalog_match_found": true,
             "catalog_has_display_image": false,
@@ -6425,7 +6426,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": true
         },
         {
           "manual_confirmed": false,
@@ -6495,7 +6497,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -6564,7 +6567,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -6633,7 +6637,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -6702,7 +6707,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -6771,7 +6777,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -6840,7 +6847,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -6909,7 +6917,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         }
       ],
       "review_state": "candidate_review_required",
@@ -15598,7 +15607,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -15668,7 +15678,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -15737,7 +15748,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -15806,7 +15818,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         },
         {
           "manual_confirmed": false,
@@ -15874,7 +15887,8 @@
             "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
           ],
           "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
+          "manual_confirmation_shortlist": false,
+          "priority_manual_review_candidate": false
         }
       ],
       "review_state": "candidate_review_required",

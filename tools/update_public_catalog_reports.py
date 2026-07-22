@@ -1958,6 +1958,9 @@ def build_operations_public(
             "manual_confirmation_shortlist_rows": source_detail_candidate_action_queue_summary.get(
                 "manual_confirmation_shortlist_rows", 0
             ),
+            "priority_manual_review_candidate_rows": source_detail_candidate_action_queue_summary.get(
+                "priority_manual_review_candidate_rows", 0
+            ),
             "near_or_better_candidate_rows": source_detail_candidate_action_queue_summary.get(
                 "near_or_better_candidate_rows", 0
             ),
@@ -2282,6 +2285,9 @@ def build_operations_public(
             "manual_confirmation_shortlist_rows": source_detail_candidate_action_queue_summary.get(
                 "manual_confirmation_shortlist_rows", 0
             ),
+            "priority_manual_review_candidate_rows": source_detail_candidate_action_queue_summary.get(
+                "priority_manual_review_candidate_rows", 0
+            ),
             "near_or_better_candidate_rows": source_detail_candidate_action_queue_summary.get(
                 "near_or_better_candidate_rows", 0
             ),
@@ -2591,6 +2597,9 @@ def build_operations_public(
         )
         open_review_queues["source_detail_candidate_manual_confirmation_shortlist_rows"] = (
             source_detail_candidate_action_queue_summary.get("manual_confirmation_shortlist_rows", 0)
+        )
+        open_review_queues["source_detail_candidate_priority_manual_review_rows"] = (
+            source_detail_candidate_action_queue_summary.get("priority_manual_review_candidate_rows", 0)
         )
     if official_detail_review_batches_summary:
         open_review_queues["official_detail_review_rows"] = (
@@ -4593,6 +4602,9 @@ def validate_report_consistency(
         )
         expected_open_queues["source_detail_candidate_manual_confirmation_shortlist_rows"] = (
             source_detail_candidate_action_summary.get("manual_confirmation_shortlist_rows", 0)
+        )
+        expected_open_queues["source_detail_candidate_priority_manual_review_rows"] = (
+            source_detail_candidate_action_summary.get("priority_manual_review_candidate_rows", 0)
         )
     official_detail_review_batches = (
         load_json(OFFICIAL_DETAIL_REVIEW_BATCHES, {})
