@@ -2969,9 +2969,9 @@
   "animation_category_review": {
     "public_report": "data/animation_goods_categories_public.json",
     "animation_goods_rows": 2121,
-    "category_count": 29,
-    "unknown_category_count": 8,
-    "unknown_category_rows": 428,
+    "category_count": 27,
+    "unknown_category_count": 3,
+    "unknown_category_rows": 374,
     "normalization_suggestion_count": 5,
     "missing_image_rows": 570,
     "missing_source_url_rows": 570,
@@ -3339,7 +3339,7 @@
     "source_discovery_rows": 647,
     "image_missing_rows": 720,
     "dedupe_groups": 109,
-    "animation_unknown_categories": 8,
+    "animation_unknown_categories": 3,
     "ichiban_missing_release_date_rows": 16,
     "ichiban_missing_price_rows": 365,
     "generic_source_patch_candidate_rows": 3,
@@ -3371,23 +3371,23 @@
     "metadata_unqueued_actionable_groups": 0,
     "metadata_actionable_missing_cells": 2529,
     "metadata_unqueued_actionable_missing_cells": 0,
-    "animation_category_review_rows": 428,
-    "animation_category_action_rows": 428,
+    "animation_category_review_rows": 374,
+    "animation_category_action_rows": 374,
     "animation_category_split_review_categories": 3,
-    "animation_category_direct_mapping_categories": 5
+    "animation_category_direct_mapping_categories": 0
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 80,
-    "summed_batch_rows": 22670,
+    "summed_batch_rows": 22620,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
-        "requested_focus_action_queue",
-        12
+        "requested_focus_review_batches",
+        13
       ],
       [
-        "requested_focus_review_batches",
+        "requested_focus_action_queue",
         12
       ],
       [
@@ -3419,15 +3419,15 @@
         3
       ],
       [
-        "animation_category_action_queue",
-        2
-      ],
-      [
         "gotouchi_official_candidate_review",
         1
       ],
       [
         "confirmed_import_readiness",
+        1
+      ],
+      [
+        "animation_category_action_queue",
         1
       ],
       [
@@ -3437,11 +3437,11 @@
     ],
     "by_agent": [
       [
-        "agent-requested-focus-action",
-        12
+        "agent-requested-focus-detail",
+        13
       ],
       [
-        "agent-requested-focus-detail",
+        "agent-requested-focus-action",
         12
       ],
       [
@@ -3473,15 +3473,15 @@
         3
       ],
       [
-        "agent-animation-category-action",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
       [
         "agent-confirmed-import",
+        1
+      ],
+      [
+        "agent-animation-category-action",
         1
       ],
       [
@@ -3493,7 +3493,7 @@
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
       "dedupe_groups": 109,
-      "animation_unknown_categories": 8,
+      "animation_unknown_categories": 3,
       "ichiban_missing_release_date_rows": 16,
       "ichiban_missing_price_rows": 365,
       "generic_source_patch_candidate_rows": 3,
@@ -3525,10 +3525,10 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2529,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 428,
-      "animation_category_action_rows": 428,
+      "animation_category_review_rows": 374,
+      "animation_category_action_rows": 374,
       "animation_category_split_review_categories": 3,
-      "animation_category_direct_mapping_categories": 5
+      "animation_category_direct_mapping_categories": 0
     }
   },
   "generic_source_patch_candidates": {
@@ -3868,15 +3868,11 @@
   },
   "animation_category_review_batches": {
     "public_report": "data/animation_category_review_batches_public.json",
-    "source_categories": 8,
-    "source_rows": 428,
-    "batch_count": 2,
+    "source_categories": 3,
+    "source_rows": 374,
+    "batch_count": 1,
     "batch_size": 4,
     "by_suggested_family": [
-      [
-        "daily_goods",
-        2
-      ],
       [
         "other",
         2
@@ -3884,25 +3880,9 @@
       [
         "acrylic",
         1
-      ],
-      [
-        "display_goods",
-        1
-      ],
-      [
-        "keyring",
-        1
-      ],
-      [
-        "figure",
-        1
       ]
     ],
     "by_suggested_color": [
-      [
-        "emerald",
-        2
-      ],
       [
         "neutral",
         2
@@ -3910,25 +3890,9 @@
       [
         "sky",
         1
-      ],
-      [
-        "indigo",
-        1
-      ],
-      [
-        "amber",
-        1
-      ],
-      [
-        "teal",
-        1
       ]
     ],
     "by_suggested_color_group": [
-      [
-        "green",
-        2
-      ],
       [
         "neutral",
         2
@@ -3936,23 +3900,11 @@
       [
         "blue",
         1
-      ],
-      [
-        "violet",
-        1
-      ],
-      [
-        "yellow",
-        1
-      ],
-      [
-        "teal",
-        1
       ]
     ],
     "folder_color_palette_count": 32,
-    "folder_visual_token_count": 29,
-    "folder_template_count": 8,
+    "folder_visual_token_count": 27,
+    "folder_template_count": 3,
     "folder_icon_family_count": 11,
     "folder_icon_option_count": 88,
     "app_folder_color_count": 188,
@@ -5491,18 +5443,14 @@
   },
   "animation_category_action_queue": {
     "public_report": "data/animation_category_action_queue_public.json",
-    "actionable_categories": 8,
-    "queued_categories": 8,
-    "actionable_catalog_rows": 428,
-    "queued_catalog_rows": 428,
-    "action_batch_count": 2,
+    "actionable_categories": 3,
+    "queued_categories": 3,
+    "actionable_catalog_rows": 374,
+    "queued_catalog_rows": 374,
+    "action_batch_count": 1,
     "batch_size": 6,
     "max_categories": 24,
     "by_suggested_family": [
-      [
-        "daily_goods",
-        2
-      ],
       [
         "other",
         2
@@ -5510,25 +5458,9 @@
       [
         "acrylic",
         1
-      ],
-      [
-        "display_goods",
-        1
-      ],
-      [
-        "keyring",
-        1
-      ],
-      [
-        "figure",
-        1
       ]
     ],
     "by_color_group": [
-      [
-        "green",
-        2
-      ],
       [
         "neutral",
         2
@@ -5536,32 +5468,16 @@
       [
         "blue",
         1
-      ],
-      [
-        "violet",
-        1
-      ],
-      [
-        "yellow",
-        1
-      ],
-      [
-        "teal",
-        1
       ]
     ],
     "by_mapping_mode": [
-      [
-        "direct_category_mapping_review",
-        5
-      ],
       [
         "name_level_split_review_required",
         3
       ]
     ],
     "split_review_categories": 3,
-    "direct_mapping_categories": 5,
+    "direct_mapping_categories": 0,
     "app_folder_color_count": 188,
     "app_folder_icon_option_count": 211,
     "app_folder_icon_group_count": 9,

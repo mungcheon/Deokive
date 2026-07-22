@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T03:14:54Z",
+  "generated_at": "2026-07-22T03:19:54Z",
   "summary": {
     "batch_count": 80,
-    "summed_batch_rows": 22670,
+    "summed_batch_rows": 22620,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
-        "requested_focus_action_queue",
-        12
+        "requested_focus_review_batches",
+        13
       ],
       [
-        "requested_focus_review_batches",
+        "requested_focus_action_queue",
         12
       ],
       [
@@ -43,15 +43,15 @@
         3
       ],
       [
-        "animation_category_action_queue",
-        2
-      ],
-      [
         "gotouchi_official_candidate_review",
         1
       ],
       [
         "confirmed_import_readiness",
+        1
+      ],
+      [
+        "animation_category_action_queue",
         1
       ],
       [
@@ -61,11 +61,11 @@
     ],
     "by_agent": [
       [
-        "agent-requested-focus-action",
-        12
+        "agent-requested-focus-detail",
+        13
       ],
       [
-        "agent-requested-focus-detail",
+        "agent-requested-focus-action",
         12
       ],
       [
@@ -97,15 +97,15 @@
         3
       ],
       [
-        "agent-animation-category-action",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
       [
         "agent-confirmed-import",
+        1
+      ],
+      [
+        "agent-animation-category-action",
         1
       ],
       [
@@ -117,7 +117,7 @@
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
       "dedupe_groups": 109,
-      "animation_unknown_categories": 8,
+      "animation_unknown_categories": 3,
       "ichiban_missing_release_date_rows": 16,
       "ichiban_missing_price_rows": 365,
       "generic_source_patch_candidate_rows": 3,
@@ -149,10 +149,10 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2529,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 428,
-      "animation_category_action_rows": 428,
+      "animation_category_review_rows": 374,
+      "animation_category_action_rows": 374,
       "animation_category_split_review_categories": 3,
-      "animation_category_direct_mapping_categories": 5
+      "animation_category_direct_mapping_categories": 0
     }
   },
   "top_next_batches": [
@@ -5877,7 +5877,7 @@
       "priority": 22,
       "title": "애니메이션 카테고리 매핑 템플릿 확인: animation-category-action-001",
       "public_report": "data/animation_category_action_queue_public.json",
-      "rows": 151,
+      "rows": 374,
       "recommended_action": "Split name-level review categories first, then confirm direct category-to-folder mapping templates.",
       "acceptance_criteria": [
         "Each category_mapping_template remains manual_confirmed=false until sample names are reviewed.",
@@ -5944,310 +5944,6 @@
           "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
-        {
-          "category": "포스터",
-          "rows": 22,
-          "review_priority": 25,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "display_goods",
-          "suggested_category": "포스터",
-          "suggested_color_group": "violet",
-          "suggested_color_hint": "indigo",
-          "suggested_primary_icon_key": "photo",
-          "review_reason": "Poster is a display goods folder, but should remain distinct from bromide/photo cards.",
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - I賞 歴代ビジュアルクリアポスター",
-            "一番くじ 呪術廻戦 死滅回游 ～弐～ - K賞 クリアポスター",
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - L賞 クリアポスター",
-            "一番くじ 呪術廻戦 5th anniversary - I賞 歴代キービジュアルポスター",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - F賞 クリアポスター",
-            "一番くじ 呪術廻戦 渋谷事変 ～壱～ - N賞 クリアポスター",
-            "一番くじ 呪術廻戦 ～肆～ - F賞 クリアポスター",
-            "一番くじ 僕のヒーローアカデミア -幸せの上に- - H賞 クリアポスター"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "포스터",
-            "target_category": "포스터",
-            "target_family": "display_goods",
-            "folder_name": "포스터",
-            "folder_color_hex": "0xFF4F46E5",
-            "folder_color_hint": "indigo",
-            "folder_color_group": "violet",
-            "folder_color_sort_order": 250,
-            "folder_icon_key": "photo",
-            "folder_icon_options": [
-              "photo",
-              "poster",
-              "collections",
-              "wallpaper",
-              "image",
-              "frame",
-              "panorama",
-              "slideshow"
-            ],
-            "affected_catalog_rows": 22,
-            "blocked_until": "category_mapping_manually_confirmed",
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "category": "참",
-          "rows": 23,
-          "review_priority": 30,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "keyring",
-          "suggested_category": "키링",
-          "suggested_color_group": "yellow",
-          "suggested_color_hint": "amber",
-          "suggested_primary_icon_key": "local_offer",
-          "review_reason": "Charm items usually behave like keyrings in the app folder model.",
-          "sample_names": [
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - K賞 コガネ ラバーチャーム",
-            "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - F賞 ラバーチャーム",
-            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - H賞 ラバーチャーム",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - H賞 ラバーチャーム",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - G賞 ラバーチャーム",
-            "一番くじ 僕のヒーローアカデミア -連なる星霜- - G賞 メタルチャーム",
-            "一番くじ 僕のヒーローアカデミア -連なる星霜- - G賞 メタルチャーム",
-            "一番くじ 僕のヒーローアカデミア ー正義のかたちー - F賞 ストラップホルダーチャーム"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "참",
-            "target_category": "키링",
-            "target_family": "keyring",
-            "folder_name": "키링",
-            "folder_color_hex": "0xFFFFC857",
-            "folder_color_hint": "amber",
-            "folder_color_group": "yellow",
-            "folder_color_sort_order": 100,
-            "folder_icon_key": "local_offer",
-            "folder_icon_options": [
-              "local_offer",
-              "keyring",
-              "acrylic_keyring",
-              "tag",
-              "loyalty",
-              "label_tag",
-              "ticket",
-              "activity"
-            ],
-            "affected_catalog_rows": 23,
-            "blocked_until": "category_mapping_manually_confirmed",
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "category": "캡슐토이",
-          "rows": 3,
-          "review_priority": 35,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "figure",
-          "suggested_category": "캡슐토이",
-          "suggested_color_group": "teal",
-          "suggested_color_hint": "teal",
-          "suggested_primary_icon_key": "toys",
-          "review_reason": "Capsule toy is usually a small figure/miniature product family.",
-          "sample_names": [
-            "스윙 피규어 미도리야 이즈쿠",
-            "캡슐 피규어 컬렉션 제2탄 호크스",
-            "캡슐 피규어 컬렉션 제3탄 토가 히미코"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "캡슐토이",
-            "target_category": "캡슐토이",
-            "target_family": "figure",
-            "folder_name": "캡슐토이",
-            "folder_color_hex": "0xFF14B8A6",
-            "folder_color_hint": "teal",
-            "folder_color_group": "teal",
-            "folder_color_sort_order": 200,
-            "folder_icon_key": "toys",
-            "folder_icon_options": [
-              "toys",
-              "figure",
-              "miniature",
-              "smart_toy",
-              "extension",
-              "blind_box",
-              "lottery_prize",
-              "casino"
-            ],
-            "affected_catalog_rows": 3,
-            "blocked_until": "category_mapping_manually_confirmed",
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "category": "컵",
-          "rows": 5,
-          "review_priority": 40,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "daily_goods",
-          "suggested_category": "머그컵",
-          "suggested_color_group": "green",
-          "suggested_color_hint": "emerald",
-          "suggested_primary_icon_key": "inventory",
-          "review_reason": "Cup items fit daily goods; verify whether they are mugs, tumblers, or glassware.",
-          "sample_names": [
-            "一番くじ 劇場版 呪術廻戦 0 ～顕現～ - D賞 グラス",
-            "一番くじ 僕のヒーローアカデミア Let you down - E賞 グラス",
-            "一番くじ 僕のヒーローアカデミア NEXT GENERATIONS！ feat.SMASH RISING - G賞 グラス",
-            "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス",
-            "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "컵",
-            "target_category": "머그컵",
-            "target_family": "daily_goods",
-            "folder_name": "머그컵",
-            "folder_color_hex": "0xFF10B981",
-            "folder_color_hint": "emerald",
-            "folder_color_group": "green",
-            "folder_color_sort_order": 180,
-            "folder_icon_key": "inventory",
-            "folder_icon_options": [
-              "inventory",
-              "bag",
-              "pouch",
-              "coffee_mug",
-              "basket",
-              "backpack",
-              "gift",
-              "storefront"
-            ],
-            "affected_catalog_rows": 5,
-            "blocked_until": "category_mapping_manually_confirmed",
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "category": "식품",
-          "rows": 1,
-          "review_priority": 50,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "daily_goods",
-          "suggested_category": "식품",
-          "suggested_color_group": "green",
-          "suggested_color_hint": "emerald",
-          "suggested_primary_icon_key": "inventory",
-          "review_reason": "Food items should stay separate from character goods but use daily goods visual treatment.",
-          "sample_names": [
-            "최애의 아이 생초코 초코링"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "식품",
-            "target_category": "식품",
-            "target_family": "daily_goods",
-            "folder_name": "식품",
-            "folder_color_hex": "0xFF10B981",
-            "folder_color_hint": "emerald",
-            "folder_color_group": "green",
-            "folder_color_sort_order": 180,
-            "folder_icon_key": "inventory",
-            "folder_icon_options": [
-              "inventory",
-              "bag",
-              "pouch",
-              "coffee_mug",
-              "basket",
-              "backpack",
-              "gift",
-              "storefront"
-            ],
-            "affected_catalog_rows": 1,
-            "blocked_until": "category_mapping_manually_confirmed",
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_summary": {
-        "split_review_categories": 1,
-        "direct_mapping_categories": 5,
-        "category_count": 6
-      },
-      "review_state": "manual_category_mapping_confirmation_required",
-      "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
-    },
-    {
-      "batch_id": "023-agent-animation-category-action-131",
-      "agent_id": "agent-animation-category-action",
-      "workstream": "animation_category_action_queue",
-      "priority": 23,
-      "title": "애니메이션 카테고리 매핑 템플릿 확인: animation-category-action-002",
-      "public_report": "data/animation_category_action_queue_public.json",
-      "rows": 277,
-      "recommended_action": "Split name-level review categories first, then confirm direct category-to-folder mapping templates.",
-      "acceptance_criteria": [
-        "Each category_mapping_template remains manual_confirmed=false until sample names are reviewed.",
-        "Broad source categories are split before one folder mapping is applied.",
-        "Folder color and icon keys already exist in app visual catalogs."
-      ],
-      "sample_items": [
         {
           "category": "굿즈",
           "rows": 274,
@@ -6363,9 +6059,9 @@
         }
       ],
       "review_summary": {
-        "split_review_categories": 2,
+        "split_review_categories": 3,
         "direct_mapping_categories": 0,
-        "category_count": 2
+        "category_count": 3
       },
       "review_state": "manual_category_mapping_confirmation_required",
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
@@ -13851,6 +13547,133 @@
             "requires_exact_source_url": true,
             "requires_labeled_official_evidence": false,
             "blocked_until": "exact_product_source_url_confirmed"
+          },
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "040-agent-requested-focus-detail-25",
+      "agent_id": "agent-requested-focus-detail",
+      "workstream": "requested_focus_review_batches",
+      "priority": 40,
+      "title": "사용자 요청 특별 리스트 release_date review",
+      "public_report": "data/requested_focus_review_batches_public.json",
+      "rows": 4,
+      "recommended_action": "verify_release_date_from_official_campaign_or_product_page",
+      "acceptance_criteria": [
+        "Verify each candidate against exact official or trusted source evidence.",
+        "Keep private collection ownership data on the local device only.",
+        "Prepare reviewed catalog patches only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 17812,
+          "missing_field": "release_date",
+          "name_ko": "단간론파 쿠루미타피누이 Vol.1",
+          "name_ja": "ダンガンロンパ くるみたぴぬい Vol.1",
+          "series_name": "단간론파 쿠루미타피누이 버전1",
+          "category": "인형",
+          "source_store": "TAPIOCA online shop",
+          "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
+          "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580831925254_1_1764821109.jpg&width=1200&height=630",
+          "release_date": null,
+          "official_price_jpy": null,
+          "barcode": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17812,
+            "field": "release_date",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
+            "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
+            "requires_exact_source_url": false,
+            "requires_labeled_official_evidence": true,
+            "blocked_until": "manual_official_evidence_confirmed"
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17813,
+          "missing_field": "release_date",
+          "name_ko": "단간론파 쿠루미타피누이 Vol.2",
+          "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
+          "series_name": "단간론파 쿠루미타피누이 버전2",
+          "category": "인형",
+          "source_store": "TAPIOCA online shop",
+          "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
+          "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif",
+          "release_date": null,
+          "official_price_jpy": null,
+          "barcode": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17813,
+            "field": "release_date",
+            "manual_value": "",
+            "evidence_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
+            "candidate_source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
+            "requires_exact_source_url": false,
+            "requires_labeled_official_evidence": true,
+            "blocked_until": "manual_official_evidence_confirmed"
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17866,
+          "missing_field": "release_date",
+          "name_ko": "주술회전 쿠루미타피누이",
+          "name_ja": "呪術廻戦 くるみたぴぬい",
+          "series_name": "주술회전 타피누이",
+          "category": "인형",
+          "source_store": "TAPIOCA online shop",
+          "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
+          "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg",
+          "release_date": null,
+          "official_price_jpy": null,
+          "barcode": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17866,
+            "field": "release_date",
+            "manual_value": "",
+            "evidence_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
+            "candidate_source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
+            "requires_exact_source_url": false,
+            "requires_labeled_official_evidence": true,
+            "blocked_until": "manual_official_evidence_confirmed"
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17814,
+          "missing_field": "release_date",
+          "name_ko": "헌터헌터 쿠루미타피누이",
+          "name_ja": "HUNTER×HUNTER くるみたぴぬい",
+          "series_name": "헌터헌터 타피누이",
+          "category": "인형",
+          "source_store": "TAPIOCA online shop",
+          "source_url": "https://jp.mercari.com/item/m69892974117",
+          "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275",
+          "release_date": null,
+          "official_price_jpy": null,
+          "barcode": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17814,
+            "field": "release_date",
+            "manual_value": "",
+            "evidence_url": "https://jp.mercari.com/item/m69892974117",
+            "candidate_source_url": "https://jp.mercari.com/item/m69892974117",
+            "requires_exact_source_url": false,
+            "requires_labeled_official_evidence": true,
+            "blocked_until": "manual_official_evidence_confirmed"
           },
           "auto_apply_enabled": false
         }
