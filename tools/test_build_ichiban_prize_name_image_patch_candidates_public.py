@@ -43,8 +43,41 @@ class BuildIchibanPrizeNameImagePatchCandidatesPublicTest(unittest.TestCase):
         self.assertFalse(row["auto_apply_enabled"])
         self.assertEqual(row["match_type"], "exact_image_match")
         self.assertEqual(row["field_changes"]["name_ja"]["to"], "A賞 フィギュア")
+        self.assertEqual(row["official_prize_display_name"], "A賞 フィギュア")
+        self.assertEqual(row["suggested_display_name_ko"], "一番くじ Demo - A賞 フィギュア")
         self.assertEqual(row["catalog_patch_template"]["name_ko"], "一番くじ Demo - A賞 フィギュア")
         self.assertFalse(row["catalog_patch_template"]["manual_confirmed"])
+
+    def test_display_name_includes_rank_when_official_name_omits_it(self) -> None:
+        review = {
+            "review_rows": [
+                {
+                    "catalog_index": 3,
+                    "series_name": "一番くじ Demo",
+                    "prize_rank": "C賞",
+                    "prize_item_name": "アクリルチャーム",
+                    "display_name_ko": "一番くじ Demo - アクリルチャーム",
+                    "source_url": "https://1kuji.com/products/demo",
+                    "image_url": "https://assets.1kuji.com/demo/c.jpg",
+                }
+            ]
+        }
+
+        report = candidates.build_report(
+            review,
+            fetch_campaign=lambda _url: [
+                {
+                    "name_ja": "アクリルチャーム",
+                    "sub_series": "C賞",
+                    "image_url": "https://assets.1kuji.com/demo/c.jpg",
+                }
+            ],
+        )
+
+        row = report["candidates"][0]
+        self.assertEqual(row["official_prize_display_name"], "C賞 アクリルチャーム")
+        self.assertEqual(row["suggested_display_name_ko"], "一番くじ Demo - C賞 アクリルチャーム")
+        self.assertEqual(row["catalog_patch_template"]["name_ko"], "一番くじ Demo - C賞 アクリルチャーム")
 
     def test_uncertain_rows_are_blocked_without_patch(self) -> None:
         review = {

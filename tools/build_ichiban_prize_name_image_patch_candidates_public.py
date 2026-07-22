@@ -29,8 +29,23 @@ def _similarity(left: Any, right: Any) -> float:
     return difflib.SequenceMatcher(None, _norm(left), _norm(right)).ratio()
 
 
-def _expected_display_name(series_name: str, name_ja: str) -> str:
-    return f"{series_name} - {name_ja}" if series_name and name_ja else ""
+def _expected_prize_display_name(prize_rank: str, name_ja: str) -> str:
+    prize_rank = prize_rank.strip()
+    name_ja = name_ja.strip()
+    if not prize_rank:
+        return name_ja
+    if not name_ja:
+        return prize_rank
+    if name_ja.startswith(prize_rank):
+        return name_ja
+    return f"{prize_rank} {name_ja}"
+
+
+def _expected_display_name(series_name: str, prize_rank: str, name_ja: str) -> str:
+    prize_display_name = _expected_prize_display_name(prize_rank, name_ja)
+    if series_name and prize_display_name:
+        return f"{series_name} - {prize_display_name}"
+    return series_name or prize_display_name
 
 
 def _index_official_rows(rows: list[dict[str, Any]]) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
@@ -141,7 +156,8 @@ def build_report(
         suggested_sub_series = str(matched.get("sub_series") or "").strip()
         suggested_image_url = str(matched.get("image_url") or "").strip()
         series_name = str(row.get("series_name") or "").strip()
-        suggested_name_ko = _expected_display_name(series_name, suggested_name_ja)
+        suggested_prize_display_name = _expected_prize_display_name(suggested_sub_series, suggested_name_ja)
+        suggested_name_ko = _expected_display_name(series_name, suggested_sub_series, suggested_name_ja)
         current_sub_series = str(row.get("prize_rank") or "").strip()
         current_name_ko = str(row.get("display_name_ko") or "").strip()
 
@@ -178,9 +194,12 @@ def build_report(
                 "series_name": series_name,
                 "current_prize_rank": current_sub_series,
                 "current_name_ja": current_name,
+                "current_display_name_ko": current_name_ko,
                 "current_image_url": current_image,
                 "official_prize_rank": suggested_sub_series,
                 "official_name_ja": suggested_name_ja,
+                "official_prize_display_name": suggested_prize_display_name,
+                "suggested_display_name_ko": suggested_name_ko,
                 "official_image_url": suggested_image_url,
                 "field_changes": field_changes,
                 "catalog_patch_template": {

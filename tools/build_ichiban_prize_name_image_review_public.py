@@ -47,8 +47,24 @@ def present(value: Any) -> bool:
     return value is not None and str(value).strip() != ""
 
 
+def expected_prize_display_name(row: dict[str, Any]) -> str:
+    prize_rank = str(row.get("sub_series") or "").strip()
+    prize_item_name = str(row.get("name_ja") or "").strip()
+    if not prize_rank:
+        return prize_item_name
+    if not prize_item_name:
+        return prize_rank
+    if prize_item_name.startswith(prize_rank):
+        return prize_item_name
+    return f"{prize_rank} {prize_item_name}"
+
+
 def expected_name_ko(row: dict[str, Any]) -> str:
-    return f"{row.get('series_name')} - {row.get('name_ja')}"
+    series_name = str(row.get("series_name") or "").strip()
+    prize_display_name = expected_prize_display_name(row)
+    if series_name and prize_display_name:
+        return f"{series_name} - {prize_display_name}"
+    return series_name or prize_display_name
 
 
 def prize_label_matches_name(row: dict[str, Any]) -> bool:
@@ -73,6 +89,7 @@ def compact_row(row: dict[str, Any], *, review_reason: str) -> dict[str, Any]:
         "series_name": row.get("series_name"),
         "prize_rank": row.get("sub_series"),
         "prize_item_name": row.get("name_ja"),
+        "expected_prize_display_name": expected_prize_display_name(row),
         "display_name_ko": row.get("name_ko"),
         "expected_display_name_ko": expected_name_ko(row),
         "category": row.get("category"),

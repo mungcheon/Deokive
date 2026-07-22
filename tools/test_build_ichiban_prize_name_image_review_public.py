@@ -27,7 +27,7 @@ class BuildIchibanPrizeNameImageReviewPublicTest(unittest.TestCase):
                     "series_name": "一番くじ Sample",
                     "sub_series": "B賞",
                     "name_ja": "Figure Without Rank",
-                    "name_ko": "一番くじ Sample - Figure Without Rank",
+                    "name_ko": "一番くじ Sample - B賞 Figure Without Rank",
                     "source_url": "https://1kuji.com/products/sample",
                     "image_url": "https://assets.1kuji.com/b.jpg",
                 },
@@ -68,6 +68,9 @@ class BuildIchibanPrizeNameImageReviewPublicTest(unittest.TestCase):
         indexes = {row["catalog_index"] for row in report["review_rows"]}
         self.assertEqual(indexes, {2, 3, 4})
         self.assertEqual(report["review_rows"][0]["manual_fix_template"]["manual_confirmed"], False)
+        review_by_index = {row["catalog_index"]: row for row in report["review_rows"]}
+        self.assertEqual(review_by_index[2]["expected_prize_display_name"], "B賞 Figure Without Rank")
+        self.assertEqual(review_by_index[2]["expected_display_name_ko"], "一番くじ Sample - B賞 Figure Without Rank")
         self.assertIn("variant", report["name_policy"]["fields"]["variant_or_character_detail"])
 
 
