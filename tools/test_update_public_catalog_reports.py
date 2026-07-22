@@ -478,6 +478,17 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_next_action.get("direct_mapping_categories"),
             animation_action_summary.get("direct_mapping_categories"),
         )
+        self.assertEqual(animation_action_summary.get("app_folder_color_count"), 188)
+        self.assertEqual(animation_action_summary.get("app_folder_icon_option_count"), 211)
+        self.assertTrue(animation_action_summary.get("app_folder_palette_sorted_by_family"))
+        self.assertEqual(
+            animation_scorecard.get("app_folder_color_count"),
+            animation_action_summary.get("app_folder_color_count"),
+        )
+        self.assertEqual(
+            animation_next_action.get("app_folder_icon_option_count"),
+            animation_action_summary.get("app_folder_icon_option_count"),
+        )
         self.assertGreater(len(animation_agent_batches), 0)
         self.assertTrue(
             all(

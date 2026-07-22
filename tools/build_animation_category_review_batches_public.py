@@ -81,6 +81,9 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
     rows = [_compact_row(row) for row in sorted(queue, key=lambda row: (_priority(row), str(row.get("category") or "")))]
     folder_color_palette = source.get("folder_color_palette") or []
     folder_visual_tokens = source.get("folder_visual_tokens") or []
+    app_visual_catalog = source.get("app_folder_visual_catalog") or {}
+    if not isinstance(app_visual_catalog, dict):
+        app_visual_catalog = {}
     folder_icon_catalog = _folder_icon_catalog(folder_visual_tokens)
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(rows), batch_size):
@@ -122,6 +125,12 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
         "folder_template_count": len(rows),
         "folder_icon_family_count": len(folder_icon_catalog),
         "folder_icon_option_count": sum(int(row.get("icon_count") or 0) for row in folder_icon_catalog),
+        "app_folder_color_count": int(app_visual_catalog.get("color_count") or 0),
+        "app_folder_icon_option_count": int(app_visual_catalog.get("icon_count") or 0),
+        "app_folder_icon_group_count": int(app_visual_catalog.get("icon_group_count") or 0),
+        "app_folder_palette_section_count": int(app_visual_catalog.get("palette_section_count") or 0),
+        "app_folder_palette_sorted_by_family": bool(app_visual_catalog.get("palette_sorted_by_family")),
+        "app_animation_visuals_covered": bool(app_visual_catalog.get("animation_visuals_covered")),
         "auto_apply_enabled": False,
     }
     return {
@@ -133,6 +142,7 @@ def build_report(source: dict[str, Any], queue: list[dict[str, Any]], *, batch_s
             [row for row in folder_color_palette if isinstance(row, dict)],
             key=lambda row: int(row.get("sort_order") or 999),
         ),
+        "app_folder_visual_catalog": app_visual_catalog,
         "folder_visual_tokens": folder_visual_tokens,
         "folder_icon_catalog": folder_icon_catalog,
         "batches": batches,

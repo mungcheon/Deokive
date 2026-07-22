@@ -53,6 +53,7 @@ CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.j
 EXECUTION_PLAN = DATA / "catalog_execution_plan_public.json"
 OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
 AGENT_WORK_QUEUE = DATA / "catalog_agent_work_queue_public.json"
+APP_FOLDER_VISUAL_AUDIT = ROOT / "server" / "app_folder_visual_catalog_audit.json"
 
 OFFICIAL_SEARCH_TEMPLATES = {
     "애니메이트": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
@@ -337,6 +338,33 @@ def load_json(path: Path, default: Any | None = None) -> Any:
             return default
         raise FileNotFoundError(path)
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def app_folder_visual_catalog_summary() -> dict[str, Any]:
+    audit = load_json(APP_FOLDER_VISUAL_AUDIT, {})
+    if not isinstance(audit, dict) or not audit:
+        return {}
+    return {
+        "source": "app_folder_visual_catalog_audit",
+        "source_files": [
+            "lib/config/app_palette_catalog.dart",
+            "lib/config/app_icon_catalog.dart",
+        ],
+        "icon_count": int(audit.get("icon_count") or 0),
+        "icon_group_count": int(audit.get("icon_group_count") or 0),
+        "icon_groups": audit.get("icon_groups") or [],
+        "color_count": int(audit.get("color_count") or 0),
+        "unique_color_count": int(audit.get("unique_color_count") or 0),
+        "palette_section_count": int(audit.get("palette_section_count") or 0),
+        "palette_sections": audit.get("palette_sections") or [],
+        "palette_sorted_by_family": bool(
+            audit.get("palette_sort", {}).get("section_order_matches_expected")
+            and audit.get("palette_sort", {}).get("section_order_monotonic")
+        ),
+        "animation_visuals_covered": bool(audit.get("animation_visuals_covered")),
+        "duplicate_icon_keys": audit.get("duplicate_icon_keys") or [],
+        "duplicate_colors": audit.get("duplicate_colors") or [],
+    }
 
 
 def write_json(path: Path, data: Any) -> None:
@@ -1715,6 +1743,9 @@ def build_operations_public(
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             "category_count": animation_summary.get("category_count", 0),
             "unknown_category_rows": animation_summary.get("unknown_category_rows", 0),
+            "app_folder_color_count": animation_summary.get("app_folder_color_count", 0),
+            "app_folder_icon_option_count": animation_summary.get("app_folder_icon_option_count", 0),
+            "app_folder_palette_sorted_by_family": animation_summary.get("app_folder_palette_sorted_by_family", False),
             "recommended_next_action": "Use taxonomy_review_queue and folder_visual_tokens for app folder colors, icons, and category cleanup.",
         },
         {
@@ -1724,6 +1755,11 @@ def build_operations_public(
             "batch_count": animation_review_batches_summary.get("batch_count", 0),
             "source_rows": animation_review_batches_summary.get("source_rows", 0),
             "folder_visual_token_count": animation_review_batches_summary.get("folder_visual_token_count", 0),
+            "app_folder_color_count": animation_review_batches_summary.get("app_folder_color_count", 0),
+            "app_folder_icon_option_count": animation_review_batches_summary.get("app_folder_icon_option_count", 0),
+            "app_folder_palette_sorted_by_family": animation_review_batches_summary.get(
+                "app_folder_palette_sorted_by_family", False
+            ),
             "recommended_next_action": "Review category batches before applying folder mappings; keep color order grouped by the palette.",
         } if animation_review_batches_summary else None,
         {
@@ -1735,6 +1771,11 @@ def build_operations_public(
             "action_batch_count": animation_action_queue_summary.get("action_batch_count", 0),
             "split_review_categories": animation_action_queue_summary.get("split_review_categories", 0),
             "direct_mapping_categories": animation_action_queue_summary.get("direct_mapping_categories", 0),
+            "app_folder_color_count": animation_action_queue_summary.get("app_folder_color_count", 0),
+            "app_folder_icon_option_count": animation_action_queue_summary.get("app_folder_icon_option_count", 0),
+            "app_folder_palette_sorted_by_family": animation_action_queue_summary.get(
+                "app_folder_palette_sorted_by_family", False
+            ),
             "recommended_next_action": "Split broad animation categories before confirming direct category-to-folder mappings.",
         } if animation_action_queue_summary else None,
     ]
@@ -1938,6 +1979,9 @@ def build_operations_public(
             "open_rows": animation_summary.get("unknown_category_rows", 0),
             "primary_report": f"data/{ANIMATION_CATEGORIES.name}",
             "next_step": "review_taxonomy_folder_visual_tokens",
+            "app_folder_color_count": animation_summary.get("app_folder_color_count", 0),
+            "app_folder_icon_option_count": animation_summary.get("app_folder_icon_option_count", 0),
+            "app_folder_palette_sorted_by_family": animation_summary.get("app_folder_palette_sorted_by_family", False),
             "auto_apply_enabled": False,
         },
         {
@@ -1946,6 +1990,11 @@ def build_operations_public(
             "open_rows": animation_review_batches_summary.get("source_rows", 0),
             "primary_report": f"data/{ANIMATION_CATEGORY_REVIEW_BATCHES.name}",
             "next_step": "review_batched_taxonomy_folder_visual_decisions",
+            "app_folder_color_count": animation_review_batches_summary.get("app_folder_color_count", 0),
+            "app_folder_icon_option_count": animation_review_batches_summary.get("app_folder_icon_option_count", 0),
+            "app_folder_palette_sorted_by_family": animation_review_batches_summary.get(
+                "app_folder_palette_sorted_by_family", False
+            ),
             "auto_apply_enabled": animation_review_batches_summary.get("auto_apply_enabled", False),
         } if animation_review_batches_summary else None,
         {
@@ -1956,6 +2005,11 @@ def build_operations_public(
             "direct_mapping_categories": animation_action_queue_summary.get("direct_mapping_categories", 0),
             "primary_report": f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}",
             "next_step": "fill_confirmed_animation_category_mapping_templates",
+            "app_folder_color_count": animation_action_queue_summary.get("app_folder_color_count", 0),
+            "app_folder_icon_option_count": animation_action_queue_summary.get("app_folder_icon_option_count", 0),
+            "app_folder_palette_sorted_by_family": animation_action_queue_summary.get(
+                "app_folder_palette_sorted_by_family", False
+            ),
             "auto_apply_enabled": animation_action_queue_summary.get("auto_apply_enabled", False),
         } if animation_action_queue_summary else None,
         {
@@ -3195,6 +3249,7 @@ def is_animation_goods(item: dict[str, Any]) -> bool:
 
 def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, Any]:
     rows = [item for item in items if is_animation_goods(item)]
+    app_visual_catalog = app_folder_visual_catalog_summary()
     by_category = Counter(str(item.get("category") or "미분류") for item in rows)
     by_family = Counter(category_family(str(item.get("category") or "")) for item in rows)
     by_store_category = Counter(
@@ -3309,11 +3364,18 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
             "folder_color_palette_count": len(FOLDER_COLOR_PALETTE),
             "folder_icon_family_count": len(FAMILY_ICON_OPTIONS),
             "folder_icon_option_count": sum(len(options) for options in FAMILY_ICON_OPTIONS.values()),
+            "app_folder_color_count": app_visual_catalog.get("color_count", 0),
+            "app_folder_icon_option_count": app_visual_catalog.get("icon_count", 0),
+            "app_folder_icon_group_count": app_visual_catalog.get("icon_group_count", 0),
+            "app_folder_palette_section_count": app_visual_catalog.get("palette_section_count", 0),
+            "app_folder_palette_sorted_by_family": app_visual_catalog.get("palette_sorted_by_family", False),
+            "app_animation_visuals_covered": app_visual_catalog.get("animation_visuals_covered", False),
         },
         "category_families": counter_rows(by_family, ("family",), 40),
         "categories": counter_rows(by_category, ("category",), 120),
         "category_visuals": category_visuals,
         "folder_color_palette": FOLDER_COLOR_PALETTE,
+        "app_folder_visual_catalog": app_visual_catalog,
         "folder_visual_tokens": folder_visual_tokens,
         "top_store_categories": counter_rows(by_store_category, ("source_store", "category"), 120),
         "missing_image_by_category": counter_rows(missing_image_by_category, ("category",), 60),

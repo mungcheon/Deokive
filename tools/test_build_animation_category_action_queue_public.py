@@ -12,6 +12,14 @@ import build_animation_category_action_queue_public as action
 class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
     def test_build_queue_creates_manual_mapping_templates(self) -> None:
         payload = {
+            "app_folder_visual_catalog": {
+                "color_count": 188,
+                "icon_count": 211,
+                "icon_group_count": 9,
+                "palette_section_count": 8,
+                "palette_sorted_by_family": True,
+                "animation_visuals_covered": True,
+            },
             "batches": [
                 {
                     "categories": [
@@ -62,6 +70,11 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queued_catalog_rows"], 97)
         self.assertEqual(report["summary"]["split_review_categories"], 1)
         self.assertEqual(report["summary"]["direct_mapping_categories"], 1)
+        self.assertEqual(report["summary"]["app_folder_color_count"], 188)
+        self.assertEqual(report["summary"]["app_folder_icon_option_count"], 211)
+        self.assertTrue(report["summary"]["app_folder_palette_sorted_by_family"])
+        self.assertTrue(report["summary"]["app_animation_visuals_covered"])
+        self.assertEqual(report["app_folder_visual_catalog"]["icon_group_count"], 9)
         self.assertEqual(
             report["summary"]["by_mapping_mode"],
             [("name_level_split_review_required", 1), ("direct_category_mapping_review", 1)],

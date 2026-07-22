@@ -111,6 +111,9 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
     rows = [_compact(row) for row in _categories(payload)]
     rows.sort(key=lambda row: (int(row.get("review_priority") or 999), str(row.get("category") or "")))
     queued = rows[:max_categories]
+    app_visual_catalog = payload.get("app_folder_visual_catalog") or {}
+    if not isinstance(app_visual_catalog, dict):
+        app_visual_catalog = {}
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(queued), batch_size):
@@ -151,6 +154,12 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
         "by_mapping_mode": mapping_mode_counts.most_common(),
         "split_review_categories": sum(1 for row in rows if _requires_split_review(row)),
         "direct_mapping_categories": sum(1 for row in rows if not _requires_split_review(row)),
+        "app_folder_color_count": int(app_visual_catalog.get("color_count") or 0),
+        "app_folder_icon_option_count": int(app_visual_catalog.get("icon_count") or 0),
+        "app_folder_icon_group_count": int(app_visual_catalog.get("icon_group_count") or 0),
+        "app_folder_palette_section_count": int(app_visual_catalog.get("palette_section_count") or 0),
+        "app_folder_palette_sorted_by_family": bool(app_visual_catalog.get("palette_sorted_by_family")),
+        "app_animation_visuals_covered": bool(app_visual_catalog.get("animation_visuals_covered")),
         "auto_apply_enabled": False,
     }
     return {
@@ -158,6 +167,7 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
         "generated_at": _now_utc(),
         "scope": "animation_category_action_queue",
         "summary": summary,
+        "app_folder_visual_catalog": app_visual_catalog,
         "batches": batches,
         "automation_policy": {
             "auto_apply_category_changes": False,

@@ -32,6 +32,14 @@ class BuildAnimationCategoryReviewBatchesPublicTest(unittest.TestCase):
                     "icon_options": ["view_carousel", "layers", "photo_library", "filter_frames"],
                 },
             ],
+            "app_folder_visual_catalog": {
+                "color_count": 188,
+                "icon_count": 211,
+                "icon_group_count": 9,
+                "palette_section_count": 8,
+                "palette_sorted_by_family": True,
+                "animation_visuals_covered": True,
+            },
         }
         queue = [
             {
@@ -75,6 +83,11 @@ class BuildAnimationCategoryReviewBatchesPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["folder_template_count"], 2)
         self.assertEqual(report["summary"]["by_suggested_color_group"], [("cool", 1), ("warm", 1)])
         self.assertEqual(report["summary"]["folder_icon_family_count"], 2)
+        self.assertEqual(report["summary"]["app_folder_color_count"], 188)
+        self.assertEqual(report["summary"]["app_folder_icon_option_count"], 211)
+        self.assertTrue(report["summary"]["app_folder_palette_sorted_by_family"])
+        self.assertTrue(report["summary"]["app_animation_visuals_covered"])
+        self.assertEqual(report["app_folder_visual_catalog"]["palette_section_count"], 8)
         self.assertFalse(report["automation_policy"]["auto_apply_category_changes"])
         self.assertFalse(report["automation_policy"]["auto_apply_folder_visuals"])
         self.assertEqual(
