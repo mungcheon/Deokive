@@ -14,6 +14,8 @@ DEFAULT_ENRICHMENT = DATA / "catalog_image_enrichment_batches_public.json"
 DEFAULT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
 DEFAULT_SOURCE_DETAIL_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 DEFAULT_SOURCE_DISCOVERY_FOCUS_PACKS = DATA / "source_discovery_focus_packs_public.json"
+DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE = DATA / "source_discovery_focus_confirmed_template_public.json"
+DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE_DRY_RUN = DATA / "source_discovery_focus_template_import_dry_run_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_missing_image_actionability_public.json"
 
 
@@ -308,6 +310,8 @@ def build_report(
     action_queue: dict[str, Any],
     source_detail_queue: dict[str, Any] | None = None,
     source_discovery_focus_packs: dict[str, Any] | None = None,
+    source_discovery_focus_template: dict[str, Any] | None = None,
+    source_discovery_focus_template_dry_run: dict[str, Any] | None = None,
     *,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -317,6 +321,17 @@ def build_report(
         source_discovery_focus_packs.get("summary")
         if isinstance(source_discovery_focus_packs, dict)
         and isinstance(source_discovery_focus_packs.get("summary"), dict)
+        else {}
+    )
+    focus_template_summary = (
+        source_discovery_focus_template.get("summary")
+        if isinstance(source_discovery_focus_template, dict)
+        and isinstance(source_discovery_focus_template.get("summary"), dict)
+        else {}
+    )
+    focus_template_dry_run_summary = (
+        source_discovery_focus_template_dry_run
+        if isinstance(source_discovery_focus_template_dry_run, dict)
         else {}
     )
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
@@ -382,6 +397,16 @@ def build_report(
             "source_discovery_confirmed_focus_source_rows": int(
                 focus_summary.get("confirmed_focus_source_rows") or 0
             ),
+            "source_discovery_focus_template_rows": int(focus_template_summary.get("template_items") or 0),
+            "source_discovery_focus_template_confirmed_rows": int(
+                focus_template_summary.get("manual_confirmed_rows") or 0
+            ),
+            "source_discovery_focus_template_dry_run_updated_rows": int(
+                focus_template_dry_run_summary.get("updated_rows") or 0
+            ),
+            "source_discovery_focus_template_dry_run_skipped_rows": int(
+                focus_template_dry_run_summary.get("skipped_rows") or 0
+            ),
             "source_discovery_focus_coverage": float(focus_summary.get("focus_coverage") or 0),
             "source_discovery_non_focus_rows": int(focus_summary.get("non_focus_source_rows") or 0),
             "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_ready),
@@ -404,6 +429,7 @@ def build_report(
             "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
             "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
             "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",
+            "source_discovery_focus_template_rows is a blank public confirmation template; import remains dry-run safe until rows are manually confirmed.",
             "All image changes remain manual-review only until exact product identity is confirmed.",
         ],
         "automation_policy": {
@@ -421,16 +447,34 @@ def main() -> int:
     parser.add_argument("--action-queue", type=Path, default=DEFAULT_ACTION_QUEUE)
     parser.add_argument("--source-detail-queue", type=Path, default=DEFAULT_SOURCE_DETAIL_QUEUE)
     parser.add_argument("--source-discovery-focus-packs", type=Path, default=DEFAULT_SOURCE_DISCOVERY_FOCUS_PACKS)
+    parser.add_argument("--source-discovery-focus-template", type=Path, default=DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE)
+    parser.add_argument(
+        "--source-discovery-focus-template-dry-run",
+        type=Path,
+        default=DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE_DRY_RUN,
+    )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
     focus_packs = load_json(args.source_discovery_focus_packs) if args.source_discovery_focus_packs.exists() else None
+    focus_template = (
+        load_json(args.source_discovery_focus_template)
+        if args.source_discovery_focus_template.exists()
+        else None
+    )
+    focus_template_dry_run = (
+        load_json(args.source_discovery_focus_template_dry_run)
+        if args.source_discovery_focus_template_dry_run.exists()
+        else None
+    )
     report = build_report(
         load_json(args.enrichment),
         load_json(args.action_queue),
         load_json(args.source_detail_queue),
         focus_packs,
+        focus_template,
+        focus_template_dry_run,
     )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

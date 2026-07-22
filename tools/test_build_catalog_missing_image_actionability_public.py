@@ -61,6 +61,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 "non_focus_source_rows": 1,
             }
         }
+        focus_template = {"summary": {"template_items": 4, "manual_confirmed_rows": 0}}
+        focus_template_dry_run = {"updated_rows": 0, "skipped_rows": 4}
         source_detail_queue = {
             "batches": [
                 {
@@ -102,6 +104,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             action_queue,
             source_detail_queue,
             focus_packs,
+            focus_template,
+            focus_template_dry_run,
             generated_at="2026-07-22T00:00:00Z",
         )
 
@@ -122,6 +126,10 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_discovery_not_started_focus_pack_count"], 2)
         self.assertEqual(report["summary"]["source_discovery_remaining_focus_review_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_confirmed_focus_source_rows"], 0)
+        self.assertEqual(report["summary"]["source_discovery_focus_template_rows"], 4)
+        self.assertEqual(report["summary"]["source_discovery_focus_template_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["source_discovery_focus_template_dry_run_updated_rows"], 0)
+        self.assertEqual(report["summary"]["source_discovery_focus_template_dry_run_skipped_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_focus_coverage"], 0.8)
         self.assertEqual(report["summary"]["source_discovery_non_focus_rows"], 1)
         self.assertEqual(report["summary"]["direct_image_action_queue_rows"], 2)
