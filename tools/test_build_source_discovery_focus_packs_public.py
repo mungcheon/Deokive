@@ -100,6 +100,13 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
         self.assertEqual(report["packs"][0]["items"][0]["catalog_index"], 1)
         self.assertEqual(report["packs"][0]["items"][0]["manual_review_status"], "not_started")
         self.assertEqual(report["packs"][0]["items"][0]["manual_confirmed_source_url"], "")
+        self.assertEqual(report["packs"][0]["items"][0]["search_query"], "a")
+        self.assertEqual(report["packs"][0]["items"][0]["review_state"], "official_search_review_required")
+        self.assertEqual(report["packs"][0]["items"][0]["workflow"], "official_search_url_available")
+        self.assertIn(
+            "Confirm the page is an exact product/detail page",
+            report["packs"][0]["items"][0]["manual_review_checklist"][1],
+        )
         self.assertEqual(report["packs"][0]["items"][0]["catalog_field_import_template"]["field"], "source_url")
         self.assertEqual(report["work_order"][0]["first_batch_id"], "b1")
         self.assertEqual(report["work_order"][0]["review_status"], "not_started")

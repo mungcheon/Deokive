@@ -6,6 +6,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import parse_qs, unquote_plus, urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +31,58 @@ def counter_pairs(counter: Counter[str], field: str, limit: int = 12) -> list[di
     return [{field: key, "rows": value} for key, value in counter.most_common(limit) if key]
 
 
+def _compact_text(value: Any) -> str:
+    return " ".join(str(value or "").split())
+
+
+def _search_query_from_url(url: Any) -> str:
+    parsed = urlparse(_compact_text(url))
+    params = parse_qs(parsed.query)
+    for key in ("smt", "q", "keyword", "query", "search"):
+        values = params.get(key)
+        if values:
+            return _compact_text(unquote_plus(values[0]))
+    return ""
+
+
+def _best_search_query(item: dict[str, Any]) -> str:
+    from_url = _search_query_from_url(item.get("official_search_url")) or _search_query_from_url(
+        item.get("web_search_url")
+    )
+    if from_url:
+        return from_url
+    return _compact_text(item.get("name_ja")) or _compact_text(item.get("name_ko"))
+
+
+def _review_state(item: dict[str, Any]) -> str:
+    domains = item.get("allowed_source_domains") or []
+    if item.get("official_search_url") and domains:
+        return "official_search_review_required"
+    if item.get("web_search_url"):
+        return "web_search_review_required"
+    return "manual_search_required"
+
+
+def _workflow(item: dict[str, Any]) -> str:
+    state = _review_state(item)
+    if state == "official_search_review_required":
+        return "official_search_url_available"
+    if state == "web_search_review_required":
+        return "web_search_url_available"
+    return "manual_official_research_required"
+
+
+def _review_checklist(item: dict[str, Any]) -> list[str]:
+    domains = item.get("allowed_source_domains") or []
+    domain_text = ", ".join(str(domain) for domain in domains) if domains else "the official store"
+    return [
+        f"Open the search hint and keep evidence on {domain_text}.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source.",
+    ]
+
+
 def compact_item(item: dict[str, Any]) -> dict[str, Any]:
     return {
         "manual_review_status": "not_started",
@@ -41,9 +94,13 @@ def compact_item(item: dict[str, Any]) -> dict[str, Any]:
         "category": item.get("category"),
         "name_ko": item.get("name_ko"),
         "name_ja": item.get("name_ja"),
+        "search_query": _best_search_query(item),
+        "review_state": _review_state(item),
+        "workflow": _workflow(item),
         "official_search_url": item.get("official_search_url"),
         "web_search_url": item.get("web_search_url"),
         "allowed_source_domains": item.get("allowed_source_domains") or [],
+        "manual_review_checklist": _review_checklist(item),
         "source_patch_template": item.get("source_patch_template") or {},
         "catalog_field_import_template": item.get("catalog_field_import_template") or {},
         "acceptance_rule": item.get("acceptance_rule"),

@@ -32,8 +32,12 @@ class BuildSourceDiscoveryFocusConfirmedTemplatePublicTest(unittest.TestCase):
                             "source_store": "Animate",
                             "category": "Acrylic",
                             "name_ko": "Stand",
+                            "search_query": "Stand Acrylic",
+                            "review_state": "official_search_review_required",
+                            "workflow": "official_search_url_available",
                             "official_search_url": "https://animate.example/search?q=stand",
                             "allowed_source_domains": ["animate.example"],
+                            "manual_review_checklist": ["Confirm exact product page"],
                             "source_patch_template": {"catalog_index": 10},
                             "catalog_field_import_template": {"field": "source_url"},
                         }
@@ -66,6 +70,10 @@ class BuildSourceDiscoveryFocusConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["row_index"], 10)
         self.assertEqual(item["target_category"], "Acrylic")
         self.assertEqual(item["source_store_remaining_after_pack"], 4)
+        self.assertEqual(item["search_query"], "Stand Acrylic")
+        self.assertEqual(item["review_state"], "official_search_review_required")
+        self.assertEqual(item["workflow"], "official_search_url_available")
+        self.assertEqual(item["manual_review_checklist"], ["Confirm exact product page"])
         self.assertEqual(item["catalog_field_import_template"]["field"], "source_url")
 
 

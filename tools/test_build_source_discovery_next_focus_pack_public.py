@@ -48,8 +48,12 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
                     "category": "Acrylic stand",
                     "name_ko": "Stand A",
                     "name_ja": "スタンドA",
+                    "search_query": "Stand A Acrylic",
+                    "review_state": "official_search_review_required",
+                    "workflow": "official_search_url_available",
                     "official_search_url": "https://animate.example/search?q=stand",
                     "allowed_source_domains": ["animate.example"],
+                    "manual_review_checklist": ["Confirm exact product page"],
                     "source_patch_template": {"catalog_index": 10},
                 },
                 {
@@ -87,6 +91,10 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual([item["catalog_index"] for item in report["items"]], [10, 11])
         self.assertEqual(report["items"][0]["manual_confirmed_source_url"], "")
+        self.assertEqual(report["items"][0]["search_query"], "Stand A Acrylic")
+        self.assertEqual(report["items"][0]["review_state"], "official_search_review_required")
+        self.assertEqual(report["items"][0]["workflow"], "official_search_url_available")
+        self.assertEqual(report["items"][0]["manual_review_checklist"], ["Confirm exact product page"])
         self.assertEqual(report["items"][0]["source_patch_template"]["catalog_index"], 10)
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 

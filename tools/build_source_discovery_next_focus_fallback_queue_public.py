@@ -122,6 +122,9 @@ def build_report(
                 "category": item.get("category"),
                 "name_ko": item.get("name_ko"),
                 "name_ja": item.get("name_ja"),
+                "search_query": item.get("search_query"),
+                "review_state": item.get("review_state"),
+                "workflow": item.get("workflow"),
                 "official_search_url": item.get("official_search_url"),
                 "official_search_fetch_status": audit_item.get("fetch_status"),
                 "official_search_http_status": audit_item.get("http_status"),
@@ -131,6 +134,7 @@ def build_report(
                 "domain_limited_web_search_urls": _domain_limited_web_search_urls(item),
                 "fallback_search_queries": _fallback_search_queries(item),
                 "allowed_source_domains": item.get("allowed_source_domains") or [],
+                "manual_review_checklist": item.get("manual_review_checklist") or [],
                 "acceptance_rule": item.get("acceptance_rule"),
                 "fallback_reason": "official_search_url_unavailable",
                 "review_instruction": (

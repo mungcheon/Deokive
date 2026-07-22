@@ -5308,6 +5308,16 @@
     "missing_image_queue_rows": 45,
     "review_queue_rows": 4,
     "missing_image_review_queue_rows": 1,
+    "candidate_review_lane_counts": {
+      "low_confidence_candidate_review": 14,
+      "manual_search_required": 71,
+      "weak_candidate_review": 4
+    },
+    "missing_image_candidate_review_lane_counts": {
+      "low_confidence_candidate_review": 2,
+      "manual_search_required": 42,
+      "weak_candidate_review": 1
+    },
     "auto_apply_enabled": false
   },
   "animate_missing_image_search": {
@@ -5981,6 +5991,24 @@
         1
       ]
     ],
+    "by_source_url_review_lane": [
+      [
+        "manual_search_required",
+        42
+      ],
+      [
+        "candidate_provider_missing",
+        5
+      ],
+      [
+        "low_confidence_candidate_review",
+        2
+      ],
+      [
+        "weak_candidate_review",
+        1
+      ]
+    ],
     "auto_apply_enabled": false
   },
   "source_discovery_next_focus_pack": {
@@ -6018,13 +6046,13 @@
     "official_search_unavailable_rows": 20,
     "status_counts": [
       [
-        "http_error_404",
+        "http_error_403",
         20
       ]
     ],
     "http_status_counts": [
       [
-        "404",
+        "403",
         20
       ]
     ],
@@ -6076,7 +6104,7 @@
     "fallback_reason": "official_search_url_unavailable",
     "by_http_status": [
       [
-        "404",
+        "403",
         20
       ]
     ],

@@ -22,9 +22,13 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
                     "category": "Acrylic stand",
                     "name_ko": "A",
                     "name_ja": "A",
+                    "search_query": "A acrylic",
+                    "review_state": "official_search_review_required",
+                    "workflow": "official_search_url_available",
                     "official_search_url": "https://animate.example/products/list.php?mode=search&smt=A",
                     "web_search_url": "https://google.example/search?q=A",
                     "allowed_source_domains": ["www.animate-onlineshop.jp"],
+                    "manual_review_checklist": ["Confirm exact product page"],
                     "acceptance_rule": "exact match",
                     "source_patch_template": {"catalog_index": 1, "source_url": "<exact>"},
                     "catalog_field_import_template": {"row_index": 1, "field": "source_url"},
@@ -68,6 +72,10 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["catalog_index"], 1)
         self.assertEqual(item["manual_review_status"], "fallback_not_started")
         self.assertFalse(item["manual_confirmed"])
+        self.assertEqual(item["search_query"], "A acrylic")
+        self.assertEqual(item["review_state"], "official_search_review_required")
+        self.assertEqual(item["workflow"], "official_search_url_available")
+        self.assertEqual(item["manual_review_checklist"], ["Confirm exact product page"])
         self.assertIn("sphone/products/list.php", item["fallback_store_search_url"])
         self.assertEqual(item["fallback_search_terms"], ["A"])
         self.assertEqual(len(item["fallback_search_queries"]), 3)
