@@ -98,6 +98,12 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
         chunk = published[offset : offset + batch_size]
         workflow_counts = Counter(str(row.get("workflow") or "") for row in chunk)
         field_counts = Counter(field for row in chunk for field in row.get("missing_fields") or [])
+        patch_template_counts = Counter(
+            template["field"]
+            for row in chunk
+            for template in row.get("campaign_field_patch_templates") or []
+            if isinstance(template, dict) and template.get("field")
+        )
         batches.append(
             {
                 "batch_id": f"ichiban-metadata-action-{len(batches) + 1:03d}",
@@ -107,6 +113,7 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
                 "offset": offset,
                 "workflow_counts": workflow_counts.most_common(),
                 "missing_field_counts": field_counts.most_common(),
+                "field_patch_template_counts": patch_template_counts.most_common(),
                 "review_state": "manual_official_campaign_metadata_confirmation_required",
                 "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
                 "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
@@ -128,6 +135,8 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
         "summary": {
             "actionable_campaigns": len(campaigns),
             "queued_action_campaigns": len(published),
+            "unqueued_action_campaigns": max(len(campaigns) - len(published), 0),
+            "campaign_queue_coverage": round(len(published) / len(campaigns), 4) if campaigns else 0,
             "queued_catalog_item_rows": sum(int(row.get("catalog_item_rows") or 0) for row in published),
             "action_batch_count": len(batches),
             "batch_size": batch_size,

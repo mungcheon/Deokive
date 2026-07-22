@@ -174,6 +174,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "image_attachment_action_queue"
         )
+        ichiban_action = reports.load_json(reports.ICHIIBAN_KUJI_METADATA_ACTION_QUEUE)
+        ichiban_action_summary = ichiban_action.get("summary", {})
+        ichiban_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "ichiban_kuji_metadata_action_queue"
+        )
+        ichiban_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "ichiban_kuji_metadata_action_queue"
+        )
         animation_action = reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)
         animation_action_summary = animation_action.get("summary", {})
         animation_scorecard = next(
@@ -221,6 +233,30 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             image_next_action.get("sample_queue_coverage"),
             image_action_summary.get("sample_queue_coverage"),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_metadata_action_campaigns"),
+            ichiban_action_summary.get("queued_action_campaigns"),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_metadata_actionable_campaigns"),
+            ichiban_action_summary.get("actionable_campaigns"),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_metadata_unqueued_action_campaigns"),
+            ichiban_action_summary.get("unqueued_action_campaigns"),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_metadata_queued_catalog_item_rows"),
+            ichiban_action_summary.get("queued_catalog_item_rows"),
+        )
+        self.assertEqual(
+            ichiban_scorecard.get("campaign_queue_coverage"),
+            ichiban_action_summary.get("campaign_queue_coverage"),
+        )
+        self.assertEqual(
+            ichiban_next_action.get("field_patch_template_counts"),
+            ichiban_action_summary.get("field_patch_template_counts"),
         )
         self.assertEqual(
             open_queues.get("animation_category_action_rows"),

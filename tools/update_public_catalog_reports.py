@@ -1669,10 +1669,16 @@ def build_operations_public(
             "priority": 53,
             "workstream": "ichiban_kuji_metadata_action_queue",
             "public_report": f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
+            "actionable_campaigns": ichiban_kuji_metadata_action_queue_summary.get("actionable_campaigns", 0),
             "queued_action_campaigns": ichiban_kuji_metadata_action_queue_summary.get("queued_action_campaigns", 0),
+            "unqueued_action_campaigns": ichiban_kuji_metadata_action_queue_summary.get("unqueued_action_campaigns", 0),
+            "campaign_queue_coverage": ichiban_kuji_metadata_action_queue_summary.get("campaign_queue_coverage", 0),
             "queued_catalog_item_rows": ichiban_kuji_metadata_action_queue_summary.get("queued_catalog_item_rows", 0),
             "action_batch_count": ichiban_kuji_metadata_action_queue_summary.get("action_batch_count", 0),
-            "recommended_next_action": "Work confirmed official 1kuji campaign metadata templates before broader historical research.",
+            "field_patch_template_counts": ichiban_kuji_metadata_action_queue_summary.get(
+                "field_patch_template_counts", []
+            ),
+            "recommended_next_action": "Work queued 1kuji metadata templates, then expand remaining actionable campaigns.",
         } if ichiban_kuji_metadata_action_queue_summary else None,
         {
             "priority": 60,
@@ -1860,6 +1866,10 @@ def build_operations_public(
             "workstream": "ichiban_kuji_metadata_action_queue",
             "status": "manual_review" if ichiban_kuji_metadata_action_queue_summary.get("queued_action_campaigns", 0) else "clear",
             "open_rows": ichiban_kuji_metadata_action_queue_summary.get("queued_action_campaigns", 0),
+            "actionable_campaigns": ichiban_kuji_metadata_action_queue_summary.get("actionable_campaigns", 0),
+            "unqueued_action_campaigns": ichiban_kuji_metadata_action_queue_summary.get("unqueued_action_campaigns", 0),
+            "campaign_queue_coverage": ichiban_kuji_metadata_action_queue_summary.get("campaign_queue_coverage", 0),
+            "queued_catalog_item_rows": ichiban_kuji_metadata_action_queue_summary.get("queued_catalog_item_rows", 0),
             "primary_report": f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
             "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
             "auto_apply_enabled": ichiban_kuji_metadata_action_queue_summary.get("auto_apply_enabled", False),
@@ -1938,6 +1948,15 @@ def build_operations_public(
     if ichiban_kuji_metadata_action_queue_summary:
         open_review_queues["ichiban_metadata_action_campaigns"] = ichiban_kuji_metadata_action_queue_summary.get(
             "queued_action_campaigns", 0
+        )
+        open_review_queues["ichiban_metadata_actionable_campaigns"] = ichiban_kuji_metadata_action_queue_summary.get(
+            "actionable_campaigns", 0
+        )
+        open_review_queues["ichiban_metadata_unqueued_action_campaigns"] = (
+            ichiban_kuji_metadata_action_queue_summary.get("unqueued_action_campaigns", 0)
+        )
+        open_review_queues["ichiban_metadata_queued_catalog_item_rows"] = (
+            ichiban_kuji_metadata_action_queue_summary.get("queued_catalog_item_rows", 0)
         )
     if metadata_action_queue_summary:
         open_review_queues["metadata_action_missing_cells"] = metadata_action_queue_summary.get(
@@ -3716,6 +3735,15 @@ def validate_report_consistency(
     if ichiban_action_summary:
         expected_open_queues["ichiban_metadata_action_campaigns"] = ichiban_action_summary.get(
             "queued_action_campaigns", 0
+        )
+        expected_open_queues["ichiban_metadata_actionable_campaigns"] = ichiban_action_summary.get(
+            "actionable_campaigns", 0
+        )
+        expected_open_queues["ichiban_metadata_unqueued_action_campaigns"] = ichiban_action_summary.get(
+            "unqueued_action_campaigns", 0
+        )
+        expected_open_queues["ichiban_metadata_queued_catalog_item_rows"] = ichiban_action_summary.get(
+            "queued_catalog_item_rows", 0
         )
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     dedupe_action_summary = dedupe_action_queue.get("summary", {})

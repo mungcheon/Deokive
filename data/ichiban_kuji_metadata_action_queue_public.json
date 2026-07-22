@@ -1,10 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:45:34Z",
+  "generated_at": "2026-07-22T00:47:21Z",
   "scope": "ichiban_kuji_metadata_action_queue",
   "summary": {
     "actionable_campaigns": 44,
     "queued_action_campaigns": 32,
+    "unqueued_action_campaigns": 12,
+    "campaign_queue_coverage": 0.7273,
     "queued_catalog_item_rows": 260,
     "action_batch_count": 4,
     "batch_size": 8,
@@ -56,6 +58,16 @@
         ]
       ],
       "missing_field_counts": [
+        [
+          "official_price_jpy",
+          6
+        ],
+        [
+          "release_date",
+          2
+        ]
+      ],
+      "field_patch_template_counts": [
         [
           "official_price_jpy",
           6
@@ -633,6 +645,12 @@
           8
         ]
       ],
+      "field_patch_template_counts": [
+        [
+          "official_price_jpy",
+          8
+        ]
+      ],
       "review_state": "manual_official_campaign_metadata_confirmation_required",
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "recommended_action": "Confirm labeled official 1kuji release dates and draw prices, then fill campaign patch templates.",
@@ -1186,6 +1204,12 @@
         ]
       ],
       "missing_field_counts": [
+        [
+          "official_price_jpy",
+          8
+        ]
+      ],
+      "field_patch_template_counts": [
         [
           "official_price_jpy",
           8
@@ -1762,6 +1786,12 @@
         ]
       ],
       "missing_field_counts": [
+        [
+          "official_price_jpy",
+          8
+        ]
+      ],
+      "field_patch_template_counts": [
         [
           "official_price_jpy",
           8

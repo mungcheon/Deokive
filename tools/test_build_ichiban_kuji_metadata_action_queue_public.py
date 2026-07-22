@@ -47,8 +47,14 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["actionable_campaigns"], 2)
         self.assertEqual(report["summary"]["queued_action_campaigns"], 2)
+        self.assertEqual(report["summary"]["unqueued_action_campaigns"], 0)
+        self.assertEqual(report["summary"]["campaign_queue_coverage"], 1.0)
         self.assertEqual(report["summary"]["queued_catalog_item_rows"], 20)
         self.assertEqual(dict(report["summary"]["field_patch_template_counts"]), {"official_price_jpy": 1, "release_date": 1})
+        self.assertEqual(
+            dict(report["batches"][0]["field_patch_template_counts"]),
+            {"release_date": 1, "official_price_jpy": 1},
+        )
         self.assertEqual([row["slug"] for row in report["batches"][0]["campaigns"]], ["release", "price"])
         self.assertEqual(
             report["batches"][0]["review_state"],
@@ -77,6 +83,8 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["actionable_campaigns"], 3)
         self.assertEqual(report["summary"]["queued_action_campaigns"], 2)
+        self.assertEqual(report["summary"]["unqueued_action_campaigns"], 1)
+        self.assertEqual(report["summary"]["campaign_queue_coverage"], 0.6667)
         self.assertEqual(report["summary"]["action_batch_count"], 2)
 
 

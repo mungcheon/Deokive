@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T00:45:29Z",
+  "generated_at": "2026-07-22T00:48:08Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -37,6 +37,9 @@
       "image_attachment_actionable_rows": 73,
       "image_attachment_unqueued_actionable_rows": 48,
       "ichiban_metadata_action_campaigns": 32,
+      "ichiban_metadata_actionable_campaigns": 44,
+      "ichiban_metadata_unqueued_action_campaigns": 12,
+      "ichiban_metadata_queued_catalog_item_rows": 260,
       "metadata_action_missing_cells": 1362,
       "animation_category_review_rows": 428,
       "animation_category_action_rows": 428,
@@ -229,6 +232,10 @@
       "workstream": "ichiban_kuji_metadata_action_queue",
       "status": "manual_review",
       "open_rows": 32,
+      "actionable_campaigns": 44,
+      "unqueued_action_campaigns": 12,
+      "campaign_queue_coverage": 0.7273,
+      "queued_catalog_item_rows": 260,
       "primary_report": "data/ichiban_kuji_metadata_action_queue_public.json",
       "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "auto_apply_enabled": false
@@ -1058,10 +1065,23 @@
       "priority": 53,
       "workstream": "ichiban_kuji_metadata_action_queue",
       "public_report": "data/ichiban_kuji_metadata_action_queue_public.json",
+      "actionable_campaigns": 44,
       "queued_action_campaigns": 32,
+      "unqueued_action_campaigns": 12,
+      "campaign_queue_coverage": 0.7273,
       "queued_catalog_item_rows": 260,
       "action_batch_count": 4,
-      "recommended_next_action": "Work confirmed official 1kuji campaign metadata templates before broader historical research."
+      "field_patch_template_counts": [
+        [
+          "official_price_jpy",
+          42
+        ],
+        [
+          "release_date",
+          2
+        ]
+      ],
+      "recommended_next_action": "Work queued 1kuji metadata templates, then expand remaining actionable campaigns."
     },
     {
       "priority": 60,
