@@ -541,14 +541,14 @@ def build_source_discovery_public(items: list[dict[str, Any]], sample_rows: int 
 
 def metadata_action(field: str) -> str:
     if field in {"source_url", "image_url"}:
-        return "find exact official product page and attach source_url/image_url together"
+        return "Find exact official product page and attach source_url/image_url together."
     if field in {"release_date", "official_price_jpy"}:
-        return "verify official detail page metadata before importing"
+        return "Verify official release/sale dates or stated JPY prices before importing."
     if field == "barcode":
-        return "fill only when barcode is shown by official or trusted retailer data"
+        return "Fill only when barcode is shown by official or trusted retailer data."
     if field == "name_ja":
-        return "verify original Japanese product title from official listing"
-    return "manual review required"
+        return "Verify original Japanese product titles from official listings."
+    return "Manual review required."
 
 
 def metadata_evidence_policy(field: str) -> dict[str, Any]:
@@ -692,6 +692,145 @@ def build_metadata_backlog_public(items: list[dict[str, Any]], sample_groups: in
             "Do not infer dates, prices, barcodes, or names without official or trusted source evidence.",
         ],
         "groups": groups,
+    }
+
+
+def metadata_review_workflow(field: str) -> str:
+    workflows = {
+        "source_url": "source_url_discovery",
+        "image_url": "source_then_image_import",
+        "release_date": "official_metadata_review",
+        "official_price_jpy": "official_metadata_review",
+        "barcode": "barcode_evidence_review",
+        "name_ja": "official_title_review",
+    }
+    return workflows.get(field, "manual_evidence_review")
+
+
+def metadata_review_priority(field: str) -> int:
+    priorities = {
+        "source_url": 10,
+        "image_url": 20,
+        "release_date": 30,
+        "official_price_jpy": 40,
+        "barcode": 50,
+        "name_ja": 60,
+    }
+    return priorities.get(field, 90)
+
+
+def build_metadata_review_batches_public(
+    items: list[dict[str, Any]],
+    generated_at: str,
+    *,
+    batch_size: int = 12,
+) -> dict[str, Any]:
+    tracked_fields = [
+        "name_ja",
+        "barcode",
+        "release_date",
+        "image_url",
+        "source_url",
+        "official_price_jpy",
+    ]
+    by_field_store: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    field_totals: Counter[str] = Counter()
+    store_totals: Counter[str] = Counter()
+
+    for item in items:
+        store = str(item.get("source_store") or "unknown")
+        for field in tracked_fields:
+            if present(item.get(field)):
+                continue
+            field_totals[field] += 1
+            store_totals[store] += 1
+            by_field_store[(field, store)].append(item)
+
+    groups: list[dict[str, Any]] = []
+    for (field, store), group_items in by_field_store.items():
+        policy = metadata_evidence_policy(field)
+        samples = group_items[:8]
+        groups.append(
+            {
+                "field": field,
+                "source_store": store,
+                "missing_rows": len(group_items),
+                "priority": metadata_review_priority(field),
+                "workflow": metadata_review_workflow(field),
+                "evidence_required": policy["evidence_required"],
+                "next_machine_step": policy["next_step"],
+                "risk": policy["risk"],
+                "recommended_action": metadata_action(field),
+                "sample_catalog_indexes": [item.get("catalog_index") for item in samples],
+                "sample_items": [
+                    {
+                        "catalog_index": item.get("catalog_index"),
+                        "name_ko": item.get("name_ko"),
+                        "name_ja": item.get("name_ja"),
+                        "series_name": item.get("series_name"),
+                        "category": item.get("category"),
+                        "source_url": item.get("source_url"),
+                        "image_url": item.get("image_url"),
+                    }
+                    for item in samples
+                ],
+            }
+        )
+
+    groups.sort(
+        key=lambda row: (
+            int(row["priority"]),
+            -int(row["missing_rows"]),
+            str(row["field"]),
+            str(row["source_store"]),
+        )
+    )
+
+    batches: list[dict[str, Any]] = []
+    for offset in range(0, len(groups), batch_size):
+        chunk = groups[offset : offset + batch_size]
+        field_counts = Counter(str(row.get("field") or "") for row in chunk)
+        workflow_counts = Counter(str(row.get("workflow") or "") for row in chunk)
+        batches.append(
+            {
+                "batch_id": f"metadata-review-{len(batches) + 1:03d}",
+                "priority": min(int(row.get("priority") or 99) for row in chunk),
+                "group_count": len(chunk),
+                "missing_cell_count": sum(int(row.get("missing_rows") or 0) for row in chunk),
+                "field_counts": field_counts.most_common(),
+                "workflow_counts": workflow_counts.most_common(),
+                "review_state": "metadata_evidence_required",
+                "next_machine_step": "collect_official_metadata_evidence",
+                "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+                "groups": chunk,
+                "auto_apply_enabled": False,
+            }
+        )
+
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "summary": {
+            "catalog_rows": len(items),
+            "tracked_fields": tracked_fields,
+            "field_store_group_count": len(groups),
+            "batch_count": len(batches),
+            "batch_size": batch_size,
+            "missing_cell_count": sum(field_totals.values()),
+            "field_missing_totals": dict(field_totals),
+            "top_source_stores_with_missing_metadata": store_totals.most_common(40),
+            "auto_apply_enabled": False,
+        },
+        "instructions": [
+            "Review batches are regenerated from data/catalog_public.json so stale field/store bottlenecks do not linger.",
+            "Use exact official or trusted source evidence before filling metadata patches.",
+            "Do not infer Japanese titles, dates, prices, barcodes, source URLs, or images from translated names alone.",
+        ],
+        "batches": batches,
+        "automation_policy": {
+            "auto_apply_metadata": False,
+            "requires_manual_review": True,
+        },
     }
 
 
@@ -1309,6 +1448,8 @@ def build_operations_public(
     generic_source_patch_candidates: dict[str, Any],
     requested_focus: dict[str, Any],
     danganronpa_missing_media: dict[str, Any],
+    metadata_review_batches_override: dict[str, Any] | None = None,
+    metadata_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -1358,9 +1499,17 @@ def build_operations_public(
     )
     ichiban_kuji_metadata_action_queue_summary = ichiban_kuji_metadata_action_queue.get("summary", {})
     metadata_summary = metadata_backlog["summary"]
-    metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
+    metadata_review_batches = (
+        metadata_review_batches_override
+        if metadata_review_batches_override is not None
+        else load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
+    )
     metadata_review_batches_summary = metadata_review_batches.get("summary", {})
-    metadata_action_queue = load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
+    metadata_action_queue = (
+        metadata_action_queue_override
+        if metadata_action_queue_override is not None
+        else load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
+    )
     metadata_action_queue_summary = metadata_action_queue.get("summary", {})
     confirmed_import_readiness = (
         load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
@@ -2208,6 +2357,8 @@ def build_agent_work_queue_public(
     operations: dict[str, Any],
     requested_focus: dict[str, Any],
     danganronpa_missing_media: dict[str, Any],
+    metadata_review_batches_override: dict[str, Any] | None = None,
+    metadata_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -2228,8 +2379,16 @@ def build_agent_work_queue_public(
         load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
     )
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
-    metadata_review_batches = load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
-    metadata_action_queue = load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
+    metadata_review_batches = (
+        metadata_review_batches_override
+        if metadata_review_batches_override is not None
+        else load_json(METADATA_REVIEW_BATCHES, {}) if METADATA_REVIEW_BATCHES.exists() else {}
+    )
+    metadata_action_queue = (
+        metadata_action_queue_override
+        if metadata_action_queue_override is not None
+        else load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
+    )
     confirmed_import_readiness = (
         load_json(CONFIRMED_IMPORT_READINESS, {}) if CONFIRMED_IMPORT_READINESS.exists() else {}
     )
@@ -4200,6 +4359,10 @@ def update_reports(write: bool) -> dict[str, Any]:
     generated_at = now_utc()
     source_discovery = build_source_discovery_public(items)
     metadata_backlog = build_metadata_backlog_public(items)
+    metadata_review_batches = build_metadata_review_batches_public(items, generated_at)
+    from build_metadata_action_queue_public import build_report as build_metadata_action_queue_report
+
+    metadata_action_queue = build_metadata_action_queue_report(metadata_review_batches)
     image_enrichment_batches = build_image_enrichment_batches_public(items)
     deduplication = build_deduplication_public(items)
     animation_categories = build_animation_categories_public(items)
@@ -4229,6 +4392,8 @@ def update_reports(write: bool) -> dict[str, Any]:
         generic_source_patch_candidates,
         requested_focus,
         danganronpa_missing_media,
+        metadata_review_batches,
+        metadata_action_queue,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -4241,6 +4406,8 @@ def update_reports(write: bool) -> dict[str, Any]:
         operations,
         requested_focus,
         danganronpa_missing_media,
+        metadata_review_batches,
+        metadata_action_queue,
     )
 
     public_meta = load_json(PUBLIC_META, {})
@@ -4456,6 +4623,8 @@ def update_reports(write: bool) -> dict[str, Any]:
     if write:
         write_json(SOURCE_DISCOVERY, source_discovery)
         write_json(METADATA_BACKLOG, metadata_backlog)
+        write_json(METADATA_REVIEW_BATCHES, metadata_review_batches)
+        write_json(METADATA_ACTION_QUEUE, metadata_action_queue)
         write_json(IMAGE_ENRICHMENT_BATCHES, image_enrichment_batches)
         write_json(DEDUPLICATION, deduplication)
         write_json(ANIMATION_CATEGORIES, animation_categories)
@@ -4490,6 +4659,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_ACTION_QUEUE.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
+            str(METADATA_REVIEW_BATCHES.relative_to(ROOT)),
             str(METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(CONFIRMED_IMPORT_READINESS.relative_to(ROOT)),
             str(EXECUTION_PLAN.relative_to(ROOT)),

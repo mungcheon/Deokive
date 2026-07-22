@@ -7,6 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import update_public_catalog_reports as reports
+from build_metadata_action_queue_public import build_report as build_metadata_action_queue_report
 
 
 class PublicCatalogReportTests(unittest.TestCase):
@@ -26,6 +27,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/requested_focus_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_confirmed_import_readiness_public.json", updated_files)
         self.assertIn("data/catalog_execution_plan_public.json", updated_files)
+        self.assertIn("data/catalog_metadata_review_batches_public.json", updated_files)
+        self.assertIn("data/catalog_metadata_action_queue_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
 
@@ -389,6 +392,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             metadata_scorecard.get("top_action_groups"),
             metadata_action_summary.get("top_action_groups"),
+        )
+        catalog_items = reports.load_json(reports.PUBLIC_CATALOG).get("items", [])
+        metadata_review = reports.build_metadata_review_batches_public(catalog_items, "2026-01-01T00:00:00Z")
+        rebuilt_metadata_action = build_metadata_action_queue_report(metadata_review)
+        rebuilt_field_cells = [
+            list(row) for row in rebuilt_metadata_action.get("summary", {}).get("missing_cells_by_field", [])
+        ]
+        self.assertEqual(
+            rebuilt_field_cells,
+            metadata_action_summary.get("missing_cells_by_field"),
         )
         self.assertEqual(
             metadata_next_action.get("unqueued_actionable_missing_cells"),

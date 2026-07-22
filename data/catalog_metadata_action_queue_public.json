@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T02:45:27Z",
+  "generated_at": "2026-07-22T02:54:58Z",
   "scope": "catalog_metadata_action_queue",
   "summary": {
     "actionable_group_count": 166,
@@ -381,7 +381,7 @@
         "missing_rows": 365,
         "priority": 20,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official stated JPY prices before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "release_date",
@@ -389,7 +389,7 @@
         "missing_rows": 227,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "release_date",
@@ -397,7 +397,7 @@
         "missing_rows": 191,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "release_date",
@@ -405,7 +405,7 @@
         "missing_rows": 114,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "official_price_jpy",
@@ -413,7 +413,7 @@
         "missing_rows": 100,
         "priority": 20,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official stated JPY prices before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "name_ja",
@@ -429,7 +429,7 @@
         "missing_rows": 95,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "release_date",
@@ -437,7 +437,7 @@
         "missing_rows": 84,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "name_ja",
@@ -453,7 +453,7 @@
         "missing_rows": 74,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "name_ja",
@@ -477,7 +477,7 @@
         "missing_rows": 50,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "release_date",
@@ -485,7 +485,7 @@
         "missing_rows": 39,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "release_date",
@@ -493,7 +493,7 @@
         "missing_rows": 34,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "name_ja",
@@ -509,7 +509,7 @@
         "missing_rows": 32,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "release_date",
@@ -517,7 +517,7 @@
         "missing_rows": 26,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
         "field": "release_date",
@@ -525,7 +525,7 @@
         "missing_rows": 24,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "recommended_action": "Verify official release/sale dates before importing."
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       }
     ],
     "excluded_field_missing_cells": [
@@ -680,8 +680,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             920,
             921,
@@ -798,8 +798,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1024,
             1025,
@@ -916,8 +916,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1137,
             1138,
@@ -1034,8 +1034,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2324,
             2325,
@@ -1152,8 +1152,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1179,
             1180,
@@ -1270,8 +1270,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1621,
             1622,
@@ -1388,8 +1388,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1158,
             1159,
@@ -1506,8 +1506,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             934,
             935,
@@ -1624,8 +1624,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1167,
             1168,
@@ -1742,8 +1742,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2272,
             17596,
@@ -1860,8 +1860,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1160,
             1161,
@@ -1978,8 +1978,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1291,
             1292,
@@ -2221,8 +2221,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             398,
             399,
@@ -2339,8 +2339,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2328,
             2329,
@@ -2457,8 +2457,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2474,
             17628,
@@ -2575,8 +2575,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1841,
             1842,
@@ -2693,8 +2693,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1169,
             1322,
@@ -2811,8 +2811,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             14193,
             14194,
@@ -2929,8 +2929,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1098,
             1099,
@@ -3047,8 +3047,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             999,
             1000,
@@ -3165,8 +3165,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2204,
             2205,
@@ -3283,8 +3283,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             972,
             973,
@@ -3401,8 +3401,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1631,
             1637,
@@ -3519,8 +3519,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1015,
             1016,
@@ -3762,8 +3762,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             631,
             632,
@@ -3880,8 +3880,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2279,
             2280,
@@ -3998,8 +3998,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1195,
             1196,
@@ -4116,8 +4116,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1026,
             1027,
@@ -4234,8 +4234,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2273,
             2274,
@@ -4352,8 +4352,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             276,
             277,
@@ -4470,8 +4470,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2341,
             2342,
@@ -4588,8 +4588,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1181,
             1182,
@@ -4706,8 +4706,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2286,
             2287,
@@ -4824,8 +4824,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1124,
             1125,
@@ -4942,8 +4942,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1400,
             1401,
@@ -5060,8 +5060,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1790,
             1791,
@@ -5303,8 +5303,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             987,
             988,
@@ -5410,8 +5410,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1091,
             1092,
@@ -5517,8 +5517,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             994,
             995,
@@ -5602,8 +5602,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2337,
             2338,
@@ -5676,8 +5676,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17812,
             17813,
@@ -5750,8 +5750,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1261,
             1262,
@@ -5824,8 +5824,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1108,
             1109,
@@ -5898,8 +5898,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2319,
             2320,
@@ -5972,8 +5972,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1274,
             1275,
@@ -6035,8 +6035,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1835,
             1836,
@@ -6098,8 +6098,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2283,
             2284,
@@ -6161,8 +6161,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17819,
             17926,
@@ -6349,8 +6349,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2316,
             2317,
@@ -6412,8 +6412,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2018,
             2019,
@@ -6475,8 +6475,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2475,
             2476,
@@ -6538,8 +6538,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2487,
             2488
@@ -6590,8 +6590,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1563,
             1566
@@ -6642,8 +6642,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2478,
             2479
@@ -6694,8 +6694,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2289,
             2290
@@ -6746,8 +6746,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1437,
             1440
@@ -6798,8 +6798,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2304,
             2305
@@ -6850,8 +6850,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2302,
             2303
@@ -6902,8 +6902,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17822,
             17823
@@ -6954,8 +6954,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1441,
             1442
@@ -7131,8 +7131,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2415,
             2421
@@ -7183,8 +7183,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1479,
             1480
@@ -7235,8 +7235,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2323,
             2466
@@ -7287,8 +7287,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2322,
             2465
@@ -7339,8 +7339,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1443
           ],
@@ -7380,8 +7380,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2125
           ],
@@ -7421,8 +7421,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17821
           ],
@@ -7462,8 +7462,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1808
           ],
@@ -7503,8 +7503,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17827
           ],
@@ -7544,8 +7544,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2270
           ],
@@ -7585,8 +7585,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2472
           ],
@@ -7626,8 +7626,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2391
           ],
@@ -7800,8 +7800,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2267
           ],
@@ -7841,8 +7841,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2266
           ],
@@ -7882,8 +7882,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2469
           ],
@@ -7923,8 +7923,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2268
           ],
@@ -7964,8 +7964,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2269
           ],
@@ -8005,8 +8005,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1264
           ],
@@ -8046,8 +8046,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17925
           ],
@@ -8087,8 +8087,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2468
           ],
@@ -8128,8 +8128,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2047
           ],
@@ -8169,8 +8169,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17811
           ],
@@ -8210,8 +8210,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
           "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2271
           ],
@@ -8251,8 +8251,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             14329,
             14330,
@@ -8494,8 +8494,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2324,
             2325,
@@ -8612,8 +8612,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             1841,
             1842,
@@ -8730,8 +8730,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             972,
             973,
@@ -8848,8 +8848,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             631,
             632,
@@ -8966,8 +8966,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             987,
             988,
@@ -9073,8 +9073,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2400,
             2449,
@@ -9158,8 +9158,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             994,
             995,
@@ -9243,8 +9243,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17812,
             17813,
@@ -9317,8 +9317,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2319,
             2320,
@@ -9391,8 +9391,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17853,
             17867,
@@ -9454,8 +9454,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17815,
             17869,
@@ -9517,8 +9517,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17819,
             17926,
@@ -9705,8 +9705,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17851,
             17852
@@ -9757,8 +9757,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17822,
             17823
@@ -9809,8 +9809,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2415,
             2421
@@ -9861,8 +9861,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2480,
             2481
@@ -9913,8 +9913,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17817,
             17924
@@ -9965,8 +9965,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2467,
             2470
@@ -10017,8 +10017,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2323,
             2466
@@ -10069,8 +10069,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17857,
             17858
@@ -10121,8 +10121,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17824,
             17932
@@ -10173,8 +10173,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2322,
             2465
@@ -10225,8 +10225,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17854
           ],
@@ -10266,8 +10266,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17820
           ],
@@ -10432,8 +10432,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17821
           ],
@@ -10473,8 +10473,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17827
           ],
@@ -10514,8 +10514,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17818
           ],
@@ -10555,8 +10555,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17848
           ],
@@ -10596,8 +10596,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17816
           ],
@@ -10637,8 +10637,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2291
           ],
@@ -10678,8 +10678,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2472
           ],
@@ -10719,8 +10719,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2311
           ],
@@ -10760,8 +10760,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2288
           ],
@@ -10801,8 +10801,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17825
           ],
@@ -10842,8 +10842,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2469
           ],
@@ -10883,8 +10883,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17925
           ],
@@ -11057,8 +11057,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2468
           ],
@@ -11098,8 +11098,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17810
           ],
@@ -11139,8 +11139,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             17811
           ],
@@ -11180,8 +11180,8 @@
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
           "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official stated JPY prices before importing.",
-          "next_machine_step": "collect_official_metadata_evidence",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "next_machine_step": "official_metadata_extraction",
           "sample_catalog_indexes": [
             2471
           ],
@@ -11222,7 +11222,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1,
             2,
@@ -11340,7 +11340,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2324,
             2325,
@@ -11458,7 +11458,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             180,
             181,
@@ -11576,7 +11576,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1024,
             1025,
@@ -11694,7 +11694,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             47,
             48,
@@ -11812,7 +11812,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2272,
             2291,
@@ -11930,7 +11930,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             17628,
             17629,
@@ -12048,7 +12048,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2489,
             2490,
@@ -12291,7 +12291,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2279,
             2280,
@@ -12409,7 +12409,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2329,
             2330,
@@ -12527,7 +12527,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2273,
             2274,
@@ -12645,7 +12645,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1027,
             1028,
@@ -12763,7 +12763,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2286,
             2287,
@@ -12881,7 +12881,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             276,
             277,
@@ -12999,7 +12999,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1125,
             1126,
@@ -13117,7 +13117,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1017,
             1018,
@@ -13224,7 +13224,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1104,
             1105,
@@ -13331,7 +13331,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1092,
             1093,
@@ -13427,7 +13427,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2400,
             2449,
@@ -13512,7 +13512,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2337,
             2338,
@@ -13711,7 +13711,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1108,
             1109,
@@ -13785,7 +13785,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2319,
             2320,
@@ -13859,7 +13859,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2484,
             2485,
@@ -13922,7 +13922,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2342,
             2344,
@@ -13985,7 +13985,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2283,
             2284,
@@ -14048,7 +14048,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2316,
             2317,
@@ -14111,7 +14111,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2487,
             2488
@@ -14163,7 +14163,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2289,
             2290
@@ -14215,7 +14215,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2304,
             2305
@@ -14267,7 +14267,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2302,
             2303
@@ -14319,7 +14319,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2415,
             2421
@@ -14371,7 +14371,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2467,
             2470
@@ -14532,7 +14532,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2323,
             2466
@@ -14584,7 +14584,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2322,
             2465
@@ -14636,7 +14636,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2476,
             2477
@@ -14688,7 +14688,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2479
           ],
@@ -14729,7 +14729,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2472
           ],
@@ -14770,7 +14770,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2288
           ],
@@ -14811,7 +14811,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2469
           ],
@@ -14852,7 +14852,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2468
           ],
@@ -14893,7 +14893,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             1014
           ],
@@ -14934,7 +14934,7 @@
           "evidence_required": "original Japanese title from official or trusted listing",
           "risk": "translated_or_inferred_title",
           "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "collect_official_title_evidence",
+          "next_machine_step": "official_title_review",
           "sample_catalog_indexes": [
             2471
           ],
