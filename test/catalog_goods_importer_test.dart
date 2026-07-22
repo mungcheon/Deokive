@@ -7,19 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('catalog entry import creates an owned goods item in the target folder',
+  test(
+      'catalog entry import creates an unopened owned item in the target folder',
       () {
     final appState = AppState();
     final folder = FolderItem(
       id: 'top-folder',
-      name: '대표 굿즈',
+      name: '대표 굿즈함',
       icon: Icons.folder_rounded,
       color: Colors.blue,
     );
     final entry = GoodsCatalogEntry(
-      nameKo: '이치방쿠지 샘플 - A상 피규어',
-      nameJa: '一番くじ サンプル - A賞 フィギュア',
-      category: '피규어',
+      nameKo: '이치방쿠지 샘플 - A상 인형',
+      nameJa: '一番くじ サンプル - A賞 ぬいぐるみ',
+      category: '인형',
       characterName: '샘플 캐릭터',
       affiliation: '샘플 작품',
       seriesName: '이치방쿠지 샘플',
@@ -39,7 +40,7 @@ void main() {
 
     expect(item.folderId, folder.id);
     expect(item.name, entry.nameKo);
-    expect(item.category, '피규어');
+    expect(item.category, '인형');
     expect(item.kind, 'A상');
     expect(item.quantity, 1);
     expect(item.officialPrice, 790);
@@ -65,7 +66,7 @@ void main() {
     appState.setDisplayCurrency(Currency.krw);
     final folder = FolderItem(
       id: 'top-folder',
-      name: '???援우쫰',
+      name: '대표 굿즈함',
       icon: Icons.folder_rounded,
       color: Colors.blue,
     );
@@ -93,7 +94,7 @@ void main() {
     final appState = AppState();
     final folder = FolderItem(
       id: 'top-folder',
-      name: '대표 굿즈',
+      name: '대표 굿즈함',
       icon: Icons.folder_rounded,
       color: Colors.blue,
     );
@@ -141,13 +142,13 @@ void main() {
     );
     const topFolder = FolderItem(
       id: 'top-folder',
-      name: '대표 굿즈',
+      name: '대표 굿즈함',
       icon: Icons.folder_rounded,
       color: Colors.blue,
     );
     const childFolder = FolderItem(
       id: 'child-folder',
-      name: '하위 굿즈',
+      name: '하위 굿즈함',
       icon: Icons.inventory_2_rounded,
       color: Colors.green,
       parentId: 'group-folder',

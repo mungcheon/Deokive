@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -141,7 +141,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
   final folders = _sortedImportTargetFolders(appState, initialFolder);
   if (folders.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('먼저 굿즈를 담을 폴더를 만들어 주세요.')),
+      const SnackBar(content: Text('먼저 굿즈를 넣을 폴더를 만들어 주세요.')),
     );
     return null;
   }
