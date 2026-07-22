@@ -186,6 +186,8 @@ def _build_plan(load_report) -> dict[str, Any]:
     public_action_queue_rows = _count(confirmed_summary, "public_action_queue_rows")
     public_action_queue_batches = _count(confirmed_summary, "public_action_queue_batches")
     confirmation_rows = template_items + public_action_queue_rows
+    manual_confirmed_ready_rows = _count(confirmed_summary, "manual_confirmed_true")
+    manual_confirmation_backlog_rows = max(confirmation_rows - manual_confirmed_ready_rows, 0)
     actions.append(
         _action(
             priority=5,
@@ -205,6 +207,8 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "public_action_queue_rows": public_action_queue_rows,
                 "public_action_queue_batches": public_action_queue_batches,
                 "ready_or_pending_import_rows": pending_import_rows,
+                "manual_confirmed_ready_rows": manual_confirmed_ready_rows,
+                "manual_confirmation_backlog_rows": manual_confirmation_backlog_rows,
                 "blocked_confirmed_rows": blocked_confirmed_rows,
             },
         )
@@ -968,6 +972,13 @@ def _build_plan(load_report) -> dict[str, Any]:
             "pending_import_action_count": sum(1 for action in actions if action["status"] == "pending_import"),
             "total_action_rows": sum(int(action.get("rows") or 0) for action in actions),
             "open_review_queues": open_queues,
+            "confirmed_import_template_rows": template_items,
+            "confirmed_import_action_queue_rows": public_action_queue_rows,
+            "confirmed_import_action_queue_batches": public_action_queue_batches,
+            "confirmed_import_pending_rows": pending_import_rows,
+            "confirmed_import_manual_confirmed_ready_rows": manual_confirmed_ready_rows,
+            "confirmed_import_manual_confirmation_backlog_rows": manual_confirmation_backlog_rows,
+            "confirmed_import_blocked_confirmed_rows": blocked_confirmed_rows,
             "requested_focus_actionable_template_rows": requested_actionable_template_rows,
             "requested_focus_barcode_template_rows": requested_barcode_template_rows,
             "danganronpa_missing_media_rows": _count(danganronpa_media_summary, "missing_media_rows"),

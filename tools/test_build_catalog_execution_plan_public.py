@@ -363,6 +363,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertIn("manual_confirmed=true", first["blocker"])
         self.assertEqual(first["evidence"]["public_action_queue_rows"], 6)
         self.assertEqual(first["evidence"]["public_action_queue_batches"], 2)
+        self.assertEqual(first["evidence"]["manual_confirmed_ready_rows"], 0)
+        self.assertEqual(first["evidence"]["manual_confirmation_backlog_rows"], 9)
+        self.assertEqual(report["summary"]["confirmed_import_template_rows"], 3)
+        self.assertEqual(report["summary"]["confirmed_import_action_queue_rows"], 6)
+        self.assertEqual(report["summary"]["confirmed_import_action_queue_batches"], 2)
+        self.assertEqual(report["summary"]["confirmed_import_pending_rows"], 0)
+        self.assertEqual(report["summary"]["confirmed_import_manual_confirmed_ready_rows"], 0)
+        self.assertEqual(report["summary"]["confirmed_import_manual_confirmation_backlog_rows"], 9)
+        self.assertEqual(report["summary"]["confirmed_import_blocked_confirmed_rows"], 0)
         requested = next(
             action
             for action in report["actions"]
