@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T02:15:05Z",
+  "generated_at": "2026-07-22T02:19:30Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -143,6 +143,194 @@
       "actionable_source_rows": 642,
       "unqueued_actionable_source_rows": 0,
       "queue_coverage": 1.0,
+      "by_review_state": [
+        [
+          "official_search_review_required",
+          630
+        ],
+        [
+          "licensed_retailer_review_required",
+          12
+        ]
+      ],
+      "by_workflow": [
+        [
+          "official_search_url_available",
+          630
+        ],
+        [
+          "licensed_retailer_search_review",
+          12
+        ]
+      ],
+      "by_source_store": [
+        [
+          "애니메이트",
+          148
+        ],
+        [
+          "엔스카이",
+          142
+        ],
+        [
+          "굿스마일컴퍼니",
+          57
+        ],
+        [
+          "코토부키야",
+          44
+        ],
+        [
+          "Movic",
+          36
+        ],
+        [
+          "점프 캐릭터즈 스토어",
+          23
+        ],
+        [
+          "FuRyu",
+          21
+        ],
+        [
+          "Taito",
+          15
+        ],
+        [
+          "무기와라스토어",
+          15
+        ],
+        [
+          "치이카와 중국 팝업스토어",
+          15
+        ],
+        [
+          "귀멸의 칼날 공식",
+          13
+        ],
+        [
+          "AmiAmi",
+          12
+        ],
+        [
+          "Cospa",
+          11
+        ],
+        [
+          "반다이",
+          11
+        ],
+        [
+          "메가하우스",
+          9
+        ],
+        [
+          "MINISO 중국",
+          7
+        ],
+        [
+          "산리오",
+          6
+        ],
+        [
+          "JYP SHOP",
+          5
+        ],
+        [
+          "Re-ment",
+          5
+        ],
+        [
+          "치이카와샵 용산",
+          5
+        ],
+        [
+          "MINISO",
+          4
+        ],
+        [
+          "가샤폰",
+          4
+        ],
+        [
+          "디즈니 스토어",
+          4
+        ],
+        [
+          "이세계아이돌 공식 굿즈",
+          4
+        ],
+        [
+          "Bandai Premium",
+          3
+        ],
+        [
+          "SM STORE",
+          3
+        ],
+        [
+          "카도카와",
+          3
+        ],
+        [
+          "Phat! Company",
+          2
+        ],
+        [
+          "YG SELECT",
+          2
+        ],
+        [
+          "롯데웰푸드",
+          2
+        ],
+        [
+          "이세계아이돌 팝업스토어",
+          2
+        ],
+        [
+          "ALTER",
+          1
+        ],
+        [
+          "CUBE STORE",
+          1
+        ],
+        [
+          "Hobby Max International",
+          1
+        ],
+        [
+          "Hololive Production Official Shop",
+          1
+        ],
+        [
+          "IST STORE",
+          1
+        ],
+        [
+          "KQ FELLAZ",
+          1
+        ],
+        [
+          "SEGA",
+          1
+        ],
+        [
+          "STARSHIP STORE",
+          1
+        ],
+        [
+          "점프 숍",
+          1
+        ]
+      ],
+      "excluded_review_state_rows": [
+        [
+          "manual_official_research_required",
+          5
+        ]
+      ],
       "primary_report": "data/source_discovery_action_queue_public.json",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "auto_apply_enabled": false
@@ -170,6 +358,44 @@
       "actionable_image_rows": 73,
       "unqueued_actionable_image_rows": 0,
       "sample_queue_coverage": 1.0,
+      "by_workflow": [
+        [
+          "replace_generic_source_then_extract_image",
+          50
+        ],
+        [
+          "review_gotouchi_official_candidates",
+          23
+        ]
+      ],
+      "by_source_store": [
+        [
+          "Stellive Store",
+          45
+        ],
+        [
+          "ご当地ちいかわ 공식(API)",
+          23
+        ],
+        [
+          "Weverse Shop",
+          3
+        ],
+        [
+          "포켓몬 센터",
+          2
+        ]
+      ],
+      "excluded_workflow_rows": [
+        [
+          "find_source_then_extract_image",
+          642
+        ],
+        [
+          "manual_image_research",
+          5
+        ]
+      ],
       "primary_report": "data/catalog_image_attachment_action_queue_public.json",
       "next_step": "confirm_source_then_fill_image_url_templates",
       "auto_apply_enabled": false
@@ -951,6 +1177,44 @@
       "unqueued_actionable_image_rows": 0,
       "sample_queue_coverage": 1.0,
       "action_batch_count": 7,
+      "by_workflow": [
+        [
+          "replace_generic_source_then_extract_image",
+          50
+        ],
+        [
+          "review_gotouchi_official_candidates",
+          23
+        ]
+      ],
+      "by_source_store": [
+        [
+          "Stellive Store",
+          45
+        ],
+        [
+          "ご当地ちいかわ 공식(API)",
+          23
+        ],
+        [
+          "Weverse Shop",
+          3
+        ],
+        [
+          "포켓몬 센터",
+          2
+        ]
+      ],
+      "excluded_workflow_rows": [
+        [
+          "find_source_then_extract_image",
+          642
+        ],
+        [
+          "manual_image_research",
+          5
+        ]
+      ],
       "recommended_next_action": "Work the queued image sample, then expand the remaining actionable image rows with exact product evidence."
     },
     {
@@ -997,6 +1261,194 @@
       "unqueued_actionable_source_rows": 0,
       "queue_coverage": 1.0,
       "action_batch_count": 61,
+      "by_review_state": [
+        [
+          "official_search_review_required",
+          630
+        ],
+        [
+          "licensed_retailer_review_required",
+          12
+        ]
+      ],
+      "by_workflow": [
+        [
+          "official_search_url_available",
+          630
+        ],
+        [
+          "licensed_retailer_search_review",
+          12
+        ]
+      ],
+      "by_source_store": [
+        [
+          "애니메이트",
+          148
+        ],
+        [
+          "엔스카이",
+          142
+        ],
+        [
+          "굿스마일컴퍼니",
+          57
+        ],
+        [
+          "코토부키야",
+          44
+        ],
+        [
+          "Movic",
+          36
+        ],
+        [
+          "점프 캐릭터즈 스토어",
+          23
+        ],
+        [
+          "FuRyu",
+          21
+        ],
+        [
+          "Taito",
+          15
+        ],
+        [
+          "무기와라스토어",
+          15
+        ],
+        [
+          "치이카와 중국 팝업스토어",
+          15
+        ],
+        [
+          "귀멸의 칼날 공식",
+          13
+        ],
+        [
+          "AmiAmi",
+          12
+        ],
+        [
+          "Cospa",
+          11
+        ],
+        [
+          "반다이",
+          11
+        ],
+        [
+          "메가하우스",
+          9
+        ],
+        [
+          "MINISO 중국",
+          7
+        ],
+        [
+          "산리오",
+          6
+        ],
+        [
+          "JYP SHOP",
+          5
+        ],
+        [
+          "Re-ment",
+          5
+        ],
+        [
+          "치이카와샵 용산",
+          5
+        ],
+        [
+          "MINISO",
+          4
+        ],
+        [
+          "가샤폰",
+          4
+        ],
+        [
+          "디즈니 스토어",
+          4
+        ],
+        [
+          "이세계아이돌 공식 굿즈",
+          4
+        ],
+        [
+          "Bandai Premium",
+          3
+        ],
+        [
+          "SM STORE",
+          3
+        ],
+        [
+          "카도카와",
+          3
+        ],
+        [
+          "Phat! Company",
+          2
+        ],
+        [
+          "YG SELECT",
+          2
+        ],
+        [
+          "롯데웰푸드",
+          2
+        ],
+        [
+          "이세계아이돌 팝업스토어",
+          2
+        ],
+        [
+          "ALTER",
+          1
+        ],
+        [
+          "CUBE STORE",
+          1
+        ],
+        [
+          "Hobby Max International",
+          1
+        ],
+        [
+          "Hololive Production Official Shop",
+          1
+        ],
+        [
+          "IST STORE",
+          1
+        ],
+        [
+          "KQ FELLAZ",
+          1
+        ],
+        [
+          "SEGA",
+          1
+        ],
+        [
+          "STARSHIP STORE",
+          1
+        ],
+        [
+          "점프 숍",
+          1
+        ]
+      ],
+      "excluded_review_state_rows": [
+        [
+          "manual_official_research_required",
+          5
+        ]
+      ],
       "recommended_next_action": "Work queued official-search source URL batches, then expand remaining actionable source rows."
     },
     {

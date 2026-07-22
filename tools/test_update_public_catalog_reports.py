@@ -343,8 +343,20 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_action_summary.get("queue_coverage"),
         )
         self.assertEqual(
+            source_scorecard.get("by_review_state"),
+            source_action_summary.get("by_review_state"),
+        )
+        self.assertEqual(
+            source_scorecard.get("by_source_store"),
+            source_action_summary.get("by_source_store"),
+        )
+        self.assertEqual(
             source_next_action.get("unqueued_actionable_source_rows"),
             source_action_summary.get("unqueued_actionable_source_rows"),
+        )
+        self.assertEqual(
+            source_next_action.get("excluded_review_state_rows"),
+            source_action_summary.get("excluded_review_state_rows"),
         )
         self.assertEqual(
             open_queues.get("metadata_action_missing_cells"),
@@ -387,8 +399,20 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_action_summary.get("unqueued_actionable_image_rows"),
         )
         self.assertEqual(
+            image_scorecard.get("by_workflow"),
+            image_action_summary.get("by_workflow"),
+        )
+        self.assertEqual(
+            image_scorecard.get("excluded_workflow_rows"),
+            image_action_summary.get("excluded_workflow_rows"),
+        )
+        self.assertEqual(
             image_next_action.get("sample_queue_coverage"),
             image_action_summary.get("sample_queue_coverage"),
+        )
+        self.assertEqual(
+            image_next_action.get("by_source_store"),
+            image_action_summary.get("by_source_store"),
         )
         self.assertEqual(
             open_queues.get("dedupe_action_groups"),
