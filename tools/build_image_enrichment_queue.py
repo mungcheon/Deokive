@@ -207,6 +207,15 @@ def search_url(row: dict[str, Any]) -> str | None:
     return template.format(query=query)
 
 
+def row_identifier(row: dict[str, Any], fallback_index: int) -> int:
+    value = row.get("catalog_index")
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str) and value.strip().isdigit():
+        return int(value.strip())
+    return fallback_index
+
+
 def load_rows(path: Path) -> list[dict[str, Any]]:
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
     if isinstance(payload, dict) and isinstance(payload.get("items"), list):
@@ -231,7 +240,7 @@ def main() -> int:
             continue
         strategy = classify(row)
         item = {
-            "row_index": row_index,
+            "row_index": row_identifier(row, row_index),
             "name_ko": row.get("name_ko"),
             "name_ja": row.get("name_ja"),
             "name_en": row.get("name_en"),

@@ -73,6 +73,7 @@ jobs:
 
       - name: Build public review batches
         run: |
+          python tools/build_image_enrichment_queue.py --input data/catalog_public.json --json-output data/catalog_missing_image_work_queue_public.json --csv-output data/catalog_missing_image_work_queue_public.csv
           python tools/build_source_discovery_review_batches_public.py
           python tools/build_catalog_metadata_review_batches_public.py
           python tools/build_deduplication_review_batches_public.py
@@ -109,6 +110,8 @@ jobs:
             data/catalog_image_candidate_review_public.json \
             data/catalog_image_asset_audit_public.json \
             data/catalog_missing_image_priority_public.json \
+            data/catalog_missing_image_work_queue_public.json \
+            data/catalog_missing_image_work_queue_public.csv \
             data/catalog_image_enrichment_batches_public.json \
             data/source_discovery_queue_public.json \
             data/source_discovery_review_batches_public.json \
