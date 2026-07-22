@@ -66,7 +66,7 @@ def _compact_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     }
 
 
-def build_report(review_batches: dict[str, Any], *, max_rows: int = 240, batch_size: int = 20) -> dict[str, Any]:
+def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_size: int = 20) -> dict[str, Any]:
     action_items: list[dict[str, Any]] = []
     excluded_review_states = Counter()
     actionable_source_rows = 0
@@ -168,7 +168,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--max-rows", type=int, default=240)
+    parser.add_argument("--max-rows", type=int, default=1000)
     parser.add_argument("--batch-size", type=int, default=20)
     args = parser.parse_args()
 
