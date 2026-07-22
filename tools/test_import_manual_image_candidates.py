@@ -216,7 +216,7 @@ class ManualImageCandidateImportTests(unittest.TestCase):
         )
 
         self.assertEqual(result["updated"], [])
-        self.assertEqual(result["skipped"][0]["reason"], "candidate_title_mismatch")
+        self.assertEqual(result["skipped"][0]["reason"], "candidate_product_type_mismatch")
 
     def test_rejects_title_match_with_only_generic_goods_type_overlap(self):
         result = import_candidates(
@@ -287,7 +287,7 @@ class ManualImageCandidateImportTests(unittest.TestCase):
         )
 
         self.assertEqual(result["updated"], [])
-        self.assertEqual(result["skipped"][0]["reason"], "candidate_title_mismatch")
+        self.assertEqual(result["skipped"][0]["reason"], "candidate_product_type_mismatch")
 
     def test_rejects_candidate_title_with_different_goods_type(self):
         result = import_candidates(
@@ -311,7 +311,7 @@ class ManualImageCandidateImportTests(unittest.TestCase):
         )
 
         self.assertEqual(result["updated"], [])
-        self.assertEqual(result["skipped"][0]["reason"], "candidate_title_mismatch")
+        self.assertEqual(result["skipped"][0]["reason"], "candidate_product_type_mismatch")
 
     def test_rejects_korean_near_name_mismatch(self):
         result = import_candidates(

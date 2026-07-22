@@ -198,10 +198,10 @@ def _product_type_markers(value: Any) -> set[str]:
     }
 
 
-def _candidate_title_matches_row(candidate: dict[str, Any], row: dict[str, Any]) -> bool:
+def _candidate_title_mismatch_reason(candidate: dict[str, Any], row: dict[str, Any]) -> str | None:
     title = str(candidate.get("candidate_title") or "").strip()
     if not title:
-        return True
+        return None
     title_tokens = _tokens(title)
     row_name_tokens = _tokens(row.get("name_ja")) | _tokens(row.get("name_ko"))
     row_tokens = row_name_tokens | _tokens(row.get("affiliation"))
@@ -213,14 +213,14 @@ def _candidate_title_matches_row(candidate: dict[str, Any], row: dict[str, Any])
     )
     title_type_markers = _product_type_markers(title)
     if row_type_markers and not (row_type_markers & title_type_markers):
-        return False
+        return "candidate_product_type_mismatch"
     if not title_tokens or not row_tokens:
-        return True
+        return None
     row_anniversary_tokens = {
         token for token in row_name_tokens if re.fullmatch(r"[\d０-９]+주년|[\d０-９]+周年", token)
     }
     if row_anniversary_tokens and not row_anniversary_tokens <= title_tokens:
-        return False
+        return "candidate_title_mismatch"
     shared = title_tokens & row_name_tokens
     distinctive_shared = {
         token
@@ -228,13 +228,19 @@ def _candidate_title_matches_row(candidate: dict[str, Any], row: dict[str, Any])
         if not _is_generic_title_token(token)
     }
     if distinctive_shared:
-        return True
+        return None
     title_text = "".join(title_tokens)
-    return any(
+    if any(
         token in title_text
         for token in row_name_tokens
         if len(token) >= 2 and not _is_generic_title_token(token)
-    )
+    ):
+        return None
+    return "candidate_title_mismatch"
+
+
+def _candidate_title_matches_row(candidate: dict[str, Any], row: dict[str, Any]) -> bool:
+    return _candidate_title_mismatch_reason(candidate, row) is None
 
 
 def _candidate_row_name_matches_current_seed(candidate: dict[str, Any], row: dict[str, Any]) -> bool:
@@ -454,16 +460,30 @@ def import_candidates(
                 )
                 continue
             candidate = {**candidate, "candidate_title": candidate.get("candidate_title") or live_title}
-        if not (
+        title_mismatch_reason = _candidate_title_mismatch_reason(candidate, row)
+        if (
             trust_manual_confirmed_title
             and candidate.get("manual_confirmed") is True
-        ) and not _candidate_title_matches_row(candidate, row):
+        ):
+            title_mismatch_reason = None
+        if title_mismatch_reason is not None:
             skipped.append(
                 {
                     "row_index": row_index,
-                    "reason": "candidate_title_mismatch",
+                    "reason": title_mismatch_reason,
                     "name_ko": row.get("name_ko"),
                     "candidate_title": candidate.get("candidate_title"),
+                    "row_product_type_markers": sorted(
+                        _product_type_markers(
+                            " ".join(
+                                str(row.get(field) or "")
+                                for field in ("name_ja", "name_ko", "category", "sub_series")
+                            )
+                        )
+                    ),
+                    "candidate_product_type_markers": sorted(
+                        _product_type_markers(candidate.get("candidate_title"))
+                    ),
                 }
             )
             continue
