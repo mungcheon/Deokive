@@ -1616,7 +1616,7 @@
         row.className = 'latest-owned-item';
         row.innerHTML = `
           <div class="latest-owned-thumb">
-            ${owned.item?.image_url ? `<img src="${escapeAttr(owned.item.image_url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'이미지 없음'}))">` : '<span>이미지 없음</span>'}
+            ${imageMarkup(owned.item, name)}
           </div>
           <div>
             <div class="latest-owned-name">${escapeHtml(name)}</div>
@@ -1676,6 +1676,7 @@
             sub_series: item.sub_series,
             official_price_jpy: item.official_price_jpy,
             image_url: item.image_url,
+            local_image_path: item.local_image_path,
             source_url: item.source_url,
             source_store: item.source_store,
             release_date: item.release_date,
@@ -1711,9 +1712,7 @@
       $('sheetName').textContent = name;
       $('sheetMeta').textContent = meta || '선택한 DB 정보가 내 기기에만 저장돼요';
       $('sheetFolder').value = $('ownedFolder').value || state.owned.folders[0]?.id || 'top';
-      $('sheetThumb').innerHTML = item.image_url
-        ? `<img src="${escapeAttr(item.image_url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'이미지 없음'}))">`
-        : '<span>이미지 없음</span>';
+      $('sheetThumb').innerHTML = imageMarkup(item, name);
       $('ownedSheet').classList.add('open');
       $('ownedSheet').setAttribute('aria-hidden', 'false');
     }
@@ -1776,7 +1775,7 @@
         card.innerHTML = `
           <div class="owned-card-top">
             <div class="owned-card-thumb">
-              ${owned.item?.image_url ? `<img src="${escapeAttr(owned.item.image_url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'이미지 없음'}))">` : '<span>이미지 없음</span>'}
+              ${imageMarkup(owned.item, name)}
             </div>
             <div>
               <div class="owned-card-name">${escapeHtml(name)}</div>
@@ -1856,7 +1855,7 @@
 
     function updateStats() {
       const rows = state.items.length;
-      const images = state.items.filter((item) => item.image_url).length;
+      const images = state.items.filter((item) => displayImageUrl(item)).length;
       const sources = state.items.filter((item) => item.source_url).length;
       const stores = new Set(state.items.map((item) => text(item.source_store)).filter(Boolean)).size;
       $('statRows').textContent = fmt.format(rows);
@@ -1889,6 +1888,21 @@
       return escapeHtml(value).replace(/`/g, '&#96;');
     }
 
+    function displayImageUrl(item) {
+      return text(item?.local_image_path || item?.image_url);
+    }
+
+    function imageMarkup(item, name, options = {}) {
+      const url = displayImageUrl(item);
+      const fallbackTag = options.fallbackTag || 'span';
+      const fallbackClass = options.fallbackClass ? ` class="${escapeAttr(options.fallbackClass)}"` : '';
+      const fallbackText = options.fallbackText || '이미지 없음';
+      if (!url) return `<${fallbackTag}${fallbackClass}>${escapeHtml(fallbackText)}</${fallbackTag}>`;
+      const loading = options.lazy ? ' loading="lazy"' : '';
+      const fallback = `Object.assign(document.createElement('${fallbackTag}'),{${options.fallbackClass ? `className:'${escapeAttr(options.fallbackClass)}',` : ''}textContent:'${escapeAttr(options.errorText || fallbackText)}'})`;
+      return `<img${loading} src="${escapeAttr(url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(${fallback})">`;
+    }
+
     function searchable(item) {
       return [
         item.name_ko,
@@ -1915,8 +1929,8 @@
         if (query && !item._search.includes(query)) return false;
         if (category !== 'all' && text(item.category) !== category) return false;
         if (store !== 'all' && text(item.source_store) !== store) return false;
-        if (image === 'with' && !item.image_url) return false;
-        if (image === 'missing' && item.image_url) return false;
+        if (image === 'with' && !displayImageUrl(item)) return false;
+        if (image === 'missing' && displayImageUrl(item)) return false;
         return true;
       });
       renderResults();
@@ -1953,7 +1967,7 @@
       card.innerHTML = `
         <div class="thumb">
           <div class="badge">${escapeHtml(item.category || '미분류')}</div>
-          ${item.image_url ? `<img loading="lazy" src="${escapeAttr(item.image_url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',textContent:'이미지 확인 필요'}))">` : '<div class="placeholder">이미지 없음</div>'}
+          ${imageMarkup(item, name, { lazy: true, fallbackTag: 'div', fallbackClass: 'placeholder', errorText: '이미지 확인 필요' })}
         </div>
         <div class="body">
           <h3 class="name">${escapeHtml(name)}</h3>
