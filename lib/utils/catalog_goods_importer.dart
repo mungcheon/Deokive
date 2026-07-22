@@ -247,6 +247,8 @@ GoodsItem goodsItemFromCatalogEntry({
   final officialPrice = entry.officialPriceJpy ?? entry.officialPriceKrw;
   final officialCurrency =
       entry.officialPriceJpy != null ? Currency.jpy : Currency.krw;
+  final paidCurrency =
+      officialPrice == null ? appState.displayCurrency : officialCurrency;
   final category = entry.normalizedCategory.trim().isEmpty
       ? '기타'
       : entry.normalizedCategory.trim();
@@ -262,7 +264,7 @@ GoodsItem goodsItemFromCatalogEntry({
     quantity: 1,
     officialPrice: officialPrice,
     paidPrice: officialPrice,
-    priceCurrencyCode: appState.displayCurrency.code,
+    priceCurrencyCode: paidCurrency.code,
     officialPriceCurrencyCode: officialCurrency.code,
     purchaseDate: null,
     isPreorder: false,
