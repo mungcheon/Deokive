@@ -876,6 +876,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(animation_action_summary.get("app_folder_color_count"), 188)
         self.assertEqual(animation_action_summary.get("app_folder_icon_option_count"), 211)
         self.assertTrue(animation_action_summary.get("app_folder_palette_sorted_by_family"))
+        animation_visual_catalog = animation_action.get("app_folder_visual_catalog") or {}
+        self.assertEqual(len(animation_visual_catalog.get("palette_color_families") or []), 8)
+        self.assertEqual(len(animation_visual_catalog.get("palette_picker_order") or []), 188)
         self.assertEqual(
             animation_scorecard.get("app_folder_color_count"),
             animation_action_summary.get("app_folder_color_count"),

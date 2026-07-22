@@ -386,6 +386,8 @@ def app_folder_visual_catalog_summary() -> dict[str, Any]:
         "unique_color_count": int(audit.get("unique_color_count") or 0),
         "palette_section_count": int(audit.get("palette_section_count") or 0),
         "palette_sections": audit.get("palette_sections") or [],
+        "palette_color_families": audit.get("palette_color_families") or [],
+        "palette_picker_order": audit.get("palette_picker_order") or [],
         "palette_sorted_by_family": bool(
             audit.get("palette_sort", {}).get("section_order_matches_expected")
             and audit.get("palette_sort", {}).get("section_order_monotonic")
