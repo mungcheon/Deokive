@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T10:55:36Z",
+  "generated_at": "2026-07-22T10:58:48Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 17,
@@ -68,6 +68,11 @@
     "dedupe_fast_review_same_source_url_groups": 38,
     "image_action_source_url_update_required_rows": 50,
     "image_action_image_url_ready_rows": 0,
+    "animation_split_review_categories": 3,
+    "animation_candidate_split_rules": 21,
+    "animation_split_matched_catalog_rows": 2283,
+    "animation_split_unmatched_catalog_rows": 2712,
+    "animation_unmatched_keyword_candidates": 49,
     "auto_apply_enabled": false
   },
   "actions": [
@@ -1005,7 +1010,13 @@
             "acrylic",
             1
           ]
-        ]
+        ],
+        "split_review_categories": 3,
+        "direct_mapping_categories": 0,
+        "candidate_split_rules": 21,
+        "matched_catalog_rows": 2283,
+        "unmatched_catalog_rows": 2712,
+        "unmatched_keyword_candidates": 49
       }
     },
     {
@@ -1020,7 +1031,12 @@
       "auto_apply_enabled": false,
       "evidence": {
         "batch_count": 1,
-        "folder_visual_token_count": 27
+        "folder_visual_token_count": 27,
+        "split_review_categories": 3,
+        "candidate_split_rules": 21,
+        "matched_catalog_rows": 2283,
+        "unmatched_catalog_rows": 2712,
+        "unmatched_keyword_candidates": 49
       }
     }
   ],

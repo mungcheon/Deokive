@@ -141,7 +141,22 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "queued_categories": 2,
                     "queued_catalog_rows": 12,
                     "action_batch_count": 1,
+                    "split_review_categories": 2,
+                    "direct_mapping_categories": 0,
                     "by_suggested_family": [["acrylic", 1], ["keyring", 1]],
+                }
+            },
+            "animation_category_split_review_public.json": {
+                "summary": {
+                    "split_review_categories": 2,
+                    "candidate_split_rules": 5,
+                    "matched_catalog_rows": 30,
+                    "unmatched_catalog_rows": 7,
+                }
+            },
+            "animation_category_unmatched_keyword_review_public.json": {
+                "summary": {
+                    "token_candidate_count": 4,
                 }
             },
             "catalog_confirmed_import_readiness_public.json": {
@@ -258,6 +273,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(animation_action["rows"], 12)
         self.assertEqual(animation_action["evidence"]["queued_categories"], 2)
+        self.assertEqual(animation_action["evidence"]["split_review_categories"], 2)
+        self.assertEqual(animation_action["evidence"]["candidate_split_rules"], 5)
+        self.assertEqual(animation_action["evidence"]["matched_catalog_rows"], 30)
+        self.assertEqual(animation_action["evidence"]["unmatched_keyword_candidates"], 4)
+        self.assertEqual(report["summary"]["animation_candidate_split_rules"], 5)
+        self.assertEqual(report["summary"]["animation_split_matched_catalog_rows"], 30)
+        self.assertEqual(report["summary"]["animation_unmatched_keyword_candidates"], 4)
 
     def test_pending_import_rows_are_prioritized(self) -> None:
         payloads = {

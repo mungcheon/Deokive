@@ -114,6 +114,8 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
     animation_batches = load_report("animation_category_review_batches_public.json")
     animation_action_queue = load_report("animation_category_action_queue_public.json")
+    animation_split_review = load_report("animation_category_split_review_public.json")
+    animation_unmatched_keywords = load_report("animation_category_unmatched_keyword_review_public.json")
     confirmed_readiness = load_report("catalog_confirmed_import_readiness_public.json")
 
     operations_summary = _summary(operations)
@@ -140,6 +142,8 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_policy_summary = _summary(kuji_policy)
     animation_summary = _summary(animation_batches)
     animation_action_summary = _summary(animation_action_queue)
+    animation_split_summary = _summary(animation_split_review)
+    animation_unmatched_summary = _summary(animation_unmatched_keywords)
     confirmed_summary = _summary(confirmed_readiness)
 
     actions: list[dict[str, Any]] = []
@@ -509,6 +513,11 @@ def _build_plan(load_report) -> dict[str, Any]:
             evidence={
                 "batch_count": _count(animation_summary, "batch_count"),
                 "folder_visual_token_count": _count(animation_summary, "folder_visual_token_count"),
+                "split_review_categories": _count(animation_split_summary, "split_review_categories"),
+                "candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
+                "matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
+                "unmatched_catalog_rows": _count(animation_split_summary, "unmatched_catalog_rows"),
+                "unmatched_keyword_candidates": _count(animation_unmatched_summary, "token_candidate_count"),
             },
         )
     )
@@ -529,6 +538,12 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "queued_catalog_rows": _count(animation_action_summary, "queued_catalog_rows"),
                 "action_batch_count": _count(animation_action_summary, "action_batch_count"),
                 "by_suggested_family": animation_action_summary.get("by_suggested_family", []),
+                "split_review_categories": _count(animation_action_summary, "split_review_categories"),
+                "direct_mapping_categories": _count(animation_action_summary, "direct_mapping_categories"),
+                "candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
+                "matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
+                "unmatched_catalog_rows": _count(animation_split_summary, "unmatched_catalog_rows"),
+                "unmatched_keyword_candidates": _count(animation_unmatched_summary, "token_candidate_count"),
             },
         )
     )
@@ -561,6 +576,13 @@ def _build_plan(load_report) -> dict[str, Any]:
                 image_action_summary, "source_url_update_required_rows"
             ),
             "image_action_image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
+            "animation_split_review_categories": _count(animation_split_summary, "split_review_categories"),
+            "animation_candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
+            "animation_split_matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
+            "animation_split_unmatched_catalog_rows": _count(animation_split_summary, "unmatched_catalog_rows"),
+            "animation_unmatched_keyword_candidates": _count(
+                animation_unmatched_summary, "token_candidate_count"
+            ),
             "auto_apply_enabled": False,
         },
         "actions": actions,
