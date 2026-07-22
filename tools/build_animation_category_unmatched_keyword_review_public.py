@@ -30,24 +30,67 @@ STOPWORDS = {
 }
 
 PRODUCT_TYPE_MARKERS = {
+    "アクリル",
     "アクリルチャーム",
     "アクリルコレクション",
+    "アクリルキーホルダー",
+    "アクリルスタンド",
+    "アクリルセレクション",
+    "アクキー",
+    "アクスタ",
+    "キーホルダー",
+    "コレクション",
+    "スタンド",
     "ツインアクリルチャーム",
     "スクールアイコンボタン",
+    "チャーム",
+    "ピックリルスタンド",
+    "フィギュア",
+    "マスコット",
     "ラバーコレクション",
     "ラバーアソート",
+    "ラバーチャーム",
     "アソート",
     "雑貨",
-    "チャーム",
     "ボタン",
     "カメラ",
     "ケース",
     "ソックス",
     "シュシュ",
+    "러버",
+    "마스코트",
+    "스탠드",
+    "아크릴",
     "봉제인형",
     "키링",
     "카메라",
     "케이스",
+    "피규어",
+    "피크릴",
+}
+
+PRODUCT_TYPE_ALIASES: dict[str, tuple[str, str]] = {
+    "アクリル": ("아크릴", "acrylic"),
+    "アクリルセレクション": ("아크릴", "acrylic"),
+    "アクリルスタンド": ("아크릴 스탠드", "acrylic"),
+    "アクスタ": ("아크릴 스탠드", "acrylic"),
+    "スタンド": ("아크릴 스탠드", "acrylic"),
+    "스탠드": ("아크릴 스탠드", "acrylic"),
+    "ピックリルスタンド": ("아크릴 스탠드", "acrylic"),
+    "피크릴": ("아크릴 스탠드", "acrylic"),
+    "アクリルキーホルダー": ("아크릴 키링", "keyring"),
+    "アクキー": ("아크릴 키링", "keyring"),
+    "キーホルダー": ("키링", "keyring"),
+    "キーリング": ("키링", "keyring"),
+    "키링": ("키링", "keyring"),
+    "チャーム": ("키링", "keyring"),
+    "ラバーチャーム": ("액세서리", "accessory"),
+    "러버": ("액세서리", "accessory"),
+    "フィギュア": ("피규어", "figure"),
+    "피규어": ("피규어", "figure"),
+    "マスコット": ("마스코트", "plush"),
+    "마스코트": ("마스코트", "plush"),
+    "コレクション": ("굿즈", "collection"),
 }
 
 NOISE_MARKERS = {
@@ -106,12 +149,55 @@ def _tokens(text: str) -> list[str]:
     return [token for token in found if token.casefold() not in STOPWORDS]
 
 
-def _candidate_review_kind(token: str) -> tuple[str, str]:
+def _split_rule_hint(token: str) -> dict[str, str] | None:
+    normalized_token = token.casefold()
+    for alias, (target_category, target_family) in PRODUCT_TYPE_ALIASES.items():
+        normalized_alias = alias.casefold()
+        if normalized_alias in normalized_token or normalized_token in normalized_alias:
+            return {
+                "suggested_target_category": target_category,
+                "suggested_target_family": target_family,
+                "suggested_rule_id": "manual_alias_review",
+            }
+    for rule in split_review.SPLIT_RULES:
+        for keyword in rule.get("match_keywords", []):
+            normalized_keyword = str(keyword).casefold()
+            if not normalized_keyword:
+                continue
+            if normalized_keyword in normalized_token or normalized_token in normalized_keyword:
+                return {
+                    "suggested_target_category": str(rule.get("target_category") or ""),
+                    "suggested_target_family": str(rule.get("target_family") or ""),
+                    "suggested_rule_id": str(rule.get("rule_id") or ""),
+                }
+    return None
+
+
+def _candidate_review(token: str) -> dict[str, Any]:
+    rule_hint = _split_rule_hint(token)
+    if rule_hint:
+        return {
+            "review_kind": "product_type_like",
+            "review_reason": "Matches a known goods type keyword or an existing split-rule target.",
+            **rule_hint,
+        }
     if token in PRODUCT_TYPE_MARKERS or any(marker in token for marker in PRODUCT_TYPE_MARKERS):
-        return "product_type_like", "Looks like a goods shape, material, or product format."
+        return {
+            "review_kind": "product_type_like",
+            "review_reason": "Looks like a goods shape, material, or product format.",
+            "suggested_target_category": "",
+            "suggested_target_family": "",
+            "suggested_rule_id": "marker_review",
+        }
     if token in NOISE_MARKERS:
-        return "series_or_source_noise", "Looks like a series, character, store, campaign, or request-source label."
-    return "ambiguous_review", "Needs sample review before it can become a category keyword."
+        return {
+            "review_kind": "series_or_source_noise",
+            "review_reason": "Looks like a series, character, store, campaign, or request-source label.",
+        }
+    return {
+        "review_kind": "ambiguous_review",
+        "review_reason": "Needs sample review before it can become a category keyword.",
+    }
 
 
 def _sample(row: dict[str, Any]) -> dict[str, Any]:
@@ -173,14 +259,14 @@ def _token_candidates(rows: list[dict[str, Any]], *, limit: int) -> list[dict[st
     ranked = sorted(token_rows.items(), key=lambda item: (-len(item[1]), item[0]))[:limit]
     candidates: list[dict[str, Any]] = []
     for token, group_rows in ranked:
-        review_kind, review_reason = _candidate_review_kind(token)
+        review = _candidate_review(token)
+        review_kind = str(review["review_kind"])
         candidates.append(
             {
             "token": token,
             "row_count": len(group_rows),
             "sample_rows": [_sample(row) for row in group_rows[:6]],
-            "review_kind": review_kind,
-            "review_reason": review_reason,
+            **review,
             "product_type_hint": review_kind == "product_type_like",
             "manual_confirmed": False,
             "suggested_use": "review_as_keyword_candidate" if review_kind != "series_or_source_noise" else "do_not_promote_without_stronger_product_type_evidence",

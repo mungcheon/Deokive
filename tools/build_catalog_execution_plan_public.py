@@ -144,6 +144,11 @@ def _build_plan(load_report) -> dict[str, Any]:
     animation_action_summary = _summary(animation_action_queue)
     animation_split_summary = _summary(animation_split_review)
     animation_unmatched_summary = _summary(animation_unmatched_keywords)
+    animation_unmatched_product_type_candidates = _count(animation_unmatched_summary, "product_type_candidate_count")
+    open_queues = dict(open_queues)
+    open_queues[
+        "animation_category_unmatched_keyword_product_type_candidates"
+    ] = animation_unmatched_product_type_candidates
     confirmed_summary = _summary(confirmed_readiness)
 
     actions: list[dict[str, Any]] = []
@@ -518,6 +523,7 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
                 "unmatched_catalog_rows": _count(animation_split_summary, "unmatched_catalog_rows"),
                 "unmatched_keyword_candidates": _count(animation_unmatched_summary, "token_candidate_count"),
+                "unmatched_keyword_product_type_candidates": animation_unmatched_product_type_candidates,
             },
         )
     )
@@ -544,6 +550,7 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
                 "unmatched_catalog_rows": _count(animation_split_summary, "unmatched_catalog_rows"),
                 "unmatched_keyword_candidates": _count(animation_unmatched_summary, "token_candidate_count"),
+                "unmatched_keyword_product_type_candidates": animation_unmatched_product_type_candidates,
             },
         )
     )
@@ -583,6 +590,7 @@ def _build_plan(load_report) -> dict[str, Any]:
             "animation_unmatched_keyword_candidates": _count(
                 animation_unmatched_summary, "token_candidate_count"
             ),
+            "animation_unmatched_keyword_product_type_candidates": animation_unmatched_product_type_candidates,
             "auto_apply_enabled": False,
         },
         "actions": actions,
