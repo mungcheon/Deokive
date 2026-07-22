@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <base href="./">
+  <base href="/">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -207,9 +207,10 @@
     }, 45000);
     async function deokiveLoadSiteStatus() {
       try {
-        const statusUrl = new URL('data/site_status_public.json', document.baseURI);
-        statusUrl.searchParams.set('v', Date.now().toString());
-        const response = await fetch(statusUrl.toString(), {
+        const statusPath = window.location.hostname.endsWith('github.io')
+          ? '/Deokive/data/site_status_public.json'
+          : '/data/site_status_public.json';
+        const response = await fetch(statusPath + '?v=' + Date.now(), {
           cache: 'no-store',
         });
         if (!response.ok) return { mode: 'normal' };
@@ -220,7 +221,7 @@
     }
     function deokiveStartFlutter() {
       const script = document.createElement('script');
-      script.src = new URL('flutter_bootstrap.js', document.baseURI).toString();
+      script.src = 'flutter_bootstrap.js';
       script.async = true;
       script.onerror = function () {
         window.deokiveLoadingFailed && window.deokiveLoadingFailed();
@@ -268,7 +269,7 @@
         } catch (_) {}
         return;
       }
-      navigator.serviceWorker.register(new URL('deokive_service_worker.js?v=20260722-pathfix1', document.baseURI).toString());
+      navigator.serviceWorker.register('deokive_service_worker.js?v=20260722-loadingfix1');
     });
   </script>
 </body>

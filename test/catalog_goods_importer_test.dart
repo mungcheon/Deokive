@@ -90,6 +90,49 @@ void main() {
     expect(item.officialPriceCurrencyCode, Currency.jpy.code);
   });
 
+  test('catalog import can create a wishlist item with zero KRW paid price',
+      () {
+    final appState = AppState();
+    const wishlist = FolderItem(
+      id: kSystemWishlistFolderId,
+      name: '위시리스트',
+      icon: Icons.favorite_rounded,
+      color: Colors.amber,
+      isSystemWishlist: true,
+    );
+    const targetFolder = FolderItem(
+      id: 'future-folder',
+      name: '나중에 넣을 폴더',
+      icon: Icons.folder_rounded,
+      color: Colors.blue,
+    );
+    const entry = GoodsCatalogEntry(
+      nameKo: 'Wishlist catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      officialPriceJpy: 1980,
+      sourceStore: 'official store',
+    );
+
+    final item = goodsItemFromCatalogEntry(
+      appState: appState,
+      entry: entry,
+      folder: wishlist,
+      addToWishlist: true,
+      wishlistTargetFolder: targetFolder,
+    );
+
+    expect(item.folderId, wishlist.id);
+    expect(item.officialPrice, 1980);
+    expect(item.officialPriceCurrencyCode, Currency.jpy.code);
+    expect(item.paidPrice, 0);
+    expect(item.priceCurrencyCode, Currency.krw.code);
+    expect(item.purchaseState, PurchaseState.wished);
+    expect(item.itemCondition, ItemCondition.wish);
+    expect(item.status, '위시');
+    expect(item.wishlistTargetFolderId, targetFolder.id);
+  });
+
   test('catalog import duplicate matching also uses barcode', () {
     final appState = AppState();
     final folder = FolderItem(

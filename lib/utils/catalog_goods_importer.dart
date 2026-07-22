@@ -58,12 +58,12 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
       await _confirmDuplicateImport(context, appState, entry);
   if (!shouldContinue || !context.mounted) return false;
 
-  final targetFolder = await _pickTargetFolderForCatalogImport(
+  final destination = await _pickDestinationForCatalogImport(
     context,
     appState,
     initialFolder: initialFolder,
   );
-  if (targetFolder == null || !context.mounted) return false;
+  if (destination == null || !context.mounted) return false;
 
   final imageBytes = await _downloadCatalogImage(entry);
   if (!context.mounted) return false;
@@ -71,14 +71,16 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   final item = goodsItemFromCatalogEntry(
     appState: appState,
     entry: entry,
-    folder: targetFolder,
+    folder: destination.folder,
+    addToWishlist: destination.addToWishlist,
+    wishlistTargetFolder: destination.wishlistTargetFolder,
     imageBytes: imageBytes,
   );
   appState.addGoods(item);
 
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text("'${entry.nameKo}'을(를) ${targetFolder.name}에 추가했어요."),
+      content: Text("'${entry.nameKo}'을(를) ${destination.folder.name}에 추가했어요."),
       action: SnackBarAction(
         label: '폴더 보기',
         onPressed: () => appState.setTab(2),
@@ -133,31 +135,45 @@ Future<bool> _confirmDuplicateImport(
   return confirmed ?? false;
 }
 
-Future<FolderItem?> _pickTargetFolderForCatalogImport(
+Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
   BuildContext context,
   AppState appState, {
   FolderItem? initialFolder,
 }) async {
   final folders = _sortedImportTargetFolders(appState, initialFolder);
-  if (folders.isEmpty) {
+  final wishlistFolder = _wishlistFolder(appState);
+  if (folders.isEmpty && wishlistFolder == null) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('먼저 굿즈를 넣을 폴더를 만들어 주세요.')),
     );
     return null;
   }
 
-  String selectedId = folders.first.id;
+  var selectedKind = folders.isNotEmpty
+      ? _CatalogImportKind.owned
+      : _CatalogImportKind.wishlist;
+  String? selectedId = initialFolder != null &&
+          folders.any((folder) => folder.id == initialFolder.id)
+      ? initialFolder.id
+      : folders.isNotEmpty
+          ? folders.first.id
+          : null;
 
-  return showModalBottomSheet<FolderItem>(
+  return showModalBottomSheet<_CatalogImportDestination>(
     context: context,
     showDragHandle: true,
     builder: (sheetContext) {
       return StatefulBuilder(
         builder: (context, setSheetState) {
-          final selectedFolder = folders.firstWhere(
-            (folder) => folder.id == selectedId,
-            orElse: () => folders.first,
-          );
+          final selectedFolder = selectedId == null
+              ? null
+              : folders.firstWhere(
+                  (folder) => folder.id == selectedId,
+                  orElse: () => folders.first,
+                );
+          final destinationFolder = selectedKind == _CatalogImportKind.wishlist
+              ? wishlistFolder
+              : selectedFolder;
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
@@ -166,7 +182,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'DB 굿즈 저장 위치',
+                    'DB 굿즈 추가 위치',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
@@ -174,7 +190,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '가장 위 폴더가 기본 저장 위치예요. 원하는 폴더를 직접 지정할 수 있어요.',
+                    '가지고 있는 굿즈는 폴더에, 사고 싶은 굿즈는 위시리스트에 담을 수 있어요.',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -182,6 +198,37 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                               .withValues(alpha: 0.58),
                         ),
                   ),
+                  const SizedBox(height: 12),
+                  if (wishlistFolder != null)
+                    _CatalogImportDestinationTile(
+                      icon: Icons.favorite_border_rounded,
+                      iconColor: wishlistFolder.color,
+                      title: '위시리스트에 추가',
+                      subtitle: '구매가 0원, 상태 위시로 저장',
+                      selected: selectedKind == _CatalogImportKind.wishlist,
+                      onTap: () {
+                        setSheetState(() {
+                          selectedKind = _CatalogImportKind.wishlist;
+                        });
+                      },
+                    ),
+                  if (folders.isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    _CatalogImportDestinationTile(
+                      icon: Icons.inventory_2_rounded,
+                      iconColor: Theme.of(context).colorScheme.primary,
+                      title: '내 굿즈함에 추가',
+                      subtitle: selectedFolder == null
+                          ? '저장할 폴더를 선택해 주세요'
+                          : '${selectedFolder.name}에 정가 구매, 미개봉으로 저장',
+                      selected: selectedKind == _CatalogImportKind.owned,
+                      onTap: () {
+                        setSheetState(() {
+                          selectedKind = _CatalogImportKind.owned;
+                        });
+                      },
+                    ),
+                  ],
                   const SizedBox(height: 8),
                   Flexible(
                     child: ListView.builder(
@@ -190,12 +237,17 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                       itemBuilder: (context, index) {
                         final folder = folders[index];
                         final folderType = folder.isGroup ? '그룹' : '폴더';
-                        final selected = folder.id == selectedId;
+                        final selected =
+                            selectedKind == _CatalogImportKind.owned &&
+                                folder.id == selectedId;
                         final defaultLabel =
                             index == 0 ? '기본 저장 위치' : folderType;
                         return ListTile(
                           onTap: () {
-                            setSheetState(() => selectedId = folder.id);
+                            setSheetState(() {
+                              selectedKind = _CatalogImportKind.owned;
+                              selectedId = folder.id;
+                            });
                           },
                           leading: Icon(folder.icon, color: folder.color),
                           title: Text(folder.name),
@@ -222,10 +274,23 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                     width: double.infinity,
                     height: 48,
                     child: FilledButton.icon(
-                      onPressed: () =>
-                          Navigator.pop(sheetContext, selectedFolder),
+                      onPressed: destinationFolder == null
+                          ? null
+                          : () => Navigator.pop(
+                                sheetContext,
+                                _CatalogImportDestination(
+                                  folder: destinationFolder,
+                                  addToWishlist: selectedKind ==
+                                      _CatalogImportKind.wishlist,
+                                  wishlistTargetFolder: selectedFolder,
+                                ),
+                              ),
                       icon: const Icon(Icons.add_rounded),
-                      label: const Text('선택한 폴더에 추가'),
+                      label: Text(
+                        selectedKind == _CatalogImportKind.wishlist
+                            ? '위시리스트에 추가'
+                            : '선택한 폴더에 추가',
+                      ),
                     ),
                   ),
                 ],
@@ -238,10 +303,122 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
   );
 }
 
+enum _CatalogImportKind {
+  wishlist,
+  owned,
+}
+
+class _CatalogImportDestination {
+  final FolderItem folder;
+  final bool addToWishlist;
+  final FolderItem? wishlistTargetFolder;
+
+  const _CatalogImportDestination({
+    required this.folder,
+    required this.addToWishlist,
+    this.wishlistTargetFolder,
+  });
+}
+
+FolderItem? _wishlistFolder(AppState appState) {
+  for (final folder in appState.folders) {
+    if (folder.isSystemWishlist || folder.id == kSystemWishlistFolderId) {
+      return folder;
+    }
+  }
+  return null;
+}
+
+class _CatalogImportDestinationTile extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final String subtitle;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _CatalogImportDestinationTile({
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.subtitle,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final color = selected ? theme.colorScheme.primary : iconColor;
+    return Material(
+      color: selected
+          ? theme.colorScheme.primary.withValues(alpha: 0.08)
+          : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.44),
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: selected
+                  ? theme.colorScheme.primary.withValues(alpha: 0.45)
+                  : theme.colorScheme.outline.withValues(alpha: 0.22),
+            ),
+          ),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: color.withValues(alpha: 0.14),
+                child: Icon(icon, color: color, size: 21),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      subtitle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color:
+                            theme.colorScheme.onSurface.withValues(alpha: 0.62),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                selected ? Icons.check_circle_rounded : Icons.circle_outlined,
+                color: selected
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.onSurface.withValues(alpha: 0.28),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 GoodsItem goodsItemFromCatalogEntry({
   required AppState appState,
   required GoodsCatalogEntry entry,
   required FolderItem folder,
+  bool addToWishlist = false,
+  FolderItem? wishlistTargetFolder,
   Uint8List? imageBytes,
 }) {
   final officialPrice = entry.officialPriceJpy ?? entry.officialPriceKrw;
@@ -263,12 +440,12 @@ GoodsItem goodsItemFromCatalogEntry({
         : entry.subSeries!.trim(),
     quantity: 1,
     officialPrice: officialPrice,
-    paidPrice: officialPrice,
-    priceCurrencyCode: paidCurrency.code,
+    paidPrice: addToWishlist ? 0 : officialPrice,
+    priceCurrencyCode: addToWishlist ? Currency.krw.code : paidCurrency.code,
     officialPriceCurrencyCode: officialCurrency.code,
     purchaseDate: null,
     isPreorder: false,
-    itemCondition: ItemCondition.unopened,
+    itemCondition: addToWishlist ? ItemCondition.wish : ItemCondition.unopened,
     seriesName: entry.seriesName?.trim() ?? '',
     characterName: entry.characterName.trim(),
     affiliation:
@@ -281,9 +458,9 @@ GoodsItem goodsItemFromCatalogEntry({
         ? 'DB에서 추가'
         : 'DB에서 추가\n출처: ${entry.sourceUrl!.trim()}',
     plannedShippingDate: null,
-    status: '미개봉',
-    purchaseState: PurchaseState.owned,
-    wishlistTargetFolderId: null,
+    status: addToWishlist ? '위시' : '미개봉',
+    purchaseState: addToWishlist ? PurchaseState.wished : PurchaseState.owned,
+    wishlistTargetFolderId: addToWishlist ? wishlistTargetFolder?.id : null,
     barcode:
         entry.barcode?.trim().isEmpty ?? true ? null : entry.barcode!.trim(),
     storageLocation: null,
