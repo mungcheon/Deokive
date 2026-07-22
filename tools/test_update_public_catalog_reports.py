@@ -24,6 +24,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_operations_public.json", updated_files)
         self.assertIn("data/catalog_agent_work_queue_public.json", updated_files)
         self.assertIn("data/catalog_image_asset_audit_public.json", updated_files)
+        self.assertIn("data/catalog_missing_image_priority_public.json", updated_files)
         self.assertIn("data/requested_focus_enrichment_public.json", updated_files)
         self.assertIn("data/requested_focus_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_confirmed_import_readiness_public.json", updated_files)
@@ -32,6 +33,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_metadata_action_queue_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
+
+        quality = reports.load_json(reports.QUALITY)
+        self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
 
     def test_all_public_json_files_are_parseable_and_safe_for_pages(self):
         public_files = reports.discover_public_json_files()
