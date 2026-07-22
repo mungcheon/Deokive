@@ -371,6 +371,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         image_action = reports.load_json(reports.IMAGE_ATTACHMENT_ACTION_QUEUE)
         image_action_summary = image_action.get("summary", {})
+        image_asset = reports.load_json(reports.IMAGE_ASSET_AUDIT)
+        image_asset_summary = image_asset.get("summary", {})
+        image_asset_gate = next(
+            row
+            for row in operations.get("quality_gates", [])
+            if row.get("key") == "local_image_asset_coverage"
+        )
+        image_asset_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "local_image_asset_audit"
+        )
         source_action = reports.load_json(reports.SOURCE_DISCOVERY_ACTION_QUEUE)
         source_action_summary = source_action.get("summary", {})
         source_detail_action = reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)
@@ -493,6 +505,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.AGENT_WORK_QUEUE.name}", next_action_reports)
         self.assertIn(f"data/{reports.EXECUTION_PLAN.name}", next_action_reports)
         self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
+        self.assertIn(f"data/{reports.IMAGE_ASSET_AUDIT.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_SPLIT_REVIEW.name}", report_links)
@@ -528,6 +541,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             open_queues.get("image_attachment_action_rows"),
             image_action_summary.get("queued_image_rows"),
+        )
+        self.assertEqual(image_asset_gate.get("status"), "pass")
+        self.assertEqual(image_asset_gate.get("image_url_without_local_path_rows"), 0)
+        self.assertEqual(image_asset_gate.get("missing_local_image_files"), 0)
+        self.assertEqual(image_asset_gate.get("image_url_rows"), image_asset_summary.get("image_url_rows"))
+        self.assertEqual(
+            image_asset_next_action.get("local_asset_coverage"),
+            image_asset_summary.get("local_asset_coverage"),
         )
         self.assertEqual(
             open_queues.get("source_discovery_action_rows"),

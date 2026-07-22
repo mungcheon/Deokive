@@ -1509,6 +1509,7 @@ def build_operations_public(
     generic_source_patch_candidates: dict[str, Any],
     requested_focus: dict[str, Any],
     danganronpa_missing_media: dict[str, Any],
+    image_asset_audit: dict[str, Any],
     metadata_review_batches_override: dict[str, Any] | None = None,
     metadata_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -1528,6 +1529,7 @@ def build_operations_public(
     source_detail_candidate_action_queue_summary = source_detail_candidate_action_queue.get("summary", {})
     source_action_queue_summary = source_action_queue.get("summary", {})
     image_summary = image_enrichment_batches["summary"]
+    image_asset_summary = image_asset_audit.get("summary", {})
     image_action_queue = (
         load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
     )
@@ -1680,6 +1682,16 @@ def build_operations_public(
             "target": 0.95,
         },
         {
+            "key": "local_image_asset_coverage",
+            "status": "pass" if image_asset_summary.get("local_asset_coverage", 0) >= 1 else "warn",
+            "value": image_asset_summary.get("local_asset_coverage", 0),
+            "target": 1,
+            "image_url_rows": image_asset_summary.get("image_url_rows", 0),
+            "local_image_path_rows": image_asset_summary.get("local_image_path_rows", 0),
+            "image_url_without_local_path_rows": image_asset_summary.get("image_url_without_local_path_rows", 0),
+            "missing_local_image_files": image_asset_summary.get("missing_local_image_files", 0),
+        },
+        {
             "key": "release_date_coverage",
             "status": "pass" if cov.get("release_date", 0) >= 0.9 else "warn",
             "value": cov.get("release_date", 0),
@@ -1791,6 +1803,17 @@ def build_operations_public(
             "blocked_rows": image_summary.get("needs_source_discovery_rows", 0),
             "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import.",
         },
+        {
+            "priority": 19,
+            "workstream": "local_image_asset_audit",
+            "public_report": f"data/{IMAGE_ASSET_AUDIT.name}",
+            "image_url_rows": image_asset_summary.get("image_url_rows", 0),
+            "local_image_path_rows": image_asset_summary.get("local_image_path_rows", 0),
+            "image_url_without_local_path_rows": image_asset_summary.get("image_url_without_local_path_rows", 0),
+            "missing_local_image_files": image_asset_summary.get("missing_local_image_files", 0),
+            "local_asset_coverage": image_asset_summary.get("local_asset_coverage", 0),
+            "recommended_next_action": "No download is needed for rows that already have image_url; remaining image work must first find exact image_url/source evidence.",
+        } if image_asset_summary else None,
         {
             "priority": 20,
             "workstream": "image_attachment_action_queue",
@@ -2482,6 +2505,7 @@ def build_operations_public(
         "reports": [
             {"key": "quality", "public_report": f"data/{QUALITY.name}"},
             {"key": "image_backlog", "public_report": f"data/{IMAGE_BACKLOG.name}"},
+            {"key": "image_asset_audit", "public_report": f"data/{IMAGE_ASSET_AUDIT.name}"},
             {"key": "execution_plan", "public_report": f"data/{EXECUTION_PLAN.name}"},
             {"key": "generic_source_patch_candidates", "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}"},
             {"key": "requested_focus_enrichment", "public_report": f"data/{REQUESTED_FOCUS.name}"},
@@ -4742,6 +4766,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         generic_source_patch_candidates,
         requested_focus,
         danganronpa_missing_media,
+        image_asset_audit,
         metadata_review_batches,
         metadata_action_queue,
     )
