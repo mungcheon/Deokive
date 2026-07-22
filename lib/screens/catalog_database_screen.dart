@@ -82,134 +82,140 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
       builder: (sheetContext) {
         final theme = Theme.of(sheetContext);
         final palette = theme.extension<DeokivePalette>()!;
-        return SafeArea(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-              18,
-              4,
-              18,
-              18 + MediaQuery.of(sheetContext).viewInsets.bottom,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _CatalogImage(entry: entry, size: 72),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            entry.nameKo,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w900,
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.8,
+          minChildSize: 0.5,
+          maxChildSize: 0.95,
+          builder: (context, scrollController) {
+            return SafeArea(
+              child: ListView(
+                controller: scrollController,
+                padding: EdgeInsets.fromLTRB(
+                  18,
+                  4,
+                  18,
+                  18 + MediaQuery.of(sheetContext).viewInsets.bottom,
+                ),
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _CatalogImage(entry: entry, size: 72),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              entry.nameKo,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w900,
+                              ),
                             ),
+                            const SizedBox(height: 6),
+                            Text(
+                              _entrySubtitle(entry),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: theme.colorScheme.onSurface
+                                    .withValues(alpha: 0.62),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+                  Text(
+                    '이 굿즈를 내 굿즈함에 추가하겠습니까?',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    widget.initialFolder == null
+                        ? '다음 단계에서 저장할 폴더를 고를 수 있어요. 가장 위 폴더가 기본값이에요.'
+                        : "'${widget.initialFolder!.name}' 폴더가 기본 저장 위치로 먼저 선택돼요.",
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color:
+                          theme.colorScheme.onSurface.withValues(alpha: 0.62),
+                    ),
+                  ),
+                  if (ownedCount > 0) ...[
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 9,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFF4D8),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.info_outline_rounded,
+                            size: 18,
+                            color: Color(0xFF9A6A12),
                           ),
-                          const SizedBox(height: 6),
-                          Text(
-                            _entrySubtitle(entry),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.colorScheme.onSurface
-                                  .withValues(alpha: 0.62),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              '이미 내 굿즈함에 $ownedCount개 있어요. 그래도 추가할 수 있어요.',
+                              style: const TextStyle(
+                                color: Color(0xFF6E4A08),
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(height: 18),
-                Text(
-                  '이 굿즈를 내 굿즈함에 추가하겠습니까?',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  widget.initialFolder == null
-                      ? '다음 단계에서 저장할 폴더를 고를 수 있어요. 가장 위 폴더가 기본값이에요.'
-                      : "'${widget.initialFolder!.name}' 폴더가 기본 저장 위치로 먼저 선택돼요.",
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.62),
-                  ),
-                ),
-                if (ownedCount > 0) ...[
-                  const SizedBox(height: 10),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 9,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFF4D8),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.info_outline_rounded,
-                          size: 18,
-                          color: Color(0xFF9A6A12),
+                  const SizedBox(height: 18),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.pop(sheetContext),
+                          child: const Text('취소'),
                         ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            '이미 내 굿즈함에 $ownedCount개 있어요. 그래도 추가할 수 있어요.',
-                            style: const TextStyle(
-                              color: Color(0xFF6E4A08),
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w700,
-                            ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        flex: 2,
+                        child: FilledButton.icon(
+                          onPressed: () async {
+                            Navigator.pop(sheetContext);
+                            await showCatalogGoodsImportFlowForEntry(
+                              context,
+                              entry: entry,
+                              initialFolder: widget.initialFolder,
+                            );
+                          },
+                          icon: const Icon(Icons.add_rounded),
+                          label: const Text('내 굿즈에 추가하기'),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: palette.primary,
+                            foregroundColor: Colors.white,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
-                const SizedBox(height: 18),
-                Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () => Navigator.pop(sheetContext),
-                        child: const Text('취소'),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      flex: 2,
-                      child: FilledButton.icon(
-                        onPressed: () async {
-                          Navigator.pop(sheetContext);
-                          await showCatalogGoodsImportFlowForEntry(
-                            context,
-                            entry: entry,
-                            initialFolder: widget.initialFolder,
-                          );
-                        },
-                        icon: const Icon(Icons.add_rounded),
-                        label: const Text('내 굿즈에 추가하기'),
-                        style: FilledButton.styleFrom(
-                          backgroundColor: palette.primary,
-                          foregroundColor: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );

@@ -387,6 +387,11 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
 
   List<Uint8List> get _images => widget.item.imageBytesList;
 
+  bool get _hasRemoteImage =>
+      (widget.item.imageUrl?.trim().isNotEmpty ?? false);
+
+  int get _imageCount => _images.length + (_hasRemoteImage ? 1 : 0);
+
   @override
   void initState() {
     super.initState();
@@ -416,10 +421,10 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
 
   void _restartAutoSlide() {
     _autoSlideTimer?.cancel();
-    if (_images.length < 2) return;
+    if (_imageCount < 2) return;
     _autoSlideTimer = Timer.periodic(const Duration(seconds: 3), (_) {
       if (!mounted || !_pageController.hasClients) return;
-      final nextPage = (_currentPage + 1) % _images.length;
+      final nextPage = (_currentPage + 1) % _imageCount;
       _pageController.animateToPage(
         nextPage,
         duration: const Duration(milliseconds: 320),
@@ -437,7 +442,7 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
         borderRadius: BorderRadius.circular(22),
       ),
       clipBehavior: Clip.antiAlias,
-      child: _images.isEmpty
+      child: _imageCount == 0
           ? GoodsItemImage(
               item: widget.item,
               placeholderIconSize: 56,
@@ -447,20 +452,25 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
               children: [
                 PageView.builder(
                   controller: _pageController,
-                  itemCount: _images.length,
+                  itemCount: _imageCount,
                   onPageChanged: (index) {
                     setState(() {
                       _currentPage = index;
                     });
                   },
                   itemBuilder: (context, index) {
+                    if (index >= _images.length) {
+                      return GoodsItemImage(
+                        item: widget.item.copyWith(imageBytesList: const []),
+                      );
+                    }
                     return Image.memory(
                       _images[index],
                       fit: BoxFit.cover,
                     );
                   },
                 ),
-                if (_images.length > 1)
+                if (_imageCount > 1)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: DecoratedBox(
@@ -475,7 +485,7 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: List.generate(_images.length, (index) {
+                          children: List.generate(_imageCount, (index) {
                             final selected = index == _currentPage;
                             return AnimatedContainer(
                               duration: const Duration(milliseconds: 180),
