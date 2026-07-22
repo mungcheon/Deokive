@@ -85,6 +85,44 @@ def _next_work_order(template: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _pack_queue_preview(template: dict[str, Any], focus_pack_id: Any, *, limit: int = 8) -> list[dict[str, Any]]:
+    progress = _pack_progress(template)
+    rows: list[dict[str, Any]] = []
+    work_order = template.get("work_order")
+    if not isinstance(work_order, list):
+        return rows
+
+    for row in work_order:
+        if not isinstance(row, dict):
+            continue
+        pack_id = str(row.get("focus_pack_id") or "")
+        stats = progress.get(pack_id, {})
+        remaining = int(
+            stats.get("remaining")
+            if stats
+            else row.get("remaining_review_rows") or row.get("row_count") or 0
+        )
+        if row.get("review_status") == "completed" or remaining <= 0:
+            continue
+        rows.append(
+            {
+                "priority": row.get("priority"),
+                "focus_pack_id": row.get("focus_pack_id"),
+                "is_current_pack": pack_id == str(focus_pack_id or ""),
+                "source_store": row.get("source_store"),
+                "target_category": row.get("target_category"),
+                "row_count": int(stats.get("items") or row.get("row_count") or 0),
+                "confirmed_source_rows": int(stats.get("confirmed") or 0),
+                "remaining_review_rows": remaining,
+                "review_status": "in_progress" if stats.get("confirmed") else row.get("review_status"),
+                "first_official_search_url": row.get("first_official_search_url"),
+            }
+        )
+        if len(rows) >= limit:
+            break
+    return rows
+
+
 def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
     return {
         "manual_review_status": item.get("manual_review_status") or "not_started",
@@ -116,6 +154,7 @@ def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
 def build_report(template: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     next_pack = _next_work_order(template)
     focus_pack_id = next_pack.get("focus_pack_id")
+    pack_queue_preview = _pack_queue_preview(template, focus_pack_id)
     items = [
         _compact_item(item)
         for item in template.get("items") or []
@@ -138,6 +177,12 @@ def build_report(template: dict[str, Any], *, generated_at: str | None = None) -
             "template_items": (template.get("summary") or {}).get("template_items", 0),
             "official_search_url_count": len(official_search_urls),
             "first_official_search_url": next_pack.get("first_official_search_url"),
+            "pack_queue_preview_count": len(pack_queue_preview),
+            "next_pack_after_current": (
+                pack_queue_preview[1].get("focus_pack_id")
+                if len(pack_queue_preview) > 1
+                else None
+            ),
             "auto_apply_enabled": False,
         },
         "instructions": [
@@ -147,6 +192,7 @@ def build_report(template: dict[str, Any], *, generated_at: str | None = None) -
             "Run tools/import_confirmed_source_discovery_rows.py as a dry run before any write.",
         ],
         "next_pack": next_pack,
+        "pack_queue_preview": pack_queue_preview,
         "official_search_urls": official_search_urls,
         "items": items,
         "automation_policy": {

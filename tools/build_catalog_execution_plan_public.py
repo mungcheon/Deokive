@@ -103,6 +103,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_action_queue = load_report("source_discovery_action_queue_public.json")
     source_focus_template = load_report("source_discovery_focus_confirmed_template_public.json")
     source_focus_template_import = load_report("source_discovery_focus_template_import_dry_run_public.json")
+    source_next_focus_pack = load_report("source_discovery_next_focus_pack_public.json")
     source_next_focus_fetch_audit = load_report("source_discovery_next_focus_pack_fetch_audit_public.json")
     source_next_focus_fallback_queue = load_report("source_discovery_next_focus_fallback_queue_public.json")
     source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
@@ -140,6 +141,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     ensky_cache_candidate_action_summary = _summary(ensky_cache_candidate_action_queue)
     metadata_summary = _summary(metadata_batches)
     metadata_action_summary = _summary(metadata_action_queue)
+    source_next_focus_pack_summary = _summary(source_next_focus_pack)
     requested_summary = _summary(requested_batches)
     requested_action_summary = _summary(requested_action_queue)
     dedupe_summary = _summary(dedupe_batches)
@@ -279,6 +281,10 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "next_target_category": source_focus_template_summary.get("next_target_category"),
                     "next_focus_pack_rows": _count(source_focus_template_summary, "next_focus_pack_rows"),
                     "next_official_search_url": source_focus_template_summary.get("next_official_search_url"),
+                    "current_focus_pack_id": source_next_focus_pack_summary.get("focus_pack_id"),
+                    "pack_queue_preview_count": _count(source_next_focus_pack_summary, "pack_queue_preview_count"),
+                    "next_pack_after_current": source_next_focus_pack_summary.get("next_pack_after_current"),
+                    "pack_queue_preview": source_next_focus_pack.get("pack_queue_preview", []),
                     "manual_confirmed_rows": _count(source_focus_template_summary, "manual_confirmed_rows"),
                     "dry_run_updated_rows": _count(source_focus_template_import, "updated_rows"),
                     "dry_run_skipped_rows": _count(source_focus_template_import, "skipped_rows"),
