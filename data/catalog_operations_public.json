@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T02:54:58Z",
+  "generated_at": "2026-07-22T03:01:01Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -14,7 +14,7 @@
       "release_date": 1416,
       "official_price_jpy": 584,
       "barcode": 7744,
-      "name_ja": 9964
+      "name_ja": 529
     },
     "open_review_queues": {
       "source_discovery_rows": 647,
@@ -47,10 +47,10 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 11964,
+      "metadata_action_missing_cells": 2529,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 11964,
+      "metadata_actionable_missing_cells": 2529,
       "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 428,
       "animation_category_action_rows": 428,
@@ -403,7 +403,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 21075,
+      "open_rows": 11640,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -411,7 +411,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 21075,
+      "open_rows": 11640,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -419,10 +419,10 @@
     {
       "workstream": "metadata_action_queue",
       "status": "manual_review",
-      "open_rows": 11964,
+      "open_rows": 2529,
       "actionable_group_count": 166,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 11964,
+      "actionable_missing_cells": 2529,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -430,23 +430,19 @@
       "next_step": "fill_confirmed_metadata_patch_templates",
       "missing_cells_by_field": [
         [
-          "name_ja",
-          9964
-        ],
-        [
           "release_date",
           1416
         ],
         [
           "official_price_jpy",
           584
+        ],
+        [
+          "name_ja",
+          529
         ]
       ],
       "missing_cells_by_source_store": [
-        [
-          "치이카와 마켓",
-          9455
-        ],
         [
           "이치방쿠지",
           382
@@ -552,6 +548,10 @@
           20
         ],
         [
+          "치이카와 마켓",
+          20
+        ],
+        [
           "SM STORE",
           18
         ],
@@ -605,14 +605,6 @@
         ]
       ],
       "top_action_groups": [
-        {
-          "field": "name_ja",
-          "source_store": "치이카와 마켓",
-          "missing_rows": 9455,
-          "priority": 30,
-          "workflow": "official_title_review",
-          "recommended_action": "Verify original Japanese product titles from official listings."
-        },
         {
           "field": "official_price_jpy",
           "source_store": "이치방쿠지",
@@ -761,6 +753,14 @@
           "field": "release_date",
           "source_store": "점프 캐릭터즈 스토어",
           "missing_rows": 24,
+          "priority": 10,
+          "workflow": "official_metadata_review",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
+        },
+        {
+          "field": "release_date",
+          "source_store": "나가노 마켓",
+          "missing_rows": 20,
           "priority": 10,
           "workflow": "official_metadata_review",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
@@ -1819,7 +1819,7 @@
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
       "field_store_group_count": 351,
-      "missing_cell_count": 21075,
+      "missing_cell_count": 11640,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
@@ -1829,17 +1829,13 @@
       "actionable_group_count": 166,
       "queued_group_count": 166,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 11964,
-      "queued_missing_cells": 11964,
+      "actionable_missing_cells": 2529,
+      "queued_missing_cells": 2529,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
       "action_batch_count": 14,
       "missing_cells_by_field": [
-        [
-          "name_ja",
-          9964
-        ],
         [
           "release_date",
           1416
@@ -1847,13 +1843,13 @@
         [
           "official_price_jpy",
           584
+        ],
+        [
+          "name_ja",
+          529
         ]
       ],
       "missing_cells_by_source_store": [
-        [
-          "치이카와 마켓",
-          9455
-        ],
         [
           "이치방쿠지",
           382
@@ -1959,6 +1955,10 @@
           20
         ],
         [
+          "치이카와 마켓",
+          20
+        ],
+        [
           "SM STORE",
           18
         ],
@@ -2012,14 +2012,6 @@
         ]
       ],
       "top_action_groups": [
-        {
-          "field": "name_ja",
-          "source_store": "치이카와 마켓",
-          "missing_rows": 9455,
-          "priority": 30,
-          "workflow": "official_title_review",
-          "recommended_action": "Verify original Japanese product titles from official listings."
-        },
         {
           "field": "official_price_jpy",
           "source_store": "이치방쿠지",
@@ -2168,6 +2160,14 @@
           "field": "release_date",
           "source_store": "점프 캐릭터즈 스토어",
           "missing_rows": 24,
+          "priority": 10,
+          "workflow": "official_metadata_review",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
+        },
+        {
+          "field": "release_date",
+          "source_store": "나가노 마켓",
+          "missing_rows": 20,
           "priority": 10,
           "workflow": "official_metadata_review",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."

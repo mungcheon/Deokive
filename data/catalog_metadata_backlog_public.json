@@ -10,7 +10,7 @@
       "name_ja"
     ],
     "field_missing_totals": {
-      "name_ja": 9964,
+      "name_ja": 529,
       "release_date": 1416,
       "barcode": 7744,
       "official_price_jpy": 584,
@@ -18,10 +18,6 @@
       "image_url": 720
     },
     "store_rows_with_any_missing_metadata": [
-      [
-        "치이카와 마켓",
-        9455
-      ],
       [
         "이치방쿠지",
         5546
@@ -97,6 +93,10 @@
       [
         "메가하우스",
         22
+      ],
+      [
+        "치이카와 마켓",
+        20
       ],
       [
         "Hololive Production Official Shop",
@@ -183,66 +183,6 @@
     "field_review_queue_rows": 6
   },
   "field_review_queue": [
-    {
-      "field": "name_ja",
-      "missing_rows": 9964,
-      "priority_score": 9964,
-      "recommended_action": "Verify original Japanese product titles from official listings.",
-      "evidence_required": "original Japanese title from official or trusted listing",
-      "auto_apply_enabled": false,
-      "next_step": "official_title_review",
-      "risk": "translated_or_inferred_title",
-      "top_source_stores": [
-        {
-          "source_store": "치이카와 마켓",
-          "missing_rows": 9455
-        },
-        {
-          "source_store": "Stellive Store",
-          "missing_rows": 99
-        },
-        {
-          "source_store": "나가노 마켓",
-          "missing_rows": 79
-        },
-        {
-          "source_store": "애니메이트",
-          "missing_rows": 63
-        },
-        {
-          "source_store": "치이카와 파크",
-          "missing_rows": 62
-        },
-        {
-          "source_store": "Weverse Shop",
-          "missing_rows": 33
-        },
-        {
-          "source_store": "닌텐도 스토어",
-          "missing_rows": 16
-        },
-        {
-          "source_store": "MINISO",
-          "missing_rows": 14
-        },
-        {
-          "source_store": "JYP SHOP",
-          "missing_rows": 13
-        },
-        {
-          "source_store": "Hololive Production Official Shop",
-          "missing_rows": 10
-        },
-        {
-          "source_store": "YG SELECT",
-          "missing_rows": 10
-        },
-        {
-          "source_store": "반다이",
-          "missing_rows": 10
-        }
-      ]
-    },
     {
       "field": "barcode",
       "missing_rows": 7744,
@@ -542,6 +482,66 @@
           "missing_rows": 3
         }
       ]
+    },
+    {
+      "field": "name_ja",
+      "missing_rows": 529,
+      "priority_score": 529,
+      "recommended_action": "Verify original Japanese product titles from official listings.",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
+      "top_source_stores": [
+        {
+          "source_store": "Stellive Store",
+          "missing_rows": 99
+        },
+        {
+          "source_store": "나가노 마켓",
+          "missing_rows": 79
+        },
+        {
+          "source_store": "애니메이트",
+          "missing_rows": 63
+        },
+        {
+          "source_store": "치이카와 파크",
+          "missing_rows": 62
+        },
+        {
+          "source_store": "Weverse Shop",
+          "missing_rows": 33
+        },
+        {
+          "source_store": "치이카와 마켓",
+          "missing_rows": 20
+        },
+        {
+          "source_store": "닌텐도 스토어",
+          "missing_rows": 16
+        },
+        {
+          "source_store": "MINISO",
+          "missing_rows": 14
+        },
+        {
+          "source_store": "JYP SHOP",
+          "missing_rows": 13
+        },
+        {
+          "source_store": "Hololive Production Official Shop",
+          "missing_rows": 10
+        },
+        {
+          "source_store": "YG SELECT",
+          "missing_rows": 10
+        },
+        {
+          "source_store": "반다이",
+          "missing_rows": 10
+        }
+      ]
     }
   ],
   "instructions": [
@@ -550,101 +550,6 @@
     "Do not infer dates, prices, barcodes, or names without official or trusted source evidence."
   ],
   "groups": [
-    {
-      "field": "name_ja",
-      "source_store": "치이카와 마켓",
-      "missing_rows": 9455,
-      "priority_score": 9455,
-      "recommended_action": "Verify original Japanese product titles from official listings.",
-      "evidence_required": "original Japanese title from official or trusted listing",
-      "auto_apply_enabled": false,
-      "next_step": "official_title_review",
-      "risk": "translated_or_inferred_title",
-      "sample_catalog_indexes": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1,
-          "name_ko": "치이카와 클리어 토트백 (비가 오네 / 라이트 블루)",
-          "name_ja": null,
-          "series_name": "치이카와 마켓",
-          "category": "가방",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189203968",
-          "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189203968_3_2c8a3463-72e0-49f0-aaf2-cba1beac7cc5.jpg"
-        },
-        {
-          "catalog_index": 2,
-          "name_ko": "치이카와 클리어 토트백 (고글 토끼 / 화이트)",
-          "name_ja": null,
-          "series_name": "치이카와 마켓",
-          "category": "가방",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189203975",
-          "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189203975_3_7531caf2-8094-47c9-bbdc-43302412c089.jpg"
-        },
-        {
-          "catalog_index": 3,
-          "name_ko": "치이카와 패커블 레인 판초 (개구리 모두 / 차콜)",
-          "name_ja": null,
-          "series_name": "치이카와 마켓",
-          "category": "레인웨어",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189203982",
-          "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189203982_0.jpg"
-        },
-        {
-          "catalog_index": 4,
-          "name_ko": "치이카와 패커블 레인 판초 (우라야하보즈 토끼 / 베이지)",
-          "name_ja": null,
-          "series_name": "치이카와 마켓",
-          "category": "레인웨어",
-          "source_url": "https://chiikawamarket.jp/ko/products/4570189204002",
-          "image_url": "https://chiikawamarket.jp/cdn/shop/files/4570189204002_0_507e6524-b282-47af-97a2-d6e78170bf04.jpg"
-        },
-        {
-          "catalog_index": 5,
-          "name_ko": "치이카와 애니메이션 암 가드 NAVY",
-          "name_ja": null,
-          "series_name": "치이카와 마켓",
-          "category": "액세서리",
-          "source_url": "https://chiikawamarket.jp/ko/products/4996855133986",
-          "image_url": "https://chiikawamarket.jp/cdn/shop/files/4996855133986_1.jpg"
-        },
-        {
-          "catalog_index": 6,
-          "name_ko": "치이카와 애니메이션 암 가드 BLUE",
-          "name_ja": null,
-          "series_name": "치이카와 마켓",
-          "category": "액세서리",
-          "source_url": "https://chiikawamarket.jp/ko/products/4996855133993",
-          "image_url": "https://chiikawamarket.jp/cdn/shop/files/4996855133993_1.jpg"
-        },
-        {
-          "catalog_index": 7,
-          "name_ko": "치이카와 애니메이션 메쉬 캡 PINK",
-          "name_ja": null,
-          "series_name": "치이카와 마켓",
-          "category": "의류",
-          "source_url": "https://chiikawamarket.jp/ko/products/4996855134044",
-          "image_url": "https://chiikawamarket.jp/cdn/shop/files/4996855134044_1.jpg"
-        },
-        {
-          "catalog_index": 8,
-          "name_ko": "치이카와 애니메이션 메쉬 캡 SAX",
-          "name_ja": null,
-          "series_name": "치이카와 마켓",
-          "category": "의류",
-          "source_url": "https://chiikawamarket.jp/ko/products/4996855134068",
-          "image_url": "https://chiikawamarket.jp/cdn/shop/files/4996855134068_1.jpg"
-        }
-      ]
-    },
     {
       "field": "barcode",
       "source_store": "이치방쿠지",
@@ -5582,6 +5487,101 @@
           "category": "피규어",
           "source_url": null,
           "image_url": null
+        }
+      ]
+    },
+    {
+      "field": "name_ja",
+      "source_store": "치이카와 마켓",
+      "missing_rows": 20,
+      "priority_score": 20,
+      "recommended_action": "Verify original Japanese product titles from official listings.",
+      "evidence_required": "original Japanese title from official or trusted listing",
+      "auto_apply_enabled": false,
+      "next_step": "official_title_review",
+      "risk": "translated_or_inferred_title",
+      "sample_catalog_indexes": [
+        2936,
+        2938,
+        2970,
+        2972,
+        3038,
+        3039,
+        3040,
+        3043
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2936,
+          "name_ko": "치이카와 와이와이 쿠리만쥬의 감피나츠(피스나밤만쥬)",
+          "name_ja": null,
+          "series_name": "치이카와 마켓",
+          "category": "굿즈",
+          "source_url": "https://chiikawamarket.jp/ko/products/4979432079037",
+          "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4979432079037_1_cd27b256-f1b0-4109-a503-95d8850d8b7d.jpg?v=1752726530"
+        },
+        {
+          "catalog_index": 2938,
+          "name_ko": "치이카와 토끼의 카레 치즈너츠와 두건(스티커 포함)(삐쓰나 토끼)",
+          "name_ja": null,
+          "series_name": "치이카와 마켓",
+          "category": "굿즈",
+          "source_url": "https://chiikawamarket.jp/ko/products/4979432079105",
+          "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4979432079105_1_d6da46ba-a5b2-4089-834c-03d63860c6ca.jpg?v=1761614967"
+        },
+        {
+          "catalog_index": 2970,
+          "name_ko": "치이카와 바르산 벌레퇴치 걸이/거치형 (토끼)",
+          "name_ja": null,
+          "series_name": "치이카와 마켓",
+          "category": "피규어",
+          "source_url": "https://chiikawamarket.jp/ko/products/4580543942990",
+          "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4580543942990_1.jpg?v=1774317044"
+        },
+        {
+          "catalog_index": 2972,
+          "name_ko": "치이카와 바르산 벌레퇴치 걸이/거치형 (치이카와)",
+          "name_ja": null,
+          "series_name": "치이카와 마켓",
+          "category": "피규어",
+          "source_url": "https://chiikawamarket.jp/ko/products/4580543942976",
+          "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4580543942976_1.jpg?v=1774317138"
+        },
+        {
+          "catalog_index": 3038,
+          "name_ko": "치이카와 애니메이션 \"치이카와\" 다이컷 동전지갑 (하늘다람쥐)",
+          "name_ja": null,
+          "series_name": "치이카와 마켓",
+          "category": "파우치",
+          "source_url": "https://chiikawamarket.jp/ko/products/4547274055252",
+          "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4547274055252_01.jpg?v=1782205952"
+        },
+        {
+          "catalog_index": 3039,
+          "name_ko": "치이카와 애니메이션 \"치이카와\" 미니 구슬반지 동전지갑 (토끼)",
+          "name_ja": null,
+          "series_name": "치이카와 마켓",
+          "category": "파우치",
+          "source_url": "https://chiikawamarket.jp/ko/products/4547274055054",
+          "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4547274055054_01.jpg?v=1782206070"
+        },
+        {
+          "catalog_index": 3040,
+          "name_ko": "치이카와 애니메이션 \"치이카와\" 미니 구슬반지 동전지갑 (치이카와)",
+          "name_ja": null,
+          "series_name": "치이카와 마켓",
+          "category": "파우치",
+          "source_url": "https://chiikawamarket.jp/ko/products/4547274055030",
+          "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4547274055030_01.jpg?v=1782206021"
+        },
+        {
+          "catalog_index": 3043,
+          "name_ko": "치이카와 애니메이션 \"치이카와\" 미니 구슬반지 동전지갑 (하늘다람쥐)",
+          "name_ja": null,
+          "series_name": "치이카와 마켓",
+          "category": "파우치",
+          "source_url": "https://chiikawamarket.jp/ko/products/4547274055061",
+          "image_url": "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4547274055061_01.jpg?v=1782206091"
         }
       ]
     },

@@ -631,12 +631,23 @@ class _AddGoodsScreenState extends State<AddGoodsScreen> {
         kindController.text = entry.subSeries!;
       }
       if (entry.officialPriceJpy != null) {
-        officialPriceController.text = entry.officialPriceJpy.toString();
+        final price = entry.officialPriceJpy.toString();
+        officialPriceController.text = price;
+        paidPriceController.text = price;
+        officialPriceCurrency = Currency.jpy;
+        paidPriceCurrency = Currency.jpy;
+      } else if (entry.officialPriceKrw != null) {
+        final price = entry.officialPriceKrw.toString();
+        officialPriceController.text = price;
+        paidPriceController.text = price;
+        officialPriceCurrency = Currency.krw;
+        paidPriceCurrency = Currency.krw;
       } else {
         // Prize/kuji/gashapon figures often have no retail price — default
         // to 0 so the field shows a value instead of being blank. User can
         // overwrite if they know the price.
         officialPriceController.text = '0';
+        paidPriceController.text = '0';
       }
       if (entry.sourceStore.isNotEmpty) {
         companyController.text = entry.sourceStore;

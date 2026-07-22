@@ -59,6 +59,36 @@ void main() {
     expect(item.memo, contains(entry.sourceUrl!));
   });
 
+  test('catalog import keeps paid currency in JPY even when display is KRW',
+      () {
+    final appState = AppState();
+    appState.setDisplayCurrency(Currency.krw);
+    final folder = FolderItem(
+      id: 'top-folder',
+      name: '???援우쫰',
+      icon: Icons.folder_rounded,
+      color: Colors.blue,
+    );
+    const entry = GoodsCatalogEntry(
+      nameKo: 'JPY catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      officialPriceJpy: 1980,
+      sourceStore: 'official store',
+    );
+
+    final item = goodsItemFromCatalogEntry(
+      appState: appState,
+      entry: entry,
+      folder: folder,
+    );
+
+    expect(item.officialPrice, 1980);
+    expect(item.paidPrice, 1980);
+    expect(item.priceCurrencyCode, Currency.jpy.code);
+    expect(item.officialPriceCurrencyCode, Currency.jpy.code);
+  });
+
   test('catalog import duplicate matching also uses barcode', () {
     final appState = AppState();
     final folder = FolderItem(

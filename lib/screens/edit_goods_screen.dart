@@ -658,7 +658,17 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
         kindController.text = entry.subSeries!;
       }
       if (entry.officialPriceJpy != null) {
-        officialPriceController.text = entry.officialPriceJpy.toString();
+        final price = entry.officialPriceJpy.toString();
+        officialPriceController.text = price;
+        paidPriceController.text = price;
+        officialPriceCurrency = Currency.jpy;
+        paidPriceCurrency = Currency.jpy;
+      } else if (entry.officialPriceKrw != null) {
+        final price = entry.officialPriceKrw.toString();
+        officialPriceController.text = price;
+        paidPriceController.text = price;
+        officialPriceCurrency = Currency.krw;
+        paidPriceCurrency = Currency.krw;
       }
       if (entry.sourceStore.isNotEmpty) {
         companyController.text = entry.sourceStore;

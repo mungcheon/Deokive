@@ -3806,6 +3806,7 @@ def validate_report_consistency(
     danganronpa_missing_media: dict[str, Any],
     operations: dict[str, Any],
     agent_work_queue: dict[str, Any],
+    metadata_action_queue_override: dict[str, Any] | None = None,
 ) -> list[str]:
     findings: list[str] = []
     source_summary = source_discovery["summary"]
@@ -4061,7 +4062,11 @@ def validate_report_consistency(
         expected_open_queues["source_discovery_unqueued_actionable_rows"] = source_action_summary.get(
             "unqueued_actionable_source_rows", 0
         )
-    metadata_action_queue = load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
+    metadata_action_queue = (
+        metadata_action_queue_override
+        if metadata_action_queue_override is not None
+        else load_json(METADATA_ACTION_QUEUE, {}) if METADATA_ACTION_QUEUE.exists() else {}
+    )
     metadata_action_summary = metadata_action_queue.get("summary", {})
     if metadata_action_summary:
         expected_open_queues["metadata_action_missing_cells"] = metadata_action_summary.get("queued_missing_cells", 0)
@@ -4611,6 +4616,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         danganronpa_missing_media,
         operations,
         agent_work_queue,
+        metadata_action_queue,
     )
     if consistency_findings:
         raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))
