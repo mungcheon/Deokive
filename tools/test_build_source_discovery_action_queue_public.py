@@ -69,6 +69,13 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["catalog_field_import_template_count"], 2)
         self.assertEqual(report["summary"]["missing_template_item_count"], 0)
         self.assertEqual(dict(report["summary"]["excluded_review_state_rows"]), {"manual_official_research_required": 5})
+        self.assertEqual(report["summary"]["manual_research_backlog_rows"], 1)
+        self.assertEqual(report["summary"]["manual_research_backlog_by_source_store"], [["Unknown", 1]])
+        self.assertEqual(report["manual_research_backlog"][0]["catalog_index"], 3)
+        self.assertEqual(
+            report["manual_research_backlog"][0]["recommended_next_step"],
+            "find_official_domain_then_record_exact_product_detail_source",
+        )
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual([item["catalog_index"] for item in report["batches"][0]["items"]], [1, 2])
         self.assertEqual(report["source_store_workstreams"][0]["source_store"], "Animate")

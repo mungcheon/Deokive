@@ -127,6 +127,7 @@ def _compact_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
 
 def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_size: int = 20) -> dict[str, Any]:
     action_items: list[dict[str, Any]] = []
+    manual_research_items: list[dict[str, Any]] = []
     excluded_review_states = Counter()
     actionable_source_rows = 0
 
@@ -137,6 +138,10 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
         row_count = int(batch.get("row_count") or 0)
         if review_state not in ACTIONABLE_REVIEW_STATES:
             excluded_review_states[review_state or "unknown"] += row_count
+            if review_state == "manual_official_research_required":
+                for item in batch.get("items") or []:
+                    if isinstance(item, dict):
+                        manual_research_items.append(_compact_item(batch, item))
             continue
         actionable_source_rows += row_count
         for item in batch.get("items") or []:
@@ -223,6 +228,8 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "by_workflow": _counter_pairs(action_items, "workflow"),
             "by_source_store": _counter_pairs(action_items, "source_store")[:40],
             "excluded_review_state_rows": [[key, value] for key, value in excluded_review_states.most_common()],
+            "manual_research_backlog_rows": len(manual_research_items),
+            "manual_research_backlog_by_source_store": _counter_pairs(manual_research_items, "source_store"),
             "auto_apply_enabled": False,
         },
         "instructions": [
@@ -231,6 +238,20 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "After source_url is confirmed, image_url can be handled by the image attachment queues.",
         ],
         "source_store_workstreams": _source_store_workstreams(batches),
+        "manual_research_backlog": [
+            {
+                "catalog_index": item.get("catalog_index"),
+                "source_store": item.get("source_store"),
+                "category": item.get("category"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "web_search_url": item.get("web_search_url"),
+                "acceptance_rule": item.get("acceptance_rule"),
+                "recommended_next_step": "find_official_domain_then_record_exact_product_detail_source",
+                "auto_apply_enabled": False,
+            }
+            for item in manual_research_items
+        ],
         "batches": batches,
         "automation_policy": {
             "auto_apply_source_url": False,

@@ -1927,6 +1927,10 @@ def build_operations_public(
             "by_source_store": source_action_queue_summary.get("by_source_store", []),
             "top_source_store_workstreams": source_action_workstreams,
             "excluded_review_state_rows": source_action_queue_summary.get("excluded_review_state_rows", []),
+            "manual_research_backlog_rows": source_action_queue_summary.get("manual_research_backlog_rows", 0),
+            "manual_research_backlog_by_source_store": source_action_queue_summary.get(
+                "manual_research_backlog_by_source_store", []
+            ),
             "recommended_next_action": "Work queued official-search source URL batches, then expand remaining actionable source rows.",
         } if source_action_queue_summary else None,
         {
@@ -2258,6 +2262,10 @@ def build_operations_public(
             "by_source_store": source_action_queue_summary.get("by_source_store", []),
             "top_source_store_workstreams": source_action_workstreams,
             "excluded_review_state_rows": source_action_queue_summary.get("excluded_review_state_rows", []),
+            "manual_research_backlog_rows": source_action_queue_summary.get("manual_research_backlog_rows", 0),
+            "manual_research_backlog_by_source_store": source_action_queue_summary.get(
+                "manual_research_backlog_by_source_store", []
+            ),
             "primary_report": f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
             "next_step": "confirm_exact_source_url_then_fill_source_templates",
             "auto_apply_enabled": source_action_queue_summary.get("auto_apply_enabled", False),
@@ -2570,6 +2578,9 @@ def build_operations_public(
         )
         open_review_queues["source_discovery_unqueued_actionable_rows"] = source_action_queue_summary.get(
             "unqueued_actionable_source_rows", 0
+        )
+        open_review_queues["source_discovery_manual_research_backlog_rows"] = (
+            source_action_queue_summary.get("manual_research_backlog_rows", 0)
         )
     if source_detail_candidate_action_queue_summary:
         open_review_queues["source_detail_candidate_action_rows"] = (
@@ -4563,6 +4574,9 @@ def validate_report_consistency(
         )
         expected_open_queues["source_discovery_unqueued_actionable_rows"] = source_action_summary.get(
             "unqueued_actionable_source_rows", 0
+        )
+        expected_open_queues["source_discovery_manual_research_backlog_rows"] = (
+            source_action_summary.get("manual_research_backlog_rows", 0)
         )
     source_detail_candidate_action_queue = (
         load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {})

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T15:41:19Z",
+  "generated_at": "2026-07-22T15:47:36Z",
   "summary": {
     "catalog_rows": 20391,
     "coverage": {
@@ -40,6 +40,7 @@
       "source_discovery_action_rows": 642,
       "source_discovery_actionable_rows": 642,
       "source_discovery_unqueued_actionable_rows": 0,
+      "source_discovery_manual_research_backlog_rows": 5,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
       "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
@@ -764,6 +765,17 @@
         [
           "manual_official_research_required",
           5
+        ]
+      ],
+      "manual_research_backlog_rows": 5,
+      "manual_research_backlog_by_source_store": [
+        [
+          "아이돌 공식",
+          3
+        ],
+        [
+          "SVC 공식",
+          2
         ]
       ],
       "primary_report": "data/source_discovery_action_queue_public.json",
@@ -2862,6 +2874,17 @@
         [
           "manual_official_research_required",
           5
+        ]
+      ],
+      "manual_research_backlog_rows": 5,
+      "manual_research_backlog_by_source_store": [
+        [
+          "아이돌 공식",
+          3
+        ],
+        [
+          "SVC 공식",
+          2
         ]
       ],
       "recommended_next_action": "Work queued official-search source URL batches, then expand remaining actionable source rows."
