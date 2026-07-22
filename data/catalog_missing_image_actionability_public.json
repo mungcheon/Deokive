@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T13:24:44Z",
+  "generated_at": "2026-07-22T13:37:37Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 720,
@@ -14,6 +14,10 @@
     "source_detail_identity_warning_rows": 10,
     "source_detail_unflagged_candidate_rows": 2,
     "manual_image_research_rows": 5,
+    "source_discovery_focus_pack_rows": 427,
+    "source_discovery_focus_pack_count": 24,
+    "source_discovery_focus_coverage": 0.6651,
+    "source_discovery_non_focus_rows": 215,
     "action_queue_rows": 75,
     "direct_image_action_queue_rows": 73,
     "actionable_image_rows": 75,
@@ -3769,6 +3773,7 @@
     "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
     "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
     "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
+    "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",
     "All image changes remain manual-review only until exact product identity is confirmed."
   ],
   "automation_policy": {

@@ -50,6 +50,14 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             ],
         }
         action_queue = {"summary": {"queued_image_rows": 2, "actionable_image_rows": 3}}
+        focus_packs = {
+            "summary": {
+                "focus_source_rows": 4,
+                "focus_pack_count": 2,
+                "focus_coverage": 0.8,
+                "non_focus_source_rows": 1,
+            }
+        }
         source_detail_queue = {
             "batches": [
                 {
@@ -90,6 +98,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             enrichment,
             action_queue,
             source_detail_queue,
+            focus_packs,
             generated_at="2026-07-22T00:00:00Z",
         )
 
@@ -105,6 +114,10 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_detail_identity_warning_rows"], 2)
         self.assertEqual(report["summary"]["source_detail_unflagged_candidate_rows"], 0)
         self.assertEqual(report["summary"]["manual_image_research_rows"], 1)
+        self.assertEqual(report["summary"]["source_discovery_focus_pack_rows"], 4)
+        self.assertEqual(report["summary"]["source_discovery_focus_pack_count"], 2)
+        self.assertEqual(report["summary"]["source_discovery_focus_coverage"], 0.8)
+        self.assertEqual(report["summary"]["source_discovery_non_focus_rows"], 1)
         self.assertEqual(report["summary"]["direct_image_action_queue_rows"], 2)
         self.assertEqual(report["summary"]["action_queue_rows"], 2)
         self.assertEqual(report["summary"]["actionable_image_rows"], 3)

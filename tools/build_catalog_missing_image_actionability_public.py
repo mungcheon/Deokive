@@ -13,6 +13,7 @@ DATA = ROOT / "data"
 DEFAULT_ENRICHMENT = DATA / "catalog_image_enrichment_batches_public.json"
 DEFAULT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
 DEFAULT_SOURCE_DETAIL_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
+DEFAULT_SOURCE_DISCOVERY_FOCUS_PACKS = DATA / "source_discovery_focus_packs_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_missing_image_actionability_public.json"
 
 
@@ -306,11 +307,18 @@ def build_report(
     enrichment: dict[str, Any],
     action_queue: dict[str, Any],
     source_detail_queue: dict[str, Any] | None = None,
+    source_discovery_focus_packs: dict[str, Any] | None = None,
     *,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     summary = enrichment.get("summary") if isinstance(enrichment.get("summary"), dict) else {}
     action_summary = action_queue.get("summary") if isinstance(action_queue.get("summary"), dict) else {}
+    focus_summary = (
+        source_discovery_focus_packs.get("summary")
+        if isinstance(source_discovery_focus_packs, dict)
+        and isinstance(source_discovery_focus_packs.get("summary"), dict)
+        else {}
+    )
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
     source_detail_missing = source_detail_missing_items(source_detail_queue)
     source_detail_ready = [
@@ -363,6 +371,10 @@ def build_report(
             ),
             "source_detail_unflagged_candidate_rows": len(source_detail_ready),
             "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
+            "source_discovery_focus_pack_rows": int(focus_summary.get("focus_source_rows") or 0),
+            "source_discovery_focus_pack_count": int(focus_summary.get("focus_pack_count") or 0),
+            "source_discovery_focus_coverage": float(focus_summary.get("focus_coverage") or 0),
+            "source_discovery_non_focus_rows": int(focus_summary.get("non_focus_source_rows") or 0),
             "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_ready),
             "direct_image_action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
             "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_ready),
@@ -382,6 +394,7 @@ def build_report(
             "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
             "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
             "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
+            "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",
             "All image changes remain manual-review only until exact product identity is confirmed.",
         ],
         "automation_policy": {
@@ -398,11 +411,18 @@ def main() -> int:
     parser.add_argument("--enrichment", type=Path, default=DEFAULT_ENRICHMENT)
     parser.add_argument("--action-queue", type=Path, default=DEFAULT_ACTION_QUEUE)
     parser.add_argument("--source-detail-queue", type=Path, default=DEFAULT_SOURCE_DETAIL_QUEUE)
+    parser.add_argument("--source-discovery-focus-packs", type=Path, default=DEFAULT_SOURCE_DISCOVERY_FOCUS_PACKS)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(load_json(args.enrichment), load_json(args.action_queue), load_json(args.source_detail_queue))
+    focus_packs = load_json(args.source_discovery_focus_packs) if args.source_discovery_focus_packs.exists() else None
+    report = build_report(
+        load_json(args.enrichment),
+        load_json(args.action_queue),
+        load_json(args.source_detail_queue),
+        focus_packs,
+    )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
