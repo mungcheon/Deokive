@@ -31,8 +31,8 @@ jobs:
               json.dumps(
                   {
                       "mode": "notice",
-                      "message": "1분 뒤 업데이트를 시작합니다. 작업 중이라면 종료 부탁드려요.",
-                      "eta": "업데이트 시작 1분 전 안내",
+                      "message": "1분 뒤 업데이트를 시작하오니 작업을 종료해 주세요.",
+                      "eta": "업데이트 시작 1분 전",
                   },
                   ensure_ascii=False,
                   indent=2,
@@ -112,6 +112,7 @@ jobs:
             data/catalog_missing_image_priority_public.json \
             data/ensky_missing_image_cache_coverage_public.json \
             data/ensky_search_page_probe_public.json \
+            data/stellive_fanding_candidates_public.json \
             data/catalog_missing_image_work_queue_public.json \
             data/catalog_missing_image_work_queue_public.csv \
             data/catalog_image_enrichment_batches_public.json \

@@ -27,6 +27,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_missing_image_priority_public.json", updated_files)
         self.assertIn("data/ensky_missing_image_cache_coverage_public.json", updated_files)
         self.assertIn("data/ensky_search_page_probe_public.json", updated_files)
+        self.assertIn("data/stellive_fanding_candidates_public.json", updated_files)
         self.assertIn("data/requested_focus_enrichment_public.json", updated_files)
         self.assertIn("data/requested_focus_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_confirmed_import_readiness_public.json", updated_files)
@@ -43,6 +44,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():
             self.assertEqual(quality["ensky_search_page_probe"]["processed_rows"], 30)
             self.assertIs(quality["ensky_search_page_probe"]["auto_apply_enabled"], False)
+        if reports.STELLIVE_FANDING_CANDIDATES.exists():
+            self.assertGreater(quality["stellive_fanding_candidates"]["missing_image_candidate_rows"], 0)
+            self.assertIs(quality["stellive_fanding_candidates"]["auto_apply_enabled"], False)
 
     def test_all_public_json_files_are_parseable_and_safe_for_pages(self):
         public_files = reports.discover_public_json_files()
