@@ -84,6 +84,18 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "auto_apply_enabled": False,
                 }
             },
+            "source_discovery_next_focus_fallback_queue_public.json": {
+                "summary": {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "queue_rows": 4,
+                    "manual_confirmed_rows": 0,
+                    "fallback_reason": "official_search_url_unavailable",
+                    "by_http_status": [["404", 4]],
+                    "by_source_store": [["Animate", 4]],
+                    "by_category": [["Acrylic stand", 4]],
+                    "auto_apply_enabled": False,
+                }
+            },
             "catalog_metadata_review_batches_public.json": {
                 "summary": {"missing_cell_count": 20, "batch_count": 2, "field_missing_totals": {"barcode": 20}}
             },
@@ -314,6 +326,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertIn("not fetchable", fetch_audit["blocker"])
         self.assertEqual(fetch_audit["evidence"]["focus_pack_id"], "source-discovery-focus-001")
         self.assertEqual(fetch_audit["evidence"]["official_search_unavailable_rows"], 4)
+        fallback_queue = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "source_discovery_next_focus_fallback_queue"
+        )
+        self.assertEqual(fallback_queue["priority"], 20)
+        self.assertEqual(fallback_queue["rows"], 4)
+        self.assertEqual(fallback_queue["evidence"]["by_source_store"], [["Animate", 4]])
+        self.assertEqual(report["summary"]["source_next_focus_fallback_rows"], 4)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
         image_action = next(

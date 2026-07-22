@@ -2490,6 +2490,8 @@
     "source_discovery_focus_template_rows": 427,
     "source_discovery_focus_template_work_order_packs": 24,
     "source_discovery_focus_template_dry_run_skipped_rows": 427,
+    "source_discovery_next_focus_fallback_rows": 20,
+    "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
     "source_detail_candidate_action_rows": 15,
     "source_detail_candidate_manual_confirmed_rows": 0,
     "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
@@ -2699,6 +2701,8 @@
       "source_discovery_focus_template_rows": 427,
       "source_discovery_focus_template_work_order_packs": 24,
       "source_discovery_focus_template_dry_run_skipped_rows": 427,
+      "source_discovery_next_focus_fallback_rows": 20,
+      "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
       "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
@@ -3664,11 +3668,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 22,
+    "action_count": 23,
     "blocked_action_count": 1,
-    "manual_review_action_count": 19,
+    "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 33563,
+    "total_action_rows": 33583,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -3697,6 +3701,8 @@
       "source_discovery_focus_template_rows": 427,
       "source_discovery_focus_template_work_order_packs": 24,
       "source_discovery_focus_template_dry_run_skipped_rows": 427,
+      "source_discovery_next_focus_fallback_rows": 20,
+      "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
       "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
@@ -3756,6 +3762,8 @@
     "source_focus_template_rows": 427,
     "source_focus_template_work_order_pack_count": 24,
     "source_focus_template_next_pack_rows": 20,
+    "source_next_focus_fallback_rows": 20,
+    "source_next_focus_fallback_manual_confirmed_rows": 0,
     "animation_split_review_categories": 3,
     "animation_candidate_split_rules": 21,
     "animation_split_matched_catalog_rows": 2283,
@@ -6059,5 +6067,32 @@
     "blocked_rows": 29,
     "auto_apply_enabled": false,
     "recommended_next_action": "manual_confirm_exact_official_patch_candidates_before_catalog_mutation"
+  },
+  "source_discovery_next_focus_fallback_queue": {
+    "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+    "focus_pack_id": "source-discovery-focus-001",
+    "queue_rows": 20,
+    "manual_confirmed_rows": 0,
+    "fallback_reason": "official_search_url_unavailable",
+    "by_http_status": [
+      [
+        "404",
+        20
+      ]
+    ],
+    "by_source_store": [
+      [
+        "애니메이트",
+        20
+      ]
+    ],
+    "by_category": [
+      [
+        "아크릴 스탠드",
+        20
+      ]
+    ],
+    "auto_apply_enabled": false,
+    "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
   }
 }

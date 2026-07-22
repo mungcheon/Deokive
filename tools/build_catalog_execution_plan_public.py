@@ -104,6 +104,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_focus_template = load_report("source_discovery_focus_confirmed_template_public.json")
     source_focus_template_import = load_report("source_discovery_focus_template_import_dry_run_public.json")
     source_next_focus_fetch_audit = load_report("source_discovery_next_focus_pack_fetch_audit_public.json")
+    source_next_focus_fallback_queue = load_report("source_discovery_next_focus_fallback_queue_public.json")
     source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
     ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
     metadata_batches = load_report("catalog_metadata_review_batches_public.json")
@@ -134,6 +135,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_action_summary = _summary(source_action_queue)
     source_focus_template_summary = _summary(source_focus_template)
     source_next_focus_fetch_audit_summary = _summary(source_next_focus_fetch_audit)
+    source_next_focus_fallback_summary = _summary(source_next_focus_fallback_queue)
     source_detail_candidate_action_summary = _summary(source_detail_candidate_action_queue)
     ensky_cache_candidate_action_summary = _summary(ensky_cache_candidate_action_queue)
     metadata_summary = _summary(metadata_batches)
@@ -312,6 +314,29 @@ def _build_plan(load_report) -> dict[str, Any]:
                         source_next_focus_fetch_audit_summary, "official_search_unavailable_rows"
                     ),
                     "status_counts": source_next_focus_fetch_audit_summary.get("status_counts", []),
+                },
+            )
+        )
+
+    if source_next_focus_fallback_summary:
+        actions.append(
+            _action(
+                priority=20,
+                workstream="source_discovery_next_focus_fallback_queue",
+                public_report="data/source_discovery_next_focus_fallback_queue_public.json",
+                status="manual_review" if _count(source_next_focus_fallback_summary, "queue_rows") else "clear",
+                rows=_count(source_next_focus_fallback_summary, "queue_rows"),
+                command="Work fallback rows with web search, archives, or alternate official store entry points.",
+                next_step="fill_exact_manual_confirmed_source_urls_from_fallback_research",
+                blocker="Every fallback source_url still needs exact product identity confirmation before import.",
+                evidence={
+                    "focus_pack_id": source_next_focus_fallback_summary.get("focus_pack_id"),
+                    "queue_rows": _count(source_next_focus_fallback_summary, "queue_rows"),
+                    "manual_confirmed_rows": _count(source_next_focus_fallback_summary, "manual_confirmed_rows"),
+                    "fallback_reason": source_next_focus_fallback_summary.get("fallback_reason"),
+                    "by_http_status": source_next_focus_fallback_summary.get("by_http_status", []),
+                    "by_source_store": source_next_focus_fallback_summary.get("by_source_store", []),
+                    "by_category": source_next_focus_fallback_summary.get("by_category", []),
                 },
             )
         )
@@ -841,6 +866,10 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "source_focus_template_next_pack_rows": _count(
                 source_focus_template_summary, "next_focus_pack_rows"
+            ),
+            "source_next_focus_fallback_rows": _count(source_next_focus_fallback_summary, "queue_rows"),
+            "source_next_focus_fallback_manual_confirmed_rows": _count(
+                source_next_focus_fallback_summary, "manual_confirmed_rows"
             ),
             "animation_split_review_categories": _count(animation_split_summary, "split_review_categories"),
             "animation_candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),

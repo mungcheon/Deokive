@@ -14,6 +14,7 @@ import build_image_source_url_confirmed_template_public
 import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
 import build_missing_image_priority_public
+import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_pack_public
 import import_confirmed_source_discovery_rows
 
@@ -82,6 +83,7 @@ SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT = DATA / "source_discovery_focus_template
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT = DATA / "source_discovery_next_focus_pack_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE = DATA / "source_discovery_next_focus_fallback_queue_public.json"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 OFFICIAL_DETAIL_REVIEW_BATCHES = DATA / "official_detail_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
@@ -1564,6 +1566,7 @@ def build_operations_public(
     metadata_action_queue_override: dict[str, Any] | None = None,
     ichiban_prize_name_image_review_override: dict[str, Any] | None = None,
     ichiban_prize_name_image_patch_candidates_override: dict[str, Any] | None = None,
+    source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -1601,6 +1604,14 @@ def build_operations_public(
         else {}
     )
     source_next_focus_fetch_audit_summary = source_next_focus_fetch_audit.get("summary", {})
+    source_next_focus_fallback_queue = (
+        source_next_focus_fallback_queue_override
+        if source_next_focus_fallback_queue_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.exists()
+        else {}
+    )
+    source_next_focus_fallback_queue_summary = source_next_focus_fallback_queue.get("summary", {})
     def compact_source_workstream(row: dict[str, Any]) -> dict[str, Any]:
         return {
             "source_store": row.get("source_store"),
@@ -2041,6 +2052,19 @@ def build_operations_public(
             "recommended_next_action": "Use web search or store archives for the current focus pack before marking any source_url confirmed.",
         } if source_next_focus_fetch_audit_summary else None,
         {
+            "priority": 20,
+            "workstream": "source_discovery_next_focus_fallback_queue",
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
+            "focus_pack_id": source_next_focus_fallback_queue_summary.get("focus_pack_id"),
+            "queue_rows": source_next_focus_fallback_queue_summary.get("queue_rows", 0),
+            "manual_confirmed_rows": source_next_focus_fallback_queue_summary.get("manual_confirmed_rows", 0),
+            "fallback_reason": source_next_focus_fallback_queue_summary.get("fallback_reason"),
+            "by_source_store": source_next_focus_fallback_queue_summary.get("by_source_store", []),
+            "by_category": source_next_focus_fallback_queue_summary.get("by_category", []),
+            "auto_apply_enabled": source_next_focus_fallback_queue_summary.get("auto_apply_enabled", False),
+            "recommended_next_action": "Review fallback rows and fill exact manual_confirmed_source_url values before source import.",
+        } if source_next_focus_fallback_queue_summary else None,
+        {
             "priority": 21,
             "workstream": "source_discovery_review_batches",
             "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
@@ -2470,6 +2494,18 @@ def build_operations_public(
             "auto_apply_enabled": source_next_focus_fetch_audit_summary.get("auto_apply_enabled", False),
         } if source_next_focus_fetch_audit_summary else None,
         {
+            "workstream": "source_discovery_next_focus_fallback_queue",
+            "status": "manual_review" if source_next_focus_fallback_queue_summary.get("queue_rows", 0) else "clear",
+            "open_rows": source_next_focus_fallback_queue_summary.get("queue_rows", 0),
+            "manual_confirmed_rows": source_next_focus_fallback_queue_summary.get("manual_confirmed_rows", 0),
+            "fallback_reason": source_next_focus_fallback_queue_summary.get("fallback_reason"),
+            "by_source_store": source_next_focus_fallback_queue_summary.get("by_source_store", []),
+            "by_category": source_next_focus_fallback_queue_summary.get("by_category", []),
+            "primary_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
+            "next_step": "fill_exact_manual_confirmed_source_urls_from_fallback_research",
+            "auto_apply_enabled": source_next_focus_fallback_queue_summary.get("auto_apply_enabled", False),
+        } if source_next_focus_fallback_queue_summary else None,
+        {
             "workstream": "source_discovery_review_batches",
             "status": "open" if source_review_batches_summary.get("source_discovery_rows", 0) else "clear",
             "open_rows": source_review_batches_summary.get("source_discovery_rows", 0),
@@ -2862,6 +2898,13 @@ def build_operations_public(
         open_review_queues["source_discovery_focus_template_dry_run_skipped_rows"] = source_focus_template_import.get(
             "skipped_rows", 0
         )
+    if source_next_focus_fallback_queue_summary:
+        open_review_queues["source_discovery_next_focus_fallback_rows"] = (
+            source_next_focus_fallback_queue_summary.get("queue_rows", 0)
+        )
+        open_review_queues["source_discovery_next_focus_fallback_manual_confirmed_rows"] = (
+            source_next_focus_fallback_queue_summary.get("manual_confirmed_rows", 0)
+        )
     if source_detail_candidate_action_queue_summary:
         open_review_queues["source_detail_candidate_action_rows"] = (
             source_detail_candidate_action_queue_summary.get("candidate_action_rows", 0)
@@ -3012,6 +3055,7 @@ def build_operations_public(
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
             {"key": "source_discovery_focus_template", "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}"},
+            {"key": "source_discovery_next_focus_fallback_queue", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}"},
             {"key": "ensky_cache_candidate_action_queue", "public_report": f"data/{ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.name}"},
             {"key": "source_detail_candidate_action_queue", "public_report": f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}"},
             {"key": "official_detail_review_batches", "public_report": f"data/{OFFICIAL_DETAIL_REVIEW_BATCHES.name}"},
@@ -4898,6 +4942,19 @@ def validate_report_consistency(
         expected_open_queues["source_discovery_focus_template_dry_run_skipped_rows"] = (
             source_focus_template_import.get("skipped_rows", 0)
         )
+    source_next_focus_fallback_queue = (
+        load_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.exists()
+        else {}
+    )
+    source_next_focus_fallback_summary = source_next_focus_fallback_queue.get("summary", {})
+    if source_next_focus_fallback_summary:
+        expected_open_queues["source_discovery_next_focus_fallback_rows"] = (
+            source_next_focus_fallback_summary.get("queue_rows", 0)
+        )
+        expected_open_queues["source_discovery_next_focus_fallback_manual_confirmed_rows"] = (
+            source_next_focus_fallback_summary.get("manual_confirmed_rows", 0)
+        )
     source_detail_candidate_action_queue = (
         load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {})
         if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists()
@@ -5345,6 +5402,35 @@ def update_reports(write: bool) -> dict[str, Any]:
         raise ValueError("generic source patch candidate count does not match item count")
     if patch_candidate_summary.get("auto_apply_enabled") is not False:
         raise ValueError("generic source patch candidates must stay manual-review only")
+    image_attachment_action_queue = load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {})
+    image_source_url_confirmed_template = build_image_source_url_confirmed_template_public.build_template(
+        image_attachment_action_queue,
+        load_json(STELLIVE_FANDING_CANDIDATES, {}) if STELLIVE_FANDING_CANDIDATES.exists() else None,
+        generated_at=generated_at,
+    )
+    source_discovery_focus_template = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {})
+    source_discovery_focus_template_import = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
+    source_discovery_next_focus_pack = build_source_discovery_next_focus_pack_public.build_report(
+        source_discovery_focus_template,
+        generated_at=generated_at,
+    )
+    source_discovery_next_focus_pack_import = build_source_discovery_import_dry_run_public(
+        source_discovery_next_focus_pack,
+        items,
+        queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_PACK,
+    )
+    source_discovery_next_focus_fetch_audit = (
+        load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists()
+        else {}
+    )
+    source_discovery_next_focus_fallback_queue = (
+        build_source_discovery_next_focus_fallback_queue_public.build_report(
+            source_discovery_next_focus_pack,
+            source_discovery_next_focus_fetch_audit,
+            generated_at=generated_at,
+        )
+    )
     operations = build_operations_public(
         generated_at,
         items,
@@ -5365,6 +5451,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         metadata_action_queue,
         ichiban_kuji_prize_name_image_review,
         ichiban_kuji_prize_name_image_patch_candidates,
+        source_discovery_next_focus_fallback_queue,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -5382,24 +5469,6 @@ def update_reports(write: bool) -> dict[str, Any]:
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 
-    image_attachment_action_queue = load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {})
-    image_source_url_confirmed_template = build_image_source_url_confirmed_template_public.build_template(
-        image_attachment_action_queue,
-        load_json(STELLIVE_FANDING_CANDIDATES, {}) if STELLIVE_FANDING_CANDIDATES.exists() else None,
-        generated_at=generated_at,
-    )
-    source_discovery_focus_template = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {})
-    source_discovery_focus_template_import = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
-    source_discovery_next_focus_pack = build_source_discovery_next_focus_pack_public.build_report(
-        source_discovery_focus_template,
-        generated_at=generated_at,
-    )
-    source_discovery_next_focus_pack_import = build_source_discovery_import_dry_run_public(
-        source_discovery_next_focus_pack,
-        items,
-        queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_PACK,
-    )
-
     execution_plan = build_plan_from_reports(
         {
             "catalog_operations_public.json": operations,
@@ -5407,11 +5476,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             "catalog_image_attachment_action_queue_public.json": image_attachment_action_queue,
             "source_discovery_focus_confirmed_template_public.json": source_discovery_focus_template,
             "source_discovery_focus_template_import_dry_run_public.json": source_discovery_focus_template_import,
-            "source_discovery_next_focus_pack_fetch_audit_public.json": (
-                load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, {})
-                if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists()
-                else {}
-            ),
+            "source_discovery_next_focus_pack_fetch_audit_public.json": source_discovery_next_focus_fetch_audit,
+            "source_discovery_next_focus_fallback_queue_public.json": source_discovery_next_focus_fallback_queue,
             "source_discovery_review_batches_public.json": load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}),
             "source_discovery_action_queue_public.json": load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}),
             "ensky_cache_candidate_action_queue_public.json": load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {}),
@@ -5538,6 +5604,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["source_discovery_next_focus_pack_fetch_audit"] = copy_report_summary(
                 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, "source_discovery_next_focus_pack_fetch_audit"
             )
+        target["source_discovery_next_focus_fallback_queue"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
+            **source_discovery_next_focus_fallback_queue["summary"],
+        }
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
             target["animate_missing_image_search"] = copy_report_summary(
                 ANIMATE_MISSING_IMAGE_SEARCH, "animate_missing_image_search"
@@ -5821,6 +5891,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, source_discovery_next_focus_fallback_queue)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
@@ -5856,6 +5927,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),

@@ -51,6 +51,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_discovery_next_focus_pack_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_pack_import_dry_run_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_pack_fetch_audit_public.json", updated_files)
+        self.assertIn("data/source_discovery_next_focus_fallback_queue_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
@@ -113,6 +114,11 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["source_discovery_next_focus_pack_fetch_audit"]["auto_apply_enabled"],
                 False,
             )
+        self.assertEqual(
+            quality["source_discovery_next_focus_fallback_queue"]["queue_rows"],
+            quality["source_discovery_next_focus_pack_fetch_audit"]["official_search_unavailable_rows"],
+        )
+        self.assertIs(quality["source_discovery_next_focus_fallback_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():
@@ -483,6 +489,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         source_focus_template = reports.load_json(reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE)
         source_focus_template_summary = source_focus_template.get("summary", {})
         source_focus_template_import = reports.load_json(reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT)
+        source_next_focus_fallback = reports.load_json(reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE)
+        source_next_focus_fallback_summary = source_next_focus_fallback.get("summary", {})
         ensky_cache_action = reports.load_json(reports.ENSKY_CACHE_CANDIDATE_ACTION_QUEUE)
         ensky_cache_action_summary = ensky_cache_action.get("summary", {})
         source_detail_action = reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)
@@ -496,6 +504,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("workstream_scorecard", [])
             if row.get("workstream") == "source_discovery_focus_template"
+        )
+        source_next_focus_fallback_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "source_discovery_next_focus_fallback_queue"
         )
         source_detail_scorecard = next(
             row
@@ -511,6 +524,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "source_discovery_focus_template"
+        )
+        source_next_focus_fallback_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "source_discovery_next_focus_fallback_queue"
         )
         ensky_cache_next_action = next(
             row
@@ -654,6 +672,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.IMAGE_ASSET_AUDIT.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}", report_links)
+        self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_SPLIT_REVIEW.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.name}", report_links)
@@ -785,6 +804,22 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_focus_template_import.get("skipped_rows"),
         )
         self.assertFalse(source_focus_scorecard.get("auto_apply_enabled"))
+        self.assertEqual(
+            open_queues.get("source_discovery_next_focus_fallback_rows"),
+            source_next_focus_fallback_summary.get("queue_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_next_focus_fallback_manual_confirmed_rows"),
+            source_next_focus_fallback_summary.get("manual_confirmed_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_fallback_scorecard.get("open_rows"),
+            source_next_focus_fallback_summary.get("queue_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_fallback_next_action.get("queue_rows"),
+            source_next_focus_fallback_summary.get("queue_rows"),
+        )
         self.assertEqual(
             quality["source_discovery_action_queue"].get("top_source_store_workstreams"),
             expected_source_workstreams,
