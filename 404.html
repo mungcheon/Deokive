@@ -2,14 +2,104 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=/">
-  <title>덕카이브로 이동 중</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Deokive로 이동 중</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d1b20;
+      --muted: #756d78;
+      --line: #efe7ee;
+      --pink: #f5b8cf;
+      --bg: #fffafd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(360px, 100%);
+      text-align: center;
+    }
+
+    .mark {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 18px;
+      border-radius: 18px;
+      background: var(--pink);
+      box-shadow: inset 0 -10px 20px rgba(255, 255, 255, 0.45);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 auto 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+  </style>
   <script>
-    window.location.replace("/");
+    const isGithubProjectPage = location.hostname.endsWith("github.io");
+    const homePath = isGithubProjectPage ? "/Deokive/" : "/";
+    const target = `${location.origin}${homePath}`;
+
+    window.setTimeout(() => {
+      location.replace(target);
+    }, 1200);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const link = document.querySelector("[data-home-link]");
+      if (link) link.href = target;
+    });
   </script>
 </head>
 <body>
-  <p>덕카이브로 이동 중입니다.</p>
+  <main>
+    <div class="mark" aria-hidden="true"></div>
+    <h1>Deokive 홈으로 이동 중이에요</h1>
+    <p>페이지 주소가 바뀌었거나 배포 직후라 잠깐 늦게 열릴 수 있어요. 곧 홈 화면으로 이동합니다.</p>
+    <a data-home-link href="/">홈으로 바로 가기</a>
+  </main>
 </body>
 </html>
