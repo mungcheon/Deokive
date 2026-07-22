@@ -46,7 +46,7 @@ Future<bool> showCatalogGoodsImportFlow(
   final imageBytes = await _downloadCatalogImage(entry);
   if (!context.mounted) return false;
 
-  final item = _goodsItemFromCatalogEntry(
+  final item = goodsItemFromCatalogEntry(
     appState: appState,
     entry: entry,
     folder: targetFolder,
@@ -212,7 +212,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
   );
 }
 
-GoodsItem _goodsItemFromCatalogEntry({
+GoodsItem goodsItemFromCatalogEntry({
   required AppState appState,
   required GoodsCatalogEntry entry,
   required FolderItem folder,
