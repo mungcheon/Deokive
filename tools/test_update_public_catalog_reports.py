@@ -116,9 +116,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["source_detail_candidate_action_queue"]["manual_confirmed_true"], 0)
             self.assertIs(quality["source_detail_candidate_action_queue"]["auto_apply_enabled"], False)
         if reports.GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.exists():
+            gotouchi_attachment = reports.load_json(reports.GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT)
             self.assertEqual(
                 quality["gotouchi_representative_image_attachment"]["representative_attachment_rows"],
-                3,
+                gotouchi_attachment["summary"]["representative_attachment_rows"],
             )
             self.assertEqual(quality["gotouchi_representative_image_attachment"]["manual_confirmed_true"], 0)
             self.assertIs(quality["gotouchi_representative_image_attachment"]["auto_apply_enabled"], False)

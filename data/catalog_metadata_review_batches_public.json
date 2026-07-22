@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T11:25:04Z",
+  "generated_at": "2026-07-22T14:12:03Z",
   "summary": {
-    "catalog_rows": 20392,
+    "catalog_rows": 20391,
     "tracked_fields": [
       "name_ja",
       "barcode",
@@ -14,12 +14,12 @@
     "field_store_group_count": 351,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 13970,
+    "missing_cell_count": 13968,
     "field_missing_totals": {
       "name_ja": 529,
       "release_date": 1408,
-      "barcode": 10097,
-      "official_price_jpy": 569,
+      "barcode": 10096,
+      "official_price_jpy": 568,
       "image_url": 720,
       "source_url": 647
     },
@@ -82,7 +82,7 @@
       ],
       [
         "Taito",
-        93
+        91
       ],
       [
         "MINISO",
@@ -11927,7 +11927,7 @@
       "batch_id": "metadata-review-016",
       "priority": 40,
       "group_count": 12,
-      "missing_cell_count": 29,
+      "missing_cell_count": 28,
       "field_counts": [
         [
           "official_price_jpy",
@@ -12041,51 +12041,6 @@
               "category": "캔뱃지",
               "source_url": "https://prtimes.jp/main/html/rd/p/000000258.000066407.html",
               "image_url": "https://prcdn.freetls.fastly.net/release_image/66407/258/66407-258-64ae0cce81fbdd43e0aaa0c6d9a35490-1909x2700.jpg?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff"
-            }
-          ]
-        },
-        {
-          "field": "official_price_jpy",
-          "source_store": "Taito",
-          "missing_rows": 3,
-          "priority": 40,
-          "workflow": "official_metadata_review",
-          "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
-          "next_machine_step": "official_metadata_extraction",
-          "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-          "sample_catalog_indexes": [
-            17815,
-            17869,
-            17923
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 17815,
-              "name_ko": "하츠네 미쿠 경품 피규어",
-              "name_ja": "初音ミク プライズ フィギュア",
-              "series_name": "하츠네미쿠 경품 피규어",
-              "category": "피규어",
-              "source_url": "https://www.taito.co.jp/taito-prize/0452072400",
-              "image_url": "https://www.taito.co.jp/Content/images/zone/2/item/201407/5d862a46-e680-45d6-a58d-68c592caf0f5_p_01_ja.jpg"
-            },
-            {
-              "catalog_index": 17869,
-              "name_ko": "하츠네 미쿠 Wonderland 동화 시리즈 피규어",
-              "name_ja": "初音ミク Wonderland フィギュア ラプンツェル（タイクレ限定）",
-              "series_name": "하츠네미쿠 동화시리즈 피규어",
-              "category": "피규어",
-              "source_url": "https://www.taito.co.jp/taito-prize/0000014383",
-              "image_url": "https://www.taito.co.jp/Content/images/zone/2/item/201407/5add8e44-01e4-40de-8d1b-c413920308b2_p_01_ja.jpg"
-            },
-            {
-              "catalog_index": 17923,
-              "name_ko": "하츠네 미쿠 Wonderland 동화 시리즈 피규어",
-              "name_ja": "初音ミク Wonderland フィギュア",
-              "series_name": null,
-              "category": "피규어",
-              "source_url": "https://www.taito.co.jp/taito-prize/0000014383",
-              "image_url": "https://www.taito.co.jp/Content/images/zone/2/item/201407/5add8e44-01e4-40de-8d1b-c413920308b2_p_01_ja.jpg"
             }
           ]
         },
@@ -12271,6 +12226,41 @@
               "category": "인형",
               "source_url": "https://taito.co.jp/en/prize/0473894610",
               "image_url": "https://solarisjapan.com/cdn/shop/products/41tJVE5nrqL._AC.jpg?v=1654229583"
+            }
+          ]
+        },
+        {
+          "field": "official_price_jpy",
+          "source_store": "Taito",
+          "missing_rows": 2,
+          "priority": 40,
+          "workflow": "official_metadata_review",
+          "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+          "next_machine_step": "official_metadata_extraction",
+          "risk": "retailer_price_or_prize_price_confusion",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "sample_catalog_indexes": [
+            17815,
+            17869
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 17815,
+              "name_ko": "하츠네 미쿠 경품 피규어",
+              "name_ja": "初音ミク プライズ フィギュア",
+              "series_name": "하츠네미쿠 경품 피규어",
+              "category": "피규어",
+              "source_url": "https://www.taito.co.jp/taito-prize/0452072400",
+              "image_url": "https://www.taito.co.jp/Content/images/zone/2/item/201407/5d862a46-e680-45d6-a58d-68c592caf0f5_p_01_ja.jpg"
+            },
+            {
+              "catalog_index": 17869,
+              "name_ko": "하츠네 미쿠 Wonderland 동화 시리즈 피규어",
+              "name_ja": "初音ミク Wonderland フィギュア ラプンツェル（タイクレ限定）",
+              "series_name": "하츠네미쿠 동화시리즈 피규어",
+              "category": "피규어",
+              "source_url": "https://www.taito.co.jp/taito-prize/0000014383",
+              "image_url": "https://www.taito.co.jp/Content/images/zone/2/item/201407/5add8e44-01e4-40de-8d1b-c413920308b2_p_01_ja.jpg"
             }
           ]
         },
@@ -13377,7 +13367,7 @@
       "batch_id": "metadata-review-019",
       "priority": 50,
       "group_count": 12,
-      "missing_cell_count": 676,
+      "missing_cell_count": 675,
       "field_counts": [
         [
           "barcode",
@@ -14062,7 +14052,7 @@
         {
           "field": "barcode",
           "source_store": "Taito",
-          "missing_rows": 34,
+          "missing_rows": 33,
           "priority": 50,
           "workflow": "barcode_evidence_review",
           "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",

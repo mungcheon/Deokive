@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T11:25:09Z",
+  "generated_at": "2026-07-22T14:12:05Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 18,
     "blocked_action_count": 1,
     "manual_review_action_count": 16,
     "pending_import_action_count": 0,
-    "total_action_rows": 42548,
+    "total_action_rows": 42545,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -43,10 +43,10 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 2506,
+      "metadata_action_missing_cells": 2505,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2506,
+      "metadata_actionable_missing_cells": 2505,
       "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 374,
       "animation_category_action_rows": 374,
@@ -509,7 +509,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 13970,
+      "rows": 13968,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -519,8 +519,8 @@
         "field_missing_totals": {
           "name_ja": 529,
           "release_date": 1408,
-          "barcode": 10097,
-          "official_price_jpy": 569,
+          "barcode": 10096,
+          "official_price_jpy": 568,
           "image_url": 720,
           "source_url": 647
         }
@@ -531,7 +531,7 @@
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 2506,
+      "rows": 2505,
       "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
       "next_step": "fill_confirmed_metadata_patch_templates",
       "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
@@ -539,8 +539,8 @@
       "evidence": {
         "actionable_group_count": 166,
         "queued_group_count": 166,
-        "actionable_missing_cells": 2506,
-        "queued_missing_cells": 2506,
+        "actionable_missing_cells": 2505,
+        "queued_missing_cells": 2505,
         "action_batch_count": 14,
         "field_counts": [
           [
@@ -563,7 +563,7 @@
           ],
           [
             "official_price_jpy",
-            569
+            568
           ],
           [
             "name_ja",
@@ -636,12 +636,12 @@
             30
           ],
           [
-            "Taito",
+            "Hololive Production Official Shop",
             29
           ],
           [
-            "Hololive Production Official Shop",
-            29
+            "Taito",
+            28
           ],
           [
             "치이카와 온라인 쿠지",

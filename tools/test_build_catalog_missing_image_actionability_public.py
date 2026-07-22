@@ -63,6 +63,15 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         }
         focus_template = {"summary": {"template_items": 4, "manual_confirmed_rows": 0}}
         focus_template_dry_run = {"updated_rows": 0, "skipped_rows": 4}
+        image_attachment_template = {
+            "summary": {
+                "template_items": 2,
+                "manual_confirmed_rows": 0,
+                "source_url_update_required_rows": 1,
+                "representative_image_review_required_rows": 1,
+            }
+        }
+        image_attachment_template_dry_run = {"updated_rows": 0, "skipped_rows": 2}
         source_detail_queue = {
             "batches": [
                 {
@@ -106,6 +115,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             focus_packs,
             focus_template,
             focus_template_dry_run,
+            image_attachment_template,
+            image_attachment_template_dry_run,
             generated_at="2026-07-22T00:00:00Z",
         )
 
@@ -133,6 +144,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_discovery_focus_coverage"], 0.8)
         self.assertEqual(report["summary"]["source_discovery_non_focus_rows"], 1)
         self.assertEqual(report["summary"]["direct_image_action_queue_rows"], 2)
+        self.assertEqual(report["summary"]["image_attachment_template_rows"], 2)
+        self.assertEqual(report["summary"]["image_attachment_template_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["image_attachment_template_source_update_required_rows"], 1)
+        self.assertEqual(report["summary"]["image_attachment_template_representative_review_rows"], 1)
+        self.assertEqual(report["summary"]["image_attachment_template_dry_run_updated_rows"], 0)
+        self.assertEqual(report["summary"]["image_attachment_template_dry_run_skipped_rows"], 2)
         self.assertEqual(report["summary"]["action_queue_rows"], 2)
         self.assertEqual(report["summary"]["actionable_image_rows"], 3)
         readiness = {row["readiness"]: row["rows"] for row in report["readiness"]}

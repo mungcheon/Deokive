@@ -86,6 +86,8 @@ SOURCES = {
     "public_source_focus_packs": DATA / "source_discovery_focus_packs_public.json",
     "public_source_focus_template": DATA / "source_discovery_focus_confirmed_template_public.json",
     "public_source_focus_template_import": DATA / "source_discovery_focus_template_import_dry_run_public.json",
+    "public_image_attachment_template": DATA / "catalog_image_attachment_confirmed_template_public.json",
+    "public_image_attachment_template_import": DATA / "catalog_image_attachment_template_import_dry_run_public.json",
 }
 
 
@@ -105,12 +107,6 @@ def _display_path(path: Path) -> str:
         return str(path.relative_to(ROOT)).replace("\\", "/")
     except ValueError:
         return str(path).replace("\\", "/")
-
-
-def _display_payload_path(value: Any) -> str | None:
-    if not value:
-        return None
-    return _display_path(Path(str(value)))
 
 
 def _top(value: Any, limit: int = 5) -> list[Any]:
@@ -231,6 +227,9 @@ def build() -> dict[str, Any]:
     public_focus_template = data.get("public_source_focus_template", {})
     public_focus_template_summary = public_focus_template.get("summary") or {}
     public_focus_template_import = data.get("public_source_focus_template_import", {})
+    public_image_attachment_template = data.get("public_image_attachment_template", {})
+    public_image_attachment_template_summary = public_image_attachment_template.get("summary") or {}
+    public_image_attachment_template_import = data.get("public_image_attachment_template_import", {})
 
     workboards = [
         {
@@ -334,6 +333,18 @@ def build() -> dict[str, Any]:
             "template_import_updated_rows": public_focus_template_import.get("updated_rows"),
             "template_import_skipped_rows": public_focus_template_import.get("skipped_rows"),
             "template_import_skip_reason_counts": public_focus_template_import.get("skip_reason_counts"),
+            "image_attachment_template_items": public_image_attachment_template_summary.get("template_items"),
+            "image_attachment_template_confirmed_rows": public_image_attachment_template_summary.get(
+                "manual_confirmed_rows"
+            ),
+            "image_attachment_template_source_update_required_rows": public_image_attachment_template_summary.get(
+                "source_url_update_required_rows"
+            ),
+            "image_attachment_template_representative_review_rows": public_image_attachment_template_summary.get(
+                "representative_image_review_required_rows"
+            ),
+            "image_attachment_template_import_updated_rows": public_image_attachment_template_import.get("updated_rows"),
+            "image_attachment_template_import_skipped_rows": public_image_attachment_template_import.get("skipped_rows"),
             "auto_apply_enabled": public_actionability_summary.get("auto_apply_enabled"),
         },
         {
@@ -762,7 +773,7 @@ def build() -> dict[str, Any]:
             "db_count_label": "audited DBs",
             "database_summaries": [
                 {
-                    "db": _display_payload_path(item.get("db")),
+                    "db": f"catalog_db_{index + 1}",
                     "ok": item.get("ok"),
                     "active_rows": item.get("active_rows"),
                     "missing_images": item.get("missing_images"),
@@ -771,7 +782,7 @@ def build() -> dict[str, Any]:
                     "updated_active_rows": item.get("updated_active_rows"),
                     "duplicate_active_rows": item.get("duplicate_active_rows"),
                 }
-                for item in db_sync.get("databases") or []
+                for index, item in enumerate(db_sync.get("databases") or [])
             ],
         },
         {
@@ -1164,6 +1175,22 @@ def build() -> dict[str, Any]:
                 ),
                 "template_import_skipped_rows": public_actionability_summary.get(
                     "source_discovery_focus_template_dry_run_skipped_rows"
+                ),
+                "image_attachment_template_rows": public_actionability_summary.get("image_attachment_template_rows"),
+                "image_attachment_template_confirmed_rows": public_actionability_summary.get(
+                    "image_attachment_template_confirmed_rows"
+                ),
+                "image_attachment_template_source_update_required_rows": public_actionability_summary.get(
+                    "image_attachment_template_source_update_required_rows"
+                ),
+                "image_attachment_template_representative_review_rows": public_actionability_summary.get(
+                    "image_attachment_template_representative_review_rows"
+                ),
+                "image_attachment_template_dry_run_updated_rows": public_actionability_summary.get(
+                    "image_attachment_template_dry_run_updated_rows"
+                ),
+                "image_attachment_template_dry_run_skipped_rows": public_actionability_summary.get(
+                    "image_attachment_template_dry_run_skipped_rows"
                 ),
                 "auto_apply_enabled": public_actionability_summary.get("auto_apply_enabled"),
             },

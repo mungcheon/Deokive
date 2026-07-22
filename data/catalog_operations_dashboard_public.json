@@ -2178,6 +2178,12 @@
       "template_confirmed_rows": 0,
       "template_import_updated_rows": 0,
       "template_import_skipped_rows": 427,
+      "image_attachment_template_rows": 73,
+      "image_attachment_template_confirmed_rows": 0,
+      "image_attachment_template_source_update_required_rows": 50,
+      "image_attachment_template_representative_review_rows": 23,
+      "image_attachment_template_dry_run_updated_rows": 0,
+      "image_attachment_template_dry_run_skipped_rows": 73,
       "auto_apply_enabled": false
     },
     "report_consistency_ok": true
@@ -2401,6 +2407,12 @@
           427
         ]
       ],
+      "image_attachment_template_items": 73,
+      "image_attachment_template_confirmed_rows": 0,
+      "image_attachment_template_source_update_required_rows": 50,
+      "image_attachment_template_representative_review_rows": 23,
+      "image_attachment_template_import_updated_rows": 0,
+      "image_attachment_template_import_skipped_rows": 73,
       "auto_apply_enabled": false
     },
     {
@@ -3118,7 +3130,7 @@
       "db_count_label": "audited DBs",
       "database_summaries": [
         {
-          "db": "server/deokive_dev.db",
+          "db": "catalog_db_1",
           "ok": true,
           "active_rows": 18040,
           "missing_images": 724,
@@ -3128,7 +3140,7 @@
           "duplicate_active_rows": 0
         },
         {
-          "db": "deokive_dev.db",
+          "db": "catalog_db_2",
           "ok": true,
           "active_rows": 18040,
           "missing_images": 724,
@@ -4336,6 +4348,8 @@
     "public_image_actionability": "data/catalog_missing_image_actionability_public.json",
     "public_source_focus_packs": "data/source_discovery_focus_packs_public.json",
     "public_source_focus_template": "data/source_discovery_focus_confirmed_template_public.json",
-    "public_source_focus_template_import": "data/source_discovery_focus_template_import_dry_run_public.json"
+    "public_source_focus_template_import": "data/source_discovery_focus_template_import_dry_run_public.json",
+    "public_image_attachment_template": "data/catalog_image_attachment_confirmed_template_public.json",
+    "public_image_attachment_template_import": "data/catalog_image_attachment_template_import_dry_run_public.json"
   }
 }

@@ -16,6 +16,8 @@ DEFAULT_SOURCE_DETAIL_QUEUE = DATA / "source_detail_candidate_action_queue_publi
 DEFAULT_SOURCE_DISCOVERY_FOCUS_PACKS = DATA / "source_discovery_focus_packs_public.json"
 DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE = DATA / "source_discovery_focus_confirmed_template_public.json"
 DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE_DRY_RUN = DATA / "source_discovery_focus_template_import_dry_run_public.json"
+DEFAULT_IMAGE_ATTACHMENT_TEMPLATE = DATA / "catalog_image_attachment_confirmed_template_public.json"
+DEFAULT_IMAGE_ATTACHMENT_TEMPLATE_DRY_RUN = DATA / "catalog_image_attachment_template_import_dry_run_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_missing_image_actionability_public.json"
 
 
@@ -312,6 +314,8 @@ def build_report(
     source_discovery_focus_packs: dict[str, Any] | None = None,
     source_discovery_focus_template: dict[str, Any] | None = None,
     source_discovery_focus_template_dry_run: dict[str, Any] | None = None,
+    image_attachment_template: dict[str, Any] | None = None,
+    image_attachment_template_dry_run: dict[str, Any] | None = None,
     *,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -332,6 +336,17 @@ def build_report(
     focus_template_dry_run_summary = (
         source_discovery_focus_template_dry_run
         if isinstance(source_discovery_focus_template_dry_run, dict)
+        else {}
+    )
+    image_attachment_template_summary = (
+        image_attachment_template.get("summary")
+        if isinstance(image_attachment_template, dict)
+        and isinstance(image_attachment_template.get("summary"), dict)
+        else {}
+    )
+    image_attachment_template_dry_run_summary = (
+        image_attachment_template_dry_run
+        if isinstance(image_attachment_template_dry_run, dict)
         else {}
     )
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
@@ -411,6 +426,22 @@ def build_report(
             "source_discovery_non_focus_rows": int(focus_summary.get("non_focus_source_rows") or 0),
             "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_ready),
             "direct_image_action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
+            "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
+            "image_attachment_template_confirmed_rows": int(
+                image_attachment_template_summary.get("manual_confirmed_rows") or 0
+            ),
+            "image_attachment_template_source_update_required_rows": int(
+                image_attachment_template_summary.get("source_url_update_required_rows") or 0
+            ),
+            "image_attachment_template_representative_review_rows": int(
+                image_attachment_template_summary.get("representative_image_review_required_rows") or 0
+            ),
+            "image_attachment_template_dry_run_updated_rows": int(
+                image_attachment_template_dry_run_summary.get("updated_rows") or 0
+            ),
+            "image_attachment_template_dry_run_skipped_rows": int(
+                image_attachment_template_dry_run_summary.get("skipped_rows") or 0
+            ),
             "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_ready),
             "auto_apply_enabled": False,
         },
@@ -430,6 +461,7 @@ def build_report(
             "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
             "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",
             "source_discovery_focus_template_rows is a blank public confirmation template; import remains dry-run safe until rows are manually confirmed.",
+            "image_attachment_template_rows is a blank public image confirmation template for the direct image action queue.",
             "All image changes remain manual-review only until exact product identity is confirmed.",
         ],
         "automation_policy": {
@@ -453,6 +485,12 @@ def main() -> int:
         type=Path,
         default=DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE_DRY_RUN,
     )
+    parser.add_argument("--image-attachment-template", type=Path, default=DEFAULT_IMAGE_ATTACHMENT_TEMPLATE)
+    parser.add_argument(
+        "--image-attachment-template-dry-run",
+        type=Path,
+        default=DEFAULT_IMAGE_ATTACHMENT_TEMPLATE_DRY_RUN,
+    )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
@@ -468,6 +506,16 @@ def main() -> int:
         if args.source_discovery_focus_template_dry_run.exists()
         else None
     )
+    image_attachment_template = (
+        load_json(args.image_attachment_template)
+        if args.image_attachment_template.exists()
+        else None
+    )
+    image_attachment_template_dry_run = (
+        load_json(args.image_attachment_template_dry_run)
+        if args.image_attachment_template_dry_run.exists()
+        else None
+    )
     report = build_report(
         load_json(args.enrichment),
         load_json(args.action_queue),
@@ -475,6 +523,8 @@ def main() -> int:
         focus_packs,
         focus_template,
         focus_template_dry_run,
+        image_attachment_template,
+        image_attachment_template_dry_run,
     )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

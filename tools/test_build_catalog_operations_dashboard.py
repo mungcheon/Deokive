@@ -409,7 +409,7 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                         "db_count": 2,
                         "databases": [
                             {
-                                "db": "server/deokive_dev.db",
+                                "db": "server/catalog_a.db",
                                 "ok": True,
                                 "active_rows": 10,
                                 "missing_images": 2,
@@ -419,7 +419,7 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                                 "duplicate_active_rows": 0,
                             },
                             {
-                                "db": "deokive_dev.db",
+                                "db": "catalog_b.db",
                                 "ok": True,
                                 "active_rows": 10,
                                 "missing_images": 2,
@@ -578,6 +578,12 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                             "source_discovery_focus_template_confirmed_rows": 0,
                             "source_discovery_focus_template_dry_run_updated_rows": 0,
                             "source_discovery_focus_template_dry_run_skipped_rows": 427,
+                            "image_attachment_template_rows": 73,
+                            "image_attachment_template_confirmed_rows": 0,
+                            "image_attachment_template_source_update_required_rows": 50,
+                            "image_attachment_template_representative_review_rows": 23,
+                            "image_attachment_template_dry_run_updated_rows": 0,
+                            "image_attachment_template_dry_run_skipped_rows": 73,
                             "auto_apply_enabled": False,
                         }
                     },
@@ -610,6 +616,25 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                         "updated_rows": 0,
                         "skipped_rows": 427,
                         "skip_reason_counts": [["manual_confirmed_false", 427]],
+                    },
+                ),
+                "public_image_attachment_template": _write_json(
+                    root / "public_image_attachment_template.json",
+                    {
+                        "summary": {
+                            "template_items": 73,
+                            "manual_confirmed_rows": 0,
+                            "source_url_update_required_rows": 50,
+                            "representative_image_review_required_rows": 23,
+                        }
+                    },
+                ),
+                "public_image_attachment_template_import": _write_json(
+                    root / "public_image_attachment_template_import.json",
+                    {
+                        "updated_rows": 0,
+                        "skipped_rows": 73,
+                        "skip_reason_counts": [["manual_confirmed_false", 73]],
                     },
                 ),
             }
@@ -762,6 +787,14 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["public_image_recovery"]["remaining_focus_review_rows"], 427)
         self.assertEqual(payload["summary"]["public_image_recovery"]["template_rows"], 427)
         self.assertEqual(payload["summary"]["public_image_recovery"]["template_import_skipped_rows"], 427)
+        self.assertEqual(payload["summary"]["public_image_recovery"]["image_attachment_template_rows"], 73)
+        self.assertEqual(payload["summary"]["public_image_recovery"]["image_attachment_template_confirmed_rows"], 0)
+        self.assertEqual(
+            payload["summary"]["public_image_recovery"]["image_attachment_template_source_update_required_rows"],
+            50,
+        )
+        self.assertEqual(payload["summary"]["public_image_recovery"]["image_attachment_template_representative_review_rows"], 23)
+        self.assertEqual(payload["summary"]["public_image_recovery"]["image_attachment_template_dry_run_skipped_rows"], 73)
         self.assertEqual(payload["summary"]["public_image_recovery"]["auto_apply_enabled"], False)
         self.assertGreaterEqual(len(payload["workboards"]), 10)
         areas = [item["area"] for item in payload["workboards"]]
@@ -885,6 +918,10 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(public_image_board["remaining_focus_review_rows"], 427)
         self.assertEqual(public_image_board["template_items"], 427)
         self.assertEqual(public_image_board["template_import_skipped_rows"], 427)
+        self.assertEqual(public_image_board["image_attachment_template_items"], 73)
+        self.assertEqual(public_image_board["image_attachment_template_source_update_required_rows"], 50)
+        self.assertEqual(public_image_board["image_attachment_template_representative_review_rows"], 23)
+        self.assertEqual(public_image_board["image_attachment_template_import_skipped_rows"], 73)
         self.assertEqual(public_image_board["status"], "manual_source_confirmation_needed")
         source_url_board = next(item for item in payload["workboards"] if item["area"] == "Source URL bottlenecks")
         self.assertEqual(source_url_board["primary_metric"], 8)

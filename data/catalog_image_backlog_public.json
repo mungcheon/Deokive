@@ -3,7 +3,7 @@
   "generated_at": "2026-07-21T17:49:58Z",
   "scope": "public_catalog_missing_image_backlog",
   "summary": {
-    "rows": 20392,
+    "rows": 20391,
     "missing_images": 720,
     "provider_candidate_items": 496,
     "manual_or_blocked_items": 228,
@@ -1867,6 +1867,7 @@
     "candidate_review_rows": 15,
     "unique_review_candidate_rows": 15,
     "failure_count": 23,
+    "provider_temporary_unavailable_stores": [],
     "time_budget_exhausted_reports": 1,
     "rate_limit_skipped_stores": [
       [
@@ -2056,7 +2057,7 @@
   },
   "deduplication_review": {
     "public_report": "data/catalog_deduplication_public.json",
-    "rows": 20392,
+    "rows": 20391,
     "duplicate_groups": 104,
     "duplicate_rows": 104,
     "published_groups": 80,
@@ -2086,15 +2087,15 @@
     ],
     "top_review_risk": "strong_identity_review",
     "source_url_exclusions": {
-      "shared_source_url_value_groups": 801,
-      "shared_source_url_value_rows": 9192,
+      "shared_source_url_value_groups": 800,
+      "shared_source_url_value_rows": 9190,
       "source_url_name_matched_review_groups": 6,
-      "excluded_shared_source_url_value_groups": 795
+      "excluded_shared_source_url_value_groups": 794
     }
   },
   "animation_category_review": {
     "public_report": "data/animation_goods_categories_public.json",
-    "animation_goods_rows": 2168,
+    "animation_goods_rows": 2167,
     "category_count": 27,
     "unknown_category_count": 3,
     "unknown_category_rows": 391,
@@ -2138,8 +2139,8 @@
     "field_missing_totals": {
       "name_ja": 529,
       "release_date": 1408,
-      "barcode": 10097,
-      "official_price_jpy": 569,
+      "barcode": 10096,
+      "official_price_jpy": 568,
       "source_url": 647,
       "image_url": 720
     },
@@ -2198,7 +2199,7 @@
       ],
       [
         "Taito",
-        34
+        33
       ],
       [
         "Weverse Shop",
@@ -2496,10 +2497,10 @@
     "ichiban_metadata_actionable_campaigns": 44,
     "ichiban_metadata_unqueued_action_campaigns": 0,
     "ichiban_metadata_queued_catalog_item_rows": 381,
-    "metadata_action_missing_cells": 2506,
+    "metadata_action_missing_cells": 2505,
     "metadata_actionable_groups": 166,
     "metadata_unqueued_actionable_groups": 0,
-    "metadata_actionable_missing_cells": 2506,
+    "metadata_actionable_missing_cells": 2505,
     "metadata_unqueued_actionable_missing_cells": 0,
     "animation_category_review_rows": 374,
     "animation_category_action_rows": 374,
@@ -2692,10 +2693,10 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 2506,
+      "metadata_action_missing_cells": 2505,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2506,
+      "metadata_actionable_missing_cells": 2505,
       "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 374,
       "animation_category_action_rows": 374,
@@ -3641,7 +3642,7 @@
     "blocked_action_count": 1,
     "manual_review_action_count": 16,
     "pending_import_action_count": 0,
-    "total_action_rows": 42548,
+    "total_action_rows": 42545,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -3677,10 +3678,10 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 2506,
+      "metadata_action_missing_cells": 2505,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2506,
+      "metadata_actionable_missing_cells": 2505,
       "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 374,
       "animation_category_action_rows": 374,
@@ -3820,6 +3821,7 @@
     "sample_queue_coverage": 1.0,
     "action_batch_count": 7,
     "sample_action_item_rows": 73,
+    "skipped_already_has_image_rows": 0,
     "batch_size": 20,
     "max_batches": 18,
     "by_workflow": [
@@ -5103,15 +5105,15 @@
   },
   "image_asset_audit": {
     "public_report": "data/catalog_image_asset_audit_public.json",
-    "rows": 20392,
-    "image_url_rows": 19672,
+    "rows": 20391,
+    "image_url_rows": 19671,
     "missing_image_url_rows": 720,
-    "local_image_path_rows": 19672,
-    "image_url_with_local_path_rows": 19672,
+    "local_image_path_rows": 19671,
+    "image_url_with_local_path_rows": 19671,
     "image_url_without_local_path_rows": 0,
     "local_path_without_image_url_rows": 0,
     "unique_local_image_paths": 19491,
-    "reused_local_image_paths": 82,
+    "reused_local_image_paths": 81,
     "missing_local_image_files": 0,
     "invalid_local_image_paths": 0,
     "local_asset_coverage": 1.0,
@@ -5293,7 +5295,8 @@
   },
   "gotouchi_representative_image_attachment": {
     "public_report": "data/gotouchi_representative_image_attachment_public.json",
-    "representative_attachment_rows": 3,
+    "representative_attachment_rows": 0,
+    "skipped_already_has_image_rows": 3,
     "manual_confirmed_true": 0,
     "auto_apply_enabled": false
   },
@@ -5392,9 +5395,31 @@
     "exact_source_ready_rows": 0,
     "source_first_rows": 692,
     "review_before_attach_rows": 23,
+    "source_detail_candidate_review_rows": 2,
+    "source_detail_candidate_recheck_required_rows": 10,
+    "source_detail_identity_warning_rows": 10,
+    "source_detail_unflagged_candidate_rows": 2,
     "manual_image_research_rows": 5,
-    "action_queue_rows": 73,
-    "actionable_image_rows": 73,
+    "source_discovery_focus_pack_rows": 427,
+    "source_discovery_focus_pack_count": 24,
+    "source_discovery_not_started_focus_pack_count": 24,
+    "source_discovery_remaining_focus_review_rows": 427,
+    "source_discovery_confirmed_focus_source_rows": 0,
+    "source_discovery_focus_template_rows": 427,
+    "source_discovery_focus_template_confirmed_rows": 0,
+    "source_discovery_focus_template_dry_run_updated_rows": 0,
+    "source_discovery_focus_template_dry_run_skipped_rows": 427,
+    "source_discovery_focus_coverage": 0.6651,
+    "source_discovery_non_focus_rows": 215,
+    "action_queue_rows": 75,
+    "direct_image_action_queue_rows": 73,
+    "image_attachment_template_rows": 73,
+    "image_attachment_template_confirmed_rows": 0,
+    "image_attachment_template_source_update_required_rows": 50,
+    "image_attachment_template_representative_review_rows": 23,
+    "image_attachment_template_dry_run_updated_rows": 0,
+    "image_attachment_template_dry_run_skipped_rows": 73,
+    "actionable_image_rows": 75,
     "auto_apply_enabled": false
   },
   "source_discovery_store_bottlenecks": {
@@ -5404,6 +5429,10 @@
     "store_count": 40,
     "top_store_rows": 148,
     "top_store": "애니메이트",
+    "top_5_store_rows": 427,
+    "top_5_store_coverage": 0.6651,
+    "top_10_store_rows": 516,
+    "top_10_store_coverage": 0.8037,
     "domainless_store_rows": 0,
     "stores_without_allowed_domain": 0,
     "auto_apply_enabled": false
@@ -5415,6 +5444,14 @@
     "batch_size": 10,
     "manual_confirmed_true": 0,
     "safe_source_image_pair_rows": 15,
+    "identity_warning_rows": 13,
+    "identity_warning_missing_display_image_rows": 10,
+    "unflagged_missing_display_image_candidate_rows": 2,
+    "current_catalog_matched_rows": 15,
+    "current_catalog_missing_display_image_rows": 12,
+    "current_catalog_already_has_display_image_rows": 3,
+    "stale_candidate_rows": 0,
+    "identity_matched_candidate_rows": 15,
     "near_or_better_candidate_rows": 2,
     "ambiguous_or_weaker_candidate_rows": 13,
     "by_source_store": [
@@ -5452,6 +5489,20 @@
       ],
       [
         "near_single_candidate",
+        2
+      ]
+    ],
+    "by_candidate_identity_flag": [
+      [
+        "candidate_title_missing_catalog_variant_hint",
+        12
+      ],
+      [
+        "candidate_title_mentions_crossover",
+        4
+      ],
+      [
+        "only_generic_shared_tokens",
         2
       ]
     ],
