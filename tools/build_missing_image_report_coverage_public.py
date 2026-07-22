@@ -53,6 +53,12 @@ REPORT_RULES = [
         None,
         ("manual_review", "manual_research_required"),
     ),
+    (
+        "generic_storefront_missing_image_source",
+        "data/generic_storefront_missing_image_source_public.json",
+        None,
+        ("source_url_generic_storefront", "blocked_until_exact_product_url"),
+    ),
 ]
 
 

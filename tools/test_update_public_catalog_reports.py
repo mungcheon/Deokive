@@ -31,6 +31,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/jump_furyu_taito_missing_image_search_public.json", updated_files)
         self.assertIn("data/secondary_official_missing_image_search_public.json", updated_files)
         self.assertIn("data/manual_missing_image_source_discovery_public.json", updated_files)
+        self.assertIn("data/generic_storefront_missing_image_source_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_report_coverage_public.json", updated_files)
         self.assertIn("data/ensky_missing_image_cache_coverage_public.json", updated_files)
         self.assertIn("data/ensky_search_page_probe_public.json", updated_files)
@@ -64,8 +65,12 @@ class PublicCatalogReportTests(unittest.TestCase):
         if reports.MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY.exists():
             self.assertEqual(quality["manual_missing_image_source_discovery"]["manual_source_discovery_rows"], 112)
             self.assertIs(quality["manual_missing_image_source_discovery"]["auto_apply_enabled"], False)
+        if reports.GENERIC_STOREFRONT_MISSING_IMAGE_SOURCE.exists():
+            self.assertEqual(quality["generic_storefront_missing_image_source"]["generic_storefront_rows"], 5)
+            self.assertIs(quality["generic_storefront_missing_image_source"]["auto_apply_enabled"], False)
         if reports.MISSING_IMAGE_REPORT_COVERAGE.exists():
             self.assertEqual(quality["missing_image_report_coverage"]["missing_image_rows"], result["missing"]["image_url"])
+            self.assertEqual(quality["missing_image_report_coverage"]["unassigned_missing_image_rows"], 0)
             self.assertIs(quality["missing_image_report_coverage"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)

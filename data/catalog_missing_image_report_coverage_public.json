@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T08:24:21Z",
+  "generated_at": "2026-07-22T08:34:12Z",
   "scope": "catalog_missing_image_report_coverage",
   "summary": {
     "missing_image_rows": 720,
-    "assigned_report_rows": 715,
-    "unassigned_missing_image_rows": 5,
-    "report_count": 9,
+    "assigned_report_rows": 720,
+    "unassigned_missing_image_rows": 0,
+    "report_count": 10,
     "auto_apply_enabled": false
   },
   "reports": [
@@ -266,78 +266,30 @@
           "rows": 1
         }
       ]
+    },
+    {
+      "report_key": "generic_storefront_missing_image_source",
+      "public_report": "data/generic_storefront_missing_image_source_public.json",
+      "assigned_missing_image_rows": 5,
+      "report_exists": true,
+      "auto_apply_enabled": false,
+      "by_source_store": [
+        {
+          "source_store": "Weverse Shop",
+          "rows": 3
+        },
+        {
+          "source_store": "포켓몬 센터",
+          "rows": 2
+        }
+      ]
     }
   ],
   "unassigned_breakdowns": {
-    "by_source_store": [
-      {
-        "source_store": "Weverse Shop",
-        "rows": 3
-      },
-      {
-        "source_store": "포켓몬 센터",
-        "rows": 2
-      }
-    ],
-    "by_strategy": [
-      {
-        "strategy": "source_url_generic_storefront",
-        "rows": 5
-      }
-    ]
+    "by_source_store": [],
+    "by_strategy": []
   },
-  "unassigned_samples": [
-    {
-      "catalog_index": 1098,
-      "name_ko": "포켓몬 봉제 인형 (피카츄)",
-      "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
-      "source_store": "포켓몬 센터",
-      "affiliation": "포켓몬",
-      "category": "인형",
-      "strategy": "source_url_generic_storefront",
-      "automation_safety": "blocked_until_exact_product_url"
-    },
-    {
-      "catalog_index": 17593,
-      "name_ko": "포켓몬 카드 게임 부스터 팩",
-      "name_ja": null,
-      "source_store": "포켓몬 센터",
-      "affiliation": "포켓몬",
-      "category": "트레이딩 카드",
-      "strategy": "source_url_generic_storefront",
-      "automation_safety": "blocked_until_exact_product_url"
-    },
-    {
-      "catalog_index": 17613,
-      "name_ko": "SEVENTEEN 포토카드 (랜덤)",
-      "name_ja": null,
-      "source_store": "Weverse Shop",
-      "affiliation": "SEVENTEEN",
-      "category": "포토카드",
-      "strategy": "source_url_generic_storefront",
-      "automation_safety": "blocked_until_exact_product_url"
-    },
-    {
-      "catalog_index": 17622,
-      "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
-      "name_ja": null,
-      "source_store": "Weverse Shop",
-      "affiliation": "ZEROBASEONE",
-      "category": "포토카드",
-      "strategy": "source_url_generic_storefront",
-      "automation_safety": "blocked_until_exact_product_url"
-    },
-    {
-      "catalog_index": 17623,
-      "name_ko": "ILLIT 포토카드 (랜덤)",
-      "name_ja": null,
-      "source_store": "Weverse Shop",
-      "affiliation": "ILLIT",
-      "category": "포토카드",
-      "strategy": "source_url_generic_storefront",
-      "automation_safety": "blocked_until_exact_product_url"
-    }
-  ],
+  "unassigned_samples": [],
   "automation_policy": {
     "auto_apply_catalog_changes": false,
     "report_is_coverage_only": true,
