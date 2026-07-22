@@ -66,6 +66,15 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(readiness["source_url_replacement_required"], 2)
         self.assertEqual(readiness["source_url_discovery_required"], 1)
         self.assertEqual(readiness["manual_research_required"], 1)
+        store_priority = {row["source_store"]: row for row in report["source_store_priority"]}
+        self.assertEqual(store_priority["Store B"]["missing_image_rows"], 2)
+        self.assertEqual(store_priority["Store B"]["primary_workflow"], "replace_generic_source_then_extract_image")
+        self.assertEqual(
+            store_priority["Store B"]["recommended_next_step"],
+            "replace_generic_source_url_then_extract_image",
+        )
+        self.assertFalse(store_priority["Store B"]["auto_apply_enabled"])
+        self.assertEqual(store_priority["Store B"]["sample_items"][0]["readiness"], "source_url_replacement_required")
 
 
 if __name__ == "__main__":

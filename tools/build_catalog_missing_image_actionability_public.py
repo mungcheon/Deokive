@@ -131,6 +131,71 @@ def summarize_groups(groups: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(rows_out, key=lambda row: (int(row["priority"]), str(row["readiness"])))
 
 
+def summarize_source_stores(groups: list[dict[str, Any]], limit: int = 30) -> list[dict[str, Any]]:
+    by_store: dict[str, dict[str, Any]] = {}
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        source_store = str(group.get("source_store") or "").strip()
+        if not source_store:
+            continue
+        workflow = str(group.get("workflow") or "manual_image_research")
+        readiness = workflow_readiness(workflow)
+        rows = int(group.get("missing_image_rows") or 0)
+        bucket = by_store.setdefault(
+            source_store,
+            {
+                "source_store": source_store,
+                "missing_image_rows": 0,
+                "priority": READINESS_ORDER.get(readiness, 99),
+                "readiness_rows": Counter(),
+                "workflow_rows": Counter(),
+                "sample_items": [],
+            },
+        )
+        bucket["missing_image_rows"] += rows
+        bucket["priority"] = min(int(bucket["priority"]), READINESS_ORDER.get(readiness, 99))
+        bucket["readiness_rows"][readiness] += rows
+        bucket["workflow_rows"][workflow] += rows
+        for item in group.get("sample_items") or []:
+            if isinstance(item, dict) and len(bucket["sample_items"]) < 8:
+                sample = compact_sample(group, item)
+                sample["workflow"] = workflow
+                sample["readiness"] = readiness
+                bucket["sample_items"].append(sample)
+
+    rows_out: list[dict[str, Any]] = []
+    for bucket in by_store.values():
+        primary_workflow = ""
+        if bucket["workflow_rows"]:
+            primary_workflow = bucket["workflow_rows"].most_common(1)[0][0]
+        rows_out.append(
+            {
+                "source_store": bucket["source_store"],
+                "priority": bucket["priority"],
+                "missing_image_rows": bucket["missing_image_rows"],
+                "primary_workflow": primary_workflow,
+                "recommended_next_step": WORKFLOW_NEXT_STEPS.get(primary_workflow, "manual_review"),
+                "readiness_rows": [
+                    {"readiness": readiness, "rows": count}
+                    for readiness, count in bucket["readiness_rows"].most_common()
+                ],
+                "workflow_rows": [
+                    {
+                        "workflow": workflow,
+                        "label": WORKFLOW_LABELS.get(workflow, workflow),
+                        "rows": count,
+                        "next_step": WORKFLOW_NEXT_STEPS.get(workflow, "manual_review"),
+                    }
+                    for workflow, count in bucket["workflow_rows"].most_common()
+                ],
+                "sample_items": bucket["sample_items"],
+                "auto_apply_enabled": False,
+            }
+        )
+    return sorted(rows_out, key=lambda row: (int(row["priority"]), -int(row["missing_image_rows"]), str(row["source_store"])))[:limit]
+
+
 def build_report(
     enrichment: dict[str, Any],
     action_queue: dict[str, Any],
@@ -141,6 +206,7 @@ def build_report(
     action_summary = action_queue.get("summary") if isinstance(action_queue.get("summary"), dict) else {}
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
     readiness_rows = summarize_groups(groups)
+    source_store_priority = summarize_source_stores(groups)
     readiness_total = sum(int(row.get("rows") or 0) for row in readiness_rows)
     missing_image_rows = int(summary.get("missing_image_rows") or readiness_total)
 
@@ -177,6 +243,7 @@ def build_report(
             "auto_apply_enabled": False,
         },
         "readiness": readiness_rows,
+        "source_store_priority": source_store_priority,
         "recommended_order": [
             "source_url_replacement_required",
             "source_url_discovery_required",
