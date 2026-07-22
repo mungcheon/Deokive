@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T00:43:19Z",
+  "generated_at": "2026-07-22T00:45:29Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -34,6 +34,8 @@
       "requested_focus_action_rows": 163,
       "source_discovery_action_rows": 240,
       "image_attachment_action_rows": 25,
+      "image_attachment_actionable_rows": 73,
+      "image_attachment_unqueued_actionable_rows": 48,
       "ichiban_metadata_action_campaigns": 32,
       "metadata_action_missing_cells": 1362,
       "animation_category_review_rows": 428,
@@ -144,6 +146,9 @@
       "workstream": "image_attachment_action_queue",
       "status": "manual_review",
       "open_rows": 25,
+      "actionable_image_rows": 73,
+      "unqueued_actionable_image_rows": 48,
+      "sample_queue_coverage": 0.3425,
       "primary_report": "data/catalog_image_attachment_action_queue_public.json",
       "next_step": "confirm_source_then_fill_image_url_templates",
       "auto_apply_enabled": false
@@ -905,8 +910,10 @@
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "actionable_image_rows": 73,
       "queued_image_rows": 25,
+      "unqueued_actionable_image_rows": 48,
+      "sample_queue_coverage": 0.3425,
       "action_batch_count": 4,
-      "recommended_next_action": "Work image action batches with exact product evidence before broad image backlog research."
+      "recommended_next_action": "Work the queued image sample, then expand the remaining actionable image rows with exact product evidence."
     },
     {
       "priority": 19,

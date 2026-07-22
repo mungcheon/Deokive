@@ -162,6 +162,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         open_queues = operations.get("summary", {}).get("open_review_queues", {})
         confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
         readiness_summary = confirmed_readiness.get("summary", {})
+        image_action = reports.load_json(reports.IMAGE_ATTACHMENT_ACTION_QUEUE)
+        image_action_summary = image_action.get("summary", {})
+        image_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "image_attachment_action_queue"
+        )
+        image_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "image_attachment_action_queue"
+        )
         animation_action = reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)
         animation_action_summary = animation_action.get("summary", {})
         animation_scorecard = next(
@@ -189,6 +201,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("image_attachment_action_rows"),
+            image_action_summary.get("queued_image_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("image_attachment_actionable_rows"),
+            image_action_summary.get("actionable_image_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("image_attachment_unqueued_actionable_rows"),
+            image_action_summary.get("unqueued_actionable_image_rows"),
+        )
+        self.assertEqual(
+            image_scorecard.get("unqueued_actionable_image_rows"),
+            image_action_summary.get("unqueued_actionable_image_rows"),
+        )
+        self.assertEqual(
+            image_next_action.get("sample_queue_coverage"),
+            image_action_summary.get("sample_queue_coverage"),
         )
         self.assertEqual(
             open_queues.get("animation_category_action_rows"),
