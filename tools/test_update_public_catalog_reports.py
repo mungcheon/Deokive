@@ -50,6 +50,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_image_source_url_confirmed_template_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_pack_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_pack_import_dry_run_public.json", updated_files)
+        self.assertIn("data/source_discovery_next_focus_pack_fetch_audit_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
@@ -101,6 +102,15 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(quality["source_discovery_next_focus_pack_import_dry_run"]["updated_rows"], 0)
         self.assertEqual(quality["source_discovery_next_focus_pack_import_dry_run"]["skipped_rows"], 20)
         self.assertIs(quality["source_discovery_next_focus_pack_import_dry_run"]["write"], False)
+        if reports.SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists():
+            self.assertEqual(
+                quality["source_discovery_next_focus_pack_fetch_audit"]["pack_items"],
+                quality["source_discovery_next_focus_pack"]["pack_items"],
+            )
+            self.assertIs(
+                quality["source_discovery_next_focus_pack_fetch_audit"]["auto_apply_enabled"],
+                False,
+            )
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():

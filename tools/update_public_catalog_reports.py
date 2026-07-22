@@ -77,6 +77,7 @@ SOURCE_DISCOVERY_FOCUS_TEMPLATE = DATA / "source_discovery_focus_confirmed_templ
 SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT = DATA / "source_discovery_focus_template_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT = DATA / "source_discovery_next_focus_pack_import_dry_run_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 OFFICIAL_DETAIL_REVIEW_BATCHES = DATA / "official_detail_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
@@ -5329,6 +5330,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "skipped_rows": source_discovery_next_focus_pack_import["skipped_rows"],
             "skip_reason_counts": source_discovery_next_focus_pack_import["skip_reason_counts"],
         }
+        if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists():
+            target["source_discovery_next_focus_pack_fetch_audit"] = copy_report_summary(
+                SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, "source_discovery_next_focus_pack_fetch_audit"
+            )
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
             target["animate_missing_image_search"] = copy_report_summary(
                 ANIMATE_MISSING_IMAGE_SEARCH, "animate_missing_image_search"
@@ -5635,6 +5640,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
