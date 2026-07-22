@@ -19,6 +19,12 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "catalog_image_enrichment_batches_public.json": {
                 "summary": {"missing_image_rows": 10, "source_url_ready_rows": 0, "needs_source_discovery_rows": 10}
             },
+            "catalog_image_candidate_review_public.json": {
+                "summary": {
+                    "provider_candidate_items": 7,
+                    "manual_or_blocked_items": 3,
+                }
+            },
             "catalog_image_attachment_action_queue_public.json": {
                 "summary": {
                     "actionable_image_rows": 2,
@@ -414,6 +420,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_next_focus_fallback_rows"], 4)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
+        self.assertEqual(image["evidence"]["provider_candidate_items"], 7)
+        self.assertEqual(image["evidence"]["manual_or_blocked_items"], 3)
         image_action = next(
             action
             for action in report["actions"]
@@ -432,6 +440,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "image-attachment-action-001",
         )
         self.assertEqual(report["summary"]["image_action_source_url_update_required_rows"], 2)
+        self.assertEqual(report["summary"]["image_candidate_provider_items"], 7)
+        self.assertEqual(report["summary"]["image_candidate_manual_or_blocked_items"], 3)
         self.assertEqual(report["summary"]["image_action_source_url_update_template_rows"], 2)
         self.assertEqual(report["summary"]["image_action_image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["image_action_workstream_count"], 1)

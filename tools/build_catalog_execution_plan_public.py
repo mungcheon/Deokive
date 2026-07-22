@@ -98,6 +98,7 @@ def _action(
 def _build_plan(load_report) -> dict[str, Any]:
     operations = load_report("catalog_operations_public.json")
     image_batches = load_report("catalog_image_enrichment_batches_public.json")
+    image_candidates = load_report("catalog_image_candidate_review_public.json")
     image_action_queue = load_report("catalog_image_attachment_action_queue_public.json")
     source_batches = load_report("source_discovery_review_batches_public.json")
     source_action_queue = load_report("source_discovery_action_queue_public.json")
@@ -131,6 +132,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     if not isinstance(open_queues, dict):
         open_queues = {}
     image_summary = _summary(image_batches)
+    image_candidate_summary = _summary(image_candidates)
     image_action_summary = _summary(image_action_queue)
     source_summary = _summary(source_batches)
     source_action_summary = _summary(source_action_queue)
@@ -458,6 +460,8 @@ def _build_plan(load_report) -> dict[str, Any]:
             blocker="No exact source_url-ready image rows are currently published." if ready_image_rows == 0 else None,
             evidence={
                 "source_url_ready_rows": ready_image_rows,
+                "provider_candidate_items": _count(image_candidate_summary, "provider_candidate_items"),
+                "manual_or_blocked_items": _count(image_candidate_summary, "manual_or_blocked_items"),
                 "generic_source_url_rows": _count(image_summary, "generic_source_url_rows"),
                 "needs_source_discovery_rows": _count(image_summary, "needs_source_discovery_rows"),
                 "gotouchi_official_review_rows": _count(image_summary, "gotouchi_official_review_rows"),
@@ -927,6 +931,10 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "image_action_source_url_update_required_rows": _count(
                 image_action_summary, "source_url_update_required_rows"
+            ),
+            "image_candidate_provider_items": _count(image_candidate_summary, "provider_candidate_items"),
+            "image_candidate_manual_or_blocked_items": _count(
+                image_candidate_summary, "manual_or_blocked_items"
             ),
             "image_action_source_url_update_template_rows": _count(
                 image_action_summary, "source_url_update_template_rows"
