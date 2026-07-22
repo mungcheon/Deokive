@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "scope": "public_catalog_missing_image_probe_summary",
+  "catalog": "data/catalog_public.json",
+  "missing_image_url_total": 720,
+  "summary": {
+    "animate_first_20": {
+      "exists": true,
+      "filled": 0,
+      "processed_rows": 20,
+      "time_budget_exhausted": false,
+      "unresolved_summary": {
+        "total": 20,
+        "by_reason": {
+          "best_candidate_rejected": 17,
+          "no_provider_candidates": 3
+        },
+        "by_rejection_reason": {
+          "ambiguous_close_candidates": 16,
+          "failed_safety_checks": 1
+        },
+        "by_failed_check": {
+          "all_distinctive_token_match": 1
+        }
+      }
+    },
+    "animate_named_60": {
+      "exists": true,
+      "filled": 0,
+      "processed_rows": 60,
+      "time_budget_exhausted": false,
+      "unresolved_summary": {
+        "total": 60,
+        "by_reason": {
+          "no_provider_candidates": 49,
+          "best_candidate_rejected": 11
+        },
+        "by_rejection_reason": {
+          "failed_safety_checks": 11
+        },
+        "by_failed_check": {
+          "all_distinctive_token_match": 11,
+          "parenthetical_terms_match": 3,
+          "goods_type_compatible": 1
+        }
+      }
+    },
+    "movic_23": {
+      "exists": true,
+      "filled": 0,
+      "processed_rows": 23,
+      "time_budget_exhausted": true,
+      "unresolved_summary": {
+        "total": 23,
+        "by_reason": {
+          "no_provider_candidates": 23
+        },
+        "by_rejection_reason": {},
+        "by_failed_check": {}
+      }
+    },
+    "kotobukiya_40": {
+      "exists": true,
+      "filled": 0,
+      "processed_rows": 40,
+      "time_budget_exhausted": false,
+      "unresolved_summary": {
+        "total": 40,
+        "by_reason": {
+          "no_provider_candidates": 40
+        },
+        "by_rejection_reason": {},
+        "by_failed_check": {}
+      }
+    },
+    "furyu_21": {
+      "exists": true,
+      "filled": 0,
+      "processed_rows": 21,
+      "time_budget_exhausted": false,
+      "unresolved_summary": {
+        "total": 21,
+        "by_reason": {
+          "no_provider_candidates": 21
+        },
+        "by_rejection_reason": {},
+        "by_failed_check": {}
+      }
+    },
+    "ensky_sitemap_142": {
+      "exists": true,
+      "updated_rows": 0,
+      "scanned_rows": 142,
+      "changes_count": 0
+    },
+    "goodsmile_official_57": {
+      "exists": true,
+      "processed_rows": 57,
+      "time_budget_exhausted": true,
+      "updated_rows": 0,
+      "review_rows": 57,
+      "changes_count": 0,
+      "review_count": 57
+    }
+  },
+  "next_actions": [
+    "Use data/catalog_missing_image_work_queue_public.json as the canonical work queue for the remaining 720 image_url gaps.",
+    "Do not attach images from generic storefront/source URLs until an exact product detail URL is confirmed.",
+    "Provider scripts currently found no safe automatic matches for sampled Animate, Ensky, Movic, Kotobukiya, FuRyu, and Good Smile rows; add stricter provider-specific matchers before writing those groups.",
+    "Gotouchi Chiikawa rows have product-detail source URLs but existing candidate review marks most as motif/type mismatches; keep them review-only unless exact type and visual identity are confirmed."
+  ]
+}
