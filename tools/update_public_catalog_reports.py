@@ -4452,6 +4452,30 @@ def update_reports(write: bool) -> dict[str, Any]:
         metadata_review_batches,
         metadata_action_queue,
     )
+    from build_catalog_execution_plan_public import build_plan_from_reports
+
+    execution_plan = build_plan_from_reports(
+        {
+            "catalog_operations_public.json": operations,
+            "catalog_image_enrichment_batches_public.json": image_enrichment_batches,
+            "catalog_image_attachment_action_queue_public.json": load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}),
+            "source_discovery_review_batches_public.json": load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}),
+            "source_discovery_action_queue_public.json": load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}),
+            "catalog_metadata_review_batches_public.json": metadata_review_batches,
+            "catalog_metadata_action_queue_public.json": metadata_action_queue,
+            "requested_focus_review_batches_public.json": load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}),
+            "requested_focus_action_queue_public.json": load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}),
+            "catalog_deduplication_review_batches_public.json": load_json(DEDUPLICATION_REVIEW_BATCHES, {}),
+            "catalog_deduplication_action_queue_public.json": load_json(DEDUPLICATION_ACTION_QUEUE, {}),
+            "ichiban_kuji_metadata_review_batches_public.json": load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {}),
+            "ichiban_kuji_metadata_action_queue_public.json": load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}),
+            "animation_category_review_batches_public.json": load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}),
+            "animation_category_action_queue_public.json": load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}),
+            "catalog_confirmed_import_readiness_public.json": load_json(CONFIRMED_IMPORT_READINESS, {}),
+        }
+    )
+    if execution_plan["summary"].get("open_review_queues") != operations["summary"]["open_review_queues"]:
+        raise ValueError("execution plan open queues do not match operations open queues")
 
     public_meta = load_json(PUBLIC_META, {})
     public_meta.update(
@@ -4585,8 +4609,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["confirmed_import_readiness"] = copy_report_summary(
                 CONFIRMED_IMPORT_READINESS, "confirmed_import_readiness"
             )
-        if EXECUTION_PLAN.exists():
-            target["execution_plan"] = copy_report_summary(EXECUTION_PLAN, "execution_plan")
+        target["execution_plan"] = {
+            "public_report": f"data/{EXECUTION_PLAN.name}",
+            **execution_plan["summary"],
+        }
         target["image_enrichment_batches"] = {
             "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
             **image_enrichment_batches["summary"],
@@ -4675,6 +4701,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
         write_json(OPERATIONS_REPORT, operations)
         write_json(AGENT_WORK_QUEUE, agent_work_queue)
+        write_json(EXECUTION_PLAN, execution_plan)
         write_json(PUBLIC_META, public_meta)
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)

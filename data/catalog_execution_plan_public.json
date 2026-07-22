@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T02:45:27Z",
+  "generated_at": "2026-07-22T03:28:59Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 15,
     "blocked_action_count": 1,
     "manual_review_action_count": 13,
     "pending_import_action_count": 0,
-    "total_action_rows": 58688,
+    "total_action_rows": 39710,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
       "dedupe_groups": 109,
-      "animation_unknown_categories": 8,
+      "animation_unknown_categories": 3,
       "ichiban_missing_release_date_rows": 16,
       "ichiban_missing_price_rows": 365,
       "generic_source_patch_candidate_rows": 3,
@@ -39,15 +39,15 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 11964,
+      "metadata_action_missing_cells": 2529,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 11964,
+      "metadata_actionable_missing_cells": 2529,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 428,
-      "animation_category_action_rows": 428,
+      "animation_category_review_rows": 374,
+      "animation_category_action_rows": 374,
       "animation_category_split_review_categories": 3,
-      "animation_category_direct_mapping_categories": 5
+      "animation_category_direct_mapping_categories": 0
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
@@ -338,7 +338,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 21075,
+      "rows": 11640,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -346,7 +346,7 @@
       "evidence": {
         "batch_count": 30,
         "field_missing_totals": {
-          "name_ja": 9964,
+          "name_ja": 529,
           "release_date": 1416,
           "barcode": 7744,
           "official_price_jpy": 584,
@@ -360,7 +360,7 @@
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 11964,
+      "rows": 2529,
       "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
       "next_step": "fill_confirmed_metadata_patch_templates",
       "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
@@ -368,8 +368,8 @@
       "evidence": {
         "actionable_group_count": 166,
         "queued_group_count": 166,
-        "actionable_missing_cells": 11964,
-        "queued_missing_cells": 11964,
+        "actionable_missing_cells": 2529,
+        "queued_missing_cells": 2529,
         "action_batch_count": 14,
         "field_counts": [
           [
@@ -387,23 +387,19 @@
         ],
         "missing_cells_by_field": [
           [
-            "name_ja",
-            9964
-          ],
-          [
             "release_date",
             1416
           ],
           [
             "official_price_jpy",
             584
+          ],
+          [
+            "name_ja",
+            529
           ]
         ],
         "missing_cells_by_source_store": [
-          [
-            "치이카와 마켓",
-            9455
-          ],
           [
             "이치방쿠지",
             382
@@ -509,6 +505,10 @@
             20
           ],
           [
+            "치이카와 마켓",
+            20
+          ],
+          [
             "SM STORE",
             18
           ],
@@ -563,20 +563,12 @@
         ],
         "top_action_groups": [
           {
-            "field": "name_ja",
-            "source_store": "치이카와 마켓",
-            "missing_rows": 9455,
-            "priority": 30,
-            "workflow": "official_title_review",
-            "recommended_action": "Verify original Japanese product titles from official listings."
-          },
-          {
             "field": "official_price_jpy",
             "source_store": "이치방쿠지",
             "missing_rows": 365,
             "priority": 20,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official stated JPY prices before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",
@@ -584,7 +576,7 @@
             "missing_rows": 227,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",
@@ -592,7 +584,7 @@
             "missing_rows": 191,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",
@@ -600,7 +592,7 @@
             "missing_rows": 114,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "official_price_jpy",
@@ -608,7 +600,7 @@
             "missing_rows": 100,
             "priority": 20,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official stated JPY prices before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "name_ja",
@@ -624,7 +616,7 @@
             "missing_rows": 95,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",
@@ -632,7 +624,7 @@
             "missing_rows": 84,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "name_ja",
@@ -648,7 +640,7 @@
             "missing_rows": 74,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "name_ja",
@@ -672,7 +664,7 @@
             "missing_rows": 50,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",
@@ -680,7 +672,7 @@
             "missing_rows": 39,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",
@@ -688,7 +680,7 @@
             "missing_rows": 34,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "name_ja",
@@ -704,7 +696,7 @@
             "missing_rows": 32,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",
@@ -712,7 +704,7 @@
             "missing_rows": 26,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",
@@ -720,7 +712,15 @@
             "missing_rows": 24,
             "priority": 10,
             "workflow": "official_metadata_review",
-            "recommended_action": "Verify official release/sale dates before importing."
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "나가노 마켓",
+            "missing_rows": 20,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           }
         ]
       }
@@ -840,39 +840,23 @@
       "workstream": "animation_category_action_queue",
       "public_report": "data/animation_category_action_queue_public.json",
       "status": "manual_review",
-      "rows": 428,
+      "rows": 374,
       "command": "Confirm animation category-to-folder mapping templates before catalog mutation.",
       "next_step": "fill_confirmed_animation_category_mapping_templates",
       "blocker": "Folder/category mappings remain manual-only until sample names confirm product type.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_categories": 8,
-        "queued_categories": 8,
-        "queued_catalog_rows": 428,
-        "action_batch_count": 2,
+        "actionable_categories": 3,
+        "queued_categories": 3,
+        "queued_catalog_rows": 374,
+        "action_batch_count": 1,
         "by_suggested_family": [
-          [
-            "daily_goods",
-            2
-          ],
           [
             "other",
             2
           ],
           [
             "acrylic",
-            1
-          ],
-          [
-            "display_goods",
-            1
-          ],
-          [
-            "keyring",
-            1
-          ],
-          [
-            "figure",
             1
           ]
         ]
@@ -883,14 +867,14 @@
       "workstream": "animation_category_review",
       "public_report": "data/animation_category_review_batches_public.json",
       "status": "manual_review",
-      "rows": 428,
+      "rows": 374,
       "command": "Map unknown animation categories to reviewed app folder visual tokens.",
       "next_step": "apply_reviewed_category_and_folder_visual_mappings",
       "blocker": "Category changes can affect app navigation and must be reviewed.",
       "auto_apply_enabled": false,
       "evidence": {
-        "batch_count": 2,
-        "folder_visual_token_count": 29
+        "batch_count": 1,
+        "folder_visual_token_count": 27
       }
     }
   ],

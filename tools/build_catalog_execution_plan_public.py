@@ -95,23 +95,23 @@ def _action(
     }
 
 
-def build_plan() -> dict[str, Any]:
-    operations = _load("catalog_operations_public.json")
-    image_batches = _load("catalog_image_enrichment_batches_public.json")
-    image_action_queue = _load("catalog_image_attachment_action_queue_public.json")
-    source_batches = _load("source_discovery_review_batches_public.json")
-    source_action_queue = _load("source_discovery_action_queue_public.json")
-    metadata_batches = _load("catalog_metadata_review_batches_public.json")
-    metadata_action_queue = _load("catalog_metadata_action_queue_public.json")
-    requested_batches = _load("requested_focus_review_batches_public.json")
-    requested_action_queue = _load("requested_focus_action_queue_public.json")
-    dedupe_batches = _load("catalog_deduplication_review_batches_public.json")
-    dedupe_action_queue = _load("catalog_deduplication_action_queue_public.json")
-    kuji_batches = _load("ichiban_kuji_metadata_review_batches_public.json")
-    kuji_action_queue = _load("ichiban_kuji_metadata_action_queue_public.json")
-    animation_batches = _load("animation_category_review_batches_public.json")
-    animation_action_queue = _load("animation_category_action_queue_public.json")
-    confirmed_readiness = _load("catalog_confirmed_import_readiness_public.json")
+def _build_plan(load_report) -> dict[str, Any]:
+    operations = load_report("catalog_operations_public.json")
+    image_batches = load_report("catalog_image_enrichment_batches_public.json")
+    image_action_queue = load_report("catalog_image_attachment_action_queue_public.json")
+    source_batches = load_report("source_discovery_review_batches_public.json")
+    source_action_queue = load_report("source_discovery_action_queue_public.json")
+    metadata_batches = load_report("catalog_metadata_review_batches_public.json")
+    metadata_action_queue = load_report("catalog_metadata_action_queue_public.json")
+    requested_batches = load_report("requested_focus_review_batches_public.json")
+    requested_action_queue = load_report("requested_focus_action_queue_public.json")
+    dedupe_batches = load_report("catalog_deduplication_review_batches_public.json")
+    dedupe_action_queue = load_report("catalog_deduplication_action_queue_public.json")
+    kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
+    kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
+    animation_batches = load_report("animation_category_review_batches_public.json")
+    animation_action_queue = load_report("animation_category_action_queue_public.json")
+    confirmed_readiness = load_report("catalog_confirmed_import_readiness_public.json")
 
     operations_summary = _summary(operations)
     open_queues = operations_summary.get("open_review_queues")
@@ -471,6 +471,18 @@ def build_plan() -> dict[str, Any]:
             "requires_manual_review": True,
         },
     }
+
+
+def build_plan_from_reports(reports: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    def load_report(name: str) -> dict[str, Any]:
+        payload = reports.get(name)
+        return payload if isinstance(payload, dict) else _load(name)
+
+    return _build_plan(load_report)
+
+
+def build_plan() -> dict[str, Any]:
+    return _build_plan(_load)
 
 
 def main() -> int:

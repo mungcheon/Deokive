@@ -83,6 +83,15 @@ class PublicCatalogReportTests(unittest.TestCase):
 
         self.assertEqual(findings, [])
 
+    def test_execution_plan_open_queues_match_operations(self):
+        operations = reports.load_json(reports.OPERATIONS_REPORT)
+        execution_plan = reports.load_json(reports.EXECUTION_PLAN)
+
+        self.assertEqual(
+            execution_plan.get("summary", {}).get("open_review_queues"),
+            operations.get("summary", {}).get("open_review_queues"),
+        )
+
     def test_published_reports_keep_manual_review_guards(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         source_discovery = reports.load_json(reports.SOURCE_DISCOVERY)
