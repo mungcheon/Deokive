@@ -40,13 +40,51 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
             ]
         }
 
-        report = split_review.build_report(payload)
+        catalog_payload = {
+            "items": [
+                {
+                    "catalog_index": 101,
+                    "name_ko": "나히아 MASTERLISE 피규어",
+                    "name_ja": "僕のヒーローアカデミア MASTERLISE",
+                    "category": "굿즈",
+                    "affiliation": "나의 히어로 아카데미아",
+                    "series_name": "이치방쿠지",
+                    "sub_series": "A상",
+                    "source_store": "이치방쿠지",
+                },
+                {
+                    "catalog_index": 102,
+                    "name_ko": "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
+                    "name_ja": "葬送のフリーレン×大川ぶくぶ グッズ",
+                    "category": "굿즈",
+                    "affiliation": "장송의 프리렌",
+                    "series_name": "부쿠부 콜라보",
+                    "sub_series": "콜라보 굿즈",
+                    "source_store": "애니메이트",
+                },
+                {
+                    "catalog_index": 103,
+                    "name_ko": "분류 안 되는 샘플",
+                    "category": "굿즈",
+                    "affiliation": "테스트",
+                    "series_name": "테스트",
+                    "source_store": "테스트",
+                },
+            ]
+        }
+
+        report = split_review.build_report(payload, catalog_payload)
 
         self.assertEqual(report["summary"]["split_review_categories"], 1)
         self.assertEqual(report["summary"]["affected_catalog_rows"], 12)
         self.assertEqual(report["summary"]["candidate_split_rules"], 4)
         self.assertEqual(report["summary"]["matched_sample_names"], 4)
         self.assertEqual(report["summary"]["unmatched_sample_names"], 1)
+        self.assertTrue(report["summary"]["catalog_scan_enabled"])
+        self.assertEqual(report["summary"]["catalog_source_category_rows"], 3)
+        self.assertEqual(report["summary"]["matched_catalog_rule_hits"], 2)
+        self.assertEqual(report["summary"]["matched_catalog_rows"], 2)
+        self.assertEqual(report["summary"]["unmatched_catalog_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_category_changes"])
@@ -57,6 +95,10 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
         self.assertEqual(item["manual_confirmation_template"], "server/animation_category_name_split_confirmed_rows.template.json")
         self.assertEqual(item["confirmed_queue"], "server/animation_category_name_split_confirmed_rows.json")
         self.assertEqual(item["unblocks_when"], "name_level_split_manually_confirmed")
+        self.assertEqual(item["catalog_category_rows"], 3)
+        self.assertEqual(item["matched_catalog_rule_hit_count"], 2)
+        self.assertEqual(item["matched_catalog_row_count"], 2)
+        self.assertEqual(item["unmatched_catalog_row_count"], 1)
         targets = {candidate["target_category"] for candidate in item["split_candidates"]}
         self.assertEqual(targets, {"피규어", "보드", "문구", "콜라보 굿즈"})
         figure = next(candidate for candidate in item["split_candidates"] if candidate["rule_id"] == "figure")
@@ -67,8 +109,11 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
         self.assertEqual(template["blocked_until"], "name_level_split_manually_confirmed")
         collab = next(candidate for candidate in item["split_candidates"] if candidate["rule_id"] == "collab_goods")
         self.assertEqual(collab["target_category"], "콜라보 굿즈")
+        self.assertEqual(collab["matched_catalog_row_count"], 1)
+        self.assertEqual(collab["matched_catalog_samples"][0]["catalog_index"], 102)
         self.assertEqual(collab["name_level_split_template"]["folder_icon_key"], "diversity_3")
         self.assertEqual(item["unmatched_sample_names"], ["분류 안 되는 샘플"])
+        self.assertEqual(item["unmatched_catalog_samples"][0]["catalog_index"], 103)
 
 
 if __name__ == "__main__":

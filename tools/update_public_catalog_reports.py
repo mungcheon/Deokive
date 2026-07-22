@@ -2000,6 +2000,9 @@ def build_operations_public(
             "candidate_split_rules": animation_split_review_summary.get("candidate_split_rules", 0),
             "matched_sample_names": animation_split_review_summary.get("matched_sample_names", 0),
             "unmatched_sample_names": animation_split_review_summary.get("unmatched_sample_names", 0),
+            "catalog_source_category_rows": animation_split_review_summary.get("catalog_source_category_rows", 0),
+            "matched_catalog_rows": animation_split_review_summary.get("matched_catalog_rows", 0),
+            "unmatched_catalog_rows": animation_split_review_summary.get("unmatched_catalog_rows", 0),
             "auto_apply_enabled": animation_split_review_summary.get("auto_apply_enabled", False),
             "recommended_next_action": "Confirm name-level split templates before changing broad goods categories.",
         } if animation_split_review_summary else None,
@@ -2248,6 +2251,9 @@ def build_operations_public(
             "candidate_split_rules": animation_split_review_summary.get("candidate_split_rules", 0),
             "matched_sample_names": animation_split_review_summary.get("matched_sample_names", 0),
             "unmatched_sample_names": animation_split_review_summary.get("unmatched_sample_names", 0),
+            "catalog_source_category_rows": animation_split_review_summary.get("catalog_source_category_rows", 0),
+            "matched_catalog_rows": animation_split_review_summary.get("matched_catalog_rows", 0),
+            "unmatched_catalog_rows": animation_split_review_summary.get("unmatched_catalog_rows", 0),
             "primary_report": f"data/{ANIMATION_CATEGORY_SPLIT_REVIEW.name}",
             "next_step": "confirm_animation_category_name_split_templates",
             "auto_apply_enabled": animation_split_review_summary.get("auto_apply_enabled", False),
@@ -2363,6 +2369,9 @@ def build_operations_public(
         )
         open_review_queues["animation_category_name_split_candidates"] = animation_split_review_summary.get(
             "candidate_split_rules", 0
+        )
+        open_review_queues["animation_category_name_split_unmatched_catalog_rows"] = (
+            animation_split_review_summary.get("unmatched_catalog_rows", 0)
         )
 
     return {
@@ -4266,6 +4275,9 @@ def validate_report_consistency(
         )
         expected_open_queues["animation_category_name_split_candidates"] = animation_split_summary.get(
             "candidate_split_rules", 0
+        )
+        expected_open_queues["animation_category_name_split_unmatched_catalog_rows"] = (
+            animation_split_summary.get("unmatched_catalog_rows", 0)
         )
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")

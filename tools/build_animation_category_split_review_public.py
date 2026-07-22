@@ -10,6 +10,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "animation_category_action_queue_public.json"
+DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "animation_category_split_review_public.json"
 CONFIRMED_TEMPLATE = "server/animation_category_name_split_confirmed_rows.template.json"
 CONFIRMED_QUEUE = "server/animation_category_name_split_confirmed_rows.json"
@@ -192,15 +193,60 @@ def _candidate_template(source_category: str, rule: dict[str, Any], matched_samp
     }
 
 
-def _review_item(row: dict[str, Any]) -> dict[str, Any]:
+def _catalog_rows(payload: dict[str, Any] | list[Any]) -> list[dict[str, Any]]:
+    if isinstance(payload, dict):
+        raw_rows = payload.get("items", [])
+    else:
+        raw_rows = payload
+    return [row for row in raw_rows if isinstance(row, dict)]
+
+
+def _item_name(row: dict[str, Any]) -> str:
+    return " ".join(
+        str(row.get(field) or "")
+        for field in ("name_ko", "name_ja", "name_en", "series_name", "sub_series")
+        if str(row.get(field) or "").strip()
+    )
+
+
+def _catalog_sample(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "catalog_index": row.get("catalog_index"),
+        "name_ko": row.get("name_ko"),
+        "name_ja": row.get("name_ja"),
+        "category": row.get("category"),
+        "affiliation": row.get("affiliation"),
+        "series_name": row.get("series_name"),
+        "sub_series": row.get("sub_series"),
+        "source_store": row.get("source_store"),
+    }
+
+
+def _catalog_row_id(row: dict[str, Any]) -> Any:
+    if row.get("catalog_index") is not None:
+        return row.get("catalog_index")
+    return (_item_name(row), row.get("category"), row.get("source_store"))
+
+
+def _catalog_matches_for_rule(catalog_rows: list[dict[str, Any]], rule: dict[str, Any]) -> list[dict[str, Any]]:
+    return [row for row in catalog_rows if _matches(_item_name(row), rule["match_keywords"])]
+
+
+def _review_item(row: dict[str, Any], catalog_rows: list[dict[str, Any]]) -> dict[str, Any]:
     source_category = str(row.get("category") or "").strip()
     samples = [str(name) for name in row.get("sample_names", []) if str(name).strip()]
+    source_catalog_rows = [
+        catalog_row for catalog_row in catalog_rows if str(catalog_row.get("category") or "").strip() == source_category
+    ]
     used_samples: set[str] = set()
+    used_catalog_indexes: set[Any] = set()
     candidates: list[dict[str, Any]] = []
     for rule in SPLIT_RULES:
         matched = [name for name in samples if _matches(name, rule["match_keywords"])]
-        if matched:
+        catalog_matches = _catalog_matches_for_rule(source_catalog_rows, rule)
+        if matched or catalog_matches:
             used_samples.update(matched)
+            used_catalog_indexes.update(_catalog_row_id(row) for row in catalog_matches)
             candidates.append(
                 {
                     "rule_id": rule["rule_id"],
@@ -212,22 +258,32 @@ def _review_item(row: dict[str, Any]) -> dict[str, Any]:
                     "match_keywords": rule["match_keywords"],
                     "matched_sample_count": len(matched),
                     "matched_sample_names": matched[:8],
+                    "matched_catalog_row_count": len(catalog_matches),
+                    "matched_catalog_samples": [_catalog_sample(catalog_row) for catalog_row in catalog_matches[:8]],
                     "name_level_split_template": _candidate_template(source_category, rule, matched),
                 }
             )
 
     unmatched = [name for name in samples if name not in used_samples]
+    unmatched_catalog_rows = [
+        catalog_row for catalog_row in source_catalog_rows if _catalog_row_id(catalog_row) not in used_catalog_indexes
+    ]
     return {
         "source_category": source_category,
         "affected_catalog_rows": int(row.get("rows") or 0),
+        "catalog_category_rows": len(source_catalog_rows),
         "suggested_default_category": row.get("suggested_category") or source_category,
         "review_reason": row.get("review_reason"),
         "sample_names": samples[:8],
         "split_candidate_count": len(candidates),
         "matched_sample_count": sum(int(candidate["matched_sample_count"]) for candidate in candidates),
         "unmatched_sample_count": len(unmatched),
+        "matched_catalog_rule_hit_count": sum(int(candidate["matched_catalog_row_count"]) for candidate in candidates),
+        "matched_catalog_row_count": len(used_catalog_indexes),
+        "unmatched_catalog_row_count": len(unmatched_catalog_rows),
         "split_candidates": candidates,
         "unmatched_sample_names": unmatched[:8],
+        "unmatched_catalog_samples": [_catalog_sample(catalog_row) for catalog_row in unmatched_catalog_rows[:8]],
         "manual_confirmation_template": CONFIRMED_TEMPLATE,
         "confirmed_queue": CONFIRMED_QUEUE,
         "import_tool": IMPORT_TOOL,
@@ -236,14 +292,18 @@ def _review_item(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_report(payload: dict[str, Any]) -> dict[str, Any]:
-    rows = [_review_item(row) for row in _split_rows(payload)]
+def build_report(payload: dict[str, Any], catalog_payload: dict[str, Any] | list[Any] | None = None) -> dict[str, Any]:
+    catalog_rows = _catalog_rows(catalog_payload or {})
+    rows = [_review_item(row, catalog_rows) for row in _split_rows(payload)]
     rows.sort(key=lambda row: (-int(row.get("affected_catalog_rows") or 0), str(row.get("source_category") or "")))
     family_counts = Counter(
         candidate["target_family"] for row in rows for candidate in row.get("split_candidates", [])
     )
     matched_samples = sum(int(row.get("matched_sample_count") or 0) for row in rows)
     unmatched_samples = sum(int(row.get("unmatched_sample_count") or 0) for row in rows)
+    matched_catalog_rule_hits = sum(int(row.get("matched_catalog_rule_hit_count") or 0) for row in rows)
+    matched_catalog_rows = sum(int(row.get("matched_catalog_row_count") or 0) for row in rows)
+    unmatched_catalog_rows = sum(int(row.get("unmatched_catalog_row_count") or 0) for row in rows)
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -254,6 +314,11 @@ def build_report(payload: dict[str, Any]) -> dict[str, Any]:
             "candidate_split_rules": sum(int(row.get("split_candidate_count") or 0) for row in rows),
             "matched_sample_names": matched_samples,
             "unmatched_sample_names": unmatched_samples,
+            "catalog_scan_enabled": bool(catalog_rows),
+            "catalog_source_category_rows": sum(int(row.get("catalog_category_rows") or 0) for row in rows),
+            "matched_catalog_rule_hits": matched_catalog_rule_hits,
+            "matched_catalog_rows": matched_catalog_rows,
+            "unmatched_catalog_rows": unmatched_catalog_rows,
             "by_target_family": family_counts.most_common(),
             "manual_confirmed_rows": 0,
             "auto_apply_enabled": False,
@@ -281,10 +346,14 @@ def build_report(payload: dict[str, Any]) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
+    parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
 
-    report = build_report(_load(args.input))
+    catalog_payload: dict[str, Any] | list[Any] | None = None
+    if args.catalog.exists():
+        catalog_payload = json.loads(args.catalog.read_text(encoding="utf-8"))
+    report = build_report(_load(args.input), catalog_payload)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     print(f"Report: {args.output}")

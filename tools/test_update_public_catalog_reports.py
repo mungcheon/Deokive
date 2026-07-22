@@ -649,6 +649,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_split_summary.get("candidate_split_rules"),
         )
         self.assertEqual(
+            open_queues.get("animation_category_name_split_unmatched_catalog_rows"),
+            animation_split_summary.get("unmatched_catalog_rows"),
+        )
+        self.assertEqual(
             animation_scorecard.get("split_review_categories"),
             animation_action_summary.get("split_review_categories"),
         )
@@ -674,6 +678,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             animation_split_next_action.get("matched_sample_names"),
             animation_split_summary.get("matched_sample_names"),
+        )
+        self.assertEqual(
+            animation_split_scorecard.get("matched_catalog_rows"),
+            animation_split_summary.get("matched_catalog_rows"),
+        )
+        self.assertEqual(
+            animation_split_next_action.get("unmatched_catalog_rows"),
+            animation_split_summary.get("unmatched_catalog_rows"),
         )
         self.assertFalse(animation_split_summary.get("auto_apply_enabled"))
         self.assertGreater(len(animation_agent_batches), 0)
