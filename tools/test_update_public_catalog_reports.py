@@ -40,6 +40,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/requested_focus_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_confirmed_import_readiness_public.json", updated_files)
         self.assertIn("data/catalog_execution_plan_public.json", updated_files)
+        self.assertIn("data/source_discovery_store_bottlenecks_public.json", updated_files)
         self.assertIn("data/catalog_metadata_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_metadata_action_queue_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
@@ -90,6 +91,13 @@ class PublicCatalogReportTests(unittest.TestCase):
         if reports.STELLIVE_FANDING_CANDIDATES.exists():
             self.assertGreater(quality["stellive_fanding_candidates"]["missing_image_candidate_rows"], 0)
             self.assertIs(quality["stellive_fanding_candidates"]["auto_apply_enabled"], False)
+        if reports.SOURCE_DISCOVERY_STORE_BOTTLENECKS.exists():
+            self.assertEqual(
+                quality["source_discovery_store_bottlenecks"]["queued_source_rows"],
+                quality["source_discovery_action_queue"]["queued_source_rows"],
+            )
+            self.assertGreater(quality["source_discovery_store_bottlenecks"]["store_count"], 0)
+            self.assertIs(quality["source_discovery_store_bottlenecks"]["auto_apply_enabled"], False)
         if reports.GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.exists():
             self.assertEqual(
                 quality["gotouchi_representative_image_attachment"]["representative_attachment_rows"],

@@ -42,6 +42,7 @@ jobs:
           python tools/build_metadata_action_queue_public.py
           python tools/build_image_attachment_action_queue_public.py
           python tools/build_catalog_missing_image_actionability_public.py --write
+          python tools/build_source_discovery_store_bottlenecks_public.py --write
           python tools/build_deduplication_action_queue_public.py
           python tools/build_deduplication_fast_review_public.py --write
           python tools/build_ichiban_kuji_metadata_action_queue_public.py
@@ -149,6 +150,7 @@ jobs:
             data/source_discovery_queue_public.json \
             data/source_discovery_review_batches_public.json \
             data/source_discovery_action_queue_public.json \
+            data/source_discovery_store_bottlenecks_public.json \
             data/catalog_metadata_backlog_public.json \
             data/catalog_metadata_review_batches_public.json \
             data/catalog_metadata_action_queue_public.json \

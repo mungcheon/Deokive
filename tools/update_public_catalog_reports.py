@@ -65,6 +65,7 @@ SOURCE_DETAIL = DATA / "source_detail_probe_public.json"
 SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public.json"
 SOURCE_DISCOVERY_ACTION_QUEUE = DATA / "source_discovery_action_queue_public.json"
+SOURCE_DISCOVERY_STORE_BOTTLENECKS = DATA / "source_discovery_store_bottlenecks_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 METADATA_ACTION_QUEUE = DATA / "catalog_metadata_action_queue_public.json"
@@ -4878,6 +4879,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["source_discovery_action_queue"] = copy_report_summary(
                 SOURCE_DISCOVERY_ACTION_QUEUE, "source_discovery_action_queue"
             )
+        if SOURCE_DISCOVERY_STORE_BOTTLENECKS.exists():
+            target["source_discovery_store_bottlenecks"] = copy_report_summary(
+                SOURCE_DISCOVERY_STORE_BOTTLENECKS, "source_discovery_store_bottlenecks"
+            )
         target["metadata_backlog"] = {
             "public_report": f"data/{METADATA_BACKLOG.name}",
             **metadata_backlog["summary"],
@@ -5043,6 +5048,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DANGANRONPA_MISSING_MEDIA.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_ACTION_QUEUE.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_STORE_BOTTLENECKS.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
             str(METADATA_REVIEW_BATCHES.relative_to(ROOT)),
             str(METADATA_ACTION_QUEUE.relative_to(ROOT)),
