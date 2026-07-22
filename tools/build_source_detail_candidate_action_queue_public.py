@@ -40,6 +40,51 @@ GENERIC_SHARED_TOKENS = {
     "t\u30b7\u30e3\u30c4",
 }
 
+PRODUCT_TYPE_HINTS = {
+    "nendoroid": {
+        "nendoroid",
+        "\u306d\u3093\u3069\u308d\u3044\u3069",
+    },
+    "nendoroid_plus": {
+        "nendoroid plus",
+        "nendoroid+",
+        "\u306d\u3093\u3069\u308d\u3044\u3069\u3077\u3089\u3059",
+    },
+    "acrylic_keychain": {
+        "acrylic keychain",
+        "acrylic key ring",
+        "\u30a2\u30af\u30ea\u30eb\u30ad\u30fc\u30c1\u30a7\u30fc\u30f3",
+        "\u30a2\u30af\u30ea\u30eb\u30ad\u30fc\u30db\u30eb\u30c0\u30fc",
+    },
+    "acrylic_stand": {
+        "acrylic stand",
+        "\u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9",
+        "\u30b9\u30bf\u30f3\u30c9\u30dd\u30c3\u30d7",
+    },
+    "clear_file": {
+        "clear file",
+        "\u30af\u30ea\u30a2\u30d5\u30a1\u30a4\u30eb",
+    },
+    "can_badge": {
+        "can badge",
+        "\u7f36\u30d0\u30c3\u30b8",
+        "\u30d0\u30c3\u30c1",
+    },
+    "tshirt": {
+        "tshirt",
+        "t-shirt",
+        "t\u30b7\u30e3\u30c4",
+    },
+    "pouch": {
+        "pouch",
+        "\u30dd\u30fc\u30c1",
+    },
+    "mug": {
+        "mug",
+        "\u30de\u30b0\u30ab\u30c3\u30d7",
+    },
+}
+
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -143,16 +188,37 @@ def parenthetical_terms(*values: Any) -> list[str]:
     return terms
 
 
+def product_type_hints(value: Any) -> set[str]:
+    text = normalize_token(value)
+    matches: set[str] = set()
+    for key, hints in PRODUCT_TYPE_HINTS.items():
+        if any(normalize_token(hint) in text for hint in hints):
+            matches.add(key)
+    if "nendoroid_plus" in matches:
+        matches.discard("nendoroid")
+    return matches
+
+
 def candidate_identity_flags(row: dict[str, Any]) -> list[str]:
     flags: list[str] = []
     shared_tokens = [token for token in row.get("shared_tokens") or [] if str(token or "").strip()]
     if shared_tokens and all(is_generic_token(token) for token in shared_tokens):
         flags.append("only_generic_shared_tokens")
 
-    name_text = " ".join(str(row.get(field) or "") for field in ("name_ko", "name_ja")).casefold()
+    name_text_raw = " ".join(str(row.get(field) or "") for field in ("name_ko", "name_ja"))
+    name_text = name_text_raw.casefold()
     title_text = str(row.get("candidate_title") or "").casefold()
     if ("\u00d7" in title_text or "|" in title_text) and "\u00d7" not in name_text and "|" not in name_text:
         flags.append("candidate_title_mentions_crossover")
+    if ("/" in title_text or "\u5168" in title_text) and "/" not in name_text and "\u5168" not in name_text:
+        flags.append("candidate_title_multi_variant_or_bundle")
+
+    catalog_types = product_type_hints(name_text_raw)
+    candidate_types = product_type_hints(row.get("candidate_title"))
+    if catalog_types and candidate_types and not catalog_types.intersection(candidate_types):
+        flags.append("candidate_title_product_type_mismatch")
+    elif "nendoroid" in catalog_types and "nendoroid_plus" in candidate_types:
+        flags.append("candidate_title_product_type_mismatch")
 
     missing_terms = [
         term

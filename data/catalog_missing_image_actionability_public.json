@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T14:10:55Z",
+  "generated_at": "2026-07-22T15:01:11Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 720,
@@ -9,10 +9,10 @@
     "exact_source_ready_rows": 0,
     "source_first_rows": 692,
     "review_before_attach_rows": 23,
-    "source_detail_candidate_review_rows": 2,
-    "source_detail_candidate_recheck_required_rows": 10,
-    "source_detail_identity_warning_rows": 10,
-    "source_detail_unflagged_candidate_rows": 2,
+    "source_detail_candidate_review_rows": 1,
+    "source_detail_candidate_recheck_required_rows": 11,
+    "source_detail_identity_warning_rows": 11,
+    "source_detail_unflagged_candidate_rows": 1,
     "manual_image_research_rows": 5,
     "source_discovery_focus_pack_rows": 427,
     "source_discovery_focus_pack_count": 24,
@@ -25,7 +25,7 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 427,
     "source_discovery_focus_coverage": 0.6651,
     "source_discovery_non_focus_rows": 215,
-    "action_queue_rows": 75,
+    "action_queue_rows": 74,
     "direct_image_action_queue_rows": 73,
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
@@ -33,44 +33,29 @@
     "image_attachment_template_representative_review_rows": 23,
     "image_attachment_template_dry_run_updated_rows": 0,
     "image_attachment_template_dry_run_skipped_rows": 73,
-    "actionable_image_rows": 75,
+    "actionable_image_rows": 74,
     "auto_apply_enabled": false
   },
   "readiness": [
     {
       "readiness": "source_detail_candidate_review",
       "priority": 11,
-      "rows": 2,
+      "rows": 1,
       "workflow_rows": [
         {
           "workflow": "confirm_source_detail_candidate_then_attach_image",
           "label": "정확한 상품 상세 후보를 확인한 뒤 source_url/image_url 첨부",
-          "rows": 2,
+          "rows": 1,
           "next_step": "manual_confirm_then_import_source_and_image_templates"
         }
       ],
       "by_source_store": [
-        {
-          "source_store": "굿스마일컴퍼니",
-          "rows": 1
-        },
         {
           "source_store": "애니메이트",
           "rows": 1
         }
       ],
       "sample_items": [
-        {
-          "catalog_index": 2038,
-          "name_ko": "넨도로이드 마히토",
-          "name_ja": "ねんどろいど 真人",
-          "source_store": "굿스마일컴퍼니",
-          "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
-          "candidate_image_url": "https://images.goodsmile.info/cgm/images/product/20211116/12005/92118/thumb/28d719e5056784537e73028721e05f66.jpg",
-          "review_risk": "ambiguous_candidate_review",
-          "candidate_identity_flags": [],
-          "workflow": "confirm_source_detail_candidate_then_attach_image"
-        },
         {
           "catalog_index": 2235,
           "name_ko": "짱구는 못말려 의류 신짱 액션가면 티셔츠",
@@ -260,12 +245,12 @@
     {
       "readiness": "source_detail_candidate_recheck_required",
       "priority": 29,
-      "rows": 10,
+      "rows": 11,
       "workflow_rows": [
         {
           "workflow": "recheck_source_detail_candidate_identity",
           "label": "후보 제목의 작품/캐릭터/변형 불일치 가능성 재확인",
-          "rows": 10,
+          "rows": 11,
           "next_step": "refresh_or_replace_candidate_before_import"
         }
       ],
@@ -276,7 +261,7 @@
         },
         {
           "source_store": "굿스마일컴퍼니",
-          "rows": 1
+          "rows": 2
         }
       ],
       "sample_items": [
@@ -293,6 +278,19 @@
           "workflow": "recheck_source_detail_candidate_identity"
         },
         {
+          "catalog_index": 2038,
+          "name_ko": "넨도로이드 마히토",
+          "name_ja": "ねんどろいど 真人",
+          "source_store": "굿스마일컴퍼니",
+          "candidate_title": "呪術廻戦 ねんどろいどぷらす アクリルキーチェーン 宿儺/真人/七海建人/夏油傑/漏瑚",
+          "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_bundle",
+            "candidate_title_product_type_mismatch"
+          ],
+          "workflow": "recheck_source_detail_candidate_identity"
+        },
+        {
           "catalog_index": 1992,
           "name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
           "name_ja": "推しの子 アクリルスタンド (あかね)",
@@ -300,6 +298,7 @@
           "candidate_title": "【グッズ-スタンドポップ】TVアニメ『【推しの子】』 れとぽぷ 第2弾 アクリルスタンド(全8種)黒川あかね",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91%E3%80%8F+%E3%82%8C%E3%81%A8%E3%81%BD%E3%81%B7+%E7%AC%AC2%E5%BC%BE+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%28%E5%85%A88%E7%A8%AE%29%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD/pd/3415376/",
           "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_bundle",
             "candidate_title_missing_catalog_variant_hint"
           ],
           "workflow": "recheck_source_detail_candidate_identity"

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T14:47:15Z",
+  "generated_at": "2026-07-22T15:01:11Z",
   "summary": {
     "batch_count": 96,
     "summed_batch_rows": 29798,
@@ -6335,72 +6335,6 @@
       "sample_items": [
         {
           "manual_confirmed": false,
-          "catalog_index": 2038,
-          "row_index": 2038,
-          "source_store": "굿스마일컴퍼니",
-          "name_ko": "넨도로이드 마히토",
-          "name_ja": "ねんどろいど 真人",
-          "query": "ねんどろいど 真人",
-          "candidate_status": "candidate_review_needed",
-          "candidate_count": 1,
-          "candidate_count_bucket": "single_candidate",
-          "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
-          "candidate_title": "呪術廻戦 ねんどろいどぷらす アクリルキーチェーン 宿儺/真人/七海建人/夏油傑/漏瑚",
-          "candidate_image_url": "https://images.goodsmile.info/cgm/images/product/20211116/12005/92118/thumb/28d719e5056784537e73028721e05f66.jpg",
-          "score": 0.5,
-          "candidate_score": 0.5,
-          "shared_tokens": [
-            "真人"
-          ],
-          "candidate_identity_flags": [],
-          "safe_source_image_pair": true,
-          "source_report": "server/catalog_source_detail_candidates.json",
-          "review_risk": "ambiguous_candidate_review",
-          "review_priority": 30,
-          "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
-          "current_catalog_state": {
-            "catalog_match_found": true,
-            "catalog_has_display_image": false,
-            "catalog_identity_matches": true,
-            "stale_candidate": false,
-            "catalog_current_name_ko": "넨도로이드 마히토",
-            "catalog_current_name_ja": "ねんどろいど 真人",
-            "catalog_current_source_store": "굿스마일컴퍼니",
-            "catalog_current_source_url": null
-          },
-          "source_patch_template": {
-            "manual_confirmed": false,
-            "row_index": 2038,
-            "field": "source_url",
-            "manual_value": "https://www.goodsmile.info/ja/product/12005/",
-            "evidence_url": "https://www.goodsmile.info/ja/product/12005/",
-            "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
-            "source_store": "굿스마일컴퍼니",
-            "name_ko": "넨도로이드 마히토",
-            "name_ja": "ねんどろいど 真人"
-          },
-          "image_patch_template": {
-            "manual_confirmed": false,
-            "row_index": 2038,
-            "field": "image_url",
-            "manual_value": "https://images.goodsmile.info/cgm/images/product/20211116/12005/92118/thumb/28d719e5056784537e73028721e05f66.jpg",
-            "evidence_url": "https://www.goodsmile.info/ja/product/12005/",
-            "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
-            "source_store": "굿스마일컴퍼니",
-            "name_ko": "넨도로이드 마히토",
-            "name_ja": "ねんどろいど 真人"
-          },
-          "acceptance_criteria": [
-            "Candidate title must describe the same product, character, and variant as the catalog row.",
-            "Candidate source URL must be an exact product/detail page.",
-            "Candidate image must be the product image from the accepted source page or trusted official CDN.",
-            "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
-          ],
-          "auto_apply_enabled": false,
-          "manual_confirmation_shortlist": false
-        },
-        {
-          "manual_confirmed": false,
           "catalog_index": 2235,
           "row_index": 2235,
           "source_store": "애니메이트",
@@ -6538,6 +6472,75 @@
         },
         {
           "manual_confirmed": false,
+          "catalog_index": 2038,
+          "row_index": 2038,
+          "source_store": "굿스마일컴퍼니",
+          "name_ko": "넨도로이드 마히토",
+          "name_ja": "ねんどろいど 真人",
+          "query": "ねんどろいど 真人",
+          "candidate_status": "candidate_review_needed",
+          "candidate_count": 1,
+          "candidate_count_bucket": "single_candidate",
+          "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
+          "candidate_title": "呪術廻戦 ねんどろいどぷらす アクリルキーチェーン 宿儺/真人/七海建人/夏油傑/漏瑚",
+          "candidate_image_url": "https://images.goodsmile.info/cgm/images/product/20211116/12005/92118/thumb/28d719e5056784537e73028721e05f66.jpg",
+          "score": 0.5,
+          "candidate_score": 0.5,
+          "shared_tokens": [
+            "真人"
+          ],
+          "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_bundle",
+            "candidate_title_product_type_mismatch"
+          ],
+          "safe_source_image_pair": true,
+          "source_report": "server/catalog_source_detail_candidates.json",
+          "review_risk": "ambiguous_candidate_review",
+          "review_priority": 35,
+          "recommended_action": "recheck_candidate_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "넨도로이드 마히토",
+            "catalog_current_name_ja": "ねんどろいど 真人",
+            "catalog_current_source_store": "굿스마일컴퍼니",
+            "catalog_current_source_url": null
+          },
+          "source_patch_template": {
+            "manual_confirmed": false,
+            "row_index": 2038,
+            "field": "source_url",
+            "manual_value": "https://www.goodsmile.info/ja/product/12005/",
+            "evidence_url": "https://www.goodsmile.info/ja/product/12005/",
+            "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
+            "source_store": "굿스마일컴퍼니",
+            "name_ko": "넨도로이드 마히토",
+            "name_ja": "ねんどろいど 真人"
+          },
+          "image_patch_template": {
+            "manual_confirmed": false,
+            "row_index": 2038,
+            "field": "image_url",
+            "manual_value": "https://images.goodsmile.info/cgm/images/product/20211116/12005/92118/thumb/28d719e5056784537e73028721e05f66.jpg",
+            "evidence_url": "https://www.goodsmile.info/ja/product/12005/",
+            "candidate_source_url": "https://www.goodsmile.info/ja/product/12005/",
+            "source_store": "굿스마일컴퍼니",
+            "name_ko": "넨도로이드 마히토",
+            "name_ja": "ねんどろいど 真人"
+          },
+          "acceptance_criteria": [
+            "Candidate title must describe the same product, character, and variant as the catalog row.",
+            "Candidate source URL must be an exact product/detail page.",
+            "Candidate image must be the product image from the accepted source page or trusted official CDN.",
+            "Leave manual_confirmed false when the candidate is a related product, bundle, or wrong variant."
+          ],
+          "auto_apply_enabled": false,
+          "manual_confirmation_shortlist": false
+        },
+        {
+          "manual_confirmed": false,
           "catalog_index": 1992,
           "row_index": 1992,
           "source_store": "애니메이트",
@@ -6556,6 +6559,7 @@
             "推しの子"
           ],
           "candidate_identity_flags": [
+            "candidate_title_multi_variant_or_bundle",
             "candidate_title_missing_catalog_variant_hint"
           ],
           "safe_source_image_pair": true,

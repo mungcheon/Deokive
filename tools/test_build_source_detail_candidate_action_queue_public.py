@@ -193,6 +193,43 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(items[4]["review_priority"], 35)
         self.assertEqual(items[4]["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
 
+    def test_build_report_flags_product_type_and_bundle_mismatches(self) -> None:
+        source_detail = {
+            "review_candidates": [
+                {
+                    "catalog_index": 5,
+                    "source_store": "Good Smile",
+                    "name_ko": "Nendoroid Mahito",
+                    "name_ja": "ねんどろいど 真人",
+                    "status": "candidate_review_needed",
+                    "candidate_count": 1,
+                    "candidate_source_url": "https://example.test/product/5",
+                    "candidate_image_url": "https://example.test/product/5.jpg",
+                    "candidate_title": "呪術廻戦 ねんどろいどぷらす アクリルキーチェーン 宿儺/真人/七海建人",
+                    "score": 0.8,
+                    "shared_tokens": ["真人"],
+                    "safe_source_image_pair": True,
+                }
+            ]
+        }
+        catalog_rows = [
+            {
+                "catalog_index": 5,
+                "source_store": "Good Smile",
+                "name_ko": "Nendoroid Mahito",
+                "name_ja": "ねんどろいど 真人",
+            }
+        ]
+
+        report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
+
+        item = report["batches"][0]["items"][0]
+        self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 0)
+        self.assertIn("candidate_title_product_type_mismatch", item["candidate_identity_flags"])
+        self.assertIn("candidate_title_multi_variant_or_bundle", item["candidate_identity_flags"])
+        self.assertEqual(item["review_priority"], 35)
+        self.assertEqual(item["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
+
 
 if __name__ == "__main__":
     unittest.main()
