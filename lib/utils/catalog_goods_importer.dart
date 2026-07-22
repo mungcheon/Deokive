@@ -162,6 +162,10 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
   return showModalBottomSheet<_CatalogImportDestination>(
     context: context,
     showDragHandle: true,
+    isScrollControlled: true,
+    constraints: BoxConstraints(
+      maxHeight: MediaQuery.sizeOf(context).height * 0.8,
+    ),
     builder: (sheetContext) {
       return StatefulBuilder(
         builder: (context, setSheetState) {
@@ -178,7 +182,7 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
@@ -230,9 +234,8 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                     ),
                   ],
                   const SizedBox(height: 8),
-                  Flexible(
+                  Expanded(
                     child: ListView.builder(
-                      shrinkWrap: true,
                       itemCount: folders.length,
                       itemBuilder: (context, index) {
                         final folder = folders[index];
@@ -465,6 +468,7 @@ GoodsItem goodsItemFromCatalogEntry({
         entry.barcode?.trim().isEmpty ?? true ? null : entry.barcode!.trim(),
     storageLocation: null,
     imageBytesList: imageBytes == null ? const [] : [imageBytes],
+    imageUrl: catalogEntryImageReference(entry),
     isFavorite: false,
   );
 }
@@ -574,4 +578,16 @@ Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
   } catch (_) {
     return null;
   }
+}
+
+@visibleForTesting
+String? catalogEntryImageReference(GoodsCatalogEntry entry) {
+  final localPath = entry.localImagePath?.trim() ?? '';
+  if (localPath.isNotEmpty) return localPath;
+  final remoteUrl = entry.imageUrl?.trim() ?? '';
+  if (remoteUrl.isEmpty) return null;
+  return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
+        RegExp(r'^//'),
+        'https://',
+      );
 }

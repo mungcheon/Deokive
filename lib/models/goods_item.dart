@@ -42,10 +42,12 @@ class GoodsItem {
   final int quantity;
   final int? officialPrice;
   final int? paidPrice;
+
   /// ISO-ish 3-letter code of the currency for [paidPrice]
   /// (e.g. 'KRW', 'JPY'). Stored as a string so this model has no dependency
   /// on the `Currency` enum that lives next to AppState.
   final String priceCurrencyCode;
+
   /// Currency for [officialPrice]. May differ from [priceCurrencyCode] —
   /// e.g. official price in JPY but the user paid in KRW. Defaults to the
   /// paid currency when omitted (legacy data).
@@ -75,6 +77,7 @@ class GoodsItem {
   final String? barcode;
   final String? storageLocation;
   final List<Uint8List> imageBytesList;
+  final String? imageUrl;
   final bool isFavorite;
 
   const GoodsItem({
@@ -105,6 +108,7 @@ class GoodsItem {
     required this.barcode,
     required this.storageLocation,
     required this.imageBytesList,
+    this.imageUrl,
     required this.isFavorite,
   });
 
@@ -162,6 +166,7 @@ class GoodsItem {
     String? barcode,
     String? storageLocation,
     List<Uint8List>? imageBytesList,
+    String? imageUrl,
     bool? isFavorite,
   }) {
     return GoodsItem(
@@ -194,6 +199,7 @@ class GoodsItem {
       barcode: barcode ?? this.barcode,
       storageLocation: storageLocation ?? this.storageLocation,
       imageBytesList: imageBytesList ?? this.imageBytesList,
+      imageUrl: imageUrl ?? this.imageUrl,
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }
@@ -228,6 +234,7 @@ class GoodsItem {
       'storageLocation': storageLocation,
       'imageBytesList':
           imageBytesList.map((b) => base64Encode(b)).toList(growable: false),
+      'imageUrl': imageUrl,
       'isFavorite': isFavorite,
     };
   }
@@ -253,8 +260,7 @@ class GoodsItem {
       officialPrice: json['officialPrice'] as int?,
       paidPrice: json['paidPrice'] as int?,
       priceCurrencyCode: json['priceCurrencyCode'] as String? ?? 'KRW',
-      officialPriceCurrencyCode:
-          json['officialPriceCurrencyCode'] as String?,
+      officialPriceCurrencyCode: json['officialPriceCurrencyCode'] as String?,
       purchaseDate: json['purchaseDate'] == null
           ? null
           : DateTime.tryParse(json['purchaseDate'] as String),
@@ -278,6 +284,7 @@ class GoodsItem {
       barcode: json['barcode'] as String?,
       storageLocation: json['storageLocation'] as String?,
       imageBytesList: images,
+      imageUrl: json['imageUrl'] as String?,
       isFavorite: json['isFavorite'] as bool? ?? false,
     );
   }

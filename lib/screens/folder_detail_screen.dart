@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/folder_item.dart';
 import '../models/goods_item.dart';
 import '../state/app_state.dart';
+import '../widgets/goods_item_image.dart';
 import 'add_goods_screen.dart';
 import 'goods_detail_screen.dart';
 import 'goods_search_screen.dart';
@@ -442,17 +443,10 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                                                     top: Radius.circular(17),
                                                   ),
                                                 ),
-                                                child: item.imageBytes != null
-                                                    ? Image.memory(
-                                                        item.imageBytes!,
-                                                        fit: BoxFit.cover,
-                                                      )
-                                                    : const Center(
-                                                        child: Icon(
-                                                          Icons.image_outlined,
-                                                          size: 34,
-                                                        ),
-                                                      ),
+                                                child: GoodsItemImage(
+                                                  item: item,
+                                                  placeholderIconSize: 34,
+                                                ),
                                               ),
                                             ),
                                             Expanded(
@@ -594,9 +588,10 @@ class _GoodsListRow extends StatelessWidget {
                   width: 64,
                   height: 64,
                   color: colorScheme.surfaceContainerHighest,
-                  child: item.imageBytes != null
-                      ? Image.memory(item.imageBytes!, fit: BoxFit.cover)
-                      : const Icon(Icons.image_outlined, size: 28),
+                  child: GoodsItemImage(
+                    item: item,
+                    placeholderIconSize: 28,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),

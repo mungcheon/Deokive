@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/folder_item.dart';
 import '../models/goods_item.dart';
 import '../state/app_state.dart';
+import '../widgets/goods_item_image.dart';
 import 'goods_detail_screen.dart';
 
 class GoodsSearchScreen extends StatefulWidget {
@@ -143,12 +144,7 @@ class _GoodsSearchScreenState extends State<GoodsSearchScreen> {
                           child: SizedBox(
                             width: 54,
                             height: 54,
-                            child: item.imageBytes != null
-                                ? Image.memory(item.imageBytes!, fit: BoxFit.cover)
-                                : Container(
-                                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                                    child: const Icon(Icons.image_outlined),
-                                  ),
+                            child: GoodsItemImage(item: item),
                           ),
                         ),
                         title: Text(

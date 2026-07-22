@@ -7,6 +7,7 @@ import '../state/app_state.dart';
 import '../utils/csv_exporter.dart';
 import '../theme/deokive_palette.dart';
 import '../widgets/deokive_header_title.dart';
+import '../widgets/goods_item_image.dart';
 import 'add_goods_screen.dart';
 import 'catalog_database_screen.dart';
 import 'folder_detail_screen.dart';
@@ -1820,13 +1821,10 @@ class _GroupFolderGoodsSectionState extends State<_GroupFolderGoodsSection> {
                                   top: Radius.circular(15),
                                 ),
                               ),
-                              child: item.imageBytes != null
-                                  ? Image.memory(item.imageBytes!,
-                                      fit: BoxFit.cover)
-                                  : const Center(
-                                      child:
-                                          Icon(Icons.image_outlined, size: 32),
-                                    ),
+                              child: GoodsItemImage(
+                                item: item,
+                                placeholderIconSize: 32,
+                              ),
                             ),
                           ),
                           Expanded(

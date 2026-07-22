@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../models/goods_item.dart';
 import '../state/app_state.dart';
+import '../widgets/goods_item_image.dart';
 import 'edit_goods_screen.dart';
 
 class GoodsDetailScreen extends StatefulWidget {
@@ -398,7 +399,8 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.item.id != widget.item.id ||
         oldWidget.item.imageBytesList.length !=
-            widget.item.imageBytesList.length) {
+            widget.item.imageBytesList.length ||
+        oldWidget.item.imageUrl != widget.item.imageUrl) {
       _currentPage = 0;
       _pageController.jumpToPage(0);
       _restartAutoSlide();
@@ -436,8 +438,9 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
       ),
       clipBehavior: Clip.antiAlias,
       child: _images.isEmpty
-          ? const Center(
-              child: Icon(Icons.image_outlined, size: 56),
+          ? GoodsItemImage(
+              item: widget.item,
+              placeholderIconSize: 56,
             )
           : Stack(
               alignment: Alignment.bottomCenter,

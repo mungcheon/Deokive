@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/folder_item.dart';
 import '../models/goods_item.dart';
 import '../state/app_state.dart';
+import '../widgets/goods_item_image.dart';
 
 class OfflineArchiveScreen extends StatefulWidget {
   const OfflineArchiveScreen({super.key});
@@ -27,7 +28,7 @@ class _OfflineArchiveScreenState extends State<OfflineArchiveScreen> {
         final goods = selectedFolder == null
             ? <GoodsItem>[]
             : appState.goodsForFolder(selectedFolder.id)
-              ..sort((a, b) => a.name.compareTo(b.name));
+          ..sort((a, b) => a.name.compareTo(b.name));
 
         return Scaffold(
           appBar: AppBar(
@@ -218,15 +219,15 @@ class _OfflineGoodsCard extends StatelessWidget {
           Expanded(
             flex: 5,
             child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(17)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(17)),
               child: Container(
                 width: double.infinity,
                 color: theme.colorScheme.surfaceContainerHighest,
-                child: item.imageBytes != null
-                    ? Image.memory(item.imageBytes!, fit: BoxFit.cover)
-                    : const Center(
-                        child: Icon(Icons.image_outlined, size: 34),
-                      ),
+                child: GoodsItemImage(
+                  item: item,
+                  placeholderIconSize: 34,
+                ),
               ),
             ),
           ),
@@ -252,7 +253,8 @@ class _OfflineGoodsCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.62),
+                      color:
+                          theme.colorScheme.onSurface.withValues(alpha: 0.62),
                     ),
                   ),
                 ],

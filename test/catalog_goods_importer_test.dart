@@ -31,6 +31,7 @@ void main() {
       barcode: '1234567890123',
       sourceStore: '이치방쿠지',
       sourceUrl: 'https://1kuji.com/products/sample',
+      imageUrl: 'https://example.com/catalog/sample.jpg',
       releaseDate: '2026-01-23',
     );
 
@@ -57,9 +58,40 @@ void main() {
     expect(item.companyName, '이치방쿠지');
     expect(item.releaseDate, DateTime(2026, 1, 23));
     expect(item.barcode, '1234567890123');
+    expect(item.imageUrl, 'https://example.com/catalog/sample.jpg');
     expect(item.status, '미개봉');
     expect(item.memo, contains('DB에서 추가'));
     expect(item.memo, contains(entry.sourceUrl!));
+  });
+
+  test(
+      'catalog import keeps an image reference when image bytes are unavailable',
+      () {
+    final appState = AppState();
+    final folder = FolderItem(
+      id: 'top-folder',
+      name: 'Top goods',
+      icon: Icons.folder_rounded,
+      color: Colors.blue,
+    );
+    const entry = GoodsCatalogEntry(
+      nameKo: 'Remote image catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      sourceStore: 'official store',
+      imageUrl: '//example.com/catalog/remote.jpg',
+    );
+
+    final item = goodsItemFromCatalogEntry(
+      appState: appState,
+      entry: entry,
+      folder: folder,
+    );
+    final restored = GoodsItem.fromJson(item.toJson());
+
+    expect(item.imageBytesList, isEmpty);
+    expect(item.imageUrl, 'https://example.com/catalog/remote.jpg');
+    expect(restored.imageUrl, item.imageUrl);
   });
 
   test('catalog import can load a bundled catalog image for saving', () async {
