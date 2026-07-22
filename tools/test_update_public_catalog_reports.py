@@ -675,6 +675,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_keyword_summary.get("token_candidate_count"),
         )
         self.assertEqual(
+            open_queues.get("animation_category_unmatched_keyword_product_type_candidates"),
+            animation_keyword_summary.get("product_type_candidate_count"),
+        )
+        self.assertEqual(
             animation_scorecard.get("split_review_categories"),
             animation_action_summary.get("split_review_categories"),
         )
@@ -713,6 +717,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             animation_keyword_next_action.get("token_candidate_count"),
             animation_keyword_summary.get("token_candidate_count"),
+        )
+        self.assertEqual(
+            animation_keyword_next_action.get("product_type_candidate_count"),
+            animation_keyword_summary.get("product_type_candidate_count"),
         )
         self.assertFalse(animation_keyword_summary.get("auto_apply_enabled"))
         self.assertGreater(len(animation_agent_batches), 0)

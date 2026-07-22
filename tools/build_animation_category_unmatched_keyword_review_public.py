@@ -29,6 +29,55 @@ STOPWORDS = {
     "cm",
 }
 
+PRODUCT_TYPE_MARKERS = {
+    "アクリルチャーム",
+    "アクリルコレクション",
+    "ツインアクリルチャーム",
+    "スクールアイコンボタン",
+    "ラバーコレクション",
+    "ラバーアソート",
+    "コレクション",
+    "アソート",
+    "雑貨",
+    "チャーム",
+    "ボタン",
+    "カメラ",
+    "ケース",
+    "ソックス",
+    "シュシュ",
+    "봉제인형",
+    "아크릴",
+    "키링",
+    "카메라",
+    "케이스",
+}
+
+NOISE_MARKERS = {
+    "이치방쿠지",
+    "一番",
+    "一番くじ",
+    "치이카와",
+    "공식",
+    "마켓",
+    "사용자",
+    "요청",
+    "추가",
+    "ワンピース",
+    "ドラゴンボール",
+    "ハイキュー",
+    "ガンダム",
+    "機動戦士",
+    "ラストワン",
+    "ジョジョ",
+    "ヒーローアカデミア",
+    "ハチワレ",
+    "하치와레",
+    "Fate",
+    "UNIVERSAL",
+    "CENTURY",
+    "SAGA",
+}
+
 
 def _now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -57,6 +106,14 @@ def _text(row: dict[str, Any]) -> str:
 def _tokens(text: str) -> list[str]:
     found = re.findall(r"[A-Za-z][A-Za-z0-9_-]{2,}|[가-힣]{2,}|[ァ-ヴー]{2,}|[一-龯々]{2,}", text)
     return [token for token in found if token.casefold() not in STOPWORDS]
+
+
+def _candidate_review_kind(token: str) -> tuple[str, str]:
+    if token in PRODUCT_TYPE_MARKERS or any(marker in token for marker in PRODUCT_TYPE_MARKERS):
+        return "product_type_like", "Looks like a goods shape, material, or product format."
+    if token in NOISE_MARKERS:
+        return "series_or_source_noise", "Looks like a series, character, store, campaign, or request-source label."
+    return "ambiguous_review", "Needs sample review before it can become a category keyword."
 
 
 def _sample(row: dict[str, Any]) -> dict[str, Any]:
@@ -116,16 +173,22 @@ def _token_candidates(rows: list[dict[str, Any]], *, limit: int) -> list[dict[st
             seen.add(token)
             token_rows[token].append(row)
     ranked = sorted(token_rows.items(), key=lambda item: (-len(item[1]), item[0]))[:limit]
-    return [
-        {
+    candidates: list[dict[str, Any]] = []
+    for token, group_rows in ranked:
+        review_kind, review_reason = _candidate_review_kind(token)
+        candidates.append(
+            {
             "token": token,
             "row_count": len(group_rows),
             "sample_rows": [_sample(row) for row in group_rows[:6]],
+            "review_kind": review_kind,
+            "review_reason": review_reason,
+            "product_type_hint": review_kind == "product_type_like",
             "manual_confirmed": False,
-            "suggested_use": "review_as_keyword_candidate",
+            "suggested_use": "review_as_keyword_candidate" if review_kind != "series_or_source_noise" else "do_not_promote_without_stronger_product_type_evidence",
         }
-        for token, group_rows in ranked
-    ]
+        )
+    return candidates
 
 
 def build_report(split_payload: dict[str, Any], catalog_payload: dict[str, Any], *, limit: int = 20) -> dict[str, Any]:
@@ -135,13 +198,17 @@ def build_report(split_payload: dict[str, Any], catalog_payload: dict[str, Any],
     for source_category, keywords in sorted(rules.items()):
         source_rows = [row for row in rows if str(row.get("category") or "").strip() == source_category]
         unmatched = [row for row in source_rows if _is_unmatched(row, keywords)]
+        token_candidates = _token_candidates(unmatched, limit=limit)
         review_items.append(
             {
                 "source_category": source_category,
                 "source_category_rows": len(source_rows),
                 "unmatched_rows": len(unmatched),
                 "current_keyword_count": len(keywords),
-                "top_token_candidates": _token_candidates(unmatched, limit=limit),
+                "top_token_candidates": token_candidates,
+                "promotable_token_candidates": [
+                    candidate for candidate in token_candidates if candidate.get("review_kind") == "product_type_like"
+                ][:10],
                 "top_series": _ranked_groups(unmatched, "series_name", limit=10),
                 "top_sub_series": _ranked_groups(unmatched, "sub_series", limit=10),
                 "top_source_stores": _ranked_groups(unmatched, "source_store", limit=10),
@@ -155,6 +222,18 @@ def build_report(split_payload: dict[str, Any], catalog_payload: dict[str, Any],
         )
 
     token_candidate_count = sum(len(item["top_token_candidates"]) for item in review_items)
+    product_type_candidate_count = sum(
+        1
+        for item in review_items
+        for candidate in item["top_token_candidates"]
+        if candidate.get("review_kind") == "product_type_like"
+    )
+    noise_candidate_count = sum(
+        1
+        for item in review_items
+        for candidate in item["top_token_candidates"]
+        if candidate.get("review_kind") == "series_or_source_noise"
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -164,6 +243,8 @@ def build_report(split_payload: dict[str, Any], catalog_payload: dict[str, Any],
             "source_category_rows": sum(int(item["source_category_rows"]) for item in review_items),
             "unmatched_rows": sum(int(item["unmatched_rows"]) for item in review_items),
             "token_candidate_count": token_candidate_count,
+            "product_type_candidate_count": product_type_candidate_count,
+            "noise_candidate_count": noise_candidate_count,
             "manual_confirmed_rows": 0,
             "auto_apply_enabled": False,
         },

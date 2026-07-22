@@ -2020,6 +2020,10 @@ def build_operations_public(
             "source_categories": animation_unmatched_keyword_review_summary.get("source_categories", 0),
             "unmatched_rows": animation_unmatched_keyword_review_summary.get("unmatched_rows", 0),
             "token_candidate_count": animation_unmatched_keyword_review_summary.get("token_candidate_count", 0),
+            "product_type_candidate_count": animation_unmatched_keyword_review_summary.get(
+                "product_type_candidate_count", 0
+            ),
+            "noise_candidate_count": animation_unmatched_keyword_review_summary.get("noise_candidate_count", 0),
             "auto_apply_enabled": animation_unmatched_keyword_review_summary.get("auto_apply_enabled", False),
             "recommended_next_action": "Review unmatched broad-category tokens before adding more split keywords.",
         } if animation_unmatched_keyword_review_summary else None,
@@ -2281,6 +2285,10 @@ def build_operations_public(
             "open_rows": animation_unmatched_keyword_review_summary.get("unmatched_rows", 0),
             "source_categories": animation_unmatched_keyword_review_summary.get("source_categories", 0),
             "token_candidate_count": animation_unmatched_keyword_review_summary.get("token_candidate_count", 0),
+            "product_type_candidate_count": animation_unmatched_keyword_review_summary.get(
+                "product_type_candidate_count", 0
+            ),
+            "noise_candidate_count": animation_unmatched_keyword_review_summary.get("noise_candidate_count", 0),
             "primary_report": f"data/{ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.name}",
             "next_step": "review_unmatched_animation_keyword_candidates",
             "auto_apply_enabled": animation_unmatched_keyword_review_summary.get("auto_apply_enabled", False),
@@ -2406,6 +2414,9 @@ def build_operations_public(
         )
         open_review_queues["animation_category_unmatched_keyword_candidates"] = (
             animation_unmatched_keyword_review_summary.get("token_candidate_count", 0)
+        )
+        open_review_queues["animation_category_unmatched_keyword_product_type_candidates"] = (
+            animation_unmatched_keyword_review_summary.get("product_type_candidate_count", 0)
         )
 
     return {
@@ -3213,6 +3224,7 @@ def build_agent_work_queue_public(
             review_summary={
                 "unmatched_rows": int(keyword_item.get("unmatched_rows") or 0),
                 "token_candidate_count": len(keyword_item.get("top_token_candidates", [])),
+                "product_type_candidate_count": len(keyword_item.get("promotable_token_candidates", [])),
                 "source_category_rows": int(keyword_item.get("source_category_rows") or 0),
             },
         )
@@ -4361,6 +4373,9 @@ def validate_report_consistency(
         )
         expected_open_queues["animation_category_unmatched_keyword_candidates"] = (
             animation_unmatched_keyword_summary.get("token_candidate_count", 0)
+        )
+        expected_open_queues["animation_category_unmatched_keyword_product_type_candidates"] = (
+            animation_unmatched_keyword_summary.get("product_type_candidate_count", 0)
         )
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
