@@ -12,6 +12,7 @@ from typing import Any
 import audit_public_catalog_image_assets
 import build_image_source_url_confirmed_template_public
 import build_missing_image_priority_public
+import build_source_discovery_next_focus_pack_public
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -73,6 +74,7 @@ SOURCE_DISCOVERY_ACTION_QUEUE = DATA / "source_discovery_action_queue_public.jso
 SOURCE_DISCOVERY_STORE_BOTTLENECKS = DATA / "source_discovery_store_bottlenecks_public.json"
 SOURCE_DISCOVERY_FOCUS_TEMPLATE = DATA / "source_discovery_focus_confirmed_template_public.json"
 SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT = DATA / "source_discovery_focus_template_import_dry_run_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_public.json"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 OFFICIAL_DETAIL_REVIEW_BATCHES = DATA / "official_detail_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
@@ -5169,12 +5171,20 @@ def update_reports(write: bool) -> dict[str, Any]:
         load_json(STELLIVE_FANDING_CANDIDATES, {}) if STELLIVE_FANDING_CANDIDATES.exists() else None,
         generated_at=generated_at,
     )
+    source_discovery_focus_template = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {})
+    source_discovery_focus_template_import = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
+    source_discovery_next_focus_pack = build_source_discovery_next_focus_pack_public.build_report(
+        source_discovery_focus_template,
+        generated_at=generated_at,
+    )
 
     execution_plan = build_plan_from_reports(
         {
             "catalog_operations_public.json": operations,
             "catalog_image_enrichment_batches_public.json": image_enrichment_batches,
             "catalog_image_attachment_action_queue_public.json": image_attachment_action_queue,
+            "source_discovery_focus_confirmed_template_public.json": source_discovery_focus_template,
+            "source_discovery_focus_template_import_dry_run_public.json": source_discovery_focus_template_import,
             "source_discovery_review_batches_public.json": load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}),
             "source_discovery_action_queue_public.json": load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}),
             "ensky_cache_candidate_action_queue_public.json": load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {}),
@@ -5281,6 +5291,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["missing_image_priority"] = {
             "public_report": f"data/{MISSING_IMAGE_PRIORITY.name}",
             **missing_image_priority["summary"],
+        }
+        target["source_discovery_next_focus_pack"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
+            **source_discovery_next_focus_pack["summary"],
         }
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
             target["animate_missing_image_search"] = copy_report_summary(
@@ -5552,6 +5566,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_ASSET_AUDIT, image_asset_audit)
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
@@ -5584,6 +5599,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),

@@ -48,6 +48,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
         self.assertIn("data/gotouchi_representative_image_attachment_public.json", updated_files)
         self.assertIn("data/catalog_image_source_url_confirmed_template_public.json", updated_files)
+        self.assertIn("data/source_discovery_next_focus_pack_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
@@ -93,6 +94,9 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["image_attachment_action_queue"]["source_url_update_template_rows"],
         )
         self.assertIs(quality["image_source_url_confirmed_template"]["auto_apply_enabled"], False)
+        self.assertEqual(quality["source_discovery_next_focus_pack"]["pack_items"], 20)
+        self.assertEqual(quality["source_discovery_next_focus_pack"]["focus_pack_id"], "source-discovery-focus-001")
+        self.assertIs(quality["source_discovery_next_focus_pack"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():
