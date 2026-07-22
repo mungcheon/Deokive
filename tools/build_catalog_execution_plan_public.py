@@ -369,6 +369,12 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "actionable_source_rows": _count(source_action_summary, "actionable_source_rows"),
                 "queued_source_rows": _count(source_action_summary, "queued_source_rows"),
                 "action_batch_count": _count(source_action_summary, "action_batch_count"),
+                "manual_research_backlog_rows": _count(
+                    source_action_summary, "manual_research_backlog_rows"
+                ),
+                "manual_research_backlog_by_source_store": source_action_summary.get(
+                    "manual_research_backlog_by_source_store", []
+                ),
                 "excluded_review_state_rows": source_action_summary.get("excluded_review_state_rows", []),
                 "by_workflow": source_action_summary.get("by_workflow", []),
             },
@@ -937,6 +943,14 @@ def _build_plan(load_report) -> dict[str, Any]:
             "source_next_focus_fallback_rows": _count(source_next_focus_fallback_summary, "queue_rows"),
             "source_next_focus_fallback_manual_confirmed_rows": _count(
                 source_next_focus_fallback_summary, "manual_confirmed_rows"
+            ),
+            "source_discovery_action_rows": _count(source_action_summary, "queued_source_rows"),
+            "source_discovery_actionable_rows": _count(source_action_summary, "actionable_source_rows"),
+            "source_discovery_unqueued_actionable_rows": _count(
+                source_action_summary, "unqueued_actionable_source_rows"
+            ),
+            "source_discovery_manual_research_backlog_rows": _count(
+                source_action_summary, "manual_research_backlog_rows"
             ),
             "animation_split_review_categories": _count(animation_split_summary, "split_review_categories"),
             "animation_candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),

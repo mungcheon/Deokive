@@ -52,7 +52,10 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                 "summary": {
                     "actionable_source_rows": 8,
                     "queued_source_rows": 4,
+                    "unqueued_actionable_source_rows": 4,
                     "action_batch_count": 1,
+                    "manual_research_backlog_rows": 2,
+                    "manual_research_backlog_by_source_store": [["Idol official", 2]],
                     "excluded_review_state_rows": [["manual_official_research_required", 2]],
                 }
             },
@@ -346,6 +349,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(source_action["priority"], 21)
         self.assertEqual(source_action["rows"], 4)
         self.assertEqual(source_action["evidence"]["actionable_source_rows"], 8)
+        self.assertEqual(source_action["evidence"]["queued_source_rows"], 4)
+        self.assertEqual(source_action["evidence"]["manual_research_backlog_rows"], 2)
+        self.assertEqual(
+            source_action["evidence"]["manual_research_backlog_by_source_store"],
+            [["Idol official", 2]],
+        )
+        self.assertEqual(report["summary"]["source_discovery_action_rows"], 4)
+        self.assertEqual(report["summary"]["source_discovery_actionable_rows"], 8)
+        self.assertEqual(report["summary"]["source_discovery_unqueued_actionable_rows"], 4)
+        self.assertEqual(report["summary"]["source_discovery_manual_research_backlog_rows"], 2)
         source_focus = next(
             action
             for action in report["actions"]
