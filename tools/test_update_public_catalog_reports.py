@@ -42,6 +42,47 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(validation["status"], "pass", validation["findings"])
         self.assertEqual(validation["checked_files"], len(public_files))
 
+    def test_catalog_currency_invariants_reject_jpy_price_with_krw_purchase(self):
+        findings = reports.catalog_currency_invariant_findings(
+            {
+                "items": [
+                    {
+                        "catalog_index": 7,
+                        "name_ko": "sample",
+                        "official_price_jpy": 1980,
+                        "default_purchase": {
+                            "price": 1980,
+                            "currency": "KRW",
+                        },
+                    }
+                ]
+            }
+        )
+
+        self.assertEqual(
+            findings,
+            ["catalog row 7 has official_price_jpy but default_purchase.currency=KRW"],
+        )
+
+    def test_catalog_currency_invariants_accept_jpy_price_with_jpy_purchase(self):
+        findings = reports.catalog_currency_invariant_findings(
+            {
+                "items": [
+                    {
+                        "catalog_index": 8,
+                        "name_ko": "sample",
+                        "official_price_jpy": 1980,
+                        "default_purchase": {
+                            "price": 1980,
+                            "currency": "JPY",
+                        },
+                    }
+                ]
+            }
+        )
+
+        self.assertEqual(findings, [])
+
     def test_published_reports_keep_manual_review_guards(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         source_discovery = reports.load_json(reports.SOURCE_DISCOVERY)

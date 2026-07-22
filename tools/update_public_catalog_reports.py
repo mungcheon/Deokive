@@ -379,6 +379,43 @@ def present(value: Any) -> bool:
     return value not in (None, "", [], {})
 
 
+def catalog_currency_invariant_findings(catalog: dict[str, Any]) -> list[str]:
+    items = catalog.get("items", [])
+    if not isinstance(items, list):
+        return ["catalog_public.items is not a list"]
+
+    findings: list[str] = []
+    for index, item in enumerate(items):
+        if not isinstance(item, dict):
+            findings.append(f"catalog_public.items[{index}] is not an object")
+            continue
+
+        official_price_jpy = item.get("official_price_jpy")
+        if not present(official_price_jpy):
+            continue
+
+        explicit_currency_fields = {
+            "paid_currency": item.get("paid_currency"),
+            "purchase_currency": item.get("purchase_currency"),
+            "price_currency": item.get("price_currency"),
+            "price_currency_code": item.get("price_currency_code"),
+        }
+        default_purchase = item.get("default_purchase")
+        if isinstance(default_purchase, dict):
+            explicit_currency_fields["default_purchase.currency"] = default_purchase.get("currency")
+            explicit_currency_fields["default_purchase.price_currency_code"] = default_purchase.get(
+                "price_currency_code"
+            )
+
+        for field, value in explicit_currency_fields.items():
+            if present(value) and str(value).upper() != "JPY":
+                findings.append(
+                    f"catalog row {item.get('catalog_index', index)} has official_price_jpy but {field}={value}"
+                )
+
+    return findings
+
+
 def missing_counts(items: list[dict[str, Any]]) -> dict[str, int]:
     return {field: sum(1 for item in items if not present(item.get(field))) for field in PUBLIC_FIELDS}
 
@@ -3785,6 +3822,7 @@ def discover_public_json_files() -> list[Path]:
 def validate_all_public_json_files() -> dict[str, Any]:
     public_files = discover_public_json_files()
     findings = validate_public_files(public_files)
+    findings.extend(catalog_currency_invariant_findings(load_json(PUBLIC_CATALOG)))
     return {
         "checked_files": len(public_files),
         "findings": findings,
