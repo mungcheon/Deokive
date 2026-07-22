@@ -76,13 +76,13 @@ def build_template(payload: dict[str, Any]) -> dict[str, Any]:
             "Copy this template to source_discovery_confirmed_rows.json before importing reviewed rows.",
             "For each exact match, set manual_confirmed=true and manual_value to the exact product/detail source_url.",
             "Do not confirm search, storefront, tag, collection, or unrelated variant pages.",
-            "Run tools/import_confirmed_catalog_field_rows.py with this confirmed file before using --write.",
+            "Run tools/import_confirmed_source_discovery_rows.py with this confirmed file before using --write.",
         ],
         "items": items,
         "automation_policy": {
             "auto_apply_enabled": False,
             "requires_manual_review": True,
-            "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+            "import_tool": "tools/import_confirmed_source_discovery_rows.py",
             "confirmed_file": "server/source_discovery_confirmed_rows.json",
         },
     }

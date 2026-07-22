@@ -41,6 +41,11 @@ class BuildSourceDiscoveryConfirmedTemplateTest(unittest.TestCase):
         self.assertEqual(template["summary"]["template_items"], 1)
         self.assertFalse(template["summary"]["auto_apply_enabled"])
         self.assertFalse(template["automation_policy"]["auto_apply_enabled"])
+        self.assertEqual(
+            template["automation_policy"]["import_tool"],
+            "tools/import_confirmed_source_discovery_rows.py",
+        )
+        self.assertIn("tools/import_confirmed_source_discovery_rows.py", "\n".join(template["instructions"]))
         item = template["items"][0]
         self.assertEqual(item["field"], "source_url")
         self.assertEqual(item["row_index"], 10)
