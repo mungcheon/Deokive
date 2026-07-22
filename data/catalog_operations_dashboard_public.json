@@ -1,0 +1,4341 @@
+{
+  "summary": {
+    "rows": 18040,
+    "duplicate_groups": 0,
+    "missing_enrichment": {
+      "image_url": 724,
+      "source_url": 777,
+      "release_date": 1434,
+      "barcode": 7747,
+      "official_price_jpy": 579
+    },
+    "field_actionable_rows": 4586,
+    "missing_images": 724,
+    "image_workstreams": 382,
+    "image_batches": 614,
+    "image_exact_url_work_items": 297,
+    "image_exact_url_research_items": 294,
+    "image_exact_url_identity_blocked": 3,
+    "image_exact_url_identity_split": [
+      [
+        "exact_url_research",
+        294
+      ],
+      [
+        "blocked_by_identity_review",
+        3
+      ]
+    ],
+    "image_path_source_review": {
+      "review_items": 82,
+      "source_report_updated_rows": 0,
+      "source_report_rejected_count": 82,
+      "by_reason": [
+        [
+          "title_mismatch",
+          80
+        ],
+        [
+          "HTTP Error 404: Not Found",
+          2
+        ]
+      ],
+      "by_host": [
+        [
+          "bsp-prize.jp",
+          56
+        ],
+        [
+          "www.goodsmile.info",
+          22
+        ],
+        [
+          "furyuprize.com",
+          2
+        ],
+        [
+          "www.animate-onlineshop.jp",
+          2
+        ]
+      ]
+    },
+    "image_auto_promotable_candidates": 0,
+    "image_auto_promotable_strict_import": {
+      "candidate_rows": 0,
+      "updated_rows": 0,
+      "skipped_rows": 0,
+      "skipped_reasons": []
+    },
+    "image_confirmed_import_ready": 0,
+    "web_image_search": {
+      "target_rows": 120,
+      "candidate_rows": 0,
+      "rejected_rows": 12,
+      "stopped_early": true,
+      "rejected_reason_counts": [
+        [
+          "search_failed",
+          12
+        ]
+      ]
+    },
+    "piapro_prize_candidates": {
+      "piapro_items": 90,
+      "candidate_rows": 0,
+      "blocker_rows": 0
+    },
+    "image_existing_candidates": {
+      "candidate_items": 0,
+      "missing_rows": 743,
+      "scanned_files": 252,
+      "scanned_candidate_rows": 1644,
+      "skipped_rows": 239,
+      "skipped_by_reason": [
+        [
+          "source_netloc_mismatch",
+          103
+        ],
+        [
+          "candidate_title_missing",
+          89
+        ],
+        [
+          "missing_source_or_image_url",
+          23
+        ],
+        [
+          "confidence_below_threshold",
+          17
+        ],
+        [
+          "candidate_title_mismatch",
+          6
+        ],
+        [
+          "unsupported_source_kind",
+          1
+        ]
+      ],
+      "strict_import": {
+        "candidate_rows": 1,
+        "updated_rows": 0,
+        "skipped_rows": 1,
+        "skipped_reasons": [
+          [
+            "live_title_exact_mismatch",
+            1
+          ]
+        ]
+      }
+    },
+    "remaining_image_audit": {
+      "missing_images": 723,
+      "provider_candidate_items": 496,
+      "manual_or_blocked_items": 228,
+      "missing_with_source_url": 50,
+      "missing_with_exact_source_url": 0,
+      "missing_with_generic_source_url": 50,
+      "candidate_reviews": {
+        "ready_items": 0,
+        "preflight_passed_items": 72,
+        "candidate_items": 38,
+        "rejected_reasons": [
+          [
+            "image_already_present",
+            5279
+          ],
+          [
+            "current_name_mismatch",
+            3425
+          ],
+          [
+            "missing_source_or_image_url",
+            2309
+          ],
+          [
+            "strict_candidate_title_mismatch",
+            219
+          ],
+          [
+            "candidate_file_unreadable",
+            169
+          ],
+          [
+            "source_netloc_mismatch",
+            109
+          ],
+          [
+            "candidate_title_missing",
+            89
+          ],
+          [
+            "live_title_exact_mismatch",
+            60
+          ],
+          [
+            "confidence_below_threshold",
+            23
+          ],
+          [
+            "search_failed",
+            8
+          ],
+          [
+            "candidate_title_mismatch",
+            6
+          ],
+          [
+            "unsupported_source_kind",
+            1
+          ]
+        ]
+      },
+      "provider_blockers": [
+        {
+          "source_store": "애니메이트",
+          "provider_candidate_items": 148,
+          "queue_items": 148,
+          "latest_processed_rows": 148,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "엔스카이",
+          "provider_candidate_items": 143,
+          "queue_items": 143,
+          "latest_processed_rows": 21,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "provider_candidate_items": 57,
+          "queue_items": 57,
+          "latest_processed_rows": 57,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "코토부키야",
+          "provider_candidate_items": 44,
+          "queue_items": 44,
+          "latest_processed_rows": 44,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "Movic",
+          "provider_candidate_items": 36,
+          "queue_items": 36,
+          "latest_processed_rows": 30,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "치이카와 마켓",
+          "provider_candidate_items": 26,
+          "queue_items": 26,
+          "latest_processed_rows": 26,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "FuRyu",
+          "provider_candidate_items": 21,
+          "queue_items": 21,
+          "latest_processed_rows": 1,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "Taito",
+          "provider_candidate_items": 15,
+          "queue_items": 15,
+          "latest_processed_rows": 15,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "Re-ment",
+          "provider_candidate_items": 5,
+          "queue_items": 5,
+          "latest_processed_rows": 5,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        },
+        {
+          "source_store": "SEGA",
+          "provider_candidate_items": 1,
+          "queue_items": 1,
+          "latest_processed_rows": 1,
+          "latest_image_filled": 0,
+          "latest_current_image_filled": 0,
+          "latest_image_fill_rate": 0.0,
+          "recommendation": "Provider runs but found zero safe matches; improve parser/query normalization or keep as review-only."
+        }
+      ]
+    },
+    "source_discovery": {
+      "source_discovery_rows": 674,
+      "stale_excluded_rows": 88,
+      "by_workflow": [
+        [
+          "official_search_url_available",
+          659
+        ],
+        [
+          "licensed_retailer_search_review",
+          12
+        ],
+        [
+          "manual_official_research",
+          3
+        ]
+      ],
+      "top_store_categories": [
+        {
+          "source_store": "엔스카이",
+          "category": "키링",
+          "rows": 44
+        },
+        {
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "rows": 38
+        },
+        {
+          "source_store": "엔스카이",
+          "category": "인형",
+          "rows": 30
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "category": "피규어",
+          "rows": 29
+        },
+        {
+          "source_store": "엔스카이",
+          "category": "아크릴 스탠드",
+          "rows": 29
+        },
+        {
+          "source_store": "애니메이트",
+          "category": "문구",
+          "rows": 27
+        },
+        {
+          "source_store": "코토부키야",
+          "category": "피규어",
+          "rows": 25
+        },
+        {
+          "source_store": "애니메이트",
+          "category": "캔뱃지",
+          "rows": 23
+        },
+        {
+          "source_store": "FuRyu",
+          "category": "피규어",
+          "rows": 21
+        },
+        {
+          "source_store": "Movic",
+          "category": "캔뱃지",
+          "rows": 20
+        }
+      ],
+      "top_official_search_store_categories": [
+        {
+          "source_store": "엔스카이",
+          "category": "키링",
+          "rows": 44
+        },
+        {
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "rows": 38
+        },
+        {
+          "source_store": "엔스카이",
+          "category": "인형",
+          "rows": 30
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "category": "피규어",
+          "rows": 29
+        },
+        {
+          "source_store": "엔스카이",
+          "category": "아크릴 스탠드",
+          "rows": 29
+        },
+        {
+          "source_store": "애니메이트",
+          "category": "문구",
+          "rows": 27
+        },
+        {
+          "source_store": "코토부키야",
+          "category": "피규어",
+          "rows": 25
+        },
+        {
+          "source_store": "애니메이트",
+          "category": "캔뱃지",
+          "rows": 23
+        },
+        {
+          "source_store": "FuRyu",
+          "category": "피규어",
+          "rows": 21
+        },
+        {
+          "source_store": "Movic",
+          "category": "캔뱃지",
+          "rows": 20
+        }
+      ]
+    },
+    "source_url_bottlenecks": {
+      "missing_source_url": 747,
+      "missing_image_and_source_url": 673,
+      "has_image_but_missing_source_url": 74,
+      "automation_ready_source_candidates": 0,
+      "manual_review_source_candidates": 83,
+      "blocked_before_image_import": 779,
+      "bottleneck_counts": [
+        [
+          "missing_source_url",
+          747
+        ],
+        [
+          "source_discovery_rows",
+          674
+        ],
+        [
+          "missing_image_and_source_url",
+          673
+        ],
+        [
+          "source_detail_no_relevant_candidate_rows",
+          77
+        ],
+        [
+          "has_image_but_missing_source_url",
+          74
+        ],
+        [
+          "generic_source_url_rows",
+          55
+        ],
+        [
+          "stale_source_identity_rows",
+          38
+        ],
+        [
+          "source_detail_manual_review_rows",
+          15
+        ],
+        [
+          "product_identity_review_rows",
+          13
+        ],
+        [
+          "source_detail_exact_candidate_rows",
+          0
+        ]
+      ],
+      "top_missing_source_stores": [
+        [
+          "애니메이트",
+          155
+        ],
+        [
+          "엔스카이",
+          142
+        ],
+        [
+          "굿스마일컴퍼니",
+          57
+        ],
+        [
+          "코토부키야",
+          48
+        ],
+        [
+          "Movic",
+          36
+        ],
+        [
+          "치이카와 마켓",
+          27
+        ],
+        [
+          "FuRyu",
+          24
+        ],
+        [
+          "점프 캐릭터즈 스토어",
+          23
+        ],
+        [
+          "치이카와 중국 팝업스토어",
+          15
+        ],
+        [
+          "Taito",
+          15
+        ]
+      ],
+      "top_missing_both_stores": [
+        [
+          "애니메이트",
+          148
+        ],
+        [
+          "엔스카이",
+          142
+        ],
+        [
+          "굿스마일컴퍼니",
+          57
+        ],
+        [
+          "코토부키야",
+          44
+        ],
+        [
+          "Movic",
+          36
+        ],
+        [
+          "치이카와 마켓",
+          26
+        ],
+        [
+          "점프 캐릭터즈 스토어",
+          23
+        ],
+        [
+          "FuRyu",
+          21
+        ],
+        [
+          "치이카와 중국 팝업스토어",
+          15
+        ],
+        [
+          "Taito",
+          15
+        ]
+      ]
+    },
+    "source_detail_candidates": {
+      "source_queue_rows": 688,
+      "supported_provider_rows": 504,
+      "unsupported_provider_rows": 184,
+      "scanned_rows": 504,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 15,
+      "status_counts": [
+        [
+          "no_candidates",
+          296
+        ],
+        [
+          "no_relevant_candidates",
+          77
+        ],
+        [
+          "candidate_review_needed",
+          15
+        ]
+      ],
+      "top_unsupported_provider_stores": [
+        {
+          "source_store": "치이카와 마켓",
+          "rows": 26
+        },
+        {
+          "source_store": "점프 캐릭터즈 스토어",
+          "rows": 23
+        },
+        {
+          "source_store": "무기와라스토어",
+          "rows": 15
+        },
+        {
+          "source_store": "치이카와 중국 팝업스토어",
+          "rows": 15
+        },
+        {
+          "source_store": "귀멸의 칼날 공식",
+          "rows": 13
+        },
+        {
+          "source_store": "반다이",
+          "rows": 11
+        },
+        {
+          "source_store": "메가하우스",
+          "rows": 9
+        },
+        {
+          "source_store": "MINISO 중국",
+          "rows": 7
+        },
+        {
+          "source_store": "산리오",
+          "rows": 6
+        },
+        {
+          "source_store": "JYP SHOP",
+          "rows": 5
+        }
+      ],
+      "batch_summary": {
+        "report_count": 19,
+        "processed_rows_reported": 745,
+        "unique_processed_store_row_pairs": 446,
+        "unique_exact_candidate_store_row_pairs": 0,
+        "unique_review_candidate_store_row_pairs": 0,
+        "actionable_report_count": 1,
+        "time_budget_exhausted_reports": 0,
+        "rate_limit_skipped_stores": [
+          [
+            "AmiAmi",
+            1
+          ],
+          [
+            "엔스카이",
+            1
+          ]
+        ],
+        "top_stores": [
+          {
+            "store": "엔스카이",
+            "report_count": 9,
+            "processed_rows_reported_single_store_only": 142,
+            "scanned_rows_reported_single_store_only": 479,
+            "result_rows": 213,
+            "failure_count": 18,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "애니메이트",
+            "report_count": 1,
+            "processed_rows_reported_single_store_only": 0,
+            "scanned_rows_reported_single_store_only": 0,
+            "result_rows": 151,
+            "failure_count": 0,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "Movic",
+            "report_count": 6,
+            "processed_rows_reported_single_store_only": 72,
+            "scanned_rows_reported_single_store_only": 72,
+            "result_rows": 107,
+            "failure_count": 1,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "코토부키야",
+            "report_count": 2,
+            "processed_rows_reported_single_store_only": 44,
+            "scanned_rows_reported_single_store_only": 44,
+            "result_rows": 88,
+            "failure_count": 0,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "Cospa",
+            "report_count": 5,
+            "processed_rows_reported_single_store_only": 35,
+            "scanned_rows_reported_single_store_only": 35,
+            "result_rows": 57,
+            "failure_count": 0,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "굿스마일컴퍼니",
+            "report_count": 1,
+            "processed_rows_reported_single_store_only": 0,
+            "scanned_rows_reported_single_store_only": 0,
+            "result_rows": 57,
+            "failure_count": 0,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "FuRyu",
+            "report_count": 1,
+            "processed_rows_reported_single_store_only": 0,
+            "scanned_rows_reported_single_store_only": 0,
+            "result_rows": 22,
+            "failure_count": 0,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "Taito",
+            "report_count": 1,
+            "processed_rows_reported_single_store_only": 0,
+            "scanned_rows_reported_single_store_only": 0,
+            "result_rows": 15,
+            "failure_count": 0,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "Re-ment",
+            "report_count": 2,
+            "processed_rows_reported_single_store_only": 5,
+            "scanned_rows_reported_single_store_only": 5,
+            "result_rows": 10,
+            "failure_count": 0,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          },
+          {
+            "store": "AmiAmi",
+            "report_count": 1,
+            "processed_rows_reported_single_store_only": 0,
+            "scanned_rows_reported_single_store_only": 0,
+            "result_rows": 0,
+            "failure_count": 6,
+            "exact_candidate_rows": 0,
+            "candidate_review_rows": 0,
+            "no_candidate_rows": 0,
+            "time_budget_exhausted_reports": 0
+          }
+        ]
+      }
+    },
+    "image_review_batches": 130,
+    "unapplied_image_candidates": 0,
+    "image_provider_recheck": {
+      "filled": 0,
+      "processed_rows": 20,
+      "time_budget_exhausted": false,
+      "allowed_stores": [
+        "치이카와 마켓"
+      ],
+      "unresolved_summary": {
+        "total": 20,
+        "by_reason": {
+          "best_candidate_rejected": 20
+        },
+        "by_rejection_reason": {
+          "failed_safety_checks": 20
+        },
+        "by_failed_check": {
+          "all_distinctive_token_match": 20,
+          "parenthetical_terms_match": 19
+        }
+      }
+    },
+    "storefront_reviewable_seed_rows": 0,
+    "storefront_reviewable_candidate_rows": 0,
+    "storefront_ambiguous_candidates": 9,
+    "storefront_manual_only_rows": 179,
+    "fanding_stellive": {
+      "candidate_rows": 94,
+      "candidate_status_counts": {
+        "low_confidence_candidate": 14,
+        "no_candidate": 76,
+        "weak_manual_review_candidate": 4
+      }
+    },
+    "official_reviewable_seed_rows": 3,
+    "official_detail_provider_sweeps": {
+      "processed_seed_rows": 299,
+      "candidate_rows": 685,
+      "reviewable_rows": 3,
+      "animate": {
+        "processed_seed_rows": 148,
+        "candidate_rows": 294,
+        "reviewable_rows": 3,
+        "by_status": [
+          [
+            "weak_or_ambiguous",
+            164
+          ],
+          [
+            "no_candidates_found",
+            104
+          ],
+          [
+            "blocked_type_mismatch",
+            23
+          ],
+          [
+            "needs_manual_title_review",
+            3
+          ]
+        ],
+        "by_manual_review_reason": null
+      },
+      "ensky": {
+        "processed_seed_rows": 151,
+        "candidate_rows": 391,
+        "reviewable_rows": 0,
+        "by_status": [
+          [
+            "blocked_type_mismatch",
+            191
+          ],
+          [
+            "weak_or_ambiguous",
+            109
+          ],
+          [
+            "no_candidates_found",
+            91
+          ]
+        ],
+        "by_manual_review_reason": [
+          [
+            "candidate_goods_type_mismatch",
+            191
+          ],
+          [
+            "weak_or_ambiguous_candidate",
+            109
+          ],
+          [
+            "no_official_candidates_found",
+            91
+          ]
+        ]
+      }
+    },
+    "pokemon_center_official": {
+      "updated_rows": 0,
+      "review_rows": 3
+    },
+    "taito_brand_target_rows": 14,
+    "taito_brand_exact_matches": 0,
+    "chiikawa_gotouchi_api": {
+      "target_rows": 26,
+      "official_image_count": 270,
+      "status_counts": {
+        "theme_available_type_missing": 7,
+        "theme_unclassified": 17,
+        "theme_not_in_current_official_api": 2
+      }
+    },
+    "ichiban_gap_items": 24,
+    "ichiban_gap_documented_terminal_items": 24,
+    "ichiban_gap_actionable_items": 0,
+    "ichiban_gap_all_documented": true,
+    "ichiban_replacement_extractable": 0,
+    "ichiban_replacement_seeded_counterparts": 2,
+    "ichiban_replacement_statuses": [
+      [
+        "no_extractable_replacement",
+        13
+      ],
+      [
+        "covered_by_seeded_counterpart",
+        2
+      ]
+    ],
+    "ichiban_campaign_gap_audit": {
+      "campaign_count": 614,
+      "seeded_campaign_url_count": 592,
+      "campaign_gap_count": 22,
+      "audited_gap_count": 22,
+      "by_classification": [
+        [
+          "archive_shell_no_prize_lineup_detected",
+          6
+        ],
+        [
+          "duplicate_payload_already_seeded",
+          1
+        ],
+        [
+          "official_online_archive_404",
+          15
+        ]
+      ]
+    },
+    "ichiban_metadata": {
+      "urls_with_missing_metadata": 44,
+      "rows_missing_release_date": 16,
+      "rows_missing_official_price_jpy": 365,
+      "safe_release_url_count": 0,
+      "safe_price_url_count": 0,
+      "review_items": 44,
+      "review_missing_release_rows": 16,
+      "review_missing_price_rows": 365,
+      "review_by_workflow": [
+        [
+          "manual_price_review",
+          42
+        ],
+        [
+          "manual_release_review",
+          2
+        ]
+      ]
+    },
+    "ichiban_history_status": {
+      "status": "metadata_evidence_blocked",
+      "campaign_count": 614,
+      "seeded_campaign_url_count": 592,
+      "campaign_coverage_rate": 0.964169,
+      "campaign_gap_count": 22,
+      "documented_terminal_gap_items": 24,
+      "actionable_gap_items": 0,
+      "import_safe_now": true,
+      "prize_rows": 5545,
+      "missing_sub_series_rows": 0,
+      "metadata": {
+        "urls_with_missing_metadata": 44,
+        "rows_missing_release_date": 16,
+        "rows_missing_official_price_jpy": 365,
+        "safe_release_url_count": 0,
+        "safe_price_url_count": 0,
+        "blocked_rows": 381,
+        "safe_update_url_count": 0
+      }
+    },
+    "animation_unknown_categories": 0,
+    "animation_category_count": 17,
+    "animation_category_families": [
+      {
+        "family": "figure",
+        "rows": 444
+      },
+      {
+        "family": "acrylic",
+        "rows": 251
+      },
+      {
+        "family": "plush",
+        "rows": 219
+      },
+      {
+        "family": "badge",
+        "rows": 154
+      },
+      {
+        "family": "keyring",
+        "rows": 134
+      },
+      {
+        "family": "stationery",
+        "rows": 107
+      },
+      {
+        "family": "daily_goods",
+        "rows": 93
+      },
+      {
+        "family": "fan_goods",
+        "rows": 8
+      },
+      {
+        "family": "display_goods",
+        "rows": 6
+      },
+      {
+        "family": "apparel",
+        "rows": 3
+      }
+    ],
+    "animation_missing_image_by_category": [
+      {
+        "category": "피규어",
+        "rows": 124
+      },
+      {
+        "category": "아크릴 스탠드",
+        "rows": 110
+      },
+      {
+        "category": "캔뱃지",
+        "rows": 85
+      },
+      {
+        "category": "키링",
+        "rows": 67
+      },
+      {
+        "category": "문구",
+        "rows": 49
+      },
+      {
+        "category": "인형",
+        "rows": 48
+      },
+      {
+        "category": "마스코트",
+        "rows": 29
+      },
+      {
+        "category": "머그컵",
+        "rows": 22
+      },
+      {
+        "category": "타월",
+        "rows": 12
+      },
+      {
+        "category": "생활잡화",
+        "rows": 10
+      }
+    ],
+    "animation_missing_source_url_by_category": [
+      {
+        "category": "피규어",
+        "rows": 137
+      },
+      {
+        "category": "아크릴 스탠드",
+        "rows": 117
+      },
+      {
+        "category": "캔뱃지",
+        "rows": 86
+      },
+      {
+        "category": "키링",
+        "rows": 68
+      },
+      {
+        "category": "인형",
+        "rows": 51
+      },
+      {
+        "category": "문구",
+        "rows": 49
+      },
+      {
+        "category": "마스코트",
+        "rows": 30
+      },
+      {
+        "category": "머그컵",
+        "rows": 24
+      },
+      {
+        "category": "타월",
+        "rows": 12
+      },
+      {
+        "category": "생활잡화",
+        "rows": 10
+      }
+    ],
+    "animation_enrichment_priority": {
+      "queue_groups": 78,
+      "queue_rows": 603,
+      "missing_image_rows": 575,
+      "missing_source_rows": 603,
+      "by_workflow": [
+        [
+          "find_exact_source_url",
+          603
+        ]
+      ]
+    },
+    "app_folder_visuals": {
+      "icon_count": 211,
+      "icon_group_count": 9,
+      "color_count": 188,
+      "unique_color_count": 188,
+      "palette_section_count": 8,
+      "animation_visuals_covered": true,
+      "missing_animation_icons": [],
+      "missing_animation_colors": []
+    },
+    "confirmed_pending": 0,
+    "confirmed_archive_items": 46,
+    "db_sync": {
+      "ok": true,
+      "db_count": 2,
+      "issue_dbs": 0,
+      "seed_rows": 18040
+    },
+    "store_source_mismatches": 0,
+    "store_source_wrong": 0,
+    "store_source_external_evidence": 54,
+    "live_source_identity": {
+      "scoped_rows": 50,
+      "audited_urls": 26,
+      "mismatch_urls": 21,
+      "failure_count": 0,
+      "status_counts": {
+        "title_overlap_ok": 5,
+        "live_title_mismatch": 21
+      }
+    },
+    "stale_source_cleanup": {
+      "mismatch_rows": 38,
+      "mismatch_urls": 29,
+      "by_source_store": [
+        [
+          "Cospa",
+          3
+        ],
+        [
+          "Movic",
+          3
+        ],
+        [
+          "애니메이트",
+          25
+        ],
+        [
+          "엔스카이",
+          57
+        ]
+      ]
+    },
+    "product_identity_review": {
+      "review_rows": 13,
+      "skipped_rows": 0,
+      "by_source_store": [
+        [
+          "Banpresto",
+          1
+        ],
+        [
+          "굿스마일컴퍼니",
+          9
+        ],
+        [
+          "엔스카이",
+          1
+        ],
+        [
+          "코토부키야",
+          2
+        ]
+      ],
+      "by_status": [
+        [
+          "official_search_no_exact_product",
+          13
+        ]
+      ]
+    },
+    "generic_source_cleanup": {
+      "generic_source_rows": 55,
+      "generic_source_urls": 3,
+      "by_source_store": [
+        [
+          "Stellive Store",
+          50
+        ],
+        [
+          "Weverse Shop",
+          3
+        ],
+        [
+          "포켓몬 센터",
+          2
+        ]
+      ],
+      "by_candidate_status": [
+        [
+          "low_confidence_candidate",
+          2
+        ],
+        [
+          "no_candidate_report",
+          52
+        ],
+        [
+          "weak_manual_review_candidate",
+          1
+        ]
+      ]
+    },
+    "prize_source_store_lines": {
+      "line_rows": 85,
+      "mismatch_rows": 24,
+      "missing_image_mismatch_rows": 12,
+      "by_current_expected": [
+        {
+          "current_source_store": "FuRyu",
+          "expected_source_store": "SEGA",
+          "rows": 11
+        },
+        {
+          "current_source_store": "AmiAmi",
+          "expected_source_store": "FuRyu",
+          "rows": 4
+        },
+        {
+          "current_source_store": "Taito",
+          "expected_source_store": "FuRyu",
+          "rows": 4
+        },
+        {
+          "current_source_store": "FuRyu",
+          "expected_source_store": "Banpresto",
+          "rows": 2
+        },
+        {
+          "current_source_store": "엔스카이",
+          "expected_source_store": "SEGA",
+          "rows": 1
+        },
+        {
+          "current_source_store": "Taito",
+          "expected_source_store": "SEGA",
+          "rows": 1
+        },
+        {
+          "current_source_store": "FuRyu",
+          "expected_source_store": "Taito",
+          "rows": 1
+        }
+      ]
+    },
+    "prize_line_provider_candidates": {
+      "expected_provider_items": 12,
+      "target_items": 12,
+      "candidate_rows": 20,
+      "by_status": [
+        [
+          "no_candidates_found",
+          10
+        ],
+        [
+          "weak_or_ambiguous",
+          10
+        ]
+      ],
+      "target_by_store": {
+        "Banpresto": 2,
+        "Taito": 1,
+        "SEGA": 9
+      }
+    },
+    "prize_provider_fallback_images": {
+      "target_stores": [
+        "FuRyu",
+        "Taito"
+      ],
+      "searched_rows": 36,
+      "fallback_candidate_rows": 21,
+      "unresolved_rows": 27
+    },
+    "requested_special_goods": {
+      "requested": 27,
+      "already_present": 27,
+      "missing": 0,
+      "with_candidate_image": 26
+    },
+    "focus_missing_images": {
+      "focus_count": 11,
+      "focus_rows": 12363,
+      "focus_missing_image_rows": 349,
+      "focus_missing_source_rows": 329,
+      "focus_missing_image_and_source_rows": 304,
+      "top_focuses": [
+        {
+          "focus_key": "danganronpa",
+          "focus_label": "단간론파",
+          "rows": 134,
+          "missing_image_rows": 34,
+          "missing_source_rows": 34,
+          "missing_image_and_source_rows": 34,
+          "top_missing_image_stores": [
+            {
+              "value": "애니메이트",
+              "rows": 9
+            },
+            {
+              "value": "Movic",
+              "rows": 7
+            },
+            {
+              "value": "엔스카이",
+              "rows": 6
+            },
+            {
+              "value": "굿스마일컴퍼니",
+              "rows": 3
+            },
+            {
+              "value": "Taito",
+              "rows": 3
+            },
+            {
+              "value": "FuRyu",
+              "rows": 3
+            },
+            {
+              "value": "코토부키야",
+              "rows": 2
+            },
+            {
+              "value": "AmiAmi",
+              "rows": 1
+            }
+          ],
+          "top_missing_image_categories": [
+            {
+              "value": "피규어",
+              "rows": 11
+            },
+            {
+              "value": "마스코트",
+              "rows": 6
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 4
+            },
+            {
+              "value": "문구",
+              "rows": 4
+            },
+            {
+              "value": "인형",
+              "rows": 2
+            },
+            {
+              "value": "머그컵",
+              "rows": 2
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 1
+            },
+            {
+              "value": "타월",
+              "rows": 1
+            },
+            {
+              "value": "생활잡화",
+              "rows": 1
+            },
+            {
+              "value": "키링",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "focus_key": "frieren",
+          "focus_label": "장송의 프리렌",
+          "rows": 89,
+          "missing_image_rows": 31,
+          "missing_source_rows": 33,
+          "missing_image_and_source_rows": 31,
+          "top_missing_image_stores": [
+            {
+              "value": "엔스카이",
+              "rows": 19
+            },
+            {
+              "value": "굿스마일컴퍼니",
+              "rows": 3
+            },
+            {
+              "value": "애니메이트",
+              "rows": 3
+            },
+            {
+              "value": "Movic",
+              "rows": 2
+            },
+            {
+              "value": "Re-ment",
+              "rows": 1
+            },
+            {
+              "value": "AmiAmi",
+              "rows": 1
+            },
+            {
+              "value": "코토부키야",
+              "rows": 1
+            },
+            {
+              "value": "Cospa",
+              "rows": 1
+            }
+          ],
+          "top_missing_image_categories": [
+            {
+              "value": "인형",
+              "rows": 9
+            },
+            {
+              "value": "키링",
+              "rows": 5
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 5
+            },
+            {
+              "value": "피규어",
+              "rows": 4
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 3
+            },
+            {
+              "value": "문구",
+              "rows": 3
+            },
+            {
+              "value": "가방",
+              "rows": 1
+            },
+            {
+              "value": "생활잡화",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "focus_key": "bukubu_collab",
+          "focus_label": "오오카와 부쿠부 콜라보",
+          "rows": 25,
+          "missing_image_rows": 0,
+          "missing_source_rows": 0,
+          "missing_image_and_source_rows": 0,
+          "top_missing_image_stores": [],
+          "top_missing_image_categories": []
+        },
+        {
+          "focus_key": "gintama",
+          "focus_label": "은혼",
+          "rows": 8,
+          "missing_image_rows": 0,
+          "missing_source_rows": 0,
+          "missing_image_and_source_rows": 0,
+          "top_missing_image_stores": [],
+          "top_missing_image_categories": []
+        },
+        {
+          "focus_key": "pop_team_epic",
+          "focus_label": "팝팀에픽",
+          "rows": 2,
+          "missing_image_rows": 0,
+          "missing_source_rows": 0,
+          "missing_image_and_source_rows": 0,
+          "top_missing_image_stores": [],
+          "top_missing_image_categories": []
+        },
+        {
+          "focus_key": "chiikawa",
+          "focus_label": "치이카와",
+          "rows": 10704,
+          "missing_image_rows": 64,
+          "missing_source_rows": 67,
+          "missing_image_and_source_rows": 64,
+          "top_missing_image_stores": [
+            {
+              "value": "치이카와 마켓",
+              "rows": 26
+            },
+            {
+              "value": "치이카와 중국 팝업스토어",
+              "rows": 15
+            },
+            {
+              "value": "엔스카이",
+              "rows": 11
+            },
+            {
+              "value": "MINISO 중국",
+              "rows": 7
+            },
+            {
+              "value": "치이카와샵 용산",
+              "rows": 5
+            }
+          ],
+          "top_missing_image_categories": [
+            {
+              "value": "마스코트",
+              "rows": 28
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 8
+            },
+            {
+              "value": "아크릴 키링",
+              "rows": 7
+            },
+            {
+              "value": "키링",
+              "rows": 5
+            },
+            {
+              "value": "인형",
+              "rows": 5
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 4
+            },
+            {
+              "value": "타월",
+              "rows": 3
+            },
+            {
+              "value": "마그넷",
+              "rows": 2
+            },
+            {
+              "value": "피규어",
+              "rows": 1
+            },
+            {
+              "value": "가방",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "focus_key": "vocaloid_miku",
+          "focus_label": "하츠네 미쿠/보컬로이드",
+          "rows": 132,
+          "missing_image_rows": 35,
+          "missing_source_rows": 49,
+          "missing_image_and_source_rows": 35,
+          "top_missing_image_stores": [
+            {
+              "value": "굿스마일컴퍼니",
+              "rows": 24
+            },
+            {
+              "value": "엔스카이",
+              "rows": 3
+            },
+            {
+              "value": "코토부키야",
+              "rows": 2
+            },
+            {
+              "value": "애니메이트",
+              "rows": 2
+            },
+            {
+              "value": "AmiAmi",
+              "rows": 2
+            },
+            {
+              "value": "SEGA",
+              "rows": 1
+            },
+            {
+              "value": "FuRyu",
+              "rows": 1
+            }
+          ],
+          "top_missing_image_categories": [
+            {
+              "value": "캔뱃지",
+              "rows": 9
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 8
+            },
+            {
+              "value": "문구",
+              "rows": 4
+            },
+            {
+              "value": "피규어",
+              "rows": 2
+            },
+            {
+              "value": "인형",
+              "rows": 2
+            },
+            {
+              "value": "키링",
+              "rows": 2
+            },
+            {
+              "value": "머그컵",
+              "rows": 2
+            },
+            {
+              "value": "응원봉",
+              "rows": 2
+            },
+            {
+              "value": "타월",
+              "rows": 1
+            },
+            {
+              "value": "가방",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "focus_key": "jujutsu_kaisen",
+          "focus_label": "주술회전",
+          "rows": 322,
+          "missing_image_rows": 50,
+          "missing_source_rows": 50,
+          "missing_image_and_source_rows": 50,
+          "top_missing_image_stores": [
+            {
+              "value": "엔스카이",
+              "rows": 18
+            },
+            {
+              "value": "애니메이트",
+              "rows": 9
+            },
+            {
+              "value": "Movic",
+              "rows": 6
+            },
+            {
+              "value": "메가하우스",
+              "rows": 4
+            },
+            {
+              "value": "코토부키야",
+              "rows": 3
+            },
+            {
+              "value": "Taito",
+              "rows": 3
+            },
+            {
+              "value": "Cospa",
+              "rows": 2
+            },
+            {
+              "value": "굿스마일컴퍼니",
+              "rows": 2
+            },
+            {
+              "value": "Re-ment",
+              "rows": 1
+            },
+            {
+              "value": "AmiAmi",
+              "rows": 1
+            }
+          ],
+          "top_missing_image_categories": [
+            {
+              "value": "피규어",
+              "rows": 12
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 9
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 8
+            },
+            {
+              "value": "문구",
+              "rows": 5
+            },
+            {
+              "value": "키링",
+              "rows": 5
+            },
+            {
+              "value": "머그컵",
+              "rows": 3
+            },
+            {
+              "value": "인형",
+              "rows": 2
+            },
+            {
+              "value": "타월",
+              "rows": 2
+            },
+            {
+              "value": "가방",
+              "rows": 1
+            },
+            {
+              "value": "생활잡화",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "focus_key": "hunter_x_hunter",
+          "focus_label": "헌터X헌터",
+          "rows": 103,
+          "missing_image_rows": 51,
+          "missing_source_rows": 52,
+          "missing_image_and_source_rows": 51,
+          "top_missing_image_stores": [
+            {
+              "value": "엔스카이",
+              "rows": 29
+            },
+            {
+              "value": "코토부키야",
+              "rows": 6
+            },
+            {
+              "value": "Movic",
+              "rows": 5
+            },
+            {
+              "value": "애니메이트",
+              "rows": 3
+            },
+            {
+              "value": "Taito",
+              "rows": 3
+            },
+            {
+              "value": "FuRyu",
+              "rows": 2
+            },
+            {
+              "value": "Cospa",
+              "rows": 2
+            },
+            {
+              "value": "AmiAmi",
+              "rows": 1
+            }
+          ],
+          "top_missing_image_categories": [
+            {
+              "value": "피규어",
+              "rows": 11
+            },
+            {
+              "value": "인형",
+              "rows": 7
+            },
+            {
+              "value": "마스코트",
+              "rows": 7
+            },
+            {
+              "value": "키링",
+              "rows": 6
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 6
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 5
+            },
+            {
+              "value": "문구",
+              "rows": 3
+            },
+            {
+              "value": "머그컵",
+              "rows": 3
+            },
+            {
+              "value": "타월",
+              "rows": 1
+            },
+            {
+              "value": "가방",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "focus_key": "mha",
+          "focus_label": "나의 히어로 아카데미아",
+          "rows": 737,
+          "missing_image_rows": 37,
+          "missing_source_rows": 37,
+          "missing_image_and_source_rows": 37,
+          "top_missing_image_stores": [
+            {
+              "value": "FuRyu",
+              "rows": 8
+            },
+            {
+              "value": "엔스카이",
+              "rows": 8
+            },
+            {
+              "value": "가샤폰",
+              "rows": 4
+            },
+            {
+              "value": "애니메이트",
+              "rows": 4
+            },
+            {
+              "value": "Taito",
+              "rows": 3
+            },
+            {
+              "value": "점프 캐릭터즈 스토어",
+              "rows": 3
+            },
+            {
+              "value": "Movic",
+              "rows": 3
+            },
+            {
+              "value": "코토부키야",
+              "rows": 2
+            },
+            {
+              "value": "AmiAmi",
+              "rows": 1
+            },
+            {
+              "value": "Cospa",
+              "rows": 1
+            }
+          ],
+          "top_missing_image_categories": [
+            {
+              "value": "피규어",
+              "rows": 11
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 7
+            },
+            {
+              "value": "캡슐토이",
+              "rows": 3
+            },
+            {
+              "value": "인형",
+              "rows": 3
+            },
+            {
+              "value": "마스코트",
+              "rows": 3
+            },
+            {
+              "value": "키링",
+              "rows": 3
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 2
+            },
+            {
+              "value": "문구",
+              "rows": 1
+            },
+            {
+              "value": "타월",
+              "rows": 1
+            },
+            {
+              "value": "가방",
+              "rows": 1
+            }
+          ]
+        }
+      ]
+    },
+    "focus_series_missing_images": {
+      "focus_count": 9,
+      "missing_image_rows": 147,
+      "missing_source_rows": 102,
+      "auto_write_ready": 0,
+      "top_focuses": [
+        {
+          "focus_key": "hunter_x_hunter",
+          "focus_label": "HUNTER×HUNTER",
+          "missing_image_rows": 51,
+          "missing_source_rows": 51,
+          "auto_write_ready": 0,
+          "top_stores": [
+            {
+              "value": "엔스카이",
+              "rows": 29
+            },
+            {
+              "value": "코토부키야",
+              "rows": 6
+            },
+            {
+              "value": "Movic",
+              "rows": 5
+            },
+            {
+              "value": "Taito",
+              "rows": 3
+            },
+            {
+              "value": "애니메이트",
+              "rows": 3
+            },
+            {
+              "value": "Cospa",
+              "rows": 2
+            },
+            {
+              "value": "FuRyu",
+              "rows": 2
+            },
+            {
+              "value": "AmiAmi",
+              "rows": 1
+            }
+          ],
+          "top_categories": [
+            {
+              "value": "피규어",
+              "rows": 11
+            },
+            {
+              "value": "인형",
+              "rows": 7
+            },
+            {
+              "value": "마스코트",
+              "rows": 7
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 6
+            },
+            {
+              "value": "키링",
+              "rows": 6
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 5
+            },
+            {
+              "value": "머그컵",
+              "rows": 3
+            },
+            {
+              "value": "문구",
+              "rows": 3
+            }
+          ]
+        },
+        {
+          "focus_key": "stellive",
+          "focus_label": "Stellive",
+          "missing_image_rows": 47,
+          "missing_source_rows": 2,
+          "auto_write_ready": 0,
+          "top_stores": [
+            {
+              "value": "Stellive Store",
+              "rows": 45
+            },
+            {
+              "value": "SVC 공식",
+              "rows": 2
+            }
+          ],
+          "top_categories": [
+            {
+              "value": "액세서리",
+              "rows": 17
+            },
+            {
+              "value": "인형",
+              "rows": 14
+            },
+            {
+              "value": "아크릴 스탠드",
+              "rows": 11
+            },
+            {
+              "value": "의류",
+              "rows": 2
+            },
+            {
+              "value": "타월",
+              "rows": 1
+            },
+            {
+              "value": "머그컵",
+              "rows": 1
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "focus_key": "chiikawa_miniso",
+          "focus_label": "Chiikawa MINISO",
+          "missing_image_rows": 7,
+          "missing_source_rows": 7,
+          "auto_write_ready": 0,
+          "top_stores": [
+            {
+              "value": "MINISO 중국",
+              "rows": 7
+            }
+          ],
+          "top_categories": [
+            {
+              "value": "인형",
+              "rows": 5
+            },
+            {
+              "value": "아크릴 키링",
+              "rows": 1
+            },
+            {
+              "value": "피규어",
+              "rows": 1
+            }
+          ]
+        },
+        {
+          "focus_key": "chiikawa_gotouchi",
+          "focus_label": "Chiikawa Gotouchi",
+          "missing_image_rows": 26,
+          "missing_source_rows": 26,
+          "auto_write_ready": 0,
+          "top_stores": [
+            {
+              "value": "치이카와 마켓",
+              "rows": 26
+            }
+          ],
+          "top_categories": [
+            {
+              "value": "마스코트",
+              "rows": 15
+            },
+            {
+              "value": "아크릴 키링",
+              "rows": 4
+            },
+            {
+              "value": "타월",
+              "rows": 3
+            },
+            {
+              "value": "마그넷",
+              "rows": 2
+            },
+            {
+              "value": "캔뱃지",
+              "rows": 2
+            }
+          ]
+        },
+        {
+          "focus_key": "chiikawa_ensky",
+          "focus_label": "Chiikawa Ensky",
+          "missing_image_rows": 11,
+          "missing_source_rows": 11,
+          "auto_write_ready": 0,
+          "top_stores": [
+            {
+              "value": "엔스카이",
+              "rows": 11
+            }
+          ],
+          "top_categories": [
+            {
+              "value": "아크릴 스탠드",
+              "rows": 6
+            },
+            {
+              "value": "키링",
+              "rows": 5
+            }
+          ]
+        },
+        {
+          "focus_key": "bukubu_danganronpa",
+          "focus_label": "Bukubu Danganronpa",
+          "missing_image_rows": 0,
+          "missing_source_rows": 0,
+          "auto_write_ready": 0,
+          "top_stores": [],
+          "top_categories": []
+        },
+        {
+          "focus_key": "bukubu_gintama",
+          "focus_label": "Bukubu Gintama",
+          "missing_image_rows": 0,
+          "missing_source_rows": 0,
+          "auto_write_ready": 0,
+          "top_stores": [],
+          "top_categories": []
+        },
+        {
+          "focus_key": "bukubu_frieren",
+          "focus_label": "Bukubu Frieren",
+          "missing_image_rows": 0,
+          "missing_source_rows": 0,
+          "auto_write_ready": 0,
+          "top_stores": [],
+          "top_categories": []
+        },
+        {
+          "focus_key": "tapi_nui",
+          "focus_label": "Tapinui",
+          "missing_image_rows": 5,
+          "missing_source_rows": 5,
+          "auto_write_ready": 0,
+          "top_stores": [
+            {
+              "value": "엔스카이",
+              "rows": 5
+            }
+          ],
+          "top_categories": [
+            {
+              "value": "인형",
+              "rows": 3
+            },
+            {
+              "value": "마스코트",
+              "rows": 2
+            }
+          ]
+        }
+      ]
+    },
+    "public_image_recovery": {
+      "missing_image_rows": 720,
+      "readiness_classified_rows": 720,
+      "unclassified_rows": 0,
+      "source_first_rows": 692,
+      "review_before_attach_rows": 23,
+      "actionable_image_rows": 75,
+      "direct_image_action_queue_rows": 73,
+      "source_detail_candidate_review_rows": 2,
+      "source_detail_candidate_recheck_required_rows": 10,
+      "manual_image_research_rows": 5,
+      "focus_pack_rows": 427,
+      "focus_pack_count": 24,
+      "remaining_focus_review_rows": 427,
+      "confirmed_focus_source_rows": 0,
+      "focus_coverage": 0.6651,
+      "template_rows": 427,
+      "template_confirmed_rows": 0,
+      "template_import_updated_rows": 0,
+      "template_import_skipped_rows": 427,
+      "auto_apply_enabled": false
+    },
+    "report_consistency_ok": true
+  },
+  "next_actions": [
+    {
+      "priority": 20,
+      "area": "official detail images",
+      "action": "Open server/official_detail_review_batches.html first, confirm exact official detail candidates, then run tools/import_confirmed_official_detail_matches.py --write.",
+      "evidence": "3 reviewable seed rows; raw queue has 0 strong, 0 needs title review"
+    },
+    {
+      "priority": 35,
+      "area": "Ichiban Kuji campaign gaps",
+      "action": "Open server/ichiban_kuji_campaign_gap_audit.md and keep archive/404 campaigns out of auto-merge unless a replacement official URL or prize-lineup evidence is found.",
+      "evidence": "22 campaign gaps; archive_shell_no_prize_lineup_detected: 6, duplicate_payload_already_seeded: 1, official_online_archive_404: 15"
+    },
+    {
+      "priority": 36,
+      "area": "Ichiban Kuji metadata",
+      "action": "Keep missing old-campaign release dates/prices blank until exact official labels are found; current audit found no safe auto-fill candidates.",
+      "evidence": "16 release-date gaps, 365 price gaps, 0 safe URL candidates"
+    },
+    {
+      "priority": 40,
+      "area": "barcodes",
+      "action": "Open server/catalog_field_enrichment_review.html, copy confirmed field JSON rows, then run tools/import_confirmed_catalog_field_rows.py --write.",
+      "evidence": "7747 missing barcodes; 1217 actionable; 6248 kuji rows without public JAN expectation"
+    },
+    {
+      "priority": 41,
+      "area": "field review batches",
+      "action": "Open server/catalog_field_review_batches.html to process missing source/image/date/price/barcode batches by store and field.",
+      "evidence": "4586 actionable rows, 919 batches; top workflow manual_source_discovery: 394"
+    },
+    {
+      "priority": 42,
+      "area": "animation goods exact sources",
+      "action": "Open server/animation_enrichment_priority_queue.html and process top category/store groups before image attachment.",
+      "evidence": "633 animation rows need source/image work; top group 피규어 / 코토부키야: 45 rows"
+    },
+    {
+      "priority": 43,
+      "area": "prize image fallback review",
+      "action": "Open server/prize_provider_fallback_image_candidates_current.html and manually confirm whether the official fallback candidate is the same product line before importing any image URL.",
+      "evidence": "21 review-only fallback candidates from FuRyu, Taito"
+    },
+    {
+      "priority": 44,
+      "area": "focus missing image queue",
+      "action": "Open server/focus_missing_image_queue_current.html and process requested series/collab rows by exact source page before image attachment.",
+      "evidence": "349 focus rows missing images; top focus 단간론파: 34"
+    },
+    {
+      "priority": 45,
+      "area": "confirmed queue: catalog_field",
+      "action": "Copy the template to the confirmed_rows JSON, mark exact rows manual_confirmed=true, dry-run first, then run: python tools/import_confirmed_catalog_field_rows.py --queue server/catalog_field_confirmed_rows.json --report server/catalog_field_confirmed_import_report.json --write",
+      "evidence": "status template_ready_no_confirmed_file; confirmed 0; template 500"
+    },
+    {
+      "priority": 45,
+      "area": "confirmed queue: focus_image",
+      "action": "Copy the template to the confirmed_rows JSON, mark exact rows manual_confirmed=true, dry-run first, then run: python tools/import_manual_image_candidates.py --candidates server/focus_image_confirmed_rows.json --report server/focus_image_confirmed_import_report.json --require-manual-confirmed --trust-manual-confirmed-title --write",
+      "evidence": "status template_ready_no_confirmed_file; confirmed 0; template 349"
+    },
+    {
+      "priority": 47,
+      "area": "external evidence sources",
+      "action": "Review server/store_source_netloc_audit.md and replace external evidence URLs only when exact maker/store URLs become available.",
+      "evidence": "54 rows intentionally rely on retailer/anime/news evidence"
+    }
+  ],
+  "workboards": [
+    {
+      "area": "Field backfill",
+      "artifact": "server/catalog_field_review_batches.html",
+      "markdown": "server/catalog_field_review_batches.md",
+      "primary_metric": 4586,
+      "primary_label": "actionable rows",
+      "secondary_metric": 919,
+      "secondary_label": "batches",
+      "status": "ready_for_review",
+      "next": "Review by store/category/field; copy exact values into catalog_field_confirmed_rows.json."
+    },
+    {
+      "area": "Image enrichment",
+      "artifact": "server/catalog_image_exact_url_work_queue.html",
+      "markdown": "server/catalog_source_discovery_queue.md",
+      "secondary_artifact": "server/catalog_image_enrichment_batch_plan.md",
+      "primary_metric": 724,
+      "primary_label": "missing images",
+      "secondary_metric": 674,
+      "secondary_label": "source discovery rows",
+      "status": "provider_work_needed",
+      "next": "Find exact source URLs for no-source rows first; then attach images only from exact product pages.",
+      "quick_win_metric": 297,
+      "quick_win_label": "exact/detail candidate rows",
+      "identity_blocked_metric": 3,
+      "identity_blocked_label": "identity-blocked rows",
+      "exact_research_metric": 294,
+      "exact_research_label": "exact URL research rows",
+      "auto_promotable": 0,
+      "auto_promotable_strict_updated": 0,
+      "auto_promotable_strict_skipped": 0,
+      "auto_promotable_strict_reasons": [],
+      "existing_candidate_strict_updated": 0,
+      "existing_candidate_strict_skipped": 1,
+      "existing_candidate_strict_reasons": [
+        [
+          "live_title_exact_mismatch",
+          1
+        ]
+      ],
+      "remaining_provider_candidate_items": 496,
+      "remaining_manual_or_blocked_items": 228,
+      "remaining_candidate_review_ready": 0,
+      "remaining_candidate_review_preflight": 72,
+      "remaining_candidate_review_reasons": [
+        [
+          "image_already_present",
+          5279
+        ],
+        [
+          "current_name_mismatch",
+          3425
+        ],
+        [
+          "missing_source_or_image_url",
+          2309
+        ],
+        [
+          "strict_candidate_title_mismatch",
+          219
+        ],
+        [
+          "candidate_file_unreadable",
+          169
+        ]
+      ],
+      "confirmed_import_ready": 0,
+      "provider_recheck_processed_metric": 20,
+      "provider_recheck_processed_label": "provider recheck rows",
+      "provider_recheck_no_candidates_metric": 0,
+      "provider_recheck_no_candidates_label": "no-provider-candidate rows",
+      "provider_recheck_rejected_metric": 20,
+      "provider_recheck_rejected_label": "rejected best candidates",
+      "provider_recheck_failed_check": [
+        [
+          "all_distinctive_token_match",
+          20
+        ],
+        [
+          "parenthetical_terms_match",
+          19
+        ]
+      ],
+      "top_source_discovery_batches": [
+        {
+          "source_store": "엔스카이",
+          "category": "키링",
+          "rows": 44
+        },
+        {
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "rows": 38
+        },
+        {
+          "source_store": "엔스카이",
+          "category": "인형",
+          "rows": 30
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "category": "피규어",
+          "rows": 29
+        },
+        {
+          "source_store": "엔스카이",
+          "category": "아크릴 스탠드",
+          "rows": 29
+        }
+      ]
+    },
+    {
+      "area": "Public image recovery",
+      "artifact": "data/catalog_missing_image_actionability_public.json",
+      "markdown": "data/source_discovery_focus_packs_public.json",
+      "secondary_artifact": "data/source_discovery_focus_confirmed_template_public.json",
+      "primary_metric": 720,
+      "primary_label": "public DB rows missing images",
+      "secondary_metric": 427,
+      "secondary_label": "focus-pack source rows",
+      "status": "manual_source_confirmation_needed",
+      "next": "Confirm exact source URLs in the focus template first; imports stay dry-run until manual confirmation is present.",
+      "quick_win_metric": 75,
+      "quick_win_label": "image action queue rows",
+      "direct_image_action_queue_rows": 73,
+      "source_detail_candidate_review_rows": 2,
+      "source_detail_candidate_recheck_required_rows": 10,
+      "manual_image_research_rows": 5,
+      "focus_pack_count": 24,
+      "not_started_focus_pack_count": 24,
+      "remaining_focus_review_rows": 427,
+      "confirmed_focus_source_rows": 0,
+      "focus_coverage": 0.6651,
+      "focus_source_stores": [
+        "애니메이트",
+        "엔스카이",
+        "굿스마일컴퍼니",
+        "코토부키야",
+        "Movic"
+      ],
+      "template_items": 427,
+      "template_confirmed_rows": 0,
+      "template_import_updated_rows": 0,
+      "template_import_skipped_rows": 427,
+      "template_import_skip_reason_counts": [
+        [
+          "manual_confirmed_false",
+          427
+        ]
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "area": "Image path source review",
+      "artifact": "server/image_path_source_url_review_queue.html",
+      "markdown": "server/image_path_source_url_review_queue.md",
+      "primary_metric": 82,
+      "primary_label": "review items",
+      "secondary_metric": 82,
+      "secondary_label": "rejected source candidates",
+      "status": "review_needed",
+      "next": "Review image-derived detail URLs that were rejected by title/HTTP checks; import only exact product pages.",
+      "quick_win_metric": 0,
+      "quick_win_label": "auto-updated rows"
+    },
+    {
+      "area": "Source URL bottlenecks",
+      "artifact": "server/catalog_source_url_bottleneck_audit.md",
+      "markdown": "server/catalog_source_url_bottleneck_audit.md",
+      "primary_metric": 747,
+      "primary_label": "missing source_url",
+      "secondary_metric": 673,
+      "secondary_label": "missing image+source",
+      "status": "source_research_needed",
+      "next": "Resolve exact product/detail source_url first; image import remains blocked while source_url is blank, generic, stale, or identity-uncertain.",
+      "quick_win_metric": 0,
+      "quick_win_label": "automation-ready source candidates",
+      "manual_review_metric": 83,
+      "manual_review_label": "manual-review source candidates",
+      "blocked_before_image_import": 779,
+      "top_missing_source_stores": [
+        [
+          "애니메이트",
+          155
+        ],
+        [
+          "엔스카이",
+          142
+        ],
+        [
+          "굿스마일컴퍼니",
+          57
+        ],
+        [
+          "코토부키야",
+          48
+        ],
+        [
+          "Movic",
+          36
+        ],
+        [
+          "치이카와 마켓",
+          27
+        ],
+        [
+          "FuRyu",
+          24
+        ],
+        [
+          "점프 캐릭터즈 스토어",
+          23
+        ]
+      ],
+      "top_missing_both_stores": [
+        [
+          "애니메이트",
+          148
+        ],
+        [
+          "엔스카이",
+          142
+        ],
+        [
+          "굿스마일컴퍼니",
+          57
+        ],
+        [
+          "코토부키야",
+          44
+        ],
+        [
+          "Movic",
+          36
+        ],
+        [
+          "치이카와 마켓",
+          26
+        ],
+        [
+          "점프 캐릭터즈 스토어",
+          23
+        ],
+        [
+          "FuRyu",
+          21
+        ]
+      ],
+      "bottleneck_counts": [
+        [
+          "missing_source_url",
+          747
+        ],
+        [
+          "source_discovery_rows",
+          674
+        ],
+        [
+          "missing_image_and_source_url",
+          673
+        ],
+        [
+          "source_detail_no_relevant_candidate_rows",
+          77
+        ],
+        [
+          "has_image_but_missing_source_url",
+          74
+        ],
+        [
+          "generic_source_url_rows",
+          55
+        ],
+        [
+          "stale_source_identity_rows",
+          38
+        ],
+        [
+          "source_detail_manual_review_rows",
+          15
+        ],
+        [
+          "product_identity_review_rows",
+          13
+        ],
+        [
+          "source_detail_exact_candidate_rows",
+          0
+        ]
+      ]
+    },
+    {
+      "area": "Web image search candidates",
+      "artifact": "server/web_image_search_candidates.json",
+      "markdown": "server/catalog_image_existing_candidate_consolidated.json",
+      "secondary_artifact": "server/catalog_image_existing_candidate_consolidated.json",
+      "primary_metric": 0,
+      "primary_label": "web candidates",
+      "secondary_metric": 0,
+      "secondary_label": "safe consolidated candidates",
+      "status": "search_retry_needed",
+      "next": "Run web image search in small store/index batches; only import candidates that survive consolidation safety guards.",
+      "quick_win_metric": 12,
+      "quick_win_label": "rejected rows",
+      "failure_metric": 12,
+      "failure_label": "search failures"
+    },
+    {
+      "area": "Piapro prize candidates",
+      "artifact": "server/piapro_prize_image_candidates_current.json",
+      "markdown": "server/piapro_prize_image_candidates_current.md",
+      "primary_metric": 0,
+      "primary_label": "exact official candidates",
+      "secondary_metric": 90,
+      "secondary_label": "Piapro prize items",
+      "status": "exact_matches_empty",
+      "next": "Use exact title + maker matches only; keep contained/generic title matches out of automatic imports.",
+      "quick_win_metric": 0,
+      "quick_win_label": "blocked rows"
+    },
+    {
+      "area": "Prize line provider candidates",
+      "artifact": "server/prize_line_official_detail_match_queue_current.html",
+      "markdown": "server/prize_line_official_detail_match_queue_current.md",
+      "secondary_artifact": "server/prize_line_expected_provider_queue_current.json",
+      "primary_metric": 20,
+      "primary_label": "official detail candidates",
+      "secondary_metric": 12,
+      "secondary_label": "source-store mismatch rows",
+      "status": "manual_confirmation_needed",
+      "next": "Review weak/ambiguous prize-line candidates before changing source_store or importing image URLs.",
+      "quick_win_metric": 10,
+      "quick_win_label": "weak/ambiguous rows"
+    },
+    {
+      "area": "Prize provider fallback images",
+      "artifact": "server/prize_provider_fallback_image_candidates_current.html",
+      "markdown": "server/prize_provider_fallback_image_candidates_current.md",
+      "secondary_artifact": "server/prize_provider_fallback_image_candidates_current.json",
+      "primary_metric": 21,
+      "primary_label": "review-only fallback candidates",
+      "secondary_metric": 36,
+      "secondary_label": "searched rows",
+      "status": "manual_confirmation_needed",
+      "next": "Compare current DB line/title with the official fallback title before importing any image URL; broad character hits can be a different prize line.",
+      "quick_win_metric": 27,
+      "quick_win_label": "unresolved rows",
+      "target_stores": [
+        "FuRyu",
+        "Taito"
+      ]
+    },
+    {
+      "area": "Agent image candidate imports",
+      "artifact": "server/agent_image_candidates_import_queue_current.html",
+      "markdown": "server/agent_image_candidates_import_queue_current.md",
+      "secondary_artifact": "server/agent_image_candidates_import_queue_current.json",
+      "primary_metric": 0,
+      "primary_label": "ready import items",
+      "secondary_metric": 3279,
+      "secondary_label": "rejected items",
+      "status": "reviewed_no_safe_imports",
+      "next": "Use this queue after agent/manual research; import only ready items and leave rejected source/store/title conflicts in review.",
+      "quick_win_metric": 24,
+      "quick_win_label": "preflight-passed items",
+      "candidate_files_metric": 223,
+      "candidate_files_label": "candidate files",
+      "rejected_reasons": [
+        [
+          "image_already_present",
+          1390
+        ],
+        [
+          "current_name_mismatch",
+          1003
+        ],
+        [
+          "missing_source_or_image_url",
+          762
+        ],
+        [
+          "strict_candidate_title_mismatch",
+          73
+        ],
+        [
+          "candidate_file_unreadable",
+          27
+        ],
+        [
+          "live_title_exact_mismatch",
+          20
+        ],
+        [
+          "source_netloc_mismatch",
+          2
+        ],
+        [
+          "confidence_below_threshold",
+          2
+        ]
+      ]
+    },
+    {
+      "area": "Broad image candidate imports",
+      "artifact": "server/agent_image_candidates_import_queue_broad.html",
+      "markdown": "server/agent_image_candidates_import_queue_broad.md",
+      "secondary_artifact": "server/agent_image_candidates_import_queue_broad.json",
+      "primary_metric": 0,
+      "primary_label": "ready import items",
+      "secondary_metric": 3279,
+      "secondary_label": "rejected items",
+      "status": "reviewed_no_safe_imports",
+      "next": "Re-scan historical image candidate files against the current seed; import only ready items that still pass identity and safety checks.",
+      "quick_win_metric": 24,
+      "quick_win_label": "preflight-passed items",
+      "candidate_files_metric": 223,
+      "candidate_files_label": "candidate files",
+      "rejected_reasons": [
+        [
+          "image_already_present",
+          1390
+        ],
+        [
+          "current_name_mismatch",
+          1003
+        ],
+        [
+          "missing_source_or_image_url",
+          762
+        ],
+        [
+          "strict_candidate_title_mismatch",
+          73
+        ],
+        [
+          "candidate_file_unreadable",
+          27
+        ],
+        [
+          "live_title_exact_mismatch",
+          20
+        ],
+        [
+          "source_netloc_mismatch",
+          2
+        ],
+        [
+          "confidence_below_threshold",
+          2
+        ]
+      ]
+    },
+    {
+      "area": "Storefront candidates",
+      "artifact": "server/storefront_review_batches.html",
+      "markdown": "server/storefront_review_batches.md",
+      "secondary_artifact": "server/storefront_match_review.html",
+      "primary_metric": 0,
+      "primary_label": "seed rows",
+      "secondary_metric": 0,
+      "secondary_label": "candidate rows",
+      "status": "empty",
+      "next": "Resolve ambiguous storefront/Fanding product rows before importing exact source/image/release fields.",
+      "ambiguous_metric": 9,
+      "ambiguous_label": "ambiguous candidates",
+      "manual_only_metric": 179,
+      "manual_only_label": "manual-only rows"
+    },
+    {
+      "area": "Stellive Fanding candidates",
+      "artifact": "server/fanding_stellive_match_queue.json",
+      "markdown": "server/fanding_stellive_match_queue.csv",
+      "primary_metric": 94,
+      "primary_label": "candidate rows",
+      "secondary_metric": 4,
+      "secondary_label": "weak review candidates",
+      "status": "manual_confirmation_needed",
+      "next": "Review Fanding candidates manually; current fuzzy matches are not safe for automatic image/source import.",
+      "quick_win_metric": null,
+      "quick_win_label": "strong review candidates",
+      "manual_only_metric": 76,
+      "manual_only_label": "no-candidate rows"
+    },
+    {
+      "area": "Pokemon Center candidates",
+      "artifact": "server/pokemon_center_official_latest_dryrun.json",
+      "markdown": "server/pokemon_center_official_latest_dryrun.json",
+      "primary_metric": 3,
+      "primary_label": "review rows",
+      "secondary_metric": 0,
+      "secondary_label": "auto updates",
+      "status": "manual_confirmation_needed",
+      "next": "Review Pokemon Center homepage rows; import only exact product pages because common terms produce multiple plausible products."
+    },
+    {
+      "area": "Official detail candidates",
+      "artifact": "server/official_detail_review_batches.html",
+      "markdown": "server/official_detail_review_batches.md",
+      "primary_metric": 3,
+      "primary_label": "seed rows",
+      "secondary_metric": 3,
+      "secondary_label": "candidate rows",
+      "status": "manual_confirmation_needed",
+      "next": "Confirm title/detail identity before writing official source/image fields."
+    },
+    {
+      "area": "Official detail provider sweeps",
+      "artifact": "server/official_detail_match_queue_animate_after_query_fix_merged_summary.md",
+      "markdown": "server/official_detail_match_queue_ensky_merged_current.md",
+      "primary_metric": 299,
+      "primary_label": "processed seed rows",
+      "secondary_metric": 3,
+      "secondary_label": "reviewable rows",
+      "status": "manual_confirmation_needed",
+      "next": "Confirm broad Animate representative rows first; Ensky has no safe official detail imports in the completed sweep.",
+      "quick_win_metric": 685,
+      "quick_win_label": "candidate rows scanned",
+      "animate_reviewable": 3,
+      "ensky_reviewable": 0,
+      "animate_statuses": [
+        [
+          "weak_or_ambiguous",
+          164
+        ],
+        [
+          "no_candidates_found",
+          104
+        ],
+        [
+          "blocked_type_mismatch",
+          23
+        ],
+        [
+          "needs_manual_title_review",
+          3
+        ]
+      ],
+      "ensky_statuses": [
+        [
+          "blocked_type_mismatch",
+          191
+        ],
+        [
+          "weak_or_ambiguous",
+          109
+        ],
+        [
+          "no_candidates_found",
+          91
+        ]
+      ],
+      "animate_manual_reasons": [],
+      "ensky_manual_reasons": [
+        [
+          "candidate_goods_type_mismatch",
+          191
+        ],
+        [
+          "weak_or_ambiguous_candidate",
+          109
+        ],
+        [
+          "no_official_candidates_found",
+          91
+        ]
+      ]
+    },
+    {
+      "area": "Taito brand API candidates",
+      "artifact": "server/taito_brand_image_candidates_current.json",
+      "markdown": "server/taito_brand_image_candidates_current.json",
+      "primary_metric": 14,
+      "primary_label": "brand API target rows",
+      "secondary_metric": 0,
+      "secondary_label": "exact matches",
+      "status": "manual_review_needed",
+      "next": "Use official Taito brand API results as evidence; import only single exact character/title matches.",
+      "quick_win_metric": 181,
+      "quick_win_label": "Desktop Cute API rows"
+    },
+    {
+      "area": "Chiikawa gotouchi API coverage",
+      "artifact": "server/chiikawa_gotouchi_api_coverage_audit.json",
+      "markdown": "server/chiikawa_gotouchi_api_coverage_audit.json",
+      "primary_metric": 26,
+      "primary_label": "missing gotouchi rows",
+      "secondary_metric": 0,
+      "secondary_label": "official pair available",
+      "status": "official_api_gap",
+      "next": "Use this audit before searching gotouchi rows; most stale themes need external official evidence rather than JP-API auto-fill.",
+      "quick_win_metric": 270,
+      "quick_win_label": "official API images"
+    },
+    {
+      "area": "Ichiban Kuji gaps",
+      "artifact": "server/ichiban_kuji_gap_work_queue.html",
+      "markdown": "server/ichiban_kuji_gap_work_queue.md",
+      "audit_artifact": "server/ichiban_kuji_campaign_gap_audit.md",
+      "secondary_artifact": "server/ichiban_replacement_url_queue.md",
+      "primary_metric": 24,
+      "primary_label": "gap items",
+      "secondary_metric": 0,
+      "secondary_label": "extractable replacement candidates",
+      "status": "archive_gaps_documented",
+      "next": "Review server/ichiban_replacement_url_queue.md first; import only official candidates that extract prize rows and match the missing campaign.",
+      "quick_win_metric": 2,
+      "quick_win_label": "seeded counterparts",
+      "documented_terminal_metric": 24,
+      "documented_terminal_label": "documented terminal gaps",
+      "actionable_gap_metric": 0,
+      "actionable_gap_label": "actionable gaps",
+      "tertiary_metric": 0,
+      "tertiary_label": "sub-series review batches"
+    },
+    {
+      "area": "Ichiban Kuji campaign audit",
+      "artifact": "server/ichiban_kuji_campaign_gap_audit.md",
+      "markdown": "server/ichiban_kuji_metadata_audit.md",
+      "secondary_artifact": "server/ichiban_kuji_prize_structure_audit.json",
+      "primary_metric": 22,
+      "primary_label": "campaign gaps",
+      "secondary_metric": 44,
+      "secondary_label": "metadata pages",
+      "status": "campaign_research_needed",
+      "next": "Keep archive/404/no-lineup campaigns documented; only add rows or metadata when exact official prize-lineup evidence is found.",
+      "quick_win_metric": 22,
+      "quick_win_label": "campaigns without seed rows",
+      "rows_missing_release_date": 16,
+      "rows_missing_official_price_jpy": 365,
+      "metadata_review_metric": 44,
+      "metadata_review_label": "metadata review items"
+    },
+    {
+      "area": "Ichiban Kuji history status",
+      "artifact": "server/ichiban_kuji_history_status_audit.md",
+      "markdown": "server/ichiban_kuji_history_status_audit.md",
+      "primary_metric": 614,
+      "primary_label": "campaigns",
+      "secondary_metric": 24,
+      "secondary_label": "documented terminal gaps",
+      "status": "metadata_evidence_blocked",
+      "next": "Keep documented terminal campaign gaps archived; import metadata only when labeled official release or yen-price evidence is safe.",
+      "quick_win_metric": 5545,
+      "quick_win_label": "prize rows",
+      "campaign_coverage_rate": 0.964169,
+      "actionable_gap_items": 0,
+      "missing_sub_series_rows": 0,
+      "metadata_blocked_rows": 381,
+      "metadata_safe_update_url_count": 0
+    },
+    {
+      "area": "Animation categories",
+      "artifact": "server/animation_goods_category_audit.md",
+      "markdown": "server/animation_goods_category_audit.md",
+      "secondary_artifact": "server/animation_enrichment_priority_queue.html",
+      "primary_metric": 1419,
+      "primary_label": "rows",
+      "secondary_metric": 0,
+      "secondary_label": "unknown categories",
+      "status": "covered",
+      "next": "Keep taxonomy normalized; review missing images/source by category.",
+      "priority_queue_groups": 78,
+      "priority_queue_rows": 603,
+      "priority_queue_by_workflow": [
+        [
+          "find_exact_source_url",
+          603
+        ]
+      ],
+      "top_missing_image_categories": [
+        {
+          "category": "피규어",
+          "rows": 124
+        },
+        {
+          "category": "아크릴 스탠드",
+          "rows": 110
+        },
+        {
+          "category": "캔뱃지",
+          "rows": 85
+        },
+        {
+          "category": "키링",
+          "rows": 67
+        },
+        {
+          "category": "문구",
+          "rows": 49
+        }
+      ],
+      "top_missing_source_categories": [
+        {
+          "category": "피규어",
+          "rows": 137
+        },
+        {
+          "category": "아크릴 스탠드",
+          "rows": 117
+        },
+        {
+          "category": "캔뱃지",
+          "rows": 86
+        },
+        {
+          "category": "키링",
+          "rows": 68
+        },
+        {
+          "category": "인형",
+          "rows": 51
+        }
+      ],
+      "category_family_count": 10,
+      "category_count": 17
+    },
+    {
+      "area": "App folder visuals",
+      "artifact": "server/app_folder_visual_catalog_audit.md",
+      "markdown": "server/app_folder_visual_catalog_audit.md",
+      "primary_metric": 211,
+      "primary_label": "folder icons",
+      "secondary_metric": 188,
+      "secondary_label": "folder colors",
+      "status": "covered",
+      "next": "Keep folder colors grouped by palette sections and ensure animation category visual hints exist in the app icon/color catalogs.",
+      "quick_win_metric": 8,
+      "quick_win_label": "palette sections",
+      "animation_visuals_covered": true,
+      "duplicate_icon_keys": [],
+      "duplicate_colors": []
+    },
+    {
+      "area": "Confirmed queues",
+      "artifact": "server/catalog_confirmed_import_queue_audit.md",
+      "markdown": "server/catalog_confirmed_import_queue_audit.md",
+      "primary_metric": 0,
+      "primary_label": "confirmed pending",
+      "secondary_metric": 46,
+      "secondary_label": "archived done",
+      "status": "clean",
+      "next": "Import only confirmed rows; completed duplicates are kept in archive files."
+    },
+    {
+      "area": "Store/source integrity",
+      "artifact": "server/stale_source_cleanup_queue.html",
+      "markdown": "server/stale_source_cleanup_queue.md",
+      "secondary_artifact": "server/store_source_netloc_audit.md",
+      "primary_metric": 0,
+      "primary_label": "mismatches",
+      "secondary_metric": 38,
+      "secondary_label": "cleanup rows",
+      "status": "live_source_review_needed",
+      "next": "Review stale source cleanup rows before propagating images; old product IDs can point to unrelated current products.",
+      "quick_win_metric": 54,
+      "quick_win_label": "external evidence rows"
+    },
+    {
+      "area": "Generic source cleanup",
+      "artifact": "server/generic_source_cleanup_queue.html",
+      "markdown": "server/generic_source_cleanup_queue.md",
+      "primary_metric": 55,
+      "primary_label": "generic source rows",
+      "secondary_metric": 3,
+      "secondary_label": "generic URLs",
+      "status": "exact_source_needed",
+      "next": "Replace homepage/storefront URLs with exact product detail pages before image import.",
+      "candidate_status_counts": [
+        [
+          "low_confidence_candidate",
+          2
+        ],
+        [
+          "no_candidate_report",
+          52
+        ],
+        [
+          "weak_manual_review_candidate",
+          1
+        ]
+      ]
+    },
+    {
+      "area": "Prize source-store line audit",
+      "artifact": "server/prize_source_store_line_audit.html",
+      "markdown": "server/prize_source_store_line_audit.md",
+      "primary_metric": 24,
+      "primary_label": "source-store mismatches",
+      "secondary_metric": 12,
+      "secondary_label": "missing-image mismatches",
+      "status": "provider_routing_review_needed",
+      "next": "Review prize line rows before provider image runs; wrong source_store sends search to the wrong official provider.",
+      "by_current_expected": [
+        {
+          "current_source_store": "FuRyu",
+          "expected_source_store": "SEGA",
+          "rows": 11
+        },
+        {
+          "current_source_store": "AmiAmi",
+          "expected_source_store": "FuRyu",
+          "rows": 4
+        },
+        {
+          "current_source_store": "Taito",
+          "expected_source_store": "FuRyu",
+          "rows": 4
+        },
+        {
+          "current_source_store": "FuRyu",
+          "expected_source_store": "Banpresto",
+          "rows": 2
+        },
+        {
+          "current_source_store": "엔스카이",
+          "expected_source_store": "SEGA",
+          "rows": 1
+        },
+        {
+          "current_source_store": "Taito",
+          "expected_source_store": "SEGA",
+          "rows": 1
+        },
+        {
+          "current_source_store": "FuRyu",
+          "expected_source_store": "Taito",
+          "rows": 1
+        }
+      ]
+    },
+    {
+      "area": "Product identity review",
+      "artifact": "server/product_identity_review_queue.html",
+      "markdown": "server/product_identity_review_queue.md",
+      "primary_metric": 13,
+      "primary_label": "blocked rows",
+      "secondary_metric": 0,
+      "secondary_label": "skipped rows",
+      "status": "identity_review_needed",
+      "next": "Verify or rename these rows before source/image import; exact official evidence is required."
+    },
+    {
+      "area": "Report consistency",
+      "artifact": "server/catalog_report_consistency_audit.json",
+      "markdown": "server/catalog_report_consistency_audit.json",
+      "primary_metric": 0,
+      "primary_label": "mismatches",
+      "secondary_metric": 125,
+      "secondary_label": "checks",
+      "status": "clean",
+      "next": "Regenerate quality, field, image, and review-batch reports before making catalog decisions."
+    },
+    {
+      "area": "DB sync",
+      "artifact": "server/catalog_db_sync_audit.md",
+      "markdown": "server/catalog_db_sync_audit.md",
+      "secondary_artifact": "server/catalog_db_sync_audit.json",
+      "primary_metric": 0,
+      "primary_label": "DBs with sync issues",
+      "secondary_metric": 18040,
+      "secondary_label": "seed rows",
+      "status": "clean",
+      "next": "Run sync_catalog_db_active.py and dedupe_catalog_db.py when stale, missing, updated, or duplicate active DB rows appear.",
+      "db_count_metric": 2,
+      "db_count_label": "audited DBs",
+      "database_summaries": [
+        {
+          "db": "server/deokive_dev.db",
+          "ok": true,
+          "active_rows": 18040,
+          "missing_images": 724,
+          "stale_active_rows": 0,
+          "missing_seed_rows": 0,
+          "updated_active_rows": 0,
+          "duplicate_active_rows": 0
+        },
+        {
+          "db": "deokive_dev.db",
+          "ok": true,
+          "active_rows": 18040,
+          "missing_images": 724,
+          "stale_active_rows": 0,
+          "missing_seed_rows": 0,
+          "updated_active_rows": 0,
+          "duplicate_active_rows": 0
+        }
+      ]
+    },
+    {
+      "area": "Requested special goods",
+      "artifact": "server/requested_special_goods_review.html",
+      "markdown": "server/requested_special_goods_queue.csv",
+      "primary_metric": 27,
+      "primary_label": "already present",
+      "secondary_metric": 0,
+      "secondary_label": "missing requests",
+      "status": "covered",
+      "next": "Keep this queue as the requested-list coverage gate before adding duplicate special goods.",
+      "quick_win_metric": 26,
+      "quick_win_label": "with candidate image"
+    },
+    {
+      "area": "Focus missing images",
+      "artifact": "server/focus_missing_image_queue_current.html",
+      "markdown": "server/focus_missing_image_queue_current.md",
+      "secondary_artifact": "server/focus_missing_image_queue_current.json",
+      "primary_metric": 349,
+      "primary_label": "focus rows missing images",
+      "secondary_metric": 329,
+      "secondary_label": "focus rows missing source",
+      "status": "source_research_needed",
+      "next": "Use the focus queue for requested series and collab goods; find exact source pages before attaching images.",
+      "quick_win_metric": 304,
+      "quick_win_label": "missing both image/source"
+    },
+    {
+      "area": "Focus series image work",
+      "artifact": "server/focus_series_missing_image_work_queues_current.csv",
+      "markdown": "server/focus_series_missing_image_work_queues_current.md",
+      "secondary_artifact": "server/focus_series_missing_image_work_queues_current.json",
+      "primary_metric": 147,
+      "primary_label": "series rows missing images",
+      "secondary_metric": 102,
+      "secondary_label": "series rows missing source",
+      "status": "source_research_needed",
+      "next": "Use this narrowed queue for HUNTER, Stellive, Chiikawa MINISO/Gotouchi/Ensky, Bukubu, and Tapinui exact-source review.",
+      "quick_win_metric": 0,
+      "quick_win_label": "auto-write ready"
+    }
+  ],
+  "top_field_workflows": [
+    [
+      "manual_source_discovery",
+      394
+    ],
+    [
+      "manual_barcode_evidence",
+      158
+    ],
+    [
+      "manual_evidence_review",
+      110
+    ],
+    [
+      "exact_url_or_image_lookup",
+      100
+    ],
+    [
+      "official_metadata_lookup",
+      99
+    ],
+    [
+      "campaign_metadata_review",
+      58
+    ]
+  ],
+  "top_image_strategies": [
+    [
+      "official_search",
+      495
+    ],
+    [
+      "manual_review",
+      112
+    ],
+    [
+      "manual_official_search_review",
+      66
+    ],
+    [
+      "source_url_generic_storefront",
+      50
+    ],
+    [
+      "prize_detail_validation",
+      1
+    ]
+  ],
+  "top_image_workstreams": [
+    {
+      "workstream_id": "img-ws-234",
+      "batch_type": "official_provider_matcher",
+      "source_store": "치이카와 마켓",
+      "affiliation": "치이카와",
+      "category": "마스코트",
+      "image_granularity": "individual_character_image_required",
+      "missing_images": 15,
+      "line_count": 4,
+      "top_lines": [
+        {
+          "line_key": "ちいかわ ご当地マスコット",
+          "missing_images": 6
+        },
+        {
+          "line_key": "うさぎ ご当地マスコット",
+          "missing_images": 4
+        },
+        {
+          "line_key": "ハチワレ ご当地マスコット",
+          "missing_images": 4
+        },
+        {
+          "line_key": "ラッコ ご当地マスコット",
+          "missing_images": 1
+        }
+      ],
+      "recommended_next_action": "Run or improve a strict provider matcher, then import only title-verified detail-page images.",
+      "manual_confirmation_template": "server/source_discovery_confirmed_rows.template.json",
+      "confirmed_queue": "server/source_discovery_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "unblocks_when": "exact_product_source_url_confirmed",
+      "sample_row_indexes": [
+        967,
+        955,
+        937,
+        941,
+        949,
+        956,
+        944,
+        954,
+        958,
+        960,
+        947,
+        945,
+        959,
+        948,
+        953
+      ],
+      "samples": [
+        {
+          "row_index": 967,
+          "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+          "name_ja": "ラッコ ご当地マスコット (北海道)",
+          "search_url": "https://chiikawamarket.jp/ko/search?q=%EB%9E%8F%EC%BD%94%20%E3%81%94%E5%BD%93%E5%9C%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%ED%99%8B%EC%B9%B4%EC%9D%B4%EB%8F%84%29&type=product"
+        },
+        {
+          "row_index": 955,
+          "name_ko": "우사기 ご当地 마스코트 (나고야 테바사키)",
+          "name_ja": "うさぎ ご当地マスコット (名古屋 手羽先)",
+          "search_url": "https://chiikawamarket.jp/ko/search?q=%EC%9A%B0%EC%82%AC%EA%B8%B0%20%E3%81%94%E5%BD%93%E5%9C%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%EB%82%98%EA%B3%A0%EC%95%BC%20%ED%85%8C%EB%B0%94%EC%82%AC%ED%82%A4%29&type=product"
+        },
+        {
+          "row_index": 937,
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "search_url": "https://chiikawamarket.jp/ko/search?q=%EC%9A%B0%EC%82%AC%EA%B8%B0%20%E3%81%94%E5%BD%93%E5%9C%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%EC%95%84%EC%82%AC%EC%BF%A0%EC%82%AC%20%EA%B9%83%EB%B0%9C%29&type=product"
+        },
+        {
+          "row_index": 941,
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "search_url": "https://chiikawamarket.jp/ko/search?q=%EC%9A%B0%EC%82%AC%EA%B8%B0%20%E3%81%94%E5%BD%93%E5%9C%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%EC%98%A4%EC%82%AC%EC%B9%B4%20%ED%86%B5%EC%B2%9C%EA%B0%81%29&type=product"
+        },
+        {
+          "row_index": 949,
+          "name_ko": "우사기 ご当地 마스코트 (홋카이도 게)",
+          "name_ja": "うさぎ ご当地マスコット (北海道 カニ)",
+          "search_url": "https://chiikawamarket.jp/ko/search?q=%EC%9A%B0%EC%82%AC%EA%B8%B0%20%E3%81%94%E5%BD%93%E5%9C%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%ED%99%8B%EC%B9%B4%EC%9D%B4%EB%8F%84%20%EA%B2%8C%29&type=product"
+        },
+        {
+          "row_index": 956,
+          "name_ko": "치이카와 ご当地 마스코트 (고베 포트타워)",
+          "name_ja": "ちいかわ ご当地マスコット (神戸 ポートタワー)",
+          "search_url": "https://chiikawamarket.jp/ko/search?q=%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%20%E3%81%94%E5%BD%93%E5%9C%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%EA%B3%A0%EB%B2%A0%20%ED%8F%AC%ED%8A%B8%ED%83%80%EC%9B%8C%29&type=product"
+        },
+        {
+          "row_index": 944,
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "search_url": "https://chiikawamarket.jp/ko/search?q=%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%20%E3%81%94%E5%BD%93%E5%9C%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%EA%B5%90%ED%86%A0%20%EB%A7%88%EC%9D%B4%EC%BD%94%29&type=product"
+        },
+        {
+          "row_index": 954,
+          "name_ko": "치이카와 ご当地 마스코트 (나고야 샤치호코)",
+          "name_ja": "ちいかわ ご当地マスコット (名古屋 金鯱)",
+          "search_url": "https://chiikawamarket.jp/ko/search?q=%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%20%E3%81%94%E5%BD%93%E5%9C%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%EB%82%98%EA%B3%A0%EC%95%BC%20%EC%83%A4%EC%B9%98%ED%98%B8%EC%BD%94%29&type=product"
+        }
+      ],
+      "rank": 1
+    },
+    {
+      "workstream_id": "img-ws-204",
+      "batch_type": "official_provider_matcher",
+      "source_store": "엔스카이",
+      "affiliation": "원피스",
+      "category": "키링",
+      "image_granularity": "individual_character_image_required",
+      "missing_images": 11,
+      "line_count": 11,
+      "top_lines": [
+        {
+          "line_key": "ニコ・ロビン ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ロロノア・ゾロ ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ブルック ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "サボ ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "サンジ ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ウソップ ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ジンベエ ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "チョッパー ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "トラファルガー・ロー カラビナ付きラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ポートガス・D・エース メタリックラバーストラップ",
+          "missing_images": 1
+        }
+      ],
+      "recommended_next_action": "Run or improve a strict provider matcher, then import only title-verified detail-page images.",
+      "manual_confirmation_template": "server/source_discovery_confirmed_rows.template.json",
+      "confirmed_queue": "server/source_discovery_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "unblocks_when": "exact_product_source_url_confirmed",
+      "sample_row_indexes": [
+        1587,
+        1582,
+        1589,
+        1592,
+        1584,
+        1585,
+        1590,
+        1586,
+        1593,
+        1591,
+        1588
+      ],
+      "samples": [
+        {
+          "row_index": 1587,
+          "name_ko": "니코 로빈 러버 스트랩",
+          "name_ja": "ニコ・ロビン ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1582,
+          "name_ko": "롤로노아 조로 러버 스트랩",
+          "name_ja": "ロロノア・ゾロ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%AD%E3%83%AD%E3%83%8E%E3%82%A2%E3%83%BB%E3%82%BE%E3%83%AD%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1589,
+          "name_ko": "브룩 러버 스트랩",
+          "name_ja": "ブルック ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1592,
+          "name_ko": "사보 러버 스트랩",
+          "name_ja": "サボ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B5%E3%83%9C%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1584,
+          "name_ko": "상디 러버 스트랩",
+          "name_ja": "サンジ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1585,
+          "name_ko": "우솝 러버 스트랩",
+          "name_ja": "ウソップ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1590,
+          "name_ko": "징베 러버 스트랩",
+          "name_ja": "ジンベエ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1586,
+          "name_ko": "토니토니 쵸파 러버 스트랩",
+          "name_ja": "チョッパー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        }
+      ],
+      "rank": 2
+    },
+    {
+      "workstream_id": "img-ws-207",
+      "batch_type": "official_provider_matcher",
+      "source_store": "엔스카이",
+      "affiliation": "장송의 프리렌",
+      "category": "인형",
+      "image_granularity": "individual_character_image_required",
+      "missing_images": 9,
+      "line_count": 9,
+      "top_lines": [
+        {
+          "line_key": "ぬいぐるみポペ フェルン",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ぬいぐるみポペ フリーレン",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ちびぬい シュタルク",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ちびぬい アイゼン",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ちびぬい フェルン",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ちびぬい ハイター",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ちびぬい ヒンメル",
+          "missing_images": 1
+        },
+        {
+          "line_key": "たぴぬい フェルン",
+          "missing_images": 1
+        },
+        {
+          "line_key": "たぴぬい フリーレン",
+          "missing_images": 1
+        }
+      ],
+      "recommended_next_action": "Run or improve a strict provider matcher, then import only title-verified detail-page images.",
+      "manual_confirmation_template": "server/source_discovery_confirmed_rows.template.json",
+      "confirmed_queue": "server/source_discovery_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "unblocks_when": "exact_product_source_url_confirmed",
+      "sample_row_indexes": [
+        1523,
+        1522,
+        1518,
+        1520,
+        1517,
+        1521,
+        1519,
+        1525,
+        1524
+      ],
+      "samples": [
+        {
+          "row_index": 1523,
+          "name_ko": "누이푸페 펀",
+          "name_ja": "ぬいぐるみポペ フェルン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%83%9A%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3"
+        },
+        {
+          "row_index": 1522,
+          "name_ko": "누이푸페 프리렌",
+          "name_ja": "ぬいぐるみポペ フリーレン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%83%9A%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3"
+        },
+        {
+          "row_index": 1518,
+          "name_ko": "치비누이 슈타르크",
+          "name_ja": "ちびぬい シュタルク",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF"
+        },
+        {
+          "row_index": 1520,
+          "name_ko": "치비누이 아이젠",
+          "name_ja": "ちびぬい アイゼン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3"
+        },
+        {
+          "row_index": 1517,
+          "name_ko": "치비누이 펀",
+          "name_ja": "ちびぬい フェルン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3"
+        },
+        {
+          "row_index": 1521,
+          "name_ko": "치비누이 하이터",
+          "name_ja": "ちびぬい ハイター",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC"
+        },
+        {
+          "row_index": 1519,
+          "name_ko": "치비누이 히멜",
+          "name_ja": "ちびぬい ヒンメル",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB"
+        },
+        {
+          "row_index": 1525,
+          "name_ko": "타피누이 펀",
+          "name_ja": "たぴぬい フェルン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3"
+        }
+      ],
+      "rank": 3
+    },
+    {
+      "workstream_id": "img-ws-001",
+      "batch_type": "official_provider_matcher",
+      "source_store": "FuRyu",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "피규어",
+      "image_granularity": "individual_character_image_required",
+      "missing_images": 8,
+      "line_count": 8,
+      "top_lines": [
+        {
+          "line_key": "ぬーどるストッパーフィギュア 緑谷出久",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ぬーどるストッパーフィギュア 爆豪勝己",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ぬーどるストッパーフィギュア オールマイト",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ぬーどるストッパーフィギュア トガヒミコ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ぬーどるストッパーフィギュア 轟焦凍",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ちょこのせプレミアムフィギュア 緑谷出久",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ちょこのせプレミアムフィギュア 爆豪勝己",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ちょこのせプレミアムフィギュア 轟焦凍",
+          "missing_images": 1
+        }
+      ],
+      "recommended_next_action": "Run or improve a strict provider matcher, then import only title-verified detail-page images.",
+      "manual_confirmation_template": "server/source_discovery_confirmed_rows.template.json",
+      "confirmed_queue": "server/source_discovery_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "unblocks_when": "exact_product_source_url_confirmed",
+      "sample_row_indexes": [
+        1256,
+        1257,
+        1259,
+        1260,
+        1258,
+        1253,
+        1254,
+        1255
+      ],
+      "samples": [
+        {
+          "row_index": 1256,
+          "name_ko": "누들 스토퍼 피규어 미도리야 이즈쿠",
+          "name_ja": "ぬーどるストッパーフィギュア 緑谷出久",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85"
+        },
+        {
+          "row_index": 1257,
+          "name_ko": "누들 스토퍼 피규어 바쿠고 카츠키",
+          "name_ja": "ぬーどるストッパーフィギュア 爆豪勝己",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1"
+        },
+        {
+          "row_index": 1259,
+          "name_ko": "누들 스토퍼 피규어 올마이트",
+          "name_ja": "ぬーどるストッパーフィギュア オールマイト",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88"
+        },
+        {
+          "row_index": 1260,
+          "name_ko": "누들 스토퍼 피규어 토가 히미코",
+          "name_ja": "ぬーどるストッパーフィギュア トガヒミコ",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3"
+        },
+        {
+          "row_index": 1258,
+          "name_ko": "누들 스토퍼 피규어 토도로키 쇼토",
+          "name_ja": "ぬーどるストッパーフィギュア 轟焦凍",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D"
+        },
+        {
+          "row_index": 1253,
+          "name_ko": "쵸코노세 프리미엄 피규어 미도리야 이즈쿠",
+          "name_ja": "ちょこのせプレミアムフィギュア 緑谷出久",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85"
+        },
+        {
+          "row_index": 1254,
+          "name_ko": "쵸코노세 프리미엄 피규어 바쿠고 카츠키",
+          "name_ja": "ちょこのせプレミアムフィギュア 爆豪勝己",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1"
+        },
+        {
+          "row_index": 1255,
+          "name_ko": "쵸코노세 프리미엄 피규어 토도로키 쇼토",
+          "name_ja": "ちょこのせプレミアムフィギュア 轟焦凍",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D"
+        }
+      ],
+      "rank": 4
+    },
+    {
+      "workstream_id": "img-ws-049",
+      "batch_type": "official_provider_matcher",
+      "source_store": "굿스마일컴퍼니",
+      "affiliation": "원피스",
+      "category": "피규어",
+      "image_granularity": "individual_character_image_required",
+      "missing_images": 7,
+      "line_count": 7,
+      "top_lines": [
+        {
+          "line_key": "POP UP PARADE ニコ・ロビン",
+          "missing_images": 1
+        },
+        {
+          "line_key": "POP UP PARADE ブルック",
+          "missing_images": 1
+        },
+        {
+          "line_key": "POP UP PARADE サボ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "POP UP PARADE ウソップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "POP UP PARADE ジンベエ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "POP UP PARADE トニートニー・チョッパー",
+          "missing_images": 1
+        },
+        {
+          "line_key": "POP UP PARADE フランキー",
+          "missing_images": 1
+        }
+      ],
+      "recommended_next_action": "Run or improve a strict provider matcher, then import only title-verified detail-page images.",
+      "manual_confirmation_template": "server/source_discovery_confirmed_rows.template.json",
+      "confirmed_queue": "server/source_discovery_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "unblocks_when": "exact_product_source_url_confirmed",
+      "sample_row_indexes": [
+        1924,
+        1926,
+        1928,
+        1922,
+        1927,
+        1923,
+        1925
+      ],
+      "samples": [
+        {
+          "row_index": 1924,
+          "name_ko": "POP UP PARADE 니코 로빈",
+          "name_ja": "POP UP PARADE ニコ・ロビン",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3"
+        },
+        {
+          "row_index": 1926,
+          "name_ko": "POP UP PARADE 브룩",
+          "name_ja": "POP UP PARADE ブルック",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF"
+        },
+        {
+          "row_index": 1928,
+          "name_ko": "POP UP PARADE 사보",
+          "name_ja": "POP UP PARADE サボ",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%B5%E3%83%9C"
+        },
+        {
+          "row_index": 1922,
+          "name_ko": "POP UP PARADE 우솝",
+          "name_ja": "POP UP PARADE ウソップ",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1927,
+          "name_ko": "POP UP PARADE 징베",
+          "name_ja": "POP UP PARADE ジンベエ",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8"
+        },
+        {
+          "row_index": 1923,
+          "name_ko": "POP UP PARADE 토니토니 쵸파",
+          "name_ja": "POP UP PARADE トニートニー・チョッパー",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%88%E3%83%8B%E3%83%BC%E3%83%88%E3%83%8B%E3%83%BC%E3%83%BB%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC"
+        },
+        {
+          "row_index": 1925,
+          "name_ko": "POP UP PARADE 프랑키",
+          "name_ja": "POP UP PARADE フランキー",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC"
+        }
+      ],
+      "rank": 5
+    },
+    {
+      "workstream_id": "img-ws-061",
+      "batch_type": "official_provider_matcher",
+      "source_store": "굿스마일컴퍼니",
+      "affiliation": "하츠네 미쿠",
+      "category": "아크릴 스탠드",
+      "image_granularity": "individual_character_image_required",
+      "missing_images": 7,
+      "line_count": 6,
+      "top_lines": [
+        {
+          "line_key": "初音ミク アクリルスタンド",
+          "missing_images": 2
+        },
+        {
+          "line_key": "巡音ルカ アクリルスタンド",
+          "missing_images": 1
+        },
+        {
+          "line_key": "鏡音レン アクリルスタンド",
+          "missing_images": 1
+        },
+        {
+          "line_key": "鏡音リン アクリルスタンド",
+          "missing_images": 1
+        },
+        {
+          "line_key": "初音ミク ビッグアクリルスタンド",
+          "missing_images": 1
+        },
+        {
+          "line_key": "初音ミク スタンドミニ",
+          "missing_images": 1
+        }
+      ],
+      "recommended_next_action": "Run or improve a strict provider matcher, then import only title-verified detail-page images.",
+      "manual_confirmation_template": "server/source_discovery_confirmed_rows.template.json",
+      "confirmed_queue": "server/source_discovery_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "unblocks_when": "exact_product_source_url_confirmed",
+      "sample_row_indexes": [
+        1607,
+        1606,
+        1605,
+        1608,
+        1610,
+        1603,
+        1604
+      ],
+      "samples": [
+        {
+          "row_index": 1607,
+          "name_ko": "메구리네 루카 아크릴 스탠드",
+          "name_ja": "巡音ルカ アクリルスタンド",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%B7%A1%E9%9F%B3%E3%83%AB%E3%82%AB%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89"
+        },
+        {
+          "row_index": 1606,
+          "name_ko": "카가미네 렌 아크릴 스탠드 (매지컬 미라이)",
+          "name_ja": "鏡音レン アクリルスタンド (マジカルミライ)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E9%8F%A1%E9%9F%B3%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%B8%E3%82%AB%E3%83%AB%E3%83%9F%E3%83%A9%E3%82%A4%29"
+        },
+        {
+          "row_index": 1605,
+          "name_ko": "카가미네 린 아크릴 스탠드 (매지컬 미라이)",
+          "name_ja": "鏡音リン アクリルスタンド (マジカルミライ)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E9%8F%A1%E9%9F%B3%E3%83%AA%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%B8%E3%82%AB%E3%83%AB%E3%83%9F%E3%83%A9%E3%82%A4%29"
+        },
+        {
+          "row_index": 1608,
+          "name_ko": "하츠네 미쿠 빅 아크릴 스탠드 (눈 미쿠)",
+          "name_ja": "初音ミク ビッグアクリルスタンド (雪ミク)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E9%9B%AA%E3%83%9F%E3%82%AF%29"
+        },
+        {
+          "row_index": 1610,
+          "name_ko": "하츠네 미쿠 스탠드 미니 (하나미 시리즈)",
+          "name_ja": "初音ミク スタンドミニ (花見シリーズ)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E8%8A%B1%E8%A6%8B%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29"
+        },
+        {
+          "row_index": 1603,
+          "name_ko": "하츠네 미쿠 아크릴 스탠드 (매지컬 미라이 2024)",
+          "name_ja": "初音ミク アクリルスタンド (マジカルミライ 2024)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%B8%E3%82%AB%E3%83%AB%E3%83%9F%E3%83%A9%E3%82%A4%202024%29"
+        },
+        {
+          "row_index": 1604,
+          "name_ko": "하츠네 미쿠 아크릴 스탠드 (벚꽃 미쿠)",
+          "name_ja": "初音ミク アクリルスタンド (桜ミク)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E3%83%9F%E3%82%AF%29"
+        }
+      ],
+      "rank": 6
+    },
+    {
+      "workstream_id": "img-ws-225",
+      "batch_type": "official_provider_matcher",
+      "source_store": "엔스카이",
+      "affiliation": "헌터X헌터",
+      "category": "마스코트",
+      "image_granularity": "individual_character_image_required",
+      "missing_images": 7,
+      "line_count": 7,
+      "top_lines": [
+        {
+          "line_key": "おまんじゅうにぎにぎマスコット ゴン＝フリークス",
+          "missing_images": 1
+        },
+        {
+          "line_key": "おまんじゅうにぎにぎマスコット レオリオ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "おまんじゅうにぎにぎマスコット クラピカ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "おまんじゅうにぎにぎマスコット キルア＝ゾルディック",
+          "missing_images": 1
+        },
+        {
+          "line_key": "おまんじゅうにぎにぎマスコット ヒソカ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "たぴぬい ゴン＝フリークス",
+          "missing_images": 1
+        },
+        {
+          "line_key": "たぴぬい キルア＝ゾルディック",
+          "missing_images": 1
+        }
+      ],
+      "recommended_next_action": "Run or improve a strict provider matcher, then import only title-verified detail-page images.",
+      "manual_confirmation_template": "server/source_discovery_confirmed_rows.template.json",
+      "confirmed_queue": "server/source_discovery_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "unblocks_when": "exact_product_source_url_confirmed",
+      "sample_row_indexes": [
+        1328,
+        1331,
+        1330,
+        1329,
+        1332,
+        1339,
+        1340
+      ],
+      "samples": [
+        {
+          "row_index": 1328,
+          "name_ko": "오만쥬 니기니기 마스코트 곤 프릭스",
+          "name_ja": "おまんじゅうにぎにぎマスコット ゴン＝フリークス",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
+        },
+        {
+          "row_index": 1331,
+          "name_ko": "오만쥬 니기니기 마스코트 레오리오",
+          "name_ja": "おまんじゅうにぎにぎマスコット レオリオ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA"
+        },
+        {
+          "row_index": 1330,
+          "name_ko": "오만쥬 니기니기 마스코트 쿠라피카",
+          "name_ja": "おまんじゅうにぎにぎマスコット クラピカ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB"
+        },
+        {
+          "row_index": 1329,
+          "name_ko": "오만쥬 니기니기 마스코트 키루아 조르딕",
+          "name_ja": "おまんじゅうにぎにぎマスコット キルア＝ゾルディック",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        },
+        {
+          "row_index": 1332,
+          "name_ko": "오만쥬 니기니기 마스코트 히소카",
+          "name_ja": "おまんじゅうにぎにぎマスコット ヒソカ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%92%E3%82%BD%E3%82%AB"
+        },
+        {
+          "row_index": 1339,
+          "name_ko": "타피누이 곤 프릭스",
+          "name_ja": "たぴぬい ゴン＝フリークス",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
+        },
+        {
+          "row_index": 1340,
+          "name_ko": "타피누이 키루아 조르딕",
+          "name_ja": "たぴぬい キルア＝ゾルディック",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        }
+      ],
+      "rank": 7
+    },
+    {
+      "workstream_id": "img-ws-219",
+      "batch_type": "official_provider_matcher",
+      "source_store": "엔스카이",
+      "affiliation": "체인소 맨",
+      "category": "키링",
+      "image_granularity": "individual_character_image_required",
+      "missing_images": 6,
+      "line_count": 6,
+      "top_lines": [
+        {
+          "line_key": "デンジ ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "マキマ ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "チェンソーマン メタリックラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "岸辺 ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "パワー ラバーストラップ",
+          "missing_images": 1
+        },
+        {
+          "line_key": "ヒメノ ラバーストラップ",
+          "missing_images": 1
+        }
+      ],
+      "recommended_next_action": "Run or improve a strict provider matcher, then import only title-verified detail-page images.",
+      "manual_confirmation_template": "server/source_discovery_confirmed_rows.template.json",
+      "confirmed_queue": "server/source_discovery_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "unblocks_when": "exact_product_source_url_confirmed",
+      "sample_row_indexes": [
+        1594,
+        1597,
+        1600,
+        1602,
+        1595,
+        1599
+      ],
+      "samples": [
+        {
+          "row_index": 1594,
+          "name_ko": "덴지 러버 스트랩",
+          "name_ja": "デンジ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1597,
+          "name_ko": "마키마 러버 스트랩",
+          "name_ja": "マキマ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%9E%E3%82%AD%E3%83%9E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1600,
+          "name_ko": "체인소 맨 메탈릭 러버 스트랩 (덴지)",
+          "name_ja": "チェンソーマン メタリックラバーストラップ (デンジ)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%87%E3%83%B3%E3%82%B8%29"
+        },
+        {
+          "row_index": 1602,
+          "name_ko": "키시베 러버 스트랩",
+          "name_ja": "岸辺 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E5%B2%B8%E8%BE%BA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1595,
+          "name_ko": "파워 러버 스트랩",
+          "name_ja": "パワー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%91%E3%83%AF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "row_index": 1599,
+          "name_ko": "히메노 러버 스트랩",
+          "name_ja": "ヒメノ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%A1%E3%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        }
+      ],
+      "rank": 8
+    }
+  ],
+  "top_image_exact_url_work": [
+    {
+      "priority": 10,
+      "row_index": 1872,
+      "name_ko": "Chokonose 아냐 포저",
+      "name_ja": "ふわぷち アーニャ・フォージャー",
+      "affiliation": "SPY×FAMILY",
+      "category": "인형",
+      "character_name": "아냐 포저",
+      "sub_series": "후와푸치",
+      "source_store": "FuRyu",
+      "query": "ちょこのせプレミアム アーニャ・フォージャー",
+      "reason": "no_provider_candidates",
+      "candidate_count": 0,
+      "top_candidate_title": null,
+      "top_candidate_url": null,
+      "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E3%82%A2%E3%83%BC%E3%83%8B%E3%83%A3%E3%83%BB%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC",
+      "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E3%82%A2%E3%83%BC%E3%83%8B%E3%83%A3%E3%83%BB%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%20FuRyu%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "report": "server\\catalog_image_furyu_missing_current_dryrun.json",
+      "blocked_by_identity_review": false,
+      "recommended_next_action": "Find an exact official/detail URL outside the current provider search, then import as a confirmed candidate."
+    },
+    {
+      "priority": 10,
+      "row_index": 1257,
+      "name_ko": "누들 스토퍼 피규어 미도리야 이즈쿠",
+      "name_ja": "ぬーどるストッパーフィギュア 爆豪勝己",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "피규어",
+      "character_name": "바쿠고 카츠키",
+      "sub_series": "누들 스토퍼",
+      "source_store": "FuRyu",
+      "query": "ぬーどるストッパーフィギュア 緑谷出久",
+      "reason": "no_provider_candidates",
+      "candidate_count": 0,
+      "top_candidate_title": null,
+      "top_candidate_url": null,
+      "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+      "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20FuRyu%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "report": "server\\catalog_image_furyu_missing_current_dryrun.json",
+      "blocked_by_identity_review": false,
+      "recommended_next_action": "Find an exact official/detail URL outside the current provider search, then import as a confirmed candidate."
+    },
+    {
+      "priority": 10,
+      "row_index": 1258,
+      "name_ko": "누들 스토퍼 피규어 바쿠고 카츠키",
+      "name_ja": "ぬーどるストッパーフィギュア 轟焦凍",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "피규어",
+      "character_name": "토도로키 쇼토",
+      "sub_series": "누들 스토퍼",
+      "source_store": "FuRyu",
+      "query": "ぬーどるストッパーフィギュア 爆豪勝己",
+      "reason": "no_provider_candidates",
+      "candidate_count": 0,
+      "top_candidate_title": null,
+      "top_candidate_url": null,
+      "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+      "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20FuRyu%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "report": "server\\catalog_image_furyu_missing_current_dryrun.json",
+      "blocked_by_identity_review": false,
+      "recommended_next_action": "Find an exact official/detail URL outside the current provider search, then import as a confirmed candidate."
+    },
+    {
+      "priority": 10,
+      "row_index": 1260,
+      "name_ko": "누들 스토퍼 피규어 올마이트",
+      "name_ja": "ぬーどるストッパーフィギュア トガヒミコ",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "피규어",
+      "character_name": "토가 히미코",
+      "sub_series": "누들 스토퍼",
+      "source_store": "FuRyu",
+      "query": "ぬーどるストッパーフィギュア オールマイト",
+      "reason": "no_provider_candidates",
+      "candidate_count": 0,
+      "top_candidate_title": null,
+      "top_candidate_url": null,
+      "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88",
+      "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20FuRyu%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "report": "server\\catalog_image_furyu_missing_current_dryrun.json",
+      "blocked_by_identity_review": false,
+      "recommended_next_action": "Find an exact official/detail URL outside the current provider search, then import as a confirmed candidate."
+    },
+    {
+      "priority": 10,
+      "row_index": 1261,
+      "name_ko": "누들 스토퍼 피규어 토가 히미코",
+      "name_ja": "僕のヒーローアカデミア スイングフィギュア 緑谷出久",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "캡슐토이",
+      "character_name": "미도리야 이즈쿠",
+      "sub_series": "스윙 피규어",
+      "source_store": "FuRyu",
+      "query": "ぬーどるストッパーフィギュア トガヒミコ",
+      "reason": "no_provider_candidates",
+      "candidate_count": 0,
+      "top_candidate_title": null,
+      "top_candidate_url": null,
+      "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3",
+      "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3%20FuRyu%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "report": "server\\catalog_image_furyu_missing_current_dryrun.json",
+      "blocked_by_identity_review": false,
+      "recommended_next_action": "Find an exact official/detail URL outside the current provider search, then import as a confirmed candidate."
+    },
+    {
+      "priority": 10,
+      "row_index": 1259,
+      "name_ko": "누들 스토퍼 피규어 토도로키 쇼토",
+      "name_ja": "ぬーどるストッパーフィギュア オールマイト",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "피규어",
+      "character_name": "올마이트",
+      "sub_series": "누들 스토퍼",
+      "source_store": "FuRyu",
+      "query": "ぬーどるストッパーフィギュア 轟焦凍",
+      "reason": "no_provider_candidates",
+      "candidate_count": 0,
+      "top_candidate_title": null,
+      "top_candidate_url": null,
+      "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D",
+      "web_search_url": "https://www.google.com/search?q=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D%20FuRyu%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "report": "server\\catalog_image_furyu_missing_current_dryrun.json",
+      "blocked_by_identity_review": false,
+      "recommended_next_action": "Find an exact official/detail URL outside the current provider search, then import as a confirmed candidate."
+    },
+    {
+      "priority": 10,
+      "row_index": 1254,
+      "name_ko": "쵸코노세 프리미엄 피규어 미도리야 이즈쿠",
+      "name_ja": "ちょこのせプレミアムフィギュア 爆豪勝己",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "피규어",
+      "character_name": "바쿠고 카츠키",
+      "sub_series": "쵸코노세",
+      "source_store": "FuRyu",
+      "query": "ちょこのせプレミアムフィギュア 緑谷出久",
+      "reason": "no_provider_candidates",
+      "candidate_count": 0,
+      "top_candidate_title": null,
+      "top_candidate_url": null,
+      "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+      "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20FuRyu%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "report": "server\\catalog_image_furyu_missing_current_dryrun.json",
+      "blocked_by_identity_review": false,
+      "recommended_next_action": "Find an exact official/detail URL outside the current provider search, then import as a confirmed candidate."
+    },
+    {
+      "priority": 10,
+      "row_index": 1255,
+      "name_ko": "쵸코노세 프리미엄 피규어 바쿠고 카츠키",
+      "name_ja": "ちょこのせプレミアムフィギュア 轟焦凍",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "피규어",
+      "character_name": "토도로키 쇼토",
+      "sub_series": "쵸코노세",
+      "source_store": "FuRyu",
+      "query": "ちょこのせプレミアムフィギュア 爆豪勝己",
+      "reason": "no_provider_candidates",
+      "candidate_count": 0,
+      "top_candidate_title": null,
+      "top_candidate_url": null,
+      "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+      "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20FuRyu%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "report": "server\\catalog_image_furyu_missing_current_dryrun.json",
+      "blocked_by_identity_review": false,
+      "recommended_next_action": "Find an exact official/detail URL outside the current provider search, then import as a confirmed candidate."
+    }
+  ],
+  "top_ichiban_gap_workflows": [
+    [
+      "online_archive_url_research",
+      15
+    ],
+    [
+      "replacement_source_search",
+      6
+    ],
+    [
+      "documented_non_prize",
+      2
+    ],
+    [
+      "documented_duplicate",
+      1
+    ]
+  ],
+  "top_ichiban_replacement_statuses": [
+    [
+      "no_extractable_replacement",
+      13
+    ],
+    [
+      "covered_by_seeded_counterpart",
+      2
+    ]
+  ],
+  "top_ichiban_campaign_gap_classifications": [
+    [
+      "archive_shell_no_prize_lineup_detected",
+      6
+    ],
+    [
+      "duplicate_payload_already_seeded",
+      1
+    ],
+    [
+      "official_online_archive_404",
+      15
+    ]
+  ],
+  "sources": {
+    "goal": "server/catalog_goal_status_current.json",
+    "quality": "server/catalog_quality_report.json",
+    "field_batches": "server/catalog_field_review_batches.json",
+    "image_queue": "server/catalog_image_enrichment_queue_current.json",
+    "image_batch_plan": "server/catalog_image_enrichment_batch_plan.json",
+    "image_exact_url_queue": "server/catalog_image_exact_url_work_queue.json",
+    "image_path_source_review": "server/image_path_source_url_review_queue.json",
+    "image_auto_promotable": "server/auto_promotable_image_candidates_current.json",
+    "image_auto_promotable_strict_import": "server/auto_promotable_image_candidates_current_import_dryrun.json",
+    "image_exact_confirmed_import": "server/catalog_image_exact_url_confirmed.import.json",
+    "image_provider_recheck": "server/catalog_missing_images_report.json",
+    "web_image_search_candidates": "server/web_image_search_candidates_current.json",
+    "piapro_prize_image_candidates": "server/piapro_prize_image_candidates_current.json",
+    "agent_image_candidates": "server/agent_image_candidates_import_queue_current.json",
+    "agent_image_candidates_broad": "server/agent_image_candidates_import_queue_broad.json",
+    "image_existing_candidates": "server/catalog_image_existing_candidate_consolidated.json",
+    "image_existing_candidates_strict_import": "server/catalog_image_existing_candidate_consolidated_strict_current_dryrun.json",
+    "remaining_image_audit": "server/catalog_remaining_image_enrichment_audit_current.json",
+    "source_discovery": "server/catalog_source_discovery_queue.json",
+    "source_url_bottlenecks": "server/catalog_source_url_bottleneck_audit.json",
+    "source_detail_candidates": "server/catalog_source_detail_candidates.json",
+    "source_detail_candidate_summary": "server/catalog_source_detail_candidate_summary.json",
+    "image_batches": "server/catalog_image_review_batches.json",
+    "unapplied_image_changes": "server/catalog_unapplied_image_report_changes.json",
+    "image_provider": "server/catalog_image_provider_coverage_audit_current.json",
+    "chiikawa_gotouchi_api": "server/chiikawa_gotouchi_api_coverage_audit.json",
+    "taito_brand_candidates": "server/taito_brand_image_candidates_current.json",
+    "storefront_match_review": "server/storefront_match_review_queue.json",
+    "storefront_batches": "server/storefront_review_batches.json",
+    "fanding_stellive": "server/fanding_stellive_match_queue.json",
+    "official_batches": "server/official_detail_review_batches.json",
+    "official_detail_animate_merged": "server/official_detail_match_queue_animate_after_query_fix_merged_summary.json",
+    "official_detail_ensky_merged": "server/official_detail_match_queue_ensky_merged_current.json",
+    "ichiban_gap": "server/ichiban_kuji_gap_work_queue.json",
+    "ichiban_replacement_urls": "server/ichiban_replacement_url_queue.json",
+    "ichiban_sub_series_batches": "server/ichiban_kuji_sub_series_review_batches.json",
+    "ichiban_structure": "server/ichiban_kuji_prize_structure_audit.json",
+    "ichiban_campaign_gap_audit": "server/ichiban_kuji_campaign_gap_audit.json",
+    "ichiban_metadata": "server/ichiban_kuji_metadata_audit.json",
+    "ichiban_metadata_review": "server/ichiban_kuji_metadata_review_queue.json",
+    "ichiban_history_status": "server/ichiban_kuji_history_status_audit.json",
+    "animation_categories": "server/animation_goods_category_audit.json",
+    "animation_enrichment_priority": "server/animation_enrichment_priority_queue.json",
+    "app_folder_visuals": "server/app_folder_visual_catalog_audit.json",
+    "confirmed_import": "server/catalog_confirmed_import_queue_audit.json",
+    "confirmed_archive": "server/catalog_confirmed_archive_report.json",
+    "requested_special_goods": "server/requested_special_goods_queue.json",
+    "report_consistency": "server/catalog_report_consistency_audit.json",
+    "db_sync": "server/catalog_db_sync_audit.json",
+    "store_source_netloc": "server/store_source_netloc_audit.json",
+    "live_source_identity": "server/live_source_identity_audit.json",
+    "stale_source_cleanup": "server/stale_source_cleanup_queue.json",
+    "product_identity_review": "server/product_identity_review_queue.json",
+    "generic_source_cleanup": "server/generic_source_cleanup_queue.json",
+    "prize_source_store_lines": "server/prize_source_store_line_audit.json",
+    "prize_line_expected_provider": "server/prize_line_expected_provider_queue_current.json",
+    "prize_line_official_detail": "server/prize_line_official_detail_match_queue_current.json",
+    "prize_provider_fallback_images": "server/prize_provider_fallback_image_candidates_current.json",
+    "focus_missing_images": "server/focus_missing_image_queue_current.json",
+    "focus_series_missing_images": "server/focus_series_missing_image_work_queues_current.json",
+    "pokemon_center_official": "server/pokemon_center_official_latest_dryrun.json",
+    "public_image_actionability": "data/catalog_missing_image_actionability_public.json",
+    "public_source_focus_packs": "data/source_discovery_focus_packs_public.json",
+    "public_source_focus_template": "data/source_discovery_focus_confirmed_template_public.json",
+    "public_source_focus_template_import": "data/source_discovery_focus_template_import_dry_run_public.json"
+  }
+}

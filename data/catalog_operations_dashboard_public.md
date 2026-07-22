@@ -1,0 +1,69 @@
+﻿# Catalog Operations Dashboard
+
+- Rows: `18040`
+- Duplicate groups: `0`
+- Missing enrichment: `{"image_url": 724, "source_url": 777, "release_date": 1434, "barcode": 7747, "official_price_jpy": 579}`
+- Store/source mismatches: `0`
+
+## Workboards
+- `Field backfill`: 4586 actionable rows, 919 batches -> `server/catalog_field_review_batches.html`
+- `Image enrichment`: 724 missing images, 674 source discovery rows -> `server/catalog_image_exact_url_work_queue.html`
+  - Secondary: `server/catalog_image_enrichment_batch_plan.md`
+- `Public image recovery`: 720 public DB rows missing images, 427 focus-pack source rows -> `data/catalog_missing_image_actionability_public.json`
+  - Secondary: `data/source_discovery_focus_confirmed_template_public.json`
+- `Image path source review`: 82 review items, 82 rejected source candidates -> `server/image_path_source_url_review_queue.html`
+- `Source URL bottlenecks`: 747 missing source_url, 673 missing image+source -> `server/catalog_source_url_bottleneck_audit.md`
+- `Web image search candidates`: 0 web candidates, 0 safe consolidated candidates -> `server/web_image_search_candidates.json`
+  - Secondary: `server/catalog_image_existing_candidate_consolidated.json`
+- `Piapro prize candidates`: 0 exact official candidates, 90 Piapro prize items -> `server/piapro_prize_image_candidates_current.json`
+- `Prize line provider candidates`: 20 official detail candidates, 12 source-store mismatch rows -> `server/prize_line_official_detail_match_queue_current.html`
+  - Secondary: `server/prize_line_expected_provider_queue_current.json`
+- `Prize provider fallback images`: 21 review-only fallback candidates, 36 searched rows -> `server/prize_provider_fallback_image_candidates_current.html`
+  - Secondary: `server/prize_provider_fallback_image_candidates_current.json`
+- `Agent image candidate imports`: 0 ready import items, 3279 rejected items -> `server/agent_image_candidates_import_queue_current.html`
+  - Secondary: `server/agent_image_candidates_import_queue_current.json`
+- `Broad image candidate imports`: 0 ready import items, 3279 rejected items -> `server/agent_image_candidates_import_queue_broad.html`
+  - Secondary: `server/agent_image_candidates_import_queue_broad.json`
+- `Storefront candidates`: 0 seed rows, 0 candidate rows -> `server/storefront_review_batches.html`
+  - Secondary: `server/storefront_match_review.html`
+- `Stellive Fanding candidates`: 94 candidate rows, 4 weak review candidates -> `server/fanding_stellive_match_queue.json`
+- `Pokemon Center candidates`: 3 review rows, 0 auto updates -> `server/pokemon_center_official_latest_dryrun.json`
+- `Official detail candidates`: 3 seed rows, 3 candidate rows -> `server/official_detail_review_batches.html`
+- `Official detail provider sweeps`: 299 processed seed rows, 3 reviewable rows -> `server/official_detail_match_queue_animate_after_query_fix_merged_summary.md`
+- `Taito brand API candidates`: 14 brand API target rows, 0 exact matches -> `server/taito_brand_image_candidates_current.json`
+- `Chiikawa gotouchi API coverage`: 26 missing gotouchi rows, 0 official pair available -> `server/chiikawa_gotouchi_api_coverage_audit.json`
+- `Ichiban Kuji gaps`: 24 gap items, 0 extractable replacement candidates -> `server/ichiban_kuji_gap_work_queue.html`
+  - Secondary: `server/ichiban_replacement_url_queue.md`
+- `Ichiban Kuji campaign audit`: 22 campaign gaps, 44 metadata pages -> `server/ichiban_kuji_campaign_gap_audit.md`
+  - Secondary: `server/ichiban_kuji_prize_structure_audit.json`
+- `Ichiban Kuji history status`: 614 campaigns, 24 documented terminal gaps -> `server/ichiban_kuji_history_status_audit.md`
+- `Animation categories`: 1419 rows, 0 unknown categories -> `server/animation_goods_category_audit.md`
+  - Secondary: `server/animation_enrichment_priority_queue.html`
+- `App folder visuals`: 211 folder icons, 188 folder colors -> `server/app_folder_visual_catalog_audit.md`
+- `Confirmed queues`: 0 confirmed pending, 46 archived done -> `server/catalog_confirmed_import_queue_audit.md`
+- `Store/source integrity`: 0 mismatches, 38 cleanup rows -> `server/stale_source_cleanup_queue.html`
+  - Secondary: `server/store_source_netloc_audit.md`
+- `Generic source cleanup`: 55 generic source rows, 3 generic URLs -> `server/generic_source_cleanup_queue.html`
+- `Prize source-store line audit`: 24 source-store mismatches, 12 missing-image mismatches -> `server/prize_source_store_line_audit.html`
+- `Product identity review`: 13 blocked rows, 0 skipped rows -> `server/product_identity_review_queue.html`
+- `Report consistency`: 0 mismatches, 125 checks -> `server/catalog_report_consistency_audit.json`
+- `DB sync`: 0 DBs with sync issues, 18040 seed rows -> `server/catalog_db_sync_audit.md`
+  - Secondary: `server/catalog_db_sync_audit.json`
+- `Requested special goods`: 27 already present, 0 missing requests -> `server/requested_special_goods_review.html`
+- `Focus missing images`: 349 focus rows missing images, 329 focus rows missing source -> `server/focus_missing_image_queue_current.html`
+  - Secondary: `server/focus_missing_image_queue_current.json`
+- `Focus series image work`: 147 series rows missing images, 102 series rows missing source -> `server/focus_series_missing_image_work_queues_current.csv`
+  - Secondary: `server/focus_series_missing_image_work_queues_current.json`
+
+## Next Actions
+- P20 `official detail images`: Open server/official_detail_review_batches.html first, confirm exact official detail candidates, then run tools/import_confirmed_official_detail_matches.py --write. (3 reviewable seed rows; raw queue has 0 strong, 0 needs title review)
+- P35 `Ichiban Kuji campaign gaps`: Open server/ichiban_kuji_campaign_gap_audit.md and keep archive/404 campaigns out of auto-merge unless a replacement official URL or prize-lineup evidence is found. (22 campaign gaps; archive_shell_no_prize_lineup_detected: 6, duplicate_payload_already_seeded: 1, official_online_archive_404: 15)
+- P36 `Ichiban Kuji metadata`: Keep missing old-campaign release dates/prices blank until exact official labels are found; current audit found no safe auto-fill candidates. (16 release-date gaps, 365 price gaps, 0 safe URL candidates)
+- P40 `barcodes`: Open server/catalog_field_enrichment_review.html, copy confirmed field JSON rows, then run tools/import_confirmed_catalog_field_rows.py --write. (7747 missing barcodes; 1217 actionable; 6248 kuji rows without public JAN expectation)
+- P41 `field review batches`: Open server/catalog_field_review_batches.html to process missing source/image/date/price/barcode batches by store and field. (4586 actionable rows, 919 batches; top workflow manual_source_discovery: 394)
+- P42 `animation goods exact sources`: Open server/animation_enrichment_priority_queue.html and process top category/store groups before image attachment. (633 animation rows need source/image work; top group 피규어 / 코토부키야: 45 rows)
+- P43 `prize image fallback review`: Open server/prize_provider_fallback_image_candidates_current.html and manually confirm whether the official fallback candidate is the same product line before importing any image URL. (21 review-only fallback candidates from FuRyu, Taito)
+- P44 `focus missing image queue`: Open server/focus_missing_image_queue_current.html and process requested series/collab rows by exact source page before image attachment. (349 focus rows missing images; top focus 단간론파: 34)
+- P45 `confirmed queue: catalog_field`: Copy the template to the confirmed_rows JSON, mark exact rows manual_confirmed=true, dry-run first, then run: python tools/import_confirmed_catalog_field_rows.py --queue server/catalog_field_confirmed_rows.json --report server/catalog_field_confirmed_import_report.json --write (status template_ready_no_confirmed_file; confirmed 0; template 500)
+- P45 `confirmed queue: focus_image`: Copy the template to the confirmed_rows JSON, mark exact rows manual_confirmed=true, dry-run first, then run: python tools/import_manual_image_candidates.py --candidates server/focus_image_confirmed_rows.json --report server/focus_image_confirmed_import_report.json --require-manual-confirmed --trust-manual-confirmed-title --write (status template_ready_no_confirmed_file; confirmed 0; template 349)
+- P47 `external evidence sources`: Review server/store_source_netloc_audit.md and replace external evidence URLs only when exact maker/store URLs become available. (54 rows intentionally rely on retailer/anime/news evidence)

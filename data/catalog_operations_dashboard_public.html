@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deokive Catalog Operations</title>
+<style>
+body { margin: 0; font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f6f7f9; color: #16181d; }
+header { padding: 24px; background: #fff; border-bottom: 1px solid #dde2ea; }
+main { max-width: 1180px; margin: auto; padding: 22px; }
+h1 { margin: 0 0 8px; font-size: 24px; }
+h2 { margin: 28px 0 12px; font-size: 18px; }
+.summary, .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+article, table { background: #fff; border: 1px solid #dfe3ea; border-radius: 10px; box-shadow: 0 4px 18px rgba(20,28,40,.05); }
+article { padding: 14px; }
+article span, small { display: block; color: #667085; }
+article strong { display: block; font-size: 26px; margin: 4px 0; }
+article p { min-height: 44px; color: #303744; }
+table { width: 100%; border-collapse: collapse; overflow: hidden; }
+th, td { padding: 10px 12px; border-bottom: 1px solid #edf0f4; vertical-align: top; text-align: left; }
+th { background: #f9fafb; }
+a { color: #0b57d0; font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Deokive Catalog Operations</h1>
+  <div>DB cleanup, enrichment, images, categories, and Ichiban Kuji workboards.</div>
+</header>
+<main>
+  <section class="summary">
+    <article><span>Rows</span><strong>18040</strong></article>
+    <article><span>Duplicate groups</span><strong>0</strong></article>
+    <article><span>Missing images</span><strong>724</strong></article>
+    <article><span>Missing barcodes</span><strong>7747</strong></article>
+    <article><span>Field actionable</span><strong>4586</strong></article>
+    <article><span>Confirmed pending</span><strong>0</strong></article>
+    <article><span>Store/source mismatches</span><strong>0</strong></article>
+  </section>
+  <h2>Workboards</h2>
+  <section class="grid">
+        <article>
+          <span>Field backfill</span>
+          <strong>4586</strong>
+          <small>actionable rows · ready_for_review</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Review by store/category/field; copy exact values into catalog_field_confirmed_rows.json.</p>
+          <a href="server/catalog_field_review_batches.html">Open</a>
+        </article>
+
+        <article>
+          <span>Image enrichment</span>
+          <strong>724</strong>
+          <small>missing images · provider_work_needed</small>
+          <small>297 exact/detail candidate rows</small>
+          <small>294 exact URL research rows</small>
+          <small>3 identity-blocked rows</small>
+          <p>Find exact source URLs for no-source rows first; then attach images only from exact product pages.</p>
+          <a href="server/catalog_image_exact_url_work_queue.html">Open</a>
+        </article>
+
+        <article>
+          <span>Public image recovery</span>
+          <strong>720</strong>
+          <small>public DB rows missing images · manual_source_confirmation_needed</small>
+          <small>75 image action queue rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Confirm exact source URLs in the focus template first; imports stay dry-run until manual confirmation is present.</p>
+          <a href="data/catalog_missing_image_actionability_public.json">Open</a>
+        </article>
+
+        <article>
+          <span>Image path source review</span>
+          <strong>82</strong>
+          <small>review items · review_needed</small>
+          <small> auto-updated rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Review image-derived detail URLs that were rejected by title/HTTP checks; import only exact product pages.</p>
+          <a href="server/image_path_source_url_review_queue.html">Open</a>
+        </article>
+
+        <article>
+          <span>Source URL bottlenecks</span>
+          <strong>747</strong>
+          <small>missing source_url · source_research_needed</small>
+          <small> automation-ready source candidates</small>
+          <small> </small>
+          <small> </small>
+          <p>Resolve exact product/detail source_url first; image import remains blocked while source_url is blank, generic, stale, or identity-uncertain.</p>
+          <a href="server/catalog_source_url_bottleneck_audit.md">Open</a>
+        </article>
+
+        <article>
+          <span>Web image search candidates</span>
+          <strong>0</strong>
+          <small>web candidates · search_retry_needed</small>
+          <small>12 rejected rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Run web image search in small store/index batches; only import candidates that survive consolidation safety guards.</p>
+          <a href="server/web_image_search_candidates.json">Open</a>
+        </article>
+
+        <article>
+          <span>Piapro prize candidates</span>
+          <strong>0</strong>
+          <small>exact official candidates · exact_matches_empty</small>
+          <small> blocked rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Use exact title + maker matches only; keep contained/generic title matches out of automatic imports.</p>
+          <a href="server/piapro_prize_image_candidates_current.json">Open</a>
+        </article>
+
+        <article>
+          <span>Prize line provider candidates</span>
+          <strong>20</strong>
+          <small>official detail candidates · manual_confirmation_needed</small>
+          <small>10 weak/ambiguous rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Review weak/ambiguous prize-line candidates before changing source_store or importing image URLs.</p>
+          <a href="server/prize_line_official_detail_match_queue_current.html">Open</a>
+        </article>
+
+        <article>
+          <span>Prize provider fallback images</span>
+          <strong>21</strong>
+          <small>review-only fallback candidates · manual_confirmation_needed</small>
+          <small>27 unresolved rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Compare current DB line/title with the official fallback title before importing any image URL; broad character hits can be a different prize line.</p>
+          <a href="server/prize_provider_fallback_image_candidates_current.html">Open</a>
+        </article>
+
+        <article>
+          <span>Agent image candidate imports</span>
+          <strong>0</strong>
+          <small>ready import items · reviewed_no_safe_imports</small>
+          <small>24 preflight-passed items</small>
+          <small> </small>
+          <small> </small>
+          <p>Use this queue after agent/manual research; import only ready items and leave rejected source/store/title conflicts in review.</p>
+          <a href="server/agent_image_candidates_import_queue_current.html">Open</a>
+        </article>
+
+        <article>
+          <span>Broad image candidate imports</span>
+          <strong>0</strong>
+          <small>ready import items · reviewed_no_safe_imports</small>
+          <small>24 preflight-passed items</small>
+          <small> </small>
+          <small> </small>
+          <p>Re-scan historical image candidate files against the current seed; import only ready items that still pass identity and safety checks.</p>
+          <a href="server/agent_image_candidates_import_queue_broad.html">Open</a>
+        </article>
+
+        <article>
+          <span>Storefront candidates</span>
+          <strong>0</strong>
+          <small>seed rows · empty</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Resolve ambiguous storefront/Fanding product rows before importing exact source/image/release fields.</p>
+          <a href="server/storefront_review_batches.html">Open</a>
+        </article>
+
+        <article>
+          <span>Stellive Fanding candidates</span>
+          <strong>94</strong>
+          <small>candidate rows · manual_confirmation_needed</small>
+          <small> strong review candidates</small>
+          <small> </small>
+          <small> </small>
+          <p>Review Fanding candidates manually; current fuzzy matches are not safe for automatic image/source import.</p>
+          <a href="server/fanding_stellive_match_queue.json">Open</a>
+        </article>
+
+        <article>
+          <span>Pokemon Center candidates</span>
+          <strong>3</strong>
+          <small>review rows · manual_confirmation_needed</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Review Pokemon Center homepage rows; import only exact product pages because common terms produce multiple plausible products.</p>
+          <a href="server/pokemon_center_official_latest_dryrun.json">Open</a>
+        </article>
+
+        <article>
+          <span>Official detail candidates</span>
+          <strong>3</strong>
+          <small>seed rows · manual_confirmation_needed</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Confirm title/detail identity before writing official source/image fields.</p>
+          <a href="server/official_detail_review_batches.html">Open</a>
+        </article>
+
+        <article>
+          <span>Official detail provider sweeps</span>
+          <strong>299</strong>
+          <small>processed seed rows · manual_confirmation_needed</small>
+          <small>685 candidate rows scanned</small>
+          <small> </small>
+          <small> </small>
+          <p>Confirm broad Animate representative rows first; Ensky has no safe official detail imports in the completed sweep.</p>
+          <a href="server/official_detail_match_queue_animate_after_query_fix_merged_summary.md">Open</a>
+        </article>
+
+        <article>
+          <span>Taito brand API candidates</span>
+          <strong>14</strong>
+          <small>brand API target rows · manual_review_needed</small>
+          <small>181 Desktop Cute API rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Use official Taito brand API results as evidence; import only single exact character/title matches.</p>
+          <a href="server/taito_brand_image_candidates_current.json">Open</a>
+        </article>
+
+        <article>
+          <span>Chiikawa gotouchi API coverage</span>
+          <strong>26</strong>
+          <small>missing gotouchi rows · official_api_gap</small>
+          <small>270 official API images</small>
+          <small> </small>
+          <small> </small>
+          <p>Use this audit before searching gotouchi rows; most stale themes need external official evidence rather than JP-API auto-fill.</p>
+          <a href="server/chiikawa_gotouchi_api_coverage_audit.json">Open</a>
+        </article>
+
+        <article>
+          <span>Ichiban Kuji gaps</span>
+          <strong>24</strong>
+          <small>gap items · archive_gaps_documented</small>
+          <small>2 seeded counterparts</small>
+          <small> </small>
+          <small> </small>
+          <p>Review server/ichiban_replacement_url_queue.md first; import only official candidates that extract prize rows and match the missing campaign.</p>
+          <a href="server/ichiban_kuji_gap_work_queue.html">Open</a>
+        </article>
+
+        <article>
+          <span>Ichiban Kuji campaign audit</span>
+          <strong>22</strong>
+          <small>campaign gaps · campaign_research_needed</small>
+          <small>22 campaigns without seed rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Keep archive/404/no-lineup campaigns documented; only add rows or metadata when exact official prize-lineup evidence is found.</p>
+          <a href="server/ichiban_kuji_campaign_gap_audit.md">Open</a>
+        </article>
+
+        <article>
+          <span>Ichiban Kuji history status</span>
+          <strong>614</strong>
+          <small>campaigns · metadata_evidence_blocked</small>
+          <small>5545 prize rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Keep documented terminal campaign gaps archived; import metadata only when labeled official release or yen-price evidence is safe.</p>
+          <a href="server/ichiban_kuji_history_status_audit.md">Open</a>
+        </article>
+
+        <article>
+          <span>Animation categories</span>
+          <strong>1419</strong>
+          <small>rows · covered</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Keep taxonomy normalized; review missing images/source by category.</p>
+          <a href="server/animation_goods_category_audit.md">Open</a>
+        </article>
+
+        <article>
+          <span>App folder visuals</span>
+          <strong>211</strong>
+          <small>folder icons · covered</small>
+          <small>8 palette sections</small>
+          <small> </small>
+          <small> </small>
+          <p>Keep folder colors grouped by palette sections and ensure animation category visual hints exist in the app icon/color catalogs.</p>
+          <a href="server/app_folder_visual_catalog_audit.md">Open</a>
+        </article>
+
+        <article>
+          <span>Confirmed queues</span>
+          <strong>0</strong>
+          <small>confirmed pending · clean</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Import only confirmed rows; completed duplicates are kept in archive files.</p>
+          <a href="server/catalog_confirmed_import_queue_audit.md">Open</a>
+        </article>
+
+        <article>
+          <span>Store/source integrity</span>
+          <strong>0</strong>
+          <small>mismatches · live_source_review_needed</small>
+          <small>54 external evidence rows</small>
+          <small> </small>
+          <small> </small>
+          <p>Review stale source cleanup rows before propagating images; old product IDs can point to unrelated current products.</p>
+          <a href="server/stale_source_cleanup_queue.html">Open</a>
+        </article>
+
+        <article>
+          <span>Generic source cleanup</span>
+          <strong>55</strong>
+          <small>generic source rows · exact_source_needed</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Replace homepage/storefront URLs with exact product detail pages before image import.</p>
+          <a href="server/generic_source_cleanup_queue.html">Open</a>
+        </article>
+
+        <article>
+          <span>Prize source-store line audit</span>
+          <strong>24</strong>
+          <small>source-store mismatches · provider_routing_review_needed</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Review prize line rows before provider image runs; wrong source_store sends search to the wrong official provider.</p>
+          <a href="server/prize_source_store_line_audit.html">Open</a>
+        </article>
+
+        <article>
+          <span>Product identity review</span>
+          <strong>13</strong>
+          <small>blocked rows · identity_review_needed</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Verify or rename these rows before source/image import; exact official evidence is required.</p>
+          <a href="server/product_identity_review_queue.html">Open</a>
+        </article>
+
+        <article>
+          <span>Report consistency</span>
+          <strong>0</strong>
+          <small>mismatches · clean</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Regenerate quality, field, image, and review-batch reports before making catalog decisions.</p>
+          <a href="server/catalog_report_consistency_audit.json">Open</a>
+        </article>
+
+        <article>
+          <span>DB sync</span>
+          <strong>0</strong>
+          <small>DBs with sync issues · clean</small>
+          <small> </small>
+          <small> </small>
+          <small> </small>
+          <p>Run sync_catalog_db_active.py and dedupe_catalog_db.py when stale, missing, updated, or duplicate active DB rows appear.</p>
+          <a href="server/catalog_db_sync_audit.md">Open</a>
+        </article>
+
+        <article>
+          <span>Requested special goods</span>
+          <strong>27</strong>
+          <small>already present · covered</small>
+          <small>26 with candidate image</small>
+          <small> </small>
+          <small> </small>
+          <p>Keep this queue as the requested-list coverage gate before adding duplicate special goods.</p>
+          <a href="server/requested_special_goods_review.html">Open</a>
+        </article>
+
+        <article>
+          <span>Focus missing images</span>
+          <strong>349</strong>
+          <small>focus rows missing images · source_research_needed</small>
+          <small>304 missing both image/source</small>
+          <small> </small>
+          <small> </small>
+          <p>Use the focus queue for requested series and collab goods; find exact source pages before attaching images.</p>
+          <a href="server/focus_missing_image_queue_current.html">Open</a>
+        </article>
+
+        <article>
+          <span>Focus series image work</span>
+          <strong>147</strong>
+          <small>series rows missing images · source_research_needed</small>
+          <small> auto-write ready</small>
+          <small> </small>
+          <small> </small>
+          <p>Use this narrowed queue for HUNTER, Stellive, Chiikawa MINISO/Gotouchi/Ensky, Bukubu, and Tapinui exact-source review.</p>
+          <a href="server/focus_series_missing_image_work_queues_current.csv">Open</a>
+        </article></section>
+  <h2>Next Actions</h2>
+  <table><thead><tr><th>Priority</th><th>Area</th><th>Action</th><th>Evidence</th></tr></thead><tbody><tr><td>P20</td><td>official detail images</td><td>Open server/official_detail_review_batches.html first, confirm exact official detail candidates, then run tools/import_confirmed_official_detail_matches.py --write.</td><td>3 reviewable seed rows; raw queue has 0 strong, 0 needs title review</td></tr>
+<tr><td>P35</td><td>Ichiban Kuji campaign gaps</td><td>Open server/ichiban_kuji_campaign_gap_audit.md and keep archive/404 campaigns out of auto-merge unless a replacement official URL or prize-lineup evidence is found.</td><td>22 campaign gaps; archive_shell_no_prize_lineup_detected: 6, duplicate_payload_already_seeded: 1, official_online_archive_404: 15</td></tr>
+<tr><td>P36</td><td>Ichiban Kuji metadata</td><td>Keep missing old-campaign release dates/prices blank until exact official labels are found; current audit found no safe auto-fill candidates.</td><td>16 release-date gaps, 365 price gaps, 0 safe URL candidates</td></tr>
+<tr><td>P40</td><td>barcodes</td><td>Open server/catalog_field_enrichment_review.html, copy confirmed field JSON rows, then run tools/import_confirmed_catalog_field_rows.py --write.</td><td>7747 missing barcodes; 1217 actionable; 6248 kuji rows without public JAN expectation</td></tr>
+<tr><td>P41</td><td>field review batches</td><td>Open server/catalog_field_review_batches.html to process missing source/image/date/price/barcode batches by store and field.</td><td>4586 actionable rows, 919 batches; top workflow manual_source_discovery: 394</td></tr>
+<tr><td>P42</td><td>animation goods exact sources</td><td>Open server/animation_enrichment_priority_queue.html and process top category/store groups before image attachment.</td><td>633 animation rows need source/image work; top group 피규어 / 코토부키야: 45 rows</td></tr>
+<tr><td>P43</td><td>prize image fallback review</td><td>Open server/prize_provider_fallback_image_candidates_current.html and manually confirm whether the official fallback candidate is the same product line before importing any image URL.</td><td>21 review-only fallback candidates from FuRyu, Taito</td></tr>
+<tr><td>P44</td><td>focus missing image queue</td><td>Open server/focus_missing_image_queue_current.html and process requested series/collab rows by exact source page before image attachment.</td><td>349 focus rows missing images; top focus 단간론파: 34</td></tr>
+<tr><td>P45</td><td>confirmed queue: catalog_field</td><td>Copy the template to the confirmed_rows JSON, mark exact rows manual_confirmed=true, dry-run first, then run: python tools/import_confirmed_catalog_field_rows.py --queue server/catalog_field_confirmed_rows.json --report server/catalog_field_confirmed_import_report.json --write</td><td>status template_ready_no_confirmed_file; confirmed 0; template 500</td></tr>
+<tr><td>P45</td><td>confirmed queue: focus_image</td><td>Copy the template to the confirmed_rows JSON, mark exact rows manual_confirmed=true, dry-run first, then run: python tools/import_manual_image_candidates.py --candidates server/focus_image_confirmed_rows.json --report server/focus_image_confirmed_import_report.json --require-manual-confirmed --trust-manual-confirmed-title --write</td><td>status template_ready_no_confirmed_file; confirmed 0; template 349</td></tr>
+<tr><td>P47</td><td>external evidence sources</td><td>Review server/store_source_netloc_audit.md and replace external evidence URLs only when exact maker/store URLs become available.</td><td>54 rows intentionally rely on retailer/anime/news evidence</td></tr></tbody></table>
+</main>
+</body>
+</html>
