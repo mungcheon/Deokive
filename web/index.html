@@ -65,9 +65,7 @@
       place-items: center;
       padding: 28px;
       box-sizing: border-box;
-      background:
-        radial-gradient(circle at 50% 14%, rgba(247, 201, 217, 0.42), transparent 34%),
-        linear-gradient(180deg, #fffafd 0%, #fff 64%);
+      background: #fffafd;
       color: var(--deokive-ink);
     }
 
@@ -148,6 +146,19 @@
       line-height: 1.55;
     }
 
+    .app-loading__eta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: #1d1b20;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     @keyframes deokive-loading {
       0% { transform: translateX(-115%); }
       50% { transform: translateX(82%); }
@@ -159,11 +170,12 @@
   <div class="app-loading" id="app-loading" role="status" aria-live="polite">
     <section class="app-loading__phone" aria-label="Deokive loading">
       <div class="app-loading__logo">D</div>
-      <h1>덕카이브 업데이트 중</h1>
+      <h1>지금 수정 중이에요</h1>
       <p>
-        굿즈 데이터와 이미지를 새로 정리하고 있어요.<br>
-        보통 3분에서 10분 안에 다시 열립니다.
+        굿즈 DB와 이미지를 정리해서 다시 올리는 중이에요.<br>
+        흰 화면 대신 이 안내가 보이면 정상적으로 배포 대기 중입니다.
       </p>
+      <div class="app-loading__eta">예상 업데이트 시간 5-15분</div>
       <div class="app-loading__bar" aria-hidden="true"></div>
       <div class="app-loading__note" id="app-loading-note">
         화면이 오래 멈춰 있으면 새로고침하거나 잠시 뒤 다시 접속해 주세요.
@@ -179,8 +191,14 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
-  <script src="flutter_bootstrap.js" async></script>
+  <script src="flutter_bootstrap.js" async onerror="window.deokiveLoadingFailed && window.deokiveLoadingFailed()"></script>
   <script>
+    window.deokiveLoadingFailed = function () {
+      const note = document.getElementById('app-loading-note');
+      if (!note) return;
+      note.textContent = '앱 파일을 불러오지 못했어요. 배포가 끝난 뒤 새로고침하면 다시 열립니다.';
+    };
+
     window.addEventListener('flutter-first-frame', function () {
       const loading = document.getElementById('app-loading');
       if (loading) loading.remove();
@@ -189,7 +207,7 @@
     window.setTimeout(function () {
       const note = document.getElementById('app-loading-note');
       if (!note) return;
-      note.textContent = '업데이트가 길어지고 있어요. 캐시 정리 중일 수 있으니 1분 뒤 새로고침해 주세요.';
+      note.textContent = '업데이트가 길어지고 있어요. GitHub Pages 캐시 반영 중일 수 있으니 1분 뒤 새로고침해 주세요.';
     }, 45000);
 
     window.addEventListener('load', async function () {
