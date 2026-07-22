@@ -46,6 +46,16 @@ def _confirmed(value: Any) -> bool:
     return str(value or "").strip().lower() in {"1", "true", "yes", "y", "confirmed", "확인", "확정"}
 
 
+def _item_confirmed(item: dict[str, Any]) -> bool:
+    if _confirmed(item.get("manual_confirmed")):
+        return True
+    return str(item.get("manual_review_status") or "").strip().lower() in {
+        "source_confirmed",
+        "source_and_image_confirmed",
+        "confirmed",
+    }
+
+
 def _http_url(value: Any) -> str | None:
     url = str(value or "").strip()
     if url.startswith("//"):
@@ -102,6 +112,24 @@ def _iter_items(raw_queue: Any) -> list[dict[str, Any]]:
     if isinstance(raw_queue, dict):
         if isinstance(raw_queue.get("items"), list):
             return [item for item in raw_queue["items"] if isinstance(item, dict)]
+        if isinstance(raw_queue.get("packs"), list):
+            items: list[dict[str, Any]] = []
+            for pack in raw_queue["packs"]:
+                if not isinstance(pack, dict):
+                    continue
+                for item in pack.get("items") or []:
+                    if not isinstance(item, dict):
+                        continue
+                    merged = dict(item)
+                    merged.setdefault("focus_pack_id", pack.get("focus_pack_id"))
+                    merged.setdefault("source_store", pack.get("source_store"))
+                    if isinstance(pack.get("allowed_source_domains"), list) and not merged.get("allowed_source_domains"):
+                        merged["allowed_source_domains"] = [
+                            domain.get("domain") if isinstance(domain, dict) else domain
+                            for domain in pack["allowed_source_domains"]
+                        ]
+                    items.append(merged)
+            return items
         if isinstance(raw_queue.get("catalog_field_import_template"), dict):
             item = dict(raw_queue["catalog_field_import_template"])
             if isinstance(raw_queue.get("allowed_source_domains"), list):
@@ -134,10 +162,15 @@ def import_rows(review_queue: dict[str, Any] | list[Any], seed_rows: list[dict[s
 
     for item in _iter_items(review_queue):
         base = {"row_index": item.get("row_index"), "catalog_index": item.get("catalog_index"), "name_ko": item.get("name_ko")}
-        if not _confirmed(item.get("manual_confirmed")):
+        if not _item_confirmed(item):
             skipped.append({**base, "reason": "manual_confirmed_false"})
             continue
-        source_url = _http_url(item.get("manual_value") or item.get("source_url") or item.get("candidate_source_url"))
+        source_url = _http_url(
+            item.get("manual_confirmed_source_url")
+            or item.get("manual_value")
+            or item.get("source_url")
+            or item.get("candidate_source_url")
+        )
         if not source_url:
             skipped.append({**base, "reason": "source_url_missing"})
             continue
@@ -161,7 +194,11 @@ def import_rows(review_queue: dict[str, Any] | list[Any], seed_rows: list[dict[s
         if not _same_url(existing_source, source_url):
             row["source_url"] = source_url
             changed["source_url"] = source_url
-        image_url = _safe_image_url(item.get("image_url") or item.get("manual_image_url"))
+        image_url = _safe_image_url(
+            item.get("manual_confirmed_image_url")
+            or item.get("image_url")
+            or item.get("manual_image_url")
+        )
         if image_url:
             existing_image = row.get("image_url")
             if existing_image not in (None, "", image_url):

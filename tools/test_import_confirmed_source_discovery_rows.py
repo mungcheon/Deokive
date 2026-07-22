@@ -89,5 +89,54 @@ class ImportConfirmedSourceDiscoveryRowsTest(unittest.TestCase):
         self.assertEqual(result["skipped"][0]["reason"], "row_index_identity_mismatch")
 
 
+    def test_imports_confirmed_focus_pack_item_fields(self) -> None:
+        focus_pack = {
+            "packs": [
+                {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": _row()["source_store"],
+                    "allowed_source_domains": [{"domain": "www.goodsmile.info", "rows": 1}],
+                    "items": [
+                        {
+                            "manual_review_status": "source_and_image_confirmed",
+                            "manual_confirmed_source_url": SOURCE,
+                            "manual_confirmed_image_url": IMAGE,
+                            "catalog_index": 0,
+                            "name_ko": _row()["name_ko"],
+                        }
+                    ],
+                }
+            ]
+        }
+
+        result = import_rows(focus_pack, [_row()])
+
+        self.assertEqual(len(result["updated"]), 1)
+        self.assertEqual(result["seed_rows"][0]["source_url"], SOURCE)
+        self.assertEqual(result["seed_rows"][0]["image_url"], IMAGE)
+
+    def test_focus_pack_item_still_requires_confirmed_status(self) -> None:
+        focus_pack = {
+            "packs": [
+                {
+                    "source_store": _row()["source_store"],
+                    "items": [
+                        {
+                            "manual_review_status": "not_started",
+                            "manual_confirmed_source_url": SOURCE,
+                            "catalog_index": 0,
+                            "name_ko": _row()["name_ko"],
+                        }
+                    ],
+                }
+            ]
+        }
+
+        result = import_rows(focus_pack, [_row()])
+
+        self.assertEqual(result["updated"], [])
+        self.assertEqual(result["skipped"][0]["reason"], "manual_confirmed_false")
+
+
 if __name__ == "__main__":
     unittest.main()
