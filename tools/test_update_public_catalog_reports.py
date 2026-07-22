@@ -52,6 +52,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
         self.assertIn("data/animation_category_unmatched_keyword_review_public.json", updated_files)
         self.assertIn("data/source_detail_probe_public.json", updated_files)
+        self.assertIn("data/source_detail_candidate_action_queue_public.json", updated_files)
 
         quality = reports.load_json(reports.QUALITY)
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
@@ -105,6 +106,13 @@ class PublicCatalogReportTests(unittest.TestCase):
                 reports.load_json(reports.SOURCE_DETAIL)["summary"]["candidate_review_rows"],
             )
             self.assertIs(quality["source_detail_candidate_probe"]["auto_apply_enabled"], False)
+        if reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists():
+            self.assertEqual(
+                quality["source_detail_candidate_action_queue"]["candidate_action_rows"],
+                reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)["summary"]["candidate_action_rows"],
+            )
+            self.assertEqual(quality["source_detail_candidate_action_queue"]["manual_confirmed_true"], 0)
+            self.assertIs(quality["source_detail_candidate_action_queue"]["auto_apply_enabled"], False)
         if reports.GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.exists():
             self.assertEqual(
                 quality["gotouchi_representative_image_attachment"]["representative_attachment_rows"],

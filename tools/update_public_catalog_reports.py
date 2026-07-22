@@ -66,6 +66,7 @@ SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public.json"
 SOURCE_DISCOVERY_ACTION_QUEUE = DATA / "source_discovery_action_queue_public.json"
 SOURCE_DISCOVERY_STORE_BOTTLENECKS = DATA / "source_discovery_store_bottlenecks_public.json"
+SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
 METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 METADATA_ACTION_QUEUE = DATA / "catalog_metadata_action_queue_public.json"
@@ -4867,6 +4868,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             )
         if SOURCE_DETAIL.exists():
             target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
+        if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists():
+            target["source_detail_candidate_action_queue"] = copy_report_summary(
+                SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, "source_detail_candidate_action_queue"
+            )
         target["source_discovery_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY.name}",
             **source_discovery["summary"],
@@ -5050,6 +5055,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_ACTION_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_STORE_BOTTLENECKS.relative_to(ROOT)),
+            str(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),
             str(METADATA_REVIEW_BATCHES.relative_to(ROOT)),
             str(METADATA_ACTION_QUEUE.relative_to(ROOT)),
