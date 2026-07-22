@@ -15,6 +15,7 @@ import '../state/app_state.dart';
 import '../widgets/currency_prefix.dart';
 import '../widgets/free_text_autocomplete.dart';
 import '../widgets/goods_name_search_field.dart';
+import '../utils/catalog_goods_importer.dart';
 import 'image_catalog_search_screen.dart';
 
 class EditGoodsScreen extends StatefulWidget {
@@ -52,6 +53,7 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
   late DateTime? releaseDate;
   late DateTime? plannedShippingDate;
   late List<Uint8List> selectedImages;
+  late String? catalogImageUrl;
   bool showDetail = false;
 
   bool get isPreorder => itemCondition == ItemCondition.preorder;
@@ -88,6 +90,7 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
     releaseDate = item.releaseDate;
     plannedShippingDate = item.plannedShippingDate;
     selectedImages = List<Uint8List>.from(item.imageBytesList);
+    catalogImageUrl = item.imageUrl;
   }
 
   int? get officialPrice =>
@@ -224,8 +227,7 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
       MaterialPageRoute(builder: (_) => const ImageCatalogSearchScreen()),
     );
     if (picked == null || !mounted) return;
-    _applyCatalogEntry(picked);
-    await _attachCatalogImage(picked);
+    await _applyCatalogEntry(picked);
   }
 
   Future<void> _attachCatalogImage(GoodsCatalogEntry entry) async {
@@ -356,6 +358,7 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
       barcode: widget.item.barcode,
       storageLocation: null,
       imageBytesList: List<Uint8List>.from(selectedImages),
+      imageUrl: catalogImageUrl,
       priceCurrencyCode: paidPriceCurrency.code,
       officialPriceCurrencyCode: officialPriceCurrency.code,
     );
@@ -669,8 +672,12 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
   /// Auto-fill metadata fields when the user picks a catalog entry. Every
   /// catalog-known field overwrites the current input — the user can edit
   /// freely after. Series is intentionally skipped.
-  void _applyCatalogEntry(GoodsCatalogEntry entry) {
+  Future<void> _applyCatalogEntry(GoodsCatalogEntry entry) async {
+    final imageReference = catalogEntryImageReference(entry);
     setState(() {
+      if (imageReference != null) {
+        catalogImageUrl = imageReference;
+      }
       if (entry.normalizedCategory.isNotEmpty) {
         categoryController.text = entry.normalizedCategory;
       }
@@ -714,6 +721,7 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
         duration: const Duration(seconds: 3),
       ),
     );
+    await _attachCatalogImage(entry);
   }
 
   Future<Uint8List?> _openGoodsImageEditor(Uint8List originalBytes) async {

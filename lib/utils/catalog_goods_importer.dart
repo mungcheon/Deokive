@@ -166,11 +166,11 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.82,
-        minChildSize: 0.56,
+        initialChildSize: 0.88,
+        minChildSize: 0.72,
         maxChildSize: 0.98,
         snap: true,
-        snapSizes: const [0.82, 0.98],
+        snapSizes: const [0.88, 0.98],
         builder: (context, scrollController) {
           return StatefulBuilder(
             builder: (context, setSheetState) {
@@ -612,7 +612,6 @@ Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
   }
 }
 
-@visibleForTesting
 String? catalogEntryImageReference(GoodsCatalogEntry entry) {
   final localPath = entry.localImagePath?.trim() ?? '';
   if (localPath.isNotEmpty) return localPath;

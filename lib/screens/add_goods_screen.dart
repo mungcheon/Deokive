@@ -16,6 +16,7 @@ import '../state/app_state.dart';
 import '../widgets/currency_prefix.dart';
 import '../widgets/free_text_autocomplete.dart';
 import '../widgets/goods_name_search_field.dart';
+import '../utils/catalog_goods_importer.dart';
 import 'image_catalog_search_screen.dart';
 
 class AddGoodsScreen extends StatefulWidget {
@@ -56,6 +57,7 @@ class _AddGoodsScreenState extends State<AddGoodsScreen> {
   DateTime? plannedShippingDate;
   bool showDetail = false;
   bool _currencyAligned = false;
+  String? catalogImageUrl;
 
   bool get isPreorder => itemCondition == ItemCondition.preorder;
   final List<Uint8List> selectedImages = [];
@@ -294,6 +296,7 @@ class _AddGoodsScreenState extends State<AddGoodsScreen> {
       barcode: null,
       storageLocation: null,
       imageBytesList: List<Uint8List>.from(selectedImages),
+      imageUrl: catalogImageUrl,
       isFavorite: false,
       priceCurrencyCode: paidPriceCurrency.code,
       officialPriceCurrencyCode: officialPriceCurrency.code,
@@ -618,7 +621,11 @@ class _AddGoodsScreenState extends State<AddGoodsScreen> {
   /// freely after. Series is intentionally skipped because the curated series
   /// labels aren't trusted yet (per user feedback).
   Future<void> _applyCatalogEntry(GoodsCatalogEntry entry) async {
+    final imageReference = catalogEntryImageReference(entry);
     setState(() {
+      if (imageReference != null) {
+        catalogImageUrl = imageReference;
+      }
       if (entry.normalizedCategory.isNotEmpty) {
         categoryController.text = entry.normalizedCategory;
       }
