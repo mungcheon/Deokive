@@ -6,6 +6,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote_plus
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,9 +32,58 @@ def _catalog_index(item: dict[str, Any]) -> int | None:
         return None
 
 
-def _store_search_url(item: dict[str, Any]) -> str:
-    query = item.get("name_ja") or item.get("name_ko") or ""
-    return str(item.get("official_search_url") or item.get("web_search_url") or "").replace("products/list.php", "sphone/products/list.php") if query else ""
+def _search_terms(item: dict[str, Any]) -> list[str]:
+    terms: list[str] = []
+    for key in ("name_ja", "name_ko"):
+        value = str(item.get(key) or "").strip()
+        if value and value not in terms:
+            terms.append(value)
+    return terms
+
+
+def _legacy_store_search_url(item: dict[str, Any]) -> str:
+    if not _search_terms(item):
+        return ""
+    raw = str(item.get("official_search_url") or item.get("web_search_url") or "")
+    return raw.replace("products/list.php", "sphone/products/list.php")
+
+
+def _domain_limited_web_search_urls(item: dict[str, Any]) -> list[str]:
+    urls: list[str] = []
+    domains = item.get("allowed_source_domains") or ["www.animate-onlineshop.jp"]
+    domain = str(domains[0] or "www.animate-onlineshop.jp").strip()
+    for term in _search_terms(item):
+        queries = [
+            f'site:{domain}/pn/ "{term}"',
+            f'site:{domain}/pn/ "{term}" "pd/"',
+            f'site:{domain}/pn/ "{term}" "アニメイト通販"',
+        ]
+        for query in queries:
+            url = f"https://www.google.com/search?q={quote_plus(query)}"
+            if url not in urls:
+                urls.append(url)
+    return urls
+
+
+def _fallback_search_queries(item: dict[str, Any]) -> list[dict[str, str]]:
+    queries: list[dict[str, str]] = []
+    domains = item.get("allowed_source_domains") or ["www.animate-onlineshop.jp"]
+    domain = str(domains[0] or "www.animate-onlineshop.jp").strip()
+    for term in _search_terms(item):
+        for purpose, suffix in [
+            ("exact_title_detail_page", ""),
+            ("exact_title_pd_path", " pd/"),
+            ("exact_title_animate_product_page", " アニメイト通販"),
+        ]:
+            query = f'site:{domain}/pn/ "{term}"{suffix}'
+            queries.append(
+                {
+                    "purpose": purpose,
+                    "query": query,
+                    "search_url": f"https://www.google.com/search?q={quote_plus(query)}",
+                }
+            )
+    return queries
 
 
 def build_report(
@@ -76,7 +126,10 @@ def build_report(
                 "official_search_fetch_status": audit_item.get("fetch_status"),
                 "official_search_http_status": audit_item.get("http_status"),
                 "web_search_url": item.get("web_search_url"),
-                "fallback_store_search_url": _store_search_url(item),
+                "fallback_store_search_url": _legacy_store_search_url(item),
+                "fallback_search_terms": _search_terms(item),
+                "domain_limited_web_search_urls": _domain_limited_web_search_urls(item),
+                "fallback_search_queries": _fallback_search_queries(item),
                 "allowed_source_domains": item.get("allowed_source_domains") or [],
                 "acceptance_rule": item.get("acceptance_rule"),
                 "fallback_reason": "official_search_url_unavailable",
@@ -93,6 +146,10 @@ def build_report(
     by_status = Counter(str(item.get("official_search_http_status")) for item in queue_items)
     by_store = Counter(str(item.get("source_store") or "unknown") for item in queue_items)
     by_category = Counter(str(item.get("category") or "unknown") for item in queue_items)
+    fallback_query_count = sum(len(item.get("fallback_search_queries") or []) for item in queue_items)
+    domain_limited_web_search_url_count = sum(
+        len(item.get("domain_limited_web_search_urls") or []) for item in queue_items
+    )
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -109,6 +166,8 @@ def build_report(
             "by_http_status": by_status.most_common(),
             "by_source_store": by_store.most_common(),
             "by_category": by_category.most_common(),
+            "fallback_query_count": fallback_query_count,
+            "domain_limited_web_search_url_count": domain_limited_web_search_url_count,
             "auto_apply_enabled": False,
             "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
         },
