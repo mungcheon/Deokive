@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T20:31:08Z",
+  "generated_at": "2026-07-22T20:34:55Z",
   "scope": "source_discovery_next_focus_fallback_queue",
   "source_reports": [
     "data/source_discovery_next_focus_pack_public.json",
@@ -33,6 +33,13 @@
     "domain_limited_web_search_url_count": 99,
     "auto_apply_enabled": false,
     "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
+  },
+  "automation_policy": {
+    "auto_apply_source_url": false,
+    "auto_apply_image_url": false,
+    "requires_manual_review": true,
+    "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+    "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json"
   },
   "items": [
     {

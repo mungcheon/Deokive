@@ -175,6 +175,13 @@ def build_report(
             "auto_apply_enabled": False,
             "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
         },
+        "automation_policy": {
+            "auto_apply_source_url": False,
+            "auto_apply_image_url": False,
+            "requires_manual_review": True,
+            "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+            "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json",
+        },
         "items": queue_items,
     }
 

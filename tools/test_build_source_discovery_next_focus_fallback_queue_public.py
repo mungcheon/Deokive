@@ -65,6 +65,11 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queue_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
+        self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
+        self.assertEqual(
+            report["automation_policy"]["import_tool"],
+            "tools/import_confirmed_source_discovery_rows.py",
+        )
         self.assertEqual(report["summary"]["by_http_status"], [("404", 1)])
         self.assertEqual(report["summary"]["fallback_query_count"], 3)
         self.assertEqual(report["summary"]["domain_limited_web_search_url_count"], 3)

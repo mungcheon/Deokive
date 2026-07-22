@@ -84,6 +84,7 @@ SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_publ
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT = DATA / "source_discovery_next_focus_pack_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE = DATA / "source_discovery_next_focus_fallback_queue_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT = DATA / "source_discovery_next_focus_fallback_import_dry_run_public.json"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 OFFICIAL_DETAIL_REVIEW_BATCHES = DATA / "official_detail_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
@@ -5431,6 +5432,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
+    source_discovery_next_focus_fallback_import = build_source_discovery_import_dry_run_public(
+        source_discovery_next_focus_fallback_queue,
+        items,
+        queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE,
+    )
     operations = build_operations_public(
         generated_at,
         items,
@@ -5607,6 +5613,13 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["source_discovery_next_focus_fallback_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
             **source_discovery_next_focus_fallback_queue["summary"],
+        }
+        target["source_discovery_next_focus_fallback_import_dry_run"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT.name}",
+            "write": source_discovery_next_focus_fallback_import["write"],
+            "updated_rows": source_discovery_next_focus_fallback_import["updated_rows"],
+            "skipped_rows": source_discovery_next_focus_fallback_import["skipped_rows"],
+            "skip_reason_counts": source_discovery_next_focus_fallback_import["skip_reason_counts"],
         }
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
             target["animate_missing_image_search"] = copy_report_summary(
@@ -5892,6 +5905,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, source_discovery_next_focus_fallback_queue)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT, source_discovery_next_focus_fallback_import)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
@@ -5928,6 +5942,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
