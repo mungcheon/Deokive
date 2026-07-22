@@ -47,9 +47,13 @@ def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
 def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     template = item.get("catalog_field_import_template")
     template = template if isinstance(template, dict) else {}
+    workflow = str(group.get("workflow") or "")
+    source_url_update_required = workflow == "replace_generic_source_then_extract_image"
+    representative_image_review_required = workflow == "review_gotouchi_official_candidates"
+    image_url_ready = workflow == "extract_from_existing_source_url"
     return {
         "catalog_index": item.get("catalog_index"),
-        "workflow": group.get("workflow"),
+        "workflow": workflow,
         "source_store": group.get("source_store"),
         "name_ko": item.get("name_ko"),
         "name_ja": item.get("name_ja"),
@@ -57,6 +61,10 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "category": item.get("category"),
         "source_url": item.get("source_url"),
         "official_search_url": item.get("official_search_url"),
+        "source_url_update_required": source_url_update_required,
+        "representative_image_review_required": representative_image_review_required,
+        "image_url_ready": image_url_ready,
+        "required_before_image_import": _required_before_image_import(workflow),
         "catalog_field_import_template": template,
         "review_state": "exact_product_image_confirmation_required",
         "auto_apply_enabled": False,
@@ -136,6 +144,11 @@ def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, b
 
     queued_rows = sum(int(batch.get("row_count") or 0) for batch in batches)
     unqueued_actionable_rows = max(actionable_group_rows - queued_rows, 0)
+    source_url_update_required_rows = sum(1 for item in action_items if item.get("source_url_update_required"))
+    representative_image_review_required_rows = sum(
+        1 for item in action_items if item.get("representative_image_review_required")
+    )
+    image_url_ready_rows = sum(1 for item in action_items if item.get("image_url_ready"))
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -153,6 +166,9 @@ def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, b
             "max_batches": max_batches,
             "by_workflow": _counter_pairs(action_items, "workflow"),
             "by_source_store": _counter_pairs(action_items, "source_store"),
+            "source_url_update_required_rows": source_url_update_required_rows,
+            "representative_image_review_required_rows": representative_image_review_required_rows,
+            "image_url_ready_rows": image_url_ready_rows,
             "excluded_workflow_rows": [[key, value] for key, value in excluded_workflows.most_common()],
             "auto_apply_enabled": False,
         },
@@ -169,6 +185,16 @@ def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, b
             "private_collection_storage": "local_device_only",
         },
     }
+
+
+def _required_before_image_import(workflow: str) -> list[str]:
+    if workflow == "extract_from_existing_source_url":
+        return ["confirm_product_page_image_url"]
+    if workflow == "replace_generic_source_then_extract_image":
+        return ["confirm_exact_product_source_url", "replace_generic_source_url", "confirm_product_page_image_url"]
+    if workflow == "review_gotouchi_official_candidates":
+        return ["confirm_exact_product_type", "confirm_representative_image_is_acceptable"]
+    return ["manual_image_evidence_review"]
 
 
 def main() -> int:

@@ -58,9 +58,22 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unqueued_actionable_image_rows"], 0)
         self.assertEqual(report["summary"]["sample_queue_coverage"], 1.0)
         self.assertEqual(dict(report["summary"]["excluded_workflow_rows"]), {"find_source_then_extract_image": 5})
+        self.assertEqual(report["summary"]["source_url_update_required_rows"], 2)
+        self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
+        self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["batches"][0]["workflow"], "replace_generic_source_then_extract_image")
         self.assertEqual([item["catalog_index"] for item in report["batches"][0]["items"]], [1, 2])
+        self.assertTrue(report["batches"][0]["items"][0]["source_url_update_required"])
+        self.assertFalse(report["batches"][0]["items"][0]["image_url_ready"])
+        self.assertEqual(
+            report["batches"][0]["items"][0]["required_before_image_import"],
+            [
+                "confirm_exact_product_source_url",
+                "replace_generic_source_url",
+                "confirm_product_page_image_url",
+            ],
+        )
 
     def test_max_batches_caps_published_batches_not_actionable_summary(self) -> None:
         enrichment = {
@@ -87,6 +100,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queued_image_rows"], 1)
         self.assertEqual(report["summary"]["unqueued_actionable_image_rows"], 2)
         self.assertEqual(report["summary"]["sample_queue_coverage"], 0.3333)
+        self.assertEqual(report["summary"]["representative_image_review_required_rows"], 3)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
 
 

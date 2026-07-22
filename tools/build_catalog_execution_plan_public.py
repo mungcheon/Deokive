@@ -317,6 +317,13 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "actionable_image_rows": _count(image_action_summary, "actionable_image_rows"),
                 "queued_image_rows": _count(image_action_summary, "queued_image_rows"),
                 "action_batch_count": _count(image_action_summary, "action_batch_count"),
+                "source_url_update_required_rows": _count(
+                    image_action_summary, "source_url_update_required_rows"
+                ),
+                "representative_image_review_required_rows": _count(
+                    image_action_summary, "representative_image_review_required_rows"
+                ),
+                "image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
                 "excluded_workflow_rows": image_action_summary.get("excluded_workflow_rows", []),
                 "by_workflow": image_action_summary.get("by_workflow", []),
             },
@@ -550,6 +557,10 @@ def _build_plan(load_report) -> dict[str, Any]:
             "dedupe_fast_review_same_source_url_groups": _count(
                 dedupe_fast_summary, "same_source_url_groups"
             ),
+            "image_action_source_url_update_required_rows": _count(
+                image_action_summary, "source_url_update_required_rows"
+            ),
+            "image_action_image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
             "auto_apply_enabled": False,
         },
         "actions": actions,

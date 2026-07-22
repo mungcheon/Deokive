@@ -25,6 +25,9 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "queued_image_rows": 2,
                     "action_batch_count": 1,
                     "excluded_workflow_rows": [["find_source_then_extract_image", 8]],
+                    "source_url_update_required_rows": 2,
+                    "representative_image_review_required_rows": 0,
+                    "image_url_ready_rows": 0,
                 }
             },
             "source_discovery_review_batches_public.json": {
@@ -205,6 +208,10 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(image_action["priority"], 31)
         self.assertEqual(image_action["rows"], 2)
         self.assertEqual(image_action["evidence"]["actionable_image_rows"], 2)
+        self.assertEqual(image_action["evidence"]["source_url_update_required_rows"], 2)
+        self.assertEqual(image_action["evidence"]["image_url_ready_rows"], 0)
+        self.assertEqual(report["summary"]["image_action_source_url_update_required_rows"], 2)
+        self.assertEqual(report["summary"]["image_action_image_url_ready_rows"], 0)
         metadata_action = next(
             action
             for action in report["actions"]
