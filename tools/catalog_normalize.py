@@ -258,6 +258,10 @@ def canonical_source_url_key(value: Any) -> str | None:
         match = re.search(r"(?:^|&)goods_no=(\d+)(?:&|$)", parsed.query)
         if match:
             query = f"goods_no={match.group(1)}"
+    if netloc == "gashapon.jp" and path == "/products/detail.php":
+        match = re.search(r"(?:^|&)jan_code=(\d+)(?:&|$)", parsed.query)
+        if match:
+            query = f"jan_code={match.group(1)}"
     if netloc == "chiikawamarket.jp" and path.startswith("/ko/products/"):
         path = path.removeprefix("/ko")
     return urlunsplit((scheme, netloc, path, query, "")).lower()
