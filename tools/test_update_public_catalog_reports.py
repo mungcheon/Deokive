@@ -46,6 +46,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
         self.assertIn("data/gotouchi_representative_image_attachment_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
+        self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
 
         quality = reports.load_json(reports.QUALITY)
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
@@ -93,6 +94,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
             self.assertEqual(quality["deduplication_fast_review"]["manual_confirmed_true"], 0)
             self.assertIs(quality["deduplication_fast_review"]["auto_delete_enabled"], False)
+        if reports.ICHIIBAN_KUJI_METADATA_FAST_REVIEW.exists():
+            self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["fast_review_campaigns"], 20)
+            self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["manual_confirmed_true"], 0)
+            self.assertIs(quality["ichiban_kuji_metadata_fast_review"]["auto_apply_enabled"], False)
 
     def test_all_public_json_files_are_parseable_and_safe_for_pages(self):
         public_files = reports.discover_public_json_files()

@@ -46,6 +46,7 @@ ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
 ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES = DATA / "ichiban_kuji_metadata_review_batches_public.json"
 ICHIIBAN_KUJI_METADATA_ACTION_QUEUE = DATA / "ichiban_kuji_metadata_action_queue_public.json"
+ICHIIBAN_KUJI_METADATA_FAST_REVIEW = DATA / "ichiban_kuji_metadata_fast_review_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT = DATA / "gotouchi_representative_image_attachment_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
@@ -4739,6 +4740,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["ichiban_kuji_metadata_action_queue"] = copy_report_summary(
                 ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, "ichiban_kuji_metadata_action_queue"
             )
+        if ICHIIBAN_KUJI_METADATA_FAST_REVIEW.exists():
+            target["ichiban_kuji_metadata_fast_review"] = copy_report_summary(
+                ICHIIBAN_KUJI_METADATA_FAST_REVIEW, "ichiban_kuji_metadata_fast_review"
+            )
         target["operations"] = {
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
@@ -4840,6 +4845,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ANIMATION_CATEGORY_ACTION_QUEUE.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_METADATA_FAST_REVIEW.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),
             str(AGENT_WORK_QUEUE.relative_to(ROOT)),
         ],
