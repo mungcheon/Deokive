@@ -241,6 +241,78 @@ class ManualImageCandidateImportTests(unittest.TestCase):
         self.assertEqual(result["updated"], [])
         self.assertEqual(result["skipped"][0]["reason"], "candidate_title_mismatch")
 
+    def test_rejects_pop_up_parade_candidate_when_only_line_name_matches(self):
+        result = import_candidates(
+            [
+                _row(
+                    source_store="\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+                    name_ko="POP UP PARADE \uce74\uc774\uc800",
+                    name_ja="POP UP PARADE \u30df\u30d2\u30e3\u30a8\u30eb\u30fb\u30ab\u30a4\u30b6\u30fc",
+                    source_url="",
+                )
+            ],
+            [
+                _candidate(
+                    source_store="\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+                    source_kind="official_manufacturer_page",
+                    source_url="https://www.goodsmile.com/ja/product/10987",
+                    image_url="https://www.goodsmile.com/example.jpg",
+                    candidate_title="POP UP PARADE \u30ed\u30a4\u30c9\u30fb\u30d5\u30a9\u30fc\u30b8\u30e3\u30fc",
+                )
+            ],
+        )
+
+        self.assertEqual(result["updated"], [])
+        self.assertEqual(result["skipped"][0]["reason"], "candidate_title_mismatch")
+
+    def test_rejects_character_only_candidate_title_when_row_has_goods_type(self):
+        result = import_candidates(
+            [
+                _row(
+                    source_store="\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+                    name_ko="\uce74\uac00\ubbf8\ub124 \ub9b0 \uba38\uadf8\ucef5",
+                    name_ja="\u93e1\u97f3\u30ea\u30f3 \u30de\u30b0\u30ab\u30c3\u30d7",
+                    source_url="",
+                )
+            ],
+            [
+                _candidate(
+                    source_store="\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+                    source_kind="official_manufacturer_page",
+                    source_url="https://www.goodsmile.com/ja/product/405",
+                    image_url="https://www.goodsmile.com/example.jpg",
+                    candidate_title="\u93e1\u97f3\u30ea\u30f3",
+                )
+            ],
+        )
+
+        self.assertEqual(result["updated"], [])
+        self.assertEqual(result["skipped"][0]["reason"], "candidate_title_mismatch")
+
+    def test_rejects_candidate_title_with_different_goods_type(self):
+        result = import_candidates(
+            [
+                _row(
+                    source_store="\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+                    name_ko="\ud558\uce20\ub124 \ubbf8\ucfe0 \ud074\ub9ac\uc5b4 \ud30c\uc77c A4",
+                    name_ja="\u521d\u97f3\u30df\u30af \u30af\u30ea\u30a2\u30d5\u30a1\u30a4\u30ebA4",
+                    source_url="",
+                )
+            ],
+            [
+                _candidate(
+                    source_store="\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+                    source_kind="official_manufacturer_page",
+                    source_url="https://www.goodsmile.com/ja/product/60606",
+                    image_url="https://www.goodsmile.com/example.jpg",
+                    candidate_title="\u306d\u3093\u3069\u308d\u3044\u3069 \u521d\u97f3\u30df\u30af",
+                )
+            ],
+        )
+
+        self.assertEqual(result["updated"], [])
+        self.assertEqual(result["skipped"][0]["reason"], "candidate_title_mismatch")
+
     def test_rejects_korean_near_name_mismatch(self):
         result = import_candidates(
             [

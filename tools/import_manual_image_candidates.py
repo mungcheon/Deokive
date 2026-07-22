@@ -50,6 +50,14 @@ GENERIC_TITLE_MATCH_TOKENS = {
     "ver",
     "vol",
     "volume",
+    "pop",
+    "popup",
+    "parade",
+    "up",
+    "good",
+    "smile",
+    "company",
+    "gsc",
     "\u30a2\u30af\u30ea\u30eb",
     "\u30ad\u30fc\u30db\u30eb\u30c0\u30fc",
     "\u30b0\u30c3\u30ba",
@@ -79,6 +87,60 @@ GENERIC_TITLE_MATCH_TOKENS = {
     "\uc2a4\ud0e0\ub4dc",
     "\uc778\ud615",
     "\ud53c\uaddc\uc5b4",
+}
+PRODUCT_TYPE_MARKERS = {
+    "acrylic_stand": (
+        "acrylicstand",
+        "\u3042\u304f\u308a\u308b\u3059\u305f\u3093\u3069",
+        "\uc544\ud06c\ub9b4\uc2a4\ud0e0\ub4dc",
+    ),
+    "clear_file": (
+        "clearfile",
+        "\u304f\u308a\u3042\u3075\u3041\u3044\u308b",
+        "\ud074\ub9ac\uc5b4\ud30c\uc77c",
+    ),
+    "mug": (
+        "mug",
+        "mugcup",
+        "\u307e\u3050\u304b\u3063\u3077",
+        "\uba38\uadf8",
+        "\uba38\uadf8\ucef5",
+    ),
+    "penlight": (
+        "penlight",
+        "\u307a\u3093\u3089\u3044\u3068",
+        "\ud39c\ub77c\uc774\ud2b8",
+    ),
+    "nendoroid": (
+        "nendoroid",
+        "\u306d\u3093\u3069\u308d\u3044\u3069",
+        "\ub125\ub3c4\ub85c\uc774\ub4dc",
+    ),
+    "rubber_strap": (
+        "rubberstrap",
+        "\u3089\u3070\u30fc\u3059\u3068\u3089\u3063\u3077",
+        "\u3089\u3070\u3059\u3068\u3089\u3063\u3077",
+        "\ub7ec\ubc84\uc2a4\ud2b8\ub7a9",
+    ),
+    "badge": (
+        "badge",
+        "\u3070\u3063\u3058",
+        "\uce94\ubc43\uc9c0",
+        "\ubc43\uc9c0",
+    ),
+    "keychain": (
+        "keychain",
+        "keyholder",
+        "\u304d\u30fc\u307b\u308b\u3060\u30fc",
+        "\u304d\u307b\u308b\u3060",
+        "\ud0a4\ub9c1",
+    ),
+    "plush": (
+        "plush",
+        "\u306c\u3044\u3050\u308b\u307f",
+        "\ubd09\uc81c\uc778\ud615",
+        "\uc778\ud615",
+    ),
 }
 STORE_ALLOWED_NETLOCS = {
     "AmiAmi": {"www.amiami.jp"},
@@ -119,6 +181,23 @@ def _tokens(value: Any) -> set[str]:
     }
 
 
+def _compact_search_text(value: Any) -> str:
+    text = unicodedata.normalize("NFKC", str(value or "")).lower()
+    text = "".join(chr(ord(char) - 0x60) if "\u30a1" <= char <= "\u30f6" else char for char in text)
+    return re.sub(r"[^0-9a-z\u3040-\u309f\u3400-\u9fff\uac00-\ud7a3]+", "", text)
+
+
+def _product_type_markers(value: Any) -> set[str]:
+    text = _compact_search_text(value)
+    if not text:
+        return set()
+    return {
+        key
+        for key, markers in PRODUCT_TYPE_MARKERS.items()
+        if any(marker in text for marker in markers)
+    }
+
+
 def _candidate_title_matches_row(candidate: dict[str, Any], row: dict[str, Any]) -> bool:
     title = str(candidate.get("candidate_title") or "").strip()
     if not title:
@@ -126,6 +205,15 @@ def _candidate_title_matches_row(candidate: dict[str, Any], row: dict[str, Any])
     title_tokens = _tokens(title)
     row_name_tokens = _tokens(row.get("name_ja")) | _tokens(row.get("name_ko"))
     row_tokens = row_name_tokens | _tokens(row.get("affiliation"))
+    row_type_markers = _product_type_markers(
+        " ".join(
+            str(row.get(field) or "")
+            for field in ("name_ja", "name_ko", "category", "sub_series")
+        )
+    )
+    title_type_markers = _product_type_markers(title)
+    if row_type_markers and not (row_type_markers & title_type_markers):
+        return False
     if not title_tokens or not row_tokens:
         return True
     row_anniversary_tokens = {
