@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 /// Tier-based showcase background.
 ///
 /// The user's profile level determines the highest tier they have *unlocked*
-/// (one tier per 5 levels, 0..7). Within the unlocked range the user can
+/// (one tier per 5 levels, 0..4). Within the unlocked range the user can
 /// freely pick any earlier tier as their preferred showcase look.
-const int kMaxShowcaseBackgroundTier = 7;
+const int kMaxShowcaseBackgroundTier = 4;
 
 int unlockedShowcaseTier(int profileLevel) =>
     (profileLevel ~/ 5).clamp(0, kMaxShowcaseBackgroundTier);
@@ -22,12 +22,6 @@ String showcaseTierLabel(int tier) {
       return '실버';
     case 4:
       return '골드';
-    case 5:
-      return '플래티넘';
-    case 6:
-      return '에메랄드';
-    case 7:
-      return '다이아';
     default:
       return '배경';
   }
@@ -35,7 +29,7 @@ String showcaseTierLabel(int tier) {
 
 /// Painter that draws the tier-N decorative background.
 class ShowcaseTierBackgroundPainter extends CustomPainter {
-  final int tier; // -1..7
+  final int tier; // -1..4
   final Color primary;
   final Color accent;
 
@@ -99,10 +93,6 @@ class ShowcaseTierBackgroundPainter extends CustomPainter {
           sparkle,
         );
       }
-    }
-
-    if (tier >= 7) {
-      _drawMasterCrown(canvas, size, style);
     }
   }
 
@@ -260,31 +250,6 @@ class ShowcaseTierBackgroundPainter extends CustomPainter {
     );
   }
 
-  void _drawMasterCrown(Canvas canvas, Size size, _RankTierStyle style) {
-    final cx = size.width / 2;
-    final y = size.height * 0.10;
-    final crown = Path()
-      ..moveTo(cx - 34, y + 24)
-      ..lineTo(cx - 24, y)
-      ..lineTo(cx - 8, y + 18)
-      ..lineTo(cx, y - 8)
-      ..lineTo(cx + 8, y + 18)
-      ..lineTo(cx + 24, y)
-      ..lineTo(cx + 34, y + 24)
-      ..close();
-    canvas.drawPath(
-      crown,
-      Paint()..color = style.highlight.withValues(alpha: 0.42),
-    );
-    canvas.drawPath(
-      crown,
-      Paint()
-        ..color = Colors.white.withValues(alpha: 0.42)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.2,
-    );
-  }
-
   void _drawSparkle(Canvas canvas, Offset c, double r, Paint paint) {
     final path = Path()
       ..moveTo(c.dx, c.dy - r * 2)
@@ -370,33 +335,6 @@ _RankTierStyle _rankStyle(int tier) {
       accent: Color(0xFFE3B94A),
       highlight: Color(0xFFFFF1A6),
       glow: Color(0xFFFFD85C),
-    ),
-    _RankTierStyle(
-      tier: 5,
-      backdropTop: Color(0xFFE6FCFF),
-      backdropBottom: Color(0xFF6FCAD2),
-      darkMetal: Color(0xFF22666D),
-      accent: Color(0xFF4FC2C8),
-      highlight: Color(0xFFCDFBFF),
-      glow: Color(0xFF67E8F9),
-    ),
-    _RankTierStyle(
-      tier: 6,
-      backdropTop: Color(0xFFE9FFF4),
-      backdropBottom: Color(0xFF52B788),
-      darkMetal: Color(0xFF1F6F55),
-      accent: Color(0xFF34C38F),
-      highlight: Color(0xFFCFFFEA),
-      glow: Color(0xFF5EF6B0),
-    ),
-    _RankTierStyle(
-      tier: 7,
-      backdropTop: Color(0xFFEAF7FF),
-      backdropBottom: Color(0xFF77BCE8),
-      darkMetal: Color(0xFF236A9D),
-      accent: Color(0xFF6ECFF6),
-      highlight: Color(0xFFFFFFFF),
-      glow: Color(0xFFA7E8FF),
     ),
   ];
   return styles[tier.clamp(0, kMaxShowcaseBackgroundTier)];

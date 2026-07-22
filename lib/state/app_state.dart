@@ -3113,14 +3113,14 @@ class AppState extends ChangeNotifier {
 
   /// Pick a showcase background tier. `-1` means background off.
   void setShowcaseBgTier(int tier) {
-    selectedShowcaseBgTier = tier.clamp(-1, 7);
+    selectedShowcaseBgTier = tier.clamp(-1, 4);
     _persistStorageValues();
     notifyListeners();
   }
 
   /// Effective tier used to render the showcase background.
   int effectiveShowcaseBgTier(int profileLevel) {
-    final maxUnlocked = (profileLevel ~/ 5).clamp(0, 7);
+    final maxUnlocked = (profileLevel ~/ 5).clamp(0, 4);
     if (selectedShowcaseBgTier < 0) return -1;
     if (selectedShowcaseBgTier > maxUnlocked) return maxUnlocked;
     return selectedShowcaseBgTier;
