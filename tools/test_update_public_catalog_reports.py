@@ -491,6 +491,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         open_queues = operations.get("summary", {}).get("open_review_queues", {})
         quality = reports.load_json(reports.QUALITY)
         readiness_summary = confirmed_readiness.get("summary", {})
+        danganronpa_media = reports.load_json(reports.DANGANRONPA_MISSING_MEDIA)
+        danganronpa_summary = danganronpa_media.get("summary", {})
         requested_focus_action = reports.load_json(reports.REQUESTED_FOCUS_ACTION_QUEUE)
         requested_focus_action_summary = requested_focus_action.get("summary", {})
         requested_focus_scorecard = next(
@@ -696,6 +698,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "animation_category_unmatched_keyword_review"
         ]
+        danganronpa_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "danganronpa_missing_media"
+        ]
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
@@ -712,6 +719,15 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}", report_links)
         self.assertIn(f"data/{reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}", report_links)
         self.assertIn(f"data/{reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}", report_links)
+        self.assertEqual(len(danganronpa_agent_batches), danganronpa_summary.get("review_batch_count"))
+        self.assertEqual(
+            {batch.get("review_state") for batch in danganronpa_agent_batches},
+            {"source_and_image_evidence_required"},
+        )
+        self.assertEqual(
+            {batch.get("next_machine_step") for batch in danganronpa_agent_batches},
+            {"confirm_exact_source_then_fill_image_url_templates"},
+        )
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),

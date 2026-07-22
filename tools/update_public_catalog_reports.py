@@ -3298,6 +3298,8 @@ def build_agent_work_queue_public(
             return "manual_metadata_evidence_confirmation_required"
         if workstream == "confirmed_import_readiness":
             return "manual_review_required"
+        if workstream == "danganronpa_missing_media":
+            return "source_and_image_evidence_required"
         if workstream == "deduplication_review":
             return "manual_dedupe_review_required"
         if workstream.startswith("ichiban_kuji"):
@@ -3323,6 +3325,7 @@ def build_agent_work_queue_public(
             "official_candidate_mismatch_review_required": "review_official_candidates_before_import",
             "source_discovery_then_image_attachment": "find_source_url_before_image_import",
             "image_evidence_confirmation_required": "confirm_source_then_fill_image_url_templates",
+            "source_and_image_evidence_required": "confirm_exact_source_then_fill_image_url_templates",
             "source_evidence_confirmation_required": "confirm_exact_source_url_then_fill_source_templates",
             "metadata_evidence_required": "collect_official_metadata_evidence",
             "manual_metadata_evidence_confirmation_required": "fill_confirmed_metadata_patch_templates",
@@ -5407,6 +5410,7 @@ def validate_report_consistency(
         "official_candidate_mismatch_review_required",
         "source_discovery_then_image_attachment",
         "image_evidence_confirmation_required",
+        "source_and_image_evidence_required",
         "source_evidence_confirmation_required",
         "metadata_evidence_required",
         "manual_metadata_evidence_confirmation_required",
@@ -5427,6 +5431,7 @@ def validate_report_consistency(
         "review_official_candidates_before_import",
         "find_source_url_before_image_import",
         "confirm_source_then_fill_image_url_templates",
+        "confirm_exact_source_then_fill_image_url_templates",
         "confirm_exact_source_url_then_fill_source_templates",
         "collect_official_metadata_evidence",
         "fill_confirmed_metadata_patch_templates",
