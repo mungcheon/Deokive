@@ -45,6 +45,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
         self.assertIn("data/gotouchi_representative_image_attachment_public.json", updated_files)
+        self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
@@ -77,6 +78,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["missing_image_report_coverage"]["missing_image_rows"], result["missing"]["image_url"])
             self.assertEqual(quality["missing_image_report_coverage"]["unassigned_missing_image_rows"], 0)
             self.assertIs(quality["missing_image_report_coverage"]["auto_apply_enabled"], False)
+        if reports.MISSING_IMAGE_ACTIONABILITY.exists():
+            self.assertEqual(quality["missing_image_actionability"]["missing_image_rows"], result["missing"]["image_url"])
+            self.assertEqual(quality["missing_image_actionability"]["unclassified_rows"], 0)
+            self.assertIs(quality["missing_image_actionability"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():

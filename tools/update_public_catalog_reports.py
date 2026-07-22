@@ -70,6 +70,7 @@ METADATA_REVIEW_BATCHES = DATA / "catalog_metadata_review_batches_public.json"
 METADATA_ACTION_QUEUE = DATA / "catalog_metadata_action_queue_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 IMAGE_ATTACHMENT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
+MISSING_IMAGE_ACTIONABILITY = DATA / "catalog_missing_image_actionability_public.json"
 CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.json"
 EXECUTION_PLAN = DATA / "catalog_execution_plan_public.json"
 OPERATIONS_REPORT = DATA / "catalog_operations_public.json"
@@ -4843,6 +4844,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["image_attachment_action_queue"] = copy_report_summary(
                 IMAGE_ATTACHMENT_ACTION_QUEUE, "image_attachment_action_queue"
             )
+        if MISSING_IMAGE_ACTIONABILITY.exists():
+            target["missing_image_actionability"] = copy_report_summary(
+                MISSING_IMAGE_ACTIONABILITY, "missing_image_actionability"
+            )
         target["danganronpa_missing_media"] = {
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
             **danganronpa_missing_media["summary"],
@@ -5030,6 +5035,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(STELLIVE_FANDING_CANDIDATES.relative_to(ROOT)),
             str(GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
+            str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
             str(REQUESTED_FOCUS_REVIEW_BATCHES.relative_to(ROOT)),

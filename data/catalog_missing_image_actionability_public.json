@@ -1,0 +1,560 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-22T09:26:21Z",
+  "scope": "catalog_missing_image_actionability",
+  "summary": {
+    "missing_image_rows": 720,
+    "readiness_classified_rows": 720,
+    "unclassified_rows": 0,
+    "exact_source_ready_rows": 0,
+    "source_first_rows": 692,
+    "review_before_attach_rows": 23,
+    "manual_image_research_rows": 5,
+    "action_queue_rows": 73,
+    "actionable_image_rows": 73,
+    "auto_apply_enabled": false
+  },
+  "readiness": [
+    {
+      "readiness": "source_url_replacement_required",
+      "priority": 20,
+      "rows": 73,
+      "workflow_rows": [
+        {
+          "workflow": "replace_generic_source_then_extract_image",
+          "label": "일반 상점/목록 URL을 상품 상세 URL로 교체 후 이미지 첨부",
+          "rows": 50,
+          "next_step": "replace_generic_source_url_then_extract_image"
+        },
+        {
+          "workflow": "review_gotouchi_official_candidates",
+          "label": "고토치 공식 후보가 상품 종류까지 맞는지 검토 후 이미지 첨부",
+          "rows": 23,
+          "next_step": "confirm_exact_product_type_then_attach_image"
+        }
+      ],
+      "by_source_store": [
+        {
+          "source_store": "Stellive Store",
+          "rows": 45
+        },
+        {
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "rows": 23
+        },
+        {
+          "source_store": "Weverse Shop",
+          "rows": 3
+        },
+        {
+          "source_store": "포켓몬 센터",
+          "rows": 2
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2325,
+          "name_ko": "스텔라이브 1주년 뱃지 세트",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "캔뱃지",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2352,
+          "name_ko": "강지 마스코트 인형",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2355,
+          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2356,
+          "name_ko": "아이리 칸나 마스코트 인형",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2357,
+          "name_ko": "아이리 칸나 키링 세트",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2361,
+          "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2362,
+          "name_ko": "쿠루미 노아 생일 기념 굿즈",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2363,
+          "name_ko": "쿠루미 노아 마스코트 인형",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2372,
+          "name_ko": "하나코 코코나 마스코트 인형",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2373,
+          "name_ko": "비비 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2374,
+          "name_ko": "비비 마스코트 인형",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "workflow": "replace_generic_source_then_extract_image"
+        },
+        {
+          "catalog_index": 2375,
+          "name_ko": "린 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "source_store": "Stellive Store",
+          "affiliation": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "workflow": "replace_generic_source_then_extract_image"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "readiness": "source_url_discovery_required",
+      "priority": 30,
+      "rows": 642,
+      "workflow_rows": [
+        {
+          "workflow": "find_source_then_extract_image",
+          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
+          "rows": 642,
+          "next_step": "find_exact_official_source_url_then_extract_image"
+        }
+      ],
+      "by_source_store": [
+        {
+          "source_store": "애니메이트",
+          "rows": 148
+        },
+        {
+          "source_store": "엔스카이",
+          "rows": 142
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "rows": 57
+        },
+        {
+          "source_store": "코토부키야",
+          "rows": 44
+        },
+        {
+          "source_store": "Movic",
+          "rows": 36
+        },
+        {
+          "source_store": "점프 캐릭터즈 스토어",
+          "rows": 23
+        },
+        {
+          "source_store": "FuRyu",
+          "rows": 21
+        },
+        {
+          "source_store": "Taito",
+          "rows": 15
+        },
+        {
+          "source_store": "무기와라스토어",
+          "rows": 15
+        },
+        {
+          "source_store": "치이카와 중국 팝업스토어",
+          "rows": 15
+        },
+        {
+          "source_store": "귀멸의 칼날 공식",
+          "rows": 13
+        },
+        {
+          "source_store": "AmiAmi",
+          "rows": 12
+        },
+        {
+          "source_store": "Cospa",
+          "rows": 11
+        },
+        {
+          "source_store": "반다이",
+          "rows": 11
+        },
+        {
+          "source_store": "메가하우스",
+          "rows": 9
+        },
+        {
+          "source_store": "MINISO 중국",
+          "rows": 7
+        },
+        {
+          "source_store": "산리오",
+          "rows": 6
+        },
+        {
+          "source_store": "JYP SHOP",
+          "rows": 5
+        },
+        {
+          "source_store": "Re-ment",
+          "rows": 5
+        },
+        {
+          "source_store": "치이카와샵 용산",
+          "rows": 5
+        },
+        {
+          "source_store": "MINISO",
+          "rows": 4
+        },
+        {
+          "source_store": "가샤폰",
+          "rows": 4
+        },
+        {
+          "source_store": "디즈니 스토어",
+          "rows": 4
+        },
+        {
+          "source_store": "이세계아이돌 공식 굿즈",
+          "rows": 4
+        },
+        {
+          "source_store": "Bandai Premium",
+          "rows": 3
+        },
+        {
+          "source_store": "SM STORE",
+          "rows": 3
+        },
+        {
+          "source_store": "카도카와",
+          "rows": 3
+        },
+        {
+          "source_store": "Phat! Company",
+          "rows": 2
+        },
+        {
+          "source_store": "YG SELECT",
+          "rows": 2
+        },
+        {
+          "source_store": "롯데웰푸드",
+          "rows": 2
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1031,
+          "name_ko": "원피스 봉제 인형 (토니토니 쵸파)",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%9B%90%ED%94%BC%EC%8A%A4%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%86%A0%EB%8B%88%ED%86%A0%EB%8B%88%20%EC%B5%B8%ED%8C%8C%29",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1033,
+          "name_ko": "원피스 클리어 파일 (밀짚모자 일당)",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "문구",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%9B%90%ED%94%BC%EC%8A%A4%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%28%EB%B0%80%EC%A7%9A%EB%AA%A8%EC%9E%90%20%EC%9D%BC%EB%8B%B9%29",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1034,
+          "name_ko": "원피스 캔뱃지 (랜덤 1팩)",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%9B%90%ED%94%BC%EC%8A%A4%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%201%ED%8C%A9%29",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1037,
+          "name_ko": "주술회전 캔뱃지 (랜덤)",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1038,
+          "name_ko": "주술회전 클리어 파일 (메인 비주얼)",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "문구",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%28%EB%A9%94%EC%9D%B8%20%EB%B9%84%EC%A3%BC%EC%96%BC%29",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1039,
+          "name_ko": "주술회전 머그컵",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "머그컵",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%EB%A8%B8%EA%B7%B8%EC%BB%B5",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1043,
+          "name_ko": "체인소맨 봉제 인형 (포치타)",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%8F%AC%EC%B9%98%ED%83%80%29",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1044,
+          "name_ko": "체인소맨 캔뱃지 (랜덤)",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1045,
+          "name_ko": "체인소맨 클리어 파일",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "문구",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1050,
+          "name_ko": "진격의 거인 캔뱃지 (랜덤)",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "캔뱃지",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A7%84%EA%B2%A9%EC%9D%98%20%EA%B1%B0%EC%9D%B8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1051,
+          "name_ko": "진격의 거인 클리어 파일",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "문구",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A7%84%EA%B2%A9%EC%9D%98%20%EA%B1%B0%EC%9D%B8%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC",
+          "workflow": "find_source_then_extract_image"
+        },
+        {
+          "catalog_index": 1061,
+          "name_ko": "나루토 클리어 파일",
+          "name_ja": null,
+          "source_store": "애니메이트",
+          "affiliation": null,
+          "category": "문구",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%82%98%EB%A3%A8%ED%86%A0%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC",
+          "workflow": "find_source_then_extract_image"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "readiness": "manual_research_required",
+      "priority": 40,
+      "rows": 5,
+      "workflow_rows": [
+        {
+          "workflow": "manual_image_research",
+          "label": "공식/제조사 경로를 수동 조사",
+          "rows": 5,
+          "next_step": "manual_official_source_and_image_research"
+        }
+      ],
+      "by_source_store": [
+        {
+          "source_store": "아이돌 공식",
+          "rows": 3
+        },
+        {
+          "source_store": "SVC 공식",
+          "rows": 2
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2316,
+          "name_ko": "포토북",
+          "name_ja": null,
+          "source_store": "아이돌 공식",
+          "affiliation": null,
+          "category": "포토북",
+          "source_url": null,
+          "official_search_url": null,
+          "workflow": "manual_image_research"
+        },
+        {
+          "catalog_index": 2317,
+          "name_ko": "시즌 그리팅 (Seasons Greetings)",
+          "name_ja": null,
+          "source_store": "아이돌 공식",
+          "affiliation": null,
+          "category": "시즌 그리팅",
+          "source_url": null,
+          "official_search_url": null,
+          "workflow": "manual_image_research"
+        },
+        {
+          "catalog_index": 2318,
+          "name_ko": "컴백 트레이딩 카드",
+          "name_ja": null,
+          "source_store": "아이돌 공식",
+          "affiliation": null,
+          "category": "트레이딩 카드",
+          "source_url": null,
+          "official_search_url": null,
+          "workflow": "manual_image_research"
+        },
+        {
+          "catalog_index": 2415,
+          "name_ko": "쿠루미 노아 콘서트 티셔츠",
+          "name_ja": null,
+          "source_store": "SVC 공식",
+          "affiliation": null,
+          "category": "의류",
+          "source_url": null,
+          "official_search_url": null,
+          "workflow": "manual_image_research"
+        },
+        {
+          "catalog_index": 2421,
+          "name_ko": "시라유키 히나 타올",
+          "name_ja": null,
+          "source_store": "SVC 공식",
+          "affiliation": null,
+          "category": "타월",
+          "source_url": null,
+          "official_search_url": null,
+          "workflow": "manual_image_research"
+        }
+      ],
+      "auto_apply_enabled": false
+    }
+  ],
+  "recommended_order": [
+    "source_url_replacement_required",
+    "source_url_discovery_required",
+    "manual_research_required",
+    "image_url_candidate_review"
+  ],
+  "notes": [
+    "exact_source_ready_rows means image_url can be reviewed from an already exact product source_url.",
+    "source_first_rows must receive or replace source_url before any image_url import.",
+    "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
+    "All image changes remain manual-review only until exact product identity is confirmed."
+  ],
+  "automation_policy": {
+    "auto_apply_catalog_changes": false,
+    "requires_exact_product_identity": true,
+    "requires_exact_source_url_before_image_url": true,
+    "private_collection_storage": "local_device_only"
+  }
+}
