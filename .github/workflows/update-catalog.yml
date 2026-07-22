@@ -82,6 +82,7 @@ jobs:
           python tools/build_requested_focus_review_batches_public.py
           python tools/build_confirmed_import_readiness_public.py
           python tools/build_animate_missing_image_search_public.py --write
+          python tools/build_goodsmile_missing_image_search_public.py --write
           python tools/build_source_discovery_action_queue_public.py
           python tools/build_metadata_action_queue_public.py
           python tools/build_image_attachment_action_queue_public.py
@@ -112,6 +113,7 @@ jobs:
             data/catalog_image_asset_audit_public.json \
             data/catalog_missing_image_priority_public.json \
             data/animate_missing_image_search_public.json \
+            data/goodsmile_missing_image_search_public.json \
             data/ensky_missing_image_cache_coverage_public.json \
             data/ensky_search_page_probe_public.json \
             data/stellive_fanding_candidates_public.json \
