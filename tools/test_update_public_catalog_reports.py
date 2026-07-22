@@ -373,15 +373,27 @@ class PublicCatalogReportTests(unittest.TestCase):
         image_action_summary = image_action.get("summary", {})
         source_action = reports.load_json(reports.SOURCE_DISCOVERY_ACTION_QUEUE)
         source_action_summary = source_action.get("summary", {})
+        source_detail_action = reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)
+        source_detail_action_summary = source_detail_action.get("summary", {})
         source_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
             if row.get("workstream") == "source_discovery_action_queue"
         )
+        source_detail_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "source_detail_candidate_action_queue"
+        )
         source_next_action = next(
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "source_discovery_action_queue"
+        )
+        source_detail_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "source_detail_candidate_action_queue"
         )
         metadata_action = reports.load_json(reports.METADATA_ACTION_QUEUE)
         metadata_action_summary = metadata_action.get("summary", {})
@@ -481,6 +493,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.AGENT_WORK_QUEUE.name}", next_action_reports)
         self.assertIn(f"data/{reports.EXECUTION_PLAN.name}", next_action_reports)
         self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
+        self.assertIn(f"data/{reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_SPLIT_REVIEW.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.name}", report_links)
@@ -547,6 +560,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_next_action.get("excluded_review_state_rows"),
             source_action_summary.get("excluded_review_state_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_detail_candidate_action_rows"),
+            source_detail_action_summary.get("candidate_action_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_detail_candidate_manual_confirmed_rows"),
+            source_detail_action_summary.get("manual_confirmed_true"),
+        )
+        self.assertEqual(
+            source_detail_scorecard.get("open_rows"),
+            source_detail_action_summary.get("candidate_action_rows"),
+        )
+        self.assertEqual(
+            source_detail_scorecard.get("by_review_risk"),
+            source_detail_action_summary.get("by_review_risk"),
+        )
+        self.assertEqual(
+            source_detail_next_action.get("candidate_action_rows"),
+            source_detail_action_summary.get("candidate_action_rows"),
         )
         self.assertEqual(
             open_queues.get("metadata_action_missing_cells"),

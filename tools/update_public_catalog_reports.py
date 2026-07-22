@@ -1520,6 +1520,12 @@ def build_operations_public(
     source_action_queue = (
         load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}) if SOURCE_DISCOVERY_ACTION_QUEUE.exists() else {}
     )
+    source_detail_candidate_action_queue = (
+        load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {})
+        if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists()
+        else {}
+    )
+    source_detail_candidate_action_queue_summary = source_detail_candidate_action_queue.get("summary", {})
     source_action_queue_summary = source_action_queue.get("summary", {})
     image_summary = image_enrichment_batches["summary"]
     image_action_queue = (
@@ -1850,6 +1856,18 @@ def build_operations_public(
             "recommended_next_action": "Work queued official-search source URL batches, then expand remaining actionable source rows.",
         } if source_action_queue_summary else None,
         {
+            "priority": 23,
+            "workstream": "source_detail_candidate_action_queue",
+            "public_report": f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}",
+            "candidate_action_rows": source_detail_candidate_action_queue_summary.get("candidate_action_rows", 0),
+            "action_batch_count": source_detail_candidate_action_queue_summary.get("action_batch_count", 0),
+            "manual_confirmed_true": source_detail_candidate_action_queue_summary.get("manual_confirmed_true", 0),
+            "by_source_store": source_detail_candidate_action_queue_summary.get("by_source_store", []),
+            "by_review_risk": source_detail_candidate_action_queue_summary.get("by_review_risk", []),
+            "auto_apply_enabled": source_detail_candidate_action_queue_summary.get("auto_apply_enabled", False),
+            "recommended_next_action": "Confirm exact candidate identity before filling source_url and image_url templates.",
+        } if source_detail_candidate_action_queue_summary else None,
+        {
             "priority": 30,
             "workstream": "metadata_backlog",
             "public_report": f"data/{METADATA_BACKLOG.name}",
@@ -2094,6 +2112,18 @@ def build_operations_public(
             "next_step": "confirm_exact_source_url_then_fill_source_templates",
             "auto_apply_enabled": source_action_queue_summary.get("auto_apply_enabled", False),
         } if source_action_queue_summary else None,
+        {
+            "workstream": "source_detail_candidate_action_queue",
+            "status": "manual_review" if source_detail_candidate_action_queue_summary.get("candidate_action_rows", 0) else "clear",
+            "open_rows": source_detail_candidate_action_queue_summary.get("candidate_action_rows", 0),
+            "action_batch_count": source_detail_candidate_action_queue_summary.get("action_batch_count", 0),
+            "manual_confirmed_true": source_detail_candidate_action_queue_summary.get("manual_confirmed_true", 0),
+            "by_source_store": source_detail_candidate_action_queue_summary.get("by_source_store", []),
+            "by_review_risk": source_detail_candidate_action_queue_summary.get("by_review_risk", []),
+            "primary_report": f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}",
+            "next_step": "confirm_candidate_identity_then_fill_source_and_image_templates",
+            "auto_apply_enabled": source_detail_candidate_action_queue_summary.get("auto_apply_enabled", False),
+        } if source_detail_candidate_action_queue_summary else None,
         {
             "workstream": "danganronpa_missing_media",
             "status": "open" if danganronpa_media_summary.get("missing_media_rows", 0) else "clear",
@@ -2352,6 +2382,13 @@ def build_operations_public(
         open_review_queues["source_discovery_unqueued_actionable_rows"] = source_action_queue_summary.get(
             "unqueued_actionable_source_rows", 0
         )
+    if source_detail_candidate_action_queue_summary:
+        open_review_queues["source_detail_candidate_action_rows"] = (
+            source_detail_candidate_action_queue_summary.get("candidate_action_rows", 0)
+        )
+        open_review_queues["source_detail_candidate_manual_confirmed_rows"] = (
+            source_detail_candidate_action_queue_summary.get("manual_confirmed_true", 0)
+        )
     if image_action_queue_summary:
         open_review_queues["image_attachment_action_rows"] = image_action_queue_summary.get("queued_image_rows", 0)
         open_review_queues["image_attachment_actionable_rows"] = image_action_queue_summary.get(
@@ -2456,6 +2493,7 @@ def build_operations_public(
             {"key": "image_enrichment_batches", "public_report": f"data/{IMAGE_ENRICHMENT_BATCHES.name}"},
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
+            {"key": "source_detail_candidate_action_queue", "public_report": f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}"},
             {"key": "metadata_backlog", "public_report": f"data/{METADATA_BACKLOG.name}"},
             {"key": "metadata_review_batches", "public_report": f"data/{METADATA_REVIEW_BATCHES.name}"},
             {"key": "metadata_action_queue", "public_report": f"data/{METADATA_ACTION_QUEUE.name}"},
@@ -2519,6 +2557,11 @@ def build_agent_work_queue_public(
     )
     source_action_queue = (
         load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}) if SOURCE_DISCOVERY_ACTION_QUEUE.exists() else {}
+    )
+    source_detail_candidate_action_queue = (
+        load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {})
+        if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists()
+        else {}
     )
     requested_focus_review_batches = (
         load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}) if REQUESTED_FOCUS_REVIEW_BATCHES.exists() else {}
@@ -2616,6 +2659,8 @@ def build_agent_work_queue_public(
             return "image_evidence_confirmation_required"
         if workstream == "source_discovery_action_queue":
             return "source_evidence_confirmation_required"
+        if workstream == "source_detail_candidate_action_queue":
+            return "candidate_review_required"
         if workstream == "source_url_discovery":
             return "exact_source_discovery_required"
         if workstream == "metadata_backlog":
@@ -2873,6 +2918,9 @@ def build_agent_work_queue_public(
 
     source_review_batch_rows = [batch for batch in source_review_batches.get("batches", []) if isinstance(batch, dict)]
     source_action_batches = [batch for batch in source_action_queue.get("batches", []) if isinstance(batch, dict)]
+    source_detail_candidate_action_batches = [
+        batch for batch in source_detail_candidate_action_queue.get("batches", []) if isinstance(batch, dict)
+    ]
     for action_batch in source_action_batches[:10]:
         add_batch(
             agent_id="agent-source-action",
@@ -2886,6 +2934,26 @@ def build_agent_work_queue_public(
                 "Accepted source_url must be an exact product/detail page.",
                 "Search result and storefront pages remain blocked until an exact product URL is found.",
                 "source_url templates are filled only after manual evidence confirmation.",
+            ],
+            samples=[item for item in action_batch.get("items", []) if isinstance(item, dict)],
+        )
+    for action_batch in source_detail_candidate_action_batches[:6]:
+        add_batch(
+            agent_id="agent-source-detail-candidate",
+            workstream="source_detail_candidate_action_queue",
+            priority=22 + int(action_batch.get("offset") or 0),
+            title=f"Source detail candidate review {action_batch.get('batch_id')}",
+            public_report=SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE,
+            rows=int(action_batch.get("row_count") or 0),
+            recommended_action=str(
+                action_batch.get("recommended_action")
+                or "Review candidate identity and confirm only exact source/image matches."
+            ),
+            acceptance_criteria=[
+                "Candidate title must match the same product, character, and variant as the catalog row.",
+                "Accept source_url only when the candidate page is an exact product/detail page.",
+                "Accept image_url only when it comes from the accepted source page or trusted official CDN.",
+                "Leave manual_confirmed false for related products, bundles, or wrong variants.",
             ],
             samples=[item for item in action_batch.get("items", []) if isinstance(item, dict)],
         )
@@ -3270,7 +3338,7 @@ def build_agent_work_queue_public(
             )
 
     batches.sort(key=lambda row: (row["priority"], -row["rows"], row["batch_id"]))
-    published_batches = batches[:80]
+    published_batches = batches[:96]
     by_workstream = Counter(str(batch["workstream"]) for batch in published_batches)
     by_agent = Counter(str(batch["agent_id"]) for batch in published_batches)
     top_next_batches = [
@@ -4283,6 +4351,19 @@ def validate_report_consistency(
         expected_open_queues["source_discovery_unqueued_actionable_rows"] = source_action_summary.get(
             "unqueued_actionable_source_rows", 0
         )
+    source_detail_candidate_action_queue = (
+        load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {})
+        if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists()
+        else {}
+    )
+    source_detail_candidate_action_summary = source_detail_candidate_action_queue.get("summary", {})
+    if source_detail_candidate_action_summary:
+        expected_open_queues["source_detail_candidate_action_rows"] = (
+            source_detail_candidate_action_summary.get("candidate_action_rows", 0)
+        )
+        expected_open_queues["source_detail_candidate_manual_confirmed_rows"] = (
+            source_detail_candidate_action_summary.get("manual_confirmed_true", 0)
+        )
     metadata_action_queue = (
         metadata_action_queue_override
         if metadata_action_queue_override is not None
@@ -4500,6 +4581,7 @@ def validate_report_consistency(
     allowed_reports = {
         f"data/{IMAGE_ENRICHMENT_BATCHES.name}",
         f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
+        f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}",
         f"data/{SOURCE_DISCOVERY.name}",
         f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
         f"data/{METADATA_BACKLOG.name}",
