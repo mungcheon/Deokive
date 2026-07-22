@@ -52,6 +52,15 @@ PRODUCT_PHRASES = {
 }
 
 
+def row_identifier(row: dict[str, Any], fallback_index: int) -> int:
+    value = row.get("catalog_index")
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str) and value.strip().isdigit():
+        return int(value.strip())
+    return fallback_index
+
+
 def _last_parenthetical_variant(value: str) -> str | None:
     matches = re.findall(r"[\(\uff08]([^\(\)\uff08\uff09]+)[\)\uff09]", value)
     if not matches:
@@ -111,6 +120,7 @@ def enrich(rows: list[dict[str, Any]], products: list[dict[str, Any]]) -> dict[s
         query = str(row.get("name_ja") or row.get("name_ko") or "").strip()
         if not query:
             continue
+        row_index = row_identifier(row, index)
         scanned += 1
 
         matches = [product for product in usable_products if _safe_match(query, str(product.get("title") or ""))]
@@ -118,7 +128,7 @@ def enrich(rows: list[dict[str, Any]], products: list[dict[str, Any]]) -> dict[s
             if len(no_matches) < 100:
                 no_matches.append(
                     {
-                        "row_index": index,
+                        "row_index": row_index,
                         "name_ko": row.get("name_ko"),
                         "name_ja": row.get("name_ja"),
                     }
@@ -127,7 +137,7 @@ def enrich(rows: list[dict[str, Any]], products: list[dict[str, Any]]) -> dict[s
         if len(matches) > 1:
             ambiguous.append(
                 {
-                    "row_index": index,
+                    "row_index": row_index,
                     "name_ko": row.get("name_ko"),
                     "name_ja": row.get("name_ja"),
                     "match_titles": [product.get("title") for product in matches[:10]],
@@ -147,7 +157,7 @@ def enrich(rows: list[dict[str, Any]], products: list[dict[str, Any]]) -> dict[s
             updated += 1
             changes.append(
                 {
-                    "row_index": index,
+                    "row_index": row_index,
                     "name_ko": row.get("name_ko"),
                     "name_ja": row.get("name_ja"),
                     "fields": changed_fields,
