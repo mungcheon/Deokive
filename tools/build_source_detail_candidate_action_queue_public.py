@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "source_detail_probe_public.json"
 DEFAULT_OUTPUT = DATA / "source_detail_candidate_action_queue_public.json"
+DEFAULT_CATALOG = DATA / "catalog_public.json"
 
 
 def now_utc() -> str:
@@ -23,6 +24,17 @@ def load_json(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"{path} must contain a JSON object")
     return payload
+
+
+def load_catalog_rows(path: Path) -> list[dict[str, Any]]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(payload, list):
+        return [row for row in payload if isinstance(row, dict)]
+    if isinstance(payload, dict):
+        rows = payload.get("items")
+        if isinstance(rows, list):
+            return [row for row in rows if isinstance(row, dict)]
+    raise ValueError(f"{path} must contain a catalog row list or an object with items")
 
 
 def counter_rows(rows: list[dict[str, Any]], field: str) -> list[list[Any]]:
@@ -60,9 +72,55 @@ def candidate_risk(row: dict[str, Any]) -> str:
     return "weak_candidate_review"
 
 
-def compact_item(row: dict[str, Any]) -> dict[str, Any]:
-    risk = candidate_risk(row)
+def catalog_index(rows: list[dict[str, Any]]) -> dict[int, dict[str, Any]]:
+    indexed: dict[int, dict[str, Any]] = {}
+    for position, row in enumerate(rows):
+        raw_index = row.get("catalog_index", position)
+        try:
+            index = int(raw_index)
+        except (TypeError, ValueError):
+            continue
+        indexed[index] = row
+    return indexed
+
+
+def text_matches(left: Any, right: Any) -> bool:
+    return str(left or "").strip() == str(right or "").strip()
+
+
+def current_catalog_state(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
+    try:
+        index = int(row.get("catalog_index"))
+    except (TypeError, ValueError):
+        index = -1
+    catalog_row = catalog_by_index.get(index)
+    if not catalog_row:
+        return {
+            "catalog_match_found": False,
+            "catalog_has_display_image": False,
+            "catalog_identity_matches": False,
+            "stale_candidate": True,
+        }
+    name_matches = text_matches(row.get("name_ko"), catalog_row.get("name_ko")) and text_matches(
+        row.get("name_ja"), catalog_row.get("name_ja")
+    )
+    store_matches = text_matches(row.get("source_store"), catalog_row.get("source_store"))
     return {
+        "catalog_match_found": True,
+        "catalog_has_display_image": bool(catalog_row.get("local_image_path") or catalog_row.get("image_url")),
+        "catalog_identity_matches": name_matches and store_matches,
+        "stale_candidate": not (name_matches and store_matches),
+        "catalog_current_name_ko": catalog_row.get("name_ko"),
+        "catalog_current_name_ja": catalog_row.get("name_ja"),
+        "catalog_current_source_store": catalog_row.get("source_store"),
+        "catalog_current_source_url": catalog_row.get("source_url"),
+    }
+
+
+def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]] | None = None) -> dict[str, Any]:
+    risk = candidate_risk(row)
+    catalog_state = current_catalog_state(row, catalog_by_index or {})
+    item = {
         "manual_confirmed": False,
         "catalog_index": row.get("catalog_index"),
         "row_index": row.get("catalog_index"),
@@ -88,6 +146,7 @@ def compact_item(row: dict[str, Any]) -> dict[str, Any]:
             "weak_candidate_review": 40,
         }.get(risk, 99),
         "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+        "current_catalog_state": catalog_state,
         "source_patch_template": {
             "manual_confirmed": False,
             "row_index": row.get("catalog_index"),
@@ -118,10 +177,26 @@ def compact_item(row: dict[str, Any]) -> dict[str, Any]:
         ],
         "auto_apply_enabled": False,
     }
+    if catalog_state.get("catalog_has_display_image"):
+        item["recommended_action"] = "skip_current_catalog_row_already_has_display_image"
+    elif catalog_state.get("stale_candidate"):
+        item["recommended_action"] = "refresh_candidate_before_manual_review"
+    return item
 
 
-def build_report(source_detail_probe: dict[str, Any], *, generated_at: str | None = None, batch_size: int = 10) -> dict[str, Any]:
-    items = [compact_item(row) for row in source_detail_probe.get("review_candidates") or [] if isinstance(row, dict)]
+def build_report(
+    source_detail_probe: dict[str, Any],
+    catalog_rows: list[dict[str, Any]] | None = None,
+    *,
+    generated_at: str | None = None,
+    batch_size: int = 10,
+) -> dict[str, Any]:
+    by_index = catalog_index(catalog_rows or [])
+    items = [
+        compact_item(row, by_index)
+        for row in source_detail_probe.get("review_candidates") or []
+        if isinstance(row, dict)
+    ]
     items.sort(
         key=lambda row: (
             {"strong_single_candidate_review": 10, "near_single_candidate_review": 20, "ambiguous_candidate_review": 30}.get(
@@ -162,6 +237,21 @@ def build_report(source_detail_probe: dict[str, Any], *, generated_at: str | Non
             "batch_size": batch_size,
             "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
             "safe_source_image_pair_rows": sum(1 for item in items if item.get("safe_source_image_pair") is True),
+            "current_catalog_matched_rows": sum(
+                1 for item in items if item.get("current_catalog_state", {}).get("catalog_match_found") is True
+            ),
+            "current_catalog_missing_display_image_rows": sum(
+                1 for item in items if item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
+            ),
+            "current_catalog_already_has_display_image_rows": sum(
+                1 for item in items if item.get("current_catalog_state", {}).get("catalog_has_display_image") is True
+            ),
+            "stale_candidate_rows": sum(
+                1 for item in items if item.get("current_catalog_state", {}).get("stale_candidate") is True
+            ),
+            "identity_matched_candidate_rows": sum(
+                1 for item in items if item.get("current_catalog_state", {}).get("catalog_identity_matches") is True
+            ),
             "near_or_better_candidate_rows": sum(
                 1
                 for item in items
@@ -183,6 +273,7 @@ def build_report(source_detail_probe: dict[str, Any], *, generated_at: str | Non
             "Use this queue only after reviewing source_detail_probe_public review candidates.",
             "Do not import candidate source_url or image_url unless manual_confirmed is set true after exact identity review.",
             "Rows may contain related products; wrong character or variant candidates must remain unconfirmed.",
+            "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image.",
         ],
         "batches": batches,
         "automation_policy": {
@@ -198,11 +289,12 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--batch-size", type=int, default=10)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(load_json(args.input), batch_size=args.batch_size)
+    report = build_report(load_json(args.input), load_catalog_rows(args.catalog), batch_size=args.batch_size)
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))

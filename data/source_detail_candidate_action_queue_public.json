@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T11:25:03Z",
+  "generated_at": "2026-07-22T13:09:25Z",
   "scope": "source_detail_candidate_action_queue",
   "summary": {
     "candidate_action_rows": 15,
@@ -8,6 +8,11 @@
     "batch_size": 10,
     "manual_confirmed_true": 0,
     "safe_source_image_pair_rows": 15,
+    "current_catalog_matched_rows": 15,
+    "current_catalog_missing_display_image_rows": 12,
+    "current_catalog_already_has_display_image_rows": 3,
+    "stale_candidate_rows": 0,
+    "identity_matched_candidate_rows": 15,
     "near_or_better_candidate_rows": 2,
     "ambiguous_or_weaker_candidate_rows": 13,
     "by_source_store": [
@@ -53,7 +58,8 @@
   "instructions": [
     "Use this queue only after reviewing source_detail_probe_public review candidates.",
     "Do not import candidate source_url or image_url unless manual_confirmed is set true after exact identity review.",
-    "Rows may contain related products; wrong character or variant candidates must remain unconfirmed."
+    "Rows may contain related products; wrong character or variant candidates must remain unconfirmed.",
+    "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image."
   ],
   "batches": [
     {
@@ -128,6 +134,16 @@
           "review_risk": "near_single_candidate_review",
           "review_priority": 20,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "POP UP PARADE 모노쿠마",
+            "catalog_current_name_ja": "POP UP PARADE モノクマ",
+            "catalog_current_source_store": "굿스마일컴퍼니",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 1455,
@@ -182,6 +198,16 @@
           "review_risk": "near_single_candidate_review",
           "review_priority": 20,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "짱구는 못말려 트레이딩 캔뱃지 (가족)",
+            "catalog_current_name_ja": "クレヨンしんちゃん トレーディング缶バッジ",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2225,
@@ -235,6 +261,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "넨도로이드 마히토",
+            "catalog_current_name_ja": "ねんどろいど 真人",
+            "catalog_current_source_store": "굿스마일컴퍼니",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2038,
@@ -288,6 +324,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
+            "catalog_current_name_ja": "推しの子 アクリルスタンド (あかね)",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 1992,
@@ -341,6 +387,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "전생슬 클리어 파일 (템페스트 연방국)",
+            "catalog_current_name_ja": "転スラ クリアファイル",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2072,
@@ -394,7 +450,17 @@
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
-          "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "recommended_action": "skip_current_catalog_row_already_has_display_image",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": true,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "전생슬 태피스트리 (리무루)",
+            "catalog_current_name_ja": "転スラ タペストリー (リムル)",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%80%91%E8%BB%A2%E7%94%9F%E3%81%97%E3%81%9F%E3%82%89%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0%E3%81%A0%E3%81%A3%E3%81%9F%E4%BB%B6++B2%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC+%28%E3%83%AA%E3%83%A0%E3%83%AB%29/pd/1967944/"
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2073,
@@ -449,6 +515,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "이루마군 키링 (알리)",
+            "catalog_current_name_ja": "魔入りました！入間くん キーホルダー (アリ)",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2197,
@@ -503,6 +579,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "이루마군 일러스트 카드 (한정)",
+            "catalog_current_name_ja": "魔入りました！入間くん イラストカード",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2202,
@@ -556,6 +642,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "짱구는 못말려 머그컵 (노하라 가족)",
+            "catalog_current_name_ja": "クレヨンしんちゃん マグカップ",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2232,
@@ -610,6 +706,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "짱구는 못말려 클리어 파일 (카스카베 방위대)",
+            "catalog_current_name_ja": "クレヨンしんちゃん クリアファイル",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2233,
@@ -702,6 +808,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "짱구는 못말려 의류 신짱 액션가면 티셔츠",
+            "catalog_current_name_ja": "クレヨンしんちゃん Tシャツ",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2235,
@@ -756,6 +872,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "짱구는 못말려 파우치 (신짱)",
+            "catalog_current_name_ja": "クレヨンしんちゃん ポーチ",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2237,
@@ -810,6 +936,16 @@
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
           "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": false,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "오버로드 클리어 파일 (나자릭 지하 대분묘)",
+            "catalog_current_name_ja": "オーバーロード クリアファイル",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": null
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2253,
@@ -863,7 +999,17 @@
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
-          "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "recommended_action": "skip_current_catalog_row_already_has_display_image",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": true,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "오버로드 머그컵 (아인즈)",
+            "catalog_current_name_ja": "オーバーロード マグカップ",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": "https://www.animate-onlineshop.jp/sphone/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%E3%80%91%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%E2%85%A1%20%E8%93%8B%E3%81%A4%E3%81%8D%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%E3%82%A2%E3%82%A4%E3%83%B3%E3%82%BA/pd/1600732/"
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2254,
@@ -916,7 +1062,17 @@
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
-          "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+          "recommended_action": "skip_current_catalog_row_already_has_display_image",
+          "current_catalog_state": {
+            "catalog_match_found": true,
+            "catalog_has_display_image": true,
+            "catalog_identity_matches": true,
+            "stale_candidate": false,
+            "catalog_current_name_ko": "오버로드 트레이딩 카드 (랜덤)",
+            "catalog_current_name_ja": "オーバーロード トレーディングカード",
+            "catalog_current_source_store": "애니메이트",
+            "catalog_current_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AB%E3%83%BC%E3%83%89%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8C%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%E3%80%8D%E8%81%96%E7%8E%8B%E5%9B%BD%E7%B7%A8%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AB%E3%83%BC%E3%83%89/pd/3026428/"
+          },
           "source_patch_template": {
             "manual_confirmed": false,
             "row_index": 2255,

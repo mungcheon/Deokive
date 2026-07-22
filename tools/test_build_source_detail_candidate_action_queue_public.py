@@ -29,13 +29,30 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
             ]
         }
 
-        report = queue.build_report(source_detail, generated_at="2026-07-22T00:00:00Z", batch_size=10)
+        catalog_rows = [
+            {
+                "catalog_index": 7,
+                "source_store": "Animate",
+                "name_ko": "Badge",
+                "name_ja": None,
+                "image_url": "",
+                "local_image_path": "",
+                "source_url": "https://old.example/item",
+            }
+        ]
+
+        report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z", batch_size=10)
 
         self.assertEqual(report["generated_at"], "2026-07-22T00:00:00Z")
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["candidate_action_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertEqual(report["summary"]["safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["summary"]["current_catalog_matched_rows"], 1)
+        self.assertEqual(report["summary"]["current_catalog_missing_display_image_rows"], 1)
+        self.assertEqual(report["summary"]["current_catalog_already_has_display_image_rows"], 0)
+        self.assertEqual(report["summary"]["stale_candidate_rows"], 0)
+        self.assertEqual(report["summary"]["identity_matched_candidate_rows"], 1)
         self.assertEqual(report["summary"]["near_or_better_candidate_rows"], 1)
         self.assertEqual(report["summary"]["ambiguous_or_weaker_candidate_rows"], 0)
         self.assertEqual(report["summary"]["by_candidate_count_bucket"], [["single_candidate", 1]])
@@ -44,10 +61,57 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["candidate_count_bucket"], "single_candidate")
         self.assertEqual(item["review_priority"], 20)
         self.assertEqual(report["batches"][0]["safe_source_image_pair_rows"], 1)
+        self.assertEqual(item["current_catalog_state"]["catalog_match_found"], True)
+        self.assertEqual(item["current_catalog_state"]["catalog_has_display_image"], False)
+        self.assertEqual(item["current_catalog_state"]["catalog_identity_matches"], True)
         self.assertEqual(item["source_patch_template"]["field"], "source_url")
         self.assertEqual(item["image_patch_template"]["field"], "image_url")
         self.assertFalse(item["source_patch_template"]["manual_confirmed"])
         self.assertIn("exact product", item["acceptance_criteria"][1])
+
+    def test_build_report_marks_stale_or_already_imaged_candidates(self) -> None:
+        source_detail = {
+            "review_candidates": [
+                {
+                    "catalog_index": 1,
+                    "source_store": "Animate",
+                    "name_ko": "Old Name",
+                    "name_ja": "古い",
+                    "status": "candidate_review_needed",
+                    "candidate_count": 4,
+                    "candidate_source_url": "https://www.animate-onlineshop.jp/pn/old/pd/1/",
+                    "candidate_image_url": "https://tc-animate.techorus-cdn.com/old.jpg",
+                    "score": 0.5,
+                    "safe_source_image_pair": True,
+                },
+                {
+                    "catalog_index": 2,
+                    "source_store": "Animate",
+                    "name_ko": "Solved",
+                    "name_ja": "解決",
+                    "status": "candidate_review_needed",
+                    "candidate_count": 1,
+                    "candidate_source_url": "https://www.animate-onlineshop.jp/pn/solved/pd/2/",
+                    "candidate_image_url": "https://tc-animate.techorus-cdn.com/solved.jpg",
+                    "score": 0.8,
+                    "safe_source_image_pair": True,
+                },
+            ]
+        }
+        catalog_rows = [
+            {"catalog_index": 1, "source_store": "Animate", "name_ko": "New Name", "name_ja": "新しい"},
+            {"catalog_index": 2, "source_store": "Animate", "name_ko": "Solved", "name_ja": "解決", "image_url": "https://example/img.jpg"},
+        ]
+
+        report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
+
+        self.assertEqual(report["summary"]["current_catalog_matched_rows"], 2)
+        self.assertEqual(report["summary"]["current_catalog_missing_display_image_rows"], 1)
+        self.assertEqual(report["summary"]["current_catalog_already_has_display_image_rows"], 1)
+        self.assertEqual(report["summary"]["stale_candidate_rows"], 1)
+        actions = {item["catalog_index"]: item["recommended_action"] for batch in report["batches"] for item in batch["items"]}
+        self.assertEqual(actions[1], "refresh_candidate_before_manual_review")
+        self.assertEqual(actions[2], "skip_current_catalog_row_already_has_display_image")
 
 
 if __name__ == "__main__":
