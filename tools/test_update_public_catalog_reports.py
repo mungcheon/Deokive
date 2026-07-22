@@ -29,6 +29,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/goodsmile_missing_image_search_public.json", updated_files)
         self.assertIn("data/kotobukiya_movic_missing_image_search_public.json", updated_files)
         self.assertIn("data/jump_furyu_taito_missing_image_search_public.json", updated_files)
+        self.assertIn("data/manual_missing_image_source_discovery_public.json", updated_files)
         self.assertIn("data/ensky_missing_image_cache_coverage_public.json", updated_files)
         self.assertIn("data/ensky_search_page_probe_public.json", updated_files)
         self.assertIn("data/stellive_fanding_candidates_public.json", updated_files)
@@ -55,6 +56,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         if reports.JUMP_FURYU_TAITO_MISSING_IMAGE_SEARCH.exists():
             self.assertEqual(quality["jump_furyu_taito_missing_image_search"]["missing_target_image_rows"], 59)
             self.assertIs(quality["jump_furyu_taito_missing_image_search"]["auto_apply_enabled"], False)
+        if reports.MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY.exists():
+            self.assertEqual(quality["manual_missing_image_source_discovery"]["manual_source_discovery_rows"], 112)
+            self.assertIs(quality["manual_missing_image_source_discovery"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():
