@@ -17,6 +17,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertGreater(result["rows"], 0)
         self.assertIn("source_url", result["missing"])
         self.assertIn("image_url", result["missing"])
+        self.assertEqual(result["public_validation"]["status"], "pass")
+        self.assertGreaterEqual(result["public_validation"]["checked_files"], 30)
         updated_files = {Path(path).as_posix() for path in result["updated_files"]}
         self.assertIn("data/catalog_operations_public.json", updated_files)
         self.assertIn("data/catalog_agent_work_queue_public.json", updated_files)
@@ -26,6 +28,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_execution_plan_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
+
+    def test_all_public_json_files_are_parseable_and_safe_for_pages(self):
+        public_files = reports.discover_public_json_files()
+        self.assertGreaterEqual(len(public_files), 30)
+        self.assertIn(reports.PUBLIC_CATALOG, public_files)
+        self.assertIn(reports.OPERATIONS_REPORT, public_files)
+
+        validation = reports.validate_all_public_json_files()
+        self.assertEqual(validation["status"], "pass", validation["findings"])
+        self.assertEqual(validation["checked_files"], len(public_files))
 
     def test_published_reports_keep_manual_review_guards(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)

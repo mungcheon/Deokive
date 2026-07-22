@@ -3460,6 +3460,22 @@ def validate_public_files(paths: list[Path]) -> list[str]:
     return findings
 
 
+def discover_public_json_files() -> list[Path]:
+    public_files = {PUBLIC_CATALOG, PUBLIC_META}
+    public_files.update(DATA.glob("*_public.json"))
+    return sorted(path for path in public_files if path.exists())
+
+
+def validate_all_public_json_files() -> dict[str, Any]:
+    public_files = discover_public_json_files()
+    findings = validate_public_files(public_files)
+    return {
+        "checked_files": len(public_files),
+        "findings": findings,
+        "status": "pass" if not findings else "fail",
+    }
+
+
 def validate_report_consistency(
     rows: int,
     missing: dict[str, int],
@@ -4246,47 +4262,8 @@ def update_reports(write: bool) -> dict[str, Any]:
     if consistency_findings:
         raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))
 
-    public_files = [
-        PUBLIC_CATALOG,
-        PUBLIC_META,
-        QUALITY,
-        IMAGE_BACKLOG,
-        IMAGE_CANDIDATES,
-        IMAGE_ATTACHMENT_ACTION_QUEUE,
-        DEDUPLICATION,
-        DEDUPLICATION_REVIEW_BATCHES,
-        DEDUPLICATION_ACTION_QUEUE,
-        ANIMATION_CATEGORIES,
-        ICHIIBAN_KUJI_HISTORY,
-        ICHIIBAN_KUJI_METADATA_PROBE,
-        ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES,
-        ICHIIBAN_KUJI_METADATA_ACTION_QUEUE,
-        GOTOUCHI,
-        REQUESTED,
-        REQUESTED_FOCUS,
-        REQUESTED_FOCUS_REVIEW_BATCHES,
-        REQUESTED_FOCUS_ACTION_QUEUE,
-        DANGANRONPA_MISSING_MEDIA,
-        DANGANRONPA_GOODSMILE_PROBE,
-        DANGANRONPA_PRIZE_PROBE,
-        DANGANRONPA_SOURCE_DETAIL_PROBE,
-        GENERIC_SOURCE,
-        GENERIC_SOURCE_PATCH_CANDIDATES,
-        SOURCE_DETAIL,
-        SOURCE_DISCOVERY,
-        SOURCE_DISCOVERY_REVIEW_BATCHES,
-        SOURCE_DISCOVERY_ACTION_QUEUE,
-        METADATA_BACKLOG,
-        METADATA_REVIEW_BATCHES,
-        METADATA_ACTION_QUEUE,
-        ANIMATION_CATEGORY_ACTION_QUEUE,
-        CONFIRMED_IMPORT_READINESS,
-        EXECUTION_PLAN,
-        IMAGE_ENRICHMENT_BATCHES,
-        OPERATIONS_REPORT,
-        AGENT_WORK_QUEUE,
-    ]
-    findings = validate_public_files([path for path in public_files if path.exists()])
+    public_validation = validate_all_public_json_files()
+    findings = public_validation["findings"]
     if findings:
         raise ValueError("public safety validation failed: " + "; ".join(findings))
 
@@ -4312,6 +4289,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         "rows": rows,
         "missing": missing,
         "coverage": cov,
+        "public_validation": public_validation,
         "updated_files": [
             str(PUBLIC_META.relative_to(ROOT)),
             str(QUALITY.relative_to(ROOT)),
