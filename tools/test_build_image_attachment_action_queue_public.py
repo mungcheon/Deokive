@@ -69,11 +69,29 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["workstreams"][0]["source_store"], "Stellive Store")
         self.assertEqual(report["workstreams"][0]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(report["workstreams"][0]["source_url_update_template_rows"], 2)
+        self.assertEqual(report["workstreams"][0]["review_summary"]["review_lane"], "source_url_replacement_first")
+        self.assertIn(
+            "generic_storefront_source_url",
+            report["workstreams"][0]["review_summary"]["primary_blockers"],
+        )
         self.assertEqual(report["next_actions"][0]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(report["batches"][0]["workflow"], "replace_generic_source_then_extract_image")
         self.assertEqual([item["catalog_index"] for item in report["batches"][0]["items"]], [1, 2])
+        self.assertEqual(report["batches"][0]["items"][0]["review_lane"], "source_url_replacement_first")
         self.assertTrue(report["batches"][0]["items"][0]["source_url_update_required"])
         self.assertFalse(report["batches"][0]["items"][0]["image_url_ready"])
+        self.assertEqual(
+            report["batches"][0]["items"][0]["image_import_blockers"],
+            [
+                "generic_storefront_source_url",
+                "missing_exact_product_detail_url",
+                "missing_product_page_image_url",
+            ],
+        )
+        self.assertIn(
+            "Find the exact product detail page",
+            report["batches"][0]["items"][0]["manual_confirmation_requirements"][0],
+        )
         source_template = report["batches"][0]["items"][0]["source_url_import_template"]
         self.assertEqual(source_template["field"], "source_url")
         self.assertEqual(source_template["manual_value"], "")
@@ -120,6 +138,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 1)
         self.assertEqual(report["next_actions"][1]["next_batch_id"], "image-attachment-action-001")
+        self.assertEqual(
+            report["batches"][0]["items"][0]["review_lane"],
+            "representative_image_candidate_review",
+        )
+        self.assertIn(
+            "product_type_confirmation_required",
+            report["batches"][0]["items"][0]["image_import_blockers"],
+        )
 
     def test_catalog_images_are_skipped_from_action_items(self) -> None:
         enrichment = {

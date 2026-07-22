@@ -105,6 +105,7 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 bucket["sample_items"].append(
                     {
                         "catalog_index": item.get("catalog_index"),
+                        "review_lane": item.get("review_lane"),
                         "name_ko": item.get("name_ko"),
                         "name_ja": item.get("name_ja"),
                         "category": item.get("category"),
@@ -141,6 +142,7 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "category_rows": [
                     [category, count] for category, count in bucket["category_rows"].most_common()
                 ],
+                "review_summary": _workstream_review_summary(workflow, bucket),
                 "sample_items": bucket["sample_items"],
                 "auto_apply_enabled": False,
             }
@@ -163,9 +165,11 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     representative_image_review_required = workflow == "review_gotouchi_official_candidates"
     image_url_ready = workflow == "extract_from_existing_source_url"
     source_url_template = _source_url_import_template(item, group) if source_url_update_required else None
+    review_lane = _review_lane(workflow)
     return {
         "catalog_index": item.get("catalog_index"),
         "workflow": workflow,
+        "review_lane": review_lane,
         "source_store": group.get("source_store"),
         "name_ko": item.get("name_ko"),
         "name_ja": item.get("name_ja"),
@@ -177,6 +181,8 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "representative_image_review_required": representative_image_review_required,
         "image_url_ready": image_url_ready,
         "required_before_image_import": _required_before_image_import(workflow),
+        "image_import_blockers": _image_import_blockers(workflow),
+        "manual_confirmation_requirements": _manual_confirmation_requirements(workflow),
         "source_url_import_template": source_url_template,
         "catalog_field_import_template": template,
         "review_state": "exact_product_image_confirmation_required",
@@ -391,6 +397,67 @@ def _required_before_image_import(workflow: str) -> list[str]:
     if workflow == "review_gotouchi_official_candidates":
         return ["confirm_exact_product_type", "confirm_representative_image_is_acceptable"]
     return ["manual_image_evidence_review"]
+
+
+def _review_lane(workflow: str) -> str:
+    if workflow == "extract_from_existing_source_url":
+        return "image_url_review_ready"
+    if workflow == "replace_generic_source_then_extract_image":
+        return "source_url_replacement_first"
+    if workflow == "review_gotouchi_official_candidates":
+        return "representative_image_candidate_review"
+    return "manual_image_research"
+
+
+def _image_import_blockers(workflow: str) -> list[str]:
+    if workflow == "extract_from_existing_source_url":
+        return ["manual_image_url_confirmation"]
+    if workflow == "replace_generic_source_then_extract_image":
+        return [
+            "generic_storefront_source_url",
+            "missing_exact_product_detail_url",
+            "missing_product_page_image_url",
+        ]
+    if workflow == "review_gotouchi_official_candidates":
+        return [
+            "representative_image_may_not_match_exact_variant",
+            "product_type_confirmation_required",
+        ]
+    return ["manual_source_and_image_evidence_required"]
+
+
+def _manual_confirmation_requirements(workflow: str) -> list[str]:
+    if workflow == "extract_from_existing_source_url":
+        return [
+            "Open source_url.",
+            "Confirm the page is for the exact catalog item.",
+            "Copy the primary product image URL into the image attachment template.",
+        ]
+    if workflow == "replace_generic_source_then_extract_image":
+        return [
+            "Find the exact product detail page, not a storefront or search page.",
+            "Fill source_url_import_template.manual_value with that exact product URL.",
+            "Only after source_url is replaced, confirm and attach the product image URL.",
+        ]
+    if workflow == "review_gotouchi_official_candidates":
+        return [
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Do not auto-apply if the official candidate shows a different product type.",
+        ]
+    return ["Manually confirm source and image evidence before catalog mutation."]
+
+
+def _workstream_review_summary(workflow: str, bucket: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "review_lane": _review_lane(workflow),
+        "queued_rows": bucket["queued_image_rows"],
+        "source_url_update_required_rows": bucket["source_url_update_template_rows"],
+        "representative_image_review_rows": bucket["representative_image_review_rows"],
+        "image_url_ready_rows": bucket["image_url_ready_rows"],
+        "primary_blockers": _image_import_blockers(workflow),
+        "manual_confirmation_requirements": _manual_confirmation_requirements(workflow),
+    }
 
 
 def main() -> int:
