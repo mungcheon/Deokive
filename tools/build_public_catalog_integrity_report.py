@@ -77,6 +77,8 @@ def compact(row: dict[str, Any]) -> dict[str, Any]:
         "category": row.get("category"),
         "sub_series": row.get("sub_series"),
         "barcode": row.get("barcode"),
+        "image_url": row.get("image_url"),
+        "local_image_path": row.get("local_image_path"),
     }
 
 
@@ -98,14 +100,21 @@ def duplicate_review_groups(rows: list[dict[str, Any]]) -> tuple[list[dict[str, 
     for (_store, _name, source, barcode), items in groups.items():
         if len(items) < 2:
             continue
+        image_keys = {
+            norm(row.get("local_image_path") or row.get("image_url"))
+            for row in items
+            if present(row.get("local_image_path")) or present(row.get("image_url"))
+        }
+        same_image = len(image_keys) <= 1
         entry = {
             "rows": len(items),
             "reason": "same_store_name_and_source_or_barcode",
             "has_barcode": bool(barcode),
             "source_url_is_generic": is_generic_source_url(source),
+            "same_display_image": same_image,
             "items": [compact(row) for row in items],
         }
-        if barcode or (source and not is_generic_source_url(source)):
+        if barcode or (source and not is_generic_source_url(source) and same_image):
             high_confidence.append(entry)
         else:
             review_needed.append(entry)
