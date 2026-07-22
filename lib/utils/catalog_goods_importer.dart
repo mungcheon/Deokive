@@ -65,7 +65,7 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   );
   if (destination == null || !context.mounted) return false;
 
-  final imageBytes = await loadCatalogEntryBundledImageBytes(entry);
+  final imageBytes = await loadCatalogEntryImageBytes(entry);
   if (!context.mounted) return false;
 
   final item = goodsItemFromCatalogEntry(
@@ -166,9 +166,9 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.88,
-        minChildSize: 0.74,
-        maxChildSize: 0.98,
+        initialChildSize: 0.80,
+        minChildSize: 0.50,
+        maxChildSize: 0.96,
         builder: (context, scrollController) {
           return StatefulBuilder(
             builder: (context, setSheetState) {
