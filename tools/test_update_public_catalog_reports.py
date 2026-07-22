@@ -44,6 +44,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_metadata_action_queue_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
+        self.assertIn("data/gotouchi_representative_image_attachment_public.json", updated_files)
 
         quality = reports.load_json(reports.QUALITY)
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
@@ -80,6 +81,13 @@ class PublicCatalogReportTests(unittest.TestCase):
         if reports.STELLIVE_FANDING_CANDIDATES.exists():
             self.assertGreater(quality["stellive_fanding_candidates"]["missing_image_candidate_rows"], 0)
             self.assertIs(quality["stellive_fanding_candidates"]["auto_apply_enabled"], False)
+        if reports.GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.exists():
+            self.assertEqual(
+                quality["gotouchi_representative_image_attachment"]["representative_attachment_rows"],
+                3,
+            )
+            self.assertEqual(quality["gotouchi_representative_image_attachment"]["manual_confirmed_true"], 0)
+            self.assertIs(quality["gotouchi_representative_image_attachment"]["auto_apply_enabled"], False)
 
     def test_all_public_json_files_are_parseable_and_safe_for_pages(self):
         public_files = reports.discover_public_json_files()

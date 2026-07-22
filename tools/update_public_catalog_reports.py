@@ -46,6 +46,7 @@ ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
 ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES = DATA / "ichiban_kuji_metadata_review_batches_public.json"
 ICHIIBAN_KUJI_METADATA_ACTION_QUEUE = DATA / "ichiban_kuji_metadata_action_queue_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
+GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT = DATA / "gotouchi_representative_image_attachment_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
 REQUESTED_FOCUS_REVIEW_BATCHES = DATA / "requested_focus_review_batches_public.json"
@@ -4567,6 +4568,10 @@ def update_reports(write: bool) -> dict[str, Any]:
     for target in (quality, image_backlog, image_candidates):
         if GOTOUCHI.exists():
             target["gotouchi_chiikawa_image_candidates"] = copy_report_summary(GOTOUCHI, "gotouchi")
+        if GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.exists():
+            target["gotouchi_representative_image_attachment"] = copy_report_summary(
+                GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT, "gotouchi_representative_image_attachment"
+            )
         if REQUESTED.exists():
             target["requested_special_goods_review"] = copy_report_summary(REQUESTED, "requested")
         if GENERIC_SOURCE.exists():
@@ -4808,6 +4813,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ENSKY_CACHE_COVERAGE.relative_to(ROOT)),
             str(ENSKY_SEARCH_PAGE_PROBE.relative_to(ROOT)),
             str(STELLIVE_FANDING_CANDIDATES.relative_to(ROOT)),
+            str(GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),

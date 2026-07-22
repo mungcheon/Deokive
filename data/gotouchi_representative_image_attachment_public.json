@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-22T08:38:38Z",
+  "scope": "gotouchi_representative_image_attachment",
+  "summary": {
+    "representative_attachment_rows": 3,
+    "manual_confirmed_true": 0,
+    "auto_apply_enabled": false
+  },
+  "breakdowns": {
+    "by_category": [
+      {
+        "category": "마스코트",
+        "rows": 3
+      }
+    ],
+    "by_character_name": [
+      {
+        "character_name": "치이카와",
+        "rows": 1
+      },
+      {
+        "character_name": "하치와레",
+        "rows": 1
+      },
+      {
+        "character_name": "우사기",
+        "rows": 1
+      }
+    ]
+  },
+  "items": [
+    {
+      "manual_confirmed": false,
+      "manual_note": "",
+      "catalog_index": 947,
+      "field": "image_url",
+      "manual_value": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+      "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+      "representative_image": true,
+      "source_store": "ご当地ちいかわ 公式(API)",
+      "name_ko": "치이카와 ご当地 마스코트 (홋카이도 곰)",
+      "name_ja": "ちいかわ ご当地マスコット (北海道 ヒグマ)",
+      "category": "마스코트",
+      "character_name": "치이카와",
+      "candidate_status": "attached_representative_official_image",
+      "candidate_alt": "北海道 ぬいぐるみキーチェーン",
+      "candidate_type": "plush_keychain",
+      "row_type": "plush_keychain",
+      "matched_motifs": [
+        "北海道"
+      ],
+      "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+    },
+    {
+      "manual_confirmed": false,
+      "manual_note": "",
+      "catalog_index": 948,
+      "field": "image_url",
+      "manual_value": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+      "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+      "representative_image": true,
+      "source_store": "ご当地ちいかわ 公式(API)",
+      "name_ko": "하치와레 ご当地 마스코트 (홋카이도 우유)",
+      "name_ja": "ハチワレ ご当地マスコット (北海道 牛乳)",
+      "category": "마스코트",
+      "character_name": "하치와레",
+      "candidate_status": "attached_representative_official_image",
+      "candidate_alt": "北海道 ぬいぐるみキーチェーン",
+      "candidate_type": "plush_keychain",
+      "row_type": "plush_keychain",
+      "matched_motifs": [
+        "北海道"
+      ],
+      "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+    },
+    {
+      "manual_confirmed": false,
+      "manual_note": "",
+      "catalog_index": 949,
+      "field": "image_url",
+      "manual_value": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+      "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+      "representative_image": true,
+      "source_store": "ご当地ちいかわ 公式(API)",
+      "name_ko": "우사기 ご当地 마스코트 (홋카이도 게)",
+      "name_ja": "うさぎ ご当地マスコット (北海道 カニ)",
+      "category": "마스코트",
+      "character_name": "우사기",
+      "candidate_status": "attached_representative_official_image",
+      "candidate_alt": "北海道 ぬいぐるみキーチェーン",
+      "candidate_type": "plush_keychain",
+      "row_type": "plush_keychain",
+      "matched_motifs": [
+        "北海道"
+      ],
+      "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+    }
+  ],
+  "automation_policy": {
+    "auto_apply_catalog_changes": false,
+    "requires_manual_confirmed_true": true,
+    "requires_visual_identity_review": true,
+    "safe_import_command": "python tools/import_confirmed_image_attachment_rows.py --queue data/gotouchi_representative_image_attachment_public.json"
+  }
+}
