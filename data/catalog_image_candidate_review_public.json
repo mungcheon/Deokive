@@ -2091,7 +2091,7 @@
     "animation_category_name_split_unmatched_catalog_rows": 2712,
     "animation_category_unmatched_keyword_rows": 2712,
     "animation_category_unmatched_keyword_candidates": 49,
-    "animation_category_unmatched_keyword_product_type_candidates": 0
+    "animation_category_unmatched_keyword_product_type_candidates": 6
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
@@ -2287,7 +2287,7 @@
       "animation_category_name_split_unmatched_catalog_rows": 2712,
       "animation_category_unmatched_keyword_rows": 2712,
       "animation_category_unmatched_keyword_candidates": 49,
-      "animation_category_unmatched_keyword_product_type_candidates": 0
+      "animation_category_unmatched_keyword_product_type_candidates": 6
     }
   },
   "generic_source_patch_candidates": {
@@ -3218,11 +3218,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 16,
+    "action_count": 17,
     "blocked_action_count": 1,
-    "manual_review_action_count": 14,
+    "manual_review_action_count": 15,
     "pending_import_action_count": 0,
-    "total_action_rows": 42071,
+    "total_action_rows": 42533,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -3272,10 +3272,23 @@
       "animation_category_name_split_unmatched_catalog_rows": 2712,
       "animation_category_unmatched_keyword_rows": 2712,
       "animation_category_unmatched_keyword_candidates": 49,
-      "animation_category_unmatched_keyword_product_type_candidates": 0
+      "animation_category_unmatched_keyword_product_type_candidates": 6
     },
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
+    "ichiban_zero_price_exception_policy_pass": true,
+    "ichiban_multi_item_prize_label_groups": 416,
+    "ichiban_reissue_duplicate_review_groups": 46,
+    "dedupe_fast_review_groups": 42,
+    "dedupe_fast_review_same_source_url_groups": 38,
+    "image_action_source_url_update_required_rows": 50,
+    "image_action_image_url_ready_rows": 0,
+    "animation_split_review_categories": 3,
+    "animation_candidate_split_rules": 21,
+    "animation_split_matched_catalog_rows": 2283,
+    "animation_split_unmatched_catalog_rows": 2712,
+    "animation_unmatched_keyword_candidates": 49,
+    "animation_unmatched_keyword_product_type_candidates": 6,
     "auto_apply_enabled": false
   },
   "requested_focus_action_queue": {
@@ -3418,6 +3431,9 @@
         2
       ]
     ],
+    "source_url_update_required_rows": 50,
+    "representative_image_review_required_rows": 23,
+    "image_url_ready_rows": 0,
     "excluded_workflow_rows": [
       [
         "find_source_then_extract_image",
@@ -4866,7 +4882,9 @@
     "public_report": "data/catalog_deduplication_fast_review_public.json",
     "fast_review_groups": 42,
     "held_for_later_groups": 6,
+    "same_barcode_groups": 42,
     "same_source_url_groups": 38,
+    "same_image_url_groups": 0,
     "manual_confirmed_true": 0,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
@@ -4942,7 +4960,7 @@
     "source_category_rows": 4995,
     "unmatched_rows": 2712,
     "token_candidate_count": 49,
-    "product_type_candidate_count": 0,
+    "product_type_candidate_count": 6,
     "noise_candidate_count": 26,
     "manual_confirmed_rows": 0,
     "auto_apply_enabled": false
