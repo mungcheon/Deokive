@@ -51,6 +51,14 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
                 {
                     "row_index": 10,
                     "candidate_status": "weak_manual_review_candidate",
+                    "candidate_review_lane": "weak_candidate_review",
+                    "match_diagnostics": {
+                        "diagnosis": "candidate_requires_exact_identity_confirmation",
+                        "query_tokens": ["badge"],
+                    },
+                    "fallback_search_queries": [
+                        "site:fanding.kr/@stellive/shop Badge",
+                    ],
                     "top_candidates": [
                         {
                             "product_no": 100,
@@ -89,6 +97,15 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["candidate_image_url"], "https://example.test/badge.webp")
         self.assertEqual(item["candidate_title"], "Badge exact-ish")
         self.assertEqual(item["candidate_status"], "weak_manual_review_candidate")
+        self.assertEqual(item["candidate_review_lane"], "weak_candidate_review")
+        self.assertEqual(
+            item["match_diagnostics"]["diagnosis"],
+            "candidate_requires_exact_identity_confirmation",
+        )
+        self.assertEqual(
+            item["fallback_search_queries"],
+            ["site:fanding.kr/@stellive/shop Badge"],
+        )
         self.assertEqual(item["source_url_review_lane"], "weak_candidate_review")
         self.assertIn("weak_candidate_only", item["source_url_review_blockers"])
         self.assertIn("manual_confirmed=true", item["manual_confirmation_requirements"][-1])

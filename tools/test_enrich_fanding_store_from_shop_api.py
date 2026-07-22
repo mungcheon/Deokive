@@ -152,6 +152,24 @@ class FandingStoreEnrichmentTests(unittest.TestCase):
             },
         )
 
+    def test_no_candidate_gets_manual_search_diagnostics(self) -> None:
+        row = {
+            "name_ko": "강지 마스코트 인형",
+            "category": "인형",
+            "affiliation": "스텔라이브",
+        }
+        queries = fanding._fallback_search_queries(row, row["name_ko"])
+
+        self.assertEqual(
+            fanding._candidate_review_lane("no_candidate", []),
+            "manual_search_required",
+        )
+        self.assertIn("site:fanding.kr/@stellive/shop 강지 마스코트 인형", queries)
+        self.assertEqual(
+            fanding._match_diagnostics(row["name_ko"], [])["diagnosis"],
+            "no_product_matched_member_and_product_type_filters",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

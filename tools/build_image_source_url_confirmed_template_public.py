@@ -63,6 +63,9 @@ def _candidate_summary(candidate_row: dict[str, Any] | None) -> dict[str, Any] |
         )
     return {
         "candidate_status": candidate_row.get("candidate_status"),
+        "candidate_review_lane": candidate_row.get("candidate_review_lane"),
+        "match_diagnostics": candidate_row.get("match_diagnostics") or {},
+        "fallback_search_queries": candidate_row.get("fallback_search_queries") or [],
         "candidate_count": len(top_candidates),
         "top_candidates": compact_candidates,
     }
@@ -83,6 +86,7 @@ def _template_item(
     top_candidate = top_candidates[0] if top_candidates else {}
     candidate_status = candidate_summary.get("candidate_status") if candidate_summary else None
     candidate_score = top_candidate.get("score")
+    candidate_review_lane = candidate_summary.get("candidate_review_lane") if candidate_summary else None
     return {
         **source_template,
         "manual_confirmed": False,
@@ -92,8 +96,11 @@ def _template_item(
         "candidate_title": top_candidate.get("title") or "",
         "candidate_score": candidate_score,
         "candidate_status": candidate_status,
+        "candidate_review_lane": candidate_review_lane,
         "candidate_count": candidate_summary.get("candidate_count") if candidate_summary else 0,
         "candidate_options": top_candidates,
+        "match_diagnostics": candidate_summary.get("match_diagnostics") if candidate_summary else {},
+        "fallback_search_queries": candidate_summary.get("fallback_search_queries") if candidate_summary else [],
         "source_url_review_lane": _source_url_review_lane(candidate_status, candidate_score),
         "source_url_review_blockers": _source_url_review_blockers(candidate_status, candidate_score),
         "manual_confirmation_requirements": _manual_confirmation_requirements(),

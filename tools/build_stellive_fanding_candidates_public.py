@@ -5,6 +5,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from collections import Counter
 
 import enrich_fanding_store_from_shop_api as fanding
 
@@ -49,6 +50,10 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         "missing_image_queue_rows": len(missing_image_queue),
         "review_queue_rows": len(review_queue),
         "missing_image_review_queue_rows": len(missing_image_review_queue),
+        "candidate_review_lane_counts": _counter_dict(queue, "candidate_review_lane"),
+        "missing_image_candidate_review_lane_counts": _counter_dict(
+            missing_image_queue, "candidate_review_lane"
+        ),
         "auto_apply_enabled": False,
     }
     return {
@@ -69,6 +74,11 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         "missing_image_review_queue": missing_image_review_queue,
         "rejected_sample": rejected,
     }
+
+
+def _counter_dict(rows: list[dict[str, Any]], field: str) -> dict[str, int]:
+    counts = Counter(str(row.get(field) or "unknown") for row in rows)
+    return {key: counts[key] for key in sorted(counts)}
 
 
 def write_report(report: dict[str, Any], path: Path = REPORT) -> None:

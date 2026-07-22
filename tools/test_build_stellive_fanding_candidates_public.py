@@ -25,6 +25,7 @@ class StelliveFandingCandidatesPublicTests(unittest.TestCase):
                 "name_ko": "sample",
                 "missing_image_url": True,
                 "candidate_status": "weak_manual_review_candidate",
+                "candidate_review_lane": "weak_candidate_review",
                 "top_candidates": [
                     {
                         "source_url": "https://fanding.kr/@stellive/shop/1",
@@ -40,6 +41,14 @@ class StelliveFandingCandidatesPublicTests(unittest.TestCase):
         self.assertEqual(report["summary"]["queue_rows"], 1)
         self.assertEqual(report["summary"]["missing_image_queue_rows"], 1)
         self.assertEqual(report["summary"]["missing_image_review_queue_rows"], 1)
+        self.assertEqual(
+            report["summary"]["candidate_review_lane_counts"],
+            {"weak_candidate_review": 1},
+        )
+        self.assertEqual(
+            report["summary"]["missing_image_candidate_review_lane_counts"],
+            {"weak_candidate_review": 1},
+        )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_catalog_changes"])
         self.assertEqual(len(report["missing_image_review_queue"]), 1)

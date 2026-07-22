@@ -370,6 +370,80 @@ def _candidate_status(candidates: list[dict[str, Any]]) -> str:
     return "low_confidence_candidate"
 
 
+def _candidate_review_lane(candidate_status: str, top_candidates: list[dict[str, Any]]) -> str:
+    if candidate_status == "no_candidate":
+        return "manual_search_required"
+    if candidate_status == "low_confidence_candidate":
+        return "low_confidence_candidate_review"
+    if candidate_status == "weak_manual_review_candidate":
+        return "weak_candidate_review"
+    if candidate_status == "strong_manual_review_candidate":
+        return "strong_candidate_manual_confirmation"
+    return "manual_review_required"
+
+
+def _match_diagnostics(query: Any, top_candidates: list[dict[str, Any]]) -> dict[str, Any]:
+    query_tokens = sorted(_tokens(query))
+    query_members = sorted(_member_tokens(query))
+    query_events = sorted(_event_tokens(query))
+    top = top_candidates[0] if top_candidates else {}
+    return {
+        "query_tokens": query_tokens,
+        "query_members": query_members,
+        "query_events": query_events,
+        "top_candidate_title": top.get("title"),
+        "top_candidate_score": top.get("score"),
+        "top_candidate_shared_tokens": top.get("shared_tokens") or [],
+        "top_candidate_query_overlap": top.get("query_overlap"),
+        "top_candidate_title_overlap": top.get("title_overlap"),
+        "diagnosis": _candidate_diagnosis(query, top_candidates),
+    }
+
+
+def _candidate_diagnosis(query: Any, top_candidates: list[dict[str, Any]]) -> str:
+    if not top_candidates:
+        members = sorted(_member_tokens(query))
+        events = sorted(_event_tokens(query))
+        if members and events:
+            return "no_product_matched_member_event_and_product_type_filters"
+        if members:
+            return "no_product_matched_member_and_product_type_filters"
+        return "no_product_matched_product_type_filters"
+    top = top_candidates[0]
+    score = float(top.get("score") or 0)
+    shared = top.get("shared_tokens") or []
+    if score < 0.5:
+        return "candidate_exists_but_score_below_manual_review_threshold"
+    if len(shared) < 2:
+        return "candidate_has_too_few_shared_identity_tokens"
+    return "candidate_requires_exact_identity_confirmation"
+
+
+def _fallback_search_queries(row: dict[str, Any], name: str) -> list[str]:
+    normalized_name = name.strip()
+    category = str(row.get("category") or "").strip()
+    affiliation = str(row.get("affiliation") or "").strip()
+    members = sorted(_member_tokens(normalized_name))
+    events = sorted(_event_tokens(normalized_name))
+    base_parts = [part for part in [normalized_name, category] if part]
+    queries = [
+        " ".join(base_parts),
+        " ".join(part for part in ["site:fanding.kr/@stellive/shop", normalized_name] if part),
+    ]
+    if members:
+        queries.append(" ".join(part for part in [members[0], category, affiliation] if part))
+    if events:
+        queries.append(" ".join(part for part in [members[0] if members else "", events[0], category] if part))
+    compact: list[str] = []
+    seen: set[str] = set()
+    for query in queries:
+        query = re.sub(r"\s+", " ", query).strip()
+        if query and query not in seen:
+            compact.append(query)
+            seen.add(query)
+    return compact[:5]
+
+
 def _image_basename(value: Any) -> str:
     path = urllib.parse.urlsplit(str(value or "")).path
     return path.rsplit("/", 1)[-1].strip().lower()
@@ -520,6 +594,9 @@ def enrich(rows: list[dict[str, Any]]) -> tuple[int, list[dict[str, Any]], list[
                 "reason": "exact_title_match_not_unique",
                 "exact_match_count": len(matches),
                 "candidate_status": candidate_status,
+                "candidate_review_lane": _candidate_review_lane(candidate_status, top_candidates),
+                "match_diagnostics": _match_diagnostics(name, top_candidates),
+                "fallback_search_queries": _fallback_search_queries(row, name),
                 "top_candidates": top_candidates,
             }
             candidate_queue.append(candidate_item)
@@ -530,6 +607,9 @@ def enrich(rows: list[dict[str, Any]]) -> tuple[int, list[dict[str, Any]], list[
                     "exact_match_count": len(matches),
                     "contains_sample": contains[:5],
                     "candidate_status": candidate_status,
+                    "candidate_review_lane": candidate_item["candidate_review_lane"],
+                    "match_diagnostics": candidate_item["match_diagnostics"],
+                    "fallback_search_queries": candidate_item["fallback_search_queries"],
                     "top_candidates": top_candidates,
                 }
             )

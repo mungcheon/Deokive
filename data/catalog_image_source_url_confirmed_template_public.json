@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T20:13:47Z",
+  "generated_at": "2026-07-22T20:17:05Z",
   "scope": "catalog_image_source_url_confirmed_template",
   "summary": {
     "template_items": 50,
@@ -143,6 +143,7 @@
       "candidate_title": "S.S.Stellive 메탈 뱃지",
       "candidate_score": 0.2733,
       "candidate_status": "low_confidence_candidate",
+      "candidate_review_lane": "low_confidence_candidate_review",
       "candidate_count": 5,
       "candidate_options": [
         {
@@ -211,6 +212,31 @@
           "title_overlap": 0.1667
         }
       ],
+      "match_diagnostics": {
+        "query_tokens": [
+          "1주년",
+          "뱃지",
+          "세트",
+          "스텔라이브"
+        ],
+        "query_members": [],
+        "query_events": [
+          "1주년"
+        ],
+        "top_candidate_title": "S.S.Stellive 메탈 뱃지",
+        "top_candidate_score": 0.2733,
+        "top_candidate_shared_tokens": [
+          "뱃지"
+        ],
+        "top_candidate_query_overlap": 0.25,
+        "top_candidate_title_overlap": 0.3333,
+        "diagnosis": "candidate_exists_but_score_below_manual_review_threshold"
+      },
+      "fallback_search_queries": [
+        "스텔라이브 1주년 뱃지 세트 캔뱃지",
+        "site:fanding.kr/@stellive/shop 스텔라이브 1주년 뱃지 세트",
+        "1주년 캔뱃지"
+      ],
       "source_url_review_lane": "low_confidence_candidate_review",
       "source_url_review_blockers": [
         "candidate_score_too_low",
@@ -253,8 +279,31 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "강지",
+          "마스코트",
+          "인형"
+        ],
+        "query_members": [
+          "강지"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "강지 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 강지 마스코트 인형",
+        "강지 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -297,8 +346,38 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "굿즈",
+          "기념",
+          "박스",
+          "생일",
+          "아이리",
+          "칸나"
+        ],
+        "query_members": [
+          "아이리",
+          "칸나"
+        ],
+        "query_events": [
+          "생일"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "아이리 칸나 생일 기념 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 생일 기념 굿즈 박스",
+        "아이리 액세서리 (전) 스텔라이브",
+        "아이리 생일 액세서리"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -341,8 +420,33 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "마스코트",
+          "아이리",
+          "인형",
+          "칸나"
+        ],
+        "query_members": [
+          "아이리",
+          "칸나"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "아이리 칸나 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 마스코트 인형",
+        "아이리 인형 (전) 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -385,8 +489,33 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "세트",
+          "아이리",
+          "칸나",
+          "키링"
+        ],
+        "query_members": [
+          "아이리",
+          "칸나"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "아이리 칸나 키링 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 키링 세트",
+        "아이리 액세서리 (전) 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -429,8 +558,38 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "기념",
+          "노아",
+          "데뷔",
+          "스탠드",
+          "아크릴",
+          "쿠루미"
+        ],
+        "query_members": [
+          "노아",
+          "쿠루미"
+        ],
+        "query_events": [
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "쿠루미 노아 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 데뷔 기념 아크릴 스탠드",
+        "노아 아크릴 스탠드 스텔라이브",
+        "노아 데뷔 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -473,8 +632,37 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "굿즈",
+          "기념",
+          "노아",
+          "생일",
+          "쿠루미"
+        ],
+        "query_members": [
+          "노아",
+          "쿠루미"
+        ],
+        "query_events": [
+          "생일"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "쿠루미 노아 생일 기념 굿즈 액세서리",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 기념 굿즈",
+        "노아 액세서리 스텔라이브",
+        "노아 생일 액세서리"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -517,8 +705,33 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "노아",
+          "마스코트",
+          "인형",
+          "쿠루미"
+        ],
+        "query_members": [
+          "노아",
+          "쿠루미"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "쿠루미 노아 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 마스코트 인형",
+        "노아 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -561,8 +774,33 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "마스코트",
+          "인형",
+          "코코나",
+          "하나코"
+        ],
+        "query_members": [
+          "코코나",
+          "하나코"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "하나코 코코나 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 마스코트 인형",
+        "코코나 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -605,8 +843,36 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "기념",
+          "데뷔",
+          "비비",
+          "스탠드",
+          "아크릴"
+        ],
+        "query_members": [
+          "비비"
+        ],
+        "query_events": [
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "비비 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 비비 데뷔 기념 아크릴 스탠드",
+        "비비 아크릴 스탠드 스텔라이브",
+        "비비 데뷔 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -649,8 +915,31 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "마스코트",
+          "비비",
+          "인형"
+        ],
+        "query_members": [
+          "비비"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "비비 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 비비 마스코트 인형",
+        "비비 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -693,8 +982,35 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "기념",
+          "데뷔",
+          "스탠드",
+          "아크릴"
+        ],
+        "query_members": [
+          "린"
+        ],
+        "query_events": [
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "린 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 린 데뷔 기념 아크릴 스탠드",
+        "린 아크릴 스탠드 스텔라이브",
+        "린 데뷔 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -737,8 +1053,30 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "마스코트",
+          "인형"
+        ],
+        "query_members": [
+          "린"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "린 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 린 마스코트 인형",
+        "린 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -781,8 +1119,32 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "강지",
+          "마스코트",
+          "봉제",
+          "인형"
+        ],
+        "query_members": [
+          "강지"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "강지 마스코트 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 강지 마스코트 봉제 인형",
+        "강지 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -825,8 +1187,32 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "강지",
+          "세트",
+          "클리어",
+          "파일"
+        ],
+        "query_members": [
+          "강지"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "강지 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 강지 클리어 파일 세트",
+        "강지 액세서리 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -869,8 +1255,33 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "봉제",
+          "아이리",
+          "인형",
+          "칸나"
+        ],
+        "query_members": [
+          "아이리",
+          "칸나"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "아이리 칸나 봉제 인형 (천사 ver.) 인형",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 봉제 인형 (천사 ver.)",
+        "아이리 인형 (전) 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -913,8 +1324,33 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "아이리",
+          "아크릴",
+          "칸나",
+          "키링"
+        ],
+        "query_members": [
+          "아이리",
+          "칸나"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "아이리 칸나 아크릴 키링 액세서리",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 아크릴 키링",
+        "아이리 액세서리 (전) 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -957,8 +1393,32 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "머그컵",
+          "아이리",
+          "칸나"
+        ],
+        "query_members": [
+          "아이리",
+          "칸나"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "아이리 칸나 머그컵 머그컵",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 머그컵",
+        "아이리 머그컵 (전) 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1001,6 +1461,7 @@
       "candidate_title": "2023 리제 아크릴 스탠드",
       "candidate_score": 0.63,
       "candidate_status": "weak_manual_review_candidate",
+      "candidate_review_lane": "weak_candidate_review",
       "candidate_count": 1,
       "candidate_options": [
         {
@@ -1018,6 +1479,40 @@
           "query_overlap": 0.5,
           "title_overlap": 0.75
         }
+      ],
+      "match_diagnostics": {
+        "query_tokens": [
+          "2주년",
+          "데뷔",
+          "리제",
+          "스탠드",
+          "아카네",
+          "아크릴"
+        ],
+        "query_members": [
+          "리제",
+          "아카네"
+        ],
+        "query_events": [
+          "2주년",
+          "데뷔"
+        ],
+        "top_candidate_title": "2023 리제 아크릴 스탠드",
+        "top_candidate_score": 0.63,
+        "top_candidate_shared_tokens": [
+          "리제",
+          "스탠드",
+          "아크릴"
+        ],
+        "top_candidate_query_overlap": 0.5,
+        "top_candidate_title_overlap": 0.75,
+        "diagnosis": "candidate_requires_exact_identity_confirmation"
+      },
+      "fallback_search_queries": [
+        "아카네 리제 데뷔 2주년 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 아카네 리제 데뷔 2주년 아크릴 스탠드",
+        "리제 아크릴 스탠드 스텔라이브",
+        "리제 2주년 아크릴 스탠드"
       ],
       "source_url_review_lane": "weak_candidate_review",
       "source_url_review_blockers": [
@@ -1061,8 +1556,39 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "1주년",
+          "노아",
+          "데뷔",
+          "스탠드",
+          "아크릴",
+          "쿠루미"
+        ],
+        "query_members": [
+          "노아",
+          "쿠루미"
+        ],
+        "query_events": [
+          "1주년",
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "쿠루미 노아 데뷔 1주년 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 데뷔 1주년 아크릴 스탠드",
+        "노아 아크릴 스탠드 스텔라이브",
+        "노아 1주년 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1105,8 +1631,37 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "노아",
+          "생일",
+          "스탠드",
+          "아크릴",
+          "쿠루미"
+        ],
+        "query_members": [
+          "노아",
+          "쿠루미"
+        ],
+        "query_events": [
+          "생일"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.) 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+        "노아 아크릴 스탠드 스텔라이브",
+        "노아 생일 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1149,8 +1704,33 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "노아",
+          "봉제",
+          "인형",
+          "쿠루미"
+        ],
+        "query_members": [
+          "노아",
+          "쿠루미"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "쿠루미 노아 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 봉제 인형",
+        "노아 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1193,8 +1773,34 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "노아",
+          "세트",
+          "쿠루미",
+          "클리어",
+          "파일"
+        ],
+        "query_members": [
+          "노아",
+          "쿠루미"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "쿠루미 노아 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 클리어 파일 세트",
+        "노아 액세서리 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1237,8 +1843,39 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "1주년",
+          "네네코",
+          "데뷔",
+          "마시로",
+          "스탠드",
+          "아크릴"
+        ],
+        "query_members": [
+          "네네코",
+          "마시로"
+        ],
+        "query_events": [
+          "1주년",
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "네네코 마시로 데뷔 1주년 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 네네코 마시로 데뷔 1주년 아크릴 스탠드",
+        "네네코 아크릴 스탠드 스텔라이브",
+        "네네코 1주년 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1281,8 +1918,37 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "굿즈",
+          "박스",
+          "생일",
+          "코코나",
+          "하나코"
+        ],
+        "query_members": [
+          "코코나",
+          "하나코"
+        ],
+        "query_events": [
+          "생일"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "하나코 코코나 생일 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 생일 굿즈 박스",
+        "코코나 액세서리 스텔라이브",
+        "코코나 생일 액세서리"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1325,8 +1991,34 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "마스코트",
+          "봉제",
+          "인형",
+          "코코나",
+          "하나코"
+        ],
+        "query_members": [
+          "코코나",
+          "하나코"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "하나코 코코나 마스코트 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 마스코트 봉제 인형",
+        "코코나 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1369,8 +2061,32 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "코코나",
+          "토트백",
+          "하나코"
+        ],
+        "query_members": [
+          "코코나",
+          "하나코"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "하나코 코코나 토트백 의류",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 토트백",
+        "코코나 의류 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1413,8 +2129,34 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "세트",
+          "코코나",
+          "클리어",
+          "파일",
+          "하나코"
+        ],
+        "query_members": [
+          "코코나",
+          "하나코"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "하나코 코코나 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 클리어 파일 세트",
+        "코코나 액세서리 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1457,8 +2199,35 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "굿즈",
+          "데뷔",
+          "박스",
+          "비비"
+        ],
+        "query_members": [
+          "비비"
+        ],
+        "query_events": [
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "비비 데뷔 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 비비 데뷔 굿즈 박스",
+        "비비 액세서리 스텔라이브",
+        "비비 데뷔 액세서리"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1501,8 +2270,35 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "비비",
+          "생일",
+          "스탠드",
+          "아크릴"
+        ],
+        "query_members": [
+          "비비"
+        ],
+        "query_events": [
+          "생일"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "비비 생일 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 비비 생일 아크릴 스탠드",
+        "비비 아크릴 스탠드 스텔라이브",
+        "비비 생일 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1545,8 +2341,31 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "봉제",
+          "비비",
+          "인형"
+        ],
+        "query_members": [
+          "비비"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "비비 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 비비 봉제 인형",
+        "비비 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1589,8 +2408,31 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "비비",
+          "아크릴",
+          "키링"
+        ],
+        "query_members": [
+          "비비"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "비비 아크릴 키링 액세서리",
+        "site:fanding.kr/@stellive/shop 비비 아크릴 키링",
+        "비비 액세서리 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1633,8 +2475,30 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "봉제",
+          "인형"
+        ],
+        "query_members": [
+          "린"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "린 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 린 봉제 인형",
+        "린 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1677,8 +2541,36 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "기념",
+          "데뷔",
+          "마유",
+          "스탠드",
+          "아크릴"
+        ],
+        "query_members": [
+          "마유"
+        ],
+        "query_events": [
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "마유 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 마유 데뷔 기념 아크릴 스탠드",
+        "마유 아크릴 스탠드 스텔라이브",
+        "마유 데뷔 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1721,8 +2613,35 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "굿즈",
+          "데뷔",
+          "마유",
+          "박스"
+        ],
+        "query_members": [
+          "마유"
+        ],
+        "query_events": [
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "마유 데뷔 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 마유 데뷔 굿즈 박스",
+        "마유 액세서리 스텔라이브",
+        "마유 데뷔 액세서리"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1765,8 +2684,31 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "마유",
+          "봉제",
+          "인형"
+        ],
+        "query_members": [
+          "마유"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "마유 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 마유 봉제 인형",
+        "마유 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1809,8 +2751,31 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "마유",
+          "아크릴",
+          "키링"
+        ],
+        "query_members": [
+          "마유"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "마유 아크릴 키링 액세서리",
+        "site:fanding.kr/@stellive/shop 마유 아크릴 키링",
+        "마유 액세서리 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1853,8 +2818,34 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "1주년",
+          "단체",
+          "세트",
+          "스텔라이브",
+          "클리어",
+          "파일"
+        ],
+        "query_members": [],
+        "query_events": [
+          "1주년"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "스텔라이브 1주년 단체 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 스텔라이브 1주년 단체 클리어 파일 세트",
+        "1주년 액세서리"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1897,6 +2888,7 @@
       "candidate_title": "스텔라이브 키캡 세트",
       "candidate_score": 0.2373,
       "candidate_status": "low_confidence_candidate",
+      "candidate_review_lane": "low_confidence_candidate_review",
       "candidate_count": 1,
       "candidate_options": [
         {
@@ -1912,6 +2904,32 @@
           "query_overlap": 0.2,
           "title_overlap": 0.3333
         }
+      ],
+      "match_diagnostics": {
+        "query_tokens": [
+          "2주년",
+          "굿즈",
+          "단체",
+          "박스",
+          "스텔라이브"
+        ],
+        "query_members": [],
+        "query_events": [
+          "2주년"
+        ],
+        "top_candidate_title": "스텔라이브 키캡 세트",
+        "top_candidate_score": 0.2373,
+        "top_candidate_shared_tokens": [
+          "스텔라이브"
+        ],
+        "top_candidate_query_overlap": 0.2,
+        "top_candidate_title_overlap": 0.3333,
+        "diagnosis": "candidate_exists_but_score_below_manual_review_threshold"
+      },
+      "fallback_search_queries": [
+        "스텔라이브 2주년 단체 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 스텔라이브 2주년 단체 굿즈 박스",
+        "2주년 액세서리"
       ],
       "source_url_review_lane": "low_confidence_candidate_review",
       "source_url_review_blockers": [
@@ -1955,8 +2973,36 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "기념",
+          "데뷔",
+          "스탠드",
+          "아크릴",
+          "후야"
+        ],
+        "query_members": [
+          "후야"
+        ],
+        "query_events": [
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "후야 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 후야 데뷔 기념 아크릴 스탠드",
+        "후야 아크릴 스탠드 스텔라이브",
+        "후야 데뷔 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -1999,8 +3045,35 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "굿즈",
+          "데뷔",
+          "박스",
+          "후야"
+        ],
+        "query_members": [
+          "후야"
+        ],
+        "query_events": [
+          "데뷔"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "후야 데뷔 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 후야 데뷔 굿즈 박스",
+        "후야 액세서리 스텔라이브",
+        "후야 데뷔 액세서리"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2043,8 +3116,36 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "기념",
+          "생일",
+          "스탠드",
+          "아크릴",
+          "후야"
+        ],
+        "query_members": [
+          "후야"
+        ],
+        "query_events": [
+          "생일"
+        ],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "후야 첫 생일 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 후야 첫 생일 기념 아크릴 스탠드",
+        "후야 아크릴 스탠드 스텔라이브",
+        "후야 생일 아크릴 스탠드"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2087,8 +3188,32 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "마스코트",
+          "봉제",
+          "인형",
+          "후야"
+        ],
+        "query_members": [
+          "후야"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "후야 마스코트 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 후야 마스코트 봉제 인형",
+        "후야 인형 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2131,8 +3256,31 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "아크릴",
+          "키링",
+          "후야"
+        ],
+        "query_members": [
+          "후야"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "후야 아크릴 키링 액세서리",
+        "site:fanding.kr/@stellive/shop 후야 아크릴 키링",
+        "후야 액세서리 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2175,8 +3323,32 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": "no_candidate",
+      "candidate_review_lane": "manual_search_required",
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {
+        "query_tokens": [
+          "세트",
+          "클리어",
+          "파일",
+          "후야"
+        ],
+        "query_members": [
+          "후야"
+        ],
+        "query_events": [],
+        "top_candidate_title": null,
+        "top_candidate_score": null,
+        "top_candidate_shared_tokens": [],
+        "top_candidate_query_overlap": null,
+        "top_candidate_title_overlap": null,
+        "diagnosis": "no_product_matched_member_and_product_type_filters"
+      },
+      "fallback_search_queries": [
+        "후야 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 후야 클리어 파일 세트",
+        "후야 액세서리 스텔라이브"
+      ],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2219,8 +3391,11 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": null,
+      "candidate_review_lane": null,
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {},
+      "fallback_search_queries": [],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2263,8 +3438,11 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": null,
+      "candidate_review_lane": null,
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {},
+      "fallback_search_queries": [],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2307,8 +3485,11 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": null,
+      "candidate_review_lane": null,
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {},
+      "fallback_search_queries": [],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2351,8 +3532,11 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": null,
+      "candidate_review_lane": null,
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {},
+      "fallback_search_queries": [],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
@@ -2395,8 +3579,11 @@
       "candidate_title": "",
       "candidate_score": null,
       "candidate_status": null,
+      "candidate_review_lane": null,
       "candidate_count": 0,
       "candidate_options": [],
+      "match_diagnostics": {},
+      "fallback_search_queries": [],
       "source_url_review_lane": "manual_search_required",
       "source_url_review_blockers": [
         "no_exact_product_candidate",
