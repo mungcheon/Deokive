@@ -114,6 +114,28 @@ SPLIT_RULES: list[dict[str, Any]] = [
         "folder_icon_options": ["inventory_2", "redeem", "local_mall", "category"],
         "match_keywords": ["タオル", "컵", "マグ", "グラス", "파우치", "ポーチ", "towel", "mug", "pouch"],
     },
+    {
+        "rule_id": "collab_goods",
+        "target_category": "콜라보 굿즈",
+        "target_family": "collab_goods",
+        "folder_color_group": "orange",
+        "folder_color_hint": "coral",
+        "folder_color_hex": "0xFFFFA36A",
+        "folder_color_sort_order": 760,
+        "folder_icon_key": "diversity_3",
+        "folder_icon_options": ["diversity_3", "handshake", "style", "category"],
+        "match_keywords": [
+            "콜라보",
+            "コラボ",
+            "collab",
+            "부쿠부",
+            "ぶくぶ",
+            "大川ぶくぶ",
+            "오오카와",
+            "팝팀애픽",
+            "ポプテピピック",
+        ],
+    },
 ]
 
 

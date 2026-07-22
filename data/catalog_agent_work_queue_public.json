@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T08:54:19Z",
+  "generated_at": "2026-07-22T08:58:06Z",
   "summary": {
     "batch_count": 80,
     "summed_batch_rows": 25330,
@@ -162,7 +162,7 @@
       "animation_category_split_review_categories": 3,
       "animation_category_direct_mapping_categories": 0,
       "animation_category_name_split_rows": 374,
-      "animation_category_name_split_candidates": 4
+      "animation_category_name_split_candidates": 5
     }
   },
   "top_next_batches": [
@@ -9940,11 +9940,79 @@
         "Same prize-letter variants remain separate catalog rows when the official campaign has multiple types.",
         "Unmatched samples stay blocked until a safer keyword or official category is confirmed."
       ],
-      "sample_items": [],
+      "sample_items": [
+        {
+          "rule_id": "collab_goods",
+          "target_category": "콜라보 굿즈",
+          "target_family": "collab_goods",
+          "folder_color_group": "orange",
+          "folder_color_hint": "coral",
+          "folder_icon_key": "diversity_3",
+          "match_keywords": [
+            "콜라보",
+            "コラボ",
+            "collab",
+            "부쿠부",
+            "ぶくぶ",
+            "大川ぶくぶ",
+            "오오카와",
+            "팝팀애픽",
+            "ポプテピピック"
+          ],
+          "matched_sample_count": 3,
+          "matched_sample_names": [
+            "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
+            "장송의 프리렌 부쿠부 굿즈",
+            "단간론파 부쿠부 굿즈"
+          ],
+          "name_level_split_template": {
+            "manual_confirmed": false,
+            "source_category": "기타 굿즈",
+            "match_keywords": [
+              "콜라보",
+              "コラボ",
+              "collab",
+              "부쿠부",
+              "ぶくぶ",
+              "大川ぶくぶ",
+              "오오카와",
+              "팝팀애픽",
+              "ポプテピピック"
+            ],
+            "target_category": "콜라보 굿즈",
+            "target_family": "collab_goods",
+            "folder_name": "콜라보 굿즈",
+            "folder_color_hex": "0xFFFFA36A",
+            "folder_color_hint": "coral",
+            "folder_color_group": "orange",
+            "folder_color_sort_order": 760,
+            "folder_icon_key": "diversity_3",
+            "folder_icon_options": [
+              "diversity_3",
+              "handshake",
+              "style",
+              "category"
+            ],
+            "matched_sample_count": 3,
+            "matched_sample_names": [
+              "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
+              "장송의 프리렌 부쿠부 굿즈",
+              "단간론파 부쿠부 굿즈"
+            ],
+            "blocked_until": "name_level_split_manually_confirmed",
+            "review_evidence_required": [
+              "keywords_match_actual_goods_type",
+              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
+              "broad_source_category_is_not_applied_as_one_folder",
+              "folder_color_and_icon_exist_in_app_catalog"
+            ]
+          }
+        }
+      ],
       "review_summary": {
-        "split_candidate_count": 0,
-        "matched_sample_count": 0,
-        "unmatched_sample_count": 3
+        "split_candidate_count": 1,
+        "matched_sample_count": 3,
+        "unmatched_sample_count": 0
       },
       "review_state": "manual_name_level_split_confirmation_required",
       "next_machine_step": "confirm_animation_category_name_split_templates"

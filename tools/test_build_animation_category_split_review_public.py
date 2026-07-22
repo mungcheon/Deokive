@@ -25,6 +25,7 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
                                 "一番くじ 僕のヒーローアカデミア - A賞 緑谷出久 MASTERLISE",
                                 "一番くじ 僕のヒーローアカデミア - H賞 キャンバス風ボード",
                                 "一番くじ 僕のヒーローアカデミア - J賞 ステーショナリーコレクション",
+                                "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
                                 "분류 안 되는 샘플",
                             ],
                         },
@@ -43,8 +44,8 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["split_review_categories"], 1)
         self.assertEqual(report["summary"]["affected_catalog_rows"], 12)
-        self.assertEqual(report["summary"]["candidate_split_rules"], 3)
-        self.assertEqual(report["summary"]["matched_sample_names"], 3)
+        self.assertEqual(report["summary"]["candidate_split_rules"], 4)
+        self.assertEqual(report["summary"]["matched_sample_names"], 4)
         self.assertEqual(report["summary"]["unmatched_sample_names"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
@@ -57,13 +58,16 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
         self.assertEqual(item["confirmed_queue"], "server/animation_category_name_split_confirmed_rows.json")
         self.assertEqual(item["unblocks_when"], "name_level_split_manually_confirmed")
         targets = {candidate["target_category"] for candidate in item["split_candidates"]}
-        self.assertEqual(targets, {"피규어", "보드", "문구"})
+        self.assertEqual(targets, {"피규어", "보드", "문구", "콜라보 굿즈"})
         figure = next(candidate for candidate in item["split_candidates"] if candidate["rule_id"] == "figure")
         template = figure["name_level_split_template"]
         self.assertFalse(template["manual_confirmed"])
         self.assertEqual(template["target_category"], "피규어")
         self.assertEqual(template["folder_icon_key"], "toys")
         self.assertEqual(template["blocked_until"], "name_level_split_manually_confirmed")
+        collab = next(candidate for candidate in item["split_candidates"] if candidate["rule_id"] == "collab_goods")
+        self.assertEqual(collab["target_category"], "콜라보 굿즈")
+        self.assertEqual(collab["name_level_split_template"]["folder_icon_key"], "diversity_3")
         self.assertEqual(item["unmatched_sample_names"], ["분류 안 되는 샘플"])
 
 
