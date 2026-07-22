@@ -1,8 +1,9 @@
 import 'dart:math' as math;
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -256,6 +257,15 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
   }
 
   Future<Uint8List?> _downloadImageBytes(String url) async {
+    if (url.startsWith('assets/') && !kIsWeb) {
+      try {
+        final data = await rootBundle.load(url);
+        return data.buffer.asUint8List();
+      } catch (_) {
+        return null;
+      }
+    }
+
     try {
       final uri = Uri.parse(url);
       final response = await http.get(

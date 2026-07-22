@@ -1,6 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -365,7 +365,18 @@ DateTime? _parseCatalogReleaseDate(String? raw) {
 }
 
 Future<Uint8List?> _downloadCatalogImage(GoodsCatalogEntry entry) async {
+  final localPath = entry.localImagePath?.trim() ?? '';
+  if (localPath.isNotEmpty && !kIsWeb) {
+    try {
+      final data = await rootBundle.load(localPath);
+      return data.buffer.asUint8List();
+    } catch (_) {
+      // Fall back to the remote URL when a bundled cache file is unavailable.
+    }
+  }
+
   var url = entry.imageUrl?.trim() ?? '';
+  if (url.isEmpty && kIsWeb) url = localPath;
   if (url.isEmpty) return null;
   url = url.replaceAll('&amp;', '&');
   if (url.startsWith('//')) url = 'https:$url';

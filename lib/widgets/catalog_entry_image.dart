@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import '../models/goods_catalog_entry.dart';
 
@@ -42,19 +43,39 @@ class CatalogEntryImage extends StatelessWidget {
 
     final localPath = entry.localImagePath?.trim() ?? '';
     final remotePath = entry.imageUrl?.trim() ?? '';
-    final imagePath = localPath.isNotEmpty ? localPath : remotePath;
-    if (imagePath.isEmpty) return placeholder;
+    if (localPath.isEmpty && remotePath.isEmpty) return placeholder;
 
-    final image = Image.network(
-      imagePath.replaceAll('&amp;', '&').replaceFirst(
-            RegExp(r'^//'),
-            'https://',
+    final Widget image;
+    if (localPath.isNotEmpty) {
+      if (kIsWeb) {
+        image = _RemoteCatalogImage(
+          imageUrl: localPath,
+          width: width,
+          height: height,
+          placeholder: placeholder,
+        );
+      } else {
+        image = Image.asset(
+          localPath,
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => _RemoteCatalogImage(
+            imageUrl: remotePath,
+            width: width,
+            height: height,
+            placeholder: placeholder,
           ),
-      width: width,
-      height: height,
-      fit: BoxFit.cover,
-      errorBuilder: (_, __, ___) => placeholder,
-    );
+        );
+      }
+    } else {
+      image = _RemoteCatalogImage(
+        imageUrl: remotePath,
+        width: width,
+        height: height,
+        placeholder: placeholder,
+      );
+    }
 
     return Container(
       width: width,
@@ -67,6 +88,37 @@ class CatalogEntryImage extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: image,
+    );
+  }
+}
+
+class _RemoteCatalogImage extends StatelessWidget {
+  final String imageUrl;
+  final double width;
+  final double height;
+  final Widget placeholder;
+
+  const _RemoteCatalogImage({
+    required this.imageUrl,
+    required this.width,
+    required this.height,
+    required this.placeholder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final remotePath = imageUrl.trim();
+    if (remotePath.isEmpty) return placeholder;
+
+    return Image.network(
+      remotePath.replaceAll('&amp;', '&').replaceFirst(
+            RegExp(r'^//'),
+            'https://',
+          ),
+      width: width,
+      height: height,
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) => placeholder,
     );
   }
 }
