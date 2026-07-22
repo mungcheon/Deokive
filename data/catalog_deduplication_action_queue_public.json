@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T19:43:26Z",
+  "generated_at": "2026-07-22T20:54:47Z",
   "scope": "catalog_deduplication_action_queue",
   "summary": {
     "actionable_groups": 48,
@@ -44,12 +44,15 @@
         8
       ]
     ],
+    "ichiban_reissue_protected_groups": 0,
+    "ichiban_reissue_protected_rows": 0,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
   },
   "instructions": [
     "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",
     "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",
+    "Ichiban Kuji probable reissue rows stay out of this queue until a human confirms they are true duplicates, not re-releases.",
     "Every accepted group needs an explicit manual keep/drop decision before mutation.",
     "Copy dedupe_decision_template rows into server/catalog_dedupe_confirmed_decisions.json, set manual_confirmed=true and decision=keep_drop_confirmed, then run tools/import_confirmed_dedupe_decisions.py."
   ],

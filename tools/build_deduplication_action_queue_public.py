@@ -18,6 +18,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "catalog_deduplication_review_batches_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "catalog_deduplication_action_queue_public.json"
+DEFAULT_ICHIBAN_POLICY_AUDIT = ROOT / "data" / "ichiban_kuji_prize_policy_audit_public.json"
 
 ACTIONABLE_CONFIDENCES = {"high_review_confidence", "medium_review_confidence"}
 CONFIDENCE_PRIORITY = {
@@ -47,8 +48,42 @@ def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     return [[name, count] for name, count in counts.most_common()]
 
 
+def _counter_to_pairs(counter: Counter[str]) -> list[list[Any]]:
+    return [[name, count] for name, count in counter.most_common()]
+
+
 def _present(value: Any) -> bool:
     return value is not None and str(value).strip() != ""
+
+
+def protected_ichiban_reissue_catalog_indexes(policy_audit: dict[str, Any] | None) -> set[int]:
+    if not policy_audit:
+        return set()
+
+    protected: set[int] = set()
+    for group in policy_audit.get("probable_reissue_review_groups") or []:
+        if not isinstance(group, dict):
+            continue
+        if not group.get("has_reissue_signal"):
+            continue
+        for row in group.get("sample_rows") or []:
+            if not isinstance(row, dict):
+                continue
+            catalog_index = row.get("catalog_index")
+            if isinstance(catalog_index, int):
+                protected.add(catalog_index)
+    return protected
+
+
+def _catalog_indexes(group: dict[str, Any]) -> set[int]:
+    indexes: set[int] = set()
+    for row in group.get("rows") or []:
+        if not isinstance(row, dict):
+            continue
+        catalog_index = row.get("catalog_index")
+        if isinstance(catalog_index, int):
+            indexes.add(catalog_index)
+    return indexes
 
 
 def _row_richness(row: dict[str, Any]) -> int:
@@ -165,9 +200,18 @@ def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, An
     }
 
 
-def build_report(review_batches: dict[str, Any], *, max_groups: int = 40, batch_size: int = 10) -> dict[str, Any]:
+def build_report(
+    review_batches: dict[str, Any],
+    *,
+    max_groups: int = 40,
+    batch_size: int = 10,
+    ichiban_policy_audit: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     actionable: list[dict[str, Any]] = []
     excluded = Counter()
+    protected_indexes = protected_ichiban_reissue_catalog_indexes(ichiban_policy_audit)
+    protected_group_count = 0
+    protected_row_indexes: set[int] = set()
 
     for batch in review_batches.get("batches", []):
         if not isinstance(batch, dict):
@@ -178,6 +222,13 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 40, batch_
             confidence = str(group.get("review_confidence") or "")
             if confidence not in ACTIONABLE_CONFIDENCES:
                 excluded[confidence or "unknown"] += 1
+                continue
+            group_indexes = _catalog_indexes(group)
+            matched_protected_indexes = group_indexes & protected_indexes
+            if matched_protected_indexes:
+                excluded["ichiban_reissue_protection"] += 1
+                protected_group_count += 1
+                protected_row_indexes.update(matched_protected_indexes)
                 continue
             compact = _compact_group(group, batch)
             compact["queue_priority"] = CONFIDENCE_PRIORITY.get(confidence, 99)
@@ -234,13 +285,16 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 40, batch_
             "max_groups": max_groups,
             "by_review_confidence": _counter_pairs(actionable, "review_confidence"),
             "by_key_type": _counter_pairs(actionable, "key_type"),
-            "excluded_review_confidence": [[key, value] for key, value in excluded.most_common()],
+            "excluded_review_confidence": _counter_to_pairs(excluded),
+            "ichiban_reissue_protected_groups": protected_group_count,
+            "ichiban_reissue_protected_rows": len(protected_row_indexes),
             "auto_merge_enabled": False,
             "auto_delete_enabled": False,
         },
         "instructions": [
             "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",
             "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",
+            "Ichiban Kuji probable reissue rows stay out of this queue until a human confirms they are true duplicates, not re-releases.",
             "Every accepted group needs an explicit manual keep/drop decision before mutation.",
             f"Copy dedupe_decision_template rows into {CONFIRMED_QUEUE}, set manual_confirmed=true and decision=keep_drop_confirmed, then run {IMPORT_TOOL}.",
         ],
@@ -261,11 +315,18 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--ichiban-policy-audit", type=Path, default=DEFAULT_ICHIBAN_POLICY_AUDIT)
     parser.add_argument("--max-groups", type=int, default=100)
     parser.add_argument("--batch-size", type=int, default=10)
     args = parser.parse_args()
 
-    report = build_report(_load(args.input), max_groups=args.max_groups, batch_size=args.batch_size)
+    ichiban_policy_audit = _load(args.ichiban_policy_audit) if args.ichiban_policy_audit.exists() else None
+    report = build_report(
+        _load(args.input),
+        max_groups=args.max_groups,
+        batch_size=args.batch_size,
+        ichiban_policy_audit=ichiban_policy_audit,
+    )
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     print(f"Report: {args.output}")

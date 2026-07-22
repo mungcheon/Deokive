@@ -142,6 +142,76 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queue_coverage"], 0.6)
         self.assertEqual(report["summary"]["action_batch_count"], 2)
 
+    def test_ichiban_reissue_candidates_are_excluded_from_action_queue(self) -> None:
+        review_batches = {
+            "batches": [
+                {
+                    "groups": [
+                        {
+                            "key_type": "barcode",
+                            "key": "ichiban-shared-barcode",
+                            "review_priority": 10,
+                            "review_risk": "strong_identity_review",
+                            "review_confidence": "high_review_confidence",
+                            "rows": [
+                                {
+                                    "catalog_index": 101,
+                                    "name_ko": "一番くじ Sample - A賞 Figure",
+                                    "source_url": "https://1kuji.com/products/sample",
+                                    "barcode": "4900000000001",
+                                },
+                                {
+                                    "catalog_index": 102,
+                                    "name_ko": "一番くじ Sample - A賞 Figure",
+                                    "source_url": "https://1kuji.com/products/sample2",
+                                    "barcode": "4900000000001",
+                                },
+                            ],
+                        },
+                        {
+                            "key_type": "barcode",
+                            "key": "ordinary-shared-barcode",
+                            "review_priority": 10,
+                            "review_risk": "strong_identity_review",
+                            "review_confidence": "high_review_confidence",
+                            "rows": [
+                                {"catalog_index": 201, "barcode": "4900000000002"},
+                                {"catalog_index": 202, "barcode": "4900000000002"},
+                            ],
+                        },
+                    ]
+                }
+            ]
+        }
+        ichiban_policy_audit = {
+            "probable_reissue_review_groups": [
+                {
+                    "has_reissue_signal": True,
+                    "sample_rows": [
+                        {"catalog_index": 101},
+                        {"catalog_index": 102},
+                    ],
+                }
+            ]
+        }
+
+        report = queue.build_report(
+            review_batches,
+            max_groups=10,
+            batch_size=10,
+            ichiban_policy_audit=ichiban_policy_audit,
+        )
+
+        self.assertEqual(report["summary"]["actionable_groups"], 1)
+        self.assertEqual(report["summary"]["queued_groups"], 1)
+        self.assertEqual(
+            dict(report["summary"]["excluded_review_confidence"])["ichiban_reissue_protection"],
+            1,
+        )
+        self.assertEqual(report["summary"]["ichiban_reissue_protected_groups"], 1)
+        self.assertEqual(report["summary"]["ichiban_reissue_protected_rows"], 2)
+        self.assertEqual(report["batches"][0]["groups"][0]["key"], "ordinary-shared-barcode")
+
 
 if __name__ == "__main__":
     unittest.main()
