@@ -24,21 +24,62 @@ def load_json(path: Path) -> dict[str, Any]:
     return payload
 
 
+def _is_confirmed(item: dict[str, Any]) -> bool:
+    if item.get("manual_confirmed") is True:
+        return True
+    status = str(item.get("manual_review_status") or "").strip().lower()
+    return status in {"source_confirmed", "source_and_image_confirmed", "confirmed"}
+
+
+def _pack_progress(template: dict[str, Any]) -> dict[str, dict[str, int]]:
+    progress: dict[str, dict[str, int]] = {}
+    for item in template.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        pack_id = str(item.get("focus_pack_id") or "")
+        if not pack_id:
+            continue
+        stats = progress.setdefault(pack_id, {"items": 0, "confirmed": 0, "remaining": 0})
+        stats["items"] += 1
+        if _is_confirmed(item):
+            stats["confirmed"] += 1
+        else:
+            stats["remaining"] += 1
+    return progress
+
+
 def _next_work_order(template: dict[str, Any]) -> dict[str, Any]:
+    progress = _pack_progress(template)
     work_order = template.get("work_order")
     if isinstance(work_order, list):
         for row in work_order:
-            if isinstance(row, dict) and row.get("review_status") != "completed":
-                return row
+            if not isinstance(row, dict):
+                continue
+            pack_id = str(row.get("focus_pack_id") or "")
+            stats = progress.get(pack_id, {})
+            remaining = int(
+                stats.get("remaining")
+                if stats
+                else row.get("remaining_review_rows") or 0
+            )
+            if row.get("review_status") != "completed" and remaining:
+                enriched = dict(row)
+                enriched["row_count"] = int(stats.get("items") or enriched.get("row_count") or 0)
+                enriched["confirmed_source_rows"] = int(stats.get("confirmed") or 0)
+                enriched["remaining_review_rows"] = remaining
+                enriched["review_status"] = "in_progress" if stats.get("confirmed") else row.get("review_status")
+                return enriched
     summary = template.get("summary") if isinstance(template.get("summary"), dict) else {}
     focus_pack_id = summary.get("next_focus_pack_id")
+    stats = progress.get(str(focus_pack_id or ""), {})
     return {
         "priority": 1,
         "focus_pack_id": focus_pack_id,
         "source_store": summary.get("next_source_store"),
-        "row_count": summary.get("next_focus_pack_rows") or 0,
+        "row_count": stats.get("items") or summary.get("next_focus_pack_rows") or 0,
         "review_status": "not_started" if focus_pack_id else "empty",
-        "remaining_review_rows": summary.get("next_focus_pack_rows") or 0,
+        "confirmed_source_rows": stats.get("confirmed") or 0,
+        "remaining_review_rows": stats.get("remaining") or summary.get("next_focus_pack_rows") or 0,
         "target_category": summary.get("next_target_category"),
         "first_official_search_url": summary.get("next_official_search_url"),
     }
@@ -87,6 +128,7 @@ def build_report(template: dict[str, Any], *, generated_at: str | None = None) -
             "source_store": next_pack.get("source_store"),
             "target_category": next_pack.get("target_category"),
             "pack_items": len(items),
+            "confirmed_source_rows": next_pack.get("confirmed_source_rows") or 0,
             "remaining_review_rows": next_pack.get("remaining_review_rows") or len(items),
             "work_order_pack_count": (template.get("summary") or {}).get("work_order_pack_count", 0),
             "template_items": (template.get("summary") or {}).get("template_items", 0),
