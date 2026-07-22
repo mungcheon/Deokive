@@ -84,7 +84,7 @@ def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, An
     }
 
 
-def build_report(review_batches: dict[str, Any], *, max_groups: int = 48, batch_size: int = 12) -> dict[str, Any]:
+def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch_size: int = 12) -> dict[str, Any]:
     groups: list[dict[str, Any]] = []
     excluded_fields = Counter()
 
@@ -176,7 +176,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--max-groups", type=int, default=48)
+    parser.add_argument("--max-groups", type=int, default=200)
     parser.add_argument("--batch-size", type=int, default=12)
     args = parser.parse_args()
 
