@@ -81,6 +81,8 @@ def _template_item(
     candidate_summary = _candidate_summary(candidate_summary)
     top_candidates = candidate_summary.get("top_candidates", []) if candidate_summary else []
     top_candidate = top_candidates[0] if top_candidates else {}
+    candidate_status = candidate_summary.get("candidate_status") if candidate_summary else None
+    candidate_score = top_candidate.get("score")
     return {
         **source_template,
         "manual_confirmed": False,
@@ -88,10 +90,13 @@ def _template_item(
         "candidate_source_url": top_candidate.get("source_url") or "",
         "candidate_image_url": top_candidate.get("image_url") or "",
         "candidate_title": top_candidate.get("title") or "",
-        "candidate_score": top_candidate.get("score"),
-        "candidate_status": candidate_summary.get("candidate_status") if candidate_summary else None,
+        "candidate_score": candidate_score,
+        "candidate_status": candidate_status,
         "candidate_count": candidate_summary.get("candidate_count") if candidate_summary else 0,
         "candidate_options": top_candidates,
+        "source_url_review_lane": _source_url_review_lane(candidate_status, candidate_score),
+        "source_url_review_blockers": _source_url_review_blockers(candidate_status, candidate_score),
+        "manual_confirmation_requirements": _manual_confirmation_requirements(),
         "evidence_url": top_candidate.get("source_url") or "",
         "manual_note": "",
         "field": "source_url",
@@ -113,6 +118,46 @@ def _template_item(
     }
 
 
+def _source_url_review_lane(candidate_status: Any, candidate_score: Any) -> str:
+    status = str(candidate_status or "")
+    score = candidate_score if isinstance(candidate_score, (int, float)) else None
+    if not status or status == "no_candidate":
+        return "manual_search_required"
+    if status == "no_candidate_report":
+        return "candidate_provider_missing"
+    if status.startswith("low_confidence"):
+        return "low_confidence_candidate_review"
+    if status.startswith("weak"):
+        return "weak_candidate_review"
+    if score is not None and score >= 0.85:
+        return "strong_candidate_manual_confirmation"
+    return "candidate_manual_confirmation"
+
+
+def _source_url_review_blockers(candidate_status: Any, candidate_score: Any) -> list[str]:
+    lane = _source_url_review_lane(candidate_status, candidate_score)
+    if lane == "manual_search_required":
+        return ["no_exact_product_candidate", "manual_product_detail_search_required"]
+    if lane == "candidate_provider_missing":
+        return ["no_candidate_provider_result", "manual_or_provider_refresh_required"]
+    if lane == "low_confidence_candidate_review":
+        return ["candidate_score_too_low", "exact_product_identity_unconfirmed"]
+    if lane == "weak_candidate_review":
+        return ["weak_candidate_only", "exact_product_identity_unconfirmed"]
+    if lane == "strong_candidate_manual_confirmation":
+        return ["manual_exact_product_confirmation_required"]
+    return ["candidate_requires_manual_confirmation"]
+
+
+def _manual_confirmation_requirements() -> list[str]:
+    return [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true.",
+    ]
+
+
 def build_template(
     action_queue: dict[str, Any],
     candidate_report: dict[str, Any] | None = None,
@@ -124,6 +169,7 @@ def build_template(
     by_store: Counter[str] = Counter()
     by_category: Counter[str] = Counter()
     by_candidate_status: Counter[str] = Counter()
+    by_review_lane: Counter[str] = Counter()
     candidates_by_index = candidate_lookup(candidate_report)
 
     for batch in action_queue.get("batches") or []:
@@ -141,6 +187,7 @@ def build_template(
             by_store[str(row.get("source_store") or "")] += 1
             by_category[str(row.get("category") or "")] += 1
             by_candidate_status[str(row.get("candidate_status") or "no_candidate_report")] += 1
+            by_review_lane[str(row.get("source_url_review_lane") or "")] += 1
 
     return {
         "schema_version": 1,
@@ -156,6 +203,9 @@ def build_template(
             "candidate_prefilled_rows": sum(1 for item in items if item.get("candidate_source_url")),
             "by_candidate_status": [
                 [key, value] for key, value in by_candidate_status.most_common(20) if key
+            ],
+            "by_source_url_review_lane": [
+                [key, value] for key, value in by_review_lane.most_common(20) if key
             ],
             "auto_apply_enabled": False,
         },

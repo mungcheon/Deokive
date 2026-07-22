@@ -79,6 +79,7 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["by_source_store"], [["Stellive Store", 1]])
         self.assertEqual(report["summary"]["candidate_prefilled_rows"], 1)
         self.assertEqual(report["summary"]["by_candidate_status"], [["weak_manual_review_candidate", 1]])
+        self.assertEqual(report["summary"]["by_source_url_review_lane"], [["weak_candidate_review", 1]])
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         item = report["items"][0]
         self.assertEqual(item["field"], "source_url")
@@ -88,6 +89,9 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["candidate_image_url"], "https://example.test/badge.webp")
         self.assertEqual(item["candidate_title"], "Badge exact-ish")
         self.assertEqual(item["candidate_status"], "weak_manual_review_candidate")
+        self.assertEqual(item["source_url_review_lane"], "weak_candidate_review")
+        self.assertIn("weak_candidate_only", item["source_url_review_blockers"])
+        self.assertIn("manual_confirmed=true", item["manual_confirmation_requirements"][-1])
         self.assertEqual(item["candidate_options"][0]["product_no"], 100)
         self.assertEqual(item["current_source_url"], "https://fanding.kr/@stellive/shop")
         self.assertEqual(item["next_after_confirmed_source_url"], "extract_or_confirm_product_page_image_url")
