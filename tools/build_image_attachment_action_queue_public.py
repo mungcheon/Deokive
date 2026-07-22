@@ -17,6 +17,7 @@ except Exception:
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "catalog_image_enrichment_batches_public.json"
+DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "catalog_image_attachment_action_queue_public.json"
 
 WORKFLOW_PRIORITY = {
@@ -36,6 +37,26 @@ def _load(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"{path} must contain a JSON object")
     return payload
+
+
+def _present(value: Any) -> bool:
+    return value is not None and str(value).strip() != ""
+
+
+def _catalog_image_lookup(catalog: dict[str, Any] | None) -> dict[int, bool]:
+    if not catalog:
+        return {}
+    items = catalog.get("items")
+    if not isinstance(items, list):
+        return {}
+    lookup: dict[int, bool] = {}
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        catalog_index = item.get("catalog_index")
+        if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
+            lookup[catalog_index] = _present(item.get("local_image_path")) or _present(item.get("image_url"))
+    return lookup
 
 
 def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
@@ -71,10 +92,18 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     }
 
 
-def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, batch_size: int = 20) -> dict[str, Any]:
+def build_report(
+    enrichment_batches: dict[str, Any],
+    catalog: dict[str, Any] | None = None,
+    *,
+    max_batches: int = 18,
+    batch_size: int = 20,
+) -> dict[str, Any]:
     action_items: list[dict[str, Any]] = []
     excluded_workflows = Counter()
     actionable_group_rows = 0
+    skipped_already_has_image_rows = 0
+    has_image_by_index = _catalog_image_lookup(catalog)
 
     for group in enrichment_batches.get("groups", []):
         if not isinstance(group, dict):
@@ -87,6 +116,10 @@ def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, b
         actionable_group_rows += missing_rows
         for item in group.get("sample_items") or []:
             if isinstance(item, dict):
+                catalog_index = item.get("catalog_index")
+                if isinstance(catalog_index, int) and has_image_by_index.get(catalog_index):
+                    skipped_already_has_image_rows += 1
+                    continue
                 action_items.append(_compact_item(group, item))
 
     action_items.sort(
@@ -162,6 +195,7 @@ def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, b
             else 0,
             "action_batch_count": len(batches),
             "sample_action_item_rows": len(action_items),
+            "skipped_already_has_image_rows": skipped_already_has_image_rows,
             "batch_size": batch_size,
             "max_batches": max_batches,
             "by_workflow": _counter_pairs(action_items, "workflow"),
@@ -200,12 +234,18 @@ def _required_before_image_import(workflow: str) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
+    parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-batches", type=int, default=18)
     parser.add_argument("--batch-size", type=int, default=20)
     args = parser.parse_args()
 
-    report = build_report(_load(args.input), max_batches=args.max_batches, batch_size=args.batch_size)
+    report = build_report(
+        _load(args.input),
+        _load(args.catalog) if args.catalog.exists() else None,
+        max_batches=args.max_batches,
+        batch_size=args.batch_size,
+    )
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     print(f"Report: {args.output}")

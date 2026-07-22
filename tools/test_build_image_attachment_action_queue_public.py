@@ -103,6 +103,35 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 3)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
 
+    def test_catalog_images_are_skipped_from_action_items(self) -> None:
+        enrichment = {
+            "groups": [
+                {
+                    "workflow": "review_gotouchi_official_candidates",
+                    "source_store": "ご当地ちいかわ 공식(API)",
+                    "missing_image_rows": 2,
+                    "sample_items": [
+                        {"catalog_index": 1, "name_ko": "Already cached"},
+                        {"catalog_index": 2, "name_ko": "Still missing"},
+                    ],
+                }
+            ]
+        }
+        catalog = {
+            "items": [
+                {"catalog_index": 1, "local_image_path": "assets/catalog_images/cached.webp"},
+                {"catalog_index": 2},
+            ]
+        }
+
+        report = queue.build_report(enrichment, catalog, max_batches=10, batch_size=20)
+
+        self.assertEqual(report["summary"]["actionable_image_rows"], 2)
+        self.assertEqual(report["summary"]["sample_action_item_rows"], 1)
+        self.assertEqual(report["summary"]["queued_image_rows"], 1)
+        self.assertEqual(report["summary"]["skipped_already_has_image_rows"], 1)
+        self.assertEqual(report["batches"][0]["items"][0]["catalog_index"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()
