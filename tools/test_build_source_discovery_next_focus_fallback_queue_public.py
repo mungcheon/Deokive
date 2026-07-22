@@ -73,6 +73,32 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["by_http_status"], [("404", 1)])
         self.assertEqual(report["summary"]["fallback_query_count"], 3)
         self.assertEqual(report["summary"]["domain_limited_web_search_url_count"], 3)
+        self.assertEqual(report["summary"]["work_order_steps"], 3)
+        self.assertEqual(
+            report["summary"]["work_order_lanes"],
+            [
+                "domain_limited_exact_title_search",
+                "legacy_mobile_store_search",
+                "evidence_fill_and_dry_run",
+            ],
+        )
+        self.assertIn(
+            "site%3Awww.animate-onlineshop.jp",
+            report["summary"]["first_domain_limited_web_search_url"],
+        )
+        self.assertIn(
+            "sphone/products/list.php",
+            report["summary"]["first_fallback_store_search_url"],
+        )
+        self.assertEqual(
+            [step["lane"] for step in report["work_order"]],
+            [
+                "domain_limited_exact_title_search",
+                "legacy_mobile_store_search",
+                "evidence_fill_and_dry_run",
+            ],
+        )
+        self.assertEqual(report["work_order"][0]["query_count"], 1)
         item = report["items"][0]
         self.assertEqual(item["catalog_index"], 1)
         self.assertEqual(item["manual_review_status"], "fallback_not_started")

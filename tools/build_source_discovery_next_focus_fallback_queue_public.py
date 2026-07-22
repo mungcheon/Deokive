@@ -86,6 +86,45 @@ def _fallback_search_queries(item: dict[str, Any]) -> list[dict[str, str]]:
     return queries
 
 
+def _fallback_work_order(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if not queue_items:
+        return []
+
+    return [
+        {
+            "rank": 1,
+            "lane": "domain_limited_exact_title_search",
+            "description": "Open the first domain-limited query for each row and look for an exact Animate product detail page.",
+            "queue_rows": len(queue_items),
+            "query_count": sum(1 for item in queue_items if item.get("domain_limited_web_search_urls")),
+            "sample_search_urls": [
+                item["domain_limited_web_search_urls"][0]
+                for item in queue_items[:5]
+                if item.get("domain_limited_web_search_urls")
+            ],
+        },
+        {
+            "rank": 2,
+            "lane": "legacy_mobile_store_search",
+            "description": "If web search is weak, open the legacy mobile Animate search URL and inspect product-detail results manually.",
+            "queue_rows": sum(1 for item in queue_items if item.get("fallback_store_search_url")),
+            "sample_search_urls": [
+                item["fallback_store_search_url"]
+                for item in queue_items[:5]
+                if item.get("fallback_store_search_url")
+            ],
+        },
+        {
+            "rank": 3,
+            "lane": "evidence_fill_and_dry_run",
+            "description": "Only after exact identity is confirmed, fill manual_confirmed_source_url/manual_evidence_url and run the dry-run importer.",
+            "queue_rows": len(queue_items),
+            "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+            "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json",
+        },
+    ]
+
+
 def build_report(
     next_pack: dict[str, Any],
     fetch_audit: dict[str, Any],
@@ -154,6 +193,7 @@ def build_report(
     domain_limited_web_search_url_count = sum(
         len(item.get("domain_limited_web_search_urls") or []) for item in queue_items
     )
+    work_order = _fallback_work_order(queue_items)
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -172,6 +212,16 @@ def build_report(
             "by_category": by_category.most_common(),
             "fallback_query_count": fallback_query_count,
             "domain_limited_web_search_url_count": domain_limited_web_search_url_count,
+            "work_order_steps": len(work_order),
+            "work_order_lanes": [step["lane"] for step in work_order],
+            "first_domain_limited_web_search_url": (
+                queue_items[0].get("domain_limited_web_search_urls", [""])[0]
+                if queue_items and queue_items[0].get("domain_limited_web_search_urls")
+                else ""
+            ),
+            "first_fallback_store_search_url": (
+                queue_items[0].get("fallback_store_search_url", "") if queue_items else ""
+            ),
             "auto_apply_enabled": False,
             "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
         },
@@ -182,6 +232,7 @@ def build_report(
             "import_tool": "tools/import_confirmed_source_discovery_rows.py",
             "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json",
         },
+        "work_order": work_order,
         "items": queue_items,
     }
 

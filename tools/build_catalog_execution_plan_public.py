@@ -343,6 +343,14 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "by_http_status": source_next_focus_fallback_summary.get("by_http_status", []),
                     "by_source_store": source_next_focus_fallback_summary.get("by_source_store", []),
                     "by_category": source_next_focus_fallback_summary.get("by_category", []),
+                    "work_order_steps": _count(source_next_focus_fallback_summary, "work_order_steps"),
+                    "work_order_lanes": source_next_focus_fallback_summary.get("work_order_lanes", []),
+                    "first_domain_limited_web_search_url": source_next_focus_fallback_summary.get(
+                        "first_domain_limited_web_search_url"
+                    ),
+                    "first_fallback_store_search_url": source_next_focus_fallback_summary.get(
+                        "first_fallback_store_search_url"
+                    ),
                 },
             )
         )

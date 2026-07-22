@@ -828,6 +828,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_fallback_summary.get("queue_rows"),
         )
         self.assertEqual(
+            source_next_focus_fallback_next_action.get("work_order_steps"),
+            source_next_focus_fallback_summary.get("work_order_steps"),
+        )
+        self.assertEqual(
+            source_next_focus_fallback_next_action.get("work_order_lanes"),
+            source_next_focus_fallback_summary.get("work_order_lanes"),
+        )
+        self.assertEqual(
+            source_next_focus_fallback_scorecard.get("work_order_lanes"),
+            source_next_focus_fallback_summary.get("work_order_lanes"),
+        )
+        self.assertEqual(
             quality["source_discovery_action_queue"].get("top_source_store_workstreams"),
             expected_source_workstreams,
         )

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T20:34:55Z",
+  "generated_at": "2026-07-22T21:24:42Z",
   "scope": "source_discovery_next_focus_fallback_queue",
   "source_reports": [
     "data/source_discovery_next_focus_pack_public.json",
@@ -31,6 +31,14 @@
     ],
     "fallback_query_count": 99,
     "domain_limited_web_search_url_count": 99,
+    "work_order_steps": 3,
+    "work_order_lanes": [
+      "domain_limited_exact_title_search",
+      "legacy_mobile_store_search",
+      "evidence_fill_and_dry_run"
+    ],
+    "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+    "first_fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
     "auto_apply_enabled": false,
     "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
   },
@@ -41,6 +49,43 @@
     "import_tool": "tools/import_confirmed_source_discovery_rows.py",
     "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json"
   },
+  "work_order": [
+    {
+      "rank": 1,
+      "lane": "domain_limited_exact_title_search",
+      "description": "Open the first domain-limited query for each row and look for an exact Animate product detail page.",
+      "queue_rows": 20,
+      "query_count": 20,
+      "sample_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%A0%EC%A3%A0%EC%9D%98+%EA%B8%B0%EB%AC%98%ED%95%9C+%EB%AA%A8%ED%97%98+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%9C%ED%83%9C%EC%9B%85%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0+%EC%B2%B4%EB%A6%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%22"
+      ]
+    },
+    {
+      "rank": 2,
+      "lane": "legacy_mobile_store_search",
+      "description": "If web search is weak, open the legacy mobile Animate search URL and inspect product-detail results manually.",
+      "queue_rows": 20,
+      "sample_search_urls": [
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%A3%A0%EC%A3%A0%EC%9D%98%20%EA%B8%B0%EB%AC%98%ED%95%9C%20%EB%AA%A8%ED%97%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM%20DUNK%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%9C%ED%83%9C%EC%9B%85%29",
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0%20%EC%B2%B4%EB%A6%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29"
+      ]
+    },
+    {
+      "rank": 3,
+      "lane": "evidence_fill_and_dry_run",
+      "description": "Only after exact identity is confirmed, fill manual_confirmed_source_url/manual_evidence_url and run the dry-run importer.",
+      "queue_rows": 20,
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json"
+    }
+  ],
   "items": [
     {
       "manual_review_status": "fallback_not_started",

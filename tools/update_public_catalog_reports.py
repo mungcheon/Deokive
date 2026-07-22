@@ -2065,6 +2065,11 @@ def build_operations_public(
             "fallback_reason": source_next_focus_fallback_queue_summary.get("fallback_reason"),
             "by_source_store": source_next_focus_fallback_queue_summary.get("by_source_store", []),
             "by_category": source_next_focus_fallback_queue_summary.get("by_category", []),
+            "work_order_steps": source_next_focus_fallback_queue_summary.get("work_order_steps", 0),
+            "work_order_lanes": source_next_focus_fallback_queue_summary.get("work_order_lanes", []),
+            "first_domain_limited_web_search_url": source_next_focus_fallback_queue_summary.get(
+                "first_domain_limited_web_search_url"
+            ),
             "auto_apply_enabled": source_next_focus_fallback_queue_summary.get("auto_apply_enabled", False),
             "recommended_next_action": "Review fallback rows and fill exact manual_confirmed_source_url values before source import.",
         } if source_next_focus_fallback_queue_summary else None,
@@ -2514,6 +2519,7 @@ def build_operations_public(
             "by_category": source_next_focus_fallback_queue_summary.get("by_category", []),
             "primary_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
             "next_step": "fill_exact_manual_confirmed_source_urls_from_fallback_research",
+            "work_order_lanes": source_next_focus_fallback_queue_summary.get("work_order_lanes", []),
             "auto_apply_enabled": source_next_focus_fallback_queue_summary.get("auto_apply_enabled", False),
         } if source_next_focus_fallback_queue_summary else None,
         {

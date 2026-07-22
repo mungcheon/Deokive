@@ -116,6 +116,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "by_http_status": [["404", 4]],
                     "by_source_store": [["Animate", 4]],
                     "by_category": [["Acrylic stand", 4]],
+                    "work_order_steps": 3,
+                    "work_order_lanes": [
+                        "domain_limited_exact_title_search",
+                        "legacy_mobile_store_search",
+                        "evidence_fill_and_dry_run",
+                    ],
+                    "first_domain_limited_web_search_url": "https://google.example/search?q=site%3Aanimate",
+                    "first_fallback_store_search_url": "https://animate.example/sphone/products/list.php",
                     "auto_apply_enabled": False,
                 }
             },
@@ -369,6 +377,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(fallback_queue["priority"], 20)
         self.assertEqual(fallback_queue["rows"], 4)
         self.assertEqual(fallback_queue["evidence"]["by_source_store"], [["Animate", 4]])
+        self.assertEqual(fallback_queue["evidence"]["work_order_steps"], 3)
+        self.assertEqual(
+            fallback_queue["evidence"]["work_order_lanes"],
+            [
+                "domain_limited_exact_title_search",
+                "legacy_mobile_store_search",
+                "evidence_fill_and_dry_run",
+            ],
+        )
         self.assertEqual(report["summary"]["source_next_focus_fallback_rows"], 4)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
