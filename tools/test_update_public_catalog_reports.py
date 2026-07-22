@@ -34,6 +34,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/generic_storefront_missing_image_source_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_report_coverage_public.json", updated_files)
         self.assertIn("data/ensky_missing_image_cache_coverage_public.json", updated_files)
+        self.assertIn("data/ensky_cache_candidate_action_queue_public.json", updated_files)
         self.assertIn("data/ensky_search_page_probe_public.json", updated_files)
         self.assertIn("data/stellive_fanding_candidates_public.json", updated_files)
         self.assertIn("data/requested_focus_enrichment_public.json", updated_files)
@@ -396,6 +397,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         source_action = reports.load_json(reports.SOURCE_DISCOVERY_ACTION_QUEUE)
         source_action_summary = source_action.get("summary", {})
+        ensky_cache_action = reports.load_json(reports.ENSKY_CACHE_CANDIDATE_ACTION_QUEUE)
+        ensky_cache_action_summary = ensky_cache_action.get("summary", {})
         source_detail_action = reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)
         source_detail_action_summary = source_detail_action.get("summary", {})
         source_scorecard = next(
@@ -412,6 +415,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "source_discovery_action_queue"
+        )
+        ensky_cache_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "ensky_cache_candidate_action_queue"
         )
         source_detail_next_action = next(
             row
@@ -627,6 +635,23 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_action_queue"].get("top_source_store_workstreams"),
             expected_source_workstreams,
         )
+        self.assertEqual(
+            open_queues.get("ensky_cache_candidate_action_rows"),
+            ensky_cache_action_summary.get("candidate_action_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("ensky_cache_candidate_manual_confirmed_rows"),
+            ensky_cache_action_summary.get("manual_confirmed_true"),
+        )
+        self.assertEqual(
+            ensky_cache_next_action.get("candidate_action_rows"),
+            ensky_cache_action_summary.get("candidate_action_rows"),
+        )
+        self.assertEqual(
+            quality["ensky_cache_candidate_action_queue"].get("candidate_action_rows"),
+            ensky_cache_action_summary.get("candidate_action_rows"),
+        )
+        self.assertFalse(quality["ensky_cache_candidate_action_queue"].get("auto_apply_enabled"))
         self.assertEqual(
             open_queues.get("source_detail_candidate_action_rows"),
             source_detail_action_summary.get("candidate_action_rows"),

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T09:42:58Z",
+  "generated_at": "2026-07-22T10:15:52Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 15,
+    "action_count": 16,
     "blocked_action_count": 1,
-    "manual_review_action_count": 13,
+    "manual_review_action_count": 14,
     "pending_import_action_count": 0,
-    "total_action_rows": 42017,
+    "total_action_rows": 42071,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -34,6 +34,8 @@
       "source_discovery_unqueued_actionable_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
+      "ensky_cache_candidate_action_rows": 54,
+      "ensky_cache_candidate_manual_confirmed_rows": 0,
       "image_attachment_action_rows": 73,
       "image_attachment_actionable_rows": 73,
       "image_attachment_unqueued_actionable_rows": 0,
@@ -286,6 +288,95 @@
             12
           ]
         ]
+      }
+    },
+    {
+      "priority": 23,
+      "workstream": "ensky_cache_candidate_action_queue",
+      "public_report": "data/ensky_cache_candidate_action_queue_public.json",
+      "status": "manual_review",
+      "rows": 54,
+      "command": "Review broad Ensky cache matches, then fill exact source_url and image_url templates only for confirmed products.",
+      "next_step": "manual_confirm_ensky_cache_candidate_then_fill_source_and_image_templates",
+      "blocker": "Broad cache candidates can match the wrong character or goods type, so auto-apply stays disabled.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "candidate_action_rows": 54,
+        "action_batch_count": 6,
+        "manual_confirmed_true": 0,
+        "by_affiliation": [
+          [
+            "원피스",
+            13
+          ],
+          [
+            "주술회전",
+            11
+          ],
+          [
+            "치이카와",
+            8
+          ],
+          [
+            "체인소 맨",
+            6
+          ],
+          [
+            "장송의 프리렌",
+            5
+          ],
+          [
+            "단간론파",
+            4
+          ],
+          [
+            "나의 히어로 아카데미아",
+            3
+          ],
+          [
+            "봇치 더 록",
+            3
+          ],
+          [
+            "헌터X헌터",
+            1
+          ]
+        ],
+        "by_category": [
+          [
+            "아크릴 스탠드",
+            21
+          ],
+          [
+            "키링",
+            9
+          ],
+          [
+            "마스코트",
+            9
+          ],
+          [
+            "캔뱃지",
+            6
+          ],
+          [
+            "문구",
+            3
+          ],
+          [
+            "머그컵",
+            2
+          ],
+          [
+            "인형",
+            2
+          ],
+          [
+            "응원용품",
+            2
+          ]
+        ],
+        "auto_apply_enabled": false
       }
     },
     {

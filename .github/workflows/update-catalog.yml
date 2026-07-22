@@ -43,6 +43,7 @@ jobs:
           python tools/build_image_attachment_action_queue_public.py
           python tools/build_catalog_missing_image_actionability_public.py --write
           python tools/build_source_discovery_store_bottlenecks_public.py --write
+          python tools/build_ensky_cache_candidate_action_queue_public.py --write
           python tools/build_source_detail_candidate_action_queue_public.py --write
           python tools/build_deduplication_action_queue_public.py
           python tools/build_deduplication_fast_review_public.py --write
@@ -144,6 +145,7 @@ jobs:
             data/gotouchi_representative_image_attachment_public.json \
             data/catalog_missing_image_report_coverage_public.json \
             data/ensky_missing_image_cache_coverage_public.json \
+            data/ensky_cache_candidate_action_queue_public.json \
             data/ensky_search_page_probe_public.json \
             data/stellive_fanding_candidates_public.json \
             data/catalog_missing_image_work_queue_public.json \

@@ -101,6 +101,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     image_action_queue = load_report("catalog_image_attachment_action_queue_public.json")
     source_batches = load_report("source_discovery_review_batches_public.json")
     source_action_queue = load_report("source_discovery_action_queue_public.json")
+    ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
     metadata_batches = load_report("catalog_metadata_review_batches_public.json")
     metadata_action_queue = load_report("catalog_metadata_action_queue_public.json")
     requested_batches = load_report("requested_focus_review_batches_public.json")
@@ -121,6 +122,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     image_action_summary = _summary(image_action_queue)
     source_summary = _summary(source_batches)
     source_action_summary = _summary(source_action_queue)
+    ensky_cache_candidate_action_summary = _summary(ensky_cache_candidate_action_queue)
     metadata_summary = _summary(metadata_batches)
     metadata_action_summary = _summary(metadata_action_queue)
     requested_summary = _summary(requested_batches)
@@ -248,6 +250,30 @@ def _build_plan(load_report) -> dict[str, Any]:
             },
         )
     )
+
+    if ensky_cache_candidate_action_summary:
+        actions.append(
+            _action(
+                priority=23,
+                workstream="ensky_cache_candidate_action_queue",
+                public_report="data/ensky_cache_candidate_action_queue_public.json",
+                status="manual_review",
+                rows=_count(ensky_cache_candidate_action_summary, "candidate_action_rows"),
+                command="Review broad Ensky cache matches, then fill exact source_url and image_url templates only for confirmed products.",
+                next_step="manual_confirm_ensky_cache_candidate_then_fill_source_and_image_templates",
+                blocker="Broad cache candidates can match the wrong character or goods type, so auto-apply stays disabled.",
+                evidence={
+                    "candidate_action_rows": _count(ensky_cache_candidate_action_summary, "candidate_action_rows"),
+                    "action_batch_count": _count(ensky_cache_candidate_action_summary, "action_batch_count"),
+                    "manual_confirmed_true": _count(ensky_cache_candidate_action_summary, "manual_confirmed_true"),
+                    "by_affiliation": ensky_cache_candidate_action_summary.get("by_affiliation", []),
+                    "by_category": ensky_cache_candidate_action_summary.get("by_category", []),
+                    "auto_apply_enabled": bool(
+                        ensky_cache_candidate_action_summary.get("auto_apply_enabled", False)
+                    ),
+                },
+            )
+        )
 
     missing_images = _count(image_summary, "missing_image_rows")
     ready_image_rows = _count(image_summary, "source_url_ready_rows")
