@@ -47,7 +47,95 @@ def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     return [[name, count] for name, count in counts.most_common()]
 
 
+def _present(value: Any) -> bool:
+    return value is not None and str(value).strip() != ""
+
+
+def _row_richness(row: dict[str, Any]) -> int:
+    value = row.get("richness")
+    if isinstance(value, int):
+        return value
+    fields = [
+        "name_ko",
+        "name_ja",
+        "name_en",
+        "category",
+        "character_name",
+        "affiliation",
+        "series_name",
+        "sub_series",
+        "official_price_jpy",
+        "barcode",
+        "image_url",
+        "source_url",
+        "source_store",
+        "release_date",
+    ]
+    return sum(1 for field in fields if _present(row.get(field)))
+
+
+def _keep_basis(group: dict[str, Any]) -> dict[str, Any]:
+    rows = [row for row in group.get("rows") or [] if isinstance(row, dict)]
+    keep_index = group.get("keep_catalog_index")
+    keep_row = next((row for row in rows if row.get("catalog_index") == keep_index), None)
+    if keep_row is None:
+        return {
+            "basis": "preselected_keep_row_from_review_queue",
+            "keep_catalog_index": keep_index,
+            "keep_richness": None,
+            "max_richness": None,
+            "keep_has_image": False,
+            "keep_has_source_url": False,
+        }
+    keep_richness = _row_richness(keep_row)
+    max_richness = max((_row_richness(row) for row in rows), default=keep_richness)
+    return {
+        "basis": "richest_or_equal_catalog_row" if keep_richness >= max_richness else "manual_recheck_keep_row",
+        "keep_catalog_index": keep_index,
+        "keep_richness": keep_richness,
+        "max_richness": max_richness,
+        "keep_has_image": _present(keep_row.get("image_url")),
+        "keep_has_source_url": _present(keep_row.get("source_url")),
+    }
+
+
+def _row_comparison_summary(group: dict[str, Any]) -> dict[str, Any]:
+    rows = [row for row in group.get("rows") or [] if isinstance(row, dict)]
+    names = {str(row.get("name_ko") or "").strip() for row in rows if _present(row.get("name_ko"))}
+    source_urls = {str(row.get("source_url") or "").strip() for row in rows if _present(row.get("source_url"))}
+    image_urls = {str(row.get("image_url") or "").strip() for row in rows if _present(row.get("image_url"))}
+    stores = {str(row.get("source_store") or "").strip() for row in rows if _present(row.get("source_store"))}
+    categories = {str(row.get("category") or "").strip() for row in rows if _present(row.get("category"))}
+    return {
+        "name_count": len(names),
+        "source_url_count": len(source_urls),
+        "image_url_count": len(image_urls),
+        "store_count": len(stores),
+        "category_count": len(categories),
+        "name_differs": len(names) > 1,
+        "source_url_differs": len(source_urls) > 1,
+        "image_url_differs": len(image_urls) > 1,
+        "multi_store": len(stores) > 1,
+        "multi_category": len(categories) > 1,
+    }
+
+
+def _confirmation_risk_flags(group: dict[str, Any], comparison: dict[str, Any]) -> list[str]:
+    flags: list[str] = []
+    if comparison.get("name_differs"):
+        flags.append("name_differs")
+    if comparison.get("image_url_differs"):
+        flags.append("image_url_differs")
+    if comparison.get("multi_store"):
+        flags.append("multi_store_review")
+    if comparison.get("multi_category"):
+        flags.append("category_differs")
+    flags.extend(str(flag) for flag in group.get("merge_blockers") or [])
+    return sorted(set(flags))
+
+
 def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
+    comparison = _row_comparison_summary(group)
     return {
         "key_type": group.get("key_type"),
         "key": group.get("key"),
@@ -61,6 +149,9 @@ def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, An
         "categories": group.get("categories") or [],
         "evidence": group.get("evidence") or [],
         "merge_blockers": group.get("merge_blockers") or [],
+        "keep_basis": _keep_basis(group),
+        "row_comparison_summary": comparison,
+        "confirmation_risk_flags": _confirmation_risk_flags(group, comparison),
         "identity_checklist": group.get("identity_checklist") or batch.get("identity_checklist") or [],
         "recommended_action": group.get("recommended_action") or batch.get("recommended_action"),
         "dedupe_decision_template": group.get("dedupe_decision_template") or {},

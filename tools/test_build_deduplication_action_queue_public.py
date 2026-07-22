@@ -24,7 +24,30 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
                             "review_confidence": "high_review_confidence",
                             "keep_catalog_index": 1,
                             "drop_catalog_indexes": [2],
+                            "merge_blockers": ["multi_store_variant_or_retailer_review"],
                             "dedupe_decision_template": {"decision": "review_required"},
+                            "rows": [
+                                {
+                                    "catalog_index": 1,
+                                    "name_ko": "Sample goods",
+                                    "source_store": "Official",
+                                    "category": "figure",
+                                    "barcode": "111",
+                                    "source_url": "https://example.test/item",
+                                    "image_url": "https://example.test/item.jpg",
+                                    "richness": 9,
+                                },
+                                {
+                                    "catalog_index": 2,
+                                    "name_ko": "Sample goods resale",
+                                    "source_store": "Retailer",
+                                    "category": "figure",
+                                    "barcode": "111",
+                                    "source_url": "https://example.test/item",
+                                    "image_url": "https://example.test/item.jpg",
+                                    "richness": 7,
+                                },
+                            ],
                         },
                         {
                             "key_type": "source_url",
@@ -85,6 +108,14 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
             report["batches"][0]["groups"][0]["confirmed_queue"],
             "server/catalog_dedupe_confirmed_decisions.json",
         )
+        first_group = report["batches"][0]["groups"][0]
+        self.assertEqual(first_group["keep_basis"]["basis"], "richest_or_equal_catalog_row")
+        self.assertEqual(first_group["keep_basis"]["keep_richness"], 9)
+        self.assertTrue(first_group["keep_basis"]["keep_has_image"])
+        self.assertTrue(first_group["row_comparison_summary"]["name_differs"])
+        self.assertTrue(first_group["row_comparison_summary"]["multi_store"])
+        self.assertIn("name_differs", first_group["confirmation_risk_flags"])
+        self.assertIn("multi_store_review", first_group["confirmation_risk_flags"])
 
     def test_max_groups_caps_published_queue_only(self) -> None:
         review_batches = {
