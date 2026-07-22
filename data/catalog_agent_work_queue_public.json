@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T19:43:32Z",
+  "generated_at": "2026-07-22T19:46:29Z",
   "summary": {
     "batch_count": 96,
     "summed_batch_rows": 20305,
@@ -17865,8 +17865,31 @@
             "release_date"
           ],
           "workflow": "release_date_review",
+          "review_lane": "confirm_campaign_release_date",
           "review_priority": 10,
           "source_evidence_required": "official_1kuji_campaign_page",
+          "patch_summary": {
+            "field_count": 1,
+            "fields": [
+              "release_date"
+            ],
+            "target_scopes": [
+              "all_catalog_rows_for_campaign_url"
+            ],
+            "target_catalog_item_rows": 8,
+            "requires_full_campaign_index_expansion": false,
+            "requires_labeled_official_evidence": true,
+            "field_confirmation_rules": [
+              "release_date_must_be_labeled_campaign_release_or_sales_start_date",
+              "ignore_double_chance_entry_deadline_or_prize_shipping_dates"
+            ]
+          },
+          "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            "release_date_must_be_labeled_campaign_release_or_sales_start_date",
+            "ignore_double_chance_entry_deadline_or_prize_shipping_dates"
+          ],
           "next_machine_step": "verify_labeled_official_release_date",
           "evidence_checklist": [
             "official_1kuji_campaign_page_or_captured_official_archive",
@@ -17938,8 +17961,31 @@
             "release_date"
           ],
           "workflow": "release_date_review",
+          "review_lane": "confirm_campaign_release_date",
           "review_priority": 10,
           "source_evidence_required": "official_1kuji_campaign_page",
+          "patch_summary": {
+            "field_count": 1,
+            "fields": [
+              "release_date"
+            ],
+            "target_scopes": [
+              "all_catalog_rows_for_campaign_url"
+            ],
+            "target_catalog_item_rows": 8,
+            "requires_full_campaign_index_expansion": false,
+            "requires_labeled_official_evidence": true,
+            "field_confirmation_rules": [
+              "release_date_must_be_labeled_campaign_release_or_sales_start_date",
+              "ignore_double_chance_entry_deadline_or_prize_shipping_dates"
+            ]
+          },
+          "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            "release_date_must_be_labeled_campaign_release_or_sales_start_date",
+            "ignore_double_chance_entry_deadline_or_prize_shipping_dates"
+          ],
           "next_machine_step": "verify_labeled_official_release_date",
           "evidence_checklist": [
             "official_1kuji_campaign_page_or_captured_official_archive",
@@ -18011,8 +18057,31 @@
             "official_price_jpy"
           ],
           "workflow": "price_review",
+          "review_lane": "confirm_campaign_draw_price",
           "review_priority": 20,
           "source_evidence_required": "official_1kuji_campaign_page",
+          "patch_summary": {
+            "field_count": 1,
+            "fields": [
+              "official_price_jpy"
+            ],
+            "target_scopes": [
+              "all_catalog_rows_for_campaign_url"
+            ],
+            "target_catalog_item_rows": 7,
+            "requires_full_campaign_index_expansion": false,
+            "requires_labeled_official_evidence": true,
+            "field_confirmation_rules": [
+              "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+              "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+            ]
+          },
+          "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+            "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+          ],
           "next_machine_step": "verify_labeled_official_price_jpy",
           "evidence_checklist": [
             "official_1kuji_campaign_page_or_captured_official_archive",
@@ -18082,8 +18151,31 @@
             "official_price_jpy"
           ],
           "workflow": "price_review",
+          "review_lane": "confirm_campaign_draw_price",
           "review_priority": 20,
           "source_evidence_required": "official_1kuji_campaign_page",
+          "patch_summary": {
+            "field_count": 1,
+            "fields": [
+              "official_price_jpy"
+            ],
+            "target_scopes": [
+              "all_catalog_rows_for_campaign_url"
+            ],
+            "target_catalog_item_rows": 7,
+            "requires_full_campaign_index_expansion": false,
+            "requires_labeled_official_evidence": true,
+            "field_confirmation_rules": [
+              "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+              "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+            ]
+          },
+          "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+            "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+          ],
           "next_machine_step": "verify_labeled_official_price_jpy",
           "evidence_checklist": [
             "official_1kuji_campaign_page_or_captured_official_archive",
@@ -18153,8 +18245,31 @@
             "official_price_jpy"
           ],
           "workflow": "price_review",
+          "review_lane": "confirm_campaign_draw_price",
           "review_priority": 20,
           "source_evidence_required": "official_1kuji_campaign_page",
+          "patch_summary": {
+            "field_count": 1,
+            "fields": [
+              "official_price_jpy"
+            ],
+            "target_scopes": [
+              "all_catalog_rows_for_campaign_url"
+            ],
+            "target_catalog_item_rows": 8,
+            "requires_full_campaign_index_expansion": false,
+            "requires_labeled_official_evidence": true,
+            "field_confirmation_rules": [
+              "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+              "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+            ]
+          },
+          "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+            "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+          ],
           "next_machine_step": "verify_labeled_official_price_jpy",
           "evidence_checklist": [
             "official_1kuji_campaign_page_or_captured_official_archive",
@@ -18227,8 +18342,31 @@
             "official_price_jpy"
           ],
           "workflow": "price_review",
+          "review_lane": "confirm_campaign_draw_price",
           "review_priority": 20,
           "source_evidence_required": "official_1kuji_campaign_page",
+          "patch_summary": {
+            "field_count": 1,
+            "fields": [
+              "official_price_jpy"
+            ],
+            "target_scopes": [
+              "all_catalog_rows_for_campaign_url"
+            ],
+            "target_catalog_item_rows": 7,
+            "requires_full_campaign_index_expansion": false,
+            "requires_labeled_official_evidence": true,
+            "field_confirmation_rules": [
+              "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+              "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+            ]
+          },
+          "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+            "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+          ],
           "next_machine_step": "verify_labeled_official_price_jpy",
           "evidence_checklist": [
             "official_1kuji_campaign_page_or_captured_official_archive",
@@ -18298,8 +18436,31 @@
             "official_price_jpy"
           ],
           "workflow": "price_review",
+          "review_lane": "confirm_campaign_draw_price",
           "review_priority": 20,
           "source_evidence_required": "official_1kuji_campaign_page",
+          "patch_summary": {
+            "field_count": 1,
+            "fields": [
+              "official_price_jpy"
+            ],
+            "target_scopes": [
+              "all_catalog_rows_for_campaign_url"
+            ],
+            "target_catalog_item_rows": 7,
+            "requires_full_campaign_index_expansion": false,
+            "requires_labeled_official_evidence": true,
+            "field_confirmation_rules": [
+              "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+              "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+            ]
+          },
+          "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+            "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+          ],
           "next_machine_step": "verify_labeled_official_price_jpy",
           "evidence_checklist": [
             "official_1kuji_campaign_page_or_captured_official_archive",
@@ -18369,8 +18530,31 @@
             "official_price_jpy"
           ],
           "workflow": "price_review",
+          "review_lane": "confirm_campaign_draw_price",
           "review_priority": 20,
           "source_evidence_required": "official_1kuji_campaign_page",
+          "patch_summary": {
+            "field_count": 1,
+            "fields": [
+              "official_price_jpy"
+            ],
+            "target_scopes": [
+              "all_catalog_rows_for_campaign_url"
+            ],
+            "target_catalog_item_rows": 7,
+            "requires_full_campaign_index_expansion": false,
+            "requires_labeled_official_evidence": true,
+            "field_confirmation_rules": [
+              "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+              "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+            ]
+          },
+          "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+            "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+          ],
           "next_machine_step": "verify_labeled_official_price_jpy",
           "evidence_checklist": [
             "official_1kuji_campaign_page_or_captured_official_archive",

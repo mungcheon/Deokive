@@ -25,7 +25,14 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
                             "missing_fields": ["official_price_jpy"],
                             "workflow": "price_review",
                             "review_priority": 20,
-                            "campaign_field_patch_templates": [{"field": "official_price_jpy"}],
+                            "campaign_field_patch_templates": [
+                                {
+                                    "field": "official_price_jpy",
+                                    "target_scope": "all_catalog_rows_for_campaign_url",
+                                    "target_catalog_item_rows": 12,
+                                    "requires_labeled_official_evidence": True,
+                                }
+                            ],
                         },
                         {
                             "slug": "release",
@@ -35,7 +42,14 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
                             "missing_fields": ["release_date"],
                             "workflow": "release_date_review",
                             "review_priority": 10,
-                            "campaign_field_patch_templates": [{"field": "release_date"}],
+                            "campaign_field_patch_templates": [
+                                {
+                                    "field": "release_date",
+                                    "target_scope": "all_catalog_rows_for_campaign_url",
+                                    "target_catalog_item_rows": 8,
+                                    "requires_labeled_official_evidence": True,
+                                }
+                            ],
                         },
                     ],
                 }
@@ -75,6 +89,21 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             report["batches"][0]["campaigns"][0]["confirmed_queue"],
             "server/ichiban_kuji_metadata_confirmed_rows.json",
+        )
+        first_campaign = report["batches"][0]["campaigns"][0]
+        self.assertEqual(first_campaign["review_lane"], "confirm_campaign_release_date")
+        self.assertEqual(first_campaign["patch_summary"]["fields"], ["release_date"])
+        self.assertEqual(first_campaign["patch_summary"]["target_catalog_item_rows"], 8)
+        self.assertTrue(first_campaign["patch_summary"]["requires_labeled_official_evidence"])
+        self.assertIn(
+            "release_date_must_be_labeled_campaign_release_or_sales_start_date",
+            first_campaign["manual_confirmation_requirements"],
+        )
+        price_campaign = report["batches"][0]["campaigns"][1]
+        self.assertEqual(price_campaign["review_lane"], "confirm_campaign_draw_price")
+        self.assertIn(
+            "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+            price_campaign["manual_confirmation_requirements"],
         )
 
     def test_max_campaigns_caps_published_queue_not_actionable_summary(self) -> None:

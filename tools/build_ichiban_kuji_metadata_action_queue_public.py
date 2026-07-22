@@ -49,12 +49,80 @@ def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     return [[name, count] for name, count in counts.most_common()]
 
 
+def _field_confirmation_rules(fields: list[str]) -> list[str]:
+    rules: list[str] = []
+    if "release_date" in fields:
+        rules.extend(
+            [
+                "release_date_must_be_labeled_campaign_release_or_sales_start_date",
+                "ignore_double_chance_entry_deadline_or_prize_shipping_dates",
+            ]
+        )
+    if "official_price_jpy" in fields:
+        rules.extend(
+            [
+                "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+                "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price",
+            ]
+        )
+    return rules
+
+
+def _patch_summary(templates: list[dict[str, Any]], catalog_item_rows: Any) -> dict[str, Any]:
+    fields = [str(template.get("field") or "") for template in templates if template.get("field")]
+    target_scopes = sorted(
+        {
+            str(template.get("target_scope") or "")
+            for template in templates
+            if template.get("target_scope")
+        }
+    )
+    requires_full_expansion = any(
+        bool(template.get("requires_full_campaign_index_expansion"))
+        for template in templates
+    )
+    requires_labeled_evidence = any(
+        bool(template.get("requires_labeled_official_evidence"))
+        for template in templates
+    )
+    target_rows = max(
+        [
+            int(template.get("target_catalog_item_rows") or 0)
+            for template in templates
+            if isinstance(template, dict)
+        ]
+        + [int(catalog_item_rows or 0)]
+    )
+    return {
+        "field_count": len(fields),
+        "fields": fields,
+        "target_scopes": target_scopes,
+        "target_catalog_item_rows": target_rows,
+        "requires_full_campaign_index_expansion": requires_full_expansion,
+        "requires_labeled_official_evidence": requires_labeled_evidence,
+        "field_confirmation_rules": _field_confirmation_rules(fields),
+    }
+
+
+def _review_lane(workflow: Any, fields: list[str]) -> str:
+    workflow_text = str(workflow or "")
+    if "release_date" in fields and "official_price_jpy" in fields:
+        return "confirm_release_date_and_draw_price"
+    if workflow_text == "release_date_review" or "release_date" in fields:
+        return "confirm_campaign_release_date"
+    if workflow_text == "price_review" or "official_price_jpy" in fields:
+        return "confirm_campaign_draw_price"
+    return "confirm_campaign_metadata"
+
+
 def _compact_campaign(campaign: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
     templates = [
         template
         for template in campaign.get("campaign_field_patch_templates") or []
         if isinstance(template, dict)
     ]
+    patch_summary = _patch_summary(templates, campaign.get("catalog_item_rows"))
+    fields = patch_summary["fields"]
     return {
         "group_key": campaign.get("group_key"),
         "url": campaign.get("url"),
@@ -63,8 +131,15 @@ def _compact_campaign(campaign: dict[str, Any], batch: dict[str, Any]) -> dict[s
         "catalog_item_rows": campaign.get("catalog_item_rows"),
         "missing_fields": campaign.get("missing_fields") or [],
         "workflow": campaign.get("workflow"),
+        "review_lane": _review_lane(campaign.get("workflow"), fields),
         "review_priority": campaign.get("review_priority"),
         "source_evidence_required": campaign.get("source_evidence_required"),
+        "patch_summary": patch_summary,
+        "manual_confirmation_requirements": [
+            "official_campaign_title_matches_catalog_series",
+            "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+            *patch_summary["field_confirmation_rules"],
+        ],
         "next_machine_step": campaign.get("next_machine_step") or batch.get("next_machine_step"),
         "evidence_checklist": campaign.get("evidence_checklist") or batch.get("evidence_checklist") or [],
         "sample_catalog_indexes": campaign.get("sample_catalog_indexes") or [],
