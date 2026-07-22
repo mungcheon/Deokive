@@ -73,8 +73,10 @@ Future<bool> _confirmDuplicateImport(
 ) async {
   final pickedName = entry.nameKo.trim();
   if (pickedName.isEmpty) return true;
-  final matches =
-      appState.goodsItems.where((g) => g.name.trim() == pickedName).toList();
+  final matches = matchingCatalogGoodsItems(
+    goodsItems: appState.goodsItems,
+    entry: entry,
+  );
   if (matches.isEmpty) return true;
 
   final folderNameById = {
@@ -297,19 +299,25 @@ List<FolderItem> _sortedImportTargetFolders(
     });
 }
 
-int _ownedCountForCatalogEntry(AppState appState, GoodsCatalogEntry entry) {
+List<GoodsItem> matchingCatalogGoodsItems({
+  required Iterable<GoodsItem> goodsItems,
+  required GoodsCatalogEntry entry,
+}) {
   final catalogName = entry.nameKo.trim();
   final catalogBarcode = entry.barcode?.trim() ?? '';
-  var count = 0;
-
-  for (final item in appState.goodsItems) {
+  return goodsItems.where((item) {
     final sameName = catalogName.isNotEmpty && item.name.trim() == catalogName;
     final sameBarcode = catalogBarcode.isNotEmpty &&
         (item.barcode?.trim() ?? '') == catalogBarcode;
-    if (sameName || sameBarcode) count += item.quantity;
-  }
+    return sameName || sameBarcode;
+  }).toList(growable: false);
+}
 
-  return count;
+int _ownedCountForCatalogEntry(AppState appState, GoodsCatalogEntry entry) {
+  return matchingCatalogGoodsItems(
+    goodsItems: appState.goodsItems,
+    entry: entry,
+  ).fold(0, (sum, item) => sum + item.quantity);
 }
 
 DateTime? _parseCatalogReleaseDate(String? raw) {

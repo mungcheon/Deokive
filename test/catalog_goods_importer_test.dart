@@ -55,4 +55,45 @@ void main() {
     expect(item.memo, contains('DB에서 추가'));
     expect(item.memo, contains(entry.sourceUrl!));
   });
+
+  test('catalog import duplicate matching also uses barcode', () {
+    final appState = AppState();
+    final folder = FolderItem(
+      id: 'top-folder',
+      name: '대표 굿즈',
+      icon: Icons.folder_rounded,
+      color: Colors.blue,
+    );
+    final ownedEntry = GoodsCatalogEntry(
+      nameKo: '판매처 A 표기명',
+      category: '인형',
+      characterName: '샘플 캐릭터',
+      affiliation: '샘플 작품',
+      sourceStore: '공식 스토어',
+      barcode: '4900000000001',
+    );
+    final pickedEntry = GoodsCatalogEntry(
+      nameKo: '판매처 B 다른 표기명',
+      category: '인형',
+      characterName: '샘플 캐릭터',
+      affiliation: '샘플 작품',
+      sourceStore: '다른 스토어',
+      barcode: '4900000000001',
+    );
+    appState.goodsItems.add(
+      goodsItemFromCatalogEntry(
+        appState: appState,
+        entry: ownedEntry,
+        folder: folder,
+      ),
+    );
+
+    final matches = matchingCatalogGoodsItems(
+      goodsItems: appState.goodsItems,
+      entry: pickedEntry,
+    );
+
+    expect(matches, hasLength(1));
+    expect(matches.single.name, '판매처 A 표기명');
+  });
 }
