@@ -23,6 +23,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         updated_files = {Path(path).as_posix() for path in result["updated_files"]}
         self.assertIn("data/catalog_operations_public.json", updated_files)
         self.assertIn("data/catalog_agent_work_queue_public.json", updated_files)
+        self.assertIn("data/catalog_image_asset_audit_public.json", updated_files)
         self.assertIn("data/requested_focus_enrichment_public.json", updated_files)
         self.assertIn("data/requested_focus_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_confirmed_import_readiness_public.json", updated_files)

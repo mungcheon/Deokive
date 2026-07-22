@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import audit_public_catalog_image_assets
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -18,6 +20,7 @@ PUBLIC_META = DATA / "catalog_public_meta.json"
 QUALITY = DATA / "catalog_quality_public.json"
 IMAGE_BACKLOG = DATA / "catalog_image_backlog_public.json"
 IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
+IMAGE_ASSET_AUDIT = DATA / "catalog_image_asset_audit_public.json"
 DEDUPLICATION = DATA / "catalog_deduplication_public.json"
 DEDUPLICATION_REVIEW_BATCHES = DATA / "catalog_deduplication_review_batches_public.json"
 DEDUPLICATION_ACTION_QUEUE = DATA / "catalog_deduplication_action_queue_public.json"
@@ -4414,6 +4417,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     requested_report = load_json(REQUESTED, {}) if REQUESTED.exists() else {}
     requested_focus = build_requested_focus_enrichment_public(items, requested_report, generated_at)
     danganronpa_missing_media = build_danganronpa_missing_media_public(items, generated_at)
+    image_asset_audit = audit_public_catalog_image_assets.build_report(catalog, generated_at=generated_at)
     patch_candidate_items = generic_source_patch_candidates.get("items", [])
     patch_candidate_summary = generic_source_patch_candidates.get("summary", {})
     if patch_candidate_summary.get("candidate_rows") != len(patch_candidate_items):
@@ -4552,6 +4556,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["generic_source_patch_candidates"] = {
             "public_report": f"data/{GENERIC_SOURCE_PATCH_CANDIDATES.name}",
             **generic_source_patch_candidates["summary"],
+        }
+        target["image_asset_audit"] = {
+            "public_report": f"data/{IMAGE_ASSET_AUDIT.name}",
+            **image_asset_audit["summary"],
         }
         target["requested_focus_enrichment"] = {
             "public_report": f"data/{REQUESTED_FOCUS.name}",
@@ -4708,6 +4716,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(QUALITY, quality)
         write_json(IMAGE_BACKLOG, image_backlog)
         write_json(IMAGE_CANDIDATES, image_candidates)
+        write_json(IMAGE_ASSET_AUDIT, image_asset_audit)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
@@ -4723,6 +4732,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(QUALITY.relative_to(ROOT)),
             str(IMAGE_BACKLOG.relative_to(ROOT)),
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
+            str(IMAGE_ASSET_AUDIT.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
