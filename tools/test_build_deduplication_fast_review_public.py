@@ -26,7 +26,24 @@ class DeduplicationFastReviewTests(unittest.TestCase):
                             "categories": ["badge"],
                             "evidence": ["barcode", "same_barcode", "same_source_url"],
                             "dedupe_decision_template": {"key": "111"},
-                            "rows": [{"catalog_index": 1}, {"catalog_index": 2}],
+                            "rows": [
+                                {
+                                    "catalog_index": 1,
+                                    "name_ko": "치이카와 양말 (하치와레/블루)",
+                                    "source_store": "store a",
+                                    "source_url": "https://example.test/item",
+                                    "image_url": "https://example.test/a.jpg",
+                                    "richness": 12,
+                                },
+                                {
+                                    "catalog_index": 2,
+                                    "name_ko": "치이카와 양말 (가르마 / 블루)",
+                                    "source_store": "store b",
+                                    "source_url": "https://example.test/item",
+                                    "image_url": "https://example.test/b.jpg",
+                                    "richness": 10,
+                                },
+                            ],
                         },
                         {
                             "key_type": "source_url",
@@ -59,6 +76,11 @@ class DeduplicationFastReviewTests(unittest.TestCase):
             "same_barcode_and_source_url",
         )
         self.assertEqual(report["items"][0]["fast_review_lane"], "same_barcode_and_source_url")
+        self.assertEqual(report["items"][0]["keep_reason"], "keeps_richest_catalog_row")
+        self.assertTrue(report["items"][0]["identity_delta"]["name_differs"])
+        self.assertFalse(report["items"][0]["identity_delta"]["source_url_differs"])
+        self.assertTrue(report["items"][0]["identity_delta"]["image_url_differs"])
+        self.assertEqual(report["items"][0]["identity_delta"]["store_count"], 2)
         self.assertEqual(
             report["breakdowns"]["by_fast_review_lane"],
             [{"fast_review_lane": "same_barcode_and_source_url", "groups": 1}],

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -55,6 +56,42 @@ def compact_row(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def normalize_name(value: Any) -> str:
+    text = str(value or "").casefold()
+    text = re.sub(r"[\s/／・,\-_()（）\[\]【】]+", "", text)
+    return text
+
+
+def keep_reason(group: dict[str, Any], rows: list[dict[str, Any]]) -> str:
+    keep_index = group.get("keep_catalog_index")
+    keep_row = next((row for row in rows if row.get("catalog_index") == keep_index), None)
+    if not keep_row:
+        return "preselected_keep_row_from_dedupe_review"
+    keep_richness = int(keep_row.get("richness") or 0)
+    max_richness = max((int(row.get("richness") or 0) for row in rows), default=keep_richness)
+    if keep_richness >= max_richness:
+        return "keeps_richest_catalog_row"
+    return "keep_row_requires_manual_recheck"
+
+
+def identity_delta(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    normalized_names = sorted({normalize_name(row.get("name_ko")) for row in rows if row.get("name_ko")})
+    source_urls = sorted({str(row.get("source_url") or "") for row in rows if row.get("source_url")})
+    image_urls = sorted({str(row.get("image_url") or "") for row in rows if row.get("image_url")})
+    stores = sorted({str(row.get("source_store") or "") for row in rows if row.get("source_store")})
+    return {
+        "normalized_name_count": len(normalized_names),
+        "normalized_names": normalized_names[:8],
+        "source_url_count": len(source_urls),
+        "image_url_count": len(image_urls),
+        "store_count": len(stores),
+        "stores": stores,
+        "name_differs": len(normalized_names) > 1,
+        "source_url_differs": len(source_urls) > 1,
+        "image_url_differs": len(image_urls) > 1,
+    }
+
+
 def compact_group(group: dict[str, Any]) -> dict[str, Any]:
     rows = [compact_row(row) for row in group.get("rows") or [] if isinstance(row, dict)]
     evidence = group.get("evidence") or []
@@ -85,6 +122,8 @@ def compact_group(group: dict[str, Any]) -> dict[str, Any]:
         "same_source_url": same_source_url,
         "same_image_url": same_image_url,
         "fast_review_lane": fast_review_lane,
+        "keep_reason": keep_reason(group, rows),
+        "identity_delta": identity_delta(rows),
         "dedupe_decision_template": decision_template,
         "rows": rows,
         "auto_merge_enabled": False,
