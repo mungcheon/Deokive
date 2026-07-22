@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "server" / "catalog_seed_from_local.json"
 DEFAULT_OUTPUT = ROOT / "data" / "catalog_public.json"
 DEFAULT_META_OUTPUT = ROOT / "data" / "catalog_public_meta.json"
+DEFAULT_REFERENCE_META = ROOT / "data" / "catalog_public_meta.json"
 
 PUBLIC_FIELDS = [
     "catalog_index",
@@ -119,6 +120,43 @@ def read_seed(path: Path) -> list[dict[str, Any]]:
     return [row for row in data if isinstance(row, dict)]
 
 
+def reference_row_count(path: Path) -> int | None:
+    if not path.exists():
+        return None
+    data = json.loads(path.read_text(encoding="utf-8-sig"))
+    if isinstance(data, dict):
+        for key in ("row_count", "total_items"):
+            value = data.get(key)
+            if value is None:
+                continue
+            try:
+                return int(value)
+            except (TypeError, ValueError):
+                continue
+    return None
+
+
+def validate_row_count(
+    rows: list[dict[str, Any]],
+    *,
+    reference_meta: Path,
+    allow_row_count_drop: bool = False,
+) -> None:
+    if allow_row_count_drop:
+        return
+    expected = reference_row_count(reference_meta)
+    if expected is None:
+        return
+    actual = len(rows)
+    if actual < expected:
+        raise SystemExit(
+            "refusing to export a smaller public catalog: "
+            f"input rows={actual}, reference rows={expected}, "
+            f"reference={reference_meta}. "
+            "Pass --allow-row-count-drop only for an intentional dedupe/prune."
+        )
+
+
 def write_json(path: Path, payload: Any, *, compact: bool = False) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if compact:
@@ -133,10 +171,17 @@ def main() -> int:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--meta-output", type=Path, default=DEFAULT_META_OUTPUT)
+    parser.add_argument("--reference-meta", type=Path, default=DEFAULT_REFERENCE_META)
+    parser.add_argument("--allow-row-count-drop", action="store_true")
     parser.add_argument("--generated-at", default=None)
     args = parser.parse_args()
 
     rows = read_seed(args.input)
+    validate_row_count(
+        rows,
+        reference_meta=args.reference_meta,
+        allow_row_count_drop=args.allow_row_count_drop,
+    )
     public_rows = export_rows(rows)
     meta = build_meta(public_rows, source=args.input, generated_at=args.generated_at)
     write_json(args.output, {"meta": meta, "items": public_rows}, compact=True)

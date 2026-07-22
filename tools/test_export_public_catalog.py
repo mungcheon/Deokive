@@ -1,9 +1,18 @@
 from __future__ import annotations
 
 import unittest
+import tempfile
+import sys
 from pathlib import Path
 
-from tools.export_public_catalog import PUBLIC_FIELDS, build_meta, export_rows
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from tools.export_public_catalog import (
+    PUBLIC_FIELDS,
+    build_meta,
+    export_rows,
+    validate_row_count,
+)
 
 
 class ExportPublicCatalogTest(unittest.TestCase):
@@ -66,6 +75,27 @@ class ExportPublicCatalogTest(unittest.TestCase):
         self.assertEqual(meta["missing"]["local_image_path"], 1)
         self.assertFalse(meta["privacy"]["contains_private_memos"])
         self.assertFalse(meta["privacy"]["contains_local_folders"])
+
+    def test_validate_row_count_rejects_unintentional_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_tmp:
+            meta = Path(raw_tmp) / "catalog_public_meta.json"
+            meta.write_text('{"row_count": 3}\n', encoding="utf-8")
+
+            with self.assertRaises(SystemExit) as raised:
+                validate_row_count([{"name_ko": "A"}, {"name_ko": "B"}], reference_meta=meta)
+
+            self.assertIn("refusing to export a smaller public catalog", str(raised.exception))
+
+    def test_validate_row_count_allows_explicit_regression(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_tmp:
+            meta = Path(raw_tmp) / "catalog_public_meta.json"
+            meta.write_text('{"row_count": 3}\n', encoding="utf-8")
+
+            validate_row_count(
+                [{"name_ko": "A"}, {"name_ko": "B"}],
+                reference_meta=meta,
+                allow_row_count_drop=True,
+            )
 
 
 if __name__ == "__main__":
