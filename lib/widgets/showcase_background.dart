@@ -13,19 +13,19 @@ int unlockedShowcaseTier(int profileLevel) =>
 String showcaseTierLabel(int tier) {
   switch (tier) {
     case 0:
-      return '흙';
+      return '무색';
     case 1:
-      return '종이';
+      return '아이언';
     case 2:
-      return '돌';
+      return '브론즈';
     case 3:
-      return '시멘트';
+      return '실버';
     case 4:
-      return '벽돌';
+      return '골드';
     case 5:
-      return '은';
+      return '플래티넘';
     case 6:
-      return '금';
+      return '에메랄드';
     case 7:
       return '다이아';
     default:
@@ -49,136 +49,47 @@ class ShowcaseTierBackgroundPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (tier < 0) return;
     final rect = Offset.zero & size;
+    final style = _rankStyle(tier);
 
-    if (tier == 0) {
-      final soil = Paint()
-        ..shader = const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFD8B08C),
-            Color(0xFFB7865E),
-          ],
-        ).createShader(rect);
-      canvas.drawRect(rect, soil);
-      return;
-    }
-
-    if (tier == 1) {
-      final paper = Paint()
-        ..shader = const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFF7F0DE),
-            Color(0xFFE8DDC2),
-          ],
-        ).createShader(rect);
-      canvas.drawRect(rect, paper);
-      final linePaint = Paint()
-        ..color = const Color(0xFFD8CBAE).withValues(alpha: 0.7)
-        ..strokeWidth = 1;
-      for (double y = 14; y < size.height; y += 14) {
-        canvas.drawLine(Offset(0, y), Offset(size.width, y), linePaint);
-      }
-      return;
-    }
-
-    final wash = Paint()
+    final base = Paint()
       ..shader = LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
         colors: [
-          primary.withValues(alpha: 0.04 + 0.015 * tier),
-          accent.withValues(alpha: 0.04 + 0.015 * tier),
+          style.backdropTop,
+          style.backdropBottom,
         ],
       ).createShader(rect);
-    canvas.drawRect(rect, wash);
+    canvas.drawRect(rect, base);
 
-    if (tier >= 2) {
-      final pebble = Paint()
-        ..color = const Color(0xFF7D8491).withValues(alpha: 0.10);
-      for (var i = 0; i < 18; i++) {
-        final dx = size.width * ((i * 37) % 100) / 100;
-        final dy = size.height * ((i * 23 + 17) % 100) / 100;
-        canvas.drawCircle(Offset(dx, dy), 8 + (i % 3).toDouble(), pebble);
-      }
-    }
+    final vignette = Paint()
+      ..shader = RadialGradient(
+        center: Alignment.topCenter,
+        radius: 1.0,
+        colors: [
+          style.glow.withValues(alpha: 0.34),
+          style.backdropBottom.withValues(alpha: 0.06),
+          Colors.black.withValues(alpha: 0.10),
+        ],
+        stops: const [0, 0.48, 1],
+      ).createShader(rect);
+    canvas.drawRect(rect, vignette);
+
+    _drawRankBeams(canvas, size, style);
+    _drawSideBlades(canvas, size, style);
+    _drawCentralCrest(canvas, size, style);
+    _drawBadgeShelf(canvas, size, style);
 
     if (tier >= 3) {
-      final cement = Paint()
-        ..color = const Color(0xFFB8BEC6).withValues(alpha: 0.16)
-        ..strokeWidth = 1.2;
-      for (var i = 0; i < 8; i++) {
-        final y = size.height * i / 7;
-        canvas.drawLine(Offset(0, y), Offset(size.width, y + 6), cement);
-      }
-    }
-
-    if (tier >= 4) {
-      final brickPaint = Paint()
-        ..color = const Color(0xFFA8553E).withValues(alpha: 0.16);
-      const brickH = 22.0;
-      const brickW = 44.0;
-      for (double y = 0; y < size.height + brickH; y += brickH) {
-        final offset = ((y / brickH).round().isEven) ? 0.0 : brickW / 2;
-        for (double x = -brickW; x < size.width + brickW; x += brickW) {
-          canvas.drawRect(
-            Rect.fromLTWH(x + offset, y, brickW - 2, brickH - 2),
-            brickPaint,
-          );
-        }
-      }
-    }
-
-    if (tier >= 5) {
-      final spotlightY = size.height * 0.58;
-      for (var i = 0; i < 3; i++) {
-        final cx = size.width * (0.18 + 0.32 * i);
-        final paint = Paint()
-          ..shader = RadialGradient(
-            colors: [
-              const Color(0xFFE8EDF4).withValues(alpha: 0.18),
-              primary.withValues(alpha: 0.0),
-            ],
-          ).createShader(
-            Rect.fromCircle(center: Offset(cx, spotlightY), radius: 90),
-          );
-        canvas.drawCircle(Offset(cx, spotlightY), 90, paint);
-      }
-    }
-
-    if (tier >= 6) {
-      final rayPaint = Paint()
-        ..shader = LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            const Color(0xFFFFD978).withValues(alpha: 0.15),
-            Colors.transparent,
-          ],
-        ).createShader(rect);
-      final rays = Path();
-      for (var i = -1; i < 6; i++) {
-        final x = size.width * i / 4;
-        rays.moveTo(x, 0);
-        rays.lineTo(x + size.width * 0.07, 0);
-        rays.lineTo(x + size.width * 0.035, size.height);
-        rays.close();
-      }
-      canvas.drawPath(rays, rayPaint);
-    }
-
-    if (tier >= 6) {
       final sparkle = Paint()
-        ..color = Colors.white.withValues(alpha: 0.55);
+        ..color = style.highlight.withValues(alpha: tier >= 6 ? 0.70 : 0.48);
       const spots = [
-        Offset(0.10, 0.20),
-        Offset(0.34, 0.14),
-        Offset(0.62, 0.18),
-        Offset(0.86, 0.26),
-        Offset(0.22, 0.84),
-        Offset(0.78, 0.82),
+        Offset(0.13, 0.26),
+        Offset(0.30, 0.18),
+        Offset(0.70, 0.18),
+        Offset(0.87, 0.27),
+        Offset(0.22, 0.78),
+        Offset(0.78, 0.78),
       ];
       for (final s in spots) {
         _drawSparkle(
@@ -191,34 +102,187 @@ class ShowcaseTierBackgroundPainter extends CustomPainter {
     }
 
     if (tier >= 7) {
-      final halo = Paint()
-        ..shader = RadialGradient(
-          center: Alignment.center,
-          colors: [
-            const Color(0xFFBEEBFF).withValues(alpha: 0.26),
-            const Color(0xFFE8F7FF).withValues(alpha: 0.12),
-            Colors.transparent,
-          ],
-        ).createShader(rect);
-      canvas.drawRect(rect, halo);
-      final gem = Paint()
-        ..color = const Color(0xFFEBFAFF).withValues(alpha: 0.55);
-      const gemSpots = [
-        Offset(0.16, 0.18),
-        Offset(0.52, 0.12),
-        Offset(0.84, 0.22),
-        Offset(0.24, 0.76),
-        Offset(0.68, 0.82),
-      ];
-      for (final s in gemSpots) {
-        _drawSparkle(
-          canvas,
-          Offset(size.width * s.dx, size.height * s.dy),
-          3.2,
-          gem,
-        );
+      _drawMasterCrown(canvas, size, style);
+    }
+  }
+
+  void _drawRankBeams(Canvas canvas, Size size, _RankTierStyle style) {
+    final center = Offset(size.width / 2, size.height * 0.46);
+    final beamPaint = Paint()
+      ..shader = RadialGradient(
+        colors: [
+          style.glow.withValues(alpha: 0.18),
+          style.glow.withValues(alpha: 0.04),
+          Colors.transparent,
+        ],
+      ).createShader(
+          Rect.fromCircle(center: center, radius: size.width * 0.62));
+    canvas.drawCircle(center, size.width * 0.62, beamPaint);
+
+    final linePaint = Paint()
+      ..color = style.highlight.withValues(alpha: 0.15)
+      ..strokeWidth = 1.1;
+    for (var i = 0; i < 7; i++) {
+      final x = size.width * (i + 0.5) / 7;
+      canvas.drawLine(
+        Offset(x, size.height * 0.12),
+        Offset(size.width / 2, size.height * 0.88),
+        linePaint,
+      );
+    }
+  }
+
+  void _drawSideBlades(Canvas canvas, Size size, _RankTierStyle style) {
+    final bladePaint = Paint()..color = style.darkMetal.withValues(alpha: 0.22);
+    final edgePaint = Paint()
+      ..color = style.highlight.withValues(alpha: 0.26)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.2;
+
+    for (final side in [-1, 1]) {
+      final leftSide = side < 0;
+      final x0 = leftSide ? 0.0 : size.width;
+      final path = Path()
+        ..moveTo(x0, size.height * 0.18)
+        ..lineTo(x0 + side * size.width * -0.16, size.height * 0.05)
+        ..lineTo(x0 + side * size.width * -0.27, size.height * 0.46)
+        ..lineTo(x0 + side * size.width * -0.12, size.height * 0.92)
+        ..lineTo(x0, size.height * 0.76)
+        ..close();
+      canvas.drawPath(path, bladePaint);
+      canvas.drawPath(path, edgePaint);
+
+      if (style.tier >= 4) {
+        final wingPaint = Paint()..color = style.accent.withValues(alpha: 0.20);
+        for (var i = 0; i < 3; i++) {
+          final y = size.height * (0.30 + i * 0.16);
+          final feather = Path()
+            ..moveTo(x0, y)
+            ..quadraticBezierTo(
+              x0 + side * size.width * -0.20,
+              y + size.height * 0.02,
+              x0 + side * size.width * -0.30,
+              y + size.height * 0.10,
+            )
+            ..quadraticBezierTo(
+              x0 + side * size.width * -0.12,
+              y + size.height * 0.09,
+              x0,
+              y + size.height * 0.15,
+            )
+            ..close();
+          canvas.drawPath(feather, wingPaint);
+        }
       }
     }
+  }
+
+  void _drawCentralCrest(Canvas canvas, Size size, _RankTierStyle style) {
+    final centerX = size.width / 2;
+    final top = size.height * 0.12;
+    final width = size.width * (0.30 + style.tier * 0.012);
+    final height = size.height * 0.56;
+
+    final shadow = Paint()
+      ..color = Colors.black.withValues(alpha: 0.16)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
+    final shadowPath = _crestPath(centerX, top + 5, width, height);
+    canvas.drawPath(shadowPath, shadow);
+
+    final crestPaint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          style.highlight.withValues(alpha: 0.90),
+          style.accent.withValues(alpha: 0.72),
+          style.darkMetal.withValues(alpha: 0.88),
+        ],
+        stops: const [0, 0.56, 1],
+      ).createShader(Rect.fromLTWH(centerX - width, top, width * 2, height));
+    final crest = _crestPath(centerX, top, width, height);
+    canvas.drawPath(crest, crestPaint);
+
+    final outline = Paint()
+      ..color = style.highlight.withValues(alpha: 0.80)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.8;
+    canvas.drawPath(crest, outline);
+
+    final inner = _crestPath(centerX, top + 10, width * 0.62, height * 0.62);
+    canvas.drawPath(
+      inner,
+      Paint()
+        ..color = Colors.white.withValues(alpha: 0.10)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.2,
+    );
+  }
+
+  Path _crestPath(double centerX, double top, double width, double height) {
+    return Path()
+      ..moveTo(centerX, top)
+      ..lineTo(centerX + width * 0.82, top + height * 0.18)
+      ..lineTo(centerX + width * 0.64, top + height * 0.66)
+      ..lineTo(centerX, top + height)
+      ..lineTo(centerX - width * 0.64, top + height * 0.66)
+      ..lineTo(centerX - width * 0.82, top + height * 0.18)
+      ..close();
+  }
+
+  void _drawBadgeShelf(Canvas canvas, Size size, _RankTierStyle style) {
+    final shelfRect = Rect.fromLTWH(
+      size.width * 0.12,
+      size.height * 0.66,
+      size.width * 0.76,
+      size.height * 0.13,
+    );
+    final shelfPaint = Paint()
+      ..shader = LinearGradient(
+        colors: [
+          style.darkMetal.withValues(alpha: 0.12),
+          style.highlight.withValues(alpha: 0.34),
+          style.darkMetal.withValues(alpha: 0.12),
+        ],
+      ).createShader(shelfRect);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(shelfRect, const Radius.circular(999)),
+      shelfPaint,
+    );
+
+    final line = Paint()
+      ..color = style.highlight.withValues(alpha: 0.50)
+      ..strokeWidth = 1.4;
+    canvas.drawLine(
+      Offset(shelfRect.left + 8, shelfRect.center.dy),
+      Offset(shelfRect.right - 8, shelfRect.center.dy),
+      line,
+    );
+  }
+
+  void _drawMasterCrown(Canvas canvas, Size size, _RankTierStyle style) {
+    final cx = size.width / 2;
+    final y = size.height * 0.10;
+    final crown = Path()
+      ..moveTo(cx - 34, y + 24)
+      ..lineTo(cx - 24, y)
+      ..lineTo(cx - 8, y + 18)
+      ..lineTo(cx, y - 8)
+      ..lineTo(cx + 8, y + 18)
+      ..lineTo(cx + 24, y)
+      ..lineTo(cx + 34, y + 24)
+      ..close();
+    canvas.drawPath(
+      crown,
+      Paint()..color = style.highlight.withValues(alpha: 0.42),
+    );
+    canvas.drawPath(
+      crown,
+      Paint()
+        ..color = Colors.white.withValues(alpha: 0.42)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.2,
+    );
   }
 
   void _drawSparkle(Canvas canvas, Offset c, double r, Paint paint) {
@@ -237,7 +301,103 @@ class ShowcaseTierBackgroundPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ShowcaseTierBackgroundPainter old) =>
-      old.tier != tier ||
-      old.primary != primary ||
-      old.accent != accent;
+      old.tier != tier || old.primary != primary || old.accent != accent;
+}
+
+class _RankTierStyle {
+  final int tier;
+  final Color backdropTop;
+  final Color backdropBottom;
+  final Color darkMetal;
+  final Color accent;
+  final Color highlight;
+  final Color glow;
+
+  const _RankTierStyle({
+    required this.tier,
+    required this.backdropTop,
+    required this.backdropBottom,
+    required this.darkMetal,
+    required this.accent,
+    required this.highlight,
+    required this.glow,
+  });
+}
+
+_RankTierStyle _rankStyle(int tier) {
+  const styles = [
+    _RankTierStyle(
+      tier: 0,
+      backdropTop: Color(0xFFF7F8FA),
+      backdropBottom: Color(0xFFE8EBEF),
+      darkMetal: Color(0xFF9AA1AA),
+      accent: Color(0xFFCDD3DA),
+      highlight: Color(0xFFFFFFFF),
+      glow: Color(0xFFE9EEF4),
+    ),
+    _RankTierStyle(
+      tier: 1,
+      backdropTop: Color(0xFFE8EBEF),
+      backdropBottom: Color(0xFF8D949B),
+      darkMetal: Color(0xFF444A50),
+      accent: Color(0xFF6F7780),
+      highlight: Color(0xFFC8CED5),
+      glow: Color(0xFF9CA5AF),
+    ),
+    _RankTierStyle(
+      tier: 2,
+      backdropTop: Color(0xFFFFE8D1),
+      backdropBottom: Color(0xFFD09A6A),
+      darkMetal: Color(0xFF6B3F26),
+      accent: Color(0xFFC17B42),
+      highlight: Color(0xFFFFD0A0),
+      glow: Color(0xFFFFAA68),
+    ),
+    _RankTierStyle(
+      tier: 3,
+      backdropTop: Color(0xFFF7FAFC),
+      backdropBottom: Color(0xFFB9C4CF),
+      darkMetal: Color(0xFF5B6670),
+      accent: Color(0xFFCBD5DF),
+      highlight: Color(0xFFFFFFFF),
+      glow: Color(0xFFDCE8F3),
+    ),
+    _RankTierStyle(
+      tier: 4,
+      backdropTop: Color(0xFFFFF2B8),
+      backdropBottom: Color(0xFFE0AE3C),
+      darkMetal: Color(0xFF725314),
+      accent: Color(0xFFE3B94A),
+      highlight: Color(0xFFFFF1A6),
+      glow: Color(0xFFFFD85C),
+    ),
+    _RankTierStyle(
+      tier: 5,
+      backdropTop: Color(0xFFE6FCFF),
+      backdropBottom: Color(0xFF6FCAD2),
+      darkMetal: Color(0xFF22666D),
+      accent: Color(0xFF4FC2C8),
+      highlight: Color(0xFFCDFBFF),
+      glow: Color(0xFF67E8F9),
+    ),
+    _RankTierStyle(
+      tier: 6,
+      backdropTop: Color(0xFFE9FFF4),
+      backdropBottom: Color(0xFF52B788),
+      darkMetal: Color(0xFF1F6F55),
+      accent: Color(0xFF34C38F),
+      highlight: Color(0xFFCFFFEA),
+      glow: Color(0xFF5EF6B0),
+    ),
+    _RankTierStyle(
+      tier: 7,
+      backdropTop: Color(0xFFEAF7FF),
+      backdropBottom: Color(0xFF77BCE8),
+      darkMetal: Color(0xFF236A9D),
+      accent: Color(0xFF6ECFF6),
+      highlight: Color(0xFFFFFFFF),
+      glow: Color(0xFFA7E8FF),
+    ),
+  ];
+  return styles[tier.clamp(0, kMaxShowcaseBackgroundTier)];
 }
