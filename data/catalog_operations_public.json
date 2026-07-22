@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T05:26:52Z",
+  "generated_at": "2026-07-22T05:52:40Z",
   "summary": {
-    "catalog_rows": 17875,
+    "catalog_rows": 20393,
     "coverage": {
-      "source_url": 0.9638,
-      "image_url": 0.9597,
-      "release_date": 0.9212
+      "source_url": 0.9683,
+      "image_url": 0.9647,
+      "release_date": 0.931
     },
     "missing": {
       "source_url": 647,
       "image_url": 720,
       "release_date": 1408,
       "official_price_jpy": 569,
-      "barcode": 7579,
+      "barcode": 10097,
       "name_ja": 529
     },
     "open_review_queues": {
@@ -24,7 +24,7 @@
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 5552,
+      "requested_focus_open_rows": 8070,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1147,
       "confirmed_import_action_queue_rows": 14136,
@@ -63,19 +63,19 @@
     {
       "key": "source_url_coverage",
       "status": "pass",
-      "value": 0.9638,
+      "value": 0.9683,
       "target": 0.95
     },
     {
       "key": "image_url_coverage",
       "status": "pass",
-      "value": 0.9597,
+      "value": 0.9647,
       "target": 0.95
     },
     {
       "key": "release_date_coverage",
       "status": "pass",
-      "value": 0.9212,
+      "value": 0.931,
       "target": 0.9
     },
     {
@@ -95,7 +95,7 @@
     {
       "workstream": "requested_focus_enrichment",
       "status": "open",
-      "open_rows": 5552,
+      "open_rows": 8070,
       "primary_report": "data/requested_focus_enrichment_public.json",
       "next_step": "work_user_requested_focus_topics_first",
       "auto_apply_enabled": false
@@ -403,7 +403,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 11452,
+      "open_rows": 13970,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -411,7 +411,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 11452,
+      "open_rows": 13970,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -834,7 +834,7 @@
     {
       "workstream": "animation_taxonomy",
       "status": "manual_review",
-      "open_rows": 331,
+      "open_rows": 391,
       "primary_report": "data/animation_goods_categories_public.json",
       "next_step": "review_taxonomy_folder_visual_tokens",
       "app_folder_color_count": 188,
@@ -945,12 +945,12 @@
     {
       "source_store": "이치방쿠지",
       "priority_score": 466.0,
-      "rows": 5381,
+      "rows": 7899,
       "missing_source_url": 0,
       "missing_image_url": 0,
       "missing_release_date": 8,
       "missing_price_jpy": 350,
-      "missing_barcode": 5381,
+      "missing_barcode": 7899,
       "recommended_first_action": "release_date_enrichment"
     },
     {
@@ -1447,7 +1447,7 @@
       "priority": 10,
       "workstream": "requested_focus_enrichment",
       "public_report": "data/requested_focus_enrichment_public.json",
-      "open_rows": 5552,
+      "open_rows": 8070,
       "topics_with_open_work": 4,
       "recommended_next_action": "Prioritize user-requested focus topics before broad catalog enrichment."
     },
@@ -1819,7 +1819,7 @@
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
       "field_store_group_count": 351,
-      "missing_cell_count": 11452,
+      "missing_cell_count": 13970,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
@@ -2266,7 +2266,7 @@
       "workstream": "animation_folder_visuals",
       "public_report": "data/animation_goods_categories_public.json",
       "category_count": 27,
-      "unknown_category_rows": 331,
+      "unknown_category_rows": 391,
       "app_folder_color_count": 188,
       "app_folder_icon_option_count": 211,
       "app_folder_palette_sorted_by_family": true,
