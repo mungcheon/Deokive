@@ -97,12 +97,12 @@
 
     .app-loading p {
       margin: 0;
-      max-width: 310px;
+      max-width: 340px;
       color: var(--deokive-muted);
       font-size: 15px;
       line-height: 1.65;
       word-break: keep-all;
-      overflow-wrap: anywhere;
+      overflow-wrap: break-word;
     }
 
     .app-loading__eta {
@@ -255,7 +255,7 @@
         window.deokiveHoldLoadingScreen = true;
         deokiveSetLoadingCopy({
           title: '곧 업데이트가 시작돼요',
-          body: '1분 뒤 업데이트를 시작하오니<br>작업 중이라면 종료 부탁드려요.',
+          body: '1분 뒤 업데이트를 시작하오니 작업 중이라면 종료 부탁드려요.',
           eta: status.eta || '업데이트 시작 1분 전',
           note: status.message || '잠시 후 새 버전으로 교체됩니다.',
         });

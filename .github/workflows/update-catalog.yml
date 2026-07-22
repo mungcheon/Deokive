@@ -19,58 +19,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Publish 1-minute update notice
-        run: |
-          git config user.name "deokive-catalog-bot"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          python - <<'PY'
-          import json
-          from pathlib import Path
-
-          Path("data/site_status_public.json").write_text(
-              json.dumps(
-                  {
-                      "mode": "notice",
-                      "message": "1분 뒤 업데이트를 시작하오니 작업을 종료해 주세요.",
-                      "eta": "업데이트 시작 1분 전",
-                  },
-                  ensure_ascii=False,
-                  indent=2,
-              )
-              + "\n",
-              encoding="utf-8",
-          )
-          PY
-          git add data/site_status_public.json
-          if git diff --cached --quiet; then
-            echo "Update notice already published."
-          else
-            git commit -m "chore: announce public catalog update"
-            git push
-          fi
-          sleep 60
-
-      - name: Mark site updating
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-
-          Path("data/site_status_public.json").write_text(
-              json.dumps(
-                  {
-                      "mode": "updating",
-                      "message": "공개 DB를 반영하고 있어요. 잠시 뒤 다시 접속해 주세요.",
-                      "eta": "예상 업데이트 시간 5-15분",
-                  },
-                  ensure_ascii=False,
-                  indent=2,
-              )
-              + "\n",
-              encoding="utf-8",
-          )
-          PY
-
       - name: Build public review batches
         run: |
           python tools/build_image_enrichment_queue.py --input data/catalog_public.json --json-output data/catalog_missing_image_work_queue_public.json --csv-output data/catalog_missing_image_work_queue_public.csv
@@ -110,6 +58,65 @@ jobs:
 
       - name: Validate generated public files
         run: python tools/update_public_catalog_reports.py
+
+      - name: Publish 1-minute update notice
+        run: |
+          git config user.name "deokive-catalog-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          Path("data/site_status_public.json").write_text(
+              json.dumps(
+                  {
+                      "mode": "notice",
+                      "message": "1분 뒤 업데이트를 시작하오니 작업 중이라면 종료 부탁드려요.",
+                      "eta": "업데이트 시작 1분 전",
+                  },
+                  ensure_ascii=False,
+                  indent=2,
+              )
+              + "\n",
+              encoding="utf-8",
+          )
+          PY
+          git add data/site_status_public.json
+          if git diff --cached --quiet; then
+            echo "Update notice already published."
+          else
+            git commit -m "chore: announce public catalog update"
+            git push
+          fi
+          sleep 60
+
+      - name: Mark site updating
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          Path("data/site_status_public.json").write_text(
+              json.dumps(
+                  {
+                      "mode": "updating",
+                      "message": "공개 DB를 반영하고 있어요. 잠시 뒤 다시 접속해 주세요.",
+                      "eta": "예상 업데이트 시간 5-15분",
+                  },
+                  ensure_ascii=False,
+                  indent=2,
+              )
+              + "\n",
+              encoding="utf-8",
+          )
+          PY
+          git add data/site_status_public.json
+          if git diff --cached --quiet; then
+            echo "Public site is already marked updating."
+          else
+            git commit -m "chore: mark public catalog updating"
+            git push
+          fi
 
       - name: Commit public report updates
         run: |
