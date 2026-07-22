@@ -54,6 +54,9 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             "summary": {
                 "focus_source_rows": 4,
                 "focus_pack_count": 2,
+                "not_started_focus_pack_count": 2,
+                "remaining_focus_review_rows": 4,
+                "confirmed_focus_source_rows": 0,
                 "focus_coverage": 0.8,
                 "non_focus_source_rows": 1,
             }
@@ -116,6 +119,9 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["manual_image_research_rows"], 1)
         self.assertEqual(report["summary"]["source_discovery_focus_pack_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_focus_pack_count"], 2)
+        self.assertEqual(report["summary"]["source_discovery_not_started_focus_pack_count"], 2)
+        self.assertEqual(report["summary"]["source_discovery_remaining_focus_review_rows"], 4)
+        self.assertEqual(report["summary"]["source_discovery_confirmed_focus_source_rows"], 0)
         self.assertEqual(report["summary"]["source_discovery_focus_coverage"], 0.8)
         self.assertEqual(report["summary"]["source_discovery_non_focus_rows"], 1)
         self.assertEqual(report["summary"]["direct_image_action_queue_rows"], 2)

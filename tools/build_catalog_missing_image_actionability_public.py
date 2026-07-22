@@ -373,6 +373,15 @@ def build_report(
             "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
             "source_discovery_focus_pack_rows": int(focus_summary.get("focus_source_rows") or 0),
             "source_discovery_focus_pack_count": int(focus_summary.get("focus_pack_count") or 0),
+            "source_discovery_not_started_focus_pack_count": int(
+                focus_summary.get("not_started_focus_pack_count") or 0
+            ),
+            "source_discovery_remaining_focus_review_rows": int(
+                focus_summary.get("remaining_focus_review_rows") or 0
+            ),
+            "source_discovery_confirmed_focus_source_rows": int(
+                focus_summary.get("confirmed_focus_source_rows") or 0
+            ),
             "source_discovery_focus_coverage": float(focus_summary.get("focus_coverage") or 0),
             "source_discovery_non_focus_rows": int(focus_summary.get("non_focus_source_rows") or 0),
             "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_ready),
