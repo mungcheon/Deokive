@@ -109,9 +109,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertIs(quality["source_detail_candidate_probe"]["auto_apply_enabled"], False)
         if reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists():
+            source_detail_action = reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)
             self.assertEqual(
                 quality["source_detail_candidate_action_queue"]["candidate_action_rows"],
-                reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)["summary"]["candidate_action_rows"],
+                source_detail_action["summary"]["candidate_action_rows"],
+            )
+            self.assertEqual(
+                quality["source_detail_candidate_action_queue"]["manual_confirmation_shortlist_rows"],
+                source_detail_action["summary"]["manual_confirmation_shortlist_rows"],
             )
             self.assertEqual(quality["source_detail_candidate_action_queue"]["manual_confirmed_true"], 0)
             self.assertIs(quality["source_detail_candidate_action_queue"]["auto_apply_enabled"], False)

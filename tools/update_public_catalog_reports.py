@@ -1944,6 +1944,9 @@ def build_operations_public(
             "safe_source_image_pair_rows": source_detail_candidate_action_queue_summary.get(
                 "safe_source_image_pair_rows", 0
             ),
+            "manual_confirmation_shortlist_rows": source_detail_candidate_action_queue_summary.get(
+                "manual_confirmation_shortlist_rows", 0
+            ),
             "near_or_better_candidate_rows": source_detail_candidate_action_queue_summary.get(
                 "near_or_better_candidate_rows", 0
             ),
@@ -2249,6 +2252,9 @@ def build_operations_public(
             "safe_source_image_pair_rows": source_detail_candidate_action_queue_summary.get(
                 "safe_source_image_pair_rows", 0
             ),
+            "manual_confirmation_shortlist_rows": source_detail_candidate_action_queue_summary.get(
+                "manual_confirmation_shortlist_rows", 0
+            ),
             "near_or_better_candidate_rows": source_detail_candidate_action_queue_summary.get(
                 "near_or_better_candidate_rows", 0
             ),
@@ -2540,6 +2546,9 @@ def build_operations_public(
         )
         open_review_queues["source_detail_candidate_manual_confirmed_rows"] = (
             source_detail_candidate_action_queue_summary.get("manual_confirmed_true", 0)
+        )
+        open_review_queues["source_detail_candidate_manual_confirmation_shortlist_rows"] = (
+            source_detail_candidate_action_queue_summary.get("manual_confirmation_shortlist_rows", 0)
         )
     if ensky_cache_candidate_action_queue_summary:
         open_review_queues["ensky_cache_candidate_action_rows"] = ensky_cache_candidate_action_queue_summary.get(
@@ -4525,6 +4534,9 @@ def validate_report_consistency(
         )
         expected_open_queues["source_detail_candidate_manual_confirmed_rows"] = (
             source_detail_candidate_action_summary.get("manual_confirmed_true", 0)
+        )
+        expected_open_queues["source_detail_candidate_manual_confirmation_shortlist_rows"] = (
+            source_detail_candidate_action_summary.get("manual_confirmation_shortlist_rows", 0)
         )
     ensky_cache_candidate_action_queue = (
         load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {})

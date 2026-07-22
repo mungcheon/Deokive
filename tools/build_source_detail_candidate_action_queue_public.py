@@ -177,6 +177,19 @@ def review_priority(risk: str, flags: list[str]) -> int:
     return base_priority
 
 
+def manual_confirmation_shortlist(item: dict[str, Any]) -> bool:
+    catalog_state = item.get("current_catalog_state") or {}
+    candidate_count = int(item.get("candidate_count") or 0)
+    return bool(
+        item.get("safe_source_image_pair") is True
+        and catalog_state.get("catalog_identity_matches") is True
+        and catalog_state.get("catalog_has_display_image") is False
+        and not item.get("candidate_identity_flags")
+        and item.get("review_risk") in {"strong_single_candidate_review", "near_single_candidate_review"}
+        and 0 < candidate_count <= 2
+    )
+
+
 def current_catalog_state(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
     try:
         index = int(row.get("catalog_index"))
@@ -225,6 +238,7 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
         "candidate_title": row.get("candidate_title"),
         "candidate_image_url": row.get("candidate_image_url"),
         "score": row.get("score"),
+        "candidate_score": row.get("score"),
         "shared_tokens": row.get("shared_tokens") or [],
         "candidate_identity_flags": identity_flags,
         "safe_source_image_pair": row.get("safe_source_image_pair"),
@@ -263,10 +277,13 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
         ],
         "auto_apply_enabled": False,
     }
+    item["manual_confirmation_shortlist"] = manual_confirmation_shortlist(item)
     if catalog_state.get("catalog_has_display_image"):
         item["recommended_action"] = "skip_current_catalog_row_already_has_display_image"
     elif catalog_state.get("stale_candidate"):
         item["recommended_action"] = "refresh_candidate_before_manual_review"
+    elif item["manual_confirmation_shortlist"]:
+        item["recommended_action"] = "priority_manual_confirm_source_and_image_patch"
     elif identity_flags:
         item["recommended_action"] = "recheck_candidate_identity_before_source_or_image_patch"
     return item
@@ -307,6 +324,9 @@ def build_report(
                 "by_review_risk": counter_rows(chunk, "review_risk"),
                 "by_candidate_count_bucket": counter_rows(chunk, "candidate_count_bucket"),
                 "safe_source_image_pair_rows": sum(1 for item in chunk if item.get("safe_source_image_pair") is True),
+                "manual_confirmation_shortlist_rows": sum(
+                    1 for item in chunk if item.get("manual_confirmation_shortlist") is True
+                ),
                 "items": chunk,
                 "auto_apply_enabled": False,
             }
@@ -322,6 +342,9 @@ def build_report(
             "batch_size": batch_size,
             "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
             "safe_source_image_pair_rows": sum(1 for item in items if item.get("safe_source_image_pair") is True),
+            "manual_confirmation_shortlist_rows": sum(
+                1 for item in items if item.get("manual_confirmation_shortlist") is True
+            ),
             "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
             "identity_warning_missing_display_image_rows": sum(
                 1
@@ -356,6 +379,10 @@ def build_report(
                 if item.get("review_risk")
                 in {"strong_single_candidate_review", "near_single_candidate_review"}
             ),
+            "by_manual_confirmation_shortlist": [
+                ["ready_for_priority_manual_confirmation", sum(1 for item in items if item.get("manual_confirmation_shortlist") is True)],
+                ["requires_deeper_identity_review", sum(1 for item in items if item.get("manual_confirmation_shortlist") is not True)],
+            ],
             "ambiguous_or_weaker_candidate_rows": sum(
                 1
                 for item in items

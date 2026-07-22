@@ -48,6 +48,11 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["candidate_action_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertEqual(report["summary"]["safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 1)
+        self.assertEqual(
+            report["summary"]["by_manual_confirmation_shortlist"],
+            [["ready_for_priority_manual_confirmation", 1], ["requires_deeper_identity_review", 0]],
+        )
         self.assertEqual(report["summary"]["identity_warning_rows"], 0)
         self.assertEqual(report["summary"]["identity_warning_missing_display_image_rows"], 0)
         self.assertEqual(report["summary"]["unflagged_missing_display_image_candidate_rows"], 1)
@@ -62,9 +67,13 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         item = report["batches"][0]["items"][0]
         self.assertFalse(item["manual_confirmed"])
         self.assertEqual(item["candidate_count_bucket"], "single_candidate")
+        self.assertEqual(item["candidate_score"], 0.8)
         self.assertEqual(item["candidate_identity_flags"], [])
+        self.assertTrue(item["manual_confirmation_shortlist"])
         self.assertEqual(item["review_priority"], 20)
+        self.assertEqual(item["recommended_action"], "priority_manual_confirm_source_and_image_patch")
         self.assertEqual(report["batches"][0]["safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["batches"][0]["manual_confirmation_shortlist_rows"], 1)
         self.assertEqual(item["current_catalog_state"]["catalog_match_found"], True)
         self.assertEqual(item["current_catalog_state"]["catalog_has_display_image"], False)
         self.assertEqual(item["current_catalog_state"]["catalog_identity_matches"], True)
@@ -158,6 +167,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
 
         self.assertEqual(report["summary"]["identity_warning_rows"], 2)
+        self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 0)
         self.assertEqual(report["summary"]["identity_warning_missing_display_image_rows"], 2)
         self.assertEqual(report["summary"]["unflagged_missing_display_image_candidate_rows"], 0)
         self.assertEqual(

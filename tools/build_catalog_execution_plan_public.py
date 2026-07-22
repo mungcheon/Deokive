@@ -287,6 +287,9 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "safe_source_image_pair_rows": _count(
                         source_detail_candidate_action_summary, "safe_source_image_pair_rows"
                     ),
+                    "manual_confirmation_shortlist_rows": _count(
+                        source_detail_candidate_action_summary, "manual_confirmation_shortlist_rows"
+                    ),
                     "near_or_better_candidate_rows": _count(
                         source_detail_candidate_action_summary, "near_or_better_candidate_rows"
                     ),
