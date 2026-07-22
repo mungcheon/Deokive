@@ -186,6 +186,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "image_attachment_action_queue"
         )
+        dedupe_action = reports.load_json(reports.DEDUPLICATION_ACTION_QUEUE)
+        dedupe_action_summary = dedupe_action.get("summary", {})
+        dedupe_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "deduplication_action_queue"
+        )
+        dedupe_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "deduplication_action_queue"
+        )
         ichiban_action = reports.load_json(reports.ICHIIBAN_KUJI_METADATA_ACTION_QUEUE)
         ichiban_action_summary = ichiban_action.get("summary", {})
         ichiban_scorecard = next(
@@ -245,6 +257,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             image_next_action.get("sample_queue_coverage"),
             image_action_summary.get("sample_queue_coverage"),
+        )
+        self.assertEqual(
+            open_queues.get("dedupe_action_groups"),
+            dedupe_action_summary.get("queued_groups"),
+        )
+        self.assertEqual(
+            open_queues.get("dedupe_actionable_groups"),
+            dedupe_action_summary.get("actionable_groups"),
+        )
+        self.assertEqual(
+            open_queues.get("dedupe_unqueued_actionable_groups"),
+            dedupe_action_summary.get("unqueued_actionable_groups"),
+        )
+        self.assertEqual(
+            dedupe_scorecard.get("queue_coverage"),
+            dedupe_action_summary.get("queue_coverage"),
+        )
+        self.assertEqual(
+            dedupe_next_action.get("unqueued_actionable_groups"),
+            dedupe_action_summary.get("unqueued_actionable_groups"),
         )
         self.assertEqual(
             open_queues.get("ichiban_metadata_action_campaigns"),

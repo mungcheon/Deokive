@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T00:48:08Z",
+  "generated_at": "2026-07-22T00:55:30Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -30,6 +30,8 @@
       "confirmed_import_action_queue_rows": 2518,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 40,
+      "dedupe_actionable_groups": 48,
+      "dedupe_unqueued_actionable_groups": 8,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 163,
       "source_discovery_action_rows": 240,
@@ -200,6 +202,9 @@
       "workstream": "deduplication_action_queue",
       "status": "manual_review",
       "open_rows": 40,
+      "actionable_groups": 48,
+      "unqueued_actionable_groups": 8,
+      "queue_coverage": 0.8333,
       "primary_report": "data/catalog_deduplication_action_queue_public.json",
       "next_step": "review_high_medium_confidence_dedupe_first",
       "auto_apply_enabled": false
@@ -1021,8 +1026,10 @@
       "public_report": "data/catalog_deduplication_action_queue_public.json",
       "actionable_groups": 48,
       "queued_groups": 40,
+      "unqueued_actionable_groups": 8,
+      "queue_coverage": 0.8333,
       "action_batch_count": 4,
-      "recommended_next_action": "Review high/medium-confidence duplicate groups before variant-risk dedupe work."
+      "recommended_next_action": "Review queued high/medium-confidence duplicate groups, then expand remaining actionable groups."
     },
     {
       "priority": 50,

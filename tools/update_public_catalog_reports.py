@@ -1634,8 +1634,10 @@ def build_operations_public(
             "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
             "actionable_groups": dedupe_action_queue_summary.get("actionable_groups", 0),
             "queued_groups": dedupe_action_queue_summary.get("queued_groups", 0),
+            "unqueued_actionable_groups": dedupe_action_queue_summary.get("unqueued_actionable_groups", 0),
+            "queue_coverage": dedupe_action_queue_summary.get("queue_coverage", 0),
             "action_batch_count": dedupe_action_queue_summary.get("action_batch_count", 0),
-            "recommended_next_action": "Review high/medium-confidence duplicate groups before variant-risk dedupe work.",
+            "recommended_next_action": "Review queued high/medium-confidence duplicate groups, then expand remaining actionable groups.",
         } if dedupe_action_queue_summary else None,
         {
             "priority": 50,
@@ -1830,6 +1832,9 @@ def build_operations_public(
             "workstream": "deduplication_action_queue",
             "status": "manual_review" if dedupe_action_queue_summary.get("queued_groups", 0) else "clear",
             "open_rows": dedupe_action_queue_summary.get("queued_groups", 0),
+            "actionable_groups": dedupe_action_queue_summary.get("actionable_groups", 0),
+            "unqueued_actionable_groups": dedupe_action_queue_summary.get("unqueued_actionable_groups", 0),
+            "queue_coverage": dedupe_action_queue_summary.get("queue_coverage", 0),
             "primary_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
             "next_step": "review_high_medium_confidence_dedupe_first",
             "auto_apply_enabled": dedupe_action_queue_summary.get("auto_delete_enabled", False),
@@ -1931,6 +1936,10 @@ def build_operations_public(
         )
     if dedupe_action_queue_summary:
         open_review_queues["dedupe_action_groups"] = dedupe_action_queue_summary.get("queued_groups", 0)
+        open_review_queues["dedupe_actionable_groups"] = dedupe_action_queue_summary.get("actionable_groups", 0)
+        open_review_queues["dedupe_unqueued_actionable_groups"] = dedupe_action_queue_summary.get(
+            "unqueued_actionable_groups", 0
+        )
     if requested_focus_review_batches_summary:
         open_review_queues["requested_focus_review_rows"] = requested_focus_review_batches_summary.get("review_row_count", 0)
     if requested_focus_action_queue_summary:
@@ -3765,6 +3774,10 @@ def validate_report_consistency(
     dedupe_action_summary = dedupe_action_queue.get("summary", {})
     if dedupe_action_summary:
         expected_open_queues["dedupe_action_groups"] = dedupe_action_summary.get("queued_groups", 0)
+        expected_open_queues["dedupe_actionable_groups"] = dedupe_action_summary.get("actionable_groups", 0)
+        expected_open_queues["dedupe_unqueued_actionable_groups"] = dedupe_action_summary.get(
+            "unqueued_actionable_groups", 0
+        )
     if animation_review_summary:
         expected_open_queues["animation_category_review_rows"] = animation_review_summary.get("source_rows", 0)
     animation_action_queue = (

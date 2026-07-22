@@ -53,6 +53,8 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["actionable_groups"], 2)
         self.assertEqual(report["summary"]["queued_groups"], 2)
+        self.assertEqual(report["summary"]["unqueued_actionable_groups"], 0)
+        self.assertEqual(report["summary"]["queue_coverage"], 1.0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertFalse(report["summary"]["auto_delete_enabled"])
         self.assertFalse(report["automation_policy"]["auto_merge"])
@@ -89,6 +91,8 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["actionable_groups"], 5)
         self.assertEqual(report["summary"]["queued_groups"], 3)
+        self.assertEqual(report["summary"]["unqueued_actionable_groups"], 2)
+        self.assertEqual(report["summary"]["queue_coverage"], 0.6)
         self.assertEqual(report["summary"]["action_batch_count"], 2)
 
 

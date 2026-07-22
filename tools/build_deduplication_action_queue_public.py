@@ -93,6 +93,8 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 40, batch_
         )
     )
     published = actionable[:max_groups]
+    unqueued_actionable_groups = max(len(actionable) - len(published), 0)
+    queue_coverage = round(len(published) / len(actionable), 4) if actionable else 1.0
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(published), batch_size):
@@ -122,6 +124,8 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 40, batch_
         "summary": {
             "actionable_groups": len(actionable),
             "queued_groups": len(published),
+            "unqueued_actionable_groups": unqueued_actionable_groups,
+            "queue_coverage": queue_coverage,
             "action_batch_count": len(batches),
             "batch_size": batch_size,
             "max_groups": max_groups,
