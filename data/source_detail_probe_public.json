@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T09:32:52Z",
+  "generated_at": "2026-07-22T11:25:03Z",
   "scope": "source_detail_probe_public",
   "summary": {
     "source_queue_rows": 445,
@@ -25,6 +25,21 @@
       ]
     ],
     "published_candidate_rows": 15,
+    "candidate_yield": 0.0337,
+    "store_bottleneck_counts": [
+      [
+        "searched_but_no_candidates",
+        5
+      ],
+      [
+        "fetch_or_rate_limit_failures",
+        3
+      ],
+      [
+        "candidate_review_available",
+        2
+      ]
+    ],
     "auto_apply_enabled": false
   },
   "scans": [
@@ -127,6 +142,148 @@
       "exact_candidate_rows": 0,
       "candidate_review_rows": 0,
       "no_candidate_rows": 0
+    }
+  ],
+  "store_bottlenecks": [
+    {
+      "source_store": "엔스카이",
+      "report_count": 8,
+      "processed_rows": 142,
+      "result_rows": 176,
+      "failure_count": 15,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 0,
+      "no_candidate_rows": 176,
+      "candidate_rows": 0,
+      "candidate_yield": 0.0,
+      "bottleneck": "fetch_or_rate_limit_failures",
+      "next_step": "rerun_scan_with_store_specific_backoff_or_cache"
+    },
+    {
+      "source_store": "AmiAmi",
+      "report_count": 1,
+      "processed_rows": 0,
+      "result_rows": 0,
+      "failure_count": 6,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 0,
+      "no_candidate_rows": 0,
+      "candidate_rows": 0,
+      "candidate_yield": 0.0,
+      "bottleneck": "fetch_or_rate_limit_failures",
+      "next_step": "rerun_scan_with_store_specific_backoff_or_cache"
+    },
+    {
+      "source_store": "Movic",
+      "report_count": 7,
+      "processed_rows": 72,
+      "result_rows": 124,
+      "failure_count": 2,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 0,
+      "no_candidate_rows": 124,
+      "candidate_rows": 0,
+      "candidate_yield": 0.0,
+      "bottleneck": "fetch_or_rate_limit_failures",
+      "next_step": "rerun_scan_with_store_specific_backoff_or_cache"
+    },
+    {
+      "source_store": "코토부키야",
+      "report_count": 2,
+      "processed_rows": 44,
+      "result_rows": 88,
+      "failure_count": 0,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 0,
+      "no_candidate_rows": 88,
+      "candidate_rows": 0,
+      "candidate_yield": 0.0,
+      "bottleneck": "searched_but_no_candidates",
+      "next_step": "improve_store_search_query_or_parser"
+    },
+    {
+      "source_store": "Cospa",
+      "report_count": 5,
+      "processed_rows": 35,
+      "result_rows": 57,
+      "failure_count": 0,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 0,
+      "no_candidate_rows": 57,
+      "candidate_rows": 0,
+      "candidate_yield": 0.0,
+      "bottleneck": "searched_but_no_candidates",
+      "next_step": "improve_store_search_query_or_parser"
+    },
+    {
+      "source_store": "FuRyu",
+      "report_count": 2,
+      "processed_rows": 0,
+      "result_rows": 43,
+      "failure_count": 0,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 0,
+      "no_candidate_rows": 43,
+      "candidate_rows": 0,
+      "candidate_yield": 0.0,
+      "bottleneck": "searched_but_no_candidates",
+      "next_step": "improve_store_search_query_or_parser"
+    },
+    {
+      "source_store": "Taito",
+      "report_count": 1,
+      "processed_rows": 0,
+      "result_rows": 15,
+      "failure_count": 0,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 0,
+      "no_candidate_rows": 15,
+      "candidate_rows": 0,
+      "candidate_yield": 0.0,
+      "bottleneck": "searched_but_no_candidates",
+      "next_step": "improve_store_search_query_or_parser"
+    },
+    {
+      "source_store": "Re-ment",
+      "report_count": 2,
+      "processed_rows": 5,
+      "result_rows": 10,
+      "failure_count": 0,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 0,
+      "no_candidate_rows": 10,
+      "candidate_rows": 0,
+      "candidate_yield": 0.0,
+      "bottleneck": "searched_but_no_candidates",
+      "next_step": "improve_store_search_query_or_parser"
+    },
+    {
+      "source_store": "애니메이트",
+      "report_count": 1,
+      "processed_rows": 0,
+      "result_rows": 151,
+      "failure_count": 0,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 13,
+      "no_candidate_rows": 138,
+      "candidate_rows": 13,
+      "candidate_yield": 0.0861,
+      "bottleneck": "candidate_review_available",
+      "next_step": "review_candidate_identity_then_fill_source_image_templates"
+    },
+    {
+      "source_store": "굿스마일컴퍼니",
+      "report_count": 1,
+      "processed_rows": 0,
+      "result_rows": 57,
+      "failure_count": 0,
+      "exact_candidate_rows": 0,
+      "candidate_review_rows": 2,
+      "no_candidate_rows": 55,
+      "candidate_rows": 2,
+      "candidate_yield": 0.0351,
+      "bottleneck": "candidate_review_available",
+      "next_step": "review_candidate_identity_then_fill_source_image_templates"
     }
   ],
   "candidate_rows_by_store": [

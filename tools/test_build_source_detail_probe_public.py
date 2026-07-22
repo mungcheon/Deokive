@@ -65,9 +65,17 @@ class BuildSourceDetailProbePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["report_count"], 1)
         self.assertEqual(report["summary"]["candidate_review_rows"], 1)
         self.assertEqual(report["summary"]["published_candidate_rows"], 1)
+        self.assertEqual(report["summary"]["candidate_yield"], 0.5)
+        self.assertEqual(
+            report["summary"]["store_bottleneck_counts"],
+            [["candidate_review_available", 1]],
+        )
         self.assertEqual(report["review_candidates"][0]["catalog_index"], 7)
         self.assertFalse(report["review_candidates"][0]["auto_apply_enabled"])
         self.assertEqual(report["candidate_rows_by_store"], [{"source_store": "Animate", "rows": 1}])
+        self.assertEqual(report["store_bottlenecks"][0]["source_store"], "Animate")
+        self.assertEqual(report["store_bottlenecks"][0]["candidate_yield"], 0.5)
+        self.assertEqual(report["store_bottlenecks"][0]["bottleneck"], "candidate_review_available")
 
 
 if __name__ == "__main__":

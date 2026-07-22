@@ -1475,6 +1475,21 @@
       ]
     ],
     "published_candidate_rows": 15,
+    "candidate_yield": 0.0337,
+    "store_bottleneck_counts": [
+      [
+        "searched_but_no_candidates",
+        5
+      ],
+      [
+        "fetch_or_rate_limit_failures",
+        3
+      ],
+      [
+        "candidate_review_available",
+        2
+      ]
+    ],
     "auto_apply_enabled": false
   },
   "source_discovery_queue": {
@@ -3218,11 +3233,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 17,
+    "action_count": 18,
     "blocked_action_count": 1,
-    "manual_review_action_count": 15,
+    "manual_review_action_count": 16,
     "pending_import_action_count": 0,
-    "total_action_rows": 42533,
+    "total_action_rows": 42548,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -4995,6 +5010,9 @@
     "action_batch_count": 2,
     "batch_size": 10,
     "manual_confirmed_true": 0,
+    "safe_source_image_pair_rows": 15,
+    "near_or_better_candidate_rows": 2,
+    "ambiguous_or_weaker_candidate_rows": 13,
     "by_source_store": [
       [
         "애니메이트",
@@ -5012,6 +5030,24 @@
       ],
       [
         "near_single_candidate_review",
+        2
+      ]
+    ],
+    "by_candidate_count_bucket": [
+      [
+        "large_candidate_set",
+        6
+      ],
+      [
+        "small_candidate_set",
+        5
+      ],
+      [
+        "single_candidate",
+        2
+      ],
+      [
+        "near_single_candidate",
         2
       ]
     ],

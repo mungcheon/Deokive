@@ -98,6 +98,68 @@ def candidate_rows(paths: list[Path], *, limit: int) -> list[dict[str, Any]]:
     return rows[:limit]
 
 
+def _safe_int(value: Any) -> int:
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _scan_bottleneck(row: dict[str, Any]) -> str:
+    failures = _safe_int(row.get("failure_count"))
+    result_rows = _safe_int(row.get("result_rows"))
+    candidate_rows = _safe_int(row.get("candidate_review_rows")) + _safe_int(row.get("exact_candidate_rows"))
+    if failures and not candidate_rows:
+        return "fetch_or_rate_limit_failures"
+    if result_rows and not candidate_rows:
+        return "searched_but_no_candidates"
+    if candidate_rows:
+        return "candidate_review_available"
+    return "not_scanned_or_empty"
+
+
+def _candidate_yield(row: dict[str, Any]) -> float:
+    result_rows = _safe_int(row.get("result_rows"))
+    if not result_rows:
+        return 0.0
+    candidate_rows = _safe_int(row.get("candidate_review_rows")) + _safe_int(row.get("exact_candidate_rows"))
+    return round(candidate_rows / result_rows, 4)
+
+
+def _bottleneck_rows(scans: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for row in scans:
+        enriched = dict(row)
+        enriched["candidate_rows"] = _safe_int(row.get("candidate_review_rows")) + _safe_int(
+            row.get("exact_candidate_rows")
+        )
+        enriched["candidate_yield"] = _candidate_yield(row)
+        enriched["bottleneck"] = _scan_bottleneck(row)
+        if enriched["bottleneck"] == "candidate_review_available":
+            enriched["next_step"] = "review_candidate_identity_then_fill_source_image_templates"
+        elif enriched["bottleneck"] == "fetch_or_rate_limit_failures":
+            enriched["next_step"] = "rerun_scan_with_store_specific_backoff_or_cache"
+        elif enriched["bottleneck"] == "searched_but_no_candidates":
+            enriched["next_step"] = "improve_store_search_query_or_parser"
+        else:
+            enriched["next_step"] = "schedule_store_scan"
+        rows.append(enriched)
+    return sorted(
+        rows,
+        key=lambda item: (
+            {
+                "fetch_or_rate_limit_failures": 10,
+                "searched_but_no_candidates": 20,
+                "not_scanned_or_empty": 30,
+                "candidate_review_available": 40,
+            }.get(str(item.get("bottleneck") or ""), 99),
+            -_safe_int(item.get("failure_count")),
+            -_safe_int(item.get("no_candidate_rows")),
+            str(item.get("source_store") or ""),
+        ),
+    )
+
+
 def build_report(paths: list[Path], *, generated_at: str | None = None, candidate_limit: int = 80) -> dict[str, Any]:
     summary_payload = build_summary(paths)
     summary = summary_payload.get("summary", {})
@@ -117,6 +179,8 @@ def build_report(paths: list[Path], *, generated_at: str | None = None, candidat
         if isinstance(row, dict)
     ]
     candidate_store_counts = Counter(str(row.get("source_store") or "") for row in candidates)
+    bottlenecks = _bottleneck_rows(scans)
+    bottleneck_counts = Counter(str(row.get("bottleneck") or "") for row in bottlenecks)
 
     return {
         "schema_version": 1,
@@ -136,9 +200,16 @@ def build_report(paths: list[Path], *, generated_at: str | None = None, candidat
             "time_budget_exhausted_reports": summary.get("time_budget_exhausted_reports", 0),
             "rate_limit_skipped_stores": summary.get("rate_limit_skipped_stores", []),
             "published_candidate_rows": len(candidates),
+            "candidate_yield": round(
+                (summary.get("unique_review_candidate_store_row_pairs", 0) or 0)
+                / (summary.get("unique_processed_store_row_pairs", 0) or 1),
+                4,
+            ),
+            "store_bottleneck_counts": [[key, value] for key, value in bottleneck_counts.most_common()],
             "auto_apply_enabled": False,
         },
         "scans": scans,
+        "store_bottlenecks": bottlenecks,
         "candidate_rows_by_store": [
             {"source_store": store, "rows": count}
             for store, count in candidate_store_counts.most_common()
