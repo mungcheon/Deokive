@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   test(
       'catalog entry import creates an unopened owned item in the target folder',
       () {
@@ -58,6 +60,21 @@ void main() {
     expect(item.status, '미개봉');
     expect(item.memo, contains('DB에서 추가'));
     expect(item.memo, contains(entry.sourceUrl!));
+  });
+
+  test('catalog import can load a bundled catalog image for saving', () async {
+    const entry = GoodsCatalogEntry(
+      nameKo: 'Image catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      sourceStore: 'official store',
+      localImagePath: 'lib/logo.png',
+    );
+
+    final imageBytes = await loadCatalogEntryImageBytes(entry);
+
+    expect(imageBytes, isNotNull);
+    expect(imageBytes!.length, greaterThan(0));
   });
 
   test('catalog import keeps paid currency in JPY even when display is KRW',

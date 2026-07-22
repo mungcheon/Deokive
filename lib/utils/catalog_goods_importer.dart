@@ -65,7 +65,7 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   );
   if (destination == null || !context.mounted) return false;
 
-  final imageBytes = await _downloadCatalogImage(entry);
+  final imageBytes = await loadCatalogEntryImageBytes(entry);
   if (!context.mounted) return false;
 
   final item = goodsItemFromCatalogEntry(
@@ -541,9 +541,10 @@ DateTime? _parseCatalogReleaseDate(String? raw) {
       DateTime.tryParse('$value-01-01');
 }
 
-Future<Uint8List?> _downloadCatalogImage(GoodsCatalogEntry entry) async {
+@visibleForTesting
+Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
   final localPath = entry.localImagePath?.trim() ?? '';
-  if (localPath.isNotEmpty && !kIsWeb) {
+  if (localPath.isNotEmpty) {
     try {
       final data = await rootBundle.load(localPath);
       return data.buffer.asUint8List();
@@ -553,7 +554,6 @@ Future<Uint8List?> _downloadCatalogImage(GoodsCatalogEntry entry) async {
   }
 
   var url = entry.imageUrl?.trim() ?? '';
-  if (url.isEmpty && kIsWeb) url = localPath;
   if (url.isEmpty) return null;
   url = url.replaceAll('&amp;', '&');
   if (url.startsWith('//')) url = 'https:$url';

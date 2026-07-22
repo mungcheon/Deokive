@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,24 +20,6 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   final List<int> _tabHistory = [];
   bool _showingBoardAlert = false;
-  bool _showUpdateNotice = true;
-  Timer? _updateNoticeTimer;
-
-  @override
-  void initState() {
-    super.initState();
-    _updateNoticeTimer = Timer(const Duration(seconds: 70), () {
-      if (mounted) {
-        setState(() => _showUpdateNotice = false);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _updateNoticeTimer?.cancel();
-    super.dispose();
-  }
 
   @override
   void didChangeDependencies() {
@@ -171,24 +151,9 @@ class _RootScreenState extends State<RootScreen> {
             }
           },
           child: Scaffold(
-            body: Column(
-              children: [
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 220),
-                  child: _showUpdateNotice
-                      ? _UpdateNoticeBanner(
-                          onClose: () =>
-                              setState(() => _showUpdateNotice = false),
-                        )
-                      : const SizedBox.shrink(),
-                ),
-                Expanded(
-                  child: IndexedStack(
-                    index: appState.currentTabIndex,
-                    children: pages,
-                  ),
-                ),
-              ],
+            body: IndexedStack(
+              index: appState.currentTabIndex,
+              children: pages,
             ),
             bottomNavigationBar: SafeArea(
               top: false,
@@ -273,71 +238,6 @@ class _RootScreenState extends State<RootScreen> {
           ),
         );
       },
-    );
-  }
-}
-
-class _UpdateNoticeBanner extends StatelessWidget {
-  final VoidCallback onClose;
-
-  const _UpdateNoticeBanner({required this.onClose});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final palette = theme.extension<DeokivePalette>()!;
-    final textColor = theme.colorScheme.onSurface;
-
-    return SafeArea(
-      bottom: false,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.fromLTRB(14, 8, 8, 8),
-        decoration: BoxDecoration(
-          color: Color.lerp(theme.colorScheme.surface, palette.accent, 0.14),
-          border: Border(
-            bottom: BorderSide(
-              color: palette.primary.withValues(alpha: 0.18),
-            ),
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              Icons.system_update_alt_rounded,
-              size: 18,
-              color: palette.primary,
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '1분 뒤 업데이트를 시작합니다. 작업 중이라면 종료해 주세요.',
-                  maxLines: 1,
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: textColor,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 0,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            IconButton(
-              visualDensity: VisualDensity.compact,
-              iconSize: 18,
-              tooltip: '닫기',
-              onPressed: onClose,
-              icon: Icon(
-                Icons.close_rounded,
-                color: textColor.withValues(alpha: 0.72),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
