@@ -36,7 +36,11 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
                             "suggested_primary_icon_key": "view_carousel",
                             "suggested_icon_options": ["view_carousel", "standee"],
                             "review_reason": "Split broad acrylic rows first.",
-                            "sample_names": ["Big acrylic stand"],
+                            "sample_names": [
+                                "Big acrylic stand",
+                                "Acrylic keyring",
+                                "Clear file set",
+                            ],
                             "folder_template": {
                                 "folder_name": "Acrylic Stand",
                                 "family": "acrylic",
@@ -91,6 +95,16 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(batch["categories"][0]["mapping_mode"], "name_level_split_review_required")
         self.assertTrue(batch["categories"][0]["requires_name_level_split_review"])
         self.assertEqual(batch["categories"][0]["confirmed_queue"], "server/animation_category_confirmed_rows.json")
+        self.assertEqual(
+            batch["categories"][0]["review_summary"]["recommended_review_path"],
+            "review_name_split_hints_before_category_mapping",
+        )
+        self.assertEqual(batch["categories"][0]["review_summary"]["name_split_hint_count"], 3)
+        hint_keys = {
+            hint["hint_key"]
+            for hint in batch["categories"][0]["name_split_hints"]
+        }
+        self.assertEqual(hint_keys, {"acrylic_stand", "acrylic_keyring", "clear_file"})
         template = batch["categories"][0]["category_mapping_template"]
         self.assertFalse(template["manual_confirmed"])
         self.assertEqual(template["mapping_mode"], "name_level_split_review_required")

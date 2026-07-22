@@ -16,6 +16,18 @@ CONFIRMED_QUEUE = "server/animation_category_confirmed_rows.json"
 IMPORT_TOOL = "tools/import_confirmed_animation_category_rows.py"
 UNBLOCKS_WHEN = "category_mapping_manually_confirmed"
 
+PRODUCT_TYPE_HINTS = [
+    ("acrylic_stand", ("アクリルスタンド", "アクスタ", "acrylic stand", "standee", "스탠드")),
+    ("acrylic_keyring", ("アクリルキーホルダー", "アクキー", "keyholder", "keyring", "키링")),
+    ("badge", ("缶バッジ", "バッジ", "badge", "뱃지")),
+    ("clear_file", ("クリアファイル", "file", "파일")),
+    ("figure", ("フィギュア", "figure", "피규어")),
+    ("plush", ("ぬいぐるみ", "マスコット", "plush", "인형", "누이")),
+    ("card", ("カード", "ポストカード", "card", "카드")),
+    ("towel", ("タオル", "towel", "타월", "수건")),
+    ("stationery", ("ノート", "ステッカー", "シール", "メモ", "文具", "문구", "스티커")),
+]
+
 
 def _now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -56,6 +68,48 @@ def _requires_split_review(row: dict[str, Any]) -> bool:
     return _mapping_mode(row) == "name_level_split_review_required"
 
 
+def _sample_names(row: dict[str, Any], limit: int = 8) -> list[str]:
+    return [str(name) for name in (row.get("sample_names") or [])[:limit]]
+
+
+def _name_split_hints(row: dict[str, Any]) -> list[dict[str, Any]]:
+    samples = _sample_names(row, limit=24)
+    hints: list[dict[str, Any]] = []
+    for hint_key, tokens in PRODUCT_TYPE_HINTS:
+        matched_names = [
+            name
+            for name in samples
+            if any(token.casefold() in name.casefold() for token in tokens)
+        ]
+        if matched_names:
+            hints.append(
+                {
+                    "hint_key": hint_key,
+                    "matched_sample_names": len(matched_names),
+                    "sample_names": matched_names[:5],
+                }
+            )
+    hints.sort(key=lambda item: (-int(item["matched_sample_names"]), str(item["hint_key"])))
+    return hints
+
+
+def _review_summary(row: dict[str, Any], mapping_mode: str) -> dict[str, Any]:
+    split_hints = _name_split_hints(row)
+    return {
+        "affected_catalog_rows": int(row.get("rows") or 0),
+        "mapping_mode": mapping_mode,
+        "requires_name_level_split_review": mapping_mode == "name_level_split_review_required",
+        "sample_name_count": len(row.get("sample_names") or []),
+        "name_split_hint_count": len(split_hints),
+        "name_split_hints": split_hints,
+        "recommended_review_path": (
+            "review_name_split_hints_before_category_mapping"
+            if mapping_mode == "name_level_split_review_required"
+            else "confirm_direct_category_mapping"
+        ),
+    }
+
+
 def _template(row: dict[str, Any]) -> dict[str, Any]:
     folder = row.get("folder_template") if isinstance(row.get("folder_template"), dict) else {}
     mapping_mode = _mapping_mode(row)
@@ -85,6 +139,7 @@ def _template(row: dict[str, Any]) -> dict[str, Any]:
 
 def _compact(row: dict[str, Any]) -> dict[str, Any]:
     mapping_mode = _mapping_mode(row)
+    review_summary = _review_summary(row, mapping_mode)
     return {
         "category": row.get("category"),
         "rows": int(row.get("rows") or 0),
@@ -97,7 +152,9 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
         "suggested_color_hint": row.get("suggested_color_hint"),
         "suggested_primary_icon_key": row.get("suggested_primary_icon_key"),
         "review_reason": row.get("review_reason"),
-        "sample_names": (row.get("sample_names") or [])[:8],
+        "review_summary": review_summary,
+        "name_split_hints": review_summary["name_split_hints"],
+        "sample_names": _sample_names(row),
         "category_mapping_template": _template(row),
         "manual_confirmation_template": CONFIRMED_TEMPLATE,
         "confirmed_queue": CONFIRMED_QUEUE,
