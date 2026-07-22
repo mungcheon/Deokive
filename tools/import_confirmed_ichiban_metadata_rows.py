@@ -167,13 +167,34 @@ def import_rows(
     return {"seed_rows": normalized_seed, "updated": updated, "skipped": skipped}
 
 
-def _load_seed(path: Path) -> list[dict[str, Any]]:
+def _load_seed_payload(path: Path) -> tuple[Any, list[dict[str, Any]]]:
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
     if isinstance(payload, dict) and isinstance(payload.get("items"), list):
-        return [row for row in payload["items"] if isinstance(row, dict)]
+        return payload, [row for row in payload["items"] if isinstance(row, dict)]
     if isinstance(payload, list):
-        return [row for row in payload if isinstance(row, dict)]
+        return payload, [row for row in payload if isinstance(row, dict)]
     raise SystemExit(f"{path} must contain a JSON list or an object with items")
+
+
+def _missing_by_field(rows: list[dict[str, Any]], fields: list[str]) -> dict[str, int]:
+    return {field: sum(1 for row in rows if row.get(field) in (None, "")) for field in fields}
+
+
+def _write_seed_payload(path: Path, payload: Any, rows: list[dict[str, Any]]) -> None:
+    if isinstance(payload, dict) and isinstance(payload.get("items"), list):
+        payload = dict(payload)
+        meta = dict(payload.get("meta") or {})
+        fields = meta.get("fields")
+        payload["items"] = rows
+        meta["generated_at"] = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+        meta["row_count"] = len(rows)
+        meta["total_items"] = len(rows)
+        if isinstance(fields, list):
+            meta["missing"] = _missing_by_field(rows, [str(field) for field in fields])
+        payload["meta"] = meta
+        path.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+        return
+    path.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> int:
@@ -200,7 +221,7 @@ def main() -> int:
         return 0
 
     review_queue = json.loads(args.queue.read_text(encoding="utf-8-sig"))
-    seed_rows = _load_seed(args.seed)
+    seed_payload, seed_rows = _load_seed_payload(args.seed)
     result = import_rows(review_queue, seed_rows, allow_existing_overwrite=args.allow_existing_overwrite)
     skip_reasons = Counter(str(item.get("reason") or "unspecified") for item in result["skipped"])
     report = {
@@ -215,7 +236,7 @@ def main() -> int:
     }
     args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if args.write and result["updated"]:
-        args.seed.write_text(json.dumps(result["seed_rows"], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        _write_seed_payload(args.seed, seed_payload, result["seed_rows"])
     print(json.dumps({k: report[k] for k in ("updated_rows", "skipped_rows", "queue", "write")}, ensure_ascii=False, indent=2))
     if not args.write:
         print("Dry run only. Confirm official 1kuji evidence, review the report, then re-run with --write.")

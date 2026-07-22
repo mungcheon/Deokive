@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import sys
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from import_confirmed_ichiban_metadata_rows import import_rows
+from import_confirmed_ichiban_metadata_rows import _write_seed_payload
 
 
 URL = "https://1kuji.com/products/test-kuji"
@@ -98,6 +101,31 @@ class ImportConfirmedIchibanMetadataRowsTest(unittest.TestCase):
 
         self.assertEqual(len(result["updated"]), 2)
         self.assertEqual(result["seed_rows"][0]["release_date"], "2026-07")
+
+    def test_write_seed_payload_preserves_public_catalog_shape_and_updates_meta(self) -> None:
+        payload = {
+            "meta": {
+                "generated_at": "2026-01-01T00:00:00Z",
+                "row_count": 1,
+                "total_items": 1,
+                "fields": ["catalog_index", "release_date", "official_price_jpy"],
+                "missing": {},
+            },
+            "items": [_row(1, release_date="", official_price_jpy=850)],
+        }
+        result = import_rows({"items": [_item("release_date", "2026-07-22", target_catalog_item_rows=1)]}, payload["items"])
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "catalog_public.json"
+            _write_seed_payload(path, payload, result["seed_rows"])
+            written = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertIsInstance(written, dict)
+        self.assertEqual(len(written["items"]), 1)
+        self.assertEqual(written["items"][0]["release_date"], "2026-07-22")
+        self.assertEqual(written["meta"]["row_count"], 1)
+        self.assertEqual(written["meta"]["total_items"], 1)
+        self.assertEqual(written["meta"]["missing"]["release_date"], 0)
+        self.assertEqual(written["meta"]["missing"]["official_price_jpy"], 0)
 
 
 if __name__ == "__main__":
