@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T09:46:50Z",
+  "generated_at": "2026-07-22T09:53:55Z",
   "summary": {
     "catalog_rows": 20392,
     "coverage": {
@@ -1514,6 +1514,10 @@
       "public_report": "data/ichiban_kuji_metadata_review_batches_public.json"
     },
     {
+      "key": "ichiban_kuji_prize_policy_audit",
+      "public_report": "data/ichiban_kuji_prize_policy_audit_public.json"
+    },
+    {
       "key": "agent_work_queue",
       "public_report": "data/catalog_agent_work_queue_public.json"
     }
@@ -2392,6 +2396,20 @@
         ]
       ],
       "recommended_next_action": "Work queued 1kuji metadata templates, then expand remaining actionable campaigns."
+    },
+    {
+      "priority": 54,
+      "workstream": "ichiban_kuji_prize_policy_audit",
+      "public_report": "data/ichiban_kuji_prize_policy_audit_public.json",
+      "last_one_rows": 533,
+      "last_one_nonzero_price_rows": 0,
+      "double_chance_rows": 9,
+      "double_chance_nonzero_price_rows": 0,
+      "multi_item_prize_label_groups": 416,
+      "repeated_name_different_source_groups": 46,
+      "zero_price_exception_policy_pass": true,
+      "auto_apply_enabled": false,
+      "recommended_next_action": "Review multi-item prize labels and repeated-name campaign URLs; keep last-one/double-chance prices at 0."
     },
     {
       "priority": 60,

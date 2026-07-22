@@ -49,6 +49,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
+        self.assertIn("data/ichiban_kuji_prize_policy_audit_public.json", updated_files)
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
         self.assertIn("data/animation_category_unmatched_keyword_review_public.json", updated_files)
         self.assertIn("data/source_detail_probe_public.json", updated_files)
@@ -128,6 +129,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["fast_review_campaigns"], 20)
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["manual_confirmed_true"], 0)
             self.assertIs(quality["ichiban_kuji_metadata_fast_review"]["auto_apply_enabled"], False)
+        if reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists():
+            prize_audit = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT)
+            self.assertEqual(
+                quality["ichiban_kuji_prize_policy_audit"]["last_one_nonzero_price_rows"],
+                prize_audit["summary"]["last_one_nonzero_price_rows"],
+            )
+            self.assertEqual(quality["ichiban_kuji_prize_policy_audit"]["double_chance_nonzero_price_rows"], 0)
+            self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["zero_price_exception_policy_pass"], True)
+            self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["auto_apply_enabled"], False)
 
     def test_all_public_json_files_are_parseable_and_safe_for_pages(self):
         public_files = reports.discover_public_json_files()
@@ -443,6 +453,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         ichiban_action = reports.load_json(reports.ICHIIBAN_KUJI_METADATA_ACTION_QUEUE)
         ichiban_action_summary = ichiban_action.get("summary", {})
+        ichiban_prize_audit = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT)
+        ichiban_prize_audit_summary = ichiban_prize_audit.get("summary", {})
         ichiban_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
@@ -452,6 +464,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "ichiban_kuji_metadata_action_queue"
+        )
+        ichiban_prize_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "ichiban_kuji_prize_policy_audit"
         )
         animation_action = reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)
         animation_action_summary = animation_action.get("summary", {})
@@ -510,6 +527,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_SPLIT_REVIEW.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.name}", report_links)
+        self.assertIn(f"data/{reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}", report_links)
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
@@ -724,6 +742,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             ichiban_next_action.get("field_patch_template_counts"),
             ichiban_action_summary.get("field_patch_template_counts"),
         )
+        self.assertEqual(
+            ichiban_prize_next_action.get("last_one_nonzero_price_rows"),
+            ichiban_prize_audit_summary.get("last_one_nonzero_price_rows"),
+        )
+        self.assertEqual(
+            ichiban_prize_next_action.get("double_chance_nonzero_price_rows"),
+            ichiban_prize_audit_summary.get("double_chance_nonzero_price_rows"),
+        )
+        self.assertIs(ichiban_prize_next_action.get("zero_price_exception_policy_pass"), True)
         self.assertEqual(
             open_queues.get("animation_category_action_rows"),
             animation_action_summary.get("queued_catalog_rows"),

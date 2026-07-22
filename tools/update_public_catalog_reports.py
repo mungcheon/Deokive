@@ -49,6 +49,7 @@ ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
 ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES = DATA / "ichiban_kuji_metadata_review_batches_public.json"
 ICHIIBAN_KUJI_METADATA_ACTION_QUEUE = DATA / "ichiban_kuji_metadata_action_queue_public.json"
 ICHIIBAN_KUJI_METADATA_FAST_REVIEW = DATA / "ichiban_kuji_metadata_fast_review_public.json"
+ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT = DATA / "ichiban_kuji_prize_policy_audit_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT = DATA / "gotouchi_representative_image_attachment_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
@@ -1577,6 +1578,10 @@ def build_operations_public(
         else {}
     )
     ichiban_kuji_metadata_action_queue_summary = ichiban_kuji_metadata_action_queue.get("summary", {})
+    ichiban_kuji_prize_policy_audit = (
+        load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {}) if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists() else {}
+    )
+    ichiban_kuji_prize_policy_audit_summary = ichiban_kuji_prize_policy_audit.get("summary", {})
     metadata_summary = metadata_backlog["summary"]
     metadata_review_batches = (
         metadata_review_batches_override
@@ -2001,6 +2006,30 @@ def build_operations_public(
             ),
             "recommended_next_action": "Work queued 1kuji metadata templates, then expand remaining actionable campaigns.",
         } if ichiban_kuji_metadata_action_queue_summary else None,
+        {
+            "priority": 54,
+            "workstream": "ichiban_kuji_prize_policy_audit",
+            "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}",
+            "last_one_rows": ichiban_kuji_prize_policy_audit_summary.get("last_one_rows", 0),
+            "last_one_nonzero_price_rows": ichiban_kuji_prize_policy_audit_summary.get(
+                "last_one_nonzero_price_rows", 0
+            ),
+            "double_chance_rows": ichiban_kuji_prize_policy_audit_summary.get("double_chance_rows", 0),
+            "double_chance_nonzero_price_rows": ichiban_kuji_prize_policy_audit_summary.get(
+                "double_chance_nonzero_price_rows", 0
+            ),
+            "multi_item_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
+                "multi_item_prize_label_groups", 0
+            ),
+            "repeated_name_different_source_groups": ichiban_kuji_prize_policy_audit_summary.get(
+                "repeated_name_different_source_groups", 0
+            ),
+            "zero_price_exception_policy_pass": ichiban_kuji_prize_policy_audit_summary.get(
+                "zero_price_exception_policy_pass", False
+            ),
+            "auto_apply_enabled": ichiban_kuji_prize_policy_audit_summary.get("auto_apply_enabled", False),
+            "recommended_next_action": "Review multi-item prize labels and repeated-name campaign URLs; keep last-one/double-chance prices at 0.",
+        } if ichiban_kuji_prize_policy_audit_summary else None,
         {
             "priority": 60,
             "workstream": "animation_folder_visuals",
@@ -2533,6 +2562,7 @@ def build_operations_public(
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
             {"key": "ichiban_kuji_metadata_probe", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}"},
             {"key": "ichiban_kuji_metadata_review_batches", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}"},
+            {"key": "ichiban_kuji_prize_policy_audit", "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}"},
             {"key": "agent_work_queue", "public_report": f"data/{AGENT_WORK_QUEUE.name}"},
         ],
         "next_actions": next_actions,
@@ -5071,6 +5101,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["ichiban_kuji_metadata_fast_review"] = copy_report_summary(
                 ICHIIBAN_KUJI_METADATA_FAST_REVIEW, "ichiban_kuji_metadata_fast_review"
             )
+        if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists():
+            target["ichiban_kuji_prize_policy_audit"] = copy_report_summary(
+                ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, "ichiban_kuji_prize_policy_audit"
+            )
         target["operations"] = {
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
@@ -5179,6 +5213,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_FAST_REVIEW.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),
             str(AGENT_WORK_QUEUE.relative_to(ROOT)),
         ],
