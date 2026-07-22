@@ -25,6 +25,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_agent_work_queue_public.json", updated_files)
         self.assertIn("data/catalog_image_asset_audit_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_priority_public.json", updated_files)
+        self.assertIn("data/animate_missing_image_search_public.json", updated_files)
         self.assertIn("data/ensky_missing_image_cache_coverage_public.json", updated_files)
         self.assertIn("data/ensky_search_page_probe_public.json", updated_files)
         self.assertIn("data/stellive_fanding_candidates_public.json", updated_files)
@@ -39,6 +40,9 @@ class PublicCatalogReportTests(unittest.TestCase):
 
         quality = reports.load_json(reports.QUALITY)
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
+        if reports.ANIMATE_MISSING_IMAGE_SEARCH.exists():
+            self.assertEqual(quality["animate_missing_image_search"]["missing_animate_image_rows"], 148)
+            self.assertIs(quality["animate_missing_image_search"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():
