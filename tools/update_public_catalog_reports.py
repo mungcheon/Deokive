@@ -2259,6 +2259,8 @@ def build_operations_public(
             "field_patch_template_counts": ichiban_kuji_metadata_action_queue_summary.get(
                 "field_patch_template_counts", []
             ),
+            "work_order_steps": ichiban_kuji_metadata_action_queue_summary.get("work_order_steps", 0),
+            "work_order_lanes": ichiban_kuji_metadata_action_queue_summary.get("work_order_lanes", []),
             "recommended_next_action": "Work queued 1kuji metadata templates, then expand remaining actionable campaigns.",
         } if ichiban_kuji_metadata_action_queue_summary else None,
         {
@@ -2729,6 +2731,7 @@ def build_operations_public(
             "queued_catalog_item_rows": ichiban_kuji_metadata_action_queue_summary.get("queued_catalog_item_rows", 0),
             "primary_report": f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
             "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+            "work_order_lanes": ichiban_kuji_metadata_action_queue_summary.get("work_order_lanes", []),
             "auto_apply_enabled": ichiban_kuji_metadata_action_queue_summary.get("auto_apply_enabled", False),
         } if ichiban_kuji_metadata_action_queue_summary else None,
         {
@@ -3698,6 +3701,25 @@ def build_agent_work_queue_public(
     ichiban_action_batches = [
         batch for batch in ichiban_metadata_action_queue.get("batches", []) if isinstance(batch, dict)
     ]
+    ichiban_action_work_order = [
+        step for step in ichiban_metadata_action_queue.get("work_order", []) if isinstance(step, dict)
+    ]
+    for step in ichiban_action_work_order:
+        add_batch(
+            agent_id="agent-ichiban-action",
+            workstream="ichiban_kuji_metadata_action_work_order",
+            priority=int(step.get("rank") or 90),
+            title=f"Ichiban Kuji metadata work order: {step.get('lane')}",
+            public_report=ICHIIBAN_KUJI_METADATA_ACTION_QUEUE,
+            rows=int(step.get("campaign_count") or 0),
+            recommended_action=str(step.get("description") or "Work queued 1kuji metadata confirmations."),
+            acceptance_criteria=[
+                "Use only labeled official 1kuji campaign metadata or captured official evidence.",
+                "Fill the manual confirmation queue before running the guarded import tool.",
+                "Keep auto-apply disabled for historical campaign metadata.",
+            ],
+            samples=[campaign for campaign in step.get("sample_campaigns", []) if isinstance(campaign, dict)],
+        )
     for action_batch in ichiban_action_batches[:6]:
         add_batch(
             agent_id="agent-ichiban-action",

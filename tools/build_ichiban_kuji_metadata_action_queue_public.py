@@ -115,6 +115,81 @@ def _review_lane(workflow: Any, fields: list[str]) -> str:
     return "confirm_campaign_metadata"
 
 
+def _work_order(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    lane_order = [
+        (
+            "confirm_release_date_and_draw_price",
+            "confirm_release_and_price",
+            "Confirm both release date and draw price on the same official campaign page.",
+            10,
+        ),
+        (
+            "confirm_campaign_release_date",
+            "confirm_release_dates",
+            "Confirm labeled campaign release or sales-start dates first.",
+            20,
+        ),
+        (
+            "confirm_campaign_draw_price",
+            "confirm_draw_prices",
+            "Confirm labeled draw price or price-per-try after release dates.",
+            30,
+        ),
+        (
+            "confirm_campaign_metadata",
+            "confirm_remaining_metadata",
+            "Confirm remaining campaign metadata with labeled official evidence.",
+            90,
+        ),
+    ]
+    rows_by_lane: dict[str, list[dict[str, Any]]] = {}
+    for campaign in campaigns:
+        rows_by_lane.setdefault(str(campaign.get("review_lane") or ""), []).append(campaign)
+
+    work_order: list[dict[str, Any]] = []
+    for review_lane, lane, description, rank in lane_order:
+        rows = rows_by_lane.get(review_lane) or []
+        if not rows:
+            continue
+        field_counts = Counter(
+            field
+            for row in rows
+            for field in row.get("patch_summary", {}).get("fields") or []
+        )
+        work_order.append(
+            {
+                "rank": rank,
+                "lane": lane,
+                "review_lane": review_lane,
+                "description": description,
+                "campaign_count": len(rows),
+                "catalog_item_rows": sum(int(row.get("catalog_item_rows") or 0) for row in rows),
+                "field_patch_template_counts": field_counts.most_common(),
+                "manual_confirmation_template": CONFIRMED_TEMPLATE,
+                "confirmed_queue": CONFIRMED_QUEUE,
+                "import_tool": IMPORT_TOOL,
+                "requires_manual_review": True,
+                "auto_apply_enabled": False,
+                "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+                "guardrails": [
+                    "official_campaign_title_matches_catalog_series",
+                    "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+                    *_field_confirmation_rules(list(field_counts.keys())),
+                ],
+                "sample_campaigns": [
+                    {
+                        "slug": row.get("slug"),
+                        "title": row.get("title"),
+                        "url": row.get("url"),
+                        "catalog_item_rows": row.get("catalog_item_rows"),
+                    }
+                    for row in rows[:5]
+                ],
+            }
+        )
+    return work_order
+
+
 def _compact_campaign(campaign: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
     templates = [
         template
@@ -176,6 +251,7 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
         )
     )
     published = campaigns[:max_campaigns]
+    work_order = _work_order(published)
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(published), batch_size):
@@ -232,6 +308,8 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
             "by_workflow": _counter_pairs(campaigns, "workflow"),
             "field_patch_template_count": sum(patch_template_counts.values()),
             "field_patch_template_counts": patch_template_counts.most_common(),
+            "work_order_steps": len(work_order),
+            "work_order_lanes": [step["lane"] for step in work_order],
             "skipped_without_templates": skipped_without_templates,
             "auto_apply_enabled": False,
         },
@@ -241,6 +319,7 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
             "Fill templates only after manual confirmation; no campaign metadata is auto-applied.",
             f"Copy {CONFIRMED_TEMPLATE} to {CONFIRMED_QUEUE}, fill manual_value and confirmation flags, then run {IMPORT_TOOL}.",
         ],
+        "work_order": work_order,
         "batches": batches,
         "automation_policy": {
             "auto_apply_release_date": False,

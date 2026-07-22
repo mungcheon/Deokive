@@ -995,6 +995,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             ichiban_action_summary.get("field_patch_template_counts"),
         )
         self.assertEqual(
+            ichiban_next_action.get("work_order_steps"),
+            ichiban_action_summary.get("work_order_steps"),
+        )
+        self.assertEqual(
+            ichiban_next_action.get("work_order_lanes"),
+            ichiban_action_summary.get("work_order_lanes"),
+        )
+        self.assertEqual(
+            ichiban_scorecard.get("work_order_lanes"),
+            ichiban_action_summary.get("work_order_lanes"),
+        )
+        self.assertEqual(
             ichiban_prize_next_action.get("last_one_nonzero_price_rows"),
             ichiban_prize_audit_summary.get("last_one_nonzero_price_rows"),
         )

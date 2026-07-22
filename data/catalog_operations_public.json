@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T21:02:43Z",
+  "generated_at": "2026-07-22T21:16:30Z",
   "summary": {
     "catalog_rows": 20391,
     "coverage": {
@@ -1681,6 +1681,10 @@
       "queued_catalog_item_rows": 381,
       "primary_report": "data/ichiban_kuji_metadata_action_queue_public.json",
       "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+      "work_order_lanes": [
+        "confirm_release_dates",
+        "confirm_draw_prices"
+      ],
       "auto_apply_enabled": false
     },
     {
@@ -4038,6 +4042,11 @@
           "release_date",
           2
         ]
+      ],
+      "work_order_steps": 2,
+      "work_order_lanes": [
+        "confirm_release_dates",
+        "confirm_draw_prices"
       ],
       "recommended_next_action": "Work queued 1kuji metadata templates, then expand remaining actionable campaigns."
     },

@@ -65,6 +65,25 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["campaign_queue_coverage"], 1.0)
         self.assertEqual(report["summary"]["queued_catalog_item_rows"], 20)
         self.assertEqual(dict(report["summary"]["field_patch_template_counts"]), {"official_price_jpy": 1, "release_date": 1})
+        self.assertEqual(report["summary"]["work_order_steps"], 2)
+        self.assertEqual(
+            report["summary"]["work_order_lanes"],
+            ["confirm_release_dates", "confirm_draw_prices"],
+        )
+        self.assertEqual([step["lane"] for step in report["work_order"]], ["confirm_release_dates", "confirm_draw_prices"])
+        self.assertEqual(report["work_order"][0]["campaign_count"], 1)
+        self.assertEqual(report["work_order"][0]["catalog_item_rows"], 8)
+        self.assertEqual(dict(report["work_order"][0]["field_patch_template_counts"]), {"release_date": 1})
+        self.assertTrue(report["work_order"][0]["requires_manual_review"])
+        self.assertFalse(report["work_order"][0]["auto_apply_enabled"])
+        self.assertIn(
+            "release_date_must_be_labeled_campaign_release_or_sales_start_date",
+            report["work_order"][0]["guardrails"],
+        )
+        self.assertIn(
+            "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+            report["work_order"][1]["guardrails"],
+        )
         self.assertEqual(
             dict(report["batches"][0]["field_patch_template_counts"]),
             {"release_date": 1, "official_price_jpy": 1},
@@ -131,6 +150,8 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unqueued_action_campaigns"], 1)
         self.assertEqual(report["summary"]["campaign_queue_coverage"], 0.6667)
         self.assertEqual(report["summary"]["action_batch_count"], 2)
+        self.assertEqual(report["summary"]["work_order_steps"], 1)
+        self.assertEqual(report["work_order"][0]["campaign_count"], 2)
 
 
 if __name__ == "__main__":

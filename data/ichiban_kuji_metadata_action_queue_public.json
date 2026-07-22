@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T19:46:24Z",
+  "generated_at": "2026-07-22T21:16:24Z",
   "scope": "ichiban_kuji_metadata_action_queue",
   "summary": {
     "actionable_campaigns": 44,
@@ -32,6 +32,11 @@
         2
       ]
     ],
+    "work_order_steps": 2,
+    "work_order_lanes": [
+      "confirm_release_dates",
+      "confirm_draw_prices"
+    ],
     "skipped_without_templates": 0,
     "auto_apply_enabled": false
   },
@@ -40,6 +45,106 @@
     "Use only labeled official 1kuji campaign pages or captured official evidence.",
     "Fill templates only after manual confirmation; no campaign metadata is auto-applied.",
     "Copy server/ichiban_kuji_metadata_confirmed_rows.template.json to server/ichiban_kuji_metadata_confirmed_rows.json, fill manual_value and confirmation flags, then run tools/import_confirmed_ichiban_metadata_rows.py."
+  ],
+  "work_order": [
+    {
+      "rank": 20,
+      "lane": "confirm_release_dates",
+      "review_lane": "confirm_campaign_release_date",
+      "description": "Confirm labeled campaign release or sales-start dates first.",
+      "campaign_count": 2,
+      "catalog_item_rows": 16,
+      "field_patch_template_counts": [
+        [
+          "release_date",
+          2
+        ]
+      ],
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "requires_manual_review": true,
+      "auto_apply_enabled": false,
+      "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+      "guardrails": [
+        "official_campaign_title_matches_catalog_series",
+        "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+        "release_date_must_be_labeled_campaign_release_or_sales_start_date",
+        "ignore_double_chance_entry_deadline_or_prize_shipping_dates"
+      ],
+      "sample_campaigns": [
+        {
+          "slug": "jujutsu-o",
+          "title": "一番くじ 呪術廻戦 －オンライン－",
+          "url": "https://1kuji.com/products/jujutsu-o",
+          "catalog_item_rows": 8
+        },
+        {
+          "slug": "myhero_o5",
+          "title": "一番くじ 僕のヴィランアカデミア",
+          "url": "https://1kuji.com/products/myhero_o5",
+          "catalog_item_rows": 8
+        }
+      ]
+    },
+    {
+      "rank": 30,
+      "lane": "confirm_draw_prices",
+      "review_lane": "confirm_campaign_draw_price",
+      "description": "Confirm labeled draw price or price-per-try after release dates.",
+      "campaign_count": 42,
+      "catalog_item_rows": 365,
+      "field_patch_template_counts": [
+        [
+          "official_price_jpy",
+          42
+        ]
+      ],
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "requires_manual_review": true,
+      "auto_apply_enabled": false,
+      "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+      "guardrails": [
+        "official_campaign_title_matches_catalog_series",
+        "evidence_url_is_official_1kuji_campaign_or_captured_official_archive",
+        "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
+        "do_not_use_last_one_or_double_chance_exception_zero_price_as_draw_price"
+      ],
+      "sample_campaigns": [
+        {
+          "slug": "10",
+          "title": "一番くじドラゴンボールＺ限界突破編",
+          "url": "https://1kuji.com/products/10",
+          "catalog_item_rows": 7
+        },
+        {
+          "slug": "38",
+          "title": "一番くじ機動戦士ガンダム00",
+          "url": "https://1kuji.com/products/38",
+          "catalog_item_rows": 7
+        },
+        {
+          "slug": "49",
+          "title": "一番くじテレビアニメ「ワンピース」",
+          "url": "https://1kuji.com/products/49",
+          "catalog_item_rows": 8
+        },
+        {
+          "slug": "53",
+          "title": "一番くじドラゴンボール 摩訶不思議アドベンチャー編",
+          "url": "https://1kuji.com/products/53",
+          "catalog_item_rows": 7
+        },
+        {
+          "slug": "64",
+          "title": "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～",
+          "url": "https://1kuji.com/products/64",
+          "catalog_item_rows": 7
+        }
+      ]
+    }
   ],
   "batches": [
     {

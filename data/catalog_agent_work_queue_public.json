@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T21:02:43Z",
+  "generated_at": "2026-07-22T21:16:30Z",
   "summary": {
     "batch_count": 96,
-    "summed_batch_rows": 20305,
+    "summed_batch_rows": 20180,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -35,10 +35,6 @@
         7
       ],
       [
-        "metadata_action_queue",
-        5
-      ],
-      [
         "requested_focus_enrichment",
         3
       ],
@@ -53,6 +49,14 @@
       [
         "animation_category_unmatched_keyword_review",
         3
+      ],
+      [
+        "metadata_action_queue",
+        3
+      ],
+      [
+        "ichiban_kuji_metadata_action_work_order",
+        2
       ],
       [
         "source_detail_candidate_action_queue",
@@ -105,10 +109,6 @@
         7
       ],
       [
-        "agent-metadata-action",
-        5
-      ],
-      [
         "agent-requested-focus",
         3
       ],
@@ -117,11 +117,19 @@
         3
       ],
       [
+        "agent-ichiban-action",
+        3
+      ],
+      [
         "agent-animation-category-split",
         3
       ],
       [
         "agent-animation-keyword-review",
+        3
+      ],
+      [
+        "agent-metadata-action",
         3
       ],
       [
@@ -138,10 +146,6 @@
       ],
       [
         "agent-animation-category-action",
-        1
-      ],
-      [
-        "agent-ichiban-action",
         1
       ]
     ],
@@ -6784,6 +6788,37 @@
       "next_machine_step": "manual_review"
     },
     {
+      "batch_id": "020-agent-ichiban-action-120",
+      "agent_id": "agent-ichiban-action",
+      "workstream": "ichiban_kuji_metadata_action_work_order",
+      "priority": 20,
+      "title": "Ichiban Kuji metadata work order: confirm_release_dates",
+      "public_report": "data/ichiban_kuji_metadata_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "Confirm labeled campaign release or sales-start dates first.",
+      "acceptance_criteria": [
+        "Use only labeled official 1kuji campaign metadata or captured official evidence.",
+        "Fill the manual confirmation queue before running the guarded import tool.",
+        "Keep auto-apply disabled for historical campaign metadata."
+      ],
+      "sample_items": [
+        {
+          "slug": "jujutsu-o",
+          "title": "一番くじ 呪術廻戦 －オンライン－",
+          "url": "https://1kuji.com/products/jujutsu-o",
+          "catalog_item_rows": 8
+        },
+        {
+          "slug": "myhero_o5",
+          "title": "一番くじ 僕のヴィランアカデミア",
+          "url": "https://1kuji.com/products/myhero_o5",
+          "catalog_item_rows": 8
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
       "batch_id": "020-agent-image-action-45",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
@@ -6944,7 +6979,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "022-agent-animation-category-action-132",
+      "batch_id": "022-agent-animation-category-action-134",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -7781,7 +7816,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "026-agent-animation-category-split-133",
+      "batch_id": "026-agent-animation-category-split-135",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 26,
@@ -8871,7 +8906,7 @@
       "next_machine_step": "confirm_animation_category_name_split_templates"
     },
     {
-      "batch_id": "027-agent-animation-category-split-134",
+      "batch_id": "027-agent-animation-category-split-136",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 27,
@@ -13409,7 +13444,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-animation-category-split-135",
+      "batch_id": "028-agent-animation-category-split-137",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 28,
@@ -13680,6 +13715,55 @@
       ],
       "review_state": "manual_review_required",
       "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "030-agent-ichiban-action-121",
+      "agent_id": "agent-ichiban-action",
+      "workstream": "ichiban_kuji_metadata_action_work_order",
+      "priority": 30,
+      "title": "Ichiban Kuji metadata work order: confirm_draw_prices",
+      "public_report": "data/ichiban_kuji_metadata_action_queue_public.json",
+      "rows": 42,
+      "recommended_action": "Confirm labeled draw price or price-per-try after release dates.",
+      "acceptance_criteria": [
+        "Use only labeled official 1kuji campaign metadata or captured official evidence.",
+        "Fill the manual confirmation queue before running the guarded import tool.",
+        "Keep auto-apply disabled for historical campaign metadata."
+      ],
+      "sample_items": [
+        {
+          "slug": "10",
+          "title": "一番くじドラゴンボールＺ限界突破編",
+          "url": "https://1kuji.com/products/10",
+          "catalog_item_rows": 7
+        },
+        {
+          "slug": "38",
+          "title": "一番くじ機動戦士ガンダム00",
+          "url": "https://1kuji.com/products/38",
+          "catalog_item_rows": 7
+        },
+        {
+          "slug": "49",
+          "title": "一番くじテレビアニメ「ワンピース」",
+          "url": "https://1kuji.com/products/49",
+          "catalog_item_rows": 8
+        },
+        {
+          "slug": "53",
+          "title": "一番くじドラゴンボール 摩訶不思議アドベンチャー編",
+          "url": "https://1kuji.com/products/53",
+          "catalog_item_rows": 7
+        },
+        {
+          "slug": "64",
+          "title": "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～",
+          "url": "https://1kuji.com/products/64",
+          "catalog_item_rows": 7
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "030-agent-source-discovery-73",
@@ -16874,7 +16958,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "034-agent-animation-keyword-review-136",
+      "batch_id": "034-agent-animation-keyword-review-138",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 34,
@@ -17486,7 +17570,7 @@
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "035-agent-animation-keyword-review-137",
+      "batch_id": "035-agent-animation-keyword-review-139",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 35,
@@ -17725,7 +17809,7 @@
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "036-agent-animation-keyword-review-138",
+      "batch_id": "036-agent-animation-keyword-review-140",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 36,
@@ -18309,7 +18393,7 @@
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "038-agent-ichiban-action-120",
+      "batch_id": "038-agent-ichiban-action-122",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -20428,204 +20512,6 @@
           "category": "마스코트",
           "source_store": null,
           "source_url": "https://nagano-market.jp/ko",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates"
-    },
-    {
-      "batch_id": "045-agent-metadata-action-87",
-      "agent_id": "agent-metadata-action",
-      "workstream": "metadata_action_queue",
-      "priority": 45,
-      "title": "Metadata action metadata-action-003",
-      "public_report": "data/catalog_metadata_action_queue_public.json",
-      "rows": 118,
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "acceptance_criteria": [
-        "Only release_date, official_price_jpy, and name_ja groups are included here.",
-        "Every value requires official or trusted evidence before import.",
-        "Barcode, source_url, and image_url remain in their dedicated queues."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2279,
-          "name_ko": "TWICE 공식 응원봉 (CANDY BONG Z)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "응원봉",
-          "source_store": null,
-          "source_url": "https://www.ktown4u.com/iteminfo?goods_no=77186",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2280,
-          "name_ko": "TWICE 포토카드 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "포토카드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2281,
-          "name_ko": "TWICE 앨범",
-          "name_ja": null,
-          "series_name": null,
-          "category": "앨범",
-          "source_store": null,
-          "source_url": "https://www.ktown4u.com/iteminfo?goods_no=147484",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2282,
-          "name_ko": "TWICE 슬로건",
-          "name_ja": null,
-          "series_name": null,
-          "category": "슬로건",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2292,
-          "name_ko": "ITZY 응원봉",
-          "name_ja": null,
-          "series_name": null,
-          "category": "응원봉",
-          "source_store": null,
-          "source_url": "https://www.ktown4u.com/iteminfo?goods_no=132282",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2293,
-          "name_ko": "ITZY 포토카드 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "포토카드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2294,
-          "name_ko": "ITZY 앨범",
-          "name_ja": null,
-          "series_name": null,
-          "category": "앨범",
-          "source_store": null,
-          "source_url": "https://www.ktown4u.com/iteminfo?goods_no=123742",
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 2295,
-          "name_ko": "Stray Kids 응원봉 (NACHIMBONG)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "응원봉",
-          "source_store": null,
-          "source_url": "https://www.ktown4u.com/iteminfo?goods_no=128768",
-          "official_search_url": null
-        }
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates"
-    },
-    {
-      "batch_id": "045-agent-metadata-action-88",
-      "agent_id": "agent-metadata-action",
-      "workstream": "metadata_action_queue",
-      "priority": 45,
-      "title": "Metadata action metadata-action-004",
-      "public_report": "data/catalog_metadata_action_queue_public.json",
-      "rows": 51,
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "acceptance_criteria": [
-        "Only release_date, official_price_jpy, and name_ja groups are included here.",
-        "Every value requires official or trusted evidence before import.",
-        "Barcode, source_url, and image_url remain in their dedicated queues."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 987,
-          "name_ko": "치이카와 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "ちいかわ × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": "中国限定",
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 988,
-          "name_ko": "하치와레 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "ハチワレ × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": "中国限定",
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 989,
-          "name_ko": "우사기 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "うさぎ × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": "中国限定",
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 990,
-          "name_ko": "치이카와 x 미니소 블라인드 박스 (중국 콜라보)",
-          "name_ja": "ちいかわ × MINISO ブラインドボックス (中国コラボ)",
-          "series_name": "中国限定",
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 991,
-          "name_ko": "치이카와 x 미니소 아크릴 키링 (중국 콜라보)",
-          "name_ja": "ちいかわ × MINISO アクリルキーホルダー (中国コラボ)",
-          "series_name": "中国限定",
-          "category": "아크릴 키링",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 992,
-          "name_ko": "모몽가 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "モモンガ × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": "中国限定",
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 993,
-          "name_ko": "쿠리만쥬 x 미니소 봉제인형 (중국 콜라보)",
-          "name_ja": "くりまんじゅう × MINISO ぬいぐるみ (中国コラボ)",
-          "series_name": "中国限定",
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": null
-        },
-        {
-          "catalog_index": 1091,
-          "name_ko": "산리오 봉제 인형 (헬로키티)",
-          "name_ja": "サンリオ ぬいぐるみ (ハローキティ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": "https://www.sanrio.co.jp/character/",
           "official_search_url": null
         }
       ],

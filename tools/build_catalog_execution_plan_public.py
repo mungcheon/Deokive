@@ -674,6 +674,8 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "queued_catalog_item_rows": _count(kuji_action_summary, "queued_catalog_item_rows"),
                 "action_batch_count": _count(kuji_action_summary, "action_batch_count"),
                 "field_patch_template_counts": kuji_action_summary.get("field_patch_template_counts", []),
+                "work_order_steps": _count(kuji_action_summary, "work_order_steps"),
+                "work_order_lanes": kuji_action_summary.get("work_order_lanes", []),
             },
         )
     )

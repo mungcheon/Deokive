@@ -171,6 +171,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "queued_catalog_item_rows": 8,
                     "action_batch_count": 1,
                     "field_patch_template_counts": [["release_date", 1]],
+                    "work_order_steps": 1,
+                    "work_order_lanes": ["confirm_release_dates"],
                 }
             },
             "ichiban_kuji_prize_name_image_review_public.json": {
@@ -390,6 +392,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(kuji_action["rows"], 1)
         self.assertEqual(kuji_action["evidence"]["queued_catalog_item_rows"], 8)
+        self.assertEqual(kuji_action["evidence"]["work_order_steps"], 1)
+        self.assertEqual(kuji_action["evidence"]["work_order_lanes"], ["confirm_release_dates"])
         kuji_name_image = next(
             action
             for action in report["actions"]
