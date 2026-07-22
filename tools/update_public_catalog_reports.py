@@ -1696,7 +1696,9 @@ def build_operations_public(
             "queued_categories": animation_action_queue_summary.get("queued_categories", 0),
             "queued_catalog_rows": animation_action_queue_summary.get("queued_catalog_rows", 0),
             "action_batch_count": animation_action_queue_summary.get("action_batch_count", 0),
-            "recommended_next_action": "Confirm category mapping templates before catalog or folder mutation.",
+            "split_review_categories": animation_action_queue_summary.get("split_review_categories", 0),
+            "direct_mapping_categories": animation_action_queue_summary.get("direct_mapping_categories", 0),
+            "recommended_next_action": "Split broad animation categories before confirming direct category-to-folder mappings.",
         } if animation_action_queue_summary else None,
     ]
     next_actions = [item for item in next_actions if item is not None]
@@ -1877,6 +1879,8 @@ def build_operations_public(
             "workstream": "animation_category_action_queue",
             "status": "manual_review" if animation_action_queue_summary.get("queued_catalog_rows", 0) else "clear",
             "open_rows": animation_action_queue_summary.get("queued_catalog_rows", 0),
+            "split_review_categories": animation_action_queue_summary.get("split_review_categories", 0),
+            "direct_mapping_categories": animation_action_queue_summary.get("direct_mapping_categories", 0),
             "primary_report": f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}",
             "next_step": "fill_confirmed_animation_category_mapping_templates",
             "auto_apply_enabled": animation_action_queue_summary.get("auto_apply_enabled", False),
@@ -1933,6 +1937,12 @@ def build_operations_public(
     if animation_action_queue_summary:
         open_review_queues["animation_category_action_rows"] = animation_action_queue_summary.get(
             "queued_catalog_rows", 0
+        )
+        open_review_queues["animation_category_split_review_categories"] = animation_action_queue_summary.get(
+            "split_review_categories", 0
+        )
+        open_review_queues["animation_category_direct_mapping_categories"] = animation_action_queue_summary.get(
+            "direct_mapping_categories", 0
         )
 
     return {
@@ -2636,6 +2646,11 @@ def build_agent_work_queue_public(
 
     animation_action_batches = [batch for batch in animation_action_queue.get("batches", []) if isinstance(batch, dict)]
     for action_index, action_batch in enumerate(animation_action_batches[:4]):
+        mapping_mode_counts = Counter(
+            str(row.get("mapping_mode") or "unknown")
+            for row in action_batch.get("categories", [])
+            if isinstance(row, dict)
+        )
         add_batch(
             agent_id="agent-animation-category-action",
             workstream="animation_category_action_queue",
@@ -2643,13 +2658,20 @@ def build_agent_work_queue_public(
             title=f"애니메이션 카테고리 매핑 템플릿 확인: {action_batch.get('batch_id')}",
             public_report=ANIMATION_CATEGORY_ACTION_QUEUE,
             rows=int(action_batch.get("affected_catalog_rows") or 0),
-            recommended_action="Confirm source category to folder/category mapping templates before catalog mutation.",
+            recommended_action=(
+                "Split name-level review categories first, then confirm direct category-to-folder mapping templates."
+            ),
             acceptance_criteria=[
                 "Each category_mapping_template remains manual_confirmed=false until sample names are reviewed.",
                 "Broad source categories are split before one folder mapping is applied.",
                 "Folder color and icon keys already exist in app visual catalogs.",
             ],
             samples=[row for row in action_batch.get("categories", []) if isinstance(row, dict)],
+            review_summary={
+                "split_review_categories": mapping_mode_counts.get("name_level_split_review_required", 0),
+                "direct_mapping_categories": mapping_mode_counts.get("direct_category_mapping_review", 0),
+                "category_count": int(action_batch.get("category_count") or 0),
+            },
         )
 
     review_batches = [batch for batch in animation_review_batches.get("batches", []) if isinstance(batch, dict)]
@@ -3692,6 +3714,12 @@ def validate_report_consistency(
     animation_action_summary = animation_action_queue.get("summary", {})
     if animation_action_summary:
         expected_open_queues["animation_category_action_rows"] = animation_action_summary.get("queued_catalog_rows", 0)
+        expected_open_queues["animation_category_split_review_categories"] = animation_action_summary.get(
+            "split_review_categories", 0
+        )
+        expected_open_queues["animation_category_direct_mapping_categories"] = animation_action_summary.get(
+            "direct_mapping_categories", 0
+        )
     if open_queues != expected_open_queues:
         findings.append("operations.open_review_queues does not match source report summaries")
     taxonomy_review_queue = animation_categories.get("taxonomy_review_queue", [])

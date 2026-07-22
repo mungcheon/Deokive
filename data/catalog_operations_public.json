@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T00:31:27Z",
+  "generated_at": "2026-07-22T00:43:19Z",
   "summary": {
     "catalog_rows": 18040,
     "coverage": {
@@ -37,7 +37,9 @@
       "ichiban_metadata_action_campaigns": 32,
       "metadata_action_missing_cells": 1362,
       "animation_category_review_rows": 428,
-      "animation_category_action_rows": 428
+      "animation_category_action_rows": 428,
+      "animation_category_split_review_categories": 3,
+      "animation_category_direct_mapping_categories": 5
     },
     "top_store_priority_score": 1832.0
   },
@@ -246,6 +248,8 @@
       "workstream": "animation_category_action_queue",
       "status": "manual_review",
       "open_rows": 428,
+      "split_review_categories": 3,
+      "direct_mapping_categories": 5,
       "primary_report": "data/animation_category_action_queue_public.json",
       "next_step": "fill_confirmed_animation_category_mapping_templates",
       "auto_apply_enabled": false
@@ -1076,7 +1080,9 @@
       "queued_categories": 8,
       "queued_catalog_rows": 428,
       "action_batch_count": 2,
-      "recommended_next_action": "Confirm category mapping templates before catalog or folder mutation."
+      "split_review_categories": 3,
+      "direct_mapping_categories": 5,
+      "recommended_next_action": "Split broad animation categories before confirming direct category-to-folder mappings."
     }
   ],
   "automation_policy": {

@@ -164,6 +164,21 @@ class PublicCatalogReportTests(unittest.TestCase):
         readiness_summary = confirmed_readiness.get("summary", {})
         animation_action = reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)
         animation_action_summary = animation_action.get("summary", {})
+        animation_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "animation_category_action_queue"
+        )
+        animation_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "animation_category_action_queue"
+        )
+        animation_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "animation_category_action_queue"
+        ]
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
@@ -178,6 +193,29 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             open_queues.get("animation_category_action_rows"),
             animation_action_summary.get("queued_catalog_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("animation_category_split_review_categories"),
+            animation_action_summary.get("split_review_categories"),
+        )
+        self.assertEqual(
+            open_queues.get("animation_category_direct_mapping_categories"),
+            animation_action_summary.get("direct_mapping_categories"),
+        )
+        self.assertEqual(
+            animation_scorecard.get("split_review_categories"),
+            animation_action_summary.get("split_review_categories"),
+        )
+        self.assertEqual(
+            animation_next_action.get("direct_mapping_categories"),
+            animation_action_summary.get("direct_mapping_categories"),
+        )
+        self.assertGreater(len(animation_agent_batches), 0)
+        self.assertTrue(
+            all(
+                "split_review_categories" in batch.get("review_summary", {})
+                for batch in animation_agent_batches
+            )
         )
 
 
