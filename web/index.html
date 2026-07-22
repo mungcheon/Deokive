@@ -16,10 +16,10 @@
   <meta property="og:title" content="Deokive">
   <meta property="og:description" content="덕질 컬렉션을 기록하고 정리하는 덕카이브">
   <meta property="og:type" content="website">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png?v=20260623b">
-  <link rel="icon" type="image/png" href="favicon.png?v=20260623b">
-  <link rel="shortcut icon" type="image/png" href="favicon.png?v=20260623b">
-  <link rel="manifest" href="manifest.json?v=20260623b">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png?v=20260722b">
+  <link rel="icon" type="image/png" href="favicon.png?v=20260722b">
+  <link rel="shortcut icon" type="image/png" href="favicon.png?v=20260722b">
+  <link rel="manifest" href="manifest.json?v=20260722b">
   <title>Deokive</title>
 
   <style>
@@ -59,7 +59,7 @@
       border: 1px solid rgba(29, 27, 32, 0.08);
       border-radius: 34px;
       box-shadow: 0 24px 70px rgba(91, 55, 73, 0.14);
-      background: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(18px);
       display: flex;
       flex-direction: column;
@@ -115,13 +115,13 @@
       border-radius: 999px;
       background: #1d1b20;
       color: #fff;
-      font-size: 13px;
+      font-size: clamp(11px, 3vw, 13px);
       font-weight: 700;
-      line-height: 1.35;
+      line-height: 1.2;
       text-align: center;
-      white-space: normal;
-      word-break: keep-all;
-      overflow-wrap: anywhere;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       box-sizing: border-box;
     }
 
@@ -157,7 +157,7 @@
       font-size: 13px;
       line-height: 1.55;
       word-break: keep-all;
-      overflow-wrap: anywhere;
+      overflow-wrap: break-word;
       box-sizing: border-box;
     }
 
@@ -221,7 +221,7 @@
       if (window.deokiveHoldLoadingScreen) return;
       const note = document.getElementById('app-loading-note');
       if (!note) return;
-      note.textContent = '로딩이 길어지고 있어요. 1분 뒤에도 그대로면 새로고침해 주세요.';
+      note.textContent = '로딩이 길어지고 있어요. 1분이 지나도 그대로면 새로고침해 주세요.';
     }, 45000);
 
     async function deokiveLoadSiteStatus() {
@@ -257,7 +257,7 @@
           title: '곧 업데이트가 시작돼요',
           body: '1분 뒤 업데이트를 시작하오니 작업 중이라면 종료 부탁드려요.',
           eta: status.eta || '업데이트 시작 1분 전',
-          note: status.message || '잠시 후 새 버전으로 교체됩니다.',
+          note: status.message || '잠시 뒤 새 버전으로 교체됩니다.',
         });
         return;
       }
@@ -265,7 +265,7 @@
         window.deokiveHoldLoadingScreen = true;
         deokiveSetLoadingCopy({
           title: '지금 업데이트 중이에요',
-          body: '새 DB를 반영하고 있어요.<br>잠시 뒤 다시 접속해 주세요.',
+          body: '앱과 DB를 반영하고 있어요.<br>잠시 뒤 다시 접속해 주세요.',
           eta: status.eta || '예상 업데이트 시간 5-15분',
           note: status.message || 'GitHub Pages 반영이 끝나면 다시 열립니다.',
         });
@@ -296,7 +296,7 @@
         return;
       }
 
-      navigator.serviceWorker.register('deokive_service_worker.js?v=20260722-statusfix1');
+      navigator.serviceWorker.register('deokive_service_worker.js?v=20260722-statusfix2');
     });
   </script>
 </body>
