@@ -92,6 +92,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             operations.get("summary", {}).get("open_review_queues"),
         )
 
+    def test_public_meta_counts_match_catalog(self):
+        catalog = reports.load_json(reports.PUBLIC_CATALOG)
+        public_meta = reports.load_json(reports.PUBLIC_META)
+        rows = len(catalog.get("items", []))
+
+        self.assertEqual(public_meta.get("row_count"), rows)
+        self.assertEqual(public_meta.get("total_items"), rows)
+        self.assertEqual(public_meta.get("generated_at"), catalog.get("meta", {}).get("generated_at"))
+
     def test_published_reports_keep_manual_review_guards(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         source_discovery = reports.load_json(reports.SOURCE_DISCOVERY)

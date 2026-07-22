@@ -19,6 +19,58 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Publish 1-minute update notice
+        run: |
+          git config user.name "deokive-catalog-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          Path("data/site_status_public.json").write_text(
+              json.dumps(
+                  {
+                      "mode": "notice",
+                      "message": "작업 중이면 종료 부탁드려요.",
+                      "eta": "업데이트 시작 전 안내",
+                  },
+                  ensure_ascii=False,
+                  indent=2,
+              )
+              + "\n",
+              encoding="utf-8",
+          )
+          PY
+          git add data/site_status_public.json
+          if git diff --cached --quiet; then
+            echo "Update notice already published."
+          else
+            git commit -m "chore: announce public catalog update"
+            git push
+          fi
+          sleep 60
+
+      - name: Mark site updating
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          Path("data/site_status_public.json").write_text(
+              json.dumps(
+                  {
+                      "mode": "updating",
+                      "message": "새 공개 DB를 반영하고 있어요.",
+                      "eta": "예상 업데이트 시간 5-15분",
+                  },
+                  ensure_ascii=False,
+                  indent=2,
+              )
+              + "\n",
+              encoding="utf-8",
+          )
+          PY
+
       - name: Build public review batches
         run: |
           python tools/build_source_discovery_review_batches_public.py
@@ -50,6 +102,7 @@ jobs:
           git config user.name "deokive-catalog-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add \
+            data/site_status_public.json \
             data/catalog_public_meta.json \
             data/catalog_quality_public.json \
             data/catalog_image_backlog_public.json \
@@ -84,5 +137,28 @@ jobs:
             echo "No public catalog report changes."
           else
             git commit -m "chore: refresh public catalog reports"
+            git push
+          fi
+
+      - name: Reopen public site
+        if: always()
+        run: |
+          git config user.name "deokive-catalog-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          Path("data/site_status_public.json").write_text(
+              json.dumps({"mode": "normal", "message": "", "eta": ""}, ensure_ascii=False, indent=2)
+              + "\n",
+              encoding="utf-8",
+          )
+          PY
+          git add data/site_status_public.json
+          if git diff --cached --quiet; then
+            echo "Public site status already normal."
+          else
+            git commit -m "chore: reopen public site"
             git push
           fi

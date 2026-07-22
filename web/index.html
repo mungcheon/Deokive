@@ -70,7 +70,7 @@
     }
 
     .app-loading__phone {
-      width: min(390px, 100%);
+      width: min(410px, 100%);
       min-height: 560px;
       border: 1px solid rgba(29, 27, 32, 0.08);
       border-radius: 34px;
@@ -83,7 +83,7 @@
       align-items: center;
       gap: 18px;
       text-align: center;
-      padding: 34px 30px;
+      padding: 34px 24px;
       box-sizing: border-box;
     }
 
@@ -107,7 +107,7 @@
       font-size: 26px;
       line-height: 1.2;
       letter-spacing: 0;
-      max-width: 300px;
+      max-width: 320px;
       word-break: keep-all;
     }
 
@@ -117,7 +117,8 @@
       font-size: 15px;
       line-height: 1.65;
       word-break: keep-all;
-      overflow-wrap: normal;
+      overflow-wrap: break-word;
+      max-width: 320px;
     }
 
     .app-loading__bar {
@@ -139,7 +140,7 @@
     }
 
     .app-loading__note {
-      max-width: 300px;
+      max-width: 320px;
       padding: 12px 14px;
       border-radius: 18px;
       background: #fff5f9;
@@ -147,6 +148,8 @@
       color: #7a4058;
       font-size: 13px;
       line-height: 1.55;
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
     .app-loading__eta {
@@ -165,7 +168,7 @@
       min-height: 32px;
       text-align: center;
       line-height: 1.35;
-      white-space: normal;
+      white-space: nowrap;
       word-break: keep-all;
     }
 
@@ -275,9 +278,9 @@
         window.deokiveHoldLoadingScreen = true;
         deokiveSetLoadingCopy({
           title: '곧 업데이트가 시작돼요',
-          body: '1분 뒤 업데이트를 시작합니다.<br>작업 중이면 종료 부탁드려요.',
+          body: '1분 뒤 업데이트를 시작합니다.',
           eta: '업데이트 시작 전 안내',
-          note: status.message || '잠시 후 새 버전으로 교체됩니다.',
+          note: status.message || '작업 중이면 종료 부탁드려요.',
         });
         return;
       }

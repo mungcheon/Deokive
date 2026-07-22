@@ -4477,12 +4477,14 @@ def update_reports(write: bool) -> dict[str, Any]:
     if execution_plan["summary"].get("open_review_queues") != operations["summary"]["open_review_queues"]:
         raise ValueError("execution plan open queues do not match operations open queues")
 
+    catalog_generated_at = catalog.get("meta", {}).get("generated_at") or generated_at
     public_meta = load_json(PUBLIC_META, {})
     public_meta.update(
         {
             "schema_version": public_meta.get("schema_version", 1),
-            "generated_at": public_meta.get("generated_at") or catalog.get("meta", {}).get("generated_at"),
+            "generated_at": catalog_generated_at,
             "row_count": rows,
+            "total_items": rows,
             "fields": PUBLIC_FIELDS,
             "missing": missing,
             "privacy": {
