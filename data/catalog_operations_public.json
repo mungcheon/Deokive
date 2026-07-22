@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T05:10:18Z",
+  "generated_at": "2026-07-22T05:26:52Z",
   "summary": {
-    "catalog_rows": 18040,
+    "catalog_rows": 17875,
     "coverage": {
-      "source_url": 0.9641,
-      "image_url": 0.9601,
-      "release_date": 0.9215
+      "source_url": 0.9638,
+      "image_url": 0.9597,
+      "release_date": 0.9212
     },
     "missing": {
       "source_url": 647,
       "image_url": 720,
-      "release_date": 1416,
-      "official_price_jpy": 584,
-      "barcode": 7744,
+      "release_date": 1408,
+      "official_price_jpy": 569,
+      "barcode": 7579,
       "name_ja": 529
     },
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
-      "dedupe_groups": 109,
+      "dedupe_groups": 105,
       "animation_unknown_categories": 3,
-      "ichiban_missing_release_date_rows": 16,
-      "ichiban_missing_price_rows": 365,
+      "ichiban_missing_release_date_rows": 8,
+      "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 5717,
+      "requested_focus_open_rows": 5552,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1147,
       "confirmed_import_action_queue_rows": 14136,
@@ -47,10 +47,10 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 2529,
+      "metadata_action_missing_cells": 2506,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2529,
+      "metadata_actionable_missing_cells": 2506,
       "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 374,
       "animation_category_action_rows": 374,
@@ -63,19 +63,19 @@
     {
       "key": "source_url_coverage",
       "status": "pass",
-      "value": 0.9641,
+      "value": 0.9638,
       "target": 0.95
     },
     {
       "key": "image_url_coverage",
       "status": "pass",
-      "value": 0.9601,
+      "value": 0.9597,
       "target": 0.95
     },
     {
       "key": "release_date_coverage",
       "status": "pass",
-      "value": 0.9215,
+      "value": 0.9212,
       "target": 0.9
     },
     {
@@ -87,7 +87,7 @@
     {
       "key": "manual_dedupe_backlog",
       "status": "warn",
-      "value": 109,
+      "value": 105,
       "target": 0
     }
   ],
@@ -95,7 +95,7 @@
     {
       "workstream": "requested_focus_enrichment",
       "status": "open",
-      "open_rows": 5717,
+      "open_rows": 5552,
       "primary_report": "data/requested_focus_enrichment_public.json",
       "next_step": "work_user_requested_focus_topics_first",
       "auto_apply_enabled": false
@@ -403,7 +403,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 11640,
+      "open_rows": 11452,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -411,7 +411,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 11640,
+      "open_rows": 11452,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -419,10 +419,10 @@
     {
       "workstream": "metadata_action_queue",
       "status": "manual_review",
-      "open_rows": 2529,
+      "open_rows": 2506,
       "actionable_group_count": 166,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2529,
+      "actionable_missing_cells": 2506,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -431,11 +431,11 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1416
+          1408
         ],
         [
           "official_price_jpy",
-          584
+          569
         ],
         [
           "name_ja",
@@ -445,7 +445,7 @@
       "missing_cells_by_source_store": [
         [
           "이치방쿠지",
-          382
+          359
         ],
         [
           "Stellive Store",
@@ -608,7 +608,7 @@
         {
           "field": "official_price_jpy",
           "source_store": "이치방쿠지",
-          "missing_rows": 365,
+          "missing_rows": 350,
           "priority": 20,
           "workflow": "official_metadata_review",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
@@ -771,7 +771,7 @@
     {
       "workstream": "deduplication",
       "status": "manual_review",
-      "open_rows": 109,
+      "open_rows": 105,
       "primary_report": "data/catalog_deduplication_public.json",
       "next_step": "review_risk_ranked_duplicate_groups",
       "auto_apply_enabled": false
@@ -798,7 +798,7 @@
     {
       "workstream": "ichiban_kuji_history",
       "status": "open",
-      "open_rows": 44,
+      "open_rows": 42,
       "primary_report": "data/ichiban_kuji_history_public.json",
       "next_step": "verify_campaign_metadata_review_queue",
       "auto_apply_enabled": false
@@ -834,7 +834,7 @@
     {
       "workstream": "animation_taxonomy",
       "status": "manual_review",
-      "open_rows": 374,
+      "open_rows": 331,
       "primary_report": "data/animation_goods_categories_public.json",
       "next_step": "review_taxonomy_folder_visual_tokens",
       "app_folder_color_count": 188,
@@ -932,17 +932,6 @@
       "recommended_first_action": "source_and_image_enrichment"
     },
     {
-      "source_store": "이치방쿠지",
-      "priority_score": 497.0,
-      "rows": 5546,
-      "missing_source_url": 0,
-      "missing_image_url": 0,
-      "missing_release_date": 16,
-      "missing_price_jpy": 365,
-      "missing_barcode": 5546,
-      "recommended_first_action": "release_date_enrichment"
-    },
-    {
       "source_store": "Movic",
       "priority_score": 494.0,
       "rows": 84,
@@ -952,6 +941,17 @@
       "missing_price_jpy": 1,
       "missing_barcode": 42,
       "recommended_first_action": "source_and_image_enrichment"
+    },
+    {
+      "source_store": "이치방쿠지",
+      "priority_score": 466.0,
+      "rows": 5381,
+      "missing_source_url": 0,
+      "missing_image_url": 0,
+      "missing_release_date": 8,
+      "missing_price_jpy": 350,
+      "missing_barcode": 5381,
+      "recommended_first_action": "release_date_enrichment"
     },
     {
       "source_store": "FuRyu",
@@ -1447,7 +1447,7 @@
       "priority": 10,
       "workstream": "requested_focus_enrichment",
       "public_report": "data/requested_focus_enrichment_public.json",
-      "open_rows": 5717,
+      "open_rows": 5552,
       "topics_with_open_work": 4,
       "recommended_next_action": "Prioritize user-requested focus topics before broad catalog enrichment."
     },
@@ -1819,7 +1819,7 @@
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
       "field_store_group_count": 351,
-      "missing_cell_count": 11640,
+      "missing_cell_count": 11452,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
@@ -1829,8 +1829,8 @@
       "actionable_group_count": 166,
       "queued_group_count": 166,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2529,
-      "queued_missing_cells": 2529,
+      "actionable_missing_cells": 2506,
+      "queued_missing_cells": 2506,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -1838,11 +1838,11 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1416
+          1408
         ],
         [
           "official_price_jpy",
-          584
+          569
         ],
         [
           "name_ja",
@@ -1852,7 +1852,7 @@
       "missing_cells_by_source_store": [
         [
           "이치방쿠지",
-          382
+          359
         ],
         [
           "Stellive Store",
@@ -2015,7 +2015,7 @@
         {
           "field": "official_price_jpy",
           "source_store": "이치방쿠지",
-          "missing_rows": 365,
+          "missing_rows": 350,
           "priority": 20,
           "workflow": "official_metadata_review",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
@@ -2179,7 +2179,7 @@
       "priority": 40,
       "workstream": "deduplication_review",
       "public_report": "data/catalog_deduplication_public.json",
-      "review_groups": 109,
+      "review_groups": 105,
       "recommended_next_action": "Review duplicates manually; automatic deletion remains disabled."
     },
     {
@@ -2206,9 +2206,9 @@
       "priority": 50,
       "workstream": "ichiban_kuji_history",
       "public_report": "data/ichiban_kuji_history_public.json",
-      "campaign_metadata_review_queue_rows": 44,
-      "missing_release_date_campaign_groups": 2,
-      "missing_price_campaign_groups": 42,
+      "campaign_metadata_review_queue_rows": 42,
+      "missing_release_date_campaign_groups": 1,
+      "missing_price_campaign_groups": 41,
       "recommended_next_action": "Use campaign_metadata_review_queue to verify official pages before applying dates or prices."
     },
     {
@@ -2266,7 +2266,7 @@
       "workstream": "animation_folder_visuals",
       "public_report": "data/animation_goods_categories_public.json",
       "category_count": 27,
-      "unknown_category_rows": 374,
+      "unknown_category_rows": 331,
       "app_folder_color_count": 188,
       "app_folder_icon_option_count": 211,
       "app_folder_palette_sorted_by_family": true,

@@ -37,8 +37,140 @@
 
   <title>Deokive</title>
   <link rel="manifest" href="manifest.json?v=20260623b">
+  <style>
+    :root {
+      color-scheme: light;
+      --deokive-ink: #1d1b20;
+      --deokive-muted: #706a74;
+      --deokive-line: #ece7ee;
+      --deokive-pink: #f7c9d9;
+      --deokive-pink-strong: #e65f91;
+      --deokive-bg: #fffafd;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--deokive-bg);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+        "SF Pro Text", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+
+    .app-loading {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      box-sizing: border-box;
+      background:
+        radial-gradient(circle at 50% 14%, rgba(247, 201, 217, 0.42), transparent 34%),
+        linear-gradient(180deg, #fffafd 0%, #fff 64%);
+      color: var(--deokive-ink);
+    }
+
+    .app-loading__phone {
+      width: min(390px, 100%);
+      min-height: 560px;
+      border: 1px solid rgba(29, 27, 32, 0.08);
+      border-radius: 34px;
+      box-shadow: 0 24px 70px rgba(91, 55, 73, 0.14);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      text-align: center;
+      padding: 34px 30px;
+      box-sizing: border-box;
+    }
+
+    .app-loading__logo {
+      width: 76px;
+      height: 76px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1px solid var(--deokive-line);
+      box-shadow: 0 12px 28px rgba(230, 95, 145, 0.18);
+      color: var(--deokive-pink-strong);
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    .app-loading h1 {
+      margin: 8px 0 0;
+      font-size: 26px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .app-loading p {
+      margin: 0;
+      color: var(--deokive-muted);
+      font-size: 15px;
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+
+    .app-loading__bar {
+      width: 190px;
+      height: 6px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #f1edf2;
+    }
+
+    .app-loading__bar::before {
+      content: "";
+      display: block;
+      width: 42%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--deokive-pink-strong);
+      animation: deokive-loading 1.45s ease-in-out infinite;
+    }
+
+    .app-loading__note {
+      max-width: 300px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: #fff5f9;
+      border: 1px solid #f7d8e4;
+      color: #7a4058;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    @keyframes deokive-loading {
+      0% { transform: translateX(-115%); }
+      50% { transform: translateX(82%); }
+      100% { transform: translateX(245%); }
+    }
+  </style>
 </head>
 <body>
+  <div class="app-loading" id="app-loading" role="status" aria-live="polite">
+    <section class="app-loading__phone" aria-label="Deokive loading">
+      <div class="app-loading__logo">D</div>
+      <h1>덕카이브 업데이트 중</h1>
+      <p>
+        굿즈 데이터와 이미지를 새로 정리하고 있어요.<br>
+        보통 3분에서 10분 안에 다시 열립니다.
+      </p>
+      <div class="app-loading__bar" aria-hidden="true"></div>
+      <div class="app-loading__note" id="app-loading-note">
+        화면이 오래 멈춰 있으면 새로고침하거나 잠시 뒤 다시 접속해 주세요.
+      </div>
+    </section>
+  </div>
+
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader
@@ -49,6 +181,17 @@
   -->
   <script src="flutter_bootstrap.js" async></script>
   <script>
+    window.addEventListener('flutter-first-frame', function () {
+      const loading = document.getElementById('app-loading');
+      if (loading) loading.remove();
+    });
+
+    window.setTimeout(function () {
+      const note = document.getElementById('app-loading-note');
+      if (!note) return;
+      note.textContent = '업데이트가 길어지고 있어요. 캐시 정리 중일 수 있으니 1분 뒤 새로고침해 주세요.';
+    }, 45000);
+
     window.addEventListener('load', async function () {
       if (!('serviceWorker' in navigator)) return;
       const host = window.location.hostname;

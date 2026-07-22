@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T17:49:58Z",
+  "generated_at": "2026-07-22T05:26:52Z",
   "catalog_generated_at": "2026-07-21T15:58:17Z",
-  "row_count": 18040,
+  "row_count": 17875,
   "missing": {
     "source_url": 647,
     "image_url": 720,
-    "release_date": 1416,
-    "barcode": 7744,
+    "release_date": 1408,
+    "barcode": 7579,
     "series_name": 1809,
     "sub_series": 541,
-    "official_price_jpy": 584
+    "official_price_jpy": 569
   },
   "coverage": {
-    "source_url": 0.9641,
-    "image_url": 0.9601,
-    "release_date": 0.9215
+    "source_url": 0.9638,
+    "image_url": 0.9597,
+    "release_date": 0.9212
   },
   "dedupe": {
     "duplicate_catalog_index_count": 0,
@@ -2922,18 +2922,14 @@
   },
   "deduplication_review": {
     "public_report": "data/catalog_deduplication_public.json",
-    "rows": 18040,
-    "duplicate_groups": 109,
-    "duplicate_rows": 109,
+    "rows": 17875,
+    "duplicate_groups": 105,
+    "duplicate_rows": 105,
     "published_groups": 80,
     "by_key_type": [
       [
         "barcode",
         102
-      ],
-      [
-        "image_url",
-        4
       ],
       [
         "source_url",
@@ -2950,28 +2946,24 @@
         37
       ],
       [
-        "image_identity_review",
-        4
-      ],
-      [
         "source_identity_review",
         2
       ]
     ],
     "top_review_risk": "strong_identity_review",
     "source_url_exclusions": {
-      "shared_source_url_value_groups": 816,
-      "shared_source_url_value_rows": 6840,
+      "shared_source_url_value_groups": 801,
+      "shared_source_url_value_rows": 6674,
       "source_url_name_matched_review_groups": 6,
-      "excluded_shared_source_url_value_groups": 810
+      "excluded_shared_source_url_value_groups": 795
     }
   },
   "animation_category_review": {
     "public_report": "data/animation_goods_categories_public.json",
-    "animation_goods_rows": 2121,
+    "animation_goods_rows": 2060,
     "category_count": 27,
     "unknown_category_count": 3,
-    "unknown_category_rows": 374,
+    "unknown_category_rows": 331,
     "normalization_suggestion_count": 5,
     "missing_image_rows": 570,
     "missing_source_url_rows": 570,
@@ -2988,14 +2980,14 @@
   "ichiban_kuji_history": {
     "public_report": "data/ichiban_kuji_history_public.json",
     "campaign_rows": 614,
-    "catalog_kuji_item_rows": 5546,
-    "campaigns_with_catalog_items": 590,
-    "campaigns_without_catalog_items": 24,
-    "missing_release_date_rows": 16,
-    "missing_release_date_campaign_groups": 2,
-    "missing_official_price_jpy_rows": 365,
-    "missing_official_price_jpy_campaign_groups": 42,
-    "campaign_metadata_review_queue_rows": 44,
+    "catalog_kuji_item_rows": 5381,
+    "campaigns_with_catalog_items": 576,
+    "campaigns_without_catalog_items": 38,
+    "missing_release_date_rows": 8,
+    "missing_release_date_campaign_groups": 1,
+    "missing_official_price_jpy_rows": 350,
+    "missing_official_price_jpy_campaign_groups": 41,
+    "campaign_metadata_review_queue_rows": 42,
     "image_coverage": 1.0,
     "source_url_coverage": 1.0
   },
@@ -3011,16 +3003,16 @@
     ],
     "field_missing_totals": {
       "name_ja": 529,
-      "release_date": 1416,
-      "barcode": 7744,
-      "official_price_jpy": 584,
+      "release_date": 1408,
+      "barcode": 7579,
+      "official_price_jpy": 569,
       "source_url": 647,
       "image_url": 720
     },
     "store_rows_with_any_missing_metadata": [
       [
         "이치방쿠지",
-        5546
+        5381
       ],
       [
         "치이카와 온라인 쿠지",
@@ -3338,12 +3330,12 @@
     "public_report": "data/catalog_operations_public.json",
     "source_discovery_rows": 647,
     "image_missing_rows": 720,
-    "dedupe_groups": 109,
+    "dedupe_groups": 105,
     "animation_unknown_categories": 3,
-    "ichiban_missing_release_date_rows": 16,
-    "ichiban_missing_price_rows": 365,
+    "ichiban_missing_release_date_rows": 8,
+    "ichiban_missing_price_rows": 350,
     "generic_source_patch_candidate_rows": 3,
-    "requested_focus_open_rows": 5717,
+    "requested_focus_open_rows": 5552,
     "danganronpa_missing_media_rows": 34,
     "confirmed_import_template_rows": 1147,
     "confirmed_import_action_queue_rows": 14136,
@@ -3366,10 +3358,10 @@
     "ichiban_metadata_actionable_campaigns": 44,
     "ichiban_metadata_unqueued_action_campaigns": 0,
     "ichiban_metadata_queued_catalog_item_rows": 381,
-    "metadata_action_missing_cells": 2529,
+    "metadata_action_missing_cells": 2506,
     "metadata_actionable_groups": 166,
     "metadata_unqueued_actionable_groups": 0,
-    "metadata_actionable_missing_cells": 2529,
+    "metadata_actionable_missing_cells": 2506,
     "metadata_unqueued_actionable_missing_cells": 0,
     "animation_category_review_rows": 374,
     "animation_category_action_rows": 374,
@@ -3379,7 +3371,7 @@
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 80,
-    "summed_batch_rows": 22620,
+    "summed_batch_rows": 22455,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3492,12 +3484,12 @@
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
-      "dedupe_groups": 109,
+      "dedupe_groups": 105,
       "animation_unknown_categories": 3,
-      "ichiban_missing_release_date_rows": 16,
-      "ichiban_missing_price_rows": 365,
+      "ichiban_missing_release_date_rows": 8,
+      "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 5717,
+      "requested_focus_open_rows": 5552,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1147,
       "confirmed_import_action_queue_rows": 14136,
@@ -3520,10 +3512,10 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 2529,
+      "metadata_action_missing_cells": 2506,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2529,
+      "metadata_actionable_missing_cells": 2506,
       "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 374,
       "animation_category_action_rows": 374,
@@ -3563,14 +3555,14 @@
   "requested_focus_enrichment": {
     "public_report": "data/requested_focus_enrichment_public.json",
     "topic_count": 5,
-    "total_matched_catalog_rows": 5826,
+    "total_matched_catalog_rows": 5661,
     "total_requested_labels": 27,
     "topics_with_open_work": 4,
-    "open_rows": 5717,
+    "open_rows": 5552,
     "missing_image_rows": 34,
     "missing_source_url_rows": 34,
-    "missing_release_date_rows": 132,
-    "missing_official_price_jpy_rows": 398,
+    "missing_release_date_rows": 124,
+    "missing_official_price_jpy_rows": 383,
     "requested_needs_review": 1,
     "auto_apply_enabled": false
   },
@@ -4463,16 +4455,16 @@
     "blocked_action_count": 1,
     "manual_review_action_count": 13,
     "pending_import_action_count": 0,
-    "total_action_rows": 39710,
+    "total_action_rows": 39499,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
-      "dedupe_groups": 109,
+      "dedupe_groups": 105,
       "animation_unknown_categories": 3,
-      "ichiban_missing_release_date_rows": 16,
-      "ichiban_missing_price_rows": 365,
+      "ichiban_missing_release_date_rows": 8,
+      "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 5717,
+      "requested_focus_open_rows": 5552,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1147,
       "confirmed_import_action_queue_rows": 14136,
@@ -4495,10 +4487,10 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 2529,
+      "metadata_action_missing_cells": 2506,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2529,
+      "metadata_actionable_missing_cells": 2506,
       "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 374,
       "animation_category_action_rows": 374,
