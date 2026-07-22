@@ -459,11 +459,30 @@ class PublicCatalogReportTests(unittest.TestCase):
 
         batches = agent_queue.get("batches", [])
         top_batches = agent_queue.get("top_next_batches", [])
+        confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
         self.assertGreater(len(batches), 0)
         self.assertEqual(agent_queue["summary"]["top_next_batch_count"], len(top_batches))
         self.assertEqual(
             [batch["batch_id"] for batch in top_batches],
             [batch["batch_id"] for batch in batches[: len(top_batches)]],
+        )
+        self.assertEqual(
+            agent_queue["summary"]["confirmed_import_template_rows"],
+            confirmed_readiness["summary"]["template_items"],
+        )
+        self.assertEqual(
+            agent_queue["summary"]["confirmed_import_action_queue_rows"],
+            confirmed_readiness["summary"]["public_action_queue_rows"],
+        )
+        self.assertEqual(
+            agent_queue["summary"]["confirmed_import_manual_confirmed_ready_rows"],
+            confirmed_readiness["summary"]["manual_confirmed_true"],
+        )
+        self.assertEqual(
+            agent_queue["summary"]["confirmed_import_manual_confirmation_backlog_rows"],
+            confirmed_readiness["summary"]["template_items"]
+            + confirmed_readiness["summary"]["public_action_queue_rows"]
+            - confirmed_readiness["summary"]["manual_confirmed_true"],
         )
 
         scorecard_reports = {row.get("primary_report") for row in operations.get("workstream_scorecard", [])}
@@ -471,7 +490,6 @@ class PublicCatalogReportTests(unittest.TestCase):
         report_links = {row.get("public_report") for row in operations.get("reports", [])}
         open_queues = operations.get("summary", {}).get("open_review_queues", {})
         quality = reports.load_json(reports.QUALITY)
-        confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
         readiness_summary = confirmed_readiness.get("summary", {})
         requested_focus_action = reports.load_json(reports.REQUESTED_FOCUS_ACTION_QUEUE)
         requested_focus_action_summary = requested_focus_action.get("summary", {})

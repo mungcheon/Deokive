@@ -3994,6 +3994,12 @@ def build_agent_work_queue_public(
     published_batches = batches[:96]
     by_workstream = Counter(str(batch["workstream"]) for batch in published_batches)
     by_agent = Counter(str(batch["agent_id"]) for batch in published_batches)
+    confirmed_summary = confirmed_import_readiness.get("summary", {})
+    confirmed_template_rows = int(confirmed_summary.get("template_items") or 0)
+    confirmed_action_rows = int(confirmed_summary.get("public_action_queue_rows") or 0)
+    confirmed_ready_rows = int(confirmed_summary.get("manual_confirmed_true") or 0)
+    confirmed_pending_rows = int(confirmed_summary.get("ready_or_pending_import_rows") or 0)
+    confirmed_blocked_rows = int(confirmed_summary.get("blocked_confirmed_rows") or 0)
     top_next_batches = [
         {
             "batch_id": batch["batch_id"],
@@ -4019,6 +4025,15 @@ def build_agent_work_queue_public(
             "by_workstream": by_workstream.most_common(),
             "by_agent": by_agent.most_common(),
             "open_review_queues": operations["summary"]["open_review_queues"],
+            "confirmed_import_template_rows": confirmed_template_rows,
+            "confirmed_import_action_queue_rows": confirmed_action_rows,
+            "confirmed_import_manual_confirmed_ready_rows": confirmed_ready_rows,
+            "confirmed_import_pending_rows": confirmed_pending_rows,
+            "confirmed_import_blocked_confirmed_rows": confirmed_blocked_rows,
+            "confirmed_import_manual_confirmation_backlog_rows": max(
+                confirmed_template_rows + confirmed_action_rows - confirmed_ready_rows,
+                0,
+            ),
         },
         "top_next_batches": top_next_batches,
         "instructions": [
@@ -5306,6 +5321,21 @@ def validate_report_consistency(
         findings.append("agent_work_queue.by_workstream does not match published batches")
     if agent_summary.get("by_agent") != Counter(str(batch.get("agent_id") or "") for batch in batches).most_common():
         findings.append("agent_work_queue.by_agent does not match published batches")
+    confirmed_template_rows = int(confirmed_import_readiness_summary.get("template_items") or 0)
+    confirmed_action_rows = int(confirmed_import_readiness_summary.get("public_action_queue_rows") or 0)
+    confirmed_ready_rows = int(confirmed_import_readiness_summary.get("manual_confirmed_true") or 0)
+    expected_confirmation_backlog = max(confirmed_template_rows + confirmed_action_rows - confirmed_ready_rows, 0)
+    agent_confirmation_fields = {
+        "confirmed_import_template_rows": confirmed_template_rows,
+        "confirmed_import_action_queue_rows": confirmed_action_rows,
+        "confirmed_import_manual_confirmed_ready_rows": confirmed_ready_rows,
+        "confirmed_import_pending_rows": int(confirmed_import_readiness_summary.get("ready_or_pending_import_rows") or 0),
+        "confirmed_import_blocked_confirmed_rows": int(confirmed_import_readiness_summary.get("blocked_confirmed_rows") or 0),
+        "confirmed_import_manual_confirmation_backlog_rows": expected_confirmation_backlog,
+    }
+    for field, expected in agent_confirmation_fields.items():
+        if agent_summary.get(field) != expected:
+            findings.append(f"agent_work_queue.{field} does not match confirmed import readiness")
     batch_priorities = [int(batch.get("priority", 999)) for batch in batches]
     if batch_priorities != sorted(batch_priorities):
         findings.append("agent_work_queue.batches are not sorted by ascending priority")
