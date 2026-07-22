@@ -11,6 +11,7 @@ from typing import Any
 
 import audit_public_catalog_image_assets
 import build_image_source_url_confirmed_template_public
+import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
 import build_missing_image_priority_public
 import build_source_discovery_next_focus_pack_public
@@ -1562,6 +1563,7 @@ def build_operations_public(
     metadata_review_batches_override: dict[str, Any] | None = None,
     metadata_action_queue_override: dict[str, Any] | None = None,
     ichiban_prize_name_image_review_override: dict[str, Any] | None = None,
+    ichiban_prize_name_image_patch_candidates_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -1711,7 +1713,9 @@ def build_operations_public(
     )
     ichiban_kuji_prize_name_image_review_summary = ichiban_kuji_prize_name_image_review.get("summary", {})
     ichiban_kuji_prize_name_image_patch_candidates = (
-        load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, {})
+        ichiban_prize_name_image_patch_candidates_override
+        if ichiban_prize_name_image_patch_candidates_override is not None
+        else load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, {})
         if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.exists()
         else {}
     )
@@ -5319,6 +5323,12 @@ def update_reports(write: bool) -> dict[str, Any]:
         catalog,
         generated_at=generated_at,
     )
+    ichiban_kuji_prize_name_image_patch_candidates = (
+        build_ichiban_prize_name_image_patch_candidates_public.build_report(
+            ichiban_kuji_prize_name_image_review,
+            generated_at=generated_at,
+        )
+    )
     generic_source_patch_candidates = build_generic_source_patch_candidates_public(generated_at)
     requested_report = load_json(REQUESTED, {}) if REQUESTED.exists() else {}
     requested_focus = build_requested_focus_enrichment_public(items, requested_report, generated_at)
@@ -5354,6 +5364,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         metadata_review_batches,
         metadata_action_queue,
         ichiban_kuji_prize_name_image_review,
+        ichiban_kuji_prize_name_image_patch_candidates,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -5413,6 +5424,9 @@ def update_reports(write: bool) -> dict[str, Any]:
             "ichiban_kuji_metadata_review_batches_public.json": load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {}),
             "ichiban_kuji_metadata_action_queue_public.json": load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}),
             "ichiban_kuji_prize_name_image_review_public.json": ichiban_kuji_prize_name_image_review,
+            "ichiban_kuji_prize_name_image_patch_candidates_public.json": (
+                ichiban_kuji_prize_name_image_patch_candidates
+            ),
             "animation_category_review_batches_public.json": load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}),
             "animation_category_action_queue_public.json": load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}),
             "catalog_confirmed_import_readiness_public.json": load_json(CONFIRMED_IMPORT_READINESS, {}),
@@ -5794,6 +5808,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
         write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, ichiban_kuji_prize_name_image_review)
+        write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, ichiban_kuji_prize_name_image_patch_candidates)
         write_json(OPERATIONS_REPORT, operations)
         write_json(AGENT_WORK_QUEUE, agent_work_queue)
         write_json(EXECUTION_PLAN, execution_plan)
@@ -5872,6 +5887,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_FAST_REVIEW.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),
             str(AGENT_WORK_QUEUE.relative_to(ROOT)),

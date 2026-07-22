@@ -56,6 +56,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_policy_audit_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_name_image_review_public.json", updated_files)
+        self.assertIn("data/ichiban_kuji_prize_name_image_patch_candidates_public.json", updated_files)
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
         self.assertIn("data/animation_category_unmatched_keyword_review_public.json", updated_files)
         self.assertIn("data/source_detail_probe_public.json", updated_files)
