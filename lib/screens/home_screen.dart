@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../data/board_posts.dart';
 import '../l10n/app_strings.dart';
 import '../models/badge_item.dart';
+import '../models/goods_catalog_entry.dart';
 import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
 import '../utils/catalog_goods_importer.dart';
@@ -274,15 +275,11 @@ class _CatalogImportPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final entries = appState.curatedCatalogEntries;
+    final health = _CatalogHealthSummary.from(entries);
     final imageEntries = entries
         .where((entry) => (entry.imageUrl ?? '').trim().isNotEmpty)
         .take(4)
         .toList();
-    final categoryCount = {
-      for (final entry in entries)
-        if (entry.normalizedCategory.trim().isNotEmpty)
-          entry.normalizedCategory.trim(),
-    }.length;
 
     return Container(
       decoration: BoxDecoration(
@@ -340,40 +337,116 @@ class _CatalogImportPanel extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 14),
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               _CatalogMetricChip(
                 label: 'DB',
-                value: '${entries.length}',
+                value: '${health.totalCount}',
                 color: palette.primary,
               ),
-              const SizedBox(width: 8),
               _CatalogMetricChip(
                 label: '분류',
-                value: '$categoryCount',
+                value: '${health.categoryCount}',
                 color: palette.accent,
               ),
-              const Spacer(),
-              SizedBox(
-                width: 118,
-                height: 42,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    for (var i = 0; i < imageEntries.length; i++)
-                      Positioned(
-                        left: i * 25,
-                        child:
-                            _CatalogThumb(imageUrl: imageEntries[i].imageUrl),
-                      ),
-                  ],
-                ),
+              _CatalogMetricChip(
+                label: '이미지',
+                value: health.imageCoverageLabel,
+                color: const Color(0xFF4F8F7B),
+              ),
+              _CatalogMetricChip(
+                label: '출처',
+                value: health.sourceCoverageLabel,
+                color: const Color(0xFF7B6EC8),
+              ),
+              _CatalogMetricChip(
+                label: '중복후보',
+                value: '${health.duplicateBarcodeGroups}',
+                color: health.duplicateBarcodeGroups == 0
+                    ? const Color(0xFF4F8F7B)
+                    : const Color(0xFFD18A3B),
               ),
             ],
           ),
+          if (imageEntries.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            SizedBox(
+              height: 42,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  for (var i = 0; i < imageEntries.length; i++)
+                    Positioned(
+                      left: i * 25,
+                      child: _CatalogThumb(imageUrl: imageEntries[i].imageUrl),
+                    ),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );
+  }
+}
+
+class _CatalogHealthSummary {
+  final int totalCount;
+  final int categoryCount;
+  final int duplicateBarcodeGroups;
+  final double imageCoverage;
+  final double sourceCoverage;
+
+  const _CatalogHealthSummary({
+    required this.totalCount,
+    required this.categoryCount,
+    required this.duplicateBarcodeGroups,
+    required this.imageCoverage,
+    required this.sourceCoverage,
+  });
+
+  String get imageCoverageLabel => _formatCoverage(imageCoverage);
+  String get sourceCoverageLabel => _formatCoverage(sourceCoverage);
+
+  static _CatalogHealthSummary from(List<GoodsCatalogEntry> entries) {
+    final categories = <String>{};
+    final barcodeCounts = <String, int>{};
+    var imageCount = 0;
+    var sourceCount = 0;
+
+    for (final entry in entries) {
+      final category = entry.normalizedCategory.trim();
+      if (category.isNotEmpty) categories.add(category);
+
+      final barcode = entry.barcode?.trim() ?? '';
+      if (barcode.isNotEmpty) {
+        barcodeCounts[barcode] = (barcodeCounts[barcode] ?? 0) + 1;
+      }
+
+      if ((entry.imageUrl ?? '').trim().isNotEmpty) {
+        imageCount += 1;
+      }
+      if ((entry.sourceUrl ?? '').trim().isNotEmpty) {
+        sourceCount += 1;
+      }
+    }
+
+    final total = entries.length;
+    return _CatalogHealthSummary(
+      totalCount: total,
+      categoryCount: categories.length,
+      duplicateBarcodeGroups:
+          barcodeCounts.values.where((count) => count > 1).length,
+      imageCoverage: total == 0 ? 0 : imageCount / total,
+      sourceCoverage: total == 0 ? 0 : sourceCount / total,
+    );
+  }
+
+  static String _formatCoverage(double value) {
+    return '${(value * 100).round()}%';
   }
 }
 
