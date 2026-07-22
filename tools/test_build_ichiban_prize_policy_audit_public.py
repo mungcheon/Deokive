@@ -69,6 +69,10 @@ class BuildIchibanPrizePolicyAuditPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["last_one_nonzero_price_rows"], 1)
         self.assertFalse(report["summary"]["zero_price_exception_policy_pass"])
         self.assertEqual(report["summary"]["multi_item_prize_label_groups"], 2)
+        self.assertEqual(
+            report["summary"]["multi_item_prize_label_review_lanes"],
+            [["unnumbered_multi_item_prize_review", 1], ["numbered_variant_gap_review", 1]],
+        )
         self.assertEqual(report["summary"]["numbered_variant_prize_label_groups"], 1)
         self.assertEqual(report["summary"]["incomplete_numbered_variant_prize_label_groups"], 1)
         self.assertFalse(report["summary"]["numbered_variant_coverage_policy_pass"])
@@ -77,6 +81,10 @@ class BuildIchibanPrizePolicyAuditPublicTest(unittest.TestCase):
             [2],
         )
         self.assertEqual(report["summary"]["probable_reissue_review_groups"], 1)
+        self.assertEqual(
+            report["summary"]["reissue_signal_reason_counts"],
+            [["explicit_reissue_token_or_numbered_url", 1], ["campaign_url_slug_number_suffix_family", 1]],
+        )
         self.assertEqual(report["summary"]["zero_price_violation_rows"], 1)
         self.assertEqual(report["summary"]["multi_item_prize_label_review_batch_count"], 1)
         self.assertEqual(report["summary"]["repeated_name_different_source_review_batch_count"], 1)
@@ -84,6 +92,22 @@ class BuildIchibanPrizePolicyAuditPublicTest(unittest.TestCase):
         self.assertEqual(report["review_batches"][0]["batch_id"], "ichiban-prize-policy-multi-item-001")
         self.assertEqual(report["review_batches"][0]["workflow"], "multi_item_prize_label_review")
         self.assertEqual(report["review_batches"][1]["batch_id"], "ichiban-prize-policy-repeated-name-001")
+        self.assertEqual(
+            report["multi_item_prize_label_groups"][0]["review_lane"],
+            "unnumbered_multi_item_prize_review",
+        )
+        self.assertEqual(
+            report["multi_item_prize_label_groups"][1]["variant_summary"]["missing_variant_numbers"],
+            [2],
+        )
+        self.assertEqual(
+            report["multi_item_prize_label_groups"][1]["variant_summary"]["numbered_variant_catalog_rows"],
+            2,
+        )
+        self.assertEqual(
+            report["probable_reissue_review_groups"][0]["reissue_signal_reasons"],
+            ["explicit_reissue_token_or_numbered_url", "campaign_url_slug_number_suffix_family"],
+        )
         self.assertEqual(report["next_actions"][0]["status"], "manual_fix_required")
         self.assertEqual(report["next_actions"][1]["next_batch_id"], "ichiban-prize-policy-multi-item-001")
         self.assertFalse(report["summary"]["auto_apply_enabled"])
