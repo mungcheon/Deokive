@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T00:55:24Z",
+  "generated_at": "2026-07-22T01:28:57Z",
   "scope": "catalog_deduplication_action_queue",
   "summary": {
     "actionable_groups": 48,
-    "queued_groups": 40,
-    "unqueued_actionable_groups": 8,
-    "queue_coverage": 0.8333,
-    "action_batch_count": 4,
+    "queued_groups": 48,
+    "unqueued_actionable_groups": 0,
+    "queue_coverage": 1.0,
+    "action_batch_count": 5,
     "batch_size": 10,
-    "max_groups": 40,
+    "max_groups": 100,
     "by_review_confidence": [
       [
         "high_review_confidence",
@@ -3288,6 +3288,649 @@
           "auto_merge_enabled": false,
           "auto_delete_enabled": false,
           "queue_priority": 10
+        }
+      ],
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "batch_id": "dedupe-action-005",
+      "priority": 10,
+      "group_count": 8,
+      "offset": 40,
+      "review_state": "explicit_keep_drop_confirmation_required",
+      "next_machine_step": "record_manual_dedupe_decisions",
+      "recommended_action": "Confirm same sellable product identity, then record manual keep/drop decisions.",
+      "review_confidence_counts": [
+        [
+          "medium_review_confidence",
+          6
+        ],
+        [
+          "high_review_confidence",
+          2
+        ]
+      ],
+      "key_type_counts": [
+        [
+          "image_url",
+          4
+        ],
+        [
+          "barcode",
+          2
+        ],
+        [
+          "source_url",
+          2
+        ]
+      ],
+      "review_risk_counts": [
+        [
+          "image_identity_review",
+          4
+        ],
+        [
+          "strong_identity_review",
+          2
+        ],
+        [
+          "source_identity_review",
+          2
+        ]
+      ],
+      "groups": [
+        {
+          "key_type": "barcode",
+          "key": "4582662917910",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 763,
+          "drop_catalog_indexes": [
+            914
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662917910",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 763,
+            "drop_catalog_indexes": [
+              914
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
+          "rows": [
+            {
+              "catalog_index": 763,
+              "name_ko": "치이카와 모칫토 쁘띠 미니 마스코트 (모몽가)",
+              "name_ja": "ちいかわ もちっとプティ ミニマスコット (モモンガ)",
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4582662917910",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662917910",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/products/4582662917910_1.jpg",
+              "richness": 14
+            },
+            {
+              "catalog_index": 914,
+              "name_ko": "치이카와 모치토 푸치미니 마스코트 (모몽가)",
+              "name_ja": "ちいかわ もちっとぷちミニマスコット（モモンガ）",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4582662917910",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%B7%E3%81%A1%E3%83%9F%E3%83%8B%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277626/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277626_01.jpg",
+              "richness": 13
+            }
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "queue_priority": 10
+        },
+        {
+          "key_type": "barcode",
+          "key": "4582662919921",
+          "review_priority": 10,
+          "review_risk": "strong_identity_review",
+          "review_confidence": "high_review_confidence",
+          "keep_catalog_index": 762,
+          "drop_catalog_indexes": [
+            915
+          ],
+          "row_count": 2,
+          "stores": [
+            "애니메이트",
+            "치이카와 마켓"
+          ],
+          "categories": [
+            "마스코트"
+          ],
+          "evidence": [
+            "barcode",
+            "same_barcode",
+            "multi_store"
+          ],
+          "merge_blockers": [
+            "multi_store_variant_or_retailer_review"
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "barcode_matches_all_rows",
+            "multi_store_rows_are_same_product_not_retailer_specific_variant"
+          ],
+          "recommended_action": "Review images and names, then record a manual keep/drop decision; auto-delete remains disabled.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "barcode",
+            "key": "4582662919921",
+            "review_confidence": "high_review_confidence",
+            "keep_catalog_index": 762,
+            "drop_catalog_indexes": [
+              915
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
+          "rows": [
+            {
+              "catalog_index": 762,
+              "name_ko": "치이카와 모칫토 쁘띠 미니 마스코트 (시사)",
+              "name_ja": "ちいかわ もちっとプティ ミニマスコット (シーサー)",
+              "source_store": "치이카와 마켓",
+              "category": "마스코트",
+              "barcode": "4582662919921",
+              "source_url": "https://chiikawamarket.jp/ko/products/4582662919921",
+              "image_url": "https://chiikawamarket.jp/cdn/shop/products/4582662919921_1.jpg",
+              "richness": 14
+            },
+            {
+              "catalog_index": 915,
+              "name_ko": "치이카와 모치토 푸치미니 마스코트 (시사)",
+              "name_ja": "ちいかわ もちっとぷちミニマスコット（シーサー）",
+              "source_store": "애니메이트",
+              "category": "마스코트",
+              "barcode": "4582662919921",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%A3%E3%81%A8%E3%81%B7%E3%81%A1%E3%83%9F%E3%83%8B%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%EF%BC%88%E3%82%B7%E3%83%BC%E3%82%B5%E3%83%BC%EF%BC%89%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/2277627/",
+              "image_url": "https://www.animate-onlineshop.jp/products_pict/2277627_01.jpg",
+              "richness": 13
+            }
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "queue_priority": 10
+        },
+        {
+          "key_type": "source_url",
+          "key": "https://fanding.kr/@stellive/shop|스텔라이브 단체 아크릴 스탠드 세트",
+          "review_priority": 20,
+          "review_risk": "source_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 2379,
+          "drop_catalog_indexes": [
+            17627
+          ],
+          "row_count": 2,
+          "stores": [
+            "Stellive Store"
+          ],
+          "categories": [
+            "아크릴 스탠드"
+          ],
+          "evidence": [
+            "source_url",
+            "same_source_url",
+            "same_image_url"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "source_page_is_not_a_variant_or_lineup_page",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "recommended_action": "Check whether the shared source page contains variants before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "source_url",
+            "key": "https://fanding.kr/@stellive/shop|스텔라이브 단체 아크릴 스탠드 세트",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 2379,
+            "drop_catalog_indexes": [
+              17627
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
+          "rows": [
+            {
+              "catalog_index": 2379,
+              "name_ko": "스텔라이브 단체 아크릴 스탠드 세트",
+              "name_ja": null,
+              "source_store": "Stellive Store",
+              "category": "아크릴 스탠드",
+              "barcode": null,
+              "source_url": "https://fanding.kr/@stellive/shop",
+              "image_url": "https://dcjnmis8jxmbl.cloudfront.net/upload/image/product/2025/01/20/PdzK4TbDeyOEg37C.webp",
+              "richness": 9
+            },
+            {
+              "catalog_index": 17627,
+              "name_ko": "스텔라이브 단체 아크릴 스탠드 세트",
+              "name_ja": null,
+              "source_store": "Stellive Store",
+              "category": "아크릴 스탠드",
+              "barcode": null,
+              "source_url": "https://fanding.kr/@stellive/shop",
+              "image_url": "https://dcjnmis8jxmbl.cloudfront.net/upload/image/product/2025/01/20/PdzK4TbDeyOEg37C.webp",
+              "richness": 8
+            }
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "queue_priority": 20
+        },
+        {
+          "key_type": "source_url",
+          "key": "https://www.jp-api.com/contents/nod62|ご当地 ちいかわ",
+          "review_priority": 20,
+          "review_risk": "source_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17817,
+          "drop_catalog_indexes": [
+            17924
+          ],
+          "row_count": 2,
+          "stores": [
+            "ご当地ちいかわ 공식(API)"
+          ],
+          "categories": [
+            "키링"
+          ],
+          "evidence": [
+            "source_url",
+            "same_source_url"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "source_page_is_not_a_variant_or_lineup_page"
+          ],
+          "recommended_action": "Check whether the shared source page contains variants before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "source_url",
+            "key": "https://www.jp-api.com/contents/nod62|ご当地 ちいかわ",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17817,
+            "drop_catalog_indexes": [
+              17924
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
+          "rows": [
+            {
+              "catalog_index": 17817,
+              "name_ko": "치이카와 지역 한정 시리즈",
+              "name_ja": "ご当地 ちいかわ",
+              "source_store": "ご当地ちいかわ 공식(API)",
+              "category": "키링",
+              "barcode": null,
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_510411_0_b.png",
+              "richness": 11
+            },
+            {
+              "catalog_index": 17924,
+              "name_ko": "치이카와 지역 한정 시리즈",
+              "name_ja": "ご当地 ちいかわ",
+              "source_store": "ご当地ちいかわ 공식(API)",
+              "category": "키링",
+              "barcode": null,
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_549952_0_b.png",
+              "richness": 10
+            }
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "queue_priority": 20
+        },
+        {
+          "key_type": "image_url",
+          "key": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg|g賞 ガラス皿",
+          "review_priority": 30,
+          "review_risk": "image_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17743,
+          "drop_catalog_indexes": [
+            17763
+          ],
+          "row_count": 2,
+          "stores": [
+            "이치방쿠지"
+          ],
+          "categories": [
+            "굿즈"
+          ],
+          "evidence": [
+            "image_url",
+            "same_image_url"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "image_url",
+            "key": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg|g賞 ガラス皿",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17743,
+            "drop_catalog_indexes": [
+              17763
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
+          "rows": [
+            {
+              "catalog_index": 17743,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 JOJO'S ASSEMBLE - G賞 ガラス皿",
+              "name_ja": "G賞 ガラス皿",
+              "source_store": "이치방쿠지",
+              "category": "굿즈",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/jojo_10",
+              "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 17763,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 JOJO'S ASSEMBLE - G賞 ガラス皿",
+              "name_ja": "G賞 ガラス皿",
+              "source_store": "이치방쿠지",
+              "category": "굿즈",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/jojo_9",
+              "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/g/01.jpg",
+              "richness": 13
+            }
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "queue_priority": 20
+        },
+        {
+          "key_type": "image_url",
+          "key": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg|h賞 タオル",
+          "review_priority": 30,
+          "review_risk": "image_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17744,
+          "drop_catalog_indexes": [
+            17764
+          ],
+          "row_count": 2,
+          "stores": [
+            "이치방쿠지"
+          ],
+          "categories": [
+            "타월"
+          ],
+          "evidence": [
+            "image_url",
+            "same_image_url"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "image_url",
+            "key": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg|h賞 タオル",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17744,
+            "drop_catalog_indexes": [
+              17764
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
+          "rows": [
+            {
+              "catalog_index": 17744,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 JOJO'S ASSEMBLE - H賞 タオル",
+              "name_ja": "H賞 タオル",
+              "source_store": "이치방쿠지",
+              "category": "타월",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/jojo_10",
+              "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 17764,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 JOJO'S ASSEMBLE - H賞 タオル",
+              "name_ja": "H賞 タオル",
+              "source_store": "이치방쿠지",
+              "category": "타월",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/jojo_9",
+              "image_url": "https://sn.bpnavi.jp/page/jojo/jojo_9/0311/h/01.jpg",
+              "richness": 13
+            }
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "queue_priority": 20
+        },
+        {
+          "key_type": "image_url",
+          "key": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg|f賞 グラス",
+          "review_priority": 30,
+          "review_risk": "image_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17786,
+          "drop_catalog_indexes": [
+            17790
+          ],
+          "row_count": 2,
+          "stores": [
+            "이치방쿠지"
+          ],
+          "categories": [
+            "컵"
+          ],
+          "evidence": [
+            "image_url",
+            "same_image_url"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "image_url",
+            "key": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg|f賞 グラス",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17786,
+            "drop_catalog_indexes": [
+              17790
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
+          "rows": [
+            {
+              "catalog_index": 17786,
+              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス",
+              "name_ja": "F賞 グラス",
+              "source_store": "이치방쿠지",
+              "category": "컵",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/myhero16",
+              "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 17790,
+              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - F賞 グラス",
+              "name_ja": "F賞 グラス",
+              "source_store": "이치방쿠지",
+              "category": "컵",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/myhero19",
+              "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/f/01.jpg",
+              "richness": 13
+            }
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "queue_priority": 20
+        },
+        {
+          "key_type": "image_url",
+          "key": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg|g賞 タオル",
+          "review_priority": 30,
+          "review_risk": "image_identity_review",
+          "review_confidence": "medium_review_confidence",
+          "keep_catalog_index": 17787,
+          "drop_catalog_indexes": [
+            17791
+          ],
+          "row_count": 2,
+          "stores": [
+            "이치방쿠지"
+          ],
+          "categories": [
+            "타월"
+          ],
+          "evidence": [
+            "image_url",
+            "same_image_url"
+          ],
+          "merge_blockers": [
+            "shared_source_or_image_may_represent_lineup"
+          ],
+          "identity_checklist": [
+            "compare_product_titles_and_character_names",
+            "compare_product_images_for_same_sellable_item",
+            "confirm_keep_drop_decision_in_a_separate_review_queue",
+            "shared_image_is_not_a_placeholder_or_lineup_image"
+          ],
+          "recommended_action": "Check whether the shared image is a lineup or placeholder before merging anything.",
+          "dedupe_decision_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "key_type": "image_url",
+            "key": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg|g賞 タオル",
+            "review_confidence": "medium_review_confidence",
+            "keep_catalog_index": 17787,
+            "drop_catalog_indexes": [
+              17791
+            ],
+            "decision": "review_required",
+            "requires_same_sellable_product": true,
+            "requires_variant_difference_disproved": false
+          },
+          "rows": [
+            {
+              "catalog_index": 17787,
+              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - G賞 タオル",
+              "name_ja": "G賞 タオル",
+              "source_store": "이치방쿠지",
+              "category": "타월",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/myhero16",
+              "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg",
+              "richness": 13
+            },
+            {
+              "catalog_index": 17791,
+              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - G賞 タオル",
+              "name_ja": "G賞 タオル",
+              "source_store": "이치방쿠지",
+              "category": "타월",
+              "barcode": null,
+              "source_url": "https://1kuji.com/products/myhero19",
+              "image_url": "https://sn.bpnavi.jp/page/myhero/myhero16/0318/g/01.jpg",
+              "richness": 13
+            }
+          ],
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "queue_priority": 20
         }
       ],
       "auto_merge_enabled": false,
