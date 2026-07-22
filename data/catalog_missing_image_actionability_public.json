@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T15:01:11Z",
+  "generated_at": "2026-07-22T20:57:30Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 720,
@@ -9,10 +9,10 @@
     "exact_source_ready_rows": 0,
     "source_first_rows": 692,
     "review_before_attach_rows": 23,
-    "source_detail_candidate_review_rows": 1,
+    "source_detail_candidate_review_rows": 0,
     "source_detail_candidate_recheck_required_rows": 11,
     "source_detail_identity_warning_rows": 11,
-    "source_detail_unflagged_candidate_rows": 1,
+    "source_detail_unflagged_candidate_rows": 0,
     "manual_image_research_rows": 5,
     "source_discovery_focus_pack_rows": 427,
     "source_discovery_focus_pack_count": 24,
@@ -25,7 +25,7 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 427,
     "source_discovery_focus_coverage": 0.6651,
     "source_discovery_non_focus_rows": 215,
-    "action_queue_rows": 74,
+    "action_queue_rows": 73,
     "direct_image_action_queue_rows": 73,
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
@@ -33,43 +33,10 @@
     "image_attachment_template_representative_review_rows": 23,
     "image_attachment_template_dry_run_updated_rows": 0,
     "image_attachment_template_dry_run_skipped_rows": 73,
-    "actionable_image_rows": 74,
+    "actionable_image_rows": 73,
     "auto_apply_enabled": false
   },
   "readiness": [
-    {
-      "readiness": "source_detail_candidate_review",
-      "priority": 11,
-      "rows": 1,
-      "workflow_rows": [
-        {
-          "workflow": "confirm_source_detail_candidate_then_attach_image",
-          "label": "정확한 상품 상세 후보를 확인한 뒤 source_url/image_url 첨부",
-          "rows": 1,
-          "next_step": "manual_confirm_then_import_source_and_image_templates"
-        }
-      ],
-      "by_source_store": [
-        {
-          "source_store": "애니메이트",
-          "rows": 1
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2235,
-          "name_ko": "짱구는 못말려 의류 신짱 액션가면 티셔츠",
-          "name_ja": "クレヨンしんちゃん Tシャツ",
-          "source_store": "애니메이트",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-T%E3%82%B7%E3%83%A3%E3%83%84%E3%80%91%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93++OMOCHABOKO+%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E4%BB%98%E3%81%8DT%E3%82%B7%E3%83%A3%E3%83%84%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93M/pd/1795295/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549660544104_1.jpg&width=400&height=400&square=1",
-          "review_risk": "ambiguous_candidate_review",
-          "candidate_identity_flags": [],
-          "workflow": "confirm_source_detail_candidate_then_attach_image"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
     {
       "readiness": "source_url_replacement_required",
       "priority": 20,
@@ -3771,6 +3738,146 @@
         }
       ],
       "auto_apply_enabled": false
+    }
+  ],
+  "work_order": [
+    {
+      "rank": 2,
+      "lane": "replace_generic_source_urls",
+      "source": "catalog_image_attachment_action_queue_public.json",
+      "row_count": 50,
+      "next_step": "replace_generic_source_url_then_extract_image",
+      "template": "catalog_image_attachment_confirmed_template_public.json",
+      "top_source_stores": [
+        {
+          "source_store": "Stellive Store",
+          "missing_image_rows": 45,
+          "primary_workflow": "replace_generic_source_then_extract_image",
+          "recommended_next_step": "replace_generic_source_url_then_extract_image"
+        },
+        {
+          "source_store": "Weverse Shop",
+          "missing_image_rows": 3,
+          "primary_workflow": "replace_generic_source_then_extract_image",
+          "recommended_next_step": "replace_generic_source_url_then_extract_image"
+        },
+        {
+          "source_store": "포켓몬 센터",
+          "missing_image_rows": 2,
+          "primary_workflow": "replace_generic_source_then_extract_image",
+          "recommended_next_step": "replace_generic_source_url_then_extract_image"
+        }
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "notes": [
+        "Rows already have generic storefront URLs; replace with exact product URLs first."
+      ]
+    },
+    {
+      "rank": 3,
+      "lane": "discover_exact_source_urls",
+      "source": "source_discovery_action_queue_public.json",
+      "row_count": 427,
+      "next_step": "confirm_exact_source_url_then_fill_source_templates",
+      "template": "source_discovery_focus_confirmed_template_public.json",
+      "top_source_stores": [
+        {
+          "source_store": "애니메이트",
+          "missing_image_rows": 148,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "엔스카이",
+          "missing_image_rows": 142,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "missing_image_rows": 57,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "코토부키야",
+          "missing_image_rows": 44,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "Movic",
+          "missing_image_rows": 36,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "점프 캐릭터즈 스토어",
+          "missing_image_rows": 23,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "FuRyu",
+          "missing_image_rows": 21,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "Taito",
+          "missing_image_rows": 15,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        }
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "notes": [
+        "Focus packs cover the highest-volume official-store gaps before broad manual research."
+      ]
+    },
+    {
+      "rank": 4,
+      "lane": "review_representative_images",
+      "source": "catalog_image_attachment_action_queue_public.json",
+      "row_count": 23,
+      "next_step": "confirm_exact_product_type_then_attach_image",
+      "template": "catalog_image_attachment_confirmed_template_public.json",
+      "top_source_stores": [],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "notes": [
+        "Representative images are allowed only when the official source matches the exact product type."
+      ]
+    },
+    {
+      "rank": 5,
+      "lane": "recheck_source_detail_candidates",
+      "source": "source_detail_candidate_action_queue_public.json",
+      "row_count": 11,
+      "next_step": "refresh_or_replace_candidate_before_import",
+      "template": "source_detail_candidate_confirmed_rows_public.json",
+      "top_source_stores": [],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "notes": [
+        "Do not import candidates with identity warning flags until the candidate is refreshed or replaced."
+      ]
+    },
+    {
+      "rank": 6,
+      "lane": "manual_image_research",
+      "source": "catalog_image_enrichment_batches_public.json",
+      "row_count": 5,
+      "next_step": "manual_official_source_and_image_research",
+      "template": "manual_image_source_discovery_public.json",
+      "top_source_stores": [],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "notes": [
+        "Use this after structured source discovery lanes are exhausted."
+      ]
     }
   ],
   "recommended_order": [

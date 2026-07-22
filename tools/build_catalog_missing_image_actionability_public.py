@@ -202,6 +202,124 @@ def summarize_source_stores(groups: list[dict[str, Any]], limit: int = 30) -> li
     return sorted(rows_out, key=lambda row: (int(row["priority"]), -int(row["missing_image_rows"]), str(row["source_store"])))[:limit]
 
 
+def build_work_order(
+    summary: dict[str, Any],
+    readiness_rows: list[dict[str, Any]],
+    source_store_priority: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    readiness_by_name = {str(row.get("readiness") or ""): row for row in readiness_rows}
+    top_generic_source_stores = [
+        {
+            "source_store": row.get("source_store"),
+            "missing_image_rows": row.get("missing_image_rows"),
+            "primary_workflow": row.get("primary_workflow"),
+            "recommended_next_step": row.get("recommended_next_step"),
+        }
+        for row in source_store_priority
+        if str(row.get("primary_workflow") or "")
+        == "replace_generic_source_then_extract_image"
+    ][:8]
+    top_source_discovery_stores = [
+        {
+            "source_store": row.get("source_store"),
+            "missing_image_rows": row.get("missing_image_rows"),
+            "primary_workflow": row.get("primary_workflow"),
+            "recommended_next_step": row.get("recommended_next_step"),
+        }
+        for row in source_store_priority
+        if str(row.get("primary_workflow") or "") == "find_source_then_extract_image"
+    ][:8]
+
+    rows: list[dict[str, Any]] = []
+
+    def add(
+        *,
+        rank: int,
+        lane: str,
+        source: str,
+        row_count: int,
+        next_step: str,
+        template: str,
+        notes: list[str] | None = None,
+        top_stores: list[dict[str, Any]] | None = None,
+    ) -> None:
+        if row_count <= 0:
+            return
+        rows.append(
+            {
+                "rank": rank,
+                "lane": lane,
+                "source": source,
+                "row_count": row_count,
+                "next_step": next_step,
+                "template": template,
+                "top_source_stores": top_stores or [],
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                "notes": notes or [],
+            }
+        )
+
+    add(
+        rank=1,
+        lane="confirm_source_detail_candidates",
+        source="source_detail_candidate_action_queue_public.json",
+        row_count=int(summary.get("source_detail_candidate_review_rows") or 0),
+        next_step="confirm_exact_identity_then_import_source_and_image",
+        template="source_detail_candidate_confirmed_rows_public.json",
+        notes=["Use only exact product detail candidates; recheck title/variant before import."],
+    )
+    add(
+        rank=2,
+        lane="replace_generic_source_urls",
+        source="catalog_image_attachment_action_queue_public.json",
+        row_count=int(summary.get("image_attachment_template_source_update_required_rows") or 0),
+        next_step="replace_generic_source_url_then_extract_image",
+        template="catalog_image_attachment_confirmed_template_public.json",
+        top_stores=top_generic_source_stores,
+        notes=["Rows already have generic storefront URLs; replace with exact product URLs first."],
+    )
+    add(
+        rank=3,
+        lane="discover_exact_source_urls",
+        source="source_discovery_action_queue_public.json",
+        row_count=int(summary.get("source_discovery_remaining_focus_review_rows") or 0),
+        next_step="confirm_exact_source_url_then_fill_source_templates",
+        template="source_discovery_focus_confirmed_template_public.json",
+        top_stores=top_source_discovery_stores,
+        notes=["Focus packs cover the highest-volume official-store gaps before broad manual research."],
+    )
+    add(
+        rank=4,
+        lane="review_representative_images",
+        source="catalog_image_attachment_action_queue_public.json",
+        row_count=int(summary.get("image_attachment_template_representative_review_rows") or 0),
+        next_step="confirm_exact_product_type_then_attach_image",
+        template="catalog_image_attachment_confirmed_template_public.json",
+        notes=["Representative images are allowed only when the official source matches the exact product type."],
+    )
+    add(
+        rank=5,
+        lane="recheck_source_detail_candidates",
+        source="source_detail_candidate_action_queue_public.json",
+        row_count=int(summary.get("source_detail_candidate_recheck_required_rows") or 0),
+        next_step="refresh_or_replace_candidate_before_import",
+        template="source_detail_candidate_confirmed_rows_public.json",
+        notes=["Do not import candidates with identity warning flags until the candidate is refreshed or replaced."],
+    )
+    manual_row = readiness_by_name.get("manual_research_required", {})
+    add(
+        rank=6,
+        lane="manual_image_research",
+        source="catalog_image_enrichment_batches_public.json",
+        row_count=int(manual_row.get("rows") or summary.get("manual_image_research_rows") or 0),
+        next_step="manual_official_source_and_image_research",
+        template="manual_image_source_discovery_public.json",
+        notes=["Use this after structured source discovery lanes are exhausted."],
+    )
+    return rows
+
+
 def source_detail_items(source_detail_queue: dict[str, Any] | None) -> list[dict[str, Any]]:
     if not isinstance(source_detail_queue, dict):
         return []
@@ -383,70 +501,66 @@ def build_report(
         if workflow == "review_gotouchi_official_candidates"
     )
 
+    summary_out = {
+        "missing_image_rows": missing_image_rows,
+        "readiness_classified_rows": readiness_total,
+        "unclassified_rows": max(missing_image_rows - readiness_total, 0),
+        "exact_source_ready_rows": immediate_rows,
+        "source_first_rows": source_first_rows,
+        "review_before_attach_rows": review_before_attach_rows,
+        "source_detail_candidate_review_rows": len(source_detail_ready),
+        "source_detail_candidate_recheck_required_rows": len(source_detail_recheck),
+        "source_detail_identity_warning_rows": sum(
+            1 for item in source_detail_missing if item.get("candidate_identity_flags")
+        ),
+        "source_detail_unflagged_candidate_rows": len(source_detail_ready),
+        "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
+        "source_discovery_focus_pack_rows": int(focus_summary.get("focus_source_rows") or 0),
+        "source_discovery_focus_pack_count": int(focus_summary.get("focus_pack_count") or 0),
+        "source_discovery_not_started_focus_pack_count": int(focus_summary.get("not_started_focus_pack_count") or 0),
+        "source_discovery_remaining_focus_review_rows": int(focus_summary.get("remaining_focus_review_rows") or 0),
+        "source_discovery_confirmed_focus_source_rows": int(focus_summary.get("confirmed_focus_source_rows") or 0),
+        "source_discovery_focus_template_rows": int(focus_template_summary.get("template_items") or 0),
+        "source_discovery_focus_template_confirmed_rows": int(focus_template_summary.get("manual_confirmed_rows") or 0),
+        "source_discovery_focus_template_dry_run_updated_rows": int(
+            focus_template_dry_run_summary.get("updated_rows") or 0
+        ),
+        "source_discovery_focus_template_dry_run_skipped_rows": int(
+            focus_template_dry_run_summary.get("skipped_rows") or 0
+        ),
+        "source_discovery_focus_coverage": float(focus_summary.get("focus_coverage") or 0),
+        "source_discovery_non_focus_rows": int(focus_summary.get("non_focus_source_rows") or 0),
+        "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_ready),
+        "direct_image_action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
+        "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
+        "image_attachment_template_confirmed_rows": int(
+            image_attachment_template_summary.get("manual_confirmed_rows") or 0
+        ),
+        "image_attachment_template_source_update_required_rows": int(
+            image_attachment_template_summary.get("source_url_update_required_rows") or 0
+        ),
+        "image_attachment_template_representative_review_rows": int(
+            image_attachment_template_summary.get("representative_image_review_required_rows") or 0
+        ),
+        "image_attachment_template_dry_run_updated_rows": int(
+            image_attachment_template_dry_run_summary.get("updated_rows") or 0
+        ),
+        "image_attachment_template_dry_run_skipped_rows": int(
+            image_attachment_template_dry_run_summary.get("skipped_rows") or 0
+        ),
+        "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_ready),
+        "auto_apply_enabled": False,
+    }
+    work_order = build_work_order(summary_out, readiness_rows, source_store_priority)
+
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
         "scope": "catalog_missing_image_actionability",
-        "summary": {
-            "missing_image_rows": missing_image_rows,
-            "readiness_classified_rows": readiness_total,
-            "unclassified_rows": max(missing_image_rows - readiness_total, 0),
-            "exact_source_ready_rows": immediate_rows,
-            "source_first_rows": source_first_rows,
-            "review_before_attach_rows": review_before_attach_rows,
-            "source_detail_candidate_review_rows": len(source_detail_ready),
-            "source_detail_candidate_recheck_required_rows": len(source_detail_recheck),
-            "source_detail_identity_warning_rows": sum(
-                1 for item in source_detail_missing if item.get("candidate_identity_flags")
-            ),
-            "source_detail_unflagged_candidate_rows": len(source_detail_ready),
-            "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
-            "source_discovery_focus_pack_rows": int(focus_summary.get("focus_source_rows") or 0),
-            "source_discovery_focus_pack_count": int(focus_summary.get("focus_pack_count") or 0),
-            "source_discovery_not_started_focus_pack_count": int(
-                focus_summary.get("not_started_focus_pack_count") or 0
-            ),
-            "source_discovery_remaining_focus_review_rows": int(
-                focus_summary.get("remaining_focus_review_rows") or 0
-            ),
-            "source_discovery_confirmed_focus_source_rows": int(
-                focus_summary.get("confirmed_focus_source_rows") or 0
-            ),
-            "source_discovery_focus_template_rows": int(focus_template_summary.get("template_items") or 0),
-            "source_discovery_focus_template_confirmed_rows": int(
-                focus_template_summary.get("manual_confirmed_rows") or 0
-            ),
-            "source_discovery_focus_template_dry_run_updated_rows": int(
-                focus_template_dry_run_summary.get("updated_rows") or 0
-            ),
-            "source_discovery_focus_template_dry_run_skipped_rows": int(
-                focus_template_dry_run_summary.get("skipped_rows") or 0
-            ),
-            "source_discovery_focus_coverage": float(focus_summary.get("focus_coverage") or 0),
-            "source_discovery_non_focus_rows": int(focus_summary.get("non_focus_source_rows") or 0),
-            "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_ready),
-            "direct_image_action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
-            "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
-            "image_attachment_template_confirmed_rows": int(
-                image_attachment_template_summary.get("manual_confirmed_rows") or 0
-            ),
-            "image_attachment_template_source_update_required_rows": int(
-                image_attachment_template_summary.get("source_url_update_required_rows") or 0
-            ),
-            "image_attachment_template_representative_review_rows": int(
-                image_attachment_template_summary.get("representative_image_review_required_rows") or 0
-            ),
-            "image_attachment_template_dry_run_updated_rows": int(
-                image_attachment_template_dry_run_summary.get("updated_rows") or 0
-            ),
-            "image_attachment_template_dry_run_skipped_rows": int(
-                image_attachment_template_dry_run_summary.get("skipped_rows") or 0
-            ),
-            "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_ready),
-            "auto_apply_enabled": False,
-        },
+        "summary": summary_out,
         "readiness": readiness_rows,
         "source_store_priority": source_store_priority,
+        "work_order": work_order,
         "recommended_order": [
             "source_url_replacement_required",
             "source_url_discovery_required",
