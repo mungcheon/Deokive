@@ -45,8 +45,13 @@ class BuildMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unqueued_actionable_missing_cells"], 0)
         self.assertEqual(report["summary"]["group_queue_coverage"], 1.0)
         self.assertEqual(report["summary"]["missing_cell_queue_coverage"], 1.0)
+        self.assertEqual(report["summary"]["field_counts"], [["release_date", 1]])
+        self.assertEqual(report["summary"]["missing_cells_by_field"], [("release_date", 3)])
+        self.assertEqual(report["summary"]["missing_cells_by_source_store"], [("Store A", 3)])
+        self.assertEqual(report["summary"]["top_action_groups"][0]["missing_rows"], 3)
         self.assertEqual(dict(report["summary"]["excluded_field_missing_cells"]), {"source_url": 5})
         self.assertEqual(report["batches"][0]["groups"][0]["field"], "release_date")
+        self.assertEqual(report["batches"][0]["missing_cells_by_field"], [("release_date", 3)])
 
     def test_max_groups_caps_queue_not_actionable_summary(self) -> None:
         review = {
@@ -56,7 +61,7 @@ class BuildMetadataActionQueuePublicTest(unittest.TestCase):
                         {
                             "field": "name_ja",
                             "source_store": f"Store {index}",
-                            "missing_rows": 1,
+                            "missing_rows": index + 1,
                         }
                         for index in range(3)
                     ]
@@ -69,12 +74,13 @@ class BuildMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["actionable_group_count"], 3)
         self.assertEqual(report["summary"]["queued_group_count"], 2)
         self.assertEqual(report["summary"]["unqueued_actionable_group_count"], 1)
-        self.assertEqual(report["summary"]["actionable_missing_cells"], 3)
-        self.assertEqual(report["summary"]["queued_missing_cells"], 2)
+        self.assertEqual(report["summary"]["actionable_missing_cells"], 6)
+        self.assertEqual(report["summary"]["queued_missing_cells"], 5)
         self.assertEqual(report["summary"]["unqueued_actionable_missing_cells"], 1)
         self.assertEqual(report["summary"]["group_queue_coverage"], 0.6667)
-        self.assertEqual(report["summary"]["missing_cell_queue_coverage"], 0.6667)
+        self.assertEqual(report["summary"]["missing_cell_queue_coverage"], 0.8333)
         self.assertEqual(report["summary"]["action_batch_count"], 2)
+        self.assertEqual(report["summary"]["missing_cells_by_field"], [("name_ja", 6)])
 
 
 if __name__ == "__main__":

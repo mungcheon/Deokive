@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T02:16:23Z",
+  "generated_at": "2026-07-22T02:45:27Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 15,
@@ -384,6 +384,344 @@
             "official_price_jpy",
             41
           ]
+        ],
+        "missing_cells_by_field": [
+          [
+            "name_ja",
+            9964
+          ],
+          [
+            "release_date",
+            1416
+          ],
+          [
+            "official_price_jpy",
+            584
+          ]
+        ],
+        "missing_cells_by_source_store": [
+          [
+            "치이카와 마켓",
+            9455
+          ],
+          [
+            "이치방쿠지",
+            382
+          ],
+          [
+            "Stellive Store",
+            294
+          ],
+          [
+            "애니메이트",
+            256
+          ],
+          [
+            "엔스카이",
+            227
+          ],
+          [
+            "굿스마일컴퍼니",
+            115
+          ],
+          [
+            "나가노 마켓",
+            99
+          ],
+          [
+            "Banpresto",
+            84
+          ],
+          [
+            "Movic",
+            75
+          ],
+          [
+            "Weverse Shop",
+            66
+          ],
+          [
+            "치이카와 파크",
+            62
+          ],
+          [
+            "코토부키야",
+            50
+          ],
+          [
+            "MINISO",
+            50
+          ],
+          [
+            "ご当地ちいかわ 공식(API)",
+            41
+          ],
+          [
+            "닌텐도 스토어",
+            35
+          ],
+          [
+            "FuRyu",
+            34
+          ],
+          [
+            "치이카와 중국 팝업스토어",
+            30
+          ],
+          [
+            "Taito",
+            29
+          ],
+          [
+            "Hololive Production Official Shop",
+            29
+          ],
+          [
+            "치이카와 온라인 쿠지",
+            28
+          ],
+          [
+            "JYP SHOP",
+            26
+          ],
+          [
+            "점프 캐릭터즈 스토어",
+            24
+          ],
+          [
+            "포켓몬 센터",
+            23
+          ],
+          [
+            "귀멸의 칼날 공식",
+            21
+          ],
+          [
+            "반다이",
+            21
+          ],
+          [
+            "YG SELECT",
+            21
+          ],
+          [
+            "치이카와 모구모구 혼포",
+            20
+          ],
+          [
+            "SM STORE",
+            18
+          ],
+          [
+            "Square Enix e-STORE",
+            17
+          ],
+          [
+            "AmiAmi",
+            16
+          ],
+          [
+            "가챠",
+            15
+          ],
+          [
+            "무기와라스토어",
+            15
+          ],
+          [
+            "Cospa",
+            14
+          ],
+          [
+            "Re-ment",
+            14
+          ],
+          [
+            "MINISO 중국",
+            14
+          ],
+          [
+            "산리오",
+            13
+          ],
+          [
+            "Nijisanji Official Store",
+            12
+          ],
+          [
+            "이세계아이돌 공식 굿즈",
+            12
+          ],
+          [
+            "메가하우스",
+            11
+          ],
+          [
+            "치이카와샵 용산",
+            10
+          ]
+        ],
+        "top_action_groups": [
+          {
+            "field": "name_ja",
+            "source_store": "치이카와 마켓",
+            "missing_rows": 9455,
+            "priority": 30,
+            "workflow": "official_title_review",
+            "recommended_action": "Verify original Japanese product titles from official listings."
+          },
+          {
+            "field": "official_price_jpy",
+            "source_store": "이치방쿠지",
+            "missing_rows": 365,
+            "priority": 20,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official stated JPY prices before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "엔스카이",
+            "missing_rows": 227,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "애니메이트",
+            "missing_rows": 191,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "굿스마일컴퍼니",
+            "missing_rows": 114,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "official_price_jpy",
+            "source_store": "Stellive Store",
+            "missing_rows": 100,
+            "priority": 20,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official stated JPY prices before importing."
+          },
+          {
+            "field": "name_ja",
+            "source_store": "Stellive Store",
+            "missing_rows": 99,
+            "priority": 30,
+            "workflow": "official_title_review",
+            "recommended_action": "Verify original Japanese product titles from official listings."
+          },
+          {
+            "field": "release_date",
+            "source_store": "Stellive Store",
+            "missing_rows": 95,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "Banpresto",
+            "missing_rows": 84,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "name_ja",
+            "source_store": "나가노 마켓",
+            "missing_rows": 79,
+            "priority": 30,
+            "workflow": "official_title_review",
+            "recommended_action": "Verify original Japanese product titles from official listings."
+          },
+          {
+            "field": "release_date",
+            "source_store": "Movic",
+            "missing_rows": 74,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "name_ja",
+            "source_store": "애니메이트",
+            "missing_rows": 63,
+            "priority": 30,
+            "workflow": "official_title_review",
+            "recommended_action": "Verify original Japanese product titles from official listings."
+          },
+          {
+            "field": "name_ja",
+            "source_store": "치이카와 파크",
+            "missing_rows": 62,
+            "priority": 30,
+            "workflow": "official_title_review",
+            "recommended_action": "Verify original Japanese product titles from official listings."
+          },
+          {
+            "field": "release_date",
+            "source_store": "코토부키야",
+            "missing_rows": 50,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "missing_rows": 39,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "FuRyu",
+            "missing_rows": 34,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "name_ja",
+            "source_store": "Weverse Shop",
+            "missing_rows": 33,
+            "priority": 30,
+            "workflow": "official_title_review",
+            "recommended_action": "Verify original Japanese product titles from official listings."
+          },
+          {
+            "field": "release_date",
+            "source_store": "Weverse Shop",
+            "missing_rows": 32,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "Taito",
+            "missing_rows": 26,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          },
+          {
+            "field": "release_date",
+            "source_store": "점프 캐릭터즈 스토어",
+            "missing_rows": 24,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "recommended_action": "Verify official release/sale dates before importing."
+          }
         ]
       }
     },

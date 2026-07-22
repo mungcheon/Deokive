@@ -121,6 +121,12 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
         chunk = published[offset : offset + batch_size]
         field_counts = Counter(str(row.get("field") or "") for row in chunk)
         store_counts = Counter(str(row.get("source_store") or "") for row in chunk)
+        field_missing_cells = Counter()
+        store_missing_cells = Counter()
+        for row in chunk:
+            missing_rows = int(row.get("missing_rows") or 0)
+            field_missing_cells[str(row.get("field") or "")] += missing_rows
+            store_missing_cells[str(row.get("source_store") or "")] += missing_rows
         batches.append(
             {
                 "batch_id": f"metadata-action-{len(batches) + 1:03d}",
@@ -130,6 +136,8 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
                 "offset": offset,
                 "field_counts": field_counts.most_common(),
                 "source_store_counts": store_counts.most_common(),
+                "missing_cells_by_field": field_missing_cells.most_common(),
+                "missing_cells_by_source_store": store_missing_cells.most_common(),
                 "review_state": "manual_metadata_evidence_confirmation_required",
                 "next_machine_step": "fill_confirmed_metadata_patch_templates",
                 "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
@@ -137,6 +145,32 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
                 "auto_apply_enabled": False,
             }
         )
+
+    missing_cells_by_field = Counter()
+    missing_cells_by_store = Counter()
+    for row in groups:
+        missing_rows = int(row.get("missing_rows") or 0)
+        missing_cells_by_field[str(row.get("field") or "")] += missing_rows
+        missing_cells_by_store[str(row.get("source_store") or "")] += missing_rows
+    top_action_groups = [
+        {
+            "field": row.get("field"),
+            "source_store": row.get("source_store"),
+            "missing_rows": int(row.get("missing_rows") or 0),
+            "priority": int(row.get("priority") or 99),
+            "workflow": row.get("workflow"),
+            "recommended_action": row.get("recommended_action"),
+        }
+        for row in sorted(
+            groups,
+            key=lambda row: (
+                -int(row.get("missing_rows") or 0),
+                int(row.get("priority") or 99),
+                str(row.get("field") or ""),
+                str(row.get("source_store") or ""),
+            ),
+        )[:20]
+    ]
 
     return {
         "schema_version": 1,
@@ -156,6 +190,9 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
             "max_groups": max_groups,
             "field_counts": _counter_pairs(groups, "field"),
             "source_store_counts": _counter_pairs(groups, "source_store")[:40],
+            "missing_cells_by_field": missing_cells_by_field.most_common(),
+            "missing_cells_by_source_store": missing_cells_by_store.most_common(40),
+            "top_action_groups": top_action_groups,
             "excluded_field_missing_cells": [[key, value] for key, value in excluded_fields.most_common()],
             "auto_apply_enabled": False,
         },

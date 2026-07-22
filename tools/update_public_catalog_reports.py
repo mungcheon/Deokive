@@ -1663,6 +1663,9 @@ def build_operations_public(
             "group_queue_coverage": metadata_action_queue_summary.get("group_queue_coverage", 0),
             "missing_cell_queue_coverage": metadata_action_queue_summary.get("missing_cell_queue_coverage", 0),
             "action_batch_count": metadata_action_queue_summary.get("action_batch_count", 0),
+            "missing_cells_by_field": metadata_action_queue_summary.get("missing_cells_by_field", []),
+            "missing_cells_by_source_store": metadata_action_queue_summary.get("missing_cells_by_source_store", []),
+            "top_action_groups": metadata_action_queue_summary.get("top_action_groups", []),
             "recommended_next_action": "Work queued release date, price, and Japanese title groups, then expand remaining actionable metadata.",
         } if metadata_action_queue_summary else None,
         {
@@ -1904,6 +1907,9 @@ def build_operations_public(
             "missing_cell_queue_coverage": metadata_action_queue_summary.get("missing_cell_queue_coverage", 0),
             "primary_report": f"data/{METADATA_ACTION_QUEUE.name}",
             "next_step": "fill_confirmed_metadata_patch_templates",
+            "missing_cells_by_field": metadata_action_queue_summary.get("missing_cells_by_field", []),
+            "missing_cells_by_source_store": metadata_action_queue_summary.get("missing_cells_by_source_store", []),
+            "top_action_groups": metadata_action_queue_summary.get("top_action_groups", []),
             "auto_apply_enabled": metadata_action_queue_summary.get("auto_apply_enabled", False),
         } if metadata_action_queue_summary else None,
         {

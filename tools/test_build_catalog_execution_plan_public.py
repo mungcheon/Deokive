@@ -49,6 +49,11 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "queued_missing_cells": 8,
                     "action_batch_count": 1,
                     "field_counts": [["release_date", 1], ["name_ja", 1]],
+                    "missing_cells_by_field": [["release_date", 6], ["name_ja", 2]],
+                    "missing_cells_by_source_store": [["Store A", 6], ["Store B", 2]],
+                    "top_action_groups": [
+                        {"field": "release_date", "source_store": "Store A", "missing_rows": 6}
+                    ],
                 }
             },
             "requested_focus_review_batches_public.json": {
@@ -138,6 +143,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["requested_focus_actionable_template_rows"], 2)
         self.assertEqual(report["summary"]["requested_focus_barcode_template_rows"], 3)
         self.assertEqual(requested["evidence"]["actionable_non_barcode_template_rows"], 2)
+        metadata_action = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "metadata_action_queue"
+        )
+        self.assertEqual(metadata_action["evidence"]["missing_cells_by_field"][0], ["release_date", 6])
+        self.assertEqual(metadata_action["evidence"]["top_action_groups"][0]["source_store"], "Store A")
         self.assertEqual(requested["evidence"]["barcode_template_rows"], 3)
         action_queue = next(
             action

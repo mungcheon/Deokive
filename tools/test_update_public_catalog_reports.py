@@ -383,8 +383,20 @@ class PublicCatalogReportTests(unittest.TestCase):
             metadata_action_summary.get("missing_cell_queue_coverage"),
         )
         self.assertEqual(
+            metadata_scorecard.get("missing_cells_by_field"),
+            metadata_action_summary.get("missing_cells_by_field"),
+        )
+        self.assertEqual(
+            metadata_scorecard.get("top_action_groups"),
+            metadata_action_summary.get("top_action_groups"),
+        )
+        self.assertEqual(
             metadata_next_action.get("unqueued_actionable_missing_cells"),
             metadata_action_summary.get("unqueued_actionable_missing_cells"),
+        )
+        self.assertEqual(
+            metadata_next_action.get("missing_cells_by_source_store"),
+            metadata_action_summary.get("missing_cells_by_source_store"),
         )
         self.assertEqual(
             open_queues.get("image_attachment_actionable_rows"),

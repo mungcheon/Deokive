@@ -324,6 +324,9 @@ def build_plan() -> dict[str, Any]:
                 "queued_missing_cells": _count(metadata_action_summary, "queued_missing_cells"),
                 "action_batch_count": _count(metadata_action_summary, "action_batch_count"),
                 "field_counts": metadata_action_summary.get("field_counts", []),
+                "missing_cells_by_field": metadata_action_summary.get("missing_cells_by_field", []),
+                "missing_cells_by_source_store": metadata_action_summary.get("missing_cells_by_source_store", []),
+                "top_action_groups": metadata_action_summary.get("top_action_groups", []),
             },
         )
     )
