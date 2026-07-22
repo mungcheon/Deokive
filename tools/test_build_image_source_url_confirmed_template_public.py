@@ -46,17 +46,49 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
             ]
         }
 
-        report = template.build_template(action_queue, generated_at="2026-07-22T00:00:00Z")
+        candidate_report = {
+            "queue": [
+                {
+                    "row_index": 10,
+                    "candidate_status": "weak_manual_review_candidate",
+                    "top_candidates": [
+                        {
+                            "product_no": 100,
+                            "title": "Badge exact-ish",
+                            "source_url": "https://fanding.kr/@stellive/shop/100",
+                            "image_url": "https://example.test/badge.webp",
+                            "score": 0.81,
+                            "shared_tokens": ["Badge"],
+                            "query_overlap": 0.5,
+                            "title_overlap": 0.75,
+                        }
+                    ],
+                }
+            ]
+        }
+
+        report = template.build_template(
+            action_queue,
+            candidate_report,
+            generated_at="2026-07-22T00:00:00Z",
+        )
 
         self.assertEqual(report["generated_at"], "2026-07-22T00:00:00Z")
         self.assertEqual(report["summary"]["template_items"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
         self.assertEqual(report["summary"]["by_source_store"], [["Stellive Store", 1]])
+        self.assertEqual(report["summary"]["candidate_prefilled_rows"], 1)
+        self.assertEqual(report["summary"]["by_candidate_status"], [["weak_manual_review_candidate", 1]])
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         item = report["items"][0]
         self.assertEqual(item["field"], "source_url")
         self.assertEqual(item["row_index"], 10)
         self.assertEqual(item["manual_value"], "")
+        self.assertEqual(item["candidate_source_url"], "https://fanding.kr/@stellive/shop/100")
+        self.assertEqual(item["candidate_image_url"], "https://example.test/badge.webp")
+        self.assertEqual(item["candidate_title"], "Badge exact-ish")
+        self.assertEqual(item["candidate_status"], "weak_manual_review_candidate")
+        self.assertEqual(item["candidate_options"][0]["product_no"], 100)
         self.assertEqual(item["current_source_url"], "https://fanding.kr/@stellive/shop")
         self.assertEqual(item["next_after_confirmed_source_url"], "extract_or_confirm_product_page_image_url")
         self.assertFalse(item["auto_apply_enabled"])
