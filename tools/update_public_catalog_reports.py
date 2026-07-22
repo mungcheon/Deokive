@@ -1607,10 +1607,20 @@ def build_operations_public(
             "priority": 32,
             "workstream": "metadata_action_queue",
             "public_report": f"data/{METADATA_ACTION_QUEUE.name}",
+            "actionable_group_count": metadata_action_queue_summary.get("actionable_group_count", 0),
             "queued_group_count": metadata_action_queue_summary.get("queued_group_count", 0),
+            "unqueued_actionable_group_count": metadata_action_queue_summary.get(
+                "unqueued_actionable_group_count", 0
+            ),
+            "actionable_missing_cells": metadata_action_queue_summary.get("actionable_missing_cells", 0),
             "queued_missing_cells": metadata_action_queue_summary.get("queued_missing_cells", 0),
+            "unqueued_actionable_missing_cells": metadata_action_queue_summary.get(
+                "unqueued_actionable_missing_cells", 0
+            ),
+            "group_queue_coverage": metadata_action_queue_summary.get("group_queue_coverage", 0),
+            "missing_cell_queue_coverage": metadata_action_queue_summary.get("missing_cell_queue_coverage", 0),
             "action_batch_count": metadata_action_queue_summary.get("action_batch_count", 0),
-            "recommended_next_action": "Work release date, price, and Japanese title groups before broad barcode research.",
+            "recommended_next_action": "Work queued release date, price, and Japanese title groups, then expand remaining actionable metadata.",
         } if metadata_action_queue_summary else None,
         {
             "priority": 40,
@@ -1813,6 +1823,16 @@ def build_operations_public(
             "workstream": "metadata_action_queue",
             "status": "manual_review" if metadata_action_queue_summary.get("queued_missing_cells", 0) else "clear",
             "open_rows": metadata_action_queue_summary.get("queued_missing_cells", 0),
+            "actionable_group_count": metadata_action_queue_summary.get("actionable_group_count", 0),
+            "unqueued_actionable_group_count": metadata_action_queue_summary.get(
+                "unqueued_actionable_group_count", 0
+            ),
+            "actionable_missing_cells": metadata_action_queue_summary.get("actionable_missing_cells", 0),
+            "unqueued_actionable_missing_cells": metadata_action_queue_summary.get(
+                "unqueued_actionable_missing_cells", 0
+            ),
+            "group_queue_coverage": metadata_action_queue_summary.get("group_queue_coverage", 0),
+            "missing_cell_queue_coverage": metadata_action_queue_summary.get("missing_cell_queue_coverage", 0),
             "primary_report": f"data/{METADATA_ACTION_QUEUE.name}",
             "next_step": "fill_confirmed_metadata_patch_templates",
             "auto_apply_enabled": metadata_action_queue_summary.get("auto_apply_enabled", False),
@@ -1981,6 +2001,18 @@ def build_operations_public(
     if metadata_action_queue_summary:
         open_review_queues["metadata_action_missing_cells"] = metadata_action_queue_summary.get(
             "queued_missing_cells", 0
+        )
+        open_review_queues["metadata_actionable_groups"] = metadata_action_queue_summary.get(
+            "actionable_group_count", 0
+        )
+        open_review_queues["metadata_unqueued_actionable_groups"] = metadata_action_queue_summary.get(
+            "unqueued_actionable_group_count", 0
+        )
+        open_review_queues["metadata_actionable_missing_cells"] = metadata_action_queue_summary.get(
+            "actionable_missing_cells", 0
+        )
+        open_review_queues["metadata_unqueued_actionable_missing_cells"] = metadata_action_queue_summary.get(
+            "unqueued_actionable_missing_cells", 0
         )
     if animation_review_batches_summary:
         open_review_queues["animation_category_review_rows"] = animation_review_batches_summary.get("source_rows", 0)
@@ -3760,6 +3792,16 @@ def validate_report_consistency(
     metadata_action_summary = metadata_action_queue.get("summary", {})
     if metadata_action_summary:
         expected_open_queues["metadata_action_missing_cells"] = metadata_action_summary.get("queued_missing_cells", 0)
+        expected_open_queues["metadata_actionable_groups"] = metadata_action_summary.get("actionable_group_count", 0)
+        expected_open_queues["metadata_unqueued_actionable_groups"] = metadata_action_summary.get(
+            "unqueued_actionable_group_count", 0
+        )
+        expected_open_queues["metadata_actionable_missing_cells"] = metadata_action_summary.get(
+            "actionable_missing_cells", 0
+        )
+        expected_open_queues["metadata_unqueued_actionable_missing_cells"] = metadata_action_summary.get(
+            "unqueued_actionable_missing_cells", 0
+        )
     image_action_queue = (
         load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
     )

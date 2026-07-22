@@ -188,6 +188,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "source_discovery_action_queue"
         )
+        metadata_action = reports.load_json(reports.METADATA_ACTION_QUEUE)
+        metadata_action_summary = metadata_action.get("summary", {})
+        metadata_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "metadata_action_queue"
+        )
+        metadata_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "metadata_action_queue"
+        )
         image_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
@@ -273,6 +285,34 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_next_action.get("unqueued_actionable_source_rows"),
             source_action_summary.get("unqueued_actionable_source_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("metadata_action_missing_cells"),
+            metadata_action_summary.get("queued_missing_cells"),
+        )
+        self.assertEqual(
+            open_queues.get("metadata_actionable_groups"),
+            metadata_action_summary.get("actionable_group_count"),
+        )
+        self.assertEqual(
+            open_queues.get("metadata_unqueued_actionable_groups"),
+            metadata_action_summary.get("unqueued_actionable_group_count"),
+        )
+        self.assertEqual(
+            open_queues.get("metadata_actionable_missing_cells"),
+            metadata_action_summary.get("actionable_missing_cells"),
+        )
+        self.assertEqual(
+            open_queues.get("metadata_unqueued_actionable_missing_cells"),
+            metadata_action_summary.get("unqueued_actionable_missing_cells"),
+        )
+        self.assertEqual(
+            metadata_scorecard.get("missing_cell_queue_coverage"),
+            metadata_action_summary.get("missing_cell_queue_coverage"),
+        )
+        self.assertEqual(
+            metadata_next_action.get("unqueued_actionable_missing_cells"),
+            metadata_action_summary.get("unqueued_actionable_missing_cells"),
         )
         self.assertEqual(
             open_queues.get("image_attachment_actionable_rows"),

@@ -109,6 +109,12 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 48, batch_
         )
     )
     published = groups[:max_groups]
+    actionable_missing_cells = sum(int(row.get("missing_rows") or 0) for row in groups)
+    queued_missing_cells = sum(int(row.get("missing_rows") or 0) for row in published)
+    unqueued_actionable_group_count = max(len(groups) - len(published), 0)
+    unqueued_actionable_missing_cells = max(actionable_missing_cells - queued_missing_cells, 0)
+    group_queue_coverage = round(len(published) / len(groups), 4) if groups else 1.0
+    missing_cell_queue_coverage = round(queued_missing_cells / actionable_missing_cells, 4) if actionable_missing_cells else 1.0
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(published), batch_size):
@@ -139,8 +145,12 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 48, batch_
         "summary": {
             "actionable_group_count": len(groups),
             "queued_group_count": len(published),
-            "actionable_missing_cells": sum(int(row.get("missing_rows") or 0) for row in groups),
-            "queued_missing_cells": sum(int(row.get("missing_rows") or 0) for row in published),
+            "unqueued_actionable_group_count": unqueued_actionable_group_count,
+            "actionable_missing_cells": actionable_missing_cells,
+            "queued_missing_cells": queued_missing_cells,
+            "unqueued_actionable_missing_cells": unqueued_actionable_missing_cells,
+            "group_queue_coverage": group_queue_coverage,
+            "missing_cell_queue_coverage": missing_cell_queue_coverage,
             "action_batch_count": len(batches),
             "batch_size": batch_size,
             "max_groups": max_groups,

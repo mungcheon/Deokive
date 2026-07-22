@@ -38,7 +38,13 @@ class BuildMetadataActionQueuePublicTest(unittest.TestCase):
 
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["actionable_group_count"], 1)
+        self.assertEqual(report["summary"]["queued_group_count"], 1)
+        self.assertEqual(report["summary"]["unqueued_actionable_group_count"], 0)
+        self.assertEqual(report["summary"]["actionable_missing_cells"], 3)
         self.assertEqual(report["summary"]["queued_missing_cells"], 3)
+        self.assertEqual(report["summary"]["unqueued_actionable_missing_cells"], 0)
+        self.assertEqual(report["summary"]["group_queue_coverage"], 1.0)
+        self.assertEqual(report["summary"]["missing_cell_queue_coverage"], 1.0)
         self.assertEqual(dict(report["summary"]["excluded_field_missing_cells"]), {"source_url": 5})
         self.assertEqual(report["batches"][0]["groups"][0]["field"], "release_date")
 
@@ -62,6 +68,12 @@ class BuildMetadataActionQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["actionable_group_count"], 3)
         self.assertEqual(report["summary"]["queued_group_count"], 2)
+        self.assertEqual(report["summary"]["unqueued_actionable_group_count"], 1)
+        self.assertEqual(report["summary"]["actionable_missing_cells"], 3)
+        self.assertEqual(report["summary"]["queued_missing_cells"], 2)
+        self.assertEqual(report["summary"]["unqueued_actionable_missing_cells"], 1)
+        self.assertEqual(report["summary"]["group_queue_coverage"], 0.6667)
+        self.assertEqual(report["summary"]["missing_cell_queue_coverage"], 0.6667)
         self.assertEqual(report["summary"]["action_batch_count"], 2)
 
 
