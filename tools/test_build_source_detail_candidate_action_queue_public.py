@@ -48,6 +48,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["candidate_action_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertEqual(report["summary"]["safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["summary"]["identity_warning_rows"], 0)
         self.assertEqual(report["summary"]["current_catalog_matched_rows"], 1)
         self.assertEqual(report["summary"]["current_catalog_missing_display_image_rows"], 1)
         self.assertEqual(report["summary"]["current_catalog_already_has_display_image_rows"], 0)
@@ -59,6 +60,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         item = report["batches"][0]["items"][0]
         self.assertFalse(item["manual_confirmed"])
         self.assertEqual(item["candidate_count_bucket"], "single_candidate")
+        self.assertEqual(item["candidate_identity_flags"], [])
         self.assertEqual(item["review_priority"], 20)
         self.assertEqual(report["batches"][0]["safe_source_image_pair_rows"], 1)
         self.assertEqual(item["current_catalog_state"]["catalog_match_found"], True)
@@ -112,6 +114,66 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         actions = {item["catalog_index"]: item["recommended_action"] for batch in report["batches"] for item in batch["items"]}
         self.assertEqual(actions[1], "refresh_candidate_before_manual_review")
         self.assertEqual(actions[2], "skip_current_catalog_row_already_has_display_image")
+
+    def test_build_report_flags_risky_title_identity_matches(self) -> None:
+        source_detail = {
+            "review_candidates": [
+                {
+                    "catalog_index": 3,
+                    "source_store": "Good Smile",
+                    "name_ko": "POP UP PARADE Monokuma",
+                    "name_ja": "POP UP PARADE Monokuma",
+                    "status": "candidate_review_needed",
+                    "candidate_count": 1,
+                    "candidate_source_url": "https://example.test/product/3",
+                    "candidate_image_url": "https://example.test/product/3.jpg",
+                    "candidate_title": "POP UP PARADE Junko Enoshima",
+                    "score": 0.75,
+                    "shared_tokens": ["pop", "up", "parade"],
+                    "safe_source_image_pair": True,
+                },
+                {
+                    "catalog_index": 4,
+                    "source_store": "Animate",
+                    "name_ko": "Crayon pouch (Shinchan)",
+                    "name_ja": "Crayon pouch",
+                    "status": "candidate_review_needed",
+                    "candidate_count": 2,
+                    "candidate_source_url": "https://example.test/product/4",
+                    "candidate_image_url": "https://example.test/product/4.jpg",
+                    "candidate_title": "TXT | Crayon earphone pouch",
+                    "score": 0.8,
+                    "shared_tokens": ["pouch"],
+                    "safe_source_image_pair": True,
+                },
+            ]
+        }
+        catalog_rows = [
+            {"catalog_index": 3, "source_store": "Good Smile", "name_ko": "POP UP PARADE Monokuma", "name_ja": "POP UP PARADE Monokuma"},
+            {"catalog_index": 4, "source_store": "Animate", "name_ko": "Crayon pouch (Shinchan)", "name_ja": "Crayon pouch"},
+        ]
+
+        report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
+
+        self.assertEqual(report["summary"]["identity_warning_rows"], 2)
+        self.assertEqual(
+            report["summary"]["by_candidate_identity_flag"],
+            [
+                ["only_generic_shared_tokens", 2],
+                ["candidate_title_mentions_crossover", 1],
+                ["candidate_title_missing_catalog_variant_hint", 1],
+            ],
+        )
+        items = {item["catalog_index"]: item for batch in report["batches"] for item in batch["items"]}
+        self.assertEqual(items[3]["candidate_identity_flags"], ["only_generic_shared_tokens"])
+        self.assertEqual(
+            items[4]["candidate_identity_flags"],
+            [
+                "only_generic_shared_tokens",
+                "candidate_title_mentions_crossover",
+                "candidate_title_missing_catalog_variant_hint",
+            ],
+        )
 
 
 if __name__ == "__main__":

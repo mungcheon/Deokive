@@ -61,6 +61,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                             "candidate_source_url": "https://example.test/item",
                             "candidate_image_url": "https://example.test/item.jpg",
                             "review_risk": "near_single_candidate_review",
+                            "candidate_identity_flags": ["only_generic_shared_tokens"],
                             "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
                             "current_catalog_state": {"catalog_has_display_image": False},
                         },
@@ -91,6 +92,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["exact_source_ready_rows"], 1)
         self.assertEqual(report["summary"]["source_first_rows"], 3)
         self.assertEqual(report["summary"]["source_detail_candidate_review_rows"], 1)
+        self.assertEqual(report["summary"]["source_detail_identity_warning_rows"], 1)
         self.assertEqual(report["summary"]["manual_image_research_rows"], 1)
         self.assertEqual(report["summary"]["direct_image_action_queue_rows"], 2)
         self.assertEqual(report["summary"]["action_queue_rows"], 3)
@@ -98,6 +100,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         readiness = {row["readiness"]: row["rows"] for row in report["readiness"]}
         self.assertEqual(readiness["image_url_candidate_review"], 1)
         self.assertEqual(readiness["source_detail_candidate_review"], 1)
+        source_detail_row = next(row for row in report["readiness"] if row["readiness"] == "source_detail_candidate_review")
+        self.assertEqual(source_detail_row["sample_items"][0]["candidate_identity_flags"], ["only_generic_shared_tokens"])
         self.assertEqual(readiness["source_url_replacement_required"], 2)
         self.assertEqual(readiness["source_url_discovery_required"], 1)
         self.assertEqual(readiness["manual_research_required"], 1)

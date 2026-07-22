@@ -234,6 +234,7 @@ def append_source_detail_readiness(
             "candidate_source_url": item.get("candidate_source_url"),
             "candidate_image_url": item.get("candidate_image_url"),
             "review_risk": item.get("review_risk"),
+            "candidate_identity_flags": item.get("candidate_identity_flags") or [],
             "workflow": "confirm_source_detail_candidate_then_attach_image",
         }
         for item in source_detail_missing[:12]
@@ -305,6 +306,9 @@ def build_report(
             "source_first_rows": source_first_rows,
             "review_before_attach_rows": review_before_attach_rows,
             "source_detail_candidate_review_rows": len(source_detail_missing),
+            "source_detail_identity_warning_rows": sum(
+                1 for item in source_detail_missing if item.get("candidate_identity_flags")
+            ),
             "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
             "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_missing),
             "direct_image_action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
@@ -324,6 +328,7 @@ def build_report(
             "source_first_rows must receive or replace source_url before any image_url import.",
             "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
             "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
+            "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
             "All image changes remain manual-review only until exact product identity is confirmed.",
         ],
         "automation_policy": {

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T13:09:25Z",
+  "generated_at": "2026-07-22T13:19:18Z",
   "scope": "source_detail_candidate_action_queue",
   "summary": {
     "candidate_action_rows": 15,
@@ -8,6 +8,7 @@
     "batch_size": 10,
     "manual_confirmed_true": 0,
     "safe_source_image_pair_rows": 15,
+    "identity_warning_rows": 13,
     "current_catalog_matched_rows": 15,
     "current_catalog_missing_display_image_rows": 12,
     "current_catalog_already_has_display_image_rows": 3,
@@ -53,13 +54,28 @@
         2
       ]
     ],
+    "by_candidate_identity_flag": [
+      [
+        "candidate_title_missing_catalog_variant_hint",
+        12
+      ],
+      [
+        "candidate_title_mentions_crossover",
+        4
+      ],
+      [
+        "only_generic_shared_tokens",
+        2
+      ]
+    ],
     "auto_apply_enabled": false
   },
   "instructions": [
     "Use this queue only after reviewing source_detail_probe_public review candidates.",
     "Do not import candidate source_url or image_url unless manual_confirmed is set true after exact identity review.",
     "Rows may contain related products; wrong character or variant candidates must remain unconfirmed.",
-    "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image."
+    "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image.",
+    "candidate_identity_flags highlight high-risk title matches such as generic-only shared tokens, crossovers, or missing variant hints."
   ],
   "batches": [
     {
@@ -129,6 +145,9 @@
             "pop",
             "up"
           ],
+          "candidate_identity_flags": [
+            "only_generic_shared_tokens"
+          ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "near_single_candidate_review",
@@ -193,6 +212,10 @@
             "クレヨンしんちゃん",
             "トレーディング缶バッジ"
           ],
+          "candidate_identity_flags": [
+            "candidate_title_mentions_crossover",
+            "candidate_title_missing_catalog_variant_hint"
+          ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "near_single_candidate_review",
@@ -256,6 +279,7 @@
           "shared_tokens": [
             "真人"
           ],
+          "candidate_identity_flags": [],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
@@ -319,6 +343,9 @@
           "shared_tokens": [
             "推しの子"
           ],
+          "candidate_identity_flags": [
+            "candidate_title_missing_catalog_variant_hint"
+          ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
@@ -381,6 +408,10 @@
           "score": 0.5,
           "shared_tokens": [
             "クリアファイル"
+          ],
+          "candidate_identity_flags": [
+            "only_generic_shared_tokens",
+            "candidate_title_missing_catalog_variant_hint"
           ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
@@ -446,6 +477,9 @@
             "タペストリー",
             "リムル"
           ],
+          "candidate_identity_flags": [
+            "candidate_title_missing_catalog_variant_hint"
+          ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
@@ -509,6 +543,9 @@
           "shared_tokens": [
             "入間くん",
             "魔入りました"
+          ],
+          "candidate_identity_flags": [
+            "candidate_title_missing_catalog_variant_hint"
           ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
@@ -574,6 +611,9 @@
             "入間くん",
             "魔入りました"
           ],
+          "candidate_identity_flags": [
+            "candidate_title_missing_catalog_variant_hint"
+          ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
@@ -636,6 +676,10 @@
           "score": 0.5,
           "shared_tokens": [
             "クレヨンしんちゃん"
+          ],
+          "candidate_identity_flags": [
+            "candidate_title_mentions_crossover",
+            "candidate_title_missing_catalog_variant_hint"
           ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
@@ -700,6 +744,10 @@
           "shared_tokens": [
             "クリアファイル",
             "クレヨンしんちゃん"
+          ],
+          "candidate_identity_flags": [
+            "candidate_title_mentions_crossover",
+            "candidate_title_missing_catalog_variant_hint"
           ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
@@ -803,6 +851,7 @@
             "tシャツ",
             "クレヨンしんちゃん"
           ],
+          "candidate_identity_flags": [],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
@@ -866,6 +915,10 @@
           "shared_tokens": [
             "クレヨンしんちゃん",
             "ポーチ"
+          ],
+          "candidate_identity_flags": [
+            "candidate_title_mentions_crossover",
+            "candidate_title_missing_catalog_variant_hint"
           ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
@@ -931,6 +984,9 @@
             "オーバーロード",
             "クリアファイル"
           ],
+          "candidate_identity_flags": [
+            "candidate_title_missing_catalog_variant_hint"
+          ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
@@ -995,6 +1051,9 @@
             "オーバーロード",
             "マグカップ"
           ],
+          "candidate_identity_flags": [
+            "candidate_title_missing_catalog_variant_hint"
+          ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
@@ -1057,6 +1116,9 @@
           "score": 0.5,
           "shared_tokens": [
             "オーバーロード"
+          ],
+          "candidate_identity_flags": [
+            "candidate_title_missing_catalog_variant_hint"
           ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",

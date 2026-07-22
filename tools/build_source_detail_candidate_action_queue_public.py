@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -13,6 +14,31 @@ DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "source_detail_probe_public.json"
 DEFAULT_OUTPUT = DATA / "source_detail_candidate_action_queue_public.json"
 DEFAULT_CATALOG = DATA / "catalog_public.json"
+
+GENERIC_SHARED_TOKENS = {
+    "pop",
+    "up",
+    "parade",
+    "acrylic",
+    "badge",
+    "can",
+    "stand",
+    "keychain",
+    "clear",
+    "file",
+    "tshirt",
+    "shirt",
+    "pouch",
+    "mug",
+    "\u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9",
+    "\u30ad\u30fc\u30db\u30eb\u30c0\u30fc",
+    "\u30af\u30ea\u30a2\u30d5\u30a1\u30a4\u30eb",
+    "\u30c8\u30ec\u30fc\u30c7\u30a3\u30f3\u30b0\u7f36\u30d0\u30c3\u30b8",
+    "\u7f36\u30d0\u30c3\u30b8",
+    "\u30de\u30b0\u30ab\u30c3\u30d7",
+    "\u30dd\u30fc\u30c1",
+    "t\u30b7\u30e3\u30c4",
+}
 
 
 def now_utc() -> str:
@@ -40,6 +66,15 @@ def load_catalog_rows(path: Path) -> list[dict[str, Any]]:
 def counter_rows(rows: list[dict[str, Any]], field: str) -> list[list[Any]]:
     counts = Counter(str(row.get(field) or "") for row in rows)
     counts.pop("", None)
+    return [[key, value] for key, value in counts.most_common()]
+
+
+def counter_list_values(rows: list[dict[str, Any]], field: str) -> list[list[Any]]:
+    counts: Counter[str] = Counter()
+    for row in rows:
+        for value in row.get(field) or []:
+            if value:
+                counts[str(value)] += 1
     return [[key, value] for key, value in counts.most_common()]
 
 
@@ -86,6 +121,48 @@ def catalog_index(rows: list[dict[str, Any]]) -> dict[int, dict[str, Any]]:
 
 def text_matches(left: Any, right: Any) -> bool:
     return str(left or "").strip() == str(right or "").strip()
+
+
+def normalize_token(value: Any) -> str:
+    return str(value or "").strip().casefold()
+
+
+def is_generic_token(value: Any) -> bool:
+    token = normalize_token(value)
+    return token in {normalize_token(item) for item in GENERIC_SHARED_TOKENS}
+
+
+def parenthetical_terms(*values: Any) -> list[str]:
+    terms: list[str] = []
+    for value in values:
+        text = str(value or "")
+        for match in re.findall(r"[\(\uff08]([^\)\uff09]{2,})[\)\uff09]", text):
+            term = match.strip()
+            if term:
+                terms.append(term)
+    return terms
+
+
+def candidate_identity_flags(row: dict[str, Any]) -> list[str]:
+    flags: list[str] = []
+    shared_tokens = [token for token in row.get("shared_tokens") or [] if str(token or "").strip()]
+    if shared_tokens and all(is_generic_token(token) for token in shared_tokens):
+        flags.append("only_generic_shared_tokens")
+
+    name_text = " ".join(str(row.get(field) or "") for field in ("name_ko", "name_ja")).casefold()
+    title_text = str(row.get("candidate_title") or "").casefold()
+    if ("\u00d7" in title_text or "|" in title_text) and "\u00d7" not in name_text and "|" not in name_text:
+        flags.append("candidate_title_mentions_crossover")
+
+    missing_terms = [
+        term
+        for term in parenthetical_terms(row.get("name_ko"), row.get("name_ja"))
+        if normalize_token(term) not in title_text and not is_generic_token(term)
+    ]
+    if missing_terms:
+        flags.append("candidate_title_missing_catalog_variant_hint")
+
+    return flags
 
 
 def current_catalog_state(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
@@ -136,6 +213,7 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
         "candidate_image_url": row.get("candidate_image_url"),
         "score": row.get("score"),
         "shared_tokens": row.get("shared_tokens") or [],
+        "candidate_identity_flags": candidate_identity_flags(row),
         "safe_source_image_pair": row.get("safe_source_image_pair"),
         "source_report": row.get("source_report"),
         "review_risk": risk,
@@ -237,6 +315,7 @@ def build_report(
             "batch_size": batch_size,
             "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
             "safe_source_image_pair_rows": sum(1 for item in items if item.get("safe_source_image_pair") is True),
+            "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
             "current_catalog_matched_rows": sum(
                 1 for item in items if item.get("current_catalog_state", {}).get("catalog_match_found") is True
             ),
@@ -267,6 +346,7 @@ def build_report(
             "by_source_store": counter_rows(items, "source_store"),
             "by_review_risk": counter_rows(items, "review_risk"),
             "by_candidate_count_bucket": counter_rows(items, "candidate_count_bucket"),
+            "by_candidate_identity_flag": counter_list_values(items, "candidate_identity_flags"),
             "auto_apply_enabled": False,
         },
         "instructions": [
@@ -274,6 +354,7 @@ def build_report(
             "Do not import candidate source_url or image_url unless manual_confirmed is set true after exact identity review.",
             "Rows may contain related products; wrong character or variant candidates must remain unconfirmed.",
             "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image.",
+            "candidate_identity_flags highlight high-risk title matches such as generic-only shared tokens, crossovers, or missing variant hints.",
         ],
         "batches": batches,
         "automation_policy": {
