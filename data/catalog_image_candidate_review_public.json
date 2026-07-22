@@ -2126,8 +2126,9 @@
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 96,
-    "summed_batch_rows": 20305,
+    "batch_count": 151,
+    "max_published_batches": 160,
+    "summed_batch_rows": 25512,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2143,7 +2144,15 @@
         12
       ],
       [
+        "metadata_backlog",
+        12
+      ],
+      [
         "source_discovery_action_queue",
+        10
+      ],
+      [
+        "deduplication_review",
         10
       ],
       [
@@ -2155,16 +2164,32 @@
         8
       ],
       [
+        "metadata_action_queue",
+        8
+      ],
+      [
+        "ichiban_kuji_prize_policy_audit",
+        8
+      ],
+      [
         "image_attachment_action_queue",
         7
       ],
       [
-        "metadata_action_queue",
+        "ichiban_kuji_metadata_action_queue",
+        6
+      ],
+      [
+        "deduplication_action_queue",
+        5
+      ],
+      [
+        "ichiban_kuji_price",
         5
       ],
       [
         "requested_focus_enrichment",
-        3
+        4
       ],
       [
         "generic_source_url_cleanup",
@@ -2177,6 +2202,10 @@
       [
         "animation_category_unmatched_keyword_review",
         3
+      ],
+      [
+        "ichiban_kuji_metadata_action_work_order",
+        2
       ],
       [
         "source_detail_candidate_action_queue",
@@ -2195,7 +2224,19 @@
         1
       ],
       [
-        "ichiban_kuji_metadata_action_queue",
+        "ichiban_kuji_prize_name_image_review",
+        1
+      ],
+      [
+        "ichiban_kuji_prize_name_image_patch_candidates",
+        1
+      ],
+      [
+        "ichiban_kuji_metadata",
+        1
+      ],
+      [
+        "animation_category_review",
         1
       ]
     ],
@@ -2213,7 +2254,15 @@
         12
       ],
       [
+        "agent-metadata",
+        12
+      ],
+      [
         "agent-source-action",
+        10
+      ],
+      [
+        "agent-dedupe",
         10
       ],
       [
@@ -2225,16 +2274,32 @@
         8
       ],
       [
+        "agent-ichiban-action",
+        8
+      ],
+      [
+        "agent-metadata-action",
+        8
+      ],
+      [
+        "agent-ichiban-prize-policy",
+        8
+      ],
+      [
         "agent-image-action",
         7
       ],
       [
-        "agent-metadata-action",
+        "agent-ichiban-kuji",
+        6
+      ],
+      [
+        "agent-dedupe-action",
         5
       ],
       [
         "agent-requested-focus",
-        3
+        4
       ],
       [
         "agent-generic-source-cleanup",
@@ -2253,6 +2318,10 @@
         2
       ],
       [
+        "agent-ichiban-prize-name-image",
+        2
+      ],
+      [
         "agent-gotouchi-review",
         1
       ],
@@ -2265,7 +2334,7 @@
         1
       ],
       [
-        "agent-ichiban-action",
+        "agent-animation-taxonomy",
         1
       ]
     ],
@@ -2334,7 +2403,13 @@
       "ichiban_prize_multi_item_rank_groups": 416,
       "ichiban_prize_name_image_patch_candidate_rows": 15,
       "ichiban_prize_name_image_patch_blocked_rows": 29
-    }
+    },
+    "confirmed_import_template_rows": 1147,
+    "confirmed_import_action_queue_rows": 4626,
+    "confirmed_import_manual_confirmed_ready_rows": 0,
+    "confirmed_import_pending_rows": 0,
+    "confirmed_import_blocked_confirmed_rows": 0,
+    "confirmed_import_manual_confirmation_backlog_rows": 5773
   },
   "generic_source_patch_candidates": {
     "public_report": "data/generic_source_patch_candidates_public.json",
@@ -3264,11 +3339,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 23,
+    "action_count": 24,
     "blocked_action_count": 1,
-    "manual_review_action_count": 20,
+    "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 33595,
+    "total_action_rows": 33629,
     "open_review_queues": {
       "source_discovery_rows": 647,
       "image_missing_rows": 720,
@@ -3335,14 +3410,37 @@
       "ichiban_prize_name_image_patch_candidate_rows": 15,
       "ichiban_prize_name_image_patch_blocked_rows": 29
     },
+    "confirmed_import_template_rows": 1147,
+    "confirmed_import_action_queue_rows": 4626,
+    "confirmed_import_action_queue_batches": 180,
+    "confirmed_import_pending_rows": 0,
+    "confirmed_import_manual_confirmed_ready_rows": 0,
+    "confirmed_import_manual_confirmation_backlog_rows": 5773,
+    "confirmed_import_blocked_confirmed_rows": 0,
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
+    "danganronpa_missing_media_rows": 34,
+    "danganronpa_missing_image_url_rows": 34,
+    "danganronpa_missing_source_url_rows": 34,
+    "danganronpa_missing_media_review_batch_count": 8,
+    "danganronpa_official_search_rows": 18,
+    "danganronpa_licensed_retailer_review_rows": 10,
+    "danganronpa_official_prize_search_rows": 6,
+    "ichiban_campaign_rows": 614,
+    "ichiban_catalog_kuji_item_rows": 7899,
+    "ichiban_campaigns_with_catalog_items": 576,
+    "ichiban_campaigns_without_catalog_items": 38,
+    "ichiban_campaign_metadata_review_queue_rows": 42,
+    "ichiban_missing_release_date_campaign_groups": 1,
+    "ichiban_missing_official_price_jpy_campaign_groups": 41,
     "ichiban_zero_price_exception_policy_pass": true,
     "ichiban_multi_item_prize_label_groups": 416,
     "ichiban_prize_policy_review_batch_count": 39,
     "ichiban_incomplete_numbered_variant_prize_label_groups": 0,
+    "ichiban_numbered_variant_created_rows": 2518,
+    "ichiban_numbered_variant_application_skipped_rows": 0,
     "ichiban_reissue_duplicate_review_groups": 46,
-    "ichiban_probable_reissue_review_groups": 0,
+    "ichiban_probable_reissue_review_groups": 20,
     "ichiban_prize_name_image_review_rows": 44,
     "ichiban_prize_name_image_name_structure_review_rows": 44,
     "ichiban_prize_name_image_image_identity_review_rows": 0,
@@ -3351,7 +3449,11 @@
     "ichiban_prize_name_image_patch_blocked_rows": 29,
     "dedupe_fast_review_groups": 42,
     "dedupe_fast_review_same_source_url_groups": 38,
+    "dedupe_ichiban_reissue_review_groups": 46,
+    "dedupe_ichiban_probable_reissue_review_groups": 20,
     "image_action_source_url_update_required_rows": 50,
+    "image_candidate_provider_items": 496,
+    "image_candidate_manual_or_blocked_items": 228,
     "image_action_source_url_update_template_rows": 50,
     "image_action_image_url_ready_rows": 0,
     "image_action_workstream_count": 4,
@@ -3360,12 +3462,22 @@
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_fallback_rows": 20,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
+    "source_discovery_action_rows": 642,
+    "source_discovery_actionable_rows": 642,
+    "source_discovery_unqueued_actionable_rows": 0,
+    "source_discovery_manual_research_backlog_rows": 5,
+    "animation_unknown_category_rows": 391,
+    "animation_unknown_category_count": 3,
     "animation_split_review_categories": 3,
     "animation_candidate_split_rules": 21,
     "animation_split_matched_catalog_rows": 2283,
     "animation_split_unmatched_catalog_rows": 2712,
     "animation_unmatched_keyword_candidates": 49,
     "animation_unmatched_keyword_product_type_candidates": 6,
+    "animation_app_folder_color_count": 188,
+    "animation_app_folder_icon_option_count": 211,
+    "animation_app_folder_palette_sorted_by_family": true,
+    "animation_app_visuals_covered": true,
     "auto_apply_enabled": false
   },
   "requested_focus_action_queue": {
@@ -3467,6 +3579,12 @@
         8
       ]
     ],
+    "ichiban_reissue_review_groups": 46,
+    "ichiban_reissue_review_rows": 92,
+    "ichiban_probable_reissue_review_groups": 20,
+    "ichiban_probable_reissue_sample_rows": 40,
+    "ichiban_reissue_protected_groups": 0,
+    "ichiban_reissue_protected_rows": 0,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
   },
@@ -3558,6 +3676,11 @@
         "release_date",
         2
       ]
+    ],
+    "work_order_steps": 2,
+    "work_order_lanes": [
+      "confirm_release_dates",
+      "confirm_draw_prices"
     ],
     "skipped_without_templates": 0,
     "auto_apply_enabled": false
@@ -4824,6 +4947,15 @@
     "app_folder_palette_section_count": 8,
     "app_folder_palette_sorted_by_family": true,
     "app_animation_visuals_covered": true,
+    "work_order_steps": 1,
+    "work_order_lanes": [
+      "name_level_split_review"
+    ],
+    "split_first_blocked_categories": [
+      "아크릴",
+      "굿즈",
+      "기타 굿즈"
+    ],
     "auto_apply_enabled": false
   },
   "image_asset_audit": {
@@ -5131,10 +5263,10 @@
     "exact_source_ready_rows": 0,
     "source_first_rows": 692,
     "review_before_attach_rows": 23,
-    "source_detail_candidate_review_rows": 1,
+    "source_detail_candidate_review_rows": 0,
     "source_detail_candidate_recheck_required_rows": 11,
     "source_detail_identity_warning_rows": 11,
-    "source_detail_unflagged_candidate_rows": 1,
+    "source_detail_unflagged_candidate_rows": 0,
     "manual_image_research_rows": 5,
     "source_discovery_focus_pack_rows": 427,
     "source_discovery_focus_pack_count": 24,
@@ -5147,7 +5279,7 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 427,
     "source_discovery_focus_coverage": 0.6651,
     "source_discovery_non_focus_rows": 215,
-    "action_queue_rows": 74,
+    "action_queue_rows": 73,
     "direct_image_action_queue_rows": 73,
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
@@ -5155,7 +5287,7 @@
     "image_attachment_template_representative_review_rows": 23,
     "image_attachment_template_dry_run_updated_rows": 0,
     "image_attachment_template_dry_run_skipped_rows": 73,
-    "actionable_image_rows": 74,
+    "actionable_image_rows": 73,
     "auto_apply_enabled": false
   },
   "source_discovery_store_bottlenecks": {
@@ -5286,11 +5418,33 @@
     "zero_price_exception_policy_pass": true,
     "campaign_prize_label_groups": 5374,
     "multi_item_prize_label_groups": 416,
+    "multi_item_prize_label_review_lanes": [
+      [
+        "numbered_variant_complete",
+        409
+      ],
+      [
+        "unnumbered_multi_item_prize_review",
+        7
+      ]
+    ],
     "numbered_variant_prize_label_groups": 409,
     "incomplete_numbered_variant_prize_label_groups": 0,
     "numbered_variant_coverage_policy_pass": true,
+    "numbered_variant_application_write": true,
+    "numbered_variant_source_prizes_considered": 409,
+    "numbered_variant_applied_prizes": 409,
+    "numbered_variant_updated_existing_rows": 409,
+    "numbered_variant_created_rows": 2518,
+    "numbered_variant_application_skipped_rows": 0,
     "repeated_name_different_source_groups": 46,
-    "probable_reissue_review_groups": 0,
+    "probable_reissue_review_groups": 20,
+    "reissue_signal_reason_counts": [
+      [
+        "campaign_url_slug_number_suffix_family",
+        20
+      ]
+    ],
     "zero_price_violation_rows": 0,
     "multi_item_prize_label_review_batch_count": 35,
     "multi_item_prize_label_review_catalog_item_rows": 2941,
@@ -5620,6 +5774,8 @@
     "template_items": 427,
     "official_search_url_count": 20,
     "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+    "pack_queue_preview_count": 8,
+    "next_pack_after_current": "source-discovery-focus-002",
     "auto_apply_enabled": false
   },
   "source_discovery_next_focus_pack_import_dry_run": {
@@ -5718,7 +5874,27 @@
     ],
     "fallback_query_count": 99,
     "domain_limited_web_search_url_count": 99,
+    "work_order_steps": 3,
+    "work_order_lanes": [
+      "domain_limited_exact_title_search",
+      "legacy_mobile_store_search",
+      "evidence_fill_and_dry_run"
+    ],
+    "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+    "first_fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
     "auto_apply_enabled": false,
     "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
+  },
+  "source_discovery_next_focus_fallback_import_dry_run": {
+    "public_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json",
+    "write": false,
+    "updated_rows": 0,
+    "skipped_rows": 20,
+    "skip_reason_counts": [
+      [
+        "manual_confirmed_false",
+        20
+      ]
+    ]
   }
 }
