@@ -1875,6 +1875,8 @@ def build_operations_public(
             "unqueued_actionable_image_rows": image_action_queue_summary.get("unqueued_actionable_image_rows", 0),
             "sample_queue_coverage": image_action_queue_summary.get("sample_queue_coverage", 0),
             "action_batch_count": image_action_queue_summary.get("action_batch_count", 0),
+            "source_url_update_required_rows": image_action_queue_summary.get("source_url_update_required_rows", 0),
+            "source_url_update_template_rows": image_action_queue_summary.get("source_url_update_template_rows", 0),
             "by_workflow": image_action_queue_summary.get("by_workflow", []),
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
             "excluded_workflow_rows": image_action_queue_summary.get("excluded_workflow_rows", []),
@@ -3072,6 +3074,7 @@ def build_agent_work_queue_public(
                 recommended_action=str(action_batch.get("recommended_action") or "review image action batch"),
                 acceptance_criteria=[
                     "Confirm exact product identity before filling image_url.",
+                    "For generic storefront rows, fill source_url_import_template before image_url.",
                     "Use official or trusted product image evidence, not resale or generic listing images.",
                     "Prepare reviewed image templates only; auto-apply remains disabled.",
                 ],

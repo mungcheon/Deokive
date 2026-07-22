@@ -72,6 +72,7 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     source_url_update_required = workflow == "replace_generic_source_then_extract_image"
     representative_image_review_required = workflow == "review_gotouchi_official_candidates"
     image_url_ready = workflow == "extract_from_existing_source_url"
+    source_url_template = _source_url_import_template(item, group) if source_url_update_required else None
     return {
         "catalog_index": item.get("catalog_index"),
         "workflow": workflow,
@@ -86,8 +87,31 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "representative_image_review_required": representative_image_review_required,
         "image_url_ready": image_url_ready,
         "required_before_image_import": _required_before_image_import(workflow),
+        "source_url_import_template": source_url_template,
         "catalog_field_import_template": template,
         "review_state": "exact_product_image_confirmation_required",
+        "auto_apply_enabled": False,
+    }
+
+
+def _source_url_import_template(item: dict[str, Any], group: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "manual_confirmed": False,
+        "manual_note": "",
+        "row_index": item.get("catalog_index"),
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "current_source_url": item.get("source_url"),
+        "source_store": item.get("source_store") or group.get("source_store"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "series_name": item.get("series_name"),
+        "category": item.get("category"),
+        "official_search_url": item.get("official_search_url"),
+        "workflow": group.get("workflow"),
+        "blocked_until": "exact_product_source_url_confirmed",
         "auto_apply_enabled": False,
     }
 
@@ -178,6 +202,7 @@ def build_report(
     queued_rows = sum(int(batch.get("row_count") or 0) for batch in batches)
     unqueued_actionable_rows = max(actionable_group_rows - queued_rows, 0)
     source_url_update_required_rows = sum(1 for item in action_items if item.get("source_url_update_required"))
+    source_url_update_template_rows = sum(1 for item in action_items if item.get("source_url_import_template"))
     representative_image_review_required_rows = sum(
         1 for item in action_items if item.get("representative_image_review_required")
     )
@@ -201,6 +226,7 @@ def build_report(
             "by_workflow": _counter_pairs(action_items, "workflow"),
             "by_source_store": _counter_pairs(action_items, "source_store"),
             "source_url_update_required_rows": source_url_update_required_rows,
+            "source_url_update_template_rows": source_url_update_template_rows,
             "representative_image_review_required_rows": representative_image_review_required_rows,
             "image_url_ready_rows": image_url_ready_rows,
             "excluded_workflow_rows": [[key, value] for key, value in excluded_workflows.most_common()],
@@ -211,6 +237,7 @@ def build_report(
             "Every image still needs exact product evidence before catalog mutation.",
             "queued_image_rows is the current review sample; unqueued_actionable_image_rows remains for later batches.",
             "Rows without source_url stay in catalog_image_enrichment_batches_public.json and source discovery queues.",
+            "For generic storefront rows, fill source_url_import_template before the image_url template.",
         ],
         "batches": batches,
         "automation_policy": {

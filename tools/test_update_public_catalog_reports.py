@@ -773,6 +773,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_action_summary.get("sample_queue_coverage"),
         )
         self.assertEqual(
+            image_next_action.get("source_url_update_template_rows"),
+            image_action_summary.get("source_url_update_template_rows"),
+        )
+        self.assertEqual(
             image_next_action.get("by_source_store"),
             image_action_summary.get("by_source_store"),
         )

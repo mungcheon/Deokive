@@ -370,6 +370,9 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "source_url_update_required_rows": _count(
                     image_action_summary, "source_url_update_required_rows"
                 ),
+                "source_url_update_template_rows": _count(
+                    image_action_summary, "source_url_update_template_rows"
+                ),
                 "representative_image_review_required_rows": _count(
                     image_action_summary, "representative_image_review_required_rows"
                 ),
@@ -642,6 +645,9 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "image_action_source_url_update_required_rows": _count(
                 image_action_summary, "source_url_update_required_rows"
+            ),
+            "image_action_source_url_update_template_rows": _count(
+                image_action_summary, "source_url_update_template_rows"
             ),
             "image_action_image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
             "animation_split_review_categories": _count(animation_split_summary, "split_review_categories"),
