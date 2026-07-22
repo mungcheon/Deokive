@@ -86,6 +86,20 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_category_changes"])
         self.assertFalse(report["automation_policy"]["auto_create_folders"])
+        self.assertEqual(len(report["work_order"]), 1)
+        self.assertEqual(report["work_order"][0]["lane"], "name_level_split_review")
+        self.assertEqual(report["work_order"][0]["category_count"], 1)
+        self.assertEqual(report["work_order"][0]["affected_catalog_rows"], 97)
+        self.assertEqual(
+            report["work_order"][0]["next_step"],
+            "confirm_animation_category_name_split_templates",
+        )
+        self.assertEqual(
+            report["work_order"][0]["blocked_direct_mapping_categories"],
+            ["Acrylic"],
+        )
+        self.assertTrue(report["work_order"][0]["manual_confirmation_required"])
+        self.assertFalse(report["work_order"][0]["auto_apply_enabled"])
         batch = report["batches"][0]
         self.assertEqual(batch["review_state"], "manual_category_mapping_confirmation_required")
         self.assertEqual(batch["next_machine_step"], "fill_confirmed_animation_category_mapping_templates")

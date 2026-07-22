@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T19:49:10Z",
+  "generated_at": "2026-07-22T20:59:14Z",
   "scope": "animation_category_action_queue",
   "summary": {
     "actionable_categories": 3,
@@ -2826,6 +2826,28 @@
     "duplicate_icon_keys": [],
     "duplicate_colors": []
   },
+  "work_order": [
+    {
+      "rank": 1,
+      "lane": "name_level_split_review",
+      "source": "animation_category_split_review_public.json",
+      "category_count": 3,
+      "affected_catalog_rows": 391,
+      "next_step": "confirm_animation_category_name_split_templates",
+      "template": "server/animation_category_name_split_confirmed_rows.template.json",
+      "blocked_direct_mapping_categories": [
+        "아크릴",
+        "굿즈",
+        "기타 굿즈"
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "notes": [
+        "Broad categories must be split by product-type keywords before any folder/category mapping.",
+        "Do not map an entire broad category such as acrylic or goods to one target folder."
+      ]
+    }
+  ],
   "batches": [
     {
       "batch_id": "animation-category-action-001",

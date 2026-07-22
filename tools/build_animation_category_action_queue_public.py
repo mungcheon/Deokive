@@ -164,6 +164,51 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _work_order(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    split_rows = [row for row in rows if row.get("requires_name_level_split_review")]
+    direct_rows = [row for row in rows if not row.get("requires_name_level_split_review")]
+    orders: list[dict[str, Any]] = []
+
+    if split_rows:
+        orders.append(
+            {
+                "rank": 1,
+                "lane": "name_level_split_review",
+                "source": "animation_category_split_review_public.json",
+                "category_count": len(split_rows),
+                "affected_catalog_rows": sum(int(row.get("rows") or 0) for row in split_rows),
+                "next_step": "confirm_animation_category_name_split_templates",
+                "template": "server/animation_category_name_split_confirmed_rows.template.json",
+                "blocked_direct_mapping_categories": [row.get("category") for row in split_rows],
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                "notes": [
+                    "Broad categories must be split by product-type keywords before any folder/category mapping.",
+                    "Do not map an entire broad category such as acrylic or goods to one target folder.",
+                ],
+            }
+        )
+
+    if direct_rows:
+        orders.append(
+            {
+                "rank": 2,
+                "lane": "direct_category_mapping_review",
+                "source": "animation_category_action_queue_public.json",
+                "category_count": len(direct_rows),
+                "affected_catalog_rows": sum(int(row.get("rows") or 0) for row in direct_rows),
+                "next_step": "fill_confirmed_animation_category_mapping_templates",
+                "template": CONFIRMED_TEMPLATE,
+                "categories": [row.get("category") for row in direct_rows],
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                "notes": ["Only use after sample names match a single target goods type."],
+            }
+        )
+
+    return orders
+
+
 def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size: int = 6) -> dict[str, Any]:
     rows = [_compact(row) for row in _categories(payload)]
     rows.sort(key=lambda row: (int(row.get("review_priority") or 999), str(row.get("category") or "")))
@@ -219,12 +264,14 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
         "app_animation_visuals_covered": bool(app_visual_catalog.get("animation_visuals_covered")),
         "auto_apply_enabled": False,
     }
+    work_order = _work_order(queued)
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
         "scope": "animation_category_action_queue",
         "summary": summary,
         "app_folder_visual_catalog": app_visual_catalog,
+        "work_order": work_order,
         "batches": batches,
         "automation_policy": {
             "auto_apply_category_changes": False,
