@@ -42,6 +42,65 @@ def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     return [[name, count] for name, count in counts.most_common()]
 
 
+def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    workstreams: dict[str, dict[str, Any]] = {}
+    for batch in batches:
+        source_store = str(batch.get("source_store") or "unknown")
+        bucket = workstreams.setdefault(
+            source_store,
+            {
+                "source_store": source_store,
+                "priority": int(batch.get("priority") or 99),
+                "queued_source_rows": 0,
+                "batch_ids": [],
+                "workflow_rows": Counter(),
+                "review_state_rows": Counter(),
+                "category_rows": Counter(),
+                "sample_items": [],
+                "recommended_next_step": "confirm_exact_source_url_then_fill_source_templates",
+                "auto_apply_enabled": False,
+            },
+        )
+        bucket["priority"] = min(int(bucket["priority"]), int(batch.get("priority") or 99))
+        row_count = int(batch.get("row_count") or 0)
+        bucket["queued_source_rows"] += row_count
+        bucket["batch_ids"].append(batch.get("batch_id"))
+        bucket["workflow_rows"][str(batch.get("workflow") or "")] += row_count
+        bucket["review_state_rows"][str(batch.get("review_state") or "")] += row_count
+        for category, count in batch.get("category_counts") or []:
+            bucket["category_rows"][str(category or "")] += int(count or 0)
+        for item in batch.get("items") or []:
+            if isinstance(item, dict) and len(bucket["sample_items"]) < 8:
+                bucket["sample_items"].append(
+                    {
+                        "catalog_index": item.get("catalog_index"),
+                        "name_ko": item.get("name_ko"),
+                        "name_ja": item.get("name_ja"),
+                        "category": item.get("category"),
+                        "official_search_url": item.get("official_search_url"),
+                        "allowed_source_domains": item.get("allowed_source_domains") or [],
+                    }
+                )
+
+    rows: list[dict[str, Any]] = []
+    for bucket in workstreams.values():
+        rows.append(
+            {
+                "source_store": bucket["source_store"],
+                "priority": bucket["priority"],
+                "queued_source_rows": bucket["queued_source_rows"],
+                "batch_ids": [batch_id for batch_id in bucket["batch_ids"] if batch_id],
+                "workflow_rows": [[key, value] for key, value in bucket["workflow_rows"].most_common() if key],
+                "review_state_rows": [[key, value] for key, value in bucket["review_state_rows"].most_common() if key],
+                "category_rows": [[key, value] for key, value in bucket["category_rows"].most_common(12) if key],
+                "sample_items": bucket["sample_items"],
+                "recommended_next_step": bucket["recommended_next_step"],
+                "auto_apply_enabled": False,
+            }
+        )
+    return sorted(rows, key=lambda row: (int(row["priority"]), -int(row["queued_source_rows"]), str(row["source_store"])))
+
+
 def _compact_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     template = item.get("catalog_field_import_template")
     template = template if isinstance(template, dict) else {}
@@ -171,6 +230,7 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "Accepted source_url values must be exact product/detail pages, not search results or storefronts.",
             "After source_url is confirmed, image_url can be handled by the image attachment queues.",
         ],
+        "source_store_workstreams": _source_store_workstreams(batches),
         "batches": batches,
         "automation_policy": {
             "auto_apply_source_url": False,

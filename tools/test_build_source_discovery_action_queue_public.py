@@ -71,6 +71,12 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(dict(report["summary"]["excluded_review_state_rows"]), {"manual_official_research_required": 5})
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual([item["catalog_index"] for item in report["batches"][0]["items"]], [1, 2])
+        self.assertEqual(report["source_store_workstreams"][0]["source_store"], "Animate")
+        self.assertEqual(report["source_store_workstreams"][0]["queued_source_rows"], 2)
+        self.assertEqual(report["source_store_workstreams"][0]["batch_ids"], ["source-discovery-action-001"])
+        self.assertEqual(report["source_store_workstreams"][0]["workflow_rows"], [["official_search_url_available", 2]])
+        self.assertEqual(report["source_store_workstreams"][0]["sample_items"][0]["catalog_index"], 1)
+        self.assertFalse(report["source_store_workstreams"][0]["auto_apply_enabled"])
         self.assertEqual(
             report["batches"][0]["items"][0]["source_patch_template"]["catalog_index"],
             1,
