@@ -35,10 +35,30 @@ def _categories(payload: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
+def _mapping_mode(row: dict[str, Any]) -> str:
+    reason = str(row.get("review_reason") or "").lower()
+    category = str(row.get("category") or "").strip().lower()
+    rows = int(row.get("rows") or 0)
+    if "split" in reason or "broad" in reason:
+        return "name_level_split_review_required"
+    if category in {"acrylic", "아크릴"}:
+        return "name_level_split_review_required"
+    if rows >= 50 and str(row.get("suggested_category") or "").strip().lower() != category:
+        return "name_level_split_review_required"
+    return "direct_category_mapping_review"
+
+
+def _requires_split_review(row: dict[str, Any]) -> bool:
+    return _mapping_mode(row) == "name_level_split_review_required"
+
+
 def _template(row: dict[str, Any]) -> dict[str, Any]:
     folder = row.get("folder_template") if isinstance(row.get("folder_template"), dict) else {}
+    mapping_mode = _mapping_mode(row)
     return {
         "manual_confirmed": False,
+        "mapping_mode": mapping_mode,
+        "requires_name_level_split_review": mapping_mode == "name_level_split_review_required",
         "source_category": row.get("category"),
         "target_category": row.get("suggested_category") or row.get("category"),
         "target_family": row.get("suggested_family"),
@@ -60,10 +80,13 @@ def _template(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def _compact(row: dict[str, Any]) -> dict[str, Any]:
+    mapping_mode = _mapping_mode(row)
     return {
         "category": row.get("category"),
         "rows": int(row.get("rows") or 0),
         "review_priority": int(row.get("review_priority") or 999),
+        "mapping_mode": mapping_mode,
+        "requires_name_level_split_review": mapping_mode == "name_level_split_review_required",
         "suggested_family": row.get("suggested_family"),
         "suggested_category": row.get("suggested_category"),
         "suggested_color_group": row.get("suggested_color_group"),
@@ -102,6 +125,7 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
 
     all_rows = sum(int(row.get("rows") or 0) for row in rows)
     queued_rows = sum(int(row.get("rows") or 0) for row in queued)
+    mapping_mode_counts = Counter(str(row.get("mapping_mode") or "") for row in rows)
     summary = {
         "actionable_categories": len(rows),
         "queued_categories": len(queued),
@@ -112,6 +136,9 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
         "max_categories": max_categories,
         "by_suggested_family": Counter(str(row.get("suggested_family") or "") for row in rows).most_common(),
         "by_color_group": Counter(str(row.get("suggested_color_group") or "neutral") for row in rows).most_common(),
+        "by_mapping_mode": mapping_mode_counts.most_common(),
+        "split_review_categories": sum(1 for row in rows if _requires_split_review(row)),
+        "direct_mapping_categories": sum(1 for row in rows if not _requires_split_review(row)),
         "auto_apply_enabled": False,
     }
     return {

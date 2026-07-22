@@ -60,14 +60,24 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["actionable_categories"], 2)
         self.assertEqual(report["summary"]["queued_categories"], 1)
         self.assertEqual(report["summary"]["queued_catalog_rows"], 97)
+        self.assertEqual(report["summary"]["split_review_categories"], 1)
+        self.assertEqual(report["summary"]["direct_mapping_categories"], 1)
+        self.assertEqual(
+            report["summary"]["by_mapping_mode"],
+            [("name_level_split_review_required", 1), ("direct_category_mapping_review", 1)],
+        )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_category_changes"])
         self.assertFalse(report["automation_policy"]["auto_create_folders"])
         batch = report["batches"][0]
         self.assertEqual(batch["review_state"], "manual_category_mapping_confirmation_required")
         self.assertEqual(batch["next_machine_step"], "fill_confirmed_animation_category_mapping_templates")
+        self.assertEqual(batch["categories"][0]["mapping_mode"], "name_level_split_review_required")
+        self.assertTrue(batch["categories"][0]["requires_name_level_split_review"])
         template = batch["categories"][0]["category_mapping_template"]
         self.assertFalse(template["manual_confirmed"])
+        self.assertEqual(template["mapping_mode"], "name_level_split_review_required")
+        self.assertTrue(template["requires_name_level_split_review"])
         self.assertEqual(template["source_category"], "Acrylic")
         self.assertEqual(template["target_category"], "Acrylic Stand")
         self.assertEqual(template["folder_icon_key"], "view_carousel")
