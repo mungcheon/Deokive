@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T14:19:57Z",
+  "generated_at": "2026-07-22T14:39:49Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 18,
@@ -63,7 +63,9 @@
     "requested_focus_barcode_template_rows": 5674,
     "ichiban_zero_price_exception_policy_pass": true,
     "ichiban_multi_item_prize_label_groups": 416,
+    "ichiban_incomplete_numbered_variant_prize_label_groups": 0,
     "ichiban_reissue_duplicate_review_groups": 46,
+    "ichiban_probable_reissue_review_groups": 0,
     "dedupe_fast_review_groups": 42,
     "dedupe_fast_review_same_source_url_groups": 38,
     "image_action_source_url_update_required_rows": 50,
@@ -1026,13 +1028,14 @@
       "public_report": "data/ichiban_kuji_prize_policy_audit_public.json",
       "status": "manual_review",
       "rows": 462,
-      "command": "Apply confirmed last-one/double-chance zero-price fixes first; then review multi-variant prize labels and reissue duplicate candidates.",
-      "next_step": "review_ichiban_price_exceptions_then_variant_and_reissue_groups",
-      "blocker": "No zero-price violations remain; variant/reissue groups still need official campaign review before mutation.",
+      "command": "Apply confirmed last-one/double-chance zero-price fixes first; then review numbered variant coverage, multi-variant prize labels, and reissue duplicate candidates.",
+      "next_step": "review_ichiban_price_exceptions_then_numbered_variants_and_reissue_groups",
+      "blocker": "No zero-price violations remain; numbered variant, variant, and reissue groups still need official campaign review before mutation.",
       "auto_apply_enabled": false,
       "evidence": {
         "kuji_rows": 7899,
         "zero_price_exception_policy_pass": true,
+        "numbered_variant_coverage_policy_pass": true,
         "last_one_rows": 533,
         "last_one_nonzero_price_rows": 0,
         "last_one_missing_price_rows": 0,
@@ -1040,7 +1043,10 @@
         "double_chance_nonzero_price_rows": 0,
         "double_chance_missing_price_rows": 0,
         "multi_item_prize_label_groups": 416,
-        "repeated_name_different_source_groups": 46
+        "numbered_variant_prize_label_groups": 409,
+        "incomplete_numbered_variant_prize_label_groups": 0,
+        "repeated_name_different_source_groups": 46,
+        "probable_reissue_review_groups": 0
       }
     },
     {

@@ -2084,8 +2084,20 @@ def build_operations_public(
             "multi_item_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "multi_item_prize_label_groups", 0
             ),
+            "numbered_variant_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_prize_label_groups", 0
+            ),
+            "incomplete_numbered_variant_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
+                "incomplete_numbered_variant_prize_label_groups", 0
+            ),
+            "numbered_variant_coverage_policy_pass": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_coverage_policy_pass", False
+            ),
             "repeated_name_different_source_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "repeated_name_different_source_groups", 0
+            ),
+            "probable_reissue_review_groups": ichiban_kuji_prize_policy_audit_summary.get(
+                "probable_reissue_review_groups", 0
             ),
             "zero_price_exception_policy_pass": ichiban_kuji_prize_policy_audit_summary.get(
                 "zero_price_exception_policy_pass", False

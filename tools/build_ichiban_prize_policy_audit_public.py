@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -21,6 +22,8 @@ DOUBLE_CHANCE_TOKENS = (
     "double-chance",
     "doublechance",
 )
+REISSUE_TOKENS = ("再販売", "再販", "reissue", "rerun")
+NUMBERED_VARIANT_PATTERN = re.compile(r"[（(](\d+)\s*/\s*(\d+)[）)]")
 
 
 def now_utc() -> str:
@@ -74,6 +77,27 @@ def compact_row(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def numbered_variant_marks(row: dict[str, Any]) -> list[tuple[int, int]]:
+    text = " ".join(str(row.get(field) or "") for field in ("name_ko", "name_ja", "name_en"))
+    return [(int(match.group(1)), int(match.group(2))) for match in NUMBERED_VARIANT_PATTERN.finditer(text)]
+
+
+def has_reissue_signal(row: dict[str, Any]) -> bool:
+    blob = " ".join(
+        str(row.get(field) or "") for field in ("name_ko", "name_ja", "name_en", "series_name", "sub_series", "source_url")
+    ).lower()
+    source_url = str(row.get("source_url") or "").lower().rstrip("/")
+    return any(token.lower() in blob for token in REISSUE_TOKENS) or bool(re.search(r"-\d+$", source_url))
+
+
+def normalized_reissue_review_name(row: dict[str, Any]) -> str:
+    name = str(row.get("name_ko") or "").lower()
+    for token in REISSUE_TOKENS:
+        name = name.replace(token.lower(), "")
+    name = name.replace("（ ）", " ").replace("（）", " ").replace("()", " ")
+    return " ".join(name.split())
+
+
 def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     items = [row for row in catalog.get("items", []) if isinstance(row, dict)]
     kuji_rows = [row for row in items if is_ichiban_row(row)]
@@ -104,25 +128,65 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
     ]
     multi_item_prize_groups.sort(key=lambda row: (-int(row["row_count"]), row["source_url"], row["sub_series"]))
 
+    numbered_variant_groups = []
+    incomplete_numbered_variant_groups = []
+    for (source_url, sub_series), rows in by_campaign_prize.items():
+        marks: list[tuple[int, int]] = []
+        for row in rows:
+            marks.extend(numbered_variant_marks(row))
+        if not marks:
+            continue
+        expected_count = max(denominator for _, denominator in marks)
+        seen_numbers = sorted({number for number, _ in marks})
+        missing_numbers = [number for number in range(1, expected_count + 1) if number not in seen_numbers]
+        group = {
+            "source_url": source_url,
+            "sub_series": sub_series,
+            "expected_variant_count": expected_count,
+            "actual_row_count": len(rows),
+            "numbered_variant_rows": len(marks),
+            "seen_variant_numbers": seen_numbers[:120],
+            "missing_variant_numbers": missing_numbers[:120],
+            "coverage_complete": not missing_numbers and len(rows) >= expected_count,
+            "sample_rows": [compact_row(row) for row in rows[:8]],
+        }
+        numbered_variant_groups.append(group)
+        if not group["coverage_complete"]:
+            incomplete_numbered_variant_groups.append(group)
+    numbered_variant_groups.sort(
+        key=lambda row: (-int(row["expected_variant_count"]), row["source_url"], row["sub_series"])
+    )
+    incomplete_numbered_variant_groups.sort(
+        key=lambda row: (-len(row["missing_variant_numbers"]), -int(row["expected_variant_count"]), row["source_url"])
+    )
+
     normalized_name_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in kuji_rows:
-        key = " ".join(str(row.get("name_ko") or "").lower().split())
+        key = normalized_reissue_review_name(row)
         if key:
             normalized_name_groups[key].append(row)
     repeated_name_different_source_groups = []
+    probable_reissue_review_groups = []
     for rows in normalized_name_groups.values():
         source_urls = {str(row.get("source_url") or "") for row in rows}
         if len(rows) > 1 and len(source_urls) > 1:
-            repeated_name_different_source_groups.append(
-                {
-                    "normalized_name": str(rows[0].get("name_ko") or ""),
-                    "row_count": len(rows),
-                    "source_url_count": len(source_urls),
-                    "sample_rows": [compact_row(row) for row in rows[:8]],
-                    "review_reason": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
-                }
-            )
+            has_reissue = any(has_reissue_signal(row) for row in rows)
+            group = {
+                "normalized_name": str(rows[0].get("name_ko") or ""),
+                "row_count": len(rows),
+                "source_url_count": len(source_urls),
+                "has_reissue_signal": has_reissue,
+                "source_urls": sorted(source_urls)[:12],
+                "sample_rows": [compact_row(row) for row in rows[:8]],
+                "review_reason": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+            }
+            repeated_name_different_source_groups.append(group)
+            if has_reissue:
+                probable_reissue_review_groups.append(group)
     repeated_name_different_source_groups.sort(
+        key=lambda row: (-int(row["source_url_count"]), -int(row["row_count"]), row["normalized_name"])
+    )
+    probable_reissue_review_groups.sort(
         key=lambda row: (-int(row["source_url_count"]), -int(row["row_count"]), row["normalized_name"])
     )
 
@@ -145,7 +209,11 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             ),
             "campaign_prize_label_groups": len(by_campaign_prize),
             "multi_item_prize_label_groups": len(multi_item_prize_groups),
+            "numbered_variant_prize_label_groups": len(numbered_variant_groups),
+            "incomplete_numbered_variant_prize_label_groups": len(incomplete_numbered_variant_groups),
+            "numbered_variant_coverage_policy_pass": not incomplete_numbered_variant_groups,
             "repeated_name_different_source_groups": len(repeated_name_different_source_groups),
+            "probable_reissue_review_groups": len(probable_reissue_review_groups),
             "auto_apply_enabled": False,
         },
         "policy": {
@@ -155,13 +223,17 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "notes": [
                 "Last-one and double-chance rows are non-purchase prize exceptions and must stay price 0.",
                 "Multiple rows inside the same prize label can be correct when the official campaign has variants.",
+                "Numbered variant labels such as (1/24) are audited for missing numbers before treating the prize group as complete.",
                 "Repeated names across campaign URLs are review candidates, not automatic duplicates.",
             ],
         },
         "last_one_price_violations": [compact_row(row) for row in last_one_nonzero + last_one_missing],
         "double_chance_price_violations": [compact_row(row) for row in double_chance_nonzero + double_chance_missing],
         "multi_item_prize_label_groups": multi_item_prize_groups[:80],
+        "numbered_variant_prize_label_groups": numbered_variant_groups[:80],
+        "incomplete_numbered_variant_prize_label_groups": incomplete_numbered_variant_groups[:80],
         "repeated_name_different_source_groups": repeated_name_different_source_groups[:80],
+        "probable_reissue_review_groups": probable_reissue_review_groups[:80],
         "top_prize_labels": [[label, count] for label, count in prize_label_counts.most_common(80)],
     }
 

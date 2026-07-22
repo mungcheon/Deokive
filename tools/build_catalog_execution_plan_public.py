@@ -502,26 +502,39 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_price_violation_rows += _count(kuji_policy_summary, "double_chance_nonzero_price_rows")
     kuji_price_violation_rows += _count(kuji_policy_summary, "double_chance_missing_price_rows")
     kuji_variant_review_rows = _count(kuji_policy_summary, "multi_item_prize_label_groups")
+    kuji_incomplete_numbered_variant_rows = _count(
+        kuji_policy_summary, "incomplete_numbered_variant_prize_label_groups"
+    )
     kuji_reissue_review_rows = _count(kuji_policy_summary, "repeated_name_different_source_groups")
-    if kuji_price_violation_rows or kuji_variant_review_rows or kuji_reissue_review_rows:
+    kuji_probable_reissue_review_rows = _count(kuji_policy_summary, "probable_reissue_review_groups")
+    if (
+        kuji_price_violation_rows
+        or kuji_variant_review_rows
+        or kuji_incomplete_numbered_variant_rows
+        or kuji_reissue_review_rows
+    ):
         actions.append(
             _action(
                 priority=62,
                 workstream="ichiban_kuji_prize_policy_audit",
                 public_report="data/ichiban_kuji_prize_policy_audit_public.json",
                 status="manual_review",
-                rows=kuji_price_violation_rows or (kuji_variant_review_rows + kuji_reissue_review_rows),
+                rows=kuji_price_violation_rows
+                or (kuji_incomplete_numbered_variant_rows + kuji_variant_review_rows + kuji_reissue_review_rows),
                 command=(
-                    "Apply confirmed last-one/double-chance zero-price fixes first; then review multi-variant prize labels and reissue duplicate candidates."
+                    "Apply confirmed last-one/double-chance zero-price fixes first; then review numbered variant coverage, multi-variant prize labels, and reissue duplicate candidates."
                 ),
-                next_step="review_ichiban_price_exceptions_then_variant_and_reissue_groups",
+                next_step="review_ichiban_price_exceptions_then_numbered_variants_and_reissue_groups",
                 blocker=None
                 if kuji_price_violation_rows
-                else "No zero-price violations remain; variant/reissue groups still need official campaign review before mutation.",
+                else "No zero-price violations remain; numbered variant, variant, and reissue groups still need official campaign review before mutation.",
                 evidence={
                     "kuji_rows": _count(kuji_policy_summary, "kuji_rows"),
                     "zero_price_exception_policy_pass": bool(
                         kuji_policy_summary.get("zero_price_exception_policy_pass")
+                    ),
+                    "numbered_variant_coverage_policy_pass": bool(
+                        kuji_policy_summary.get("numbered_variant_coverage_policy_pass")
                     ),
                     "last_one_rows": _count(kuji_policy_summary, "last_one_rows"),
                     "last_one_nonzero_price_rows": _count(
@@ -538,7 +551,12 @@ def _build_plan(load_report) -> dict[str, Any]:
                         kuji_policy_summary, "double_chance_missing_price_rows"
                     ),
                     "multi_item_prize_label_groups": kuji_variant_review_rows,
+                    "numbered_variant_prize_label_groups": _count(
+                        kuji_policy_summary, "numbered_variant_prize_label_groups"
+                    ),
+                    "incomplete_numbered_variant_prize_label_groups": kuji_incomplete_numbered_variant_rows,
                     "repeated_name_different_source_groups": kuji_reissue_review_rows,
+                    "probable_reissue_review_groups": kuji_probable_reissue_review_rows,
                 },
             )
         )
@@ -611,8 +629,10 @@ def _build_plan(load_report) -> dict[str, Any]:
             "ichiban_zero_price_exception_policy_pass": bool(
                 kuji_policy_summary.get("zero_price_exception_policy_pass")
             ),
-            "ichiban_multi_item_prize_label_groups": kuji_variant_review_rows,
-            "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
+        "ichiban_multi_item_prize_label_groups": kuji_variant_review_rows,
+        "ichiban_incomplete_numbered_variant_prize_label_groups": kuji_incomplete_numbered_variant_rows,
+        "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
+        "ichiban_probable_reissue_review_groups": kuji_probable_reissue_review_rows,
             "dedupe_fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
             "dedupe_fast_review_same_source_url_groups": _count(
                 dedupe_fast_summary, "same_source_url_groups"

@@ -150,6 +150,14 @@ class PublicCatalogReportTests(unittest.TestCase):
                 prize_audit["summary"]["last_one_nonzero_price_rows"],
             )
             self.assertEqual(quality["ichiban_kuji_prize_policy_audit"]["double_chance_nonzero_price_rows"], 0)
+            self.assertEqual(
+                quality["ichiban_kuji_prize_policy_audit"]["incomplete_numbered_variant_prize_label_groups"],
+                prize_audit["summary"]["incomplete_numbered_variant_prize_label_groups"],
+            )
+            self.assertIs(
+                quality["ichiban_kuji_prize_policy_audit"]["numbered_variant_coverage_policy_pass"],
+                prize_audit["summary"]["numbered_variant_coverage_policy_pass"],
+            )
             self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["zero_price_exception_policy_pass"], True)
             self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["auto_apply_enabled"], False)
 
