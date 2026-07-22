@@ -166,9 +166,9 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.80,
-        minChildSize: 0.50,
-        maxChildSize: 0.96,
+        initialChildSize: 0.90,
+        minChildSize: 0.80,
+        maxChildSize: 0.98,
         builder: (context, scrollController) {
           return StatefulBuilder(
             builder: (context, setSheetState) {
@@ -475,7 +475,10 @@ GoodsItem goodsItemFromCatalogEntry({
         entry.barcode?.trim().isEmpty ?? true ? null : entry.barcode!.trim(),
     storageLocation: null,
     imageBytesList: imageBytes == null ? const [] : [imageBytes],
-    imageUrl: catalogEntryImageReference(entry, preferLocalAsset: false),
+    imageUrl: catalogEntryImageReference(
+      entry,
+      preferLocalAsset: imageBytes == null,
+    ),
     isFavorite: false,
   );
 }
@@ -586,37 +589,50 @@ Future<Uint8List?> loadCatalogEntryBundledImageBytes(
 ) async {
   final localPath = entry.localImagePath?.trim() ?? '';
   if (localPath.isNotEmpty) {
-    try {
-      final data = await rootBundle.load(localPath);
-      return data.buffer.asUint8List();
-    } catch (_) {
-      if (kIsWeb) {
-        final bytes = await _loadWebAssetBytes(localPath);
-        if (bytes != null) return bytes;
+    for (final assetKey in _candidateAssetKeys(localPath)) {
+      try {
+        final data = await rootBundle.load(assetKey);
+        return data.buffer.asUint8List();
+      } catch (_) {
+        // Try the next common Flutter web/native asset key shape.
       }
-      // Fall back to the remote URL when a bundled cache file is unavailable.
     }
+    if (kIsWeb) {
+      final bytes = await _loadWebAssetBytes(localPath);
+      if (bytes != null) return bytes;
+    }
+    // Fall back to the remote URL when a bundled cache file is unavailable.
   }
   return null;
 }
 
 Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
   if (!assetPath.startsWith('assets/')) return null;
-  try {
-    final response = await http.get(
-      Uri.base.resolve('assets/$assetPath'),
-      headers: const {
-        'User-Agent': 'Mozilla/5.0 Deokive/1.0',
-        'Accept': 'image/*,*/*',
-      },
-    ).timeout(const Duration(seconds: 8));
-    if (response.statusCode != 200 || response.bodyBytes.isEmpty) {
-      return null;
+  for (final path in [assetPath, 'assets/$assetPath']) {
+    try {
+      final response = await http.get(
+        Uri.base.resolve(path),
+        headers: const {
+          'User-Agent': 'Mozilla/5.0 Deokive/1.0',
+          'Accept': 'image/*,*/*',
+        },
+      ).timeout(const Duration(seconds: 8));
+      if (response.statusCode == 200 && response.bodyBytes.isNotEmpty) {
+        return response.bodyBytes;
+      }
+    } catch (_) {
+      // Try the next public asset URL shape.
     }
-    return response.bodyBytes;
-  } catch (_) {
-    return null;
   }
+  return null;
+}
+
+List<String> _candidateAssetKeys(String assetPath) {
+  final keys = <String>[assetPath];
+  if (assetPath.startsWith('assets/')) {
+    keys.add('assets/$assetPath');
+  }
+  return keys.toSet().toList(growable: false);
 }
 
 String? catalogEntryImageReference(

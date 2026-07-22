@@ -96,7 +96,7 @@ void main() {
     expect(restored.imageUrl, item.imageUrl);
   });
 
-  test('catalog import keeps remote image reference when bytes are unavailable',
+  test('catalog import keeps local image reference when bytes are unavailable',
       () {
     final appState = AppState();
     final folder = FolderItem(
@@ -120,7 +120,35 @@ void main() {
       folder: folder,
     );
 
-    expect(item.imageUrl, 'https://example.com/catalog/source.jpg');
+    expect(item.imageUrl, 'assets/catalog/cache/sample.jpg');
+  });
+
+  test('catalog import keeps local image reference when bundled bytes fail',
+      () {
+    final appState = AppState();
+    final folder = FolderItem(
+      id: 'top-folder',
+      name: 'Top goods',
+      icon: Icons.folder_rounded,
+      color: Colors.blue,
+    );
+    const entry = GoodsCatalogEntry(
+      nameKo: 'Local cached catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      sourceStore: 'official store',
+      localImagePath: 'assets/catalog_images/sample.webp',
+      imageUrl: 'https://example.com/catalog/source.jpg',
+    );
+
+    final item = goodsItemFromCatalogEntry(
+      appState: appState,
+      entry: entry,
+      folder: folder,
+    );
+
+    expect(item.imageBytesList, isEmpty);
+    expect(item.imageUrl, 'assets/catalog_images/sample.webp');
   });
 
   test('catalog import keeps remote image reference after loading bytes', () {

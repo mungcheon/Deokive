@@ -198,6 +198,27 @@ def _product_type_markers(value: Any) -> set[str]:
     }
 
 
+def _parenthetical_distinctive_tokens(value: Any) -> set[str]:
+    text = unicodedata.normalize("NFKC", str(value or ""))
+    tokens: set[str] = set()
+    for match in re.finditer(r"\(([^()]*)\)", text):
+        tokens.update(_tokens(match.group(1)))
+    return {
+        token
+        for token in tokens
+        if not _is_generic_title_token(token)
+    }
+
+
+def _parenthetical_distinctive_token_groups(*values: Any) -> list[set[str]]:
+    groups: list[set[str]] = []
+    for value in values:
+        tokens = _parenthetical_distinctive_tokens(value)
+        if tokens:
+            groups.append(tokens)
+    return groups
+
+
 def _candidate_title_mismatch_reason(candidate: dict[str, Any], row: dict[str, Any]) -> str | None:
     title = str(candidate.get("candidate_title") or "").strip()
     if not title:
@@ -205,6 +226,14 @@ def _candidate_title_mismatch_reason(candidate: dict[str, Any], row: dict[str, A
     title_tokens = _tokens(title)
     row_name_tokens = _tokens(row.get("name_ja")) | _tokens(row.get("name_ko"))
     row_tokens = row_name_tokens | _tokens(row.get("affiliation"))
+    row_parenthetical_token_groups = _parenthetical_distinctive_token_groups(
+        row.get("name_ja"),
+        row.get("name_ko"),
+    )
+    if row_parenthetical_token_groups and not any(
+        group <= title_tokens for group in row_parenthetical_token_groups
+    ):
+        return "candidate_parenthetical_mismatch"
     row_type_markers = _product_type_markers(
         " ".join(
             str(row.get(field) or "")
@@ -251,6 +280,25 @@ def _candidate_row_name_matches_current_seed(candidate: dict[str, Any], row: dic
     row_ko = str(row.get("name_ko") or "").strip()
     row_ja = str(row.get("name_ja") or "").strip()
     return bool((candidate_ko and candidate_ko == row_ko) or (candidate_ja and candidate_ja == row_ja))
+
+
+def _unique_row_index_by_candidate_name(
+    seed_rows: list[dict[str, Any]],
+    candidate: dict[str, Any],
+) -> int | None:
+    candidate_ko = str(candidate.get("name_ko") or "").strip()
+    candidate_ja = str(candidate.get("name_ja") or "").strip()
+    if not candidate_ko and not candidate_ja:
+        return None
+    matches: list[int] = []
+    for index, row in enumerate(seed_rows):
+        row_ko = str(row.get("name_ko") or "").strip()
+        row_ja = str(row.get("name_ja") or "").strip()
+        if (candidate_ko and candidate_ko == row_ko) or (candidate_ja and candidate_ja == row_ja):
+            matches.append(index)
+            if len(matches) > 1:
+                return None
+    return matches[0] if matches else None
 
 
 def _live_title_matches_current_seed(live_title: str, row: dict[str, Any]) -> bool:
@@ -369,6 +417,7 @@ def import_candidates(
     require_live_title_exact: bool = False,
     trust_manual_confirmed_title: bool = False,
     require_manual_confirmed: bool = False,
+    allow_name_remap: bool = False,
 ) -> dict[str, Any]:
     updated: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
@@ -382,9 +431,7 @@ def import_candidates(
         if row_index is None:
             skipped.append({"row_index": candidate.get("row_index"), "reason": "invalid_row_index"})
             continue
-        if row_index in seen_indexes:
-            skipped.append({"row_index": row_index, "reason": "duplicate_row_index"})
-            continue
+        original_row_index = row_index
 
         source_kind = str(candidate.get("source_kind") or "").strip()
         if source_kind not in ALLOWED_SOURCE_KINDS:
@@ -410,14 +457,31 @@ def import_candidates(
 
         row = seed_rows[row_index]
         if not _candidate_row_name_matches_current_seed(candidate, row):
+            remapped_row_index = (
+                _unique_row_index_by_candidate_name(seed_rows, candidate)
+                if allow_name_remap
+                else None
+            )
+            if remapped_row_index is None:
+                skipped.append(
+                    {
+                        "row_index": row_index,
+                        "reason": "candidate_row_name_mismatch",
+                        "candidate_name_ko": candidate.get("name_ko"),
+                        "candidate_name_ja": candidate.get("name_ja"),
+                        "current_name_ko": row.get("name_ko"),
+                        "current_name_ja": row.get("name_ja"),
+                    }
+                )
+                continue
+            row_index = remapped_row_index
+            row = seed_rows[row_index]
+        if row_index in seen_indexes:
             skipped.append(
                 {
                     "row_index": row_index,
-                    "reason": "candidate_row_name_mismatch",
-                    "candidate_name_ko": candidate.get("name_ko"),
-                    "candidate_name_ja": candidate.get("name_ja"),
-                    "current_name_ko": row.get("name_ko"),
-                    "current_name_ja": row.get("name_ja"),
+                    "reason": "duplicate_row_index",
+                    "original_row_index": original_row_index,
                 }
             )
             continue
@@ -459,7 +523,12 @@ def import_candidates(
                     }
                 )
                 continue
-            candidate = {**candidate, "candidate_title": candidate.get("candidate_title") or live_title}
+            candidate = {
+                **candidate,
+                "candidate_title": live_title
+                if require_live_title_exact
+                else candidate.get("candidate_title") or live_title,
+            }
         title_mismatch_reason = _candidate_title_mismatch_reason(candidate, row)
         if (
             trust_manual_confirmed_title
@@ -520,6 +589,7 @@ def import_candidates(
         updated.append(
             {
                 "row_index": row_index,
+                "original_row_index": original_row_index,
                 "name_ko": row.get("name_ko"),
                 "name_ja": row.get("name_ja"),
                 "changed_fields": changed_fields,
@@ -558,6 +628,11 @@ def main() -> int:
         action="store_true",
         help="Skip every candidate that is not explicitly marked manual_confirmed=true.",
     )
+    parser.add_argument(
+        "--allow-name-remap",
+        action="store_true",
+        help="When a stale row_index points at a different current row, remap by a unique exact candidate name match.",
+    )
     args = parser.parse_args()
 
     rows, seed_wrapper = _load_seed(args.seed)
@@ -572,6 +647,7 @@ def main() -> int:
         require_live_title_exact=args.require_live_title_exact,
         trust_manual_confirmed_title=args.trust_manual_confirmed_title,
         require_manual_confirmed=args.require_manual_confirmed,
+        allow_name_remap=args.allow_name_remap,
     )
     report = {
         "write": args.write,

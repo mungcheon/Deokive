@@ -313,6 +313,30 @@ class ManualImageCandidateImportTests(unittest.TestCase):
         self.assertEqual(result["updated"], [])
         self.assertEqual(result["skipped"][0]["reason"], "candidate_product_type_mismatch")
 
+    def test_rejects_same_type_candidate_when_parenthetical_series_differs(self):
+        result = import_candidates(
+            [
+                _row(
+                    source_store="\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+                    name_ko="\ud558\uce20\ub124 \ubbf8\ucfe0 \ub7ec\ubc84 \uc2a4\ud2b8\ub7a9 (\ub9e4\uc9c0\uceec \ubbf8\ub77c\uc774 2023)",
+                    name_ja="\u521d\u97f3\u30df\u30af \u30e9\u30d0\u30fc\u30b9\u30c8\u30e9\u30c3\u30d7 (\u30de\u30b8\u30ab\u30eb\u30df\u30e9\u30a42023)",
+                    source_url="",
+                )
+            ],
+            [
+                _candidate(
+                    source_store="\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+                    source_kind="official_manufacturer_page",
+                    source_url="https://www.goodsmile.com/ja/product/10368",
+                    image_url="https://www.goodsmile.com/example.jpg",
+                    candidate_title="\u30d7\u30ed\u30b8\u30a7\u30af\u30c8\u30bb\u30ab\u30a4 feat. \u521d\u97f3\u30df\u30af \u30c8\u30ec\u30fc\u30c7\u30a3\u30f3\u30b0\u30e9\u30d0\u30fc\u30b9\u30c8\u30e9\u30c3\u30d7",
+                )
+            ],
+        )
+
+        self.assertEqual(result["updated"], [])
+        self.assertEqual(result["skipped"][0]["reason"], "candidate_parenthetical_mismatch")
+
     def test_rejects_korean_near_name_mismatch(self):
         result = import_candidates(
             [
@@ -346,6 +370,51 @@ class ManualImageCandidateImportTests(unittest.TestCase):
                     candidate_title="Current Name",
                 )
             ],
+        )
+
+        self.assertEqual(result["updated"], [])
+        self.assertEqual(result["skipped"][0]["reason"], "candidate_row_name_mismatch")
+
+    def test_remaps_stale_row_index_by_unique_exact_candidate_name_when_enabled(self):
+        result = import_candidates(
+            [
+                _row(name_ko="Wrong Row", name_ja="Wrong Row JP"),
+                _row(name_ko="Target Prize", name_ja="Target Prize JP"),
+            ],
+            [
+                _candidate(
+                    row_index=0,
+                    name_ko="Target Prize",
+                    name_ja="Target Prize JP",
+                    candidate_title="Target Prize JP",
+                    source_url="https://bsp-prize.jp/item/67890/",
+                    image_url="https://bsp-prize.jp/files_thumbnail/item/remapped.jpg",
+                )
+            ],
+            allow_name_remap=True,
+        )
+
+        self.assertEqual(len(result["updated"]), 1)
+        self.assertEqual(result["updated"][0]["row_index"], 1)
+        self.assertEqual(result["updated"][0]["original_row_index"], 0)
+        self.assertEqual(result["seed_rows"][1]["image_url"], "https://bsp-prize.jp/files_thumbnail/item/remapped.jpg")
+
+    def test_name_remap_requires_unique_exact_candidate_name(self):
+        result = import_candidates(
+            [
+                _row(name_ko="Wrong Row", name_ja="Wrong Row JP"),
+                _row(name_ko="Target Prize", name_ja="Target Prize JP"),
+                _row(name_ko="Target Prize", name_ja="Target Prize JP"),
+            ],
+            [
+                _candidate(
+                    row_index=0,
+                    name_ko="Target Prize",
+                    name_ja="Target Prize JP",
+                    candidate_title="Target Prize JP",
+                )
+            ],
+            allow_name_remap=True,
         )
 
         self.assertEqual(result["updated"], [])
@@ -429,30 +498,29 @@ class ManualImageCandidateImportTests(unittest.TestCase):
     def test_require_live_title_exact_accepts_current_seed_title(self):
         with patch(
             "import_manual_image_candidates._page_title",
-            return_value="ちいかわ ラバーストラップ (ハチワレ) | エンスカイショップ",
+            return_value="\u30c0\u30f3\u30ac\u30f3\u30ed\u30f3\u30d1 \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 (\u30e2\u30ce\u30af\u30de) | Movic",
         ):
             result = import_candidates(
                 [
                     _row(
-                        source_store="\uc5d4\uc2a4\uce74\uc774",
-                        name_ko="\uce58\uc774\uce74\uc640 \ub7ec\ubc84 \uc2a4\ud2b8\ub7a9 (\ud558\uce58\uc640\ub808)",
-                        name_ja="ちいかわ ラバーストラップ (ハチワレ)",
+                        source_store="Movic",
+                        name_ko="\ub2e8\uac04\ub860\ud30c \uc544\ud06c\ub9b4 \uc2a4\ud0e0\ub4dc (\ubaa8\ub178\ucfe0\ub9c8)",
+                        name_ja="\u30c0\u30f3\u30ac\u30f3\u30ed\u30f3\u30d1 \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 (\u30e2\u30ce\u30af\u30de)",
                     )
                 ],
                 [
                     _candidate(
-                        source_store="\uc5d4\uc2a4\uce74\uc774",
-                        source_kind="licensed_retailer_exact",
-                        source_url="https://www.enskyshop.com/products/detail/29520",
-                        image_url="https://www.enskyshop.com/html/upload/save_image/0827104242_68ae629247650.jpg",
-                        candidate_title="ちいかわ ラバーストラップ (ハチワレ)",
+                        source_store="Movic",
+                        source_kind="official_manufacturer",
+                        source_url="https://www.movic.jp/shop/g/g02330-00350-00624/",
+                        image_url="https://www.movic.jp/img/goods/S/02330-00350-00624-s.jpg",
+                        candidate_title="\u30c0\u30f3\u30ac\u30f3\u30ed\u30f3\u30d1 \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 (\u30e2\u30ce\u30af\u30de)",
                     )
                 ],
                 require_live_title_exact=True,
             )
 
         self.assertEqual(len(result["updated"]), 1)
-
     def test_accepts_kana_spelling_variant_in_official_title(self):
         result = import_candidates(
             [
