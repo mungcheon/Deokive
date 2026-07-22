@@ -31,6 +31,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         source_discovery = reports.load_json(reports.SOURCE_DISCOVERY)
         generic_candidates = reports.load_json(reports.GENERIC_SOURCE_PATCH_CANDIDATES)
+        deduplication = reports.load_json(reports.DEDUPLICATION)
 
         scorecard = operations.get("workstream_scorecard", [])
         self.assertGreater(len(scorecard), 0)
@@ -67,6 +68,49 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertTrue(all(item.get("auto_apply_enabled") is False for item in danganronpa_items))
         self.assertTrue(all(batch.get("auto_apply_enabled") is False for batch in danganronpa_batches))
+
+        dedupe_summary = deduplication.get("summary", {})
+        source_url_exclusions = dedupe_summary.get("source_url_exclusions", {})
+        self.assertGreater(source_url_exclusions.get("shared_source_url_value_groups", 0), 0)
+        self.assertGreater(source_url_exclusions.get("excluded_shared_source_url_value_groups", 0), 0)
+        self.assertLess(
+            source_url_exclusions.get("source_url_name_matched_review_groups", 0),
+            source_url_exclusions.get("shared_source_url_value_groups", 0),
+        )
+        self.assertIs(deduplication.get("automation_policy", {}).get("auto_delete"), False)
+        self.assertIn(
+            "broad same-source-url matches",
+            deduplication.get("automation_policy", {}).get("excluded", ""),
+        )
+
+    def test_shared_campaign_urls_do_not_become_dedupe_groups(self):
+        items = [
+            {
+                "catalog_index": 1,
+                "name_ko": "이치방쿠지 샘플 A상 피규어",
+                "category": "피규어",
+                "source_url": "https://1kuji.com/products/sample",
+                "image_url": "https://example.com/a.jpg",
+            },
+            {
+                "catalog_index": 2,
+                "name_ko": "이치방쿠지 샘플 B상 쿠션",
+                "category": "생활잡화",
+                "source_url": "https://1kuji.com/products/sample",
+                "image_url": "https://example.com/b.jpg",
+            },
+        ]
+
+        dedupe = reports.build_deduplication_public(items)
+        self.assertEqual(dedupe["summary"]["duplicate_groups"], 0)
+        self.assertEqual(
+            dedupe["summary"]["source_url_exclusions"]["shared_source_url_value_groups"],
+            1,
+        )
+        self.assertEqual(
+            dedupe["summary"]["source_url_exclusions"]["excluded_shared_source_url_value_groups"],
+            1,
+        )
 
     def test_published_reports_expose_home_catalog_work_blocks(self):
         operations = reports.load_json(reports.OPERATIONS_REPORT)

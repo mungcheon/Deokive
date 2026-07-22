@@ -2840,6 +2840,33 @@ def dedupe_keys(item: dict[str, Any]) -> list[tuple[str, str]]:
     return keys
 
 
+def shared_source_url_exclusion_summary(items: list[dict[str, Any]]) -> dict[str, int]:
+    source_url_groups: dict[str, list[int]] = defaultdict(list)
+    for index, item in enumerate(items):
+        source_url = normalize_url_key(item.get("source_url"))
+        if source_url:
+            source_url_groups[source_url].append(index)
+
+    shared_groups = [indices for indices in source_url_groups.values() if len(set(indices)) > 1]
+    shared_rows = sum(len(set(indices)) for indices in shared_groups)
+    dedupe_key_groups = 0
+    for indices in shared_groups:
+        grouped_by_name: dict[str, set[int]] = defaultdict(set)
+        for index in indices:
+            item = items[index]
+            for key_type, key_value in dedupe_keys(item):
+                if key_type.startswith("source_url"):
+                    grouped_by_name[key_value].add(index)
+        dedupe_key_groups += sum(1 for grouped_indices in grouped_by_name.values() if len(grouped_indices) > 1)
+
+    return {
+        "shared_source_url_value_groups": len(shared_groups),
+        "shared_source_url_value_rows": shared_rows,
+        "source_url_name_matched_review_groups": dedupe_key_groups,
+        "excluded_shared_source_url_value_groups": max(len(shared_groups) - dedupe_key_groups, 0),
+    }
+
+
 def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int = 80) -> dict[str, Any]:
     key_to_indices: dict[tuple[str, str], list[int]] = {}
     for index, item in enumerate(items):
@@ -2938,6 +2965,7 @@ def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int =
 
     by_key_type = Counter(group["key_type"] for group in groups)
     by_review_risk = Counter(group["review_risk"] for group in groups)
+    source_url_exclusions = shared_source_url_exclusion_summary(items)
     groups.sort(
         key=lambda group: (
             int(group.get("review_priority") or 99),
@@ -2956,13 +2984,14 @@ def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int =
             "by_key_type": by_key_type.most_common(),
             "by_review_risk": by_review_risk.most_common(),
             "top_review_risk": groups[0]["review_risk"] if groups else None,
+            "source_url_exclusions": source_url_exclusions,
         },
         "automation_policy": {
             "auto_delete": False,
             "requires_manual_review": True,
             "reason": "Shared barcode/source/image evidence can still represent variants; public report is a review queue only.",
             "normalization": "Names are normalized only when barcode/source_url/image_url evidence is shared.",
-            "excluded": "Broad same-name matches across different campaign URLs are excluded because they often represent legitimate variants.",
+            "excluded": "Broad same-name matches across different campaign URLs and broad same-source-url matches are excluded because they often represent legitimate variants, campaign prize rows, or lineup pages.",
         },
         "groups": groups[:sample_groups],
     }

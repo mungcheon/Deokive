@@ -37,14 +37,20 @@
         2
       ]
     ],
-    "top_review_risk": "strong_identity_review"
+    "top_review_risk": "strong_identity_review",
+    "source_url_exclusions": {
+      "shared_source_url_value_groups": 816,
+      "shared_source_url_value_rows": 6840,
+      "source_url_name_matched_review_groups": 70,
+      "excluded_shared_source_url_value_groups": 746
+    }
   },
   "automation_policy": {
     "auto_delete": false,
     "requires_manual_review": true,
     "reason": "Shared barcode/source/image evidence can still represent variants; public report is a review queue only.",
     "normalization": "Names are normalized only when barcode/source_url/image_url evidence is shared.",
-    "excluded": "Broad same-name matches across different campaign URLs are excluded because they often represent legitimate variants."
+    "excluded": "Broad same-name matches across different campaign URLs and broad same-source-url matches are excluded because they often represent legitimate variants, campaign prize rows, or lineup pages."
   },
   "groups": [
     {
