@@ -6,6 +6,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote_plus
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,6 +72,96 @@ def _candidate_summary(candidate_row: dict[str, Any] | None) -> dict[str, Any] |
     }
 
 
+def _compact_text(value: Any) -> str:
+    return " ".join(str(value or "").split())
+
+
+def _first_non_empty(*values: Any) -> str:
+    for value in values:
+        text = _compact_text(value)
+        if text:
+            return text
+    return ""
+
+
+def _store_search_scope(source_store: Any, current_source_url: Any) -> dict[str, str]:
+    store = _compact_text(source_store).lower()
+    current_url = _compact_text(current_source_url)
+    if "weverse" in store:
+        return {
+            "storefront_url": current_url or "https://shop.weverse.io/home",
+            "site_query": "site:shop.weverse.io",
+            "search_url_template": "https://shop.weverse.io/search?keyword={query}",
+        }
+    if "pokemon" in store or "포켓몬" in store:
+        return {
+            "storefront_url": current_url or "https://www.pokemoncenter-online.com/",
+            "site_query": "site:pokemoncenter-online.com",
+            "search_url_template": "https://www.pokemoncenter-online.com/search/?keyword={query}",
+        }
+    return {
+        "storefront_url": current_url,
+        "site_query": "",
+        "search_url_template": "",
+    }
+
+
+def _generated_search_queries(source_template: dict[str, Any], item: dict[str, Any]) -> list[str]:
+    name = _first_non_empty(item.get("name_ja"), item.get("name_ko"))
+    korean_name = _compact_text(item.get("name_ko"))
+    category = _compact_text(item.get("category"))
+    series = _compact_text(item.get("series_name"))
+    source_store = _compact_text(item.get("source_store") or source_template.get("source_store"))
+    current_url = _compact_text(item.get("source_url") or source_template.get("current_source_url"))
+    scope = _store_search_scope(source_store, current_url)
+
+    query_parts = [part for part in [name, series, category] if part]
+    query = " ".join(query_parts) or korean_name
+    queries: list[str] = []
+    if scope["site_query"] and query:
+        queries.append(f'{scope["site_query"]} "{query}"')
+    if scope["site_query"] and korean_name and korean_name != query:
+        queries.append(f'{scope["site_query"]} "{korean_name}"')
+    if source_store and query:
+        queries.append(f'"{query}" "{source_store}"')
+    if query:
+        queries.append(query)
+    return _dedupe_preserve_order(queries)
+
+
+def _generated_store_search_hints(source_template: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
+    source_store = _compact_text(item.get("source_store") or source_template.get("source_store"))
+    current_url = _compact_text(item.get("source_url") or source_template.get("current_source_url"))
+    name = _first_non_empty(item.get("name_ja"), item.get("name_ko"))
+    scope = _store_search_scope(source_store, current_url)
+    encoded_name = quote_plus(name) if name else ""
+    search_url = (
+        scope["search_url_template"].format(query=encoded_name)
+        if scope["search_url_template"] and encoded_name
+        else ""
+    )
+    return {
+        "source_store": source_store,
+        "storefront_url": scope["storefront_url"],
+        "store_search_url": search_url,
+        "site_query": scope["site_query"],
+        "search_scope": "official_store_or_site_restricted_search_hint",
+        "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing.",
+    }
+
+
+def _dedupe_preserve_order(values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for value in values:
+        compact = _compact_text(value)
+        if not compact or compact in seen:
+            continue
+        seen.add(compact)
+        out.append(compact)
+    return out
+
+
 def _template_item(
     batch: dict[str, Any],
     item: dict[str, Any],
@@ -84,9 +175,28 @@ def _template_item(
     candidate_summary = _candidate_summary(candidate_summary)
     top_candidates = candidate_summary.get("top_candidates", []) if candidate_summary else []
     top_candidate = top_candidates[0] if top_candidates else {}
-    candidate_status = candidate_summary.get("candidate_status") if candidate_summary else None
+    candidate_status = (
+        candidate_summary.get("candidate_status") if candidate_summary else "no_candidate_report"
+    )
     candidate_score = top_candidate.get("score")
-    candidate_review_lane = candidate_summary.get("candidate_review_lane") if candidate_summary else None
+    candidate_review_lane = (
+        candidate_summary.get("candidate_review_lane")
+        if candidate_summary
+        else "candidate_provider_missing"
+    )
+    fallback_search_queries = (
+        candidate_summary.get("fallback_search_queries") if candidate_summary else []
+    )
+    if not fallback_search_queries:
+        fallback_search_queries = _generated_search_queries(source_template, item)
+    match_diagnostics = (
+        candidate_summary.get("match_diagnostics")
+        if candidate_summary
+        else {
+            "diagnosis": "no_store_specific_candidate_report",
+            "reason": "No candidate provider report exists for this source store yet.",
+        }
+    )
     return {
         **source_template,
         "manual_confirmed": False,
@@ -99,8 +209,9 @@ def _template_item(
         "candidate_review_lane": candidate_review_lane,
         "candidate_count": candidate_summary.get("candidate_count") if candidate_summary else 0,
         "candidate_options": top_candidates,
-        "match_diagnostics": candidate_summary.get("match_diagnostics") if candidate_summary else {},
-        "fallback_search_queries": candidate_summary.get("fallback_search_queries") if candidate_summary else [],
+        "match_diagnostics": match_diagnostics,
+        "fallback_search_queries": fallback_search_queries,
+        "store_search_hints": _generated_store_search_hints(source_template, item),
         "source_url_review_lane": _source_url_review_lane(candidate_status, candidate_score),
         "source_url_review_blockers": _source_url_review_blockers(candidate_status, candidate_score),
         "manual_confirmation_requirements": _manual_confirmation_requirements(),

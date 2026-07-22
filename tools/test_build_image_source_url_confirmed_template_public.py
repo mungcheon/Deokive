@@ -37,6 +37,21 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
                         },
                         {
                             "catalog_index": 11,
+                            "workflow": "replace_generic_source_then_extract_image",
+                            "source_store": "Weverse Shop",
+                            "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+                            "name_ja": "SEVENTEEN フォトカード（ランダム）",
+                            "series_name": "SEVENTEEN",
+                            "category": "포토카드",
+                            "source_url": "https://shop.weverse.io/home",
+                            "source_url_import_template": {
+                                "row_index": 11,
+                                "field": "source_url",
+                                "current_source_url": "https://shop.weverse.io/home",
+                            },
+                        },
+                        {
+                            "catalog_index": 12,
                             "workflow": "review_gotouchi_official_candidates",
                             "source_store": "Gotouchi",
                             "name_ko": "Charm",
@@ -82,12 +97,21 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         )
 
         self.assertEqual(report["generated_at"], "2026-07-22T00:00:00Z")
-        self.assertEqual(report["summary"]["template_items"], 1)
+        self.assertEqual(report["summary"]["template_items"], 2)
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
-        self.assertEqual(report["summary"]["by_source_store"], [["Stellive Store", 1]])
+        self.assertEqual(
+            report["summary"]["by_source_store"],
+            [["Stellive Store", 1], ["Weverse Shop", 1]],
+        )
         self.assertEqual(report["summary"]["candidate_prefilled_rows"], 1)
-        self.assertEqual(report["summary"]["by_candidate_status"], [["weak_manual_review_candidate", 1]])
-        self.assertEqual(report["summary"]["by_source_url_review_lane"], [["weak_candidate_review", 1]])
+        self.assertEqual(
+            report["summary"]["by_candidate_status"],
+            [["weak_manual_review_candidate", 1], ["no_candidate_report", 1]],
+        )
+        self.assertEqual(
+            report["summary"]["by_source_url_review_lane"],
+            [["weak_candidate_review", 1], ["candidate_provider_missing", 1]],
+        )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         item = report["items"][0]
         self.assertEqual(item["field"], "source_url")
@@ -113,6 +137,27 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["current_source_url"], "https://fanding.kr/@stellive/shop")
         self.assertEqual(item["next_after_confirmed_source_url"], "extract_or_confirm_product_page_image_url")
         self.assertFalse(item["auto_apply_enabled"])
+
+        missing_provider_item = report["items"][1]
+        self.assertEqual(missing_provider_item["row_index"], 11)
+        self.assertEqual(missing_provider_item["candidate_status"], "no_candidate_report")
+        self.assertEqual(missing_provider_item["candidate_review_lane"], "candidate_provider_missing")
+        self.assertEqual(
+            missing_provider_item["source_url_review_lane"],
+            "candidate_provider_missing",
+        )
+        self.assertIn(
+            'site:shop.weverse.io "SEVENTEEN フォトカード（ランダム） SEVENTEEN 포토카드"',
+            missing_provider_item["fallback_search_queries"],
+        )
+        self.assertEqual(
+            missing_provider_item["store_search_hints"]["store_search_url"],
+            "https://shop.weverse.io/search?keyword=SEVENTEEN+%E3%83%95%E3%82%A9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%EF%BC%88%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%EF%BC%89",
+        )
+        self.assertEqual(
+            missing_provider_item["match_diagnostics"]["diagnosis"],
+            "no_store_specific_candidate_report",
+        )
 
 
 if __name__ == "__main__":
