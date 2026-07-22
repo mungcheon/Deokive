@@ -144,7 +144,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '넣을 폴더 선택',
+                    'DB 굿즈 저장 위치',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
@@ -152,7 +152,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '기본값은 가장 위에 있는 폴더예요. 원하는 폴더로 바꿀 수 있어요.',
+                    '처음 선택된 폴더에 바로 추가하거나, 원하는 폴더로 바꿀 수 있어요.',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -169,6 +169,8 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                         final folder = folders[index];
                         final folderType = folder.isGroup ? '그룹' : '폴더';
                         final selected = folder.id == selectedId;
+                        final defaultLabel =
+                            index == 0 ? '기본 저장 위치' : folderType;
                         return ListTile(
                           onTap: () {
                             setSheetState(() => selectedId = folder.id);
@@ -176,7 +178,7 @@ Future<FolderItem?> _pickTargetFolderForCatalogImport(
                           leading: Icon(folder.icon, color: folder.color),
                           title: Text(folder.name),
                           subtitle: Text(
-                            '$folderType · ${appState.goodsCountForFolder(folder.id)}개 보관 중',
+                            '$defaultLabel · ${appState.goodsCountForFolder(folder.id)}개 보관 중',
                           ),
                           trailing: Icon(
                             selected
@@ -270,7 +272,17 @@ List<FolderItem> _sortedImportTargetFolders(
   AppState appState,
   FolderItem? initialFolder,
 ) {
-  final source = appState.owningFolders;
+  return sortedCatalogImportTargetFolders(
+    folders: appState.owningFolders,
+    initialFolder: initialFolder,
+  );
+}
+
+List<FolderItem> sortedCatalogImportTargetFolders({
+  required Iterable<FolderItem> folders,
+  FolderItem? initialFolder,
+}) {
+  final source = folders.where((folder) => !folder.isSystemWishlist).toList();
   if (source.isEmpty) return const [];
 
   final originalIndexById = <String, int>{};

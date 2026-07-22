@@ -96,4 +96,51 @@ void main() {
     expect(matches, hasLength(1));
     expect(matches.single.name, '판매처 A 표기명');
   });
+
+  test('catalog import target folders prefer the active folder or top folder',
+      () {
+    const wishlist = FolderItem(
+      id: kSystemWishlistFolderId,
+      name: '위시리스트',
+      icon: Icons.shopping_bag_rounded,
+      color: Colors.amber,
+      isSystemWishlist: true,
+    );
+    const topFolder = FolderItem(
+      id: 'top-folder',
+      name: '대표 굿즈',
+      icon: Icons.folder_rounded,
+      color: Colors.blue,
+    );
+    const childFolder = FolderItem(
+      id: 'child-folder',
+      name: '하위 굿즈',
+      icon: Icons.inventory_2_rounded,
+      color: Colors.green,
+      parentId: 'group-folder',
+    );
+    const groupFolder = FolderItem(
+      id: 'group-folder',
+      name: '그룹',
+      icon: Icons.folder_copy_rounded,
+      color: Colors.purple,
+      isGroup: true,
+    );
+
+    final defaultOrder = sortedCatalogImportTargetFolders(
+      folders: const [wishlist, childFolder, groupFolder, topFolder],
+    );
+    expect(defaultOrder.map((folder) => folder.id), [
+      'top-folder',
+      'group-folder',
+      'child-folder',
+    ]);
+
+    final activeFolderOrder = sortedCatalogImportTargetFolders(
+      folders: const [wishlist, childFolder, groupFolder, topFolder],
+      initialFolder: childFolder,
+    );
+    expect(activeFolderOrder.first.id, 'child-folder');
+    expect(activeFolderOrder, isNot(contains(wishlist)));
+  });
 }
