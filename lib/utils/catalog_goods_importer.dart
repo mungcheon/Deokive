@@ -166,11 +166,9 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.88,
-        minChildSize: 0.72,
+        initialChildSize: 0.80,
+        minChildSize: 0.48,
         maxChildSize: 0.98,
-        snap: true,
-        snapSizes: const [0.88, 0.98],
         builder: (context, scrollController) {
           return StatefulBuilder(
             builder: (context, setSheetState) {
@@ -453,7 +451,7 @@ GoodsItem goodsItemFromCatalogEntry({
     quantity: 1,
     officialPrice: officialPrice,
     paidPrice: addToWishlist ? 0 : officialPrice,
-    priceCurrencyCode: addToWishlist ? Currency.krw.code : paidCurrency.code,
+    priceCurrencyCode: paidCurrency.code,
     officialPriceCurrencyCode: officialCurrency.code,
     purchaseDate: null,
     isPreorder: false,
@@ -477,7 +475,10 @@ GoodsItem goodsItemFromCatalogEntry({
         entry.barcode?.trim().isEmpty ?? true ? null : entry.barcode!.trim(),
     storageLocation: null,
     imageBytesList: imageBytes == null ? const [] : [imageBytes],
-    imageUrl: catalogEntryImageReference(entry),
+    imageUrl: catalogEntryImageReference(
+      entry,
+      preferLocalAsset: imageBytes != null,
+    ),
     isFavorite: false,
   );
 }
@@ -612,16 +613,19 @@ Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
   }
 }
 
-String? catalogEntryImageReference(GoodsCatalogEntry entry) {
+String? catalogEntryImageReference(
+  GoodsCatalogEntry entry, {
+  bool preferLocalAsset = true,
+}) {
   final localPath = entry.localImagePath?.trim() ?? '';
-  if (localPath.isNotEmpty) return localPath;
-
   final remoteUrl = entry.imageUrl?.trim() ?? '';
-  if (remoteUrl.isNotEmpty) {
-    return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
-          RegExp(r'^//'),
-          'https://',
-        );
-  }
-  return null;
+  final normalizedRemoteUrl = remoteUrl.isEmpty
+      ? null
+      : remoteUrl.replaceAll('&amp;', '&').replaceFirst(
+            RegExp(r'^//'),
+            'https://',
+          );
+
+  if (preferLocalAsset && localPath.isNotEmpty) return localPath;
+  return normalizedRemoteUrl ?? (localPath.isNotEmpty ? localPath : null);
 }

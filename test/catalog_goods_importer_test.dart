@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:deokive/models/folder_item.dart';
 import 'package:deokive/models/goods_catalog_entry.dart';
 import 'package:deokive/models/goods_item.dart';
@@ -94,7 +96,8 @@ void main() {
     expect(restored.imageUrl, item.imageUrl);
   });
 
-  test('catalog import prefers bundled image references for saved goods', () {
+  test('catalog import keeps remote image reference when bytes are unavailable',
+      () {
     final appState = AppState();
     final folder = FolderItem(
       id: 'top-folder',
@@ -117,6 +120,35 @@ void main() {
       folder: folder,
     );
 
+    expect(item.imageUrl, 'https://example.com/catalog/source.jpg');
+  });
+
+  test('catalog import can keep bundled image reference after loading bytes',
+      () {
+    final appState = AppState();
+    final folder = FolderItem(
+      id: 'top-folder',
+      name: 'Top goods',
+      icon: Icons.folder_rounded,
+      color: Colors.blue,
+    );
+    const entry = GoodsCatalogEntry(
+      nameKo: 'Bundled saved catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      sourceStore: 'official store',
+      localImagePath: 'assets/catalog/cache/sample.jpg',
+      imageUrl: 'https://example.com/catalog/source.jpg',
+    );
+
+    final item = goodsItemFromCatalogEntry(
+      appState: appState,
+      entry: entry,
+      folder: folder,
+      imageBytes: Uint8List.fromList([1, 2, 3]),
+    );
+
+    expect(item.imageBytesList.single, [1, 2, 3]);
     expect(item.imageUrl, 'assets/catalog/cache/sample.jpg');
   });
 
@@ -165,7 +197,8 @@ void main() {
     expect(item.officialPriceCurrencyCode, Currency.jpy.code);
   });
 
-  test('catalog import can create a wishlist item with zero KRW paid price',
+  test(
+      'catalog import can create a wishlist item with zero catalog-currency paid price',
       () {
     final appState = AppState();
     const wishlist = FolderItem(
@@ -201,7 +234,7 @@ void main() {
     expect(item.officialPrice, 1980);
     expect(item.officialPriceCurrencyCode, Currency.jpy.code);
     expect(item.paidPrice, 0);
-    expect(item.priceCurrencyCode, Currency.krw.code);
+    expect(item.priceCurrencyCode, Currency.jpy.code);
     expect(item.purchaseState, PurchaseState.wished);
     expect(item.itemCondition, ItemCondition.wish);
     expect(item.status, '위시');
