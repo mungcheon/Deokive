@@ -2121,6 +2121,12 @@ def build_operations_public(
             "multi_item_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "multi_item_prize_label_groups", 0
             ),
+            "multi_item_prize_label_review_batch_count": ichiban_kuji_prize_policy_audit_summary.get(
+                "multi_item_prize_label_review_batch_count", 0
+            ),
+            "multi_item_prize_label_review_catalog_item_rows": ichiban_kuji_prize_policy_audit_summary.get(
+                "multi_item_prize_label_review_catalog_item_rows", 0
+            ),
             "numbered_variant_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "numbered_variant_prize_label_groups", 0
             ),
@@ -2133,14 +2139,23 @@ def build_operations_public(
             "repeated_name_different_source_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "repeated_name_different_source_groups", 0
             ),
+            "repeated_name_different_source_review_batch_count": ichiban_kuji_prize_policy_audit_summary.get(
+                "repeated_name_different_source_review_batch_count", 0
+            ),
+            "repeated_name_different_source_review_catalog_item_rows": ichiban_kuji_prize_policy_audit_summary.get(
+                "repeated_name_different_source_review_catalog_item_rows", 0
+            ),
             "probable_reissue_review_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "probable_reissue_review_groups", 0
+            ),
+            "prize_policy_review_batch_count": ichiban_kuji_prize_policy_audit_summary.get(
+                "prize_policy_review_batch_count", 0
             ),
             "zero_price_exception_policy_pass": ichiban_kuji_prize_policy_audit_summary.get(
                 "zero_price_exception_policy_pass", False
             ),
             "auto_apply_enabled": ichiban_kuji_prize_policy_audit_summary.get("auto_apply_enabled", False),
-            "recommended_next_action": "Review multi-item prize labels and repeated-name campaign URLs; keep last-one/double-chance prices at 0.",
+            "recommended_next_action": "Work the next prize policy review batch; verify same-prize variants and repeated-name campaign URLs against official 1kuji pages before mutation.",
         } if ichiban_kuji_prize_policy_audit_summary else None,
         {
             "priority": 60,

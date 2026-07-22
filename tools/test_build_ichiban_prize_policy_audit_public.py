@@ -77,6 +77,15 @@ class BuildIchibanPrizePolicyAuditPublicTest(unittest.TestCase):
             [2],
         )
         self.assertEqual(report["summary"]["probable_reissue_review_groups"], 1)
+        self.assertEqual(report["summary"]["zero_price_violation_rows"], 1)
+        self.assertEqual(report["summary"]["multi_item_prize_label_review_batch_count"], 1)
+        self.assertEqual(report["summary"]["repeated_name_different_source_review_batch_count"], 1)
+        self.assertEqual(report["summary"]["prize_policy_review_batch_count"], 2)
+        self.assertEqual(report["review_batches"][0]["batch_id"], "ichiban-prize-policy-multi-item-001")
+        self.assertEqual(report["review_batches"][0]["workflow"], "multi_item_prize_label_review")
+        self.assertEqual(report["review_batches"][1]["batch_id"], "ichiban-prize-policy-repeated-name-001")
+        self.assertEqual(report["next_actions"][0]["status"], "manual_fix_required")
+        self.assertEqual(report["next_actions"][1]["next_batch_id"], "ichiban-prize-policy-multi-item-001")
         self.assertFalse(report["summary"]["auto_apply_enabled"])
 
 

@@ -557,12 +557,27 @@ def _build_plan(load_report) -> dict[str, Any]:
                         kuji_policy_summary, "double_chance_missing_price_rows"
                     ),
                     "multi_item_prize_label_groups": kuji_variant_review_rows,
+                    "multi_item_prize_label_review_batch_count": _count(
+                        kuji_policy_summary, "multi_item_prize_label_review_batch_count"
+                    ),
+                    "multi_item_prize_label_review_catalog_item_rows": _count(
+                        kuji_policy_summary, "multi_item_prize_label_review_catalog_item_rows"
+                    ),
                     "numbered_variant_prize_label_groups": _count(
                         kuji_policy_summary, "numbered_variant_prize_label_groups"
                     ),
                     "incomplete_numbered_variant_prize_label_groups": kuji_incomplete_numbered_variant_rows,
                     "repeated_name_different_source_groups": kuji_reissue_review_rows,
+                    "repeated_name_different_source_review_batch_count": _count(
+                        kuji_policy_summary, "repeated_name_different_source_review_batch_count"
+                    ),
+                    "repeated_name_different_source_review_catalog_item_rows": _count(
+                        kuji_policy_summary, "repeated_name_different_source_review_catalog_item_rows"
+                    ),
                     "probable_reissue_review_groups": kuji_probable_reissue_review_rows,
+                    "prize_policy_review_batch_count": _count(
+                        kuji_policy_summary, "prize_policy_review_batch_count"
+                    ),
                 },
             )
         )
@@ -635,10 +650,13 @@ def _build_plan(load_report) -> dict[str, Any]:
             "ichiban_zero_price_exception_policy_pass": bool(
                 kuji_policy_summary.get("zero_price_exception_policy_pass")
             ),
-        "ichiban_multi_item_prize_label_groups": kuji_variant_review_rows,
-        "ichiban_incomplete_numbered_variant_prize_label_groups": kuji_incomplete_numbered_variant_rows,
-        "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
-        "ichiban_probable_reissue_review_groups": kuji_probable_reissue_review_rows,
+            "ichiban_multi_item_prize_label_groups": kuji_variant_review_rows,
+            "ichiban_prize_policy_review_batch_count": _count(
+                kuji_policy_summary, "prize_policy_review_batch_count"
+            ),
+            "ichiban_incomplete_numbered_variant_prize_label_groups": kuji_incomplete_numbered_variant_rows,
+            "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
+            "ichiban_probable_reissue_review_groups": kuji_probable_reissue_review_rows,
             "dedupe_fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
             "dedupe_fast_review_same_source_url_groups": _count(
                 dedupe_fast_summary, "same_source_url_groups"

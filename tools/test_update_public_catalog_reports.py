@@ -163,6 +163,10 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["ichiban_kuji_prize_policy_audit"]["numbered_variant_coverage_policy_pass"],
                 prize_audit["summary"]["numbered_variant_coverage_policy_pass"],
             )
+            self.assertEqual(
+                quality["ichiban_kuji_prize_policy_audit"]["prize_policy_review_batch_count"],
+                prize_audit["summary"]["prize_policy_review_batch_count"],
+            )
             self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["zero_price_exception_policy_pass"], True)
             self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["auto_apply_enabled"], False)
 
@@ -835,6 +839,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             ichiban_prize_next_action.get("double_chance_nonzero_price_rows"),
             ichiban_prize_audit_summary.get("double_chance_nonzero_price_rows"),
+        )
+        self.assertEqual(
+            ichiban_prize_next_action.get("multi_item_prize_label_review_batch_count"),
+            ichiban_prize_audit_summary.get("multi_item_prize_label_review_batch_count"),
+        )
+        self.assertEqual(
+            ichiban_prize_next_action.get("repeated_name_different_source_review_batch_count"),
+            ichiban_prize_audit_summary.get("repeated_name_different_source_review_batch_count"),
+        )
+        self.assertEqual(
+            ichiban_prize_next_action.get("prize_policy_review_batch_count"),
+            ichiban_prize_audit_summary.get("prize_policy_review_batch_count"),
         )
         self.assertIs(ichiban_prize_next_action.get("zero_price_exception_policy_pass"), True)
         self.assertEqual(

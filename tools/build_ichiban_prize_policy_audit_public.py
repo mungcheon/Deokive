@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "catalog_public.json"
 DEFAULT_OUTPUT = DATA / "ichiban_kuji_prize_policy_audit_public.json"
+REVIEW_BATCH_SIZE = 12
 
 LAST_ONE_TOKENS = ("ラストワン賞", "ラストワン", "last one", "last-one", "lastone")
 DOUBLE_CHANCE_TOKENS = (
@@ -75,6 +76,34 @@ def compact_row(row: dict[str, Any]) -> dict[str, Any]:
         "official_price_jpy": row.get("official_price_jpy"),
         "source_url": row.get("source_url"),
     }
+
+
+def batch_groups(
+    groups: list[dict[str, Any]],
+    *,
+    workflow: str,
+    batch_id_prefix: str,
+    recommended_action: str,
+    review_reason: str,
+    batch_size: int = REVIEW_BATCH_SIZE,
+) -> list[dict[str, Any]]:
+    batches = []
+    for offset in range(0, len(groups), batch_size):
+        batch_groups = groups[offset : offset + batch_size]
+        batches.append(
+            {
+                "batch_id": f"{batch_id_prefix}-{(offset // batch_size) + 1:03d}",
+                "workflow": workflow,
+                "priority": 30 + (offset // batch_size),
+                "group_count": len(batch_groups),
+                "catalog_item_rows": sum(int(group.get("row_count") or 0) for group in batch_groups),
+                "review_state": "manual_official_campaign_prize_confirmation_required",
+                "recommended_action": recommended_action,
+                "review_reason": review_reason,
+                "groups": batch_groups,
+            }
+        )
+    return batches
 
 
 def numbered_variant_marks(row: dict[str, Any]) -> list[tuple[int, int]]:
@@ -191,6 +220,36 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
     )
 
     prize_label_counts = Counter(str(row.get("sub_series") or "") for row in kuji_rows if row.get("sub_series"))
+    multi_item_review_batches = batch_groups(
+        multi_item_prize_groups,
+        workflow="multi_item_prize_label_review",
+        batch_id_prefix="ichiban-prize-policy-multi-item",
+        recommended_action=(
+            "Open the official campaign page and confirm every item listed under the same prize label before "
+            "adding missing variants or merging duplicate-looking rows."
+        ),
+        review_reason=(
+            "The same prize label has multiple catalog rows. This is often correct for Ichiban Kuji variants, "
+            "but it must be checked against the official campaign lineup."
+        ),
+    )
+    repeated_name_review_batches = batch_groups(
+        repeated_name_different_source_groups,
+        workflow="repeated_name_different_source_review",
+        batch_id_prefix="ichiban-prize-policy-repeated-name",
+        recommended_action=(
+            "Compare official campaign URLs and release context, then mark each group as reissue, distinct "
+            "variant, or exact duplicate before any dedupe mutation."
+        ),
+        review_reason=(
+            "The same normalized item name appears under multiple campaign URLs. Re-releases must stay separate "
+            "when they are official distinct runs."
+        ),
+    )
+    price_exception_rows = len(last_one_nonzero) + len(last_one_missing) + len(double_chance_nonzero) + len(
+        double_chance_missing
+    )
+    review_batches = (multi_item_review_batches + repeated_name_review_batches)[:40]
 
     return {
         "schema_version": 1,
@@ -214,6 +273,16 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "numbered_variant_coverage_policy_pass": not incomplete_numbered_variant_groups,
             "repeated_name_different_source_groups": len(repeated_name_different_source_groups),
             "probable_reissue_review_groups": len(probable_reissue_review_groups),
+            "zero_price_violation_rows": price_exception_rows,
+            "multi_item_prize_label_review_batch_count": len(multi_item_review_batches),
+            "multi_item_prize_label_review_catalog_item_rows": sum(
+                int(group.get("row_count") or 0) for group in multi_item_prize_groups
+            ),
+            "repeated_name_different_source_review_batch_count": len(repeated_name_review_batches),
+            "repeated_name_different_source_review_catalog_item_rows": sum(
+                int(group.get("row_count") or 0) for group in repeated_name_different_source_groups
+            ),
+            "prize_policy_review_batch_count": len(multi_item_review_batches) + len(repeated_name_review_batches),
             "auto_apply_enabled": False,
         },
         "policy": {
@@ -234,6 +303,32 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         "incomplete_numbered_variant_prize_label_groups": incomplete_numbered_variant_groups[:80],
         "repeated_name_different_source_groups": repeated_name_different_source_groups[:80],
         "probable_reissue_review_groups": probable_reissue_review_groups[:80],
+        "review_batches": review_batches,
+        "next_actions": [
+            {
+                "priority": 1,
+                "workstream": "last_one_double_chance_zero_price_policy",
+                "status": "pass" if price_exception_rows == 0 else "manual_fix_required",
+                "rows": price_exception_rows,
+                "recommended_next_action": "Keep Last One and Double Chance prize exceptions at official_price_jpy=0.",
+            },
+            {
+                "priority": 2,
+                "workstream": "multi_item_prize_label_review",
+                "rows": len(multi_item_prize_groups),
+                "batch_count": len(multi_item_review_batches),
+                "next_batch_id": multi_item_review_batches[0]["batch_id"] if multi_item_review_batches else None,
+                "recommended_next_action": "Review same-prize-label groups against official lineup pages before adding missing variants.",
+            },
+            {
+                "priority": 3,
+                "workstream": "repeated_name_different_source_review",
+                "rows": len(repeated_name_different_source_groups),
+                "batch_count": len(repeated_name_review_batches),
+                "next_batch_id": repeated_name_review_batches[0]["batch_id"] if repeated_name_review_batches else None,
+                "recommended_next_action": "Separate official reissues from exact duplicate rows before dedupe.",
+            },
+        ],
         "top_prize_labels": [[label, count] for label, count in prize_label_counts.most_common(80)],
     }
 
