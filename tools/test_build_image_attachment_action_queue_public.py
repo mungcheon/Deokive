@@ -62,7 +62,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 2)
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
+        self.assertEqual(report["summary"]["workstream_count"], 1)
+        self.assertEqual(report["summary"]["source_url_update_workstream_count"], 1)
+        self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
+        self.assertEqual(report["workstreams"][0]["source_store"], "Stellive Store")
+        self.assertEqual(report["workstreams"][0]["next_batch_id"], "image-attachment-action-001")
+        self.assertEqual(report["workstreams"][0]["source_url_update_template_rows"], 2)
+        self.assertEqual(report["next_actions"][0]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(report["batches"][0]["workflow"], "replace_generic_source_then_extract_image")
         self.assertEqual([item["catalog_index"] for item in report["batches"][0]["items"]], [1, 2])
         self.assertTrue(report["batches"][0]["items"][0]["source_url_update_required"])
@@ -110,6 +117,9 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 3)
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
+        self.assertEqual(report["summary"]["workstream_count"], 1)
+        self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 1)
+        self.assertEqual(report["next_actions"][1]["next_batch_id"], "image-attachment-action-001")
 
     def test_catalog_images_are_skipped_from_action_items(self) -> None:
         enrichment = {

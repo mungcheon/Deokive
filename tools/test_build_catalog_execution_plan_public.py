@@ -29,7 +29,21 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "source_url_update_template_rows": 2,
                     "representative_image_review_required_rows": 0,
                     "image_url_ready_rows": 0,
-                }
+                    "workstream_count": 1,
+                    "source_url_update_workstream_count": 1,
+                    "representative_image_review_workstream_count": 0,
+                },
+                "workstreams": [
+                    {
+                        "workflow": "replace_generic_source_then_extract_image",
+                        "source_store": "Stellive Store",
+                        "queued_image_rows": 2,
+                        "batch_count": 1,
+                        "next_batch_id": "image-attachment-action-001",
+                        "source_url_update_template_rows": 2,
+                        "representative_image_review_rows": 0,
+                    }
+                ],
             },
             "source_discovery_review_batches_public.json": {
                 "summary": {"source_discovery_rows": 10, "batch_count": 2}
@@ -232,9 +246,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(image_action["evidence"]["source_url_update_required_rows"], 2)
         self.assertEqual(image_action["evidence"]["source_url_update_template_rows"], 2)
         self.assertEqual(image_action["evidence"]["image_url_ready_rows"], 0)
+        self.assertEqual(image_action["evidence"]["workstream_count"], 1)
+        self.assertEqual(image_action["evidence"]["source_url_update_workstream_count"], 1)
+        self.assertEqual(
+            image_action["evidence"]["top_image_attachment_workstreams"][0]["next_batch_id"],
+            "image-attachment-action-001",
+        )
         self.assertEqual(report["summary"]["image_action_source_url_update_required_rows"], 2)
         self.assertEqual(report["summary"]["image_action_source_url_update_template_rows"], 2)
         self.assertEqual(report["summary"]["image_action_image_url_ready_rows"], 0)
+        self.assertEqual(report["summary"]["image_action_workstream_count"], 1)
         metadata_action = next(
             action
             for action in report["actions"]

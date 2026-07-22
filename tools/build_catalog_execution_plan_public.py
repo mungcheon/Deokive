@@ -377,6 +377,26 @@ def _build_plan(load_report) -> dict[str, Any]:
                     image_action_summary, "representative_image_review_required_rows"
                 ),
                 "image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
+                "workstream_count": _count(image_action_summary, "workstream_count"),
+                "source_url_update_workstream_count": _count(
+                    image_action_summary, "source_url_update_workstream_count"
+                ),
+                "representative_image_review_workstream_count": _count(
+                    image_action_summary, "representative_image_review_workstream_count"
+                ),
+                "top_image_attachment_workstreams": [
+                    {
+                        "workflow": row.get("workflow"),
+                        "source_store": row.get("source_store"),
+                        "queued_image_rows": row.get("queued_image_rows", 0),
+                        "batch_count": row.get("batch_count", 0),
+                        "next_batch_id": row.get("next_batch_id"),
+                        "source_url_update_template_rows": row.get("source_url_update_template_rows", 0),
+                        "representative_image_review_rows": row.get("representative_image_review_rows", 0),
+                    }
+                    for row in image_action_queue.get("workstreams", [])
+                    if isinstance(row, dict)
+                ][:8],
                 "excluded_workflow_rows": image_action_summary.get("excluded_workflow_rows", []),
                 "by_workflow": image_action_summary.get("by_workflow", []),
             },
@@ -668,6 +688,7 @@ def _build_plan(load_report) -> dict[str, Any]:
                 image_action_summary, "source_url_update_template_rows"
             ),
             "image_action_image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
+            "image_action_workstream_count": _count(image_action_summary, "workstream_count"),
             "animation_split_review_categories": _count(animation_split_summary, "split_review_categories"),
             "animation_candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
             "animation_split_matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),

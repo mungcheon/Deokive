@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T16:47:49Z",
+  "generated_at": "2026-07-22T17:00:04Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 18,
@@ -78,6 +78,7 @@
     "image_action_source_url_update_required_rows": 50,
     "image_action_source_url_update_template_rows": 50,
     "image_action_image_url_ready_rows": 0,
+    "image_action_workstream_count": 4,
     "animation_split_review_categories": 3,
     "animation_candidate_split_rules": 21,
     "animation_split_matched_catalog_rows": 2283,
@@ -494,6 +495,47 @@
         "source_url_update_template_rows": 50,
         "representative_image_review_required_rows": 23,
         "image_url_ready_rows": 0,
+        "workstream_count": 4,
+        "source_url_update_workstream_count": 3,
+        "representative_image_review_workstream_count": 1,
+        "top_image_attachment_workstreams": [
+          {
+            "workflow": "replace_generic_source_then_extract_image",
+            "source_store": "Stellive Store",
+            "queued_image_rows": 45,
+            "batch_count": 3,
+            "next_batch_id": "image-attachment-action-001",
+            "source_url_update_template_rows": 45,
+            "representative_image_review_rows": 0
+          },
+          {
+            "workflow": "replace_generic_source_then_extract_image",
+            "source_store": "Weverse Shop",
+            "queued_image_rows": 3,
+            "batch_count": 1,
+            "next_batch_id": "image-attachment-action-004",
+            "source_url_update_template_rows": 3,
+            "representative_image_review_rows": 0
+          },
+          {
+            "workflow": "replace_generic_source_then_extract_image",
+            "source_store": "포켓몬 센터",
+            "queued_image_rows": 2,
+            "batch_count": 1,
+            "next_batch_id": "image-attachment-action-005",
+            "source_url_update_template_rows": 2,
+            "representative_image_review_rows": 0
+          },
+          {
+            "workflow": "review_gotouchi_official_candidates",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "queued_image_rows": 23,
+            "batch_count": 2,
+            "next_batch_id": "image-attachment-action-006",
+            "source_url_update_template_rows": 0,
+            "representative_image_review_rows": 23
+          }
+        ],
         "excluded_workflow_rows": [
           [
             "find_source_then_extract_image",

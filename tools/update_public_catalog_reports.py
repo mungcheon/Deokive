@@ -1574,12 +1574,34 @@ def build_operations_public(
         for row in source_action_queue.get("source_store_workstreams", [])
         if isinstance(row, dict)
     ][:8]
+    def compact_image_workstream(row: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "workflow": row.get("workflow"),
+            "source_store": row.get("source_store"),
+            "priority": row.get("priority"),
+            "queued_image_rows": row.get("queued_image_rows", 0),
+            "batch_count": row.get("batch_count", 0),
+            "next_batch_id": row.get("next_batch_id"),
+            "batch_ids": row.get("batch_ids", []),
+            "next_machine_step": row.get("next_machine_step"),
+            "source_url_update_template_rows": row.get("source_url_update_template_rows", 0),
+            "representative_image_review_rows": row.get("representative_image_review_rows", 0),
+            "image_url_ready_rows": row.get("image_url_ready_rows", 0),
+            "category_rows": row.get("category_rows", []),
+            "auto_apply_enabled": row.get("auto_apply_enabled", False),
+        }
+
     image_summary = image_enrichment_batches["summary"]
     image_asset_summary = image_asset_audit.get("summary", {})
     image_action_queue = (
         load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
     )
     image_action_queue_summary = image_action_queue.get("summary", {})
+    image_action_workstreams = [
+        compact_image_workstream(row)
+        for row in image_action_queue.get("workstreams", [])
+        if isinstance(row, dict)
+    ][:8]
     ensky_cache_candidate_action_queue = (
         load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {})
         if ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.exists()
@@ -1881,10 +1903,18 @@ def build_operations_public(
             "action_batch_count": image_action_queue_summary.get("action_batch_count", 0),
             "source_url_update_required_rows": image_action_queue_summary.get("source_url_update_required_rows", 0),
             "source_url_update_template_rows": image_action_queue_summary.get("source_url_update_template_rows", 0),
+            "workstream_count": image_action_queue_summary.get("workstream_count", 0),
+            "source_url_update_workstream_count": image_action_queue_summary.get(
+                "source_url_update_workstream_count", 0
+            ),
+            "representative_image_review_workstream_count": image_action_queue_summary.get(
+                "representative_image_review_workstream_count", 0
+            ),
             "by_workflow": image_action_queue_summary.get("by_workflow", []),
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
+            "top_image_attachment_workstreams": image_action_workstreams,
             "excluded_workflow_rows": image_action_queue_summary.get("excluded_workflow_rows", []),
-            "recommended_next_action": "Work the queued image sample, then expand the remaining actionable image rows with exact product evidence.",
+            "recommended_next_action": "Work top image attachment workstreams by exact product URL replacement first, then representative image review.",
         } if image_action_queue_summary else None,
         {
             "priority": 19,
@@ -2375,6 +2405,7 @@ def build_operations_public(
             "sample_queue_coverage": image_action_queue_summary.get("sample_queue_coverage", 0),
             "by_workflow": image_action_queue_summary.get("by_workflow", []),
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
+            "top_image_attachment_workstreams": image_action_workstreams,
             "excluded_workflow_rows": image_action_queue_summary.get("excluded_workflow_rows", []),
             "primary_report": f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
             "next_step": "confirm_source_then_fill_image_url_templates",

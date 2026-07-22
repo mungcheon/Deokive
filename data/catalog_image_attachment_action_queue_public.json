@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T16:28:21Z",
+  "generated_at": "2026-07-22T17:00:01Z",
   "scope": "catalog_image_attachment_action_queue",
   "summary": {
     "actionable_image_rows": 73,
@@ -44,6 +44,9 @@
     "source_url_update_template_rows": 50,
     "representative_image_review_required_rows": 23,
     "image_url_ready_rows": 0,
+    "workstream_count": 4,
+    "source_url_update_workstream_count": 3,
+    "representative_image_review_workstream_count": 1,
     "excluded_workflow_rows": [
       [
         "find_source_then_extract_image",
@@ -62,6 +65,375 @@
     "queued_image_rows is the current review sample; unqueued_actionable_image_rows remains for later batches.",
     "Rows without source_url stay in catalog_image_enrichment_batches_public.json and source discovery queues.",
     "For generic storefront rows, fill source_url_import_template before the image_url template."
+  ],
+  "workstreams": [
+    {
+      "workflow": "replace_generic_source_then_extract_image",
+      "source_store": "Stellive Store",
+      "priority": 20,
+      "queued_image_rows": 45,
+      "batch_count": 3,
+      "next_batch_id": "image-attachment-action-001",
+      "batch_ids": [
+        "image-attachment-action-001",
+        "image-attachment-action-002",
+        "image-attachment-action-003"
+      ],
+      "next_machine_step": "replace_generic_source_url_then_extract_image",
+      "source_url_update_template_rows": 45,
+      "representative_image_review_rows": 0,
+      "image_url_ready_rows": 0,
+      "category_rows": [
+        [
+          "액세서리",
+          17
+        ],
+        [
+          "인형",
+          14
+        ],
+        [
+          "아크릴 스탠드",
+          11
+        ],
+        [
+          "캔뱃지",
+          1
+        ],
+        [
+          "머그컵",
+          1
+        ],
+        [
+          "의류",
+          1
+        ]
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2325,
+          "name_ko": "스텔라이브 1주년 뱃지 세트",
+          "name_ja": null,
+          "category": "캔뱃지",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 2352,
+          "name_ko": "강지 마스코트 인형",
+          "name_ja": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 2355,
+          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+          "name_ja": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 2356,
+          "name_ko": "아이리 칸나 마스코트 인형",
+          "name_ja": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 2357,
+          "name_ko": "아이리 칸나 키링 세트",
+          "name_ja": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 2361,
+          "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 2362,
+          "name_ko": "쿠루미 노아 생일 기념 굿즈",
+          "name_ja": null,
+          "category": "액세서리",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 2363,
+          "name_ko": "쿠루미 노아 마스코트 인형",
+          "name_ja": null,
+          "category": "인형",
+          "source_url": "https://fanding.kr/@stellive/shop",
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "workflow": "replace_generic_source_then_extract_image",
+      "source_store": "Weverse Shop",
+      "priority": 20,
+      "queued_image_rows": 3,
+      "batch_count": 1,
+      "next_batch_id": "image-attachment-action-004",
+      "batch_ids": [
+        "image-attachment-action-004"
+      ],
+      "next_machine_step": "replace_generic_source_url_then_extract_image",
+      "source_url_update_template_rows": 3,
+      "representative_image_review_rows": 0,
+      "image_url_ready_rows": 0,
+      "category_rows": [
+        [
+          "포토카드",
+          3
+        ]
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 17613,
+          "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+          "name_ja": null,
+          "category": "포토카드",
+          "source_url": "https://shop.weverse.io/home",
+          "official_search_url": null,
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 17622,
+          "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
+          "name_ja": null,
+          "category": "포토카드",
+          "source_url": "https://shop.weverse.io/home",
+          "official_search_url": null,
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 17623,
+          "name_ko": "ILLIT 포토카드 (랜덤)",
+          "name_ja": null,
+          "category": "포토카드",
+          "source_url": "https://shop.weverse.io/home",
+          "official_search_url": null,
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "workflow": "replace_generic_source_then_extract_image",
+      "source_store": "포켓몬 센터",
+      "priority": 20,
+      "queued_image_rows": 2,
+      "batch_count": 1,
+      "next_batch_id": "image-attachment-action-005",
+      "batch_ids": [
+        "image-attachment-action-005"
+      ],
+      "next_machine_step": "replace_generic_source_url_then_extract_image",
+      "source_url_update_template_rows": 2,
+      "representative_image_review_rows": 0,
+      "image_url_ready_rows": 0,
+      "category_rows": [
+        [
+          "인형",
+          1
+        ],
+        [
+          "트레이딩 카드",
+          1
+        ]
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1098,
+          "name_ko": "포켓몬 봉제 인형 (피카츄)",
+          "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
+          "category": "인형",
+          "source_url": "https://www.pokemoncenter-online.com/",
+          "official_search_url": null,
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        },
+        {
+          "catalog_index": 17593,
+          "name_ko": "포켓몬 카드 게임 부스터 팩",
+          "name_ja": null,
+          "category": "트레이딩 카드",
+          "source_url": "https://www.pokemoncenter-online.com/",
+          "official_search_url": null,
+          "source_url_update_required": true,
+          "representative_image_review_required": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "workflow": "review_gotouchi_official_candidates",
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "priority": 30,
+      "queued_image_rows": 23,
+      "batch_count": 2,
+      "next_batch_id": "image-attachment-action-006",
+      "batch_ids": [
+        "image-attachment-action-006",
+        "image-attachment-action-007"
+      ],
+      "next_machine_step": "confirm_exact_gotouchi_product_type_then_attach_image",
+      "source_url_update_template_rows": 0,
+      "representative_image_review_rows": 23,
+      "image_url_ready_rows": 0,
+      "category_rows": [
+        [
+          "마스코트",
+          12
+        ],
+        [
+          "아크릴 키링",
+          4
+        ],
+        [
+          "타월",
+          3
+        ],
+        [
+          "마그넷",
+          2
+        ],
+        [
+          "캔뱃지",
+          2
+        ]
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 936,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "source_url_update_required": false,
+          "representative_image_review_required": true
+        },
+        {
+          "catalog_index": 937,
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "source_url_update_required": false,
+          "representative_image_review_required": true
+        },
+        {
+          "catalog_index": 938,
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "source_url_update_required": false,
+          "representative_image_review_required": true
+        },
+        {
+          "catalog_index": 941,
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "source_url_update_required": false,
+          "representative_image_review_required": true
+        },
+        {
+          "catalog_index": 942,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "source_url_update_required": false,
+          "representative_image_review_required": true
+        },
+        {
+          "catalog_index": 943,
+          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "source_url_update_required": false,
+          "representative_image_review_required": true
+        },
+        {
+          "catalog_index": 944,
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "source_url_update_required": false,
+          "representative_image_review_required": true
+        },
+        {
+          "catalog_index": 945,
+          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "source_url_update_required": false,
+          "representative_image_review_required": true
+        }
+      ],
+      "auto_apply_enabled": false
+    }
+  ],
+  "next_actions": [
+    {
+      "priority": 1,
+      "workstream": "replace_generic_source_then_extract_image",
+      "rows": 50,
+      "workstream_count": 3,
+      "next_batch_id": "image-attachment-action-001",
+      "recommended_next_action": "Confirm exact product detail URLs for generic storefront rows before image import."
+    },
+    {
+      "priority": 2,
+      "workstream": "review_representative_image_candidates",
+      "rows": 23,
+      "workstream_count": 1,
+      "next_batch_id": "image-attachment-action-006",
+      "recommended_next_action": "Confirm representative official candidates only when product type and variant match."
+    }
   ],
   "batches": [
     {
