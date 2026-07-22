@@ -1529,6 +1529,24 @@ def build_operations_public(
     )
     source_detail_candidate_action_queue_summary = source_detail_candidate_action_queue.get("summary", {})
     source_action_queue_summary = source_action_queue.get("summary", {})
+    def compact_source_workstream(row: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "source_store": row.get("source_store"),
+            "priority": row.get("priority"),
+            "queued_source_rows": row.get("queued_source_rows"),
+            "batch_ids": row.get("batch_ids", []),
+            "workflow_rows": row.get("workflow_rows", []),
+            "review_state_rows": row.get("review_state_rows", []),
+            "category_rows": row.get("category_rows", []),
+            "recommended_next_step": row.get("recommended_next_step"),
+            "auto_apply_enabled": row.get("auto_apply_enabled", False),
+        }
+
+    source_action_workstreams = [
+        compact_source_workstream(row)
+        for row in source_action_queue.get("source_store_workstreams", [])
+        if isinstance(row, dict)
+    ][:8]
     image_summary = image_enrichment_batches["summary"]
     image_asset_summary = image_asset_audit.get("summary", {})
     image_action_queue = (
@@ -1880,6 +1898,7 @@ def build_operations_public(
             "by_review_state": source_action_queue_summary.get("by_review_state", []),
             "by_workflow": source_action_queue_summary.get("by_workflow", []),
             "by_source_store": source_action_queue_summary.get("by_source_store", []),
+            "top_source_store_workstreams": source_action_workstreams,
             "excluded_review_state_rows": source_action_queue_summary.get("excluded_review_state_rows", []),
             "recommended_next_action": "Work queued official-search source URL batches, then expand remaining actionable source rows.",
         } if source_action_queue_summary else None,
@@ -2159,6 +2178,7 @@ def build_operations_public(
             "by_review_state": source_action_queue_summary.get("by_review_state", []),
             "by_workflow": source_action_queue_summary.get("by_workflow", []),
             "by_source_store": source_action_queue_summary.get("by_source_store", []),
+            "top_source_store_workstreams": source_action_workstreams,
             "excluded_review_state_rows": source_action_queue_summary.get("excluded_review_state_rows", []),
             "primary_report": f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
             "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -5021,6 +5041,22 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["source_discovery_action_queue"] = copy_report_summary(
                 SOURCE_DISCOVERY_ACTION_QUEUE, "source_discovery_action_queue"
             )
+            source_action_payload = load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {})
+            target["source_discovery_action_queue"]["top_source_store_workstreams"] = [
+                {
+                    "source_store": row.get("source_store"),
+                    "priority": row.get("priority"),
+                    "queued_source_rows": row.get("queued_source_rows"),
+                    "batch_ids": row.get("batch_ids", []),
+                    "workflow_rows": row.get("workflow_rows", []),
+                    "review_state_rows": row.get("review_state_rows", []),
+                    "category_rows": row.get("category_rows", []),
+                    "recommended_next_step": row.get("recommended_next_step"),
+                    "auto_apply_enabled": row.get("auto_apply_enabled", False),
+                }
+                for row in source_action_payload.get("source_store_workstreams", [])
+                if isinstance(row, dict)
+            ][:8]
         if SOURCE_DISCOVERY_STORE_BOTTLENECKS.exists():
             target["source_discovery_store_bottlenecks"] = copy_report_summary(
                 SOURCE_DISCOVERY_STORE_BOTTLENECKS, "source_discovery_store_bottlenecks"

@@ -365,6 +365,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         next_action_reports = {row.get("public_report") for row in operations.get("next_actions", [])}
         report_links = {row.get("public_report") for row in operations.get("reports", [])}
         open_queues = operations.get("summary", {}).get("open_review_queues", {})
+        quality = reports.load_json(reports.QUALITY)
         confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
         readiness_summary = confirmed_readiness.get("summary", {})
         requested_focus_action = reports.load_json(reports.REQUESTED_FOCUS_ACTION_QUEUE)
@@ -592,6 +593,24 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_scorecard.get("by_source_store"),
             source_action_summary.get("by_source_store"),
         )
+        expected_source_workstreams = [
+            {
+                "source_store": row.get("source_store"),
+                "priority": row.get("priority"),
+                "queued_source_rows": row.get("queued_source_rows"),
+                "batch_ids": row.get("batch_ids", []),
+                "workflow_rows": row.get("workflow_rows", []),
+                "review_state_rows": row.get("review_state_rows", []),
+                "category_rows": row.get("category_rows", []),
+                "recommended_next_step": row.get("recommended_next_step"),
+                "auto_apply_enabled": row.get("auto_apply_enabled", False),
+            }
+            for row in source_action.get("source_store_workstreams", [])[:8]
+        ]
+        self.assertEqual(
+            source_scorecard.get("top_source_store_workstreams"),
+            expected_source_workstreams,
+        )
         self.assertEqual(
             source_next_action.get("unqueued_actionable_source_rows"),
             source_action_summary.get("unqueued_actionable_source_rows"),
@@ -599,6 +618,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_next_action.get("excluded_review_state_rows"),
             source_action_summary.get("excluded_review_state_rows"),
+        )
+        self.assertEqual(
+            source_next_action.get("top_source_store_workstreams"),
+            expected_source_workstreams,
+        )
+        self.assertEqual(
+            quality["source_discovery_action_queue"].get("top_source_store_workstreams"),
+            expected_source_workstreams,
         )
         self.assertEqual(
             open_queues.get("source_detail_candidate_action_rows"),
