@@ -1785,7 +1785,10 @@ class _GroupFolderGoodsSectionState extends State<_GroupFolderGoodsSection> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => GoodsDetailScreen(item: item),
+                      builder: (_) => GoodsDetailScreen(
+                        item: item,
+                        galleryItems: items,
+                      ),
                     ),
                   );
                 },

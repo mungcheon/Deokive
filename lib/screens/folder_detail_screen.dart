@@ -97,7 +97,7 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
               content: targetFolders.isEmpty
                   ? const Text('이동할 폴더가 없습니다.')
                   : DropdownButtonFormField<String>(
-                      value: selectedFolderId,
+                      initialValue: selectedFolderId,
                       decoration: const InputDecoration(
                         labelText: '이동할 폴더',
                       ),
@@ -364,8 +364,10 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (_) =>
-                                          GoodsDetailScreen(item: item),
+                                      builder: (_) => GoodsDetailScreen(
+                                        item: item,
+                                        galleryItems: items,
+                                      ),
                                     ),
                                   );
                                 }
@@ -401,8 +403,10 @@ class _FolderDetailContentState extends State<FolderDetailContent> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) =>
-                                              GoodsDetailScreen(item: item),
+                                          builder: (_) => GoodsDetailScreen(
+                                            item: item,
+                                            galleryItems: items,
+                                          ),
                                         ),
                                       );
                                     }

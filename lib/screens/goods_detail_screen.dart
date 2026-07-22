@@ -8,13 +8,49 @@ import '../models/goods_item.dart';
 import '../state/app_state.dart';
 import 'edit_goods_screen.dart';
 
-class GoodsDetailScreen extends StatelessWidget {
+class GoodsDetailScreen extends StatefulWidget {
   final GoodsItem item;
+  final List<GoodsItem> galleryItems;
 
   const GoodsDetailScreen({
     super.key,
     required this.item,
+    this.galleryItems = const [],
   });
+
+  @override
+  State<GoodsDetailScreen> createState() => _GoodsDetailScreenState();
+}
+
+class _GoodsDetailScreenState extends State<GoodsDetailScreen> {
+  late final PageController _goodsPageController;
+  late int _currentPage;
+
+  List<GoodsItem> get _initialGallery {
+    final source = widget.galleryItems.isEmpty
+        ? <GoodsItem>[widget.item]
+        : widget.galleryItems;
+    if (source.any((item) => item.id == widget.item.id)) {
+      return source;
+    }
+    return [widget.item, ...source];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final initialIndex = _initialGallery.indexWhere(
+      (candidate) => candidate.id == widget.item.id,
+    );
+    _currentPage = initialIndex < 0 ? 0 : initialIndex;
+    _goodsPageController = PageController(initialPage: _currentPage);
+  }
+
+  @override
+  void dispose() {
+    _goodsPageController.dispose();
+    super.dispose();
+  }
 
   String formatDate(DateTime? date) {
     if (date == null) return '-';
@@ -122,18 +158,11 @@ class GoodsDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, appState, _) {
-        final currentItem = appState.goodsItems.firstWhere(
-          (goods) => goods.id == item.id,
-          orElse: () => item,
-        );
-
-        String folderName = '-';
-        for (final folder in appState.folders) {
-          if (folder.id == currentItem.folderId) {
-            folderName = folder.name;
-            break;
-          }
+        final gallery = _liveGalleryItems(appState);
+        if (_currentPage >= gallery.length) {
+          _currentPage = gallery.length - 1;
         }
+        final currentItem = gallery[_currentPage];
 
         return Scaffold(
           appBar: AppBar(
@@ -168,78 +197,175 @@ class GoodsDetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: ListView(
-            padding: const EdgeInsets.all(16),
+          body: Stack(
             children: [
-              Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 900),
-                  child: Column(
-                    children: [
-                      _GoodsImageCarousel(item: currentItem),
-                      const SizedBox(height: 20),
-                      _SectionCard(
-                        children: [
-                          _InfoRow(label: '이름', value: currentItem.name),
-                          _InfoRow(
-                            label: '시리즈',
-                            value: currentItem.seriesName.isEmpty
-                                ? '-'
-                                : currentItem.seriesName,
-                          ),
-                          _InfoRow(label: '카테고리', value: currentItem.category),
-                          _InfoRow(label: '폴더', value: folderName),
-                          _InfoRow(label: '상태', value: currentItem.status),
-                          _InfoRow(label: '개수', value: '${currentItem.quantity}'),
-                        ],
+              PageView.builder(
+                controller: _goodsPageController,
+                itemCount: gallery.length,
+                onPageChanged: (index) => setState(() => _currentPage = index),
+                itemBuilder: (context, index) {
+                  final pageItem = gallery[index];
+                  return _GoodsDetailPage(
+                    item: pageItem,
+                    folderName: _folderNameFor(appState, pageItem),
+                    appState: appState,
+                    formatDate: formatDate,
+                    formatPrice: _formatPrice,
+                    priceCompareText: priceCompareText,
+                  );
+                },
+              ),
+              if (gallery.length > 1)
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 12,
+                  child: Center(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surface
+                            .withValues(alpha: 0.92),
+                        borderRadius: BorderRadius.circular(999),
+                        border: Border.all(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .outline
+                              .withValues(alpha: 0.2),
+                        ),
                       ),
-                      const SizedBox(height: 14),
-                      _SectionCard(
-                        children: [
-                          _InfoRow(
-                            label: '정가',
-                            value: _formatPrice(
-                              currentItem.officialPrice,
-                              currentItem.effectiveOfficialPriceCurrencyCode,
-                              appState,
-                            ),
-                          ),
-                          _InfoRow(
-                            label: '구매가',
-                            value: _formatPrice(
-                              currentItem.paidPrice,
-                              currentItem.priceCurrencyCode,
-                              appState,
-                            ),
-                          ),
-                          _InfoRow(
-                            label: '가격 비교',
-                            value: priceCompareText(currentItem, appState),
-                          ),
-                          _InfoRow(
-                            label: '구매 날짜',
-                            value: formatDate(currentItem.purchaseDate),
-                          ),
-                          _InfoRow(
-                            label: '제조사',
-                            value: currentItem.companyName ?? '-',
-                          ),
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        child: Text(
+                          '${_currentPage + 1} / ${gallery.length}',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
                       ),
-                      const SizedBox(height: 14),
-                      _SectionCard(
-                        children: [
-                          _InfoRow(label: '메모', value: currentItem.memo ?? '-'),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         );
       },
+    );
+  }
+
+  List<GoodsItem> _liveGalleryItems(AppState appState) {
+    final byId = {
+      for (final item in appState.goodsItems) item.id: item,
+    };
+    final items = <GoodsItem>[];
+    final seen = <String>{};
+    for (final item in _initialGallery) {
+      final liveItem = byId[item.id] ?? item;
+      if (seen.add(liveItem.id)) {
+        items.add(liveItem);
+      }
+    }
+    return items.isEmpty ? [widget.item] : items;
+  }
+
+  String _folderNameFor(AppState appState, GoodsItem item) {
+    for (final folder in appState.folders) {
+      if (folder.id == item.folderId) {
+        return folder.name;
+      }
+    }
+    return '-';
+  }
+}
+
+class _GoodsDetailPage extends StatelessWidget {
+  final GoodsItem item;
+  final String folderName;
+  final AppState appState;
+  final String Function(DateTime?) formatDate;
+  final String Function(int?, String, AppState) formatPrice;
+  final String Function(GoodsItem, AppState) priceCompareText;
+
+  const _GoodsDetailPage({
+    required this.item,
+    required this.folderName,
+    required this.appState,
+    required this.formatDate,
+    required this.formatPrice,
+    required this.priceCompareText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 56),
+      children: [
+        Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 900),
+            child: Column(
+              children: [
+                _GoodsImageCarousel(item: item),
+                const SizedBox(height: 20),
+                _SectionCard(
+                  children: [
+                    _InfoRow(label: '이름', value: item.name),
+                    _InfoRow(
+                      label: '시리즈',
+                      value: item.seriesName.isEmpty ? '-' : item.seriesName,
+                    ),
+                    _InfoRow(label: '카테고리', value: item.category),
+                    _InfoRow(label: '폴더', value: folderName),
+                    _InfoRow(label: '상태', value: item.status),
+                    _InfoRow(label: '개수', value: '${item.quantity}'),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                _SectionCard(
+                  children: [
+                    _InfoRow(
+                      label: '정가',
+                      value: formatPrice(
+                        item.officialPrice,
+                        item.effectiveOfficialPriceCurrencyCode,
+                        appState,
+                      ),
+                    ),
+                    _InfoRow(
+                      label: '구매가',
+                      value: formatPrice(
+                        item.paidPrice,
+                        item.priceCurrencyCode,
+                        appState,
+                      ),
+                    ),
+                    _InfoRow(
+                      label: '가격 비교',
+                      value: priceCompareText(item, appState),
+                    ),
+                    _InfoRow(
+                      label: '구매 날짜',
+                      value: formatDate(item.purchaseDate),
+                    ),
+                    _InfoRow(
+                      label: '제조사',
+                      value: item.companyName ?? '-',
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                _SectionCard(
+                  children: [
+                    _InfoRow(label: '메모', value: item.memo ?? '-'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -271,7 +397,8 @@ class _GoodsImageCarouselState extends State<_GoodsImageCarousel> {
   void didUpdateWidget(covariant _GoodsImageCarousel oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.item.id != widget.item.id ||
-        oldWidget.item.imageBytesList.length != widget.item.imageBytesList.length) {
+        oldWidget.item.imageBytesList.length !=
+            widget.item.imageBytesList.length) {
       _currentPage = 0;
       _pageController.jumpToPage(0);
       _restartAutoSlide();

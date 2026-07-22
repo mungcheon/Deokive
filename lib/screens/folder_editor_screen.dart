@@ -97,7 +97,6 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final isEditing = widget.initialFolder != null;
     final title = isEditing
         ? (widget.isGroup ? '굿즈 묶음 수정' : '굿즈 폴더 수정')
@@ -129,34 +128,13 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
             onSubmitted: (_) => _submit(),
           ),
           const SizedBox(height: 22),
-          Text(
-            '아이콘',
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: 10),
-          ..._groupedIcons.entries.map(
-            (entry) => _IconSection(
-              title: entry.key,
-              options: entry.value,
-              selectedIcon: _selectedIcon,
-              selectedColor: _selectedColor,
-              onSelected: (icon) => setState(() => _selectedIcon = icon),
-            ),
-          ),
-          const SizedBox(height: 18),
-          Text(
-            '색상',
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: 10),
-          _ColorGrid(
+          _FolderVisualPicker(
+            groupedIcons: _groupedIcons,
             colors: _colors,
+            selectedIcon: _selectedIcon,
             selectedColor: _selectedColor,
-            onSelected: (color) => setState(() => _selectedColor = color),
+            onIconSelected: (icon) => setState(() => _selectedIcon = icon),
+            onColorSelected: (color) => setState(() => _selectedColor = color),
           ),
         ],
       ),
@@ -169,6 +147,85 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
             icon: Icon(isEditing ? Icons.check_rounded : Icons.add_rounded),
             label: Text(isEditing ? '저장' : '생성'),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FolderVisualPicker extends StatelessWidget {
+  final Map<String, List<AppIconOption>> groupedIcons;
+  final List<Color> colors;
+  final IconData selectedIcon;
+  final Color selectedColor;
+  final ValueChanged<IconData> onIconSelected;
+  final ValueChanged<Color> onColorSelected;
+
+  const _FolderVisualPicker({
+    required this.groupedIcons,
+    required this.colors,
+    required this.selectedIcon,
+    required this.selectedColor,
+    required this.onIconSelected,
+    required this.onColorSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return DefaultTabController(
+      length: 2,
+      child: Container(
+        height: 460,
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: theme.colorScheme.outline.withValues(alpha: 0.22),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          children: [
+            Material(
+              color: theme.colorScheme.surfaceContainerHighest
+                  .withValues(alpha: 0.5),
+              child: const TabBar(
+                tabs: [
+                  Tab(icon: Icon(Icons.category_rounded), text: '아이콘'),
+                  Tab(icon: Icon(Icons.palette_rounded), text: '색상'),
+                ],
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  ListView(
+                    padding: const EdgeInsets.all(14),
+                    children: groupedIcons.entries
+                        .map(
+                          (entry) => _IconSection(
+                            title: entry.key,
+                            options: entry.value,
+                            selectedIcon: selectedIcon,
+                            selectedColor: selectedColor,
+                            onSelected: onIconSelected,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.all(14),
+                    child: _ColorGrid(
+                      colors: colors,
+                      selectedColor: selectedColor,
+                      onSelected: onColorSelected,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
