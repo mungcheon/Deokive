@@ -49,6 +49,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertEqual(report["summary"]["safe_source_image_pair_rows"], 1)
         self.assertEqual(report["summary"]["identity_warning_rows"], 0)
+        self.assertEqual(report["summary"]["identity_warning_missing_display_image_rows"], 0)
+        self.assertEqual(report["summary"]["unflagged_missing_display_image_candidate_rows"], 1)
         self.assertEqual(report["summary"]["current_catalog_matched_rows"], 1)
         self.assertEqual(report["summary"]["current_catalog_missing_display_image_rows"], 1)
         self.assertEqual(report["summary"]["current_catalog_already_has_display_image_rows"], 0)
@@ -156,6 +158,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
 
         self.assertEqual(report["summary"]["identity_warning_rows"], 2)
+        self.assertEqual(report["summary"]["identity_warning_missing_display_image_rows"], 2)
+        self.assertEqual(report["summary"]["unflagged_missing_display_image_candidate_rows"], 0)
         self.assertEqual(
             report["summary"]["by_candidate_identity_flag"],
             [
@@ -166,6 +170,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         )
         items = {item["catalog_index"]: item for batch in report["batches"] for item in batch["items"]}
         self.assertEqual(items[3]["candidate_identity_flags"], ["only_generic_shared_tokens"])
+        self.assertEqual(items[3]["review_priority"], 35)
+        self.assertEqual(items[3]["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
         self.assertEqual(
             items[4]["candidate_identity_flags"],
             [
@@ -174,6 +180,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
                 "candidate_title_missing_catalog_variant_hint",
             ],
         )
+        self.assertEqual(items[4]["review_priority"], 35)
+        self.assertEqual(items[4]["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
 
 
 if __name__ == "__main__":

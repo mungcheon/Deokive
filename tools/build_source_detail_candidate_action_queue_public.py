@@ -165,6 +165,18 @@ def candidate_identity_flags(row: dict[str, Any]) -> list[str]:
     return flags
 
 
+def review_priority(risk: str, flags: list[str]) -> int:
+    base_priority = {
+        "strong_single_candidate_review": 10,
+        "near_single_candidate_review": 20,
+        "ambiguous_candidate_review": 30,
+        "weak_candidate_review": 40,
+    }.get(risk, 99)
+    if flags and base_priority < 35:
+        return 35
+    return base_priority
+
+
 def current_catalog_state(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
     try:
         index = int(row.get("catalog_index"))
@@ -197,6 +209,7 @@ def current_catalog_state(row: dict[str, Any], catalog_by_index: dict[int, dict[
 def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]] | None = None) -> dict[str, Any]:
     risk = candidate_risk(row)
     catalog_state = current_catalog_state(row, catalog_by_index or {})
+    identity_flags = candidate_identity_flags(row)
     item = {
         "manual_confirmed": False,
         "catalog_index": row.get("catalog_index"),
@@ -213,16 +226,11 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
         "candidate_image_url": row.get("candidate_image_url"),
         "score": row.get("score"),
         "shared_tokens": row.get("shared_tokens") or [],
-        "candidate_identity_flags": candidate_identity_flags(row),
+        "candidate_identity_flags": identity_flags,
         "safe_source_image_pair": row.get("safe_source_image_pair"),
         "source_report": row.get("source_report"),
         "review_risk": risk,
-        "review_priority": {
-            "strong_single_candidate_review": 10,
-            "near_single_candidate_review": 20,
-            "ambiguous_candidate_review": 30,
-            "weak_candidate_review": 40,
-        }.get(risk, 99),
+        "review_priority": review_priority(risk, identity_flags),
         "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
         "current_catalog_state": catalog_state,
         "source_patch_template": {
@@ -259,6 +267,8 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
         item["recommended_action"] = "skip_current_catalog_row_already_has_display_image"
     elif catalog_state.get("stale_candidate"):
         item["recommended_action"] = "refresh_candidate_before_manual_review"
+    elif identity_flags:
+        item["recommended_action"] = "recheck_candidate_identity_before_source_or_image_patch"
     return item
 
 
@@ -277,10 +287,7 @@ def build_report(
     ]
     items.sort(
         key=lambda row: (
-            {"strong_single_candidate_review": 10, "near_single_candidate_review": 20, "ambiguous_candidate_review": 30}.get(
-                str(row.get("review_risk") or ""),
-                40,
-            ),
+            int(row.get("review_priority") or 99),
             str(row.get("source_store") or ""),
             int(row.get("catalog_index") or 999_999_999),
         )
@@ -316,6 +323,18 @@ def build_report(
             "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
             "safe_source_image_pair_rows": sum(1 for item in items if item.get("safe_source_image_pair") is True),
             "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
+            "identity_warning_missing_display_image_rows": sum(
+                1
+                for item in items
+                if item.get("candidate_identity_flags")
+                and item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
+            ),
+            "unflagged_missing_display_image_candidate_rows": sum(
+                1
+                for item in items
+                if not item.get("candidate_identity_flags")
+                and item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
+            ),
             "current_catalog_matched_rows": sum(
                 1 for item in items if item.get("current_catalog_state", {}).get("catalog_match_found") is True
             ),

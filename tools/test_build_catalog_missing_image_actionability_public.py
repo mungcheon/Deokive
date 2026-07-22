@@ -62,7 +62,16 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                             "candidate_image_url": "https://example.test/item.jpg",
                             "review_risk": "near_single_candidate_review",
                             "candidate_identity_flags": ["only_generic_shared_tokens"],
-                            "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+                            "recommended_action": "recheck_candidate_identity_before_source_or_image_patch",
+                            "current_catalog_state": {"catalog_has_display_image": False},
+                        },
+                        {
+                            "catalog_index": 7,
+                            "name_ko": "Needs recheck",
+                            "source_store": "Store E",
+                            "candidate_title": "Wrong crossover",
+                            "candidate_identity_flags": ["candidate_title_mentions_crossover"],
+                            "recommended_action": "recheck_candidate_identity_before_source_or_image_patch",
                             "current_catalog_state": {"catalog_has_display_image": False},
                         },
                         {
@@ -91,16 +100,18 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unclassified_rows"], 0)
         self.assertEqual(report["summary"]["exact_source_ready_rows"], 1)
         self.assertEqual(report["summary"]["source_first_rows"], 3)
-        self.assertEqual(report["summary"]["source_detail_candidate_review_rows"], 1)
-        self.assertEqual(report["summary"]["source_detail_identity_warning_rows"], 1)
+        self.assertEqual(report["summary"]["source_detail_candidate_review_rows"], 0)
+        self.assertEqual(report["summary"]["source_detail_candidate_recheck_required_rows"], 2)
+        self.assertEqual(report["summary"]["source_detail_identity_warning_rows"], 2)
+        self.assertEqual(report["summary"]["source_detail_unflagged_candidate_rows"], 0)
         self.assertEqual(report["summary"]["manual_image_research_rows"], 1)
         self.assertEqual(report["summary"]["direct_image_action_queue_rows"], 2)
-        self.assertEqual(report["summary"]["action_queue_rows"], 3)
-        self.assertEqual(report["summary"]["actionable_image_rows"], 4)
+        self.assertEqual(report["summary"]["action_queue_rows"], 2)
+        self.assertEqual(report["summary"]["actionable_image_rows"], 3)
         readiness = {row["readiness"]: row["rows"] for row in report["readiness"]}
         self.assertEqual(readiness["image_url_candidate_review"], 1)
-        self.assertEqual(readiness["source_detail_candidate_review"], 1)
-        source_detail_row = next(row for row in report["readiness"] if row["readiness"] == "source_detail_candidate_review")
+        self.assertEqual(readiness["source_detail_candidate_recheck_required"], 2)
+        source_detail_row = next(row for row in report["readiness"] if row["readiness"] == "source_detail_candidate_recheck_required")
         self.assertEqual(source_detail_row["sample_items"][0]["candidate_identity_flags"], ["only_generic_shared_tokens"])
         self.assertEqual(readiness["source_url_replacement_required"], 2)
         self.assertEqual(readiness["source_url_discovery_required"], 1)

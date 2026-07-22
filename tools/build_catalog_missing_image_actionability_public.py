@@ -215,7 +215,6 @@ def source_detail_missing_items(source_detail_queue: dict[str, Any] | None) -> l
         item
         for item in source_detail_items(source_detail_queue)
         if item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
-        and item.get("recommended_action") == "confirm_exact_identity_before_source_or_image_patch"
     ]
 
 
@@ -223,9 +222,19 @@ def append_source_detail_readiness(
     readiness_rows: list[dict[str, Any]],
     source_detail_missing: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    if not source_detail_missing:
+    ready_items = [
+        item
+        for item in source_detail_missing
+        if item.get("recommended_action") == "confirm_exact_identity_before_source_or_image_patch"
+    ]
+    recheck_items = [
+        item
+        for item in source_detail_missing
+        if item.get("recommended_action") == "recheck_candidate_identity_before_source_or_image_patch"
+    ]
+    if not ready_items and not recheck_items:
         return readiness_rows
-    samples = [
+    ready_samples = [
         {
             "catalog_index": item.get("catalog_index"),
             "name_ko": item.get("name_ko"),
@@ -237,27 +246,59 @@ def append_source_detail_readiness(
             "candidate_identity_flags": item.get("candidate_identity_flags") or [],
             "workflow": "confirm_source_detail_candidate_then_attach_image",
         }
-        for item in source_detail_missing[:12]
+        for item in ready_items[:12]
     ]
     out = list(readiness_rows)
-    out.append(
-        {
-            "readiness": "source_detail_candidate_review",
-            "priority": READINESS_ORDER["image_url_candidate_review"] + 1,
-            "rows": len(source_detail_missing),
-            "workflow_rows": [
-                {
-                    "workflow": "confirm_source_detail_candidate_then_attach_image",
-                    "label": "정확한 상품 상세 후보를 확인한 뒤 source_url/image_url 첨부",
-                    "rows": len(source_detail_missing),
-                    "next_step": "manual_confirm_then_import_source_and_image_templates",
-                }
-            ],
-            "by_source_store": counter_rows(Counter(str(item.get("source_store") or "") for item in source_detail_missing), "source_store"),
-            "sample_items": samples,
-            "auto_apply_enabled": False,
-        }
-    )
+    if ready_items:
+        out.append(
+            {
+                "readiness": "source_detail_candidate_review",
+                "priority": READINESS_ORDER["image_url_candidate_review"] + 1,
+                "rows": len(ready_items),
+                "workflow_rows": [
+                    {
+                        "workflow": "confirm_source_detail_candidate_then_attach_image",
+                        "label": "정확한 상품 상세 후보를 확인한 뒤 source_url/image_url 첨부",
+                        "rows": len(ready_items),
+                        "next_step": "manual_confirm_then_import_source_and_image_templates",
+                    }
+                ],
+                "by_source_store": counter_rows(Counter(str(item.get("source_store") or "") for item in ready_items), "source_store"),
+                "sample_items": ready_samples,
+                "auto_apply_enabled": False,
+            }
+        )
+    if recheck_items:
+        out.append(
+            {
+                "readiness": "source_detail_candidate_recheck_required",
+                "priority": READINESS_ORDER["source_url_discovery_required"] - 1,
+                "rows": len(recheck_items),
+                "workflow_rows": [
+                    {
+                        "workflow": "recheck_source_detail_candidate_identity",
+                        "label": "후보 제목의 작품/캐릭터/변형 불일치 가능성 재확인",
+                        "rows": len(recheck_items),
+                        "next_step": "refresh_or_replace_candidate_before_import",
+                    }
+                ],
+                "by_source_store": counter_rows(Counter(str(item.get("source_store") or "") for item in recheck_items), "source_store"),
+                "sample_items": [
+                    {
+                        "catalog_index": item.get("catalog_index"),
+                        "name_ko": item.get("name_ko"),
+                        "name_ja": item.get("name_ja"),
+                        "source_store": item.get("source_store"),
+                        "candidate_title": item.get("candidate_title"),
+                        "candidate_source_url": item.get("candidate_source_url"),
+                        "candidate_identity_flags": item.get("candidate_identity_flags") or [],
+                        "workflow": "recheck_source_detail_candidate_identity",
+                    }
+                    for item in recheck_items[:12]
+                ],
+                "auto_apply_enabled": False,
+            }
+        )
     return sorted(out, key=lambda row: (int(row["priority"]), str(row["readiness"])))
 
 
@@ -272,6 +313,16 @@ def build_report(
     action_summary = action_queue.get("summary") if isinstance(action_queue.get("summary"), dict) else {}
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
     source_detail_missing = source_detail_missing_items(source_detail_queue)
+    source_detail_ready = [
+        item
+        for item in source_detail_missing
+        if item.get("recommended_action") == "confirm_exact_identity_before_source_or_image_patch"
+    ]
+    source_detail_recheck = [
+        item
+        for item in source_detail_missing
+        if item.get("recommended_action") == "recheck_candidate_identity_before_source_or_image_patch"
+    ]
     base_readiness_rows = summarize_groups(groups)
     readiness_rows = append_source_detail_readiness(base_readiness_rows, source_detail_missing)
     source_store_priority = summarize_source_stores(groups)
@@ -305,14 +356,16 @@ def build_report(
             "exact_source_ready_rows": immediate_rows,
             "source_first_rows": source_first_rows,
             "review_before_attach_rows": review_before_attach_rows,
-            "source_detail_candidate_review_rows": len(source_detail_missing),
+            "source_detail_candidate_review_rows": len(source_detail_ready),
+            "source_detail_candidate_recheck_required_rows": len(source_detail_recheck),
             "source_detail_identity_warning_rows": sum(
                 1 for item in source_detail_missing if item.get("candidate_identity_flags")
             ),
+            "source_detail_unflagged_candidate_rows": len(source_detail_ready),
             "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
-            "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_missing),
+            "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_ready),
             "direct_image_action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
-            "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_missing),
+            "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_ready),
             "auto_apply_enabled": False,
         },
         "readiness": readiness_rows,
