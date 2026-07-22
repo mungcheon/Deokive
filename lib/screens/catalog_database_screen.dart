@@ -84,8 +84,8 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
         final palette = theme.extension<DeokivePalette>()!;
         return DraggableScrollableSheet(
           expand: false,
-          initialChildSize: 0.82,
-          minChildSize: 0.62,
+          initialChildSize: 0.88,
+          minChildSize: 0.74,
           maxChildSize: 0.98,
           builder: (context, scrollController) {
             return SafeArea(

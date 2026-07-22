@@ -151,6 +151,24 @@ void main() {
     expect(item.imageUrl, 'https://example.com/catalog/source.jpg');
   });
 
+  test('catalog DB import does not persist remote image bytes', () async {
+    const entry = GoodsCatalogEntry(
+      nameKo: 'Remote-only catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      sourceStore: 'official store',
+      imageUrl: 'https://example.com/catalog/source.jpg',
+    );
+
+    final imageBytes = await loadCatalogEntryBundledImageBytes(entry);
+
+    expect(imageBytes, isNull);
+    expect(
+      catalogEntryImageReference(entry, preferLocalAsset: false),
+      'https://example.com/catalog/source.jpg',
+    );
+  });
+
   test('catalog import can load a bundled catalog image for saving', () async {
     const entry = GoodsCatalogEntry(
       nameKo: 'Image catalog item',

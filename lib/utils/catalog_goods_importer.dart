@@ -65,7 +65,7 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   );
   if (destination == null || !context.mounted) return false;
 
-  final imageBytes = await loadCatalogEntryImageBytes(entry);
+  final imageBytes = await loadCatalogEntryBundledImageBytes(entry);
   if (!context.mounted) return false;
 
   final item = goodsItemFromCatalogEntry(
@@ -166,8 +166,8 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.82,
-        minChildSize: 0.62,
+        initialChildSize: 0.88,
+        minChildSize: 0.74,
         maxChildSize: 0.98,
         builder: (context, scrollController) {
           return StatefulBuilder(
@@ -206,7 +206,7 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                                   .withValues(alpha: 0.58),
                             ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 10),
                       if (wishlistFolder != null)
                         _CatalogImportDestinationTile(
                           icon: Icons.favorite_border_rounded,
@@ -221,7 +221,7 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                           },
                         ),
                       if (folders.isNotEmpty) ...[
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 6),
                         _CatalogImportDestinationTile(
                           icon: Icons.inventory_2_rounded,
                           iconColor: Theme.of(context).colorScheme.primary,
@@ -554,19 +554,8 @@ DateTime? _parseCatalogReleaseDate(String? raw) {
 
 @visibleForTesting
 Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
-  final localPath = entry.localImagePath?.trim() ?? '';
-  if (localPath.isNotEmpty) {
-    try {
-      final data = await rootBundle.load(localPath);
-      return data.buffer.asUint8List();
-    } catch (_) {
-      if (kIsWeb) {
-        final bytes = await _loadWebAssetBytes(localPath);
-        if (bytes != null) return bytes;
-      }
-      // Fall back to the remote URL when a bundled cache file is unavailable.
-    }
-  }
+  final localBytes = await loadCatalogEntryBundledImageBytes(entry);
+  if (localBytes != null) return localBytes;
 
   var url = entry.imageUrl?.trim() ?? '';
   if (url.isEmpty) return null;
@@ -589,6 +578,26 @@ Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
   } catch (_) {
     return null;
   }
+}
+
+@visibleForTesting
+Future<Uint8List?> loadCatalogEntryBundledImageBytes(
+  GoodsCatalogEntry entry,
+) async {
+  final localPath = entry.localImagePath?.trim() ?? '';
+  if (localPath.isNotEmpty) {
+    try {
+      final data = await rootBundle.load(localPath);
+      return data.buffer.asUint8List();
+    } catch (_) {
+      if (kIsWeb) {
+        final bytes = await _loadWebAssetBytes(localPath);
+        if (bytes != null) return bytes;
+      }
+      // Fall back to the remote URL when a bundled cache file is unavailable.
+    }
+  }
+  return null;
 }
 
 Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
