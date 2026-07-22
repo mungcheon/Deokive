@@ -135,6 +135,7 @@ def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, b
             break
 
     queued_rows = sum(int(batch.get("row_count") or 0) for batch in batches)
+    unqueued_actionable_rows = max(actionable_group_rows - queued_rows, 0)
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -142,6 +143,10 @@ def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, b
         "summary": {
             "actionable_image_rows": actionable_group_rows,
             "queued_image_rows": queued_rows,
+            "unqueued_actionable_image_rows": unqueued_actionable_rows,
+            "sample_queue_coverage": round(queued_rows / actionable_group_rows, 4)
+            if actionable_group_rows
+            else 0,
             "action_batch_count": len(batches),
             "sample_action_item_rows": len(action_items),
             "batch_size": batch_size,
@@ -154,6 +159,7 @@ def build_report(enrichment_batches: dict[str, Any], *, max_batches: int = 18, b
         "instructions": [
             "Use this queue for image-url work that is closer to actionable than broad source discovery.",
             "Every image still needs exact product evidence before catalog mutation.",
+            "queued_image_rows is the current review sample; unqueued_actionable_image_rows remains for later batches.",
             "Rows without source_url stay in catalog_image_enrichment_batches_public.json and source discovery queues.",
         ],
         "batches": batches,

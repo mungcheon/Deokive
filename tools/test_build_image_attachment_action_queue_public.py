@@ -55,6 +55,8 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["actionable_image_rows"], 2)
         self.assertEqual(report["summary"]["queued_image_rows"], 2)
+        self.assertEqual(report["summary"]["unqueued_actionable_image_rows"], 0)
+        self.assertEqual(report["summary"]["sample_queue_coverage"], 1.0)
         self.assertEqual(dict(report["summary"]["excluded_workflow_rows"]), {"find_source_then_extract_image": 5})
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["batches"][0]["workflow"], "replace_generic_source_then_extract_image")
@@ -83,6 +85,8 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["actionable_image_rows"], 3)
         self.assertEqual(report["summary"]["queued_image_rows"], 1)
+        self.assertEqual(report["summary"]["unqueued_actionable_image_rows"], 2)
+        self.assertEqual(report["summary"]["sample_queue_coverage"], 0.3333)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
 
 

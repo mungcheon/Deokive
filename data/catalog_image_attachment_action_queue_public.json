@@ -1,10 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-21T22:36:15Z",
+  "generated_at": "2026-07-22T00:31:26Z",
   "scope": "catalog_image_attachment_action_queue",
   "summary": {
     "actionable_image_rows": 73,
     "queued_image_rows": 25,
+    "unqueued_actionable_image_rows": 48,
+    "sample_queue_coverage": 0.3425,
     "action_batch_count": 4,
     "sample_action_item_rows": 25,
     "batch_size": 20,
@@ -52,6 +54,7 @@
   "instructions": [
     "Use this queue for image-url work that is closer to actionable than broad source discovery.",
     "Every image still needs exact product evidence before catalog mutation.",
+    "queued_image_rows is the current review sample; unqueued_actionable_image_rows remains for later batches.",
     "Rows without source_url stay in catalog_image_enrichment_batches_public.json and source discovery queues."
   ],
   "batches": [
