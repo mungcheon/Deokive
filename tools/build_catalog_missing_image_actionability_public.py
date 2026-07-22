@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DEFAULT_ENRICHMENT = DATA / "catalog_image_enrichment_batches_public.json"
 DEFAULT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
+DEFAULT_SOURCE_DETAIL_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_missing_image_actionability_public.json"
 
 
@@ -196,18 +197,84 @@ def summarize_source_stores(groups: list[dict[str, Any]], limit: int = 30) -> li
     return sorted(rows_out, key=lambda row: (int(row["priority"]), -int(row["missing_image_rows"]), str(row["source_store"])))[:limit]
 
 
+def source_detail_items(source_detail_queue: dict[str, Any] | None) -> list[dict[str, Any]]:
+    if not isinstance(source_detail_queue, dict):
+        return []
+    items: list[dict[str, Any]] = []
+    for batch in source_detail_queue.get("batches") or []:
+        if not isinstance(batch, dict):
+            continue
+        for item in batch.get("items") or []:
+            if isinstance(item, dict):
+                items.append(item)
+    return items
+
+
+def source_detail_missing_items(source_detail_queue: dict[str, Any] | None) -> list[dict[str, Any]]:
+    return [
+        item
+        for item in source_detail_items(source_detail_queue)
+        if item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
+        and item.get("recommended_action") == "confirm_exact_identity_before_source_or_image_patch"
+    ]
+
+
+def append_source_detail_readiness(
+    readiness_rows: list[dict[str, Any]],
+    source_detail_missing: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if not source_detail_missing:
+        return readiness_rows
+    samples = [
+        {
+            "catalog_index": item.get("catalog_index"),
+            "name_ko": item.get("name_ko"),
+            "name_ja": item.get("name_ja"),
+            "source_store": item.get("source_store"),
+            "candidate_source_url": item.get("candidate_source_url"),
+            "candidate_image_url": item.get("candidate_image_url"),
+            "review_risk": item.get("review_risk"),
+            "workflow": "confirm_source_detail_candidate_then_attach_image",
+        }
+        for item in source_detail_missing[:12]
+    ]
+    out = list(readiness_rows)
+    out.append(
+        {
+            "readiness": "source_detail_candidate_review",
+            "priority": READINESS_ORDER["image_url_candidate_review"] + 1,
+            "rows": len(source_detail_missing),
+            "workflow_rows": [
+                {
+                    "workflow": "confirm_source_detail_candidate_then_attach_image",
+                    "label": "정확한 상품 상세 후보를 확인한 뒤 source_url/image_url 첨부",
+                    "rows": len(source_detail_missing),
+                    "next_step": "manual_confirm_then_import_source_and_image_templates",
+                }
+            ],
+            "by_source_store": counter_rows(Counter(str(item.get("source_store") or "") for item in source_detail_missing), "source_store"),
+            "sample_items": samples,
+            "auto_apply_enabled": False,
+        }
+    )
+    return sorted(out, key=lambda row: (int(row["priority"]), str(row["readiness"])))
+
+
 def build_report(
     enrichment: dict[str, Any],
     action_queue: dict[str, Any],
+    source_detail_queue: dict[str, Any] | None = None,
     *,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     summary = enrichment.get("summary") if isinstance(enrichment.get("summary"), dict) else {}
     action_summary = action_queue.get("summary") if isinstance(action_queue.get("summary"), dict) else {}
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
-    readiness_rows = summarize_groups(groups)
+    source_detail_missing = source_detail_missing_items(source_detail_queue)
+    base_readiness_rows = summarize_groups(groups)
+    readiness_rows = append_source_detail_readiness(base_readiness_rows, source_detail_missing)
     source_store_priority = summarize_source_stores(groups)
-    readiness_total = sum(int(row.get("rows") or 0) for row in readiness_rows)
+    readiness_total = sum(int(row.get("rows") or 0) for row in base_readiness_rows)
     missing_image_rows = int(summary.get("missing_image_rows") or readiness_total)
 
     immediate_rows = sum(
@@ -237,9 +304,11 @@ def build_report(
             "exact_source_ready_rows": immediate_rows,
             "source_first_rows": source_first_rows,
             "review_before_attach_rows": review_before_attach_rows,
+            "source_detail_candidate_review_rows": len(source_detail_missing),
             "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
-            "action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
-            "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0),
+            "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_missing),
+            "direct_image_action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
+            "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_missing),
             "auto_apply_enabled": False,
         },
         "readiness": readiness_rows,
@@ -254,6 +323,7 @@ def build_report(
             "exact_source_ready_rows means image_url can be reviewed from an already exact product source_url.",
             "source_first_rows must receive or replace source_url before any image_url import.",
             "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
+            "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
             "All image changes remain manual-review only until exact product identity is confirmed.",
         ],
         "automation_policy": {
@@ -269,11 +339,12 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--enrichment", type=Path, default=DEFAULT_ENRICHMENT)
     parser.add_argument("--action-queue", type=Path, default=DEFAULT_ACTION_QUEUE)
+    parser.add_argument("--source-detail-queue", type=Path, default=DEFAULT_SOURCE_DETAIL_QUEUE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(load_json(args.enrichment), load_json(args.action_queue))
+    report = build_report(load_json(args.enrichment), load_json(args.action_queue), load_json(args.source_detail_queue))
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))

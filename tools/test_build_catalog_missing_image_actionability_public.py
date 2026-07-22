@@ -50,8 +50,38 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             ],
         }
         action_queue = {"summary": {"queued_image_rows": 2, "actionable_image_rows": 3}}
+        source_detail_queue = {
+            "batches": [
+                {
+                    "items": [
+                        {
+                            "catalog_index": 5,
+                            "name_ko": "Candidate",
+                            "source_store": "Store E",
+                            "candidate_source_url": "https://example.test/item",
+                            "candidate_image_url": "https://example.test/item.jpg",
+                            "review_risk": "near_single_candidate_review",
+                            "recommended_action": "confirm_exact_identity_before_source_or_image_patch",
+                            "current_catalog_state": {"catalog_has_display_image": False},
+                        },
+                        {
+                            "catalog_index": 6,
+                            "name_ko": "Already solved",
+                            "source_store": "Store E",
+                            "recommended_action": "skip_current_catalog_row_already_has_display_image",
+                            "current_catalog_state": {"catalog_has_display_image": True},
+                        },
+                    ]
+                }
+            ]
+        }
 
-        report = actionability.build_report(enrichment, action_queue, generated_at="2026-07-22T00:00:00Z")
+        report = actionability.build_report(
+            enrichment,
+            action_queue,
+            source_detail_queue,
+            generated_at="2026-07-22T00:00:00Z",
+        )
 
         self.assertEqual(report["generated_at"], "2026-07-22T00:00:00Z")
         self.assertFalse(report["summary"]["auto_apply_enabled"])
@@ -60,9 +90,14 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unclassified_rows"], 0)
         self.assertEqual(report["summary"]["exact_source_ready_rows"], 1)
         self.assertEqual(report["summary"]["source_first_rows"], 3)
+        self.assertEqual(report["summary"]["source_detail_candidate_review_rows"], 1)
         self.assertEqual(report["summary"]["manual_image_research_rows"], 1)
+        self.assertEqual(report["summary"]["direct_image_action_queue_rows"], 2)
+        self.assertEqual(report["summary"]["action_queue_rows"], 3)
+        self.assertEqual(report["summary"]["actionable_image_rows"], 4)
         readiness = {row["readiness"]: row["rows"] for row in report["readiness"]}
         self.assertEqual(readiness["image_url_candidate_review"], 1)
+        self.assertEqual(readiness["source_detail_candidate_review"], 1)
         self.assertEqual(readiness["source_url_replacement_required"], 2)
         self.assertEqual(readiness["source_url_discovery_required"], 1)
         self.assertEqual(readiness["manual_research_required"], 1)
