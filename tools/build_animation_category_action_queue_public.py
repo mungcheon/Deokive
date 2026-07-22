@@ -11,6 +11,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "animation_category_review_batches_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "animation_category_action_queue_public.json"
+CONFIRMED_TEMPLATE = "server/animation_category_confirmed_rows.template.json"
+CONFIRMED_QUEUE = "server/animation_category_confirmed_rows.json"
+IMPORT_TOOL = "tools/import_confirmed_animation_category_rows.py"
+UNBLOCKS_WHEN = "category_mapping_manually_confirmed"
 
 
 def _now_utc() -> str:
@@ -95,6 +99,10 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
         "review_reason": row.get("review_reason"),
         "sample_names": (row.get("sample_names") or [])[:8],
         "category_mapping_template": _template(row),
+        "manual_confirmation_template": CONFIRMED_TEMPLATE,
+        "confirmed_queue": CONFIRMED_QUEUE,
+        "import_tool": IMPORT_TOOL,
+        "unblocks_when": UNBLOCKS_WHEN,
         "auto_apply_enabled": False,
     }
 
@@ -119,6 +127,10 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
                 "color_group_counts": color_counts.most_common(),
                 "review_state": "manual_category_mapping_confirmation_required",
                 "next_machine_step": "fill_confirmed_animation_category_mapping_templates",
+                "manual_confirmation_template": CONFIRMED_TEMPLATE,
+                "confirmed_queue": CONFIRMED_QUEUE,
+                "import_tool": IMPORT_TOOL,
+                "unblocks_when": UNBLOCKS_WHEN,
                 "categories": chunk,
             }
         )
@@ -151,12 +163,17 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
             "auto_apply_category_changes": False,
             "auto_create_folders": False,
             "requires_manual_review": True,
+            "manual_confirmation_template": CONFIRMED_TEMPLATE,
+            "confirmed_queue": CONFIRMED_QUEUE,
+            "import_tool": IMPORT_TOOL,
+            "unblocks_when": UNBLOCKS_WHEN,
             "reason": "Category mappings affect app navigation and user-facing folders.",
         },
         "instructions": [
             "Confirm each category_mapping_template before any catalog mutation.",
             "Split broad source categories such as acrylic before applying a single folder mapping.",
             "Keep folder colors ordered by color_group/sort_order so similar colors remain grouped.",
+            f"Copy confirmed category_mapping_template rows into {CONFIRMED_QUEUE}, set manual_confirmed=true, then run {IMPORT_TOOL}.",
         ],
     }
 

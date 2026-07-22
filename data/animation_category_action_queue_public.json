@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T00:40:44Z",
+  "generated_at": "2026-07-22T02:05:20Z",
   "scope": "animation_category_action_queue",
   "summary": {
     "actionable_categories": 8,
@@ -128,6 +128,10 @@
       ],
       "review_state": "manual_category_mapping_confirmation_required",
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates",
+      "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+      "confirmed_queue": "server/animation_category_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_animation_category_rows.py",
+      "unblocks_when": "category_mapping_manually_confirmed",
       "categories": [
         {
           "category": "아크릴",
@@ -182,6 +186,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -237,6 +245,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -292,6 +304,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -342,6 +358,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -394,6 +414,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -442,6 +466,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         }
       ]
@@ -465,6 +493,10 @@
       ],
       "review_state": "manual_category_mapping_confirmation_required",
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates",
+      "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+      "confirmed_queue": "server/animation_category_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_animation_category_rows.py",
+      "unblocks_when": "category_mapping_manually_confirmed",
       "categories": [
         {
           "category": "굿즈",
@@ -519,6 +551,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         },
         {
@@ -569,6 +605,10 @@
               "folder_color_and_icon_exist_in_app_catalog"
             ]
           },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "category_mapping_manually_confirmed",
           "auto_apply_enabled": false
         }
       ]
@@ -578,11 +618,16 @@
     "auto_apply_category_changes": false,
     "auto_create_folders": false,
     "requires_manual_review": true,
+    "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+    "confirmed_queue": "server/animation_category_confirmed_rows.json",
+    "import_tool": "tools/import_confirmed_animation_category_rows.py",
+    "unblocks_when": "category_mapping_manually_confirmed",
     "reason": "Category mappings affect app navigation and user-facing folders."
   },
   "instructions": [
     "Confirm each category_mapping_template before any catalog mutation.",
     "Split broad source categories such as acrylic before applying a single folder mapping.",
-    "Keep folder colors ordered by color_group/sort_order so similar colors remain grouped."
+    "Keep folder colors ordered by color_group/sort_order so similar colors remain grouped.",
+    "Copy confirmed category_mapping_template rows into server/animation_category_confirmed_rows.json, set manual_confirmed=true, then run tools/import_confirmed_animation_category_rows.py."
   ]
 }

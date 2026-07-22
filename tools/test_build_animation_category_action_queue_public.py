@@ -72,8 +72,12 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         batch = report["batches"][0]
         self.assertEqual(batch["review_state"], "manual_category_mapping_confirmation_required")
         self.assertEqual(batch["next_machine_step"], "fill_confirmed_animation_category_mapping_templates")
+        self.assertEqual(batch["manual_confirmation_template"], "server/animation_category_confirmed_rows.template.json")
+        self.assertEqual(batch["import_tool"], "tools/import_confirmed_animation_category_rows.py")
+        self.assertEqual(batch["unblocks_when"], "category_mapping_manually_confirmed")
         self.assertEqual(batch["categories"][0]["mapping_mode"], "name_level_split_review_required")
         self.assertTrue(batch["categories"][0]["requires_name_level_split_review"])
+        self.assertEqual(batch["categories"][0]["confirmed_queue"], "server/animation_category_confirmed_rows.json")
         template = batch["categories"][0]["category_mapping_template"]
         self.assertFalse(template["manual_confirmed"])
         self.assertEqual(template["mapping_mode"], "name_level_split_review_required")
@@ -82,6 +86,10 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(template["target_category"], "Acrylic Stand")
         self.assertEqual(template["folder_icon_key"], "view_carousel")
         self.assertEqual(template["blocked_until"], "category_mapping_manually_confirmed")
+        self.assertEqual(
+            report["automation_policy"]["manual_confirmation_template"],
+            "server/animation_category_confirmed_rows.template.json",
+        )
 
 
 if __name__ == "__main__":
