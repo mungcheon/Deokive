@@ -36,6 +36,11 @@ REFERER_BY_HOST = {
     "one-piece.com": "https://one-piece.com/",
     "tc-animate.techorus-cdn.com": "https://www.animate-onlineshop.jp/",
     "www.bandai.co.jp": "https://www.bandai.co.jp/",
+    "assets.1kuji.com": "https://1kuji.com/",
+    "cache-www.dragonquest.jp": "https://www.dragonquest.jp/",
+    "chiikawamarket.jp": "https://chiikawamarket.jp/",
+    "shop.kotobukiya.co.jp": "https://shop.kotobukiya.co.jp/",
+    "store.jp.square-enix.com": "https://store.jp.square-enix.com/",
 }
 IMAGE_SUFFIXES = (".jpg", ".jpeg", ".png", ".webp", ".gif")
 
