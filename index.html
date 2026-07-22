@@ -14,7 +14,11 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="/Deokive/">
+  <script>
+    const deokiveBase = document.createElement('base');
+    deokiveBase.href = window.location.hostname.endsWith('github.io') ? '/Deokive/' : '/';
+    document.head.appendChild(deokiveBase);
+  </script>
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
