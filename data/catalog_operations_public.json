@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T18:07:04Z",
+  "generated_at": "2026-07-22T18:20:55Z",
   "summary": {
     "catalog_rows": 20391,
     "coverage": {
@@ -74,7 +74,9 @@
       "animation_category_name_split_unmatched_catalog_rows": 2712,
       "animation_category_unmatched_keyword_rows": 2712,
       "animation_category_unmatched_keyword_candidates": 49,
-      "animation_category_unmatched_keyword_product_type_candidates": 6
+      "animation_category_unmatched_keyword_product_type_candidates": 6,
+      "ichiban_prize_name_image_review_rows": 38,
+      "ichiban_prize_multi_item_rank_groups": 416
     },
     "top_store_priority_score": 1832.0
   },
@@ -1656,6 +1658,18 @@
       "auto_apply_enabled": false
     },
     {
+      "workstream": "ichiban_kuji_prize_name_image_review",
+      "status": "manual_review",
+      "open_rows": 38,
+      "name_structure_review_rows": 38,
+      "image_identity_review_rows": 0,
+      "multi_item_prize_rank_groups": 416,
+      "multi_item_prize_rank_catalog_rows": 2941,
+      "primary_report": "data/ichiban_kuji_prize_name_image_review_public.json",
+      "next_step": "confirm_prize_name_components_and_image_identity",
+      "auto_apply_enabled": false
+    },
+    {
       "workstream": "animation_taxonomy",
       "status": "manual_review",
       "open_rows": 391,
@@ -2302,6 +2316,10 @@
       "public_report": "data/ichiban_kuji_metadata_review_batches_public.json"
     },
     {
+      "key": "ichiban_kuji_prize_name_image_review",
+      "public_report": "data/ichiban_kuji_prize_name_image_review_public.json"
+    },
+    {
       "key": "ichiban_kuji_prize_policy_audit",
       "public_report": "data/ichiban_kuji_prize_policy_audit_public.json"
     },
@@ -2321,7 +2339,7 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 19,
+      "action_count": 20,
       "blocked_action_count": 1,
       "manual_review_action_count": 17,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
@@ -3948,6 +3966,18 @@
     },
     {
       "priority": 54,
+      "workstream": "ichiban_kuji_prize_name_image_review",
+      "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
+      "review_rows": 38,
+      "name_structure_review_rows": 38,
+      "image_identity_review_rows": 0,
+      "multi_item_prize_rank_groups": 416,
+      "multi_item_prize_rank_catalog_rows": 2941,
+      "auto_apply_enabled": false,
+      "recommended_next_action": "Review prize display names and image identity against official Ichiban Kuji campaign lineups."
+    },
+    {
+      "priority": 55,
       "workstream": "ichiban_kuji_prize_policy_audit",
       "public_report": "data/ichiban_kuji_prize_policy_audit_public.json",
       "last_one_rows": 533,

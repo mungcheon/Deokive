@@ -116,6 +116,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
     kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
     kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
+    kuji_name_image = load_report("ichiban_kuji_prize_name_image_review_public.json")
     animation_batches = load_report("animation_category_review_batches_public.json")
     animation_action_queue = load_report("animation_category_action_queue_public.json")
     animation_split_review = load_report("animation_category_split_review_public.json")
@@ -147,6 +148,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_summary = _summary(kuji_batches)
     kuji_action_summary = _summary(kuji_action_queue)
     kuji_policy_summary = _summary(kuji_policy)
+    kuji_name_image_summary = _summary(kuji_name_image)
     animation_summary = _summary(animation_batches)
     animation_action_summary = _summary(animation_action_queue)
     animation_split_summary = _summary(animation_split_review)
@@ -507,6 +509,46 @@ def _build_plan(load_report) -> dict[str, Any]:
         )
     )
 
+    if kuji_name_image_summary:
+        kuji_name_image_review_rows = _count(kuji_name_image_summary, "review_rows")
+        actions.append(
+            _action(
+                priority=45,
+                workstream="ichiban_kuji_prize_name_image_review",
+                public_report="data/ichiban_kuji_prize_name_image_review_public.json",
+                status="manual_review" if kuji_name_image_review_rows else "clear",
+                rows=kuji_name_image_review_rows,
+                command=(
+                    "Review Ichiban Kuji campaign title, prize rank, prize item name, variant detail, and image identity against official lineup pages."
+                ),
+                next_step="confirm_prize_name_components_and_image_identity",
+                blocker="Official lineup evidence is required before mutating prize display names or replacing images.",
+                evidence={
+                    "kuji_rows": _count(kuji_name_image_summary, "kuji_rows"),
+                    "review_rows": kuji_name_image_review_rows,
+                    "name_structure_review_rows": _count(
+                        kuji_name_image_summary, "name_structure_review_rows"
+                    ),
+                    "image_identity_review_rows": _count(
+                        kuji_name_image_summary, "image_identity_review_rows"
+                    ),
+                    "same_campaign_prize_rank_name_duplicate_rows": _count(
+                        kuji_name_image_summary, "same_campaign_prize_rank_name_duplicate_rows"
+                    ),
+                    "same_campaign_image_reused_different_name_rows": _count(
+                        kuji_name_image_summary, "same_campaign_image_reused_different_name_rows"
+                    ),
+                    "multi_item_prize_rank_groups": _count(
+                        kuji_name_image_summary, "multi_item_prize_rank_groups"
+                    ),
+                    "multi_item_prize_rank_catalog_rows": _count(
+                        kuji_name_image_summary, "multi_item_prize_rank_catalog_rows"
+                    ),
+                    "review_reason_counts": kuji_name_image_summary.get("review_reason_counts", []),
+                },
+            )
+        )
+
     actions.append(
         _action(
             priority=50,
@@ -740,6 +782,16 @@ def _build_plan(load_report) -> dict[str, Any]:
             "ichiban_incomplete_numbered_variant_prize_label_groups": kuji_incomplete_numbered_variant_rows,
             "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
             "ichiban_probable_reissue_review_groups": kuji_probable_reissue_review_rows,
+            "ichiban_prize_name_image_review_rows": _count(kuji_name_image_summary, "review_rows"),
+            "ichiban_prize_name_image_name_structure_review_rows": _count(
+                kuji_name_image_summary, "name_structure_review_rows"
+            ),
+            "ichiban_prize_name_image_image_identity_review_rows": _count(
+                kuji_name_image_summary, "image_identity_review_rows"
+            ),
+            "ichiban_prize_name_image_multi_item_groups": _count(
+                kuji_name_image_summary, "multi_item_prize_rank_groups"
+            ),
             "dedupe_fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
             "dedupe_fast_review_same_source_url_groups": _count(
                 dedupe_fast_summary, "same_source_url_groups"

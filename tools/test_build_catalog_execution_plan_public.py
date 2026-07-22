@@ -161,6 +161,20 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "field_patch_template_counts": [["release_date", 1]],
                 }
             },
+            "ichiban_kuji_prize_name_image_review_public.json": {
+                "summary": {
+                    "kuji_rows": 20,
+                    "review_rows": 2,
+                    "name_structure_review_rows": 1,
+                    "image_identity_review_rows": 1,
+                    "same_campaign_prize_rank_name_duplicate_rows": 0,
+                    "same_campaign_image_reused_different_name_rows": 1,
+                    "multi_item_prize_rank_groups": 1,
+                    "multi_item_prize_rank_catalog_rows": 3,
+                    "review_reason_counts": [["prize_rank_not_visible_in_prize_item_name", 1]],
+                    "auto_apply_enabled": False,
+                }
+            },
             "ichiban_kuji_prize_policy_audit_public.json": {
                 "summary": {
                     "kuji_rows": 20,
@@ -341,6 +355,19 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(kuji_action["rows"], 1)
         self.assertEqual(kuji_action["evidence"]["queued_catalog_item_rows"], 8)
+        kuji_name_image = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "ichiban_kuji_prize_name_image_review"
+        )
+        self.assertEqual(kuji_name_image["priority"], 45)
+        self.assertEqual(kuji_name_image["rows"], 2)
+        self.assertEqual(kuji_name_image["evidence"]["kuji_rows"], 20)
+        self.assertEqual(kuji_name_image["evidence"]["name_structure_review_rows"], 1)
+        self.assertEqual(kuji_name_image["evidence"]["image_identity_review_rows"], 1)
+        self.assertEqual(kuji_name_image["evidence"]["multi_item_prize_rank_groups"], 1)
+        self.assertEqual(report["summary"]["ichiban_prize_name_image_review_rows"], 2)
+        self.assertEqual(report["summary"]["ichiban_prize_name_image_multi_item_groups"], 1)
         kuji_policy = next(
             action
             for action in report["actions"]

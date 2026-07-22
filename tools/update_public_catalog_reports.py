@@ -11,6 +11,7 @@ from typing import Any
 
 import audit_public_catalog_image_assets
 import build_image_source_url_confirmed_template_public
+import build_ichiban_prize_name_image_review_public
 import build_missing_image_priority_public
 import build_source_discovery_next_focus_pack_public
 import import_confirmed_source_discovery_rows
@@ -56,6 +57,7 @@ ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES = DATA / "ichiban_kuji_metadata_review_bat
 ICHIIBAN_KUJI_METADATA_ACTION_QUEUE = DATA / "ichiban_kuji_metadata_action_queue_public.json"
 ICHIIBAN_KUJI_METADATA_FAST_REVIEW = DATA / "ichiban_kuji_metadata_fast_review_public.json"
 ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT = DATA / "ichiban_kuji_prize_policy_audit_public.json"
+ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW = DATA / "ichiban_kuji_prize_name_image_review_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT = DATA / "gotouchi_representative_image_attachment_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
@@ -1558,6 +1560,7 @@ def build_operations_public(
     image_asset_audit: dict[str, Any],
     metadata_review_batches_override: dict[str, Any] | None = None,
     metadata_action_queue_override: dict[str, Any] | None = None,
+    ichiban_prize_name_image_review_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -1698,6 +1701,14 @@ def build_operations_public(
         load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {}) if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists() else {}
     )
     ichiban_kuji_prize_policy_audit_summary = ichiban_kuji_prize_policy_audit.get("summary", {})
+    ichiban_kuji_prize_name_image_review = (
+        ichiban_prize_name_image_review_override
+        if ichiban_prize_name_image_review_override is not None
+        else load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, {})
+        if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists()
+        else {}
+    )
+    ichiban_kuji_prize_name_image_review_summary = ichiban_kuji_prize_name_image_review.get("summary", {})
     metadata_summary = metadata_backlog["summary"]
     metadata_review_batches = (
         metadata_review_batches_override
@@ -2211,6 +2222,26 @@ def build_operations_public(
         } if ichiban_kuji_metadata_action_queue_summary else None,
         {
             "priority": 54,
+            "workstream": "ichiban_kuji_prize_name_image_review",
+            "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}",
+            "review_rows": ichiban_kuji_prize_name_image_review_summary.get("review_rows", 0),
+            "name_structure_review_rows": ichiban_kuji_prize_name_image_review_summary.get(
+                "name_structure_review_rows", 0
+            ),
+            "image_identity_review_rows": ichiban_kuji_prize_name_image_review_summary.get(
+                "image_identity_review_rows", 0
+            ),
+            "multi_item_prize_rank_groups": ichiban_kuji_prize_name_image_review_summary.get(
+                "multi_item_prize_rank_groups", 0
+            ),
+            "multi_item_prize_rank_catalog_rows": ichiban_kuji_prize_name_image_review_summary.get(
+                "multi_item_prize_rank_catalog_rows", 0
+            ),
+            "auto_apply_enabled": ichiban_kuji_prize_name_image_review_summary.get("auto_apply_enabled", False),
+            "recommended_next_action": "Review prize display names and image identity against official Ichiban Kuji campaign lineups.",
+        } if ichiban_kuji_prize_name_image_review_summary else None,
+        {
+            "priority": 55,
             "workstream": "ichiban_kuji_prize_policy_audit",
             "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}",
             "last_one_rows": ichiban_kuji_prize_policy_audit_summary.get("last_one_rows", 0),
@@ -2625,6 +2656,26 @@ def build_operations_public(
             "auto_apply_enabled": ichiban_kuji_metadata_action_queue_summary.get("auto_apply_enabled", False),
         } if ichiban_kuji_metadata_action_queue_summary else None,
         {
+            "workstream": "ichiban_kuji_prize_name_image_review",
+            "status": "manual_review" if ichiban_kuji_prize_name_image_review_summary.get("review_rows", 0) else "clear",
+            "open_rows": ichiban_kuji_prize_name_image_review_summary.get("review_rows", 0),
+            "name_structure_review_rows": ichiban_kuji_prize_name_image_review_summary.get(
+                "name_structure_review_rows", 0
+            ),
+            "image_identity_review_rows": ichiban_kuji_prize_name_image_review_summary.get(
+                "image_identity_review_rows", 0
+            ),
+            "multi_item_prize_rank_groups": ichiban_kuji_prize_name_image_review_summary.get(
+                "multi_item_prize_rank_groups", 0
+            ),
+            "multi_item_prize_rank_catalog_rows": ichiban_kuji_prize_name_image_review_summary.get(
+                "multi_item_prize_rank_catalog_rows", 0
+            ),
+            "primary_report": f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}",
+            "next_step": "confirm_prize_name_components_and_image_identity",
+            "auto_apply_enabled": ichiban_kuji_prize_name_image_review_summary.get("auto_apply_enabled", False),
+        } if ichiban_kuji_prize_name_image_review_summary else None,
+        {
             "workstream": "animation_taxonomy",
             "status": "manual_review" if animation_summary.get("unknown_category_rows", 0) else "clear",
             "open_rows": animation_summary.get("unknown_category_rows", 0),
@@ -2860,6 +2911,13 @@ def build_operations_public(
         open_review_queues["animation_category_unmatched_keyword_product_type_candidates"] = (
             animation_unmatched_keyword_review_summary.get("product_type_candidate_count", 0)
         )
+    if ichiban_kuji_prize_name_image_review_summary:
+        open_review_queues["ichiban_prize_name_image_review_rows"] = (
+            ichiban_kuji_prize_name_image_review_summary.get("review_rows", 0)
+        )
+        open_review_queues["ichiban_prize_multi_item_rank_groups"] = (
+            ichiban_kuji_prize_name_image_review_summary.get("multi_item_prize_rank_groups", 0)
+        )
 
     return {
         "schema_version": 1,
@@ -2915,6 +2973,7 @@ def build_operations_public(
             {"key": "ichiban_kuji_history", "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}"},
             {"key": "ichiban_kuji_metadata_probe", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_PROBE.name}"},
             {"key": "ichiban_kuji_metadata_review_batches", "public_report": f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}"},
+            {"key": "ichiban_kuji_prize_name_image_review", "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}"},
             {"key": "ichiban_kuji_prize_policy_audit", "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}"},
             {"key": "agent_work_queue", "public_report": f"data/{AGENT_WORK_QUEUE.name}"},
         ],
@@ -4874,6 +4933,19 @@ def validate_report_consistency(
         expected_open_queues["ichiban_metadata_queued_catalog_item_rows"] = ichiban_action_summary.get(
             "queued_catalog_item_rows", 0
         )
+    ichiban_prize_name_image_review = (
+        load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, {})
+        if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists()
+        else {}
+    )
+    ichiban_prize_name_image_summary = ichiban_prize_name_image_review.get("summary", {})
+    if ichiban_prize_name_image_summary:
+        expected_open_queues["ichiban_prize_name_image_review_rows"] = (
+            ichiban_prize_name_image_summary.get("review_rows", 0)
+        )
+        expected_open_queues["ichiban_prize_multi_item_rank_groups"] = (
+            ichiban_prize_name_image_summary.get("multi_item_prize_rank_groups", 0)
+        )
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     dedupe_action_summary = dedupe_action_queue.get("summary", {})
     if dedupe_action_summary:
@@ -5176,6 +5248,10 @@ def update_reports(write: bool) -> dict[str, Any]:
     deduplication = build_deduplication_public(items)
     animation_categories = build_animation_categories_public(items)
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
+    ichiban_kuji_prize_name_image_review = build_ichiban_prize_name_image_review_public.build_report(
+        catalog,
+        generated_at=generated_at,
+    )
     generic_source_patch_candidates = build_generic_source_patch_candidates_public(generated_at)
     requested_report = load_json(REQUESTED, {}) if REQUESTED.exists() else {}
     requested_focus = build_requested_focus_enrichment_public(items, requested_report, generated_at)
@@ -5210,6 +5286,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         image_asset_audit,
         metadata_review_batches,
         metadata_action_queue,
+        ichiban_kuji_prize_name_image_review,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -5268,6 +5345,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "catalog_deduplication_action_queue_public.json": load_json(DEDUPLICATION_ACTION_QUEUE, {}),
             "ichiban_kuji_metadata_review_batches_public.json": load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {}),
             "ichiban_kuji_metadata_action_queue_public.json": load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}),
+            "ichiban_kuji_prize_name_image_review_public.json": ichiban_kuji_prize_name_image_review,
             "animation_category_review_batches_public.json": load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}),
             "animation_category_action_queue_public.json": load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}),
             "catalog_confirmed_import_readiness_public.json": load_json(CONFIRMED_IMPORT_READINESS, {}),
@@ -5593,6 +5671,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["ichiban_kuji_metadata_fast_review"] = copy_report_summary(
                 ICHIIBAN_KUJI_METADATA_FAST_REVIEW, "ichiban_kuji_metadata_fast_review"
             )
+        if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists():
+            target["ichiban_kuji_prize_name_image_review"] = copy_report_summary(
+                ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, "ichiban_kuji_prize_name_image_review"
+            )
         if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists():
             target["ichiban_kuji_prize_policy_audit"] = copy_report_summary(
                 ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, "ichiban_kuji_prize_policy_audit"
@@ -5639,6 +5721,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(DEDUPLICATION, deduplication)
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
+        write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, ichiban_kuji_prize_name_image_review)
         write_json(OPERATIONS_REPORT, operations)
         write_json(AGENT_WORK_QUEUE, agent_work_queue)
         write_json(EXECUTION_PLAN, execution_plan)
@@ -5716,6 +5799,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_FAST_REVIEW.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),
             str(AGENT_WORK_QUEUE.relative_to(ROOT)),
