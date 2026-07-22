@@ -107,6 +107,58 @@
     "Use data/catalog_missing_image_work_queue_public.json as the canonical work queue for the remaining 720 image_url gaps.",
     "Do not attach images from generic storefront/source URLs until an exact product detail URL is confirmed.",
     "Provider scripts currently found no safe automatic matches for sampled Animate, Ensky, Movic, Kotobukiya, FuRyu, and Good Smile rows; add stricter provider-specific matchers before writing those groups.",
-    "Gotouchi Chiikawa rows have product-detail source URLs but existing candidate review marks most as motif/type mismatches; keep them review-only unless exact type and visual identity are confirmed."
-  ]
+    "Gotouchi Chiikawa rows have product-detail source URLs but existing candidate review marks most as motif/type mismatches; keep them review-only unless exact type and visual identity are confirmed.",
+    "Keep jp-api gotouchi contents pages review-only; the official page contains many product images and cannot prove a row-level image without exact type/visual confirmation."
+  ],
+  "queue_after_safety_fix": {
+    "by_strategy": [
+      [
+        "official_search",
+        468
+      ],
+      [
+        "manual_review",
+        112
+      ],
+      [
+        "manual_official_search_review",
+        66
+      ],
+      [
+        "source_url_generic_storefront",
+        50
+      ],
+      [
+        "source_url_manual_review",
+        23
+      ],
+      [
+        "prize_detail_validation",
+        1
+      ]
+    ],
+    "by_automation_safety": [
+      [
+        "candidate_provider_script_required",
+        468
+      ],
+      [
+        "manual_research_required",
+        112
+      ],
+      [
+        "manual_confirmation_required",
+        89
+      ],
+      [
+        "blocked_until_exact_product_url",
+        50
+      ],
+      [
+        "detail_page_validation_required",
+        1
+      ]
+    ],
+    "note": "jp-api contents pages are category/list pages, not product-specific detail pages; they are manual-review only."
+  }
 }

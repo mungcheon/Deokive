@@ -11,7 +11,6 @@ PRODUCT_DETAIL_PATTERNS = (
     re.compile(r"^https://chiikawamarket\.jp/(?:ko/)?products/[^/?#]+/?$", re.I),
     re.compile(r"^https://nagano-market\.jp/(?:ko/)?products/[^/?#]+/?$", re.I),
     re.compile(r"^https://chiikawamogumogu\.shop/products/[^/?#]+/?$", re.I),
-    re.compile(r"^https://www\.jp-api\.com/contents/[A-Z0-9]+/?$", re.I),
     re.compile(r"^https://www\.animate-onlineshop\.jp/(?:products/detail\.php\?product_id=\d+|pd/\d+|(?:sphone/)?pn/.*/pd/\d+/?)", re.I),
     re.compile(r"^https://www\.enskyshop\.com/products/detail/\d+/?$", re.I),
     re.compile(r"^https://www\.goodsmile\.info/(?:ja|en)/product/\d+/?$", re.I),
@@ -101,11 +100,6 @@ def is_safe_source_image_pair(source_url: Any, image_url: Any) -> bool:
     if (
         "eu.store.square-enix-games.com/" in source
         and re.search(r"^https://cdn11\.bigcommerce\.com/s-uak4l72xa0/products/\d+/images/\d+/", url, re.I)
-    ):
-        return True
-    if (
-        re.search(r"^https://www\.jp-api\.com/contents/[A-Z0-9]+/?$", source, re.I)
-        and re.search(r"^https://www\.jp-api\.com/images/tphoto_\d+_\d+_[a-z]\.(?:png|jpe?g|webp)$", url, re.I)
     ):
         return True
     return not looks_like_generic_image_url(url)
