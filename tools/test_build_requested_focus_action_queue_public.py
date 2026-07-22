@@ -73,7 +73,13 @@ class BuildRequestedFocusActionQueuePublicTest(unittest.TestCase):
 
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["actionable_template_rows"], 2)
+        self.assertEqual(report["summary"]["queued_action_rows"], 2)
+        self.assertEqual(report["summary"]["unqueued_actionable_rows"], 0)
+        self.assertEqual(report["summary"]["queue_coverage"], 1.0)
         self.assertEqual(report["summary"]["barcode_template_rows_excluded"], 1)
+        self.assertEqual(report["summary"]["non_barcode_template_rows"], 2)
+        self.assertEqual(report["summary"]["total_review_template_rows"], 3)
+        self.assertEqual(report["summary"]["non_barcode_template_share"], 0.6667)
         self.assertEqual(dict(report["summary"]["field_counts"]), {"source_url": 1, "image_url": 1})
         self.assertEqual(report["summary"]["action_batch_count"], 2)
         fields = [batch["missing_field"] for batch in report["batches"]]
@@ -106,6 +112,8 @@ class BuildRequestedFocusActionQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["actionable_template_rows"], 5)
         self.assertEqual(report["summary"]["queued_action_rows"], 2)
+        self.assertEqual(report["summary"]["unqueued_actionable_rows"], 3)
+        self.assertEqual(report["summary"]["queue_coverage"], 0.4)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
 
 

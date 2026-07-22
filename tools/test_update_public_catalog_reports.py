@@ -174,6 +174,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         open_queues = operations.get("summary", {}).get("open_review_queues", {})
         confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
         readiness_summary = confirmed_readiness.get("summary", {})
+        requested_focus_action = reports.load_json(reports.REQUESTED_FOCUS_ACTION_QUEUE)
+        requested_focus_action_summary = requested_focus_action.get("summary", {})
+        requested_focus_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "requested_focus_action_queue"
+        )
+        requested_focus_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "requested_focus_action_queue"
+        )
         image_action = reports.load_json(reports.IMAGE_ATTACHMENT_ACTION_QUEUE)
         image_action_summary = image_action.get("summary", {})
         source_action = reports.load_json(reports.SOURCE_DISCOVERY_ACTION_QUEUE)
@@ -261,6 +273,30 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("requested_focus_action_rows"),
+            requested_focus_action_summary.get("queued_action_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("requested_focus_actionable_rows"),
+            requested_focus_action_summary.get("actionable_template_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("requested_focus_unqueued_actionable_rows"),
+            requested_focus_action_summary.get("unqueued_actionable_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("requested_focus_barcode_template_rows_excluded"),
+            requested_focus_action_summary.get("barcode_template_rows_excluded"),
+        )
+        self.assertEqual(
+            requested_focus_scorecard.get("queue_coverage"),
+            requested_focus_action_summary.get("queue_coverage"),
+        )
+        self.assertEqual(
+            requested_focus_next_action.get("non_barcode_template_share"),
+            requested_focus_action_summary.get("non_barcode_template_share"),
         )
         self.assertEqual(
             open_queues.get("image_attachment_action_rows"),

@@ -77,7 +77,7 @@ def _compact_action_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[st
     }
 
 
-def build_report(review_batches: dict[str, Any], *, max_batches: int = 24, batch_size: int = 25) -> dict[str, Any]:
+def build_report(review_batches: dict[str, Any], *, max_batches: int = 120, batch_size: int = 25) -> dict[str, Any]:
     action_items: list[dict[str, Any]] = []
     barcode_template_rows = 0
     skipped_non_template_rows = 0
@@ -153,6 +153,13 @@ def build_report(review_batches: dict[str, Any], *, max_batches: int = 24, batch
             break
 
     queued_rows = sum(int(batch.get("row_count") or 0) for batch in action_batches)
+    unqueued_actionable_rows = max(len(action_items) - queued_rows, 0)
+    queue_coverage = round(queued_rows / len(action_items), 4) if action_items else 1.0
+    non_barcode_template_rows = len(action_items)
+    total_review_template_rows = non_barcode_template_rows + barcode_template_rows
+    non_barcode_template_share = (
+        round(non_barcode_template_rows / total_review_template_rows, 4) if total_review_template_rows else 1.0
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -160,10 +167,15 @@ def build_report(review_batches: dict[str, Any], *, max_batches: int = 24, batch
         "summary": {
             "actionable_template_rows": len(action_items),
             "queued_action_rows": queued_rows,
+            "unqueued_actionable_rows": unqueued_actionable_rows,
+            "queue_coverage": queue_coverage,
             "action_batch_count": len(action_batches),
             "batch_size": batch_size,
             "max_batches": max_batches,
             "barcode_template_rows_excluded": barcode_template_rows,
+            "non_barcode_template_rows": non_barcode_template_rows,
+            "total_review_template_rows": total_review_template_rows,
+            "non_barcode_template_share": non_barcode_template_share,
             "skipped_non_template_rows": skipped_non_template_rows,
             "field_counts": _count_pairs(action_items, "missing_field"),
             "topic_counts": _count_pairs(action_items, "topic_id"),
@@ -187,7 +199,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--max-batches", type=int, default=24)
+    parser.add_argument("--max-batches", type=int, default=120)
     parser.add_argument("--batch-size", type=int, default=25)
     args = parser.parse_args()
 

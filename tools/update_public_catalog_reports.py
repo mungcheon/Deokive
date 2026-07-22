@@ -1483,8 +1483,16 @@ def build_operations_public(
             "public_report": f"data/{REQUESTED_FOCUS_ACTION_QUEUE.name}",
             "actionable_template_rows": requested_focus_action_queue_summary.get("actionable_template_rows", 0),
             "queued_action_rows": requested_focus_action_queue_summary.get("queued_action_rows", 0),
+            "unqueued_actionable_rows": requested_focus_action_queue_summary.get("unqueued_actionable_rows", 0),
+            "queue_coverage": requested_focus_action_queue_summary.get("queue_coverage", 0),
+            "barcode_template_rows_excluded": requested_focus_action_queue_summary.get(
+                "barcode_template_rows_excluded", 0
+            ),
+            "non_barcode_template_share": requested_focus_action_queue_summary.get(
+                "non_barcode_template_share", 0
+            ),
             "action_batch_count": requested_focus_action_queue_summary.get("action_batch_count", 0),
-            "recommended_next_action": "Work non-barcode requested-focus rows before long barcode research.",
+            "recommended_next_action": "Work queued non-barcode requested-focus rows, then expand remaining actionable rows before barcode research.",
         } if requested_focus_action_queue_summary else None,
         {
             "priority": 15,
@@ -1745,6 +1753,12 @@ def build_operations_public(
             "workstream": "requested_focus_action_queue",
             "status": "manual_review" if requested_focus_action_queue_summary.get("action_batch_count", 0) else "clear",
             "open_rows": requested_focus_action_queue_summary.get("queued_action_rows", 0),
+            "actionable_template_rows": requested_focus_action_queue_summary.get("actionable_template_rows", 0),
+            "unqueued_actionable_rows": requested_focus_action_queue_summary.get("unqueued_actionable_rows", 0),
+            "queue_coverage": requested_focus_action_queue_summary.get("queue_coverage", 0),
+            "barcode_template_rows_excluded": requested_focus_action_queue_summary.get(
+                "barcode_template_rows_excluded", 0
+            ),
             "primary_report": f"data/{REQUESTED_FOCUS_ACTION_QUEUE.name}",
             "next_step": "work_non_barcode_requested_focus_batches_first",
             "auto_apply_enabled": requested_focus_action_queue_summary.get("auto_apply_enabled", False),
@@ -1969,6 +1983,15 @@ def build_operations_public(
         open_review_queues["requested_focus_review_rows"] = requested_focus_review_batches_summary.get("review_row_count", 0)
     if requested_focus_action_queue_summary:
         open_review_queues["requested_focus_action_rows"] = requested_focus_action_queue_summary.get("queued_action_rows", 0)
+        open_review_queues["requested_focus_actionable_rows"] = requested_focus_action_queue_summary.get(
+            "actionable_template_rows", 0
+        )
+        open_review_queues["requested_focus_unqueued_actionable_rows"] = requested_focus_action_queue_summary.get(
+            "unqueued_actionable_rows", 0
+        )
+        open_review_queues["requested_focus_barcode_template_rows_excluded"] = (
+            requested_focus_action_queue_summary.get("barcode_template_rows_excluded", 0)
+        )
     if source_action_queue_summary:
         open_review_queues["source_discovery_action_rows"] = source_action_queue_summary.get("queued_source_rows", 0)
         open_review_queues["source_discovery_actionable_rows"] = source_action_queue_summary.get(
@@ -3775,6 +3798,15 @@ def validate_report_consistency(
     if requested_focus_action_summary:
         expected_open_queues["requested_focus_action_rows"] = requested_focus_action_summary.get(
             "queued_action_rows", 0
+        )
+        expected_open_queues["requested_focus_actionable_rows"] = requested_focus_action_summary.get(
+            "actionable_template_rows", 0
+        )
+        expected_open_queues["requested_focus_unqueued_actionable_rows"] = requested_focus_action_summary.get(
+            "unqueued_actionable_rows", 0
+        )
+        expected_open_queues["requested_focus_barcode_template_rows_excluded"] = (
+            requested_focus_action_summary.get("barcode_template_rows_excluded", 0)
         )
     source_action_queue = (
         load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}) if SOURCE_DISCOVERY_ACTION_QUEUE.exists() else {}
