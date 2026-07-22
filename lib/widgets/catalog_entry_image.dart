@@ -47,12 +47,18 @@ class CatalogEntryImage extends StatelessWidget {
 
     final Widget image;
     if (localPath.isNotEmpty) {
+      final remoteFallback = _RemoteCatalogImage(
+        imageUrl: remotePath,
+        width: width,
+        height: height,
+        placeholder: placeholder,
+      );
       if (kIsWeb) {
         image = _RemoteCatalogImage(
           imageUrl: localPath,
           width: width,
           height: height,
-          placeholder: placeholder,
+          placeholder: remotePath.isEmpty ? placeholder : remoteFallback,
         );
       } else {
         image = Image.asset(
@@ -60,12 +66,8 @@ class CatalogEntryImage extends StatelessWidget {
           width: width,
           height: height,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => _RemoteCatalogImage(
-            imageUrl: remotePath,
-            width: width,
-            height: height,
-            placeholder: placeholder,
-          ),
+          errorBuilder: (_, __, ___) =>
+              remotePath.isEmpty ? placeholder : remoteFallback,
         );
       }
     } else {
