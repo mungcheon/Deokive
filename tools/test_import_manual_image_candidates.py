@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import sys
+import json
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -8,7 +10,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from image_enrichment_safety import is_product_specific_source_url, is_safe_source_image_pair
-from import_manual_image_candidates import import_candidates
+from import_manual_image_candidates import _load_seed, _write_seed, import_candidates
 
 
 def _row(**overrides):
@@ -41,6 +43,47 @@ class ManualImageCandidateImportTests(unittest.TestCase):
 
         self.assertEqual(len(result["updated"]), 1)
         self.assertEqual(result["seed_rows"][0]["image_url"], "https://bsp-prize.jp/files_thumbnail/item/test.jpg")
+
+    def test_load_and_write_preserves_public_catalog_wrapper(self):
+        with tempfile.TemporaryDirectory() as raw_tmp:
+            path = Path(raw_tmp) / "catalog_public.json"
+            path.write_text(
+                json.dumps(
+                    {
+                        "meta": {
+                            "schema_version": 1,
+                            "row_count": 1,
+                            "total_items": 1,
+                            "fields": ["catalog_index", "name_ko", "image_url", "source_url"],
+                            "missing": {"name_ko": 0, "image_url": 1, "source_url": 1},
+                        },
+                        "items": [
+                            {
+                                "catalog_index": 7,
+                                "source_store": "Banpresto",
+                                "name_ko": "Test Prize",
+                                "name_ja": "Test Prize JP",
+                                "image_url": "",
+                                "source_url": "",
+                            }
+                        ],
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            rows, wrapper = _load_seed(path)
+            result = import_candidates(rows, [_candidate()])
+            _write_seed(path, result["seed_rows"], wrapper)
+
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(payload["meta"]["schema_version"], 1)
+            self.assertEqual(payload["meta"]["row_count"], 1)
+            self.assertEqual(payload["meta"]["total_items"], 1)
+            self.assertEqual(payload["meta"]["missing"]["image_url"], 0)
+            self.assertEqual(payload["items"][0]["catalog_index"], 7)
+            self.assertEqual(payload["items"][0]["image_url"], "https://bsp-prize.jp/files_thumbnail/item/test.jpg")
 
     def test_rejects_unsupported_source_kind(self):
         result = import_candidates([_row()], [_candidate(source_kind="retailer_candidate")])

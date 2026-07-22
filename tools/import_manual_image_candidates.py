@@ -190,6 +190,48 @@ def _load_items(path: Path) -> list[dict[str, Any]]:
     return [item for item in items if isinstance(item, dict)]
 
 
+def _load_seed(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
+    raw = json.loads(path.read_text(encoding="utf-8-sig"))
+    if isinstance(raw, dict):
+        items = raw.get("items")
+        if not isinstance(items, list):
+            raise SystemExit(f"{path} must contain a JSON list or an object with items")
+        return [item for item in items if isinstance(item, dict)], raw
+    if isinstance(raw, list):
+        return [item for item in raw if isinstance(item, dict)], None
+    raise SystemExit(f"{path} must contain a JSON list or an object with items")
+
+
+def _refresh_catalog_wrapper_meta(wrapper: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, Any]:
+    meta = wrapper.get("meta")
+    if not isinstance(meta, dict):
+        return wrapper
+    meta = dict(meta)
+    meta["row_count"] = len(rows)
+    if "total_items" in meta:
+        meta["total_items"] = len(rows)
+    fields = meta.get("fields")
+    if isinstance(fields, list):
+        meta["missing"] = {
+            str(field): sum(1 for row in rows if row.get(str(field)) in (None, ""))
+            for field in fields
+            if str(field) != "catalog_index"
+        }
+    wrapper = dict(wrapper)
+    wrapper["meta"] = meta
+    wrapper["items"] = rows
+    return wrapper
+
+
+def _write_seed(path: Path, rows: list[dict[str, Any]], wrapper: dict[str, Any] | None) -> None:
+    if wrapper is None:
+        text = json.dumps(rows, ensure_ascii=False, indent=2)
+    else:
+        payload = _refresh_catalog_wrapper_meta(wrapper, rows)
+        text = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    path.write_text(text + "\n", encoding="utf-8")
+
+
 def _confidence_score(value: Any) -> float:
     if isinstance(value, (int, float)):
         return float(value)
@@ -410,9 +452,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    rows = json.loads(args.seed.read_text(encoding="utf-8-sig"))
-    if not isinstance(rows, list):
-        raise SystemExit(f"{args.seed} must contain a JSON list")
+    rows, seed_wrapper = _load_seed(args.seed)
     candidates = _load_items(args.candidates)
     result = import_candidates(
         rows,
@@ -438,7 +478,7 @@ def main() -> int:
     }
     args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if args.write and result["updated"]:
-        args.seed.write_text(json.dumps(result["seed_rows"], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        _write_seed(args.seed, result["seed_rows"], seed_wrapper)
     print(json.dumps({k: report[k] for k in ("candidate_rows", "updated_rows", "skipped_rows", "write")}, ensure_ascii=False, indent=2))
     if not args.write:
         print("Dry run only. Re-run with --write after reviewing the report.")
