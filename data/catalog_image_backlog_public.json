@@ -3318,9 +3318,9 @@
     "field_store_group_count": 351,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 21075,
+    "missing_cell_count": 11640,
     "field_missing_totals": {
-      "name_ja": 9964,
+      "name_ja": 529,
       "release_date": 1416,
       "barcode": 7744,
       "official_price_jpy": 584,
@@ -3328,10 +3328,6 @@
       "source_url": 647
     },
     "top_source_stores_with_missing_metadata": [
-      [
-        "치이카와 마켓",
-        9455
-      ],
       [
         "이치방쿠지",
         5928
@@ -3487,6 +3483,10 @@
       [
         "이세계아이돌 공식 굿즈",
         24
+      ],
+      [
+        "치이카와 모구모구 혼포",
+        22
       ]
     ],
     "auto_apply_enabled": false
@@ -4054,8 +4054,8 @@
     "actionable_group_count": 166,
     "queued_group_count": 166,
     "unqueued_actionable_group_count": 0,
-    "actionable_missing_cells": 11964,
-    "queued_missing_cells": 11964,
+    "actionable_missing_cells": 2529,
+    "queued_missing_cells": 2529,
     "unqueued_actionable_missing_cells": 0,
     "group_queue_coverage": 1.0,
     "missing_cell_queue_coverage": 1.0,
@@ -4240,23 +4240,19 @@
     ],
     "missing_cells_by_field": [
       [
-        "name_ja",
-        9964
-      ],
-      [
         "release_date",
         1416
       ],
       [
         "official_price_jpy",
         584
+      ],
+      [
+        "name_ja",
+        529
       ]
     ],
     "missing_cells_by_source_store": [
-      [
-        "치이카와 마켓",
-        9455
-      ],
       [
         "이치방쿠지",
         382
@@ -4362,6 +4358,10 @@
         20
       ],
       [
+        "치이카와 마켓",
+        20
+      ],
+      [
         "SM STORE",
         18
       ],
@@ -4415,14 +4415,6 @@
       ]
     ],
     "top_action_groups": [
-      {
-        "field": "name_ja",
-        "source_store": "치이카와 마켓",
-        "missing_rows": 9455,
-        "priority": 30,
-        "workflow": "official_title_review",
-        "recommended_action": "Verify original Japanese product titles from official listings."
-      },
       {
         "field": "official_price_jpy",
         "source_store": "이치방쿠지",
@@ -4571,6 +4563,14 @@
         "field": "release_date",
         "source_store": "점프 캐릭터즈 스토어",
         "missing_rows": 24,
+        "priority": 10,
+        "workflow": "official_metadata_review",
+        "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
+      },
+      {
+        "field": "release_date",
+        "source_store": "나가노 마켓",
+        "missing_rows": 20,
         "priority": 10,
         "workflow": "official_metadata_review",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
