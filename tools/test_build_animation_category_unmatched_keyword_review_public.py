@@ -69,6 +69,17 @@ class BuildAnimationCategoryUnmatchedKeywordReviewPublicTest(unittest.TestCase):
         camera = next(row for row in item["top_token_candidates"] if row["token"] == "카메라")
         self.assertEqual(camera["review_kind"], "product_type_like")
         self.assertTrue(camera["product_type_hint"])
+        self.assertGreater(camera["review_score"], 80)
+        self.assertEqual(
+            camera["recommended_manual_action"],
+            "review_samples_then_add_name_level_split_rule_if_consistent",
+        )
+        self.assertEqual(item["next_review_action"], "review_promotable_product_type_candidates")
+        self.assertGreater(item["highest_review_score"], 0)
+        self.assertIn(
+            "product_type_like",
+            {row["review_kind"] for row in item["review_kind_counts"]},
+        )
         self.assertEqual(item["promotable_token_candidates"][0]["token"], "카메라")
         self.assertEqual(item["sample_unmatched_rows"][0]["catalog_index"], 2)
 

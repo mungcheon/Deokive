@@ -200,6 +200,32 @@ def _candidate_review(token: str) -> dict[str, Any]:
     }
 
 
+def _review_score(review: dict[str, Any], row_count: int) -> int:
+    kind = str(review.get("review_kind") or "")
+    base = {
+        "product_type_like": 80,
+        "ambiguous_review": 35,
+        "series_or_source_noise": 5,
+    }.get(kind, 20)
+    volume_bonus = min(row_count, 25)
+    rule_bonus = 15 if review.get("suggested_rule_id") not in {None, "", "marker_review"} else 0
+    return base + volume_bonus + rule_bonus
+
+
+def _recommended_manual_action(review: dict[str, Any]) -> str:
+    kind = str(review.get("review_kind") or "")
+    if kind == "product_type_like":
+        return "review_samples_then_add_name_level_split_rule_if_consistent"
+    if kind == "series_or_source_noise":
+        return "keep_as_noise_do_not_promote_to_category_rule"
+    return "inspect_samples_before_deciding_product_type_or_noise"
+
+
+def _review_kind_counts(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    counts = Counter(str(candidate.get("review_kind") or "unknown") for candidate in candidates)
+    return [{"review_kind": key, "candidates": value} for key, value in counts.most_common()]
+
+
 def _sample(row: dict[str, Any]) -> dict[str, Any]:
     return {
         "catalog_index": row.get("catalog_index"),
@@ -261,17 +287,31 @@ def _token_candidates(rows: list[dict[str, Any]], *, limit: int) -> list[dict[st
     for token, group_rows in ranked:
         review = _candidate_review(token)
         review_kind = str(review["review_kind"])
+        review_score = _review_score(review, len(group_rows))
         candidates.append(
             {
-            "token": token,
-            "row_count": len(group_rows),
-            "sample_rows": [_sample(row) for row in group_rows[:6]],
-            **review,
-            "product_type_hint": review_kind == "product_type_like",
-            "manual_confirmed": False,
-            "suggested_use": "review_as_keyword_candidate" if review_kind != "series_or_source_noise" else "do_not_promote_without_stronger_product_type_evidence",
-        }
+                "token": token,
+                "row_count": len(group_rows),
+                "review_score": review_score,
+                "sample_rows": [_sample(row) for row in group_rows[:6]],
+                **review,
+                "product_type_hint": review_kind == "product_type_like",
+                "manual_confirmed": False,
+                "recommended_manual_action": _recommended_manual_action(review),
+                "suggested_use": (
+                    "review_as_keyword_candidate"
+                    if review_kind != "series_or_source_noise"
+                    else "do_not_promote_without_stronger_product_type_evidence"
+                ),
+            }
         )
+    candidates.sort(
+        key=lambda candidate: (
+            -int(candidate.get("review_score") or 0),
+            -int(candidate.get("row_count") or 0),
+            str(candidate.get("token") or ""),
+        )
+    )
     return candidates
 
 
@@ -283,16 +323,27 @@ def build_report(split_payload: dict[str, Any], catalog_payload: dict[str, Any],
         source_rows = [row for row in rows if str(row.get("category") or "").strip() == source_category]
         unmatched = [row for row in source_rows if _is_unmatched(row, keywords)]
         token_candidates = _token_candidates(unmatched, limit=limit)
+        promotable = [
+            candidate for candidate in token_candidates if candidate.get("review_kind") == "product_type_like"
+        ][:10]
         review_items.append(
             {
                 "source_category": source_category,
                 "source_category_rows": len(source_rows),
                 "unmatched_rows": len(unmatched),
                 "current_keyword_count": len(keywords),
+                "review_kind_counts": _review_kind_counts(token_candidates),
+                "highest_review_score": max(
+                    (int(candidate.get("review_score") or 0) for candidate in token_candidates),
+                    default=0,
+                ),
                 "top_token_candidates": token_candidates,
-                "promotable_token_candidates": [
-                    candidate for candidate in token_candidates if candidate.get("review_kind") == "product_type_like"
-                ][:10],
+                "promotable_token_candidates": promotable,
+                "next_review_action": (
+                    "review_promotable_product_type_candidates"
+                    if promotable
+                    else "collect_more_samples_or_leave_unmatched"
+                ),
                 "top_series": _ranked_groups(unmatched, "series_name", limit=10),
                 "top_sub_series": _ranked_groups(unmatched, "sub_series", limit=10),
                 "top_source_stores": _ranked_groups(unmatched, "source_store", limit=10),
