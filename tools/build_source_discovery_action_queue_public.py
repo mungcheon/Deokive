@@ -53,6 +53,8 @@ def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, A
                 "priority": int(batch.get("priority") or 99),
                 "queued_source_rows": 0,
                 "batch_ids": [],
+                "allowed_source_domains": set(),
+                "official_search_url_count": 0,
                 "workflow_rows": Counter(),
                 "review_state_rows": Counter(),
                 "category_rows": Counter(),
@@ -70,7 +72,14 @@ def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, A
         for category, count in batch.get("category_counts") or []:
             bucket["category_rows"][str(category or "")] += int(count or 0)
         for item in batch.get("items") or []:
-            if isinstance(item, dict) and len(bucket["sample_items"]) < 8:
+            if not isinstance(item, dict):
+                continue
+            for domain in item.get("allowed_source_domains") or batch.get("allowed_source_domains") or []:
+                if isinstance(domain, str) and domain:
+                    bucket["allowed_source_domains"].add(domain)
+            if item.get("official_search_url"):
+                bucket["official_search_url_count"] += 1
+            if len(bucket["sample_items"]) < 8:
                 bucket["sample_items"].append(
                     {
                         "catalog_index": item.get("catalog_index"),
@@ -89,7 +98,11 @@ def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, A
                 "source_store": bucket["source_store"],
                 "priority": bucket["priority"],
                 "queued_source_rows": bucket["queued_source_rows"],
+                "batch_count": len([batch_id for batch_id in bucket["batch_ids"] if batch_id]),
+                "next_batch_id": next((batch_id for batch_id in bucket["batch_ids"] if batch_id), None),
                 "batch_ids": [batch_id for batch_id in bucket["batch_ids"] if batch_id],
+                "allowed_source_domains": sorted(bucket["allowed_source_domains"]),
+                "official_search_url_count": bucket["official_search_url_count"],
                 "workflow_rows": [[key, value] for key, value in bucket["workflow_rows"].most_common() if key],
                 "review_state_rows": [[key, value] for key, value in bucket["review_state_rows"].most_common() if key],
                 "category_rows": [[key, value] for key, value in bucket["category_rows"].most_common(12) if key],
@@ -208,6 +221,8 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
                 }
             )
 
+    source_store_workstreams = _source_store_workstreams(batches)
+
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -230,6 +245,14 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "excluded_review_state_rows": [[key, value] for key, value in excluded_review_states.most_common()],
             "manual_research_backlog_rows": len(manual_research_items),
             "manual_research_backlog_by_source_store": _counter_pairs(manual_research_items, "source_store"),
+            "source_store_workstream_count": len(source_store_workstreams),
+            "high_volume_source_store_workstream_count": sum(
+                1 for row in source_store_workstreams if int(row.get("queued_source_rows") or 0) >= 20
+            ),
+            "largest_source_store_workstream_rows": max(
+                (int(row.get("queued_source_rows") or 0) for row in source_store_workstreams),
+                default=0,
+            ),
             "auto_apply_enabled": False,
         },
         "instructions": [
@@ -237,7 +260,7 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "Accepted source_url values must be exact product/detail pages, not search results or storefronts.",
             "After source_url is confirmed, image_url can be handled by the image attachment queues.",
         ],
-        "source_store_workstreams": _source_store_workstreams(batches),
+        "source_store_workstreams": source_store_workstreams,
         "manual_research_backlog": [
             {
                 "catalog_index": item.get("catalog_index"),
