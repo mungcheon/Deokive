@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/goods_catalog_entry.dart';
+import 'catalog_entry_image.dart';
 
 /// Goods-name input that opens a catalog picker dialog when tapped.
 /// Selecting a row fills the form from the read-only public DB.
@@ -300,7 +301,7 @@ class _CatalogRow extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _Thumbnail(imageUrl: entry.imageUrl),
+            _Thumbnail(entry: entry),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -403,54 +404,17 @@ class _CatalogRow extends StatelessWidget {
 }
 
 class _Thumbnail extends StatelessWidget {
-  final String? imageUrl;
+  final GoodsCatalogEntry entry;
 
-  const _Thumbnail({required this.imageUrl});
+  const _Thumbnail({required this.entry});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final placeholder = Container(
+    return CatalogEntryImage(
+      entry: entry,
       width: 56,
       height: 56,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Icon(
-        Icons.inventory_2_outlined,
-        color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
-        size: 24,
-      ),
-    );
-
-    final url = imageUrl;
-    if (url == null || url.isEmpty) return placeholder;
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Image.network(
-        url,
-        width: 56,
-        height: 56,
-        fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => placeholder,
-        loadingBuilder: (context, child, progress) {
-          if (progress == null) return child;
-          return Container(
-            width: 56,
-            height: 56,
-            color: theme.colorScheme.surfaceContainerHighest,
-            child: const Center(
-              child: SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-            ),
-          );
-        },
-      ),
+      borderRadius: 8,
     );
   }
 }

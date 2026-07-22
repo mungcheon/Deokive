@@ -6,6 +6,7 @@ import '../models/goods_catalog_entry.dart';
 import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
 import '../utils/catalog_goods_importer.dart';
+import '../widgets/catalog_entry_image.dart';
 
 class CatalogDatabaseScreen extends StatefulWidget {
   final FolderItem? initialFolder;
@@ -417,36 +418,11 @@ class _CatalogImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final placeholder = Container(
+    return CatalogEntryImage(
+      entry: entry,
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Icon(
-        Icons.inventory_2_outlined,
-        color: theme.colorScheme.onSurface.withValues(alpha: 0.48),
-      ),
-    );
-
-    final raw = entry.imageUrl?.trim() ?? '';
-    if (raw.isEmpty) return placeholder;
-    final url = raw.replaceAll('&amp;', '&').replaceFirst(
-          RegExp(r'^//'),
-          'https://',
-        );
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: Image.network(
-        url,
-        width: size,
-        height: size,
-        fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => placeholder,
-      ),
+      borderRadius: 16,
     );
   }
 }

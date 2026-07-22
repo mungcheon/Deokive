@@ -16,6 +16,7 @@ class GoodsCatalogEntry {
   final int? officialPriceKrw;
   final String? barcode;
   final String? imageUrl;
+  final String? localImagePath;
   final String? sourceUrl;
   final String sourceStore;
   final String? releaseDate;
@@ -34,6 +35,7 @@ class GoodsCatalogEntry {
     this.officialPriceKrw,
     this.barcode,
     this.imageUrl,
+    this.localImagePath,
     this.sourceUrl,
     this.sourceStore = '',
     this.releaseDate,
@@ -54,6 +56,7 @@ class GoodsCatalogEntry {
       officialPriceKrw: json['official_price_krw'] as int?,
       barcode: json['barcode'] as String?,
       imageUrl: json['image_url'] as String?,
+      localImagePath: json['local_image_path'] as String?,
       sourceUrl: json['source_url'] as String?,
       sourceStore: json['source_store'] as String? ?? '',
       releaseDate: json['release_date'] as String?,
@@ -76,6 +79,13 @@ class GoodsCatalogEntry {
   String get normalizedCategory {
     final compact = category.replaceAll(RegExp(r'\s+'), '');
     return _categoryAliases[compact] ?? category;
+  }
+
+  String? get displayImagePath {
+    final local = localImagePath?.trim() ?? '';
+    if (local.isNotEmpty) return local;
+    final remote = imageUrl?.trim() ?? '';
+    return remote.isEmpty ? null : remote;
   }
 }
 

@@ -9,6 +9,7 @@ import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
 import '../widgets/deokive_avatar.dart';
 import '../widgets/deokive_header_title.dart';
+import '../widgets/catalog_entry_image.dart';
 import '../widgets/showcase_background.dart';
 import 'avatar_editor_screen.dart';
 import 'badge_screen.dart';
@@ -277,7 +278,7 @@ class _CatalogImportPanel extends StatelessWidget {
     final entries = appState.curatedCatalogEntries;
     final health = _CatalogHealthSummary.from(entries);
     final imageEntries = entries
-        .where((entry) => (entry.imageUrl ?? '').trim().isNotEmpty)
+        .where((entry) => (entry.displayImagePath ?? '').trim().isNotEmpty)
         .take(4)
         .toList();
 
@@ -388,7 +389,7 @@ class _CatalogImportPanel extends StatelessWidget {
                   for (var i = 0; i < imageEntries.length; i++)
                     Positioned(
                       left: i * 25,
-                      child: _CatalogThumb(imageUrl: imageEntries[i].imageUrl),
+                      child: _CatalogThumb(entry: imageEntries[i]),
                     ),
                 ],
               ),
@@ -433,7 +434,7 @@ class _CatalogHealthSummary {
         barcodeCounts[barcode] = (barcodeCounts[barcode] ?? 0) + 1;
       }
 
-      if ((entry.imageUrl ?? '').trim().isNotEmpty) {
+      if ((entry.displayImagePath ?? '').trim().isNotEmpty) {
         imageCount += 1;
       }
       if ((entry.sourceUrl ?? '').trim().isNotEmpty) {
@@ -502,26 +503,13 @@ class _CatalogMetricChip extends StatelessWidget {
 }
 
 class _CatalogThumb extends StatelessWidget {
-  final String? imageUrl;
+  final GoodsCatalogEntry entry;
 
-  const _CatalogThumb({required this.imageUrl});
+  const _CatalogThumb({required this.entry});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final placeholder = Container(
-      width: 42,
-      height: 42,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest,
-        shape: BoxShape.circle,
-        border: Border.all(color: theme.colorScheme.surface, width: 2),
-      ),
-      child: const Icon(Icons.inventory_2_outlined, size: 18),
-    );
-
-    final url = imageUrl;
-    if (url == null || url.trim().isEmpty) return placeholder;
     return Container(
       width: 42,
       height: 42,
@@ -530,10 +518,11 @@ class _CatalogThumb extends StatelessWidget {
         border: Border.all(color: theme.colorScheme.surface, width: 2),
       ),
       clipBehavior: Clip.antiAlias,
-      child: Image.network(
-        url.replaceAll('&amp;', '&').replaceFirst(RegExp(r'^//'), 'https://'),
-        fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => placeholder,
+      child: CatalogEntryImage(
+        entry: entry,
+        width: 42,
+        height: 42,
+        shape: BoxShape.circle,
       ),
     );
   }

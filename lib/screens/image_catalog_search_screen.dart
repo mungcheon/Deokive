@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../models/goods_catalog_entry.dart';
 import '../state/app_state.dart';
 import '../services/image_similarity_service_web.dart';
+import '../widgets/catalog_entry_image.dart';
 
 /// Standalone screen for image-based catalog lookup. User picks a photo,
 /// service computes a perceptual signature, then ranks catalog entries.
@@ -219,15 +220,12 @@ class _ResultTile extends StatelessWidget {
                 child: SizedBox(
                   width: 72,
                   height: 72,
-                  child: Image.network(
-                    (entry.imageUrl ?? '')
-                        .replaceAll('&amp;', '&')
-                        .replaceFirst(RegExp(r'^//'), 'https://'),
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      color: theme.colorScheme.surfaceContainerHighest,
-                      child: const Icon(Icons.image_outlined),
-                    ),
+                  child: CatalogEntryImage(
+                    entry: entry,
+                    width: 72,
+                    height: 72,
+                    borderRadius: 8,
+                    placeholderIcon: Icons.image_outlined,
                   ),
                 ),
               ),

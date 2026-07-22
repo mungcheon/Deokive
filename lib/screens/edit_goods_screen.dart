@@ -228,6 +228,16 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
   }
 
   Future<void> _attachCatalogImage(GoodsCatalogEntry entry) async {
+    final localPath = entry.localImagePath?.trim() ?? '';
+    if (localPath.isNotEmpty) {
+      final localBytes = await _downloadImageBytes(localPath);
+      if (!mounted) return;
+      if (localBytes != null) {
+        setState(() => selectedImages.add(localBytes));
+        return;
+      }
+    }
+
     final raw = entry.imageUrl?.trim() ?? '';
     if (raw.isEmpty) return;
     var url = raw.replaceAll('&amp;', '&');
@@ -247,8 +257,9 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
 
   Future<Uint8List?> _downloadImageBytes(String url) async {
     try {
+      final uri = Uri.parse(url);
       final response = await http.get(
-        Uri.parse(url),
+        uri.hasScheme ? uri : Uri.base.resolve(url),
         headers: const {
           'User-Agent': 'Mozilla/5.0 (Linux; Android) Deokive/1.0',
           'Accept': 'image/*,*/*',

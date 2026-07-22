@@ -28,6 +28,7 @@ FIELD_MAP = [
     ("officialPriceKrw", "official_price_krw", "int"),
     ("barcode", "barcode", "string"),
     ("imageUrl", "image_url", "string"),
+    ("localImagePath", "local_image_path", "string"),
     ("sourceUrl", "source_url", "string"),
     ("sourceStore", "source_store", "string"),
     ("releaseDate", "release_date", "string"),

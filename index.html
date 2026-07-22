@@ -14,11 +14,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <script>
-    const deokiveBase = document.createElement('base');
-    deokiveBase.href = window.location.hostname.endsWith('github.io') ? '/Deokive/' : '/';
-    document.head.appendChild(deokiveBase);
-  </script>
+  <base href="/Deokive/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -51,32 +47,31 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
+  <script src="flutter_bootstrap.js" async></script>
   <script>
-    async function clearDeokiveWebCache() {
-      try {
-        if ('serviceWorker' in navigator) {
+    window.addEventListener('load', async function () {
+      if (!('serviceWorker' in navigator)) return;
+      const host = window.location.hostname;
+      const isLocalHost =
+        host === 'localhost' ||
+        host === '127.0.0.1' ||
+        host === '::1';
+
+      if (isLocalHost) {
+        try {
           const regs = await navigator.serviceWorker.getRegistrations();
           for (const reg of regs) {
             await reg.unregister();
           }
-        }
-        if ('caches' in window) {
-          const keys = await caches.keys();
-          await Promise.all(keys.map((key) => caches.delete(key)));
-        }
-      } catch (_) {}
-    }
+          if ('caches' in window) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map((key) => caches.delete(key)));
+          }
+        } catch (_) {}
+        return;
+      }
 
-    function loadDeokiveApp() {
-      const script = document.createElement('script');
-      script.src = 'flutter_bootstrap.js?v=20260722-rootfix5';
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    window.addEventListener('DOMContentLoaded', async function () {
-      await clearDeokiveWebCache();
-      loadDeokiveApp();
+      navigator.serviceWorker.register('deokive_service_worker.js?v=20260627-localfix1');
     });
   </script>
 </body>
