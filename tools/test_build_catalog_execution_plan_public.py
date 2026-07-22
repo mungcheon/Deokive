@@ -274,6 +274,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "animation_category_review_batches_public.json": {
                 "summary": {"source_rows": 0}
             },
+            "animation_goods_categories_public.json": {
+                "summary": {
+                    "unknown_category_count": 3,
+                    "unknown_category_rows": 39,
+                    "app_folder_color_count": 188,
+                    "app_folder_icon_option_count": 211,
+                    "app_folder_palette_sorted_by_family": True,
+                    "app_animation_visuals_covered": True,
+                }
+            },
             "animation_category_action_queue_public.json": {
                 "summary": {
                     "actionable_categories": 2,
@@ -534,6 +544,10 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(animation_action["rows"], 12)
         self.assertEqual(animation_action["evidence"]["queued_categories"], 2)
+        self.assertEqual(animation_action["evidence"]["unknown_category_rows"], 39)
+        self.assertEqual(animation_action["evidence"]["app_folder_color_count"], 188)
+        self.assertEqual(animation_action["evidence"]["app_folder_icon_option_count"], 211)
+        self.assertTrue(animation_action["evidence"]["app_folder_palette_sorted_by_family"])
         self.assertEqual(animation_action["evidence"]["split_review_categories"], 2)
         self.assertEqual(animation_action["evidence"]["work_order_steps"], 1)
         self.assertEqual(animation_action["evidence"]["work_order_lanes"], ["name_level_split_review"])
@@ -541,9 +555,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(animation_action["evidence"]["candidate_split_rules"], 5)
         self.assertEqual(animation_action["evidence"]["matched_catalog_rows"], 30)
         self.assertEqual(animation_action["evidence"]["unmatched_keyword_candidates"], 4)
+        self.assertEqual(report["summary"]["animation_unknown_category_rows"], 39)
+        self.assertEqual(report["summary"]["animation_unknown_category_count"], 3)
         self.assertEqual(report["summary"]["animation_candidate_split_rules"], 5)
         self.assertEqual(report["summary"]["animation_split_matched_catalog_rows"], 30)
         self.assertEqual(report["summary"]["animation_unmatched_keyword_candidates"], 4)
+        self.assertEqual(report["summary"]["animation_app_folder_color_count"], 188)
+        self.assertEqual(report["summary"]["animation_app_folder_icon_option_count"], 211)
+        self.assertTrue(report["summary"]["animation_app_folder_palette_sorted_by_family"])
+        self.assertTrue(report["summary"]["animation_app_visuals_covered"])
 
     def test_pending_import_rows_are_prioritized(self) -> None:
         payloads = {

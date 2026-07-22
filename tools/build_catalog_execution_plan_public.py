@@ -121,6 +121,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
     kuji_name_image = load_report("ichiban_kuji_prize_name_image_review_public.json")
     kuji_name_image_patch = load_report("ichiban_kuji_prize_name_image_patch_candidates_public.json")
+    animation_goods_categories = load_report("animation_goods_categories_public.json")
     animation_batches = load_report("animation_category_review_batches_public.json")
     animation_action_queue = load_report("animation_category_action_queue_public.json")
     animation_split_review = load_report("animation_category_split_review_public.json")
@@ -157,6 +158,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_policy_summary = _summary(kuji_policy)
     kuji_name_image_summary = _summary(kuji_name_image)
     kuji_name_image_patch_summary = _summary(kuji_name_image_patch)
+    animation_goods_summary = _summary(animation_goods_categories)
     animation_summary = _summary(animation_batches)
     animation_action_summary = _summary(animation_action_queue)
     animation_split_summary = _summary(animation_split_review)
@@ -831,7 +833,19 @@ def _build_plan(load_report) -> dict[str, Any]:
             blocker="Category changes can affect app navigation and must be reviewed.",
             evidence={
                 "batch_count": _count(animation_summary, "batch_count"),
+                "unknown_category_rows": _count(animation_goods_summary, "unknown_category_rows"),
+                "unknown_category_count": _count(animation_goods_summary, "unknown_category_count"),
                 "folder_visual_token_count": _count(animation_summary, "folder_visual_token_count"),
+                "app_folder_color_count": _count(animation_goods_summary, "app_folder_color_count"),
+                "app_folder_icon_option_count": _count(
+                    animation_goods_summary, "app_folder_icon_option_count"
+                ),
+                "app_folder_palette_sorted_by_family": bool(
+                    animation_goods_summary.get("app_folder_palette_sorted_by_family")
+                ),
+                "app_animation_visuals_covered": bool(
+                    animation_goods_summary.get("app_animation_visuals_covered")
+                ),
                 "split_review_categories": _count(animation_split_summary, "split_review_categories"),
                 "candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
                 "matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
@@ -857,6 +871,21 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "queued_categories": _count(animation_action_summary, "queued_categories"),
                 "queued_catalog_rows": _count(animation_action_summary, "queued_catalog_rows"),
                 "action_batch_count": _count(animation_action_summary, "action_batch_count"),
+                "unknown_category_rows": _count(animation_goods_summary, "unknown_category_rows"),
+                "app_folder_color_count": _count(
+                    animation_action_summary, "app_folder_color_count"
+                )
+                or _count(animation_goods_summary, "app_folder_color_count"),
+                "app_folder_icon_option_count": _count(
+                    animation_action_summary, "app_folder_icon_option_count"
+                )
+                or _count(
+                    animation_goods_summary, "app_folder_icon_option_count"
+                ),
+                "app_folder_palette_sorted_by_family": bool(
+                    animation_action_summary.get("app_folder_palette_sorted_by_family")
+                    or animation_goods_summary.get("app_folder_palette_sorted_by_family")
+                ),
                 "by_suggested_family": animation_action_summary.get("by_suggested_family", []),
                 "split_review_categories": _count(animation_action_summary, "split_review_categories"),
                 "direct_mapping_categories": _count(animation_action_summary, "direct_mapping_categories"),
@@ -960,6 +989,8 @@ def _build_plan(load_report) -> dict[str, Any]:
             "source_discovery_manual_research_backlog_rows": _count(
                 source_action_summary, "manual_research_backlog_rows"
             ),
+            "animation_unknown_category_rows": _count(animation_goods_summary, "unknown_category_rows"),
+            "animation_unknown_category_count": _count(animation_goods_summary, "unknown_category_count"),
             "animation_split_review_categories": _count(animation_split_summary, "split_review_categories"),
             "animation_candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
             "animation_split_matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
@@ -968,6 +999,16 @@ def _build_plan(load_report) -> dict[str, Any]:
                 animation_unmatched_summary, "token_candidate_count"
             ),
             "animation_unmatched_keyword_product_type_candidates": animation_unmatched_product_type_candidates,
+            "animation_app_folder_color_count": _count(animation_goods_summary, "app_folder_color_count"),
+            "animation_app_folder_icon_option_count": _count(
+                animation_goods_summary, "app_folder_icon_option_count"
+            ),
+            "animation_app_folder_palette_sorted_by_family": bool(
+                animation_goods_summary.get("app_folder_palette_sorted_by_family")
+            ),
+            "animation_app_visuals_covered": bool(
+                animation_goods_summary.get("app_animation_visuals_covered")
+            ),
             "auto_apply_enabled": False,
         },
         "actions": actions,
