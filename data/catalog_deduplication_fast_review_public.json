@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T15:08:47Z",
+  "generated_at": "2026-07-22T16:09:03Z",
   "scope": "catalog_deduplication_fast_review",
   "summary": {
     "fast_review_groups": 42,
@@ -8,6 +8,9 @@
     "same_barcode_groups": 42,
     "same_source_url_groups": 38,
     "same_image_url_groups": 0,
+    "name_delta_groups": 23,
+    "image_delta_groups": 42,
+    "variant_warning_groups": 42,
     "manual_confirmed_true": 0,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
@@ -21,6 +24,16 @@
       {
         "fast_review_lane": "same_barcode_high_confidence",
         "groups": 4
+      }
+    ],
+    "by_fast_review_warning": [
+      {
+        "fast_review_warning": "name_delta_requires_variant_check",
+        "groups": 23
+      },
+      {
+        "fast_review_warning": "image_delta_requires_visual_check",
+        "groups": 19
       }
     ],
     "by_source_store": [
@@ -96,6 +109,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -185,6 +199,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -273,6 +288,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -362,6 +378,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -450,6 +467,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -538,6 +556,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -627,6 +646,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -716,6 +736,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -805,6 +826,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -893,6 +915,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -981,6 +1004,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -1070,6 +1094,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -1159,6 +1184,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -1248,6 +1274,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -1337,6 +1364,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -1425,6 +1453,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -1514,6 +1543,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -1602,6 +1632,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -1690,6 +1721,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -1778,6 +1810,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -1867,6 +1900,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -1956,6 +1990,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -2045,6 +2080,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -2133,6 +2169,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -2222,6 +2259,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -2311,6 +2349,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -2399,6 +2438,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -2488,6 +2528,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -2577,6 +2618,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -2665,6 +2707,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -2754,6 +2797,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -2842,6 +2886,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -2930,6 +2975,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -3018,6 +3064,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -3106,6 +3153,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -3194,6 +3242,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -3282,6 +3331,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -3371,6 +3421,7 @@
       "same_source_url": true,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 1,
@@ -3458,6 +3509,7 @@
       "same_source_url": false,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_high_confidence",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -3546,6 +3598,7 @@
       "same_source_url": false,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_high_confidence",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -3634,6 +3687,7 @@
       "same_source_url": false,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_high_confidence",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,
@@ -3722,6 +3776,7 @@
       "same_source_url": false,
       "same_image_url": false,
       "fast_review_lane": "same_barcode_high_confidence",
+      "fast_review_warning": "name_delta_requires_variant_check",
       "keep_reason": "keeps_richest_catalog_row",
       "identity_delta": {
         "normalized_name_count": 2,

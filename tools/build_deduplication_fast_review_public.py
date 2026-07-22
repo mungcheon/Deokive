@@ -92,6 +92,14 @@ def identity_delta(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def fast_review_warning(delta: dict[str, Any]) -> str:
+    if delta.get("name_differs"):
+        return "name_delta_requires_variant_check"
+    if delta.get("image_url_differs"):
+        return "image_delta_requires_visual_check"
+    return "no_identity_delta_detected"
+
+
 def compact_group(group: dict[str, Any]) -> dict[str, Any]:
     rows = [compact_row(row) for row in group.get("rows") or [] if isinstance(row, dict)]
     evidence = group.get("evidence") or []
@@ -107,6 +115,8 @@ def compact_group(group: dict[str, Any]) -> dict[str, Any]:
             "fast_review_lane": fast_review_lane,
         }
     )
+    delta = identity_delta(rows)
+    warning = fast_review_warning(delta)
     return {
         "key_type": group.get("key_type"),
         "key": group.get("key"),
@@ -122,8 +132,9 @@ def compact_group(group: dict[str, Any]) -> dict[str, Any]:
         "same_source_url": same_source_url,
         "same_image_url": same_image_url,
         "fast_review_lane": fast_review_lane,
+        "fast_review_warning": warning,
         "keep_reason": keep_reason(group, rows),
-        "identity_delta": identity_delta(rows),
+        "identity_delta": delta,
         "dedupe_decision_template": decision_template,
         "rows": rows,
         "auto_merge_enabled": False,
@@ -155,9 +166,12 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
     by_category = Counter()
     by_blocker = Counter()
     by_fast_review_lane = Counter()
+    by_fast_review_warning = Counter()
     same_barcode_groups = 0
     same_source_url_groups = 0
     same_image_url_groups = 0
+    name_delta_groups = 0
+    image_delta_groups = 0
     for group in fast_groups:
         if group.get("same_barcode"):
             same_barcode_groups += 1
@@ -165,7 +179,13 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             same_source_url_groups += 1
         if group.get("same_image_url"):
             same_image_url_groups += 1
+        delta = group.get("identity_delta") or {}
+        if delta.get("name_differs"):
+            name_delta_groups += 1
+        if delta.get("image_url_differs"):
+            image_delta_groups += 1
         by_fast_review_lane[str(group.get("fast_review_lane") or "unknown")] += 1
+        by_fast_review_warning[str(group.get("fast_review_warning") or "unknown")] += 1
         for store in group.get("stores") or []:
             by_store[str(store)] += 1
         for category in group.get("categories") or []:
@@ -184,12 +204,18 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             "same_barcode_groups": same_barcode_groups,
             "same_source_url_groups": same_source_url_groups,
             "same_image_url_groups": same_image_url_groups,
+            "name_delta_groups": name_delta_groups,
+            "image_delta_groups": image_delta_groups,
+            "variant_warning_groups": sum(
+                1 for group in fast_groups if group.get("fast_review_warning") != "no_identity_delta_detected"
+            ),
             "manual_confirmed_true": 0,
             "auto_merge_enabled": False,
             "auto_delete_enabled": False,
         },
         "breakdowns": {
             "by_fast_review_lane": counter_rows(by_fast_review_lane, "fast_review_lane"),
+            "by_fast_review_warning": counter_rows(by_fast_review_warning, "fast_review_warning"),
             "by_source_store": counter_rows(by_store, "source_store"),
             "by_category": counter_rows(by_category, "category"),
             "by_merge_blocker": counter_rows(by_blocker, "merge_blocker"),
