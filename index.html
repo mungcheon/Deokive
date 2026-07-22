@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="/Deokive/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="덕질 컬렉션을 기록하고 정리하는 적응형 웹 아카이브, Deokive">
+  <meta name="description" content="덕질 컬렉션을 기록하고 정리하는 나만의 아카이브, Deokive">
   <meta name="theme-color" content="#f7c9d9">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -27,23 +14,20 @@
   <meta name="mobile-web-app-capable" content="yes">
 
   <meta property="og:title" content="Deokive">
-  <meta property="og:description" content="덕질 컬렉션을 기록하고 정리하는 적응형 웹 아카이브">
+  <meta property="og:description" content="덕질 컬렉션을 기록하고 정리하는 나만의 아카이브">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="icons/Icon-192.png?v=20260623b">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png?v=20260623b"/>
-  <link rel="shortcut icon" type="image/png" href="favicon.png?v=20260623b"/>
-
-  <title>Deokive</title>
+  <link rel="icon" type="image/png" href="favicon.png?v=20260623b">
+  <link rel="shortcut icon" type="image/png" href="favicon.png?v=20260623b">
   <link rel="manifest" href="manifest.json?v=20260623b">
+  <title>Deokive</title>
+
   <style>
     :root {
       color-scheme: light;
       --deokive-ink: #1d1b20;
       --deokive-muted: #706a74;
       --deokive-line: #ece7ee;
-      --deokive-pink: #f7c9d9;
       --deokive-pink-strong: #e65f91;
       --deokive-bg: #fffafd;
     }
@@ -75,7 +59,7 @@
       border: 1px solid rgba(29, 27, 32, 0.08);
       border-radius: 34px;
       box-shadow: 0 24px 70px rgba(91, 55, 73, 0.14);
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.86);
       backdrop-filter: blur(18px);
       display: flex;
       flex-direction: column;
@@ -104,20 +88,45 @@
 
     .app-loading h1 {
       margin: 8px 0 0;
+      max-width: 310px;
       font-size: 26px;
       line-height: 1.2;
       letter-spacing: 0;
-      max-width: 300px;
       word-break: keep-all;
     }
 
     .app-loading p {
       margin: 0;
+      max-width: 310px;
       color: var(--deokive-muted);
       font-size: 15px;
       line-height: 1.65;
       word-break: keep-all;
-      overflow-wrap: normal;
+      overflow-wrap: break-word;
+    }
+
+    .app-loading__eta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
+      max-width: 270px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #1d1b20;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-align: center;
+      white-space: normal;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+    }
+
+    .app-loading__eta[hidden] {
+      display: none;
     }
 
     .app-loading__bar {
@@ -139,7 +148,7 @@
     }
 
     .app-loading__note {
-      max-width: 300px;
+      max-width: 310px;
       padding: 12px 14px;
       border-radius: 18px;
       background: #fff5f9;
@@ -147,30 +156,9 @@
       color: #7a4058;
       font-size: 13px;
       line-height: 1.55;
-    }
-
-    .app-loading__eta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 32px;
-      padding: 0 14px;
-      border-radius: 999px;
-      background: #1d1b20;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      max-width: 270px;
-      height: auto;
-      min-height: 32px;
-      text-align: center;
-      line-height: 1.35;
-      white-space: normal;
       word-break: keep-all;
-    }
-
-    .app-loading__eta[hidden] {
-      display: none;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
     }
 
     @keyframes deokive-loading {
@@ -186,7 +174,7 @@
       <div class="app-loading__logo">D</div>
       <h1 id="app-loading-title">덕카이브 여는 중</h1>
       <p id="app-loading-body">
-        앱 화면을 준비하고 있어요.<br>
+        화면을 준비하고 있어요.<br>
         잠시만 기다려 주세요.
       </p>
       <div class="app-loading__eta" id="app-loading-eta" hidden></div>
@@ -197,14 +185,6 @@
     </section>
   </div>
 
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
   <script>
     function deokiveSetLoadingCopy(copy) {
       const title = document.getElementById('app-loading-title');
@@ -275,9 +255,9 @@
         window.deokiveHoldLoadingScreen = true;
         deokiveSetLoadingCopy({
           title: '곧 업데이트가 시작돼요',
-          body: '1분 뒤 업데이트를 시작합니다.<br>작업 중이면 종료 부탁드려요.',
-          eta: '업데이트 시작 전 안내',
-          note: status.message || '잠시 후 새 버전으로 교체됩니다.',
+          body: '1분 뒤 업데이트를 시작합니다.<br>작업 중이라면 종료 부탁드려요.',
+          eta: status.eta || '업데이트 시작 1분 전 안내',
+          note: status.message || '잠시 뒤 새 버전으로 교체합니다.',
         });
         return;
       }
