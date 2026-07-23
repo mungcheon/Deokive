@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T13:56:56Z",
+  "generated_at": "2026-07-23T14:14:59Z",
   "summary": {
     "batch_count": 148,
     "max_published_batches": 160,
-    "summed_batch_rows": 20868,
+    "summed_batch_rows": 20840,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -261,11 +261,11 @@
       "animation_category_unmatched_keyword_rows": 0,
       "animation_category_unmatched_keyword_candidates": 0,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
-      "ichiban_prize_name_image_review_rows": 29,
+      "ichiban_prize_name_image_review_rows": 1,
       "ichiban_prize_multi_item_rank_groups": 415,
       "ichiban_prize_name_image_patch_candidate_rows": 0,
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
-      "ichiban_prize_name_image_patch_blocked_rows": 29
+      "ichiban_prize_name_image_patch_blocked_rows": 1
     },
     "confirmed_import_template_rows": 1141,
     "confirmed_import_action_queue_rows": 4637,
@@ -21948,13 +21948,55 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
+      "batch_id": "056-agent-ichiban-reissue-dedupe-106",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 56,
+      "title": "Ichiban Kuji reissue dedupe check 001",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 14798,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "name_ja": "ラストワン賞 スペシャル缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/haikyu8",
+          "official_search_url": null,
+          "campaign_url_comparison": null
+        },
+        {
+          "catalog_index": 14818,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "name_ja": "ラストワン賞 スペシャル缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/haikyu4",
+          "official_search_url": null,
+          "campaign_url_comparison": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
       "batch_id": "056-agent-ichiban-prize-name-image-148",
       "agent_id": "agent-ichiban-prize-name-image",
       "workstream": "ichiban_kuji_prize_name_image_review",
       "priority": 56,
       "title": "Ichiban Kuji prize name/image structure review",
       "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
-      "rows": 29,
+      "rows": 1,
       "recommended_action": "Confirm each prize display name includes campaign, prize rank, prize item, and variant detail.",
       "acceptance_criteria": [
         "Display names include the release name, prize rank, and prize item name.",
@@ -22006,337 +22048,18 @@
             "manual_confirmed": false
           },
           "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16169,
-          "series_name": "一番くじ ハッピーバースデー チョッパー",
-          "prize_rank": "ぬいぐるみ",
-          "prize_item_name": "ワンピース ぬいぐるみ～Happy Birthday Chopper！～",
-          "expected_prize_display_name": "ぬいぐるみ ワンピース ぬいぐるみ～Happy Birthday Chopper！～",
-          "display_name_ko": "一番くじ ハッピーバースデー チョッパー - ワンピース ぬいぐるみ～Happy Birthday Chopper！～",
-          "expected_display_name_ko": "一番くじ ハッピーバースデー チョッパー - ぬいぐるみ ワンピース ぬいぐるみ～Happy Birthday Chopper！～",
-          "category": "인형",
-          "character_name": "기타",
-          "official_price_jpy": 500,
-          "release_date": "2011-03-10",
-          "source_url": "https://1kuji.com/products/cho-birth",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/1365/f0a25151-ba3c-4dc2-a5ae-35f599952273.jpg",
-          "local_image_path": "assets/catalog_images/641ae0ffb1099bd74943.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 16169,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/cho-birth",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16170,
-          "series_name": "一番くじ ハッピーバースデー チョッパー",
-          "prize_rank": "関連商品",
-          "prize_item_name": "菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "expected_prize_display_name": "関連商品 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "display_name_ko": "一番くじ ハッピーバースデー チョッパー - 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "expected_display_name_ko": "一番くじ ハッピーバースデー チョッパー - 関連商品 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "category": "굿즈",
-          "character_name": "기타",
-          "official_price_jpy": 500,
-          "release_date": "2011-03-10",
-          "source_url": "https://1kuji.com/products/cho-birth",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/1367/919da83d-8dea-4084-80b1-e411d513690b.jpg",
-          "local_image_path": "assets/catalog_images/aa5d59b88be7439f2b03.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 16170,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/cho-birth",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16171,
-          "series_name": "一番くじ ハッピーバースデー チョッパー",
-          "prize_rank": "関連商品",
-          "prize_item_name": "玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "expected_prize_display_name": "関連商品 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "display_name_ko": "一番くじ ハッピーバースデー チョッパー - 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "expected_display_name_ko": "一番くじ ハッピーバースデー チョッパー - 関連商品 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "category": "굿즈",
-          "character_name": "기타",
-          "official_price_jpy": 500,
-          "release_date": "2011-03-10",
-          "source_url": "https://1kuji.com/products/cho-birth",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/1368/f05afcd7-f161-4f78-92b3-63c1c00f9fe4.jpg",
-          "local_image_path": "assets/catalog_images/80913716a28b59157760.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 16171,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/cho-birth",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16681,
-          "series_name": "一番くじ ドラゴンボール ～超戦士バトル列伝～",
-          "prize_rank": "ダブルチャンス",
-          "prize_item_name": "合計50個ダブルチャンスキャンペーン",
-          "expected_prize_display_name": "ダブルチャンス 合計50個ダブルチャンスキャンペーン",
-          "display_name_ko": "一番くじ ドラゴンボール ～超戦士バトル列伝～ - 合計50個ダブルチャンスキャンペーン",
-          "expected_display_name_ko": "一番くじ ドラゴンボール ～超戦士バトル列伝～ - ダブルチャンス 合計50個ダブルチャンスキャンペーン",
-          "category": "굿즈",
-          "character_name": "기타",
-          "official_price_jpy": 0,
-          "release_date": "2018-05-02",
-          "source_url": "https://1kuji.com/products/db_battle",
-          "image_url": "https://sn.bpnavi.jp/db_battle/images/item_ttl_w.png",
-          "local_image_path": "assets/catalog_images/769696d347e77155ab99.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 16681,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/db_battle",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 17833,
-          "series_name": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS",
-          "prize_rank": "A賞",
-          "prize_item_name": "超サイヤ人ゴジータ フィギュア",
-          "expected_prize_display_name": "A賞 超サイヤ人ゴジータ フィギュア",
-          "display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - 超サイヤ人ゴジータ フィギュア",
-          "expected_display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - A賞 超サイヤ人ゴジータ フィギュア",
-          "category": "피규어",
-          "character_name": "기타",
-          "official_price_jpy": 680,
-          "release_date": "2020-07-23",
-          "source_url": "https://1kuji.com/products/db_legends2",
-          "image_url": "https://sn.bpnavi.jp/page/db/db_legends2/0623/a_prize_C8tFMZJr.jpg",
-          "local_image_path": "assets/catalog_images/a91ad4baed9235c9f021.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 17833,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/db_legends2",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 17834,
-          "series_name": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS",
-          "prize_rank": "B賞",
-          "prize_item_name": "超サイヤ人ブロリー フィギュア",
-          "expected_prize_display_name": "B賞 超サイヤ人ブロリー フィギュア",
-          "display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - 超サイヤ人ブロリー フィギュア",
-          "expected_display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - B賞 超サイヤ人ブロリー フィギュア",
-          "category": "피규어",
-          "character_name": "기타",
-          "official_price_jpy": 680,
-          "release_date": "2020-07-23",
-          "source_url": "https://1kuji.com/products/db_legends2",
-          "image_url": "https://sn.bpnavi.jp/page/db/db_legends2/0623/b_prize_De9G3fNL.jpg",
-          "local_image_path": "assets/catalog_images/c3e5a9152281da4cc0d7.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 17834,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/db_legends2",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 17835,
-          "series_name": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS",
-          "prize_rank": "C賞",
-          "prize_item_name": "超ベジット フィギュア",
-          "expected_prize_display_name": "C賞 超ベジット フィギュア",
-          "display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - 超ベジット フィギュア",
-          "expected_display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - C賞 超ベジット フィギュア",
-          "category": "피규어",
-          "character_name": "기타",
-          "official_price_jpy": 680,
-          "release_date": "2020-07-23",
-          "source_url": "https://1kuji.com/products/db_legends2",
-          "image_url": "https://sn.bpnavi.jp/page/db/db_legends2/0623/c_prize_Jc6Wj8Hm.jpg",
-          "local_image_path": "assets/catalog_images/ed53250f8cbb79385d3f.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 17835,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/db_legends2",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
         }
       ],
       "review_summary": {
         "kuji_rows": 7899,
-        "review_rows": 29,
-        "name_structure_review_rows": 29,
+        "review_rows": 1,
+        "name_structure_review_rows": 1,
         "image_identity_review_rows": 0,
         "same_campaign_prize_rank_name_duplicate_rows": 0,
         "same_campaign_image_reused_different_name_rows": 0,
         "multi_item_prize_rank_groups": 415,
         "multi_item_prize_rank_catalog_rows": 2939,
         "review_reason_counts": [
-          [
-            "display_name_does_not_match_series_and_prize_name",
-            28
-          ],
           [
             "missing_required_name_component",
             1
@@ -22347,48 +22070,6 @@
       },
       "review_state": "manual_prize_name_structure_confirmation_required",
       "next_machine_step": "confirm_ichiban_prize_name_structure_templates"
-    },
-    {
-      "batch_id": "056-agent-ichiban-reissue-dedupe-106",
-      "agent_id": "agent-ichiban-reissue-dedupe",
-      "workstream": "ichiban_kuji_reissue_dedupe_review",
-      "priority": 56,
-      "title": "Ichiban Kuji reissue dedupe check 001",
-      "public_report": "data/catalog_deduplication_action_queue_public.json",
-      "rows": 2,
-      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
-      "acceptance_criteria": [
-        "Compare every source_url campaign page before marking rows as exact duplicates.",
-        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
-        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
-        "Auto-merge and auto-delete remain disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 14798,
-          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
-          "name_ja": "ラストワン賞 スペシャル缶バッジ",
-          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
-          "category": null,
-          "source_store": null,
-          "source_url": "https://1kuji.com/products/haikyu8",
-          "official_search_url": null,
-          "campaign_url_comparison": null
-        },
-        {
-          "catalog_index": 14818,
-          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
-          "name_ja": "ラストワン賞 スペシャル缶バッジ",
-          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
-          "category": null,
-          "source_store": null,
-          "source_url": "https://1kuji.com/products/haikyu4",
-          "official_search_url": null,
-          "campaign_url_comparison": null
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "057-agent-ichiban-reissue-dedupe-107",
@@ -23823,7 +23504,7 @@
           "sample_rows": [
             {
               "catalog_index": 16170,
-              "name_ko": "一番くじ ハッピーバースデー チョッパー - 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
+              "name_ko": "一番くじ ハッピーバースデー チョッパー - 関連商品 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
               "name_ja": "菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
               "series_name": "一番くじ ハッピーバースデー チョッパー",
               "sub_series": "関連商品",
@@ -23832,7 +23513,7 @@
             },
             {
               "catalog_index": 16171,
-              "name_ko": "一番くじ ハッピーバースデー チョッパー - 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
+              "name_ko": "一番くじ ハッピーバースデー チョッパー - 関連商品 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
               "name_ja": "玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
               "series_name": "一番くじ ハッピーバースデー チョッパー",
               "sub_series": "関連商品",
@@ -23955,7 +23636,7 @@
           "sample_rows": [
             {
               "catalog_index": 13318,
-              "name_ko": "一番くじ めちゃでかショッパー - 一番くじ めちゃでかショッパー(2026 vol.1)",
+              "name_ko": "一番くじ めちゃでかショッパー - めちゃでかショッパー 一番くじ めちゃでかショッパー(2026 vol.1)",
               "name_ja": "一番くじ めちゃでかショッパー(2026 vol.1)",
               "series_name": "一番くじ めちゃでかショッパー",
               "sub_series": "めちゃでかショッパー",
@@ -23964,7 +23645,7 @@
             },
             {
               "catalog_index": 13319,
-              "name_ko": "一番くじ めちゃでかショッパー - 一番くじ めちゃでかショッパー(2026 vol.2)",
+              "name_ko": "一番くじ めちゃでかショッパー - めちゃでかショッパー 一番くじ めちゃでかショッパー(2026 vol.2)",
               "name_ja": "一番くじ めちゃでかショッパー(2026 vol.2)",
               "series_name": "一番くじ めちゃでかショッパー",
               "sub_series": "めちゃでかショッパー",

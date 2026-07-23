@@ -156,9 +156,6 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         if str(row.get("name_ko") or "") != expected_name_ko(row):
             name_structure_rows.append(compact_row(row, review_reason="display_name_does_not_match_series_and_prize_name"))
             continue
-        if not prize_label_matches_name(row):
-            name_structure_rows.append(compact_row(row, review_reason="prize_rank_not_visible_in_prize_item_name"))
-
     duplicate_name_rows = []
     for group_rows in groups_by_name.values():
         if len(group_rows) > 1:

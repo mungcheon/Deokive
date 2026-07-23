@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T13:57:26Z",
+  "generated_at": "2026-07-23T14:15:26Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 22,
     "blocked_action_count": 1,
     "manual_review_action_count": 19,
     "pending_import_action_count": 0,
-    "total_action_rows": 32378,
+    "total_action_rows": 32350,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -75,11 +75,11 @@
       "animation_category_unmatched_keyword_rows": 0,
       "animation_category_unmatched_keyword_candidates": 0,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
-      "ichiban_prize_name_image_review_rows": 29,
+      "ichiban_prize_name_image_review_rows": 1,
       "ichiban_prize_multi_item_rank_groups": 415,
       "ichiban_prize_name_image_patch_candidate_rows": 0,
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
-      "ichiban_prize_name_image_patch_blocked_rows": 29
+      "ichiban_prize_name_image_patch_blocked_rows": 1
     },
     "confirmed_import_template_rows": 1141,
     "confirmed_import_action_queue_rows": 4637,
@@ -114,12 +114,12 @@
     "ichiban_numbered_variant_application_skipped_rows": 0,
     "ichiban_reissue_duplicate_review_groups": 46,
     "ichiban_probable_reissue_review_groups": 20,
-    "ichiban_prize_name_image_review_rows": 29,
-    "ichiban_prize_name_image_name_structure_review_rows": 29,
+    "ichiban_prize_name_image_review_rows": 1,
+    "ichiban_prize_name_image_name_structure_review_rows": 1,
     "ichiban_prize_name_image_image_identity_review_rows": 0,
     "ichiban_prize_name_image_multi_item_groups": 415,
     "ichiban_prize_name_image_patch_candidate_rows": 0,
-    "ichiban_prize_name_image_patch_blocked_rows": 29,
+    "ichiban_prize_name_image_patch_blocked_rows": 1,
     "dedupe_fast_review_groups": 42,
     "dedupe_fast_review_same_source_url_groups": 38,
     "dedupe_ichiban_reissue_review_groups": 46,
@@ -1373,25 +1373,21 @@
       "workstream": "ichiban_kuji_prize_name_image_review",
       "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
       "status": "manual_review",
-      "rows": 29,
+      "rows": 1,
       "command": "Review Ichiban Kuji campaign title, prize rank, prize item name, variant detail, and image identity against official lineup pages.",
       "next_step": "confirm_prize_name_components_and_image_identity",
       "blocker": "Official lineup evidence is required before mutating prize display names or replacing images.",
       "auto_apply_enabled": false,
       "evidence": {
         "kuji_rows": 7899,
-        "review_rows": 29,
-        "name_structure_review_rows": 29,
+        "review_rows": 1,
+        "name_structure_review_rows": 1,
         "image_identity_review_rows": 0,
         "same_campaign_prize_rank_name_duplicate_rows": 0,
         "same_campaign_image_reused_different_name_rows": 0,
         "multi_item_prize_rank_groups": 415,
         "multi_item_prize_rank_catalog_rows": 2939,
         "review_reason_counts": [
-          [
-            "display_name_does_not_match_series_and_prize_name",
-            28
-          ],
           [
             "missing_required_name_component",
             1
