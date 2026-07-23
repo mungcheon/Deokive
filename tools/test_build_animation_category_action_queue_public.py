@@ -108,9 +108,24 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             report["summary"]["by_mapping_mode"],
             [("name_level_split_review_required", 1), ("direct_category_mapping_review", 1)],
         )
+        self.assertEqual(
+            report["summary"]["by_blocked_reason"],
+            [
+                ("broad_source_category_requires_name_level_split", 1),
+                ("direct_category_mapping_requires_sample_review", 1),
+            ],
+        )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_category_changes"])
         self.assertFalse(report["automation_policy"]["auto_create_folders"])
+        self.assertEqual(
+            report["automation_policy"]["blocked_until_default"],
+            "category_mapping_or_split_rules_manually_confirmed",
+        )
+        self.assertIn(
+            "broad_categories_split_before_mapping",
+            report["automation_policy"]["required_evidence"],
+        )
         self.assertEqual(len(report["work_order"]), 2)
         self.assertEqual(report["work_order"][0]["lane"], "name_level_split_review")
         self.assertEqual(report["work_order"][0]["category_count"], 1)
@@ -125,6 +140,14 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         )
         self.assertTrue(report["work_order"][0]["manual_confirmation_required"])
         self.assertFalse(report["work_order"][0]["auto_apply_enabled"])
+        self.assertEqual(
+            report["work_order"][0]["blocked_reason"],
+            "broad_source_category_requires_name_level_split",
+        )
+        self.assertIn(
+            "confirmed_split_target_category_for_each_rule",
+            report["work_order"][0]["required_evidence"],
+        )
         self.assertEqual(report["work_order"][1]["lane"], "unmatched_keyword_review")
         self.assertEqual(report["work_order"][1]["affected_catalog_rows"], 42)
         self.assertEqual(report["work_order"][1]["token_candidate_count"], 7)
@@ -137,6 +160,10 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         )
         self.assertTrue(report["work_order"][1]["manual_confirmation_required"])
         self.assertFalse(report["work_order"][1]["auto_apply_enabled"])
+        self.assertEqual(
+            report["work_order"][1]["blocked_reason"],
+            "unmatched_product_type_keywords_need_review",
+        )
         batch = report["batches"][0]
         self.assertEqual(batch["review_state"], "manual_category_mapping_confirmation_required")
         self.assertEqual(batch["next_machine_step"], "fill_confirmed_animation_category_mapping_templates")
@@ -146,6 +173,14 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(batch["categories"][0]["mapping_mode"], "name_level_split_review_required")
         self.assertTrue(batch["categories"][0]["requires_name_level_split_review"])
         self.assertEqual(batch["categories"][0]["confirmed_queue"], "server/animation_category_confirmed_rows.json")
+        self.assertEqual(
+            batch["categories"][0]["blocked_until"],
+            "name_level_split_rules_manually_confirmed",
+        )
+        self.assertIn(
+            "broad_category_not_mapped_to_single_folder",
+            batch["categories"][0]["required_evidence"],
+        )
         self.assertEqual(
             batch["categories"][0]["review_summary"]["recommended_review_path"],
             "review_name_split_hints_before_category_mapping",
@@ -163,7 +198,8 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(template["source_category"], "Acrylic")
         self.assertEqual(template["target_category"], "Acrylic Stand")
         self.assertEqual(template["folder_icon_key"], "view_carousel")
-        self.assertEqual(template["blocked_until"], "category_mapping_manually_confirmed")
+        self.assertEqual(template["blocked_until"], "name_level_split_rules_manually_confirmed")
+        self.assertEqual(template["blocked_reason"], "broad_source_category_requires_name_level_split")
         self.assertEqual(
             report["automation_policy"]["manual_confirmation_template"],
             "server/animation_category_confirmed_rows.template.json",

@@ -17,6 +17,49 @@ CONFIRMED_QUEUE = "server/animation_category_confirmed_rows.json"
 IMPORT_TOOL = "tools/import_confirmed_animation_category_rows.py"
 UNBLOCKS_WHEN = "category_mapping_manually_confirmed"
 
+MODE_BLOCKERS = {
+    "name_level_split_review_required": {
+        "blocked_until": "name_level_split_rules_manually_confirmed",
+        "blocked_reason": "broad_source_category_requires_name_level_split",
+        "required_evidence": [
+            "sample_names_match_product_type_split_rules",
+            "broad_category_not_mapped_to_single_folder",
+            "confirmed_split_target_category_for_each_rule",
+        ],
+    },
+    "direct_category_mapping_review": {
+        "blocked_until": "direct_category_mapping_manually_confirmed",
+        "blocked_reason": "direct_category_mapping_requires_sample_review",
+        "required_evidence": [
+            "sample_names_match_single_target_goods_type",
+            "target_folder_color_and_icon_exist_in_app_catalog",
+            "manual_note_for_mapping_decision",
+        ],
+    },
+    "unmatched_keyword_review": {
+        "blocked_until": "unmatched_keywords_classified_or_rejected",
+        "blocked_reason": "unmatched_product_type_keywords_need_review",
+        "required_evidence": [
+            "product_type_like_tokens_confirmed_with_samples",
+            "series_source_store_noise_tokens_rejected",
+            "new_split_rules_recorded_only_for_consistent_goods_types",
+        ],
+    },
+}
+
+
+def _mode_blocker(mode: str) -> dict[str, Any]:
+    return dict(
+        MODE_BLOCKERS.get(
+            mode,
+            {
+                "blocked_until": "manual_review_completed",
+                "blocked_reason": "manual_review_required",
+                "required_evidence": ["manual_confirmation"],
+            },
+        )
+    )
+
 PRODUCT_TYPE_HINTS = [
     ("acrylic_stand", ("アクリルスタンド", "アクスタ", "acrylic stand", "standee", "스탠드")),
     ("acrylic_keyring", ("アクリルキーホルダー", "アクキー", "keyholder", "keyring", "키링")),
@@ -129,7 +172,8 @@ def _template(row: dict[str, Any]) -> dict[str, Any]:
         "folder_icon_key": folder.get("primary_icon_key") or row.get("suggested_primary_icon_key"),
         "folder_icon_options": folder.get("icon_options") or row.get("suggested_icon_options") or [],
         "affected_catalog_rows": int(row.get("rows") or 0),
-        "blocked_until": "category_mapping_manually_confirmed",
+        **_mode_blocker(mapping_mode),
+        "blocked_until": _mode_blocker(mapping_mode)["blocked_until"],
         "review_evidence_required": [
             "sample_names_match_target_product_type",
             "broad_categories_are_split_before_mapping",
@@ -162,6 +206,7 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
         "import_tool": IMPORT_TOOL,
         "unblocks_when": UNBLOCKS_WHEN,
         "auto_apply_enabled": False,
+        **_mode_blocker(mapping_mode),
     }
 
 
@@ -201,6 +246,7 @@ def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, 
                 "blocked_direct_mapping_categories": [row.get("category") for row in split_rows],
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
+                **_mode_blocker("name_level_split_review_required"),
                 "notes": [
                     "Broad categories must be split by product-type keywords before any folder/category mapping.",
                     "Do not map an entire broad category such as acrylic or goods to one target folder.",
@@ -221,6 +267,7 @@ def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, 
                 "categories": [row.get("category") for row in direct_rows],
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
+                **_mode_blocker("direct_category_mapping_review"),
                 "notes": ["Only use after sample names match a single target goods type."],
             }
         )
@@ -240,6 +287,7 @@ def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, 
                 "template": "server/animation_category_name_split_confirmed_rows.template.json",
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
+                **_mode_blocker("unmatched_keyword_review"),
                 "notes": [
                     "Review product_type_like tokens first; add name-level split rules only when samples consistently match one goods type.",
                     "Treat series/source/store noise as exclusions, not category rules.",
@@ -290,6 +338,10 @@ def build_queue(
     all_rows = sum(int(row.get("rows") or 0) for row in rows)
     queued_rows = sum(int(row.get("rows") or 0) for row in queued)
     mapping_mode_counts = Counter(str(row.get("mapping_mode") or "") for row in rows)
+    blocked_reason_counts = Counter(str(row.get("blocked_reason") or "") for row in rows)
+    blocked_reason_counts.pop("", None)
+    blocked_until_counts = Counter(str(row.get("blocked_until") or "") for row in rows)
+    blocked_until_counts.pop("", None)
     unmatched_summary = (
         unmatched_keyword_review.get("summary")
         if isinstance(unmatched_keyword_review, dict)
@@ -308,6 +360,8 @@ def build_queue(
         "by_suggested_family": Counter(str(row.get("suggested_family") or "") for row in rows).most_common(),
         "by_color_group": Counter(str(row.get("suggested_color_group") or "neutral") for row in rows).most_common(),
         "by_mapping_mode": mapping_mode_counts.most_common(),
+        "by_blocked_reason": blocked_reason_counts.most_common(),
+        "by_blocked_until": blocked_until_counts.most_common(),
         "split_review_categories": sum(1 for row in rows if _requires_split_review(row)),
         "direct_mapping_categories": sum(1 for row in rows if not _requires_split_review(row)),
         "app_folder_color_count": int(app_visual_catalog.get("color_count") or 0),
@@ -349,6 +403,13 @@ def build_queue(
             "confirmed_queue": CONFIRMED_QUEUE,
             "import_tool": IMPORT_TOOL,
             "unblocks_when": UNBLOCKS_WHEN,
+            "blocked_until_default": "category_mapping_or_split_rules_manually_confirmed",
+            "required_evidence": [
+                "sample_names_match_target_product_type",
+                "broad_categories_split_before_mapping",
+                "folder_color_and_icon_exist_in_app_catalog",
+                "manual_confirmation_for_public_template_rows",
+            ],
             "reason": "Category mappings affect app navigation and user-facing folders.",
         },
         "instructions": [

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T08:28:40Z",
+  "generated_at": "2026-07-23T08:32:06Z",
   "summary": {
     "batch_count": 155,
     "max_published_batches": 160,
@@ -7155,7 +7155,13 @@
               "grid"
             ],
             "affected_catalog_rows": 108,
-            "blocked_until": "category_mapping_manually_confirmed",
+            "blocked_until": "name_level_split_rules_manually_confirmed",
+            "blocked_reason": "broad_source_category_requires_name_level_split",
+            "required_evidence": [
+              "sample_names_match_product_type_split_rules",
+              "broad_category_not_mapped_to_single_folder",
+              "confirmed_split_target_category_for_each_rule"
+            ],
             "review_evidence_required": [
               "sample_names_match_target_product_type",
               "broad_categories_are_split_before_mapping",
@@ -7166,7 +7172,14 @@
           "confirmed_queue": "server/animation_category_confirmed_rows.json",
           "import_tool": "tools/import_confirmed_animation_category_rows.py",
           "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "blocked_until": "name_level_split_rules_manually_confirmed",
+          "blocked_reason": "broad_source_category_requires_name_level_split",
+          "required_evidence": [
+            "sample_names_match_product_type_split_rules",
+            "broad_category_not_mapped_to_single_folder",
+            "confirmed_split_target_category_for_each_rule"
+          ]
         },
         {
           "category": "굿즈",
@@ -7224,7 +7237,13 @@
               "dashboard"
             ],
             "affected_catalog_rows": 280,
-            "blocked_until": "category_mapping_manually_confirmed",
+            "blocked_until": "name_level_split_rules_manually_confirmed",
+            "blocked_reason": "broad_source_category_requires_name_level_split",
+            "required_evidence": [
+              "sample_names_match_product_type_split_rules",
+              "broad_category_not_mapped_to_single_folder",
+              "confirmed_split_target_category_for_each_rule"
+            ],
             "review_evidence_required": [
               "sample_names_match_target_product_type",
               "broad_categories_are_split_before_mapping",
@@ -7235,7 +7254,14 @@
           "confirmed_queue": "server/animation_category_confirmed_rows.json",
           "import_tool": "tools/import_confirmed_animation_category_rows.py",
           "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "blocked_until": "name_level_split_rules_manually_confirmed",
+          "blocked_reason": "broad_source_category_requires_name_level_split",
+          "required_evidence": [
+            "sample_names_match_product_type_split_rules",
+            "broad_category_not_mapped_to_single_folder",
+            "confirmed_split_target_category_for_each_rule"
+          ]
         },
         {
           "category": "기타 굿즈",
@@ -7288,7 +7314,13 @@
               "dashboard"
             ],
             "affected_catalog_rows": 3,
-            "blocked_until": "category_mapping_manually_confirmed",
+            "blocked_until": "name_level_split_rules_manually_confirmed",
+            "blocked_reason": "broad_source_category_requires_name_level_split",
+            "required_evidence": [
+              "sample_names_match_product_type_split_rules",
+              "broad_category_not_mapped_to_single_folder",
+              "confirmed_split_target_category_for_each_rule"
+            ],
             "review_evidence_required": [
               "sample_names_match_target_product_type",
               "broad_categories_are_split_before_mapping",
@@ -7299,7 +7331,14 @@
           "confirmed_queue": "server/animation_category_confirmed_rows.json",
           "import_tool": "tools/import_confirmed_animation_category_rows.py",
           "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "blocked_until": "name_level_split_rules_manually_confirmed",
+          "blocked_reason": "broad_source_category_requires_name_level_split",
+          "required_evidence": [
+            "sample_names_match_product_type_split_rules",
+            "broad_category_not_mapped_to_single_folder",
+            "confirmed_split_target_category_for_each_rule"
+          ]
         }
       ],
       "review_summary": {

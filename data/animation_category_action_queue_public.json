@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T08:28:40Z",
+  "generated_at": "2026-07-23T08:32:06Z",
   "scope": "animation_category_action_queue",
   "summary": {
     "actionable_categories": 3,
@@ -33,6 +33,18 @@
     "by_mapping_mode": [
       [
         "name_level_split_review_required",
+        3
+      ]
+    ],
+    "by_blocked_reason": [
+      [
+        "broad_source_category_requires_name_level_split",
+        3
+      ]
+    ],
+    "by_blocked_until": [
+      [
+        "name_level_split_rules_manually_confirmed",
         3
       ]
     ],
@@ -2855,6 +2867,13 @@
       ],
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
+      "blocked_until": "name_level_split_rules_manually_confirmed",
+      "blocked_reason": "broad_source_category_requires_name_level_split",
+      "required_evidence": [
+        "sample_names_match_product_type_split_rules",
+        "broad_category_not_mapped_to_single_folder",
+        "confirmed_split_target_category_for_each_rule"
+      ],
       "notes": [
         "Broad categories must be split by product-type keywords before any folder/category mapping.",
         "Do not map an entire broad category such as acrylic or goods to one target folder."
@@ -3219,6 +3238,13 @@
       "template": "server/animation_category_name_split_confirmed_rows.template.json",
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
+      "blocked_until": "unmatched_keywords_classified_or_rejected",
+      "blocked_reason": "unmatched_product_type_keywords_need_review",
+      "required_evidence": [
+        "product_type_like_tokens_confirmed_with_samples",
+        "series_source_store_noise_tokens_rejected",
+        "new_split_rules_recorded_only_for_consistent_goods_types"
+      ],
       "notes": [
         "Review product_type_like tokens first; add name-level split rules only when samples consistently match one goods type.",
         "Treat series/source/store noise as exclusions, not category rules."
@@ -3338,7 +3364,13 @@
               "grid"
             ],
             "affected_catalog_rows": 108,
-            "blocked_until": "category_mapping_manually_confirmed",
+            "blocked_until": "name_level_split_rules_manually_confirmed",
+            "blocked_reason": "broad_source_category_requires_name_level_split",
+            "required_evidence": [
+              "sample_names_match_product_type_split_rules",
+              "broad_category_not_mapped_to_single_folder",
+              "confirmed_split_target_category_for_each_rule"
+            ],
             "review_evidence_required": [
               "sample_names_match_target_product_type",
               "broad_categories_are_split_before_mapping",
@@ -3349,7 +3381,14 @@
           "confirmed_queue": "server/animation_category_confirmed_rows.json",
           "import_tool": "tools/import_confirmed_animation_category_rows.py",
           "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "blocked_until": "name_level_split_rules_manually_confirmed",
+          "blocked_reason": "broad_source_category_requires_name_level_split",
+          "required_evidence": [
+            "sample_names_match_product_type_split_rules",
+            "broad_category_not_mapped_to_single_folder",
+            "confirmed_split_target_category_for_each_rule"
+          ]
         },
         {
           "category": "굿즈",
@@ -3407,7 +3446,13 @@
               "dashboard"
             ],
             "affected_catalog_rows": 280,
-            "blocked_until": "category_mapping_manually_confirmed",
+            "blocked_until": "name_level_split_rules_manually_confirmed",
+            "blocked_reason": "broad_source_category_requires_name_level_split",
+            "required_evidence": [
+              "sample_names_match_product_type_split_rules",
+              "broad_category_not_mapped_to_single_folder",
+              "confirmed_split_target_category_for_each_rule"
+            ],
             "review_evidence_required": [
               "sample_names_match_target_product_type",
               "broad_categories_are_split_before_mapping",
@@ -3418,7 +3463,14 @@
           "confirmed_queue": "server/animation_category_confirmed_rows.json",
           "import_tool": "tools/import_confirmed_animation_category_rows.py",
           "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "blocked_until": "name_level_split_rules_manually_confirmed",
+          "blocked_reason": "broad_source_category_requires_name_level_split",
+          "required_evidence": [
+            "sample_names_match_product_type_split_rules",
+            "broad_category_not_mapped_to_single_folder",
+            "confirmed_split_target_category_for_each_rule"
+          ]
         },
         {
           "category": "기타 굿즈",
@@ -3471,7 +3523,13 @@
               "dashboard"
             ],
             "affected_catalog_rows": 3,
-            "blocked_until": "category_mapping_manually_confirmed",
+            "blocked_until": "name_level_split_rules_manually_confirmed",
+            "blocked_reason": "broad_source_category_requires_name_level_split",
+            "required_evidence": [
+              "sample_names_match_product_type_split_rules",
+              "broad_category_not_mapped_to_single_folder",
+              "confirmed_split_target_category_for_each_rule"
+            ],
             "review_evidence_required": [
               "sample_names_match_target_product_type",
               "broad_categories_are_split_before_mapping",
@@ -3482,7 +3540,14 @@
           "confirmed_queue": "server/animation_category_confirmed_rows.json",
           "import_tool": "tools/import_confirmed_animation_category_rows.py",
           "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "blocked_until": "name_level_split_rules_manually_confirmed",
+          "blocked_reason": "broad_source_category_requires_name_level_split",
+          "required_evidence": [
+            "sample_names_match_product_type_split_rules",
+            "broad_category_not_mapped_to_single_folder",
+            "confirmed_split_target_category_for_each_rule"
+          ]
         }
       ]
     }
@@ -3495,6 +3560,13 @@
     "confirmed_queue": "server/animation_category_confirmed_rows.json",
     "import_tool": "tools/import_confirmed_animation_category_rows.py",
     "unblocks_when": "category_mapping_manually_confirmed",
+    "blocked_until_default": "category_mapping_or_split_rules_manually_confirmed",
+    "required_evidence": [
+      "sample_names_match_target_product_type",
+      "broad_categories_split_before_mapping",
+      "folder_color_and_icon_exist_in_app_catalog",
+      "manual_confirmation_for_public_template_rows"
+    ],
     "reason": "Category mappings affect app navigation and user-facing folders."
   },
   "instructions": [
