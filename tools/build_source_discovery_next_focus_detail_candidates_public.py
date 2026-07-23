@@ -159,6 +159,7 @@ def build_report(
     search = search_fn or _default_searcher()
     items: list[dict[str, Any]] = []
     candidate_confirmation_template: list[dict[str, Any]] = []
+    exact_candidate_confirmation_shortlist: list[dict[str, Any]] = []
     status_counts: Counter[str] = Counter()
     candidate_rows = 0
     items_with_candidates = 0
@@ -184,32 +185,41 @@ def build_report(
             status_counts["no_candidates_found" if fetch_status == "ok" else "candidate_fetch_error"] += 1
         for candidate in candidate_payload:
             status_counts[str(candidate.get("review_status") or "")] += 1
-            candidate_confirmation_template.append(
-                {
-                    "manual_confirmed": False,
-                    "manual_review_status": "not_started",
-                    "manual_note": "",
-                    "focus_pack_id": item.get("focus_pack_id"),
-                    "catalog_index": item.get("catalog_index"),
-                    "source_store": item.get("source_store"),
-                    "category": item.get("category"),
-                    "name_ko": item.get("name_ko"),
-                    "name_ja": item.get("name_ja"),
-                    "search_query": query,
-                    "candidate_rank": candidate.get("rank"),
-                    "candidate_review_status": candidate.get("review_status"),
-                    "candidate_title": candidate.get("candidate_title"),
-                    "candidate_source_url": candidate.get("candidate_source_url"),
-                    "candidate_image_url": candidate.get("candidate_image_url"),
-                    "manual_confirmed_source_url": "",
-                    "manual_confirmed_image_url": "",
-                    "evidence_url": candidate.get("candidate_source_url") or item.get("official_search_url"),
-                    "acceptance_criteria": (
-                        "confirm exact product title, character/variant, category, source page, and image identity"
-                    ),
-                    "blocked_until": "manual_confirmed_true",
-                }
-            )
+            template_row = {
+                "manual_confirmed": False,
+                "manual_review_status": "not_started",
+                "manual_note": "",
+                "focus_pack_id": item.get("focus_pack_id"),
+                "catalog_index": item.get("catalog_index"),
+                "source_store": item.get("source_store"),
+                "category": item.get("category"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "search_query": query,
+                "candidate_rank": candidate.get("rank"),
+                "candidate_review_status": candidate.get("review_status"),
+                "candidate_title": candidate.get("candidate_title"),
+                "candidate_source_url": candidate.get("candidate_source_url"),
+                "candidate_image_url": candidate.get("candidate_image_url"),
+                "manual_confirmed_source_url": "",
+                "manual_confirmed_image_url": "",
+                "evidence_url": candidate.get("candidate_source_url") or item.get("official_search_url"),
+                "acceptance_criteria": (
+                    "confirm exact product title, character/variant, category, source page, and image identity"
+                ),
+                "blocked_until": "manual_confirmed_true",
+            }
+            candidate_confirmation_template.append(template_row)
+            if candidate.get("review_status") == "exact_candidate_review":
+                exact_candidate_confirmation_shortlist.append(
+                    {
+                        **template_row,
+                        "shortlist_reason": "exact_candidate_gate_passed",
+                        "recommended_next_step": (
+                            "Open candidate_source_url and confirm the product image/variant before copying to manual_confirmed_* fields."
+                        ),
+                    }
+                )
         candidate_rows += len(candidate_payload)
         items.append(
             {
@@ -253,6 +263,7 @@ def build_report(
             "no_candidate_items": status_counts.get("no_candidates_found", 0),
             "candidate_fetch_error_items": status_counts.get("candidate_fetch_error", 0),
             "candidate_confirmation_template_rows": len(candidate_confirmation_template),
+            "exact_candidate_confirmation_shortlist_rows": len(exact_candidate_confirmation_shortlist),
             "candidate_confirmation_exact_review_rows": sum(
                 1
                 for row in candidate_confirmation_template
@@ -275,6 +286,7 @@ def build_report(
             "This report is candidate-only; it never mutates catalog data.",
         ],
         "items": items,
+        "exact_candidate_confirmation_shortlist": exact_candidate_confirmation_shortlist,
         "candidate_confirmation_template": candidate_confirmation_template,
         "automation_policy": {
             "auto_apply_source_url": False,

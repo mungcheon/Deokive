@@ -66,6 +66,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(report["summary"]["exact_candidate_review_rows"], 1)
         self.assertEqual(report["summary"]["no_candidate_items"], 1)
         self.assertEqual(report["summary"]["candidate_confirmation_template_rows"], 1)
+        self.assertEqual(report["summary"]["exact_candidate_confirmation_shortlist_rows"], 1)
         self.assertEqual(report["summary"]["candidate_confirmation_exact_review_rows"], 1)
         self.assertEqual(report["summary"]["candidate_confirmation_manual_confirmed_rows"], 0)
         first = report["items"][0]
@@ -85,6 +86,11 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             "https://www.animate-onlineshop.jp/pn/test/pd/1234567/",
         )
         self.assertEqual(template_row["manual_confirmed_source_url"], "")
+        shortlist_row = report["exact_candidate_confirmation_shortlist"][0]
+        self.assertEqual(shortlist_row["catalog_index"], 1)
+        self.assertEqual(shortlist_row["candidate_review_status"], "exact_candidate_review")
+        self.assertEqual(shortlist_row["shortlist_reason"], "exact_candidate_gate_passed")
+        self.assertIn("recommended_next_step", shortlist_row)
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 
     def test_candidate_row_explains_manual_review_blockers(self) -> None:
