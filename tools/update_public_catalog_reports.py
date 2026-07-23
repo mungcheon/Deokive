@@ -11,11 +11,15 @@ from typing import Any
 
 import audit_public_catalog_image_assets
 import build_catalog_missing_image_actionability_public
+import build_candidate_source_url_review_queue_public
+import build_gotouchi_official_candidate_review_queue_public
 import build_image_source_url_confirmed_template_public
 import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
+import build_manual_source_url_search_queue_public
 import build_missing_image_report_coverage_public
 import build_missing_image_priority_public
+import build_provider_missing_source_url_queue_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_pack_public
@@ -66,6 +70,7 @@ ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW = DATA / "ichiban_kuji_prize_name_image_re
 ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES = DATA / "ichiban_kuji_prize_name_image_patch_candidates_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT = DATA / "gotouchi_representative_image_attachment_public.json"
+GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE = DATA / "gotouchi_official_candidate_review_queue_public.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
 REQUESTED_FOCUS_REVIEW_BATCHES = DATA / "requested_focus_review_batches_public.json"
@@ -98,6 +103,9 @@ METADATA_ACTION_QUEUE = DATA / "catalog_metadata_action_queue_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 IMAGE_ATTACHMENT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
 IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE = DATA / "catalog_image_source_url_confirmed_template_public.json"
+MANUAL_SOURCE_URL_SEARCH_QUEUE = DATA / "catalog_manual_source_url_search_queue_public.json"
+PROVIDER_MISSING_SOURCE_URL_QUEUE = DATA / "catalog_provider_missing_source_url_queue_public.json"
+CANDIDATE_SOURCE_URL_REVIEW_QUEUE = DATA / "catalog_candidate_source_url_review_queue_public.json"
 IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE = DATA / "catalog_image_attachment_confirmed_template_public.json"
 IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN = DATA / "catalog_image_attachment_template_import_dry_run_public.json"
 MISSING_IMAGE_ACTIONABILITY = DATA / "catalog_missing_image_actionability_public.json"
@@ -5800,6 +5808,25 @@ def update_reports(write: bool) -> dict[str, Any]:
         load_json(STELLIVE_FANDING_CANDIDATES, {}) if STELLIVE_FANDING_CANDIDATES.exists() else None,
         generated_at=generated_at,
     )
+    manual_source_url_search_queue = build_manual_source_url_search_queue_public.build_queue(
+        image_source_url_confirmed_template,
+        generated_at=generated_at,
+    )
+    provider_missing_source_url_queue = build_provider_missing_source_url_queue_public.build_queue(
+        image_source_url_confirmed_template,
+        generated_at=generated_at,
+    )
+    candidate_source_url_review_queue = build_candidate_source_url_review_queue_public.build_queue(
+        image_source_url_confirmed_template,
+        generated_at=generated_at,
+    )
+    gotouchi_official_candidate_review_queue = (
+        build_gotouchi_official_candidate_review_queue_public.build_queue(
+            image_attachment_action_queue,
+            load_json(GOTOUCHI, {}) if GOTOUCHI.exists() else {"items": []},
+            generated_at=generated_at,
+        )
+    )
     source_discovery_focus_template = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {})
     source_discovery_focus_template_import = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
     source_discovery_next_focus_pack = build_source_discovery_next_focus_pack_public.build_report(
@@ -5989,6 +6016,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["gotouchi_representative_image_attachment"] = copy_report_summary(
                 GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT, "gotouchi_representative_image_attachment"
             )
+        target["gotouchi_official_candidate_review_queue"] = {
+            "public_report": f"data/{GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE.name}",
+            **gotouchi_official_candidate_review_queue["summary"],
+        }
         if REQUESTED.exists():
             target["requested_special_goods_review"] = copy_report_summary(REQUESTED, "requested")
         if GENERIC_SOURCE.exists():
@@ -6082,6 +6113,43 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["image_source_url_confirmed_template"] = {
             "public_report": f"data/{IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.name}",
             **image_source_url_confirmed_template["summary"],
+        }
+        target["manual_source_url_search_queue"] = {
+            "public_report": f"data/{MANUAL_SOURCE_URL_SEARCH_QUEUE.name}",
+            **manual_source_url_search_queue["summary"],
+        }
+        target["provider_missing_source_url_queue"] = {
+            "public_report": f"data/{PROVIDER_MISSING_SOURCE_URL_QUEUE.name}",
+            **provider_missing_source_url_queue["summary"],
+        }
+        target["candidate_source_url_review_queue"] = {
+            "public_report": f"data/{CANDIDATE_SOURCE_URL_REVIEW_QUEUE.name}",
+            **candidate_source_url_review_queue["summary"],
+        }
+        target["source_url_update_queue_split"] = {
+            "public_reports": [
+                f"data/{MANUAL_SOURCE_URL_SEARCH_QUEUE.name}",
+                f"data/{PROVIDER_MISSING_SOURCE_URL_QUEUE.name}",
+                f"data/{CANDIDATE_SOURCE_URL_REVIEW_QUEUE.name}",
+            ],
+            "source_url_update_required_rows": image_source_url_confirmed_template["summary"].get(
+                "template_items", 0
+            ),
+            "manual_search_required_rows": manual_source_url_search_queue["summary"].get(
+                "manual_search_required_rows", 0
+            ),
+            "provider_missing_rows": provider_missing_source_url_queue["summary"].get(
+                "provider_missing_rows", 0
+            ),
+            "candidate_review_rows": candidate_source_url_review_queue["summary"].get(
+                "candidate_review_rows", 0
+            ),
+            "covered_rows": (
+                manual_source_url_search_queue["summary"].get("manual_search_required_rows", 0)
+                + provider_missing_source_url_queue["summary"].get("provider_missing_rows", 0)
+                + candidate_source_url_review_queue["summary"].get("candidate_review_rows", 0)
+            ),
+            "auto_apply_enabled": False,
         }
         target["requested_focus_enrichment"] = {
             "public_report": f"data/{REQUESTED_FOCUS.name}",
@@ -6325,6 +6393,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority)
         write_json(MISSING_IMAGE_REPORT_COVERAGE, missing_image_report_coverage)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
+        write_json(MANUAL_SOURCE_URL_SEARCH_QUEUE, manual_source_url_search_queue)
+        write_json(PROVIDER_MISSING_SOURCE_URL_QUEUE, provider_missing_source_url_queue)
+        write_json(CANDIDATE_SOURCE_URL_REVIEW_QUEUE, candidate_source_url_review_queue)
+        write_json(GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE, gotouchi_official_candidate_review_queue)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, source_discovery_next_focus_detail_candidates)
@@ -6361,8 +6433,12 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ENSKY_SEARCH_PAGE_PROBE.relative_to(ROOT)),
             str(STELLIVE_FANDING_CANDIDATES.relative_to(ROOT)),
             str(GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.relative_to(ROOT)),
+            str(GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.relative_to(ROOT)),
+            str(MANUAL_SOURCE_URL_SEARCH_QUEUE.relative_to(ROOT)),
+            str(PROVIDER_MISSING_SOURCE_URL_QUEUE.relative_to(ROOT)),
+            str(CANDIDATE_SOURCE_URL_REVIEW_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.relative_to(ROOT)),

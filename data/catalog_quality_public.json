@@ -6326,6 +6326,7 @@
     "generic_source_url_rows": 50,
     "product_source_url_rows": 0,
     "high_priority_rows": 528,
+    "safe_existing_image_reuse_candidate_rows": 0,
     "auto_apply_enabled": false
   },
   "ensky_cache_coverage": {
@@ -6357,14 +6358,14 @@
     "creator_no": 3142,
     "products_fetched": 331,
     "api_errors": [],
-    "candidate_rows": 89,
-    "review_candidate_rows": 4,
+    "candidate_rows": 87,
+    "review_candidate_rows": 3,
     "missing_image_candidate_rows": 45,
     "missing_image_review_candidate_rows": 1,
     "candidate_status_counts": {
-      "low_confidence_candidate": 14,
+      "low_confidence_candidate": 13,
       "no_candidate": 71,
-      "weak_manual_review_candidate": 4
+      "weak_manual_review_candidate": 3
     },
     "missing_image_candidate_status_counts": {
       "low_confidence_candidate": 2,
@@ -6373,14 +6374,14 @@
     },
     "updated_rows": 0,
     "change_rows": 0,
-    "queue_rows": 89,
+    "queue_rows": 87,
     "missing_image_queue_rows": 45,
-    "review_queue_rows": 4,
+    "review_queue_rows": 3,
     "missing_image_review_queue_rows": 1,
     "candidate_review_lane_counts": {
-      "low_confidence_candidate_review": 14,
+      "low_confidence_candidate_review": 13,
       "manual_search_required": 71,
-      "weak_candidate_review": 4
+      "weak_candidate_review": 3
     },
     "missing_image_candidate_review_lane_counts": {
       "low_confidence_candidate_review": 2,
@@ -7072,7 +7073,7 @@
         1
       ]
     ],
-    "candidate_prefilled_rows": 3,
+    "candidate_prefilled_rows": 0,
     "by_candidate_status": [
       [
         "no_candidate",
@@ -7279,6 +7280,181 @@
         16
       ]
     ],
+    "auto_apply_enabled": false
+  },
+  "gotouchi_official_candidate_review_queue": {
+    "public_report": "data/gotouchi_official_candidate_review_queue_public.json",
+    "review_rows": 23,
+    "workstream_count": 3,
+    "by_candidate_status": [
+      [
+        "motif_only_type_mismatch",
+        16
+      ],
+      [
+        "no_official_candidate",
+        6
+      ],
+      [
+        "rejected_visual_mismatch",
+        1
+      ]
+    ],
+    "by_category": [
+      [
+        "마스코트",
+        12
+      ],
+      [
+        "아크릴 키링",
+        4
+      ],
+      [
+        "타월",
+        3
+      ],
+      [
+        "마그넷",
+        2
+      ],
+      [
+        "캔뱃지",
+        2
+      ]
+    ],
+    "by_character_name": [],
+    "with_candidate_options": 17,
+    "without_candidate_options": 6,
+    "manual_confirmed_true": 0,
+    "auto_apply_enabled": false
+  },
+  "manual_source_url_search_queue": {
+    "public_report": "data/catalog_manual_source_url_search_queue_public.json",
+    "manual_search_required_rows": 42,
+    "workstream_count": 5,
+    "by_source_store": [
+      [
+        "Stellive Store",
+        42
+      ]
+    ],
+    "by_category": [
+      [
+        "액세서리",
+        16
+      ],
+      [
+        "인형",
+        14
+      ],
+      [
+        "아크릴 스탠드",
+        10
+      ],
+      [
+        "머그컵",
+        1
+      ],
+      [
+        "의류",
+        1
+      ]
+    ],
+    "with_store_search_url": 42,
+    "with_site_query": 42,
+    "auto_apply_enabled": false
+  },
+  "provider_missing_source_url_queue": {
+    "public_report": "data/catalog_provider_missing_source_url_queue_public.json",
+    "provider_missing_rows": 5,
+    "workstream_count": 2,
+    "by_source_store": [
+      [
+        "Weverse Shop",
+        3
+      ],
+      [
+        "포켓몬 센터",
+        2
+      ]
+    ],
+    "by_category": [
+      [
+        "포토카드",
+        3
+      ],
+      [
+        "인형",
+        1
+      ],
+      [
+        "트레이딩 카드",
+        1
+      ]
+    ],
+    "with_store_search_url": 5,
+    "with_site_query": 5,
+    "auto_apply_enabled": false
+  },
+  "candidate_source_url_review_queue": {
+    "public_report": "data/catalog_candidate_source_url_review_queue_public.json",
+    "candidate_review_rows": 3,
+    "workstream_count": 2,
+    "by_source_url_review_lane": [
+      [
+        "low_confidence_candidate_review",
+        2
+      ],
+      [
+        "weak_candidate_review",
+        1
+      ]
+    ],
+    "by_candidate_status": [
+      [
+        "low_confidence_candidate",
+        2
+      ],
+      [
+        "weak_manual_review_candidate",
+        1
+      ]
+    ],
+    "by_source_store": [
+      [
+        "Stellive Store",
+        3
+      ]
+    ],
+    "by_category": [
+      [
+        "캔뱃지",
+        1
+      ],
+      [
+        "액세서리",
+        1
+      ],
+      [
+        "아크릴 스탠드",
+        1
+      ]
+    ],
+    "with_candidate_options": 3,
+    "with_store_search_url": 3,
+    "auto_apply_enabled": false
+  },
+  "source_url_update_queue_split": {
+    "public_reports": [
+      "data/catalog_manual_source_url_search_queue_public.json",
+      "data/catalog_provider_missing_source_url_queue_public.json",
+      "data/catalog_candidate_source_url_review_queue_public.json"
+    ],
+    "source_url_update_required_rows": 50,
+    "manual_search_required_rows": 42,
+    "provider_missing_rows": 5,
+    "candidate_review_rows": 3,
+    "covered_rows": 50,
     "auto_apply_enabled": false
   }
 }
