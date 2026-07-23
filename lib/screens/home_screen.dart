@@ -328,13 +328,13 @@ class _CatalogImportPanel extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '전체 DB에서 검색하고, 고른 항목을 내 굿즈함이나 위시리스트에 바로 추가해요.',
-            maxLines: 3,
+            '전체 DB에서 검색한 뒤 내 굿즈함이나 위시리스트에 바로 추가할 수 있어요.',
+            maxLines: 4,
             softWrap: true,
             overflow: TextOverflow.ellipsis,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
-              height: 1.35,
+              height: 1.42,
               fontWeight: FontWeight.w600,
             ),
           ),

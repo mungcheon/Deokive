@@ -48,6 +48,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["candidate_action_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertEqual(report["summary"]["safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["summary"]["identity_safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["summary"]["identity_blocked_source_image_pair_rows"], 0)
         self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 1)
         self.assertEqual(report["summary"]["priority_manual_review_candidate_rows"], 1)
         self.assertEqual(
@@ -76,6 +78,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["candidate_identity_flags"], [])
         self.assertTrue(item["manual_confirmation_shortlist"])
         self.assertTrue(item["priority_manual_review_candidate"])
+        self.assertTrue(item["identity_safe_source_image_pair"])
         self.assertEqual(item["review_priority"], 20)
         self.assertEqual(item["recommended_action"], "priority_manual_confirm_source_and_image_patch")
         self.assertEqual(report["priority_manual_review_candidates"][0]["catalog_index"], 7)
@@ -84,6 +87,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
             "priority_manual_confirm_source_and_image_patch",
         )
         self.assertEqual(report["batches"][0]["safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["batches"][0]["identity_safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["batches"][0]["identity_blocked_source_image_pair_rows"], 0)
         self.assertEqual(report["batches"][0]["manual_confirmation_shortlist_rows"], 1)
         self.assertEqual(report["batches"][0]["priority_manual_review_candidate_rows"], 1)
         self.assertEqual(item["current_catalog_state"]["catalog_match_found"], True)
@@ -179,6 +184,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
 
         self.assertEqual(report["summary"]["identity_warning_rows"], 2)
+        self.assertEqual(report["summary"]["identity_safe_source_image_pair_rows"], 0)
+        self.assertEqual(report["summary"]["identity_blocked_source_image_pair_rows"], 2)
         self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 0)
         self.assertEqual(report["summary"]["priority_manual_review_candidate_rows"], 0)
         self.assertEqual(report["priority_manual_review_candidates"], [])
@@ -194,6 +201,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         )
         items = {item["catalog_index"]: item for batch in report["batches"] for item in batch["items"]}
         self.assertEqual(items[3]["candidate_identity_flags"], ["only_generic_shared_tokens"])
+        self.assertFalse(items[3]["identity_safe_source_image_pair"])
         self.assertEqual(items[3]["review_priority"], 35)
         self.assertEqual(items[3]["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
         self.assertEqual(
@@ -205,6 +213,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
             ],
         )
         self.assertEqual(items[4]["review_priority"], 35)
+        self.assertFalse(items[4]["identity_safe_source_image_pair"])
         self.assertEqual(items[4]["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
 
     def test_build_report_flags_product_type_and_bundle_mismatches(self) -> None:
@@ -239,6 +248,9 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
 
         item = report["batches"][0]["items"][0]
         self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 0)
+        self.assertEqual(report["summary"]["identity_safe_source_image_pair_rows"], 0)
+        self.assertEqual(report["summary"]["identity_blocked_source_image_pair_rows"], 1)
+        self.assertFalse(item["identity_safe_source_image_pair"])
         self.assertIn("candidate_title_product_type_mismatch", item["candidate_identity_flags"])
         self.assertIn("candidate_title_multi_variant_or_bundle", item["candidate_identity_flags"])
         self.assertEqual(item["review_priority"], 35)
@@ -281,8 +293,11 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(item["manual_confirmation_shortlist"])
         self.assertTrue(item["candidate_count_review_required"])
         self.assertTrue(item["priority_manual_review_candidate"])
+        self.assertTrue(item["identity_safe_source_image_pair"])
         self.assertEqual(item["recommended_action"], "review_large_candidate_set_before_source_or_image_patch")
         self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 0)
+        self.assertEqual(report["summary"]["identity_safe_source_image_pair_rows"], 1)
+        self.assertEqual(report["summary"]["identity_blocked_source_image_pair_rows"], 0)
         self.assertEqual(report["summary"]["candidate_count_review_required_rows"], 1)
         self.assertEqual(report["summary"]["priority_manual_review_candidate_rows"], 1)
         self.assertEqual(report["priority_manual_review_candidates"][0]["catalog_index"], 6)

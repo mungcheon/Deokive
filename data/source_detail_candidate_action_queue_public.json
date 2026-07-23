@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T10:19:00Z",
+  "generated_at": "2026-07-23T14:37:26Z",
   "scope": "source_detail_candidate_action_queue",
   "summary": {
     "candidate_action_rows": 15,
@@ -8,6 +8,8 @@
     "batch_size": 10,
     "manual_confirmed_true": 0,
     "safe_source_image_pair_rows": 15,
+    "identity_safe_source_image_pair_rows": 1,
+    "identity_blocked_source_image_pair_rows": 14,
     "manual_confirmation_shortlist_rows": 0,
     "candidate_count_review_required_rows": 1,
     "priority_manual_review_candidate_rows": 1,
@@ -109,6 +111,7 @@
     "Rows may contain related products; wrong character or variant candidates must remain unconfirmed.",
     "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image.",
     "candidate_identity_flags highlight high-risk title matches such as generic-only shared tokens, crossovers, or missing variant hints.",
+    "safe_source_image_pair_rows only means the candidate source/image URL pair passed URL safety checks; identity_safe_source_image_pair_rows additionally requires matching current catalog identity, no display image, and no title identity flags.",
     "candidate_count_review_required means the best candidate scored highly, but the source returned many candidates; confirm against the source page before importing."
   ],
   "priority_manual_review_candidates": [
@@ -196,6 +199,8 @@
         ]
       ],
       "safe_source_image_pair_rows": 10,
+      "identity_safe_source_image_pair_rows": 1,
+      "identity_blocked_source_image_pair_rows": 9,
       "manual_confirmation_shortlist_rows": 0,
       "candidate_count_review_required_rows": 1,
       "priority_manual_review_candidate_rows": 1,
@@ -267,7 +272,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": true,
-          "priority_manual_review_candidate": true
+          "priority_manual_review_candidate": true,
+          "identity_safe_source_image_pair": true
         },
         {
           "manual_confirmed": false,
@@ -339,7 +345,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -410,7 +417,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -481,7 +489,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -552,7 +561,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -623,7 +633,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -694,7 +705,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -765,7 +777,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -837,7 +850,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -908,7 +922,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         }
       ],
       "auto_apply_enabled": false
@@ -947,6 +962,8 @@
         ]
       ],
       "safe_source_image_pair_rows": 5,
+      "identity_safe_source_image_pair_rows": 0,
+      "identity_blocked_source_image_pair_rows": 5,
       "manual_confirmation_shortlist_rows": 0,
       "candidate_count_review_required_rows": 0,
       "priority_manual_review_candidate_rows": 0,
@@ -1021,7 +1038,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -1093,7 +1111,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -1164,7 +1183,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -1235,7 +1255,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         },
         {
           "manual_confirmed": false,
@@ -1305,7 +1326,8 @@
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
           "candidate_count_review_required": false,
-          "priority_manual_review_candidate": false
+          "priority_manual_review_candidate": false,
+          "identity_safe_source_image_pair": false
         }
       ],
       "auto_apply_enabled": false

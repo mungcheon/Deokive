@@ -51,15 +51,15 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   if (destination == null || !context.mounted) return false;
 
   try {
-    // DB imports should feel instant. Keep the catalog image reference instead
-    // of waiting on asset/network bytes; the image widget resolves that
-    // reference on demand in web/native builds.
+    final imageBytes = await loadCatalogEntryImageBytes(entry);
+    if (!context.mounted) return false;
     final item = goodsItemFromCatalogEntry(
       appState: appState,
       entry: entry,
       folder: destination.folder,
       addToWishlist: destination.addToWishlist,
       wishlistTargetFolder: destination.wishlistTargetFolder,
+      imageBytes: imageBytes,
     );
     appState.addGoods(item);
   } catch (error) {

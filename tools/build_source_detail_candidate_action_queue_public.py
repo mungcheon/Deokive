@@ -287,6 +287,16 @@ def priority_manual_review_candidate(item: dict[str, Any]) -> bool:
     return small_candidate_ready or candidate_count_review_required(item)
 
 
+def identity_safe_source_image_pair(item: dict[str, Any]) -> bool:
+    catalog_state = item.get("current_catalog_state") or {}
+    return bool(
+        item.get("safe_source_image_pair") is True
+        and catalog_state.get("catalog_identity_matches") is True
+        and catalog_state.get("catalog_has_display_image") is False
+        and not item.get("candidate_identity_flags")
+    )
+
+
 def current_catalog_state(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
     try:
         index = int(row.get("catalog_index"))
@@ -377,6 +387,7 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
     item["manual_confirmation_shortlist"] = manual_confirmation_shortlist(item)
     item["candidate_count_review_required"] = candidate_count_review_required(item)
     item["priority_manual_review_candidate"] = priority_manual_review_candidate(item)
+    item["identity_safe_source_image_pair"] = identity_safe_source_image_pair(item)
     if catalog_state.get("catalog_has_display_image"):
         item["recommended_action"] = "skip_current_catalog_row_already_has_display_image"
     elif catalog_state.get("stale_candidate"):
@@ -429,6 +440,15 @@ def build_report(
                 "by_review_risk": counter_rows(chunk, "review_risk"),
                 "by_candidate_count_bucket": counter_rows(chunk, "candidate_count_bucket"),
                 "safe_source_image_pair_rows": sum(1 for item in chunk if item.get("safe_source_image_pair") is True),
+                "identity_safe_source_image_pair_rows": sum(
+                    1 for item in chunk if item.get("identity_safe_source_image_pair") is True
+                ),
+                "identity_blocked_source_image_pair_rows": sum(
+                    1
+                    for item in chunk
+                    if item.get("safe_source_image_pair") is True
+                    and item.get("identity_safe_source_image_pair") is not True
+                ),
                 "manual_confirmation_shortlist_rows": sum(
                     1 for item in chunk if item.get("manual_confirmation_shortlist") is True
                 ),
@@ -473,6 +493,15 @@ def build_report(
             "batch_size": batch_size,
             "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
             "safe_source_image_pair_rows": sum(1 for item in items if item.get("safe_source_image_pair") is True),
+            "identity_safe_source_image_pair_rows": sum(
+                1 for item in items if item.get("identity_safe_source_image_pair") is True
+            ),
+            "identity_blocked_source_image_pair_rows": sum(
+                1
+                for item in items
+                if item.get("safe_source_image_pair") is True
+                and item.get("identity_safe_source_image_pair") is not True
+            ),
             "manual_confirmation_shortlist_rows": sum(
                 1 for item in items if item.get("manual_confirmation_shortlist") is True
             ),
@@ -543,6 +572,7 @@ def build_report(
             "Rows may contain related products; wrong character or variant candidates must remain unconfirmed.",
             "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image.",
             "candidate_identity_flags highlight high-risk title matches such as generic-only shared tokens, crossovers, or missing variant hints.",
+            "safe_source_image_pair_rows only means the candidate source/image URL pair passed URL safety checks; identity_safe_source_image_pair_rows additionally requires matching current catalog identity, no display image, and no title identity flags.",
             "candidate_count_review_required means the best candidate scored highly, but the source returned many candidates; confirm against the source page before importing.",
         ],
         "priority_manual_review_candidates": priority_review_candidates,
