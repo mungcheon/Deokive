@@ -197,6 +197,25 @@ void main() {
     );
   });
 
+  test('catalog import can skip remote image byte downloads for storage',
+      () async {
+    const entry = GoodsCatalogEntry(
+      nameKo: 'Remote-only catalog item',
+      category: 'figure',
+      characterName: 'sample',
+      sourceStore: 'official store',
+      imageUrl: 'https://example.com/catalog/source.jpg',
+    );
+
+    final imageBytes = await loadCatalogEntryImageBytes(
+      entry,
+      includeRemote: false,
+    );
+
+    expect(imageBytes, isNull);
+    expect(catalogEntryImageReference(entry), entry.imageUrl);
+  });
+
   test('catalog import can load a bundled catalog image for saving', () async {
     const entry = GoodsCatalogEntry(
       nameKo: 'Image catalog item',

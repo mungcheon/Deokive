@@ -51,7 +51,10 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   if (destination == null || !context.mounted) return false;
 
   try {
-    final imageBytes = await loadCatalogEntryImageBytes(entry);
+    final imageBytes = await loadCatalogEntryImageBytes(
+      entry,
+      includeRemote: false,
+    );
     if (!context.mounted) return false;
     final item = goodsItemFromCatalogEntry(
       appState: appState,
@@ -613,9 +616,14 @@ DateTime? _parseCatalogReleaseDate(String? raw) {
       DateTime.tryParse('$value-01-01');
 }
 
-Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
+Future<Uint8List?> loadCatalogEntryImageBytes(
+  GoodsCatalogEntry entry, {
+  bool includeRemote = true,
+}) async {
   final localBytes = await loadCatalogEntryBundledImageBytes(entry);
   if (localBytes != null) return localBytes;
+
+  if (!includeRemote) return null;
 
   var url = entry.imageUrl?.trim() ?? '';
   if (url.isEmpty) return null;

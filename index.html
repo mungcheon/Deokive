@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <base href="/">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="?뺤쭏 而щ젆?섏쓣 湲곕줉?섍퀬 ?뺣━?섎뒗 ?뺤뭅?대툕, Deokive">
+  <meta name="description" content="덕질 컬렉션을 기록하고 정리하는 덕카이브, Deokive">
   <meta name="theme-color" content="#f7c9d9">
   <meta name="deokive-build" content="20260723-index-refresh1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
   <meta name="apple-mobile-web-app-title" content="Deokive">
   <meta name="mobile-web-app-capable" content="yes">
   <meta property="og:title" content="Deokive">
-  <meta property="og:description" content="?뺤쭏 而щ젆?섏쓣 湲곕줉?섍퀬 ?뺣━?섎뒗 ?뺤뭅?대툕">
+  <meta property="og:description" content="덕질 컬렉션을 기록하고 정리하는 덕카이브">
   <meta property="og:type" content="website">
   <link rel="apple-touch-icon" href="icons/Icon-192.png?v=20260722c">
   <link rel="icon" type="image/png" href="favicon.png?v=20260722c">
@@ -159,15 +159,15 @@
   <div class="app-loading" id="app-loading" role="status" aria-live="polite">
     <section class="app-loading__phone" aria-label="Deokive loading">
       <div class="app-loading__logo">D</div>
-      <h1 id="app-loading-title">?뺤뭅?대툕 ?щ뒗 以?/h1>
+      <h1 id="app-loading-title">덕카이브 여는 중</h1>
       <p id="app-loading-body">
-        ?붾㈃??以鍮꾪븯怨??덉뼱??<br>
-        ?좎떆留?湲곕떎??二쇱꽭??
+        화면을 준비하고 있어요.<br>
+        잠시만 기다려 주세요.
       </p>
       <div class="app-loading__eta" id="app-loading-eta" hidden></div>
       <div class="app-loading__bar" aria-hidden="true"></div>
       <div class="app-loading__note" id="app-loading-note">
-        ?붾㈃???ㅻ옒 硫덉떠 ?덉쑝硫??덈줈怨좎묠??二쇱꽭??
+        화면이 오래 멈춰 있으면 새로고침해 주세요.
       </div>
     </section>
   </div>
@@ -193,7 +193,7 @@
     window.deokiveLoadingFailed = function () {
       const note = document.getElementById('app-loading-note');
       if (!note) return;
-      note.textContent = '???뚯씪??遺덈윭?ㅼ? 紐삵뻽?댁슂. ?좎떆 ???덈줈怨좎묠?섎㈃ ?ㅼ떆 ?대┰?덈떎.';
+      note.textContent = '앱 파일을 불러오지 못했어요. 잠시 후 새로고침하면 다시 열립니다.';
     };
     window.addEventListener('flutter-first-frame', function () {
       if (window.deokiveHoldLoadingScreen) return;
@@ -204,7 +204,7 @@
       if (window.deokiveHoldLoadingScreen) return;
       const note = document.getElementById('app-loading-note');
       if (!note) return;
-      note.textContent = '濡쒕뵫??湲몄뼱吏怨??덉뼱?? 1遺꾩씠 吏?섎룄 洹몃?濡쒕㈃ ?덈줈怨좎묠??二쇱꽭??';
+      note.textContent = '로딩이 길어지고 있어요. 1분이 지나도 그대로면 새로고침해 주세요.';
     }, 45000);
     async function deokiveLoadSiteStatus() {
       try {
@@ -222,7 +222,7 @@
     }
     function deokiveStartFlutter() {
       const script = document.createElement('script');
-      script.src = 'flutter_bootstrap.js?v=20260724-home-db-panel1';
+      script.src = 'flutter_bootstrap.js?v=20260723-imagefix7';
       script.async = true;
       script.onerror = function () {
         window.deokiveLoadingFailed && window.deokiveLoadingFailed();
@@ -234,20 +234,20 @@
       if (mode === 'notice') {
         window.deokiveHoldLoadingScreen = true;
         deokiveSetLoadingCopy({
-          title: '怨??낅뜲?댄듃媛 ?쒖옉?쇱슂',
-          body: '1遺????낅뜲?댄듃瑜??쒖옉?⑸땲??<br>?묒뾽 以묒씠?쇰㈃ 醫낅즺 遺?곷뱶?ㅼ슂.',
-          eta: status.eta || '?낅뜲?댄듃 ?쒖옉 1遺???,
-          note: status.message || '?좎떆 ????踰꾩쟾?쇰줈 援먯껜?⑸땲??',
+          title: '곧 업데이트가 시작돼요',
+          body: '1분 뒤 업데이트를 시작합니다.<br>작업 중이라면 종료 부탁드려요.',
+          eta: status.eta || '업데이트 시작 1분 전',
+          note: status.message || '잠시 후 새 버전으로 교체됩니다.',
         });
         return;
       }
       if (mode === 'updating') {
         window.deokiveHoldLoadingScreen = true;
         deokiveSetLoadingCopy({
-          title: '吏湲??낅뜲?댄듃 以묒씠?먯슂',
-          body: '?깃낵 DB瑜?諛섏쁺?섍퀬 ?덉뼱??<br>?좎떆 ???ㅼ떆 ?묒냽??二쇱꽭??',
-          eta: status.eta || '?덉긽 ?낅뜲?댄듃 ?쒓컙 5-15遺?,
-          note: status.message || 'GitHub Pages 諛섏쁺???앸굹硫??ㅼ떆 ?대┰?덈떎.',
+          title: '지금 업데이트 중이에요',
+          body: '앱과 DB를 반영하고 있어요.<br>잠시 후 다시 접속해 주세요.',
+          eta: status.eta || '예상 업데이트 시간 5-15분',
+          note: status.message || 'GitHub Pages 반영이 끝나면 다시 열립니다.',
         });
         return;
       }
