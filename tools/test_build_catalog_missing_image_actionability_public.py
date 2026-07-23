@@ -383,6 +383,25 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         )
         self.assertFalse(work_order[0]["auto_apply_enabled"])
         self.assertTrue(work_order[0]["manual_confirmation_required"])
+        execution_queue = report["execution_queue_summary"]
+        self.assertEqual(execution_queue["not_yet_queued_rows"], 0)
+        self.assertEqual(execution_queue["unqueued_phase_rows_total"], 0)
+        self.assertGreater(execution_queue["overlay_queue_rows"], 0)
+        phase_breakdown = {
+            row["phase_id"]: row for row in execution_queue["phase_queue_breakdown"]
+        }
+        self.assertEqual(
+            phase_breakdown["complete_source_discovery_focus_packs"][
+                "direct_queue_lane"
+            ],
+            "discover_exact_source_urls",
+        )
+        self.assertEqual(
+            phase_breakdown["complete_source_discovery_focus_packs"][
+                "remaining_rows"
+            ],
+            0,
+        )
 
     def test_work_order_falls_back_to_source_discovery_readiness_when_focus_pack_is_empty(self) -> None:
         enrichment = {

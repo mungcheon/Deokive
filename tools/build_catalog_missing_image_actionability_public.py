@@ -870,6 +870,46 @@ def build_execution_queue_summary(
 
     open_missing_image_rows = int(summary.get("missing_image_rows") or 0)
     queued_rows_total = sum(int(queue.get("row_count") or 0) for queue in queues)
+    phase_queue_breakdown = build_phase_queue_breakdown(completion_plan, queues)
+    unqueued_phase_rows_total = sum(
+        int(row.get("remaining_rows") or 0) for row in phase_queue_breakdown
+    )
+    phase_linked_lanes = {
+        str(row.get("direct_queue_lane") or "")
+        for row in phase_queue_breakdown
+        if row.get("direct_queue_lane")
+    }
+    overlay_queue_rows = sum(
+        int(queue.get("row_count") or 0)
+        for queue in queues
+        if str(queue.get("lane") or "") not in phase_linked_lanes
+    )
+    not_yet_queued_rows = max(0, open_missing_image_rows - queued_rows_total)
+    unqueued_rows_breakdown = [
+        {
+            "bucket": "later_source_discovery_backlog",
+            "phase_id": row.get("phase_id"),
+            "phase_row_count": row.get("row_count"),
+            "direct_queue_lane": row.get("direct_queue_lane"),
+            "directly_queued_rows": row.get("queued_rows"),
+            "remaining_phase_rows": row.get("remaining_rows"),
+            "offset_by_overlay_queue_rows": overlay_queue_rows,
+            "reported_not_yet_queued_rows": max(
+                0, int(row.get("remaining_rows") or 0) - overlay_queue_rows
+            ),
+            "next_step": row.get("next_step"),
+            "blocked_reason": row.get("blocked_reason"),
+            "explanation": (
+                "These rows are outside the current focused source-discovery "
+                "pack. Overlay candidate recheck queues may cover some of the "
+                "same catalog rows, so the displayed not_yet_queued_rows is "
+                "remaining_phase_rows minus overlay_queue_rows."
+            ),
+        }
+        for row in phase_queue_breakdown
+        if str(row.get("phase_id") or "") == "triage_remaining_source_discovery_backlog"
+        and int(row.get("remaining_rows") or 0) > 0
+    ]
     next_queue = queues[0] if queues else {}
     return {
         "open_missing_image_rows": open_missing_image_rows,
@@ -877,10 +917,18 @@ def build_execution_queue_summary(
         + int(summary.get("source_detail_ready_unflagged_candidate_rows") or 0),
         "queue_count": len(queues),
         "queued_rows_total": queued_rows_total,
-        "not_yet_queued_rows": max(0, open_missing_image_rows - queued_rows_total),
+        "not_yet_queued_rows": not_yet_queued_rows,
+        "not_yet_queued_rows_explained": sum(
+            int(row.get("reported_not_yet_queued_rows") or 0)
+            for row in unqueued_rows_breakdown
+        ),
+        "unqueued_phase_rows_total": unqueued_phase_rows_total,
+        "overlay_queue_rows": overlay_queue_rows,
         "completion_plan_status": completion_plan.get("status"),
         "next_queue": next_queue,
         "queues": queues,
+        "phase_queue_breakdown": phase_queue_breakdown,
+        "unqueued_rows_breakdown": unqueued_rows_breakdown,
         "operator_note": (
             "Work queues are dry-run safe. Fill the listed confirmation template only "
             "after exact product identity, source URL, and image evidence are verified."
@@ -891,6 +939,44 @@ def build_execution_queue_summary(
             "reason": "Every open image row still needs source/product/image identity evidence.",
         },
     }
+
+
+def build_phase_queue_breakdown(
+    completion_plan: dict[str, Any],
+    queues: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    phase_to_lane = {
+        "replace_generic_source_urls": "replace_generic_source_urls",
+        "review_representative_images": "review_representative_images",
+        "complete_source_discovery_focus_packs": "discover_exact_source_urls",
+        "manual_nonstandard_image_research": "manual_image_research",
+    }
+    queue_rows_by_lane = {
+        str(queue.get("lane") or ""): int(queue.get("row_count") or 0)
+        for queue in queues
+    }
+    rows: list[dict[str, Any]] = []
+    for phase in completion_plan.get("phases") or []:
+        if not isinstance(phase, dict):
+            continue
+        phase_id = str(phase.get("phase_id") or "")
+        lane = phase_to_lane.get(phase_id)
+        row_count = int(phase.get("row_count") or 0)
+        queued_rows = queue_rows_by_lane.get(lane or "", 0)
+        rows.append(
+            {
+                "phase_id": phase_id,
+                "row_count": row_count,
+                "direct_queue_lane": lane,
+                "queued_rows": min(row_count, queued_rows),
+                "remaining_rows": max(0, row_count - queued_rows),
+                "next_step": phase.get("next_step"),
+                "blocked_reason": phase.get("blocked_reason"),
+                "source": phase.get("source"),
+                "template": phase.get("template"),
+            }
+        )
+    return rows
 
 
 def source_detail_items(source_detail_queue: dict[str, Any] | None) -> list[dict[str, Any]]:

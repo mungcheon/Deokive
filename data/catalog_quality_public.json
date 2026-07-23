@@ -7088,6 +7088,9 @@
       "queue_count": 5,
       "queued_rows_total": 507,
       "not_yet_queued_rows": 203,
+      "not_yet_queued_rows_explained": 203,
+      "unqueued_phase_rows_total": 215,
+      "overlay_queue_rows": 12,
       "completion_plan_status": "balanced",
       "next_queue": {
         "rank": 3,
@@ -7191,6 +7194,78 @@
             "image_url_source_explained",
             "manual_note_for_nonstandard_source"
           ]
+        }
+      ],
+      "phase_queue_breakdown": [
+        {
+          "phase_id": "replace_generic_source_urls",
+          "row_count": 50,
+          "direct_queue_lane": "replace_generic_source_urls",
+          "queued_rows": 50,
+          "remaining_rows": 0,
+          "next_step": "replace_generic_source_url_then_extract_image",
+          "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+          "source": "catalog_image_attachment_action_queue_public.json",
+          "template": "catalog_image_attachment_confirmed_template_public.json"
+        },
+        {
+          "phase_id": "review_representative_images",
+          "row_count": 23,
+          "direct_queue_lane": "review_representative_images",
+          "queued_rows": 23,
+          "remaining_rows": 0,
+          "next_step": "confirm_exact_product_type_then_attach_image",
+          "blocked_reason": "representative_image_requires_product_type_review",
+          "source": "catalog_image_attachment_action_queue_public.json",
+          "template": "catalog_image_attachment_confirmed_template_public.json"
+        },
+        {
+          "phase_id": "complete_source_discovery_focus_packs",
+          "row_count": 417,
+          "direct_queue_lane": "discover_exact_source_urls",
+          "queued_rows": 417,
+          "remaining_rows": 0,
+          "next_step": "fill_source_discovery_focus_confirmed_template",
+          "blocked_reason": "missing_exact_source_url",
+          "source": "source_discovery_focus_packs_public.json",
+          "template": "source_discovery_focus_confirmed_template_public.json"
+        },
+        {
+          "phase_id": "triage_remaining_source_discovery_backlog",
+          "row_count": 215,
+          "direct_queue_lane": null,
+          "queued_rows": 0,
+          "remaining_rows": 215,
+          "next_step": "promote_next_store_groups_into_focus_packs",
+          "blocked_reason": "missing_exact_source_url",
+          "source": "source_discovery_action_queue_public.json",
+          "template": "source_discovery_focus_confirmed_template_public.json"
+        },
+        {
+          "phase_id": "manual_nonstandard_image_research",
+          "row_count": 5,
+          "direct_queue_lane": "manual_image_research",
+          "queued_rows": 5,
+          "remaining_rows": 0,
+          "next_step": "manual_official_source_and_image_evidence_recorded",
+          "blocked_reason": "structured_source_discovery_not_available",
+          "source": "catalog_image_enrichment_batches_public.json",
+          "template": "manual_image_source_discovery_public.json"
+        }
+      ],
+      "unqueued_rows_breakdown": [
+        {
+          "bucket": "later_source_discovery_backlog",
+          "phase_id": "triage_remaining_source_discovery_backlog",
+          "phase_row_count": 215,
+          "direct_queue_lane": null,
+          "directly_queued_rows": 0,
+          "remaining_phase_rows": 215,
+          "offset_by_overlay_queue_rows": 12,
+          "reported_not_yet_queued_rows": 203,
+          "next_step": "promote_next_store_groups_into_focus_packs",
+          "blocked_reason": "missing_exact_source_url",
+          "explanation": "These rows are outside the current focused source-discovery pack. Overlay candidate recheck queues may cover some of the same catalog rows, so the displayed not_yet_queued_rows is remaining_phase_rows minus overlay_queue_rows."
         }
       ],
       "operator_note": "Work queues are dry-run safe. Fill the listed confirmation template only after exact product identity, source URL, and image evidence are verified.",

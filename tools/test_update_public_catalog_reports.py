@@ -152,6 +152,19 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(execution_queue["open_missing_image_rows"], result["missing"]["image_url"])
             self.assertEqual(execution_queue["queued_rows_total"], 507)
             self.assertEqual(execution_queue["not_yet_queued_rows"], 203)
+            self.assertEqual(execution_queue["not_yet_queued_rows_explained"], 203)
+            self.assertEqual(execution_queue["unqueued_phase_rows_total"], 215)
+            self.assertEqual(execution_queue["overlay_queue_rows"], 12)
+            self.assertEqual(
+                execution_queue["unqueued_rows_breakdown"][0]["phase_id"],
+                "triage_remaining_source_discovery_backlog",
+            )
+            self.assertEqual(
+                execution_queue["unqueued_rows_breakdown"][0][
+                    "reported_not_yet_queued_rows"
+                ],
+                203,
+            )
             self.assertEqual(execution_queue["completion_plan_status"], "balanced")
             self.assertEqual(execution_queue["next_queue"]["lane"], "replace_generic_source_urls")
             self.assertEqual(execution_queue["next_queue"]["template"], "catalog_image_attachment_confirmed_template_public.json")
