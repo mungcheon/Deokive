@@ -75,6 +75,72 @@ def protected_ichiban_reissue_catalog_indexes(policy_audit: dict[str, Any] | Non
     return protected
 
 
+def ichiban_reissue_review_index(policy_audit: dict[str, Any] | None) -> dict[int, dict[str, Any]]:
+    if not policy_audit:
+        return {}
+
+    index: dict[int, dict[str, Any]] = {}
+    for group in policy_audit.get("probable_reissue_review_groups") or []:
+        if not isinstance(group, dict):
+            continue
+        reasons = sorted(str(reason) for reason in group.get("reissue_signal_reasons") or [])
+        entry = {
+            "normalized_name": group.get("normalized_name"),
+            "source_urls": group.get("source_urls") or [],
+            "reissue_signal_reasons": reasons,
+            "review_reason": group.get("review_reason"),
+            "has_reissue_signal": bool(group.get("has_reissue_signal")),
+            "probable_reissue_review": bool(group.get("has_reissue_signal")),
+        }
+        for row in group.get("sample_rows") or []:
+            if not isinstance(row, dict):
+                continue
+            catalog_index = row.get("catalog_index")
+            if isinstance(catalog_index, int):
+                index[catalog_index] = entry
+    return index
+
+
+def ichiban_reissue_review_lane(
+    policy_audit: dict[str, Any] | None,
+    *,
+    limit: int = 80,
+) -> list[dict[str, Any]]:
+    if not policy_audit:
+        return []
+
+    lane: list[dict[str, Any]] = []
+    for group in policy_audit.get("probable_reissue_review_groups") or []:
+        if not isinstance(group, dict):
+            continue
+        sample_rows = [row for row in group.get("sample_rows") or [] if isinstance(row, dict)]
+        lane.append(
+            {
+                "normalized_name": group.get("normalized_name"),
+                "row_count": group.get("row_count"),
+                "source_url_count": group.get("source_url_count"),
+                "has_reissue_signal": bool(group.get("has_reissue_signal")),
+                "reissue_signal_reasons": group.get("reissue_signal_reasons") or [],
+                "campaign_slug_families": group.get("campaign_slug_families") or [],
+                "source_urls": group.get("source_urls") or [],
+                "review_reason": group.get("review_reason"),
+                "review_state": "probable_reissue_manual_confirmation_required",
+                "next_machine_step": "verify_ichiban_campaign_pages_before_dedupe",
+                "merge_blockers": ["ichiban_reissue_manual_confirmation_required"],
+                "sample_rows": sample_rows,
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    lane.sort(
+        key=lambda row: (
+            0 if row.get("has_reissue_signal") else 1,
+            str(row.get("normalized_name") or ""),
+        )
+    )
+    return lane[:limit]
+
+
 def ichiban_reissue_policy_summary(policy_audit: dict[str, Any] | None) -> dict[str, int]:
     if not policy_audit:
         return {
@@ -196,9 +262,14 @@ def _confirmation_risk_flags(group: dict[str, Any], comparison: dict[str, Any]) 
     return sorted(set(flags))
 
 
-def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
+def _compact_group(
+    group: dict[str, Any],
+    batch: dict[str, Any],
+    *,
+    reissue_review_index: dict[int, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     comparison = _row_comparison_summary(group)
-    return {
+    compact = {
         "key_type": group.get("key_type"),
         "key": group.get("key"),
         "review_priority": group.get("review_priority"),
@@ -225,6 +296,34 @@ def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, An
         "auto_merge_enabled": False,
         "auto_delete_enabled": False,
     }
+    matched_reissue = []
+    if reissue_review_index:
+        for catalog_index in sorted(_catalog_indexes(group)):
+            if catalog_index in reissue_review_index:
+                matched_reissue.append({"catalog_index": catalog_index, **reissue_review_index[catalog_index]})
+    if matched_reissue:
+        reasons = sorted(
+            {
+                str(reason)
+                for item in matched_reissue
+                for reason in item.get("reissue_signal_reasons", [])
+                if str(reason)
+            }
+        )
+        compact["ichiban_reissue_review"] = True
+        compact["ichiban_probable_reissue_review"] = any(
+            bool(item.get("probable_reissue_review")) for item in matched_reissue
+        )
+        compact["ichiban_reissue_catalog_indexes"] = [item["catalog_index"] for item in matched_reissue]
+        compact["ichiban_reissue_signal_reasons"] = reasons
+        compact["ichiban_reissue_review_notes"] = matched_reissue
+        compact["merge_blockers"] = sorted(
+            set(compact["merge_blockers"]) | {"ichiban_reissue_manual_confirmation_required"}
+        )
+        compact["confirmation_risk_flags"] = sorted(
+            set(compact["confirmation_risk_flags"]) | {"ichiban_reissue_manual_confirmation_required"}
+        )
+    return compact
 
 
 def build_report(
@@ -237,7 +336,9 @@ def build_report(
     actionable: list[dict[str, Any]] = []
     excluded = Counter()
     protected_indexes = protected_ichiban_reissue_catalog_indexes(ichiban_policy_audit)
+    reissue_review_index = ichiban_reissue_review_index(ichiban_policy_audit)
     reissue_policy = ichiban_reissue_policy_summary(ichiban_policy_audit)
+    reissue_lane = ichiban_reissue_review_lane(ichiban_policy_audit)
     protected_group_count = 0
     protected_row_indexes: set[int] = set()
 
@@ -258,7 +359,7 @@ def build_report(
                 protected_group_count += 1
                 protected_row_indexes.update(matched_protected_indexes)
                 continue
-            compact = _compact_group(group, batch)
+            compact = _compact_group(group, batch, reissue_review_index=reissue_review_index)
             compact["queue_priority"] = CONFIDENCE_PRIORITY.get(confidence, 99)
             actionable.append(compact)
 
@@ -324,9 +425,11 @@ def build_report(
             "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",
             "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",
             "Ichiban Kuji probable reissue rows stay out of this queue until a human confirms they are true duplicates, not re-releases.",
+            "Use ichiban_reissue_review_lane for same-name 1kuji campaign rows before any dedupe import.",
             "Every accepted group needs an explicit manual keep/drop decision before mutation.",
             f"Copy dedupe_decision_template rows into {CONFIRMED_QUEUE}, set manual_confirmed=true and decision=keep_drop_confirmed, then run {IMPORT_TOOL}.",
         ],
+        "ichiban_reissue_review_lane": reissue_lane,
         "batches": batches,
         "automation_policy": {
             "auto_merge": False,

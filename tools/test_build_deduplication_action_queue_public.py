@@ -213,6 +213,15 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_reissue_review_groups"], 0)
         self.assertEqual(report["summary"]["ichiban_probable_reissue_review_groups"], 0)
         self.assertEqual(report["batches"][0]["groups"][0]["key"], "ordinary-shared-barcode")
+        self.assertEqual(len(report["ichiban_reissue_review_lane"]), 1)
+        self.assertEqual(
+            report["ichiban_reissue_review_lane"][0]["review_state"],
+            "probable_reissue_manual_confirmation_required",
+        )
+        self.assertIn(
+            "ichiban_reissue_manual_confirmation_required",
+            report["ichiban_reissue_review_lane"][0]["merge_blockers"],
+        )
 
     def test_ichiban_reissue_policy_counts_are_reported_even_without_queue_overlap(self) -> None:
         report = queue.build_report(
@@ -238,6 +247,60 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_probable_reissue_review_groups"], 20)
         self.assertEqual(report["summary"]["ichiban_probable_reissue_sample_rows"], 2)
         self.assertEqual(report["summary"]["ichiban_reissue_protected_groups"], 0)
+        self.assertEqual(len(report["ichiban_reissue_review_lane"]), 1)
+        self.assertEqual(
+            report["ichiban_reissue_review_lane"][0]["next_machine_step"],
+            "verify_ichiban_campaign_pages_before_dedupe",
+        )
+
+    def test_ichiban_reissue_overlap_is_flagged_on_unprotected_dedupe_group(self) -> None:
+        review_batches = {
+            "batches": [
+                {
+                    "groups": [
+                        {
+                            "key_type": "barcode",
+                            "key": "ichiban-shared-barcode",
+                            "review_priority": 10,
+                            "review_risk": "strong_identity_review",
+                            "review_confidence": "high_review_confidence",
+                            "rows": [
+                                {"catalog_index": 101, "barcode": "4900000000001"},
+                                {"catalog_index": 102, "barcode": "4900000000001"},
+                            ],
+                        },
+                    ]
+                }
+            ]
+        }
+        ichiban_policy_audit = {
+            "probable_reissue_review_groups": [
+                {
+                    "normalized_name": "一番くじ sample prize",
+                    "has_reissue_signal": False,
+                    "reissue_signal_reasons": ["same_name_different_campaign_url"],
+                    "sample_rows": [
+                        {"catalog_index": 101},
+                        {"catalog_index": 102},
+                    ],
+                }
+            ]
+        }
+
+        report = queue.build_report(
+            review_batches,
+            max_groups=10,
+            batch_size=10,
+            ichiban_policy_audit=ichiban_policy_audit,
+        )
+
+        group = report["batches"][0]["groups"][0]
+        self.assertTrue(group["ichiban_reissue_review"])
+        self.assertFalse(group["ichiban_probable_reissue_review"])
+        self.assertEqual(group["ichiban_reissue_catalog_indexes"], [101, 102])
+        self.assertIn("same_name_different_campaign_url", group["ichiban_reissue_signal_reasons"])
+        self.assertIn("ichiban_reissue_manual_confirmation_required", group["merge_blockers"])
+        self.assertIn("ichiban_reissue_manual_confirmation_required", group["confirmation_risk_flags"])
 
 
 if __name__ == "__main__":
