@@ -1,46 +1,21 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T13:25:42Z",
+  "generated_at": "2026-07-23T13:42:36Z",
   "scope": "animation_category_action_queue",
   "summary": {
-    "actionable_categories": 1,
-    "queued_categories": 1,
-    "actionable_catalog_rows": 22,
-    "queued_catalog_rows": 22,
-    "action_batch_count": 1,
+    "actionable_categories": 0,
+    "queued_categories": 0,
+    "actionable_catalog_rows": 0,
+    "queued_catalog_rows": 0,
+    "action_batch_count": 0,
     "batch_size": 6,
     "max_categories": 24,
-    "by_suggested_family": [
-      [
-        "other",
-        1
-      ]
-    ],
-    "by_color_group": [
-      [
-        "neutral",
-        1
-      ]
-    ],
-    "by_mapping_mode": [
-      [
-        "name_level_split_review_required",
-        1
-      ]
-    ],
-    "by_blocked_reason": [
-      [
-        "broad_source_category_requires_name_level_split",
-        1
-      ]
-    ],
-    "by_blocked_until": [
-      [
-        "name_level_split_rules_manually_confirmed",
-        1
-      ]
-    ],
-    "split_review_categories": 1,
+    "by_suggested_family": [],
+    "by_color_group": [],
+    "by_mapping_mode": [],
+    "by_blocked_reason": [],
+    "by_blocked_until": [],
+    "split_review_categories": 0,
     "direct_mapping_categories": 0,
     "app_folder_color_count": 188,
     "app_folder_icon_option_count": 211,
@@ -48,16 +23,11 @@
     "app_folder_palette_section_count": 8,
     "app_folder_palette_sorted_by_family": true,
     "app_animation_visuals_covered": true,
-    "work_order_steps": 2,
-    "work_order_lanes": [
-      "name_level_split_review",
-      "unmatched_keyword_review"
-    ],
-    "split_first_blocked_categories": [
-      "굿즈"
-    ],
-    "unmatched_keyword_review_rows": 1811,
-    "unmatched_keyword_candidate_count": 20,
+    "work_order_steps": 0,
+    "work_order_lanes": [],
+    "split_first_blocked_categories": [],
+    "unmatched_keyword_review_rows": 0,
+    "unmatched_keyword_candidate_count": 0,
     "unmatched_keyword_product_type_candidate_count": 0,
     "auto_apply_enabled": false
   },
@@ -2841,168 +2811,8 @@
     "duplicate_icon_keys": [],
     "duplicate_colors": []
   },
-  "work_order": [
-    {
-      "rank": 1,
-      "lane": "name_level_split_review",
-      "source": "animation_category_split_review_public.json",
-      "category_count": 1,
-      "affected_catalog_rows": 22,
-      "next_step": "confirm_animation_category_name_split_templates",
-      "template": "server/animation_category_name_split_confirmed_rows.template.json",
-      "blocked_direct_mapping_categories": [
-        "굿즈"
-      ],
-      "manual_confirmation_required": true,
-      "auto_apply_enabled": false,
-      "blocked_until": "name_level_split_rules_manually_confirmed",
-      "blocked_reason": "broad_source_category_requires_name_level_split",
-      "required_evidence": [
-        "sample_names_match_product_type_split_rules",
-        "broad_category_not_mapped_to_single_folder",
-        "confirmed_split_target_category_for_each_rule"
-      ],
-      "notes": [
-        "Broad categories must be split by product-type keywords before any folder/category mapping.",
-        "Do not map an entire broad category such as acrylic or goods to one target folder."
-      ]
-    },
-    {
-      "rank": 3,
-      "lane": "unmatched_keyword_review",
-      "source": "animation_category_unmatched_keyword_review_public.json",
-      "affected_catalog_rows": 1811,
-      "token_candidate_count": 20,
-      "product_type_candidate_count": 0,
-      "top_product_type_candidate_count": 0,
-      "top_product_type_candidates": [],
-      "next_step": "review_unmatched_animation_keyword_candidates",
-      "template": "server/animation_category_name_split_confirmed_rows.template.json",
-      "manual_confirmation_required": true,
-      "auto_apply_enabled": false,
-      "blocked_until": "unmatched_keywords_classified_or_rejected",
-      "blocked_reason": "unmatched_product_type_keywords_need_review",
-      "required_evidence": [
-        "product_type_like_tokens_confirmed_with_samples",
-        "series_source_store_noise_tokens_rejected",
-        "new_split_rules_recorded_only_for_consistent_goods_types"
-      ],
-      "notes": [
-        "Review product_type_like tokens first; add name-level split rules only when samples consistently match one goods type.",
-        "Treat series/source/store noise as exclusions, not category rules."
-      ]
-    }
-  ],
-  "batches": [
-    {
-      "batch_id": "animation-category-action-001",
-      "priority": 70,
-      "category_count": 1,
-      "affected_catalog_rows": 22,
-      "family_counts": [
-        [
-          "other",
-          1
-        ]
-      ],
-      "color_group_counts": [
-        [
-          "neutral",
-          1
-        ]
-      ],
-      "review_state": "manual_category_mapping_confirmation_required",
-      "next_machine_step": "fill_confirmed_animation_category_mapping_templates",
-      "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-      "confirmed_queue": "server/animation_category_confirmed_rows.json",
-      "import_tool": "tools/import_confirmed_animation_category_rows.py",
-      "unblocks_when": "category_mapping_manually_confirmed",
-      "categories": [
-        {
-          "category": "굿즈",
-          "rows": 22,
-          "review_priority": 70,
-          "mapping_mode": "name_level_split_review_required",
-          "requires_name_level_split_review": true,
-          "suggested_family": "other",
-          "suggested_category": "기타 굿즈",
-          "suggested_color_group": "neutral",
-          "suggested_color_hint": "neutral",
-          "suggested_primary_icon_key": "category",
-          "review_reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
-          "review_summary": {
-            "affected_catalog_rows": 22,
-            "mapping_mode": "name_level_split_review_required",
-            "requires_name_level_split_review": true,
-            "sample_name_count": 8,
-            "name_split_hint_count": 0,
-            "name_split_hints": [],
-            "recommended_review_path": "review_name_split_hints_before_category_mapping"
-          },
-          "name_split_hints": [],
-          "sample_names": [
-            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - G賞 クリアアイテムアソート（1/15）",
-            "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
-            "一番くじ 僕のヒーローアカデミア 相反する思い - F賞 銅像オールマイト MASTERELIVE COLLECTION",
-            "一番くじ 僕のヒーローアカデミア～After The Fight～ - A賞 スペシャルシーンセレクション",
-            "一番くじ 僕のヒーローアカデミア～雄英体育祭！～ - C賞 観客席応援セット",
-            "一番くじ 僕のヒーローアカデミア～休み時間！～ - A賞 アルバム委員一押し！1-Aアルバム",
-            "一番くじ 僕のヒーローアカデミア～WHITE OR BLACK！～ - F賞 ラバーストラップ",
-            "一番くじ 僕のヒーローアカデミア～WHITE OR BLACK！～ - ラストワン賞 缶ケース入りスペシャルバッジセット"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "name_level_split_review_required",
-            "requires_name_level_split_review": true,
-            "source_category": "굿즈",
-            "target_category": "기타 굿즈",
-            "target_family": "other",
-            "folder_name": "기타 굿즈",
-            "folder_color_hex": "0xFF9CA3AF",
-            "folder_color_hint": "neutral",
-            "folder_color_group": "neutral",
-            "folder_color_sort_order": 300,
-            "folder_icon_key": "category",
-            "folder_icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "affected_catalog_rows": 22,
-            "blocked_until": "name_level_split_rules_manually_confirmed",
-            "blocked_reason": "broad_source_category_requires_name_level_split",
-            "required_evidence": [
-              "sample_names_match_product_type_split_rules",
-              "broad_category_not_mapped_to_single_folder",
-              "confirmed_split_target_category_for_each_rule"
-            ],
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false,
-          "blocked_until": "name_level_split_rules_manually_confirmed",
-          "blocked_reason": "broad_source_category_requires_name_level_split",
-          "required_evidence": [
-            "sample_names_match_product_type_split_rules",
-            "broad_category_not_mapped_to_single_folder",
-            "confirmed_split_target_category_for_each_rule"
-          ]
-        }
-      ]
-    }
-  ],
+  "work_order": [],
+  "batches": [],
   "automation_policy": {
     "auto_apply_category_changes": false,
     "auto_create_folders": false,

@@ -1463,9 +1463,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_keyword_summary.get("product_type_candidate_count"),
         )
         self.assertFalse(animation_keyword_summary.get("auto_apply_enabled"))
-        self.assertGreater(len(animation_agent_batches), 0)
-        self.assertGreater(len(animation_split_agent_batches), 0)
-        self.assertGreater(len(animation_keyword_agent_batches), 0)
+        if animation_action_summary.get("queued_catalog_rows"):
+            self.assertGreater(len(animation_agent_batches), 0)
+        else:
+            self.assertEqual(len(animation_agent_batches), 0)
+        if animation_split_summary.get("affected_catalog_rows"):
+            self.assertGreater(len(animation_split_agent_batches), 0)
+        else:
+            self.assertEqual(len(animation_split_agent_batches), 0)
+        if animation_keyword_summary.get("unmatched_rows"):
+            self.assertGreater(len(animation_keyword_agent_batches), 0)
+        else:
+            self.assertEqual(len(animation_keyword_agent_batches), 0)
         self.assertTrue(
             all(
                 "split_review_categories" in batch.get("review_summary", {})
