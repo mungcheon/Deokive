@@ -264,6 +264,9 @@ class _CatalogImportPanel extends StatelessWidget {
     final theme = Theme.of(context);
     final entries = appState.curatedCatalogEntries;
     final health = _CatalogHealthSummary.from(entries);
+    final subtitle = health.filteredOutCount > 0
+        ? '중복·예시 ${_CatalogHealthSummary.formatCount(health.filteredOutCount)}개 제외'
+        : '중복·예시 항목 제외 완료';
 
     return Material(
       color: theme.colorScheme.surface,
@@ -275,7 +278,7 @@ class _CatalogImportPanel extends StatelessWidget {
             color: theme.colorScheme.outline.withValues(alpha: 0.22),
           ),
         ),
-        padding: const EdgeInsets.fromLTRB(14, 13, 14, 14),
+        padding: const EdgeInsets.fromLTRB(14, 13, 14, 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -301,7 +304,7 @@ class _CatalogImportPanel extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '공개 굿즈 DB',
+                        '굿즈 DB',
                         maxLines: 1,
                         softWrap: false,
                         overflow: TextOverflow.ellipsis,
@@ -312,7 +315,7 @@ class _CatalogImportPanel extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '검색해서 내 굿즈함에 바로 담아요',
+                        subtitle,
                         maxLines: 1,
                         softWrap: false,
                         overflow: TextOverflow.ellipsis,
@@ -334,14 +337,14 @@ class _CatalogImportPanel extends StatelessWidget {
               runSpacing: 6,
               children: [
                 _CatalogMetricPill(
-                  label: '목록',
+                  label: '정리',
                   value: '${_CatalogHealthSummary.formatCount(
                     health.uniqueCount,
                   )}개',
                   color: palette.primary,
                 ),
                 _CatalogMetricPill(
-                  label: '사진',
+                  label: '사진 있음',
                   value: _CatalogHealthSummary.formatCount(
                     health.imageCount,
                   ),
@@ -351,8 +354,9 @@ class _CatalogImportPanel extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              '전체 DB에서 필터링하고 원하는 폴더나 위시리스트에 추가할 수 있어요.',
-              maxLines: 2,
+              '검색 후 내 굿즈함 또는 위시리스트에 추가할 수 있어요.',
+              maxLines: 1,
+              softWrap: false,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.58),
@@ -361,9 +365,14 @@ class _CatalogImportPanel extends StatelessWidget {
                 letterSpacing: 0,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 10),
+            Divider(
+              height: 1,
+              color: theme.colorScheme.outline.withValues(alpha: 0.14),
+            ),
+            const SizedBox(height: 10),
             SizedBox(
-              height: 46,
+              height: 44,
               child: FilledButton.icon(
                 onPressed: () {
                   Navigator.push(
@@ -382,7 +391,7 @@ class _CatalogImportPanel extends StatelessWidget {
                 ),
                 style: FilledButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(13),
                   ),
                 ),
               ),
@@ -452,25 +461,35 @@ class _CatalogMetricPill extends StatelessWidget {
 class _CatalogHealthSummary {
   final int uniqueCount;
   final int imageCount;
+  final int filteredOutCount;
 
   const _CatalogHealthSummary({
     required this.uniqueCount,
     required this.imageCount,
+    required this.filteredOutCount,
   });
 
   static _CatalogHealthSummary from(List<GoodsCatalogEntry> entries) {
     final seenKeys = <String>{};
     final imageKeys = <String>{};
+    var exampleCount = 0;
+    var duplicateCount = 0;
 
     for (final entry in entries) {
       if (_isExampleEntry(entry)) {
+        exampleCount += 1;
         continue;
       }
 
       final key = _identityKey(entry);
-      if (seenKeys.add(key) &&
-          ((entry.localImagePath ?? '').trim().isNotEmpty ||
-              (entry.imageUrl ?? '').trim().isNotEmpty)) {
+      final isUnique = seenKeys.add(key);
+      if (!isUnique) {
+        duplicateCount += 1;
+        continue;
+      }
+
+      if ((entry.localImagePath ?? '').trim().isNotEmpty ||
+          (entry.imageUrl ?? '').trim().isNotEmpty) {
         imageKeys.add(key);
       }
     }
@@ -478,6 +497,7 @@ class _CatalogHealthSummary {
     return _CatalogHealthSummary(
       uniqueCount: seenKeys.length,
       imageCount: imageKeys.length,
+      filteredOutCount: exampleCount + duplicateCount,
     );
   }
 

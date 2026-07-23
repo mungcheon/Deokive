@@ -7625,6 +7625,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["missing_image_actionability"] = {
             "public_report": f"data/{MISSING_IMAGE_ACTIONABILITY.name}",
             **missing_image_actionability["summary"],
+            "manual_validation_focus": missing_image_actionability.get(
+                "manual_validation_focus",
+                {},
+            ),
         }
         target["danganronpa_missing_media"] = {
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",

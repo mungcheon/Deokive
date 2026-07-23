@@ -781,6 +781,64 @@ def build_completion_plan(
     }
 
 
+def build_manual_validation_focus(
+    summary: dict[str, Any],
+    work_order: list[dict[str, Any]],
+) -> dict[str, Any]:
+    auto_import_ready_rows = int(summary.get("image_attachment_template_dry_run_updated_rows") or 0) + int(
+        summary.get("source_detail_ready_unflagged_candidate_rows") or 0
+    )
+    focus_lanes = [
+        {
+            "rank": row.get("rank"),
+            "lane": row.get("lane"),
+            "row_count": row.get("row_count"),
+            "source": row.get("source"),
+            "next_step": row.get("next_step"),
+            "blocked_reason": row.get("blocked_reason"),
+            "blocked_until": row.get("blocked_until"),
+            "required_evidence": row.get("required_evidence") or [],
+            "top_source_stores": row.get("top_source_stores") or [],
+            "current_focus_pack": row.get("current_focus_pack") or {},
+        }
+        for row in sorted(
+            work_order,
+            key=lambda item: (int(item.get("rank") or 999), str(item.get("lane") or "")),
+        )
+        if int(row.get("row_count") or 0) > 0
+    ][:5]
+    return {
+        "auto_import_ready_rows": auto_import_ready_rows,
+        "manual_validation_required_rows": int(summary.get("missing_image_rows") or 0),
+        "next_focus_lane": focus_lanes[0].get("lane") if focus_lanes else None,
+        "next_focus_row_count": focus_lanes[0].get("row_count") if focus_lanes else 0,
+        "next_focus_source": focus_lanes[0].get("source") if focus_lanes else None,
+        "focus_lanes": focus_lanes,
+        "blocked_summary": {
+            "generic_source_url_replacement_rows": int(
+                summary.get("image_attachment_template_source_update_required_rows") or 0
+            ),
+            "representative_image_review_rows": int(
+                summary.get("image_attachment_template_representative_review_rows") or 0
+            ),
+            "source_detail_recheck_required_rows": int(
+                summary.get("source_detail_candidate_recheck_required_rows") or 0
+            ),
+            "source_discovery_focus_rows": int(
+                summary.get("source_discovery_remaining_focus_review_rows") or 0
+            ),
+            "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
+        },
+        "automation_policy": {
+            "auto_apply_catalog_changes": False,
+            "reason": (
+                "No image row is ready until exact product identity and source/image "
+                "evidence are manually confirmed."
+            ),
+        },
+    }
+
+
 def source_detail_items(source_detail_queue: dict[str, Any] | None) -> list[dict[str, Any]]:
     if not isinstance(source_detail_queue, dict):
         return []
@@ -1113,6 +1171,7 @@ def build_report(
         source_discovery_work_packs,
         next_source_discovery_focus_pack,
     )
+    manual_validation_focus = build_manual_validation_focus(summary_out, work_order)
     completion_plan = build_completion_plan(
         summary_out,
         source_store_priority,
@@ -1138,6 +1197,7 @@ def build_report(
         "source_discovery_work_packs": source_discovery_work_packs,
         "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
+        "manual_validation_focus": manual_validation_focus,
         "completion_plan": completion_plan,
         "recommended_order": [
             "source_url_replacement_required",

@@ -36,14 +36,15 @@ void main() {
     );
 
     await tester.scrollUntilVisible(
-      find.text('공개 굿즈 DB'),
+      find.text('굿즈 DB'),
       180,
       scrollable: find.byType(Scrollable).first,
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('공개 굿즈 DB'), findsOneWidget);
-    expect(find.text('검색해서 내 굿즈함에 바로 담아요'), findsOneWidget);
+    expect(find.text('굿즈 DB'), findsOneWidget);
+    expect(find.textContaining('중복·예시'), findsOneWidget);
+    expect(find.text('검색 후 내 굿즈함 또는 위시리스트에 추가할 수 있어요.'), findsOneWidget);
     expect(find.widgetWithText(FilledButton, 'DB 보기'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

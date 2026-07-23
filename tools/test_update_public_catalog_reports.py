@@ -142,6 +142,21 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["missing_image_actionability"]["unclassified_rows"], 0)
             actionability = reports.load_json(reports.MISSING_IMAGE_ACTIONABILITY)
             completion_plan = actionability["completion_plan"]
+            manual_focus = actionability["manual_validation_focus"]
+            self.assertEqual(manual_focus["auto_import_ready_rows"], 0)
+            self.assertEqual(manual_focus["manual_validation_required_rows"], result["missing"]["image_url"])
+            self.assertEqual(manual_focus["next_focus_lane"], "replace_generic_source_urls")
+            self.assertEqual(manual_focus["next_focus_row_count"], 50)
+            self.assertEqual(
+                manual_focus["blocked_summary"]["generic_source_url_replacement_rows"],
+                50,
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"]["manual_validation_focus"][
+                    "auto_import_ready_rows"
+                ],
+                0,
+            )
             self.assertEqual(completion_plan["total_open_rows"], result["missing"]["image_url"])
             self.assertEqual(completion_plan["phase_rows_total"], result["missing"]["image_url"])
             self.assertEqual(completion_plan["status"], "balanced")

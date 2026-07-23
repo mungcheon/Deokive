@@ -6743,7 +6743,343 @@
     "completion_plan_total_open_rows": 710,
     "completion_plan_phase_rows_total": 710,
     "completion_plan_phase_count": 5,
-    "completion_plan_status": "balanced"
+    "completion_plan_status": "balanced",
+    "manual_validation_focus": {
+      "auto_import_ready_rows": 0,
+      "manual_validation_required_rows": 710,
+      "next_focus_lane": "replace_generic_source_urls",
+      "next_focus_row_count": 50,
+      "next_focus_source": "catalog_image_attachment_action_queue_public.json",
+      "focus_lanes": [
+        {
+          "rank": 3,
+          "lane": "replace_generic_source_urls",
+          "row_count": 50,
+          "source": "catalog_image_attachment_action_queue_public.json",
+          "next_step": "replace_generic_source_url_then_extract_image",
+          "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+          "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+          "required_evidence": [
+            "exact_product_source_url",
+            "existing_generic_source_url_replaced_or_preserved_with_reason",
+            "image_url_from_exact_source_after_replacement"
+          ],
+          "top_source_stores": [
+            {
+              "source_store": "Stellive Store",
+              "missing_image_rows": 45,
+              "primary_workflow": "replace_generic_source_then_extract_image",
+              "recommended_next_step": "replace_generic_source_url_then_extract_image"
+            },
+            {
+              "source_store": "Weverse Shop",
+              "missing_image_rows": 3,
+              "primary_workflow": "replace_generic_source_then_extract_image",
+              "recommended_next_step": "replace_generic_source_url_then_extract_image"
+            },
+            {
+              "source_store": "포켓몬 센터",
+              "missing_image_rows": 2,
+              "primary_workflow": "replace_generic_source_then_extract_image",
+              "recommended_next_step": "replace_generic_source_url_then_extract_image"
+            }
+          ],
+          "current_focus_pack": {}
+        },
+        {
+          "rank": 4,
+          "lane": "discover_exact_source_urls",
+          "row_count": 417,
+          "source": "source_discovery_action_queue_public.json",
+          "next_step": "confirm_exact_source_url_then_fill_source_templates",
+          "blocked_reason": "missing_exact_source_url",
+          "blocked_until": "exact_product_source_url_discovered",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
+          ],
+          "top_source_stores": [
+            {
+              "source_store": "애니메이트",
+              "missing_image_rows": 144,
+              "primary_workflow": "find_source_then_extract_image",
+              "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+            },
+            {
+              "source_store": "엔스카이",
+              "missing_image_rows": 137,
+              "primary_workflow": "find_source_then_extract_image",
+              "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+            },
+            {
+              "source_store": "굿스마일컴퍼니",
+              "missing_image_rows": 56,
+              "primary_workflow": "find_source_then_extract_image",
+              "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+            },
+            {
+              "source_store": "코토부키야",
+              "missing_image_rows": 44,
+              "primary_workflow": "find_source_then_extract_image",
+              "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+            },
+            {
+              "source_store": "Movic",
+              "missing_image_rows": 36,
+              "primary_workflow": "find_source_then_extract_image",
+              "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+            },
+            {
+              "source_store": "점프 캐릭터즈 스토어",
+              "missing_image_rows": 23,
+              "primary_workflow": "find_source_then_extract_image",
+              "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+            },
+            {
+              "source_store": "FuRyu",
+              "missing_image_rows": 21,
+              "primary_workflow": "find_source_then_extract_image",
+              "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+            },
+            {
+              "source_store": "Taito",
+              "missing_image_rows": 15,
+              "primary_workflow": "find_source_then_extract_image",
+              "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+            }
+          ],
+          "current_focus_pack": {
+            "focus_pack_id": "source-discovery-focus-001",
+            "source_store": "애니메이트",
+            "target_category": "아크릴 스탠드",
+            "row_count": 20,
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+            "focused_pack_report": "data/source_discovery_next_focus_pack_public.json",
+            "detail_candidates_report": "data/source_discovery_next_focus_detail_candidates_public.json",
+            "confirmed_template": "data/source_discovery_focus_confirmed_template_public.json",
+            "import_dry_run_report": "data/source_discovery_next_focus_pack_import_dry_run_public.json",
+            "next_step": "review_candidate_and_fallback_summaries_then_fill_confirmed_source_urls",
+            "auto_apply_enabled": false,
+            "blocked_until": "exact_product_source_url_discovered",
+            "blocked_reason": "missing_exact_source_url",
+            "required_evidence": [
+              "official_or_trusted_product_detail_source_url",
+              "title_character_variant_type_match",
+              "image_url_from_confirmed_source_or_trusted_official_cdn"
+            ],
+            "candidate_review_summary": {
+              "pack_items": 20,
+              "items_with_candidates": 7,
+              "candidate_rows": 50,
+              "manual_candidate_review_rows": 50,
+              "no_candidate_items": 13,
+              "official_search_has_results": 3,
+              "official_search_no_results": 17,
+              "fallback_search_needed_items": 17
+            },
+            "fallback_review_summary": {
+              "queue_rows": 17,
+              "fallback_query_count": 108,
+              "manual_confirmed_rows": 0,
+              "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+              "first_fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29"
+            },
+            "candidate_review_samples": [
+              {
+                "catalog_index": 1072,
+                "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
+                "name_ja": "推しの子 アクリルスタンド (星野アイ)",
+                "candidate_count": 0,
+                "official_search_audit_status": "official_search_no_results",
+                "needs_fallback_web_search": true,
+                "status": null
+              },
+              {
+                "catalog_index": 1082,
+                "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
+                "name_ja": null,
+                "candidate_count": 40,
+                "official_search_audit_status": "official_search_no_results",
+                "needs_fallback_web_search": true,
+                "status": null
+              },
+              {
+                "catalog_index": 1083,
+                "name_ko": "슬램덩크 아크릴 스탠드 (강백호)",
+                "name_ja": "SLAM DUNK アクリルスタンド (桜木花道)",
+                "candidate_count": 0,
+                "official_search_audit_status": "official_search_no_results",
+                "needs_fallback_web_search": true,
+                "status": null
+              },
+              {
+                "catalog_index": 1084,
+                "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
+                "name_ja": null,
+                "candidate_count": 0,
+                "official_search_audit_status": "official_search_no_results",
+                "needs_fallback_web_search": true,
+                "status": null
+              },
+              {
+                "catalog_index": 1117,
+                "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+                "name_ja": null,
+                "candidate_count": 40,
+                "official_search_audit_status": "official_search_no_results",
+                "needs_fallback_web_search": true,
+                "status": null
+              },
+              {
+                "catalog_index": 1119,
+                "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
+                "name_ja": null,
+                "candidate_count": 2,
+                "official_search_audit_status": "official_search_no_results",
+                "needs_fallback_web_search": true,
+                "status": null
+              },
+              {
+                "catalog_index": 1123,
+                "name_ko": "신세기 에반게리온 아크릴 스탠드",
+                "name_ja": null,
+                "candidate_count": 40,
+                "official_search_audit_status": "official_search_no_results",
+                "needs_fallback_web_search": true,
+                "status": null
+              },
+              {
+                "catalog_index": 1632,
+                "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
+                "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+                "candidate_count": 0,
+                "official_search_audit_status": "official_search_no_results",
+                "needs_fallback_web_search": true,
+                "status": null
+              }
+            ],
+            "fallback_review_samples": [
+              {
+                "catalog_index": 1072,
+                "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
+                "name_ja": "推しの子 アクリルスタンド (星野アイ)",
+                "domain_limited_web_search_url_count": 6,
+                "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29"
+              },
+              {
+                "catalog_index": 1082,
+                "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
+                "name_ja": null,
+                "domain_limited_web_search_url_count": 6,
+                "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89"
+              },
+              {
+                "catalog_index": 1083,
+                "name_ko": "슬램덩크 아크릴 스탠드 (강백호)",
+                "name_ja": "SLAM DUNK アクリルスタンド (桜木花道)",
+                "domain_limited_web_search_url_count": 6,
+                "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29"
+              },
+              {
+                "catalog_index": 1084,
+                "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
+                "name_ja": null,
+                "domain_limited_web_search_url_count": 6,
+                "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93"
+              },
+              {
+                "catalog_index": 1117,
+                "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+                "name_ja": null,
+                "domain_limited_web_search_url_count": 6,
+                "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C"
+              },
+              {
+                "catalog_index": 1119,
+                "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
+                "name_ja": null,
+                "domain_limited_web_search_url_count": 6,
+                "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3"
+              },
+              {
+                "catalog_index": 1123,
+                "name_ko": "신세기 에반게리온 아크릴 스탠드",
+                "name_ja": null,
+                "domain_limited_web_search_url_count": 6,
+                "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89"
+              },
+              {
+                "catalog_index": 1632,
+                "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
+                "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+                "domain_limited_web_search_url_count": 6,
+                "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29"
+              }
+            ]
+          }
+        },
+        {
+          "rank": 5,
+          "lane": "review_representative_images",
+          "row_count": 23,
+          "source": "catalog_image_attachment_action_queue_public.json",
+          "next_step": "confirm_exact_product_type_then_attach_image",
+          "blocked_reason": "representative_image_requires_product_type_review",
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "required_evidence": [
+            "official_source_matches_exact_product_type",
+            "representative_image_is_not_wrong_variant_or_lineup_only",
+            "manual_note_for_representative_image_choice"
+          ],
+          "top_source_stores": [],
+          "current_focus_pack": {}
+        },
+        {
+          "rank": 6,
+          "lane": "recheck_source_detail_candidates",
+          "row_count": 12,
+          "source": "source_detail_candidate_action_queue_public.json",
+          "next_step": "refresh_or_replace_candidate_before_import",
+          "blocked_reason": "candidate_identity_warning_requires_recheck",
+          "blocked_until": "candidate_identity_rechecked_or_replaced",
+          "required_evidence": [
+            "candidate_identity_flags_resolved",
+            "replacement_candidate_source_url_if_current_candidate_is_wrong",
+            "manual_note_explaining_keep_or_reject_decision"
+          ],
+          "top_source_stores": [],
+          "current_focus_pack": {}
+        },
+        {
+          "rank": 7,
+          "lane": "manual_image_research",
+          "row_count": 5,
+          "source": "catalog_image_enrichment_batches_public.json",
+          "next_step": "manual_official_source_and_image_research",
+          "blocked_reason": "structured_source_discovery_not_available",
+          "blocked_until": "manual_official_source_and_image_evidence_recorded",
+          "required_evidence": [
+            "trusted_source_url_or_manual_evidence_url",
+            "image_url_source_explained",
+            "manual_note_for_nonstandard_source"
+          ],
+          "top_source_stores": [],
+          "current_focus_pack": {}
+        }
+      ],
+      "blocked_summary": {
+        "generic_source_url_replacement_rows": 50,
+        "representative_image_review_rows": 23,
+        "source_detail_recheck_required_rows": 12,
+        "source_discovery_focus_rows": 417,
+        "manual_image_research_rows": 5
+      },
+      "automation_policy": {
+        "auto_apply_catalog_changes": false,
+        "reason": "No image row is ready until exact product identity and source/image evidence are manually confirmed."
+      }
+    }
   },
   "source_discovery_store_bottlenecks": {
     "public_report": "data/source_discovery_store_bottlenecks_public.json",
