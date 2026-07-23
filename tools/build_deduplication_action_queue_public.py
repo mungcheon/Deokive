@@ -694,6 +694,56 @@ def build_report(
             for reason in group.get("manual_review_required_reasons", [])
         ]
     )
+    manual_confirmed_reissue_rows = sum(
+        1
+        for order in reissue_work_orders
+        if order.get("decision_template", {}).get("manual_confirmed") is True
+    )
+    completion_status = (
+        "clear"
+        if not actionable and not reissue_work_orders
+        else "ichiban_reissue_review_required"
+        if reissue_work_orders
+        else "manual_keep_drop_confirmation_required"
+    )
+    completion_readiness = {
+        "status": completion_status,
+        "auto_merge_ready_groups": 0,
+        "auto_delete_ready_groups": 0,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+        "manual_confirmed_groups": 0,
+        "actionable_groups": len(actionable),
+        "queued_groups": len(published),
+        "unqueued_actionable_groups": unqueued_actionable_groups,
+        "explicit_keep_drop_required_groups": len(actionable),
+        "ichiban_reissue_review_groups": reissue_policy.get("ichiban_reissue_review_groups", 0),
+        "ichiban_probable_reissue_review_groups": reissue_policy.get(
+            "ichiban_probable_reissue_review_groups", 0
+        ),
+        "ichiban_reissue_work_order_rows": len(reissue_work_orders),
+        "ichiban_reissue_manual_confirmed_rows": manual_confirmed_reissue_rows,
+        "ichiban_reissue_protected_groups": protected_group_count,
+        "blocked_reasons": [
+            "explicit_manual_keep_drop_confirmation_required" if actionable else None,
+            "ichiban_reissue_manual_confirmation_required" if reissue_work_orders else None,
+            "variant_or_retailer_identity_review_required" if merge_blocker_counts else None,
+        ],
+        "next_safe_phase": (
+            "verify_ichiban_campaign_pages_before_dedupe"
+            if reissue_work_orders
+            else "record_manual_keep_drop_decisions"
+            if actionable
+            else "no_dedupe_action_required"
+        ),
+        "safety_note": (
+            "Duplicate evidence can represent retailer mirrors, variants, or reissues. "
+            "No catalog row may be merged or deleted until an explicit manual keep/drop decision is recorded."
+        ),
+    }
+    completion_readiness["blocked_reasons"] = [
+        reason for reason in completion_readiness["blocked_reasons"] if reason
+    ]
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(published), batch_size):
@@ -743,16 +793,17 @@ def build_report(
             "ichiban_reissue_decision_template_rows": len(reissue_work_orders),
             "ichiban_reissue_campaign_work_order_rows": len(reissue_campaign_work_orders),
             "ichiban_reissue_campaign_decision_template_rows": len(reissue_campaign_work_orders),
-            "ichiban_reissue_manual_confirmed_rows": sum(
-                1
-                for order in reissue_work_orders
-                if order.get("decision_template", {}).get("manual_confirmed") is True
-            ),
+            "ichiban_reissue_manual_confirmed_rows": manual_confirmed_reissue_rows,
             "ichiban_reissue_protected_groups": protected_group_count,
             "ichiban_reissue_protected_rows": len(protected_row_indexes),
+            "completion_readiness_status": completion_status,
+            "auto_merge_ready_groups": 0,
+            "auto_delete_ready_groups": 0,
+            "explicit_keep_drop_required_groups": len(actionable),
             "auto_merge_enabled": False,
             "auto_delete_enabled": False,
         },
+        "completion_readiness": completion_readiness,
         "instructions": [
             "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",
             "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",

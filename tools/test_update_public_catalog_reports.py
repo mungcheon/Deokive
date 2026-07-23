@@ -377,6 +377,22 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["without_candidate_options"], 6)
         self.assertIs(quality["gotouchi_official_candidate_review_queue"]["auto_apply_enabled"], False)
         if reports.DEDUPLICATION_FAST_REVIEW.exists():
+            dedupe_action = reports.load_json(reports.DEDUPLICATION_ACTION_QUEUE)
+            dedupe_action_summary = dedupe_action["summary"]
+            self.assertEqual(
+                quality["deduplication_action_queue"]["completion_readiness_status"],
+                dedupe_action_summary["completion_readiness_status"],
+            )
+            self.assertEqual(quality["deduplication_action_queue"]["auto_merge_ready_groups"], 0)
+            self.assertEqual(quality["deduplication_action_queue"]["auto_delete_ready_groups"], 0)
+            self.assertEqual(
+                quality["deduplication_action_queue"]["explicit_keep_drop_required_groups"],
+                dedupe_action_summary["explicit_keep_drop_required_groups"],
+            )
+            self.assertEqual(
+                quality["deduplication_action_queue"]["ichiban_reissue_work_order_rows"],
+                dedupe_action_summary["ichiban_reissue_work_order_rows"],
+            )
             self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
             self.assertEqual(quality["deduplication_fast_review"]["manual_confirmed_true"], 0)
             self.assertIs(quality["deduplication_fast_review"]["auto_delete_enabled"], False)

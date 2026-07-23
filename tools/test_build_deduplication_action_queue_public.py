@@ -80,6 +80,16 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queue_coverage"], 1.0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertFalse(report["summary"]["auto_delete_enabled"])
+        self.assertEqual(report["summary"]["completion_readiness_status"], "manual_keep_drop_confirmation_required")
+        self.assertEqual(report["summary"]["auto_merge_ready_groups"], 0)
+        self.assertEqual(report["summary"]["auto_delete_ready_groups"], 0)
+        self.assertEqual(report["summary"]["explicit_keep_drop_required_groups"], 2)
+        self.assertEqual(report["completion_readiness"]["status"], "manual_keep_drop_confirmation_required")
+        self.assertEqual(report["completion_readiness"]["next_safe_phase"], "record_manual_keep_drop_decisions")
+        self.assertIn(
+            "explicit_manual_keep_drop_confirmation_required",
+            report["completion_readiness"]["blocked_reasons"],
+        )
         self.assertFalse(report["automation_policy"]["auto_merge"])
         self.assertEqual(dict(report["summary"]["by_review_confidence"]), {
             "high_review_confidence": 1,
@@ -262,6 +272,16 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_reissue_campaign_work_order_rows"], 1)
         self.assertEqual(report["summary"]["ichiban_reissue_campaign_decision_template_rows"], 1)
         self.assertEqual(report["summary"]["ichiban_reissue_manual_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["completion_readiness_status"], "ichiban_reissue_review_required")
+        self.assertEqual(report["completion_readiness"]["status"], "ichiban_reissue_review_required")
+        self.assertEqual(
+            report["completion_readiness"]["next_safe_phase"],
+            "verify_ichiban_campaign_pages_before_dedupe",
+        )
+        self.assertIn(
+            "ichiban_reissue_manual_confirmation_required",
+            report["completion_readiness"]["blocked_reasons"],
+        )
         self.assertEqual(len(report["ichiban_reissue_campaign_work_order"]), 1)
         campaign_order = report["ichiban_reissue_campaign_work_order"][0]
         self.assertEqual(campaign_order["item_work_order_count"], 1)
@@ -337,6 +357,8 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_probable_reissue_review_groups"], 20)
         self.assertEqual(report["summary"]["ichiban_probable_reissue_sample_rows"], 2)
         self.assertEqual(report["summary"]["ichiban_reissue_protected_groups"], 0)
+        self.assertEqual(report["summary"]["completion_readiness_status"], "ichiban_reissue_review_required")
+        self.assertEqual(report["completion_readiness"]["ichiban_reissue_work_order_rows"], 1)
         self.assertEqual(len(report["ichiban_reissue_review_lane"]), 1)
         self.assertEqual(len(report["ichiban_reissue_work_order"]), 1)
         self.assertEqual(len(report["ichiban_reissue_campaign_work_order"]), 1)
