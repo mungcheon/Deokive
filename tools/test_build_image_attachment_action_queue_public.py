@@ -67,6 +67,26 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
+        self.assertEqual(
+            report["execution_readiness"]["status"],
+            "source_url_replacement_required",
+        )
+        self.assertFalse(report["execution_readiness"]["can_auto_apply_catalog_changes"])
+        self.assertFalse(report["execution_readiness"]["can_import_image_urls_now"])
+        self.assertEqual(report["execution_readiness"]["blocked_before_image_import_rows"], 2)
+        self.assertEqual(
+            report["execution_readiness"]["recommended_first_batch_id"],
+            "image-attachment-action-001",
+        )
+        self.assertEqual(len(report["next_operator_actions"]), 1)
+        self.assertEqual(
+            report["next_operator_actions"][0]["lane"],
+            "source_url_replacement_first",
+        )
+        self.assertEqual(
+            report["next_operator_actions"][0]["status"],
+            "manual_source_url_confirmation_required",
+        )
         self.assertEqual(report["workstreams"][0]["source_store"], "Stellive Store")
         self.assertEqual(report["workstreams"][0]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(report["workstreams"][0]["source_url_update_template_rows"], 2)
@@ -150,6 +170,16 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 1)
+        self.assertEqual(
+            report["execution_readiness"]["status"],
+            "representative_image_review_required",
+        )
+        self.assertEqual(report["execution_readiness"]["blocked_before_image_import_rows"], 3)
+        self.assertEqual(report["next_operator_actions"][0]["lane"], "representative_image_candidate_review")
+        self.assertEqual(
+            report["next_operator_actions"][0]["status"],
+            "manual_variant_confirmation_required",
+        )
         self.assertEqual(report["next_actions"][1]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(
             report["batches"][0]["items"][0]["review_lane"],

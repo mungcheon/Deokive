@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T02:46:03Z",
+  "generated_at": "2026-07-23T05:11:40Z",
   "scope": "catalog_image_attachment_action_queue",
   "summary": {
     "actionable_image_rows": 73,
@@ -67,6 +67,25 @@
     "Rows without source_url stay in catalog_image_enrichment_batches_public.json and source discovery queues.",
     "For generic storefront rows, fill source_url_import_template before the image_url template."
   ],
+  "execution_readiness": {
+    "status": "source_url_replacement_required",
+    "can_auto_apply_catalog_changes": false,
+    "can_import_image_urls_now": false,
+    "requires_manual_review": true,
+    "image_url_ready_rows": 0,
+    "source_url_replacement_required_rows": 50,
+    "source_url_update_work_order_count": 3,
+    "representative_image_review_required_rows": 23,
+    "blocked_before_image_import_rows": 73,
+    "recommended_first_workstream": "replace_generic_source_then_extract_image",
+    "recommended_first_batch_id": "image-attachment-action-001",
+    "blocking_reason": "Exact product source URLs must be confirmed before image URLs can be attached.",
+    "evidence": {
+      "source_url_replacement_next_batch_id": "image-attachment-action-001",
+      "representative_review_next_batch_id": "image-attachment-action-006",
+      "image_url_ready_next_batch_id": null
+    }
+  },
   "workstreams": [
     {
       "workflow": "replace_generic_source_then_extract_image",
@@ -1092,6 +1111,31 @@
           }
         }
       ],
+      "auto_apply_enabled": false
+    }
+  ],
+  "next_operator_actions": [
+    {
+      "priority": 1,
+      "lane": "source_url_replacement_first",
+      "workflow": "replace_generic_source_then_extract_image",
+      "rows": 50,
+      "work_order_count": 3,
+      "next_batch_id": "image-attachment-action-001",
+      "status": "manual_source_url_confirmation_required",
+      "operator_step": "Fill source_url_import_template with exact product detail URLs before image attachment.",
+      "unblocks": "image_url_extraction_and_attachment_review",
+      "auto_apply_enabled": false
+    },
+    {
+      "priority": 3,
+      "lane": "representative_image_candidate_review",
+      "workflow": "review_gotouchi_official_candidates",
+      "rows": 23,
+      "next_batch_id": "image-attachment-action-006",
+      "status": "manual_variant_confirmation_required",
+      "operator_step": "Confirm product type and variant before accepting representative official images.",
+      "unblocks": "manual_catalog_image_url_import",
       "auto_apply_enabled": false
     }
   ],

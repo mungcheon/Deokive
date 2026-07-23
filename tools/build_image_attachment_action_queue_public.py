@@ -248,6 +248,141 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
     return work_order
 
 
+def _first_workstream_batch_id(workstreams: list[dict[str, Any]], field: str) -> Any:
+    return next(
+        (
+            row.get("next_batch_id")
+            for row in workstreams
+            if int(row.get(field) or 0) > 0
+        ),
+        None,
+    )
+
+
+def _build_execution_readiness(
+    *,
+    source_url_update_required_rows: int,
+    representative_image_review_required_rows: int,
+    image_url_ready_rows: int,
+    workstreams: list[dict[str, Any]],
+    source_url_update_work_order: list[dict[str, Any]],
+) -> dict[str, Any]:
+    source_url_batch_id = _first_workstream_batch_id(
+        workstreams, "source_url_update_template_rows"
+    )
+    representative_batch_id = _first_workstream_batch_id(
+        workstreams, "representative_image_review_rows"
+    )
+    image_ready_batch_id = _first_workstream_batch_id(workstreams, "image_url_ready_rows")
+    blocked_before_image_import_rows = (
+        source_url_update_required_rows + representative_image_review_required_rows
+    )
+
+    if source_url_update_required_rows:
+        status = "source_url_replacement_required"
+        recommended_first_workstream = "replace_generic_source_then_extract_image"
+        recommended_first_batch_id = source_url_batch_id
+        blocking_reason = "Exact product source URLs must be confirmed before image URLs can be attached."
+    elif image_url_ready_rows:
+        status = "image_url_review_ready"
+        recommended_first_workstream = "extract_from_existing_source_url"
+        recommended_first_batch_id = image_ready_batch_id
+        blocking_reason = "Image URL rows are ready for manual evidence review before import."
+    elif representative_image_review_required_rows:
+        status = "representative_image_review_required"
+        recommended_first_workstream = "review_gotouchi_official_candidates"
+        recommended_first_batch_id = representative_batch_id
+        blocking_reason = "Representative candidates must be checked against exact product variants."
+    else:
+        status = "no_actionable_image_attachment_rows"
+        recommended_first_workstream = None
+        recommended_first_batch_id = None
+        blocking_reason = "No sampled rows are currently ready for image attachment work."
+
+    return {
+        "status": status,
+        "can_auto_apply_catalog_changes": False,
+        "can_import_image_urls_now": image_url_ready_rows > 0,
+        "requires_manual_review": True,
+        "image_url_ready_rows": image_url_ready_rows,
+        "source_url_replacement_required_rows": source_url_update_required_rows,
+        "source_url_update_work_order_count": len(source_url_update_work_order),
+        "representative_image_review_required_rows": representative_image_review_required_rows,
+        "blocked_before_image_import_rows": blocked_before_image_import_rows,
+        "recommended_first_workstream": recommended_first_workstream,
+        "recommended_first_batch_id": recommended_first_batch_id,
+        "blocking_reason": blocking_reason,
+        "evidence": {
+            "source_url_replacement_next_batch_id": source_url_batch_id,
+            "representative_review_next_batch_id": representative_batch_id,
+            "image_url_ready_next_batch_id": image_ready_batch_id,
+        },
+    }
+
+
+def _build_next_operator_actions(
+    *,
+    source_url_update_required_rows: int,
+    representative_image_review_required_rows: int,
+    image_url_ready_rows: int,
+    workstreams: list[dict[str, Any]],
+    source_url_update_work_order: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    actions: list[dict[str, Any]] = []
+
+    if source_url_update_required_rows:
+        actions.append(
+            {
+                "priority": 1,
+                "lane": "source_url_replacement_first",
+                "workflow": "replace_generic_source_then_extract_image",
+                "rows": source_url_update_required_rows,
+                "work_order_count": len(source_url_update_work_order),
+                "next_batch_id": _first_workstream_batch_id(
+                    workstreams, "source_url_update_template_rows"
+                ),
+                "status": "manual_source_url_confirmation_required",
+                "operator_step": "Fill source_url_import_template with exact product detail URLs before image attachment.",
+                "unblocks": "image_url_extraction_and_attachment_review",
+                "auto_apply_enabled": False,
+            }
+        )
+
+    if image_url_ready_rows:
+        actions.append(
+            {
+                "priority": 2,
+                "lane": "image_url_review_ready",
+                "workflow": "extract_from_existing_source_url",
+                "rows": image_url_ready_rows,
+                "next_batch_id": _first_workstream_batch_id(workstreams, "image_url_ready_rows"),
+                "status": "manual_image_url_confirmation_required",
+                "operator_step": "Confirm exact product image URLs and fill the image attachment template.",
+                "unblocks": "manual_catalog_image_url_import",
+                "auto_apply_enabled": False,
+            }
+        )
+
+    if representative_image_review_required_rows:
+        actions.append(
+            {
+                "priority": 3,
+                "lane": "representative_image_candidate_review",
+                "workflow": "review_gotouchi_official_candidates",
+                "rows": representative_image_review_required_rows,
+                "next_batch_id": _first_workstream_batch_id(
+                    workstreams, "representative_image_review_rows"
+                ),
+                "status": "manual_variant_confirmation_required",
+                "operator_step": "Confirm product type and variant before accepting representative official images.",
+                "unblocks": "manual_catalog_image_url_import",
+                "auto_apply_enabled": False,
+            }
+        )
+
+    return actions
+
+
 def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     template = item.get("catalog_field_import_template")
     template = template if isinstance(template, dict) else {}
@@ -396,6 +531,20 @@ def build_report(
     )
     image_url_ready_rows = sum(1 for item in action_items if item.get("image_url_ready"))
     source_url_update_work_order = _build_source_url_update_work_order(action_items)
+    execution_readiness = _build_execution_readiness(
+        source_url_update_required_rows=source_url_update_required_rows,
+        representative_image_review_required_rows=representative_image_review_required_rows,
+        image_url_ready_rows=image_url_ready_rows,
+        workstreams=workstreams,
+        source_url_update_work_order=source_url_update_work_order,
+    )
+    next_operator_actions = _build_next_operator_actions(
+        source_url_update_required_rows=source_url_update_required_rows,
+        representative_image_review_required_rows=representative_image_review_required_rows,
+        image_url_ready_rows=image_url_ready_rows,
+        workstreams=workstreams,
+        source_url_update_work_order=source_url_update_work_order,
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -436,8 +585,10 @@ def build_report(
             "Rows without source_url stay in catalog_image_enrichment_batches_public.json and source discovery queues.",
             "For generic storefront rows, fill source_url_import_template before the image_url template.",
         ],
+        "execution_readiness": execution_readiness,
         "workstreams": workstreams,
         "source_url_update_work_order": source_url_update_work_order,
+        "next_operator_actions": next_operator_actions,
         "next_actions": [
             {
                 "priority": 1,
