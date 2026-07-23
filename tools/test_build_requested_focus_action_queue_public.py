@@ -81,11 +81,31 @@ class BuildRequestedFocusActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["total_review_template_rows"], 3)
         self.assertEqual(report["summary"]["non_barcode_template_share"], 0.6667)
         self.assertEqual(dict(report["summary"]["field_counts"]), {"source_url": 1, "image_url": 1})
+        self.assertEqual(
+            dict(report["summary"]["blocked_reason_counts"]),
+            {
+                "missing_exact_source_url_for_requested_focus": 1,
+                "image_url_requires_confirmed_source_evidence": 1,
+            },
+        )
+        self.assertEqual(
+            report["summary"]["barcode_template_rows_excluded_blocked_reason"],
+            "barcode_research_deferred_from_requested_focus_action_queue",
+        )
         self.assertEqual(report["summary"]["action_batch_count"], 2)
         fields = [batch["missing_field"] for batch in report["batches"]]
         self.assertEqual(fields, ["source_url", "image_url"])
+        self.assertEqual(
+            report["batches"][0]["blocked_reason"],
+            "missing_exact_source_url_for_requested_focus",
+        )
+        self.assertIn("exact_official_or_trusted_product_source_url", report["batches"][0]["required_evidence"])
         queued_names = [item["name_ko"] for batch in report["batches"] for item in batch["items"]]
         self.assertEqual(queued_names, ["Acrylic Stand", "Nui"])
+        first_template = report["batches"][0]["items"][0]["catalog_field_import_template"]
+        self.assertEqual(first_template["blocked_until"], "exact_product_source_url_confirmed")
+        self.assertEqual(first_template["blocked_reason"], "missing_exact_source_url_for_requested_focus")
+        self.assertIn("manual_note_for_source_choice", first_template["required_evidence"])
 
     def test_max_batches_caps_published_batches_not_total_summary(self) -> None:
         review_batches = {
@@ -115,6 +135,10 @@ class BuildRequestedFocusActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unqueued_actionable_rows"], 3)
         self.assertEqual(report["summary"]["queue_coverage"], 0.4)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
+        self.assertEqual(
+            dict(report["summary"]["blocked_reason_counts"]),
+            {"price_requires_labeled_yen_evidence": 5},
+        )
 
 
 if __name__ == "__main__":
