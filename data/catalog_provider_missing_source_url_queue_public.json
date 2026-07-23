@@ -1,0 +1,525 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-23T05:33:50Z",
+  "scope": "catalog_provider_missing_source_url_queue",
+  "summary": {
+    "provider_missing_rows": 5,
+    "workstream_count": 2,
+    "by_source_store": [
+      [
+        "Weverse Shop",
+        3
+      ],
+      [
+        "포켓몬 센터",
+        2
+      ]
+    ],
+    "by_category": [
+      [
+        "포토카드",
+        3
+      ],
+      [
+        "인형",
+        1
+      ],
+      [
+        "트레이딩 카드",
+        1
+      ]
+    ],
+    "with_store_search_url": 5,
+    "with_site_query": 5,
+    "auto_apply_enabled": false
+  },
+  "instructions": [
+    "This queue covers rows where no store-specific candidate provider result exists.",
+    "Search hints are not evidence and must not be imported directly.",
+    "Use only official product/detail pages as confirmed source_url evidence.",
+    "After manual source URLs are confirmed, dry-run tools/import_confirmed_catalog_field_rows.py.",
+    "Then rebuild the image attachment queue to extract or confirm image_url."
+  ],
+  "workstreams": [
+    {
+      "source_store": "Weverse Shop",
+      "row_count": 3,
+      "storefront_url": "https://shop.weverse.io/home",
+      "site_query": "site:shop.weverse.io",
+      "store_search_url_count": 3,
+      "category_rows": [
+        [
+          "포토카드",
+          3
+        ]
+      ],
+      "rows": [
+        {
+          "row_index": 17613,
+          "catalog_index": 17613,
+          "source_store": "Weverse Shop",
+          "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "current_source_url": "https://shop.weverse.io/home",
+          "storefront_url": "https://shop.weverse.io/home",
+          "store_search_url": "https://shop.weverse.io/search?keyword=SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+          "site_query": "site:shop.weverse.io",
+          "fallback_search_queries": [
+            "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤) 포토카드\"",
+            "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤)\"",
+            "\"SEVENTEEN 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+            "SEVENTEEN 포토카드 (랜덤) 포토카드"
+          ],
+          "source_url_import_template": {
+            "row_index": 17613,
+            "catalog_index": 17613,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://shop.weverse.io/home",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-004",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 17622,
+          "catalog_index": 17622,
+          "source_store": "Weverse Shop",
+          "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "current_source_url": "https://shop.weverse.io/home",
+          "storefront_url": "https://shop.weverse.io/home",
+          "store_search_url": "https://shop.weverse.io/search?keyword=ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+          "site_query": "site:shop.weverse.io",
+          "fallback_search_queries": [
+            "site:shop.weverse.io \"ZEROBASEONE 포토카드 (랜덤) 포토카드\"",
+            "site:shop.weverse.io \"ZEROBASEONE 포토카드 (랜덤)\"",
+            "\"ZEROBASEONE 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+            "ZEROBASEONE 포토카드 (랜덤) 포토카드"
+          ],
+          "source_url_import_template": {
+            "row_index": 17622,
+            "catalog_index": 17622,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://shop.weverse.io/home",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-004",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 17623,
+          "catalog_index": 17623,
+          "source_store": "Weverse Shop",
+          "name_ko": "ILLIT 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "current_source_url": "https://shop.weverse.io/home",
+          "storefront_url": "https://shop.weverse.io/home",
+          "store_search_url": "https://shop.weverse.io/search?keyword=ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+          "site_query": "site:shop.weverse.io",
+          "fallback_search_queries": [
+            "site:shop.weverse.io \"ILLIT 포토카드 (랜덤) 포토카드\"",
+            "site:shop.weverse.io \"ILLIT 포토카드 (랜덤)\"",
+            "\"ILLIT 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+            "ILLIT 포토카드 (랜덤) 포토카드"
+          ],
+          "source_url_import_template": {
+            "row_index": 17623,
+            "catalog_index": 17623,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://shop.weverse.io/home",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-004",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Open store_search_url first when it is available.",
+        "If store search fails, use fallback_search_queries with site_query.",
+        "Confirm the exact product detail page, not a storefront, search page, or collection page.",
+        "Copy the verified official/detail URL into source_url_import_template.manual_value.",
+        "Set manual_confirmed=true only after title, product type, variant, and release context match."
+      ],
+      "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "포켓몬 센터",
+      "row_count": 2,
+      "storefront_url": "https://www.pokemoncenter-online.com/",
+      "site_query": "site:pokemoncenter-online.com",
+      "store_search_url_count": 2,
+      "category_rows": [
+        [
+          "인형",
+          1
+        ],
+        [
+          "트레이딩 카드",
+          1
+        ]
+      ],
+      "rows": [
+        {
+          "row_index": 1098,
+          "catalog_index": 1098,
+          "source_store": "포켓몬 센터",
+          "name_ko": "포켓몬 봉제 인형 (피카츄)",
+          "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://www.pokemoncenter-online.com/",
+          "storefront_url": "https://www.pokemoncenter-online.com/",
+          "store_search_url": "https://www.pokemoncenter-online.com/search/?keyword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29",
+          "site_query": "site:pokemoncenter-online.com",
+          "fallback_search_queries": [
+            "site:pokemoncenter-online.com \"ポケモン ぬいぐるみ (ピカチュウ) 인형\"",
+            "site:pokemoncenter-online.com \"포켓몬 봉제 인형 (피카츄)\"",
+            "\"ポケモン ぬいぐるみ (ピカチュウ) 인형\" \"포켓몬 센터\"",
+            "ポケモン ぬいぐるみ (ピカチュウ) 인형"
+          ],
+          "source_url_import_template": {
+            "row_index": 1098,
+            "catalog_index": 1098,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://www.pokemoncenter-online.com/",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-005",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 17593,
+          "catalog_index": 17593,
+          "source_store": "포켓몬 센터",
+          "name_ko": "포켓몬 카드 게임 부스터 팩",
+          "name_ja": null,
+          "series_name": null,
+          "category": "트레이딩 카드",
+          "current_source_url": "https://www.pokemoncenter-online.com/",
+          "storefront_url": "https://www.pokemoncenter-online.com/",
+          "store_search_url": "https://www.pokemoncenter-online.com/search/?keyword=%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9",
+          "site_query": "site:pokemoncenter-online.com",
+          "fallback_search_queries": [
+            "site:pokemoncenter-online.com \"포켓몬 카드 게임 부스터 팩 트레이딩 카드\"",
+            "site:pokemoncenter-online.com \"포켓몬 카드 게임 부스터 팩\"",
+            "\"포켓몬 카드 게임 부스터 팩 트레이딩 카드\" \"포켓몬 센터\"",
+            "포켓몬 카드 게임 부스터 팩 트레이딩 카드"
+          ],
+          "source_url_import_template": {
+            "row_index": 17593,
+            "catalog_index": 17593,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://www.pokemoncenter-online.com/",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-005",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Open store_search_url first when it is available.",
+        "If store search fails, use fallback_search_queries with site_query.",
+        "Confirm the exact product detail page, not a storefront, search page, or collection page.",
+        "Copy the verified official/detail URL into source_url_import_template.manual_value.",
+        "Set manual_confirmed=true only after title, product type, variant, and release context match."
+      ],
+      "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+      "auto_apply_enabled": false
+    }
+  ],
+  "items": [
+    {
+      "row_index": 17613,
+      "catalog_index": 17613,
+      "source_store": "Weverse Shop",
+      "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+      "name_ja": null,
+      "series_name": null,
+      "category": "포토카드",
+      "current_source_url": "https://shop.weverse.io/home",
+      "storefront_url": "https://shop.weverse.io/home",
+      "store_search_url": "https://shop.weverse.io/search?keyword=SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+      "site_query": "site:shop.weverse.io",
+      "fallback_search_queries": [
+        "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤) 포토카드\"",
+        "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤)\"",
+        "\"SEVENTEEN 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+        "SEVENTEEN 포토카드 (랜덤) 포토카드"
+      ],
+      "source_url_import_template": {
+        "row_index": 17613,
+        "catalog_index": 17613,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://shop.weverse.io/home",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_candidate_provider_result",
+        "manual_or_provider_refresh_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-004",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 17622,
+      "catalog_index": 17622,
+      "source_store": "Weverse Shop",
+      "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
+      "name_ja": null,
+      "series_name": null,
+      "category": "포토카드",
+      "current_source_url": "https://shop.weverse.io/home",
+      "storefront_url": "https://shop.weverse.io/home",
+      "store_search_url": "https://shop.weverse.io/search?keyword=ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+      "site_query": "site:shop.weverse.io",
+      "fallback_search_queries": [
+        "site:shop.weverse.io \"ZEROBASEONE 포토카드 (랜덤) 포토카드\"",
+        "site:shop.weverse.io \"ZEROBASEONE 포토카드 (랜덤)\"",
+        "\"ZEROBASEONE 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+        "ZEROBASEONE 포토카드 (랜덤) 포토카드"
+      ],
+      "source_url_import_template": {
+        "row_index": 17622,
+        "catalog_index": 17622,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://shop.weverse.io/home",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_candidate_provider_result",
+        "manual_or_provider_refresh_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-004",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 17623,
+      "catalog_index": 17623,
+      "source_store": "Weverse Shop",
+      "name_ko": "ILLIT 포토카드 (랜덤)",
+      "name_ja": null,
+      "series_name": null,
+      "category": "포토카드",
+      "current_source_url": "https://shop.weverse.io/home",
+      "storefront_url": "https://shop.weverse.io/home",
+      "store_search_url": "https://shop.weverse.io/search?keyword=ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+      "site_query": "site:shop.weverse.io",
+      "fallback_search_queries": [
+        "site:shop.weverse.io \"ILLIT 포토카드 (랜덤) 포토카드\"",
+        "site:shop.weverse.io \"ILLIT 포토카드 (랜덤)\"",
+        "\"ILLIT 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+        "ILLIT 포토카드 (랜덤) 포토카드"
+      ],
+      "source_url_import_template": {
+        "row_index": 17623,
+        "catalog_index": 17623,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://shop.weverse.io/home",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_candidate_provider_result",
+        "manual_or_provider_refresh_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-004",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 1098,
+      "catalog_index": 1098,
+      "source_store": "포켓몬 센터",
+      "name_ko": "포켓몬 봉제 인형 (피카츄)",
+      "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://www.pokemoncenter-online.com/",
+      "storefront_url": "https://www.pokemoncenter-online.com/",
+      "store_search_url": "https://www.pokemoncenter-online.com/search/?keyword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29",
+      "site_query": "site:pokemoncenter-online.com",
+      "fallback_search_queries": [
+        "site:pokemoncenter-online.com \"ポケモン ぬいぐるみ (ピカチュウ) 인형\"",
+        "site:pokemoncenter-online.com \"포켓몬 봉제 인형 (피카츄)\"",
+        "\"ポケモン ぬいぐるみ (ピカチュウ) 인형\" \"포켓몬 센터\"",
+        "ポケモン ぬいぐるみ (ピカチュウ) 인형"
+      ],
+      "source_url_import_template": {
+        "row_index": 1098,
+        "catalog_index": 1098,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://www.pokemoncenter-online.com/",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_candidate_provider_result",
+        "manual_or_provider_refresh_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-005",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 17593,
+      "catalog_index": 17593,
+      "source_store": "포켓몬 센터",
+      "name_ko": "포켓몬 카드 게임 부스터 팩",
+      "name_ja": null,
+      "series_name": null,
+      "category": "트레이딩 카드",
+      "current_source_url": "https://www.pokemoncenter-online.com/",
+      "storefront_url": "https://www.pokemoncenter-online.com/",
+      "store_search_url": "https://www.pokemoncenter-online.com/search/?keyword=%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9",
+      "site_query": "site:pokemoncenter-online.com",
+      "fallback_search_queries": [
+        "site:pokemoncenter-online.com \"포켓몬 카드 게임 부스터 팩 트레이딩 카드\"",
+        "site:pokemoncenter-online.com \"포켓몬 카드 게임 부스터 팩\"",
+        "\"포켓몬 카드 게임 부스터 팩 트레이딩 카드\" \"포켓몬 센터\"",
+        "포켓몬 카드 게임 부스터 팩 트레이딩 카드"
+      ],
+      "source_url_import_template": {
+        "row_index": 17593,
+        "catalog_index": 17593,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://www.pokemoncenter-online.com/",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_candidate_provider_result",
+        "manual_or_provider_refresh_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-005",
+      "auto_apply_enabled": false
+    }
+  ],
+  "automation_policy": {
+    "auto_apply_source_url": false,
+    "requires_manual_review": true,
+    "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+    "private_collection_storage": "local_device_only"
+  }
+}
