@@ -202,10 +202,54 @@ def summarize_source_stores(groups: list[dict[str, Any]], limit: int = 30) -> li
     return sorted(rows_out, key=lambda row: (int(row["priority"]), -int(row["missing_image_rows"]), str(row["source_store"])))[:limit]
 
 
+def build_source_discovery_work_packs(groups: list[dict[str, Any]], limit: int = 16) -> list[dict[str, Any]]:
+    packs: list[dict[str, Any]] = []
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        if str(group.get("workflow") or "") != "find_source_then_extract_image":
+            continue
+        source_store = str(group.get("source_store") or "").strip()
+        samples = [
+            compact_sample(group, item)
+            for item in group.get("sample_items") or []
+            if isinstance(item, dict)
+        ]
+        category_counts = Counter(str(item.get("category") or "") for item in samples)
+        affiliation_counts = Counter(str(item.get("affiliation") or "") for item in samples)
+        packs.append(
+            {
+                "pack_id": f"missing-image-source-discovery-{len(packs) + 1:03d}",
+                "source_store": source_store,
+                "row_count": int(group.get("missing_image_rows") or 0),
+                "priority": int(group.get("priority") or READINESS_ORDER["source_url_discovery_required"]),
+                "official_search_available": bool(group.get("official_search_available")),
+                "next_step": "confirm_exact_source_url_then_fill_source_templates",
+                "template": "source_discovery_focus_confirmed_template_public.json",
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                "review_checklist": [
+                    "Open official_search_url for each sample item.",
+                    "Confirm the exact official product detail page, not a search/listing page.",
+                    "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
+                    "Attach image_url only after exact source_url is confirmed.",
+                ],
+                "sample_category_counts": counter_rows(category_counts, "category", limit=8),
+                "sample_affiliation_counts": counter_rows(affiliation_counts, "affiliation", limit=8),
+                "sample_items": samples[:10],
+            }
+        )
+    packs.sort(key=lambda row: (int(row["priority"]), -int(row["row_count"]), str(row["source_store"])))
+    for rank, row in enumerate(packs[:limit], start=1):
+        row["rank"] = rank
+    return packs[:limit]
+
+
 def build_work_order(
     summary: dict[str, Any],
     readiness_rows: list[dict[str, Any]],
     source_store_priority: list[dict[str, Any]],
+    source_discovery_work_packs: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     readiness_by_name = {str(row.get("readiness") or ""): row for row in readiness_rows}
     source_discovery_row = readiness_by_name.get("source_url_discovery_required", {})
@@ -246,6 +290,7 @@ def build_work_order(
         template: str,
         notes: list[str] | None = None,
         top_stores: list[dict[str, Any]] | None = None,
+        top_work_packs: list[dict[str, Any]] | None = None,
     ) -> None:
         if row_count <= 0:
             return
@@ -258,6 +303,7 @@ def build_work_order(
                 "next_step": next_step,
                 "template": template,
                 "top_source_stores": top_stores or [],
+                "top_work_packs": top_work_packs or [],
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
                 "notes": notes or [],
@@ -291,6 +337,7 @@ def build_work_order(
         next_step="confirm_exact_source_url_then_fill_source_templates",
         template="source_discovery_focus_confirmed_template_public.json",
         top_stores=top_source_discovery_stores,
+        top_work_packs=(source_discovery_work_packs or [])[:8],
         notes=[
             "Focus packs cover the highest-volume official-store gaps before broad manual research.",
             "If no focus pack is active yet, this lane falls back to every source_url_discovery_required missing-image row.",
@@ -499,6 +546,7 @@ def build_report(
     base_readiness_rows = summarize_groups(groups)
     readiness_rows = append_source_detail_readiness(base_readiness_rows, source_detail_missing)
     source_store_priority = summarize_source_stores(groups)
+    source_discovery_work_packs = build_source_discovery_work_packs(groups)
     readiness_total = sum(int(row.get("rows") or 0) for row in base_readiness_rows)
     missing_image_rows = int(summary.get("missing_image_rows") or readiness_total)
 
@@ -571,9 +619,11 @@ def build_report(
             image_attachment_template_dry_run_summary.get("skipped_rows") or 0
         ),
         "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_ready),
+        "source_discovery_work_pack_count": len(source_discovery_work_packs),
+        "source_discovery_work_pack_rows": sum(int(row.get("row_count") or 0) for row in source_discovery_work_packs),
         "auto_apply_enabled": False,
     }
-    work_order = build_work_order(summary_out, readiness_rows, source_store_priority)
+    work_order = build_work_order(summary_out, readiness_rows, source_store_priority, source_discovery_work_packs)
 
     return {
         "schema_version": 1,
@@ -582,6 +632,7 @@ def build_report(
         "summary": summary_out,
         "readiness": readiness_rows,
         "source_store_priority": source_store_priority,
+        "source_discovery_work_packs": source_discovery_work_packs,
         "work_order": work_order,
         "recommended_order": [
             "source_url_replacement_required",
@@ -597,6 +648,7 @@ def build_report(
             "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
             "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",
             "source_discovery_focus_template_rows is a blank public confirmation template; import remains dry-run safe until rows are manually confirmed.",
+            "source_discovery_work_packs split the largest missing-image source discovery lane into practical store packs.",
             "image_attachment_template_rows is a blank public image confirmation template for the direct image action queue.",
             "All image changes remain manual-review only until exact product identity is confirmed.",
         ],

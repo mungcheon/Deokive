@@ -162,6 +162,15 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["image_attachment_template_dry_run_skipped_rows"], 2)
         self.assertEqual(report["summary"]["action_queue_rows"], 3)
         self.assertEqual(report["summary"]["actionable_image_rows"], 4)
+        self.assertEqual(report["summary"]["source_discovery_work_pack_count"], 1)
+        self.assertEqual(report["summary"]["source_discovery_work_pack_rows"], 1)
+        work_packs = report["source_discovery_work_packs"]
+        self.assertEqual(len(work_packs), 1)
+        self.assertEqual(work_packs[0]["source_store"], "Store C")
+        self.assertEqual(work_packs[0]["row_count"], 1)
+        self.assertTrue(work_packs[0]["manual_confirmation_required"])
+        self.assertFalse(work_packs[0]["auto_apply_enabled"])
+        self.assertEqual(work_packs[0]["sample_items"][0]["catalog_index"], 3)
         readiness = {row["readiness"]: row["rows"] for row in report["readiness"]}
         self.assertEqual(readiness["image_url_candidate_review"], 1)
         self.assertEqual(readiness["source_detail_candidate_review"], 1)
@@ -195,6 +204,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(work_order[0]["row_count"], 1)
         self.assertEqual(work_order[1]["row_count"], 1)
         self.assertEqual(work_order[2]["row_count"], 4)
+        self.assertEqual(work_order[2]["top_work_packs"][0]["source_store"], "Store C")
         self.assertFalse(work_order[0]["auto_apply_enabled"])
         self.assertTrue(work_order[0]["manual_confirmation_required"])
 
@@ -234,6 +244,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(discover["row_count"], 4)
         self.assertEqual(discover["top_source_stores"][0]["source_store"], "Animate")
         self.assertEqual(discover["top_source_stores"][0]["missing_image_rows"], 3)
+        self.assertEqual(report["summary"]["source_discovery_work_pack_count"], 2)
+        self.assertEqual(report["summary"]["source_discovery_work_pack_rows"], 4)
+        self.assertEqual(report["source_discovery_work_packs"][0]["source_store"], "Animate")
+        self.assertEqual(report["source_discovery_work_packs"][0]["row_count"], 3)
+        self.assertEqual(discover["top_work_packs"][0]["source_store"], "Animate")
+        self.assertEqual(discover["top_work_packs"][0]["row_count"], 3)
         self.assertIn("falls back", discover["notes"][1])
 
 
