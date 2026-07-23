@@ -97,6 +97,15 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                             "current_catalog_state": {"catalog_has_display_image": False},
                         },
                         {
+                            "catalog_index": 8,
+                            "name_ko": "Safe ready",
+                            "source_store": "Store F",
+                            "candidate_title": "Safe ready",
+                            "candidate_identity_flags": [],
+                            "recommended_action": "priority_manual_review_safe_source_image_candidate",
+                            "current_catalog_state": {"catalog_has_display_image": False},
+                        },
+                        {
                             "catalog_index": 6,
                             "name_ko": "Already solved",
                             "source_store": "Store E",
@@ -127,10 +136,11 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unclassified_rows"], 0)
         self.assertEqual(report["summary"]["exact_source_ready_rows"], 1)
         self.assertEqual(report["summary"]["source_first_rows"], 3)
-        self.assertEqual(report["summary"]["source_detail_candidate_review_rows"], 0)
+        self.assertEqual(report["summary"]["source_detail_candidate_review_rows"], 1)
         self.assertEqual(report["summary"]["source_detail_candidate_recheck_required_rows"], 2)
         self.assertEqual(report["summary"]["source_detail_identity_warning_rows"], 2)
-        self.assertEqual(report["summary"]["source_detail_unflagged_candidate_rows"], 0)
+        self.assertEqual(report["summary"]["source_detail_unflagged_candidate_rows"], 1)
+        self.assertEqual(report["summary"]["source_detail_ready_unflagged_candidate_rows"], 1)
         self.assertEqual(report["summary"]["manual_image_research_rows"], 1)
         self.assertEqual(report["summary"]["source_discovery_focus_pack_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_focus_pack_count"], 2)
@@ -150,10 +160,11 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["image_attachment_template_representative_review_rows"], 1)
         self.assertEqual(report["summary"]["image_attachment_template_dry_run_updated_rows"], 0)
         self.assertEqual(report["summary"]["image_attachment_template_dry_run_skipped_rows"], 2)
-        self.assertEqual(report["summary"]["action_queue_rows"], 2)
-        self.assertEqual(report["summary"]["actionable_image_rows"], 3)
+        self.assertEqual(report["summary"]["action_queue_rows"], 3)
+        self.assertEqual(report["summary"]["actionable_image_rows"], 4)
         readiness = {row["readiness"]: row["rows"] for row in report["readiness"]}
         self.assertEqual(readiness["image_url_candidate_review"], 1)
+        self.assertEqual(readiness["source_detail_candidate_review"], 1)
         self.assertEqual(readiness["source_detail_candidate_recheck_required"], 2)
         source_detail_row = next(row for row in report["readiness"] if row["readiness"] == "source_detail_candidate_recheck_required")
         self.assertEqual(source_detail_row["sample_items"][0]["candidate_identity_flags"], ["only_generic_shared_tokens"])
@@ -173,6 +184,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(
             [row["lane"] for row in work_order],
             [
+                "confirm_source_detail_candidates",
                 "replace_generic_source_urls",
                 "discover_exact_source_urls",
                 "review_representative_images",
@@ -181,7 +193,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             ],
         )
         self.assertEqual(work_order[0]["row_count"], 1)
-        self.assertEqual(work_order[1]["row_count"], 4)
+        self.assertEqual(work_order[1]["row_count"], 1)
+        self.assertEqual(work_order[2]["row_count"], 4)
         self.assertFalse(work_order[0]["auto_apply_enabled"])
         self.assertTrue(work_order[0]["manual_confirmation_required"])
 

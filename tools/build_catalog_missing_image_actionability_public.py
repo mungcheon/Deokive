@@ -352,10 +352,15 @@ def append_source_detail_readiness(
     readiness_rows: list[dict[str, Any]],
     source_detail_missing: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
+    ready_actions = {
+        "confirm_exact_identity_before_source_or_image_patch",
+        "priority_manual_confirm_source_and_image_patch",
+        "priority_manual_review_safe_source_image_candidate",
+    }
     ready_items = [
         item
         for item in source_detail_missing
-        if item.get("recommended_action") == "confirm_exact_identity_before_source_or_image_patch"
+        if item.get("recommended_action") in ready_actions
     ]
     recheck_items = [
         item
@@ -479,7 +484,12 @@ def build_report(
     source_detail_ready = [
         item
         for item in source_detail_missing
-        if item.get("recommended_action") == "confirm_exact_identity_before_source_or_image_patch"
+        if item.get("recommended_action")
+        in {
+            "confirm_exact_identity_before_source_or_image_patch",
+            "priority_manual_confirm_source_and_image_patch",
+            "priority_manual_review_safe_source_image_candidate",
+        }
     ]
     source_detail_recheck = [
         item
@@ -520,7 +530,12 @@ def build_report(
         "source_detail_identity_warning_rows": sum(
             1 for item in source_detail_missing if item.get("candidate_identity_flags")
         ),
-        "source_detail_unflagged_candidate_rows": len(source_detail_ready),
+        "source_detail_unflagged_candidate_rows": sum(
+            1 for item in source_detail_missing if not item.get("candidate_identity_flags")
+        ),
+        "source_detail_ready_unflagged_candidate_rows": sum(
+            1 for item in source_detail_ready if not item.get("candidate_identity_flags")
+        ),
         "manual_image_research_rows": int(summary.get("manual_image_research_rows") or 0),
         "source_discovery_focus_pack_rows": int(focus_summary.get("focus_source_rows") or 0),
         "source_discovery_focus_pack_count": int(focus_summary.get("focus_pack_count") or 0),
