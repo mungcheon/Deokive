@@ -468,6 +468,22 @@ def build_report(payload: dict[str, Any], catalog_payload: dict[str, Any] | list
             str(candidate.get("rule_id") or ""),
         )
     )
+    starter_confirmed_queue = {
+        "schema_version": 1,
+        "source_report": str(DEFAULT_OUTPUT.relative_to(ROOT)).replace("\\", "/"),
+        "target_queue": CONFIRMED_QUEUE,
+        "import_tool": IMPORT_TOOL,
+        "manual_confirmed_default": False,
+        "instructions": [
+            "Review each item, then set manual_confirmed=true only for rules whose keywords match the goods type.",
+            "Save confirmed items to server/animation_category_name_split_confirmed_rows.json before running the import tool.",
+            "Keep count checks enabled unless the catalog was regenerated after this report.",
+        ],
+        "items": [
+            dict(candidate.get("manual_confirmation_template") or {})
+            for candidate in candidate_priority_queue
+        ],
+    }
     family_counts = Counter(
         candidate["target_family"] for row in rows for candidate in row.get("split_candidates", [])
     )
@@ -493,6 +509,7 @@ def build_report(payload: dict[str, Any], catalog_payload: dict[str, Any] | list
             "unmatched_catalog_rows": unmatched_catalog_rows,
             "by_target_family": family_counts.most_common(),
             "candidate_priority_rows": len(candidate_priority_queue),
+            "starter_confirmed_queue_rows": len(starter_confirmed_queue["items"]),
             "top_candidate_expected_update_rows": int(
                 candidate_priority_queue[0].get("expected_update_rows") or 0
             )
@@ -509,6 +526,7 @@ def build_report(payload: dict[str, Any], catalog_payload: dict[str, Any] | list
         },
         "review_items": rows,
         "candidate_priority_queue": candidate_priority_queue,
+        "starter_confirmed_queue": starter_confirmed_queue,
         "automation_policy": {
             "auto_apply_category_changes": False,
             "auto_create_folders": False,

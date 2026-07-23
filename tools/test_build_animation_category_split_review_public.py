@@ -86,6 +86,7 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["matched_catalog_rows"], 2)
         self.assertEqual(report["summary"]["unmatched_catalog_rows"], 1)
         self.assertEqual(report["summary"]["candidate_priority_rows"], 4)
+        self.assertEqual(report["summary"]["starter_confirmed_queue_rows"], 4)
         self.assertEqual(report["summary"]["top_candidate_expected_update_rows"], 1)
         self.assertEqual(report["summary"]["top_candidate_source_category"], "굿즈")
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
@@ -125,6 +126,13 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
             priority["manual_confirmation_template"]["blocked_until"],
             "name_level_split_manually_confirmed",
         )
+        starter = report["starter_confirmed_queue"]
+        self.assertEqual(starter["target_queue"], "server/animation_category_name_split_confirmed_rows.json")
+        self.assertEqual(starter["import_tool"], "tools/import_confirmed_animation_category_rows.py")
+        self.assertFalse(starter["manual_confirmed_default"])
+        self.assertEqual(starter["items"][0]["manual_confirmed"], False)
+        self.assertEqual(starter["items"][0]["source_category"], priority["source_category"])
+        self.assertEqual(starter["items"][0]["target_category"], priority["target_category"])
 
     def test_unicode_stationery_and_tableware_split_rules_are_available(self) -> None:
         rules = {rule["rule_id"]: rule for rule in split_review.SPLIT_RULES}
