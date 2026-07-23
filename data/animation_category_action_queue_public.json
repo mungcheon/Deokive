@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T13:17:17Z",
+  "generated_at": "2026-07-23T13:25:42Z",
   "scope": "animation_category_action_queue",
   "summary": {
     "actionable_categories": 1,
     "queued_categories": 1,
-    "actionable_catalog_rows": 109,
-    "queued_catalog_rows": 109,
+    "actionable_catalog_rows": 22,
+    "queued_catalog_rows": 22,
     "action_batch_count": 1,
     "batch_size": 6,
     "max_categories": 24,
@@ -56,7 +56,7 @@
     "split_first_blocked_categories": [
       "굿즈"
     ],
-    "unmatched_keyword_review_rows": 2430,
+    "unmatched_keyword_review_rows": 1811,
     "unmatched_keyword_candidate_count": 20,
     "unmatched_keyword_product_type_candidate_count": 0,
     "auto_apply_enabled": false
@@ -2847,7 +2847,7 @@
       "lane": "name_level_split_review",
       "source": "animation_category_split_review_public.json",
       "category_count": 1,
-      "affected_catalog_rows": 109,
+      "affected_catalog_rows": 22,
       "next_step": "confirm_animation_category_name_split_templates",
       "template": "server/animation_category_name_split_confirmed_rows.template.json",
       "blocked_direct_mapping_categories": [
@@ -2871,7 +2871,7 @@
       "rank": 3,
       "lane": "unmatched_keyword_review",
       "source": "animation_category_unmatched_keyword_review_public.json",
-      "affected_catalog_rows": 2430,
+      "affected_catalog_rows": 1811,
       "token_candidate_count": 20,
       "product_type_candidate_count": 0,
       "top_product_type_candidate_count": 0,
@@ -2898,7 +2898,7 @@
       "batch_id": "animation-category-action-001",
       "priority": 70,
       "category_count": 1,
-      "affected_catalog_rows": 109,
+      "affected_catalog_rows": 22,
       "family_counts": [
         [
           "other",
@@ -2920,7 +2920,7 @@
       "categories": [
         {
           "category": "굿즈",
-          "rows": 109,
+          "rows": 22,
           "review_priority": 70,
           "mapping_mode": "name_level_split_review_required",
           "requires_name_level_split_review": true,
@@ -2931,40 +2931,24 @@
           "suggested_primary_icon_key": "category",
           "review_reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
           "review_summary": {
-            "affected_catalog_rows": 109,
+            "affected_catalog_rows": 22,
             "mapping_mode": "name_level_split_review_required",
             "requires_name_level_split_review": true,
             "sample_name_count": 8,
-            "name_split_hint_count": 1,
-            "name_split_hints": [
-              {
-                "hint_key": "stationery",
-                "matched_sample_names": 1,
-                "sample_names": [
-                  "一番くじ 葬送のフリーレン - G賞 魔導書風ノート"
-                ]
-              }
-            ],
+            "name_split_hint_count": 0,
+            "name_split_hints": [],
             "recommended_review_path": "review_name_split_hints_before_category_mapping"
           },
-          "name_split_hints": [
-            {
-              "hint_key": "stationery",
-              "matched_sample_names": 1,
-              "sample_names": [
-                "一番くじ 葬送のフリーレン - G賞 魔導書風ノート"
-              ]
-            }
-          ],
+          "name_split_hints": [],
           "sample_names": [
-            "一番くじ 葬送のフリーレン - B賞 メタリックビジュアルシート",
-            "一番くじ 葬送のフリーレン - G賞 魔導書風ノート",
-            "一番くじ 呪術廻戦 死滅回游 ～弐～ - L賞 ぽこっとちゃーむ",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-1賞 SOFVICちゅ 緑谷出久",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-2賞 SOFVICちゅ 爆豪勝己",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-3賞 SOFVICちゅ 麗日お茶子",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-5賞 SOFVICちゅ オールマイト"
+            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - G賞 クリアアイテムアソート（1/15）",
+            "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
+            "一番くじ 僕のヒーローアカデミア 相反する思い - F賞 銅像オールマイト MASTERELIVE COLLECTION",
+            "一番くじ 僕のヒーローアカデミア～After The Fight～ - A賞 スペシャルシーンセレクション",
+            "一番くじ 僕のヒーローアカデミア～雄英体育祭！～ - C賞 観客席応援セット",
+            "一番くじ 僕のヒーローアカデミア～休み時間！～ - A賞 アルバム委員一押し！1-Aアルバム",
+            "一番くじ 僕のヒーローアカデミア～WHITE OR BLACK！～ - F賞 ラバーストラップ",
+            "一番くじ 僕のヒーローアカデミア～WHITE OR BLACK！～ - ラストワン賞 缶ケース入りスペシャルバッジセット"
           ],
           "category_mapping_template": {
             "manual_confirmed": false,
@@ -2989,7 +2973,7 @@
               "source",
               "dashboard"
             ],
-            "affected_catalog_rows": 109,
+            "affected_catalog_rows": 22,
             "blocked_until": "name_level_split_rules_manually_confirmed",
             "blocked_reason": "broad_source_category_requires_name_level_split",
             "required_evidence": [

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T13:17:17Z",
+  "generated_at": "2026-07-23T13:25:41Z",
   "summary": {
     "batch_count": 152,
     "max_published_batches": 160,
-    "summed_batch_rows": 23625,
+    "summed_batch_rows": 22745,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -283,14 +283,14 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2499,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 109,
-      "animation_category_action_rows": 109,
+      "animation_category_review_rows": 22,
+      "animation_category_action_rows": 22,
       "animation_category_split_review_categories": 1,
       "animation_category_direct_mapping_categories": 0,
-      "animation_category_name_split_rows": 109,
+      "animation_category_name_split_rows": 22,
       "animation_category_name_split_candidates": 0,
-      "animation_category_name_split_unmatched_catalog_rows": 2430,
-      "animation_category_unmatched_keyword_rows": 2430,
+      "animation_category_name_split_unmatched_catalog_rows": 1811,
+      "animation_category_unmatched_keyword_rows": 1811,
       "animation_category_unmatched_keyword_candidates": 20,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
       "ichiban_prize_name_image_review_rows": 29,
@@ -8011,7 +8011,7 @@
       "priority": 22,
       "title": "애니메이션 카테고리 매핑 템플릿 확인: animation-category-action-001",
       "public_report": "data/animation_category_action_queue_public.json",
-      "rows": 109,
+      "rows": 22,
       "recommended_action": "Split name-level review categories first, then confirm direct category-to-folder mapping templates.",
       "acceptance_criteria": [
         "Each category_mapping_template remains manual_confirmed=false until sample names are reviewed.",
@@ -8021,7 +8021,7 @@
       "sample_items": [
         {
           "category": "굿즈",
-          "rows": 109,
+          "rows": 22,
           "review_priority": 70,
           "mapping_mode": "name_level_split_review_required",
           "requires_name_level_split_review": true,
@@ -8032,40 +8032,24 @@
           "suggested_primary_icon_key": "category",
           "review_reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
           "review_summary": {
-            "affected_catalog_rows": 109,
+            "affected_catalog_rows": 22,
             "mapping_mode": "name_level_split_review_required",
             "requires_name_level_split_review": true,
             "sample_name_count": 8,
-            "name_split_hint_count": 1,
-            "name_split_hints": [
-              {
-                "hint_key": "stationery",
-                "matched_sample_names": 1,
-                "sample_names": [
-                  "一番くじ 葬送のフリーレン - G賞 魔導書風ノート"
-                ]
-              }
-            ],
+            "name_split_hint_count": 0,
+            "name_split_hints": [],
             "recommended_review_path": "review_name_split_hints_before_category_mapping"
           },
-          "name_split_hints": [
-            {
-              "hint_key": "stationery",
-              "matched_sample_names": 1,
-              "sample_names": [
-                "一番くじ 葬送のフリーレン - G賞 魔導書風ノート"
-              ]
-            }
-          ],
+          "name_split_hints": [],
           "sample_names": [
-            "一番くじ 葬送のフリーレン - B賞 メタリックビジュアルシート",
-            "一番くじ 葬送のフリーレン - G賞 魔導書風ノート",
-            "一番くじ 呪術廻戦 死滅回游 ～弐～ - L賞 ぽこっとちゃーむ",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-1賞 SOFVICちゅ 緑谷出久",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-2賞 SOFVICちゅ 爆豪勝己",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-3賞 SOFVICちゅ 麗日お茶子",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-5賞 SOFVICちゅ オールマイト"
+            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - G賞 クリアアイテムアソート（1/15）",
+            "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
+            "一番くじ 僕のヒーローアカデミア 相反する思い - F賞 銅像オールマイト MASTERELIVE COLLECTION",
+            "一番くじ 僕のヒーローアカデミア～After The Fight～ - A賞 スペシャルシーンセレクション",
+            "一番くじ 僕のヒーローアカデミア～雄英体育祭！～ - C賞 観客席応援セット",
+            "一番くじ 僕のヒーローアカデミア～休み時間！～ - A賞 アルバム委員一押し！1-Aアルバム",
+            "一番くじ 僕のヒーローアカデミア～WHITE OR BLACK！～ - F賞 ラバーストラップ",
+            "一番くじ 僕のヒーローアカデミア～WHITE OR BLACK！～ - ラストワン賞 缶ケース入りスペシャルバッジセット"
           ],
           "category_mapping_template": {
             "manual_confirmed": false,
@@ -8090,7 +8074,7 @@
               "source",
               "dashboard"
             ],
-            "affected_catalog_rows": 109,
+            "affected_catalog_rows": 22,
             "blocked_until": "name_level_split_rules_manually_confirmed",
             "blocked_reason": "broad_source_category_requires_name_level_split",
             "required_evidence": [
@@ -8727,7 +8711,7 @@
       "priority": 26,
       "title": "애니메이션 이름별 세부 분류 확인: 굿즈",
       "public_report": "data/animation_category_split_review_public.json",
-      "rows": 109,
+      "rows": 22,
       "recommended_action": "Confirm name keyword templates before applying broad category split rules to catalog rows.",
       "acceptance_criteria": [
         "Each name_level_split_template remains manual_confirmed=false until item names are reviewed.",
@@ -12155,7 +12139,7 @@
           "name_ko": "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
           "name_ja": "A賞 虎杖悠仁ビジュアルクロス",
           "series_name": "一番くじ 呪術廻戦 －オンライン－",
-          "category": "굿즈",
+          "category": "태피스트리",
           "source_store": "이치방쿠지",
           "source_url": "https://1kuji.com/products/jujutsu-o",
           "official_search_url": null
@@ -12165,7 +12149,7 @@
           "name_ko": "一番くじ 呪術廻戦 －オンライン－ - B賞 伏黒恵ビジュアルクロス",
           "name_ja": "B賞 伏黒恵ビジュアルクロス",
           "series_name": "一番くじ 呪術廻戦 －オンライン－",
-          "category": "굿즈",
+          "category": "태피스트리",
           "source_store": "이치방쿠지",
           "source_url": "https://1kuji.com/products/jujutsu-o",
           "official_search_url": null
@@ -12175,7 +12159,7 @@
           "name_ko": "一番くじ 呪術廻戦 －オンライン－ - C賞 釘崎野薔薇ビジュアルクロス",
           "name_ja": "C賞 釘崎野薔薇ビジュアルクロス",
           "series_name": "一番くじ 呪術廻戦 －オンライン－",
-          "category": "굿즈",
+          "category": "태피스트리",
           "source_store": "이치방쿠지",
           "source_url": "https://1kuji.com/products/jujutsu-o",
           "official_search_url": null
@@ -12185,7 +12169,7 @@
           "name_ko": "一番くじ 呪術廻戦 －オンライン－ - D賞 五条悟ビジュアルクロス",
           "name_ja": "D賞 五条悟ビジュアルクロス",
           "series_name": "一番くじ 呪術廻戦 －オンライン－",
-          "category": "굿즈",
+          "category": "태피스트리",
           "source_store": "이치방쿠지",
           "source_url": "https://1kuji.com/products/jujutsu-o",
           "official_search_url": null
@@ -12195,7 +12179,7 @@
           "name_ko": "一番くじ 呪術廻戦 －オンライン－ - E賞 クリアボトル",
           "name_ja": "E賞 クリアボトル",
           "series_name": "一番くじ 呪術廻戦 －オンライン－",
-          "category": "굿즈",
+          "category": "생활잡화",
           "source_store": "이치방쿠지",
           "source_url": "https://1kuji.com/products/jujutsu-o",
           "official_search_url": null
@@ -15477,7 +15461,7 @@
       "priority": 34,
       "title": "애니메이션 미매칭 키워드 후보 검수: 굿즈",
       "public_report": "data/animation_category_unmatched_keyword_review_public.json",
-      "rows": 2430,
+      "rows": 1811,
       "recommended_action": "Review token candidates and promote only product-type keywords into split rules.",
       "acceptance_criteria": [
         "Token candidates remain manual_confirmed=false until sample rows are checked.",
@@ -15486,215 +15470,142 @@
       ],
       "sample_items": [
         {
-          "token": "コレクション",
-          "row_count": 104,
+          "token": "ACLLECT",
+          "row_count": 74,
           "review_score": 60,
           "sample_rows": [
             {
-              "catalog_index": 12462,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - ときのそら賞 ときのそら",
-              "name_ja": "ときのそら賞 ときのそら",
+              "catalog_index": 12401,
+              "name_ko": "一番くじ 北斗の拳 -FIST OF THE NORTH STAR- - G賞 ACLLECT 北斗の拳 世紀末の章",
+              "name_ja": "G賞 ACLLECT 北斗の拳 世紀末の章",
               "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "ときのそら賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12463,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - ロボ子さん賞 ロボ子さん",
-              "name_ja": "ロボ子さん賞 ロボ子さん",
-              "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "ロボ子さん賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12464,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - アキ・ローゼンタール賞 アキ・ローゼンタール",
-              "name_ja": "アキ・ローゼンタール賞 アキ・ローゼンタール",
-              "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "アキ・ローゼンタール賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12465,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - 白上フブキ賞 白上フブキ",
-              "name_ja": "白上フブキ賞 白上フブキ",
-              "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "白上フブキ賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12466,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - 夏色まつり賞 夏色まつり",
-              "name_ja": "夏色まつり賞 夏色まつり",
-              "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "夏色まつり賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12467,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - 百鬼あやめ賞 百鬼あやめ",
-              "name_ja": "百鬼あやめ賞 百鬼あやめ",
-              "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "百鬼あやめ賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        },
-        {
-          "token": "冒険",
-          "row_count": 93,
-          "review_score": 60,
-          "sample_rows": [
-            {
-              "catalog_index": 12273,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - A賞 モンキー・D・ルフィ 魂豪示像",
-              "name_ja": "A賞 モンキー・D・ルフィ 魂豪示像",
-              "category": "굿즈",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "A賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12275,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - C賞 モンキー・D・ルフィ 海賊王におれはなる!!!! Revible Moment",
-              "name_ja": "C賞 モンキー・D・ルフィ 海賊王におれはなる!!!! Revible Moment",
-              "category": "굿즈",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "C賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12276,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - D賞 モンキー・D・ルフィ ギア5 ONDIMENSION",
-              "name_ja": "D賞 モンキー・D・ルフィ ギア5 ONDIMENSION",
-              "category": "굿즈",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "D賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12277,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - E賞 はこにわーるど（1/2）",
-              "name_ja": "E賞 はこにわーるど（1/2）",
-              "category": "굿즈",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "E賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12281,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - I賞 デスクアソート（1/10）",
-              "name_ja": "I賞 デスクアソート（1/10）",
-              "category": "굿즈",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12425,
-              "name_ko": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN - E賞 スティーブン・スティール 小物入れ",
-              "name_ja": "E賞 スティーブン・スティール 小物入れ",
-              "category": "굿즈",
-              "affiliation": "죠죠의 기묘한 모험",
-              "series_name": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN",
-              "sub_series": "E賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        },
-        {
-          "token": "奇妙",
-          "row_count": 85,
-          "review_score": 60,
-          "sample_rows": [
-            {
-              "catalog_index": 12425,
-              "name_ko": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN - E賞 スティーブン・スティール 小物入れ",
-              "name_ja": "E賞 スティーブン・スティール 小物入れ",
-              "category": "굿즈",
-              "affiliation": "죠죠의 기묘한 모험",
-              "series_name": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN",
-              "sub_series": "E賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12429,
-              "name_ko": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN - I賞 ノートコレクション（1/10）",
-              "name_ja": "I賞 ノートコレクション（1/10）",
-              "category": "굿즈",
-              "affiliation": "죠죠의 기묘한 모험",
-              "series_name": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12585,
-              "name_ko": "一番くじ ジョジョの奇妙な冒険 The Gathering of STARS - H賞 ジョジョの奇妙な冒険 LOGO de Collection（1/7）",
-              "name_ja": "H賞 ジョジョの奇妙な冒険 LOGO de Collection（1/7）",
-              "category": "굿즈",
-              "affiliation": "죠죠의 기묘한 모험",
-              "series_name": "一番くじ ジョジョの奇妙な冒険 The Gathering of STARS",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 14848,
-              "name_ko": "一番くじ ジョジョの奇妙な冒険 -THE★JOJO WORLD- - H賞 ピンズコレクション（1/6）",
-              "name_ja": "H賞 ピンズコレクション（1/6）",
-              "category": "굿즈",
-              "affiliation": "죠죠의 기묘한 모험",
-              "series_name": "一番くじ ジョジョの奇妙な冒険 -THE★JOJO WORLD-",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 14872,
-              "name_ko": "一番くじ ジョジョの奇妙な冒険 STARDUST CRUSADERS ＋ - G賞 オリジナルトランプ",
-              "name_ja": "G賞 オリジナルトランプ",
-              "category": "굿즈",
-              "affiliation": "죠죠의 기묘한 모험",
-              "series_name": "一番くじ ジョジョの奇妙な冒険 STARDUST CRUSADERS ＋",
+              "affiliation": "북두의 권",
+              "series_name": "一番くじ 北斗の拳 -FIST OF THE NORTH STAR-",
               "sub_series": "G賞",
               "source_store": "이치방쿠지"
             },
             {
-              "catalog_index": 14873,
-              "name_ko": "一番くじ ジョジョの奇妙な冒険 STARDUST CRUSADERS ＋ - H賞 F-MEGA MASTERELIVE COLLECTION",
-              "name_ja": "H賞 F-MEGA MASTERELIVE COLLECTION",
+              "catalog_index": 13490,
+              "name_ko": "一番くじ ゴジラ 最恐怪獣王列伝 - D賞 ACLLECT -ゴジラ vol.4-（1/11）",
+              "name_ja": "D賞 ACLLECT -ゴジラ vol.4-（1/11）",
               "category": "굿즈",
-              "affiliation": "죠죠의 기묘한 모험",
-              "series_name": "一番くじ ジョジョの奇妙な冒険 STARDUST CRUSADERS ＋",
+              "affiliation": "고질라",
+              "series_name": "一番くじ ゴジラ 最恐怪獣王列伝",
+              "sub_series": "D賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 14227,
+              "name_ko": "一番くじ NARUTO-ナルト- 中忍試験編 - I賞 ACLLECT -NARUTO vol.1-",
+              "name_ja": "I賞 ACLLECT -NARUTO vol.1-",
+              "category": "굿즈",
+              "affiliation": "나루토",
+              "series_name": "一番くじ NARUTO-ナルト- 中忍試験編",
+              "sub_series": "I賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 15140,
+              "name_ko": "一番くじ ワンピース メモリーオブヒロインズ -Devil’s night- - H賞 ACLLECT -ワンピース- ～Heroines～（1/15）",
+              "name_ja": "H賞 ACLLECT -ワンピース- ～Heroines～（1/15）",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース メモリーオブヒロインズ -Devil’s night-",
               "sub_series": "H賞",
               "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 15184,
+              "name_ko": "一番くじ ワンピース 試練のその先へ - I賞 ACLLECT -ワンピース- ~3D2Y~",
+              "name_ja": "I賞 ACLLECT -ワンピース- ~3D2Y~",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース 試練のその先へ",
+              "sub_series": "I賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 15204,
+              "name_ko": "一番くじ ワンピース ロジャー海賊団～伝説の海賊～ - H賞 ACLLECT -ワンピース- ~ロジャー海賊団~",
+              "name_ja": "H賞 ACLLECT -ワンピース- ~ロジャー海賊団~",
+              "category": "굿즈",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース ロジャー海賊団～伝説の海賊～",
+              "sub_series": "H賞",
+              "source_store": "이치방쿠지"
+            }
+          ],
+          "review_kind": "ambiguous_review",
+          "review_reason": "Needs sample review before it can become a category keyword.",
+          "product_type_hint": false,
+          "manual_confirmed": false,
+          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
+          "suggested_use": "review_as_keyword_candidate"
+        },
+        {
+          "token": "シャツ",
+          "row_count": 72,
+          "review_score": 60,
+          "sample_rows": [
+            {
+              "catalog_index": 2617,
+              "name_ko": "치이카와 영화 \"치이카와\" T셔츠 인어의 섬의 비밀 블랙",
+              "name_ja": "ちいかわ 映画ちいかわ Tシャツ 人魚の島のひみつ ブラック",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2620,
+              "name_ko": "치이카와 영화 \"치이카와\" T셔츠 맛자랑 그레이",
+              "name_ja": "ちいかわ 映画ちいかわ Tシャツ 味自慢 グレー",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2621,
+              "name_ko": "치이카와 영화 \"치이카와\" T셔츠 WELCOME ISLAND 오프 화이트",
+              "name_ja": "ちいかわ 映画ちいかわ Tシャツ WELCOME ISLAND オフホワイト",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2622,
+              "name_ko": "치이카와 영화 \"치이카와\" T셔츠 세이렌 화이트",
+              "name_ja": "ちいかわ 映画ちいかわ Tシャツ セイレーン ホワイト",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 2623,
+              "name_ko": "치이카와 영화 \"치이카와\" T셔츠 WARNING 블랙",
+              "name_ja": "ちいかわ 映画ちいかわ Tシャツ WARNING ブラック",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 5740,
+              "name_ko": "치이카와 매지컬치이카와 티셔츠 나쁜 버전 모두 화이트",
+              "name_ja": "ちいかわ まじかるちいかわ Tシャツ 悪いバージョンだ みんな ホワイト",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
             }
           ],
           "review_kind": "ambiguous_review",
@@ -15706,7 +15617,7 @@
         },
         {
           "token": "DRAGON",
-          "row_count": 76,
+          "row_count": 65,
           "review_score": 60,
           "sample_rows": [
             {
@@ -15778,68 +15689,68 @@
           "suggested_use": "review_as_keyword_candidate"
         },
         {
-          "token": "ホロライブ",
-          "row_count": 75,
+          "token": "冒険",
+          "row_count": 57,
           "review_score": 60,
           "sample_rows": [
             {
-              "catalog_index": 12462,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - ときのそら賞 ときのそら",
-              "name_ja": "ときのそら賞 ときのそら",
+              "catalog_index": 12273,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - A賞 モンキー・D・ルフィ 魂豪示像",
+              "name_ja": "A賞 モンキー・D・ルフィ 魂豪示像",
               "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "ときのそら賞",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "A賞",
               "source_store": "이치방쿠지"
             },
             {
-              "catalog_index": 12463,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - ロボ子さん賞 ロボ子さん",
-              "name_ja": "ロボ子さん賞 ロボ子さん",
+              "catalog_index": 12276,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - D賞 モンキー・D・ルフィ ギア5 ONDIMENSION",
+              "name_ja": "D賞 モンキー・D・ルフィ ギア5 ONDIMENSION",
               "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "ロボ子さん賞",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "D賞",
               "source_store": "이치방쿠지"
             },
             {
-              "catalog_index": 12464,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - アキ・ローゼンタール賞 アキ・ローゼンタール",
-              "name_ja": "アキ・ローゼンタール賞 アキ・ローゼンタール",
+              "catalog_index": 12277,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - E賞 はこにわーるど（1/2）",
+              "name_ja": "E賞 はこにわーるど（1/2）",
               "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "アキ・ローゼンタール賞",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "E賞",
               "source_store": "이치방쿠지"
             },
             {
-              "catalog_index": 12465,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - 白上フブキ賞 白上フブキ",
-              "name_ja": "白上フブキ賞 白上フブキ",
+              "catalog_index": 12281,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - I賞 デスクアソート（1/10）",
+              "name_ja": "I賞 デスクアソート（1/10）",
               "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "白上フブキ賞",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "I賞",
               "source_store": "이치방쿠지"
             },
             {
-              "catalog_index": 12466,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - 夏色まつり賞 夏色まつり",
-              "name_ja": "夏色まつり賞 夏色まつり",
+              "catalog_index": 12425,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN - E賞 スティーブン・スティール 小物入れ",
+              "name_ja": "E賞 スティーブン・スティール 小物入れ",
               "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "夏色まつり賞",
+              "affiliation": "죠죠의 기묘한 모험",
+              "series_name": "一番くじ ジョジョの奇妙な冒険 STEEL BALL RUN",
+              "sub_series": "E賞",
               "source_store": "이치방쿠지"
             },
             {
-              "catalog_index": 12467,
-              "name_ko": "一番くじ ホロライブ ちょこのっこコレクション 2026ver. - 百鬼あやめ賞 百鬼あやめ",
-              "name_ja": "百鬼あやめ賞 百鬼あやめ",
+              "catalog_index": 12585,
+              "name_ko": "一番くじ ジョジョの奇妙な冒険 The Gathering of STARS - H賞 ジョジョの奇妙な冒険 LOGO de Collection（1/7）",
+              "name_ja": "H賞 ジョジョの奇妙な冒険 LOGO de Collection（1/7）",
               "category": "굿즈",
-              "affiliation": "홀로라이브",
-              "series_name": "一番くじ ホロライブ ちょこのっこコレクション 2026ver.",
-              "sub_series": "百鬼あやめ賞",
+              "affiliation": "죠죠의 기묘한 모험",
+              "series_name": "一番くじ ジョジョの奇妙な冒険 The Gathering of STARS",
+              "sub_series": "H賞",
               "source_store": "이치방쿠지"
             }
           ],
@@ -15851,8 +15762,227 @@
           "suggested_use": "review_as_keyword_candidate"
         },
         {
+          "token": "세트",
+          "row_count": 55,
+          "review_score": 60,
+          "sample_rows": [
+            {
+              "catalog_index": 3906,
+              "name_ko": "치이카와 파라 비즈 간단! 캐릭터 비즈 세트 (치이카와)",
+              "name_ja": "ちいかわ パーラービーズ かんたん！キャラビーズセット（ちいかわ）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 5560,
+              "name_ko": "치이카와 휘핑 마카롱 세트",
+              "name_ja": "ちいかわ ホイップる マカロンセット",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 5983,
+              "name_ko": "니들 펠트 미니멈 스타터 세트",
+              "name_ja": "ニードルフェルト ミニマムスターターセット",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 6092,
+              "name_ko": "치이카와 펄러비즈 간단! 캐릭터비즈 세트 (모몽가)",
+              "name_ja": "ちいかわ パーラービーズ かんたん！キャラビーズセット（モモンガ）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 6095,
+              "name_ko": "치이카와 펄러비즈 간단! 캐릭터비즈 세트 (카니)",
+              "name_ja": "ちいかわ パーラービーズ かんたん！キャラビーズセット（古本屋）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 7219,
+              "name_ko": "치이카와 파라 비즈 간단! 캐릭터 비즈 세트 (하치와레)",
+              "name_ja": "ちいかわ パーラービーズ かんたん！キャラビーズセット（ハチワレ）",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            }
+          ],
+          "review_kind": "ambiguous_review",
+          "review_reason": "Needs sample review before it can become a category keyword.",
+          "product_type_hint": false,
+          "manual_confirmed": false,
+          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
+          "suggested_use": "review_as_keyword_candidate"
+        },
+        {
+          "token": "カービィ",
+          "row_count": 53,
+          "review_score": 60,
+          "sample_rows": [
+            {
+              "catalog_index": 12284,
+              "name_ko": "一番くじ 星のカービィ PUPUPU GOURMET - B賞 レンジで☆ふっくらごはん炊飯器",
+              "name_ja": "B賞 レンジで☆ふっくらごはん炊飯器",
+              "category": "굿즈",
+              "affiliation": "별의 커비",
+              "series_name": "一番くじ 星のカービィ PUPUPU GOURMET",
+              "sub_series": "B賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12286,
+              "name_ko": "一番くじ 星のカービィ PUPUPU GOURMET - D賞 まんぷく☆ストックコンテナ（1/4）",
+              "name_ja": "D賞 まんぷく☆ストックコンテナ（1/4）",
+              "category": "굿즈",
+              "affiliation": "별의 커비",
+              "series_name": "一番くじ 星のカービィ PUPUPU GOURMET",
+              "sub_series": "D賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 12291,
+              "name_ko": "一番くじ 星のカービィ PUPUPU GOURMET - ラストワン賞 つまみぐい☆トースター風タイマー",
+              "name_ja": "ラストワン賞 つまみぐい☆トースター風タイマー",
+              "category": "굿즈",
+              "affiliation": "별의 커비",
+              "series_name": "一番くじ 星のカービィ PUPUPU GOURMET",
+              "sub_series": "ラストワン賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 14345,
+              "name_ko": "一番くじ 星のカービィ Kirby Café PETIT - B賞 めしあがれ ワッフルメーカー",
+              "name_ja": "B賞 めしあがれ ワッフルメーカー",
+              "category": "굿즈",
+              "affiliation": "별의 커비",
+              "series_name": "一番くじ 星のカービィ Kirby Café PETIT",
+              "sub_series": "B賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 14352,
+              "name_ko": "一番くじ 星のカービィ WELCOME TO THE NEW PARK！ - A賞 くるくる観覧車☆テープカッター",
+              "name_ja": "A賞 くるくる観覧車☆テープカッター",
+              "category": "굿즈",
+              "affiliation": "별의 커비",
+              "series_name": "一番くじ 星のカービィ WELCOME TO THE NEW PARK！",
+              "sub_series": "A賞",
+              "source_store": "이치방쿠지"
+            },
+            {
+              "catalog_index": 14354,
+              "name_ko": "一番くじ 星のカービィ WELCOME TO THE NEW PARK！ - C賞 買いすぎちゅうい☆ショッピングトート",
+              "name_ja": "C賞 買いすぎちゅうい☆ショッピングトート",
+              "category": "굿즈",
+              "affiliation": "별의 커비",
+              "series_name": "一番くじ 星のカービィ WELCOME TO THE NEW PARK！",
+              "sub_series": "C賞",
+              "source_store": "이치방쿠지"
+            }
+          ],
+          "review_kind": "ambiguous_review",
+          "review_reason": "Needs sample review before it can become a category keyword.",
+          "product_type_hint": false,
+          "manual_confirmed": false,
+          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
+          "suggested_use": "review_as_keyword_candidate"
+        },
+        {
+          "token": "ワクワク",
+          "row_count": 52,
+          "review_score": 60,
+          "sample_rows": [
+            {
+              "catalog_index": 10467,
+              "name_ko": "치이카와 신나는 유원지 파타파타 메모",
+              "name_ja": "ちいかわ ワクワクゆうえんち パタパタメモ",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 10469,
+              "name_ko": "치이카와 신나는 유원지 숟가락",
+              "name_ja": "ちいかわ ワクワクゆうえんち スプーン",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 10473,
+              "name_ko": "치이카와 신나는 유원지 A5 노트 세트",
+              "name_ja": "ちいかわ ワクワクゆうえんち A5ノートセット",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 10474,
+              "name_ko": "치이카와 신나는 유원지 스케치북",
+              "name_ja": "ちいかわ ワクワクゆうえんち スケッチブック",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 10475,
+              "name_ko": "치이카와 신나는 유원지 제트스트림",
+              "name_ja": "ちいかわ ワクワクゆうえんち ジェットストリーム",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            },
+            {
+              "catalog_index": 10476,
+              "name_ko": "치이카와 신나는 유원지 프로패스 윈도우 2본 세트",
+              "name_ja": "ちいかわ ワクワクゆうえんち プロパスウィンドウ2本セット",
+              "category": "굿즈",
+              "affiliation": "치이카와",
+              "series_name": "치이카와 마켓",
+              "sub_series": "공식 마켓",
+              "source_store": "치이카와 마켓"
+            }
+          ],
+          "review_kind": "ambiguous_review",
+          "review_reason": "Needs sample review before it can become a category keyword.",
+          "product_type_hint": false,
+          "manual_confirmed": false,
+          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
+          "suggested_use": "review_as_keyword_candidate"
+        },
+        {
           "token": "이치방쿠지",
-          "row_count": 1632,
+          "row_count": 1013,
           "review_score": 30,
           "sample_rows": [
             {
@@ -15862,16 +15992,6 @@
               "category": "굿즈",
               "affiliation": "치이카와",
               "series_name": "一番くじ ちいかわ",
-              "sub_series": "ラストワン賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 11594,
-              "name_ko": "一番くじ ちいかわ ～SWEETS SHOP～ - ラストワン賞 大きいアイスクリームの幸せクッション",
-              "name_ja": "ラストワン賞 大きいアイスクリームの幸せクッション",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "一番くじ ちいかわ ～SWEETS SHOP～",
               "sub_series": "ラストワン賞",
               "source_store": "이치방쿠지"
             },
@@ -15906,160 +16026,24 @@
               "source_store": "이치방쿠지"
             },
             {
-              "catalog_index": 11612,
-              "name_ko": "一番くじ ちいかわ ～なんかほっこり ちいかわの湯～ - ラストワン賞 一緒にほっこり♪湯あがりクッション",
-              "name_ja": "ラストワン賞 一緒にほっこり♪湯あがりクッション",
+              "catalog_index": 12273,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - A賞 モンキー・D・ルフィ 魂豪示像",
+              "name_ja": "A賞 モンキー・D・ルフィ 魂豪示像",
               "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "一番くじ ちいかわ ～なんかほっこり ちいかわの湯～",
-              "sub_series": "ラストワン賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "series_or_source_noise",
-          "review_reason": "Looks like a series, character, store, campaign, or request-source label.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "keep_as_noise_do_not_promote_to_category_rule",
-          "suggested_use": "do_not_promote_without_stronger_product_type_evidence"
-        },
-        {
-          "token": "一番",
-          "row_count": 1628,
-          "review_score": 30,
-          "sample_rows": [
-            {
-              "catalog_index": 3794,
-              "name_ko": "치이카와 슷파이만 치이카와 제일",
-              "name_ja": "ちいかわ スッパイマン ちいかわ一番",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 11586,
-              "name_ko": "一番くじ ちいかわ - ラストワン賞 ラグマット",
-              "name_ja": "ラストワン賞 ラグマット",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "一番くじ ちいかわ",
-              "sub_series": "ラストワン賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 11594,
-              "name_ko": "一番くじ ちいかわ ～SWEETS SHOP～ - ラストワン賞 大きいアイスクリームの幸せクッション",
-              "name_ja": "ラストワン賞 大きいアイスクリームの幸せクッション",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "一番くじ ちいかわ ～SWEETS SHOP～",
-              "sub_series": "ラストワン賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 11595,
-              "name_ko": "一番くじ ちいかわ ～みんなでラーメン～ - A賞 一緒にいただきます♪ヌードルタイマー",
-              "name_ja": "A賞 一緒にいただきます♪ヌードルタイマー",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "一番くじ ちいかわ ～みんなでラーメン～",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
               "sub_series": "A賞",
               "source_store": "이치방쿠지"
             },
             {
-              "catalog_index": 11603,
-              "name_ko": "一番くじ ちいかわ ～みんなでラーメン～ - ラストワン賞 「郎」ティッシュケース",
-              "name_ja": "ラストワン賞 「郎」ティッシュケース",
+              "catalog_index": 12276,
+              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - D賞 モンキー・D・ルフィ ギア5 ONDIMENSION",
+              "name_ja": "D賞 モンキー・D・ルフィ ギア5 ONDIMENSION",
               "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "一番くじ ちいかわ ～みんなでラーメン～",
-              "sub_series": "ラストワン賞",
+              "affiliation": "원피스",
+              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
+              "sub_series": "D賞",
               "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 11611,
-              "name_ko": "一番くじ ちいかわ ～なんかほっこり ちいかわの湯～ - H賞 ファブリックコレクション（1/6）",
-              "name_ja": "H賞 ファブリックコレクション（1/6）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "一番くじ ちいかわ ～なんかほっこり ちいかわの湯～",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "series_or_source_noise",
-          "review_reason": "Looks like a series, character, store, campaign, or request-source label.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "keep_as_noise_do_not_promote_to_category_rule",
-          "suggested_use": "do_not_promote_without_stronger_product_type_evidence"
-        },
-        {
-          "token": "치이카와",
-          "row_count": 788,
-          "review_score": 30,
-          "sample_rows": [
-            {
-              "catalog_index": 2532,
-              "name_ko": "치이카와 영화 \"치이카와\" 시루코 샌드",
-              "name_ja": "ちいかわ 映画ちいかわ しるこサンド",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 2546,
-              "name_ko": "치이카와 그 시절의 카메라 (토끼 브이)",
-              "name_ja": "ちいかわ あのころのカメラ（うさぎ ピース）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 2547,
-              "name_ko": "치이카와 그 시절의 카메라 (가르마 브이)",
-              "name_ja": "ちいかわ あのころのカメラ（ハチワレ ピース）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 2548,
-              "name_ko": "치이카와 그 시절의 카메라 (치이카와 브이)",
-              "name_ja": "ちいかわ あのころのカメラ（ちいかわ ピース）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 2549,
-              "name_ko": "치이카와 그 시절의 카메라 (모두)",
-              "name_ja": "ちいかわ あのころのカメラ（みんな）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 2605,
-              "name_ko": "치이카와 영화 \"치이카와\" 슈슈 모두 라이트 옐로",
-              "name_ja": "ちいかわ 映画ちいかわ シュシュ みんな ライトイエロー",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
             }
           ],
           "review_kind": "series_or_source_noise",
@@ -16071,11 +16055,11 @@
         }
       ],
       "review_summary": {
-        "unmatched_rows": 2430,
+        "unmatched_rows": 1811,
         "token_candidate_count": 20,
         "product_type_candidate_count": 0,
         "sample_source": "top_token_candidates",
-        "source_category_rows": 2430
+        "source_category_rows": 1811
       },
       "review_state": "manual_keyword_candidate_review_required",
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
@@ -31236,7 +31220,7 @@
       "priority": 210,
       "title": "애니메이션 굿즈 카테고리 검수: animation-taxonomy-review-001",
       "public_report": "data/animation_category_review_batches_public.json",
-      "rows": 109,
+      "rows": 22,
       "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
       "acceptance_criteria": [
         "Folder color hints follow folder_color_palette sort order.",
@@ -31246,7 +31230,7 @@
       "sample_items": [
         {
           "category": "굿즈",
-          "rows": 109,
+          "rows": 22,
           "review_priority": 70,
           "suggested_family": "other",
           "suggested_category": "기타 굿즈",
@@ -31267,14 +31251,14 @@
           ],
           "review_reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
           "sample_names": [
-            "一番くじ 葬送のフリーレン - B賞 メタリックビジュアルシート",
-            "一番くじ 葬送のフリーレン - G賞 魔導書風ノート",
-            "一番くじ 呪術廻戦 死滅回游 ～弐～ - L賞 ぽこっとちゃーむ",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-1賞 SOFVICちゅ 緑谷出久",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-2賞 SOFVICちゅ 爆豪勝己",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-3賞 SOFVICちゅ 麗日お茶子",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-5賞 SOFVICちゅ オールマイト"
+            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - G賞 クリアアイテムアソート（1/15）",
+            "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
+            "一番くじ 僕のヒーローアカデミア 相反する思い - F賞 銅像オールマイト MASTERELIVE COLLECTION",
+            "一番くじ 僕のヒーローアカデミア～After The Fight～ - A賞 スペシャルシーンセレクション",
+            "一番くじ 僕のヒーローアカデミア～雄英体育祭！～ - C賞 観客席応援セット",
+            "一番くじ 僕のヒーローアカデミア～休み時間！～ - A賞 アルバム委員一押し！1-Aアルバム",
+            "一番くじ 僕のヒーローアカデミア～WHITE OR BLACK！～ - F賞 ラバーストラップ",
+            "一番くじ 僕のヒーローアカデミア～WHITE OR BLACK！～ - ラストワン賞 缶ケース入りスペシャルバッジセット"
           ],
           "folder_template": {
             "folder_name": "기타 굿즈",
@@ -31298,7 +31282,7 @@
             "requires_manual_review": true
           },
           "folder_creation_blocked_until": "category_mapping_manually_confirmed",
-          "recommended_action": "Split this broad category by product name first, then map reviewed rows into app folders.",
+          "recommended_action": "Review sample names and map the category to the suggested folder only when product type is clear.",
           "auto_apply_enabled": false
         }
       ],
