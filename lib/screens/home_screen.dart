@@ -341,20 +341,12 @@ class _CatalogImportPanel extends StatelessWidget {
                   color: palette.primary,
                 ),
                 _CatalogMetricPill(
-                  label: '중복 제외',
-                  value: '-${_CatalogHealthSummary.formatCount(
-                    health.duplicateCount,
-                  )}',
-                  color: theme.colorScheme.onSurface,
-                ),
-                if (health.exampleCount > 0)
-                  _CatalogMetricPill(
-                    label: '예시 제외',
-                    value: '-${_CatalogHealthSummary.formatCount(
-                      health.exampleCount,
-                    )}',
-                    color: theme.colorScheme.onSurface,
+                  label: '사진',
+                  value: _CatalogHealthSummary.formatCount(
+                    health.imageCount,
                   ),
+                  color: palette.accent,
+                ),
               ],
             ),
             const SizedBox(height: 10),
@@ -460,35 +452,33 @@ class _CatalogMetricPill extends StatelessWidget {
 
 class _CatalogHealthSummary {
   final int uniqueCount;
-  final int duplicateCount;
-  final int exampleCount;
+  final int imageCount;
 
   const _CatalogHealthSummary({
     required this.uniqueCount,
-    required this.duplicateCount,
-    required this.exampleCount,
+    required this.imageCount,
   });
 
   static _CatalogHealthSummary from(List<GoodsCatalogEntry> entries) {
     final seenKeys = <String>{};
-    var exampleCount = 0;
-    var duplicateCount = 0;
+    final imageKeys = <String>{};
 
     for (final entry in entries) {
       if (_isExampleEntry(entry)) {
-        exampleCount += 1;
         continue;
       }
 
-      if (!seenKeys.add(_identityKey(entry))) {
-        duplicateCount += 1;
+      final key = _identityKey(entry);
+      if (seenKeys.add(key) &&
+          ((entry.localImagePath ?? '').trim().isNotEmpty ||
+              (entry.imageUrl ?? '').trim().isNotEmpty)) {
+        imageKeys.add(key);
       }
     }
 
     return _CatalogHealthSummary(
       uniqueCount: seenKeys.length,
-      duplicateCount: duplicateCount,
-      exampleCount: exampleCount,
+      imageCount: imageKeys.length,
     );
   }
 

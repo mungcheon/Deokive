@@ -132,8 +132,7 @@ void main() {
       );
     final entry = kFullCatalog.firstWhere(
       (item) =>
-          ((item.localImagePath ?? '').isNotEmpty ||
-              (item.imageUrl ?? '').isNotEmpty) &&
+          (item.localImagePath ?? '').isNotEmpty &&
           item.nameKo.trim().isNotEmpty,
     );
     final palette = paletteSpecFor(AppPalette.zeroTwoPink);
@@ -172,6 +171,7 @@ void main() {
     expect(savedItem.folderId, 'default-folder');
     expect(savedItem.imageUrl, isNotNull);
     expect(savedItem.imageUrl, isNotEmpty);
+    expect(savedItem.imageBytesList, isNotEmpty);
   });
 
   testWidgets('catalog database can add even when saved folders are empty',
