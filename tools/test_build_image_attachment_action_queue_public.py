@@ -64,6 +64,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["source_url_update_workstream_count"], 1)
+        self.assertEqual(report["summary"]["source_url_update_work_order_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["workstreams"][0]["source_store"], "Stellive Store")
@@ -106,6 +107,17 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
                 "confirm_product_page_image_url",
             ],
         )
+        work_order = report["source_url_update_work_order"][0]
+        self.assertEqual(work_order["source_store"], "Stellive Store")
+        self.assertEqual(work_order["row_count"], 2)
+        self.assertEqual(work_order["source_url_update_template_rows"], 2)
+        self.assertEqual(work_order["current_source_urls"], [{"source_url": "https://example.com/shop", "rows": 2}])
+        self.assertEqual(work_order["sample_items"][0]["catalog_index"], 1)
+        self.assertEqual(
+            work_order["sample_items"][0]["source_url_import_template"]["field"],
+            "source_url",
+        )
+        self.assertIn("exact product detail page", work_order["recommended_review_order"][1])
 
     def test_max_batches_caps_published_batches_not_actionable_summary(self) -> None:
         enrichment = {
@@ -134,6 +146,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["sample_queue_coverage"], 0.3333)
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 3)
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 0)
+        self.assertEqual(report["summary"]["source_url_update_work_order_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 1)

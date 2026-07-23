@@ -157,6 +157,97 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
+def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[str, dict[str, Any]] = {}
+    for item in action_items:
+        if not item.get("source_url_update_required"):
+            continue
+        source_store = str(item.get("source_store") or "unknown")
+        bucket = grouped.setdefault(
+            source_store,
+            {
+                "source_store": source_store,
+                "rows": [],
+                "current_source_urls": Counter(),
+                "categories": Counter(),
+                "official_search_url_rows": 0,
+                "missing_official_search_url_rows": 0,
+            },
+        )
+        bucket["rows"].append(item)
+        source_url = str(item.get("source_url") or "")
+        if source_url:
+            bucket["current_source_urls"][source_url] += 1
+        category = str(item.get("category") or "")
+        if category:
+            bucket["categories"][category] += 1
+        if item.get("official_search_url"):
+            bucket["official_search_url_rows"] += 1
+        else:
+            bucket["missing_official_search_url_rows"] += 1
+
+    work_order: list[dict[str, Any]] = []
+    for bucket in grouped.values():
+        rows = sorted(
+            bucket["rows"],
+            key=lambda row: (
+                0 if row.get("official_search_url") else 1,
+                int(row.get("catalog_index") or 999_999_999),
+            ),
+        )
+        current_source_urls = [
+            {"source_url": url, "rows": count}
+            for url, count in bucket["current_source_urls"].most_common()
+        ]
+        samples = [
+            {
+                "catalog_index": row.get("catalog_index"),
+                "name_ko": row.get("name_ko"),
+                "name_ja": row.get("name_ja"),
+                "series_name": row.get("series_name"),
+                "category": row.get("category"),
+                "current_source_url": row.get("source_url"),
+                "official_search_url": row.get("official_search_url"),
+                "source_url_import_template": row.get("source_url_import_template"),
+            }
+            for row in rows[:12]
+        ]
+        work_order.append(
+            {
+                "source_store": bucket["source_store"],
+                "row_count": len(rows),
+                "source_url_update_template_rows": sum(
+                    1 for row in rows if row.get("source_url_import_template")
+                ),
+                "official_search_url_rows": bucket["official_search_url_rows"],
+                "missing_official_search_url_rows": bucket[
+                    "missing_official_search_url_rows"
+                ],
+                "current_source_urls": current_source_urls,
+                "category_rows": [
+                    [category, count] for category, count in bucket["categories"].most_common()
+                ],
+                "recommended_review_order": [
+                    "Open official_search_url when present.",
+                    "Confirm the exact product detail page, not a storefront/search page.",
+                    "Fill source_url_import_template.manual_value and evidence_url.",
+                    "After source_url is confirmed, run image extraction/attachment review.",
+                ],
+                "blocked_until": "exact_product_source_url_confirmed",
+                "sample_items": samples,
+                "auto_apply_enabled": False,
+            }
+        )
+    work_order.sort(
+        key=lambda row: (
+            -int(row["row_count"]),
+            int(row["missing_official_search_url_rows"]),
+            str(row["source_store"]),
+        )
+    )
+    return work_order
+
+
 def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     template = item.get("catalog_field_import_template")
     template = template if isinstance(template, dict) else {}
@@ -304,6 +395,7 @@ def build_report(
         1 for item in action_items if item.get("representative_image_review_required")
     )
     image_url_ready_rows = sum(1 for item in action_items if item.get("image_url_ready"))
+    source_url_update_work_order = _build_source_url_update_work_order(action_items)
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -330,6 +422,7 @@ def build_report(
             "source_url_update_workstream_count": sum(
                 1 for row in workstreams if row.get("source_url_update_template_rows")
             ),
+            "source_url_update_work_order_count": len(source_url_update_work_order),
             "representative_image_review_workstream_count": sum(
                 1 for row in workstreams if row.get("representative_image_review_rows")
             ),
@@ -344,6 +437,7 @@ def build_report(
             "For generic storefront rows, fill source_url_import_template before the image_url template.",
         ],
         "workstreams": workstreams,
+        "source_url_update_work_order": source_url_update_work_order,
         "next_actions": [
             {
                 "priority": 1,
