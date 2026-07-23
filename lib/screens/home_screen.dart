@@ -315,14 +315,14 @@ class _CatalogImportPanel extends StatelessWidget {
                               Expanded(
                                 child: _CatalogMetaChip(
                                   label:
-                                      '정리 ${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
+                                      '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개 정리됨',
                                   palette: palette,
                                 ),
                               ),
                               const SizedBox(width: 6),
                               Expanded(
                                 child: _CatalogMetaChip(
-                                  label: '사진 ${health.imageCoverageLabel}',
+                                  label: '공개 데이터',
                                   palette: palette,
                                 ),
                               ),
@@ -335,9 +335,9 @@ class _CatalogImportPanel extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  '공개 DB에서 검색하고 내 굿즈함에 바로 담아요.',
-                  maxLines: 1,
-                  softWrap: false,
+                  '전체 DB에서 검색한 뒤 원하는 항목을 골라 내 굿즈함이나 위시리스트에 추가해요.',
+                  maxLines: 2,
+                  softWrap: true,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.72),

@@ -31,10 +31,26 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
     super.dispose();
   }
 
+  List<GoodsCatalogEntry> _displayEntries(AppState appState) {
+    final uniqueEntries = <GoodsCatalogEntry>[];
+    final seenKeys = <String>{};
+
+    for (final entry in appState.curatedCatalogEntries) {
+      if (_isExampleEntry(entry)) continue;
+
+      final key = _identityKey(entry);
+      if (seenKeys.add(key)) {
+        uniqueEntries.add(entry);
+      }
+    }
+
+    return uniqueEntries;
+  }
+
   List<GoodsCatalogEntry> _filteredEntries(AppState appState) {
     final normalizedQuery = _query.trim().toLowerCase();
     final normalizedCategory = _category?.trim();
-    final entries = appState.curatedCatalogEntries.where((entry) {
+    final entries = _displayEntries(appState).where((entry) {
       if (normalizedCategory != null &&
           normalizedCategory.isNotEmpty &&
           entry.normalizedCategory != normalizedCategory) {
@@ -63,6 +79,83 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
       return a.nameKo.compareTo(b.nameKo);
     });
     return entries;
+  }
+
+  List<String> _displayCategories(AppState appState) {
+    final categories = <String>{};
+    for (final entry in _displayEntries(appState)) {
+      final category = entry.normalizedCategory.trim();
+      if (category.isNotEmpty) categories.add(category);
+    }
+    final sorted = categories.toList()..sort();
+    return sorted;
+  }
+
+  static String _identityKey(GoodsCatalogEntry entry) {
+    final barcode = entry.barcode?.trim() ?? '';
+    if (barcode.isNotEmpty) return 'barcode:$barcode';
+
+    final identityParts = [
+      entry.affiliation,
+      entry.seriesName ?? '',
+      entry.nameKo,
+      entry.nameJa ?? '',
+      entry.category,
+      entry.characterName,
+      entry.subSeries ?? '',
+    ].map((value) => value.trim().toLowerCase()).join('|');
+    if (identityParts.replaceAll('|', '').isNotEmpty) {
+      return 'identity:$identityParts';
+    }
+
+    final sourceUrl = entry.sourceUrl?.trim().toLowerCase() ?? '';
+    if (sourceUrl.isNotEmpty) return 'source:$sourceUrl';
+
+    return 'entry:${entry.id ?? entry.hashCode}';
+  }
+
+  static bool _isExampleEntry(GoodsCatalogEntry entry) {
+    final values = [
+      entry.nameKo,
+      entry.nameJa ?? '',
+      entry.nameEn ?? '',
+      entry.category,
+      entry.characterName,
+      entry.affiliation,
+      entry.seriesName ?? '',
+      entry.subSeries ?? '',
+      entry.sourceStore,
+      entry.sourceUrl ?? '',
+      entry.displayImagePath ?? '',
+    ].map((value) => value.trim().toLowerCase());
+
+    return values.any(_looksLikeExampleText);
+  }
+
+  static bool _looksLikeExampleText(String value) {
+    if (value.isEmpty) return false;
+
+    return [
+      'sample',
+      'example',
+      'placeholder',
+      'image_placeholder',
+      'no_image',
+      'no-image',
+      'noimage',
+      'dummy',
+      'test-image',
+      'fixture',
+      'blank',
+      'default-image',
+      'default_image',
+      'coming-soon',
+      'coming_soon',
+      '예시',
+      '샘플',
+      '테스트',
+      '더미',
+    ].any(value.contains);
   }
 
   Future<void> _showAddSheet(
@@ -230,7 +323,8 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
         final theme = Theme.of(context);
         final palette = theme.extension<DeokivePalette>()!;
         final entries = _filteredEntries(appState);
-        final categories = appState.curatedCatalogCategories.take(18).toList();
+        final totalDisplayCount = _displayEntries(appState).length;
+        final categories = _displayCategories(appState).take(18).toList();
 
         return Scaffold(
           appBar: AppBar(
@@ -240,7 +334,7 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                 padding: const EdgeInsets.only(right: 14),
                 child: Center(
                   child: Text(
-                    '${entries.length}/${appState.curatedCatalogEntries.length}',
+                    '${entries.length}/$totalDisplayCount',
                     style: theme.textTheme.labelLarge?.copyWith(
                       color:
                           theme.colorScheme.onSurface.withValues(alpha: 0.62),
