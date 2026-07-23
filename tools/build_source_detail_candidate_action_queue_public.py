@@ -514,6 +514,80 @@ def build_report(
         for item in items
         if item.get("priority_manual_review_candidate") is True
     ]
+    identity_safe_rows = sum(1 for item in items if item.get("identity_safe_source_image_pair") is True)
+    identity_blocked_rows = sum(
+        1
+        for item in items
+        if item.get("safe_source_image_pair") is True
+        and item.get("identity_safe_source_image_pair") is not True
+    )
+    already_imaged_rows = sum(
+        1 for item in items if item.get("current_catalog_state", {}).get("catalog_has_display_image") is True
+    )
+    missing_display_identity_warning_rows = sum(
+        1
+        for item in items
+        if item.get("candidate_identity_flags")
+        and item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
+    )
+    unflagged_missing_display_rows = sum(
+        1
+        for item in items
+        if not item.get("candidate_identity_flags")
+        and item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
+    )
+    manual_confirmed_rows = sum(1 for item in items if item.get("manual_confirmed") is True)
+    readiness_status = (
+        "clear"
+        if not items
+        else "manual_confirmation_ready"
+        if priority_review_candidates
+        else "identity_recheck_required"
+        if identity_blocked_rows
+        else "manual_confirmation_required"
+    )
+    completion_readiness = {
+        "status": readiness_status,
+        "auto_apply_ready_rows": 0,
+        "auto_apply_enabled": False,
+        "manual_confirmed_rows": manual_confirmed_rows,
+        "manual_confirmation_shortlist_rows": sum(
+            1 for item in items if item.get("manual_confirmation_shortlist") is True
+        ),
+        "priority_manual_review_candidate_rows": len(priority_review_candidates),
+        "identity_safe_source_image_pair_rows": identity_safe_rows,
+        "identity_blocked_source_image_pair_rows": identity_blocked_rows,
+        "identity_warning_missing_display_image_rows": missing_display_identity_warning_rows,
+        "unflagged_missing_display_image_candidate_rows": unflagged_missing_display_rows,
+        "current_catalog_already_has_display_image_rows": already_imaged_rows,
+        "blocked_reasons": [
+            "candidate_identity_warning_requires_recheck"
+            if missing_display_identity_warning_rows
+            else None,
+            "current_catalog_row_already_has_display_image"
+            if already_imaged_rows
+            else None,
+            "manual_confirmation_required_before_import"
+            if unflagged_missing_display_rows
+            else None,
+        ],
+        "next_safe_phase": (
+            "confirm_priority_manual_review_candidates"
+            if priority_review_candidates
+            else "recheck_candidate_identity_or_replace_candidate"
+            if identity_blocked_rows
+            else "wait_for_source_detail_candidates"
+            if not items
+            else "confirm_exact_identity_before_import"
+        ),
+        "safety_note": (
+            "safe_source_image_pair only proves URL/domain compatibility; "
+            "image import still requires exact product identity confirmation."
+        ),
+    }
+    completion_readiness["blocked_reasons"] = [
+        reason for reason in completion_readiness["blocked_reasons"] if reason
+    ]
 
     return {
         "schema_version": 1,
@@ -523,17 +597,12 @@ def build_report(
             "candidate_action_rows": len(items),
             "action_batch_count": len(batches),
             "batch_size": batch_size,
-            "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
+            "manual_confirmed_true": manual_confirmed_rows,
+            "completion_readiness_status": readiness_status,
+            "auto_apply_ready_rows": 0,
             "safe_source_image_pair_rows": sum(1 for item in items if item.get("safe_source_image_pair") is True),
-            "identity_safe_source_image_pair_rows": sum(
-                1 for item in items if item.get("identity_safe_source_image_pair") is True
-            ),
-            "identity_blocked_source_image_pair_rows": sum(
-                1
-                for item in items
-                if item.get("safe_source_image_pair") is True
-                and item.get("identity_safe_source_image_pair") is not True
-            ),
+            "identity_safe_source_image_pair_rows": identity_safe_rows,
+            "identity_blocked_source_image_pair_rows": identity_blocked_rows,
             "manual_confirmation_shortlist_rows": sum(
                 1 for item in items if item.get("manual_confirmation_shortlist") is True
             ),
@@ -542,27 +611,15 @@ def build_report(
             ),
             "priority_manual_review_candidate_rows": len(priority_review_candidates),
             "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
-            "identity_warning_missing_display_image_rows": sum(
-                1
-                for item in items
-                if item.get("candidate_identity_flags")
-                and item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
-            ),
-            "unflagged_missing_display_image_candidate_rows": sum(
-                1
-                for item in items
-                if not item.get("candidate_identity_flags")
-                and item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
-            ),
+            "identity_warning_missing_display_image_rows": missing_display_identity_warning_rows,
+            "unflagged_missing_display_image_candidate_rows": unflagged_missing_display_rows,
             "current_catalog_matched_rows": sum(
                 1 for item in items if item.get("current_catalog_state", {}).get("catalog_match_found") is True
             ),
             "current_catalog_missing_display_image_rows": sum(
                 1 for item in items if item.get("current_catalog_state", {}).get("catalog_has_display_image") is False
             ),
-            "current_catalog_already_has_display_image_rows": sum(
-                1 for item in items if item.get("current_catalog_state", {}).get("catalog_has_display_image") is True
-            ),
+            "current_catalog_already_has_display_image_rows": already_imaged_rows,
             "stale_candidate_rows": sum(
                 1 for item in items if item.get("current_catalog_state", {}).get("stale_candidate") is True
             ),
@@ -598,6 +655,7 @@ def build_report(
             "by_candidate_identity_flag": counter_list_values(items, "candidate_identity_flags"),
             "auto_apply_enabled": False,
         },
+        "completion_readiness": completion_readiness,
         "instructions": [
             "Use this queue only after reviewing source_detail_probe_public review candidates.",
             "Do not import candidate source_url or image_url unless manual_confirmed is set true after exact identity review.",

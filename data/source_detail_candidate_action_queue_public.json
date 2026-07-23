@@ -1,12 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T14:46:56Z",
+  "generated_at": "2026-07-23T22:27:14Z",
   "scope": "source_detail_candidate_action_queue",
   "summary": {
     "candidate_action_rows": 15,
     "action_batch_count": 2,
     "batch_size": 10,
     "manual_confirmed_true": 0,
+    "completion_readiness_status": "identity_recheck_required",
+    "auto_apply_ready_rows": 0,
     "safe_source_image_pair_rows": 15,
     "identity_safe_source_image_pair_rows": 0,
     "identity_blocked_source_image_pair_rows": 15,
@@ -108,6 +110,25 @@
       ]
     ],
     "auto_apply_enabled": false
+  },
+  "completion_readiness": {
+    "status": "identity_recheck_required",
+    "auto_apply_ready_rows": 0,
+    "auto_apply_enabled": false,
+    "manual_confirmed_rows": 0,
+    "manual_confirmation_shortlist_rows": 0,
+    "priority_manual_review_candidate_rows": 0,
+    "identity_safe_source_image_pair_rows": 0,
+    "identity_blocked_source_image_pair_rows": 15,
+    "identity_warning_missing_display_image_rows": 12,
+    "unflagged_missing_display_image_candidate_rows": 0,
+    "current_catalog_already_has_display_image_rows": 3,
+    "blocked_reasons": [
+      "candidate_identity_warning_requires_recheck",
+      "current_catalog_row_already_has_display_image"
+    ],
+    "next_safe_phase": "recheck_candidate_identity_or_replace_candidate",
+    "safety_note": "safe_source_image_pair only proves URL/domain compatibility; image import still requires exact product identity confirmation."
   },
   "instructions": [
     "Use this queue only after reviewing source_detail_probe_public review candidates.",

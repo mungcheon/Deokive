@@ -47,6 +47,8 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["candidate_action_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
+        self.assertEqual(report["summary"]["completion_readiness_status"], "manual_confirmation_ready")
+        self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
         self.assertEqual(report["summary"]["safe_source_image_pair_rows"], 1)
         self.assertEqual(report["summary"]["identity_safe_source_image_pair_rows"], 1)
         self.assertEqual(report["summary"]["identity_blocked_source_image_pair_rows"], 0)
@@ -91,6 +93,14 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["batches"][0]["identity_blocked_source_image_pair_rows"], 0)
         self.assertEqual(report["batches"][0]["manual_confirmation_shortlist_rows"], 1)
         self.assertEqual(report["batches"][0]["priority_manual_review_candidate_rows"], 1)
+        self.assertEqual(report["completion_readiness"]["status"], "manual_confirmation_ready")
+        self.assertEqual(report["completion_readiness"]["next_safe_phase"], "confirm_priority_manual_review_candidates")
+        self.assertEqual(report["completion_readiness"]["auto_apply_ready_rows"], 0)
+        self.assertIn(
+            "manual_confirmation_required_before_import",
+            report["completion_readiness"]["blocked_reasons"],
+        )
+        self.assertIn("exact product identity", report["completion_readiness"]["safety_note"])
         self.assertEqual(item["current_catalog_state"]["catalog_match_found"], True)
         self.assertEqual(item["current_catalog_state"]["catalog_has_display_image"], False)
         self.assertEqual(item["current_catalog_state"]["catalog_identity_matches"], True)
@@ -184,6 +194,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
 
         self.assertEqual(report["summary"]["identity_warning_rows"], 2)
+        self.assertEqual(report["summary"]["completion_readiness_status"], "identity_recheck_required")
         self.assertEqual(report["summary"]["identity_safe_source_image_pair_rows"], 0)
         self.assertEqual(report["summary"]["identity_blocked_source_image_pair_rows"], 2)
         self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 0)
@@ -205,6 +216,16 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(items[3]["identity_safe_source_image_pair"])
         self.assertEqual(items[3]["review_priority"], 35)
         self.assertEqual(items[3]["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
+        self.assertEqual(report["completion_readiness"]["status"], "identity_recheck_required")
+        self.assertEqual(
+            report["completion_readiness"]["next_safe_phase"],
+            "recheck_candidate_identity_or_replace_candidate",
+        )
+        self.assertEqual(report["completion_readiness"]["identity_blocked_source_image_pair_rows"], 2)
+        self.assertIn(
+            "candidate_identity_warning_requires_recheck",
+            report["completion_readiness"]["blocked_reasons"],
+        )
         self.assertEqual(
             items[4]["candidate_identity_flags"],
             [

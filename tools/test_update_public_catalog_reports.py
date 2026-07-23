@@ -345,6 +345,15 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["source_detail_candidate_action_queue"]["candidate_count_review_required_rows"],
                 source_detail_action["summary"].get("candidate_count_review_required_rows", 0),
             )
+            self.assertEqual(
+                quality["source_detail_candidate_action_queue"]["completion_readiness_status"],
+                source_detail_action["summary"]["completion_readiness_status"],
+            )
+            self.assertEqual(
+                quality["source_detail_candidate_action_queue"]["identity_blocked_source_image_pair_rows"],
+                source_detail_action["summary"]["identity_blocked_source_image_pair_rows"],
+            )
+            self.assertEqual(quality["source_detail_candidate_action_queue"]["auto_apply_ready_rows"], 0)
             self.assertEqual(quality["source_detail_candidate_action_queue"]["manual_confirmed_true"], 0)
             self.assertIs(quality["source_detail_candidate_action_queue"]["auto_apply_enabled"], False)
         if reports.GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.exists():
