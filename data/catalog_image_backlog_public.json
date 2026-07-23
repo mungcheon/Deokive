@@ -2102,8 +2102,8 @@
     "public_report": "data/animation_goods_categories_public.json",
     "animation_goods_rows": 2167,
     "category_count": 31,
-    "unknown_category_count": 7,
-    "unknown_category_rows": 170,
+    "unknown_category_count": 2,
+    "unknown_category_rows": 110,
     "normalization_suggestion_count": 4,
     "missing_image_rows": 560,
     "missing_source_url_rows": 560,
@@ -2471,7 +2471,7 @@
     "source_discovery_rows": 637,
     "image_missing_rows": 710,
     "dedupe_groups": 61,
-    "animation_unknown_categories": 7,
+    "animation_unknown_categories": 2,
     "ichiban_missing_release_date_rows": 8,
     "ichiban_missing_price_rows": 350,
     "generic_source_patch_candidate_rows": 3,
@@ -2524,7 +2524,7 @@
     "metadata_unqueued_actionable_groups": 0,
     "metadata_actionable_missing_cells": 2499,
     "metadata_unqueued_actionable_missing_cells": 0,
-    "animation_category_review_rows": 170,
+    "animation_category_review_rows": 110,
     "animation_category_action_rows": 110,
     "animation_category_split_review_categories": 2,
     "animation_category_direct_mapping_categories": 0,
@@ -2542,9 +2542,9 @@
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 155,
+    "batch_count": 154,
     "max_published_batches": 160,
-    "summed_batch_rows": 23701,
+    "summed_batch_rows": 23641,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2632,10 +2632,6 @@
         2
       ],
       [
-        "animation_category_review",
-        2
-      ],
-      [
         "gotouchi_official_candidate_review",
         1
       ],
@@ -2657,6 +2653,10 @@
       ],
       [
         "ichiban_kuji_metadata",
+        1
+      ],
+      [
+        "animation_category_review",
         1
       ]
     ],
@@ -2742,10 +2742,6 @@
         2
       ],
       [
-        "agent-animation-taxonomy",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
@@ -2764,13 +2760,17 @@
       [
         "agent-ichiban-prize-name-image",
         1
+      ],
+      [
+        "agent-animation-taxonomy",
+        1
       ]
     ],
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
       "dedupe_groups": 61,
-      "animation_unknown_categories": 7,
+      "animation_unknown_categories": 2,
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
@@ -2823,7 +2823,7 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2499,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 170,
+      "animation_category_review_rows": 110,
       "animation_category_action_rows": 110,
       "animation_category_split_review_categories": 2,
       "animation_category_direct_mapping_categories": 0,
@@ -3787,12 +3787,12 @@
     "blocked_action_count": 1,
     "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 32658,
+    "total_action_rows": 32598,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
       "dedupe_groups": 61,
-      "animation_unknown_categories": 7,
+      "animation_unknown_categories": 2,
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
@@ -3845,7 +3845,7 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2499,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 170,
+      "animation_category_review_rows": 110,
       "animation_category_action_rows": 110,
       "animation_category_split_review_categories": 2,
       "animation_category_direct_mapping_categories": 0,
@@ -5788,32 +5788,27 @@
     "public_report": "data/animation_category_split_review_public.json",
     "split_review_categories": 2,
     "affected_catalog_rows": 110,
-    "candidate_split_rules": 1,
+    "candidate_split_rules": 0,
     "matched_sample_names": 0,
     "unmatched_sample_names": 9,
     "catalog_scan_enabled": true,
-    "catalog_source_category_rows": 2449,
-    "matched_catalog_rule_hits": 6,
-    "matched_catalog_rows": 6,
+    "catalog_source_category_rows": 2443,
+    "matched_catalog_rule_hits": 0,
+    "matched_catalog_rows": 0,
     "unmatched_catalog_rows": 2443,
-    "by_target_family": [
-      [
-        "acrylic",
-        1
-      ]
-    ],
-    "candidate_priority_rows": 1,
-    "starter_confirmed_queue_rows": 1,
-    "top_candidate_expected_update_rows": 6,
-    "top_candidate_source_category": "아크릴",
-    "top_candidate_target_category": "아크릴 스탠드",
+    "by_target_family": [],
+    "candidate_priority_rows": 0,
+    "starter_confirmed_queue_rows": 0,
+    "top_candidate_expected_update_rows": 0,
+    "top_candidate_source_category": null,
+    "top_candidate_target_category": null,
     "manual_confirmed_rows": 0,
     "auto_apply_enabled": false
   },
   "animation_category_unmatched_keyword_review": {
     "public_report": "data/animation_category_unmatched_keyword_review_public.json",
     "source_categories": 2,
-    "source_category_rows": 2449,
+    "source_category_rows": 2443,
     "unmatched_rows": 2443,
     "token_candidate_count": 40,
     "product_type_candidate_count": 0,

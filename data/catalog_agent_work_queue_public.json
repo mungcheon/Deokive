@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T12:56:45Z",
+  "generated_at": "2026-07-23T13:11:59Z",
   "summary": {
-    "batch_count": 155,
+    "batch_count": 154,
     "max_published_batches": 160,
-    "summed_batch_rows": 23701,
+    "summed_batch_rows": 23641,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -92,10 +92,6 @@
         2
       ],
       [
-        "animation_category_review",
-        2
-      ],
-      [
         "gotouchi_official_candidate_review",
         1
       ],
@@ -117,6 +113,10 @@
       ],
       [
         "ichiban_kuji_metadata",
+        1
+      ],
+      [
+        "animation_category_review",
         1
       ]
     ],
@@ -202,10 +202,6 @@
         2
       ],
       [
-        "agent-animation-taxonomy",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
@@ -224,13 +220,17 @@
       [
         "agent-ichiban-prize-name-image",
         1
+      ],
+      [
+        "agent-animation-taxonomy",
+        1
       ]
     ],
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
       "dedupe_groups": 61,
-      "animation_unknown_categories": 7,
+      "animation_unknown_categories": 2,
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
@@ -283,7 +283,7 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2499,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 170,
+      "animation_category_review_rows": 110,
       "animation_category_action_rows": 110,
       "animation_category_split_review_categories": 2,
       "animation_category_direct_mapping_categories": 0,
@@ -31698,7 +31698,7 @@
       "priority": 160,
       "title": "애니메이션 굿즈 카테고리 검수: animation-taxonomy-review-001",
       "public_report": "data/animation_category_review_batches_public.json",
-      "rows": 158,
+      "rows": 110,
       "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
       "acceptance_criteria": [
         "Folder color hints follow folder_color_palette sort order.",
@@ -31811,297 +31811,6 @@
           },
           "folder_creation_blocked_until": "category_mapping_manually_confirmed",
           "recommended_action": "Split this broad category by product name first, then map reviewed rows into app folders.",
-          "auto_apply_enabled": false
-        },
-        {
-          "category": "보드",
-          "rows": 41,
-          "review_priority": 90,
-          "suggested_family": "other",
-          "suggested_category": "보드",
-          "suggested_color_hint": "neutral",
-          "suggested_color_hex": "0xFF9CA3AF",
-          "suggested_color_group": "neutral",
-          "suggested_color_sort_order": 300,
-          "suggested_primary_icon_key": "category",
-          "suggested_icon_options": [
-            "category",
-            "folder",
-            "folder_special",
-            "inventory",
-            "package",
-            "archive",
-            "source",
-            "dashboard"
-          ],
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - H賞 キャンバス風ボード（1/10）",
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - H賞 キャンバス風ボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - A賞 アクリルボード ー放課後ー",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - B賞 アクリルボード ー五条悟ー",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - C賞 アクリルボード ー夏油傑ー"
-          ],
-          "folder_template": {
-            "folder_name": "보드",
-            "family": "other",
-            "color_hint": "neutral",
-            "color_hex": "0xFF9CA3AF",
-            "color_group": "neutral",
-            "color_sort_order": 300,
-            "primary_icon_key": "category",
-            "icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "source_category": "보드",
-            "requires_manual_review": true
-          },
-          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
-          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
-          "auto_apply_enabled": false
-        },
-        {
-          "category": "색지",
-          "rows": 7,
-          "review_priority": 90,
-          "suggested_family": "other",
-          "suggested_category": "색지",
-          "suggested_color_hint": "neutral",
-          "suggested_color_hex": "0xFF9CA3AF",
-          "suggested_color_group": "neutral",
-          "suggested_color_sort_order": 300,
-          "suggested_primary_icon_key": "category",
-          "suggested_icon_options": [
-            "category",
-            "folder",
-            "folder_special",
-            "inventory",
-            "package",
-            "archive",
-            "source",
-            "dashboard"
-          ],
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "sample_names": [
-            "一番くじ 呪術廻戦 - G賞 ミニ色紙",
-            "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞① 色紙 feat. One's Justice",
-            "一番くじ 僕のヒーローアカデミア～ボーイ・ミーツ…～ - H賞 メタリック色紙",
-            "一番くじ 僕のヒーローアカデミア〜Break Time〜 - F賞 ミニ色紙",
-            "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - D賞 色紙 feat. SMASH RISING",
-            "一番くじ 僕のヒーローアカデミア～更に向こうへ～ - F賞 ミニ色紙",
-            "一番くじ 僕のヒーローアカデミア～ねことひと休み～ - E賞 ミニ色紙"
-          ],
-          "folder_template": {
-            "folder_name": "색지",
-            "family": "other",
-            "color_hint": "neutral",
-            "color_hex": "0xFF9CA3AF",
-            "color_group": "neutral",
-            "color_sort_order": 300,
-            "primary_icon_key": "category",
-            "icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "source_category": "색지",
-            "requires_manual_review": true
-          },
-          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
-          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_state": "taxonomy_mapping_required",
-      "next_machine_step": "map_category_to_folder_color_and_icon"
-    },
-    {
-      "batch_id": "230-agent-animation-taxonomy-155",
-      "agent_id": "agent-animation-taxonomy",
-      "workstream": "animation_category_review",
-      "priority": 230,
-      "title": "애니메이션 굿즈 카테고리 검수: animation-taxonomy-review-002",
-      "public_report": "data/animation_category_review_batches_public.json",
-      "rows": 12,
-      "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
-      "acceptance_criteria": [
-        "Folder color hints follow folder_color_palette sort order.",
-        "Icon choices use existing icon keys from folder_visual_tokens.",
-        "Category changes remain review-only until app navigation impact is checked."
-      ],
-      "sample_items": [
-        {
-          "category": "아크릴 키링",
-          "rows": 8,
-          "review_priority": 90,
-          "suggested_family": "other",
-          "suggested_category": "아크릴 키링",
-          "suggested_color_hint": "neutral",
-          "suggested_color_hex": "0xFF9CA3AF",
-          "suggested_color_group": "neutral",
-          "suggested_color_sort_order": 300,
-          "suggested_primary_icon_key": "category",
-          "suggested_icon_options": [
-            "category",
-            "folder",
-            "folder_special",
-            "inventory",
-            "package",
-            "archive",
-            "source",
-            "dashboard"
-          ],
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "sample_names": [
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - M賞 アクリルチャーム",
-            "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - G賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - F賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～壱～ - G賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 ～肆～ - G賞 アクリルチャーム",
-            "一番くじ 僕のヒーローアカデミア -更に向こうへ- - I賞 エリのツノ型アクリルチャーム",
-            "一番くじ 僕のヒーローアカデミア～ねことひと休み～ - D賞 アクリルチャーム",
-            "一番くじ 僕のヒーローアカデミア Go And Go！ - H賞 アクリルキーホルダー"
-          ],
-          "folder_template": {
-            "folder_name": "아크릴 키링",
-            "family": "other",
-            "color_hint": "neutral",
-            "color_hex": "0xFF9CA3AF",
-            "color_group": "neutral",
-            "color_sort_order": 300,
-            "primary_icon_key": "category",
-            "icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "source_category": "아크릴 키링",
-            "requires_manual_review": true
-          },
-          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
-          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
-          "auto_apply_enabled": false
-        },
-        {
-          "category": "카드/브로마이드",
-          "rows": 1,
-          "review_priority": 90,
-          "suggested_family": "other",
-          "suggested_category": "카드/브로마이드",
-          "suggested_color_hint": "neutral",
-          "suggested_color_hex": "0xFF9CA3AF",
-          "suggested_color_group": "neutral",
-          "suggested_color_sort_order": 300,
-          "suggested_primary_icon_key": "category",
-          "suggested_icon_options": [
-            "category",
-            "folder",
-            "folder_special",
-            "inventory",
-            "package",
-            "archive",
-            "source",
-            "dashboard"
-          ],
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア -更に向こうへ- - J賞 ヒーローカード風アクリルミラーカード"
-          ],
-          "folder_template": {
-            "folder_name": "카드/브로마이드",
-            "family": "other",
-            "color_hint": "neutral",
-            "color_hex": "0xFF9CA3AF",
-            "color_group": "neutral",
-            "color_sort_order": 300,
-            "primary_icon_key": "category",
-            "icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "source_category": "카드/브로마이드",
-            "requires_manual_review": true
-          },
-          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
-          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
-          "auto_apply_enabled": false
-        },
-        {
-          "category": "콜라보 굿즈",
-          "rows": 3,
-          "review_priority": 90,
-          "suggested_family": "other",
-          "suggested_category": "콜라보 굿즈",
-          "suggested_color_hint": "neutral",
-          "suggested_color_hex": "0xFF9CA3AF",
-          "suggested_color_group": "neutral",
-          "suggested_color_sort_order": 300,
-          "suggested_primary_icon_key": "category",
-          "suggested_icon_options": [
-            "category",
-            "folder",
-            "folder_special",
-            "inventory",
-            "package",
-            "archive",
-            "source",
-            "dashboard"
-          ],
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "sample_names": [
-            "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
-            "장송의 프리렌 부쿠부 굿즈",
-            "단간론파 부쿠부 굿즈"
-          ],
-          "folder_template": {
-            "folder_name": "콜라보 굿즈",
-            "family": "other",
-            "color_hint": "neutral",
-            "color_hex": "0xFF9CA3AF",
-            "color_group": "neutral",
-            "color_sort_order": 300,
-            "primary_icon_key": "category",
-            "icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "source_category": "콜라보 굿즈",
-            "requires_manual_review": true
-          },
-          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
-          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
           "auto_apply_enabled": false
         }
       ],

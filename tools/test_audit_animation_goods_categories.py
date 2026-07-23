@@ -51,6 +51,41 @@ class AnimationGoodsCategoryAuditTests(unittest.TestCase):
             "\uc561\uc138\uc11c\ub9ac",
         )
 
+    def test_requested_taxonomy_categories_have_folder_families(self) -> None:
+        rows = [
+            {
+                "source_store": "\uc560\ub2c8\uba54\uc774\ud2b8",
+                "category": category,
+                "name_ko": category,
+            }
+            for category in [
+                "\ubcf4\ub4dc",
+                "\uc0c9\uc9c0",
+                "\uc544\ud06c\ub9b4 \ud0a4\ub9c1",
+                "\uce74\ub4dc/\ube0c\ub85c\ub9c8\uc774\ub4dc",
+                "\ucf5c\ub77c\ubcf4 \uad7f\uc988",
+                "\uad7f\uc988",
+                "\uc544\ud06c\ub9b4",
+            ]
+        ]
+
+        result = audit.build_audit(rows)
+        visuals = {item["category"]: item for item in result["category_visuals"]}
+        unknown = {item["category"] for item in result["unknown_categories"]}
+
+        self.assertEqual(visuals["\ubcf4\ub4dc"]["family"], "display_goods")
+        self.assertEqual(visuals["\uc0c9\uc9c0"]["family"], "stationery")
+        self.assertEqual(visuals["\uc544\ud06c\ub9b4 \ud0a4\ub9c1"]["family"], "keyring")
+        self.assertEqual(visuals["\uce74\ub4dc/\ube0c\ub85c\ub9c8\uc774\ub4dc"]["family"], "stationery")
+        self.assertEqual(visuals["\ucf5c\ub77c\ubcf4 \uad7f\uc988"]["family"], "fan_goods")
+        self.assertNotIn("\ubcf4\ub4dc", unknown)
+        self.assertNotIn("\uc0c9\uc9c0", unknown)
+        self.assertNotIn("\uc544\ud06c\ub9b4 \ud0a4\ub9c1", unknown)
+        self.assertNotIn("\uce74\ub4dc/\ube0c\ub85c\ub9c8\uc774\ub4dc", unknown)
+        self.assertNotIn("\ucf5c\ub77c\ubcf4 \uad7f\uc988", unknown)
+        self.assertIn("\uad7f\uc988", unknown)
+        self.assertIn("\uc544\ud06c\ub9b4", unknown)
+
     def test_load_rows_accepts_public_catalog_shape(self) -> None:
         payload = {
             "meta": {"row_count": 1},
