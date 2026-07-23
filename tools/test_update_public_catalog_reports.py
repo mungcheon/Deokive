@@ -70,6 +70,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/ichiban_kuji_prize_policy_issue_queue_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_name_image_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_name_image_patch_candidates_public.json", updated_files)
+        self.assertIn("data/ichiban_kuji_historical_roadmap_public.json", updated_files)
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
         self.assertIn("data/animation_category_unmatched_keyword_review_public.json", updated_files)
         self.assertIn("data/source_detail_probe_public.json", updated_files)
@@ -326,6 +327,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertIs(quality["ichiban_kuji_prize_policy_issue_queue"]["auto_apply_enabled"], False)
         self.assertIs(quality["ichiban_kuji_prize_policy_issue_queue"]["auto_delete_enabled"], False)
+        roadmap = reports.load_json(reports.ICHIIBAN_KUJI_HISTORICAL_ROADMAP)
+        self.assertEqual(
+            quality["ichiban_kuji_historical_roadmap"]["roadmap_phase_count"],
+            len(roadmap["phases"]),
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_historical_roadmap"]["metadata_actionable_campaigns"],
+            roadmap["summary"]["metadata_actionable_campaigns"],
+        )
+        self.assertIs(roadmap["summary"]["auto_apply_enabled"], False)
+        self.assertIs(roadmap["summary"]["auto_merge_enabled"], False)
+        self.assertIs(roadmap["summary"]["auto_delete_enabled"], False)
         if reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists():
             prize_name_image = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW)
             prize_name_image_summary = prize_name_image.get("summary", {})
@@ -657,6 +670,94 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(summary["generic_source_replacement_rows"], 6)
         self.assertEqual(roadmap["phases"][3]["rows"], 6)
         self.assertIs(summary["auto_apply_enabled"], False)
+
+    def test_ichiban_kuji_historical_roadmap_summarizes_manual_phases(self):
+        roadmap = reports.build_ichiban_kuji_historical_roadmap_public(
+            generated_at="2026-01-01T00:00:00Z",
+            ichiban_kuji_history={
+                "summary": {
+                    "catalog_kuji_item_rows": 12,
+                    "campaign_rows": 3,
+                    "campaign_metadata_review_queue_rows": 2,
+                    "missing_release_date_rows": 1,
+                    "missing_official_price_jpy_rows": 4,
+                }
+            },
+            ichiban_metadata_action_queue={
+                "summary": {
+                    "actionable_campaigns": 2,
+                    "queued_action_campaigns": 2,
+                    "unqueued_action_campaigns": 0,
+                    "queued_catalog_item_rows": 7,
+                    "action_batch_count": 1,
+                }
+            },
+            ichiban_metadata_fast_review={
+                "summary": {
+                    "fast_review_campaigns": 1,
+                    "held_for_later_campaigns": 1,
+                    "fast_review_template_rows": 1,
+                    "manual_confirmed_true": 0,
+                }
+            },
+            ichiban_kuji_prize_policy_issue_queue={
+                "summary": {
+                    "issue_rows": 3,
+                    "open_issue_rows": 5,
+                    "zero_price_violation_rows": 0,
+                    "zero_price_exception_policy_pass": True,
+                    "numbered_variant_coverage_policy_pass": True,
+                    "probable_reissue_work_order_rows": 2,
+                    "probable_reissue_review_groups": 2,
+                    "repeated_name_different_source_groups": 4,
+                }
+            },
+            deduplication_action_queue={
+                "summary": {
+                    "ichiban_reissue_review_groups": 4,
+                    "ichiban_reissue_work_order_rows": 2,
+                    "ichiban_reissue_decision_template_rows": 2,
+                    "auto_merge_enabled": False,
+                    "auto_delete_enabled": False,
+                }
+            },
+            name_duplicate_audit={
+                "summary": {
+                    "ichiban_campaign_or_reissue_protected_groups": 9,
+                    "same_barcode_name_review_groups": 1,
+                    "auto_merge_enabled": False,
+                    "auto_delete_enabled": False,
+                }
+            },
+            ichiban_kuji_prize_name_image_review={
+                "summary": {
+                    "review_rows": 6,
+                    "multi_item_prize_rank_groups": 2,
+                    "auto_apply_enabled": False,
+                }
+            },
+            ichiban_kuji_prize_name_image_patch_candidates={
+                "summary": {
+                    "candidate_rows": 4,
+                    "open_candidate_rows": 3,
+                    "manual_confirmed_rows": 0,
+                    "auto_apply_enabled": False,
+                },
+                "candidates": [{}, {}, {}, {}],
+            },
+        )
+
+        summary = roadmap["summary"]
+        self.assertEqual(summary["catalog_ichiban_rows"], 12)
+        self.assertEqual(summary["metadata_actionable_campaigns"], 2)
+        self.assertEqual(summary["probable_reissue_review_groups"], 2)
+        self.assertEqual(summary["roadmap_phase_count"], 5)
+        self.assertEqual(roadmap["phases"][0]["phase"], "confirm_ichiban_campaign_metadata")
+        self.assertEqual(roadmap["phases"][0]["rows"], 2)
+        self.assertEqual(roadmap["phases"][1]["rows"], 2)
+        self.assertIs(summary["auto_apply_enabled"], False)
+        self.assertIs(summary["auto_merge_enabled"], False)
+        self.assertIs(summary["auto_delete_enabled"], False)
 
     def test_deduplication_template_import_dry_run_has_actionable_summary(self):
         template = {

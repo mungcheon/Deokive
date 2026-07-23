@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-23T19:22:13Z",
+  "summary": {
+    "catalog_ichiban_rows": 7898,
+    "campaign_rows": 614,
+    "campaign_metadata_review_queue_rows": 42,
+    "metadata_actionable_campaigns": 44,
+    "metadata_queued_action_campaigns": 44,
+    "metadata_unqueued_action_campaigns": 0,
+    "metadata_fast_review_campaigns": 20,
+    "missing_release_date_rows": 8,
+    "missing_official_price_jpy_rows": 350,
+    "probable_reissue_review_groups": 20,
+    "probable_reissue_work_order_rows": 20,
+    "dedupe_ichiban_reissue_review_groups": 46,
+    "dedupe_ichiban_reissue_work_order_rows": 20,
+    "repeated_name_different_source_groups": 46,
+    "name_duplicate_ichiban_protected_groups": 479,
+    "prize_policy_issue_rows": 20,
+    "zero_price_violation_rows": 0,
+    "zero_price_exception_policy_pass": true,
+    "numbered_variant_coverage_policy_pass": true,
+    "prize_name_image_review_rows": 0,
+    "prize_name_image_patch_open_rows": 0,
+    "roadmap_phase_count": 5,
+    "auto_apply_enabled": false,
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false
+  },
+  "phases": [
+    {
+      "phase": "confirm_ichiban_campaign_metadata",
+      "label": "Confirm official campaign metadata",
+      "rows": 44,
+      "blocking_reason": "Campaign release dates and draw prices must be confirmed from official campaign pages.",
+      "public_reports": [
+        "data/ichiban_kuji_history_public.json",
+        "data/ichiban_kuji_metadata_action_queue_public.json",
+        "data/ichiban_kuji_metadata_fast_review_public.json"
+      ],
+      "recommended_next_action": "Work release-date and official-price templates before mutating catalog metadata.",
+      "auto_apply_enabled": false
+    },
+    {
+      "phase": "resolve_ichiban_reissue_identity",
+      "label": "Resolve reissue and campaign-variant identity",
+      "rows": 20,
+      "review_groups": 46,
+      "blocking_reason": "Repeated names across official campaign URLs may be legitimate reissues, variants, or duplicates.",
+      "public_reports": [
+        "data/catalog_deduplication_action_queue_public.json",
+        "data/ichiban_kuji_prize_policy_issue_queue_public.json"
+      ],
+      "recommended_next_action": "Compare official campaign pages and mark keep/merge decisions manually.",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "phase": "verify_prize_policy_exceptions",
+      "label": "Verify prize policy exceptions",
+      "rows": 40,
+      "blocking_reason": "Last One and Double Chance rows should keep zero price, while numbered same-rank variants must remain represented.",
+      "public_reports": [
+        "data/ichiban_kuji_prize_policy_issue_queue_public.json"
+      ],
+      "policy_checks": {
+        "zero_price_exception_policy_pass": true,
+        "numbered_variant_coverage_policy_pass": true,
+        "zero_price_violation_rows": 0
+      },
+      "recommended_next_action": "Keep zero-price exception rows protected and review remaining same-prize-rank groups manually.",
+      "auto_apply_enabled": false
+    },
+    {
+      "phase": "review_prize_name_image_patches",
+      "label": "Review prize name and image patch candidates",
+      "rows": 0,
+      "multi_item_prize_rank_groups": 415,
+      "blocking_reason": "Prize names and images must match official campaign lineup cards before any patch is applied.",
+      "public_reports": [
+        "data/ichiban_kuji_prize_name_image_review_public.json",
+        "data/ichiban_kuji_prize_name_image_patch_candidates_public.json"
+      ],
+      "recommended_next_action": "Confirm exact official patch candidates, then fill manual templates for blocked rows.",
+      "auto_apply_enabled": false
+    },
+    {
+      "phase": "archive_protected_name_duplicates",
+      "label": "Archive protected same-name duplicate groups",
+      "rows": 479,
+      "blocking_reason": "These same-name groups are protected because campaign/reissue context may intentionally repeat product names.",
+      "public_reports": [
+        "data/catalog_name_duplicate_audit_public.json"
+      ],
+      "recommended_next_action": "Keep protected groups documented; do not merge by name alone.",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    }
+  ],
+  "instructions": [
+    "Use this roadmap as the public manual work order for historical Ichiban Kuji cleanup.",
+    "Do not delete or merge reissue-looking rows until official campaign identity is confirmed.",
+    "Keep Last One and Double Chance price exceptions at zero unless official policy changes.",
+    "Apply prize name/image patches only after exact official campaign lineup confirmation."
+  ],
+  "inputs": {
+    "ichiban_kuji_history": "data/ichiban_kuji_history_public.json",
+    "ichiban_kuji_metadata_action_queue": "data/ichiban_kuji_metadata_action_queue_public.json",
+    "ichiban_kuji_metadata_fast_review": "data/ichiban_kuji_metadata_fast_review_public.json",
+    "ichiban_kuji_prize_policy_issue_queue": "data/ichiban_kuji_prize_policy_issue_queue_public.json",
+    "catalog_deduplication_action_queue": "data/catalog_deduplication_action_queue_public.json",
+    "catalog_name_duplicate_audit": "data/catalog_name_duplicate_audit_public.json",
+    "ichiban_kuji_prize_name_image_review": "data/ichiban_kuji_prize_name_image_review_public.json",
+    "ichiban_kuji_prize_name_image_patch_candidates": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json"
+  },
+  "automation_policy": {
+    "auto_apply_catalog_changes": false,
+    "auto_merge_catalog_rows": false,
+    "auto_delete_catalog_rows": false,
+    "requires_manual_official_confirmation": true,
+    "reason": "Historical Ichiban Kuji rows can repeat names across campaigns, reissues, ranks, and prize variants."
+  }
+}

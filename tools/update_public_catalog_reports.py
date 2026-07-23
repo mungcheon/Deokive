@@ -75,6 +75,7 @@ ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
 ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES = DATA / "ichiban_kuji_metadata_review_batches_public.json"
 ICHIIBAN_KUJI_METADATA_ACTION_QUEUE = DATA / "ichiban_kuji_metadata_action_queue_public.json"
 ICHIIBAN_KUJI_METADATA_FAST_REVIEW = DATA / "ichiban_kuji_metadata_fast_review_public.json"
+ICHIIBAN_KUJI_HISTORICAL_ROADMAP = DATA / "ichiban_kuji_historical_roadmap_public.json"
 ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT = DATA / "ichiban_kuji_prize_policy_audit_public.json"
 ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE = DATA / "ichiban_kuji_prize_policy_issue_queue_public.json"
 ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW = DATA / "ichiban_kuji_prize_name_image_review_public.json"
@@ -5944,6 +5945,195 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
     }
 
 
+def build_ichiban_kuji_historical_roadmap_public(
+    *,
+    generated_at: str,
+    ichiban_kuji_history: dict[str, Any],
+    ichiban_metadata_action_queue: dict[str, Any],
+    ichiban_metadata_fast_review: dict[str, Any],
+    ichiban_kuji_prize_policy_issue_queue: dict[str, Any],
+    deduplication_action_queue: dict[str, Any],
+    name_duplicate_audit: dict[str, Any],
+    ichiban_kuji_prize_name_image_review: dict[str, Any],
+    ichiban_kuji_prize_name_image_patch_candidates: dict[str, Any],
+) -> dict[str, Any]:
+    history = ichiban_kuji_history.get("summary", {})
+    metadata_action = ichiban_metadata_action_queue.get("summary", {})
+    metadata_fast = ichiban_metadata_fast_review.get("summary", {})
+    prize_policy = ichiban_kuji_prize_policy_issue_queue.get("summary", {})
+    dedupe = deduplication_action_queue.get("summary", {})
+    duplicate_names = name_duplicate_audit.get("summary", {})
+    prize_name_image = ichiban_kuji_prize_name_image_review.get("summary", {})
+    patch_candidates = normalize_ichiban_prize_patch_candidate_summary(
+        ichiban_kuji_prize_name_image_patch_candidates
+    )
+
+    def value(summary: dict[str, Any], key: str, default: int = 0) -> int:
+        raw = summary.get(key, default)
+        return raw if isinstance(raw, int) else default
+
+    phases = [
+        {
+            "phase": "confirm_ichiban_campaign_metadata",
+            "label": "Confirm official campaign metadata",
+            "rows": value(metadata_action, "actionable_campaigns")
+            or value(history, "campaign_metadata_review_queue_rows"),
+            "blocking_reason": "Campaign release dates and draw prices must be confirmed from official campaign pages.",
+            "public_reports": [
+                f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+                f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
+                f"data/{ICHIIBAN_KUJI_METADATA_FAST_REVIEW.name}",
+            ],
+            "recommended_next_action": "Work release-date and official-price templates before mutating catalog metadata.",
+            "auto_apply_enabled": False,
+        },
+        {
+            "phase": "resolve_ichiban_reissue_identity",
+            "label": "Resolve reissue and campaign-variant identity",
+            "rows": value(dedupe, "ichiban_reissue_work_order_rows")
+            or value(prize_policy, "probable_reissue_work_order_rows"),
+            "review_groups": value(dedupe, "ichiban_reissue_review_groups")
+            or value(prize_policy, "probable_reissue_review_groups"),
+            "blocking_reason": "Repeated names across official campaign URLs may be legitimate reissues, variants, or duplicates.",
+            "public_reports": [
+                f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+                f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.name}",
+            ],
+            "recommended_next_action": "Compare official campaign pages and mark keep/merge decisions manually.",
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+        },
+        {
+            "phase": "verify_prize_policy_exceptions",
+            "label": "Verify prize policy exceptions",
+            "rows": value(prize_policy, "open_issue_rows") or value(prize_policy, "issue_rows"),
+            "blocking_reason": "Last One and Double Chance rows should keep zero price, while numbered same-rank variants must remain represented.",
+            "public_reports": [f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.name}"],
+            "policy_checks": {
+                "zero_price_exception_policy_pass": prize_policy.get(
+                    "zero_price_exception_policy_pass", False
+                ),
+                "numbered_variant_coverage_policy_pass": prize_policy.get(
+                    "numbered_variant_coverage_policy_pass", False
+                ),
+                "zero_price_violation_rows": value(prize_policy, "zero_price_violation_rows"),
+            },
+            "recommended_next_action": "Keep zero-price exception rows protected and review remaining same-prize-rank groups manually.",
+            "auto_apply_enabled": False,
+        },
+        {
+            "phase": "review_prize_name_image_patches",
+            "label": "Review prize name and image patch candidates",
+            "rows": value(patch_candidates, "open_candidate_rows")
+            + value(prize_name_image, "review_rows"),
+            "multi_item_prize_rank_groups": value(
+                prize_name_image, "multi_item_prize_rank_groups"
+            ),
+            "blocking_reason": "Prize names and images must match official campaign lineup cards before any patch is applied.",
+            "public_reports": [
+                f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}",
+                f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}",
+            ],
+            "recommended_next_action": "Confirm exact official patch candidates, then fill manual templates for blocked rows.",
+            "auto_apply_enabled": False,
+        },
+        {
+            "phase": "archive_protected_name_duplicates",
+            "label": "Archive protected same-name duplicate groups",
+            "rows": value(duplicate_names, "ichiban_campaign_or_reissue_protected_groups"),
+            "blocking_reason": "These same-name groups are protected because campaign/reissue context may intentionally repeat product names.",
+            "public_reports": [f"data/{NAME_DUPLICATE_AUDIT.name}"],
+            "recommended_next_action": "Keep protected groups documented; do not merge by name alone.",
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+        },
+    ]
+
+    summary = {
+        "catalog_ichiban_rows": value(history, "catalog_kuji_item_rows"),
+        "campaign_rows": value(history, "campaign_rows"),
+        "campaign_metadata_review_queue_rows": value(
+            history, "campaign_metadata_review_queue_rows"
+        ),
+        "metadata_actionable_campaigns": value(metadata_action, "actionable_campaigns"),
+        "metadata_queued_action_campaigns": value(
+            metadata_action, "queued_action_campaigns"
+        ),
+        "metadata_unqueued_action_campaigns": value(
+            metadata_action, "unqueued_action_campaigns"
+        ),
+        "metadata_fast_review_campaigns": value(metadata_fast, "fast_review_campaigns"),
+        "missing_release_date_rows": value(history, "missing_release_date_rows"),
+        "missing_official_price_jpy_rows": value(
+            history, "missing_official_price_jpy_rows"
+        ),
+        "probable_reissue_review_groups": value(
+            prize_policy, "probable_reissue_review_groups"
+        ),
+        "probable_reissue_work_order_rows": value(
+            prize_policy, "probable_reissue_work_order_rows"
+        ),
+        "dedupe_ichiban_reissue_review_groups": value(
+            dedupe, "ichiban_reissue_review_groups"
+        ),
+        "dedupe_ichiban_reissue_work_order_rows": value(
+            dedupe, "ichiban_reissue_work_order_rows"
+        ),
+        "repeated_name_different_source_groups": value(
+            prize_policy, "repeated_name_different_source_groups"
+        ),
+        "name_duplicate_ichiban_protected_groups": value(
+            duplicate_names, "ichiban_campaign_or_reissue_protected_groups"
+        ),
+        "prize_policy_issue_rows": value(prize_policy, "issue_rows"),
+        "zero_price_violation_rows": value(prize_policy, "zero_price_violation_rows"),
+        "zero_price_exception_policy_pass": prize_policy.get(
+            "zero_price_exception_policy_pass", False
+        ),
+        "numbered_variant_coverage_policy_pass": prize_policy.get(
+            "numbered_variant_coverage_policy_pass", False
+        ),
+        "prize_name_image_review_rows": value(prize_name_image, "review_rows"),
+        "prize_name_image_patch_open_rows": value(
+            patch_candidates, "open_candidate_rows"
+        ),
+        "roadmap_phase_count": len(phases),
+        "auto_apply_enabled": False,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+    }
+
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "summary": summary,
+        "phases": phases,
+        "instructions": [
+            "Use this roadmap as the public manual work order for historical Ichiban Kuji cleanup.",
+            "Do not delete or merge reissue-looking rows until official campaign identity is confirmed.",
+            "Keep Last One and Double Chance price exceptions at zero unless official policy changes.",
+            "Apply prize name/image patches only after exact official campaign lineup confirmation.",
+        ],
+        "inputs": {
+            "ichiban_kuji_history": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
+            "ichiban_kuji_metadata_action_queue": f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
+            "ichiban_kuji_metadata_fast_review": f"data/{ICHIIBAN_KUJI_METADATA_FAST_REVIEW.name}",
+            "ichiban_kuji_prize_policy_issue_queue": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.name}",
+            "catalog_deduplication_action_queue": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            "catalog_name_duplicate_audit": f"data/{NAME_DUPLICATE_AUDIT.name}",
+            "ichiban_kuji_prize_name_image_review": f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}",
+            "ichiban_kuji_prize_name_image_patch_candidates": f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}",
+        },
+        "automation_policy": {
+            "auto_apply_catalog_changes": False,
+            "auto_merge_catalog_rows": False,
+            "auto_delete_catalog_rows": False,
+            "requires_manual_official_confirmation": True,
+            "reason": "Historical Ichiban Kuji rows can repeat names across campaigns, reissues, ranks, and prize variants.",
+        },
+    }
+
+
 def validate_public_files(paths: list[Path]) -> list[str]:
     findings: list[str] = []
     for path in paths:
@@ -6940,6 +7130,19 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
+    ichiban_kuji_historical_roadmap = build_ichiban_kuji_historical_roadmap_public(
+        generated_at=generated_at,
+        ichiban_kuji_history=ichiban_kuji_history,
+        ichiban_metadata_action_queue=ichiban_metadata_action_queue,
+        ichiban_metadata_fast_review=ichiban_metadata_fast_review,
+        ichiban_kuji_prize_policy_issue_queue=ichiban_kuji_prize_policy_issue_queue,
+        deduplication_action_queue=load_json(DEDUPLICATION_ACTION_QUEUE, {})
+        if DEDUPLICATION_ACTION_QUEUE.exists()
+        else {},
+        name_duplicate_audit=name_duplicate_audit,
+        ichiban_kuji_prize_name_image_review=ichiban_kuji_prize_name_image_review,
+        ichiban_kuji_prize_name_image_patch_candidates=ichiban_kuji_prize_name_image_patch_candidates,
+    )
     import build_source_discovery_action_queue_public
     import build_source_discovery_focus_confirmed_template_public
     import build_source_discovery_focus_packs_public
@@ -7554,6 +7757,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.name}",
             **ichiban_kuji_prize_policy_issue_queue.get("summary", {}),
         }
+        target["ichiban_kuji_historical_roadmap"] = {
+            "public_report": f"data/{ICHIIBAN_KUJI_HISTORICAL_ROADMAP.name}",
+            **ichiban_kuji_historical_roadmap.get("summary", {}),
+        }
         target["operations"] = {
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
@@ -7611,6 +7818,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(ICHIIBAN_KUJI_METADATA_FAST_REVIEW, ichiban_metadata_fast_review)
         write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, ichiban_kuji_prize_name_image_review)
         write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, ichiban_kuji_prize_name_image_patch_candidates)
+        write_json(ICHIIBAN_KUJI_HISTORICAL_ROADMAP, ichiban_kuji_historical_roadmap)
         write_json(OPERATIONS_REPORT, operations)
         write_json(AGENT_WORK_QUEUE, agent_work_queue)
         write_json(EXECUTION_PLAN, execution_plan)
@@ -7726,6 +7934,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ICHIIBAN_KUJI_METADATA_FAST_REVIEW.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_HISTORICAL_ROADMAP.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),
