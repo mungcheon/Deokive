@@ -7629,6 +7629,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "manual_validation_focus",
                 {},
             ),
+            "execution_queue_summary": missing_image_actionability.get(
+                "execution_queue_summary",
+                {},
+            ),
         }
         target["danganronpa_missing_media"] = {
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",

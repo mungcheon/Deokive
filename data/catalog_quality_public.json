@@ -7079,6 +7079,124 @@
         "auto_apply_catalog_changes": false,
         "reason": "No image row is ready until exact product identity and source/image evidence are manually confirmed."
       }
+    },
+    "execution_queue_summary": {
+      "open_missing_image_rows": 710,
+      "auto_import_ready_rows": 0,
+      "queue_count": 5,
+      "queued_rows_total": 507,
+      "not_yet_queued_rows": 203,
+      "completion_plan_status": "balanced",
+      "next_queue": {
+        "rank": 3,
+        "lane": "replace_generic_source_urls",
+        "row_count": 50,
+        "source": "catalog_image_attachment_action_queue_public.json",
+        "template": "catalog_image_attachment_confirmed_template_public.json",
+        "next_step": "replace_generic_source_url_then_extract_image",
+        "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+        "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+        "manual_confirmation_required": true,
+        "auto_apply_enabled": false,
+        "required_evidence": [
+          "exact_product_source_url",
+          "existing_generic_source_url_replaced_or_preserved_with_reason",
+          "image_url_from_exact_source_after_replacement"
+        ]
+      },
+      "queues": [
+        {
+          "rank": 3,
+          "lane": "replace_generic_source_urls",
+          "row_count": 50,
+          "source": "catalog_image_attachment_action_queue_public.json",
+          "template": "catalog_image_attachment_confirmed_template_public.json",
+          "next_step": "replace_generic_source_url_then_extract_image",
+          "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+          "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "required_evidence": [
+            "exact_product_source_url",
+            "existing_generic_source_url_replaced_or_preserved_with_reason",
+            "image_url_from_exact_source_after_replacement"
+          ]
+        },
+        {
+          "rank": 4,
+          "lane": "discover_exact_source_urls",
+          "row_count": 417,
+          "source": "source_discovery_action_queue_public.json",
+          "template": "source_discovery_focus_confirmed_template_public.json",
+          "next_step": "confirm_exact_source_url_then_fill_source_templates",
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
+          ]
+        },
+        {
+          "rank": 5,
+          "lane": "review_representative_images",
+          "row_count": 23,
+          "source": "catalog_image_attachment_action_queue_public.json",
+          "template": "catalog_image_attachment_confirmed_template_public.json",
+          "next_step": "confirm_exact_product_type_then_attach_image",
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "blocked_reason": "representative_image_requires_product_type_review",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "required_evidence": [
+            "official_source_matches_exact_product_type",
+            "representative_image_is_not_wrong_variant_or_lineup_only",
+            "manual_note_for_representative_image_choice"
+          ]
+        },
+        {
+          "rank": 6,
+          "lane": "recheck_source_detail_candidates",
+          "row_count": 12,
+          "source": "source_detail_candidate_action_queue_public.json",
+          "template": "source_detail_candidate_confirmed_rows_public.json",
+          "next_step": "refresh_or_replace_candidate_before_import",
+          "blocked_until": "candidate_identity_rechecked_or_replaced",
+          "blocked_reason": "candidate_identity_warning_requires_recheck",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "required_evidence": [
+            "candidate_identity_flags_resolved",
+            "replacement_candidate_source_url_if_current_candidate_is_wrong",
+            "manual_note_explaining_keep_or_reject_decision"
+          ]
+        },
+        {
+          "rank": 7,
+          "lane": "manual_image_research",
+          "row_count": 5,
+          "source": "catalog_image_enrichment_batches_public.json",
+          "template": "manual_image_source_discovery_public.json",
+          "next_step": "manual_official_source_and_image_research",
+          "blocked_until": "manual_official_source_and_image_evidence_recorded",
+          "blocked_reason": "structured_source_discovery_not_available",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "required_evidence": [
+            "trusted_source_url_or_manual_evidence_url",
+            "image_url_source_explained",
+            "manual_note_for_nonstandard_source"
+          ]
+        }
+      ],
+      "operator_note": "Work queues are dry-run safe. Fill the listed confirmation template only after exact product identity, source URL, and image evidence are verified.",
+      "automation_policy": {
+        "auto_apply_catalog_changes": false,
+        "manual_confirmation_required": true,
+        "reason": "Every open image row still needs source/product/image identity evidence."
+      }
     }
   },
   "source_discovery_store_bottlenecks": {

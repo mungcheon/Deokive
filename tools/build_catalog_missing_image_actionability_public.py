@@ -839,6 +839,60 @@ def build_manual_validation_focus(
     }
 
 
+def build_execution_queue_summary(
+    summary: dict[str, Any],
+    work_order: list[dict[str, Any]],
+    completion_plan: dict[str, Any],
+) -> dict[str, Any]:
+    queues = []
+    for row in sorted(
+        work_order,
+        key=lambda item: (int(item.get("rank") or 999), str(item.get("lane") or "")),
+    ):
+        row_count = int(row.get("row_count") or 0)
+        if row_count <= 0:
+            continue
+        queues.append(
+            {
+                "rank": row.get("rank"),
+                "lane": row.get("lane"),
+                "row_count": row_count,
+                "source": row.get("source"),
+                "template": row.get("template"),
+                "next_step": row.get("next_step"),
+                "blocked_until": row.get("blocked_until"),
+                "blocked_reason": row.get("blocked_reason"),
+                "manual_confirmation_required": bool(row.get("manual_confirmation_required", True)),
+                "auto_apply_enabled": bool(row.get("auto_apply_enabled", False)),
+                "required_evidence": row.get("required_evidence") or [],
+            }
+        )
+
+    open_missing_image_rows = int(summary.get("missing_image_rows") or 0)
+    queued_rows_total = sum(int(queue.get("row_count") or 0) for queue in queues)
+    next_queue = queues[0] if queues else {}
+    return {
+        "open_missing_image_rows": open_missing_image_rows,
+        "auto_import_ready_rows": int(summary.get("image_attachment_template_dry_run_updated_rows") or 0)
+        + int(summary.get("source_detail_ready_unflagged_candidate_rows") or 0),
+        "queue_count": len(queues),
+        "queued_rows_total": queued_rows_total,
+        "not_yet_queued_rows": max(0, open_missing_image_rows - queued_rows_total),
+        "completion_plan_status": completion_plan.get("status"),
+        "next_queue": next_queue,
+        "queues": queues,
+        "operator_note": (
+            "Work queues are dry-run safe. Fill the listed confirmation template only "
+            "after exact product identity, source URL, and image evidence are verified."
+        ),
+        "automation_policy": {
+            "auto_apply_catalog_changes": False,
+            "manual_confirmation_required": True,
+            "reason": "Every open image row still needs source/product/image identity evidence.",
+        },
+    }
+
+
 def source_detail_items(source_detail_queue: dict[str, Any] | None) -> list[dict[str, Any]]:
     if not isinstance(source_detail_queue, dict):
         return []
@@ -1178,6 +1232,11 @@ def build_report(
         source_discovery_work_packs,
         next_source_discovery_focus_pack,
     )
+    execution_queue_summary = build_execution_queue_summary(
+        summary_out,
+        work_order,
+        completion_plan,
+    )
     summary_out.update(
         {
             "completion_plan_total_open_rows": int(completion_plan.get("total_open_rows") or 0),
@@ -1198,6 +1257,7 @@ def build_report(
         "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
         "manual_validation_focus": manual_validation_focus,
+        "execution_queue_summary": execution_queue_summary,
         "completion_plan": completion_plan,
         "recommended_order": [
             "source_url_replacement_required",

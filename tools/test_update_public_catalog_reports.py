@@ -143,10 +143,19 @@ class PublicCatalogReportTests(unittest.TestCase):
             actionability = reports.load_json(reports.MISSING_IMAGE_ACTIONABILITY)
             completion_plan = actionability["completion_plan"]
             manual_focus = actionability["manual_validation_focus"]
+            execution_queue = actionability["execution_queue_summary"]
             self.assertEqual(manual_focus["auto_import_ready_rows"], 0)
             self.assertEqual(manual_focus["manual_validation_required_rows"], result["missing"]["image_url"])
             self.assertEqual(manual_focus["next_focus_lane"], "replace_generic_source_urls")
             self.assertEqual(manual_focus["next_focus_row_count"], 50)
+            self.assertEqual(execution_queue["auto_import_ready_rows"], 0)
+            self.assertEqual(execution_queue["open_missing_image_rows"], result["missing"]["image_url"])
+            self.assertEqual(execution_queue["queued_rows_total"], 507)
+            self.assertEqual(execution_queue["not_yet_queued_rows"], 203)
+            self.assertEqual(execution_queue["completion_plan_status"], "balanced")
+            self.assertEqual(execution_queue["next_queue"]["lane"], "replace_generic_source_urls")
+            self.assertEqual(execution_queue["next_queue"]["template"], "catalog_image_attachment_confirmed_template_public.json")
+            self.assertIs(execution_queue["next_queue"]["auto_apply_enabled"], False)
             self.assertEqual(
                 manual_focus["blocked_summary"]["generic_source_url_replacement_rows"],
                 50,
@@ -156,6 +165,12 @@ class PublicCatalogReportTests(unittest.TestCase):
                     "auto_import_ready_rows"
                 ],
                 0,
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"]["execution_queue_summary"][
+                    "next_queue"
+                ]["lane"],
+                "replace_generic_source_urls",
             )
             self.assertEqual(completion_plan["total_open_rows"], result["missing"]["image_url"])
             self.assertEqual(completion_plan["phase_rows_total"], result["missing"]["image_url"])
