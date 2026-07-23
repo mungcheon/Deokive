@@ -44,6 +44,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_discovery_store_bottlenecks_public.json", updated_files)
         self.assertIn("data/catalog_metadata_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_metadata_action_queue_public.json", updated_files)
+        self.assertIn("data/catalog_name_duplicate_audit_public.json", updated_files)
         self.assertIn("data/animation_category_review_batches_public.json", updated_files)
         self.assertIn("data/animation_category_coverage_audit_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
@@ -259,6 +260,9 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["deduplication_template_import_dry_run"]["manual_confirmed_rows"], 0)
             self.assertIs(quality["deduplication_template_import_dry_run"]["write"], False)
             self.assertIs(quality["deduplication_template_import_dry_run"]["auto_delete_enabled"], False)
+        self.assertGreaterEqual(quality["name_duplicate_audit"]["name_duplicate_groups"], 1)
+        self.assertIs(quality["name_duplicate_audit"]["auto_merge_enabled"], False)
+        self.assertIs(quality["name_duplicate_audit"]["auto_delete_enabled"], False)
         self.assertEqual(quality["animation_category_coverage_audit"]["status"], "pass")
         self.assertEqual(quality["animation_category_coverage_audit"]["unknown_category_count"], 0)
         self.assertEqual(quality["animation_category_coverage_audit"]["failed_check_count"], 0)
@@ -522,6 +526,53 @@ class PublicCatalogReportTests(unittest.TestCase):
             dedupe["summary"]["source_url_exclusions"]["excluded_shared_source_url_value_groups"],
             1,
         )
+
+    def test_name_duplicate_audit_protects_reissues_and_variants(self):
+        items = [
+            {
+                "catalog_index": 1,
+                "name_ko": "이치방쿠지 샘플 A상 인형",
+                "name_ja": "一番くじ サンプル A賞 ぬいぐるみ",
+                "category": "인형",
+                "source_url": "https://1kuji.com/products/sample-2024",
+                "source_store": "이치방쿠지",
+            },
+            {
+                "catalog_index": 2,
+                "name_ko": "이치방쿠지 샘플 A상 인형",
+                "name_ja": "一番くじ サンプル A賞 ぬいぐるみ",
+                "category": "인형",
+                "source_url": "https://1kuji.com/products/sample-2025",
+                "source_store": "이치방쿠지",
+            },
+            {
+                "catalog_index": 3,
+                "name_ko": "샘플 아크릴 키링",
+                "name_ja": "サンプル アクリルキーホルダー",
+                "category": "아크릴 키링",
+                "barcode": "111",
+                "source_url": "https://example.com/a",
+            },
+            {
+                "catalog_index": 4,
+                "name_ko": "샘플 아크릴 키링",
+                "name_ja": "サンプル アクリルキーホルダー",
+                "category": "아크릴 키링",
+                "barcode": "222",
+                "source_url": "https://example.com/b",
+            },
+        ]
+
+        audit = reports.build_name_duplicate_audit_public(items)
+        summary = audit["summary"]
+        lanes = {row["lane"] for row in audit["groups"]}
+
+        self.assertEqual(summary["name_duplicate_groups"], 2)
+        self.assertEqual(summary["protected_groups"], 2)
+        self.assertIn("ichiban_campaign_or_reissue_protected", lanes)
+        self.assertIn("same_name_distinct_barcode_variant_protected", lanes)
+        self.assertIs(summary["auto_merge_enabled"], False)
+        self.assertIs(summary["auto_delete_enabled"], False)
 
     def test_deduplication_template_import_dry_run_has_actionable_summary(self):
         template = {

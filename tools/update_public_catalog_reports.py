@@ -62,6 +62,7 @@ DEDUPLICATION_ACTION_QUEUE = DATA / "catalog_deduplication_action_queue_public.j
 DEDUPLICATION_FAST_REVIEW = DATA / "catalog_deduplication_fast_review_public.json"
 DEDUPLICATION_CONFIRMED_TEMPLATE = DATA / "catalog_deduplication_confirmed_template_public.json"
 DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN = DATA / "catalog_deduplication_template_import_dry_run_public.json"
+NAME_DUPLICATE_AUDIT = DATA / "catalog_name_duplicate_audit_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_public.json"
 ANIMATION_CATEGORY_ACTION_QUEUE = DATA / "animation_category_action_queue_public.json"
@@ -5117,6 +5118,175 @@ def build_deduplication_public(items: list[dict[str, Any]], sample_groups: int =
     }
 
 
+def build_name_duplicate_audit_public(items: list[dict[str, Any]], sample_groups: int = 120) -> dict[str, Any]:
+    groups_by_name: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for item in items:
+        name_key = normalize_dedupe_name(item.get("name_ja") or item.get("name_ko"))
+        if len(name_key) >= 6:
+            groups_by_name[name_key].append(item)
+
+    duplicate_groups = [
+        rows for rows in groups_by_name.values() if len({int(row.get("catalog_index") or -1) for row in rows}) > 1
+    ]
+
+    def distinct_values(rows: list[dict[str, Any]], field: str) -> set[str]:
+        return {str(row.get(field) or "").strip() for row in rows if present(row.get(field))}
+
+    def classify(rows: list[dict[str, Any]]) -> tuple[str, int, str, str]:
+        barcodes = distinct_values(rows, "barcode")
+        categories = distinct_values(rows, "category")
+        source_urls = distinct_values(rows, "source_url")
+        source_stores = distinct_values(rows, "source_store")
+        sub_series = distinct_values(rows, "sub_series")
+        character_names = distinct_values(rows, "character_name")
+        has_ichiban = any(is_ichiban_kuji_item(row) for row in rows)
+        campaign_urls = {
+            url
+            for url in source_urls
+            if "1kuji.com/products/" in url
+        }
+
+        if has_ichiban and len(campaign_urls) > 1:
+            return (
+                "ichiban_campaign_or_reissue_protected",
+                10,
+                "Same visible prize name appears across multiple 1kuji campaign URLs.",
+                "Compare campaign pages and only record a dedupe decision if official evidence proves the same sellable product.",
+            )
+        if len(barcodes) == 1 and barcodes:
+            return (
+                "same_barcode_name_review",
+                20,
+                "Rows share a barcode and normalized name.",
+                "Verify product images/source pages, then prefer the richer official row before any keep/drop decision.",
+            )
+        if len(barcodes) > 1:
+            return (
+                "same_name_distinct_barcode_variant_protected",
+                30,
+                "Same normalized name has distinct barcode values.",
+                "Treat as likely variants or rereleases unless source evidence proves otherwise.",
+            )
+        if len(categories) > 1 or len(sub_series) > 1 or len(character_names) > 1:
+            return (
+                "same_name_variant_risk_review",
+                40,
+                "Same normalized name spans category, character, or sub-series differences.",
+                "Preserve variants unless official evidence proves rows are accidental duplicates.",
+            )
+        if len(source_urls) > 1 or len(source_stores) > 1:
+            return (
+                "same_name_multi_source_review",
+                50,
+                "Same normalized name appears across multiple sources.",
+                "Review source identity and release context before proposing a merge.",
+            )
+        return (
+            "same_name_manual_review",
+            60,
+            "Same normalized name lacks stronger shared barcode/source/image evidence.",
+            "Manually compare images, source, release date, and product variant labels before any action.",
+        )
+
+    rows_out: list[dict[str, Any]] = []
+    lane_counts: Counter[str] = Counter()
+    protected_lanes = {
+        "ichiban_campaign_or_reissue_protected",
+        "same_name_distinct_barcode_variant_protected",
+        "same_name_variant_risk_review",
+    }
+    protected_groups = 0
+    manual_review_groups = 0
+    for group_rows in duplicate_groups:
+        lane, priority, reason, action = classify(group_rows)
+        lane_counts[lane] += 1
+        if lane in protected_lanes:
+            protected_groups += 1
+        else:
+            manual_review_groups += 1
+
+        sorted_rows = sorted(group_rows, key=lambda row: int(row.get("catalog_index") or 0))
+        rows_out.append(
+            {
+                "name_key": normalize_dedupe_name(sorted_rows[0].get("name_ja") or sorted_rows[0].get("name_ko")),
+                "sample_name_ko": sorted_rows[0].get("name_ko"),
+                "sample_name_ja": sorted_rows[0].get("name_ja"),
+                "rows": len(sorted_rows),
+                "catalog_indexes": [row.get("catalog_index") for row in sorted_rows],
+                "lane": lane,
+                "review_priority": priority,
+                "blocked_reason": reason,
+                "recommended_action": action,
+                "distinct_barcodes": sorted(distinct_values(sorted_rows, "barcode")),
+                "distinct_source_urls": sorted(distinct_values(sorted_rows, "source_url"))[:12],
+                "distinct_categories": sorted(distinct_values(sorted_rows, "category")),
+                "distinct_sub_series": sorted(distinct_values(sorted_rows, "sub_series")),
+                "distinct_source_stores": sorted(distinct_values(sorted_rows, "source_store")),
+                "sample_items": [
+                    {
+                        "catalog_index": row.get("catalog_index"),
+                        "name_ko": row.get("name_ko"),
+                        "name_ja": row.get("name_ja"),
+                        "category": row.get("category"),
+                        "sub_series": row.get("sub_series"),
+                        "barcode": row.get("barcode"),
+                        "source_store": row.get("source_store"),
+                        "source_url": row.get("source_url"),
+                        "release_date": row.get("release_date"),
+                    }
+                    for row in sorted_rows[:8]
+                ],
+            }
+        )
+
+    rows_out.sort(
+        key=lambda row: (
+            int(row.get("review_priority") or 99),
+            -int(row.get("rows") or 0),
+            str(row.get("sample_name_ko") or ""),
+        )
+    )
+    duplicate_rows = sum(len(rows) for rows in duplicate_groups)
+    return {
+        "schema_version": 1,
+        "scope": "catalog_name_duplicate_audit",
+        "summary": {
+            "catalog_rows": len(items),
+            "name_duplicate_groups": len(duplicate_groups),
+            "name_duplicate_rows": duplicate_rows,
+            "published_groups": min(sample_groups, len(rows_out)),
+            "manual_review_groups": manual_review_groups,
+            "protected_groups": protected_groups,
+            "ichiban_campaign_or_reissue_protected_groups": lane_counts.get(
+                "ichiban_campaign_or_reissue_protected", 0
+            ),
+            "same_barcode_name_review_groups": lane_counts.get("same_barcode_name_review", 0),
+            "same_name_distinct_barcode_variant_protected_groups": lane_counts.get(
+                "same_name_distinct_barcode_variant_protected", 0
+            ),
+            "same_name_variant_risk_review_groups": lane_counts.get("same_name_variant_risk_review", 0),
+            "same_name_multi_source_review_groups": lane_counts.get("same_name_multi_source_review", 0),
+            "same_name_manual_review_groups": lane_counts.get("same_name_manual_review", 0),
+            "lane_counts": lane_counts.most_common(),
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+        },
+        "groups": rows_out[:sample_groups],
+        "automation_policy": {
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+            "requires_manual_review": True,
+            "reason": "Same-name groups often include rereleases, Ichiban Kuji campaign variants, or distinct barcode variants.",
+            "required_before_write": [
+                "open every source_url in the group",
+                "confirm official product identity",
+                "confirm same barcode/source/image only when applicable",
+                "record explicit keep/drop decisions in the confirmed deduplication template",
+            ],
+        },
+    }
+
+
 def category_family(category: str) -> str:
     for family, values in CATEGORY_FAMILIES.items():
         if category in values:
@@ -6469,6 +6639,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     metadata_action_queue = build_metadata_action_queue_report(metadata_review_batches)
     image_enrichment_batches = build_image_enrichment_batches_public(items)
     deduplication = build_deduplication_public(items)
+    name_duplicate_audit = build_name_duplicate_audit_public(items)
     deduplication_confirmed_template = (
         load_json(DEDUPLICATION_CONFIRMED_TEMPLATE, {})
         if DEDUPLICATION_CONFIRMED_TEMPLATE.exists()
@@ -7119,6 +7290,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{DEDUPLICATION.name}",
             **deduplication["summary"],
         }
+        target["name_duplicate_audit"] = {
+            "public_report": f"data/{NAME_DUPLICATE_AUDIT.name}",
+            **name_duplicate_audit["summary"],
+        }
         if DEDUPLICATION_REVIEW_BATCHES.exists():
             target["deduplication_review_batches"] = copy_report_summary(
                 DEDUPLICATION_REVIEW_BATCHES, "deduplication_review_batches"
@@ -7247,6 +7422,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(METADATA_ACTION_QUEUE, metadata_action_queue)
         write_json(IMAGE_ENRICHMENT_BATCHES, image_enrichment_batches)
         write_json(DEDUPLICATION, deduplication)
+        write_json(NAME_DUPLICATE_AUDIT, name_duplicate_audit)
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ANIMATION_CATEGORY_COVERAGE_AUDIT, animation_category_coverage_audit)
         write_json(ANIMATION_CATEGORY_REVIEW_BATCHES, animation_review_batches)
@@ -7354,6 +7530,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(EXECUTION_PLAN.relative_to(ROOT)),
             str(IMAGE_ENRICHMENT_BATCHES.relative_to(ROOT)),
             str(DEDUPLICATION.relative_to(ROOT)),
+            str(NAME_DUPLICATE_AUDIT.relative_to(ROOT)),
             str(DEDUPLICATION_ACTION_QUEUE.relative_to(ROOT)),
             str(DEDUPLICATION_FAST_REVIEW.relative_to(ROOT)),
             str(DEDUPLICATION_CONFIRMED_TEMPLATE.relative_to(ROOT)),

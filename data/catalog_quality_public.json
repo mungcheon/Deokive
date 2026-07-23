@@ -7727,5 +7727,48 @@
     "failed_check_count": 0,
     "status": "pass",
     "auto_apply_enabled": false
+  },
+  "name_duplicate_audit": {
+    "public_report": "data/catalog_name_duplicate_audit_public.json",
+    "catalog_rows": 20347,
+    "name_duplicate_groups": 574,
+    "name_duplicate_rows": 1817,
+    "published_groups": 120,
+    "manual_review_groups": 70,
+    "protected_groups": 504,
+    "ichiban_campaign_or_reissue_protected_groups": 479,
+    "same_barcode_name_review_groups": 11,
+    "same_name_distinct_barcode_variant_protected_groups": 16,
+    "same_name_variant_risk_review_groups": 9,
+    "same_name_multi_source_review_groups": 58,
+    "same_name_manual_review_groups": 1,
+    "lane_counts": [
+      [
+        "ichiban_campaign_or_reissue_protected",
+        479
+      ],
+      [
+        "same_name_multi_source_review",
+        58
+      ],
+      [
+        "same_name_distinct_barcode_variant_protected",
+        16
+      ],
+      [
+        "same_barcode_name_review",
+        11
+      ],
+      [
+        "same_name_variant_risk_review",
+        9
+      ],
+      [
+        "same_name_manual_review",
+        1
+      ]
+    ],
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false
   }
 }
