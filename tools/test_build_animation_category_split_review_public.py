@@ -115,6 +115,20 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
         self.assertEqual(item["unmatched_sample_names"], ["분류 안 되는 샘플"])
         self.assertEqual(item["unmatched_catalog_samples"][0]["catalog_index"], 103)
 
+    def test_unicode_stationery_and_tableware_split_rules_are_available(self) -> None:
+        rules = {rule["rule_id"]: rule for rule in split_review.SPLIT_RULES}
+
+        self.assertEqual(rules["shikishi_board"]["target_category"], "색지")
+        self.assertIn("色紙", rules["shikishi_board"]["match_keywords"])
+        self.assertEqual(rules["sticker"]["target_category"], "스티커")
+        self.assertIn("ステッカー", rules["sticker"]["match_keywords"])
+        self.assertEqual(rules["card_bromide"]["target_category"], "카드/브로마이드")
+        self.assertIn("ブロマイド", rules["card_bromide"]["match_keywords"])
+        self.assertEqual(rules["clear_file"]["target_category"], "클리어 파일")
+        self.assertIn("クリアファイル", rules["clear_file"]["match_keywords"])
+        self.assertEqual(rules["tableware_daily_goods"]["target_category"], "생활잡화")
+        self.assertIn("食器", rules["tableware_daily_goods"]["match_keywords"])
+
 
 if __name__ == "__main__":
     unittest.main()

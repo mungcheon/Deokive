@@ -89,6 +89,45 @@ class BuildAnimationCategoryUnmatchedKeywordReviewPublicTest(unittest.TestCase):
         self.assertEqual(report["top_product_type_candidates"][0]["token"], "카메라")
         self.assertEqual(item["sample_unmatched_rows"][0]["catalog_index"], 2)
 
+    def test_unicode_stationery_and_tableware_keywords_are_promotable(self) -> None:
+        split_payload = {
+            "review_items": [
+                {
+                    "source_category": "굿즈",
+                    "split_candidates": [],
+                }
+            ]
+        }
+        catalog_payload = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "치이카와 색지 컬렉션",
+                    "name_ja": "ちいかわ 色紙コレクション",
+                    "category": "굿즈",
+                },
+                {
+                    "catalog_index": 2,
+                    "name_ko": "치이카와 식기 세트",
+                    "name_ja": "ちいかわ 食器コレクション",
+                    "category": "굿즈",
+                },
+            ]
+        }
+
+        report = keyword_review.build_report(split_payload, catalog_payload, limit=10)
+        candidates = {
+            row["token"]: row
+            for item in report["review_items"]
+            for row in item["top_token_candidates"]
+        }
+
+        self.assertEqual(candidates["色紙"]["suggested_target_category"], "색지")
+        self.assertEqual(candidates["色紙"]["suggested_target_family"], "stationery")
+        self.assertEqual(candidates["食器"]["suggested_target_category"], "생활잡화")
+        self.assertEqual(candidates["食器"]["suggested_target_family"], "daily_goods")
+        self.assertNotIn("コレクション", {row["token"] for row in report["top_product_type_candidates"]})
+
 
 if __name__ == "__main__":
     unittest.main()

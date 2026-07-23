@@ -12,6 +12,10 @@ from typing import Any
 import audit_public_catalog_image_assets
 import build_catalog_missing_image_actionability_public
 import build_candidate_source_url_review_queue_public
+import build_animation_category_action_queue_public
+import build_animation_category_review_batches_public
+import build_animation_category_split_review_public
+import build_animation_category_unmatched_keyword_review_public
 import build_gotouchi_official_candidate_review_queue_public
 import build_image_source_url_confirmed_template_public
 import build_ichiban_prize_policy_issue_queue_public
@@ -1603,6 +1607,10 @@ def build_operations_public(
     ichiban_prize_name_image_review_override: dict[str, Any] | None = None,
     ichiban_prize_name_image_patch_candidates_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
+    animation_review_batches_override: dict[str, Any] | None = None,
+    animation_action_queue_override: dict[str, Any] | None = None,
+    animation_split_review_override: dict[str, Any] | None = None,
+    animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -1713,22 +1721,30 @@ def build_operations_public(
     dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
     animation_summary = animation_categories["summary"]
     animation_review_batches = (
-        load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
+        animation_review_batches_override
+        if animation_review_batches_override is not None
+        else load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
     )
     animation_review_batches_summary = animation_review_batches.get("summary", {})
     animation_action_queue = (
-        load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
+        animation_action_queue_override
+        if animation_action_queue_override is not None
+        else load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
     )
     animation_action_queue_summary = animation_action_queue.get("summary", {})
     animation_action_queue_work_order = [
         row for row in animation_action_queue.get("work_order", []) if isinstance(row, dict)
     ]
     animation_split_review = (
-        load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
+        animation_split_review_override
+        if animation_split_review_override is not None
+        else load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
     )
     animation_split_review_summary = animation_split_review.get("summary", {})
     animation_unmatched_keyword_review = (
-        load_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, {})
+        animation_unmatched_keyword_review_override
+        if animation_unmatched_keyword_review_override is not None
+        else load_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, {})
         if ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.exists()
         else {}
     )
@@ -3291,6 +3307,10 @@ def build_agent_work_queue_public(
     danganronpa_missing_media: dict[str, Any],
     metadata_review_batches_override: dict[str, Any] | None = None,
     metadata_action_queue_override: dict[str, Any] | None = None,
+    animation_review_batches_override: dict[str, Any] | None = None,
+    animation_action_queue_override: dict[str, Any] | None = None,
+    animation_split_review_override: dict[str, Any] | None = None,
+    animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -3355,17 +3375,25 @@ def build_agent_work_queue_public(
         else {}
     )
     animation_review_batches = (
-        load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
+        animation_review_batches_override
+        if animation_review_batches_override is not None
+        else load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
     )
     animation_action_queue = (
-        load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
+        animation_action_queue_override
+        if animation_action_queue_override is not None
+        else load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
     )
     animation_action_queue_summary = animation_action_queue.get("summary", {})
     animation_split_review = (
-        load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
+        animation_split_review_override
+        if animation_split_review_override is not None
+        else load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
     )
     animation_unmatched_keyword_review = (
-        load_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, {})
+        animation_unmatched_keyword_review_override
+        if animation_unmatched_keyword_review_override is not None
+        else load_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, {})
         if ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.exists()
         else {}
     )
@@ -5017,6 +5045,10 @@ def validate_report_consistency(
     operations: dict[str, Any],
     agent_work_queue: dict[str, Any],
     metadata_action_queue_override: dict[str, Any] | None = None,
+    animation_review_batches_override: dict[str, Any] | None = None,
+    animation_action_queue_override: dict[str, Any] | None = None,
+    animation_split_review_override: dict[str, Any] | None = None,
+    animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
 ) -> list[str]:
     findings: list[str] = []
     source_summary = source_discovery["summary"]
@@ -5220,7 +5252,9 @@ def validate_report_consistency(
         "danganronpa_missing_media_rows": danganronpa_media_summary.get("missing_media_rows", 0),
     }
     animation_review_batches = (
-        load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
+        animation_review_batches_override
+        if animation_review_batches_override is not None
+        else load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}) if ANIMATION_CATEGORY_REVIEW_BATCHES.exists() else {}
     )
     animation_review_summary = animation_review_batches.get("summary", {})
     requested_focus_review_batches = (
@@ -5448,7 +5482,9 @@ def validate_report_consistency(
     if animation_review_summary:
         expected_open_queues["animation_category_review_rows"] = animation_review_summary.get("source_rows", 0)
     animation_action_queue = (
-        load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
+        animation_action_queue_override
+        if animation_action_queue_override is not None
+        else load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}) if ANIMATION_CATEGORY_ACTION_QUEUE.exists() else {}
     )
     animation_action_summary = animation_action_queue.get("summary", {})
     if animation_action_summary:
@@ -5460,7 +5496,9 @@ def validate_report_consistency(
             "direct_mapping_categories", 0
         )
     animation_split_review = (
-        load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
+        animation_split_review_override
+        if animation_split_review_override is not None
+        else load_json(ANIMATION_CATEGORY_SPLIT_REVIEW, {}) if ANIMATION_CATEGORY_SPLIT_REVIEW.exists() else {}
     )
     animation_split_summary = animation_split_review.get("summary", {})
     if animation_split_summary:
@@ -5474,7 +5512,9 @@ def validate_report_consistency(
             animation_split_summary.get("unmatched_catalog_rows", 0)
         )
     animation_unmatched_keyword_review = (
-        load_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, {})
+        animation_unmatched_keyword_review_override
+        if animation_unmatched_keyword_review_override is not None
+        else load_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, {})
         if ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.exists()
         else {}
     )
@@ -5772,6 +5812,36 @@ def update_reports(write: bool) -> dict[str, Any]:
     image_enrichment_batches = build_image_enrichment_batches_public(items)
     deduplication = build_deduplication_public(items)
     animation_categories = build_animation_categories_public(items)
+    animation_review_queue = [
+        row
+        for row in (
+            animation_categories.get("taxonomy_review_queue")
+            or animation_categories.get("unknown_categories")
+            or []
+        )
+        if isinstance(row, dict)
+    ]
+    animation_review_batches = build_animation_category_review_batches_public.build_report(
+        animation_categories,
+        animation_review_queue,
+    )
+    animation_action_queue = build_animation_category_action_queue_public.build_queue(
+        animation_review_batches,
+    )
+    animation_split_review = build_animation_category_split_review_public.build_report(
+        animation_action_queue,
+        catalog,
+    )
+    animation_unmatched_keyword_review = (
+        build_animation_category_unmatched_keyword_review_public.build_report(
+            animation_split_review,
+            catalog,
+        )
+    )
+    animation_action_queue = build_animation_category_action_queue_public.build_queue(
+        animation_review_batches,
+        unmatched_keyword_review=animation_unmatched_keyword_review,
+    )
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
     ichiban_kuji_prize_name_image_review = build_ichiban_prize_name_image_review_public.build_report(
         catalog,
@@ -5908,6 +5978,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_prize_name_image_review,
         ichiban_kuji_prize_name_image_patch_candidates,
         source_discovery_next_focus_fallback_queue,
+        animation_review_batches,
+        animation_action_queue,
+        animation_split_review,
+        animation_unmatched_keyword_review,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -5922,6 +5996,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         danganronpa_missing_media,
         metadata_review_batches,
         metadata_action_queue,
+        animation_review_batches,
+        animation_action_queue,
+        animation_split_review,
+        animation_unmatched_keyword_review,
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 
@@ -5949,8 +6027,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "ichiban_kuji_prize_name_image_patch_candidates_public.json": (
                 ichiban_kuji_prize_name_image_patch_candidates
             ),
-            "animation_category_review_batches_public.json": load_json(ANIMATION_CATEGORY_REVIEW_BATCHES, {}),
-            "animation_category_action_queue_public.json": load_json(ANIMATION_CATEGORY_ACTION_QUEUE, {}),
+            "animation_category_review_batches_public.json": animation_review_batches,
+            "animation_category_action_queue_public.json": animation_action_queue,
+            "animation_category_split_review_public.json": animation_split_review,
+            "animation_category_unmatched_keyword_review_public.json": animation_unmatched_keyword_review,
             "catalog_confirmed_import_readiness_public.json": load_json(CONFIRMED_IMPORT_READINESS, {}),
         }
     )
@@ -6379,6 +6459,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         operations,
         agent_work_queue,
         metadata_action_queue,
+        animation_review_batches,
+        animation_action_queue,
+        animation_split_review,
+        animation_unmatched_keyword_review,
     )
     if consistency_findings:
         raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))
@@ -6396,6 +6480,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_ENRICHMENT_BATCHES, image_enrichment_batches)
         write_json(DEDUPLICATION, deduplication)
         write_json(ANIMATION_CATEGORIES, animation_categories)
+        write_json(ANIMATION_CATEGORY_REVIEW_BATCHES, animation_review_batches)
+        write_json(ANIMATION_CATEGORY_ACTION_QUEUE, animation_action_queue)
+        write_json(ANIMATION_CATEGORY_SPLIT_REVIEW, animation_split_review)
+        write_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, animation_unmatched_keyword_review)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
         write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, ichiban_kuji_prize_name_image_review)
         write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, ichiban_kuji_prize_name_image_patch_candidates)
@@ -6487,6 +6575,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DEDUPLICATION_CONFIRMED_TEMPLATE.relative_to(ROOT)),
             str(DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
+            str(ANIMATION_CATEGORY_REVIEW_BATCHES.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_ACTION_QUEUE.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_SPLIT_REVIEW.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.relative_to(ROOT)),

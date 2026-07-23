@@ -39,7 +39,16 @@ PRODUCT_TYPE_MARKERS = {
     "アクキー",
     "アクスタ",
     "キーホルダー",
-    "コレクション",
+    "色紙",
+    "ステッカー",
+    "シール",
+    "カード",
+    "ブロマイド",
+    "クリアファイル",
+    "食器",
+    "プレート",
+    "グラス",
+    "カップ",
     "スタンド",
     "ツインアクリルチャーム",
     "スクールアイコンボタン",
@@ -67,6 +76,14 @@ PRODUCT_TYPE_MARKERS = {
     "케이스",
     "피규어",
     "피크릴",
+    "색지",
+    "스티커",
+    "카드",
+    "브로마이드",
+    "클리어파일",
+    "식기",
+    "컵",
+    "머그",
 }
 
 PRODUCT_TYPE_ALIASES: dict[str, tuple[str, str]] = {
@@ -90,7 +107,24 @@ PRODUCT_TYPE_ALIASES: dict[str, tuple[str, str]] = {
     "피규어": ("피규어", "figure"),
     "マスコット": ("마스코트", "plush"),
     "마스코트": ("마스코트", "plush"),
-    "コレクション": ("굿즈", "collection"),
+    "色紙": ("색지", "stationery"),
+    "색지": ("색지", "stationery"),
+    "ステッカー": ("스티커", "stationery"),
+    "シール": ("스티커", "stationery"),
+    "스티커": ("스티커", "stationery"),
+    "カード": ("카드/브로마이드", "stationery"),
+    "ブロマイド": ("카드/브로마이드", "stationery"),
+    "카드": ("카드/브로마이드", "stationery"),
+    "브로마이드": ("카드/브로마이드", "stationery"),
+    "クリアファイル": ("클리어 파일", "stationery"),
+    "클리어파일": ("클리어 파일", "stationery"),
+    "食器": ("생활잡화", "daily_goods"),
+    "プレート": ("생활잡화", "daily_goods"),
+    "グラス": ("생활잡화", "daily_goods"),
+    "カップ": ("생활잡화", "daily_goods"),
+    "식기": ("생활잡화", "daily_goods"),
+    "컵": ("생활잡화", "daily_goods"),
+    "머그": ("생활잡화", "daily_goods"),
 }
 
 NOISE_MARKERS = {
@@ -118,6 +152,8 @@ NOISE_MARKERS = {
     "CENTURY",
     "SAGA",
 }
+
+GENERIC_PRODUCT_WORDS = {"コレクション", "collection", "アソート", "assort"}
 
 
 def _now_utc() -> str:
@@ -151,6 +187,8 @@ def _tokens(text: str) -> list[str]:
 
 def _split_rule_hint(token: str) -> dict[str, str] | None:
     normalized_token = token.casefold()
+    if token in GENERIC_PRODUCT_WORDS or normalized_token in GENERIC_PRODUCT_WORDS:
+        return None
     for alias, (target_category, target_family) in PRODUCT_TYPE_ALIASES.items():
         normalized_alias = alias.casefold()
         if normalized_alias in normalized_token or normalized_token in normalized_alias:

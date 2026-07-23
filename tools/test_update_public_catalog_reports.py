@@ -44,6 +44,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_discovery_store_bottlenecks_public.json", updated_files)
         self.assertIn("data/catalog_metadata_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_metadata_action_queue_public.json", updated_files)
+        self.assertIn("data/animation_category_review_batches_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
         self.assertIn("data/gotouchi_representative_image_attachment_public.json", updated_files)
