@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import Counter
 from datetime import datetime, timezone
@@ -12,6 +13,7 @@ from enrich_catalog_images import (
     AnimateSearchProvider,
     ProductImage,
     SEARCH_PROVIDERS,
+    _distinctive_query_tokens,
     _has_all_distinctive_token_matches,
     _has_goods_type_compatibility,
     _parenthetical_terms_match,
@@ -112,6 +114,11 @@ def _candidate_exact_review_blockers(
     rank: int,
 ) -> list[str]:
     blockers: list[str] = []
+    parenthetical_terms = [
+        term.strip()
+        for term in re.findall(r"\(([^)]+)\)", query or "")
+        if term.strip()
+    ]
     source_ok = bool(candidate.source_url and is_product_specific_source_url(candidate.source_url))
     pair_ok = bool(
         candidate.source_url
@@ -131,6 +138,8 @@ def _candidate_exact_review_blockers(
         blockers.append("distinctive_tokens_missing")
     if not _parenthetical_terms_match(query, candidate.title):
         blockers.append("parenthetical_terms_missing")
+    if not parenthetical_terms and len(_distinctive_query_tokens(query)) <= 2:
+        blockers.append("broad_query_without_variant")
     if not source_ok:
         blockers.append("non_product_source_url")
     if not pair_ok:
@@ -181,7 +190,7 @@ def build_report(
     search_fn: SearchFn | None = None,
     fetch_audit: dict[str, Any] | None = None,
     generated_at: str | None = None,
-    candidate_limit: int = 5,
+    candidate_limit: int = 8,
 ) -> dict[str, Any]:
     search = search_fn or _default_searcher()
     audit_by_index = _fetch_audit_by_index(fetch_audit)
@@ -367,7 +376,7 @@ def main() -> int:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--fetch-audit", type=Path, default=DEFAULT_FETCH_AUDIT)
-    parser.add_argument("--candidate-limit", type=int, default=5)
+    parser.add_argument("--candidate-limit", type=int, default=8)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 

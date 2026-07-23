@@ -296,7 +296,7 @@ class _CatalogImportPanel extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      '굿즈 DB',
+                      '공개 굿즈 DB',
                       maxLines: 1,
                       softWrap: false,
                       overflow: TextOverflow.ellipsis,
@@ -307,7 +307,7 @@ class _CatalogImportPanel extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      '공개 데이터 ${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
+                      '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개 등록',
                       maxLines: 1,
                       softWrap: false,
                       overflow: TextOverflow.ellipsis,
@@ -325,7 +325,7 @@ class _CatalogImportPanel extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '검색 후 선택한 굿즈를 내 굿즈함이나 위시리스트에 담을 수 있어요.',
+            '검색해서 내 굿즈함이나 위시리스트에 바로 추가해요.',
             maxLines: 1,
             softWrap: false,
             overflow: TextOverflow.ellipsis,
@@ -356,7 +356,7 @@ class _CatalogImportPanel extends StatelessWidget {
               },
               icon: const Icon(Icons.manage_search_rounded, size: 19),
               label: const Text(
-                '전체 DB 보기',
+                'DB 보기',
                 maxLines: 1,
                 softWrap: false,
                 overflow: TextOverflow.ellipsis,
