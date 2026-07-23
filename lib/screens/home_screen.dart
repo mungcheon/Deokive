@@ -265,118 +265,108 @@ class _CatalogImportPanel extends StatelessWidget {
     final entries = appState.curatedCatalogEntries;
     final health = _CatalogHealthSummary.from(entries);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Container(
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
-          ),
-          padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 156),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
+      ),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                  color: palette.primary.withValues(alpha: 0.14),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.dataset_outlined,
+                  color: palette.primary,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 38,
-                      height: 38,
-                      decoration: BoxDecoration(
-                        color: palette.primary.withValues(alpha: 0.14),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.dataset_outlined,
-                        color: palette.primary,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            '굿즈 DB',
-                            maxLines: 1,
-                            softWrap: false,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _CatalogMetaChip(
-                                  label:
-                                      '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개 정리됨',
-                                  palette: palette,
-                                ),
-                              ),
-                              const SizedBox(width: 6),
-                              Expanded(
-                                child: _CatalogMetaChip(
-                                  label: '공개 데이터',
-                                  palette: palette,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  '전체 DB에서 검색한 뒤 원하는 항목을 골라 내 굿즈함이나 위시리스트에 추가해요.',
-                  maxLines: 2,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
-                    height: 1.35,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 18),
-                SizedBox(
-                  width: double.infinity,
-                  height: 46,
-                  child: FilledButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const CatalogDatabaseScreen(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.manage_search_rounded, size: 19),
-                    label: const Text(
-                      'DB 보기',
+                    const Text(
+                      '굿즈 DB',
                       maxLines: 1,
                       softWrap: false,
                       overflow: TextOverflow.ellipsis,
-                    ),
-                    style: FilledButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: [
+                        _CatalogMetaChip(
+                          label:
+                              '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
+                          palette: palette,
+                        ),
+                        _CatalogMetaChip(
+                          label: '공개 DB',
+                          palette: palette,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            '전체 DB에서 검색하고, 고른 항목을 내 굿즈함이나 위시리스트에 바로 추가해요.',
+            maxLines: 3,
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
+              height: 1.35,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        );
-      },
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            height: 46,
+            child: FilledButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const CatalogDatabaseScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.manage_search_rounded, size: 19),
+              label: const Text(
+                'DB 보기',
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+              ),
+              style: FilledButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
