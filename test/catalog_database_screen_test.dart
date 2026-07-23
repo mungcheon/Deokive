@@ -119,4 +119,62 @@ void main() {
     expect(appState.goodsItems.single.name, entry.nameKo);
     expect(appState.goodsItems.single.folderId, 'default-folder');
   });
+
+  testWidgets('catalog database preserves image reference when adding an item',
+      (tester) async {
+    final appState = AppState()
+      ..isLoggedIn = false
+      ..folders.add(
+        const FolderItem(
+          id: 'default-folder',
+          name: 'Default',
+          icon: Icons.folder_rounded,
+          color: Colors.blue,
+        ),
+      );
+    final entry = kFullCatalog.firstWhere(
+      (item) =>
+          ((item.localImagePath ?? '').isNotEmpty ||
+              (item.imageUrl ?? '').isNotEmpty) &&
+          item.nameKo.trim().isNotEmpty,
+    );
+    final palette = paletteSpecFor(AppPalette.zeroTwoPink);
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(
+        value: appState,
+        child: MaterialApp(
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(seedColor: palette.primary),
+            extensions: [
+              DeokivePalette(
+                primary: palette.primary,
+                accent: palette.accent,
+                background: palette.background,
+                text: palette.text,
+                softSurface: Colors.white,
+              ),
+            ],
+          ),
+          home: const CatalogDatabaseScreen(),
+        ),
+      ),
+    );
+
+    await tester.enterText(find.byType(TextField), entry.nameKo);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FilledButton).first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FilledButton).last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FilledButton).last);
+    await tester.pumpAndSettle();
+
+    final savedItem = appState.goodsItems.single;
+    expect(savedItem.name, entry.nameKo);
+    expect(savedItem.folderId, 'default-folder');
+    expect(savedItem.imageUrl, isNotNull);
+    expect(savedItem.imageUrl, isNotEmpty);
+  });
 }

@@ -319,35 +319,18 @@ class _CatalogImportPanel extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           Text(
-            '전체 DB에서 굿즈를 검색해 내 굿즈함이나 위시리스트에 바로 추가해요.',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            'DB에서 원하는 굿즈를 찾아 내 굿즈함이나 위시리스트에 바로 추가해요.',
+            maxLines: 3,
+            overflow: TextOverflow.visible,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
               height: 1.35,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              _CatalogStatusChip(
-                icon: Icons.layers_clear_rounded,
-                label: health.duplicateCount == 0
-                    ? '중복 없음'
-                    : '중복 ${_CatalogHealthSummary.formatCount(health.duplicateCount)}개 숨김',
-              ),
-              _CatalogStatusChip(
-                icon: Icons.image_outlined,
-                label: '예시사진 제외',
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
             height: 46,
@@ -370,53 +353,6 @@ class _CatalogImportPanel extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _CatalogStatusChip extends StatelessWidget {
-  final IconData icon;
-  final String label;
-
-  const _CatalogStatusChip({
-    required this.icon,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final palette = theme.extension<DeokivePalette>()!;
-    final maxChipWidth = MediaQuery.sizeOf(context).width - 64;
-
-    return Container(
-      constraints: BoxConstraints(maxWidth: maxChipWidth),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-      decoration: BoxDecoration(
-        color: palette.softSurface.withValues(alpha: 0.62),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: palette.primary.withValues(alpha: 0.14),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 15, color: palette.primary),
-          const SizedBox(width: 5),
-          Flexible(
-            child: Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.70),
-                fontWeight: FontWeight.w800,
               ),
             ),
           ),
