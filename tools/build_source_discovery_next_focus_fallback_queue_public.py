@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote_plus
 
+from enrich_catalog_images import _preferred_query_for_row
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -34,6 +36,15 @@ def _catalog_index(item: dict[str, Any]) -> int | None:
 
 def _search_terms(item: dict[str, Any]) -> list[str]:
     terms: list[str] = []
+    query_row = dict(item)
+    field_template = item.get("catalog_field_import_template")
+    if isinstance(field_template, dict):
+        for key in ("affiliation", "category", "name_ko", "name_ja", "source_store"):
+            if not query_row.get(key) and field_template.get(key):
+                query_row[key] = field_template.get(key)
+    preferred = _preferred_query_for_row(query_row).strip()
+    if preferred:
+        terms.append(preferred)
     for key in ("name_ja", "name_ko"):
         value = str(item.get(key) or "").strip()
         if value and value not in terms:
@@ -42,9 +53,15 @@ def _search_terms(item: dict[str, Any]) -> list[str]:
 
 
 def _legacy_store_search_url(item: dict[str, Any]) -> str:
-    if not _search_terms(item):
+    terms = _search_terms(item)
+    if not terms:
         return ""
     raw = str(item.get("official_search_url") or item.get("web_search_url") or "")
+    if "animate-onlineshop.jp" in raw:
+        return (
+            "https://www.animate-onlineshop.jp/sphone/products/list.php"
+            f"?mode=search&smt={quote_plus(terms[0])}"
+        )
     return raw.replace("products/list.php", "sphone/products/list.php")
 
 

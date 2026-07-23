@@ -119,6 +119,43 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["source_patch_template"]["catalog_index"], 1)
         self.assertEqual(item["catalog_field_import_template"]["field"], "source_url")
 
+    def test_fallback_terms_prefer_localized_animate_query(self) -> None:
+        next_pack = {
+            "summary": {"focus_pack_id": "source-discovery-focus-001"},
+            "items": [
+                {
+                    "catalog_index": 10,
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "pack_sequence": 1,
+                    "source_store": "애니메이트",
+                    "affiliation": "슬램덩크",
+                    "category": "아크릴 스탠드",
+                    "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
+                    "name_ja": None,
+                    "search_query": "슬램덩크 아크릴 스탠드 (서태웅)",
+                    "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=old",
+                    "allowed_source_domains": ["www.animate-onlineshop.jp"],
+                }
+            ],
+        }
+        fetch_audit = {
+            "items": [
+                {
+                    "catalog_index": 10,
+                    "needs_fallback_web_search": True,
+                    "fetch_status": "ok",
+                    "http_status": 200,
+                }
+            ]
+        }
+
+        report = target.build_report(next_pack, fetch_audit, generated_at="2026-01-01T00:00:00Z")
+
+        item = report["items"][0]
+        self.assertEqual(item["fallback_search_terms"][0], "SLAM DUNK アクリルスタンド 流川楓")
+        self.assertIn("SLAM+DUNK", item["fallback_store_search_url"])
+        self.assertIn("SLAM+DUNK", item["domain_limited_web_search_urls"][0])
+
 
 if __name__ == "__main__":
     unittest.main()
