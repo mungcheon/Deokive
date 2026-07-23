@@ -424,15 +424,24 @@ class PublicCatalogReportTests(unittest.TestCase):
         danganronpa_summary = danganronpa_media.get("summary", {})
         danganronpa_items = danganronpa_media.get("items", [])
         danganronpa_batches = danganronpa_media.get("review_batches", [])
+        danganronpa_template = danganronpa_media.get("confirmed_patch_template", [])
         self.assertIs(danganronpa_summary.get("auto_apply_enabled"), False)
         self.assertEqual(danganronpa_summary.get("missing_media_rows"), len(danganronpa_items))
         self.assertEqual(danganronpa_summary.get("review_batch_count"), len(danganronpa_batches))
+        self.assertEqual(danganronpa_summary.get("confirmed_patch_template_rows"), len(danganronpa_template))
+        self.assertEqual(
+            danganronpa_summary.get("confirmed_patch_template_pending_rows"),
+            len(danganronpa_template),
+        )
         self.assertEqual(
             danganronpa_summary.get("missing_media_rows"),
             sum(int(batch.get("rows") or 0) for batch in danganronpa_batches),
         )
         self.assertTrue(all(item.get("auto_apply_enabled") is False for item in danganronpa_items))
         self.assertTrue(all(batch.get("auto_apply_enabled") is False for batch in danganronpa_batches))
+        self.assertTrue(all(row.get("auto_apply_enabled") is False for row in danganronpa_template))
+        self.assertTrue(all("manual_confirmed_source_url" in row for row in danganronpa_template))
+        self.assertTrue(all("manual_confirmed_image_url" in row for row in danganronpa_template))
 
         dedupe_summary = deduplication.get("summary", {})
         source_url_exclusions = dedupe_summary.get("source_url_exclusions", {})

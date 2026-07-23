@@ -1555,6 +1555,27 @@ def build_danganronpa_missing_media_public(items: list[dict[str, Any]], generate
                 "auto_apply_enabled": False,
             }
         )
+    confirmed_patch_template = [
+        {
+            "catalog_index": row.get("catalog_index"),
+            "name_ko": row.get("name_ko"),
+            "name_ja": row.get("name_ja"),
+            "source_store": row.get("source_store"),
+            "source_kind": row.get("source_kind"),
+            "official_search_url": row.get("official_search_url"),
+            "web_search_url": row.get("web_search_url"),
+            "allowed_source_domains": row.get("allowed_source_domains", []),
+            "manual_confirmed_source_url": "",
+            "manual_confirmed_image_url": "",
+            "manual_confirmed_release_date": "",
+            "manual_confirmed_barcode": "",
+            "manual_evidence_note": "",
+            "dry_run_status": "skipped_pending_manual_confirmation",
+            "required_evidence": row.get("evidence_required", []),
+            "auto_apply_enabled": False,
+        }
+        for row in queue
+    ]
     return {
         "schema_version": 1,
         "generated_at": generated_at,
@@ -1567,16 +1588,27 @@ def build_danganronpa_missing_media_public(items: list[dict[str, Any]], generate
             "official_search_rows": sum(1 for row in queue if row.get("source_kind") == "official_manufacturer"),
             "official_prize_search_rows": sum(1 for row in queue if row.get("source_kind") == "official_prize"),
             "licensed_retailer_review_rows": sum(1 for row in queue if row.get("source_kind") == "licensed_retailer"),
+            "confirmed_patch_template_rows": len(confirmed_patch_template),
+            "confirmed_patch_template_pending_rows": len(
+                [
+                    row
+                    for row in confirmed_patch_template
+                    if not present(row.get("manual_confirmed_source_url"))
+                    or not present(row.get("manual_confirmed_image_url"))
+                ]
+            ),
             "by_source_store": by_store.most_common(),
             "by_source_kind": by_source_kind.most_common(),
             "auto_apply_enabled": False,
         },
         "items": queue,
         "review_batches": review_batches,
+        "confirmed_patch_template": confirmed_patch_template,
         "instructions": [
             "Work these Danganronpa rows before broad image enrichment because every row lacks both source_url and image_url.",
             "Process review_batches in batch_rank order so official manufacturer batches are cleared before retailer-only rows.",
             "Use official manufacturer or prize pages first; licensed retailers require extra identity review.",
+            "Fill confirmed_patch_template only after source_url and image_url evidence both match the same product.",
             "Do not attach images from marketplaces, blogs, or resale listings unless separately promoted into a trusted-source policy.",
         ],
         "automation_policy": {
