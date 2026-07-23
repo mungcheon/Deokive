@@ -79,6 +79,23 @@ class BuildIchibanReissueDeduplicationSummaryPublicTest(unittest.TestCase):
         self.assertTrue(summary["summary_matches_top_level_counts"])
         self.assertFalse(summary["automation_policy"]["auto_delete_enabled"])
         self.assertTrue(summary["automation_policy"]["manual_review_required_before_mutation"])
+        self.assertIn("campaign identity", summary["automation_policy"]["reason"])
+        self.assertIn(
+            "reissue_or_campaign_variant_keep_separate",
+            summary["manual_review_policy"]["decision_options"],
+        )
+        self.assertIn(
+            "variant_name_when_same_rank_has_multiple_kinds",
+            summary["manual_review_policy"]["required_evidence"],
+        )
+        self.assertIn(
+            "last_one_and_double_chance_official_price_jpy_zero_policy",
+            summary["manual_review_policy"]["safe_auto_changes"],
+        )
+        self.assertIn(
+            "delete_or_merge_same_name_rows_across_multiple_campaign_urls",
+            summary["manual_review_policy"]["blocked_auto_changes"],
+        )
 
     def test_summary_reports_missing_local_image_files(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

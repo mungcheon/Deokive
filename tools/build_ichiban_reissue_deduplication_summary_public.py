@@ -85,6 +85,35 @@ def build_summary(report: dict[str, Any], *, asset_root: Path | None = None) -> 
             "auto_delete_enabled": False,
             "auto_merge_enabled": False,
             "manual_review_required_before_mutation": True,
+            "reason": (
+                "Ichiban Kuji rows that share a displayed prize name can be true "
+                "reissues, channel variants, or campaign waves. Keep them separate "
+                "until campaign identity is confirmed from official evidence."
+            ),
+        },
+        "manual_review_policy": {
+            "decision_options": [
+                "reissue_or_campaign_variant_keep_separate",
+                "same_sellable_product_keep_drop_confirmed",
+                "needs_more_source_evidence",
+            ],
+            "required_evidence": [
+                "official_campaign_title",
+                "release_period_or_release_date",
+                "source_url",
+                "prize_rank",
+                "official_prize_name",
+                "variant_name_when_same_rank_has_multiple_kinds",
+                "image_identity_when_available",
+            ],
+            "safe_auto_changes": [
+                "last_one_and_double_chance_official_price_jpy_zero_policy",
+                "numbered_variant_rows_when_official_numbered_coverage_is_complete",
+            ],
+            "blocked_auto_changes": [
+                "delete_or_merge_same_name_rows_across_multiple_campaign_urls",
+                "collapse_same_prize_rank_rows_without_variant_identity",
+            ],
         },
     }
     if asset_root is not None:
