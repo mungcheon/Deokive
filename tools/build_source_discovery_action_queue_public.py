@@ -24,6 +24,13 @@ ACTIONABLE_REVIEW_STATES = {
     "licensed_retailer_review_required": 20,
 }
 
+GENERIC_IDENTITY_BACKFILL_NAMES = {
+    "포토북",
+    "시즌 그리팅",
+    "시즌 그리팅 (seasons greetings)",
+    "컴백 트레이딩 카드",
+}
+
 
 def _now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -119,7 +126,7 @@ def _compact_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     template = template if isinstance(template, dict) else {}
     source_template = item.get("source_patch_template")
     source_template = source_template if isinstance(source_template, dict) else {}
-    return {
+    compact = {
         "catalog_index": item.get("catalog_index"),
         "workflow": batch.get("workflow"),
         "review_state": batch.get("review_state"),
@@ -136,6 +143,48 @@ def _compact_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "next_machine_step": batch.get("next_machine_step"),
         "auto_apply_enabled": False,
     }
+    for key in (
+        "name_en",
+        "character_name",
+        "affiliation",
+        "series_name",
+        "sub_series",
+        "barcode",
+    ):
+        value = item.get(key)
+        if str(value or "").strip():
+            compact[key] = value
+    return compact
+
+
+def _requires_identity_backfill(item: dict[str, Any]) -> tuple[bool, str | None]:
+    source_store = str(item.get("source_store") or "").strip().lower()
+    name_ko = str(item.get("name_ko") or "").strip().lower()
+    name_ja = str(item.get("name_ja") or "").strip()
+    name_en = str(item.get("name_en") or "").strip()
+    barcode = str(item.get("barcode") or "").strip()
+    identity_values = [
+        item.get("character_name"),
+        item.get("affiliation"),
+        item.get("series_name"),
+        item.get("sub_series"),
+    ]
+    has_specific_identity = any(str(value or "").strip() for value in identity_values)
+
+    if (
+        source_store == "아이돌 공식"
+        and name_ko in GENERIC_IDENTITY_BACKFILL_NAMES
+        and not has_specific_identity
+        and not name_ja
+        and not name_en
+        and not barcode
+    ):
+        return (
+            True,
+            "generic_kpop_goods_name_without_artist_album_year_or_official_identifier",
+        )
+
+    return False, None
 
 
 def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_size: int = 20) -> dict[str, Any]:
@@ -183,6 +232,17 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
         if not item.get("source_patch_template")
         or not item.get("catalog_field_import_template")
     ]
+    manual_identity_backfill_items: list[dict[str, Any]] = []
+    manual_official_lookup_items: list[dict[str, Any]] = []
+    for item in manual_research_items:
+        requires_backfill, reason = _requires_identity_backfill(item)
+        if requires_backfill:
+            enriched = dict(item)
+            enriched["identity_backfill_required"] = True
+            enriched["identity_backfill_reason"] = reason
+            manual_identity_backfill_items.append(enriched)
+        else:
+            manual_official_lookup_items.append(item)
 
     grouped: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
     for item in published:
@@ -245,6 +305,16 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "excluded_review_state_rows": [[key, value] for key, value in excluded_review_states.most_common()],
             "manual_research_backlog_rows": len(manual_research_items),
             "manual_research_backlog_by_source_store": _counter_pairs(manual_research_items, "source_store"),
+            "manual_research_identity_backfill_required_rows": len(manual_identity_backfill_items),
+            "manual_research_identity_backfill_by_source_store": _counter_pairs(
+                manual_identity_backfill_items,
+                "source_store",
+            ),
+            "manual_research_official_lookup_rows": len(manual_official_lookup_items),
+            "manual_research_official_lookup_by_source_store": _counter_pairs(
+                manual_official_lookup_items,
+                "source_store",
+            ),
             "source_store_workstream_count": len(source_store_workstreams),
             "high_volume_source_store_workstream_count": sum(
                 1 for row in source_store_workstreams if int(row.get("queued_source_rows") or 0) >= 20
@@ -268,12 +338,23 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
                 "category": item.get("category"),
                 "name_ko": item.get("name_ko"),
                 "name_ja": item.get("name_ja"),
+                "name_en": item.get("name_en"),
+                "character_name": item.get("character_name"),
+                "affiliation": item.get("affiliation"),
+                "series_name": item.get("series_name"),
+                "sub_series": item.get("sub_series"),
+                "identity_backfill_required": item in manual_identity_backfill_items,
+                "identity_backfill_reason": item.get("identity_backfill_reason"),
                 "web_search_url": item.get("web_search_url"),
                 "acceptance_rule": item.get("acceptance_rule"),
-                "recommended_next_step": "find_official_domain_then_record_exact_product_detail_source",
+                "recommended_next_step": (
+                    "fill_artist_album_year_or_specific_series_before_official_search"
+                    if item in manual_identity_backfill_items
+                    else "find_official_domain_then_record_exact_product_detail_source"
+                ),
                 "auto_apply_enabled": False,
             }
-            for item in manual_research_items
+            for item in manual_identity_backfill_items + manual_official_lookup_items
         ],
         "batches": batches,
         "automation_policy": {

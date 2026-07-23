@@ -78,6 +78,8 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(dict(report["summary"]["excluded_review_state_rows"]), {"manual_official_research_required": 5})
         self.assertEqual(report["summary"]["manual_research_backlog_rows"], 1)
         self.assertEqual(report["summary"]["manual_research_backlog_by_source_store"], [["Unknown", 1]])
+        self.assertEqual(report["summary"]["manual_research_identity_backfill_required_rows"], 0)
+        self.assertEqual(report["summary"]["manual_research_official_lookup_rows"], 1)
         self.assertEqual(report["manual_research_backlog"][0]["catalog_index"], 3)
         self.assertEqual(
             report["manual_research_backlog"][0]["recommended_next_step"],
@@ -122,6 +124,74 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["missing_template_item_count"], 2)
         self.assertEqual(report["summary"]["missing_template_sample_catalog_indexes"], [1, 2])
         self.assertEqual(report["summary"]["action_batch_count"], 2)
+
+    def test_manual_research_splits_generic_identity_backfill_items(self) -> None:
+        review = {
+            "batches": [
+                {
+                    "workflow": "manual_official_research",
+                    "review_state": "manual_official_research_required",
+                    "source_store": "아이돌 공식",
+                    "row_count": 2,
+                    "items": [
+                        {
+                            "catalog_index": 2316,
+                            "name_ko": "포토북",
+                            "category": "포토북",
+                            "source_store": "아이돌 공식",
+                        },
+                        {
+                            "catalog_index": 9000,
+                            "name_ko": "특정 그룹 2026 포토북",
+                            "category": "포토북",
+                            "source_store": "아이돌 공식",
+                            "affiliation": "특정 그룹",
+                        },
+                    ],
+                },
+                {
+                    "workflow": "manual_official_research",
+                    "review_state": "manual_official_research_required",
+                    "source_store": "SVC 공식",
+                    "row_count": 1,
+                    "items": [
+                        {
+                            "catalog_index": 2415,
+                            "name_ko": "쿠루미 노아 콘서트 티셔츠",
+                            "category": "의류",
+                            "source_store": "SVC 공식",
+                        },
+                    ],
+                },
+            ]
+        }
+
+        report = queue.build_report(review, max_rows=10, batch_size=10)
+
+        self.assertEqual(report["summary"]["manual_research_backlog_rows"], 3)
+        self.assertEqual(report["summary"]["manual_research_identity_backfill_required_rows"], 1)
+        self.assertEqual(report["summary"]["manual_research_official_lookup_rows"], 2)
+        self.assertEqual(
+            report["summary"]["manual_research_identity_backfill_by_source_store"],
+            [["아이돌 공식", 1]],
+        )
+        self.assertEqual(
+            report["summary"]["manual_research_official_lookup_by_source_store"],
+            [["아이돌 공식", 1], ["SVC 공식", 1]],
+        )
+
+        backfill_item = report["manual_research_backlog"][0]
+        self.assertEqual(backfill_item["catalog_index"], 2316)
+        self.assertTrue(backfill_item["identity_backfill_required"])
+        self.assertEqual(
+            backfill_item["identity_backfill_reason"],
+            "generic_kpop_goods_name_without_artist_album_year_or_official_identifier",
+        )
+        self.assertEqual(
+            backfill_item["recommended_next_step"],
+            "fill_artist_album_year_or_specific_series_before_official_search",
+        )
+        self.assertFalse(report["manual_research_backlog"][1]["identity_backfill_required"])
 
 
 if __name__ == "__main__":
