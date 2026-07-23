@@ -52,10 +52,22 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
                 "ichiban_reissue_work_order": [
                     {
                         "normalized_name": "sample prize",
+                        "work_order_id": "ichiban-reissue-dedupe-001",
                         "catalog_indexes": [6, 7],
+                        "source_url_count": 2,
                         "source_urls": [
                             "https://1kuji.com/products/sample",
                             "https://1kuji.com/products/sample-2",
+                        ],
+                        "campaign_slug_families": ["sample"],
+                        "campaign_url_comparison": {
+                            "source_url_count": 2,
+                            "campaign_slugs": ["sample", "sample-2"],
+                            "campaign_slug_families": ["sample"],
+                            "likely_same_campaign_family_reissue": True,
+                        },
+                        "manual_review_checklist": [
+                            "Open every source_url and compare official campaign title/release period/prize lineup."
                         ],
                         "decision_template": {"manual_confirmed": False},
                         "prize_identity_summary": {
@@ -67,7 +79,21 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
                             "last_one_or_double_chance_rows_must_be_zero_jpy": True,
                             "current_group_pass": True,
                         },
-                        "sample_rows": [{"catalog_index": 6}, {"catalog_index": 7}],
+                        "sample_rows": [
+                            {
+                                "catalog_index": 6,
+                                "source_url": "https://1kuji.com/products/sample",
+                                "sub_series": "A賞",
+                                "official_price_jpy": 790,
+                                "image_url": "https://img.example/a.jpg",
+                            },
+                            {
+                                "catalog_index": 7,
+                                "source_url": "https://1kuji.com/products/sample-2",
+                                "sub_series": "A賞",
+                                "official_price_jpy": 790,
+                            },
+                        ],
                     }
                 ],
             },
@@ -114,6 +140,10 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             report["issues"][1]["blocked_reason"],
             "same_prize_label_has_multiple_unnumbered_rows",
         )
+        self.assertEqual(
+            report["issues"][1]["groups"][0]["identity_summary"]["catalog_indexes"],
+            [2, 3],
+        )
         self.assertIn(
             "decision_separate_prizes_selectable_variants_or_duplicate",
             report["issues"][1]["required_evidence"],
@@ -124,6 +154,22 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             "same_name_across_campaign_urls_may_be_reissue",
         )
         self.assertIn("release_periods_compared", report["issues"][2]["required_evidence"])
+        self.assertEqual(report["issues"][2]["work_order_id"], "ichiban-reissue-dedupe-001")
+        self.assertEqual(report["issues"][2]["source_url_count"], 2)
+        self.assertTrue(
+            report["issues"][2]["campaign_url_comparison"][
+                "likely_same_campaign_family_reissue"
+            ]
+        )
+        self.assertEqual(report["issues"][2]["campaign_slug_families"], ["sample"])
+        self.assertIn(
+            "Open every source_url",
+            report["issues"][2]["manual_review_checklist"][0],
+        )
+        self.assertEqual(
+            report["issues"][2]["source_url_evidence_rows"][0]["rows_with_image_reference"],
+            1,
+        )
         self.assertEqual(report["issues"][2]["prize_identity_summary"]["prize_labels"], ["A賞"])
         self.assertTrue(report["issues"][2]["zero_price_exception_policy"]["current_group_pass"])
 

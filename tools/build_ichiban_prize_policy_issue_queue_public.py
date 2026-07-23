@@ -98,14 +98,96 @@ def _rows_from_groups(groups: list[dict[str, Any]]) -> int:
     return len(indexes) if indexes else fallback
 
 
+def _unique_sorted(values: list[Any]) -> list[Any]:
+    seen: set[str] = set()
+    result: list[Any] = []
+    for value in values:
+        if value in (None, ""):
+            continue
+        key = json.dumps(value, ensure_ascii=False, sort_keys=True)
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(value)
+    return sorted(result, key=lambda item: str(item))
+
+
+def _compact_review_row(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: row.get(key)
+        for key in [
+            "catalog_index",
+            "name_ko",
+            "name_ja",
+            "series_name",
+            "sub_series",
+            "official_price_jpy",
+            "source_url",
+            "image_url",
+            "local_image_path",
+            "release_date",
+        ]
+        if row.get(key) not in (None, "")
+    }
+
+
+def _sample_row_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "catalog_indexes": _unique_sorted([row.get("catalog_index") for row in rows]),
+        "source_urls": _unique_sorted([row.get("source_url") for row in rows]),
+        "series_names": _unique_sorted([row.get("series_name") for row in rows]),
+        "prize_labels": _unique_sorted([row.get("sub_series") for row in rows]),
+        "display_names": _unique_sorted([row.get("name_ja") or row.get("name_ko") for row in rows]),
+        "official_price_jpy_values": _unique_sorted(
+            [row.get("official_price_jpy") for row in rows]
+        ),
+        "release_dates": _unique_sorted([row.get("release_date") for row in rows]),
+        "rows_with_image_reference": sum(
+            1
+            for row in rows
+            if row.get("image_url") not in (None, "") or row.get("local_image_path") not in (None, "")
+        ),
+    }
+
+
+def _source_url_evidence_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_source: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        source_url = str(row.get("source_url") or "").strip()
+        if not source_url:
+            source_url = "(missing source_url)"
+        by_source.setdefault(source_url, []).append(row)
+
+    evidence: list[dict[str, Any]] = []
+    for source_url, source_rows in sorted(by_source.items()):
+        summary = _sample_row_summary(source_rows)
+        evidence.append(
+            {
+                "source_url": source_url,
+                "catalog_indexes": summary["catalog_indexes"],
+                "series_names": summary["series_names"],
+                "prize_labels": summary["prize_labels"],
+                "display_names": summary["display_names"],
+                "official_price_jpy_values": summary["official_price_jpy_values"],
+                "release_dates": summary["release_dates"],
+                "rows_with_image_reference": summary["rows_with_image_reference"],
+                "row_count": len(source_rows),
+            }
+        )
+    return evidence
+
+
 def _compact_group(group: dict[str, Any]) -> dict[str, Any]:
+    rows = [row for row in group.get("sample_rows") or [] if isinstance(row, dict)]
     return {
         "source_url": group.get("source_url"),
         "sub_series": group.get("sub_series"),
         "row_count": group.get("row_count"),
         "review_lane": group.get("review_lane"),
         "variant_summary": group.get("variant_summary") or {},
-        "sample_rows": group.get("sample_rows") or [],
+        "identity_summary": _sample_row_summary(rows),
+        "source_url_evidence_rows": _source_url_evidence_rows(rows),
+        "sample_rows": [_compact_review_row(row) for row in rows],
     }
 
 
@@ -159,6 +241,8 @@ def _price_issue(
 
 
 def _reissue_work_order(row: dict[str, Any], rank: int) -> dict[str, Any]:
+    sample_rows = [item for item in row.get("sample_rows") or [] if isinstance(item, dict)]
+    decision_template = row.get("decision_template") or {}
     return {
         "issue_id": f"ichiban-reissue-review-{rank:03d}",
         "priority": 300 + rank,
@@ -168,13 +252,20 @@ def _reissue_work_order(row: dict[str, Any], rank: int) -> dict[str, Any]:
         "review_state": row.get("review_state") or "ichiban_reissue_identity_confirmation_required",
         "review_reason": "Same displayed item appears under multiple 1kuji campaign URLs; protect as possible reissue until manually confirmed.",
         "recommended_action": "Compare campaign title, release period, and prize lineup before deciding keep-separate or keep/drop.",
+        "work_order_id": row.get("work_order_id"),
         "catalog_indexes": row.get("catalog_indexes") or [],
         "source_urls": row.get("source_urls") or [],
+        "source_url_count": row.get("source_url_count"),
+        "campaign_slug_families": row.get("campaign_slug_families") or [],
+        "campaign_url_comparison": row.get("campaign_url_comparison") or {},
         "reissue_signal_reasons": row.get("reissue_signal_reasons") or [],
-        "decision_template": row.get("decision_template") or {},
+        "manual_review_checklist": row.get("manual_review_checklist") or [],
+        "decision_options": decision_template.get("decision_options") or [],
+        "decision_template": decision_template,
         "prize_identity_summary": row.get("prize_identity_summary") or {},
         "zero_price_exception_policy": row.get("zero_price_exception_policy") or {},
-        "sample_rows": row.get("sample_rows") or [],
+        "source_url_evidence_rows": _source_url_evidence_rows(sample_rows),
+        "sample_rows": [_compact_review_row(item) for item in sample_rows],
         "merge_blockers": row.get("merge_blockers") or ["ichiban_reissue_manual_confirmation_required"],
         "manual_confirmed": False,
         "auto_merge_enabled": False,
