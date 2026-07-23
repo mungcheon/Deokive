@@ -49,6 +49,25 @@ class StelliveFandingCandidatesPublicTests(unittest.TestCase):
             report["summary"]["missing_image_candidate_review_lane_counts"],
             {"weak_candidate_review": 1},
         )
+        self.assertEqual(
+            report["summary"]["missing_image_resolution_readiness"],
+            {
+                "exact_source_image_ready_rows": 0,
+                "manual_search_required_rows": 0,
+                "candidate_review_required_rows": 1,
+                "weak_candidate_review_rows": 1,
+                "low_confidence_candidate_review_rows": 0,
+                "blocking_reason": (
+                    "No missing-image Stellive/Fanding row has a unique exact "
+                    "product identity match. Confirm exact product detail pages "
+                    "before importing images."
+                ),
+                "next_safe_step": (
+                    "Resolve the 0 manual-search rows first, then review the 1 "
+                    "candidate rows before image attachment."
+                ),
+            },
+        )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_catalog_changes"])
         self.assertEqual(len(report["missing_image_review_queue"]), 1)

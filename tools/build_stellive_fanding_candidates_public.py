@@ -41,6 +41,9 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         if item.get("candidate_status") in {"strong_manual_review_candidate", "weak_manual_review_candidate"}
     ]
     missing_image_review_queue = [item for item in review_queue if item.get("missing_image_url")]
+    missing_image_status_counts = _counter_dict(missing_image_queue, "candidate_status")
+    missing_image_manual_search_rows = missing_image_status_counts.get("no_candidate", 0)
+    missing_image_candidate_review_rows = len(missing_image_queue) - missing_image_manual_search_rows
 
     summary = {
         **summary,
@@ -54,6 +57,28 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         "missing_image_candidate_review_lane_counts": _counter_dict(
             missing_image_queue, "candidate_review_lane"
         ),
+        "missing_image_resolution_readiness": {
+            "exact_source_image_ready_rows": 0,
+            "manual_search_required_rows": missing_image_manual_search_rows,
+            "candidate_review_required_rows": missing_image_candidate_review_rows,
+            "weak_candidate_review_rows": missing_image_status_counts.get(
+                "weak_manual_review_candidate",
+                0,
+            ),
+            "low_confidence_candidate_review_rows": missing_image_status_counts.get(
+                "low_confidence_candidate",
+                0,
+            ),
+            "blocking_reason": (
+                "No missing-image Stellive/Fanding row has a unique exact product "
+                "identity match. Confirm exact product detail pages before importing images."
+            ),
+            "next_safe_step": (
+                f"Resolve the {missing_image_manual_search_rows} manual-search rows first, "
+                f"then review the {missing_image_candidate_review_rows} candidate rows "
+                "before image attachment."
+            ),
+        },
         "auto_apply_enabled": False,
     }
     return {
