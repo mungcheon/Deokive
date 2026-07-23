@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T07:06:15Z",
+  "generated_at": "2026-07-23T07:17:37Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 22,
     "blocked_action_count": 1,
     "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 33168,
+    "total_action_rows": 33162,
     "open_review_queues": {
-      "source_discovery_rows": 641,
-      "image_missing_rows": 714,
+      "source_discovery_rows": 639,
+      "image_missing_rows": 712,
       "dedupe_groups": 61,
       "animation_unknown_categories": 3,
       "ichiban_missing_release_date_rows": 8,
@@ -735,7 +735,7 @@
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "status": "blocked",
-      "rows": 714,
+      "rows": 712,
       "command": "Extract images only after exact source_url evidence is confirmed.",
       "next_step": "resolve_source_url_blockers_then_extract_images",
       "blocker": "No exact source_url-ready image rows are currently published.",
@@ -745,7 +745,7 @@
         "provider_candidate_items": 496,
         "manual_or_blocked_items": 228,
         "generic_source_url_rows": 50,
-        "needs_source_discovery_rows": 636,
+        "needs_source_discovery_rows": 634,
         "gotouchi_official_review_rows": 23
       }
     },
@@ -835,7 +835,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 13948,
+      "rows": 13944,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -847,8 +847,8 @@
           "release_date": 1406,
           "barcode": 10094,
           "official_price_jpy": 566,
-          "image_url": 714,
-          "source_url": 641
+          "image_url": 712,
+          "source_url": 639
         }
       }
     },

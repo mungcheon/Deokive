@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T07:05:42Z",
+  "generated_at": "2026-07-23T07:17:05Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
-    "missing_image_rows": 714,
+    "missing_image_rows": 712,
     "work_queue_rows": 720,
-    "queue_matched_rows": 714,
+    "queue_matched_rows": 712,
     "stale_queue_index_matches": 0,
     "unmatched_catalog_missing_rows": 0,
-    "missing_source_url_rows": 641,
+    "missing_source_url_rows": 639,
     "generic_source_url_rows": 50,
     "product_source_url_rows": 0,
-    "high_priority_rows": 528,
+    "high_priority_rows": 526,
     "safe_existing_image_reuse_candidate_rows": 0,
     "auto_apply_enabled": false
   },
@@ -19,7 +19,7 @@
     "by_source_store": [
       {
         "source_store": "애니메이트",
-        "rows": 148
+        "rows": 146
       },
       {
         "source_store": "엔스카이",
@@ -236,11 +236,11 @@
         "rows": 17
       },
       {
-        "affiliation": "전생슬",
-        "rows": 14
+        "affiliation": "블루록",
+        "rows": 12
       },
       {
-        "affiliation": "블루록",
+        "affiliation": "전생슬",
         "rows": 12
       },
       {
@@ -342,12 +342,12 @@
     ],
     "by_category": [
       {
-        "category": "아크릴 스탠드",
-        "rows": 126
-      },
-      {
         "category": "피규어",
         "rows": 125
+      },
+      {
+        "category": "아크릴 스탠드",
+        "rows": 124
       },
       {
         "category": "캔뱃지",
@@ -461,7 +461,7 @@
     "by_strategy": [
       {
         "strategy": "official_search",
-        "rows": 462
+        "rows": 460
       },
       {
         "strategy": "manual_review",
@@ -487,7 +487,7 @@
     "by_automation_safety": [
       {
         "automation_safety": "candidate_provider_script_required",
-        "rows": 462
+        "rows": 460
       },
       {
         "automation_safety": "manual_research_required",
@@ -509,7 +509,7 @@
     "by_source_url_state": [
       {
         "source_url_state": "missing_source_url",
-        "rows": 641
+        "rows": 639
       },
       {
         "source_url_state": "generic_source_url",
@@ -523,7 +523,7 @@
   },
   "next_action_queues": {
     "source_discovery_first": {
-      "rows": 641,
+      "rows": 639,
       "reason": "Attach exact product source URLs before image candidates can be trusted."
     },
     "replace_generic_source_then_attach_image": {
@@ -609,12 +609,6 @@
       "recommended_workflow": "manual_exact_image_research"
     },
     {
-      "source_store": "애니메이트",
-      "affiliation": "전생슬",
-      "rows": 11,
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
-    },
-    {
       "source_store": "엔스카이",
       "affiliation": "치이카와",
       "rows": 11,
@@ -635,6 +629,12 @@
     {
       "source_store": "애니메이트",
       "affiliation": "단간론파",
+      "rows": 9,
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
+    },
+    {
+      "source_store": "애니메이트",
+      "affiliation": "전생슬",
       "rows": 9,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
