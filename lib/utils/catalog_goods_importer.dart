@@ -475,10 +475,7 @@ GoodsItem goodsItemFromCatalogEntry({
         entry.barcode?.trim().isEmpty ?? true ? null : entry.barcode!.trim(),
     storageLocation: null,
     imageBytesList: imageBytes == null ? const [] : [imageBytes],
-    imageUrl: catalogEntryImageReference(
-      entry,
-      preferLocalAsset: imageBytes == null,
-    ),
+    imageUrl: catalogEntryImageReference(entry),
     isFavorite: false,
   );
 }

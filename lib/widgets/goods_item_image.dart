@@ -18,12 +18,20 @@ class GoodsItemImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageUrl = item.imageUrl?.trim() ?? '';
     final imageBytes = item.imageBytes;
     if (imageBytes != null) {
-      return Image.memory(imageBytes, fit: fit);
+      return Image.memory(
+        imageBytes,
+        fit: fit,
+        errorBuilder: (_, __, ___) => _imageFromReference(imageUrl),
+      );
     }
 
-    final imageUrl = item.imageUrl?.trim() ?? '';
+    return _imageFromReference(imageUrl);
+  }
+
+  Widget _imageFromReference(String imageUrl) {
     if (imageUrl.isNotEmpty) {
       final normalizedImageUrl = imageUrl.replaceAll('&amp;', '&').replaceFirst(
             RegExp(r'^//'),

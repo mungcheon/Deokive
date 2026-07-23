@@ -151,7 +151,7 @@ void main() {
     expect(item.imageUrl, 'assets/catalog_images/sample.webp');
   });
 
-  test('catalog import keeps remote image reference after loading bytes', () {
+  test('catalog import keeps local image reference after loading bytes', () {
     final appState = AppState();
     final folder = FolderItem(
       id: 'top-folder',
@@ -176,7 +176,7 @@ void main() {
     );
 
     expect(item.imageBytesList.single, [1, 2, 3]);
-    expect(item.imageUrl, 'https://example.com/catalog/source.jpg');
+    expect(item.imageUrl, 'assets/catalog/cache/sample.jpg');
   });
 
   test('catalog DB import does not persist remote image bytes', () async {
