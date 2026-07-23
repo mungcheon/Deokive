@@ -154,9 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
-              const SizedBox(height: 18),
-              _CatalogImportPanel(appState: appState, palette: palette),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               const Text(
                 '덕카이브 시작 가이드',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
@@ -236,6 +234,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 20),
+              _CatalogImportPanel(appState: appState, palette: palette),
+              const SizedBox(height: 20),
               const StatsContent(),
             ],
           ),
@@ -267,13 +267,15 @@ class _CatalogImportPanel extends StatelessWidget {
 
     return Material(
       color: theme.colorScheme.surface,
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(16),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: theme.colorScheme.outline.withValues(alpha: 0.22),
+          ),
         ),
-        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+        padding: const EdgeInsets.fromLTRB(14, 13, 14, 14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -284,32 +286,46 @@ class _CatalogImportPanel extends StatelessWidget {
                   width: 38,
                   height: 38,
                   decoration: BoxDecoration(
-                    color: palette.primary.withValues(alpha: 0.12),
+                    color: theme.colorScheme.surfaceContainerHighest
+                        .withValues(alpha: 0.62),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     Icons.dataset_outlined,
-                    color: palette.primary,
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    '공개 굿즈 DB',
-                    maxLines: 1,
-                    softWrap: false,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '공개 굿즈 DB',
+                        maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '검색해서 내 굿즈함이나 위시리스트에 추가',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurface
+                              .withValues(alpha: 0.60),
+                          height: 1.22,
+                          letterSpacing: 0,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
+                const SizedBox(width: 10),
                 _CatalogMetricPill(
                   label: '등록',
                   value: '${_CatalogHealthSummary.formatCount(
@@ -317,26 +333,21 @@ class _CatalogImportPanel extends StatelessWidget {
                   )}개',
                   color: palette.primary,
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    '검색 후 내 굿즈함 또는 위시리스트에 바로 추가',
-                    maxLines: 1,
-                    softWrap: false,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurface.withValues(
-                        alpha: 0.62,
-                      ),
-                      height: 1.2,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0,
-                    ),
-                  ),
-                ),
               ],
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 12),
+            Text(
+              '중복 후보와 예시 이미지는 홈 집계에서 제외했어요. 전체 목록에서 검색어로 좁힌 뒤 원하는 항목만 담을 수 있어요.',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.58),
+                height: 1.24,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0,
+              ),
+            ),
+            const SizedBox(height: 12),
             SizedBox(
               height: 46,
               child: FilledButton.icon(

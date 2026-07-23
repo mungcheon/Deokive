@@ -166,8 +166,8 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
     builder: (sheetContext) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.90,
-        minChildSize: 0.80,
+        initialChildSize: 0.92,
+        minChildSize: 0.82,
         maxChildSize: 0.98,
         builder: (context, scrollController) {
           return StatefulBuilder(
@@ -206,38 +206,59 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                                   .withValues(alpha: 0.58),
                             ),
                       ),
-                      const SizedBox(height: 10),
-                      if (wishlistFolder != null)
-                        _CatalogImportDestinationTile(
-                          icon: Icons.favorite_border_rounded,
-                          iconColor: wishlistFolder.color,
-                          title: '위시리스트에 추가',
-                          subtitle: '구매가 0원, 상태 위시로 저장',
-                          selected: selectedKind == _CatalogImportKind.wishlist,
-                          onTap: () {
-                            setSheetState(() {
-                              selectedKind = _CatalogImportKind.wishlist;
-                            });
-                          },
-                        ),
-                      if (refreshedFolders.isNotEmpty) ...[
-                        const SizedBox(height: 6),
-                        _CatalogImportDestinationTile(
-                          icon: Icons.inventory_2_rounded,
-                          iconColor: Theme.of(context).colorScheme.primary,
-                          title: '내 굿즈함에 추가',
-                          subtitle: selectedFolder == null
-                              ? '저장할 폴더를 선택해 주세요'
-                              : '${selectedFolder.name}에 정가 구매, 미개봉으로 저장',
-                          selected: selectedKind == _CatalogImportKind.owned,
-                          onTap: () {
-                            setSheetState(() {
-                              selectedKind = _CatalogImportKind.owned;
-                            });
-                          },
-                        ),
-                      ],
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          if (refreshedFolders.isNotEmpty)
+                            Expanded(
+                              child: _CatalogImportDestinationTile(
+                                icon: Icons.inventory_2_rounded,
+                                iconColor:
+                                    Theme.of(context).colorScheme.primary,
+                                title: '내 굿즈함',
+                                subtitle: selectedFolder == null
+                                    ? '폴더 선택 필요'
+                                    : '${selectedFolder.name} 저장',
+                                selected:
+                                    selectedKind == _CatalogImportKind.owned,
+                                compact: true,
+                                onTap: () {
+                                  setSheetState(() {
+                                    selectedKind = _CatalogImportKind.owned;
+                                  });
+                                },
+                              ),
+                            ),
+                          if (refreshedFolders.isNotEmpty &&
+                              wishlistFolder != null)
+                            const SizedBox(width: 8),
+                          if (wishlistFolder != null)
+                            Expanded(
+                              child: _CatalogImportDestinationTile(
+                                icon: Icons.favorite_border_rounded,
+                                iconColor: wishlistFolder.color,
+                                title: '위시리스트',
+                                subtitle: '0원 · 위시',
+                                selected:
+                                    selectedKind == _CatalogImportKind.wishlist,
+                                compact: true,
+                                onTap: () {
+                                  setSheetState(() {
+                                    selectedKind = _CatalogImportKind.wishlist;
+                                  });
+                                },
+                              ),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        '저장할 폴더',
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              fontWeight: FontWeight.w900,
+                            ),
+                      ),
+                      const SizedBox(height: 6),
                       Expanded(
                         child: ListView.builder(
                           controller: scrollController,
@@ -250,28 +271,61 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                                     folder.id == selectedId;
                             final defaultLabel =
                                 index == 0 ? '기본 저장 위치' : folderType;
-                            return ListTile(
-                              onTap: () {
-                                setSheetState(() {
-                                  selectedKind = _CatalogImportKind.owned;
-                                  selectedId = folder.id;
-                                });
-                              },
-                              leading: Icon(folder.icon, color: folder.color),
-                              title: Text(folder.name),
-                              subtitle: Text(
-                                '$defaultLabel · 보유 ${appState.goodsCountForFolder(folder.id)}개',
+                            return Card(
+                              margin: const EdgeInsets.only(bottom: 8),
+                              elevation: 0,
+                              color: selected
+                                  ? Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withValues(alpha: 0.08)
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .surfaceContainerHighest
+                                      .withValues(alpha: 0.38),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                                side: BorderSide(
+                                  color: selected
+                                      ? Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withValues(alpha: 0.36)
+                                      : Colors.transparent,
+                                ),
                               ),
-                              trailing: Icon(
-                                selected
-                                    ? Icons.check_circle_rounded
-                                    : Icons.circle_outlined,
-                                color: selected
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context)
-                                        .colorScheme
-                                        .onSurface
-                                        .withValues(alpha: 0.32),
+                              child: ListTile(
+                                onTap: () {
+                                  setSheetState(() {
+                                    selectedKind = _CatalogImportKind.owned;
+                                    selectedId = folder.id;
+                                  });
+                                },
+                                leading: Icon(folder.icon, color: folder.color),
+                                title: Text(
+                                  folder.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  '$defaultLabel · 보유 ${appState.goodsCountForFolder(folder.id)}개',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                trailing: Icon(
+                                  selected
+                                      ? Icons.check_circle_rounded
+                                      : Icons.circle_outlined,
+                                  color: selected
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withValues(alpha: 0.32),
+                                ),
                               ),
                             );
                           },
@@ -346,6 +400,7 @@ class _CatalogImportDestinationTile extends StatelessWidget {
   final String subtitle;
   final bool selected;
   final VoidCallback onTap;
+  final bool compact;
 
   const _CatalogImportDestinationTile({
     required this.icon,
@@ -354,6 +409,7 @@ class _CatalogImportDestinationTile extends StatelessWidget {
     required this.subtitle,
     required this.selected,
     required this.onTap,
+    this.compact = false,
   });
 
   @override
@@ -369,7 +425,7 @@ class _CatalogImportDestinationTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(compact ? 10 : 12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
@@ -381,17 +437,19 @@ class _CatalogImportDestinationTile extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                radius: 20,
+                radius: compact ? 18 : 20,
                 backgroundColor: color.withValues(alpha: 0.14),
-                child: Icon(icon, color: color, size: 21),
+                child: Icon(icon, color: color, size: compact ? 19 : 21),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: compact ? 9 : 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w900,
                       ),
@@ -399,7 +457,7 @@ class _CatalogImportDestinationTile extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       subtitle,
-                      maxLines: 2,
+                      maxLines: compact ? 1 : 2,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color:
