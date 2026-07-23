@@ -5115,7 +5115,27 @@
     "invalid_local_image_paths": 0,
     "local_asset_coverage": 1.0,
     "web_public_asset_coverage": 1.0,
-    "status": "pass"
+    "status": "pass",
+    "download_readiness_status": "known_image_assets_complete",
+    "known_image_download_blocker_rows": 0,
+    "rows_still_requiring_image_url_evidence": 710,
+    "auto_download_ready_rows": 0,
+    "download_readiness": {
+      "status": "known_image_assets_complete",
+      "known_image_url_rows": 19637,
+      "known_image_download_blocker_rows": 0,
+      "image_url_without_local_path_rows": 0,
+      "missing_local_image_files": 0,
+      "missing_web_public_asset_files": 0,
+      "invalid_local_image_paths": 0,
+      "missing_image_url_rows": 710,
+      "rows_still_requiring_image_url_evidence": 710,
+      "download_complete_for_known_image_urls": true,
+      "next_safe_phase": "find_exact_image_urls_for_missing_rows",
+      "auto_download_ready_rows": 0,
+      "auto_apply_enabled": false,
+      "operator_message": "All catalog rows that already have image_url also have local and web-public image assets; remaining rows first need exact image_url/source evidence before a download can be attempted."
+    }
   },
   "missing_image_priority": {
     "public_report": "data/catalog_missing_image_priority_public.json",
@@ -7231,6 +7251,9 @@
     "probable_reissue_sample_rows": 40,
     "repeated_name_different_source_groups": 46,
     "manual_confirmed_rows": 0,
+    "manual_review_rows": 40,
+    "auto_apply_ready_rows": 0,
+    "completion_readiness_status": "ichiban_reissue_review_required",
     "lane_counts": [
       [
         "probable_reissue_or_campaign_variant_review",
@@ -7251,7 +7274,34 @@
     ],
     "auto_apply_enabled": false,
     "auto_merge_enabled": false,
-    "auto_delete_enabled": false
+    "auto_delete_enabled": false,
+    "completion_readiness": {
+      "status": "ichiban_reissue_review_required",
+      "zero_price_policy_ready": true,
+      "numbered_variant_policy_ready": true,
+      "same_rank_unnumbered_policy_ready": true,
+      "reissue_identity_policy_ready": false,
+      "issue_rows": 20,
+      "open_issue_rows": 40,
+      "manual_review_rows": 40,
+      "auto_apply_ready_rows": 0,
+      "zero_price_violation_rows": 0,
+      "unnumbered_multi_item_prize_review_groups": 0,
+      "unnumbered_multi_item_prize_review_rows": 0,
+      "protected_unnumbered_multi_item_prize_groups": 6,
+      "protected_unnumbered_multi_item_prize_rows": 12,
+      "probable_reissue_work_order_rows": 20,
+      "probable_reissue_review_groups": 20,
+      "repeated_name_different_source_groups": 46,
+      "blocked_reasons": [
+        "same_name_across_campaign_urls_requires_keep_or_merge_decision"
+      ],
+      "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+      "auto_apply_enabled": false,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "safety_note": "Last One and Double Chance zero-price rows are policy exceptions; same-name Ichiban Kuji rows across campaign URLs must not be merged until official campaign evidence confirms the identity decision."
+    }
   },
   "source_discovery_completion_roadmap": {
     "public_report": "data/source_discovery_completion_roadmap_public.json",
