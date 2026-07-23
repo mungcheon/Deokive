@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T10:09:55Z",
+  "generated_at": "2026-07-23T10:21:27Z",
   "summary": {
     "batch_count": 155,
     "max_published_batches": 160,
@@ -253,7 +253,8 @@
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
       "source_detail_candidate_manual_confirmation_shortlist_rows": 0,
-      "source_detail_candidate_priority_manual_review_rows": 0,
+      "source_detail_candidate_count_review_required_rows": 1,
+      "source_detail_candidate_priority_manual_review_rows": 1,
       "official_detail_review_rows": 3,
       "official_detail_review_candidate_rows": 3,
       "official_detail_review_manual_confirmed_rows": 0,
@@ -8140,7 +8141,7 @@
           "source_report": "server/catalog_source_detail_candidates.json",
           "review_risk": "ambiguous_candidate_review",
           "review_priority": 30,
-          "recommended_action": "recheck_candidate_identity_before_source_or_image_patch",
+          "recommended_action": "review_large_candidate_set_before_source_or_image_patch",
           "current_catalog_state": {
             "catalog_match_found": true,
             "catalog_has_display_image": false,
@@ -8181,7 +8182,8 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
-          "priority_manual_review_candidate": false
+          "candidate_count_review_required": true,
+          "priority_manual_review_candidate": true
         },
         {
           "manual_confirmed": false,
@@ -8252,6 +8254,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -8322,6 +8325,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -8392,6 +8396,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -8462,6 +8467,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -8532,6 +8538,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -8602,6 +8609,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -8672,6 +8680,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         }
       ],
@@ -17390,6 +17399,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -17461,6 +17471,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -17531,6 +17542,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -17601,6 +17613,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         },
         {
@@ -17670,6 +17683,7 @@
           ],
           "auto_apply_enabled": false,
           "manual_confirmation_shortlist": false,
+          "candidate_count_review_required": false,
           "priority_manual_review_candidate": false
         }
       ],

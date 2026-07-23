@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T10:09:55Z",
+  "generated_at": "2026-07-23T10:21:27Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 710,
@@ -10,7 +10,7 @@
     "source_first_rows": 682,
     "review_before_attach_rows": 23,
     "source_detail_candidate_review_rows": 0,
-    "source_detail_candidate_recheck_required_rows": 12,
+    "source_detail_candidate_recheck_required_rows": 11,
     "source_detail_identity_warning_rows": 11,
     "source_detail_unflagged_candidate_rows": 1,
     "source_detail_ready_unflagged_candidate_rows": 0,
@@ -54,7 +54,7 @@
       },
       {
         "blocked_reason": "candidate_identity_warning_requires_recheck",
-        "rows": 12
+        "rows": 11
       },
       {
         "blocked_reason": "structured_source_discovery_not_available",
@@ -76,7 +76,7 @@
       },
       {
         "blocked_until": "candidate_identity_rechecked_or_replaced",
-        "rows": 12
+        "rows": 11
       },
       {
         "blocked_until": "manual_official_source_and_image_evidence_recorded",
@@ -419,19 +419,19 @@
     {
       "readiness": "source_detail_candidate_recheck_required",
       "priority": 29,
-      "rows": 12,
+      "rows": 11,
       "workflow_rows": [
         {
           "workflow": "recheck_source_detail_candidate_identity",
           "label": "후보 제목의 작품/캐릭터/변형 불일치 가능성 재확인",
-          "rows": 12,
+          "rows": 11,
           "next_step": "refresh_or_replace_candidate_before_import"
         }
       ],
       "by_source_store": [
         {
           "source_store": "애니메이트",
-          "rows": 10
+          "rows": 9
         },
         {
           "source_store": "굿스마일컴퍼니",
@@ -439,16 +439,6 @@
         }
       ],
       "sample_items": [
-        {
-          "catalog_index": 2235,
-          "name_ko": "짱구는 못말려 의류 신짱 액션가면 티셔츠",
-          "name_ja": "クレヨンしんちゃん Tシャツ",
-          "source_store": "애니메이트",
-          "candidate_title": "【グッズ-Tシャツ】クレヨンしんちゃん  OMOCHABOKO ポケット付きTシャツしんちゃんM",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-T%E3%82%B7%E3%83%A3%E3%83%84%E3%80%91%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93++OMOCHABOKO+%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E4%BB%98%E3%81%8DT%E3%82%B7%E3%83%A3%E3%83%84%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93M/pd/1795295/",
-          "candidate_identity_flags": [],
-          "workflow": "recheck_source_detail_candidate_identity"
-        },
         {
           "catalog_index": 1455,
           "name_ko": "POP UP PARADE 모노쿠마",
@@ -7854,7 +7844,7 @@
       "rank": 5,
       "lane": "recheck_source_detail_candidates",
       "source": "source_detail_candidate_action_queue_public.json",
-      "row_count": 12,
+      "row_count": 11,
       "next_step": "refresh_or_replace_candidate_before_import",
       "template": "source_detail_candidate_confirmed_rows_public.json",
       "top_source_stores": [],

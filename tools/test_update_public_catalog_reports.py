@@ -207,6 +207,10 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["source_detail_candidate_action_queue"]["manual_confirmation_shortlist_rows"],
                 source_detail_action["summary"]["manual_confirmation_shortlist_rows"],
             )
+            self.assertEqual(
+                quality["source_detail_candidate_action_queue"]["candidate_count_review_required_rows"],
+                source_detail_action["summary"].get("candidate_count_review_required_rows", 0),
+            )
             self.assertEqual(quality["source_detail_candidate_action_queue"]["manual_confirmed_true"], 0)
             self.assertIs(quality["source_detail_candidate_action_queue"]["auto_apply_enabled"], False)
         if reports.GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT.exists():
@@ -1046,8 +1050,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_detail_action_summary.get("manual_confirmed_true"),
         )
         self.assertEqual(
+            open_queues.get("source_detail_candidate_count_review_required_rows"),
+            source_detail_action_summary.get("candidate_count_review_required_rows"),
+        )
+        self.assertEqual(
             source_detail_scorecard.get("open_rows"),
             source_detail_action_summary.get("candidate_action_rows"),
+        )
+        self.assertEqual(
+            source_detail_scorecard.get("candidate_count_review_required_rows"),
+            source_detail_action_summary.get("candidate_count_review_required_rows"),
         )
         self.assertEqual(
             source_detail_scorecard.get("by_review_risk"),
@@ -1056,6 +1068,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_detail_next_action.get("candidate_action_rows"),
             source_detail_action_summary.get("candidate_action_rows"),
+        )
+        self.assertEqual(
+            source_detail_next_action.get("candidate_count_review_required_rows"),
+            source_detail_action_summary.get("candidate_count_review_required_rows"),
         )
         self.assertEqual(
             open_queues.get("metadata_action_missing_cells"),

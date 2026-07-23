@@ -256,10 +256,27 @@ def manual_confirmation_shortlist(item: dict[str, Any]) -> bool:
     )
 
 
+def candidate_count_review_required(item: dict[str, Any]) -> bool:
+    catalog_state = item.get("current_catalog_state") or {}
+    try:
+        score = float(item.get("candidate_score") or item.get("score") or 0)
+    except (TypeError, ValueError):
+        score = 0.0
+    candidate_count = int(item.get("candidate_count") or 0)
+    return bool(
+        item.get("safe_source_image_pair") is True
+        and catalog_state.get("catalog_identity_matches") is True
+        and catalog_state.get("catalog_has_display_image") is False
+        and not item.get("candidate_identity_flags")
+        and score >= 0.95
+        and candidate_count > 3
+    )
+
+
 def priority_manual_review_candidate(item: dict[str, Any]) -> bool:
     catalog_state = item.get("current_catalog_state") or {}
     candidate_count = int(item.get("candidate_count") or 0)
-    return bool(
+    small_candidate_ready = bool(
         item.get("safe_source_image_pair") is True
         and catalog_state.get("catalog_identity_matches") is True
         and catalog_state.get("catalog_has_display_image") is False
@@ -267,6 +284,7 @@ def priority_manual_review_candidate(item: dict[str, Any]) -> bool:
         and item.get("review_risk") in {"strong_single_candidate_review", "near_single_candidate_review"}
         and 0 < candidate_count <= 3
     )
+    return small_candidate_ready or candidate_count_review_required(item)
 
 
 def current_catalog_state(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
@@ -357,6 +375,7 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
         "auto_apply_enabled": False,
     }
     item["manual_confirmation_shortlist"] = manual_confirmation_shortlist(item)
+    item["candidate_count_review_required"] = candidate_count_review_required(item)
     item["priority_manual_review_candidate"] = priority_manual_review_candidate(item)
     if catalog_state.get("catalog_has_display_image"):
         item["recommended_action"] = "skip_current_catalog_row_already_has_display_image"
@@ -364,6 +383,8 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
         item["recommended_action"] = "refresh_candidate_before_manual_review"
     elif item["manual_confirmation_shortlist"]:
         item["recommended_action"] = "priority_manual_confirm_source_and_image_patch"
+    elif item["candidate_count_review_required"]:
+        item["recommended_action"] = "review_large_candidate_set_before_source_or_image_patch"
     elif item["priority_manual_review_candidate"]:
         item["recommended_action"] = "priority_manual_review_safe_source_image_candidate"
     elif identity_flags:
@@ -411,6 +432,9 @@ def build_report(
                 "manual_confirmation_shortlist_rows": sum(
                     1 for item in chunk if item.get("manual_confirmation_shortlist") is True
                 ),
+                "candidate_count_review_required_rows": sum(
+                    1 for item in chunk if item.get("candidate_count_review_required") is True
+                ),
                 "priority_manual_review_candidate_rows": sum(
                     1 for item in chunk if item.get("priority_manual_review_candidate") is True
                 ),
@@ -429,6 +453,7 @@ def build_report(
             "candidate_image_url": item.get("candidate_image_url"),
             "review_risk": item.get("review_risk"),
             "candidate_count_bucket": item.get("candidate_count_bucket"),
+            "candidate_count_review_required": item.get("candidate_count_review_required"),
             "recommended_action": item.get("recommended_action"),
             "source_patch_template": item.get("source_patch_template"),
             "image_patch_template": item.get("image_patch_template"),
@@ -450,6 +475,9 @@ def build_report(
             "safe_source_image_pair_rows": sum(1 for item in items if item.get("safe_source_image_pair") is True),
             "manual_confirmation_shortlist_rows": sum(
                 1 for item in items if item.get("manual_confirmation_shortlist") is True
+            ),
+            "candidate_count_review_required_rows": sum(
+                1 for item in items if item.get("candidate_count_review_required") is True
             ),
             "priority_manual_review_candidate_rows": len(priority_review_candidates),
             "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
@@ -515,6 +543,7 @@ def build_report(
             "Rows may contain related products; wrong character or variant candidates must remain unconfirmed.",
             "current_catalog_state flags candidates that no longer match the public catalog row or already have a display image.",
             "candidate_identity_flags highlight high-risk title matches such as generic-only shared tokens, crossovers, or missing variant hints.",
+            "candidate_count_review_required means the best candidate scored highly, but the source returned many candidates; confirm against the source page before importing.",
         ],
         "priority_manual_review_candidates": priority_review_candidates,
         "batches": batches,

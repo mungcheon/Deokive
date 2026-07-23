@@ -2184,6 +2184,9 @@ def build_operations_public(
             "manual_confirmation_shortlist_rows": source_detail_candidate_action_queue_summary.get(
                 "manual_confirmation_shortlist_rows", 0
             ),
+            "candidate_count_review_required_rows": source_detail_candidate_action_queue_summary.get(
+                "candidate_count_review_required_rows", 0
+            ),
             "priority_manual_review_candidate_rows": source_detail_candidate_action_queue_summary.get(
                 "priority_manual_review_candidate_rows", 0
             ),
@@ -2683,6 +2686,9 @@ def build_operations_public(
             "manual_confirmation_shortlist_rows": source_detail_candidate_action_queue_summary.get(
                 "manual_confirmation_shortlist_rows", 0
             ),
+            "candidate_count_review_required_rows": source_detail_candidate_action_queue_summary.get(
+                "candidate_count_review_required_rows", 0
+            ),
             "priority_manual_review_candidate_rows": source_detail_candidate_action_queue_summary.get(
                 "priority_manual_review_candidate_rows", 0
             ),
@@ -3101,6 +3107,9 @@ def build_operations_public(
         )
         open_review_queues["source_detail_candidate_manual_confirmation_shortlist_rows"] = (
             source_detail_candidate_action_queue_summary.get("manual_confirmation_shortlist_rows", 0)
+        )
+        open_review_queues["source_detail_candidate_count_review_required_rows"] = (
+            source_detail_candidate_action_queue_summary.get("candidate_count_review_required_rows", 0)
         )
         open_review_queues["source_detail_candidate_priority_manual_review_rows"] = (
             source_detail_candidate_action_queue_summary.get("priority_manual_review_candidate_rows", 0)
@@ -5356,6 +5365,9 @@ def validate_report_consistency(
         )
         expected_open_queues["source_detail_candidate_manual_confirmation_shortlist_rows"] = (
             source_detail_candidate_action_summary.get("manual_confirmation_shortlist_rows", 0)
+        )
+        expected_open_queues["source_detail_candidate_count_review_required_rows"] = (
+            source_detail_candidate_action_summary.get("candidate_count_review_required_rows", 0)
         )
         expected_open_queues["source_detail_candidate_priority_manual_review_rows"] = (
             source_detail_candidate_action_summary.get("priority_manual_review_candidate_rows", 0)
