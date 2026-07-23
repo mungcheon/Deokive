@@ -784,7 +784,14 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_price_violation_rows += _count(kuji_policy_summary, "last_one_missing_price_rows")
     kuji_price_violation_rows += _count(kuji_policy_summary, "double_chance_nonzero_price_rows")
     kuji_price_violation_rows += _count(kuji_policy_summary, "double_chance_missing_price_rows")
-    kuji_variant_review_rows = _count(kuji_policy_summary, "multi_item_prize_label_groups")
+    kuji_variant_total_groups = _count(kuji_policy_summary, "multi_item_prize_label_groups")
+    kuji_variant_review_rows = _count(kuji_policy_summary, "multi_item_prize_label_manual_review_groups")
+    if "multi_item_prize_label_manual_review_groups" not in kuji_policy_summary:
+        kuji_variant_review_rows = kuji_variant_total_groups
+    kuji_numbered_variant_complete_groups = _count(
+        kuji_policy_summary,
+        "numbered_variant_complete_prize_label_groups",
+    )
     kuji_incomplete_numbered_variant_rows = _count(
         kuji_policy_summary, "incomplete_numbered_variant_prize_label_groups"
     )
@@ -851,7 +858,9 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "double_chance_missing_price_rows": _count(
                         kuji_policy_summary, "double_chance_missing_price_rows"
                     ),
-                    "multi_item_prize_label_groups": kuji_variant_review_rows,
+                    "multi_item_prize_label_groups": kuji_variant_total_groups,
+                    "multi_item_prize_label_manual_review_groups": kuji_variant_review_rows,
+                    "numbered_variant_complete_prize_label_groups": kuji_numbered_variant_complete_groups,
                     "multi_item_prize_label_review_batch_count": _count(
                         kuji_policy_summary, "multi_item_prize_label_review_batch_count"
                     ),
@@ -1016,7 +1025,9 @@ def _build_plan(load_report) -> dict[str, Any]:
             "ichiban_zero_price_exception_policy_pass": bool(
                 kuji_policy_summary.get("zero_price_exception_policy_pass")
             ),
-            "ichiban_multi_item_prize_label_groups": kuji_variant_review_rows,
+            "ichiban_multi_item_prize_label_groups": kuji_variant_total_groups,
+            "ichiban_multi_item_prize_label_manual_review_groups": kuji_variant_review_rows,
+            "ichiban_numbered_variant_complete_prize_label_groups": kuji_numbered_variant_complete_groups,
             "ichiban_prize_policy_review_batch_count": _count(
                 kuji_policy_summary, "prize_policy_review_batch_count"
             ),

@@ -315,13 +315,18 @@ def build_report(
 
     prize_label_counts = Counter(str(row.get("sub_series") or "") for row in kuji_rows if row.get("sub_series"))
     multi_item_review_lane_counts = Counter(str(group.get("review_lane") or "") for group in multi_item_prize_groups)
+    manual_multi_item_prize_groups = [
+        group
+        for group in multi_item_prize_groups
+        if str(group.get("review_lane") or "") != "numbered_variant_complete"
+    ]
     reissue_reason_counts = Counter(
         reason
         for group in repeated_name_different_source_groups
         for reason in group.get("reissue_signal_reasons", [])
     )
     multi_item_review_batches = batch_groups(
-        multi_item_prize_groups,
+        manual_multi_item_prize_groups,
         workflow="multi_item_prize_label_review",
         batch_id_prefix="ichiban-prize-policy-multi-item",
         recommended_action=(
@@ -395,7 +400,14 @@ def build_report(
             "zero_price_violation_rows": price_exception_rows,
             "multi_item_prize_label_review_batch_count": len(multi_item_review_batches),
             "multi_item_prize_label_review_catalog_item_rows": sum(
-                int(group.get("row_count") or 0) for group in multi_item_prize_groups
+                int(group.get("row_count") or 0) for group in manual_multi_item_prize_groups
+            ),
+            "multi_item_prize_label_manual_review_groups": len(manual_multi_item_prize_groups),
+            "multi_item_prize_label_manual_review_catalog_item_rows": sum(
+                int(group.get("row_count") or 0) for group in manual_multi_item_prize_groups
+            ),
+            "numbered_variant_complete_prize_label_groups": multi_item_review_lane_counts.get(
+                "numbered_variant_complete", 0
             ),
             "repeated_name_different_source_review_batch_count": len(repeated_name_review_batches),
             "repeated_name_different_source_review_catalog_item_rows": sum(
@@ -452,7 +464,11 @@ def build_report(
             {
                 "priority": 3,
                 "workstream": "multi_item_prize_label_review",
-                "rows": len(multi_item_prize_groups),
+                "rows": len(manual_multi_item_prize_groups),
+                "total_multi_item_prize_label_groups": len(multi_item_prize_groups),
+                "numbered_variant_complete_prize_label_groups": multi_item_review_lane_counts.get(
+                    "numbered_variant_complete", 0
+                ),
                 "batch_count": len(multi_item_review_batches),
                 "next_batch_id": multi_item_review_batches[0]["batch_id"] if multi_item_review_batches else None,
                 "recommended_next_action": "Review same-prize-label groups against official lineup pages before adding missing variants.",

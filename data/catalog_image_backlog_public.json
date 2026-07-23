@@ -2531,9 +2531,9 @@
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 150,
+    "batch_count": 147,
     "max_published_batches": 160,
-    "summed_batch_rows": 25475,
+    "summed_batch_rows": 24340,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2573,16 +2573,16 @@
         8
       ],
       [
-        "ichiban_kuji_prize_policy_audit",
-        8
-      ],
-      [
         "image_attachment_action_queue",
         7
       ],
       [
         "ichiban_kuji_metadata_action_queue",
         6
+      ],
+      [
+        "ichiban_kuji_prize_policy_audit",
+        5
       ],
       [
         "deduplication_action_queue",
@@ -2683,16 +2683,16 @@
         8
       ],
       [
-        "agent-ichiban-prize-policy",
-        8
-      ],
-      [
         "agent-image-action",
         7
       ],
       [
         "agent-ichiban-kuji",
         6
+      ],
+      [
+        "agent-ichiban-prize-policy",
+        5
       ],
       [
         "agent-dedupe-action",
@@ -3745,7 +3745,7 @@
     "blocked_action_count": 1,
     "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 33567,
+    "total_action_rows": 33157,
     "open_review_queues": {
       "source_discovery_rows": 641,
       "image_missing_rows": 714,
@@ -3837,8 +3837,10 @@
     "ichiban_missing_release_date_campaign_groups": 1,
     "ichiban_missing_official_price_jpy_campaign_groups": 41,
     "ichiban_zero_price_exception_policy_pass": true,
-    "ichiban_multi_item_prize_label_groups": 416,
-    "ichiban_prize_policy_review_batch_count": 39,
+    "ichiban_multi_item_prize_label_groups": 415,
+    "ichiban_multi_item_prize_label_manual_review_groups": 6,
+    "ichiban_numbered_variant_complete_prize_label_groups": 409,
+    "ichiban_prize_policy_review_batch_count": 5,
     "ichiban_incomplete_numbered_variant_prize_label_groups": 0,
     "ichiban_numbered_variant_created_rows": 2518,
     "ichiban_numbered_variant_application_skipped_rows": 0,
@@ -5823,8 +5825,8 @@
     "double_chance_nonzero_price_rows": 0,
     "double_chance_missing_price_rows": 0,
     "zero_price_exception_policy_pass": true,
-    "campaign_prize_label_groups": 5374,
-    "multi_item_prize_label_groups": 416,
+    "campaign_prize_label_groups": 5375,
+    "multi_item_prize_label_groups": 415,
     "multi_item_prize_label_review_lanes": [
       [
         "numbered_variant_complete",
@@ -5832,7 +5834,7 @@
       ],
       [
         "unnumbered_multi_item_prize_review",
-        7
+        6
       ]
     ],
     "numbered_variant_prize_label_groups": 409,
@@ -5853,11 +5855,14 @@
       ]
     ],
     "zero_price_violation_rows": 0,
-    "multi_item_prize_label_review_batch_count": 35,
-    "multi_item_prize_label_review_catalog_item_rows": 2941,
+    "multi_item_prize_label_review_batch_count": 1,
+    "multi_item_prize_label_review_catalog_item_rows": 12,
+    "multi_item_prize_label_manual_review_groups": 6,
+    "multi_item_prize_label_manual_review_catalog_item_rows": 12,
+    "numbered_variant_complete_prize_label_groups": 409,
     "repeated_name_different_source_review_batch_count": 4,
     "repeated_name_different_source_review_catalog_item_rows": 92,
-    "prize_policy_review_batch_count": 39,
+    "prize_policy_review_batch_count": 5,
     "auto_apply_enabled": false
   },
   "ensky_cache_candidate_action_queue": {

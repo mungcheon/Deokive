@@ -137,6 +137,58 @@ class BuildIchibanPrizePolicyAuditPublicTest(unittest.TestCase):
         self.assertEqual(report["numbered_variant_application"]["numbered_variant_created_rows"], 2518)
         self.assertEqual(report["next_actions"][1]["status"], "applied")
 
+    def test_numbered_variant_complete_groups_are_not_manual_review_batches(self) -> None:
+        report = audit.build_report(
+            {
+                "items": [
+                    {
+                        "catalog_index": 1,
+                        "name_ko": "一番くじ sample - A賞 Acrylic (1/2)",
+                        "name_ja": "A賞 Acrylic (1/2)",
+                        "sub_series": "A賞",
+                        "official_price_jpy": 700,
+                        "source_url": "https://1kuji.com/products/sample",
+                    },
+                    {
+                        "catalog_index": 2,
+                        "name_ko": "一番くじ sample - A賞 Acrylic (2/2)",
+                        "name_ja": "A賞 Acrylic (2/2)",
+                        "sub_series": "A賞",
+                        "official_price_jpy": 700,
+                        "source_url": "https://1kuji.com/products/sample",
+                    },
+                    {
+                        "catalog_index": 3,
+                        "name_ko": "一番くじ sample - B賞 Plate red",
+                        "name_ja": "B賞 Plate red",
+                        "sub_series": "B賞",
+                        "official_price_jpy": 700,
+                        "source_url": "https://1kuji.com/products/sample",
+                    },
+                    {
+                        "catalog_index": 4,
+                        "name_ko": "一番くじ sample - B賞 Plate blue",
+                        "name_ja": "B賞 Plate blue",
+                        "sub_series": "B賞",
+                        "official_price_jpy": 700,
+                        "source_url": "https://1kuji.com/products/sample",
+                    },
+                ]
+            },
+            generated_at="2026-07-22T00:00:00Z",
+        )
+
+        self.assertEqual(report["summary"]["multi_item_prize_label_groups"], 2)
+        self.assertEqual(report["summary"]["numbered_variant_complete_prize_label_groups"], 1)
+        self.assertEqual(report["summary"]["multi_item_prize_label_manual_review_groups"], 1)
+        self.assertEqual(report["summary"]["multi_item_prize_label_review_batch_count"], 1)
+        self.assertEqual(report["summary"]["multi_item_prize_label_review_catalog_item_rows"], 2)
+        self.assertEqual(report["review_batches"][0]["group_count"], 1)
+        self.assertEqual(report["review_batches"][0]["groups"][0]["sub_series"], "B賞")
+        self.assertEqual(report["next_actions"][2]["rows"], 1)
+        self.assertEqual(report["next_actions"][2]["total_multi_item_prize_label_groups"], 2)
+        self.assertEqual(report["next_actions"][2]["numbered_variant_complete_prize_label_groups"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

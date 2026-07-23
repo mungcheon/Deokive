@@ -2357,11 +2357,20 @@ def build_operations_public(
             "multi_item_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "multi_item_prize_label_groups", 0
             ),
+            "multi_item_prize_label_manual_review_groups": ichiban_kuji_prize_policy_audit_summary.get(
+                "multi_item_prize_label_manual_review_groups", 0
+            ),
             "multi_item_prize_label_review_batch_count": ichiban_kuji_prize_policy_audit_summary.get(
                 "multi_item_prize_label_review_batch_count", 0
             ),
             "multi_item_prize_label_review_catalog_item_rows": ichiban_kuji_prize_policy_audit_summary.get(
                 "multi_item_prize_label_review_catalog_item_rows", 0
+            ),
+            "multi_item_prize_label_manual_review_catalog_item_rows": ichiban_kuji_prize_policy_audit_summary.get(
+                "multi_item_prize_label_manual_review_catalog_item_rows", 0
+            ),
+            "numbered_variant_complete_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
+                "numbered_variant_complete_prize_label_groups", 0
             ),
             "numbered_variant_prize_label_groups": ichiban_kuji_prize_policy_audit_summary.get(
                 "numbered_variant_prize_label_groups", 0
