@@ -6103,6 +6103,8 @@ def update_reports(write: bool) -> dict[str, Any]:
         load_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, {})
         if IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.exists()
         else {},
+        source_discovery_next_focus_detail_candidates=source_discovery_next_focus_detail_candidates,
+        source_discovery_next_focus_fallback_queue=source_discovery_next_focus_fallback_queue,
         generated_at=generated_at,
     )
     operations = build_operations_public(

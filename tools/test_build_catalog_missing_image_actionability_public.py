@@ -89,6 +89,55 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             }
         }
         image_attachment_template_dry_run = {"updated_rows": 0, "skipped_rows": 2}
+        next_focus_detail_candidates = {
+            "summary": {
+                "pack_items": 2,
+                "items_with_candidates": 1,
+                "candidate_rows": 3,
+                "manual_candidate_review_rows": 3,
+                "no_candidate_items": 1,
+                "official_search_audit_status_counts": [
+                    ["official_search_has_results", 1],
+                    ["official_search_no_results", 1],
+                ],
+            },
+            "items": [
+                {
+                    "catalog_index": 3,
+                    "name_ko": "Source first",
+                    "name_ja": "ソース優先",
+                    "candidate_count": 3,
+                    "official_search_audit_status": "official_search_has_results",
+                    "needs_fallback_web_search": False,
+                    "status": "manual_candidate_review",
+                },
+                {
+                    "catalog_index": 33,
+                    "name_ko": "Fallback needed",
+                    "candidate_count": 0,
+                    "official_search_audit_status": "official_search_no_results",
+                    "needs_fallback_web_search": True,
+                    "status": "no_candidates_found",
+                },
+            ],
+        }
+        next_focus_fallback_queue = {
+            "summary": {
+                "queue_rows": 1,
+                "fallback_query_count": 5,
+                "manual_confirmed_rows": 0,
+                "first_domain_limited_web_search_url": "https://google.example/search",
+                "first_fallback_store_search_url": "https://store-c.example/mobile-search",
+            },
+            "items": [
+                {
+                    "catalog_index": 33,
+                    "name_ko": "Fallback needed",
+                    "domain_limited_web_search_urls": ["https://google.example/search"],
+                    "fallback_store_search_url": "https://store-c.example/mobile-search",
+                }
+            ],
+        }
         source_detail_queue = {
             "batches": [
                 {
@@ -155,6 +204,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             focus_template_dry_run,
             image_attachment_template,
             image_attachment_template_dry_run,
+            source_discovery_next_focus_detail_candidates=next_focus_detail_candidates,
+            source_discovery_next_focus_fallback_queue=next_focus_fallback_queue,
             generated_at="2026-07-22T00:00:00Z",
         )
 
@@ -299,6 +350,36 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(
             report["next_source_discovery_focus_pack"]["blocked_until"],
             "exact_product_source_url_discovered",
+        )
+        self.assertEqual(
+            report["next_source_discovery_focus_pack"]["candidate_review_summary"][
+                "candidate_rows"
+            ],
+            3,
+        )
+        self.assertEqual(
+            report["next_source_discovery_focus_pack"]["candidate_review_summary"][
+                "fallback_search_needed_items"
+            ],
+            1,
+        )
+        self.assertEqual(
+            report["next_source_discovery_focus_pack"]["fallback_review_summary"][
+                "queue_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
+            report["next_source_discovery_focus_pack"]["candidate_review_samples"][0][
+                "candidate_count"
+            ],
+            3,
+        )
+        self.assertEqual(
+            report["next_source_discovery_focus_pack"]["fallback_review_samples"][0][
+                "domain_limited_web_search_url_count"
+            ],
+            1,
         )
         self.assertFalse(work_order[0]["auto_apply_enabled"])
         self.assertTrue(work_order[0]["manual_confirmation_required"])

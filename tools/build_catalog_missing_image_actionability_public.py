@@ -16,6 +16,12 @@ DEFAULT_SOURCE_DETAIL_QUEUE = DATA / "source_detail_candidate_action_queue_publi
 DEFAULT_SOURCE_DISCOVERY_FOCUS_PACKS = DATA / "source_discovery_focus_packs_public.json"
 DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE = DATA / "source_discovery_focus_confirmed_template_public.json"
 DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE_DRY_RUN = DATA / "source_discovery_focus_template_import_dry_run_public.json"
+DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES = (
+    DATA / "source_discovery_next_focus_detail_candidates_public.json"
+)
+DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE = (
+    DATA / "source_discovery_next_focus_fallback_queue_public.json"
+)
 DEFAULT_IMAGE_ATTACHMENT_TEMPLATE = DATA / "catalog_image_attachment_confirmed_template_public.json"
 DEFAULT_IMAGE_ATTACHMENT_TEMPLATE_DRY_RUN = DATA / "catalog_image_attachment_template_import_dry_run_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_missing_image_actionability_public.json"
@@ -361,6 +367,95 @@ def next_focus_pack_from_template_summary(summary: dict[str, Any]) -> dict[str, 
     }
 
 
+def enrich_next_focus_pack(
+    next_focus_pack: dict[str, Any] | None,
+    detail_candidates: dict[str, Any] | None,
+    fallback_queue: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    if not next_focus_pack:
+        return None
+    enriched = dict(next_focus_pack)
+    detail_summary = (
+        detail_candidates.get("summary")
+        if isinstance(detail_candidates, dict) and isinstance(detail_candidates.get("summary"), dict)
+        else {}
+    )
+    fallback_summary = (
+        fallback_queue.get("summary")
+        if isinstance(fallback_queue, dict) and isinstance(fallback_queue.get("summary"), dict)
+        else {}
+    )
+    candidate_items = [
+        item
+        for item in (detail_candidates or {}).get("items", [])
+        if isinstance(item, dict)
+    ] if isinstance(detail_candidates, dict) else []
+    fallback_items = [
+        item for item in (fallback_queue or {}).get("items", []) if isinstance(item, dict)
+    ] if isinstance(fallback_queue, dict) else []
+
+    if detail_summary:
+        enriched["candidate_review_summary"] = {
+            "pack_items": int(detail_summary.get("pack_items") or 0),
+            "items_with_candidates": int(detail_summary.get("items_with_candidates") or 0),
+            "candidate_rows": int(detail_summary.get("candidate_rows") or 0),
+            "manual_candidate_review_rows": int(
+                detail_summary.get("manual_candidate_review_rows") or 0
+            ),
+            "no_candidate_items": int(detail_summary.get("no_candidate_items") or 0),
+            "official_search_has_results": dict(
+                detail_summary.get("official_search_audit_status_counts") or []
+            ).get("official_search_has_results", 0),
+            "official_search_no_results": dict(
+                detail_summary.get("official_search_audit_status_counts") or []
+            ).get("official_search_no_results", 0),
+            "fallback_search_needed_items": sum(
+                1 for item in candidate_items if item.get("needs_fallback_web_search")
+            ),
+        }
+    if fallback_summary:
+        enriched["fallback_review_summary"] = {
+            "queue_rows": int(fallback_summary.get("queue_rows") or 0),
+            "fallback_query_count": int(fallback_summary.get("fallback_query_count") or 0),
+            "manual_confirmed_rows": int(fallback_summary.get("manual_confirmed_rows") or 0),
+            "first_domain_limited_web_search_url": fallback_summary.get(
+                "first_domain_limited_web_search_url"
+            ),
+            "first_fallback_store_search_url": fallback_summary.get(
+                "first_fallback_store_search_url"
+            ),
+        }
+    if candidate_items:
+        enriched["candidate_review_samples"] = [
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "candidate_count": item.get("candidate_count"),
+                "official_search_audit_status": item.get("official_search_audit_status"),
+                "needs_fallback_web_search": bool(item.get("needs_fallback_web_search")),
+                "status": item.get("status") or item.get("review_state"),
+            }
+            for item in candidate_items[:8]
+        ]
+    if fallback_items:
+        enriched["fallback_review_samples"] = [
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "domain_limited_web_search_url_count": len(
+                    item.get("domain_limited_web_search_urls") or []
+                ),
+                "fallback_store_search_url": item.get("fallback_store_search_url"),
+            }
+            for item in fallback_items[:8]
+        ]
+    if detail_summary or fallback_summary:
+        enriched["next_step"] = "review_candidate_and_fallback_summaries_then_fill_confirmed_source_urls"
+    return enriched
+
+
 def build_work_order(
     summary: dict[str, Any],
     readiness_rows: list[dict[str, Any]],
@@ -683,6 +778,8 @@ def build_report(
     source_discovery_focus_template_dry_run: dict[str, Any] | None = None,
     image_attachment_template: dict[str, Any] | None = None,
     image_attachment_template_dry_run: dict[str, Any] | None = None,
+    source_discovery_next_focus_detail_candidates: dict[str, Any] | None = None,
+    source_discovery_next_focus_fallback_queue: dict[str, Any] | None = None,
     *,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -737,7 +834,11 @@ def build_report(
     readiness_rows = append_source_detail_readiness(base_readiness_rows, source_detail_missing)
     source_store_priority = summarize_source_stores(groups)
     source_discovery_work_packs = build_source_discovery_work_packs(groups)
-    next_source_discovery_focus_pack = next_focus_pack_from_template_summary(focus_template_summary)
+    next_source_discovery_focus_pack = enrich_next_focus_pack(
+        next_focus_pack_from_template_summary(focus_template_summary),
+        source_discovery_next_focus_detail_candidates,
+        source_discovery_next_focus_fallback_queue,
+    )
     readiness_total = sum(int(row.get("rows") or 0) for row in base_readiness_rows)
     missing_image_rows = int(summary.get("missing_image_rows") or readiness_total)
     blocked_reason_counts = Counter(
@@ -906,6 +1007,16 @@ def main() -> int:
         type=Path,
         default=DEFAULT_SOURCE_DISCOVERY_FOCUS_TEMPLATE_DRY_RUN,
     )
+    parser.add_argument(
+        "--source-discovery-next-focus-detail-candidates",
+        type=Path,
+        default=DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES,
+    )
+    parser.add_argument(
+        "--source-discovery-next-focus-fallback-queue",
+        type=Path,
+        default=DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE,
+    )
     parser.add_argument("--image-attachment-template", type=Path, default=DEFAULT_IMAGE_ATTACHMENT_TEMPLATE)
     parser.add_argument(
         "--image-attachment-template-dry-run",
@@ -937,6 +1048,16 @@ def main() -> int:
         if args.image_attachment_template_dry_run.exists()
         else None
     )
+    next_focus_detail_candidates = (
+        load_json(args.source_discovery_next_focus_detail_candidates)
+        if args.source_discovery_next_focus_detail_candidates.exists()
+        else None
+    )
+    next_focus_fallback_queue = (
+        load_json(args.source_discovery_next_focus_fallback_queue)
+        if args.source_discovery_next_focus_fallback_queue.exists()
+        else None
+    )
     report = build_report(
         load_json(args.enrichment),
         load_json(args.action_queue),
@@ -946,6 +1067,8 @@ def main() -> int:
         focus_template_dry_run,
         image_attachment_template,
         image_attachment_template_dry_run,
+        source_discovery_next_focus_detail_candidates=next_focus_detail_candidates,
+        source_discovery_next_focus_fallback_queue=next_focus_fallback_queue,
     )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
