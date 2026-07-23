@@ -108,7 +108,7 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(FilledButton, '추가').first);
+    await tester.tap(find.widgetWithText(FilledButton, '추가하기').first);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();
@@ -208,7 +208,7 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(FilledButton, '추가').first);
+    await tester.tap(find.widgetWithText(FilledButton, '추가하기').first);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();

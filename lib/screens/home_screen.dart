@@ -264,8 +264,7 @@ class _CatalogImportPanel extends StatelessWidget {
     final theme = Theme.of(context);
     final entries = appState.curatedCatalogEntries;
     final health = _CatalogHealthSummary.from(entries);
-    final subtitle =
-        '정리된 공개 DB ${_CatalogHealthSummary.formatCount(health.uniqueCount)}개';
+    final subtitle = '검색해서 내 굿즈함이나 위시리스트에 바로 담기';
 
     return Material(
       color: theme.colorScheme.surface,
@@ -302,15 +301,26 @@ class _CatalogImportPanel extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '굿즈 DB',
-                        maxLines: 1,
-                        softWrap: false,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 0,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '굿즈 DB',
+                              maxLines: 1,
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 0,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          _CatalogCountBadge(
+                            count: health.uniqueCount,
+                            color: palette.primary,
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 2),
                       Text(
@@ -327,27 +337,6 @@ class _CatalogImportPanel extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 8,
-              runSpacing: 6,
-              children: [
-                _CatalogMetricPill(
-                  label: '전체',
-                  value: '${_CatalogHealthSummary.formatCount(
-                    health.uniqueCount,
-                  )}개',
-                  color: palette.primary,
-                ),
-                _CatalogMetricPill(
-                  label: '사진',
-                  value: _CatalogHealthSummary.formatCount(
-                    health.imageCount,
-                  ),
-                  color: palette.accent,
                 ),
               ],
             ),
@@ -389,56 +378,38 @@ class _CatalogImportPanel extends StatelessWidget {
   }
 }
 
-class _CatalogMetricPill extends StatelessWidget {
-  final String label;
-  final String value;
+class _CatalogCountBadge extends StatelessWidget {
+  final int count;
   final Color color;
 
-  const _CatalogMetricPill({
-    required this.label,
-    required this.value,
+  const _CatalogCountBadge({
+    required this.count,
     required this.color,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 116),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.10),
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            label,
-            maxLines: 1,
-            softWrap: false,
-            overflow: TextOverflow.ellipsis,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: color.withValues(alpha: 0.78),
-              fontWeight: FontWeight.w900,
-              letterSpacing: 0,
-            ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 86),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.10),
+          borderRadius: BorderRadius.circular(999),
+        ),
+        child: Text(
+          '${_CatalogHealthSummary.formatCount(count)}개',
+          maxLines: 1,
+          softWrap: false,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+          style: theme.textTheme.labelMedium?.copyWith(
+            color: color,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0,
           ),
-          const SizedBox(width: 5),
-          Flexible(
-            child: Text(
-              value,
-              maxLines: 1,
-              softWrap: false,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: color,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 0,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

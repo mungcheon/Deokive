@@ -59,6 +59,11 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
       wishlistTargetFolder: destination.wishlistTargetFolder,
     );
     appState.addGoods(item);
+    final added =
+        appState.goodsItems.any((savedItem) => savedItem.id == item.id);
+    if (!added) {
+      throw StateError('저장 목록에 반영되지 않았어요.');
+    }
   } catch (error) {
     if (!context.mounted) return false;
     ScaffoldMessenger.of(context).showSnackBar(

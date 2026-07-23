@@ -40,11 +40,14 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
     if (_importingEntryKeys.contains(key)) return;
     setState(() => _importingEntryKeys.add(key));
     try {
-      await showCatalogGoodsImportFlowForEntry(
+      final added = await showCatalogGoodsImportFlowForEntry(
         context,
         entry: entry,
         initialFolder: widget.initialFolder,
       );
+      if (added && mounted) {
+        setState(() {});
+      }
     } finally {
       if (mounted) {
         setState(() => _importingEntryKeys.remove(key));
@@ -312,11 +315,15 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                           onPressed: () async {
                             Navigator.pop(sheetContext);
                             if (!parentContext.mounted) return;
-                            await showCatalogGoodsImportFlowForEntry(
+                            final added =
+                                await showCatalogGoodsImportFlowForEntry(
                               parentContext,
                               entry: entry,
                               initialFolder: widget.initialFolder,
                             );
+                            if (added && mounted) {
+                              setState(() {});
+                            }
                           },
                           icon: const Icon(Icons.add_rounded),
                           label: const Text('내 굿즈에 추가하기'),
@@ -537,22 +544,45 @@ class _CatalogListTile extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            FilledButton.tonalIcon(
-              onPressed: isAdding ? null : () async => onAdd(),
-              icon: isAdding
-                  ? const Icon(Icons.more_horiz_rounded, size: 18)
-                  : const Icon(Icons.add_rounded, size: 18),
-              label: const Text(
-                '추가',
-                maxLines: 1,
-                softWrap: false,
-                overflow: TextOverflow.ellipsis,
-              ),
-              style: FilledButton.styleFrom(
-                foregroundColor: palette.primary,
-                minimumSize: const Size(70, 40),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            SizedBox(
+              width: 86,
+              height: 40,
+              child: FilledButton(
+                onPressed: isAdding ? null : () async => onAdd(),
+                style: FilledButton.styleFrom(
+                  backgroundColor: palette.primary,
+                  foregroundColor: Colors.white,
+                  disabledBackgroundColor: palette.primary.withValues(
+                    alpha: 0.30,
+                  ),
+                  disabledForegroundColor: Colors.white.withValues(alpha: 0.82),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                ),
+                child: isAdding
+                    ? const Icon(Icons.more_horiz_rounded, size: 18)
+                    : const FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.add_rounded, size: 17),
+                            SizedBox(width: 3),
+                            Text(
+                              '추가하기',
+                              maxLines: 1,
+                              softWrap: false,
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
               ),
             ),
           ],
