@@ -605,10 +605,18 @@ Future<Uint8List?> loadCatalogEntryBundledImageBytes(
 
 Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
   if (!assetPath.startsWith('assets/')) return null;
-  for (final path in [assetPath, 'assets/$assetPath']) {
+  final paths = <Uri>[
+    Uri.base.resolve(assetPath),
+    Uri.base.resolve('assets/$assetPath'),
+  ];
+  final origin = Uri.base.origin;
+  if (origin.isNotEmpty) {
+    paths.add(Uri.parse(origin).resolve('/assets/$assetPath'));
+  }
+  for (final uri in paths.toSet()) {
     try {
       final response = await http.get(
-        Uri.base.resolve(path),
+        uri,
         headers: const {
           'User-Agent': 'Mozilla/5.0 Deokive/1.0',
           'Accept': 'image/*,*/*',

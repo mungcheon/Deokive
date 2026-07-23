@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'deokive-offline-v4';
+const CACHE_VERSION = 'deokive-offline-v3';
 const APP_SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const APP_SHELL_URLS = [
@@ -27,18 +27,13 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    Promise.all([
-      caches.keys().then((keys) =>
-        Promise.all(
-          keys
-              .filter((key) => !key.startsWith(CACHE_VERSION))
-              .map((key) => caches.delete(key)),
-        ),
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys
+            .filter((key) => !key.startsWith(CACHE_VERSION))
+            .map((key) => caches.delete(key)),
       ),
-      self.registration.navigationPreload
-          ? self.registration.navigationPreload.enable()
-          : Promise.resolve(),
-    ]),
+    ),
   );
   self.clients.claim();
 });
@@ -77,13 +72,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  const isFreshAsset =
-      url.pathname.endsWith('.js') ||
-      url.pathname.endsWith('.json') ||
-      url.pathname.endsWith('.wasm') ||
-      url.pathname.endsWith('.bin') ||
-      url.pathname.includes('/assets/');
-
   event.respondWith(
     caches.match(request).then((cached) => {
       const networkFetch = fetch(request)
@@ -96,7 +84,7 @@ self.addEventListener('fetch', (event) => {
           })
           .catch(() => cached);
 
-      return isFreshAsset ? networkFetch : cached || networkFetch;
+      return cached || networkFetch;
     }),
   );
 });

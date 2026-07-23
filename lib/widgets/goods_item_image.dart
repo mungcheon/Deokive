@@ -69,10 +69,47 @@ class GoodsItemImage extends StatelessWidget {
 
   Widget _publicAssetFallback(String assetPath) {
     if (!assetPath.startsWith('assets/')) return _placeholder();
-    return Image.network(
-      Uri.base.resolve('assets/$assetPath').toString(),
+    return _FallbackNetworkAssetImage(
+      urls: _publicAssetUrls(assetPath),
       fit: fit,
-      errorBuilder: (_, __, ___) => _placeholder(),
+      fallback: _placeholder(),
     );
   }
+}
+
+class _FallbackNetworkAssetImage extends StatelessWidget {
+  final List<String> urls;
+  final BoxFit fit;
+  final Widget fallback;
+
+  const _FallbackNetworkAssetImage({
+    required this.urls,
+    required this.fit,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildAt(0);
+  }
+
+  Widget _buildAt(int index) {
+    if (index >= urls.length) return fallback;
+    return Image.network(
+      urls[index],
+      fit: fit,
+      errorBuilder: (_, __, ___) => _buildAt(index + 1),
+    );
+  }
+}
+
+List<String> _publicAssetUrls(String assetPath) {
+  final candidates = <String>[
+    Uri.base.resolve('assets/$assetPath').toString(),
+  ];
+  final origin = Uri.base.origin;
+  if (origin.isNotEmpty) {
+    candidates.add(Uri.parse(origin).resolve('/assets/$assetPath').toString());
+  }
+  return candidates.toSet().toList(growable: false);
 }

@@ -104,13 +104,44 @@ class _PublicCatalogAssetImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!assetPath.startsWith('assets/')) return fallback;
-    final publicUrl = Uri.base.resolve('assets/$assetPath').toString();
-    return Image.network(
-      publicUrl,
+    return _FallbackNetworkAssetImage(
+      urls: _publicAssetUrls(assetPath),
       width: width,
       height: height,
       fit: BoxFit.cover,
-      errorBuilder: (_, __, ___) => fallback,
+      fallback: fallback,
+    );
+  }
+}
+
+class _FallbackNetworkAssetImage extends StatelessWidget {
+  final List<String> urls;
+  final double width;
+  final double height;
+  final BoxFit fit;
+  final Widget fallback;
+
+  const _FallbackNetworkAssetImage({
+    required this.urls,
+    required this.width,
+    required this.height,
+    required this.fit,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildAt(0);
+  }
+
+  Widget _buildAt(int index) {
+    if (index >= urls.length) return fallback;
+    return Image.network(
+      urls[index],
+      width: width,
+      height: height,
+      fit: fit,
+      errorBuilder: (_, __, ___) => _buildAt(index + 1),
     );
   }
 }
@@ -144,4 +175,15 @@ class _RemoteCatalogImage extends StatelessWidget {
       errorBuilder: (_, __, ___) => placeholder,
     );
   }
+}
+
+List<String> _publicAssetUrls(String assetPath) {
+  final candidates = <String>[
+    Uri.base.resolve('assets/$assetPath').toString(),
+  ];
+  final origin = Uri.base.origin;
+  if (origin.isNotEmpty) {
+    candidates.add(Uri.parse(origin).resolve('/assets/$assetPath').toString());
+  }
+  return candidates.toSet().toList(growable: false);
 }
