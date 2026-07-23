@@ -11,6 +11,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "animation_category_review_batches_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "animation_category_action_queue_public.json"
+DEFAULT_UNMATCHED_KEYWORD_REVIEW = ROOT / "data" / "animation_category_unmatched_keyword_review_public.json"
 CONFIRMED_TEMPLATE = "server/animation_category_confirmed_rows.template.json"
 CONFIRMED_QUEUE = "server/animation_category_confirmed_rows.json"
 IMPORT_TOOL = "tools/import_confirmed_animation_category_rows.py"
@@ -164,9 +165,18 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _work_order(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     split_rows = [row for row in rows if row.get("requires_name_level_split_review")]
     direct_rows = [row for row in rows if not row.get("requires_name_level_split_review")]
+    unmatched_summary = (
+        unmatched_keyword_review.get("summary")
+        if isinstance(unmatched_keyword_review, dict)
+        and isinstance(unmatched_keyword_review.get("summary"), dict)
+        else {}
+    )
+    unmatched_rows = int(unmatched_summary.get("unmatched_rows") or 0)
+    token_candidates = int(unmatched_summary.get("token_candidate_count") or 0)
+    product_type_candidates = int(unmatched_summary.get("product_type_candidate_count") or 0)
     orders: list[dict[str, Any]] = []
 
     if split_rows:
@@ -206,10 +216,36 @@ def _work_order(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             }
         )
 
+    if unmatched_rows or token_candidates:
+        orders.append(
+            {
+                "rank": 3,
+                "lane": "unmatched_keyword_review",
+                "source": "animation_category_unmatched_keyword_review_public.json",
+                "affected_catalog_rows": unmatched_rows,
+                "token_candidate_count": token_candidates,
+                "product_type_candidate_count": product_type_candidates,
+                "next_step": "review_unmatched_animation_keyword_candidates",
+                "template": "server/animation_category_name_split_confirmed_rows.template.json",
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                "notes": [
+                    "Review product_type_like tokens first; add name-level split rules only when samples consistently match one goods type.",
+                    "Treat series/source/store noise as exclusions, not category rules.",
+                ],
+            }
+        )
+
     return orders
 
 
-def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size: int = 6) -> dict[str, Any]:
+def build_queue(
+    payload: dict[str, Any],
+    *,
+    max_categories: int = 24,
+    batch_size: int = 6,
+    unmatched_keyword_review: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     rows = [_compact(row) for row in _categories(payload)]
     rows.sort(key=lambda row: (int(row.get("review_priority") or 999), str(row.get("category") or "")))
     queued = rows[:max_categories]
@@ -243,7 +279,13 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
     all_rows = sum(int(row.get("rows") or 0) for row in rows)
     queued_rows = sum(int(row.get("rows") or 0) for row in queued)
     mapping_mode_counts = Counter(str(row.get("mapping_mode") or "") for row in rows)
-    work_order = _work_order(queued)
+    unmatched_summary = (
+        unmatched_keyword_review.get("summary")
+        if isinstance(unmatched_keyword_review, dict)
+        and isinstance(unmatched_keyword_review.get("summary"), dict)
+        else {}
+    )
+    work_order = _work_order(queued, unmatched_keyword_review)
     summary = {
         "actionable_categories": len(rows),
         "queued_categories": len(queued),
@@ -273,6 +315,11 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
             if row.get("lane") == "name_level_split_review"
             for category in row.get("blocked_direct_mapping_categories", [])
         ],
+        "unmatched_keyword_review_rows": int(unmatched_summary.get("unmatched_rows") or 0),
+        "unmatched_keyword_candidate_count": int(unmatched_summary.get("token_candidate_count") or 0),
+        "unmatched_keyword_product_type_candidate_count": int(
+            unmatched_summary.get("product_type_candidate_count") or 0
+        ),
         "auto_apply_enabled": False,
     }
     return {
@@ -296,6 +343,7 @@ def build_queue(payload: dict[str, Any], *, max_categories: int = 24, batch_size
         "instructions": [
             "Confirm each category_mapping_template before any catalog mutation.",
             "Split broad source categories such as acrylic before applying a single folder mapping.",
+            "Review unmatched keyword candidates after the first split pass to reduce broad goods/category leftovers.",
             "Keep folder colors ordered by color_group/sort_order so similar colors remain grouped.",
             f"Copy confirmed category_mapping_template rows into {CONFIRMED_QUEUE}, set manual_confirmed=true, then run {IMPORT_TOOL}.",
         ],
@@ -306,11 +354,22 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--unmatched-keyword-review", type=Path, default=DEFAULT_UNMATCHED_KEYWORD_REVIEW)
     parser.add_argument("--max-categories", type=int, default=24)
     parser.add_argument("--batch-size", type=int, default=6)
     args = parser.parse_args()
 
-    queue = build_queue(_load(args.input), max_categories=args.max_categories, batch_size=args.batch_size)
+    unmatched_keyword_review = (
+        _load(args.unmatched_keyword_review)
+        if args.unmatched_keyword_review.exists()
+        else None
+    )
+    queue = build_queue(
+        _load(args.input),
+        max_categories=args.max_categories,
+        batch_size=args.batch_size,
+        unmatched_keyword_review=unmatched_keyword_review,
+    )
     args.output.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(queue["summary"], ensure_ascii=False, indent=2))
     print(f"Report: {args.output}")
