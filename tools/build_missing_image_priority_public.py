@@ -71,6 +71,67 @@ def queue_by_identity(queue: dict[str, Any]) -> dict[tuple[str, str, str, str], 
     return result
 
 
+def image_reuse_key(row: dict[str, Any]) -> tuple[str, str, str, str]:
+    return identity_key(row)
+
+
+def reusable_image_candidates(catalog: dict[str, Any]) -> list[dict[str, Any]]:
+    items = catalog.get("items")
+    if not isinstance(items, list):
+        raise ValueError("catalog_public.json must contain an items list")
+
+    image_rows_by_key: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    missing_rows: list[dict[str, Any]] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        key = image_reuse_key(item)
+        if not all(key):
+            continue
+        if has_display_image(item):
+            image_rows_by_key[key].append(item)
+        else:
+            missing_rows.append(item)
+
+    candidates: list[dict[str, Any]] = []
+    for item in missing_rows:
+        matches = image_rows_by_key.get(image_reuse_key(item), [])
+        local_paths = sorted(
+            {
+                str(match.get("local_image_path") or "").strip()
+                for match in matches
+                if present(match.get("local_image_path"))
+            }
+        )
+        image_urls = sorted(
+            {
+                str(match.get("image_url") or "").strip()
+                for match in matches
+                if present(match.get("image_url"))
+            }
+        )
+        if len(local_paths) != 1 or not image_urls:
+            continue
+        candidates.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "source_store": item.get("source_store"),
+                "affiliation": item.get("affiliation"),
+                "category": item.get("category"),
+                "matched_catalog_indices": [
+                    match.get("catalog_index") for match in matches[:10]
+                ],
+                "candidate_image_url": image_urls[0],
+                "candidate_local_image_path": local_paths[0],
+                "candidate_match_rows": len(matches),
+                "review_required": True,
+            }
+        )
+    return candidates
+
+
 def counter_rows(counter: Counter[str], field: str, limit: int = 40) -> list[dict[str, Any]]:
     return [{field: key, "rows": count} for key, count in counter.most_common(limit)]
 
@@ -110,6 +171,7 @@ def build_report(
     high_priority_rows = []
     stale_index_matches = []
     unmatched_catalog_rows = []
+    reuse_candidates = reusable_image_candidates(catalog)
 
     for item in missing_rows:
         catalog_index = item.get("catalog_index")
@@ -180,6 +242,7 @@ def build_report(
             "generic_source_url_rows": generic_source_url_rows,
             "product_source_url_rows": product_source_url_rows,
             "high_priority_rows": len(high_priority_rows),
+            "safe_existing_image_reuse_candidate_rows": len(reuse_candidates),
             "auto_apply_enabled": False,
         },
         "breakdowns": {
@@ -239,6 +302,7 @@ def build_report(
             }
             for item in unmatched_catalog_rows[:20]
         ],
+        "existing_image_reuse_candidates": reuse_candidates[:50],
         "automation_policy": {
             "auto_apply_catalog_changes": False,
             "requires_exact_product_identity": True,

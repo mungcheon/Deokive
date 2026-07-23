@@ -29,6 +29,7 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertEqual(summary["queue_matched_rows"], expected_missing)
         self.assertEqual(summary["stale_queue_index_matches"], 0)
         self.assertEqual(summary["unmatched_catalog_missing_rows"], 0)
+        self.assertIn("safe_existing_image_reuse_candidate_rows", summary)
         self.assertIs(summary["auto_apply_enabled"], False)
         self.assertEqual(
             sum(row["rows"] for row in report["breakdowns"]["by_source_url_state"]),
@@ -102,6 +103,48 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
             report["focus_groups"][0]["recommended_workflow"],
             "official_prize_provider_search_then_exact_detail_match",
         )
+
+    def test_reports_existing_image_reuse_candidates_for_exact_identity(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "Sample Acrylic",
+                    "source_store": "Animate",
+                    "affiliation": "Sample Series",
+                    "category": "Acrylic Stand",
+                },
+                {
+                    "catalog_index": 2,
+                    "name_ko": "Sample Acrylic",
+                    "source_store": "Animate",
+                    "affiliation": "Sample Series",
+                    "category": "Acrylic Stand",
+                    "image_url": "https://example.com/sample.webp",
+                    "local_image_path": "assets/catalog_images/sample.webp",
+                },
+            ]
+        }
+        queue = {
+            "items": [
+                {
+                    "row_index": 1,
+                    "source_store": "Animate",
+                    "priority": 10,
+                    "source_url_is_product_detail": True,
+                }
+            ]
+        }
+
+        report = target.build_report(catalog, queue, generated_at="2026-01-01T00:00:00Z")
+
+        self.assertEqual(report["summary"]["safe_existing_image_reuse_candidate_rows"], 1)
+        self.assertEqual(len(report["existing_image_reuse_candidates"]), 1)
+        self.assertEqual(
+            report["existing_image_reuse_candidates"][0]["candidate_local_image_path"],
+            "assets/catalog_images/sample.webp",
+        )
+        self.assertTrue(report["existing_image_reuse_candidates"][0]["review_required"])
 
 
 if __name__ == "__main__":
