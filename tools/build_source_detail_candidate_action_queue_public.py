@@ -85,6 +85,24 @@ PRODUCT_TYPE_HINTS = {
     },
 }
 
+CATALOG_VARIANT_HINT_GROUPS = {
+    "action_mask": {
+        "\uc561\uc158\uac00\uba74",
+        "\u30a2\u30af\u30b7\u30e7\u30f3\u4eee\u9762",
+        "action mask",
+        "action kamen",
+    },
+    "shinchan": {
+        "\uc2e0\uc9f1",
+        "\uc2e0\ucc2c",
+        "\ub178\ud558\ub77c \uc2e0\ub178\uc2a4\ucf00",
+        "\u3057\u3093\u3061\u3083\u3093",
+        "\u91ce\u539f\u3057\u3093\u306e\u3059\u3051",
+        "shinchan",
+        "shin-chan",
+    },
+}
+
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -199,6 +217,15 @@ def product_type_hints(value: Any) -> set[str]:
     return matches
 
 
+def variant_hint_groups(value: Any) -> set[str]:
+    text = normalize_token(value)
+    matches: set[str] = set()
+    for key, hints in CATALOG_VARIANT_HINT_GROUPS.items():
+        if any(normalize_token(hint) in text for hint in hints):
+            matches.add(key)
+    return matches
+
+
 def candidate_identity_flags(row: dict[str, Any]) -> list[str]:
     flags: list[str] = []
     shared_tokens = [token for token in row.get("shared_tokens") or [] if str(token or "").strip()]
@@ -227,6 +254,11 @@ def candidate_identity_flags(row: dict[str, Any]) -> list[str]:
     ]
     if missing_terms:
         flags.append("candidate_title_missing_catalog_variant_hint")
+
+    catalog_variant_groups = variant_hint_groups(name_text_raw)
+    candidate_variant_groups = variant_hint_groups(row.get("candidate_title"))
+    if catalog_variant_groups and not catalog_variant_groups.issubset(candidate_variant_groups):
+        flags.append("candidate_title_missing_catalog_named_variant")
 
     return flags
 

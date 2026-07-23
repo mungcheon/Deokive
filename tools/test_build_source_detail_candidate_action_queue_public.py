@@ -197,6 +197,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
                 ["only_generic_shared_tokens", 2],
                 ["candidate_title_mentions_crossover", 1],
                 ["candidate_title_missing_catalog_variant_hint", 1],
+                ["candidate_title_missing_catalog_named_variant", 1],
             ],
         )
         items = {item["catalog_index"]: item for batch in report["batches"] for item in batch["items"]}
@@ -210,6 +211,7 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
                 "only_generic_shared_tokens",
                 "candidate_title_mentions_crossover",
                 "candidate_title_missing_catalog_variant_hint",
+                "candidate_title_missing_catalog_named_variant",
             ],
         )
         self.assertEqual(items[4]["review_priority"], 35)
@@ -303,6 +305,45 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["priority_manual_review_candidates"][0]["catalog_index"], 6)
         self.assertTrue(report["priority_manual_review_candidates"][0]["candidate_count_review_required"])
         self.assertEqual(report["batches"][0]["candidate_count_review_required_rows"], 1)
+
+    def test_build_report_flags_missing_catalog_named_variant(self) -> None:
+        source_detail = {
+            "review_candidates": [
+                {
+                    "catalog_index": 7,
+                    "source_store": "Animate",
+                    "name_ko": "Crayon Shin-chan Action Mask T-shirt",
+                    "name_ja": "\u30af\u30ec\u30e8\u30f3\u3057\u3093\u3061\u3083\u3093 T\u30b7\u30e3\u30c4",
+                    "status": "candidate_review_needed",
+                    "candidate_count": 23,
+                    "candidate_source_url": "https://www.animate-onlineshop.jp/pn/shinchan-shirt/pd/7/",
+                    "candidate_image_url": "https://tc-animate.techorus-cdn.com/shinchan-shirt.jpg",
+                    "candidate_title": "\u30af\u30ec\u30e8\u30f3\u3057\u3093\u3061\u3083\u3093 OMOCHABOKO \u30dd\u30b1\u30c3\u30c8\u4ed8\u304dT\u30b7\u30e3\u30c4\u3057\u3093\u3061\u3083\u3093M",
+                    "score": 1.0,
+                    "shared_tokens": ["\u30af\u30ec\u30e8\u30f3\u3057\u3093\u3061\u3083\u3093", "T\u30b7\u30e3\u30c4"],
+                    "safe_source_image_pair": True,
+                }
+            ]
+        }
+        catalog_rows = [
+            {
+                "catalog_index": 7,
+                "source_store": "Animate",
+                "name_ko": "Crayon Shin-chan Action Mask T-shirt",
+                "name_ja": "\u30af\u30ec\u30e8\u30f3\u3057\u3093\u3061\u3083\u3093 T\u30b7\u30e3\u30c4",
+                "image_url": "",
+                "local_image_path": "",
+            }
+        ]
+
+        report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
+
+        item = report["batches"][0]["items"][0]
+        self.assertIn("candidate_title_missing_catalog_named_variant", item["candidate_identity_flags"])
+        self.assertFalse(item["identity_safe_source_image_pair"])
+        self.assertFalse(item["candidate_count_review_required"])
+        self.assertFalse(item["priority_manual_review_candidate"])
+        self.assertEqual(item["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
 
 
 if __name__ == "__main__":
