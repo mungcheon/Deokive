@@ -1866,8 +1866,6 @@ class AppState extends ChangeNotifier {
     var changed = false;
     for (var index = 0; index < goodsItems.length; index++) {
       final item = goodsItems[index];
-      if (!_needsCatalogImageReferenceBackfill(item.imageUrl)) continue;
-
       final barcode = item.barcode?.trim() ?? '';
       final matchedByBarcode =
           barcode.isEmpty ? null : entriesByBarcode[barcode];
@@ -1877,6 +1875,7 @@ class AppState extends ChangeNotifier {
 
       final imageUrl = _catalogEntryImageReference(entry);
       if (imageUrl == null || imageUrl == item.imageUrl) continue;
+      if (!_needsCatalogImageReferenceBackfill(item.imageUrl, entry)) continue;
 
       goodsItems[index] = item.copyWith(imageUrl: imageUrl);
       changed = true;
@@ -1884,9 +1883,20 @@ class AppState extends ChangeNotifier {
     return changed;
   }
 
-  bool _needsCatalogImageReferenceBackfill(String? value) {
+  bool _needsCatalogImageReferenceBackfill(
+    String? value,
+    GoodsCatalogEntry entry,
+  ) {
     final imageUrl = value?.trim() ?? '';
-    return imageUrl.isEmpty || imageUrl.startsWith('assets/catalog_images/');
+    if (imageUrl.isEmpty || imageUrl.startsWith('assets/catalog_images/')) {
+      return true;
+    }
+
+    final rawCatalogRemoteUrl = entry.imageUrl?.trim() ?? '';
+    final catalogRemoteUrl = rawCatalogRemoteUrl
+        .replaceAll('&amp;', '&')
+        .replaceFirst(RegExp(r'^//'), 'https://');
+    return catalogRemoteUrl.isNotEmpty && imageUrl == catalogRemoteUrl;
   }
 
   String _catalogBackfillNameKey(String value) {
@@ -1894,6 +1904,9 @@ class AppState extends ChangeNotifier {
   }
 
   String? _catalogEntryImageReference(GoodsCatalogEntry entry) {
+    final localPath = entry.localImagePath?.trim() ?? '';
+    if (localPath.isNotEmpty) return localPath;
+
     final remoteUrl = entry.imageUrl?.trim() ?? '';
     if (remoteUrl.isNotEmpty) {
       return remoteUrl.replaceAll('&amp;', '&').replaceFirst(
@@ -1901,9 +1914,7 @@ class AppState extends ChangeNotifier {
             'https://',
           );
     }
-
-    final localPath = entry.localImagePath?.trim() ?? '';
-    return localPath.isEmpty ? null : localPath;
+    return null;
   }
 
   /// Pull the shared board from the server and replace the local list with

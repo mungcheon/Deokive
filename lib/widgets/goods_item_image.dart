@@ -39,7 +39,9 @@ class GoodsItemImage extends StatelessWidget {
       return Image.asset(
         normalizedImageUrl,
         fit: fit,
-        errorBuilder: (_, __, ___) => _placeholder(),
+        errorBuilder: (_, __, ___) => _publicAssetFallback(
+          normalizedImageUrl,
+        ),
       );
     }
 
@@ -55,5 +57,14 @@ class GoodsItemImage extends StatelessWidget {
   bool _isNetworkUrl(String value) {
     final uri = Uri.tryParse(value);
     return uri != null && (uri.scheme == 'http' || uri.scheme == 'https');
+  }
+
+  Widget _publicAssetFallback(String assetPath) {
+    if (!assetPath.startsWith('assets/')) return _placeholder();
+    return Image.network(
+      Uri.base.resolve('assets/$assetPath').toString(),
+      fit: fit,
+      errorBuilder: (_, __, ___) => _placeholder(),
+    );
   }
 }

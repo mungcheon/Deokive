@@ -57,8 +57,12 @@ class CatalogEntryImage extends StatelessWidget {
         width: width,
         height: height,
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) =>
-            remotePath.isEmpty ? placeholder : remoteFallback,
+        errorBuilder: (_, __, ___) => _PublicCatalogAssetImage(
+          assetPath: localPath,
+          width: width,
+          height: height,
+          fallback: remotePath.isEmpty ? placeholder : remoteFallback,
+        ),
       );
     } else {
       image = _RemoteCatalogImage(
@@ -80,6 +84,33 @@ class CatalogEntryImage extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: image,
+    );
+  }
+}
+
+class _PublicCatalogAssetImage extends StatelessWidget {
+  final String assetPath;
+  final double width;
+  final double height;
+  final Widget fallback;
+
+  const _PublicCatalogAssetImage({
+    required this.assetPath,
+    required this.width,
+    required this.height,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (!assetPath.startsWith('assets/')) return fallback;
+    final publicUrl = Uri.base.resolve('assets/$assetPath').toString();
+    return Image.network(
+      publicUrl,
+      width: width,
+      height: height,
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) => fallback,
     );
   }
 }
