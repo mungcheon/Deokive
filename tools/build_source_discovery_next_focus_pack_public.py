@@ -48,6 +48,16 @@ def _is_confirmed(item: dict[str, Any]) -> bool:
     return status in {"source_confirmed", "source_and_image_confirmed", "confirmed"}
 
 
+def _item_field(item: dict[str, Any], key: str) -> Any:
+    value = item.get(key)
+    if value not in (None, ""):
+        return value
+    field_template = item.get("catalog_field_import_template")
+    if isinstance(field_template, dict):
+        return field_template.get(key)
+    return None
+
+
 def _pack_progress(template: dict[str, Any]) -> dict[str, dict[str, int]]:
     progress: dict[str, dict[str, int]] = {}
     for item in template.get("items") or []:
@@ -178,6 +188,7 @@ def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
         "row_index": item.get("row_index"),
         "catalog_index": item.get("catalog_index"),
         "source_store": item.get("source_store"),
+        "affiliation": _item_field(item, "affiliation"),
         "category": item.get("category"),
         "name_ko": item.get("name_ko"),
         "name_ja": item.get("name_ja"),

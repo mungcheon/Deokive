@@ -55,6 +55,7 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
                     "allowed_source_domains": ["animate.example"],
                     "manual_review_checklist": ["Confirm exact product page"],
                     "source_patch_template": {"catalog_index": 10},
+                    "catalog_field_import_template": {"affiliation": "Series A"},
                 },
                 {
                     "focus_pack_id": "source-discovery-focus-001",
@@ -111,6 +112,7 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual([item["catalog_index"] for item in report["items"]], [10, 11])
+        self.assertEqual(report["items"][0]["affiliation"], "Series A")
         self.assertEqual(report["items"][0]["manual_confirmed_source_url"], "")
         self.assertEqual(
             report["items"][0]["blocked_until"],

@@ -21,6 +21,7 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
                         {
                             "catalog_index": 2,
                             "source_store": "Animate",
+                            "affiliation": "Series B",
                             "category": "Badge",
                             "name_ko": "Badge B",
                             "official_search_url": "https://animate.example/search?q=b",
@@ -36,7 +37,10 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
                             "official_search_url": "https://animate.example/search?q=a",
                             "allowed_source_domains": ["animate.example"],
                             "source_patch_template": {"manual_confirmed": False},
-                            "catalog_field_import_template": {"field": "source_url"},
+                            "catalog_field_import_template": {
+                                "affiliation": "Series A",
+                                "field": "source_url",
+                            },
                         },
                     ],
                 },
@@ -108,6 +112,7 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
         )
         self.assertEqual(report["packs"][0]["target_category"], "Acrylic")
         self.assertEqual(report["packs"][0]["items"][0]["catalog_index"], 1)
+        self.assertEqual(report["packs"][0]["items"][0]["affiliation"], "Series A")
         self.assertEqual(report["packs"][0]["items"][0]["manual_review_status"], "not_started")
         self.assertEqual(report["packs"][0]["items"][0]["manual_confirmed_source_url"], "")
         self.assertEqual(

@@ -39,7 +39,10 @@ class BuildSourceDiscoveryFocusConfirmedTemplatePublicTest(unittest.TestCase):
                             "allowed_source_domains": ["animate.example"],
                             "manual_review_checklist": ["Confirm exact product page"],
                             "source_patch_template": {"catalog_index": 10},
-                            "catalog_field_import_template": {"field": "source_url"},
+                            "catalog_field_import_template": {
+                                "affiliation": "Series A",
+                                "field": "source_url",
+                            },
                         }
                     ],
                 }
@@ -76,6 +79,7 @@ class BuildSourceDiscoveryFocusConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["focus_pack_id"], "source-discovery-focus-001")
         self.assertEqual(item["pack_sequence"], 1)
         self.assertEqual(item["row_index"], 10)
+        self.assertEqual(item["affiliation"], "Series A")
         self.assertEqual(item["target_category"], "Acrylic")
         self.assertEqual(item["source_store_remaining_after_pack"], 4)
         self.assertEqual(item["blocked_reason"], "exact_product_detail_source_url_not_confirmed")

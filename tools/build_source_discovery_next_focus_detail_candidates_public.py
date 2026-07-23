@@ -15,6 +15,7 @@ from enrich_catalog_images import (
     _has_all_distinctive_token_matches,
     _has_goods_type_compatibility,
     _parenthetical_terms_match,
+    _preferred_query_for_row,
     _score,
 )
 from image_enrichment_safety import is_product_specific_source_url, is_safe_source_image_pair
@@ -47,12 +48,16 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def _query_for_item(item: dict[str, Any]) -> str:
-    return str(
-        item.get("search_query")
-        or item.get("name_ja")
-        or item.get("name_ko")
-        or ""
-    ).strip()
+    query_row = dict(item)
+    field_template = item.get("catalog_field_import_template")
+    if isinstance(field_template, dict):
+        for key in ("affiliation", "category", "name_ko", "name_ja", "source_store"):
+            if not query_row.get(key) and field_template.get(key):
+                query_row[key] = field_template.get(key)
+    preferred = _preferred_query_for_row(query_row)
+    if preferred:
+        return preferred
+    return str(item.get("search_query") or item.get("name_ja") or item.get("name_ko") or "").strip()
 
 
 def _candidate_status(
@@ -192,6 +197,8 @@ def build_report(
                 "focus_pack_id": item.get("focus_pack_id"),
                 "catalog_index": item.get("catalog_index"),
                 "source_store": item.get("source_store"),
+                "affiliation": item.get("affiliation")
+                or (item.get("catalog_field_import_template") or {}).get("affiliation"),
                 "category": item.get("category"),
                 "name_ko": item.get("name_ko"),
                 "name_ja": item.get("name_ja"),
@@ -230,6 +237,8 @@ def build_report(
                 "focus_pack_id": item.get("focus_pack_id"),
                 "catalog_index": item.get("catalog_index"),
                 "source_store": item.get("source_store"),
+                "affiliation": item.get("affiliation")
+                or (item.get("catalog_field_import_template") or {}).get("affiliation"),
                 "category": item.get("category"),
                 "name_ko": item.get("name_ko"),
                 "name_ja": item.get("name_ja"),

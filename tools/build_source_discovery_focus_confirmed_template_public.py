@@ -41,6 +41,16 @@ def load_json(path: Path) -> dict[str, Any]:
     return payload
 
 
+def _item_field(item: dict[str, Any], key: str) -> Any:
+    value = item.get(key)
+    if value not in (None, ""):
+        return value
+    field_template = item.get("catalog_field_import_template")
+    if isinstance(field_template, dict):
+        return field_template.get(key)
+    return None
+
+
 def template_item(pack: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     row_index = item.get("row_index") or item.get("catalog_index")
     blocked_reason = item.get("blocked_reason") or pack.get("blocked_reason") or SOURCE_DISCOVERY_BLOCKED_REASON
@@ -97,6 +107,7 @@ def template_item(pack: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
         "row_index": row_index,
         "source_store": item.get("source_store") or pack.get("source_store"),
         "catalog_index": item.get("catalog_index"),
+        "affiliation": _item_field(item, "affiliation"),
         "name_ko": item.get("name_ko"),
         "name_ja": item.get("name_ja"),
         "category": item.get("category"),

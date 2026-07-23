@@ -23,6 +23,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
                     "focus_pack_id": "source-discovery-focus-001",
                     "catalog_index": 1,
                     "source_store": "애니메이트",
+                    "affiliation": "Series A",
                     "category": "아크릴 스탠드",
                     "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
                     "name_ja": "推しの子 アクリルスタンド (星野アイ)",
@@ -72,6 +73,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         first = report["items"][0]
         self.assertEqual(first["manual_review_status"], "not_started")
         self.assertEqual(first["manual_confirmed_source_url"], "")
+        self.assertEqual(first["affiliation"], "Series A")
         self.assertEqual(first["candidates"][0]["review_status"], "exact_candidate_review")
         self.assertTrue(first["candidates"][0]["exact_candidate_gate_passed"])
         self.assertEqual(first["candidates"][0]["exact_candidate_blockers"], [])
@@ -79,6 +81,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         template_row = report["candidate_confirmation_template"][0]
         self.assertFalse(template_row["manual_confirmed"])
         self.assertEqual(template_row["catalog_index"], 1)
+        self.assertEqual(template_row["affiliation"], "Series A")
         self.assertEqual(template_row["candidate_rank"], 1)
         self.assertEqual(template_row["candidate_review_status"], "exact_candidate_review")
         self.assertEqual(
@@ -92,6 +95,51 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(shortlist_row["shortlist_reason"], "exact_candidate_gate_passed")
         self.assertIn("recommended_next_step", shortlist_row)
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
+
+    def test_build_report_uses_localized_animate_query_for_korean_only_rows(self) -> None:
+        source = {
+            "summary": {
+                "focus_pack_id": "source-discovery-focus-001",
+                "source_store": "애니메이트",
+                "target_category": "아크릴 스탠드",
+            },
+            "items": [
+                {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "catalog_index": 3,
+                    "source_store": "애니메이트",
+                    "category": "아크릴 스탠드",
+                    "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+                    "name_ja": "",
+                    "search_query": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+                    "catalog_field_import_template": {
+                        "affiliation": "카드캡터 체리",
+                        "category": "아크릴 스탠드",
+                        "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+                        "name_ja": "",
+                        "source_store": "애니메이트",
+                    },
+                }
+            ],
+        }
+        seen_queries: list[str] = []
+
+        def search(item):
+            seen_queries.append(builder._query_for_item(item))
+            return []
+
+        report = builder.build_report(
+            source,
+            search_fn=search,
+            generated_at="2026-07-23T00:00:00Z",
+        )
+
+        self.assertEqual(seen_queries, ["カードキャプターさくら アクリルスタンド 木之本桜"])
+        self.assertEqual(
+            report["items"][0]["search_query"],
+            "カードキャプターさくら アクリルスタンド 木之本桜",
+        )
+        self.assertEqual(report["items"][0]["affiliation"], "카드캡터 체리")
 
     def test_candidate_row_explains_manual_review_blockers(self) -> None:
         row = builder._candidate_row(

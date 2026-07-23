@@ -99,6 +99,16 @@ def _review_checklist(item: dict[str, Any]) -> list[str]:
     ]
 
 
+def _item_field(item: dict[str, Any], key: str) -> Any:
+    value = item.get(key)
+    if value not in (None, ""):
+        return value
+    field_template = item.get("catalog_field_import_template")
+    if isinstance(field_template, dict):
+        return field_template.get(key)
+    return None
+
+
 def compact_item(item: dict[str, Any]) -> dict[str, Any]:
     source_patch_template = dict(item.get("source_patch_template") or {})
     catalog_field_import_template = dict(item.get("catalog_field_import_template") or {})
@@ -124,6 +134,7 @@ def compact_item(item: dict[str, Any]) -> dict[str, Any]:
         "image_url_required_evidence": IMAGE_ATTACHMENT_REQUIRED_EVIDENCE,
         "catalog_index": item.get("catalog_index"),
         "source_store": item.get("source_store"),
+        "affiliation": _item_field(item, "affiliation"),
         "category": item.get("category"),
         "name_ko": item.get("name_ko"),
         "name_ja": item.get("name_ja"),
