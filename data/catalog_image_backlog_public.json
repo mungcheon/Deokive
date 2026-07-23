@@ -7517,6 +7517,84 @@
     "provider_missing_rows": 5,
     "candidate_review_rows": 3,
     "covered_rows": 50,
+    "review_readiness": {
+      "status": "manual_review_required",
+      "source_url_update_required_rows": 50,
+      "covered_rows": 50,
+      "auto_apply_ready_rows": 0,
+      "manual_review_rows": 50,
+      "lanes": [
+        {
+          "lane": "manual_search_required",
+          "rows": 42,
+          "status": "manual_search_required",
+          "next_review_row": {
+            "catalog_index": 2352,
+            "name_ko": "강지 마스코트 인형",
+            "source_store": "Stellive Store",
+            "category": "인형",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "fallback_search_queries": [
+              "강지 마스코트 인형 인형",
+              "site:fanding.kr/@stellive/shop 강지 마스코트 인형",
+              "강지 인형 스텔라이브"
+            ]
+          }
+        },
+        {
+          "lane": "provider_or_manual_refresh_required",
+          "rows": 5,
+          "status": "provider_or_manual_refresh_required",
+          "next_review_row": {
+            "catalog_index": 17613,
+            "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+            "source_store": "Weverse Shop",
+            "category": "포토카드",
+            "store_search_url": "https://shop.weverse.io/search?keyword=SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+            "site_query": "site:shop.weverse.io",
+            "fallback_search_queries": [
+              "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤) 포토카드\"",
+              "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤)\"",
+              "\"SEVENTEEN 포토카드 (랜덤) 포토카드\" \"Weverse Shop\""
+            ]
+          }
+        },
+        {
+          "lane": "candidate_review_required",
+          "rows": 3,
+          "status": "manual_candidate_review_required",
+          "next_review_row": {
+            "catalog_index": 2325,
+            "name_ko": "스텔라이브 1주년 뱃지 세트",
+            "source_store": "Stellive Store",
+            "category": "캔뱃지",
+            "candidate_count": 5,
+            "top_candidate_title": "S.S.Stellive 메탈 뱃지",
+            "top_candidate_source_url": "https://fanding.kr/@stellive/shop/3700",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8"
+          }
+        }
+      ],
+      "next_queue": {
+        "lane": "candidate_review_required",
+        "reason": "candidate_options_exist_for_review",
+        "rows": 3,
+        "next_review_row": {
+          "catalog_index": 2325,
+          "name_ko": "스텔라이브 1주년 뱃지 세트",
+          "source_store": "Stellive Store",
+          "category": "캔뱃지",
+          "candidate_count": 5,
+          "top_candidate_title": "S.S.Stellive 메탈 뱃지",
+          "top_candidate_source_url": "https://fanding.kr/@stellive/shop/3700",
+          "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8"
+        }
+      },
+      "blocked_reason": "source_url_identity_not_confirmed",
+      "blocked_until": "manual_exact_source_url_confirmation",
+      "auto_apply_enabled": false
+    },
     "auto_apply_enabled": false
   },
   "ichiban_kuji_prize_policy_issue_queue": {

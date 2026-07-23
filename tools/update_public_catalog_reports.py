@@ -7801,6 +7801,136 @@ def update_reports(write: bool) -> dict[str, Any]:
                 + provider_missing_source_url_queue["summary"].get("provider_missing_rows", 0)
                 + candidate_source_url_review_queue["summary"].get("candidate_review_rows", 0)
             ),
+            "review_readiness": {
+                "status": (
+                    "manual_review_required"
+                    if image_source_url_confirmed_template["summary"].get("template_items", 0)
+                    else "empty"
+                ),
+                "source_url_update_required_rows": image_source_url_confirmed_template[
+                    "summary"
+                ].get("template_items", 0),
+                "covered_rows": (
+                    manual_source_url_search_queue["summary"].get(
+                        "manual_search_required_rows",
+                        0,
+                    )
+                    + provider_missing_source_url_queue["summary"].get(
+                        "provider_missing_rows",
+                        0,
+                    )
+                    + candidate_source_url_review_queue["summary"].get(
+                        "candidate_review_rows",
+                        0,
+                    )
+                ),
+                "auto_apply_ready_rows": (
+                    manual_source_url_search_queue.get("review_readiness", {}).get(
+                        "auto_apply_ready_rows",
+                        0,
+                    )
+                    + provider_missing_source_url_queue.get("review_readiness", {}).get(
+                        "auto_apply_ready_rows",
+                        0,
+                    )
+                    + candidate_source_url_review_queue.get("review_readiness", {}).get(
+                        "auto_apply_ready_rows",
+                        0,
+                    )
+                ),
+                "manual_review_rows": (
+                    manual_source_url_search_queue.get("review_readiness", {}).get(
+                        "manual_review_rows",
+                        0,
+                    )
+                    + provider_missing_source_url_queue.get("review_readiness", {}).get(
+                        "manual_review_rows",
+                        0,
+                    )
+                    + candidate_source_url_review_queue.get("review_readiness", {}).get(
+                        "manual_review_rows",
+                        0,
+                    )
+                ),
+                "lanes": [
+                    {
+                        "lane": "manual_search_required",
+                        "rows": manual_source_url_search_queue["summary"].get(
+                            "manual_search_required_rows",
+                            0,
+                        ),
+                        "status": manual_source_url_search_queue.get(
+                            "review_readiness",
+                            {},
+                        ).get("status"),
+                        "next_review_row": manual_source_url_search_queue.get(
+                            "review_readiness",
+                            {},
+                        ).get("next_review_row", {}),
+                    },
+                    {
+                        "lane": "provider_or_manual_refresh_required",
+                        "rows": provider_missing_source_url_queue["summary"].get(
+                            "provider_missing_rows",
+                            0,
+                        ),
+                        "status": provider_missing_source_url_queue.get(
+                            "review_readiness",
+                            {},
+                        ).get("status"),
+                        "next_review_row": provider_missing_source_url_queue.get(
+                            "review_readiness",
+                            {},
+                        ).get("next_review_row", {}),
+                    },
+                    {
+                        "lane": "candidate_review_required",
+                        "rows": candidate_source_url_review_queue["summary"].get(
+                            "candidate_review_rows",
+                            0,
+                        ),
+                        "status": candidate_source_url_review_queue.get(
+                            "review_readiness",
+                            {},
+                        ).get("status"),
+                        "next_review_row": candidate_source_url_review_queue.get(
+                            "review_readiness",
+                            {},
+                        ).get("next_review_row", {}),
+                    },
+                ],
+                "next_queue": {
+                    "lane": "candidate_review_required",
+                    "reason": "candidate_options_exist_for_review",
+                    "rows": candidate_source_url_review_queue["summary"].get(
+                        "candidate_review_rows",
+                        0,
+                    ),
+                    "next_review_row": candidate_source_url_review_queue.get(
+                        "review_readiness",
+                        {},
+                    ).get("next_review_row", {}),
+                }
+                if candidate_source_url_review_queue["summary"].get(
+                    "candidate_review_rows",
+                    0,
+                )
+                else {
+                    "lane": "manual_search_required",
+                    "reason": "no_candidate_options_available",
+                    "rows": manual_source_url_search_queue["summary"].get(
+                        "manual_search_required_rows",
+                        0,
+                    ),
+                    "next_review_row": manual_source_url_search_queue.get(
+                        "review_readiness",
+                        {},
+                    ).get("next_review_row", {}),
+                },
+                "blocked_reason": "source_url_identity_not_confirmed",
+                "blocked_until": "manual_exact_source_url_confirmation",
+                "auto_apply_enabled": False,
+            },
             "auto_apply_enabled": False,
         }
         target["requested_focus_enrichment"] = {
