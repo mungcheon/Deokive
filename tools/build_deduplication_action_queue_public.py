@@ -7,6 +7,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 
 try:
@@ -132,6 +133,45 @@ def _prize_identity_summary(sample_rows: list[dict[str, Any]]) -> dict[str, Any]
     }
 
 
+def _campaign_slug(url: str) -> str:
+    parsed = urlparse(url)
+    parts = [part for part in parsed.path.split("/") if part]
+    return parts[-1] if parts else ""
+
+
+def _slug_family(slug: str) -> str:
+    return slug.rstrip("0123456789-_")
+
+
+def _slug_numeric_suffix(slug: str) -> str:
+    suffix = ""
+    for char in reversed(slug):
+        if not char.isdigit():
+            break
+        suffix = char + suffix
+    return suffix
+
+
+def _campaign_url_comparison(source_urls: list[str]) -> dict[str, Any]:
+    slugs = [_campaign_slug(url) for url in source_urls]
+    families = _unique_sorted([_slug_family(slug) for slug in slugs])
+    suffixes = _unique_sorted([_slug_numeric_suffix(slug) for slug in slugs])
+    return {
+        "source_url_count": len(source_urls),
+        "campaign_slugs": slugs,
+        "campaign_slug_families": families,
+        "campaign_slug_family_count": len(families),
+        "numeric_suffixes": suffixes,
+        "has_numbered_campaign_suffixes": bool(suffixes),
+        "likely_same_campaign_family_reissue": len(families) == 1 and len(source_urls) > 1 and bool(suffixes),
+        "dedupe_risk_note": (
+            "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+            if len(families) == 1 and len(source_urls) > 1 and bool(suffixes)
+            else "Compare official campaign titles and prize lineup before deciding keep/drop."
+        ),
+    }
+
+
 def protected_ichiban_reissue_catalog_indexes(policy_audit: dict[str, Any] | None) -> set[int]:
     if not policy_audit:
         return set()
@@ -191,6 +231,7 @@ def ichiban_reissue_review_lane(
             continue
         sample_rows = [row for row in group.get("sample_rows") or [] if isinstance(row, dict)]
         prize_identity = _prize_identity_summary(sample_rows)
+        source_urls = group.get("source_urls") or _unique_sorted([row.get("source_url") for row in sample_rows])
         lane.append(
             {
                 "normalized_name": group.get("normalized_name"),
@@ -199,7 +240,7 @@ def ichiban_reissue_review_lane(
                 "has_reissue_signal": bool(group.get("has_reissue_signal")),
                 "reissue_signal_reasons": group.get("reissue_signal_reasons") or [],
                 "campaign_slug_families": group.get("campaign_slug_families") or [],
-                "source_urls": group.get("source_urls") or [],
+                "source_urls": source_urls,
                 "review_reason": group.get("review_reason"),
                 "review_state": "probable_reissue_manual_confirmation_required",
                 "next_machine_step": "verify_ichiban_campaign_pages_before_dedupe",
@@ -236,6 +277,7 @@ def ichiban_reissue_work_order(
         )
         source_urls = [str(url).strip() for url in row.get("source_urls") or [] if str(url).strip()]
         prize_identity = _prize_identity_summary(sample_rows)
+        campaign_url_comparison = _campaign_url_comparison(source_urls)
         orders.append(
             {
                 "work_order_id": f"ichiban-reissue-dedupe-{rank:03d}",
@@ -246,6 +288,7 @@ def ichiban_reissue_work_order(
                 "catalog_indexes": catalog_indexes,
                 "source_urls": source_urls,
                 "campaign_slug_families": row.get("campaign_slug_families") or [],
+                "campaign_url_comparison": campaign_url_comparison,
                 "reissue_signal_reasons": row.get("reissue_signal_reasons") or [],
                 "review_state": "ichiban_reissue_identity_confirmation_required",
                 "next_machine_step": "compare_campaign_pages_then_record_reissue_or_duplicate_decision",

@@ -285,6 +285,13 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
                 "last_one_or_double_chance_rows_must_be_zero_jpy"
             ]
         )
+        campaign_comparison = report["ichiban_reissue_work_order"][0]["campaign_url_comparison"]
+        self.assertEqual(campaign_comparison["campaign_slugs"], ["sample", "sample2"])
+        self.assertEqual(campaign_comparison["campaign_slug_families"], ["sample"])
+        self.assertEqual(campaign_comparison["numeric_suffixes"], ["2"])
+        self.assertTrue(campaign_comparison["has_numbered_campaign_suffixes"])
+        self.assertTrue(campaign_comparison["likely_same_campaign_family_reissue"])
+        self.assertIn("reissue/campaign-wave", campaign_comparison["dedupe_risk_note"])
 
     def test_ichiban_reissue_policy_counts_are_reported_even_without_queue_overlap(self) -> None:
         report = queue.build_report(
