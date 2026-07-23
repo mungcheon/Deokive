@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import audit_public_catalog_safety
 import audit_public_catalog_image_assets
 import build_catalog_missing_image_actionability_public
 import build_candidate_source_url_review_queue_public
@@ -6971,6 +6972,55 @@ def validate_report_consistency(
     return findings
 
 
+def build_public_catalog_crosscheck(items: list[dict[str, Any]]) -> dict[str, Any]:
+    public_summary = audit_public_catalog_safety.summarize_seed(items)
+    public_compact = {
+        "path": f"data/{PUBLIC_CATALOG.name}",
+        "exists": True,
+        "rows": public_summary["rows"],
+        "duplicate_groups": public_summary["duplicate_groups"],
+        "duplicate_rows": public_summary["duplicate_rows"],
+        "missing_enrichment": public_summary["missing_enrichment"],
+    }
+    seed_path = audit_public_catalog_safety.DEFAULT_SEED
+    if not seed_path.exists():
+        return {
+            "public_catalog": public_compact,
+            "seed_catalog": {
+                "path": seed_path.relative_to(ROOT).as_posix(),
+                "exists": False,
+            },
+            "comparison": {
+                "same_row_count": False,
+                "row_delta": public_summary["rows"],
+                "public_image_missing_rows": public_summary["missing_enrichment"].get("image_url", 0),
+                "seed_image_missing_rows": None,
+                "image_missing_delta": None,
+                "note": "data/catalog_public.json is the GitHub Pages source of truth; local seed export was not present.",
+            },
+        }
+
+    seed_rows = audit_public_catalog_safety.load_json(seed_path)
+    if not isinstance(seed_rows, list):
+        seed_rows = []
+    seed_summary = audit_public_catalog_safety.summarize_seed(
+        [row for row in seed_rows if isinstance(row, dict)]
+    )
+    seed_compact = {
+        "path": seed_path.relative_to(ROOT).as_posix(),
+        "exists": True,
+        "rows": seed_summary["rows"],
+        "duplicate_groups": seed_summary["duplicate_groups"],
+        "duplicate_rows": seed_summary["duplicate_rows"],
+        "missing_enrichment": seed_summary["missing_enrichment"],
+    }
+    return {
+        "public_catalog": public_compact,
+        "seed_catalog": seed_compact,
+        "comparison": audit_public_catalog_safety.compare_public_catalog(public_compact, seed_summary),
+    }
+
+
 def update_reports(write: bool) -> dict[str, Any]:
     catalog = load_json(PUBLIC_CATALOG)
     if not isinstance(catalog, dict) or not isinstance(catalog.get("items"), list):
@@ -6980,6 +7030,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     rows = len(items)
     missing = missing_counts(items)
     cov = coverage(missing, rows, ["source_url", "image_url", "release_date"])
+    public_catalog_crosscheck = build_public_catalog_crosscheck(items)
     generated_at = now_utc()
     source_discovery = build_source_discovery_public(items)
     metadata_backlog = build_metadata_backlog_public(items)
@@ -7360,6 +7411,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "row_count": rows,
             "missing": quality_missing,
             "coverage": cov,
+            "public_catalog_crosscheck": public_catalog_crosscheck,
         }
     )
     if quality_changed:

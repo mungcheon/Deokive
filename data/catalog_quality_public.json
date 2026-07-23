@@ -7902,5 +7902,50 @@
     "auto_apply_enabled": false,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
+  },
+  "public_catalog_crosscheck": {
+    "public_catalog": {
+      "path": "data/catalog_public.json",
+      "exists": true,
+      "rows": 20347,
+      "duplicate_groups": 0,
+      "duplicate_rows": 0,
+      "missing_enrichment": {
+        "image_url": 710,
+        "source_url": 637,
+        "release_date": 1406,
+        "barcode": 10093,
+        "official_price_jpy": 566
+      }
+    },
+    "seed_catalog": {
+      "path": "server/catalog_seed_from_local.json",
+      "exists": true,
+      "rows": 18040,
+      "duplicate_groups": 0,
+      "duplicate_rows": 0,
+      "missing_enrichment": {
+        "image_url": 715,
+        "source_url": 739,
+        "release_date": 1434,
+        "barcode": 7747,
+        "official_price_jpy": 579
+      }
+    },
+    "comparison": {
+      "same_row_count": false,
+      "row_delta": 2307,
+      "missing_enrichment_delta": {
+        "barcode": 2346,
+        "image_url": -5,
+        "official_price_jpy": -13,
+        "release_date": -28,
+        "source_url": -102
+      },
+      "public_image_missing_rows": 710,
+      "seed_image_missing_rows": 715,
+      "image_missing_delta": -5,
+      "note": "data/catalog_public.json is the GitHub Pages source of truth; server/catalog_seed_from_local.json is the local DB export safety source."
+    }
   }
 }

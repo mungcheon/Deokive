@@ -77,6 +77,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_detail_candidate_action_queue_public.json", updated_files)
 
         quality = reports.load_json(reports.QUALITY)
+        self.assertEqual(
+            quality["public_catalog_crosscheck"]["public_catalog"]["rows"],
+            result["rows"],
+        )
+        self.assertEqual(
+            quality["public_catalog_crosscheck"]["public_catalog"]["missing_enrichment"]["image_url"],
+            result["missing"]["image_url"],
+        )
+        self.assertEqual(
+            quality["public_catalog_crosscheck"]["comparison"]["public_image_missing_rows"],
+            result["missing"]["image_url"],
+        )
+        self.assertEqual(
+            quality["public_catalog_crosscheck"]["comparison"]["seed_image_missing_rows"],
+            715,
+        )
+        self.assertEqual(
+            quality["public_catalog_crosscheck"]["comparison"]["image_missing_delta"],
+            -5,
+        )
         image_candidates = reports.load_json(reports.IMAGE_CANDIDATES)
         self.assertEqual(image_candidates["summary"]["missing_images"], result["missing"]["image_url"])
         self.assertEqual(image_candidates["summary"]["rows"], result["rows"])
