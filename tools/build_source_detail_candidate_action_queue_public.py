@@ -258,11 +258,14 @@ def manual_confirmation_shortlist(item: dict[str, Any]) -> bool:
 
 def priority_manual_review_candidate(item: dict[str, Any]) -> bool:
     catalog_state = item.get("current_catalog_state") or {}
+    candidate_count = int(item.get("candidate_count") or 0)
     return bool(
         item.get("safe_source_image_pair") is True
         and catalog_state.get("catalog_identity_matches") is True
         and catalog_state.get("catalog_has_display_image") is False
         and not item.get("candidate_identity_flags")
+        and item.get("review_risk") in {"strong_single_candidate_review", "near_single_candidate_review"}
+        and 0 < candidate_count <= 3
     )
 
 
@@ -364,6 +367,8 @@ def compact_item(row: dict[str, Any], catalog_by_index: dict[int, dict[str, Any]
     elif item["priority_manual_review_candidate"]:
         item["recommended_action"] = "priority_manual_review_safe_source_image_candidate"
     elif identity_flags:
+        item["recommended_action"] = "recheck_candidate_identity_before_source_or_image_patch"
+    else:
         item["recommended_action"] = "recheck_candidate_identity_before_source_or_image_patch"
     return item
 

@@ -244,6 +244,47 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["review_priority"], 35)
         self.assertEqual(item["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
 
+    def test_priority_manual_review_requires_small_candidate_set(self) -> None:
+        source_detail = {
+            "review_candidates": [
+                {
+                    "catalog_index": 6,
+                    "source_store": "Animate",
+                    "name_ko": "Unflagged shirt",
+                    "name_ja": "Unflagged shirt",
+                    "status": "candidate_review_needed",
+                    "candidate_count": 23,
+                    "candidate_source_url": "https://www.animate-onlineshop.jp/pn/shirt/pd/6/",
+                    "candidate_image_url": "https://tc-animate.techorus-cdn.com/shirt.jpg",
+                    "candidate_title": "Unflagged shirt",
+                    "score": 0.8,
+                    "shared_tokens": ["Unflagged"],
+                    "safe_source_image_pair": True,
+                }
+            ]
+        }
+        catalog_rows = [
+            {
+                "catalog_index": 6,
+                "source_store": "Animate",
+                "name_ko": "Unflagged shirt",
+                "name_ja": "Unflagged shirt",
+                "image_url": "",
+                "local_image_path": "",
+            }
+        ]
+
+        report = queue.build_report(source_detail, catalog_rows, generated_at="2026-07-22T00:00:00Z")
+
+        item = report["batches"][0]["items"][0]
+        self.assertEqual(item["candidate_count_bucket"], "large_candidate_set")
+        self.assertFalse(item["manual_confirmation_shortlist"])
+        self.assertFalse(item["priority_manual_review_candidate"])
+        self.assertEqual(item["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
+        self.assertEqual(report["summary"]["manual_confirmation_shortlist_rows"], 0)
+        self.assertEqual(report["summary"]["priority_manual_review_candidate_rows"], 0)
+        self.assertEqual(report["priority_manual_review_candidates"], [])
+
 
 if __name__ == "__main__":
     unittest.main()
