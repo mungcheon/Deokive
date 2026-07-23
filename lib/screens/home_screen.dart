@@ -312,8 +312,9 @@ class _CatalogImportPanel extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '검색해서 내 굿즈함이나 위시리스트에 추가',
-                        maxLines: 2,
+                        '검색 후 내 굿즈함·위시리스트에 추가',
+                        maxLines: 1,
+                        softWrap: false,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: theme.colorScheme.onSurface
@@ -325,25 +326,46 @@ class _CatalogImportPanel extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: 10),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 8,
+              runSpacing: 6,
+              children: [
                 _CatalogMetricPill(
-                  label: '등록',
+                  label: '실데이터',
                   value: '${_CatalogHealthSummary.formatCount(
                     health.uniqueCount,
                   )}개',
                   color: palette.primary,
                 ),
+                _CatalogMetricPill(
+                  label: '중복 제외',
+                  value: '-${_CatalogHealthSummary.formatCount(
+                    health.duplicateCount,
+                  )}',
+                  color: theme.colorScheme.onSurface,
+                ),
+                if (health.exampleCount > 0)
+                  _CatalogMetricPill(
+                    label: '예시 제외',
+                    value: '-${_CatalogHealthSummary.formatCount(
+                      health.exampleCount,
+                    )}',
+                    color: theme.colorScheme.onSurface,
+                  ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 10),
             Text(
-              '중복 항목은 한 번만 집계해요. 전체 DB에서 검색한 뒤 내 굿즈함이나 위시리스트에 바로 담을 수 있어요.',
-              maxLines: 2,
-              softWrap: true,
+              'DB 전체 목록에서 필터링하고 선택한 굿즈만 추가해요.',
+              maxLines: 1,
+              softWrap: false,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.58),
-                height: 1.24,
+                height: 1.22,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0,
               ),
@@ -438,21 +460,36 @@ class _CatalogMetricPill extends StatelessWidget {
 
 class _CatalogHealthSummary {
   final int uniqueCount;
+  final int duplicateCount;
+  final int exampleCount;
 
   const _CatalogHealthSummary({
     required this.uniqueCount,
+    required this.duplicateCount,
+    required this.exampleCount,
   });
 
   static _CatalogHealthSummary from(List<GoodsCatalogEntry> entries) {
     final seenKeys = <String>{};
+    var exampleCount = 0;
+    var duplicateCount = 0;
 
     for (final entry in entries) {
-      if (_isExampleEntry(entry)) continue;
+      if (_isExampleEntry(entry)) {
+        exampleCount += 1;
+        continue;
+      }
 
-      seenKeys.add(_identityKey(entry));
+      if (!seenKeys.add(_identityKey(entry))) {
+        duplicateCount += 1;
+      }
     }
 
-    return _CatalogHealthSummary(uniqueCount: seenKeys.length);
+    return _CatalogHealthSummary(
+      uniqueCount: seenKeys.length,
+      duplicateCount: duplicateCount,
+      exampleCount: exampleCount,
+    );
   }
 
   static String _identityKey(GoodsCatalogEntry entry) {
