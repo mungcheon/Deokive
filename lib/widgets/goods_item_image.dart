@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/goods_item.dart';
-
-const _goodsAssetVersion = '20260723-imagefix4';
+import '../utils/catalog_asset_urls.dart';
 
 class GoodsItemImage extends StatelessWidget {
   final GoodsItem item;
@@ -74,9 +73,10 @@ class GoodsItemImage extends StatelessWidget {
   }
 
   Widget _publicAssetFallback(String assetPath) {
-    if (!assetPath.startsWith('assets/')) return _placeholder();
+    final urls = publicCatalogAssetUrls(assetPath);
+    if (urls.isEmpty) return _placeholder();
     return _FallbackNetworkAssetImage(
-      urls: _publicAssetUrls(assetPath),
+      urls: urls,
       fit: fit,
       fallback: _placeholder(),
     );
@@ -107,37 +107,4 @@ class _FallbackNetworkAssetImage extends StatelessWidget {
       errorBuilder: (_, __, ___) => _buildAt(index + 1),
     );
   }
-}
-
-List<String> _publicAssetUrls(String assetPath) {
-  final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
-  final candidates = <String>[
-    _versionedAssetUrl(Uri.base.resolve('assets/$normalizedPath')),
-    _versionedAssetUrl(Uri.base.resolve(normalizedPath)),
-  ];
-  final origin = Uri.base.origin;
-  if (origin.isNotEmpty) {
-    candidates.add(
-      _versionedAssetUrl(Uri.parse(origin).resolve('/assets/$normalizedPath')),
-    );
-    candidates
-        .add(_versionedAssetUrl(Uri.parse(origin).resolve('/$normalizedPath')));
-    candidates.add(
-      _versionedAssetUrl(
-          Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath')),
-    );
-    candidates.add(
-      _versionedAssetUrl(Uri.parse(origin).resolve('/Deokive/$normalizedPath')),
-    );
-  }
-  return candidates.toSet().toList(growable: false);
-}
-
-String _versionedAssetUrl(Uri uri) {
-  return uri.replace(
-    queryParameters: {
-      ...uri.queryParameters,
-      'v': _goodsAssetVersion,
-    },
-  ).toString();
 }

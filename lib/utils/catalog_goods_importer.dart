@@ -9,8 +9,7 @@ import '../models/goods_catalog_entry.dart';
 import '../models/goods_item.dart';
 import '../state/app_state.dart';
 import '../widgets/goods_name_search_field.dart';
-
-const _catalogImportAssetVersion = '20260723-imagefix4';
+import 'catalog_asset_urls.dart';
 
 Future<bool> showCatalogGoodsImportFlow(
   BuildContext context, {
@@ -605,27 +604,10 @@ Future<Uint8List?> loadCatalogEntryBundledImageBytes(
 }
 
 Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
-  if (!assetPath.startsWith('assets/')) return null;
-  final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
-  final paths = <Uri>[
-    _versionedCatalogAssetUri(Uri.base.resolve('assets/$normalizedPath')),
-    _versionedCatalogAssetUri(Uri.base.resolve(normalizedPath)),
-  ];
-  final origin = Uri.base.origin;
-  if (origin.isNotEmpty) {
-    paths.add(_versionedCatalogAssetUri(
-        Uri.parse(origin).resolve('/assets/$normalizedPath')));
-    paths.add(_versionedCatalogAssetUri(
-        Uri.parse(origin).resolve('/$normalizedPath')));
-    paths.add(_versionedCatalogAssetUri(
-        Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath')));
-    paths.add(_versionedCatalogAssetUri(
-        Uri.parse(origin).resolve('/Deokive/$normalizedPath')));
-  }
-  for (final uri in paths.toSet()) {
+  for (final url in publicCatalogAssetUrls(assetPath)) {
     try {
       final response = await http.get(
-        uri,
+        Uri.parse(url),
         headers: const {
           'User-Agent': 'Mozilla/5.0 Deokive/1.0',
           'Accept': 'image/*,*/*',
@@ -639,15 +621,6 @@ Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
     }
   }
   return null;
-}
-
-Uri _versionedCatalogAssetUri(Uri uri) {
-  return uri.replace(
-    queryParameters: {
-      ...uri.queryParameters,
-      'v': _catalogImportAssetVersion,
-    },
-  );
 }
 
 List<String> _candidateAssetKeys(String assetPath) {
