@@ -5640,6 +5640,63 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
             str(row.get("category") or ""),
         )
     )
+    normalization_review_rows = sum(
+        int(row.get("affected_catalog_rows") or 0)
+        for row in normalization_review_queue
+    )
+    unknown_category_rows = sum(int(row.get("rows") or 0) for row in unknown_categories)
+    visual_coverage_ready = bool(
+        app_visual_catalog.get("palette_sorted_by_family", False)
+        and app_visual_catalog.get("animation_visuals_covered", False)
+        and int(app_visual_catalog.get("color_count") or 0) > 0
+        and int(app_visual_catalog.get("icon_count") or 0) > 0
+    )
+    category_completion_status = (
+        "normalization_review_required"
+        if normalization_review_queue
+        else "unknown_category_review_required"
+        if unknown_categories
+        else "ready"
+        if visual_coverage_ready
+        else "folder_visual_catalog_review_required"
+    )
+    category_readiness = {
+        "status": category_completion_status,
+        "auto_apply_ready_rows": 0,
+        "auto_apply_enabled": False,
+        "manual_confirmed_rows": 0,
+        "unknown_category_rows": unknown_category_rows,
+        "unknown_category_count": len(unknown_categories),
+        "normalization_review_queue_rows": normalization_review_rows,
+        "normalization_review_queue_count": len(normalization_review_queue),
+        "folder_visual_coverage_ready": visual_coverage_ready,
+        "app_folder_color_count": app_visual_catalog.get("color_count", 0),
+        "app_folder_icon_option_count": app_visual_catalog.get("icon_count", 0),
+        "app_folder_palette_sorted_by_family": app_visual_catalog.get("palette_sorted_by_family", False),
+        "blocked_reasons": [
+            "canonical_category_normalization_manually_confirmed"
+            if normalization_review_queue
+            else None,
+            "unknown_category_mapping_required" if unknown_categories else None,
+            "folder_visual_catalog_review_required" if not visual_coverage_ready else None,
+        ],
+        "next_safe_phase": (
+            "confirm_category_normalization_before_import"
+            if normalization_review_queue
+            else "map_unknown_categories_to_folder_families"
+            if unknown_categories
+            else "no_animation_category_cleanup_required"
+            if visual_coverage_ready
+            else "verify_folder_color_and_icon_catalog"
+        ),
+        "safety_note": (
+            "Animation category changes affect navigation and folder semantics; "
+            "preserve subtype labels as sub_series or notes unless manual review confirms a direct category change."
+        ),
+    }
+    category_readiness["blocked_reasons"] = [
+        reason for reason in category_readiness["blocked_reasons"] if reason
+    ]
 
     return {
         "schema_version": 1,
@@ -5647,13 +5704,13 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
             "animation_goods_rows": len(rows),
             "category_count": len(by_category),
             "unknown_category_count": len(unknown_categories),
-            "unknown_category_rows": sum(int(row.get("rows") or 0) for row in unknown_categories),
+            "unknown_category_rows": unknown_category_rows,
             "normalization_suggestion_count": len(suggestions),
-            "normalization_review_queue_rows": sum(
-                int(row.get("affected_catalog_rows") or 0)
-                for row in normalization_review_queue
-            ),
+            "normalization_review_queue_rows": normalization_review_rows,
             "normalization_review_queue_count": len(normalization_review_queue),
+            "category_readiness_status": category_completion_status,
+            "auto_apply_ready_rows": 0,
+            "folder_visual_coverage_ready": visual_coverage_ready,
             "missing_image_rows": sum(1 for item in rows if not present(item.get("image_url"))),
             "missing_source_url_rows": sum(1 for item in rows if not present(item.get("source_url"))),
             "folder_color_palette_count": len(FOLDER_COLOR_PALETTE),
@@ -5678,6 +5735,7 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
         "top_sub_series": counter_rows(by_sub_series, ("sub_series",), 80),
         "normalization_suggestions": suggestions,
         "normalization_review_queue": normalization_review_queue,
+        "category_readiness": category_readiness,
         "unknown_categories": unknown_categories[:80],
         "taxonomy_review_queue": unknown_categories[:80],
         "automation_policy": {

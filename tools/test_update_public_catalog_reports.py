@@ -449,6 +449,20 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["animation_category_review"]["normalization_review_queue_rows"],
             sum(int(row.get("affected_catalog_rows") or 0) for row in normalization_queue),
         )
+        self.assertEqual(
+            quality["animation_category_review"]["category_readiness_status"],
+            "normalization_review_required",
+        )
+        self.assertEqual(quality["animation_category_review"]["auto_apply_ready_rows"], 0)
+        self.assertTrue(quality["animation_category_review"]["folder_visual_coverage_ready"])
+        self.assertEqual(
+            animation_categories["category_readiness"]["next_safe_phase"],
+            "confirm_category_normalization_before_import",
+        )
+        self.assertIn(
+            "canonical_category_normalization_manually_confirmed",
+            animation_categories["category_readiness"]["blocked_reasons"],
+        )
         self.assertFalse(normalization_queue[0]["auto_apply_enabled"])
         self.assertEqual(
             normalization_queue[0]["mapping_mode"],
