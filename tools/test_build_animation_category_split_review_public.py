@@ -137,6 +137,8 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
     def test_unicode_stationery_and_tableware_split_rules_are_available(self) -> None:
         rules = {rule["rule_id"]: rule for rule in split_review.SPLIT_RULES}
 
+        self.assertIn("ピックリルスタンド", rules["acrylic_stand"]["match_keywords"])
+        self.assertIn("피크릴", rules["acrylic_stand"]["match_keywords"])
         self.assertEqual(rules["shikishi_board"]["target_category"], "색지")
         self.assertIn("色紙", rules["shikishi_board"]["match_keywords"])
         self.assertEqual(rules["sticker"]["target_category"], "스티커")
