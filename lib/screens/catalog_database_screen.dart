@@ -200,6 +200,7 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
       builder: (sheetContext) {
         final theme = Theme.of(sheetContext);
         final palette = theme.extension<DeokivePalette>()!;
+        final addButtonForeground = _readableForegroundFor(palette.primary);
         return DraggableScrollableSheet(
           expand: false,
           initialChildSize: 0.80,
@@ -329,7 +330,7 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                           label: const Text('내 굿즈에 추가하기'),
                           style: FilledButton.styleFrom(
                             backgroundColor: palette.primary,
-                            foregroundColor: Colors.white,
+                            foregroundColor: addButtonForeground,
                           ),
                         ),
                       ),
@@ -478,6 +479,7 @@ class _CatalogListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final palette = theme.extension<DeokivePalette>()!;
+    final addButtonForeground = _readableForegroundFor(palette.primary);
     return Material(
       color: theme.colorScheme.surface,
       borderRadius: BorderRadius.circular(18),
@@ -545,18 +547,19 @@ class _CatalogListTile extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             SizedBox(
-              width: 86,
+              width: 96,
               height: 40,
               child: FilledButton(
                 onPressed: isAdding ? null : () async => onAdd(),
                 style: FilledButton.styleFrom(
                   backgroundColor: palette.primary,
-                  foregroundColor: Colors.white,
+                  foregroundColor: addButtonForeground,
                   disabledBackgroundColor: palette.primary.withValues(
                     alpha: 0.30,
                   ),
-                  disabledForegroundColor: Colors.white.withValues(alpha: 0.82),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  disabledForegroundColor:
+                      addButtonForeground.withValues(alpha: 0.72),
+                  padding: const EdgeInsets.symmetric(horizontal: 9),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(999),
@@ -695,4 +698,11 @@ String _entrySubtitle(GoodsCatalogEntry entry) {
       .toList();
   if (parts.isEmpty) return '상세 정보 없음';
   return parts.join(' · ');
+}
+
+Color _readableForegroundFor(Color background) {
+  final brightness = ThemeData.estimateBrightnessForColor(background);
+  return brightness == Brightness.light
+      ? const Color(0xFF171717)
+      : Colors.white;
 }
