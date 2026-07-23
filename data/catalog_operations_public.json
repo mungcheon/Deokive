@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T15:58:10Z",
+  "generated_at": "2026-07-23T17:43:43Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -26,6 +26,8 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 8069,
       "danganronpa_missing_media_rows": 34,
+      "danganronpa_patch_template_pending_rows": 34,
+      "danganronpa_patch_template_ready_rows": 0,
       "confirmed_import_template_rows": 1141,
       "confirmed_import_action_queue_rows": 4637,
       "confirmed_import_pending_rows": 0,
@@ -1090,6 +1092,16 @@
       "open_rows": 34,
       "primary_report": "data/danganronpa_missing_media_public.json",
       "next_step": "verify_danganronpa_exact_source_pages",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "danganronpa_patch_template_dry_run",
+      "status": "pending_confirmation",
+      "open_rows": 34,
+      "ready_rows": 0,
+      "blocked_rows": 0,
+      "primary_report": "data/danganronpa_patch_template_dry_run_public.json",
+      "next_step": "fill_and_review_danganronpa_confirmed_patch_template",
       "auto_apply_enabled": false
     },
     {
@@ -2311,6 +2323,10 @@
       "public_report": "data/danganronpa_missing_media_public.json"
     },
     {
+      "key": "danganronpa_patch_template_dry_run",
+      "public_report": "data/danganronpa_patch_template_dry_run_public.json"
+    },
+    {
       "key": "danganronpa_goodsmile_probe",
       "public_report": "data/danganronpa_goodsmile_probe_public.json"
     },
@@ -2491,6 +2507,16 @@
       "open_rows": 34,
       "official_search_rows": 18,
       "recommended_next_action": "Verify exact Danganronpa source pages and attach source_url/image_url patches."
+    },
+    {
+      "priority": 15,
+      "workstream": "danganronpa_patch_template_dry_run",
+      "public_report": "data/danganronpa_patch_template_dry_run_public.json",
+      "template_rows": 34,
+      "ready_rows": 0,
+      "skipped_rows": 34,
+      "blocked_rows": 0,
+      "recommended_next_action": "Review filled Danganronpa template rows here before any catalog patch."
     },
     {
       "priority": 16,

@@ -47,6 +47,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/animation_category_review_batches_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
+        self.assertIn("data/danganronpa_patch_template_dry_run_public.json", updated_files)
         self.assertIn("data/gotouchi_representative_image_attachment_public.json", updated_files)
         self.assertIn("data/gotouchi_official_candidate_review_queue_public.json", updated_files)
         self.assertIn("data/catalog_image_source_url_confirmed_template_public.json", updated_files)
@@ -443,6 +444,21 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(all("manual_confirmed_source_url" in row for row in danganronpa_template))
         self.assertTrue(all("manual_confirmed_image_url" in row for row in danganronpa_template))
 
+        danganronpa_dry_run = reports.load_json(reports.DANGANRONPA_PATCH_TEMPLATE_DRY_RUN)
+        danganronpa_dry_summary = danganronpa_dry_run.get("summary", {})
+        danganronpa_dry_items = danganronpa_dry_run.get("items", [])
+        self.assertIs(danganronpa_dry_summary.get("auto_apply_enabled"), False)
+        self.assertEqual(
+            danganronpa_dry_summary.get("template_rows"),
+            danganronpa_summary.get("confirmed_patch_template_rows"),
+        )
+        self.assertEqual(danganronpa_dry_summary.get("template_rows"), len(danganronpa_dry_items))
+        self.assertEqual(danganronpa_dry_summary.get("ready_rows"), 0)
+        self.assertEqual(danganronpa_dry_summary.get("skipped_rows"), len(danganronpa_dry_items))
+        self.assertEqual(danganronpa_dry_summary.get("blocked_rows"), 0)
+        self.assertTrue(all(item.get("auto_apply_enabled") is False for item in danganronpa_dry_items))
+        self.assertTrue(all(item.get("status") == "skipped_pending_manual_confirmation" for item in danganronpa_dry_items))
+
         dedupe_summary = deduplication.get("summary", {})
         source_url_exclusions = dedupe_summary.get("source_url_exclusions", {})
         self.assertGreater(source_url_exclusions.get("shared_source_url_value_groups", 0), 0)
@@ -583,6 +599,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         readiness_summary = confirmed_readiness.get("summary", {})
         danganronpa_media = reports.load_json(reports.DANGANRONPA_MISSING_MEDIA)
         danganronpa_summary = danganronpa_media.get("summary", {})
+        danganronpa_dry_run = reports.load_json(reports.DANGANRONPA_PATCH_TEMPLATE_DRY_RUN)
+        danganronpa_dry_summary = danganronpa_dry_run.get("summary", {})
         requested_focus_action = reports.load_json(reports.REQUESTED_FOCUS_ACTION_QUEUE)
         requested_focus_action_summary = requested_focus_action.get("summary", {})
         requested_focus_scorecard = next(
@@ -849,6 +867,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
+        self.assertIn(f"data/{reports.DANGANRONPA_PATCH_TEMPLATE_DRY_RUN.name}", scorecard_reports)
         self.assertIn(f"data/{reports.AGENT_WORK_QUEUE.name}", next_action_reports)
         self.assertIn(f"data/{reports.EXECUTION_PLAN.name}", next_action_reports)
         self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
@@ -857,6 +876,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}", report_links)
+        self.assertIn(f"data/{reports.DANGANRONPA_PATCH_TEMPLATE_DRY_RUN.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_SPLIT_REVIEW.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.name}", report_links)
@@ -917,6 +937,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             requested_focus_next_action.get("non_barcode_template_share"),
             requested_focus_action_summary.get("non_barcode_template_share"),
+        )
+        self.assertEqual(
+            open_queues.get("danganronpa_patch_template_pending_rows"),
+            danganronpa_dry_summary.get("skipped_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("danganronpa_patch_template_ready_rows"),
+            danganronpa_dry_summary.get("ready_rows"),
         )
         self.assertEqual(
             open_queues.get("image_attachment_action_rows"),
