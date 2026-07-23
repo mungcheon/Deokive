@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'deokive-offline-v5';
+const CACHE_VERSION = 'deokive-offline-v6';
 const APP_SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const APP_SHELL_URLS = [
@@ -16,6 +16,10 @@ const API_PREFIXES = ['/health', '/auth', '/profile', '/catalog', '/board', '/ba
 
 function isApiRequest(url) {
   return API_PREFIXES.some((prefix) => url.pathname.startsWith(prefix));
+}
+
+function isCatalogImageRequest(url) {
+  return url.pathname.includes('/catalog_images/');
 }
 
 self.addEventListener('install', (event) => {
@@ -50,6 +54,11 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (isApiRequest(url)) {
+    return;
+  }
+
+  if (isCatalogImageRequest(url)) {
+    event.respondWith(fetch(request));
     return;
   }
 

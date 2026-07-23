@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../models/goods_item.dart';
 
+const _goodsAssetVersion = '20260723-imagefix3';
+
 class GoodsItemImage extends StatelessWidget {
   final GoodsItem item;
   final BoxFit fit;
@@ -110,21 +112,32 @@ class _FallbackNetworkAssetImage extends StatelessWidget {
 List<String> _publicAssetUrls(String assetPath) {
   final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
   final candidates = <String>[
-    Uri.base.resolve(normalizedPath).toString(),
-    Uri.base.resolve('assets/$normalizedPath').toString(),
+    _versionedAssetUrl(Uri.base.resolve(normalizedPath)),
+    _versionedAssetUrl(Uri.base.resolve('assets/$normalizedPath')),
   ];
   final origin = Uri.base.origin;
   if (origin.isNotEmpty) {
-    candidates.add(Uri.parse(origin).resolve('/$normalizedPath').toString());
+    candidates
+        .add(_versionedAssetUrl(Uri.parse(origin).resolve('/$normalizedPath')));
     candidates.add(
-      Uri.parse(origin).resolve('/assets/$normalizedPath').toString(),
+      _versionedAssetUrl(Uri.parse(origin).resolve('/assets/$normalizedPath')),
     );
     candidates.add(
-      Uri.parse(origin).resolve('/Deokive/$normalizedPath').toString(),
+      _versionedAssetUrl(Uri.parse(origin).resolve('/Deokive/$normalizedPath')),
     );
     candidates.add(
-      Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath').toString(),
+      _versionedAssetUrl(
+          Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath')),
     );
   }
   return candidates.toSet().toList(growable: false);
+}
+
+String _versionedAssetUrl(Uri uri) {
+  return uri.replace(
+    queryParameters: {
+      ...uri.queryParameters,
+      'v': _goodsAssetVersion,
+    },
+  ).toString();
 }

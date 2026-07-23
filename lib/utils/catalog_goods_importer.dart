@@ -10,6 +10,8 @@ import '../models/goods_item.dart';
 import '../state/app_state.dart';
 import '../widgets/goods_name_search_field.dart';
 
+const _catalogImportAssetVersion = '20260723-imagefix3';
+
 Future<bool> showCatalogGoodsImportFlow(
   BuildContext context, {
   FolderItem? initialFolder,
@@ -606,15 +608,19 @@ Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
   if (!assetPath.startsWith('assets/')) return null;
   final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
   final paths = <Uri>[
-    Uri.base.resolve(normalizedPath),
-    Uri.base.resolve('assets/$normalizedPath'),
+    _versionedCatalogAssetUri(Uri.base.resolve(normalizedPath)),
+    _versionedCatalogAssetUri(Uri.base.resolve('assets/$normalizedPath')),
   ];
   final origin = Uri.base.origin;
   if (origin.isNotEmpty) {
-    paths.add(Uri.parse(origin).resolve('/$normalizedPath'));
-    paths.add(Uri.parse(origin).resolve('/assets/$normalizedPath'));
-    paths.add(Uri.parse(origin).resolve('/Deokive/$normalizedPath'));
-    paths.add(Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath'));
+    paths.add(_versionedCatalogAssetUri(
+        Uri.parse(origin).resolve('/$normalizedPath')));
+    paths.add(_versionedCatalogAssetUri(
+        Uri.parse(origin).resolve('/assets/$normalizedPath')));
+    paths.add(_versionedCatalogAssetUri(
+        Uri.parse(origin).resolve('/Deokive/$normalizedPath')));
+    paths.add(_versionedCatalogAssetUri(
+        Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath')));
   }
   for (final uri in paths.toSet()) {
     try {
@@ -633,6 +639,15 @@ Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
     }
   }
   return null;
+}
+
+Uri _versionedCatalogAssetUri(Uri uri) {
+  return uri.replace(
+    queryParameters: {
+      ...uri.queryParameters,
+      'v': _catalogImportAssetVersion,
+    },
+  );
 }
 
 List<String> _candidateAssetKeys(String assetPath) {
