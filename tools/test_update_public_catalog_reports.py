@@ -62,6 +62,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_policy_audit_public.json", updated_files)
+        self.assertIn("data/ichiban_kuji_prize_policy_issue_queue_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_name_image_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_name_image_patch_candidates_public.json", updated_files)
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
@@ -254,6 +255,23 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["zero_price_exception_policy_pass"], True)
             self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["auto_apply_enabled"], False)
+        self.assertEqual(quality["ichiban_kuji_prize_policy_issue_queue"]["issue_rows"], 21)
+        self.assertEqual(quality["ichiban_kuji_prize_policy_issue_queue"]["zero_price_violation_rows"], 0)
+        self.assertIs(quality["ichiban_kuji_prize_policy_issue_queue"]["zero_price_exception_policy_pass"], True)
+        self.assertEqual(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["unnumbered_multi_item_prize_review_groups"],
+            6,
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["probable_reissue_work_order_rows"],
+            20,
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["numbered_variant_created_rows"],
+            2518,
+        )
+        self.assertIs(quality["ichiban_kuji_prize_policy_issue_queue"]["auto_apply_enabled"], False)
+        self.assertIs(quality["ichiban_kuji_prize_policy_issue_queue"]["auto_delete_enabled"], False)
         if reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists():
             prize_name_image = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW)
             prize_name_image_summary = prize_name_image.get("summary", {})

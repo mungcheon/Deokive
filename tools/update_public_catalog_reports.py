@@ -14,6 +14,7 @@ import build_catalog_missing_image_actionability_public
 import build_candidate_source_url_review_queue_public
 import build_gotouchi_official_candidate_review_queue_public
 import build_image_source_url_confirmed_template_public
+import build_ichiban_prize_policy_issue_queue_public
 import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
 import build_manual_source_url_search_queue_public
@@ -66,6 +67,7 @@ ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES = DATA / "ichiban_kuji_metadata_review_bat
 ICHIIBAN_KUJI_METADATA_ACTION_QUEUE = DATA / "ichiban_kuji_metadata_action_queue_public.json"
 ICHIIBAN_KUJI_METADATA_FAST_REVIEW = DATA / "ichiban_kuji_metadata_fast_review_public.json"
 ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT = DATA / "ichiban_kuji_prize_policy_audit_public.json"
+ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE = DATA / "ichiban_kuji_prize_policy_issue_queue_public.json"
 ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW = DATA / "ichiban_kuji_prize_name_image_review_public.json"
 ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES = DATA / "ichiban_kuji_prize_name_image_patch_candidates_public.json"
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
@@ -5827,6 +5829,17 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
+    ichiban_kuji_prize_policy_issue_queue = (
+        build_ichiban_prize_policy_issue_queue_public.build_queue(
+            load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {})
+            if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists()
+            else {},
+            load_json(DEDUPLICATION_ACTION_QUEUE, {})
+            if DEDUPLICATION_ACTION_QUEUE.exists()
+            else {},
+            generated_at=generated_at,
+        )
+    )
     source_discovery_focus_template = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {})
     source_discovery_focus_template_import = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
     source_discovery_next_focus_pack = build_source_discovery_next_focus_pack_public.build_report(
@@ -6338,6 +6351,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["ichiban_kuji_prize_policy_audit"] = copy_report_summary(
                 ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, "ichiban_kuji_prize_policy_audit"
             )
+        target["ichiban_kuji_prize_policy_issue_queue"] = {
+            "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.name}",
+            **ichiban_kuji_prize_policy_issue_queue.get("summary", {}),
+        }
         target["operations"] = {
             "public_report": f"data/{OPERATIONS_REPORT.name}",
             **operations["summary"]["open_review_queues"],
@@ -6397,6 +6414,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(PROVIDER_MISSING_SOURCE_URL_QUEUE, provider_missing_source_url_queue)
         write_json(CANDIDATE_SOURCE_URL_REVIEW_QUEUE, candidate_source_url_review_queue)
         write_json(GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE, gotouchi_official_candidate_review_queue)
+        write_json(ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE, ichiban_kuji_prize_policy_issue_queue)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, source_discovery_next_focus_detail_candidates)
@@ -6478,6 +6496,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.relative_to(ROOT)),
             str(OPERATIONS_REPORT.relative_to(ROOT)),
             str(AGENT_WORK_QUEUE.relative_to(ROOT)),
         ],
