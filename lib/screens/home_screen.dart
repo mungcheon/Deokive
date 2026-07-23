@@ -84,17 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 '👉 사고 싶은 아이템은 위시리스트 폴더에 따로 모아두면 결제 추적과 분리돼서 편해요.',
           },
           {
-            'title': 'DB에서 골라 바로 추가',
-            'subtitle': '검색한 DB 항목을 내 굿즈함이나 위시리스트로 복사해요.',
-            'icon': Icons.manage_search_rounded,
-            'detailTitle': 'DB에서 골라 바로 추가',
-            'detailDate': '사용 가이드',
-            'detailContent': '1. 홈의 [DB 보기] 또는 굿즈 추가 화면에서 DB 열기\n'
-                '2. 상품명, 작품명, 캐릭터명으로 검색\n'
-                '3. 항목을 고른 뒤 내 굿즈함 또는 위시리스트에 추가\n\n'
-                '👉 DB 항목에 사진과 정가가 있으면 저장할 때 함께 들어가요.',
-          },
-          {
             'title': '위시리스트도 같이 관리',
             'subtitle': '아직 안 산 굿즈는 구매가 0원 상태로 따로 담아둘 수 있어요.',
             'icon': Icons.favorite_border_rounded,
@@ -316,7 +305,7 @@ class _CatalogImportPanel extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${_CatalogHealthSummary.formatCount(health.totalCount)}개 항목 · 사진 ${health.imageCoverageLabel}',
+                      '${_CatalogHealthSummary.formatCount(health.totalCount)}개 · 사진 ${health.imageCoverageLabel}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodySmall?.copyWith(

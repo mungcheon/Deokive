@@ -51,7 +51,7 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.byIcon(Icons.add_circle_outline_rounded).first);
+    await tester.tap(find.widgetWithText(FilledButton, '추가').first);
     await tester.pumpAndSettle();
 
     await tester.tap(find.byType(FilledButton).last);
@@ -66,7 +66,8 @@ void main() {
     expect(appState.goodsItems.single.folderId, 'default-folder');
   });
 
-  testWidgets('catalog database can add to local guest storage', (tester) async {
+  testWidgets('catalog database can add to local guest storage',
+      (tester) async {
     final appState = AppState()
       ..isLoggedIn = false
       ..folders.add(
@@ -107,7 +108,7 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.byIcon(Icons.add_circle_outline_rounded).first);
+    await tester.tap(find.widgetWithText(FilledButton, '추가').first);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();

@@ -403,9 +403,16 @@ class _CatalogListTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Icon(
-                Icons.add_circle_outline_rounded,
-                color: palette.primary,
+              FilledButton.tonalIcon(
+                onPressed: onTap,
+                icon: const Icon(Icons.add_rounded, size: 18),
+                label: const Text('추가'),
+                style: FilledButton.styleFrom(
+                  foregroundColor: palette.primary,
+                  minimumSize: const Size(68, 38),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
               ),
             ],
           ),

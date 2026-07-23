@@ -50,21 +50,29 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   );
   if (destination == null || !context.mounted) return false;
 
-  // DB imports should never feel blocked by a remote image request. The item
-  // keeps its catalog image reference either way, and bundled/cache images can
-  // still be copied into local storage when available.
-  final imageBytes = await loadCatalogEntryBundledImageBytes(entry);
-  if (!context.mounted) return false;
+  try {
+    // DB imports should never feel blocked by a remote image request. The item
+    // keeps its catalog image reference either way, and bundled/cache images can
+    // still be copied into local storage when available.
+    final imageBytes = await loadCatalogEntryBundledImageBytes(entry);
+    if (!context.mounted) return false;
 
-  final item = goodsItemFromCatalogEntry(
-    appState: appState,
-    entry: entry,
-    folder: destination.folder,
-    addToWishlist: destination.addToWishlist,
-    wishlistTargetFolder: destination.wishlistTargetFolder,
-    imageBytes: imageBytes,
-  );
-  appState.addGoods(item);
+    final item = goodsItemFromCatalogEntry(
+      appState: appState,
+      entry: entry,
+      folder: destination.folder,
+      addToWishlist: destination.addToWishlist,
+      wishlistTargetFolder: destination.wishlistTargetFolder,
+      imageBytes: imageBytes,
+    );
+    appState.addGoods(item);
+  } catch (error) {
+    if (!context.mounted) return false;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('DB 추가에 실패했어요. $error')),
+    );
+    return false;
+  }
 
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
