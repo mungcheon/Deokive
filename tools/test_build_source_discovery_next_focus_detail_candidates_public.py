@@ -89,8 +89,14 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(report["summary"]["exact_candidate_confirmation_shortlist_rows"], 1)
         self.assertEqual(report["summary"]["candidate_confirmation_exact_review_rows"], 1)
         self.assertEqual(report["summary"]["candidate_confirmation_manual_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["fallback_bridge_rows"], 0)
+        self.assertEqual(
+            report["summary"]["review_bucket_counts"],
+            [["exact_candidate_shortlist_review", 1], ["no_candidate_manual_source_research", 1]],
+        )
         first = report["items"][0]
         self.assertEqual(first["manual_review_status"], "not_started")
+        self.assertEqual(first["review_bucket"], "exact_candidate_shortlist_review")
         self.assertEqual(first["manual_confirmed_source_url"], "")
         self.assertEqual(first["affiliation"], "Series A")
         self.assertEqual(first["official_search_audit_status"], "official_search_no_results")
@@ -117,7 +123,60 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(shortlist_row["candidate_review_status"], "exact_candidate_review")
         self.assertEqual(shortlist_row["shortlist_reason"], "exact_candidate_gate_passed")
         self.assertIn("recommended_next_step", shortlist_row)
+        self.assertEqual(report["candidate_review_work_order"][0]["catalog_index"], 1)
+        self.assertEqual(
+            report["candidate_review_work_order"][0]["recommended_next_step"],
+            "confirm_exact_candidate_identity",
+        )
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
+
+    def test_build_report_bridges_no_candidate_fallback_rows(self) -> None:
+        source = {
+            "summary": {
+                "focus_pack_id": "source-discovery-focus-001",
+                "source_store": "애니메이트",
+                "target_category": "아크릴 스탠드",
+            },
+            "items": [
+                {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "catalog_index": 9,
+                    "source_store": "애니메이트",
+                    "category": "아크릴 스탠드",
+                    "name_ko": "후보 없음",
+                    "name_ja": "候補なし アクリルスタンド",
+                    "search_query": "候補なし アクリルスタンド",
+                }
+            ],
+        }
+
+        report = builder.build_report(
+            source,
+            search_fn=lambda _item: [],
+            fetch_audit={
+                "items": [
+                    {
+                        "catalog_index": 9,
+                        "no_results_page": True,
+                        "needs_fallback_web_search": True,
+                    }
+                ]
+            },
+            generated_at="2026-07-23T00:00:00Z",
+        )
+
+        self.assertEqual(report["summary"]["fallback_bridge_rows"], 1)
+        self.assertEqual(report["summary"]["no_candidate_items"], 1)
+        self.assertEqual(report["summary"]["review_bucket_counts"], [["fallback_search_required", 1]])
+        self.assertEqual(report["fallback_bridge_items"][0]["catalog_index"], 9)
+        self.assertEqual(
+            report["fallback_bridge_items"][0]["fallback_queue_report"],
+            "data/source_discovery_next_focus_fallback_queue_public.json",
+        )
+        self.assertEqual(
+            report["candidate_review_work_order"][0]["recommended_next_step"],
+            "use_fallback_queue_to_find_exact_source_url",
+        )
 
     def test_build_report_uses_localized_animate_query_for_korean_only_rows(self) -> None:
         source = {

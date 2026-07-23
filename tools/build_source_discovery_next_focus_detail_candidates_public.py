@@ -172,6 +172,22 @@ def _candidate_row(query: str, candidate: ProductImage, rank: int) -> dict[str, 
     }
 
 
+def _counter_rows(counter: Counter[str], key: str) -> list[list[Any]]:
+    return [[name, count] for name, count in counter.most_common() if name]
+
+
+def _review_bucket(item: dict[str, Any], candidate_payload: list[dict[str, Any]]) -> str:
+    if not candidate_payload:
+        if item.get("needs_fallback_web_search"):
+            return "fallback_search_required"
+        return "no_candidate_manual_source_research"
+    if any(candidate.get("review_status") == "exact_candidate_review" for candidate in candidate_payload):
+        return "exact_candidate_shortlist_review"
+    if any(candidate.get("review_status") == "manual_candidate_review" for candidate in candidate_payload):
+        return "manual_candidate_identity_review"
+    return "blocked_candidate_research"
+
+
 def _default_searcher() -> SearchFn:
     provider = AnimateSearchProvider("애니메이트", SEARCH_PROVIDERS["애니메이트"]["search_url"])
 
@@ -199,6 +215,10 @@ def build_report(
     exact_candidate_confirmation_shortlist: list[dict[str, Any]] = []
     status_counts: Counter[str] = Counter()
     audit_status_counts: Counter[str] = Counter()
+    blocker_counts: Counter[str] = Counter()
+    review_bucket_counts: Counter[str] = Counter()
+    fallback_bridge_items: list[dict[str, Any]] = []
+    review_work_order_items: list[dict[str, Any]] = []
     candidate_rows = 0
     items_with_candidates = 0
     candidate_items_with_official_no_results = 0
@@ -232,6 +252,54 @@ def build_report(
             _candidate_row(query, candidate, rank)
             for rank, candidate in enumerate(candidates[:candidate_limit], start=1)
         ]
+        for candidate in candidate_payload:
+            blocker_counts.update(candidate.get("exact_candidate_blockers") or [])
+        review_bucket = _review_bucket(
+            {
+                **item,
+                "needs_fallback_web_search": needs_fallback_web_search,
+            },
+            candidate_payload,
+        )
+        review_bucket_counts[review_bucket] += 1
+        if review_bucket == "fallback_search_required":
+            fallback_bridge_items.append(
+                {
+                    "catalog_index": item.get("catalog_index"),
+                    "name_ko": item.get("name_ko"),
+                    "name_ja": item.get("name_ja"),
+                    "search_query": query,
+                    "official_search_audit_status": audit_status,
+                    "fallback_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+                    "recommended_next_step": "review_domain_limited_or_legacy_store_fallback_search",
+                }
+            )
+        review_work_order_items.append(
+            {
+                "rank": len(review_work_order_items) + 1,
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "review_bucket": review_bucket,
+                "candidate_count": len(candidate_payload),
+                "top_candidate_title": (
+                    candidate_payload[0].get("candidate_title") if candidate_payload else ""
+                ),
+                "top_candidate_blockers": (
+                    candidate_payload[0].get("exact_candidate_blockers") if candidate_payload else []
+                ),
+                "official_search_audit_status": audit_status,
+                "recommended_next_step": (
+                    "confirm_exact_candidate_identity"
+                    if review_bucket == "exact_candidate_shortlist_review"
+                    else "review_candidate_variants_manually"
+                    if review_bucket == "manual_candidate_identity_review"
+                    else "use_fallback_queue_to_find_exact_source_url"
+                    if review_bucket == "fallback_search_required"
+                    else "manual_source_research"
+                ),
+            }
+        )
         if candidate_payload:
             items_with_candidates += 1
             if official_search_no_results:
@@ -306,6 +374,7 @@ def build_report(
                 "fetch_error": fetch_error,
                 "candidate_count": len(candidates),
                 "candidates": candidate_payload,
+                "review_bucket": review_bucket,
                 "source_patch_template": item.get("source_patch_template") or {},
                 "catalog_field_import_template": item.get("catalog_field_import_template") or {},
                 "auto_apply_enabled": False,
@@ -346,6 +415,11 @@ def build_report(
             "candidate_confirmation_manual_confirmed_rows": sum(
                 1 for row in candidate_confirmation_template if row.get("manual_confirmed") is True
             ),
+            "candidate_blocker_counts": _counter_rows(blocker_counts, "blocker"),
+            "review_bucket_counts": _counter_rows(review_bucket_counts, "review_bucket"),
+            "fallback_bridge_rows": len(fallback_bridge_items),
+            "manual_review_item_rows": review_bucket_counts.get("manual_candidate_identity_review", 0),
+            "blocked_candidate_research_item_rows": review_bucket_counts.get("blocked_candidate_research", 0),
             "status_counts": [[key, value] for key, value in status_counts.most_common() if key],
             "official_search_audit_status_counts": [
                 [key, value] for key, value in audit_status_counts.most_common() if key
@@ -358,6 +432,8 @@ def build_report(
             "This report is candidate-only; it never mutates catalog data.",
         ],
         "items": items,
+        "candidate_review_work_order": review_work_order_items,
+        "fallback_bridge_items": fallback_bridge_items,
         "exact_candidate_confirmation_shortlist": exact_candidate_confirmation_shortlist,
         "candidate_confirmation_template": candidate_confirmation_template,
         "automation_policy": {
