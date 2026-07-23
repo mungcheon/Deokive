@@ -2053,6 +2053,14 @@ def build_operations_public(
             "action_batch_count": image_action_queue_summary.get("action_batch_count", 0),
             "source_url_update_required_rows": image_action_queue_summary.get("source_url_update_required_rows", 0),
             "source_url_update_template_rows": image_action_queue_summary.get("source_url_update_template_rows", 0),
+            "source_url_update_search_hint_rows": image_action_queue_summary.get(
+                "source_url_update_search_hint_rows",
+                0,
+            ),
+            "source_url_update_missing_search_hint_rows": image_action_queue_summary.get(
+                "source_url_update_missing_search_hint_rows",
+                0,
+            ),
             "workstream_count": image_action_queue_summary.get("workstream_count", 0),
             "source_url_update_workstream_count": image_action_queue_summary.get(
                 "source_url_update_workstream_count", 0
@@ -2789,6 +2797,14 @@ def build_operations_public(
             "actionable_image_rows": image_action_queue_summary.get("actionable_image_rows", 0),
             "unqueued_actionable_image_rows": image_action_queue_summary.get("unqueued_actionable_image_rows", 0),
             "sample_queue_coverage": image_action_queue_summary.get("sample_queue_coverage", 0),
+            "source_url_update_search_hint_rows": image_action_queue_summary.get(
+                "source_url_update_search_hint_rows",
+                0,
+            ),
+            "source_url_update_missing_search_hint_rows": image_action_queue_summary.get(
+                "source_url_update_missing_search_hint_rows",
+                0,
+            ),
             "by_workflow": image_action_queue_summary.get("by_workflow", []),
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
             "top_image_attachment_workstreams": image_action_workstreams,
@@ -3189,6 +3205,12 @@ def build_operations_public(
         )
         open_review_queues["image_attachment_unqueued_actionable_rows"] = image_action_queue_summary.get(
             "unqueued_actionable_image_rows", 0
+        )
+        open_review_queues["image_attachment_source_url_search_hint_rows"] = image_action_queue_summary.get(
+            "source_url_update_search_hint_rows", 0
+        )
+        open_review_queues["image_attachment_source_url_missing_search_hint_rows"] = image_action_queue_summary.get(
+            "source_url_update_missing_search_hint_rows", 0
         )
     if ichiban_kuji_metadata_action_queue_summary:
         open_review_queues["ichiban_metadata_action_campaigns"] = ichiban_kuji_metadata_action_queue_summary.get(
@@ -5554,6 +5576,12 @@ def validate_report_consistency(
         expected_open_queues["image_attachment_actionable_rows"] = image_action_summary.get("actionable_image_rows", 0)
         expected_open_queues["image_attachment_unqueued_actionable_rows"] = image_action_summary.get(
             "unqueued_actionable_image_rows", 0
+        )
+        expected_open_queues["image_attachment_source_url_search_hint_rows"] = image_action_summary.get(
+            "source_url_update_search_hint_rows", 0
+        )
+        expected_open_queues["image_attachment_source_url_missing_search_hint_rows"] = image_action_summary.get(
+            "source_url_update_missing_search_hint_rows", 0
         )
     ichiban_action_queue = (
         load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}) if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists() else {}

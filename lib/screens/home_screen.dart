@@ -312,7 +312,7 @@ class _CatalogImportPanel extends StatelessWidget {
                       children: [
                         _CatalogMetaChip(
                           label:
-                              '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
+                              '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개 공개 데이터',
                           palette: palette,
                         ),
                       ],
@@ -324,7 +324,7 @@ class _CatalogImportPanel extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '중복과 예시 데이터를 제외한 공개 DB에서 검색해 바로 추가할 수 있어요.',
+            '검색해서 내 굿즈함이나 위시리스트에 바로 담을 수 있어요.',
             maxLines: 2,
             softWrap: true,
             overflow: TextOverflow.ellipsis,

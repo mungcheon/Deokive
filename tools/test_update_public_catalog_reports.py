@@ -913,6 +913,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues.get("image_attachment_action_rows"),
             image_action_summary.get("queued_image_rows"),
         )
+        self.assertEqual(
+            open_queues.get("image_attachment_source_url_search_hint_rows"),
+            image_action_summary.get("source_url_update_search_hint_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("image_attachment_source_url_missing_search_hint_rows"),
+            image_action_summary.get("source_url_update_missing_search_hint_rows"),
+        )
         self.assertEqual(image_asset_gate.get("status"), "pass")
         self.assertEqual(image_asset_gate.get("image_url_without_local_path_rows"), 0)
         self.assertEqual(image_asset_gate.get("missing_local_image_files"), 0)
@@ -1205,6 +1213,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             image_next_action.get("source_url_update_template_rows"),
             image_action_summary.get("source_url_update_template_rows"),
+        )
+        self.assertEqual(
+            image_next_action.get("source_url_update_search_hint_rows"),
+            image_action_summary.get("source_url_update_search_hint_rows"),
+        )
+        self.assertEqual(
+            image_scorecard.get("source_url_update_missing_search_hint_rows"),
+            image_action_summary.get("source_url_update_missing_search_hint_rows"),
         )
         self.assertEqual(
             image_next_action.get("by_source_store"),

@@ -392,6 +392,7 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     image_url_ready = workflow == "extract_from_existing_source_url"
     source_url_template = _source_url_import_template(item, group) if source_url_update_required else None
     review_lane = _review_lane(workflow)
+    source_search_url = _source_search_url(item, template)
     return {
         "catalog_index": item.get("catalog_index"),
         "workflow": workflow,
@@ -402,7 +403,8 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "series_name": item.get("series_name"),
         "category": item.get("category"),
         "source_url": item.get("source_url"),
-        "official_search_url": item.get("official_search_url"),
+        "official_search_url": source_search_url,
+        "source_search_url": source_search_url,
         "source_url_update_required": source_url_update_required,
         "representative_image_review_required": representative_image_review_required,
         "image_url_ready": image_url_ready,
@@ -416,7 +418,20 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     }
 
 
+def _source_search_url(item: dict[str, Any], template: dict[str, Any] | None = None) -> Any:
+    template = template if isinstance(template, dict) else {}
+    return (
+        item.get("official_search_url")
+        or item.get("source_search_url")
+        or template.get("official_search_url")
+        or template.get("source_search_url")
+    )
+
+
 def _source_url_import_template(item: dict[str, Any], group: dict[str, Any]) -> dict[str, Any]:
+    image_template = item.get("catalog_field_import_template")
+    image_template = image_template if isinstance(image_template, dict) else {}
+    source_search_url = _source_search_url(item, image_template)
     return {
         "manual_confirmed": False,
         "manual_note": "",
@@ -431,7 +446,8 @@ def _source_url_import_template(item: dict[str, Any], group: dict[str, Any]) -> 
         "name_ja": item.get("name_ja"),
         "series_name": item.get("series_name"),
         "category": item.get("category"),
-        "official_search_url": item.get("official_search_url"),
+        "official_search_url": source_search_url,
+        "source_search_url": source_search_url,
         "workflow": group.get("workflow"),
         "blocked_until": "exact_product_source_url_confirmed",
         "auto_apply_enabled": False,
@@ -526,6 +542,12 @@ def build_report(
     unqueued_actionable_rows = max(actionable_group_rows - queued_rows, 0)
     source_url_update_required_rows = sum(1 for item in action_items if item.get("source_url_update_required"))
     source_url_update_template_rows = sum(1 for item in action_items if item.get("source_url_import_template"))
+    source_url_update_search_hint_rows = sum(
+        1
+        for item in action_items
+        if item.get("source_url_update_required")
+        and (item.get("source_search_url") or item.get("official_search_url"))
+    )
     representative_image_review_required_rows = sum(
         1 for item in action_items if item.get("representative_image_review_required")
     )
@@ -565,6 +587,10 @@ def build_report(
             "by_source_store": _counter_pairs(action_items, "source_store"),
             "source_url_update_required_rows": source_url_update_required_rows,
             "source_url_update_template_rows": source_url_update_template_rows,
+            "source_url_update_search_hint_rows": source_url_update_search_hint_rows,
+            "source_url_update_missing_search_hint_rows": (
+                source_url_update_required_rows - source_url_update_search_hint_rows
+            ),
             "representative_image_review_required_rows": representative_image_review_required_rows,
             "image_url_ready_rows": image_url_ready_rows,
             "workstream_count": len(workstreams),

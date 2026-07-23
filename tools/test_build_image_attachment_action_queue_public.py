@@ -23,7 +23,10 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
                             "name_ko": "Badge",
                             "category": "Can Badge",
                             "source_url": "https://example.com/shop",
-                            "catalog_field_import_template": {"field": "image_url"},
+                            "catalog_field_import_template": {
+                                "field": "image_url",
+                                "source_search_url": "https://example.com/search?q=badge",
+                            },
                         },
                         {
                             "catalog_index": 1,
@@ -60,6 +63,8 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(dict(report["summary"]["excluded_workflow_rows"]), {"find_source_then_extract_image": 5})
         self.assertEqual(report["summary"]["source_url_update_required_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 2)
+        self.assertEqual(report["summary"]["source_url_update_search_hint_rows"], 1)
+        self.assertEqual(report["summary"]["source_url_update_missing_search_hint_rows"], 1)
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["workstream_count"], 1)
@@ -119,6 +124,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(source_template["candidate_source_url"], "")
         self.assertEqual(source_template["current_source_url"], "https://example.com/shop")
         self.assertFalse(source_template["manual_confirmed"])
+        self.assertEqual(report["batches"][0]["items"][1]["source_search_url"], "https://example.com/search?q=badge")
+        self.assertEqual(
+            report["batches"][0]["items"][1]["source_url_import_template"]["source_search_url"],
+            "https://example.com/search?q=badge",
+        )
         self.assertEqual(
             report["batches"][0]["items"][0]["required_before_image_import"],
             [
@@ -132,7 +142,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(work_order["row_count"], 2)
         self.assertEqual(work_order["source_url_update_template_rows"], 2)
         self.assertEqual(work_order["current_source_urls"], [{"source_url": "https://example.com/shop", "rows": 2}])
-        self.assertEqual(work_order["sample_items"][0]["catalog_index"], 1)
+        self.assertEqual(work_order["sample_items"][0]["catalog_index"], 2)
+        self.assertEqual(
+            work_order["sample_items"][0]["source_url_import_template"]["source_search_url"],
+            "https://example.com/search?q=badge",
+        )
         self.assertEqual(
             work_order["sample_items"][0]["source_url_import_template"]["field"],
             "source_url",

@@ -433,7 +433,7 @@ class _CatalogListTile extends StatelessWidget {
   final GoodsCatalogEntry entry;
   final int ownedCount;
   final VoidCallback onPreview;
-  final VoidCallback onAdd;
+  final Future<void> Function() onAdd;
 
   const _CatalogListTile({
     required this.entry,
@@ -505,7 +505,7 @@ class _CatalogListTile extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               FilledButton.tonalIcon(
-                onPressed: onAdd,
+                onPressed: () async => onAdd(),
                 icon: const Icon(Icons.add_rounded, size: 18),
                 label: const Text('추가'),
                 style: FilledButton.styleFrom(
