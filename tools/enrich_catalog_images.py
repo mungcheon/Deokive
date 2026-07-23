@@ -461,14 +461,38 @@ def _distinctive_query_tokens(query: str) -> list[str]:
     return out
 
 
+DISTINCTIVE_TOKEN_ALIASES = {
+    "転スラ": ("転生したらスライムだった件",),
+}
+
+
+def _candidate_matches_distinctive_token(token: str, candidate_tokens: set[str], candidate_key: str) -> bool:
+    token_key = _squash(token)
+    if not token_key:
+        return True
+    if token_key in candidate_tokens:
+        return True
+    if len(token_key) >= 4 and token_key in candidate_key:
+        return True
+    for alias in DISTINCTIVE_TOKEN_ALIASES.get(token, ()):
+        alias_key = _squash(alias)
+        if not alias_key:
+            continue
+        if alias_key in candidate_tokens:
+            return True
+        if len(alias_key) >= 4 and alias_key in candidate_key:
+            return True
+    return False
+
+
 def _has_distinctive_token_match(query: str, candidate: str) -> bool:
     tokens = _distinctive_query_tokens(query)
     if not tokens:
         return True
+    candidate_tokens = {_squash(token) for token in _tokens(candidate)}
     candidate_key = _squash(candidate)
     for token in tokens:
-        token_key = _squash(token)
-        if token_key and token_key in candidate_key:
+        if _candidate_matches_distinctive_token(token, candidate_tokens, candidate_key):
             return True
     return False
 
@@ -480,14 +504,8 @@ def _has_all_distinctive_token_matches(query: str, candidate: str) -> bool:
     candidate_tokens = {_squash(token) for token in _tokens(candidate)}
     candidate_key = _squash(candidate)
     for token in tokens:
-        token_key = _squash(token)
-        if not token_key:
-            continue
-        if token_key in candidate_tokens:
-            continue
-        if len(token_key) >= 4 and token_key in candidate_key:
-            continue
-        return False
+        if not _candidate_matches_distinctive_token(token, candidate_tokens, candidate_key):
+            return False
     return True
 
 

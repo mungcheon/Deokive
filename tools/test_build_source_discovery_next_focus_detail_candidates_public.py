@@ -103,6 +103,21 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertIn("distinctive_tokens_missing", row["exact_candidate_blockers"])
         self.assertIn("parenthetical_terms_missing", row["exact_candidate_blockers"])
 
+    def test_candidate_row_accepts_tensura_title_alias(self) -> None:
+        row = builder._candidate_row(
+            "転スラ アクリルスタンド (リムル)",
+            ProductImage(
+                title="転生したらスライムだった件 アクリルスタンド リムル",
+                image_url="https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550000000000_1.jpg&width=400&height=400&square=1",
+                source_url="https://www.animate-onlineshop.jp/pn/test/pd/1234567/",
+            ),
+            1,
+        )
+
+        self.assertEqual(row["review_status"], "exact_candidate_review")
+        self.assertTrue(row["exact_candidate_gate_passed"])
+        self.assertEqual(row["exact_candidate_blockers"], [])
+
 
 if __name__ == "__main__":
     unittest.main()

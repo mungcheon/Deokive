@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T06:54:23Z",
+  "generated_at": "2026-07-23T06:59:23Z",
   "scope": "source_discovery_next_focus_detail_candidates",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -10,22 +10,26 @@
     "pack_items": 20,
     "items_with_candidates": 4,
     "candidate_rows": 20,
-    "exact_candidate_review_rows": 0,
-    "manual_candidate_review_rows": 20,
+    "exact_candidate_review_rows": 2,
+    "manual_candidate_review_rows": 18,
     "no_candidate_items": 16,
     "candidate_fetch_error_items": 0,
     "candidate_confirmation_template_rows": 20,
-    "candidate_confirmation_exact_review_rows": 0,
-    "candidate_confirmation_manual_review_rows": 20,
+    "candidate_confirmation_exact_review_rows": 2,
+    "candidate_confirmation_manual_review_rows": 18,
     "candidate_confirmation_manual_confirmed_rows": 0,
     "status_counts": [
       [
         "manual_candidate_review",
-        20
+        18
       ],
       [
         "no_candidates_found",
         16
+      ],
+      [
+        "exact_candidate_review",
+        2
       ]
     ],
     "auto_apply_enabled": false
@@ -1022,15 +1026,13 @@
           "token_overlap": 2,
           "similarity": 1.0,
           "type_compatible": true,
-          "all_distinctive_token_match": false,
+          "all_distinctive_token_match": true,
           "parenthetical_terms_match": true,
           "product_source_url": true,
           "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": false,
-          "exact_candidate_blockers": [
-            "distinctive_tokens_missing"
-          ],
-          "review_status": "manual_candidate_review"
+          "exact_candidate_gate_passed": true,
+          "exact_candidate_blockers": [],
+          "review_status": "exact_candidate_review"
         },
         {
           "rank": 2,
@@ -1169,15 +1171,13 @@
           "token_overlap": 2,
           "similarity": 1.0,
           "type_compatible": true,
-          "all_distinctive_token_match": false,
+          "all_distinctive_token_match": true,
           "parenthetical_terms_match": true,
           "product_source_url": true,
           "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": false,
-          "exact_candidate_blockers": [
-            "distinctive_tokens_missing"
-          ],
-          "review_status": "manual_candidate_review"
+          "exact_candidate_gate_passed": true,
+          "exact_candidate_blockers": [],
+          "review_status": "exact_candidate_review"
         },
         {
           "rank": 2,
@@ -1187,15 +1187,14 @@
           "token_overlap": 1,
           "similarity": 1.0,
           "type_compatible": true,
-          "all_distinctive_token_match": false,
+          "all_distinctive_token_match": true,
           "parenthetical_terms_match": true,
           "product_source_url": true,
           "safe_source_image_pair": true,
           "exact_candidate_gate_passed": false,
           "exact_candidate_blockers": [
             "rank_not_first",
-            "token_overlap_below_2",
-            "distinctive_tokens_missing"
+            "token_overlap_below_2"
           ],
           "review_status": "manual_candidate_review"
         },
@@ -1229,14 +1228,13 @@
           "token_overlap": 2,
           "similarity": 1.0,
           "type_compatible": true,
-          "all_distinctive_token_match": false,
+          "all_distinctive_token_match": true,
           "parenthetical_terms_match": true,
           "product_source_url": true,
           "safe_source_image_pair": true,
           "exact_candidate_gate_passed": false,
           "exact_candidate_blockers": [
-            "rank_not_first",
-            "distinctive_tokens_missing"
+            "rank_not_first"
           ],
           "review_status": "manual_candidate_review"
         },
@@ -1248,14 +1246,13 @@
           "token_overlap": 2,
           "similarity": 1.0,
           "type_compatible": true,
-          "all_distinctive_token_match": false,
+          "all_distinctive_token_match": true,
           "parenthetical_terms_match": true,
           "product_source_url": true,
           "safe_source_image_pair": true,
           "exact_candidate_gate_passed": false,
           "exact_candidate_blockers": [
-            "rank_not_first",
-            "distinctive_tokens_missing"
+            "rank_not_first"
           ],
           "review_status": "manual_candidate_review"
         }
@@ -1565,7 +1562,7 @@
       "name_ja": "転スラ アクリルスタンド (リムル)",
       "search_query": "転スラ アクリルスタンド (リムル)",
       "candidate_rank": 1,
-      "candidate_review_status": "manual_candidate_review",
+      "candidate_review_status": "exact_candidate_review",
       "candidate_title": "【グッズ-スタンドポップ】転生したらスライムだった件 アクリルスタンド/きゃらびぃ リムル",
       "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E8%BB%A2%E7%94%9F%E3%81%97%E3%81%9F%E3%82%89%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0%E3%81%A0%E3%81%A3%E3%81%9F%E4%BB%B6+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/%E3%81%8D%E3%82%83%E3%82%89%E3%81%B3%E3%81%83+%E3%83%AA%E3%83%A0%E3%83%AB/pd/1882572/",
       "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743483979_1.jpg&width=400&height=400&square=1",
@@ -1675,7 +1672,7 @@
       "name_ja": "転スラ アクリルスタンド (ミリム)",
       "search_query": "転スラ アクリルスタンド (ミリム)",
       "candidate_rank": 1,
-      "candidate_review_status": "manual_candidate_review",
+      "candidate_review_status": "exact_candidate_review",
       "candidate_title": "【グッズ-スタンドポップ】転生したらスライムだった件 アクリルスタンド/きゃらびぃ ミリム",
       "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E8%BB%A2%E7%94%9F%E3%81%97%E3%81%9F%E3%82%89%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0%E3%81%A0%E3%81%A3%E3%81%9F%E4%BB%B6+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/%E3%81%8D%E3%82%83%E3%82%89%E3%81%B3%E3%81%83+%E3%83%9F%E3%83%AA%E3%83%A0/pd/1882573/",
       "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743483986_1.jpg&width=400&height=400&square=1",
