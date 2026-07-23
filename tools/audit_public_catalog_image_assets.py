@@ -68,6 +68,48 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
     if invalid_paths:
         findings.append("some local_image_path values are absolute or escape the repository")
 
+    known_image_download_blockers = (
+        len(image_without_local)
+        + len(missing_files)
+        + len(missing_web_public_files)
+        + len(invalid_paths)
+    )
+    missing_image_url_rows = rows - len(image_url_rows)
+    download_readiness = {
+        "status": (
+            "known_image_assets_complete"
+            if known_image_download_blockers == 0
+            else "known_image_asset_download_required"
+        ),
+        "known_image_url_rows": len(image_url_rows),
+        "known_image_download_blocker_rows": known_image_download_blockers,
+        "image_url_without_local_path_rows": len(image_without_local),
+        "missing_local_image_files": len(missing_files),
+        "missing_web_public_asset_files": len(missing_web_public_files),
+        "invalid_local_image_paths": len(invalid_paths),
+        "missing_image_url_rows": missing_image_url_rows,
+        "rows_still_requiring_image_url_evidence": missing_image_url_rows,
+        "download_complete_for_known_image_urls": known_image_download_blockers == 0,
+        "next_safe_phase": (
+            "find_exact_image_urls_for_missing_rows"
+            if known_image_download_blockers == 0 and missing_image_url_rows
+            else "download_or_repair_known_image_assets"
+            if known_image_download_blockers
+            else "archive_image_asset_completion"
+        ),
+        "auto_download_ready_rows": 0,
+        "auto_apply_enabled": False,
+        "operator_message": (
+            "All catalog rows that already have image_url also have local and web-public image assets; "
+            "remaining rows first need exact image_url/source evidence before a download can be attempted."
+        )
+        if known_image_download_blockers == 0
+        else (
+            "Some rows with known image_url are missing local or web-public assets; repair those files before "
+            "moving on to image URL discovery."
+        ),
+    }
+
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -75,7 +117,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         "summary": {
             "rows": rows,
             "image_url_rows": len(image_url_rows),
-            "missing_image_url_rows": rows - len(image_url_rows),
+            "missing_image_url_rows": missing_image_url_rows,
             "local_image_path_rows": len(local_path_rows),
             "image_url_with_local_path_rows": len(both_rows),
             "image_url_without_local_path_rows": len(image_without_local),
@@ -92,7 +134,12 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             if local_path_rows
             else 1.0,
             "status": "pass" if not findings else "review_required",
+            "download_readiness_status": download_readiness["status"],
+            "known_image_download_blocker_rows": known_image_download_blockers,
+            "rows_still_requiring_image_url_evidence": missing_image_url_rows,
+            "auto_download_ready_rows": 0,
         },
+        "download_readiness": download_readiness,
         "breakdowns": {
             "by_extension": extension_counts.most_common(),
             "by_directory": directory_counts.most_common(20),

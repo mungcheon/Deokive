@@ -24,6 +24,21 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
         self.assertEqual(summary["local_asset_coverage"], 1.0)
         self.assertEqual(summary["web_public_asset_coverage"], 1.0)
         self.assertEqual(summary["status"], "pass")
+        self.assertEqual(summary["download_readiness_status"], "known_image_assets_complete")
+        self.assertEqual(summary["known_image_download_blocker_rows"], 0)
+        self.assertEqual(
+            summary["rows_still_requiring_image_url_evidence"],
+            summary["missing_image_url_rows"],
+        )
+        self.assertEqual(summary["auto_download_ready_rows"], 0)
+        self.assertTrue(
+            report["download_readiness"]["download_complete_for_known_image_urls"]
+        )
+        self.assertEqual(report["download_readiness"]["auto_download_ready_rows"], 0)
+        self.assertEqual(
+            report["download_readiness"]["next_safe_phase"],
+            "find_exact_image_urls_for_missing_rows",
+        )
         self.assertEqual(report["findings"], [])
 
     def test_report_flags_image_url_without_local_path(self) -> None:
@@ -41,6 +56,17 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
 
         self.assertEqual(report["summary"]["image_url_without_local_path_rows"], 1)
         self.assertEqual(report["summary"]["status"], "review_required")
+        self.assertEqual(
+            report["summary"]["download_readiness_status"],
+            "known_image_asset_download_required",
+        )
+        self.assertFalse(
+            report["download_readiness"]["download_complete_for_known_image_urls"]
+        )
+        self.assertEqual(
+            report["download_readiness"]["next_safe_phase"],
+            "download_or_repair_known_image_assets",
+        )
 
     def test_report_flags_missing_local_file(self) -> None:
         catalog = {
@@ -59,6 +85,11 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
         self.assertEqual(report["summary"]["missing_local_image_files"], 1)
         self.assertEqual(report["summary"]["missing_web_public_asset_files"], 1)
         self.assertEqual(report["summary"]["status"], "review_required")
+        self.assertEqual(
+            report["summary"]["download_readiness_status"],
+            "known_image_asset_download_required",
+        )
+        self.assertEqual(report["download_readiness"]["known_image_download_blocker_rows"], 2)
 
 
 if __name__ == "__main__":

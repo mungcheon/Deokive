@@ -7672,6 +7672,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["image_asset_audit"] = {
             "public_report": f"data/{IMAGE_ASSET_AUDIT.name}",
             **image_asset_audit["summary"],
+            "download_readiness": image_asset_audit.get("download_readiness", {}),
         }
         target["missing_image_priority"] = {
             "public_report": f"data/{MISSING_IMAGE_PRIORITY.name}",

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:05Z",
+  "generated_at": "2026-07-23T23:50:32Z",
   "scope": "public_catalog_image_asset_audit",
   "summary": {
     "rows": 20347,
@@ -17,7 +17,27 @@
     "invalid_local_image_paths": 0,
     "local_asset_coverage": 1.0,
     "web_public_asset_coverage": 1.0,
-    "status": "pass"
+    "status": "pass",
+    "download_readiness_status": "known_image_assets_complete",
+    "known_image_download_blocker_rows": 0,
+    "rows_still_requiring_image_url_evidence": 710,
+    "auto_download_ready_rows": 0
+  },
+  "download_readiness": {
+    "status": "known_image_assets_complete",
+    "known_image_url_rows": 19637,
+    "known_image_download_blocker_rows": 0,
+    "image_url_without_local_path_rows": 0,
+    "missing_local_image_files": 0,
+    "missing_web_public_asset_files": 0,
+    "invalid_local_image_paths": 0,
+    "missing_image_url_rows": 710,
+    "rows_still_requiring_image_url_evidence": 710,
+    "download_complete_for_known_image_urls": true,
+    "next_safe_phase": "find_exact_image_urls_for_missing_rows",
+    "auto_download_ready_rows": 0,
+    "auto_apply_enabled": false,
+    "operator_message": "All catalog rows that already have image_url also have local and web-public image assets; remaining rows first need exact image_url/source evidence before a download can be attempted."
   },
   "breakdowns": {
     "by_extension": [
