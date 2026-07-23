@@ -25,7 +25,7 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         )
 
         self.assertEqual(summary["missing_image_rows"], expected_missing)
-        self.assertGreaterEqual(summary["work_queue_rows"], expected_missing)
+        self.assertEqual(summary["work_queue_rows"], expected_missing)
         self.assertEqual(summary["queue_matched_rows"], expected_missing)
         self.assertEqual(summary["stale_queue_index_matches"], 0)
         self.assertEqual(summary["unmatched_catalog_missing_rows"], 0)
