@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T19:22:13Z",
+  "generated_at": "2026-07-23T21:16:36Z",
   "summary": {
     "catalog_ichiban_rows": 7898,
     "campaign_rows": 614,
@@ -11,6 +11,10 @@
     "metadata_fast_review_campaigns": 20,
     "missing_release_date_rows": 8,
     "missing_official_price_jpy_rows": 350,
+    "missing_official_price_jpy_campaign_groups": 41,
+    "official_price_jpy_review_queue_campaigns": 41,
+    "metadata_review_queue_covers_all_price_campaign_groups": true,
+    "avg_missing_price_rows_per_campaign_group": 8.54,
     "probable_reissue_review_groups": 20,
     "probable_reissue_work_order_rows": 20,
     "dedupe_ichiban_reissue_review_groups": 46,
@@ -33,6 +37,10 @@
       "phase": "confirm_ichiban_campaign_metadata",
       "label": "Confirm official campaign metadata",
       "rows": 44,
+      "price_resolution_unit": "campaign_draw_price",
+      "official_price_jpy_review_queue_campaigns": 41,
+      "missing_official_price_jpy_rows": 350,
+      "avg_missing_price_rows_per_campaign_group": 8.54,
       "blocking_reason": "Campaign release dates and draw prices must be confirmed from official campaign pages.",
       "public_reports": [
         "data/ichiban_kuji_history_public.json",
@@ -40,6 +48,12 @@
         "data/ichiban_kuji_metadata_fast_review_public.json"
       ],
       "recommended_next_action": "Work release-date and official-price templates before mutating catalog metadata.",
+      "guardrails": [
+        "confirm draw price from the labeled official campaign page or captured official archive",
+        "do not use Last One or Double Chance exception rows as draw-price evidence",
+        "do not overwrite zero-price Last One or Double Chance exception rows",
+        "apply confirmed draw price only to rows in the same campaign URL scope"
+      ],
       "auto_apply_enabled": false
     },
     {

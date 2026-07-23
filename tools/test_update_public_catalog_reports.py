@@ -457,6 +457,41 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["ichiban_kuji_historical_roadmap"]["metadata_actionable_campaigns"],
             roadmap["summary"]["metadata_actionable_campaigns"],
         )
+        ichiban_history = reports.load_json(reports.ICHIIBAN_KUJI_HISTORY)
+        self.assertEqual(
+            ichiban_history["summary"]["official_price_jpy_review_queue_campaigns"],
+            41,
+        )
+        self.assertEqual(
+            ichiban_history["summary"][
+                "missing_official_price_jpy_campaign_groups"
+            ],
+            41,
+        )
+        self.assertTrue(
+            ichiban_history["summary"][
+                "metadata_review_queue_covers_all_price_campaign_groups"
+            ]
+        )
+        self.assertEqual(
+            ichiban_history["metadata_resolution_summary"][
+                "price_resolution_unit"
+            ],
+            "campaign_draw_price",
+        )
+        self.assertIn(
+            "do not overwrite zero-price Last One or Double Chance exception rows",
+            ichiban_history["metadata_resolution_summary"]["guardrails"],
+        )
+        self.assertEqual(
+            roadmap["summary"]["official_price_jpy_review_queue_campaigns"],
+            41,
+        )
+        self.assertTrue(
+            roadmap["summary"][
+                "metadata_review_queue_covers_all_price_campaign_groups"
+            ]
+        )
         self.assertIs(roadmap["summary"]["auto_apply_enabled"], False)
         self.assertIs(roadmap["summary"]["auto_merge_enabled"], False)
         self.assertIs(roadmap["summary"]["auto_delete_enabled"], False)
@@ -802,6 +837,19 @@ class PublicCatalogReportTests(unittest.TestCase):
                     "campaign_metadata_review_queue_rows": 2,
                     "missing_release_date_rows": 1,
                     "missing_official_price_jpy_rows": 4,
+                    "missing_official_price_jpy_campaign_groups": 2,
+                    "official_price_jpy_review_queue_campaigns": 2,
+                    "metadata_review_queue_covers_all_price_campaign_groups": True,
+                    "avg_missing_price_rows_per_campaign_group": 2.0,
+                },
+                "metadata_resolution_summary": {
+                    "price_resolution_unit": "campaign_draw_price",
+                    "official_price_jpy_review_queue_campaigns": 2,
+                    "missing_official_price_jpy_rows": 4,
+                    "avg_catalog_rows_per_price_campaign": 2.0,
+                    "guardrails": [
+                        "do not overwrite zero-price Last One or Double Chance exception rows"
+                    ],
                 }
             },
             ichiban_metadata_action_queue={
@@ -871,10 +919,20 @@ class PublicCatalogReportTests(unittest.TestCase):
         summary = roadmap["summary"]
         self.assertEqual(summary["catalog_ichiban_rows"], 12)
         self.assertEqual(summary["metadata_actionable_campaigns"], 2)
+        self.assertEqual(summary["official_price_jpy_review_queue_campaigns"], 2)
+        self.assertTrue(summary["metadata_review_queue_covers_all_price_campaign_groups"])
         self.assertEqual(summary["probable_reissue_review_groups"], 2)
         self.assertEqual(summary["roadmap_phase_count"], 5)
         self.assertEqual(roadmap["phases"][0]["phase"], "confirm_ichiban_campaign_metadata")
         self.assertEqual(roadmap["phases"][0]["rows"], 2)
+        self.assertEqual(
+            roadmap["phases"][0]["price_resolution_unit"],
+            "campaign_draw_price",
+        )
+        self.assertIn(
+            "do not overwrite zero-price Last One or Double Chance exception rows",
+            roadmap["phases"][0]["guardrails"],
+        )
         self.assertEqual(roadmap["phases"][1]["rows"], 2)
         self.assertIs(summary["auto_apply_enabled"], False)
         self.assertIs(summary["auto_merge_enabled"], False)

@@ -5907,6 +5907,41 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
             str(row.get("slug") or row.get("group_key") or ""),
         ),
     )
+    price_review_queue_campaigns = sum(
+        1
+        for row in campaign_metadata_review_queue
+        if "official_price_jpy" in (row.get("missing_fields") or [])
+    )
+    release_review_queue_campaigns = sum(
+        1
+        for row in campaign_metadata_review_queue
+        if "release_date" in (row.get("missing_fields") or [])
+    )
+    price_rows_per_campaign = (
+        round(len(missing_price) / len(missing_price_groups), 2)
+        if missing_price_groups
+        else 0
+    )
+    metadata_resolution_summary = {
+        "missing_release_date_rows": len(missing_release),
+        "release_date_review_queue_campaigns": release_review_queue_campaigns,
+        "missing_official_price_jpy_rows": len(missing_price),
+        "missing_official_price_jpy_campaign_groups": len(missing_price_groups),
+        "official_price_jpy_review_queue_campaigns": price_review_queue_campaigns,
+        "avg_catalog_rows_per_price_campaign": price_rows_per_campaign,
+        "price_patch_scope": "all_catalog_rows_for_campaign_url",
+        "price_resolution_unit": "campaign_draw_price",
+        "review_queue_covers_all_price_campaign_groups": (
+            price_review_queue_campaigns == len(missing_price_groups)
+        ),
+        "guardrails": [
+            "confirm draw price from the labeled official campaign page or captured official archive",
+            "do not use Last One or Double Chance exception rows as draw-price evidence",
+            "do not overwrite zero-price Last One or Double Chance exception rows",
+            "apply confirmed draw price only to rows in the same campaign URL scope",
+        ],
+        "auto_apply_enabled": False,
+    }
 
     latest_campaigns = sorted(
         campaign_rows,
@@ -5925,6 +5960,11 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
             "missing_release_date_campaign_groups": len(missing_release_groups),
             "missing_official_price_jpy_rows": len(missing_price),
             "missing_official_price_jpy_campaign_groups": len(missing_price_groups),
+            "official_price_jpy_review_queue_campaigns": price_review_queue_campaigns,
+            "avg_missing_price_rows_per_campaign_group": price_rows_per_campaign,
+            "metadata_review_queue_covers_all_price_campaign_groups": (
+                price_review_queue_campaigns == len(missing_price_groups)
+            ),
             "campaign_metadata_review_queue_rows": len(campaign_metadata_review_queue),
             "image_coverage": round(
                 (len(kuji_items) - sum(1 for item in kuji_items if not present(item.get("image_url")))) / len(kuji_items),
@@ -5977,6 +6017,7 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
         "missing_release_date_campaigns": missing_release_groups,
         "missing_official_price_jpy_campaigns": missing_price_groups,
         "campaign_metadata_review_queue": campaign_metadata_review_queue[:120],
+        "metadata_resolution_summary": metadata_resolution_summary,
         "automation_policy": {
             "auto_import_campaigns": False,
             "requires_manual_review": True,
@@ -5998,6 +6039,7 @@ def build_ichiban_kuji_historical_roadmap_public(
     ichiban_kuji_prize_name_image_patch_candidates: dict[str, Any],
 ) -> dict[str, Any]:
     history = ichiban_kuji_history.get("summary", {})
+    metadata_resolution = ichiban_kuji_history.get("metadata_resolution_summary", {})
     metadata_action = ichiban_metadata_action_queue.get("summary", {})
     metadata_fast = ichiban_metadata_fast_review.get("summary", {})
     prize_policy = ichiban_kuji_prize_policy_issue_queue.get("summary", {})
@@ -6018,6 +6060,18 @@ def build_ichiban_kuji_historical_roadmap_public(
             "label": "Confirm official campaign metadata",
             "rows": value(metadata_action, "actionable_campaigns")
             or value(history, "campaign_metadata_review_queue_rows"),
+            "price_resolution_unit": metadata_resolution.get(
+                "price_resolution_unit", "campaign_draw_price"
+            ),
+            "official_price_jpy_review_queue_campaigns": value(
+                metadata_resolution, "official_price_jpy_review_queue_campaigns"
+            ),
+            "missing_official_price_jpy_rows": value(
+                metadata_resolution, "missing_official_price_jpy_rows"
+            ),
+            "avg_missing_price_rows_per_campaign_group": metadata_resolution.get(
+                "avg_catalog_rows_per_price_campaign", 0
+            ),
             "blocking_reason": "Campaign release dates and draw prices must be confirmed from official campaign pages.",
             "public_reports": [
                 f"data/{ICHIIBAN_KUJI_HISTORY.name}",
@@ -6025,6 +6079,7 @@ def build_ichiban_kuji_historical_roadmap_public(
                 f"data/{ICHIIBAN_KUJI_METADATA_FAST_REVIEW.name}",
             ],
             "recommended_next_action": "Work release-date and official-price templates before mutating catalog metadata.",
+            "guardrails": metadata_resolution.get("guardrails", []),
             "auto_apply_enabled": False,
         },
         {
@@ -6106,6 +6161,18 @@ def build_ichiban_kuji_historical_roadmap_public(
         "missing_release_date_rows": value(history, "missing_release_date_rows"),
         "missing_official_price_jpy_rows": value(
             history, "missing_official_price_jpy_rows"
+        ),
+        "missing_official_price_jpy_campaign_groups": value(
+            history, "missing_official_price_jpy_campaign_groups"
+        ),
+        "official_price_jpy_review_queue_campaigns": value(
+            history, "official_price_jpy_review_queue_campaigns"
+        ),
+        "metadata_review_queue_covers_all_price_campaign_groups": history.get(
+            "metadata_review_queue_covers_all_price_campaign_groups", False
+        ),
+        "avg_missing_price_rows_per_campaign_group": history.get(
+            "avg_missing_price_rows_per_campaign_group", 0
         ),
         "probable_reissue_review_groups": value(
             prize_policy, "probable_reissue_review_groups"

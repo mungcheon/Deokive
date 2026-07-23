@@ -9,6 +9,9 @@
     "missing_release_date_campaign_groups": 1,
     "missing_official_price_jpy_rows": 350,
     "missing_official_price_jpy_campaign_groups": 41,
+    "official_price_jpy_review_queue_campaigns": 41,
+    "avg_missing_price_rows_per_campaign_group": 8.54,
+    "metadata_review_queue_covers_all_price_campaign_groups": true,
     "campaign_metadata_review_queue_rows": 42,
     "image_coverage": 1.0,
     "source_url_coverage": 1.0
@@ -4173,6 +4176,24 @@
       "recommended_action": "Verify official campaign page before applying missing campaign metadata."
     }
   ],
+  "metadata_resolution_summary": {
+    "missing_release_date_rows": 8,
+    "release_date_review_queue_campaigns": 1,
+    "missing_official_price_jpy_rows": 350,
+    "missing_official_price_jpy_campaign_groups": 41,
+    "official_price_jpy_review_queue_campaigns": 41,
+    "avg_catalog_rows_per_price_campaign": 8.54,
+    "price_patch_scope": "all_catalog_rows_for_campaign_url",
+    "price_resolution_unit": "campaign_draw_price",
+    "review_queue_covers_all_price_campaign_groups": true,
+    "guardrails": [
+      "confirm draw price from the labeled official campaign page or captured official archive",
+      "do not use Last One or Double Chance exception rows as draw-price evidence",
+      "do not overwrite zero-price Last One or Double Chance exception rows",
+      "apply confirmed draw price only to rows in the same campaign URL scope"
+    ],
+    "auto_apply_enabled": false
+  },
   "automation_policy": {
     "auto_import_campaigns": false,
     "requires_manual_review": true,
