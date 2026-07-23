@@ -206,6 +206,9 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "ichiban_reissue_review_rows": 92,
                     "ichiban_probable_reissue_review_groups": 20,
                     "ichiban_probable_reissue_sample_rows": 8,
+                    "ichiban_reissue_work_order_rows": 20,
+                    "ichiban_reissue_decision_template_rows": 20,
+                    "ichiban_reissue_manual_confirmed_rows": 0,
                     "ichiban_reissue_protected_groups": 0,
                     "ichiban_reissue_protected_rows": 0,
                 }
@@ -556,6 +559,24 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             ichiban_reissue_dedupe_action["evidence"]["ichiban_probable_reissue_review_groups"],
             20,
         )
+        self.assertEqual(
+            ichiban_reissue_dedupe_action["evidence"]["ichiban_reissue_work_order_rows"],
+            20,
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_action["evidence"]["ichiban_reissue_decision_template_rows"],
+            20,
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_action["evidence"]["ichiban_reissue_manual_confirmed_rows"],
+            0,
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_action["next_step"],
+            "fill_ichiban_reissue_decision_template_before_dedupe",
+        )
+        self.assertEqual(report["summary"]["dedupe_ichiban_reissue_work_order_rows"], 20)
+        self.assertEqual(report["summary"]["dedupe_ichiban_reissue_decision_template_rows"], 20)
         kuji_action = next(
             action
             for action in report["actions"]

@@ -730,7 +730,7 @@ def _build_plan(load_report) -> dict[str, Any]:
             status="manual_review",
             rows=_count(dedupe_action_summary, "ichiban_reissue_review_groups"),
             command="Verify same-name Ichiban Kuji rows against campaign pages before any dedupe decision.",
-            next_step="verify_ichiban_campaign_pages_before_dedupe",
+            next_step="fill_ichiban_reissue_decision_template_before_dedupe",
             blocker="Same display names can be re-releases or campaign-specific prizes; do not merge until official campaign evidence is checked.",
             evidence={
                 "ichiban_reissue_review_groups": _count(
@@ -744,6 +744,15 @@ def _build_plan(load_report) -> dict[str, Any]:
                 ),
                 "ichiban_probable_reissue_sample_rows": _count(
                     dedupe_action_summary, "ichiban_probable_reissue_sample_rows"
+                ),
+                "ichiban_reissue_work_order_rows": _count(
+                    dedupe_action_summary, "ichiban_reissue_work_order_rows"
+                ),
+                "ichiban_reissue_decision_template_rows": _count(
+                    dedupe_action_summary, "ichiban_reissue_decision_template_rows"
+                ),
+                "ichiban_reissue_manual_confirmed_rows": _count(
+                    dedupe_action_summary, "ichiban_reissue_manual_confirmed_rows"
                 ),
                 "ichiban_reissue_protected_groups": _count(
                     dedupe_action_summary, "ichiban_reissue_protected_groups"
@@ -1096,6 +1105,15 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "dedupe_ichiban_probable_reissue_review_groups": _count(
                 dedupe_action_summary, "ichiban_probable_reissue_review_groups"
+            ),
+            "dedupe_ichiban_reissue_work_order_rows": _count(
+                dedupe_action_summary, "ichiban_reissue_work_order_rows"
+            ),
+            "dedupe_ichiban_reissue_decision_template_rows": _count(
+                dedupe_action_summary, "ichiban_reissue_decision_template_rows"
+            ),
+            "dedupe_ichiban_reissue_manual_confirmed_rows": _count(
+                dedupe_action_summary, "ichiban_reissue_manual_confirmed_rows"
             ),
             "image_action_source_url_update_required_rows": _count(
                 image_action_summary, "source_url_update_required_rows"

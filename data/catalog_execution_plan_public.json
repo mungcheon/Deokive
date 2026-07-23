@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T02:49:41Z",
+  "generated_at": "2026-07-23T04:06:26Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 22,
@@ -120,6 +120,9 @@
     "dedupe_fast_review_same_source_url_groups": 38,
     "dedupe_ichiban_reissue_review_groups": 46,
     "dedupe_ichiban_probable_reissue_review_groups": 20,
+    "dedupe_ichiban_reissue_work_order_rows": 20,
+    "dedupe_ichiban_reissue_decision_template_rows": 20,
+    "dedupe_ichiban_reissue_manual_confirmed_rows": 0,
     "image_action_source_url_update_required_rows": 50,
     "image_candidate_provider_items": 496,
     "image_candidate_manual_or_blocked_items": 228,
@@ -1345,7 +1348,7 @@
       "status": "manual_review",
       "rows": 46,
       "command": "Verify same-name Ichiban Kuji rows against campaign pages before any dedupe decision.",
-      "next_step": "verify_ichiban_campaign_pages_before_dedupe",
+      "next_step": "fill_ichiban_reissue_decision_template_before_dedupe",
       "blocker": "Same display names can be re-releases or campaign-specific prizes; do not merge until official campaign evidence is checked.",
       "auto_apply_enabled": false,
       "evidence": {
@@ -1353,6 +1356,9 @@
         "ichiban_reissue_review_rows": 92,
         "ichiban_probable_reissue_review_groups": 20,
         "ichiban_probable_reissue_sample_rows": 40,
+        "ichiban_reissue_work_order_rows": 20,
+        "ichiban_reissue_decision_template_rows": 20,
+        "ichiban_reissue_manual_confirmed_rows": 0,
         "ichiban_reissue_protected_groups": 0,
         "ichiban_reissue_protected_rows": 0
       }

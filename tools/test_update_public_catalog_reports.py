@@ -634,6 +634,12 @@ class PublicCatalogReportTests(unittest.TestCase):
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "ichiban_kuji_reissue_dedupe_review"
         )
+        execution_plan = reports.load_json(reports.EXECUTION_PLAN)
+        ichiban_reissue_execution_action = next(
+            row
+            for row in execution_plan.get("actions", [])
+            if row.get("workstream") == "ichiban_kuji_reissue_dedupe_review"
+        )
         ichiban_action = reports.load_json(reports.ICHIIBAN_KUJI_METADATA_ACTION_QUEUE)
         ichiban_action_summary = ichiban_action.get("summary", {})
         ichiban_prize_audit = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT)
@@ -1118,6 +1124,22 @@ class PublicCatalogReportTests(unittest.TestCase):
             ichiban_reissue_dedupe_next_action.get("review_groups"),
             dedupe_action_summary.get("ichiban_reissue_review_groups"),
         )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("work_order_rows"),
+            dedupe_action_summary.get("ichiban_reissue_work_order_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("decision_template_rows"),
+            dedupe_action_summary.get("ichiban_reissue_decision_template_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("manual_confirmed_rows"),
+            dedupe_action_summary.get("ichiban_reissue_manual_confirmed_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("next_step"),
+            "fill_ichiban_reissue_decision_template_before_dedupe",
+        )
         self.assertGreater(len(ichiban_reissue_dedupe_agent_batches), 0)
         self.assertEqual(ichiban_reissue_dedupe_agent_batches[0]["rows"], 2)
         self.assertEqual(len(ichiban_reissue_dedupe_agent_batches[0]["sample_items"]), 2)
@@ -1176,6 +1198,22 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             ichiban_prize_next_action.get("prize_policy_review_batch_count"),
             ichiban_prize_audit_summary.get("prize_policy_review_batch_count"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get("ichiban_reissue_work_order_rows"),
+            dedupe_action_summary.get("ichiban_reissue_work_order_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get("ichiban_reissue_decision_template_rows"),
+            dedupe_action_summary.get("ichiban_reissue_decision_template_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get("ichiban_reissue_manual_confirmed_rows"),
+            dedupe_action_summary.get("ichiban_reissue_manual_confirmed_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action.get("next_step"),
+            "fill_ichiban_reissue_decision_template_before_dedupe",
         )
         self.assertIs(ichiban_prize_next_action.get("zero_price_exception_policy_pass"), True)
         self.assertEqual(

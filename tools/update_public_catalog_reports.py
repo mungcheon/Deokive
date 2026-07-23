@@ -2272,8 +2272,18 @@ def build_operations_public(
                 "ichiban_probable_reissue_review_groups", 0
             ),
             "review_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_rows", 0),
+            "work_order_rows": dedupe_action_queue_summary.get("ichiban_reissue_work_order_rows", 0),
+            "decision_template_rows": dedupe_action_queue_summary.get(
+                "ichiban_reissue_decision_template_rows", 0
+            ),
+            "manual_confirmed_rows": dedupe_action_queue_summary.get(
+                "ichiban_reissue_manual_confirmed_rows", 0
+            ),
             "protected_groups": dedupe_action_queue_summary.get("ichiban_reissue_protected_groups", 0),
-            "recommended_next_action": "Verify same-name 1kuji rows against their campaign pages before any dedupe import.",
+            "next_step": "fill_ichiban_reissue_decision_template_before_dedupe",
+            "recommended_next_action": (
+                "Fill the Ichiban reissue decision template from the work order before any dedupe import."
+            ),
         } if dedupe_action_queue_summary else None,
         {
             "priority": 50,
@@ -2801,9 +2811,16 @@ def build_operations_public(
                 "ichiban_probable_reissue_review_groups", 0
             ),
             "review_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_rows", 0),
+            "work_order_rows": dedupe_action_queue_summary.get("ichiban_reissue_work_order_rows", 0),
+            "decision_template_rows": dedupe_action_queue_summary.get(
+                "ichiban_reissue_decision_template_rows", 0
+            ),
+            "manual_confirmed_rows": dedupe_action_queue_summary.get(
+                "ichiban_reissue_manual_confirmed_rows", 0
+            ),
             "protected_groups": dedupe_action_queue_summary.get("ichiban_reissue_protected_groups", 0),
             "primary_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
-            "next_step": "verify_ichiban_campaign_pages_before_dedupe",
+            "next_step": "fill_ichiban_reissue_decision_template_before_dedupe",
             "auto_apply_enabled": False,
         } if dedupe_action_queue_summary else None,
         {
