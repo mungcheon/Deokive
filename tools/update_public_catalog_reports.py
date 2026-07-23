@@ -101,6 +101,7 @@ SOURCE_DISCOVERY_STORE_BOTTLENECKS = DATA / "source_discovery_store_bottlenecks_
 SOURCE_DISCOVERY_FOCUS_PACKS = DATA / "source_discovery_focus_packs_public.json"
 SOURCE_DISCOVERY_FOCUS_TEMPLATE = DATA / "source_discovery_focus_confirmed_template_public.json"
 SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT = DATA / "source_discovery_focus_template_import_dry_run_public.json"
+SOURCE_DISCOVERY_ROADMAP = DATA / "source_discovery_completion_roadmap_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT = DATA / "source_discovery_next_focus_pack_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
@@ -711,6 +712,165 @@ def build_source_discovery_import_dry_run_public(
         "skip_reason_counts": skip_reasons.most_common(),
         "updated": result["updated"],
         "skipped_sample": result["skipped"][:100],
+    }
+
+
+def build_source_discovery_completion_roadmap_public(
+    *,
+    generated_at: str,
+    missing_image_actionability: dict[str, Any],
+    source_discovery_action_queue: dict[str, Any],
+    source_discovery_store_bottlenecks: dict[str, Any],
+    source_discovery_focus_packs: dict[str, Any],
+    source_discovery_next_focus_pack: dict[str, Any],
+    source_discovery_next_focus_fallback_queue: dict[str, Any],
+    manual_source_url_search_queue: dict[str, Any],
+    provider_missing_source_url_queue: dict[str, Any],
+    candidate_source_url_review_queue: dict[str, Any],
+    image_attachment_action_queue: dict[str, Any],
+) -> dict[str, Any]:
+    action_summary = source_discovery_action_queue.get("summary", {})
+    bottleneck_summary = source_discovery_store_bottlenecks.get("summary", {})
+    focus_summary = source_discovery_focus_packs.get("summary", {})
+    next_focus_summary = source_discovery_next_focus_pack.get("summary", {})
+    fallback_summary = source_discovery_next_focus_fallback_queue.get("summary", {})
+    manual_summary = manual_source_url_search_queue.get("summary", {})
+    provider_summary = provider_missing_source_url_queue.get("summary", {})
+    candidate_summary = candidate_source_url_review_queue.get("summary", {})
+    image_action_summary = image_attachment_action_queue.get("summary", {})
+    missing_summary = missing_image_actionability.get("summary", {})
+
+    stores = [
+        row
+        for row in source_discovery_store_bottlenecks.get("stores", [])
+        if isinstance(row, dict)
+    ]
+    focus_packs = [
+        row
+        for row in source_discovery_focus_packs.get("focus_packs", [])
+        if isinstance(row, dict)
+    ]
+
+    top_store_steps = []
+    for rank, store in enumerate(stores[:10], start=1):
+        rows = int(store.get("rows") or 0)
+        pack_count = sum(
+            1
+            for pack in focus_packs
+            if str(pack.get("source_store") or "") == str(store.get("source_store") or "")
+        )
+        top_store_steps.append(
+            {
+                "rank": rank,
+                "source_store": store.get("source_store"),
+                "rows": rows,
+                "estimated_image_rows_unblocked_after_source_confirmation": rows,
+                "pack_count": pack_count,
+                "top_category": store.get("top_category"),
+                "top_allowed_source_domain": store.get("top_allowed_source_domain"),
+                "first_batch_id": store.get("first_batch_id"),
+                "next_step": store.get("next_step")
+                or "open_official_search_and_confirm_exact_product_source_url",
+                "auto_apply_enabled": False,
+            }
+        )
+
+    current_pack = {
+        "focus_pack_id": next_focus_summary.get("focus_pack_id"),
+        "source_store": next_focus_summary.get("source_store"),
+        "target_category": next_focus_summary.get("target_category"),
+        "pack_items": next_focus_summary.get("pack_items", 0),
+        "remaining_review_rows": next_focus_summary.get("remaining_review_rows", 0),
+        "blocked_rows": next_focus_summary.get("blocked_rows", 0),
+        "fallback_queue_rows": fallback_summary.get("queue_rows", 0),
+        "first_official_search_url": next_focus_summary.get("first_official_search_url"),
+        "first_fallback_store_search_url": fallback_summary.get("first_fallback_store_search_url"),
+        "recommended_action": "confirm current focus pack source URLs before image attachment",
+    }
+
+    phases = [
+        {
+            "phase": 1,
+            "name": "current_focus_pack_source_confirmation",
+            "rows": int(next_focus_summary.get("pack_items") or 0),
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
+            "blocked_until": "exact_product_detail_source_url_confirmed",
+            "next_machine_step": "import_confirmed_source_discovery_rows_after_manual_review",
+        },
+        {
+            "phase": 2,
+            "name": "top_store_source_confirmation",
+            "rows": int(focus_summary.get("remaining_focus_review_rows") or 0),
+            "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_PACKS.name}",
+            "blocked_until": "exact_product_detail_source_url_confirmed",
+            "next_machine_step": "rotate_focus_packs_until_top_5_stores_are_confirmed",
+        },
+        {
+            "phase": 3,
+            "name": "non_focus_source_confirmation",
+            "rows": int(action_summary.get("queued_source_rows") or 0)
+            - int(focus_summary.get("focus_source_rows") or 0),
+            "public_report": f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
+            "blocked_until": "exact_product_detail_source_url_confirmed",
+            "next_machine_step": "build_next_focus_pack_from_remaining_store_bottlenecks",
+        },
+        {
+            "phase": 4,
+            "name": "generic_or_missing_provider_source_replacement",
+            "rows": int(manual_summary.get("manual_search_required_rows") or 0)
+            + int(provider_summary.get("provider_missing_rows") or 0)
+            + int(candidate_summary.get("candidate_review_rows") or 0),
+            "public_report": f"data/{IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.name}",
+            "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+            "next_machine_step": "import_confirmed_image_attachment_source_url_updates",
+        },
+        {
+            "phase": 5,
+            "name": "image_attachment_after_source_confirmation",
+            "rows": int(image_action_summary.get("actionable_image_rows") or 0),
+            "public_report": f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+            "blocked_until": "exact_source_page_product_image_confirmed",
+            "next_machine_step": "import_confirmed_image_attachment_rows_after_manual_review",
+        },
+    ]
+
+    source_rows = int(action_summary.get("queued_source_rows") or 0)
+    focus_rows = int(focus_summary.get("focus_source_rows") or 0)
+    top_10_rows = int(bottleneck_summary.get("top_10_store_rows") or 0)
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "scope": "source_discovery_completion_roadmap",
+        "summary": {
+            "missing_image_rows": int(missing_summary.get("missing_image_rows") or 0),
+            "source_first_rows": int(missing_summary.get("source_first_rows") or 0),
+            "queued_source_rows": source_rows,
+            "focus_source_rows": focus_rows,
+            "focus_coverage": round(focus_rows / source_rows, 4) if source_rows else 0,
+            "top_10_store_rows": top_10_rows,
+            "top_10_store_coverage": round(top_10_rows / source_rows, 4) if source_rows else 0,
+            "current_focus_pack_rows": int(next_focus_summary.get("pack_items") or 0),
+            "current_focus_fallback_rows": int(fallback_summary.get("queue_rows") or 0),
+            "generic_source_replacement_rows": int(
+                image_action_summary.get("source_url_update_required_rows") or 0
+            ),
+            "manual_source_search_rows": int(manual_summary.get("manual_search_required_rows") or 0),
+            "provider_missing_rows": int(provider_summary.get("provider_missing_rows") or 0),
+            "candidate_source_review_rows": int(candidate_summary.get("candidate_review_rows") or 0),
+            "direct_image_action_rows": int(image_action_summary.get("actionable_image_rows") or 0),
+            "roadmap_phase_count": len(phases),
+            "auto_apply_enabled": False,
+        },
+        "current_focus_pack": current_pack,
+        "top_store_steps": top_store_steps,
+        "phases": phases,
+        "automation_policy": {
+            "auto_apply_enabled": False,
+            "auto_import_source_url": False,
+            "auto_import_image_url": False,
+            "requires_manual_review": True,
+            "reason": "Roadmap only: exact product source URLs and image identity must be manually confirmed before imports.",
+        },
     }
 
 
@@ -6857,6 +7017,19 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_next_focus_fallback_queue=source_discovery_next_focus_fallback_queue,
         generated_at=generated_at,
     )
+    source_discovery_completion_roadmap = build_source_discovery_completion_roadmap_public(
+        generated_at=generated_at,
+        missing_image_actionability=missing_image_actionability,
+        source_discovery_action_queue=source_discovery_action_queue,
+        source_discovery_store_bottlenecks=source_discovery_store_bottlenecks,
+        source_discovery_focus_packs=source_discovery_focus_packs,
+        source_discovery_next_focus_pack=source_discovery_next_focus_pack,
+        source_discovery_next_focus_fallback_queue=source_discovery_next_focus_fallback_queue,
+        manual_source_url_search_queue=manual_source_url_search_queue,
+        provider_missing_source_url_queue=provider_missing_source_url_queue,
+        candidate_source_url_review_queue=candidate_source_url_review_queue,
+        image_attachment_action_queue=image_attachment_action_queue,
+    )
     operations = build_operations_public(
         generated_at,
         items,
@@ -6914,6 +7087,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "catalog_image_attachment_action_queue_public.json": image_attachment_action_queue,
             "source_discovery_focus_confirmed_template_public.json": source_discovery_focus_template,
             "source_discovery_focus_template_import_dry_run_public.json": source_discovery_focus_template_import,
+            "source_discovery_completion_roadmap_public.json": source_discovery_completion_roadmap,
             "source_discovery_next_focus_pack_public.json": source_discovery_next_focus_pack,
             "source_discovery_next_focus_pack_fetch_audit_public.json": source_discovery_next_focus_fetch_audit,
             "source_discovery_next_focus_fallback_queue_public.json": source_discovery_next_focus_fallback_queue,
@@ -7083,6 +7257,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "updated_rows": source_discovery_next_focus_fallback_import["updated_rows"],
             "skipped_rows": source_discovery_next_focus_fallback_import["skipped_rows"],
             "skip_reason_counts": source_discovery_next_focus_fallback_import["skip_reason_counts"],
+        }
+        target["source_discovery_completion_roadmap"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_ROADMAP.name}",
+            **source_discovery_completion_roadmap["summary"],
         }
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
             target["animate_missing_image_search"] = copy_report_summary(
@@ -7456,6 +7634,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(SOURCE_DISCOVERY_FOCUS_PACKS, source_discovery_focus_packs)
         write_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, source_discovery_focus_template)
         write_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, source_discovery_focus_template_import)
+        write_json(SOURCE_DISCOVERY_ROADMAP, source_discovery_completion_roadmap)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, source_discovery_next_focus_detail_candidates)
@@ -7521,6 +7700,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_FOCUS_PACKS.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_FOCUS_TEMPLATE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_ROADMAP.relative_to(ROOT)),
             str(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.relative_to(ROOT)),
             str(OFFICIAL_DETAIL_REVIEW_BATCHES.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),

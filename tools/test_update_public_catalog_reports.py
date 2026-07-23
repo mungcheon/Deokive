@@ -62,6 +62,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_discovery_next_focus_detail_candidates_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_fallback_queue_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_fallback_import_dry_run_public.json", updated_files)
+        self.assertIn("data/source_discovery_completion_roadmap_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
@@ -184,6 +185,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_next_focus_fallback_queue"]["queue_rows"],
         )
         self.assertIs(quality["source_discovery_next_focus_fallback_import_dry_run"]["write"], False)
+        self.assertEqual(quality["source_discovery_completion_roadmap"]["queued_source_rows"], 632)
+        self.assertEqual(quality["source_discovery_completion_roadmap"]["current_focus_pack_rows"], 20)
+        self.assertGreaterEqual(quality["source_discovery_completion_roadmap"]["top_10_store_coverage"], 0.8)
+        self.assertIs(quality["source_discovery_completion_roadmap"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():
@@ -573,6 +578,85 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("same_name_distinct_barcode_variant_protected", lanes)
         self.assertIs(summary["auto_merge_enabled"], False)
         self.assertIs(summary["auto_delete_enabled"], False)
+
+    def test_source_discovery_completion_roadmap_summarizes_next_steps(self):
+        roadmap = reports.build_source_discovery_completion_roadmap_public(
+            generated_at="2026-01-01T00:00:00Z",
+            missing_image_actionability={
+                "summary": {
+                    "missing_image_rows": 10,
+                    "source_first_rows": 8,
+                }
+            },
+            source_discovery_action_queue={
+                "summary": {
+                    "queued_source_rows": 8,
+                }
+            },
+            source_discovery_store_bottlenecks={
+                "summary": {
+                    "top_10_store_rows": 6,
+                },
+                "stores": [
+                    {
+                        "source_store": "스토어A",
+                        "rows": 5,
+                        "top_category": "인형",
+                        "top_allowed_source_domain": "example.com",
+                        "first_batch_id": "batch-1",
+                    },
+                    {
+                        "source_store": "스토어B",
+                        "rows": 1,
+                    },
+                ],
+            },
+            source_discovery_focus_packs={
+                "summary": {
+                    "focus_source_rows": 5,
+                    "remaining_focus_review_rows": 5,
+                },
+                "focus_packs": [
+                    {
+                        "focus_pack_id": "source-discovery-focus-001",
+                        "source_store": "스토어A",
+                    }
+                ],
+            },
+            source_discovery_next_focus_pack={
+                "summary": {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": "스토어A",
+                    "target_category": "인형",
+                    "pack_items": 5,
+                    "remaining_review_rows": 5,
+                    "blocked_rows": 5,
+                }
+            },
+            source_discovery_next_focus_fallback_queue={
+                "summary": {
+                    "queue_rows": 2,
+                    "first_fallback_store_search_url": "https://example.com/search",
+                }
+            },
+            manual_source_url_search_queue={"summary": {"manual_search_required_rows": 3}},
+            provider_missing_source_url_queue={"summary": {"provider_missing_rows": 2}},
+            candidate_source_url_review_queue={"summary": {"candidate_review_rows": 1}},
+            image_attachment_action_queue={
+                "summary": {
+                    "actionable_image_rows": 4,
+                    "source_url_update_required_rows": 6,
+                }
+            },
+        )
+
+        summary = roadmap["summary"]
+        self.assertEqual(summary["queued_source_rows"], 8)
+        self.assertEqual(summary["focus_coverage"], 0.625)
+        self.assertEqual(summary["top_10_store_coverage"], 0.75)
+        self.assertEqual(summary["generic_source_replacement_rows"], 6)
+        self.assertEqual(roadmap["phases"][3]["rows"], 6)
+        self.assertIs(summary["auto_apply_enabled"], False)
 
     def test_deduplication_template_import_dry_run_has_actionable_summary(self):
         template = {
