@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/goods_item.dart';
@@ -43,6 +44,9 @@ class GoodsItemImage extends StatelessWidget {
           fit: fit,
           errorBuilder: (_, __, ___) => _placeholder(),
         );
+      }
+      if (kIsWeb && normalizedImageUrl.startsWith('assets/')) {
+        return _publicAssetFallback(normalizedImageUrl);
       }
       return Image.asset(
         normalizedImageUrl,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/goods_catalog_entry.dart';
@@ -45,7 +46,21 @@ class CatalogEntryImage extends StatelessWidget {
     if (localPath.isEmpty && remotePath.isEmpty) return placeholder;
 
     final Widget image;
-    if (localPath.isNotEmpty) {
+    if (localPath.isNotEmpty && kIsWeb) {
+      image = _PublicCatalogAssetImage(
+        assetPath: localPath,
+        width: width,
+        height: height,
+        fallback: remotePath.isEmpty
+            ? placeholder
+            : _RemoteCatalogImage(
+                imageUrl: remotePath,
+                width: width,
+                height: height,
+                placeholder: placeholder,
+              ),
+      );
+    } else if (localPath.isNotEmpty) {
       final remoteFallback = _RemoteCatalogImage(
         imageUrl: remotePath,
         width: width,
