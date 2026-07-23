@@ -6,6 +6,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import build_ichiban_prize_policy_audit_public as audit
+import clear_zero_official_prices as cleanup
 from clear_zero_official_prices import clear_zero_prices
 
 
@@ -31,6 +33,10 @@ class ClearZeroOfficialPricesTests(unittest.TestCase):
             changes[0]["reason"],
             "zero_is_not_a_valid_official_price_except_last_one_or_double_chance",
         )
+
+    def test_reuses_ichiban_prize_policy_tokens(self) -> None:
+        self.assertIn(audit.LAST_ONE_TOKENS[0], cleanup.ZERO_PRICE_PRIZE_TERMS)
+        self.assertIn(audit.DOUBLE_CHANCE_TOKENS[0], cleanup.ZERO_PRICE_PRIZE_TERMS)
 
 
 if __name__ == "__main__":

@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from build_ichiban_prize_policy_audit_public import DOUBLE_CHANCE_TOKENS, LAST_ONE_TOKENS
+
 try:
     sys.stdout.reconfigure(encoding="utf-8")
 except Exception:
@@ -15,14 +17,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "server" / "catalog_seed_from_local.json"
 DEFAULT_REPORT = ROOT / "server" / "zero_official_price_cleanup_report.json"
 
-ZERO_PRICE_PRIZE_TERMS = (
-    "ラストワン",
-    "last one",
-    "라스트원",
-    "ダブルチャンス",
-    "double chance",
-    "더블찬스",
-)
+EXTRA_ZERO_PRICE_PRIZE_TERMS = ("라스트원", "더블찬스")
+ZERO_PRICE_PRIZE_TERMS = LAST_ONE_TOKENS + DOUBLE_CHANCE_TOKENS + EXTRA_ZERO_PRICE_PRIZE_TERMS
 
 
 def _zero_price_prize_row(row: dict[str, Any]) -> bool:
