@@ -239,9 +239,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["deduplication_confirmed_template"]["manual_confirmed_rows"], 0)
             self.assertIs(quality["deduplication_confirmed_template"]["auto_delete_enabled"], False)
         if reports.DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.exists():
+            dedupe_dry_run = reports.load_json(reports.DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN)
+            self.assertEqual(
+                quality["deduplication_template_import_dry_run"]["template_items"],
+                dedupe_dry_run["summary"]["template_items"],
+            )
             self.assertEqual(quality["deduplication_template_import_dry_run"]["updated_rows"], 0)
             self.assertEqual(quality["deduplication_template_import_dry_run"]["skipped_rows"], 42)
+            self.assertEqual(quality["deduplication_template_import_dry_run"]["manual_confirmed_rows"], 0)
             self.assertIs(quality["deduplication_template_import_dry_run"]["write"], False)
+            self.assertIs(quality["deduplication_template_import_dry_run"]["auto_delete_enabled"], False)
         if reports.ICHIIBAN_KUJI_METADATA_FAST_REVIEW.exists():
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["fast_review_campaigns"], 20)
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["manual_confirmed_true"], 0)
@@ -501,6 +508,44 @@ class PublicCatalogReportTests(unittest.TestCase):
             dedupe["summary"]["source_url_exclusions"]["excluded_shared_source_url_value_groups"],
             1,
         )
+
+    def test_deduplication_template_import_dry_run_has_actionable_summary(self):
+        template = {
+            "items": [
+                {
+                    "manual_confirmed": False,
+                    "same_sellable_product_confirmed": False,
+                    "decision": "review_required",
+                    "key_type": "barcode",
+                    "key": "123",
+                    "keep_catalog_index": 2,
+                    "drop_catalog_indexes": [1],
+                }
+            ]
+        }
+        catalog = {
+            "items": [
+                {"catalog_index": 1, "name_ko": "Drop", "barcode": "123"},
+                {"catalog_index": 2, "name_ko": "Keep", "barcode": "123"},
+            ]
+        }
+
+        dry_run = reports.build_deduplication_template_import_dry_run_public(
+            template,
+            catalog,
+            "2026-07-24T00:00:00Z",
+        )
+
+        self.assertEqual(dry_run["schema_version"], 2)
+        self.assertEqual(dry_run["summary"]["template_items"], 1)
+        self.assertEqual(dry_run["summary"]["manual_confirmed_rows"], 0)
+        self.assertEqual(dry_run["summary"]["ready_decision_rows"], 0)
+        self.assertEqual(dry_run["summary"]["updated_rows"], 0)
+        self.assertEqual(dry_run["summary"]["skipped_rows"], 1)
+        self.assertEqual(dry_run["summary"]["skip_reason_counts"], [("manual_confirmed_false", 1)])
+        self.assertIs(dry_run["summary"]["auto_delete_enabled"], False)
+        self.assertEqual(dry_run["queue"], "data/catalog_deduplication_confirmed_template_public.json")
+        self.assertEqual(dry_run["skipped_sample"][0]["reason"], "manual_confirmed_false")
 
     def test_image_actionable_groups_publish_enough_samples_for_action_queue(self):
         items = [

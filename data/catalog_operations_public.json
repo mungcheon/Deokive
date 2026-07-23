@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T17:43:43Z",
+  "generated_at": "2026-07-23T18:04:11Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -1692,6 +1692,16 @@
       "ichiban_reissue_protected_groups": 0,
       "primary_report": "data/catalog_deduplication_action_queue_public.json",
       "next_step": "review_high_medium_confidence_dedupe_first",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "deduplication_template_import_dry_run",
+      "status": "blocked",
+      "open_rows": 42,
+      "ready_decision_rows": 0,
+      "updated_rows": 0,
+      "primary_report": "data/catalog_deduplication_template_import_dry_run_public.json",
+      "next_step": "set_manual_confirmed_and_same_sellable_product_confirmed_before_write_import",
       "auto_apply_enabled": false
     },
     {
@@ -4099,6 +4109,22 @@
       "ichiban_probable_reissue_review_groups": 20,
       "ichiban_reissue_protected_groups": 0,
       "recommended_next_action": "Review queued high/medium-confidence duplicate groups, then expand remaining actionable groups."
+    },
+    {
+      "priority": 42.5,
+      "workstream": "deduplication_template_import_dry_run",
+      "public_report": "data/catalog_deduplication_template_import_dry_run_public.json",
+      "template_items": 42,
+      "ready_decision_rows": 0,
+      "updated_rows": 0,
+      "skipped_rows": 42,
+      "skip_reason_counts": [
+        [
+          "manual_confirmed_false",
+          42
+        ]
+      ],
+      "recommended_next_action": "Confirm same-sellable-product keep/drop rows before running any dedupe import with --write."
     },
     {
       "priority": 43,

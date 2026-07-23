@@ -1,8 +1,31 @@
 {
+  "schema_version": 2,
+  "generated_at": "2026-07-23T18:04:11Z",
+  "scope": "catalog_deduplication_template_import_dry_run",
+  "summary": {
+    "template_items": 42,
+    "manual_confirmed_rows": 0,
+    "same_sellable_product_confirmed_rows": 0,
+    "ready_decision_rows": 0,
+    "drop_candidate_rows": 42,
+    "updated_rows": 0,
+    "skipped_rows": 42,
+    "blocked_rows": 42,
+    "skip_reason_counts": [
+      [
+        "manual_confirmed_false",
+        42
+      ]
+    ],
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false,
+    "write": false
+  },
   "write": false,
-  "queue": "data\\catalog_deduplication_confirmed_template_public.json",
+  "queue": "data/catalog_deduplication_confirmed_template_public.json",
   "updated_rows": 0,
   "skipped_rows": 42,
+  "blocked_rows": 42,
   "skip_reason_counts": [
     [
       "manual_confirmed_false",
@@ -389,5 +412,17 @@
       ],
       "reason": "manual_confirmed_false"
     }
-  ]
+  ],
+  "automation_policy": {
+    "import_tool": "tools/import_confirmed_deduplication_rows.py",
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false,
+    "write_enabled": false,
+    "required_before_write": [
+      "manual_confirmed=true",
+      "same_sellable_product_confirmed=true",
+      "decision in drop_duplicates/merge_duplicates/remove_duplicate_rows",
+      "keep_catalog_index and drop_catalog_indexes verified against current catalog_public.json"
+    ]
+  }
 }

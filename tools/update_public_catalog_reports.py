@@ -29,6 +29,7 @@ import build_provider_missing_source_url_queue_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_pack_public
+import import_confirmed_deduplication_rows
 import import_confirmed_source_discovery_rows
 
 
@@ -524,12 +525,95 @@ def normalize_ichiban_prize_patch_candidate_summary(report: dict[str, Any]) -> d
 
 def copy_import_dry_run(path: Path) -> dict[str, Any]:
     data = load_json(path, {})
+    if isinstance(data, dict) and isinstance(data.get("summary"), dict):
+        return {
+            "public_report": f"data/{path.name}",
+            **data["summary"],
+        }
     return {
         "public_report": f"data/{path.name}",
         "write": bool(data.get("write")) if isinstance(data, dict) else False,
         "updated_rows": int(data.get("updated_rows") or 0) if isinstance(data, dict) else 0,
         "skipped_rows": int(data.get("skipped_rows") or 0) if isinstance(data, dict) else 0,
         "skip_reason_counts": data.get("skip_reason_counts") if isinstance(data, dict) else [],
+    }
+
+
+def build_deduplication_template_import_dry_run_public(
+    template: dict[str, Any],
+    catalog: dict[str, Any],
+    generated_at: str,
+) -> dict[str, Any]:
+    seed_rows = [row for row in catalog.get("items", []) if isinstance(row, dict)]
+    result = import_confirmed_deduplication_rows.import_rows(template, seed_rows)
+    items = [item for item in template.get("items", []) if isinstance(item, dict)]
+    skip_reasons = Counter(str(item.get("reason") or "unspecified") for item in result["skipped"])
+
+    def confirmed(value: Any) -> bool:
+        if isinstance(value, bool):
+            return value
+        return str(value or "").strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "y",
+            "confirmed",
+            "확인",
+            "확정",
+        }
+
+    ready_decision_rows = sum(
+        1
+        for item in items
+        if confirmed(item.get("manual_confirmed"))
+        and confirmed(item.get("same_sellable_product_confirmed"))
+        and str(item.get("decision") or "").strip()
+        in import_confirmed_deduplication_rows.VALID_DECISIONS
+        and isinstance(item.get("keep_catalog_index"), int)
+        and bool(item.get("drop_catalog_indexes"))
+    )
+    drop_candidate_rows = sum(len(item.get("drop_catalog_indexes") or []) for item in items)
+    summary = {
+        "template_items": len(items),
+        "manual_confirmed_rows": sum(1 for item in items if confirmed(item.get("manual_confirmed"))),
+        "same_sellable_product_confirmed_rows": sum(
+            1 for item in items if confirmed(item.get("same_sellable_product_confirmed"))
+        ),
+        "ready_decision_rows": ready_decision_rows,
+        "drop_candidate_rows": drop_candidate_rows,
+        "updated_rows": len(result["updated"]),
+        "skipped_rows": len(result["skipped"]),
+        "blocked_rows": len(result["skipped"]),
+        "skip_reason_counts": skip_reasons.most_common(),
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+        "write": False,
+    }
+    return {
+        "schema_version": 2,
+        "generated_at": generated_at,
+        "scope": "catalog_deduplication_template_import_dry_run",
+        "summary": summary,
+        "write": False,
+        "queue": str(DEDUPLICATION_CONFIRMED_TEMPLATE.relative_to(ROOT)).replace("\\", "/"),
+        "updated_rows": len(result["updated"]),
+        "skipped_rows": len(result["skipped"]),
+        "blocked_rows": len(result["skipped"]),
+        "skip_reason_counts": skip_reasons.most_common(),
+        "updated": result["updated"],
+        "skipped_sample": result["skipped"][:100],
+        "automation_policy": {
+            "import_tool": "tools/import_confirmed_deduplication_rows.py",
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+            "write_enabled": False,
+            "required_before_write": [
+                "manual_confirmed=true",
+                "same_sellable_product_confirmed=true",
+                "decision in drop_duplicates/merge_duplicates/remove_duplicate_rows",
+                "keep_catalog_index and drop_catalog_indexes verified against current catalog_public.json",
+            ],
+        },
     }
 
 
@@ -1768,6 +1852,7 @@ def build_operations_public(
     ichiban_prize_name_image_patch_candidates_override: dict[str, Any] | None = None,
     source_next_focus_pack_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
+    deduplication_template_import_dry_run_override: dict[str, Any] | None = None,
     animation_review_batches_override: dict[str, Any] | None = None,
     animation_action_queue_override: dict[str, Any] | None = None,
     animation_split_review_override: dict[str, Any] | None = None,
@@ -1888,6 +1973,14 @@ def build_operations_public(
     dedupe_review_batches_summary = dedupe_review_batches.get("summary", {})
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
+    dedupe_template_import_dry_run = (
+        deduplication_template_import_dry_run_override
+        if deduplication_template_import_dry_run_override is not None
+        else load_json(DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN, {})
+        if DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.exists()
+        else {}
+    )
+    dedupe_template_import_dry_run_summary = dedupe_template_import_dry_run.get("summary", {})
     animation_summary = animation_categories["summary"]
     animation_review_batches = (
         animation_review_batches_override
@@ -2497,6 +2590,17 @@ def build_operations_public(
             "recommended_next_action": "Review queued high/medium-confidence duplicate groups, then expand remaining actionable groups.",
         } if dedupe_action_queue_summary else None,
         {
+            "priority": 42.5,
+            "workstream": "deduplication_template_import_dry_run",
+            "public_report": f"data/{DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.name}",
+            "template_items": dedupe_template_import_dry_run_summary.get("template_items", 0),
+            "ready_decision_rows": dedupe_template_import_dry_run_summary.get("ready_decision_rows", 0),
+            "updated_rows": dedupe_template_import_dry_run_summary.get("updated_rows", 0),
+            "skipped_rows": dedupe_template_import_dry_run_summary.get("skipped_rows", 0),
+            "skip_reason_counts": dedupe_template_import_dry_run_summary.get("skip_reason_counts", []),
+            "recommended_next_action": "Confirm same-sellable-product keep/drop rows before running any dedupe import with --write.",
+        } if dedupe_template_import_dry_run_summary else None,
+        {
             "priority": 43,
             "workstream": "ichiban_kuji_reissue_dedupe_review",
             "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
@@ -3069,6 +3173,18 @@ def build_operations_public(
             "next_step": "review_high_medium_confidence_dedupe_first",
             "auto_apply_enabled": dedupe_action_queue_summary.get("auto_delete_enabled", False),
         } if dedupe_action_queue_summary else None,
+        {
+            "workstream": "deduplication_template_import_dry_run",
+            "status": "blocked"
+            if dedupe_template_import_dry_run_summary.get("skipped_rows", 0)
+            else "ready",
+            "open_rows": dedupe_template_import_dry_run_summary.get("skipped_rows", 0),
+            "ready_decision_rows": dedupe_template_import_dry_run_summary.get("ready_decision_rows", 0),
+            "updated_rows": dedupe_template_import_dry_run_summary.get("updated_rows", 0),
+            "primary_report": f"data/{DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.name}",
+            "next_step": "set_manual_confirmed_and_same_sellable_product_confirmed_before_write_import",
+            "auto_apply_enabled": False,
+        } if dedupe_template_import_dry_run_summary else None,
         {
             "workstream": "ichiban_kuji_reissue_dedupe_review",
             "status": "manual_review"
@@ -6181,6 +6297,16 @@ def update_reports(write: bool) -> dict[str, Any]:
     metadata_action_queue = build_metadata_action_queue_report(metadata_review_batches)
     image_enrichment_batches = build_image_enrichment_batches_public(items)
     deduplication = build_deduplication_public(items)
+    deduplication_confirmed_template = (
+        load_json(DEDUPLICATION_CONFIRMED_TEMPLATE, {})
+        if DEDUPLICATION_CONFIRMED_TEMPLATE.exists()
+        else {"items": []}
+    )
+    deduplication_template_import_dry_run = build_deduplication_template_import_dry_run_public(
+        deduplication_confirmed_template,
+        catalog,
+        generated_at,
+    )
     animation_categories = build_animation_categories_public(items)
     animation_review_queue = [
         row
@@ -6399,6 +6525,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_prize_name_image_patch_candidates,
         source_discovery_next_focus_pack,
         source_discovery_next_focus_fallback_queue,
+        deduplication_template_import_dry_run,
         animation_review_batches,
         animation_action_queue,
         animation_split_review,
@@ -6820,10 +6947,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["deduplication_confirmed_template"] = copy_report_summary(
                 DEDUPLICATION_CONFIRMED_TEMPLATE, "deduplication_confirmed_template"
             )
-        if DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.exists():
-            target["deduplication_template_import_dry_run"] = copy_import_dry_run(
-                DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN
-            )
+        target["deduplication_template_import_dry_run"] = {
+            "public_report": f"data/{DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.name}",
+            **deduplication_template_import_dry_run["summary"],
+        }
         target["animation_category_review"] = {
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
@@ -6969,6 +7096,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
         write_json(DANGANRONPA_PATCH_TEMPLATE_DRY_RUN, danganronpa_patch_template_dry_run)
+        write_json(DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN, deduplication_template_import_dry_run)
 
     return {
         "write": write,
