@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T15:39:57Z",
+  "generated_at": "2026-07-23T01:22:58Z",
   "scope": "public_confirmed_import_readiness",
   "summary": {
     "workflow_count": 11,
     "confirmed_files": 2,
     "template_items": 1147,
-    "public_action_queue_rows": 4626,
+    "public_action_queue_rows": 4637,
     "public_action_queue_batches": 180,
     "manual_confirmed_true": 0,
     "updated_rows": 0,
@@ -14,6 +14,11 @@
     "duplicates": 0,
     "ready_or_pending_import_rows": 0,
     "blocked_confirmed_rows": 0,
+    "manual_confirmation_backlog_rows": 5784,
+    "work_order_lanes": 10,
+    "top_work_order_row_count": 647,
+    "top_work_order_lane": "confirm_template_rows",
+    "top_work_order_workflow": "source_discovery",
     "by_status": [
       [
         "public_action_queue_ready_for_confirmation",
@@ -94,7 +99,7 @@
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
-      "public_action_rows": 2505,
+      "public_action_rows": 2499,
       "public_action_batches": 14,
       "public_action_next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
       "updated_rows": 0,
@@ -255,7 +260,7 @@
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/animation_category_action_queue_public.json",
-      "public_action_rows": 374,
+      "public_action_rows": 391,
       "public_action_batches": 1,
       "public_action_next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
       "updated_rows": 0,
@@ -289,10 +294,133 @@
       "auto_apply_enabled": false
     }
   ],
+  "work_order": [
+    {
+      "workflow": "source_discovery",
+      "public_workstream": "source_discovery_source_urls",
+      "lane": "confirm_template_rows",
+      "row_count": 647,
+      "batch_count": 0,
+      "next_step": "review_template_rows_then_copy_exact_confirmed_rows",
+      "template_file_exists": true,
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 1
+    },
+    {
+      "workflow": "catalog_field",
+      "public_workstream": "metadata_field_values",
+      "lane": "confirm_template_rows",
+      "row_count": 500,
+      "batch_count": 0,
+      "next_step": "review_template_rows_then_copy_exact_confirmed_rows",
+      "template_file_exists": true,
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 2
+    },
+    {
+      "workflow": "catalog_field",
+      "public_workstream": "metadata_field_values",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 2499,
+      "batch_count": 14,
+      "next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
+      "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 3
+    },
+    {
+      "workflow": "source_discovery",
+      "public_workstream": "source_discovery_source_urls",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 642,
+      "batch_count": 61,
+      "next_step": "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
+      "public_action_queue_report": "data/source_discovery_action_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 4
+    },
+    {
+      "workflow": "focus_image",
+      "public_workstream": "requested_focus_image_urls",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 600,
+      "batch_count": 86,
+      "next_step": "confirm_requested_focus_templates_then_run_import_confirmed_requested_focus_rows",
+      "public_action_queue_report": "data/requested_focus_action_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 5
+    },
+    {
+      "workflow": "animation_category",
+      "public_workstream": "animation_category_mapping",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 391,
+      "batch_count": 1,
+      "next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
+      "public_action_queue_report": "data/animation_category_action_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 6
+    },
+    {
+      "workflow": "ichiban_metadata",
+      "public_workstream": "ichiban_kuji_metadata",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 381,
+      "batch_count": 6,
+      "next_step": "fill_confirmed_ichiban_campaign_patch_templates_then_run_import_confirmed_ichiban_metadata_rows",
+      "public_action_queue_report": "data/ichiban_kuji_metadata_action_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 7
+    },
+    {
+      "workflow": "catalog_image",
+      "public_workstream": "exact_image_urls",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 73,
+      "batch_count": 7,
+      "next_step": "confirm_exact_image_url_templates_then_run_import_confirmed_image_attachment_rows",
+      "public_action_queue_report": "data/catalog_image_attachment_action_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 8
+    },
+    {
+      "workflow": "deduplication",
+      "public_workstream": "catalog_deduplication",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 48,
+      "batch_count": 5,
+      "next_step": "fill_confirmed_deduplication_decisions_then_run_import_confirmed_dedupe_decisions",
+      "public_action_queue_report": "data/catalog_deduplication_action_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 9
+    },
+    {
+      "workflow": "official_detail",
+      "public_workstream": "official_detail_source_image",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 3,
+      "batch_count": 0,
+      "next_step": "confirm_official_detail_candidates_then_run_import_confirmed_official_detail_matches",
+      "public_action_queue_report": "data/official_detail_review_batches_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 10
+    }
+  ],
   "instructions": [
     "This public report exposes counts and workflow readiness only; it omits private row-level candidate details.",
     "Rows become importable only after manual_confirmed=true and a dry-run import report passes safety checks.",
     "Public action queue rows identify manually confirmable source/image/metadata templates; row-level details stay in the source queue report.",
+    "Use work_order to pick the next workflow: import already confirmed rows first, resolve blocked confirmations, then confirm templates and public action queues.",
     "Use this to decide whether image/source/metadata import queues are blocked, pending, or already imported."
   ],
   "automation_policy": {

@@ -218,6 +218,90 @@ def _status(
     return "no_current_candidates"
 
 
+def _work_order(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    lanes: list[dict[str, Any]] = []
+    for row in rows:
+        confirmed_rows = int(row["manual_confirmed_true"])
+        template_rows = int(row["template_items"])
+        action_rows = int(row["public_action_rows"])
+        blocked_rows = confirmed_rows if row["status"] == "confirmed_rows_blocked" else 0
+        pending_rows = confirmed_rows if row["status"] == "confirmed_rows_pending_import" else 0
+
+        if pending_rows:
+            lanes.append(
+                {
+                    "workflow": row["workflow"],
+                    "public_workstream": row["public_workstream"],
+                    "lane": "run_guarded_confirmed_import",
+                    "row_count": pending_rows,
+                    "batch_count": 0,
+                    "next_step": row["next_action"],
+                    "confirmed_file_ready": True,
+                    "manual_confirmation_required": False,
+                    "auto_apply_enabled": False,
+                }
+            )
+        if blocked_rows:
+            lanes.append(
+                {
+                    "workflow": row["workflow"],
+                    "public_workstream": row["public_workstream"],
+                    "lane": "resolve_blocked_confirmed_rows",
+                    "row_count": blocked_rows,
+                    "batch_count": 0,
+                    "next_step": row["next_action"],
+                    "skip_reason_counts": row.get("skip_reason_counts", []),
+                    "manual_confirmation_required": True,
+                    "auto_apply_enabled": False,
+                }
+            )
+        if template_rows:
+            lanes.append(
+                {
+                    "workflow": row["workflow"],
+                    "public_workstream": row["public_workstream"],
+                    "lane": "confirm_template_rows",
+                    "row_count": template_rows,
+                    "batch_count": 0,
+                    "next_step": "review_template_rows_then_copy_exact_confirmed_rows",
+                    "template_file_exists": row["template_file_exists"],
+                    "manual_confirmation_required": True,
+                    "auto_apply_enabled": False,
+                }
+            )
+        if action_rows:
+            lanes.append(
+                {
+                    "workflow": row["workflow"],
+                    "public_workstream": row["public_workstream"],
+                    "lane": "convert_public_action_queue_to_confirmed_rows",
+                    "row_count": action_rows,
+                    "batch_count": int(row["public_action_batches"]),
+                    "next_step": row.get("public_action_next_step") or row["next_action"],
+                    "public_action_queue_report": row.get("public_action_queue_report"),
+                    "manual_confirmation_required": True,
+                    "auto_apply_enabled": False,
+                }
+            )
+
+    lane_rank = {
+        "run_guarded_confirmed_import": 1,
+        "resolve_blocked_confirmed_rows": 2,
+        "confirm_template_rows": 3,
+        "convert_public_action_queue_to_confirmed_rows": 4,
+    }
+    lanes.sort(
+        key=lambda item: (
+            lane_rank.get(str(item.get("lane")), 99),
+            -int(item.get("row_count") or 0),
+            str(item.get("workflow") or ""),
+        )
+    )
+    for index, item in enumerate(lanes, start=1):
+        item["rank"] = index
+    return lanes
+
+
 def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
     workflows = workflows or WORKFLOWS
     rows: list[dict[str, Any]] = []
@@ -274,6 +358,11 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
         )
 
     by_status = Counter(row["status"] for row in rows)
+    work_order = _work_order(rows)
+    manual_confirmation_backlog_rows = sum(
+        int(row["template_items"]) + int(row["public_action_rows"])
+        for row in rows
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -298,14 +387,21 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
                 for row in rows
                 if row["status"] == "confirmed_rows_blocked"
             ),
+            "manual_confirmation_backlog_rows": manual_confirmation_backlog_rows,
+            "work_order_lanes": len(work_order),
+            "top_work_order_row_count": int(work_order[0]["row_count"]) if work_order else 0,
+            "top_work_order_lane": work_order[0]["lane"] if work_order else None,
+            "top_work_order_workflow": work_order[0]["workflow"] if work_order else None,
             "by_status": by_status.most_common(),
             "auto_apply_enabled": False,
         },
         "workflows": rows,
+        "work_order": work_order,
         "instructions": [
             "This public report exposes counts and workflow readiness only; it omits private row-level candidate details.",
             "Rows become importable only after manual_confirmed=true and a dry-run import report passes safety checks.",
             "Public action queue rows identify manually confirmable source/image/metadata templates; row-level details stay in the source queue report.",
+            "Use work_order to pick the next workflow: import already confirmed rows first, resolve blocked confirmations, then confirm templates and public action queues.",
             "Use this to decide whether image/source/metadata import queues are blocked, pending, or already imported.",
         ],
         "automation_policy": {

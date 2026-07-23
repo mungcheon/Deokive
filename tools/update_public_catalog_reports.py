@@ -4182,6 +4182,10 @@ def build_agent_work_queue_public(
                 confirmed_template_rows + confirmed_action_rows - confirmed_ready_rows,
                 0,
             ),
+            "confirmed_import_work_order_lanes": int(confirmed_summary.get("work_order_lanes") or 0),
+            "confirmed_import_top_work_order_lane": confirmed_summary.get("top_work_order_lane"),
+            "confirmed_import_top_work_order_workflow": confirmed_summary.get("top_work_order_workflow"),
+            "confirmed_import_top_work_order_row_count": int(confirmed_summary.get("top_work_order_row_count") or 0),
         },
         "top_next_batches": top_next_batches,
         "instructions": [
@@ -5485,6 +5489,12 @@ def validate_report_consistency(
         "confirmed_import_pending_rows": int(confirmed_import_readiness_summary.get("ready_or_pending_import_rows") or 0),
         "confirmed_import_blocked_confirmed_rows": int(confirmed_import_readiness_summary.get("blocked_confirmed_rows") or 0),
         "confirmed_import_manual_confirmation_backlog_rows": expected_confirmation_backlog,
+        "confirmed_import_work_order_lanes": int(confirmed_import_readiness_summary.get("work_order_lanes") or 0),
+        "confirmed_import_top_work_order_lane": confirmed_import_readiness_summary.get("top_work_order_lane"),
+        "confirmed_import_top_work_order_workflow": confirmed_import_readiness_summary.get("top_work_order_workflow"),
+        "confirmed_import_top_work_order_row_count": int(
+            confirmed_import_readiness_summary.get("top_work_order_row_count") or 0
+        ),
     }
     for field, expected in agent_confirmation_fields.items():
         if agent_summary.get(field) != expected:

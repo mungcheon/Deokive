@@ -203,8 +203,65 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(workflow["public_action_batches"], 2)
         self.assertEqual(report["summary"]["public_action_queue_rows"], 12)
         self.assertEqual(report["summary"]["public_action_queue_batches"], 2)
+        self.assertEqual(report["summary"]["manual_confirmation_backlog_rows"], 12)
+        self.assertEqual(report["summary"]["work_order_lanes"], 1)
+        self.assertEqual(report["summary"]["top_work_order_lane"], "convert_public_action_queue_to_confirmed_rows")
+        self.assertEqual(report["summary"]["top_work_order_workflow"], "catalog_field")
+        self.assertEqual(report["work_order"][0]["row_count"], 12)
+        self.assertEqual(report["work_order"][0]["batch_count"], 2)
         self.assertNotIn("batches", workflow)
         self.assertNotIn("groups", workflow)
+        self.assertNotIn("batches", report["work_order"][0])
+        self.assertNotIn("groups", report["work_order"][0])
+
+    def test_work_order_prioritizes_importable_and_blocked_rows_before_backlog(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            workflows = {
+                "catalog_image": {
+                    "confirmed": _write_json(
+                        root / "image_confirmed.json",
+                        {"items": [{"manual_confirmed": True}, {"manual_confirmed": True}]},
+                    ),
+                    "template": _write_json(root / "image.template.json", {"items": []}),
+                    "report": _write_json(root / "image_report.json", {"updated_rows": 0, "skipped_rows": 2}),
+                    "public_workstream": "exact_image_urls",
+                },
+                "source_discovery": {
+                    "confirmed": _write_json(
+                        root / "source_confirmed.json",
+                        {"items": [{"manual_confirmed": True}]},
+                    ),
+                    "template": _write_json(root / "source.template.json", {"items": []}),
+                    "report": root / "source_report.json",
+                    "public_workstream": "source_discovery_source_urls",
+                },
+                "catalog_field": {
+                    "confirmed": root / "metadata_confirmed.json",
+                    "template": _write_json(
+                        root / "metadata.template.json",
+                        {"items": [{"manual_confirmed": False}, {"manual_confirmed": False}]},
+                    ),
+                    "report": root / "metadata_report.json",
+                    "public_workstream": "metadata_field_values",
+                    "public_action_queue": _write_json(
+                        root / "metadata_action.json",
+                        {"summary": {"queued_missing_cells": 99, "action_batch_count": 4}},
+                    ),
+                    "public_action_rows_key": "queued_missing_cells",
+                    "public_action_batches_key": "action_batch_count",
+                    "public_action_next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
+                },
+            }
+
+            report = readiness.build_report(workflows)
+
+        lanes = [(row["lane"], row["workflow"], row["row_count"]) for row in report["work_order"]]
+        self.assertEqual(lanes[0], ("run_guarded_confirmed_import", "source_discovery", 1))
+        self.assertEqual(lanes[1], ("resolve_blocked_confirmed_rows", "catalog_image", 2))
+        self.assertEqual(lanes[2], ("confirm_template_rows", "catalog_field", 2))
+        self.assertEqual(lanes[3], ("convert_public_action_queue_to_confirmed_rows", "catalog_field", 99))
+        self.assertEqual(report["summary"]["manual_confirmation_backlog_rows"], 101)
 
     def test_public_action_queue_takes_priority_over_empty_confirmed_file(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

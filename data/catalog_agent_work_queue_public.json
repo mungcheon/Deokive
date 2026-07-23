@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T01:09:22Z",
+  "generated_at": "2026-07-23T01:24:25Z",
   "summary": {
     "batch_count": 147,
     "max_published_batches": 160,
-    "summed_batch_rows": 24340,
+    "summed_batch_rows": 24351,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -221,7 +221,7 @@
       "requested_focus_open_rows": 8070,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1147,
-      "confirmed_import_action_queue_rows": 4626,
+      "confirmed_import_action_queue_rows": 4637,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
@@ -278,11 +278,15 @@
       "ichiban_prize_name_image_patch_blocked_rows": 29
     },
     "confirmed_import_template_rows": 1147,
-    "confirmed_import_action_queue_rows": 4626,
+    "confirmed_import_action_queue_rows": 4637,
     "confirmed_import_manual_confirmed_ready_rows": 0,
     "confirmed_import_pending_rows": 0,
     "confirmed_import_blocked_confirmed_rows": 0,
-    "confirmed_import_manual_confirmation_backlog_rows": 5773
+    "confirmed_import_manual_confirmation_backlog_rows": 5784,
+    "confirmed_import_work_order_lanes": 10,
+    "confirmed_import_top_work_order_lane": "confirm_template_rows",
+    "confirmed_import_top_work_order_workflow": "source_discovery",
+    "confirmed_import_top_work_order_row_count": 647
   },
   "top_next_batches": [
     {
@@ -3212,7 +3216,7 @@
       "priority": 19,
       "title": "Confirmed import readiness review",
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
-      "rows": 5773,
+      "rows": 5784,
       "recommended_action": "Review pending/blocked confirmed imports before any catalog write.",
       "acceptance_criteria": [
         "Do not expose row-level private candidate details in public reports.",
@@ -3256,7 +3260,7 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
-          "public_action_rows": 2505,
+          "public_action_rows": 2499,
           "public_action_batches": 14,
           "public_action_next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
           "updated_rows": 0,
@@ -3371,7 +3375,7 @@
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/animation_category_action_queue_public.json",
-          "public_action_rows": 374,
+          "public_action_rows": 391,
           "public_action_batches": 1,
           "public_action_next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
           "updated_rows": 0,
