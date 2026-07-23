@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T01:24:25Z",
+  "generated_at": "2026-07-23T01:28:59Z",
   "summary": {
     "batch_count": 147,
     "max_published_batches": 160,
-    "summed_batch_rows": 24351,
+    "summed_batch_rows": 24345,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -220,7 +220,7 @@
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 8070,
       "danganronpa_missing_media_rows": 34,
-      "confirmed_import_template_rows": 1147,
+      "confirmed_import_template_rows": 1141,
       "confirmed_import_action_queue_rows": 4637,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 48,
@@ -277,16 +277,16 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 29
     },
-    "confirmed_import_template_rows": 1147,
+    "confirmed_import_template_rows": 1141,
     "confirmed_import_action_queue_rows": 4637,
     "confirmed_import_manual_confirmed_ready_rows": 0,
     "confirmed_import_pending_rows": 0,
     "confirmed_import_blocked_confirmed_rows": 0,
-    "confirmed_import_manual_confirmation_backlog_rows": 5784,
+    "confirmed_import_manual_confirmation_backlog_rows": 5778,
     "confirmed_import_work_order_lanes": 10,
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
-    "confirmed_import_top_work_order_row_count": 647
+    "confirmed_import_top_work_order_row_count": 641
   },
   "top_next_batches": [
     {
@@ -3216,7 +3216,7 @@
       "priority": 19,
       "title": "Confirmed import readiness review",
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
-      "rows": 5784,
+      "rows": 5778,
       "recommended_action": "Review pending/blocked confirmed imports before any catalog write.",
       "acceptance_criteria": [
         "Do not expose row-level private candidate details in public reports.",
@@ -3279,7 +3279,7 @@
           "import_report_exists": false,
           "confirmed_items": 0,
           "manual_confirmed_true": 0,
-          "template_items": 647,
+          "template_items": 641,
           "template_manual_confirmed_true": 0,
           "public_action_queue_exists": true,
           "public_action_queue_report": "data/source_discovery_action_queue_public.json",

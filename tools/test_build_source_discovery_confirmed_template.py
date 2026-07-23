@@ -39,6 +39,7 @@ class BuildSourceDiscoveryConfirmedTemplateTest(unittest.TestCase):
         template = builder.build_template(payload)
 
         self.assertEqual(template["summary"]["template_items"], 1)
+        self.assertEqual(template["summary"]["stale_excluded_source_url_rows"], 0)
         self.assertFalse(template["summary"]["auto_apply_enabled"])
         self.assertFalse(template["automation_policy"]["auto_apply_enabled"])
         self.assertEqual(
@@ -75,6 +76,58 @@ class BuildSourceDiscoveryConfirmedTemplateTest(unittest.TestCase):
         self.assertEqual(len(template["items"]), 1)
         self.assertFalse(template["items"][0]["manual_confirmed"])
         self.assertEqual(template["items"][0]["manual_value"], "")
+
+    def test_excludes_seed_rows_that_already_have_source_url(self) -> None:
+        payload = {
+            "batches": [
+                {
+                    "batch_id": "source-discovery-001",
+                    "workflow": "official_search_url_available",
+                    "items": [
+                        {
+                            "catalog_field_import_template": {
+                                "row_index": 0,
+                                "field": "source_url",
+                                "source_store": "Example Store",
+                                "name_ko": "Already fixed",
+                            }
+                        },
+                        {
+                            "catalog_field_import_template": {
+                                "row_index": 1,
+                                "field": "source_url",
+                                "source_store": "Example Store",
+                                "name_ko": "Still missing",
+                            }
+                        },
+                    ],
+                }
+            ]
+        }
+        seed_rows = [
+            {
+                "catalog_index": 100,
+                "name_ko": "Already fixed",
+                "source_store": "Example Store",
+                "source_url": "https://example.test/product/100",
+            },
+            {
+                "catalog_index": 101,
+                "name_ko": "Still missing",
+                "source_store": "Example Store",
+                "source_url": None,
+            },
+        ]
+
+        template = builder.build_template(payload, seed_rows)
+
+        self.assertEqual(template["summary"]["template_items"], 1)
+        self.assertEqual(template["summary"]["stale_excluded_source_url_rows"], 1)
+        self.assertEqual(template["items"][0]["row_index"], 1)
+        self.assertEqual(
+            template["stale_excluded_sample"][0]["reason"],
+            "seed_source_url_already_present",
+        )
 
 
 if __name__ == "__main__":
