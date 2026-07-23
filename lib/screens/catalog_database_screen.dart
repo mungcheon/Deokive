@@ -326,8 +326,17 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                               setState(() {});
                             }
                           },
-                          icon: const Icon(Icons.add_rounded),
-                          label: const Text('내 굿즈에 추가하기'),
+                          icon: Icon(
+                            Icons.add_rounded,
+                            color: addButtonForeground,
+                          ),
+                          label: Text(
+                            '내 굿즈에 추가하기',
+                            style: TextStyle(
+                              color: addButtonForeground,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
                           style: FilledButton.styleFrom(
                             backgroundColor: palette.primary,
                             foregroundColor: addButtonForeground,
@@ -566,19 +575,28 @@ class _CatalogListTile extends StatelessWidget {
                   ),
                 ),
                 child: isAdding
-                    ? const Icon(Icons.more_horiz_rounded, size: 18)
-                    : const FittedBox(
+                    ? Icon(
+                        Icons.more_horiz_rounded,
+                        size: 18,
+                        color: addButtonForeground,
+                      )
+                    : FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.add_rounded, size: 17),
-                            SizedBox(width: 3),
+                            Icon(
+                              Icons.add_rounded,
+                              size: 17,
+                              color: addButtonForeground,
+                            ),
+                            const SizedBox(width: 3),
                             Text(
                               '추가하기',
                               maxLines: 1,
                               softWrap: false,
                               style: TextStyle(
+                                color: addButtonForeground,
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w900,
                               ),
