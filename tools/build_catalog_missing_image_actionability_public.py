@@ -615,6 +615,172 @@ def build_work_order(
     return rows
 
 
+def build_completion_plan(
+    summary: dict[str, Any],
+    source_store_priority: list[dict[str, Any]],
+    source_discovery_work_packs: list[dict[str, Any]] | None = None,
+    next_source_discovery_focus_pack: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    generic_source_rows = int(summary.get("image_attachment_template_source_update_required_rows") or 0)
+    representative_rows = int(summary.get("image_attachment_template_representative_review_rows") or 0)
+    source_first_rows = int(summary.get("source_first_rows") or 0)
+    source_discovery_rows = max(source_first_rows - generic_source_rows, 0)
+    focus_rows = int(summary.get("source_discovery_remaining_focus_review_rows") or 0)
+    non_focus_rows = int(summary.get("source_discovery_non_focus_rows") or 0)
+    if focus_rows + non_focus_rows != source_discovery_rows:
+        non_focus_rows = max(source_discovery_rows - focus_rows, 0)
+    manual_rows = int(summary.get("manual_image_research_rows") or 0)
+
+    phases: list[dict[str, Any]] = []
+
+    def add_phase(
+        *,
+        phase_id: str,
+        title: str,
+        row_count: int,
+        source: str,
+        next_step: str,
+        template: str,
+        blocker: str,
+        notes: list[str] | None = None,
+        top_source_stores: list[dict[str, Any]] | None = None,
+        work_packs: list[dict[str, Any]] | None = None,
+        current_batch: dict[str, Any] | None = None,
+    ) -> None:
+        if row_count <= 0:
+            return
+        phases.append(
+            {
+                "rank": len(phases) + 1,
+                "phase_id": phase_id,
+                "title": title,
+                "row_count": row_count,
+                "source": source,
+                "next_step": next_step,
+                "template": template,
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                **readiness_blocker(blocker),
+                "top_source_stores": top_source_stores or [],
+                "work_packs": work_packs or [],
+                "current_batch": current_batch or {},
+                "notes": notes or [],
+            }
+        )
+
+    generic_stores = [
+        {
+            "source_store": row.get("source_store"),
+            "missing_image_rows": row.get("missing_image_rows"),
+            "recommended_next_step": row.get("recommended_next_step"),
+        }
+        for row in source_store_priority
+        if str(row.get("primary_workflow") or "") == "replace_generic_source_then_extract_image"
+    ][:8]
+    discovery_stores = [
+        {
+            "source_store": row.get("source_store"),
+            "missing_image_rows": row.get("missing_image_rows"),
+            "recommended_next_step": row.get("recommended_next_step"),
+        }
+        for row in source_store_priority
+        if str(row.get("primary_workflow") or "") == "find_source_then_extract_image"
+    ][:10]
+
+    add_phase(
+        phase_id="replace_generic_source_urls",
+        title="일반/목록 source_url을 정확한 상품 상세 URL로 교체",
+        row_count=generic_source_rows,
+        source="catalog_image_attachment_action_queue_public.json",
+        next_step="replace_generic_source_url_then_extract_image",
+        template="catalog_image_attachment_confirmed_template_public.json",
+        blocker="source_url_replacement_required",
+        top_source_stores=generic_stores,
+        notes=[
+            "These rows already have a source_url, but it is a listing or generic storefront URL.",
+            "Confirm the exact product detail page before attaching an image.",
+        ],
+    )
+    add_phase(
+        phase_id="review_representative_images",
+        title="대표 이미지 후보가 정확한 상품 타입인지 확인",
+        row_count=representative_rows,
+        source="catalog_image_attachment_action_queue_public.json",
+        next_step="confirm_exact_product_type_then_attach_image",
+        template="catalog_image_attachment_confirmed_template_public.json",
+        blocker="representative_image_review_required",
+        notes=[
+            "Do not use lineup or wrong-variant images as if they were exact product photos.",
+        ],
+    )
+    add_phase(
+        phase_id="complete_source_discovery_focus_packs",
+        title="상위 스토어 source_url 발견 팩 처리",
+        row_count=focus_rows,
+        source="source_discovery_focus_packs_public.json",
+        next_step="fill_source_discovery_focus_confirmed_template",
+        template="source_discovery_focus_confirmed_template_public.json",
+        blocker="source_url_discovery_required",
+        top_source_stores=discovery_stores,
+        work_packs=(source_discovery_work_packs or [])[:8],
+        current_batch=next_source_discovery_focus_pack,
+        notes=[
+            "The current_batch is the next concrete 20-row pack to review.",
+            "Rows stay dry-run safe until the public confirmation template is manually filled.",
+        ],
+    )
+    add_phase(
+        phase_id="triage_remaining_source_discovery_backlog",
+        title="포커스 팩 밖 source_url 누락 항목 정리",
+        row_count=non_focus_rows,
+        source="source_discovery_action_queue_public.json",
+        next_step="promote_next_store_groups_into_focus_packs",
+        template="source_discovery_focus_confirmed_template_public.json",
+        blocker="source_url_discovery_required",
+        top_source_stores=discovery_stores[10:],
+        notes=[
+            "These rows are outside the current focus-pack coverage and should be rotated into later packs.",
+        ],
+    )
+    add_phase(
+        phase_id="manual_nonstandard_image_research",
+        title="구조화 소스가 없는 항목 수동 조사",
+        row_count=manual_rows,
+        source="catalog_image_enrichment_batches_public.json",
+        next_step="manual_official_source_and_image_evidence_recorded",
+        template="manual_image_source_discovery_public.json",
+        blocker="manual_research_required",
+        notes=[
+            "Use trusted official/manufacturer evidence and record why the source is acceptable.",
+        ],
+    )
+
+    phase_total = sum(int(phase.get("row_count") or 0) for phase in phases)
+    missing_image_rows = int(summary.get("missing_image_rows") or phase_total)
+    return {
+        "total_open_rows": missing_image_rows,
+        "phase_rows_total": phase_total,
+        "phase_count": len(phases),
+        "status": "balanced" if phase_total == missing_image_rows else "needs_review",
+        "phases": phases,
+        "current_focus_pack": next_source_discovery_focus_pack or {},
+        "overlay_review_flags": {
+            "source_detail_candidate_recheck_required_rows": int(
+                summary.get("source_detail_candidate_recheck_required_rows") or 0
+            ),
+            "source_detail_identity_warning_rows": int(
+                summary.get("source_detail_identity_warning_rows") or 0
+            ),
+            "note": "Overlay rows may overlap with source discovery work and are not added to phase_rows_total.",
+        },
+        "automation_policy": {
+            "auto_apply_catalog_changes": False,
+            "requires_exact_product_identity": True,
+            "requires_manual_confirmation": True,
+        },
+    }
+
+
 def source_detail_items(source_detail_queue: dict[str, Any] | None) -> list[dict[str, Any]]:
     if not isinstance(source_detail_queue, dict):
         return []
@@ -947,6 +1113,20 @@ def build_report(
         source_discovery_work_packs,
         next_source_discovery_focus_pack,
     )
+    completion_plan = build_completion_plan(
+        summary_out,
+        source_store_priority,
+        source_discovery_work_packs,
+        next_source_discovery_focus_pack,
+    )
+    summary_out.update(
+        {
+            "completion_plan_total_open_rows": int(completion_plan.get("total_open_rows") or 0),
+            "completion_plan_phase_rows_total": int(completion_plan.get("phase_rows_total") or 0),
+            "completion_plan_phase_count": int(completion_plan.get("phase_count") or 0),
+            "completion_plan_status": completion_plan.get("status"),
+        }
+    )
 
     return {
         "schema_version": 1,
@@ -958,6 +1138,7 @@ def build_report(
         "source_discovery_work_packs": source_discovery_work_packs,
         "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
+        "completion_plan": completion_plan,
         "recommended_order": [
             "source_url_replacement_required",
             "representative_image_review_required",

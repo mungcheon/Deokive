@@ -120,6 +120,20 @@ class PublicCatalogReportTests(unittest.TestCase):
         if reports.MISSING_IMAGE_ACTIONABILITY.exists():
             self.assertEqual(quality["missing_image_actionability"]["missing_image_rows"], result["missing"]["image_url"])
             self.assertEqual(quality["missing_image_actionability"]["unclassified_rows"], 0)
+            actionability = reports.load_json(reports.MISSING_IMAGE_ACTIONABILITY)
+            completion_plan = actionability["completion_plan"]
+            self.assertEqual(completion_plan["total_open_rows"], result["missing"]["image_url"])
+            self.assertEqual(completion_plan["phase_rows_total"], result["missing"]["image_url"])
+            self.assertEqual(completion_plan["status"], "balanced")
+            self.assertEqual(
+                completion_plan["phase_count"],
+                len(completion_plan["phases"]),
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"]["completion_plan_phase_rows_total"],
+                result["missing"]["image_url"],
+            )
+            self.assertIs(completion_plan["automation_policy"]["auto_apply_catalog_changes"], False)
             self.assertIs(quality["missing_image_actionability"]["auto_apply_enabled"], False)
         self.assertEqual(
             quality["image_source_url_confirmed_template"]["template_items"],
