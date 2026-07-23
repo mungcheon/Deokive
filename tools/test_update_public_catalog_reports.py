@@ -361,6 +361,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(quality["animation_category_coverage_audit"]["unknown_category_count"], 0)
         self.assertEqual(quality["animation_category_coverage_audit"]["failed_check_count"], 0)
         self.assertIs(quality["animation_category_coverage_audit"]["auto_apply_enabled"], False)
+        animation_categories = reports.load_json(reports.ANIMATION_CATEGORIES)
+        normalization_queue = animation_categories["normalization_review_queue"]
+        self.assertEqual(
+            quality["animation_category_review"]["normalization_review_queue_count"],
+            len(normalization_queue),
+        )
+        self.assertEqual(quality["animation_category_review"]["normalization_review_queue_count"], 4)
+        self.assertEqual(
+            quality["animation_category_review"]["normalization_review_queue_rows"],
+            sum(int(row.get("affected_catalog_rows") or 0) for row in normalization_queue),
+        )
+        self.assertFalse(normalization_queue[0]["auto_apply_enabled"])
+        self.assertEqual(
+            normalization_queue[0]["mapping_mode"],
+            "canonical_category_normalization_review",
+        )
+        self.assertIn(
+            "source_category_should_be_preserved_as_sub_series_or_note",
+            normalization_queue[0]["required_evidence"],
+        )
         if reports.ICHIIBAN_KUJI_METADATA_FAST_REVIEW.exists():
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["fast_review_campaigns"], 20)
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["manual_confirmed_true"], 0)

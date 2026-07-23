@@ -6,6 +6,8 @@
     "unknown_category_count": 0,
     "unknown_category_rows": 0,
     "normalization_suggestion_count": 4,
+    "normalization_review_queue_rows": 36,
+    "normalization_review_queue_count": 4,
     "missing_image_rows": 560,
     "missing_source_url_rows": 560,
     "folder_color_palette_count": 32,
@@ -5096,6 +5098,148 @@
       "sample_names": [
         "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ"
       ]
+    }
+  ],
+  "normalization_review_queue": [
+    {
+      "review_id": "animation-category-normalization-001",
+      "category": "클리어파일",
+      "suggested_category": "문구",
+      "affected_catalog_rows": 8,
+      "risk": "medium",
+      "review_reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+      "sample_names": [
+        "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット",
+        "一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット",
+        "一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット",
+        "一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット",
+        "一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット",
+        "一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット",
+        "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
+        "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING"
+      ],
+      "mapping_mode": "canonical_category_normalization_review",
+      "next_step": "confirm_category_normalization_before_import",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "blocked_until": "canonical_category_normalization_manually_confirmed",
+      "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+      "required_evidence": [
+        "sample_names_match_suggested_broader_category",
+        "source_category_should_be_preserved_as_sub_series_or_note",
+        "folder_color_and_icon_exist_in_app_catalog",
+        "manual_note_for_category_semantics"
+      ],
+      "category_mapping_template": {
+        "manual_confirmed": false,
+        "source_category": "클리어파일",
+        "target_category": "문구",
+        "preserve_source_category_as_sub_series": true,
+        "affected_catalog_rows": 8,
+        "manual_note": ""
+      }
+    },
+    {
+      "review_id": "animation-category-normalization-002",
+      "category": "카드",
+      "suggested_category": "문구",
+      "affected_catalog_rows": 3,
+      "risk": "medium",
+      "review_reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+      "sample_names": [
+        "一番くじ 葬送のフリーレン - H賞 繋がるポストカード",
+        "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
+        "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー"
+      ],
+      "mapping_mode": "canonical_category_normalization_review",
+      "next_step": "confirm_category_normalization_before_import",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "blocked_until": "canonical_category_normalization_manually_confirmed",
+      "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+      "required_evidence": [
+        "sample_names_match_suggested_broader_category",
+        "source_category_should_be_preserved_as_sub_series_or_note",
+        "folder_color_and_icon_exist_in_app_catalog",
+        "manual_note_for_category_semantics"
+      ],
+      "category_mapping_template": {
+        "manual_confirmed": false,
+        "source_category": "카드",
+        "target_category": "문구",
+        "preserve_source_category_as_sub_series": true,
+        "affected_catalog_rows": 3,
+        "manual_note": ""
+      }
+    },
+    {
+      "review_id": "animation-category-normalization-003",
+      "category": "스티커",
+      "suggested_category": "문구",
+      "affected_catalog_rows": 24,
+      "risk": "medium",
+      "review_reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+      "sample_names": [
+        "一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット",
+        "一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット",
+        "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット",
+        "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット",
+        "一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット",
+        "一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット",
+        "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
+        "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット"
+      ],
+      "mapping_mode": "canonical_category_normalization_review",
+      "next_step": "confirm_category_normalization_before_import",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "blocked_until": "canonical_category_normalization_manually_confirmed",
+      "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+      "required_evidence": [
+        "sample_names_match_suggested_broader_category",
+        "source_category_should_be_preserved_as_sub_series_or_note",
+        "folder_color_and_icon_exist_in_app_catalog",
+        "manual_note_for_category_semantics"
+      ],
+      "category_mapping_template": {
+        "manual_confirmed": false,
+        "source_category": "스티커",
+        "target_category": "문구",
+        "preserve_source_category_as_sub_series": true,
+        "affected_catalog_rows": 24,
+        "manual_note": ""
+      }
+    },
+    {
+      "review_id": "animation-category-normalization-004",
+      "category": "파우치",
+      "suggested_category": "가방",
+      "affected_catalog_rows": 1,
+      "risk": "medium",
+      "review_reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+      "sample_names": [
+        "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ"
+      ],
+      "mapping_mode": "canonical_category_normalization_review",
+      "next_step": "confirm_category_normalization_before_import",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "blocked_until": "canonical_category_normalization_manually_confirmed",
+      "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+      "required_evidence": [
+        "sample_names_match_suggested_broader_category",
+        "source_category_should_be_preserved_as_sub_series_or_note",
+        "folder_color_and_icon_exist_in_app_catalog",
+        "manual_note_for_category_semantics"
+      ],
+      "category_mapping_template": {
+        "manual_confirmed": false,
+        "source_category": "파우치",
+        "target_category": "가방",
+        "preserve_source_category_as_sub_series": true,
+        "affected_catalog_rows": 1,
+        "manual_note": ""
+      }
     }
   ],
   "unknown_categories": [],

@@ -5560,6 +5560,39 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
                 "sample_names": [item.get("name_ko") for item in affected[:8]],
             }
         )
+    normalization_review_queue = []
+    for index, suggestion in enumerate(suggestions, start=1):
+        normalization_review_queue.append(
+            {
+                "review_id": f"animation-category-normalization-{index:03d}",
+                "category": suggestion["category"],
+                "suggested_category": suggestion["suggested_category"],
+                "affected_catalog_rows": suggestion["rows"],
+                "risk": suggestion["risk"],
+                "review_reason": suggestion["reason"],
+                "sample_names": suggestion["sample_names"],
+                "mapping_mode": "canonical_category_normalization_review",
+                "next_step": "confirm_category_normalization_before_import",
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                "blocked_until": "canonical_category_normalization_manually_confirmed",
+                "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+                "required_evidence": [
+                    "sample_names_match_suggested_broader_category",
+                    "source_category_should_be_preserved_as_sub_series_or_note",
+                    "folder_color_and_icon_exist_in_app_catalog",
+                    "manual_note_for_category_semantics",
+                ],
+                "category_mapping_template": {
+                    "manual_confirmed": False,
+                    "source_category": suggestion["category"],
+                    "target_category": suggestion["suggested_category"],
+                    "preserve_source_category_as_sub_series": True,
+                    "affected_catalog_rows": suggestion["rows"],
+                    "manual_note": "",
+                },
+            }
+        )
 
     unknown_categories = []
     for category, count in by_category.most_common():
@@ -5616,6 +5649,11 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
             "unknown_category_count": len(unknown_categories),
             "unknown_category_rows": sum(int(row.get("rows") or 0) for row in unknown_categories),
             "normalization_suggestion_count": len(suggestions),
+            "normalization_review_queue_rows": sum(
+                int(row.get("affected_catalog_rows") or 0)
+                for row in normalization_review_queue
+            ),
+            "normalization_review_queue_count": len(normalization_review_queue),
             "missing_image_rows": sum(1 for item in rows if not present(item.get("image_url"))),
             "missing_source_url_rows": sum(1 for item in rows if not present(item.get("source_url"))),
             "folder_color_palette_count": len(FOLDER_COLOR_PALETTE),
@@ -5639,6 +5677,7 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
         "missing_source_url_by_category": counter_rows(missing_source_by_category, ("category",), 60),
         "top_sub_series": counter_rows(by_sub_series, ("sub_series",), 80),
         "normalization_suggestions": suggestions,
+        "normalization_review_queue": normalization_review_queue,
         "unknown_categories": unknown_categories[:80],
         "taxonomy_review_queue": unknown_categories[:80],
         "automation_policy": {
