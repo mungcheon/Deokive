@@ -1,17 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T13:11:59Z",
+  "generated_at": "2026-07-23T13:17:17Z",
   "scope": "animation_goods_taxonomy_review_batches",
   "summary": {
-    "source_categories": 2,
-    "source_rows": 110,
+    "source_categories": 1,
+    "source_rows": 109,
     "batch_count": 1,
     "batch_size": 4,
     "by_suggested_family": [
-      [
-        "acrylic",
-        1
-      ],
       [
         "other",
         1
@@ -19,27 +15,19 @@
     ],
     "by_suggested_color": [
       [
-        "sky",
-        1
-      ],
-      [
         "neutral",
         1
       ]
     ],
     "by_suggested_color_group": [
       [
-        "blue",
-        1
-      ],
-      [
         "neutral",
         1
       ]
     ],
     "folder_color_palette_count": 32,
-    "folder_visual_token_count": 31,
-    "folder_template_count": 2,
+    "folder_visual_token_count": 30,
+    "folder_template_count": 1,
     "folder_icon_family_count": 11,
     "folder_icon_option_count": 88,
     "app_folder_color_count": 188,
@@ -3148,7 +3136,7 @@
     {
       "category": "아크릴 키링",
       "family": "keyring",
-      "rows": 8,
+      "rows": 9,
       "color_hint": "amber",
       "color_hex": "0xFFFFC857",
       "color_group": "yellow",
@@ -3606,26 +3594,6 @@
       ]
     },
     {
-      "category": "아크릴",
-      "family": "other",
-      "rows": 1,
-      "color_hint": "neutral",
-      "color_hex": "0xFF9CA3AF",
-      "color_group": "neutral",
-      "color_sort_order": 300,
-      "primary_icon_key": "category",
-      "icon_options": [
-        "category",
-        "folder",
-        "folder_special",
-        "inventory",
-        "package",
-        "archive",
-        "source",
-        "dashboard"
-      ]
-    },
-    {
       "category": "의류",
       "family": "apparel",
       "rows": 3,
@@ -3816,14 +3784,10 @@
   "batches": [
     {
       "batch_id": "animation-taxonomy-review-001",
-      "priority": 20,
-      "category_count": 2,
-      "row_count": 110,
+      "priority": 70,
+      "category_count": 1,
+      "row_count": 109,
       "suggested_family_counts": [
-        [
-          "acrylic",
-          1
-        ],
         [
           "other",
           1
@@ -3831,46 +3795,17 @@
       ],
       "suggested_color_counts": [
         [
-          "sky",
-          1
-        ],
-        [
           "neutral",
           1
         ]
       ],
       "suggested_color_group_counts": [
         [
-          "blue",
-          1
-        ],
-        [
           "neutral",
           1
         ]
       ],
       "folder_templates": [
-        {
-          "folder_name": "아크릴 스탠드",
-          "family": "acrylic",
-          "color_hint": "sky",
-          "color_hex": "0xFF7DB7FF",
-          "color_group": "blue",
-          "color_sort_order": 220,
-          "primary_icon_key": "view_carousel",
-          "icon_options": [
-            "view_carousel",
-            "acrylic_stand",
-            "standee",
-            "acrylic_keyring",
-            "display_case",
-            "frame",
-            "photo_album",
-            "grid"
-          ],
-          "source_category": "아크릴",
-          "requires_manual_review": true
-        },
         {
           "folder_name": "기타 굿즈",
           "family": "other",
@@ -3896,56 +3831,6 @@
       "folder_creation_blocked_until": "category_mapping_manually_confirmed",
       "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
       "categories": [
-        {
-          "category": "아크릴",
-          "rows": 1,
-          "review_priority": 20,
-          "suggested_family": "acrylic",
-          "suggested_category": "아크릴 스탠드",
-          "suggested_color_hint": "sky",
-          "suggested_color_hex": "0xFF7DB7FF",
-          "suggested_color_group": "blue",
-          "suggested_color_sort_order": 220,
-          "suggested_primary_icon_key": "view_carousel",
-          "suggested_icon_options": [
-            "view_carousel",
-            "acrylic_stand",
-            "standee",
-            "acrylic_keyring",
-            "display_case",
-            "frame",
-            "photo_album",
-            "grid"
-          ],
-          "review_reason": "Most acrylic goods should be split into acrylic stand/keyholder/card after name review.",
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア～ジャンフェス限定!～ - B賞 アクリルストラップ"
-          ],
-          "folder_template": {
-            "folder_name": "아크릴 스탠드",
-            "family": "acrylic",
-            "color_hint": "sky",
-            "color_hex": "0xFF7DB7FF",
-            "color_group": "blue",
-            "color_sort_order": 220,
-            "primary_icon_key": "view_carousel",
-            "icon_options": [
-              "view_carousel",
-              "acrylic_stand",
-              "standee",
-              "acrylic_keyring",
-              "display_case",
-              "frame",
-              "photo_album",
-              "grid"
-            ],
-            "source_category": "아크릴",
-            "requires_manual_review": true
-          },
-          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
-          "recommended_action": "Review sample names and map the category to the suggested folder only when product type is clear.",
-          "auto_apply_enabled": false
-        },
         {
           "category": "굿즈",
           "rows": 109,

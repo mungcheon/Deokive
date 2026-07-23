@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T13:11:59Z",
+  "generated_at": "2026-07-23T13:17:17Z",
   "summary": {
-    "batch_count": 154,
+    "batch_count": 152,
     "max_published_batches": 160,
-    "summed_batch_rows": 23641,
+    "summed_batch_rows": 23625,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -84,14 +84,6 @@
         2
       ],
       [
-        "animation_category_split_review",
-        2
-      ],
-      [
-        "animation_category_unmatched_keyword_review",
-        2
-      ],
-      [
         "gotouchi_official_candidate_review",
         1
       ],
@@ -105,6 +97,14 @@
       ],
       [
         "animation_category_action_queue",
+        1
+      ],
+      [
+        "animation_category_split_review",
+        1
+      ],
+      [
+        "animation_category_unmatched_keyword_review",
         1
       ],
       [
@@ -194,14 +194,6 @@
         2
       ],
       [
-        "agent-animation-category-split",
-        2
-      ],
-      [
-        "agent-animation-keyword-review",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
@@ -218,6 +210,14 @@
         1
       ],
       [
+        "agent-animation-category-split",
+        1
+      ],
+      [
+        "agent-animation-keyword-review",
+        1
+      ],
+      [
         "agent-ichiban-prize-name-image",
         1
       ],
@@ -230,7 +230,7 @@
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
       "dedupe_groups": 61,
-      "animation_unknown_categories": 2,
+      "animation_unknown_categories": 1,
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
@@ -283,15 +283,15 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2499,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 110,
-      "animation_category_action_rows": 110,
-      "animation_category_split_review_categories": 2,
+      "animation_category_review_rows": 109,
+      "animation_category_action_rows": 109,
+      "animation_category_split_review_categories": 1,
       "animation_category_direct_mapping_categories": 0,
-      "animation_category_name_split_rows": 110,
+      "animation_category_name_split_rows": 109,
       "animation_category_name_split_candidates": 0,
-      "animation_category_name_split_unmatched_catalog_rows": 2443,
-      "animation_category_unmatched_keyword_rows": 2443,
-      "animation_category_unmatched_keyword_candidates": 40,
+      "animation_category_name_split_unmatched_catalog_rows": 2430,
+      "animation_category_unmatched_keyword_rows": 2430,
+      "animation_category_unmatched_keyword_candidates": 20,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
       "ichiban_prize_name_image_review_rows": 29,
       "ichiban_prize_multi_item_rank_groups": 415,
@@ -8011,7 +8011,7 @@
       "priority": 22,
       "title": "애니메이션 카테고리 매핑 템플릿 확인: animation-category-action-001",
       "public_report": "data/animation_category_action_queue_public.json",
-      "rows": 110,
+      "rows": 109,
       "recommended_action": "Split name-level review categories first, then confirm direct category-to-folder mapping templates.",
       "acceptance_criteria": [
         "Each category_mapping_template remains manual_confirmed=false until sample names are reviewed.",
@@ -8019,81 +8019,6 @@
         "Folder color and icon keys already exist in app visual catalogs."
       ],
       "sample_items": [
-        {
-          "category": "아크릴",
-          "rows": 1,
-          "review_priority": 20,
-          "mapping_mode": "name_level_split_review_required",
-          "requires_name_level_split_review": true,
-          "suggested_family": "acrylic",
-          "suggested_category": "아크릴 스탠드",
-          "suggested_color_group": "blue",
-          "suggested_color_hint": "sky",
-          "suggested_primary_icon_key": "view_carousel",
-          "review_reason": "Most acrylic goods should be split into acrylic stand/keyholder/card after name review.",
-          "review_summary": {
-            "affected_catalog_rows": 1,
-            "mapping_mode": "name_level_split_review_required",
-            "requires_name_level_split_review": true,
-            "sample_name_count": 1,
-            "name_split_hint_count": 0,
-            "name_split_hints": [],
-            "recommended_review_path": "review_name_split_hints_before_category_mapping"
-          },
-          "name_split_hints": [],
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア～ジャンフェス限定!～ - B賞 アクリルストラップ"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "name_level_split_review_required",
-            "requires_name_level_split_review": true,
-            "source_category": "아크릴",
-            "target_category": "아크릴 스탠드",
-            "target_family": "acrylic",
-            "folder_name": "아크릴 스탠드",
-            "folder_color_hex": "0xFF7DB7FF",
-            "folder_color_hint": "sky",
-            "folder_color_group": "blue",
-            "folder_color_sort_order": 220,
-            "folder_icon_key": "view_carousel",
-            "folder_icon_options": [
-              "view_carousel",
-              "acrylic_stand",
-              "standee",
-              "acrylic_keyring",
-              "display_case",
-              "frame",
-              "photo_album",
-              "grid"
-            ],
-            "affected_catalog_rows": 1,
-            "blocked_until": "name_level_split_rules_manually_confirmed",
-            "blocked_reason": "broad_source_category_requires_name_level_split",
-            "required_evidence": [
-              "sample_names_match_product_type_split_rules",
-              "broad_category_not_mapped_to_single_folder",
-              "confirmed_split_target_category_for_each_rule"
-            ],
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false,
-          "blocked_until": "name_level_split_rules_manually_confirmed",
-          "blocked_reason": "broad_source_category_requires_name_level_split",
-          "required_evidence": [
-            "sample_names_match_product_type_split_rules",
-            "broad_category_not_mapped_to_single_folder",
-            "confirmed_split_target_category_for_each_rule"
-          ]
-        },
         {
           "category": "굿즈",
           "rows": 109,
@@ -8194,15 +8119,14 @@
         }
       ],
       "review_summary": {
-        "split_review_categories": 2,
+        "split_review_categories": 1,
         "direct_mapping_categories": 0,
-        "category_count": 2,
+        "category_count": 1,
         "work_order_lanes": [
           "name_level_split_review",
           "unmatched_keyword_review"
         ],
         "split_first_blocked_categories": [
-          "아크릴",
           "굿즈"
         ]
       },
@@ -8815,29 +8739,6 @@
         "split_candidate_count": 0,
         "matched_sample_count": 0,
         "unmatched_sample_count": 8
-      },
-      "review_state": "manual_name_level_split_confirmation_required",
-      "next_machine_step": "confirm_animation_category_name_split_templates"
-    },
-    {
-      "batch_id": "027-agent-animation-category-split-151",
-      "agent_id": "agent-animation-category-split",
-      "workstream": "animation_category_split_review",
-      "priority": 27,
-      "title": "애니메이션 이름별 세부 분류 확인: 아크릴",
-      "public_report": "data/animation_category_split_review_public.json",
-      "rows": 1,
-      "recommended_action": "Confirm name keyword templates before applying broad category split rules to catalog rows.",
-      "acceptance_criteria": [
-        "Each name_level_split_template remains manual_confirmed=false until item names are reviewed.",
-        "Same prize-letter variants remain separate catalog rows when the official campaign has multiple types.",
-        "Unmatched samples stay blocked until a safer keyword or official category is confirmed."
-      ],
-      "sample_items": [],
-      "review_summary": {
-        "split_candidate_count": 0,
-        "matched_sample_count": 0,
-        "unmatched_sample_count": 1
       },
       "review_state": "manual_name_level_split_confirmation_required",
       "next_machine_step": "confirm_animation_category_name_split_templates"
@@ -15570,7 +15471,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "034-agent-animation-keyword-review-152",
+      "batch_id": "034-agent-animation-keyword-review-151",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 34,
@@ -16175,369 +16076,6 @@
         "product_type_candidate_count": 0,
         "sample_source": "top_token_candidates",
         "source_category_rows": 2430
-      },
-      "review_state": "manual_keyword_candidate_review_required",
-      "next_machine_step": "review_unmatched_animation_keyword_candidates"
-    },
-    {
-      "batch_id": "035-agent-animation-keyword-review-153",
-      "agent_id": "agent-animation-keyword-review",
-      "workstream": "animation_category_unmatched_keyword_review",
-      "priority": 35,
-      "title": "애니메이션 미매칭 키워드 후보 검수: 아크릴",
-      "public_report": "data/animation_category_unmatched_keyword_review_public.json",
-      "rows": 13,
-      "recommended_action": "Review token candidates and promote only product-type keywords into split rules.",
-      "acceptance_criteria": [
-        "Token candidates remain manual_confirmed=false until sample rows are checked.",
-        "Series names, character names, and store-only tokens are not promoted as product categories.",
-        "Accepted keywords map to an existing app folder color and icon family."
-      ],
-      "sample_items": [
-        {
-          "token": "アクリルセレクション",
-          "row_count": 7,
-          "review_score": 42,
-          "sample_rows": [
-            {
-              "catalog_index": 13367,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（1/7）",
-              "name_ja": "F賞 アクリルセレクション（1/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19652,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（2/7）",
-              "name_ja": "F賞 アクリルセレクション（2/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19653,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（3/7）",
-              "name_ja": "F賞 アクリルセレクション（3/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19654,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（4/7）",
-              "name_ja": "F賞 アクリルセレクション（4/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19655,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（5/7）",
-              "name_ja": "F賞 アクリルセレクション（5/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19656,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（6/7）",
-              "name_ja": "F賞 アクリルセレクション（6/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "same_category_product_word",
-          "review_reason": "Matches the current broad category but does not suggest a more specific split.",
-          "suggested_target_category": "아크릴",
-          "suggested_target_family": "acrylic",
-          "suggested_rule_id": "manual_alias_review",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "keep_as_context_keyword_do_not_promote_without_more_specific_type",
-          "suggested_use": "do_not_promote_without_stronger_product_type_evidence"
-        },
-        {
-          "token": "夏目友人帳",
-          "row_count": 7,
-          "review_score": 42,
-          "sample_rows": [
-            {
-              "catalog_index": 13367,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（1/7）",
-              "name_ja": "F賞 アクリルセレクション（1/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19652,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（2/7）",
-              "name_ja": "F賞 アクリルセレクション（2/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19653,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（3/7）",
-              "name_ja": "F賞 アクリルセレクション（3/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19654,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（4/7）",
-              "name_ja": "F賞 アクリルセレクション（4/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19655,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（5/7）",
-              "name_ja": "F賞 アクリルセレクション（5/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19656,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（6/7）",
-              "name_ja": "F賞 アクリルセレクション（6/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        },
-        {
-          "token": "紙飛行機",
-          "row_count": 7,
-          "review_score": 42,
-          "sample_rows": [
-            {
-              "catalog_index": 13367,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（1/7）",
-              "name_ja": "F賞 アクリルセレクション（1/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19652,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（2/7）",
-              "name_ja": "F賞 アクリルセレクション（2/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19653,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（3/7）",
-              "name_ja": "F賞 アクリルセレクション（3/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19654,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（4/7）",
-              "name_ja": "F賞 アクリルセレクション（4/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19655,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（5/7）",
-              "name_ja": "F賞 アクリルセレクション（5/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19656,
-              "name_ko": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜 - F賞 アクリルセレクション（6/7）",
-              "name_ja": "F賞 アクリルセレクション（6/7）",
-              "category": "아크릴",
-              "affiliation": "나츠메 우인장",
-              "series_name": "一番くじ 夏目友人帳 あとりえほん〜紙飛行機に乗せて〜",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        },
-        {
-          "token": "Adventure",
-          "row_count": 1,
-          "review_score": 36,
-          "sample_rows": [
-            {
-              "catalog_index": 16307,
-              "name_ko": "一番くじ ドラゴンボール Fantastic Adventure - D賞 アクリルマルチスタンド",
-              "name_ja": "D賞 アクリルマルチスタンド",
-              "category": "아크릴",
-              "affiliation": "드래곤볼",
-              "series_name": "一番くじ ドラゴンボール Fantastic Adventure",
-              "sub_series": "D賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        },
-        {
-          "token": "BASE",
-          "row_count": 1,
-          "review_score": 36,
-          "sample_rows": [
-            {
-              "catalog_index": 15119,
-              "name_ko": "ONE PIECE BASE SHOP くじ 366DAYS OF BIRTHDAYS - アクリルブロックチャーム賞 366DAYS OF BIRTHDAYS",
-              "name_ja": "アクリルブロックチャーム賞 366DAYS OF BIRTHDAYS",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "ONE PIECE BASE SHOP くじ 366DAYS OF BIRTHDAYS",
-              "sub_series": "アクリルブロックチャーム賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        },
-        {
-          "token": "BIRTHDAYS",
-          "row_count": 1,
-          "review_score": 36,
-          "sample_rows": [
-            {
-              "catalog_index": 15119,
-              "name_ko": "ONE PIECE BASE SHOP くじ 366DAYS OF BIRTHDAYS - アクリルブロックチャーム賞 366DAYS OF BIRTHDAYS",
-              "name_ja": "アクリルブロックチャーム賞 366DAYS OF BIRTHDAYS",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "ONE PIECE BASE SHOP くじ 366DAYS OF BIRTHDAYS",
-              "sub_series": "アクリルブロックチャーム賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        },
-        {
-          "token": "CHAPTER7",
-          "row_count": 1,
-          "review_score": 36,
-          "sample_rows": [
-            {
-              "catalog_index": 12524,
-              "name_ko": "一番くじ 勝利の女神：NIKKE CHAPTER7 - J賞 アクリルコースター",
-              "name_ja": "J賞 アクリルコースター",
-              "category": "아크릴",
-              "affiliation": "승리의 여신: 니케",
-              "series_name": "一番くじ 勝利の女神：NIKKE CHAPTER7",
-              "sub_series": "J賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        },
-        {
-          "token": "DAYS",
-          "row_count": 1,
-          "review_score": 36,
-          "sample_rows": [
-            {
-              "catalog_index": 15119,
-              "name_ko": "ONE PIECE BASE SHOP くじ 366DAYS OF BIRTHDAYS - アクリルブロックチャーム賞 366DAYS OF BIRTHDAYS",
-              "name_ja": "アクリルブロックチャーム賞 366DAYS OF BIRTHDAYS",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "ONE PIECE BASE SHOP くじ 366DAYS OF BIRTHDAYS",
-              "sub_series": "アクリルブロックチャーム賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "review_kind": "ambiguous_review",
-          "review_reason": "Needs sample review before it can become a category keyword.",
-          "product_type_hint": false,
-          "manual_confirmed": false,
-          "recommended_manual_action": "inspect_samples_before_deciding_product_type_or_noise",
-          "suggested_use": "review_as_keyword_candidate"
-        }
-      ],
-      "review_summary": {
-        "unmatched_rows": 13,
-        "token_candidate_count": 20,
-        "product_type_candidate_count": 0,
-        "sample_source": "top_token_candidates",
-        "source_category_rows": 13
       },
       "review_state": "manual_keyword_candidate_review_required",
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
@@ -31692,13 +31230,13 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "160-agent-animation-taxonomy-154",
+      "batch_id": "210-agent-animation-taxonomy-152",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
-      "priority": 160,
+      "priority": 210,
       "title": "애니메이션 굿즈 카테고리 검수: animation-taxonomy-review-001",
       "public_report": "data/animation_category_review_batches_public.json",
-      "rows": 110,
+      "rows": 109,
       "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
       "acceptance_criteria": [
         "Folder color hints follow folder_color_palette sort order.",
@@ -31706,56 +31244,6 @@
         "Category changes remain review-only until app navigation impact is checked."
       ],
       "sample_items": [
-        {
-          "category": "아크릴",
-          "rows": 1,
-          "review_priority": 20,
-          "suggested_family": "acrylic",
-          "suggested_category": "아크릴 스탠드",
-          "suggested_color_hint": "sky",
-          "suggested_color_hex": "0xFF7DB7FF",
-          "suggested_color_group": "blue",
-          "suggested_color_sort_order": 220,
-          "suggested_primary_icon_key": "view_carousel",
-          "suggested_icon_options": [
-            "view_carousel",
-            "acrylic_stand",
-            "standee",
-            "acrylic_keyring",
-            "display_case",
-            "frame",
-            "photo_album",
-            "grid"
-          ],
-          "review_reason": "Most acrylic goods should be split into acrylic stand/keyholder/card after name review.",
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア～ジャンフェス限定!～ - B賞 アクリルストラップ"
-          ],
-          "folder_template": {
-            "folder_name": "아크릴 스탠드",
-            "family": "acrylic",
-            "color_hint": "sky",
-            "color_hex": "0xFF7DB7FF",
-            "color_group": "blue",
-            "color_sort_order": 220,
-            "primary_icon_key": "view_carousel",
-            "icon_options": [
-              "view_carousel",
-              "acrylic_stand",
-              "standee",
-              "acrylic_keyring",
-              "display_case",
-              "frame",
-              "photo_album",
-              "grid"
-            ],
-            "source_category": "아크릴",
-            "requires_manual_review": true
-          },
-          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
-          "recommended_action": "Review sample names and map the category to the suggested folder only when product type is clear.",
-          "auto_apply_enabled": false
-        },
         {
           "category": "굿즈",
           "rows": 109,
