@@ -172,6 +172,8 @@ def _reissue_work_order(row: dict[str, Any], rank: int) -> dict[str, Any]:
         "source_urls": row.get("source_urls") or [],
         "reissue_signal_reasons": row.get("reissue_signal_reasons") or [],
         "decision_template": row.get("decision_template") or {},
+        "prize_identity_summary": row.get("prize_identity_summary") or {},
+        "zero_price_exception_policy": row.get("zero_price_exception_policy") or {},
         "sample_rows": row.get("sample_rows") or [],
         "merge_blockers": row.get("merge_blockers") or ["ichiban_reissue_manual_confirmation_required"],
         "manual_confirmed": False,

@@ -58,6 +58,15 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
                             "https://1kuji.com/products/sample-2",
                         ],
                         "decision_template": {"manual_confirmed": False},
+                        "prize_identity_summary": {
+                            "prize_labels": ["A賞"],
+                            "official_price_jpy_values": [790],
+                            "zero_price_exception_policy_pass": True,
+                        },
+                        "zero_price_exception_policy": {
+                            "last_one_or_double_chance_rows_must_be_zero_jpy": True,
+                            "current_group_pass": True,
+                        },
                         "sample_rows": [{"catalog_index": 6}, {"catalog_index": 7}],
                     }
                 ],
@@ -115,6 +124,8 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             "same_name_across_campaign_urls_may_be_reissue",
         )
         self.assertIn("release_periods_compared", report["issues"][2]["required_evidence"])
+        self.assertEqual(report["issues"][2]["prize_identity_summary"]["prize_labels"], ["A賞"])
+        self.assertTrue(report["issues"][2]["zero_price_exception_policy"]["current_group_pass"])
 
     def test_clean_price_policy_still_surfaces_remaining_reviews(self) -> None:
         report = queue.build_queue(

@@ -212,8 +212,22 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
                 {
                     "has_reissue_signal": True,
                     "sample_rows": [
-                        {"catalog_index": 101},
-                        {"catalog_index": 102},
+                        {
+                            "catalog_index": 101,
+                            "series_name": "一番くじ Sample",
+                            "sub_series": "ラストワン賞",
+                            "name_ja": "ラストワン賞 Sample Figure",
+                            "official_price_jpy": 0,
+                            "source_url": "https://1kuji.com/products/sample",
+                        },
+                        {
+                            "catalog_index": 102,
+                            "series_name": "一番くじ Sample",
+                            "sub_series": "ラストワン賞",
+                            "name_ja": "ラストワン賞 Sample Figure",
+                            "official_price_jpy": 0,
+                            "source_url": "https://1kuji.com/products/sample2",
+                        },
                     ],
                 }
             ]
@@ -256,6 +270,20 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertIn(
             "ichiban_reissue_manual_confirmation_required",
             report["ichiban_reissue_review_lane"][0]["merge_blockers"],
+        )
+        identity_summary = report["ichiban_reissue_work_order"][0]["prize_identity_summary"]
+        self.assertEqual(identity_summary["prize_labels"], ["ラストワン賞"])
+        self.assertEqual(identity_summary["official_price_jpy_values"], [0])
+        self.assertEqual(identity_summary["zero_price_exception_rows"], 2)
+        self.assertTrue(identity_summary["zero_price_exception_policy_pass"])
+        self.assertIn(
+            "sub_series_or_prize_rank",
+            identity_summary["identity_fields_required"],
+        )
+        self.assertTrue(
+            report["ichiban_reissue_work_order"][0]["zero_price_exception_policy"][
+                "last_one_or_double_chance_rows_must_be_zero_jpy"
+            ]
         )
 
     def test_ichiban_reissue_policy_counts_are_reported_even_without_queue_overlap(self) -> None:

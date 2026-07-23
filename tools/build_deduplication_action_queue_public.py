@@ -60,6 +60,78 @@ def _present(value: Any) -> bool:
     return value is not None and str(value).strip() != ""
 
 
+def _unique_sorted(values: list[Any]) -> list[str]:
+    return sorted({str(value).strip() for value in values if str(value).strip()})
+
+
+def _is_zero_price_exception_label(value: Any) -> bool:
+    text = str(value or "").strip().lower()
+    if not text:
+        return False
+    return any(
+        token in text
+        for token in [
+            "last one",
+            "last-one",
+            "double chance",
+            "double-chance",
+            "ラストワン",
+            "ダブルチャンス",
+            "더블찬스",
+            "라스트원",
+        ]
+    )
+
+
+def _price_value(row: dict[str, Any]) -> int | None:
+    value = row.get("official_price_jpy")
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str) and value.strip().isdigit():
+        return int(value.strip())
+    return None
+
+
+def _prize_identity_summary(sample_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    prize_labels = [
+        row.get("sub_series") or row.get("name_ja") or row.get("name_ko")
+        for row in sample_rows
+    ]
+    exception_rows = [
+        row
+        for row in sample_rows
+        if _is_zero_price_exception_label(row.get("sub_series"))
+        or _is_zero_price_exception_label(row.get("name_ja"))
+        or _is_zero_price_exception_label(row.get("name_ko"))
+    ]
+    nonzero_exception_rows = [
+        row
+        for row in exception_rows
+        if (price := _price_value(row)) is not None and price != 0
+    ]
+    return {
+        "series_names": _unique_sorted([row.get("series_name") for row in sample_rows]),
+        "prize_labels": _unique_sorted(prize_labels),
+        "prize_label_count": len(_unique_sorted(prize_labels)),
+        "display_names": _unique_sorted([row.get("name_ja") or row.get("name_ko") for row in sample_rows]),
+        "display_name_count": len(_unique_sorted([row.get("name_ja") or row.get("name_ko") for row in sample_rows])),
+        "official_price_jpy_values": sorted(
+            {price for row in sample_rows if (price := _price_value(row)) is not None}
+        ),
+        "zero_price_exception_rows": len(exception_rows),
+        "zero_price_exception_nonzero_rows": len(nonzero_exception_rows),
+        "zero_price_exception_policy_pass": len(nonzero_exception_rows) == 0,
+        "identity_fields_required": [
+            "series_name",
+            "source_url",
+            "sub_series_or_prize_rank",
+            "name_ja_or_official_prize_name",
+            "official_price_jpy",
+            "image_url",
+        ],
+    }
+
+
 def protected_ichiban_reissue_catalog_indexes(policy_audit: dict[str, Any] | None) -> set[int]:
     if not policy_audit:
         return set()
@@ -118,6 +190,7 @@ def ichiban_reissue_review_lane(
         if not isinstance(group, dict):
             continue
         sample_rows = [row for row in group.get("sample_rows") or [] if isinstance(row, dict)]
+        prize_identity = _prize_identity_summary(sample_rows)
         lane.append(
             {
                 "normalized_name": group.get("normalized_name"),
@@ -131,6 +204,7 @@ def ichiban_reissue_review_lane(
                 "review_state": "probable_reissue_manual_confirmation_required",
                 "next_machine_step": "verify_ichiban_campaign_pages_before_dedupe",
                 "merge_blockers": ["ichiban_reissue_manual_confirmation_required"],
+                "prize_identity_summary": prize_identity,
                 "sample_rows": sample_rows,
                 "auto_merge_enabled": False,
                 "auto_delete_enabled": False,
@@ -161,6 +235,7 @@ def ichiban_reissue_work_order(
             }
         )
         source_urls = [str(url).strip() for url in row.get("source_urls") or [] if str(url).strip()]
+        prize_identity = _prize_identity_summary(sample_rows)
         orders.append(
             {
                 "work_order_id": f"ichiban-reissue-dedupe-{rank:03d}",
@@ -176,6 +251,7 @@ def ichiban_reissue_work_order(
                 "next_machine_step": "compare_campaign_pages_then_record_reissue_or_duplicate_decision",
                 "manual_review_checklist": [
                     "Open every source_url and compare official campaign title/release period/prize lineup.",
+                    "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
                     "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
                     "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
                     "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
@@ -195,6 +271,12 @@ def ichiban_reissue_work_order(
                     "evidence_urls": source_urls,
                     "manual_note": "",
                     "protected_if_reissue": True,
+                },
+                "prize_identity_summary": prize_identity,
+                "zero_price_exception_policy": {
+                    "last_one_or_double_chance_rows_must_be_zero_jpy": True,
+                    "current_group_pass": prize_identity["zero_price_exception_policy_pass"],
+                    "nonzero_exception_rows": prize_identity["zero_price_exception_nonzero_rows"],
                 },
                 "sample_rows": sample_rows,
                 "merge_blockers": ["ichiban_reissue_manual_confirmation_required"],
