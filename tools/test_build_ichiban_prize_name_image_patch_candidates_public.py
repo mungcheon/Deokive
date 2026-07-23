@@ -87,9 +87,16 @@ class BuildIchibanPrizeNameImagePatchCandidatesPublicTest(unittest.TestCase):
                     "series_name": "一番くじ Demo",
                     "prize_rank": "B賞",
                     "prize_item_name": "タオル",
+                    "expected_display_name_ko": "一番くじ Demo - B賞 タオル",
                     "display_name_ko": "一番くじ Demo - タオル",
+                    "review_reason": "display_name_does_not_match_series_and_prize_name",
                     "source_url": "https://1kuji.com/products/demo",
                     "image_url": "https://assets.1kuji.com/demo/missing.jpg",
+                    "manual_fix_template": {
+                        "catalog_index": 2,
+                        "name_ko": "<confirmed_display_name_or_blank>",
+                        "manual_confirmed": False,
+                    },
                 }
             ]
         }
@@ -107,7 +114,21 @@ class BuildIchibanPrizeNameImagePatchCandidatesPublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["candidate_rows"], 0)
         self.assertEqual(report["summary"]["blocked_rows"], 1)
+        self.assertEqual(report["summary"]["blocked_rows_with_manual_fix_template"], 1)
+        self.assertEqual(
+            report["summary"]["blocked_reason_counts"],
+            [("no_safe_official_name_or_image_match", 1)],
+        )
+        self.assertEqual(
+            report["summary"]["blocked_review_reason_counts"],
+            [("display_name_does_not_match_series_and_prize_name", 1)],
+        )
         self.assertEqual(report["blocked_rows"][0]["reason"], "no_safe_official_name_or_image_match")
+        self.assertEqual(
+            report["blocked_rows"][0]["recommended_manual_action"],
+            "open_official_campaign_lineup_and_fill_manual_fix_template",
+        )
+        self.assertEqual(report["blocked_rows"][0]["manual_fix_template"]["catalog_index"], 2)
 
 
 if __name__ == "__main__":

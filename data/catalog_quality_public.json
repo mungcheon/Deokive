@@ -7185,10 +7185,33 @@
     "exact_image_match_rows": 0,
     "strong_name_match_rows": 0,
     "blocked_rows": 29,
+    "blocked_reason_counts": [
+      [
+        "no_safe_official_name_or_image_match",
+        20
+      ],
+      [
+        "official_match_found_but_no_field_change",
+        8
+      ],
+      [
+        "official_campaign_not_fetchable_or_root_url",
+        1
+      ]
+    ],
+    "blocked_review_reason_counts": [
+      [
+        "display_name_does_not_match_series_and_prize_name",
+        28
+      ],
+      [
+        "missing_required_name_component",
+        1
+      ]
+    ],
+    "blocked_rows_with_manual_fix_template": 29,
     "auto_apply_enabled": false,
-    "recommended_next_action": "manual_confirm_exact_official_patch_candidates_before_catalog_mutation",
-    "manual_confirmed_rows": 0,
-    "open_candidate_rows": 0
+    "recommended_next_action": "manual_confirm_exact_official_patch_candidates_or_fill_blocked_manual_templates"
   },
   "source_discovery_next_focus_fallback_queue": {
     "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",

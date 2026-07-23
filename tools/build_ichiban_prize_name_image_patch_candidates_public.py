@@ -5,6 +5,7 @@ import difflib
 import json
 import sys
 import time
+from collections import Counter
 from pathlib import Path
 from typing import Any, Callable
 
@@ -79,6 +80,24 @@ def _best_name_match(prize_item_name: str, official_rows: list[dict[str, Any]]) 
     return best, best_score
 
 
+def _blocked_row(row: dict[str, Any], *, reason: str) -> dict[str, Any]:
+    return {
+        "catalog_index": row.get("catalog_index"),
+        "source_url": row.get("source_url"),
+        "reason": reason,
+        "review_reason": row.get("review_reason"),
+        "series_name": row.get("series_name"),
+        "current_prize_rank": row.get("prize_rank"),
+        "current_name_ja": row.get("prize_item_name"),
+        "current_display_name_ko": row.get("display_name_ko"),
+        "expected_display_name_ko": row.get("expected_display_name_ko"),
+        "current_image_url": row.get("image_url"),
+        "manual_fix_template": row.get("manual_fix_template"),
+        "manual_confirmed": False,
+        "recommended_manual_action": "open_official_campaign_lineup_and_fill_manual_fix_template",
+    }
+
+
 def build_report(
     review_report: dict[str, Any],
     *,
@@ -118,13 +137,10 @@ def build_report(
         official = official_by_url.get(source_url)
         if not official:
             blocked_rows.append(
-                {
-                    "catalog_index": row.get("catalog_index"),
-                    "source_url": source_url,
-                    "reason": "official_campaign_not_fetchable_or_root_url",
-                    "current_name_ja": row.get("prize_item_name"),
-                    "current_image_url": row.get("image_url"),
-                }
+                _blocked_row(
+                    row,
+                    reason="official_campaign_not_fetchable_or_root_url",
+                )
             )
             continue
 
@@ -142,13 +158,10 @@ def build_report(
 
         if not matched:
             blocked_rows.append(
-                {
-                    "catalog_index": row.get("catalog_index"),
-                    "source_url": source_url,
-                    "reason": "no_safe_official_name_or_image_match",
-                    "current_name_ja": current_name,
-                    "current_image_url": current_image,
-                }
+                _blocked_row(
+                    row,
+                    reason="no_safe_official_name_or_image_match",
+                )
             )
             continue
 
@@ -173,13 +186,10 @@ def build_report(
 
         if not field_changes:
             blocked_rows.append(
-                {
-                    "catalog_index": row.get("catalog_index"),
-                    "source_url": source_url,
-                    "reason": "official_match_found_but_no_field_change",
-                    "current_name_ja": current_name,
-                    "current_image_url": current_image,
-                }
+                _blocked_row(
+                    row,
+                    reason="official_match_found_but_no_field_change",
+                )
             )
             continue
 
@@ -217,6 +227,8 @@ def build_report(
 
     candidates.sort(key=lambda row: (str(row.get("source_url") or ""), int(row.get("catalog_index") or 0)))
     blocked_rows.sort(key=lambda row: (str(row.get("source_url") or ""), int(row.get("catalog_index") or 0)))
+    blocked_reason_counts = Counter(str(row.get("reason") or "unknown") for row in blocked_rows)
+    blocked_review_reason_counts = Counter(str(row.get("review_reason") or "unknown") for row in blocked_rows)
     return {
         "schema_version": 1,
         "generated_at": generated_at,
@@ -230,8 +242,13 @@ def build_report(
             "exact_image_match_rows": sum(1 for row in candidates if row["match_type"] == "exact_image_match"),
             "strong_name_match_rows": sum(1 for row in candidates if row["match_type"] == "strong_name_match"),
             "blocked_rows": len(blocked_rows),
+            "blocked_reason_counts": blocked_reason_counts.most_common(),
+            "blocked_review_reason_counts": blocked_review_reason_counts.most_common(),
+            "blocked_rows_with_manual_fix_template": sum(
+                1 for row in blocked_rows if isinstance(row.get("manual_fix_template"), dict)
+            ),
             "auto_apply_enabled": False,
-            "recommended_next_action": "manual_confirm_exact_official_patch_candidates_before_catalog_mutation",
+            "recommended_next_action": "manual_confirm_exact_official_patch_candidates_or_fill_blocked_manual_templates",
         },
         "candidates": candidates,
         "blocked_rows": blocked_rows,
