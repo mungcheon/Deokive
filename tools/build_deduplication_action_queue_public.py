@@ -52,6 +52,10 @@ def _counter_to_pairs(counter: Counter[str]) -> list[list[Any]]:
     return [[name, count] for name, count in counter.most_common()]
 
 
+def _counter_from_values(values: list[str]) -> list[list[Any]]:
+    return _counter_to_pairs(Counter(value for value in values if value))
+
+
 def _present(value: Any) -> bool:
     return value is not None and str(value).strip() != ""
 
@@ -322,6 +326,29 @@ def _confirmation_risk_flags(group: dict[str, Any], comparison: dict[str, Any]) 
     return sorted(set(flags))
 
 
+def _manual_review_required_reasons(group: dict[str, Any]) -> list[str]:
+    comparison = group.get("row_comparison_summary") or {}
+    reasons = [
+        "manual_keep_drop_confirmation_required",
+        "same_sellable_product_identity_must_be_confirmed",
+    ]
+    if comparison.get("name_differs"):
+        reasons.append("name_differs")
+    if comparison.get("image_url_differs"):
+        reasons.append("image_url_differs")
+    if comparison.get("source_url_differs"):
+        reasons.append("source_url_differs")
+    if comparison.get("multi_store"):
+        reasons.append("multi_store_variant_or_retailer_review")
+    if comparison.get("multi_category"):
+        reasons.append("category_differs")
+    if group.get("ichiban_reissue_review"):
+        reasons.append("ichiban_reissue_manual_confirmation_required")
+    reasons.extend(str(reason) for reason in group.get("merge_blockers") or [])
+    reasons.extend(str(flag) for flag in group.get("confirmation_risk_flags") or [])
+    return sorted(set(reason for reason in reasons if reason))
+
+
 def _compact_group(
     group: dict[str, Any],
     batch: dict[str, Any],
@@ -383,6 +410,9 @@ def _compact_group(
         compact["confirmation_risk_flags"] = sorted(
             set(compact["confirmation_risk_flags"]) | {"ichiban_reissue_manual_confirmation_required"}
         )
+    compact["manual_review_required_reasons"] = _manual_review_required_reasons(compact)
+    compact["auto_merge_blocked_reason"] = "explicit_manual_keep_drop_confirmation_required"
+    compact["auto_delete_blocked_reason"] = "explicit_manual_keep_drop_confirmation_required"
     return compact
 
 
@@ -435,6 +465,27 @@ def build_report(
     published = actionable[:max_groups]
     unqueued_actionable_groups = max(len(actionable) - len(published), 0)
     queue_coverage = round(len(published) / len(actionable), 4) if actionable else 1.0
+    merge_blocker_counts = _counter_from_values(
+        [
+            str(blocker)
+            for group in actionable
+            for blocker in group.get("merge_blockers", [])
+        ]
+    )
+    confirmation_risk_counts = _counter_from_values(
+        [
+            str(flag)
+            for group in actionable
+            for flag in group.get("confirmation_risk_flags", [])
+        ]
+    )
+    manual_reason_counts = _counter_from_values(
+        [
+            str(reason)
+            for group in actionable
+            for reason in group.get("manual_review_required_reasons", [])
+        ]
+    )
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(published), batch_size):
@@ -475,6 +526,9 @@ def build_report(
             "max_groups": max_groups,
             "by_review_confidence": _counter_pairs(actionable, "review_confidence"),
             "by_key_type": _counter_pairs(actionable, "key_type"),
+            "by_merge_blocker": merge_blocker_counts,
+            "by_confirmation_risk_flag": confirmation_risk_counts,
+            "by_manual_review_required_reason": manual_reason_counts,
             "excluded_review_confidence": _counter_to_pairs(excluded),
             **reissue_policy,
             "ichiban_reissue_work_order_rows": len(reissue_work_orders),
@@ -505,6 +559,20 @@ def build_report(
             "auto_merge": False,
             "auto_delete": False,
             "requires_manual_review": True,
+            "blocked_until": UNBLOCKS_WHEN,
+            "default_blocked_reason": "explicit_manual_keep_drop_confirmation_required",
+            "required_evidence": [
+                "same_sellable_product_identity_confirmed",
+                "keep_catalog_index_confirmed",
+                "drop_catalog_indexes_confirmed",
+                "evidence_urls_recorded",
+                "manual_note_recorded",
+            ],
+            "protected_lanes": [
+                "variant_caution",
+                "manual_identity_check",
+                "ichiban_probable_reissue_review",
+            ],
             "manual_confirmation_template": CONFIRMED_TEMPLATE,
             "confirmed_queue": CONFIRMED_QUEUE,
             "import_tool": IMPORT_TOOL,

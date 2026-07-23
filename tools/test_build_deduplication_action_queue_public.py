@@ -86,6 +86,21 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
             "medium_review_confidence": 1,
         })
         self.assertEqual(dict(report["summary"]["excluded_review_confidence"]), {"variant_caution": 1})
+        self.assertEqual(
+            dict(report["summary"]["by_manual_review_required_reason"])[
+                "manual_keep_drop_confirmation_required"
+            ],
+            2,
+        )
+        self.assertEqual(
+            report["automation_policy"]["blocked_until"],
+            "explicit_manual_keep_drop_decision_confirmed",
+        )
+        self.assertIn(
+            "same_sellable_product_identity_confirmed",
+            report["automation_policy"]["required_evidence"],
+        )
+        self.assertIn("variant_caution", report["automation_policy"]["protected_lanes"])
         keys = [group["key"] for group in report["batches"][0]["groups"]]
         self.assertEqual(keys, ["111", "https://example.test/item"])
         self.assertEqual(
@@ -112,10 +127,19 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(first_group["keep_basis"]["basis"], "richest_or_equal_catalog_row")
         self.assertEqual(first_group["keep_basis"]["keep_richness"], 9)
         self.assertTrue(first_group["keep_basis"]["keep_has_image"])
+        self.assertEqual(
+            first_group["auto_merge_blocked_reason"],
+            "explicit_manual_keep_drop_confirmation_required",
+        )
         self.assertTrue(first_group["row_comparison_summary"]["name_differs"])
         self.assertTrue(first_group["row_comparison_summary"]["multi_store"])
         self.assertIn("name_differs", first_group["confirmation_risk_flags"])
         self.assertIn("multi_store_review", first_group["confirmation_risk_flags"])
+        self.assertIn("name_differs", first_group["manual_review_required_reasons"])
+        self.assertIn(
+            "multi_store_variant_or_retailer_review",
+            first_group["manual_review_required_reasons"],
+        )
 
     def test_max_groups_caps_published_queue_only(self) -> None:
         review_batches = {
@@ -318,6 +342,10 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertIn("same_name_different_campaign_url", group["ichiban_reissue_signal_reasons"])
         self.assertIn("ichiban_reissue_manual_confirmation_required", group["merge_blockers"])
         self.assertIn("ichiban_reissue_manual_confirmation_required", group["confirmation_risk_flags"])
+        self.assertIn(
+            "ichiban_reissue_manual_confirmation_required",
+            group["manual_review_required_reasons"],
+        )
 
 
 if __name__ == "__main__":
