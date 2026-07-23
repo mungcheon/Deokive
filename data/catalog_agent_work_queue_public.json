@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T23:44:13Z",
+  "generated_at": "2026-07-23T00:16:08Z",
   "summary": {
-    "batch_count": 151,
+    "batch_count": 150,
     "max_published_batches": 160,
-    "summed_batch_rows": 25488,
+    "summed_batch_rows": 25458,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -104,10 +104,6 @@
         1
       ],
       [
-        "ichiban_kuji_prize_name_image_patch_candidates",
-        1
-      ],
-      [
         "ichiban_kuji_metadata",
         1
       ],
@@ -194,10 +190,6 @@
         2
       ],
       [
-        "agent-ichiban-prize-name-image",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
@@ -207,6 +199,10 @@
       ],
       [
         "agent-animation-category-action",
+        1
+      ],
+      [
+        "agent-ichiban-prize-name-image",
         1
       ],
       [
@@ -275,9 +271,10 @@
       "animation_category_unmatched_keyword_rows": 2712,
       "animation_category_unmatched_keyword_candidates": 49,
       "animation_category_unmatched_keyword_product_type_candidates": 6,
-      "ichiban_prize_name_image_review_rows": 44,
-      "ichiban_prize_multi_item_rank_groups": 416,
-      "ichiban_prize_name_image_patch_candidate_rows": 15,
+      "ichiban_prize_name_image_review_rows": 29,
+      "ichiban_prize_multi_item_rank_groups": 415,
+      "ichiban_prize_name_image_patch_candidate_rows": 0,
+      "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 29
     },
     "confirmed_import_template_rows": 1147,
@@ -7050,7 +7047,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "022-agent-animation-category-action-144",
+      "batch_id": "022-agent-animation-category-action-143",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -7887,7 +7884,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "026-agent-animation-category-split-145",
+      "batch_id": "026-agent-animation-category-split-144",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 26,
@@ -8977,7 +8974,7 @@
       "next_machine_step": "confirm_animation_category_name_split_templates"
     },
     {
-      "batch_id": "027-agent-animation-category-split-146",
+      "batch_id": "027-agent-animation-category-split-145",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 27,
@@ -13515,7 +13512,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-animation-category-split-147",
+      "batch_id": "028-agent-animation-category-split-146",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 28,
@@ -17029,7 +17026,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "034-agent-animation-keyword-review-148",
+      "batch_id": "034-agent-animation-keyword-review-147",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 34,
@@ -17641,7 +17638,7 @@
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "035-agent-animation-keyword-review-149",
+      "batch_id": "035-agent-animation-keyword-review-148",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 35,
@@ -17880,7 +17877,7 @@
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "036-agent-animation-keyword-review-150",
+      "batch_id": "036-agent-animation-keyword-review-149",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 36,
@@ -25131,7 +25128,7 @@
       "priority": 56,
       "title": "Ichiban Kuji prize name/image structure review",
       "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
-      "rows": 44,
+      "rows": 29,
       "recommended_action": "Confirm each prize display name includes campaign, prize rank, prize item, and variant detail.",
       "acceptance_criteria": [
         "Display names include the release name, prize rank, and prize item name.",
@@ -25322,96 +25319,6 @@
         {
           "manual_review_status": "not_started",
           "manual_confirmed": false,
-          "catalog_index": 16649,
-          "series_name": "一番くじ ドラゴンボール超 THE 20TH FILM",
-          "prize_rank": "FILM記念賞",
-          "prize_item_name": "THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "expected_prize_display_name": "FILM記念賞 THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "display_name_ko": "一番くじ ドラゴンボール超 THE 20TH FILM - THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "expected_display_name_ko": "一番くじ ドラゴンボール超 THE 20TH FILM - FILM記念賞 THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "category": "포스터",
-          "character_name": "기타",
-          "official_price_jpy": 650,
-          "release_date": "2018-12-04",
-          "source_url": "https://1kuji.com/products/db_20film",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/15715/6aea2151-773c-441b-b845-8c912a0f99b2.jpg",
-          "local_image_path": "assets/catalog_images/fc458e5d922852e435cd.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 16649,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/db_20film",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16615,
-          "series_name": "一番くじ ドラゴンボール超 THE 20TH FILM",
-          "prize_rank": "FILM記念賞",
-          "prize_item_name": "THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "expected_prize_display_name": "FILM記念賞 THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "display_name_ko": "一番くじ ドラゴンボール超 THE 20TH FILM - THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "expected_display_name_ko": "一番くじ ドラゴンボール超 THE 20TH FILM - FILM記念賞 THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "category": "포스터",
-          "character_name": "기타",
-          "official_price_jpy": 650,
-          "release_date": "2019-06-08",
-          "source_url": "https://1kuji.com/products/db_20film_re",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/16110/92c3cc29-f873-4f43-be93-27ab8ab4528c.jpg",
-          "local_image_path": "assets/catalog_images/859cc3385b9199e1fa3c.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 16615,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/db_20film_re",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
           "catalog_index": 16681,
           "series_name": "一番くじ ドラゴンボール ～超戦士バトル列伝～",
           "prize_rank": "ダブルチャンス",
@@ -25457,20 +25364,20 @@
         {
           "manual_review_status": "not_started",
           "manual_confirmed": false,
-          "catalog_index": 16680,
-          "series_name": "一番くじ ドラゴンボール ～超戦士バトル列伝～",
-          "prize_rank": "ラストワン賞",
-          "prize_item_name": "最後の1個を引くと付いてくる！ラストワン賞",
-          "expected_prize_display_name": "ラストワン賞 最後の1個を引くと付いてくる！ラストワン賞",
-          "display_name_ko": "一番くじ ドラゴンボール ～超戦士バトル列伝～ - 最後の1個を引くと付いてくる！ラストワン賞",
-          "expected_display_name_ko": "一番くじ ドラゴンボール ～超戦士バトル列伝～ - ラストワン賞 最後の1個を引くと付いてくる！ラストワン賞",
-          "category": "굿즈",
+          "catalog_index": 17833,
+          "series_name": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS",
+          "prize_rank": "A賞",
+          "prize_item_name": "超サイヤ人ゴジータ フィギュア",
+          "expected_prize_display_name": "A賞 超サイヤ人ゴジータ フィギュア",
+          "display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - 超サイヤ人ゴジータ フィギュア",
+          "expected_display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - A賞 超サイヤ人ゴジータ フィギュア",
+          "category": "피규어",
           "character_name": "기타",
-          "official_price_jpy": 0,
-          "release_date": "2018-05-02",
-          "source_url": "https://1kuji.com/products/db_battle",
-          "image_url": "https://sn.bpnavi.jp/db_battle/images/item_ttl_lo.png",
-          "local_image_path": "assets/catalog_images/082aa7b46307258b836a.webp",
+          "official_price_jpy": 680,
+          "release_date": "2020-07-23",
+          "source_url": "https://1kuji.com/products/db_legends2",
+          "image_url": "https://sn.bpnavi.jp/page/db/db_legends2/0623/a_prize_C8tFMZJr.jpg",
+          "local_image_path": "assets/catalog_images/a91ad4baed9235c9f021.webp",
           "review_reason": "display_name_does_not_match_series_and_prize_name",
           "name_policy": {
             "required_components": [
@@ -25489,12 +25396,102 @@
             "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
           },
           "manual_fix_template": {
-            "catalog_index": 16680,
+            "catalog_index": 17833,
             "name_ko": "<confirmed_display_name_or_blank>",
             "name_ja": "<confirmed_prize_item_name_or_blank>",
             "sub_series": "<confirmed_prize_rank_or_blank>",
             "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/db_battle",
+            "evidence_url": "https://1kuji.com/products/db_legends2",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
+          "catalog_index": 17834,
+          "series_name": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS",
+          "prize_rank": "B賞",
+          "prize_item_name": "超サイヤ人ブロリー フィギュア",
+          "expected_prize_display_name": "B賞 超サイヤ人ブロリー フィギュア",
+          "display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - 超サイヤ人ブロリー フィギュア",
+          "expected_display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - B賞 超サイヤ人ブロリー フィギュア",
+          "category": "피규어",
+          "character_name": "기타",
+          "official_price_jpy": 680,
+          "release_date": "2020-07-23",
+          "source_url": "https://1kuji.com/products/db_legends2",
+          "image_url": "https://sn.bpnavi.jp/page/db/db_legends2/0623/b_prize_De9G3fNL.jpg",
+          "local_image_path": "assets/catalog_images/c3e5a9152281da4cc0d7.webp",
+          "review_reason": "display_name_does_not_match_series_and_prize_name",
+          "name_policy": {
+            "required_components": [
+              "ichiban_release_name(series_name)",
+              "prize_rank(sub_series)",
+              "prize_item_name(name_ja)",
+              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+            ],
+            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
+            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+          },
+          "image_review_policy": {
+            "requires_same_campaign": true,
+            "requires_same_prize_rank": true,
+            "requires_same_variant_or_item": true,
+            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+          },
+          "manual_fix_template": {
+            "catalog_index": 17834,
+            "name_ko": "<confirmed_display_name_or_blank>",
+            "name_ja": "<confirmed_prize_item_name_or_blank>",
+            "sub_series": "<confirmed_prize_rank_or_blank>",
+            "image_url": "<confirmed_official_image_url_or_blank>",
+            "evidence_url": "https://1kuji.com/products/db_legends2",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
+          "catalog_index": 17835,
+          "series_name": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS",
+          "prize_rank": "C賞",
+          "prize_item_name": "超ベジット フィギュア",
+          "expected_prize_display_name": "C賞 超ベジット フィギュア",
+          "display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - 超ベジット フィギュア",
+          "expected_display_name_ko": "一番くじ ドラゴンボール Rising Fighters with DRAGONBALL LEGENDS - C賞 超ベジット フィギュア",
+          "category": "피규어",
+          "character_name": "기타",
+          "official_price_jpy": 680,
+          "release_date": "2020-07-23",
+          "source_url": "https://1kuji.com/products/db_legends2",
+          "image_url": "https://sn.bpnavi.jp/page/db/db_legends2/0623/c_prize_Jc6Wj8Hm.jpg",
+          "local_image_path": "assets/catalog_images/ed53250f8cbb79385d3f.webp",
+          "review_reason": "display_name_does_not_match_series_and_prize_name",
+          "name_policy": {
+            "required_components": [
+              "ichiban_release_name(series_name)",
+              "prize_rank(sub_series)",
+              "prize_item_name(name_ja)",
+              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+            ],
+            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
+            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+          },
+          "image_review_policy": {
+            "requires_same_campaign": true,
+            "requires_same_prize_rank": true,
+            "requires_same_variant_or_item": true,
+            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+          },
+          "manual_fix_template": {
+            "catalog_index": 17835,
+            "name_ko": "<confirmed_display_name_or_blank>",
+            "name_ja": "<confirmed_prize_item_name_or_blank>",
+            "sub_series": "<confirmed_prize_rank_or_blank>",
+            "image_url": "<confirmed_official_image_url_or_blank>",
+            "evidence_url": "https://1kuji.com/products/db_legends2",
             "manual_confirmed": false
           },
           "auto_apply_enabled": false
@@ -25502,17 +25499,17 @@
       ],
       "review_summary": {
         "kuji_rows": 7899,
-        "review_rows": 44,
-        "name_structure_review_rows": 44,
+        "review_rows": 29,
+        "name_structure_review_rows": 29,
         "image_identity_review_rows": 0,
         "same_campaign_prize_rank_name_duplicate_rows": 0,
         "same_campaign_image_reused_different_name_rows": 0,
-        "multi_item_prize_rank_groups": 416,
-        "multi_item_prize_rank_catalog_rows": 2941,
+        "multi_item_prize_rank_groups": 415,
+        "multi_item_prize_rank_catalog_rows": 2939,
         "review_reason_counts": [
           [
             "display_name_does_not_match_series_and_prize_name",
-            43
+            28
           ],
           [
             "missing_required_name_component",
@@ -25524,309 +25521,6 @@
       },
       "review_state": "manual_prize_name_structure_confirmation_required",
       "next_machine_step": "confirm_ichiban_prize_name_structure_templates"
-    },
-    {
-      "batch_id": "057-agent-ichiban-prize-name-image-143",
-      "agent_id": "agent-ichiban-prize-name-image",
-      "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
-      "priority": 57,
-      "title": "Ichiban Kuji prize image/name patch candidates",
-      "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
-      "rows": 15,
-      "recommended_action": "Review exact image matches and confirm only safe catalog patch templates.",
-      "acceptance_criteria": [
-        "candidate image URL must match the same official campaign prize and item variant.",
-        "field_changes must not erase variant details or collapse distinct prize rows.",
-        "catalog_patch_template stays manual_confirmed=false until reviewed."
-      ],
-      "sample_items": [
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16649,
-          "source_url": "https://1kuji.com/products/db_20film",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ドラゴンボール超 THE 20TH FILM",
-          "current_prize_rank": "FILM記念賞",
-          "current_name_ja": "THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "current_display_name_ko": "一番くじ ドラゴンボール超 THE 20TH FILM - THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/15715/6aea2151-773c-441b-b845-8c912a0f99b2.jpg",
-          "official_prize_rank": "THE 20TH FILM記念賞",
-          "official_name_ja": "THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "official_prize_display_name": "THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "suggested_display_name_ko": "一番くじ ドラゴンボール超 THE 20TH FILM - THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/15715/6aea2151-773c-441b-b845-8c912a0f99b2.jpg",
-          "field_changes": {
-            "sub_series": {
-              "from": "FILM記念賞",
-              "to": "THE 20TH FILM記念賞"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 16649,
-            "name_ko": "",
-            "name_ja": "",
-            "sub_series": "THE 20TH FILM記念賞",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/db_20film",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16615,
-          "source_url": "https://1kuji.com/products/db_20film_re",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ドラゴンボール超 THE 20TH FILM",
-          "current_prize_rank": "FILM記念賞",
-          "current_name_ja": "THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "current_display_name_ko": "一番くじ ドラゴンボール超 THE 20TH FILM - THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/16110/92c3cc29-f873-4f43-be93-27ab8ab4528c.jpg",
-          "official_prize_rank": "THE 20TH FILM記念賞",
-          "official_name_ja": "THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "official_prize_display_name": "THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "suggested_display_name_ko": "一番くじ ドラゴンボール超 THE 20TH FILM - THE 20TH FILM記念賞 歴代劇場版ポスタークリアファイルセット",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/16110/92c3cc29-f873-4f43-be93-27ab8ab4528c.jpg",
-          "field_changes": {
-            "sub_series": {
-              "from": "FILM記念賞",
-              "to": "THE 20TH FILM記念賞"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 16615,
-            "name_ko": "",
-            "name_ja": "",
-            "sub_series": "THE 20TH FILM記念賞",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/db_20film_re",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16680,
-          "source_url": "https://1kuji.com/products/db_battle",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ドラゴンボール ～超戦士バトル列伝～",
-          "current_prize_rank": "ラストワン賞",
-          "current_name_ja": "最後の1個を引くと付いてくる！ラストワン賞",
-          "current_display_name_ko": "一番くじ ドラゴンボール ～超戦士バトル列伝～ - 最後の1個を引くと付いてくる！ラストワン賞",
-          "current_image_url": "https://sn.bpnavi.jp/db_battle/images/item_ttl_lo.png",
-          "official_prize_rank": "最後の1個を引くと付いてくる！ラストワン賞",
-          "official_name_ja": "最後の1個を引くと付いてくる！ラストワン賞",
-          "official_prize_display_name": "最後の1個を引くと付いてくる！ラストワン賞",
-          "suggested_display_name_ko": "一番くじ ドラゴンボール ～超戦士バトル列伝～ - 最後の1個を引くと付いてくる！ラストワン賞",
-          "official_image_url": "https://sn.bpnavi.jp/db_battle/images/item_ttl_lo.png",
-          "field_changes": {
-            "sub_series": {
-              "from": "ラストワン賞",
-              "to": "最後の1個を引くと付いてくる！ラストワン賞"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 16680,
-            "name_ko": "",
-            "name_ja": "",
-            "sub_series": "最後の1個を引くと付いてくる！ラストワン賞",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/db_battle",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16738,
-          "source_url": "https://1kuji.com/products/db_frieza",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ドラゴンボール～ゴーゴー！フリーザ様～",
-          "current_prize_rank": "A賞",
-          "current_name_ja": "モバイルくじ A賞 フリーザ様ちびきゅんキャラ スペシャルカラーver.",
-          "current_display_name_ko": "一番くじ ドラゴンボール～ゴーゴー！フリーザ様～ - モバイルくじ A賞 フリーザ様ちびきゅんキャラ スペシャルカラーver.",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/6580/4082bbb8-4b79-45ec-abb3-05157ce943d6.jpg",
-          "official_prize_rank": "モバイルくじ A賞",
-          "official_name_ja": "モバイルくじ A賞 フリーザ様ちびきゅんキャラ スペシャルカラーver.",
-          "official_prize_display_name": "モバイルくじ A賞 フリーザ様ちびきゅんキャラ スペシャルカラーver.",
-          "suggested_display_name_ko": "一番くじ ドラゴンボール～ゴーゴー！フリーザ様～ - モバイルくじ A賞 フリーザ様ちびきゅんキャラ スペシャルカラーver.",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/6580/4082bbb8-4b79-45ec-abb3-05157ce943d6.jpg",
-          "field_changes": {
-            "sub_series": {
-              "from": "A賞",
-              "to": "モバイルくじ A賞"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 16738,
-            "name_ko": "",
-            "name_ja": "",
-            "sub_series": "モバイルくじ A賞",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/db_frieza",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16739,
-          "source_url": "https://1kuji.com/products/db_frieza",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ドラゴンボール～ゴーゴー！フリーザ様～",
-          "current_prize_rank": "B賞",
-          "current_name_ja": "モバイルくじ B賞 「フリーザ様オリジナルボイス」",
-          "current_display_name_ko": "一番くじ ドラゴンボール～ゴーゴー！フリーザ様～ - モバイルくじ B賞 「フリーザ様オリジナルボイス」",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/6581/1c07eabf-46c8-4e96-9ab2-2ff9b3c511c6.jpg",
-          "official_prize_rank": "モバイルくじ B賞",
-          "official_name_ja": "モバイルくじ B賞 「フリーザ様オリジナルボイス」",
-          "official_prize_display_name": "モバイルくじ B賞 「フリーザ様オリジナルボイス」",
-          "suggested_display_name_ko": "一番くじ ドラゴンボール～ゴーゴー！フリーザ様～ - モバイルくじ B賞 「フリーザ様オリジナルボイス」",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/6581/1c07eabf-46c8-4e96-9ab2-2ff9b3c511c6.jpg",
-          "field_changes": {
-            "sub_series": {
-              "from": "B賞",
-              "to": "モバイルくじ B賞"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 16739,
-            "name_ko": "",
-            "name_ja": "",
-            "sub_series": "モバイルくじ B賞",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/db_frieza",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16640,
-          "source_url": "https://1kuji.com/products/dbuew_dokkan",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ドラゴンボール ULTIMATE EVOLUTION With ドラゴンボールZ ドッカンバトル",
-          "current_prize_rank": "ラストワン賞",
-          "current_name_ja": "最後の1個を引くと付いてくる！ラストワン賞 孫悟空（身勝手の極意“兆”） フィギュア",
-          "current_display_name_ko": "一番くじ ドラゴンボール ULTIMATE EVOLUTION With ドラゴンボールZ ドッカンバトル - 最後の1個を引くと付いてくる！ラストワン賞 孫悟空（身勝手の極意“兆”） フィギュア",
-          "current_image_url": "https://sn.bpnavi.jp/dbuew_dokkan/images/item_ttl_lo.png",
-          "official_prize_rank": "最後の1個を引くと付いてくる！ラストワン賞",
-          "official_name_ja": "最後の1個を引くと付いてくる！ラストワン賞 孫悟空（身勝手の極意“兆”） フィギュア",
-          "official_prize_display_name": "最後の1個を引くと付いてくる！ラストワン賞 孫悟空（身勝手の極意“兆”） フィギュア",
-          "suggested_display_name_ko": "一番くじ ドラゴンボール ULTIMATE EVOLUTION With ドラゴンボールZ ドッカンバトル - 最後の1個を引くと付いてくる！ラストワン賞 孫悟空（身勝手の極意“兆”） フィギュア",
-          "official_image_url": "https://sn.bpnavi.jp/dbuew_dokkan/images/item_ttl_lo.png",
-          "field_changes": {
-            "sub_series": {
-              "from": "ラストワン賞",
-              "to": "最後の1個を引くと付いてくる！ラストワン賞"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 16640,
-            "name_ko": "",
-            "name_ja": "",
-            "sub_series": "最後の1個を引くと付いてくる！ラストワン賞",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/dbuew_dokkan",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 14710,
-          "source_url": "https://1kuji.com/products/haikyu16",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ハイキュー!! 〜世界が泣いた巨匠縁下監督の話題作が待望の商品化!!〜",
-          "current_prize_rank": "ラストワン賞",
-          "current_name_ja": "【ファイターボックス】ファイターラストワン賞 HAIKYU FIGHTER The MOVIEセット",
-          "current_display_name_ko": "一番くじ ハイキュー!! 〜世界が泣いた巨匠縁下監督の話題作が待望の商品化!!〜 - 【ファイターボックス】ファイターラストワン賞 HAIKYU FIGHTER The MOVIEセット",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/11071/5ca642ad-427e-4df5-9385-116b6276a970.jpg",
-          "official_prize_rank": "【ファイターボックス】ファイターラストワン賞",
-          "official_name_ja": "【ファイターボックス】ファイターラストワン賞 HAIKYU FIGHTER The MOVIEセット",
-          "official_prize_display_name": "【ファイターボックス】ファイターラストワン賞 HAIKYU FIGHTER The MOVIEセット",
-          "suggested_display_name_ko": "一番くじ ハイキュー!! 〜世界が泣いた巨匠縁下監督の話題作が待望の商品化!!〜 - 【ファイターボックス】ファイターラストワン賞 HAIKYU FIGHTER The MOVIEセット",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/11071/5ca642ad-427e-4df5-9385-116b6276a970.jpg",
-          "field_changes": {
-            "sub_series": {
-              "from": "ラストワン賞",
-              "to": "【ファイターボックス】ファイターラストワン賞"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 14710,
-            "name_ko": "",
-            "name_ja": "",
-            "sub_series": "【ファイターボックス】ファイターラストワン賞",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/haikyu16",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 14712,
-          "source_url": "https://1kuji.com/products/haikyu16",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ハイキュー!! 〜世界が泣いた巨匠縁下監督の話題作が待望の商品化!!〜",
-          "current_prize_rank": "A賞",
-          "current_name_ja": "【クエストボックス】A賞 冒険クッション",
-          "current_display_name_ko": "一番くじ ハイキュー!! 〜世界が泣いた巨匠縁下監督の話題作が待望の商品化!!〜 - 【クエストボックス】A賞 冒険クッション",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/11073/f49cb8be-b709-4f15-94b6-79ad98dc6024.jpg",
-          "official_prize_rank": "【クエストボックス】A賞",
-          "official_name_ja": "【クエストボックス】A賞 冒険クッション",
-          "official_prize_display_name": "【クエストボックス】A賞 冒険クッション",
-          "suggested_display_name_ko": "一番くじ ハイキュー!! 〜世界が泣いた巨匠縁下監督の話題作が待望の商品化!!〜 - 【クエストボックス】A賞 冒険クッション",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/11073/f49cb8be-b709-4f15-94b6-79ad98dc6024.jpg",
-          "field_changes": {
-            "sub_series": {
-              "from": "A賞",
-              "to": "【クエストボックス】A賞"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 14712,
-            "name_ko": "",
-            "name_ja": "",
-            "sub_series": "【クエストボックス】A賞",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/haikyu16",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_summary": {
-        "review_rows": 44,
-        "source_urls": 14,
-        "fetched_source_urls": 14,
-        "fetch_failure_urls": 0,
-        "candidate_rows": 15,
-        "exact_image_match_rows": 15,
-        "strong_name_match_rows": 0,
-        "blocked_rows": 29,
-        "auto_apply_enabled": false,
-        "recommended_next_action": "manual_confirm_exact_official_patch_candidates_before_catalog_mutation"
-      },
-      "review_state": "manual_prize_image_patch_confirmation_required",
-      "next_machine_step": "confirm_ichiban_prize_image_patch_templates"
     },
     {
       "batch_id": "060-agent-metadata-100",
@@ -38384,7 +38078,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "160-agent-animation-taxonomy-151",
+      "batch_id": "160-agent-animation-taxonomy-150",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
       "priority": 160,

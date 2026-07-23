@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T23:44:20Z",
+  "generated_at": "2026-07-23T00:16:14Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 24,
+    "action_count": 23,
     "blocked_action_count": 1,
-    "manual_review_action_count": 21,
+    "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 33597,
+    "total_action_rows": 33567,
     "open_review_queues": {
       "source_discovery_rows": 641,
       "image_missing_rows": 714,
@@ -69,9 +69,10 @@
       "animation_category_unmatched_keyword_rows": 2712,
       "animation_category_unmatched_keyword_candidates": 49,
       "animation_category_unmatched_keyword_product_type_candidates": 6,
-      "ichiban_prize_name_image_review_rows": 44,
-      "ichiban_prize_multi_item_rank_groups": 416,
-      "ichiban_prize_name_image_patch_candidate_rows": 15,
+      "ichiban_prize_name_image_review_rows": 29,
+      "ichiban_prize_multi_item_rank_groups": 415,
+      "ichiban_prize_name_image_patch_candidate_rows": 0,
+      "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 29
     },
     "confirmed_import_template_rows": 1147,
@@ -105,11 +106,11 @@
     "ichiban_numbered_variant_application_skipped_rows": 0,
     "ichiban_reissue_duplicate_review_groups": 46,
     "ichiban_probable_reissue_review_groups": 20,
-    "ichiban_prize_name_image_review_rows": 44,
-    "ichiban_prize_name_image_name_structure_review_rows": 44,
+    "ichiban_prize_name_image_review_rows": 29,
+    "ichiban_prize_name_image_name_structure_review_rows": 29,
     "ichiban_prize_name_image_image_identity_review_rows": 0,
-    "ichiban_prize_name_image_multi_item_groups": 416,
-    "ichiban_prize_name_image_patch_candidate_rows": 15,
+    "ichiban_prize_name_image_multi_item_groups": 415,
+    "ichiban_prize_name_image_patch_candidate_rows": 0,
     "ichiban_prize_name_image_patch_blocked_rows": 29,
     "dedupe_fast_review_groups": 42,
     "dedupe_fast_review_same_source_url_groups": 38,
@@ -1285,49 +1286,30 @@
       "workstream": "ichiban_kuji_prize_name_image_review",
       "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
       "status": "manual_review",
-      "rows": 44,
+      "rows": 29,
       "command": "Review Ichiban Kuji campaign title, prize rank, prize item name, variant detail, and image identity against official lineup pages.",
       "next_step": "confirm_prize_name_components_and_image_identity",
       "blocker": "Official lineup evidence is required before mutating prize display names or replacing images.",
       "auto_apply_enabled": false,
       "evidence": {
         "kuji_rows": 7899,
-        "review_rows": 44,
-        "name_structure_review_rows": 44,
+        "review_rows": 29,
+        "name_structure_review_rows": 29,
         "image_identity_review_rows": 0,
         "same_campaign_prize_rank_name_duplicate_rows": 0,
         "same_campaign_image_reused_different_name_rows": 0,
-        "multi_item_prize_rank_groups": 416,
-        "multi_item_prize_rank_catalog_rows": 2941,
+        "multi_item_prize_rank_groups": 415,
+        "multi_item_prize_rank_catalog_rows": 2939,
         "review_reason_counts": [
           [
             "display_name_does_not_match_series_and_prize_name",
-            43
+            28
           ],
           [
             "missing_required_name_component",
             1
           ]
         ]
-      }
-    },
-    {
-      "priority": 46,
-      "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
-      "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
-      "status": "manual_review",
-      "rows": 15,
-      "command": "Manual-confirm exact official 1kuji name/image patch candidates before catalog mutation.",
-      "next_step": "mark_exact_candidates_manual_confirmed_then_import",
-      "blocker": "Auto-apply is disabled; exact-image matches still need human confirmation before catalog writes.",
-      "auto_apply_enabled": false,
-      "evidence": {
-        "review_rows": 44,
-        "candidate_rows": 15,
-        "exact_image_match_rows": 15,
-        "strong_name_match_rows": 0,
-        "blocked_rows": 29,
-        "fetch_failure_urls": 0
       }
     },
     {

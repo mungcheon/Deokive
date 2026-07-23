@@ -761,7 +761,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertGreater(len(ichiban_prize_policy_agent_batches), 0)
         self.assertGreater(len(ichiban_prize_name_image_agent_batches), 0)
-        self.assertGreater(len(ichiban_prize_name_image_patch_agent_batches), 0)
+        if open_queues.get("ichiban_prize_name_image_patch_candidate_rows", 0):
+            self.assertGreater(len(ichiban_prize_name_image_patch_agent_batches), 0)
+        else:
+            self.assertEqual(len(ichiban_prize_name_image_patch_agent_batches), 0)
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
@@ -1148,7 +1151,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             open_queues.get("ichiban_prize_name_image_patch_candidate_rows"),
-            ichiban_prize_name_image_patch_summary.get("candidate_rows"),
+            ichiban_prize_name_image_patch_summary.get(
+                "open_candidate_rows",
+                ichiban_prize_name_image_patch_summary.get("candidate_rows"),
+            ),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_prize_name_image_patch_manual_confirmed_rows"),
+            ichiban_prize_name_image_patch_summary.get("manual_confirmed_rows", 0),
         )
         self.assertEqual(
             open_queues.get("ichiban_prize_name_image_patch_blocked_rows"),
@@ -1156,7 +1166,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             ichiban_prize_name_image_patch_scorecard.get("open_rows"),
-            ichiban_prize_name_image_patch_summary.get("candidate_rows"),
+            ichiban_prize_name_image_patch_summary.get(
+                "open_candidate_rows",
+                ichiban_prize_name_image_patch_summary.get("candidate_rows"),
+            ),
         )
         self.assertEqual(
             ichiban_prize_name_image_patch_next_action.get("exact_image_match_rows"),

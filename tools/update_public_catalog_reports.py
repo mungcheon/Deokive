@@ -10,9 +10,11 @@ from pathlib import Path
 from typing import Any
 
 import audit_public_catalog_image_assets
+import build_catalog_missing_image_actionability_public
 import build_image_source_url_confirmed_template_public
 import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
+import build_missing_image_report_coverage_public
 import build_missing_image_priority_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_pack_public
@@ -93,6 +95,8 @@ METADATA_ACTION_QUEUE = DATA / "catalog_metadata_action_queue_public.json"
 IMAGE_ENRICHMENT_BATCHES = DATA / "catalog_image_enrichment_batches_public.json"
 IMAGE_ATTACHMENT_ACTION_QUEUE = DATA / "catalog_image_attachment_action_queue_public.json"
 IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE = DATA / "catalog_image_source_url_confirmed_template_public.json"
+IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE = DATA / "catalog_image_attachment_confirmed_template_public.json"
+IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN = DATA / "catalog_image_attachment_template_import_dry_run_public.json"
 MISSING_IMAGE_ACTIONABILITY = DATA / "catalog_missing_image_actionability_public.json"
 CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.json"
 EXECUTION_PLAN = DATA / "catalog_execution_plan_public.json"
@@ -359,6 +363,7 @@ PUBLIC_FIELDS = [
     "official_price_krw",
     "barcode",
     "image_url",
+    "local_image_path",
     "source_url",
     "source_store",
     "release_date",
@@ -481,6 +486,21 @@ def copy_report_summary(path: Path, key: str) -> dict[str, Any]:
     if not isinstance(summary, dict):
         summary = {}
     return {"public_report": f"data/{path.name}", **summary}
+
+
+def normalize_ichiban_prize_patch_candidate_summary(report: dict[str, Any]) -> dict[str, Any]:
+    summary = report.get("summary")
+    if not isinstance(summary, dict):
+        summary = {}
+        report["summary"] = summary
+
+    candidates = [row for row in report.get("candidates", []) if isinstance(row, dict)]
+    confirmed_rows = sum(1 for row in candidates if row.get("manual_confirmed") is True)
+    open_candidate_rows = max(0, len(candidates) - confirmed_rows)
+    summary["candidate_rows"] = len(candidates)
+    summary["manual_confirmed_rows"] = confirmed_rows
+    summary["open_candidate_rows"] = open_candidate_rows
+    return summary
 
 
 def copy_import_dry_run(path: Path) -> dict[str, Any]:
@@ -1737,7 +1757,7 @@ def build_operations_public(
         else {}
     )
     ichiban_kuji_prize_name_image_patch_candidates_summary = (
-        ichiban_kuji_prize_name_image_patch_candidates.get("summary", {})
+        normalize_ichiban_prize_patch_candidate_summary(ichiban_kuji_prize_name_image_patch_candidates)
     )
     metadata_summary = metadata_backlog["summary"]
     metadata_review_batches = (
@@ -2303,6 +2323,12 @@ def build_operations_public(
             "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
             "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}",
             "candidate_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get("candidate_rows", 0),
+            "open_candidate_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get(
+                "open_candidate_rows", 0
+            ),
+            "manual_confirmed_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get(
+                "manual_confirmed_rows", 0
+            ),
             "exact_image_match_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get(
                 "exact_image_match_rows", 0
             ),
@@ -2798,9 +2824,13 @@ def build_operations_public(
         {
             "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
             "status": "manual_review"
-            if ichiban_kuji_prize_name_image_patch_candidates_summary.get("candidate_rows", 0)
+            if ichiban_kuji_prize_name_image_patch_candidates_summary.get("open_candidate_rows", 0)
             else "clear",
-            "open_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get("candidate_rows", 0),
+            "open_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get("open_candidate_rows", 0),
+            "candidate_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get("candidate_rows", 0),
+            "manual_confirmed_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get(
+                "manual_confirmed_rows", 0
+            ),
             "exact_image_match_rows": ichiban_kuji_prize_name_image_patch_candidates_summary.get(
                 "exact_image_match_rows", 0
             ),
@@ -3075,7 +3105,10 @@ def build_operations_public(
         )
     if ichiban_kuji_prize_name_image_patch_candidates_summary:
         open_review_queues["ichiban_prize_name_image_patch_candidate_rows"] = (
-            ichiban_kuji_prize_name_image_patch_candidates_summary.get("candidate_rows", 0)
+            ichiban_kuji_prize_name_image_patch_candidates_summary.get("open_candidate_rows", 0)
+        )
+        open_review_queues["ichiban_prize_name_image_patch_manual_confirmed_rows"] = (
+            ichiban_kuji_prize_name_image_patch_candidates_summary.get("manual_confirmed_rows", 0)
         )
         open_review_queues["ichiban_prize_name_image_patch_blocked_rows"] = (
             ichiban_kuji_prize_name_image_patch_candidates_summary.get("blocked_rows", 0)
@@ -3947,7 +3980,9 @@ def build_agent_work_queue_public(
         )
 
     ichiban_patch_candidates = [
-        row for row in ichiban_prize_name_image_patch_candidates.get("candidates", []) if isinstance(row, dict)
+        row
+        for row in ichiban_prize_name_image_patch_candidates.get("candidates", [])
+        if isinstance(row, dict) and row.get("manual_confirmed") is not True
     ]
     if ichiban_patch_candidates:
         add_batch(
@@ -5269,10 +5304,15 @@ def validate_report_consistency(
         if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.exists()
         else {}
     )
-    ichiban_prize_name_image_patch_summary = ichiban_prize_name_image_patch_candidates.get("summary", {})
+    ichiban_prize_name_image_patch_summary = normalize_ichiban_prize_patch_candidate_summary(
+        ichiban_prize_name_image_patch_candidates
+    )
     if ichiban_prize_name_image_patch_summary:
         expected_open_queues["ichiban_prize_name_image_patch_candidate_rows"] = (
-            ichiban_prize_name_image_patch_summary.get("candidate_rows", 0)
+            ichiban_prize_name_image_patch_summary.get("open_candidate_rows", 0)
+        )
+        expected_open_queues["ichiban_prize_name_image_patch_manual_confirmed_rows"] = (
+            ichiban_prize_name_image_patch_summary.get("manual_confirmed_rows", 0)
         )
         expected_open_queues["ichiban_prize_name_image_patch_blocked_rows"] = (
             ichiban_prize_name_image_patch_summary.get("blocked_rows", 0)
@@ -5627,6 +5667,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         load_json(DATA / "catalog_missing_image_work_queue_public.json", {"items": []}),
         generated_at=generated_at,
     )
+    missing_image_report_coverage = build_missing_image_report_coverage_public.build_report(
+        catalog,
+        load_json(DATA / "catalog_missing_image_work_queue_public.json", {"items": []}),
+        generated_at=generated_at,
+    )
     patch_candidate_items = generic_source_patch_candidates.get("items", [])
     patch_candidate_summary = generic_source_patch_candidates.get("summary", {})
     if patch_candidate_summary.get("candidate_rows") != len(patch_candidate_items):
@@ -5666,6 +5711,19 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_next_focus_fallback_queue,
         items,
         queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE,
+    )
+    missing_image_actionability = build_catalog_missing_image_actionability_public.build_report(
+        image_enrichment_batches,
+        image_attachment_action_queue,
+        load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {}) if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists() else {},
+        source_discovery_next_focus_pack,
+        source_discovery_focus_template,
+        source_discovery_focus_template_import,
+        load_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, {}) if IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.exists() else {},
+        load_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, {})
+        if IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.exists()
+        else {},
+        generated_at=generated_at,
     )
     operations = build_operations_public(
         generated_at,
@@ -5879,10 +5937,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["generic_storefront_missing_image_source"] = copy_report_summary(
                 GENERIC_STOREFRONT_MISSING_IMAGE_SOURCE, "generic_storefront_missing_image_source"
             )
-        if MISSING_IMAGE_REPORT_COVERAGE.exists():
-            target["missing_image_report_coverage"] = copy_report_summary(
-                MISSING_IMAGE_REPORT_COVERAGE, "missing_image_report_coverage"
-            )
+        target["missing_image_report_coverage"] = {
+            "public_report": f"data/{MISSING_IMAGE_REPORT_COVERAGE.name}",
+            **missing_image_report_coverage["summary"],
+        }
         if ENSKY_CACHE_COVERAGE.exists():
             target["ensky_cache_coverage"] = copy_report_summary(ENSKY_CACHE_COVERAGE, "ensky_cache_coverage")
         if ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.exists():
@@ -5915,10 +5973,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["image_attachment_action_queue"] = copy_report_summary(
                 IMAGE_ATTACHMENT_ACTION_QUEUE, "image_attachment_action_queue"
             )
-        if MISSING_IMAGE_ACTIONABILITY.exists():
-            target["missing_image_actionability"] = copy_report_summary(
-                MISSING_IMAGE_ACTIONABILITY, "missing_image_actionability"
-            )
+        target["missing_image_actionability"] = {
+            "public_report": f"data/{MISSING_IMAGE_ACTIONABILITY.name}",
+            **missing_image_actionability["summary"],
+        }
         target["danganronpa_missing_media"] = {
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
             **danganronpa_missing_media["summary"],
@@ -6131,11 +6189,13 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_CANDIDATES, image_candidates)
         write_json(IMAGE_ASSET_AUDIT, image_asset_audit)
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority)
+        write_json(MISSING_IMAGE_REPORT_COVERAGE, missing_image_report_coverage)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, source_discovery_next_focus_fallback_queue)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT, source_discovery_next_focus_fallback_import)
+        write_json(MISSING_IMAGE_ACTIONABILITY, missing_image_actionability)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
