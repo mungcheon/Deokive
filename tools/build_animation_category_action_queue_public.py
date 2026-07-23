@@ -210,6 +210,14 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _is_noop_direct_mapping(row: dict[str, Any]) -> bool:
+    if row.get("mapping_mode") != "direct_category_mapping_review":
+        return False
+    source = str(row.get("category") or "").strip().casefold()
+    target = str(row.get("suggested_category") or row.get("category") or "").strip().casefold()
+    return bool(source) and source == target
+
+
 def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     split_rows = [row for row in rows if row.get("requires_name_level_split_review")]
     direct_rows = [row for row in rows if not row.get("requires_name_level_split_review")]
@@ -305,7 +313,11 @@ def build_queue(
     batch_size: int = 6,
     unmatched_keyword_review: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    rows = [_compact(row) for row in _categories(payload)]
+    rows = [
+        row
+        for row in (_compact(category) for category in _categories(payload))
+        if not _is_noop_direct_mapping(row)
+    ]
     rows.sort(key=lambda row: (int(row.get("review_priority") or 999), str(row.get("category") or "")))
     queued = rows[:max_categories]
     app_visual_catalog = payload.get("app_folder_visual_catalog") or {}

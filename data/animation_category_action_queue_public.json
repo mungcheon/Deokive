@@ -1,32 +1,32 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T11:30:03Z",
+  "generated_at": "2026-07-23T11:37:02Z",
   "scope": "animation_category_action_queue",
   "summary": {
-    "actionable_categories": 4,
-    "queued_categories": 4,
-    "actionable_catalog_rows": 185,
-    "queued_catalog_rows": 185,
+    "actionable_categories": 2,
+    "queued_categories": 2,
+    "actionable_catalog_rows": 110,
+    "queued_catalog_rows": 110,
     "action_batch_count": 1,
     "batch_size": 6,
     "max_categories": 24,
     "by_suggested_family": [
       [
-        "other",
-        3
+        "acrylic",
+        1
       ],
       [
-        "acrylic",
+        "other",
         1
       ]
     ],
     "by_color_group": [
       [
-        "neutral",
-        3
+        "blue",
+        1
       ],
       [
-        "blue",
+        "neutral",
         1
       ]
     ],
@@ -34,19 +34,11 @@
       [
         "name_level_split_review_required",
         2
-      ],
-      [
-        "direct_category_mapping_review",
-        2
       ]
     ],
     "by_blocked_reason": [
       [
         "broad_source_category_requires_name_level_split",
-        2
-      ],
-      [
-        "direct_category_mapping_requires_sample_review",
         2
       ]
     ],
@@ -54,24 +46,19 @@
       [
         "name_level_split_rules_manually_confirmed",
         2
-      ],
-      [
-        "direct_category_mapping_manually_confirmed",
-        2
       ]
     ],
     "split_review_categories": 2,
-    "direct_mapping_categories": 2,
+    "direct_mapping_categories": 0,
     "app_folder_color_count": 188,
     "app_folder_icon_option_count": 211,
     "app_folder_icon_group_count": 9,
     "app_folder_palette_section_count": 8,
     "app_folder_palette_sorted_by_family": true,
     "app_animation_visuals_covered": true,
-    "work_order_steps": 3,
+    "work_order_steps": 2,
     "work_order_lanes": [
       "name_level_split_review",
-      "direct_category_mapping_review",
       "unmatched_keyword_review"
     ],
     "split_first_blocked_categories": [
@@ -2869,7 +2856,7 @@
       "lane": "name_level_split_review",
       "source": "animation_category_split_review_public.json",
       "category_count": 2,
-      "affected_catalog_rows": 149,
+      "affected_catalog_rows": 110,
       "next_step": "confirm_animation_category_name_split_templates",
       "template": "server/animation_category_name_split_confirmed_rows.template.json",
       "blocked_direct_mapping_categories": [
@@ -2888,31 +2875,6 @@
       "notes": [
         "Broad categories must be split by product-type keywords before any folder/category mapping.",
         "Do not map an entire broad category such as acrylic or goods to one target folder."
-      ]
-    },
-    {
-      "rank": 2,
-      "lane": "direct_category_mapping_review",
-      "source": "animation_category_action_queue_public.json",
-      "category_count": 2,
-      "affected_catalog_rows": 36,
-      "next_step": "fill_confirmed_animation_category_mapping_templates",
-      "template": "server/animation_category_confirmed_rows.template.json",
-      "categories": [
-        "보드",
-        "콜라보 굿즈"
-      ],
-      "manual_confirmation_required": true,
-      "auto_apply_enabled": false,
-      "blocked_until": "direct_category_mapping_manually_confirmed",
-      "blocked_reason": "direct_category_mapping_requires_sample_review",
-      "required_evidence": [
-        "sample_names_match_single_target_goods_type",
-        "target_folder_color_and_icon_exist_in_app_catalog",
-        "manual_note_for_mapping_decision"
-      ],
-      "notes": [
-        "Only use after sample names match a single target goods type."
       ]
     },
     {
@@ -3291,25 +3253,25 @@
     {
       "batch_id": "animation-category-action-001",
       "priority": 20,
-      "category_count": 4,
-      "affected_catalog_rows": 185,
+      "category_count": 2,
+      "affected_catalog_rows": 110,
       "family_counts": [
         [
-          "other",
-          3
+          "acrylic",
+          1
         ],
         [
-          "acrylic",
+          "other",
           1
         ]
       ],
       "color_group_counts": [
         [
-          "neutral",
-          3
+          "blue",
+          1
         ],
         [
-          "blue",
+          "neutral",
           1
         ]
       ],
@@ -3322,7 +3284,7 @@
       "categories": [
         {
           "category": "아크릴",
-          "rows": 18,
+          "rows": 1,
           "review_priority": 20,
           "mapping_mode": "name_level_split_review_required",
           "requires_name_level_split_review": true,
@@ -3333,24 +3295,17 @@
           "suggested_primary_icon_key": "view_carousel",
           "review_reason": "Most acrylic goods should be split into acrylic stand/keyholder/card after name review.",
           "review_summary": {
-            "affected_catalog_rows": 18,
+            "affected_catalog_rows": 1,
             "mapping_mode": "name_level_split_review_required",
             "requires_name_level_split_review": true,
-            "sample_name_count": 8,
+            "sample_name_count": 1,
             "name_split_hint_count": 0,
             "name_split_hints": [],
             "recommended_review_path": "review_name_split_hints_before_category_mapping"
           },
           "name_split_hints": [],
           "sample_names": [
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - M賞 アクリルチャーム",
-            "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - G賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - F賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - A賞 アクリルボード ー放課後ー",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - B賞 アクリルボード ー五条悟ー"
+            "一番くじ 僕のヒーローアカデミア～ジャンフェス限定!～ - B賞 アクリルストラップ"
           ],
           "category_mapping_template": {
             "manual_confirmed": false,
@@ -3375,7 +3330,7 @@
               "photo_album",
               "grid"
             ],
-            "affected_catalog_rows": 18,
+            "affected_catalog_rows": 1,
             "blocked_until": "name_level_split_rules_manually_confirmed",
             "blocked_reason": "broad_source_category_requires_name_level_split",
             "required_evidence": [
@@ -3404,7 +3359,7 @@
         },
         {
           "category": "굿즈",
-          "rows": 131,
+          "rows": 109,
           "review_priority": 70,
           "mapping_mode": "name_level_split_review_required",
           "requires_name_level_split_review": true,
@@ -3415,7 +3370,7 @@
           "suggested_primary_icon_key": "category",
           "review_reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
           "review_summary": {
-            "affected_catalog_rows": 131,
+            "affected_catalog_rows": 109,
             "mapping_mode": "name_level_split_review_required",
             "requires_name_level_split_review": true,
             "sample_name_count": 8,
@@ -3442,13 +3397,13 @@
           ],
           "sample_names": [
             "一番くじ 葬送のフリーレン - B賞 メタリックビジュアルシート",
-            "一番くじ 葬送のフリーレン - E賞 ミニプレート",
             "一番くじ 葬送のフリーレン - G賞 魔導書風ノート",
             "一番くじ 呪術廻戦 死滅回游 ～弐～ - L賞 ぽこっとちゃーむ",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-1賞 SOFVICちゅ 緑谷出久",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-2賞 SOFVICちゅ 爆豪勝己",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-3賞 SOFVICちゅ 麗日お茶子",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍"
+            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍",
+            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-5賞 SOFVICちゅ オールマイト"
           ],
           "category_mapping_template": {
             "manual_confirmed": false,
@@ -3473,7 +3428,7 @@
               "source",
               "dashboard"
             ],
-            "affected_catalog_rows": 131,
+            "affected_catalog_rows": 109,
             "blocked_until": "name_level_split_rules_manually_confirmed",
             "blocked_reason": "broad_source_category_requires_name_level_split",
             "required_evidence": [
@@ -3498,165 +3453,6 @@
             "sample_names_match_product_type_split_rules",
             "broad_category_not_mapped_to_single_folder",
             "confirmed_split_target_category_for_each_rule"
-          ]
-        },
-        {
-          "category": "보드",
-          "rows": 33,
-          "review_priority": 90,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "other",
-          "suggested_category": "보드",
-          "suggested_color_group": "neutral",
-          "suggested_color_hint": "neutral",
-          "suggested_primary_icon_key": "category",
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "review_summary": {
-            "affected_catalog_rows": 33,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "sample_name_count": 8,
-            "name_split_hint_count": 0,
-            "name_split_hints": [],
-            "recommended_review_path": "confirm_direct_category_mapping"
-          },
-          "name_split_hints": [],
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - H賞 キャンバス風ボード（1/10）",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - H賞 キャンバス風ボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～弐～ - A賞 イラストボード ～Jujutsu Sorcerer～",
-            "一番くじ 呪術廻戦 渋谷事変 ～弐～ - B賞 イラストボード ～Curse～",
-            "一番くじ 呪術廻戦 渋谷事変 ～壱～ - L賞 ティザーイラストボード",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～壱～ - D賞 ティザーイラストボード",
-            "一番くじ 呪術廻戦 ～肆～ - A賞 イラストボード",
-            "一番くじ 劇場版 呪術廻戦 0 - A賞 キャンバス地タペストリー"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "보드",
-            "target_category": "보드",
-            "target_family": "other",
-            "folder_name": "보드",
-            "folder_color_hex": "0xFF9CA3AF",
-            "folder_color_hint": "neutral",
-            "folder_color_group": "neutral",
-            "folder_color_sort_order": 300,
-            "folder_icon_key": "category",
-            "folder_icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "affected_catalog_rows": 33,
-            "blocked_until": "direct_category_mapping_manually_confirmed",
-            "blocked_reason": "direct_category_mapping_requires_sample_review",
-            "required_evidence": [
-              "sample_names_match_single_target_goods_type",
-              "target_folder_color_and_icon_exist_in_app_catalog",
-              "manual_note_for_mapping_decision"
-            ],
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false,
-          "blocked_until": "direct_category_mapping_manually_confirmed",
-          "blocked_reason": "direct_category_mapping_requires_sample_review",
-          "required_evidence": [
-            "sample_names_match_single_target_goods_type",
-            "target_folder_color_and_icon_exist_in_app_catalog",
-            "manual_note_for_mapping_decision"
-          ]
-        },
-        {
-          "category": "콜라보 굿즈",
-          "rows": 3,
-          "review_priority": 90,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "other",
-          "suggested_category": "콜라보 굿즈",
-          "suggested_color_group": "neutral",
-          "suggested_color_hint": "neutral",
-          "suggested_primary_icon_key": "category",
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "review_summary": {
-            "affected_catalog_rows": 3,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "sample_name_count": 3,
-            "name_split_hint_count": 0,
-            "name_split_hints": [],
-            "recommended_review_path": "confirm_direct_category_mapping"
-          },
-          "name_split_hints": [],
-          "sample_names": [
-            "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
-            "장송의 프리렌 부쿠부 굿즈",
-            "단간론파 부쿠부 굿즈"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "콜라보 굿즈",
-            "target_category": "콜라보 굿즈",
-            "target_family": "other",
-            "folder_name": "콜라보 굿즈",
-            "folder_color_hex": "0xFF9CA3AF",
-            "folder_color_hint": "neutral",
-            "folder_color_group": "neutral",
-            "folder_color_sort_order": 300,
-            "folder_icon_key": "category",
-            "folder_icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "affected_catalog_rows": 3,
-            "blocked_until": "direct_category_mapping_manually_confirmed",
-            "blocked_reason": "direct_category_mapping_requires_sample_review",
-            "required_evidence": [
-              "sample_names_match_single_target_goods_type",
-              "target_folder_color_and_icon_exist_in_app_catalog",
-              "manual_note_for_mapping_decision"
-            ],
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false,
-          "blocked_until": "direct_category_mapping_manually_confirmed",
-          "blocked_reason": "direct_category_mapping_requires_sample_review",
-          "required_evidence": [
-            "sample_names_match_single_target_goods_type",
-            "target_folder_color_and_icon_exist_in_app_catalog",
-            "manual_note_for_mapping_decision"
           ]
         }
       ]

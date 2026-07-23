@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T11:30:02Z",
+  "generated_at": "2026-07-23T11:37:01Z",
   "summary": {
-    "batch_count": 154,
+    "batch_count": 155,
     "max_published_batches": 160,
-    "summed_batch_rows": 23852,
+    "summed_batch_rows": 23723,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -92,6 +92,10 @@
         2
       ],
       [
+        "animation_category_review",
+        2
+      ],
+      [
         "gotouchi_official_candidate_review",
         1
       ],
@@ -113,10 +117,6 @@
       ],
       [
         "ichiban_kuji_metadata",
-        1
-      ],
-      [
-        "animation_category_review",
         1
       ]
     ],
@@ -202,6 +202,10 @@
         2
       ],
       [
+        "agent-animation-taxonomy",
+        2
+      ],
+      [
         "agent-gotouchi-review",
         1
       ],
@@ -220,17 +224,13 @@
       [
         "agent-ichiban-prize-name-image",
         1
-      ],
-      [
-        "agent-animation-taxonomy",
-        1
       ]
     ],
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
       "dedupe_groups": 61,
-      "animation_unknown_categories": 4,
+      "animation_unknown_categories": 7,
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
@@ -283,12 +283,12 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2499,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "animation_category_review_rows": 185,
-      "animation_category_action_rows": 185,
+      "animation_category_review_rows": 170,
+      "animation_category_action_rows": 110,
       "animation_category_split_review_categories": 2,
-      "animation_category_direct_mapping_categories": 2,
-      "animation_category_name_split_rows": 149,
-      "animation_category_name_split_candidates": 19,
+      "animation_category_direct_mapping_categories": 0,
+      "animation_category_name_split_rows": 110,
+      "animation_category_name_split_candidates": 0,
       "animation_category_name_split_unmatched_catalog_rows": 2465,
       "animation_category_unmatched_keyword_rows": 2465,
       "animation_category_unmatched_keyword_candidates": 40,
@@ -8011,7 +8011,7 @@
       "priority": 22,
       "title": "애니메이션 카테고리 매핑 템플릿 확인: animation-category-action-001",
       "public_report": "data/animation_category_action_queue_public.json",
-      "rows": 185,
+      "rows": 110,
       "recommended_action": "Split name-level review categories first, then confirm direct category-to-folder mapping templates.",
       "acceptance_criteria": [
         "Each category_mapping_template remains manual_confirmed=false until sample names are reviewed.",
@@ -8021,7 +8021,7 @@
       "sample_items": [
         {
           "category": "아크릴",
-          "rows": 18,
+          "rows": 1,
           "review_priority": 20,
           "mapping_mode": "name_level_split_review_required",
           "requires_name_level_split_review": true,
@@ -8032,24 +8032,17 @@
           "suggested_primary_icon_key": "view_carousel",
           "review_reason": "Most acrylic goods should be split into acrylic stand/keyholder/card after name review.",
           "review_summary": {
-            "affected_catalog_rows": 18,
+            "affected_catalog_rows": 1,
             "mapping_mode": "name_level_split_review_required",
             "requires_name_level_split_review": true,
-            "sample_name_count": 8,
+            "sample_name_count": 1,
             "name_split_hint_count": 0,
             "name_split_hints": [],
             "recommended_review_path": "review_name_split_hints_before_category_mapping"
           },
           "name_split_hints": [],
           "sample_names": [
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - M賞 アクリルチャーム",
-            "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - G賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - F賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - A賞 アクリルボード ー放課後ー",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - B賞 アクリルボード ー五条悟ー"
+            "一番くじ 僕のヒーローアカデミア～ジャンフェス限定!～ - B賞 アクリルストラップ"
           ],
           "category_mapping_template": {
             "manual_confirmed": false,
@@ -8074,7 +8067,7 @@
               "photo_album",
               "grid"
             ],
-            "affected_catalog_rows": 18,
+            "affected_catalog_rows": 1,
             "blocked_until": "name_level_split_rules_manually_confirmed",
             "blocked_reason": "broad_source_category_requires_name_level_split",
             "required_evidence": [
@@ -8103,7 +8096,7 @@
         },
         {
           "category": "굿즈",
-          "rows": 131,
+          "rows": 109,
           "review_priority": 70,
           "mapping_mode": "name_level_split_review_required",
           "requires_name_level_split_review": true,
@@ -8114,7 +8107,7 @@
           "suggested_primary_icon_key": "category",
           "review_reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
           "review_summary": {
-            "affected_catalog_rows": 131,
+            "affected_catalog_rows": 109,
             "mapping_mode": "name_level_split_review_required",
             "requires_name_level_split_review": true,
             "sample_name_count": 8,
@@ -8141,13 +8134,13 @@
           ],
           "sample_names": [
             "一番くじ 葬送のフリーレン - B賞 メタリックビジュアルシート",
-            "一番くじ 葬送のフリーレン - E賞 ミニプレート",
             "一番くじ 葬送のフリーレン - G賞 魔導書風ノート",
             "一番くじ 呪術廻戦 死滅回游 ～弐～ - L賞 ぽこっとちゃーむ",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-1賞 SOFVICちゅ 緑谷出久",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-2賞 SOFVICちゅ 爆豪勝己",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-3賞 SOFVICちゅ 麗日お茶子",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍"
+            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍",
+            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-5賞 SOFVICちゅ オールマイト"
           ],
           "category_mapping_template": {
             "manual_confirmed": false,
@@ -8172,7 +8165,7 @@
               "source",
               "dashboard"
             ],
-            "affected_catalog_rows": 131,
+            "affected_catalog_rows": 109,
             "blocked_until": "name_level_split_rules_manually_confirmed",
             "blocked_reason": "broad_source_category_requires_name_level_split",
             "required_evidence": [
@@ -8198,174 +8191,14 @@
             "broad_category_not_mapped_to_single_folder",
             "confirmed_split_target_category_for_each_rule"
           ]
-        },
-        {
-          "category": "보드",
-          "rows": 33,
-          "review_priority": 90,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "other",
-          "suggested_category": "보드",
-          "suggested_color_group": "neutral",
-          "suggested_color_hint": "neutral",
-          "suggested_primary_icon_key": "category",
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "review_summary": {
-            "affected_catalog_rows": 33,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "sample_name_count": 8,
-            "name_split_hint_count": 0,
-            "name_split_hints": [],
-            "recommended_review_path": "confirm_direct_category_mapping"
-          },
-          "name_split_hints": [],
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - H賞 キャンバス風ボード（1/10）",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - H賞 キャンバス風ボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～弐～ - A賞 イラストボード ～Jujutsu Sorcerer～",
-            "一番くじ 呪術廻戦 渋谷事変 ～弐～ - B賞 イラストボード ～Curse～",
-            "一番くじ 呪術廻戦 渋谷事変 ～壱～ - L賞 ティザーイラストボード",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～壱～ - D賞 ティザーイラストボード",
-            "一番くじ 呪術廻戦 ～肆～ - A賞 イラストボード",
-            "一番くじ 劇場版 呪術廻戦 0 - A賞 キャンバス地タペストリー"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "보드",
-            "target_category": "보드",
-            "target_family": "other",
-            "folder_name": "보드",
-            "folder_color_hex": "0xFF9CA3AF",
-            "folder_color_hint": "neutral",
-            "folder_color_group": "neutral",
-            "folder_color_sort_order": 300,
-            "folder_icon_key": "category",
-            "folder_icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "affected_catalog_rows": 33,
-            "blocked_until": "direct_category_mapping_manually_confirmed",
-            "blocked_reason": "direct_category_mapping_requires_sample_review",
-            "required_evidence": [
-              "sample_names_match_single_target_goods_type",
-              "target_folder_color_and_icon_exist_in_app_catalog",
-              "manual_note_for_mapping_decision"
-            ],
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false,
-          "blocked_until": "direct_category_mapping_manually_confirmed",
-          "blocked_reason": "direct_category_mapping_requires_sample_review",
-          "required_evidence": [
-            "sample_names_match_single_target_goods_type",
-            "target_folder_color_and_icon_exist_in_app_catalog",
-            "manual_note_for_mapping_decision"
-          ]
-        },
-        {
-          "category": "콜라보 굿즈",
-          "rows": 3,
-          "review_priority": 90,
-          "mapping_mode": "direct_category_mapping_review",
-          "requires_name_level_split_review": false,
-          "suggested_family": "other",
-          "suggested_category": "콜라보 굿즈",
-          "suggested_color_group": "neutral",
-          "suggested_color_hint": "neutral",
-          "suggested_primary_icon_key": "category",
-          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
-          "review_summary": {
-            "affected_catalog_rows": 3,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "sample_name_count": 3,
-            "name_split_hint_count": 0,
-            "name_split_hints": [],
-            "recommended_review_path": "confirm_direct_category_mapping"
-          },
-          "name_split_hints": [],
-          "sample_names": [
-            "장송의 프리렌 × 오오카와 부쿠부 콜라보 굿즈",
-            "장송의 프리렌 부쿠부 굿즈",
-            "단간론파 부쿠부 굿즈"
-          ],
-          "category_mapping_template": {
-            "manual_confirmed": false,
-            "mapping_mode": "direct_category_mapping_review",
-            "requires_name_level_split_review": false,
-            "source_category": "콜라보 굿즈",
-            "target_category": "콜라보 굿즈",
-            "target_family": "other",
-            "folder_name": "콜라보 굿즈",
-            "folder_color_hex": "0xFF9CA3AF",
-            "folder_color_hint": "neutral",
-            "folder_color_group": "neutral",
-            "folder_color_sort_order": 300,
-            "folder_icon_key": "category",
-            "folder_icon_options": [
-              "category",
-              "folder",
-              "folder_special",
-              "inventory",
-              "package",
-              "archive",
-              "source",
-              "dashboard"
-            ],
-            "affected_catalog_rows": 3,
-            "blocked_until": "direct_category_mapping_manually_confirmed",
-            "blocked_reason": "direct_category_mapping_requires_sample_review",
-            "required_evidence": [
-              "sample_names_match_single_target_goods_type",
-              "target_folder_color_and_icon_exist_in_app_catalog",
-              "manual_note_for_mapping_decision"
-            ],
-            "review_evidence_required": [
-              "sample_names_match_target_product_type",
-              "broad_categories_are_split_before_mapping",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          },
-          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
-          "confirmed_queue": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "unblocks_when": "category_mapping_manually_confirmed",
-          "auto_apply_enabled": false,
-          "blocked_until": "direct_category_mapping_manually_confirmed",
-          "blocked_reason": "direct_category_mapping_requires_sample_review",
-          "required_evidence": [
-            "sample_names_match_single_target_goods_type",
-            "target_folder_color_and_icon_exist_in_app_catalog",
-            "manual_note_for_mapping_decision"
-          ]
         }
       ],
       "review_summary": {
         "split_review_categories": 2,
-        "direct_mapping_categories": 2,
-        "category_count": 4,
+        "direct_mapping_categories": 0,
+        "category_count": 2,
         "work_order_lanes": [
           "name_level_split_review",
-          "direct_category_mapping_review",
           "unmatched_keyword_review"
         ],
         "split_first_blocked_categories": [
@@ -8970,1099 +8803,18 @@
       "priority": 26,
       "title": "애니메이션 이름별 세부 분류 확인: 굿즈",
       "public_report": "data/animation_category_split_review_public.json",
-      "rows": 131,
+      "rows": 109,
       "recommended_action": "Confirm name keyword templates before applying broad category split rules to catalog rows.",
       "acceptance_criteria": [
         "Each name_level_split_template remains manual_confirmed=false until item names are reviewed.",
         "Same prize-letter variants remain separate catalog rows when the official campaign has multiple types.",
         "Unmatched samples stay blocked until a safer keyword or official category is confirmed."
       ],
-      "sample_items": [
-        {
-          "rule_id": "acrylic_stand",
-          "target_category": "아크릴 스탠드",
-          "target_family": "acrylic",
-          "folder_color_group": "blue",
-          "folder_color_hint": "sky",
-          "folder_icon_key": "view_carousel",
-          "match_keywords": [
-            "アクリルスタンド",
-            "アクリルペンスタンド",
-            "アクスタ",
-            "아크릴 스탠드",
-            "아크릴 펜스탠드",
-            "아크릴 펜 스탠드",
-            "acrylic stand",
-            "stand"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 25,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 2928,
-              "name_ko": "치이카와 매지컬치이카와 나쁜 버전 레이어 아크릴 스탠드 (하트)",
-              "name_ja": "ちいかわ まじかるちいかわ 悪いバージョンなレイヤーアクリルスタンド（ハート）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 6337,
-              "name_ko": "치이카와 매지컬치이카와 나쁜 버전 레이어 아크릴 스탠드 (나쁘네)",
-              "name_ja": "ちいかわ まじかるちいかわ 悪いバージョンなレイヤーアクリルスタンド（悪いね）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 6338,
-              "name_ko": "치이카와 매지컬치이카와 나쁜 버전 레이어 아크릴 스탠드 (치이카와 & 모몽가)",
-              "name_ja": "ちいかわ まじかるちいかわ 悪いバージョンなレイヤーアクリルスタンド（ちいかわとモモンガ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10850,
-              "name_ko": "치이카와 친구들과 나들이 쁘띠 아크릴 스탠드 (외출)",
-              "name_ja": "ちいかわ なかよしおでかけプチアクリルスタンド（おでかけ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10853,
-              "name_ko": "치이카와 친구들과 나들이 쁘띠 아크릴 스탠드 (밤 산책)",
-              "name_ja": "ちいかわ なかよしおでかけプチアクリルスタンド（よるのおさんぽ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10854,
-              "name_ko": "치이카와 친구들과 나들이 쁘띠 아크릴 스탠드 (외출 준비)",
-              "name_ja": "ちいかわ なかよしおでかけプチアクリルスタンド（おでかけ準備）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 11034,
-              "name_ko": "치이카와 친한 친구와 나들이 쁘띠 아크릴 스탠드 (이게 나야?)",
-              "name_ja": "ちいかわ なかよしおでかけプチアクリルスタンド（これって自分？）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 11036,
-              "name_ko": "치이카와 친한 친구와 나들이 쁘띠 아크릴 스탠드 (지금이다! 야아ー!!)",
-              "name_ja": "ちいかわ なかよしおでかけプチアクリルスタンド（今だ！ヤアー！！）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "굿즈",
-            "match_keywords": [
-              "アクリルスタンド",
-              "アクリルペンスタンド",
-              "アクスタ",
-              "아크릴 스탠드",
-              "아크릴 펜스탠드",
-              "아크릴 펜 스탠드",
-              "acrylic stand",
-              "stand"
-            ],
-            "target_category": "아크릴 스탠드",
-            "target_family": "acrylic",
-            "folder_name": "아크릴 스탠드",
-            "folder_color_hex": "0xFF7DB7FF",
-            "folder_color_hint": "sky",
-            "folder_color_group": "blue",
-            "folder_color_sort_order": 220,
-            "folder_icon_key": "view_carousel",
-            "folder_icon_options": [
-              "view_carousel",
-              "crop_portrait",
-              "badge",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 25,
-            "matched_catalog_row_count": 25,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "acrylic_keyring",
-          "target_category": "아크릴 키링",
-          "target_family": "keyring",
-          "folder_color_group": "blue",
-          "folder_color_hint": "aqua",
-          "folder_icon_key": "local_offer",
-          "match_keywords": [
-            "アクリルキーホルダー",
-            "アクキー",
-            "아크릴 키링",
-            "아크릴 키홀더",
-            "acrylic key"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 2,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 7409,
-              "name_ko": "치이카와 3연 아크릴 키홀더 (치이카와 / 하치와레 / 우사기)",
-              "name_ja": "ちいかわ 3連アクリルキーホルダー（ちいかわ／ハチワレ／うさぎ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 11203,
-              "name_ko": "치이카와 3연 아크릴 키홀더 (여행 가고 싶어)",
-              "name_ja": "ちいかわ 3連アクリルキーホルダー（旅行いきたい）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "굿즈",
-            "match_keywords": [
-              "アクリルキーホルダー",
-              "アクキー",
-              "아크릴 키링",
-              "아크릴 키홀더",
-              "acrylic key"
-            ],
-            "target_category": "아크릴 키링",
-            "target_family": "keyring",
-            "folder_name": "아크릴 키링",
-            "folder_color_hex": "0xFF66CFE8",
-            "folder_color_hint": "aqua",
-            "folder_color_group": "blue",
-            "folder_color_sort_order": 235,
-            "folder_icon_key": "local_offer",
-            "folder_icon_options": [
-              "local_offer",
-              "key",
-              "sell",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 2,
-            "matched_catalog_row_count": 2,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "badge",
-          "target_category": "캔뱃지",
-          "target_family": "badge",
-          "folder_color_group": "red",
-          "folder_color_hint": "rose",
-          "folder_icon_key": "verified",
-          "match_keywords": [
-            "缶バッジ",
-            "缶バッヂ",
-            "캔뱃지",
-            "캔배지",
-            "badge",
-            "バッジ"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 70,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 2820,
-              "name_ko": "치이카와랜드 캔 배지 (샤쿠)",
-              "name_ja": "ちいかわらんど 缶バッジ（シャク）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 2823,
-              "name_ko": "치이카와랜드 캔 배지 (고운고운)",
-              "name_ja": "ちいかわらんど 缶バッジ（ゴウンゴウン）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 3970,
-              "name_ko": "치이카와랜드 캔 배지 (탈 수 없어요)",
-              "name_ja": "ちいかわらんど 缶バッジ（乗れません）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10337,
-              "name_ko": "치이카와 트레이딩 캔 뱃지 (즐거운 친구들 편) (전체 15종)",
-              "name_ja": "ちいかわ トレーディング缶バッジ（たのしいなかま編）（全15種）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10649,
-              "name_ko": "치이카와 캔 뱃지 (치이카와)",
-              "name_ja": "ちいかわ　缶バッジ（ちいかわ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10652,
-              "name_ko": "치이카와 캔 뱃지 (야ー!)",
-              "name_ja": "ちいかわ　缶バッジ（ヤーッ！）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10653,
-              "name_ko": "치이카와 캔 뱃지 (집합)",
-              "name_ja": "ちいかわ　缶バッジ（集合）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10654,
-              "name_ko": "치이카와 캔 뱃지 (하치와레 스이스이)",
-              "name_ja": "ちいかわ　缶バッジ（ハチワレスイスイ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "굿즈",
-            "match_keywords": [
-              "缶バッジ",
-              "缶バッヂ",
-              "캔뱃지",
-              "캔배지",
-              "badge",
-              "バッジ"
-            ],
-            "target_category": "캔뱃지",
-            "target_family": "badge",
-            "folder_name": "캔뱃지",
-            "folder_color_hex": "0xFFFF8B9A",
-            "folder_color_hint": "rose",
-            "folder_color_group": "red",
-            "folder_color_sort_order": 520,
-            "folder_icon_key": "verified",
-            "folder_icon_options": [
-              "verified",
-              "military_tech",
-              "workspace_premium",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 70,
-            "matched_catalog_row_count": 70,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "plush",
-          "target_category": "인형",
-          "target_family": "plush",
-          "folder_color_group": "pink",
-          "folder_color_hint": "pink",
-          "folder_icon_key": "face",
-          "match_keywords": [
-            "ぬいぐるみ",
-            "ぬい",
-            "マスコット",
-            "인형",
-            "마스코트",
-            "plush",
-            "nuigurumi"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 15,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 5314,
-              "name_ko": "치이카와 캬라파키 고무 마스코트 포함 Ver. (총 8종) 1BOX 10개입",
-              "name_ja": "ちいかわ キャラパキ ラバマスつきVer.（全8種）1BOX 10個入",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 5575,
-              "name_ko": "치이카와 러브아미 마스코트 메이커",
-              "name_ja": "ちいかわ ラブあみ マスコットメーカー",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 5803,
-              "name_ko": "치이카와 뜨개 인형 키트 (치이카와)",
-              "name_ja": "ちいかわ あみぐるみキット（ちいかわ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 5805,
-              "name_ko": "치이카와 뜨개 인형 키트 (우사기)",
-              "name_ja": "ちいかわ あみぐるみキット（うさぎ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 5806,
-              "name_ko": "치이카와 뜨개 인형 키트 (하치와레)",
-              "name_ja": "ちいかわ あみぐるみキット（ハチワレ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 6811,
-              "name_ko": "치이카와 소프비 퍼펫 마스코트 (전 10종) 1박스 10개입",
-              "name_ja": "ちいかわ ソフビパペットマスコット（全10種）1BOX 10個入",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10507,
-              "name_ko": "치이카와 신나는 유원지 티셔츠 인형탈 노란색",
-              "name_ja": "ちいかわ ワクワクゆうえんち Tシャツ 着ぐるみ イエロー",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 11174,
-              "name_ko": "치이카와 러버 마스코트 달린 립 크림 (우사기)",
-              "name_ja": "ちいかわ ラバーマスコット付リップクリーム（うさぎ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "굿즈",
-            "match_keywords": [
-              "ぬいぐるみ",
-              "ぬい",
-              "マスコット",
-              "인형",
-              "마스코트",
-              "plush",
-              "nuigurumi"
-            ],
-            "target_category": "인형",
-            "target_family": "plush",
-            "folder_name": "인형",
-            "folder_color_hex": "0xFFFF9BC7",
-            "folder_color_hint": "pink",
-            "folder_color_group": "pink",
-            "folder_color_sort_order": 540,
-            "folder_icon_key": "face",
-            "folder_icon_options": [
-              "face",
-              "child_care",
-              "toys",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 15,
-            "matched_catalog_row_count": 15,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "shikishi_board",
-          "target_category": "색지",
-          "target_family": "stationery",
-          "folder_color_group": "purple",
-          "folder_color_hint": "lilac",
-          "folder_icon_key": "article",
-          "match_keywords": [
-            "색지",
-            "色紙",
-            "shikishi",
-            "mini shikishi"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 51,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 10487,
-              "name_ko": "치이카와×산리오 캐릭터즈 색지 컬렉션 (전 16종) 1박스 16개입",
-              "name_ja": "ちいかわ×サンリオキャラクターズ 色紙コレクション（全16種）1BOX 16個入",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10914,
-              "name_ko": "치이카와 색지 컬렉션 1박스 16개입",
-              "name_ja": "ちいかわ 色紙コレクション 1BOX 16個入",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 12783,
-              "name_ko": "一番くじ 五等分の花嫁 ～一番くじ化5周年のお祝いも私たち全員で分かち合います！～ - ラストワン賞 クリア色紙セット",
-              "name_ja": "ラストワン賞 クリア色紙セット",
-              "category": "굿즈",
-              "affiliation": "5등분의 신부",
-              "series_name": "一番くじ 五等分の花嫁 ～一番くじ化5周年のお祝いも私たち全員で分かち合います！～",
-              "sub_series": "ラストワン賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13006,
-              "name_ko": "一番くじ 桃源暗鬼 弐 - H賞 ミニ色紙",
-              "name_ja": "H賞 ミニ色紙",
-              "category": "굿즈",
-              "affiliation": "도원암귀",
-              "series_name": "一番くじ 桃源暗鬼 弐",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13646,
-              "name_ko": "一番くじ 鬼滅の刃 ～鬼の棲む街～ 其ノ弐 - I賞 ミニ色紙",
-              "name_ja": "I賞 ミニ色紙",
-              "category": "굿즈",
-              "affiliation": "귀멸의 칼날",
-              "series_name": "一番くじ 鬼滅の刃 ～鬼の棲む街～ 其ノ弐",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13774,
-              "name_ko": "一番くじ 鬼滅の刃 - E賞 ミニ色紙",
-              "name_ja": "E賞 ミニ色紙",
-              "category": "굿즈",
-              "affiliation": "귀멸의 칼날",
-              "series_name": "一番くじ 鬼滅の刃",
-              "sub_series": "E賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13781,
-              "name_ko": "一番くじ 鬼滅の刃 - E賞 ミニ色紙",
-              "name_ja": "E賞 ミニ色紙",
-              "category": "굿즈",
-              "affiliation": "귀멸의 칼날",
-              "series_name": "一番くじ 鬼滅の刃",
-              "sub_series": "E賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13883,
-              "name_ko": "一番くじ SPY×FAMILY -Mission Start!- - G賞 ミニ色紙",
-              "name_ja": "G賞 ミニ色紙",
-              "category": "굿즈",
-              "affiliation": "SPY×FAMILY",
-              "series_name": "一番くじ SPY×FAMILY -Mission Start!-",
-              "sub_series": "G賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "굿즈",
-            "match_keywords": [
-              "색지",
-              "色紙",
-              "shikishi",
-              "mini shikishi"
-            ],
-            "target_category": "색지",
-            "target_family": "stationery",
-            "folder_name": "색지",
-            "folder_color_hex": "0xFFC4B5FD",
-            "folder_color_hint": "lilac",
-            "folder_color_group": "purple",
-            "folder_color_sort_order": 625,
-            "folder_icon_key": "article",
-            "folder_icon_options": [
-              "article",
-              "sticky_note_2",
-              "wallpaper",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 51,
-            "matched_catalog_row_count": 51,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "card_bromide",
-          "target_category": "카드/브로마이드",
-          "target_family": "stationery",
-          "folder_color_group": "purple",
-          "folder_color_hint": "lavender",
-          "folder_icon_key": "view_carousel",
-          "match_keywords": [
-            "카드",
-            "브로마이드",
-            "カード",
-            "ブロマイド",
-            "トレーディングカード",
-            "card",
-            "bromide"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 19,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 10938,
-              "name_ko": "[예약 종료] 치이카와 디자인 손목시계 BE [9월 중순부터 순차 발송 예정]",
-              "name_ja": "【予約終了】ちいかわ デザイン腕時計 BE【9月中旬より順次発送予定】【クレジットカード決済のみ可】【通常商品と同時購入・配送希望日指定不可】【キャンペーン対象外】",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10940,
-              "name_ko": "[예약 종료] 치이카와 디자인 손목시계 BL [9월 중순부터 순차 발송 예정]",
-              "name_ja": "【予約終了】ちいかわ デザイン腕時計 BL【9月中旬より順次発送予定】【クレジットカード決済のみ可】【通常商品と同時購入・配送希望日指定不可】【キャンペーン対象外】",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 10941,
-              "name_ko": "[예약 종료] 치이카와 디자인 손목시계 PK [9월 중순부터 순차 발송 예정]",
-              "name_ja": "【予約終了】ちいかわ デザイン腕時計 PK【9月中旬より順次発送予定】【クレジットカード決済のみ可】【通常商品と同時購入・配送希望日指定不可】【キャンペーン対象外】",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 12760,
-              "name_ko": "一番くじ アニメ カードキャプターさくら クリアカード編～Charmful collection～ - B賞 封印の杖メイクブラシ",
-              "name_ja": "B賞 封印の杖メイクブラシ",
-              "category": "굿즈",
-              "affiliation": "카드캡터 사쿠라",
-              "series_name": "一番くじ アニメ カードキャプターさくら クリアカード編～Charmful collection～",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12762,
-              "name_ko": "一番くじ アニメ カードキャプターさくら クリアカード編～Charmful collection～ - D賞 コンパクトミラー（1/6）",
-              "name_ja": "D賞 コンパクトミラー（1/6）",
-              "category": "굿즈",
-              "affiliation": "카드캡터 사쿠라",
-              "series_name": "一番くじ アニメ カードキャプターさくら クリアカード編～Charmful collection～",
-              "sub_series": "D賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12766,
-              "name_ko": "一番くじ アニメ カードキャプターさくら クリアカード編～Charmful collection～ - H賞 ラバーコレクション（1/7）",
-              "name_ja": "H賞 ラバーコレクション（1/7）",
-              "category": "굿즈",
-              "affiliation": "카드캡터 사쿠라",
-              "series_name": "一番くじ アニメ カードキャプターさくら クリアカード編～Charmful collection～",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13039,
-              "name_ko": "一番くじ ONE PIECE CARD GAME - C賞 サイコロクッション",
-              "name_ja": "C賞 サイコロクッション",
-              "category": "굿즈",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ONE PIECE CARD GAME",
-              "sub_series": "C賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13046,
-              "name_ko": "一番くじ ONE PIECE CARD GAME - ラストワン賞 一番くじ限定デザインプレイマット＆マットケース",
-              "name_ja": "ラストワン賞 一番くじ限定デザインプレイマット＆マットケース",
-              "category": "굿즈",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ONE PIECE CARD GAME",
-              "sub_series": "ラストワン賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "굿즈",
-            "match_keywords": [
-              "카드",
-              "브로마이드",
-              "カード",
-              "ブロマイド",
-              "トレーディングカード",
-              "card",
-              "bromide"
-            ],
-            "target_category": "카드/브로마이드",
-            "target_family": "stationery",
-            "folder_name": "카드/브로마이드",
-            "folder_color_hex": "0xFFB9A7FF",
-            "folder_color_hint": "lavender",
-            "folder_color_group": "purple",
-            "folder_color_sort_order": 635,
-            "folder_icon_key": "view_carousel",
-            "folder_icon_options": [
-              "view_carousel",
-              "style",
-              "photo_library",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 19,
-            "matched_catalog_row_count": 19,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "towel_daily_goods",
-          "target_category": "생활잡화",
-          "target_family": "daily_goods",
-          "folder_color_group": "yellow",
-          "folder_color_hint": "lemon",
-          "folder_icon_key": "inventory_2",
-          "match_keywords": [
-            "タオル",
-            "컵",
-            "マグ",
-            "グラス",
-            "파우치",
-            "ポーチ",
-            "アクリルライト",
-            "아크릴 라이트",
-            "towel",
-            "mug",
-            "pouch"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 146,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 2809,
-              "name_ko": "치이카와랜드 안 깨지는 컵 (탈 수 없어요)",
-              "name_ja": "ちいかわらんど 割れないグラス（乗れません）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 2822,
-              "name_ko": "치이카와랜드 머그컵",
-              "name_ja": "ちいかわらんど マグカップ",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 3353,
-              "name_ko": "치이카와 애니메이션 \"치이카와\" 냉감 후드 타월 SAX",
-              "name_ja": "ちいかわ アニメ『ちいかわ』 冷感フードタオル SAX",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 3965,
-              "name_ko": "치이카와랜드 안 깨지는 컵 (샤쿠)",
-              "name_ja": "ちいかわらんど 割れないグラス（シャク）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 7650,
-              "name_ko": "치이카와 나무 자석 훅 (하치와레)",
-              "name_ja": "ちいかわ 木製マグネットフック（ハチワレ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 7651,
-              "name_ko": "치이카와 나무 자석 훅 (치이카와)",
-              "name_ja": "ちいかわ 木製マグネットフック（ちいかわ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 8319,
-              "name_ko": "치이카와 반점 발수 마그컵",
-              "name_ja": "ちいかわ飯店 撥水マグカップ",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 8330,
-              "name_ko": "치이카와 반점 미니 글라스 (로고)",
-              "name_ja": "ちいかわ飯店 ミニグラス（ロゴ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "굿즈",
-            "match_keywords": [
-              "タオル",
-              "컵",
-              "マグ",
-              "グラス",
-              "파우치",
-              "ポーチ",
-              "アクリルライト",
-              "아크릴 라이트",
-              "towel",
-              "mug",
-              "pouch"
-            ],
-            "target_category": "생활잡화",
-            "target_family": "daily_goods",
-            "folder_name": "생활잡화",
-            "folder_color_hex": "0xFFFFDE66",
-            "folder_color_hint": "lemon",
-            "folder_color_group": "yellow",
-            "folder_color_sort_order": 720,
-            "folder_icon_key": "inventory_2",
-            "folder_icon_options": [
-              "inventory_2",
-              "redeem",
-              "local_mall",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 146,
-            "matched_catalog_row_count": 146,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "tableware_daily_goods",
-          "target_category": "생활잡화",
-          "target_family": "daily_goods",
-          "folder_color_group": "yellow",
-          "folder_color_hint": "cream",
-          "folder_icon_key": "local_cafe",
-          "match_keywords": [
-            "식기",
-            "그릇",
-            "접시",
-            "컵",
-            "머그",
-            "食器",
-            "皿",
-            "プレート",
-            "グラス",
-            "カップ",
-            "マグ",
-            "tableware",
-            "plate",
-            "glass",
-            "cup",
-            "mug"
-          ],
-          "matched_sample_count": 1,
-          "matched_sample_names": [
-            "一番くじ 葬送のフリーレン - E賞 ミニプレート"
-          ],
-          "matched_catalog_row_count": 317,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 2809,
-              "name_ko": "치이카와랜드 안 깨지는 컵 (탈 수 없어요)",
-              "name_ja": "ちいかわらんど 割れないグラス（乗れません）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 2822,
-              "name_ko": "치이카와랜드 머그컵",
-              "name_ja": "ちいかわらんど マグカップ",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 3965,
-              "name_ko": "치이카와랜드 안 깨지는 컵 (샤쿠)",
-              "name_ja": "ちいかわらんど 割れないグラス（シャク）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 5327,
-              "name_ko": "치이카와 반점 작은 접시 (하치와레)",
-              "name_ja": "ちいかわ飯店 小皿（ハチワレ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 6940,
-              "name_ko": "치이카와 반점 중접시",
-              "name_ja": "ちいかわ飯店 中皿",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 7272,
-              "name_ko": "치이카와 반점 작은 접시 (우사기)",
-              "name_ja": "ちいかわ飯店 小皿（うさぎ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 7650,
-              "name_ko": "치이카와 나무 자석 훅 (하치와레)",
-              "name_ja": "ちいかわ 木製マグネットフック（ハチワレ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 7651,
-              "name_ko": "치이카와 나무 자석 훅 (치이카와)",
-              "name_ja": "ちいかわ 木製マグネットフック（ちいかわ）",
-              "category": "굿즈",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "굿즈",
-            "match_keywords": [
-              "식기",
-              "그릇",
-              "접시",
-              "컵",
-              "머그",
-              "食器",
-              "皿",
-              "プレート",
-              "グラス",
-              "カップ",
-              "マグ",
-              "tableware",
-              "plate",
-              "glass",
-              "cup",
-              "mug"
-            ],
-            "target_category": "생활잡화",
-            "target_family": "daily_goods",
-            "folder_name": "생활잡화",
-            "folder_color_hex": "0xFFF6D365",
-            "folder_color_hint": "cream",
-            "folder_color_group": "yellow",
-            "folder_color_sort_order": 725,
-            "folder_icon_key": "local_cafe",
-            "folder_icon_options": [
-              "local_cafe",
-              "inventory_2",
-              "redeem",
-              "category"
-            ],
-            "matched_sample_count": 1,
-            "expected_update_rows": 317,
-            "matched_catalog_row_count": 317,
-            "matched_sample_names": [
-              "一番くじ 葬送のフリーレン - E賞 ミニプレート"
-            ],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        }
-      ],
+      "sample_items": [],
       "review_summary": {
-        "split_candidate_count": 11,
-        "matched_sample_count": 1,
-        "unmatched_sample_count": 7
+        "split_candidate_count": 0,
+        "matched_sample_count": 0,
+        "unmatched_sample_count": 8
       },
       "review_state": "manual_name_level_split_confirmation_required",
       "next_machine_step": "confirm_animation_category_name_split_templates"
@@ -10074,1093 +8826,18 @@
       "priority": 27,
       "title": "애니메이션 이름별 세부 분류 확인: 아크릴",
       "public_report": "data/animation_category_split_review_public.json",
-      "rows": 18,
+      "rows": 1,
       "recommended_action": "Confirm name keyword templates before applying broad category split rules to catalog rows.",
       "acceptance_criteria": [
         "Each name_level_split_template remains manual_confirmed=false until item names are reviewed.",
         "Same prize-letter variants remain separate catalog rows when the official campaign has multiple types.",
         "Unmatched samples stay blocked until a safer keyword or official category is confirmed."
       ],
-      "sample_items": [
-        {
-          "rule_id": "acrylic_keyring",
-          "target_category": "아크릴 키링",
-          "target_family": "keyring",
-          "folder_color_group": "blue",
-          "folder_color_hint": "aqua",
-          "folder_icon_key": "local_offer",
-          "match_keywords": [
-            "アクリルキーホルダー",
-            "アクキー",
-            "아크릴 키링",
-            "아크릴 키홀더",
-            "acrylic key"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 22,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 12381,
-              "name_ko": "一番くじ 学園アイドルマスター Part5 - F賞 描きおろし アクリルキーホルダー",
-              "name_ja": "F賞 描きおろし アクリルキーホルダー",
-              "category": "아크릴",
-              "affiliation": "학원 아이돌마스터",
-              "series_name": "一番くじ 学園アイドルマスター Part5",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12408,
-              "name_ko": "一番くじ ぷちきゅあ - F賞 ツインアクリルキーホルダー（1/8）",
-              "name_ja": "F賞 ツインアクリルキーホルダー（1/8）",
-              "category": "아크릴",
-              "affiliation": "프리큐어",
-              "series_name": "一番くじ ぷちきゅあ",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13136,
-              "name_ko": "一番くじちょこっと いぬとの暮らし illustration by てらおかなつみ - C賞 いぬのアクリルキーホルダー",
-              "name_ja": "C賞 いぬのアクリルキーホルダー",
-              "category": "아크릴",
-              "affiliation": "테라오카 나츠미",
-              "series_name": "一番くじちょこっと いぬとの暮らし illustration by てらおかなつみ",
-              "sub_series": "C賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 15151,
-              "name_ko": "一番くじ ワンピース The Unbreakable Law - I賞 アクリルキーホルダー（1/10）",
-              "name_ja": "I賞 アクリルキーホルダー（1/10）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース The Unbreakable Law",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 17400,
-              "name_ko": "一番くじ 機動戦士ガンダム ガンプラ2022 - H賞 アクリルキーホルダー",
-              "name_ja": "H賞 アクリルキーホルダー",
-              "category": "아크릴",
-              "affiliation": "기동전사 건담",
-              "series_name": "一番くじ 機動戦士ガンダム ガンプラ2022",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 17788,
-              "name_ko": "一番くじ 僕のヒーローアカデミア Go And Go！ - H賞 アクリルキーホルダー",
-              "name_ja": "H賞 アクリルキーホルダー",
-              "category": "아크릴",
-              "affiliation": "나의 히어로 아카데미아",
-              "series_name": "一番くじ 僕のヒーローアカデミア Go And Go！",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19861,
-              "name_ko": "一番くじ ワンピース The Unbreakable Law - I賞 アクリルキーホルダー（2/10）",
-              "name_ja": "I賞 アクリルキーホルダー（2/10）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース The Unbreakable Law",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19862,
-              "name_ko": "一番くじ ワンピース The Unbreakable Law - I賞 アクリルキーホルダー（3/10）",
-              "name_ja": "I賞 アクリルキーホルダー（3/10）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース The Unbreakable Law",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "아크릴",
-            "match_keywords": [
-              "アクリルキーホルダー",
-              "アクキー",
-              "아크릴 키링",
-              "아크릴 키홀더",
-              "acrylic key"
-            ],
-            "target_category": "아크릴 키링",
-            "target_family": "keyring",
-            "folder_name": "아크릴 키링",
-            "folder_color_hex": "0xFF66CFE8",
-            "folder_color_hint": "aqua",
-            "folder_color_group": "blue",
-            "folder_color_sort_order": 235,
-            "folder_icon_key": "local_offer",
-            "folder_icon_options": [
-              "local_offer",
-              "key",
-              "sell",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 22,
-            "matched_catalog_row_count": 22,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "badge",
-          "target_category": "캔뱃지",
-          "target_family": "badge",
-          "folder_color_group": "red",
-          "folder_color_hint": "rose",
-          "folder_icon_key": "verified",
-          "match_keywords": [
-            "缶バッジ",
-            "缶バッヂ",
-            "캔뱃지",
-            "캔배지",
-            "badge",
-            "バッジ"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 7,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 13321,
-              "name_ko": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ - B賞 アクリルバッジ（1/6）",
-              "name_ja": "B賞 アクリルバッジ（1/6）",
-              "category": "아크릴",
-              "affiliation": "은하특급 밀키 서브웨이",
-              "series_name": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13522,
-              "name_ko": "一番くじ 鬼滅の刃 ～上弦の弐～ - H賞 アクリルバッジ",
-              "name_ja": "H賞 アクリルバッジ",
-              "category": "아크릴",
-              "affiliation": "귀멸의 칼날",
-              "series_name": "一番くじ 鬼滅の刃 ～上弦の弐～",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19432,
-              "name_ko": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ - B賞 アクリルバッジ（2/6）",
-              "name_ja": "B賞 アクリルバッジ（2/6）",
-              "category": "아크릴",
-              "affiliation": "은하특급 밀키 서브웨이",
-              "series_name": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19433,
-              "name_ko": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ - B賞 アクリルバッジ（3/6）",
-              "name_ja": "B賞 アクリルバッジ（3/6）",
-              "category": "아크릴",
-              "affiliation": "은하특급 밀키 서브웨이",
-              "series_name": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19434,
-              "name_ko": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ - B賞 アクリルバッジ（4/6）",
-              "name_ja": "B賞 アクリルバッジ（4/6）",
-              "category": "아크릴",
-              "affiliation": "은하특급 밀키 서브웨이",
-              "series_name": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19435,
-              "name_ko": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ - B賞 アクリルバッジ（5/6）",
-              "name_ja": "B賞 アクリルバッジ（5/6）",
-              "category": "아크릴",
-              "affiliation": "은하특급 밀키 서브웨이",
-              "series_name": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19436,
-              "name_ko": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ - B賞 アクリルバッジ（6/6）",
-              "name_ja": "B賞 アクリルバッジ（6/6）",
-              "category": "아크릴",
-              "affiliation": "은하특급 밀키 서브웨이",
-              "series_name": "一番くじちょこっと 銀河特急 ミルキー☆サブウェイ",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "아크릴",
-            "match_keywords": [
-              "缶バッジ",
-              "缶バッヂ",
-              "캔뱃지",
-              "캔배지",
-              "badge",
-              "バッジ"
-            ],
-            "target_category": "캔뱃지",
-            "target_family": "badge",
-            "folder_name": "캔뱃지",
-            "folder_color_hex": "0xFFFF8B9A",
-            "folder_color_hint": "rose",
-            "folder_color_group": "red",
-            "folder_color_sort_order": 520,
-            "folder_icon_key": "verified",
-            "folder_icon_options": [
-              "verified",
-              "military_tech",
-              "workspace_premium",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 7,
-            "matched_catalog_row_count": 7,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "board",
-          "target_category": "보드",
-          "target_family": "display",
-          "folder_color_group": "neutral",
-          "folder_color_hint": "stone",
-          "folder_icon_key": "dashboard",
-          "match_keywords": [
-            "ボード",
-            "보드",
-            "board",
-            "キャンバス"
-          ],
-          "matched_sample_count": 5,
-          "matched_sample_names": [
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - A賞 アクリルボード ー放課後ー",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - B賞 アクリルボード ー五条悟ー"
-          ],
-          "matched_catalog_row_count": 39,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 12338,
-              "name_ko": "一番くじ TVアニメ『薬屋のひとりごと』 - B賞 アクリルボード",
-              "name_ja": "B賞 アクリルボード",
-              "category": "아크릴",
-              "affiliation": "약사의 혼잣말",
-              "series_name": "一番くじ TVアニメ『薬屋のひとりごと』",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12517,
-              "name_ko": "一番くじ 勝利の女神：NIKKE CHAPTER7 - C賞 プリバティのおいしくな～れ♡アクリルボード",
-              "name_ja": "C賞 プリバティのおいしくな～れ♡アクリルボード",
-              "category": "아크릴",
-              "affiliation": "승리의 여신: 니케",
-              "series_name": "一番くじ 勝利の女神：NIKKE CHAPTER7",
-              "sub_series": "C賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12518,
-              "name_ko": "一番くじ 勝利の女神：NIKKE CHAPTER7 - D賞 クラストのめしあがれ♡アクリルボード",
-              "name_ja": "D賞 クラストのめしあがれ♡アクリルボード",
-              "category": "아크릴",
-              "affiliation": "승리의 여신: 니케",
-              "series_name": "一番くじ 勝利の女神：NIKKE CHAPTER7",
-              "sub_series": "D賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12519,
-              "name_ko": "一番くじ 勝利の女神：NIKKE CHAPTER7 - E賞 ブレッディのいただきます♡アクリルボード",
-              "name_ja": "E賞 ブレッディのいただきます♡アクリルボード",
-              "category": "아크릴",
-              "affiliation": "승리의 여신: 니케",
-              "series_name": "一番くじ 勝利の女神：NIKKE CHAPTER7",
-              "sub_series": "E賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12564,
-              "name_ko": "一番くじ WIND BREAKER -原作5周年- - C賞 アクリルボード",
-              "name_ja": "C賞 アクリルボード",
-              "category": "아크릴",
-              "affiliation": "윈드브레이커",
-              "series_name": "一番くじ WIND BREAKER -原作5周年-",
-              "sub_series": "C賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12697,
-              "name_ko": "一番くじ 呪術廻戦 死滅回游 ～壱～ - J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
-              "name_ja": "J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
-              "category": "아크릴",
-              "affiliation": "주술회전",
-              "series_name": "一番くじ 呪術廻戦 死滅回游 ～壱～",
-              "sub_series": "J賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12725,
-              "name_ko": "一番くじ ウマ娘 プリティーダービー 13弾 - D賞 アクリルボード",
-              "name_ja": "D賞 アクリルボード",
-              "category": "아크릴",
-              "affiliation": "우마무스메",
-              "series_name": "一番くじ ウマ娘 プリティーダービー 13弾",
-              "sub_series": "D賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12769,
-              "name_ko": "一番くじちょこっと 劇場版『チェンソーマン レゼ篇』 - B賞 メモリアルアクリルボード（1/5）",
-              "name_ja": "B賞 メモリアルアクリルボード（1/5）",
-              "category": "아크릴",
-              "affiliation": "체인소 맨",
-              "series_name": "一番くじちょこっと 劇場版『チェンソーマン レゼ篇』",
-              "sub_series": "B賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "아크릴",
-            "match_keywords": [
-              "ボード",
-              "보드",
-              "board",
-              "キャンバス"
-            ],
-            "target_category": "보드",
-            "target_family": "display",
-            "folder_name": "보드",
-            "folder_color_hex": "0xFFB8B8C7",
-            "folder_color_hint": "stone",
-            "folder_color_group": "neutral",
-            "folder_color_sort_order": 130,
-            "folder_icon_key": "dashboard",
-            "folder_icon_options": [
-              "dashboard",
-              "wallpaper",
-              "photo_size_select_actual",
-              "category"
-            ],
-            "matched_sample_count": 5,
-            "expected_update_rows": 39,
-            "matched_catalog_row_count": 39,
-            "matched_sample_names": [
-              "一番くじ 呪術廻戦 死滅回游 ～壱～ - J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
-              "一番くじ 呪術廻戦 渋谷事変 ～肆～ - A賞 アクリルボード",
-              "一番くじ 呪術廻戦 渋谷事変 ～参～ - A賞 アクリルボード",
-              "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - A賞 アクリルボード ー放課後ー",
-              "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - B賞 アクリルボード ー五条悟ー"
-            ],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "card_bromide",
-          "target_category": "카드/브로마이드",
-          "target_family": "stationery",
-          "folder_color_group": "purple",
-          "folder_color_hint": "lavender",
-          "folder_icon_key": "view_carousel",
-          "match_keywords": [
-            "카드",
-            "브로마이드",
-            "カード",
-            "ブロマイド",
-            "トレーディングカード",
-            "card",
-            "bromide"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 10,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 13044,
-              "name_ko": "一番くじ ONE PIECE CARD GAME - H賞 アクリル雑貨アソート（1/8）",
-              "name_ja": "H賞 アクリル雑貨アソート（1/8）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ONE PIECE CARD GAME",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13828,
-              "name_ko": "一番くじ 劇場版 SPY×FAMILY CODE: White - I賞 アクリルカードチャーム",
-              "name_ja": "I賞 アクリルカードチャーム",
-              "category": "아크릴",
-              "affiliation": "SPY×FAMILY",
-              "series_name": "一番くじ 劇場版 SPY×FAMILY CODE: White",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 16832,
-              "name_ko": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - J賞 ヒーローカード風アクリルミラーカード",
-              "name_ja": "J賞 ヒーローカード風アクリルミラーカード",
-              "category": "아크릴",
-              "affiliation": "나의 히어로 아카데미아",
-              "series_name": "一番くじ 僕のヒーローアカデミア -更に向こうへ-",
-              "sub_series": "J賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19704,
-              "name_ko": "一番くじ ONE PIECE CARD GAME - H賞 アクリル雑貨アソート（2/8）",
-              "name_ja": "H賞 アクリル雑貨アソート（2/8）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ONE PIECE CARD GAME",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19705,
-              "name_ko": "一番くじ ONE PIECE CARD GAME - H賞 アクリル雑貨アソート（3/8）",
-              "name_ja": "H賞 アクリル雑貨アソート（3/8）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ONE PIECE CARD GAME",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19706,
-              "name_ko": "一番くじ ONE PIECE CARD GAME - H賞 アクリル雑貨アソート（4/8）",
-              "name_ja": "H賞 アクリル雑貨アソート（4/8）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ONE PIECE CARD GAME",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19707,
-              "name_ko": "一番くじ ONE PIECE CARD GAME - H賞 アクリル雑貨アソート（5/8）",
-              "name_ja": "H賞 アクリル雑貨アソート（5/8）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ONE PIECE CARD GAME",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19708,
-              "name_ko": "一番くじ ONE PIECE CARD GAME - H賞 アクリル雑貨アソート（6/8）",
-              "name_ja": "H賞 アクリル雑貨アソート（6/8）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ONE PIECE CARD GAME",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "아크릴",
-            "match_keywords": [
-              "카드",
-              "브로마이드",
-              "カード",
-              "ブロマイド",
-              "トレーディングカード",
-              "card",
-              "bromide"
-            ],
-            "target_category": "카드/브로마이드",
-            "target_family": "stationery",
-            "folder_name": "카드/브로마이드",
-            "folder_color_hex": "0xFFB9A7FF",
-            "folder_color_hint": "lavender",
-            "folder_color_group": "purple",
-            "folder_color_sort_order": 635,
-            "folder_icon_key": "view_carousel",
-            "folder_icon_options": [
-              "view_carousel",
-              "style",
-              "photo_library",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 10,
-            "matched_catalog_row_count": 10,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "towel_daily_goods",
-          "target_category": "생활잡화",
-          "target_family": "daily_goods",
-          "folder_color_group": "yellow",
-          "folder_color_hint": "lemon",
-          "folder_icon_key": "inventory_2",
-          "match_keywords": [
-            "タオル",
-            "컵",
-            "マグ",
-            "グラス",
-            "파우치",
-            "ポーチ",
-            "アクリルライト",
-            "아크릴 라이트",
-            "towel",
-            "mug",
-            "pouch"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 17,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 11523,
-              "name_ko": "치이카와 반점 LED 라이트업 아크릴 라이트",
-              "name_ja": "ちいかわ飯店 LEDライトアップアクリルライト",
-              "category": "아크릴",
-              "affiliation": "치이카와",
-              "series_name": "치이카와 마켓",
-              "sub_series": "공식 마켓",
-              "source_store": "치이카와 마켓"
-            },
-            {
-              "catalog_index": 12280,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（1/14）",
-              "name_ja": "H賞 アクリルマグネット（1/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13217,
-              "name_ko": "一番くじ 刃牙～巨大なる鼓動～ - I賞 アクリルマグネットッッ！",
-              "name_ja": "I賞 アクリルマグネットッッ！",
-              "category": "아크릴",
-              "affiliation": "바키",
-              "series_name": "一番くじ 刃牙～巨大なる鼓動～",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 15371,
-              "name_ko": "一番くじ ワンピース BEYOND THE LEVEL - D賞 アクリルライト",
-              "name_ja": "D賞 アクリルライト",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース BEYOND THE LEVEL",
-              "sub_series": "D賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19761,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（2/14）",
-              "name_ja": "H賞 アクリルマグネット（2/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19762,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（3/14）",
-              "name_ja": "H賞 アクリルマグネット（3/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19763,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（4/14）",
-              "name_ja": "H賞 アクリルマグネット（4/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19764,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（5/14）",
-              "name_ja": "H賞 アクリルマグネット（5/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "아크릴",
-            "match_keywords": [
-              "タオル",
-              "컵",
-              "マグ",
-              "グラス",
-              "파우치",
-              "ポーチ",
-              "アクリルライト",
-              "아크릴 라이트",
-              "towel",
-              "mug",
-              "pouch"
-            ],
-            "target_category": "생활잡화",
-            "target_family": "daily_goods",
-            "folder_name": "생활잡화",
-            "folder_color_hex": "0xFFFFDE66",
-            "folder_color_hint": "lemon",
-            "folder_color_group": "yellow",
-            "folder_color_sort_order": 720,
-            "folder_icon_key": "inventory_2",
-            "folder_icon_options": [
-              "inventory_2",
-              "redeem",
-              "local_mall",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 17,
-            "matched_catalog_row_count": 17,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "tableware_daily_goods",
-          "target_category": "생활잡화",
-          "target_family": "daily_goods",
-          "folder_color_group": "yellow",
-          "folder_color_hint": "cream",
-          "folder_icon_key": "local_cafe",
-          "match_keywords": [
-            "식기",
-            "그릇",
-            "접시",
-            "컵",
-            "머그",
-            "食器",
-            "皿",
-            "プレート",
-            "グラス",
-            "カップ",
-            "マグ",
-            "tableware",
-            "plate",
-            "glass",
-            "cup",
-            "mug"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 16,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 12280,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（1/14）",
-              "name_ja": "H賞 アクリルマグネット（1/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 13217,
-              "name_ko": "一番くじ 刃牙～巨大なる鼓動～ - I賞 アクリルマグネットッッ！",
-              "name_ja": "I賞 アクリルマグネットッッ！",
-              "category": "아크릴",
-              "affiliation": "바키",
-              "series_name": "一番くじ 刃牙～巨大なる鼓動～",
-              "sub_series": "I賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 14311,
-              "name_ko": "一番くじ NARUTO -THE HISTORY- - 4等 アクリルプレート",
-              "name_ja": "4等 アクリルプレート",
-              "category": "아크릴",
-              "affiliation": "나루토",
-              "series_name": "一番くじ NARUTO -THE HISTORY-",
-              "sub_series": "4等",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19761,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（2/14）",
-              "name_ja": "H賞 アクリルマグネット（2/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19762,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（3/14）",
-              "name_ja": "H賞 アクリルマグネット（3/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19763,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（4/14）",
-              "name_ja": "H賞 アクリルマグネット（4/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19764,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（5/14）",
-              "name_ja": "H賞 アクリルマグネット（5/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 19765,
-              "name_ko": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－ - H賞 アクリルマグネット（6/14）",
-              "name_ja": "H賞 アクリルマグネット（6/14）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース MONKEY.D.LUFFY－冒険の記憶と未来への航路－",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "아크릴",
-            "match_keywords": [
-              "식기",
-              "그릇",
-              "접시",
-              "컵",
-              "머그",
-              "食器",
-              "皿",
-              "プレート",
-              "グラス",
-              "カップ",
-              "マグ",
-              "tableware",
-              "plate",
-              "glass",
-              "cup",
-              "mug"
-            ],
-            "target_category": "생활잡화",
-            "target_family": "daily_goods",
-            "folder_name": "생활잡화",
-            "folder_color_hex": "0xFFF6D365",
-            "folder_color_hint": "cream",
-            "folder_color_group": "yellow",
-            "folder_color_sort_order": 725,
-            "folder_icon_key": "local_cafe",
-            "folder_icon_options": [
-              "local_cafe",
-              "inventory_2",
-              "redeem",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 16,
-            "matched_catalog_row_count": 16,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "acrylic_charm",
-          "target_category": "아크릴 키링",
-          "target_family": "keyring",
-          "folder_color_group": "blue",
-          "folder_color_hint": "aqua",
-          "folder_icon_key": "local_offer",
-          "match_keywords": [
-            "アクリルチャーム",
-            "ツインアクリルチャーム",
-            "アクリルコレクション",
-            "アクリル雑貨アソート",
-            "スクールアイコンボタン"
-          ],
-          "matched_sample_count": 3,
-          "matched_sample_names": [
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - M賞 アクリルチャーム",
-            "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - G賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - F賞 アクリルチャーム"
-          ],
-          "matched_catalog_row_count": 196,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 12270,
-              "name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ - H賞 場面写アクリルチャーム",
-              "name_ja": "H賞 場面写アクリルチャーム",
-              "category": "아크릴",
-              "affiliation": "블루록",
-              "series_name": "一番くじ ブルーロック あでぃしょなる・たいむ！",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12307,
-              "name_ko": "一番くじ BLEACH Stirring Souls vol.4 - E賞 ツインアクリルチャーム",
-              "name_ja": "E賞 ツインアクリルチャーム",
-              "category": "아크릴",
-              "affiliation": "블리치",
-              "series_name": "一番くじ BLEACH Stirring Souls vol.4",
-              "sub_series": "E賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12355,
-              "name_ko": "一番くじ ワンピース 赤髪海賊団 - J賞 アクリルチャームアソート（1/10）",
-              "name_ja": "J賞 アクリルチャームアソート（1/10）",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース 赤髪海賊団",
-              "sub_series": "J賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12418,
-              "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 風影奪還編 - H賞 -NARUTO 72 series-アクリルチャーム（1/9）",
-              "name_ja": "H賞 -NARUTO 72 series-アクリルチャーム（1/9）",
-              "category": "아크릴",
-              "affiliation": "나루토",
-              "series_name": "一番くじ NARUTO-ナルト- 疾風伝 風影奪還編",
-              "sub_series": "H賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12657,
-              "name_ko": "一番くじ 進撃の巨人 ～それぞれの決意～ - F賞 つながるアクリルチャーム",
-              "name_ja": "F賞 つながるアクリルチャーム",
-              "category": "아크릴",
-              "affiliation": "진격의 거인",
-              "series_name": "一番くじ 進撃の巨人 ～それぞれの決意～",
-              "sub_series": "F賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12700,
-              "name_ko": "一番くじ 呪術廻戦 死滅回游 ～壱～ - M賞 アクリルチャーム",
-              "name_ja": "M賞 アクリルチャーム",
-              "category": "아크릴",
-              "affiliation": "주술회전",
-              "series_name": "一番くじ 呪術廻戦 死滅回游 ～壱～",
-              "sub_series": "M賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12770,
-              "name_ko": "一番くじちょこっと 劇場版『チェンソーマン レゼ篇』 - C賞 ポチタ アクリルチャームコレクション（1/4）",
-              "name_ja": "C賞 ポチタ アクリルチャームコレクション（1/4）",
-              "category": "아크릴",
-              "affiliation": "체인소 맨",
-              "series_name": "一番くじちょこっと 劇場版『チェンソーマン レゼ篇』",
-              "sub_series": "C賞",
-              "source_store": "이치방쿠지"
-            },
-            {
-              "catalog_index": 12808,
-              "name_ko": "一番くじ ハイキュー‼ -最強の挑戦者- - G賞 アクリルチャーム",
-              "name_ja": "G賞 アクリルチャーム",
-              "category": "아크릴",
-              "affiliation": "하이큐",
-              "series_name": "一番くじ ハイキュー‼ -最強の挑戦者-",
-              "sub_series": "G賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "아크릴",
-            "match_keywords": [
-              "アクリルチャーム",
-              "ツインアクリルチャーム",
-              "アクリルコレクション",
-              "アクリル雑貨アソート",
-              "スクールアイコンボタン"
-            ],
-            "target_category": "아크릴 키링",
-            "target_family": "keyring",
-            "folder_name": "아크릴 키링",
-            "folder_color_hex": "0xFF66CFE8",
-            "folder_color_hint": "aqua",
-            "folder_color_group": "blue",
-            "folder_color_sort_order": 238,
-            "folder_icon_key": "local_offer",
-            "folder_icon_options": [
-              "local_offer",
-              "key",
-              "sell",
-              "category"
-            ],
-            "matched_sample_count": 3,
-            "expected_update_rows": 196,
-            "matched_catalog_row_count": 196,
-            "matched_sample_names": [
-              "一番くじ 呪術廻戦 死滅回游 ～壱～ - M賞 アクリルチャーム",
-              "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - G賞 アクリルチャーム",
-              "一番くじ 呪術廻戦 渋谷事変 ～参～ - F賞 アクリルチャーム"
-            ],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        },
-        {
-          "rule_id": "collab_goods",
-          "target_category": "콜라보 굿즈",
-          "target_family": "collab_goods",
-          "folder_color_group": "orange",
-          "folder_color_hint": "coral",
-          "folder_icon_key": "diversity_3",
-          "match_keywords": [
-            "콜라보",
-            "コラボ",
-            "collab",
-            "부쿠부",
-            "ぶくぶ",
-            "大川ぶくぶ",
-            "오오카와",
-            "팝팀애픽",
-            "ポプテピピック"
-          ],
-          "matched_sample_count": 0,
-          "matched_sample_names": [],
-          "matched_catalog_row_count": 1,
-          "matched_catalog_samples": [
-            {
-              "catalog_index": 15165,
-              "name_ko": "一番くじ ワンピース 未来島エッグヘッド～きみへの想い～ - J賞 【麦わらストアコラボ】 アクリルチャーム",
-              "name_ja": "J賞 【麦わらストアコラボ】 アクリルチャーム",
-              "category": "아크릴",
-              "affiliation": "원피스",
-              "series_name": "一番くじ ワンピース 未来島エッグヘッド～きみへの想い～",
-              "sub_series": "J賞",
-              "source_store": "이치방쿠지"
-            }
-          ],
-          "name_level_split_template": {
-            "manual_confirmed": false,
-            "source_category": "아크릴",
-            "match_keywords": [
-              "콜라보",
-              "コラボ",
-              "collab",
-              "부쿠부",
-              "ぶくぶ",
-              "大川ぶくぶ",
-              "오오카와",
-              "팝팀애픽",
-              "ポプテピピック"
-            ],
-            "target_category": "콜라보 굿즈",
-            "target_family": "collab_goods",
-            "folder_name": "콜라보 굿즈",
-            "folder_color_hex": "0xFFFFA36A",
-            "folder_color_hint": "coral",
-            "folder_color_group": "orange",
-            "folder_color_sort_order": 760,
-            "folder_icon_key": "diversity_3",
-            "folder_icon_options": [
-              "diversity_3",
-              "handshake",
-              "style",
-              "category"
-            ],
-            "matched_sample_count": 0,
-            "expected_update_rows": 1,
-            "matched_catalog_row_count": 1,
-            "matched_sample_names": [],
-            "blocked_until": "name_level_split_manually_confirmed",
-            "review_evidence_required": [
-              "keywords_match_actual_goods_type",
-              "same_prize_letter_variants_are_kept_as_separate_catalog_rows",
-              "broad_source_category_is_not_applied_as_one_folder",
-              "folder_color_and_icon_exist_in_app_catalog"
-            ]
-          }
-        }
-      ],
+      "sample_items": [],
       "review_summary": {
-        "split_candidate_count": 8,
-        "matched_sample_count": 8,
-        "unmatched_sample_count": 0
+        "split_candidate_count": 0,
+        "matched_sample_count": 0,
+        "unmatched_sample_count": 1
       },
       "review_state": "manual_name_level_split_confirmation_required",
       "next_machine_step": "confirm_animation_category_name_split_templates"
@@ -18497,7 +16174,7 @@
         "token_candidate_count": 20,
         "product_type_candidate_count": 0,
         "sample_source": "top_token_candidates",
-        "source_category_rows": 3142
+        "source_category_rows": 2444
       },
       "review_state": "manual_keyword_candidate_review_required",
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
@@ -18863,7 +16540,7 @@
         "token_candidate_count": 20,
         "product_type_candidate_count": 5,
         "sample_source": "product_type_candidates",
-        "source_category_rows": 305
+        "source_category_rows": 21
       },
       "review_state": "manual_keyword_candidate_review_required",
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
@@ -34024,7 +31701,7 @@
       "priority": 160,
       "title": "애니메이션 굿즈 카테고리 검수: animation-taxonomy-review-001",
       "public_report": "data/animation_category_review_batches_public.json",
-      "rows": 185,
+      "rows": 158,
       "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
       "acceptance_criteria": [
         "Folder color hints follow folder_color_palette sort order.",
@@ -34034,7 +31711,7 @@
       "sample_items": [
         {
           "category": "아크릴",
-          "rows": 18,
+          "rows": 1,
           "review_priority": 20,
           "suggested_family": "acrylic",
           "suggested_category": "아크릴 스탠드",
@@ -34055,14 +31732,7 @@
           ],
           "review_reason": "Most acrylic goods should be split into acrylic stand/keyholder/card after name review.",
           "sample_names": [
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - M賞 アクリルチャーム",
-            "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - G賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - A賞 アクリルボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - F賞 アクリルチャーム",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - A賞 アクリルボード ー放課後ー",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - B賞 アクリルボード ー五条悟ー"
+            "一番くじ 僕のヒーローアカデミア～ジャンフェス限定!～ - B賞 アクリルストラップ"
           ],
           "folder_template": {
             "folder_name": "아크릴 스탠드",
@@ -34091,7 +31761,7 @@
         },
         {
           "category": "굿즈",
-          "rows": 131,
+          "rows": 109,
           "review_priority": 70,
           "suggested_family": "other",
           "suggested_category": "기타 굿즈",
@@ -34113,13 +31783,13 @@
           "review_reason": "Broad catch-all category; inspect names before moving to a specific folder family.",
           "sample_names": [
             "一番くじ 葬送のフリーレン - B賞 メタリックビジュアルシート",
-            "一番くじ 葬送のフリーレン - E賞 ミニプレート",
             "一番くじ 葬送のフリーレン - G賞 魔導書風ノート",
             "一番くじ 呪術廻戦 死滅回游 ～弐～ - L賞 ぽこっとちゃーむ",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-1賞 SOFVICちゅ 緑谷出久",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-2賞 SOFVICちゅ 爆豪勝己",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-3賞 SOFVICちゅ 麗日お茶子",
-            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍"
+            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-4賞 SOFVICちゅ 轟焦凍",
+            "一番くじ 僕のヒーローアカデミア -紡がれる想い- - F-5賞 SOFVICちゅ オールマイト"
           ],
           "folder_template": {
             "folder_name": "기타 굿즈",
@@ -34148,7 +31818,7 @@
         },
         {
           "category": "보드",
-          "rows": 33,
+          "rows": 41,
           "review_priority": 90,
           "suggested_family": "other",
           "suggested_category": "보드",
@@ -34170,13 +31840,13 @@
           "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
           "sample_names": [
             "一番くじ 僕のヒーローアカデミア -いつまでも手を差し伸べ続ける物語- - H賞 キャンバス風ボード（1/10）",
+            "一番くじ 呪術廻戦 死滅回游 ～壱～ - J賞 死滅回游 〈総則〉 （ ルール ） アクリルボード",
             "一番くじ 僕のヒーローアカデミア -紡がれる想い- - H賞 キャンバス風ボード",
-            "一番くじ 呪術廻戦 渋谷事変 ～弐～ - A賞 イラストボード ～Jujutsu Sorcerer～",
-            "一番くじ 呪術廻戦 渋谷事変 ～弐～ - B賞 イラストボード ～Curse～",
-            "一番くじ 呪術廻戦 渋谷事変 ～壱～ - L賞 ティザーイラストボード",
-            "一番くじ 呪術廻戦 懐玉・玉折 ～壱～ - D賞 ティザーイラストボード",
-            "一番くじ 呪術廻戦 ～肆～ - A賞 イラストボード",
-            "一番くじ 劇場版 呪術廻戦 0 - A賞 キャンバス地タペストリー"
+            "一番くじ 呪術廻戦 渋谷事変 ～肆～ - A賞 アクリルボード",
+            "一番くじ 呪術廻戦 渋谷事変 ～参～ - A賞 アクリルボード",
+            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - A賞 アクリルボード ー放課後ー",
+            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - B賞 アクリルボード ー五条悟ー",
+            "一番くじ 呪術廻戦 懐玉・玉折 ～参～ - C賞 アクリルボード ー夏油傑ー"
           ],
           "folder_template": {
             "folder_name": "보드",
@@ -34197,6 +31867,188 @@
               "dashboard"
             ],
             "source_category": "보드",
+            "requires_manual_review": true
+          },
+          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
+          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
+          "auto_apply_enabled": false
+        },
+        {
+          "category": "색지",
+          "rows": 7,
+          "review_priority": 90,
+          "suggested_family": "other",
+          "suggested_category": "색지",
+          "suggested_color_hint": "neutral",
+          "suggested_color_hex": "0xFF9CA3AF",
+          "suggested_color_group": "neutral",
+          "suggested_color_sort_order": 300,
+          "suggested_primary_icon_key": "category",
+          "suggested_icon_options": [
+            "category",
+            "folder",
+            "folder_special",
+            "inventory",
+            "package",
+            "archive",
+            "source",
+            "dashboard"
+          ],
+          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
+          "sample_names": [
+            "一番くじ 呪術廻戦 - G賞 ミニ色紙",
+            "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞① 色紙 feat. One's Justice",
+            "一番くじ 僕のヒーローアカデミア～ボーイ・ミーツ…～ - H賞 メタリック色紙",
+            "一番くじ 僕のヒーローアカデミア〜Break Time〜 - F賞 ミニ色紙",
+            "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - D賞 色紙 feat. SMASH RISING",
+            "一番くじ 僕のヒーローアカデミア～更に向こうへ～ - F賞 ミニ色紙",
+            "一番くじ 僕のヒーローアカデミア～ねことひと休み～ - E賞 ミニ色紙"
+          ],
+          "folder_template": {
+            "folder_name": "색지",
+            "family": "other",
+            "color_hint": "neutral",
+            "color_hex": "0xFF9CA3AF",
+            "color_group": "neutral",
+            "color_sort_order": 300,
+            "primary_icon_key": "category",
+            "icon_options": [
+              "category",
+              "folder",
+              "folder_special",
+              "inventory",
+              "package",
+              "archive",
+              "source",
+              "dashboard"
+            ],
+            "source_category": "색지",
+            "requires_manual_review": true
+          },
+          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
+          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_state": "taxonomy_mapping_required",
+      "next_machine_step": "map_category_to_folder_color_and_icon"
+    },
+    {
+      "batch_id": "230-agent-animation-taxonomy-155",
+      "agent_id": "agent-animation-taxonomy",
+      "workstream": "animation_category_review",
+      "priority": 230,
+      "title": "애니메이션 굿즈 카테고리 검수: animation-taxonomy-review-002",
+      "public_report": "data/animation_category_review_batches_public.json",
+      "rows": 12,
+      "recommended_action": "Review category names against samples, then record explicit category/folder decisions before catalog mutation.",
+      "acceptance_criteria": [
+        "Folder color hints follow folder_color_palette sort order.",
+        "Icon choices use existing icon keys from folder_visual_tokens.",
+        "Category changes remain review-only until app navigation impact is checked."
+      ],
+      "sample_items": [
+        {
+          "category": "아크릴 키링",
+          "rows": 8,
+          "review_priority": 90,
+          "suggested_family": "other",
+          "suggested_category": "아크릴 키링",
+          "suggested_color_hint": "neutral",
+          "suggested_color_hex": "0xFF9CA3AF",
+          "suggested_color_group": "neutral",
+          "suggested_color_sort_order": 300,
+          "suggested_primary_icon_key": "category",
+          "suggested_icon_options": [
+            "category",
+            "folder",
+            "folder_special",
+            "inventory",
+            "package",
+            "archive",
+            "source",
+            "dashboard"
+          ],
+          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
+          "sample_names": [
+            "一番くじ 呪術廻戦 死滅回游 ～壱～ - M賞 アクリルチャーム",
+            "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - G賞 アクリルチャーム",
+            "一番くじ 呪術廻戦 渋谷事変 ～参～ - F賞 アクリルチャーム",
+            "一番くじ 呪術廻戦 懐玉・玉折 ～壱～ - G賞 アクリルチャーム",
+            "一番くじ 呪術廻戦 ～肆～ - G賞 アクリルチャーム",
+            "一番くじ 僕のヒーローアカデミア -更に向こうへ- - I賞 エリのツノ型アクリルチャーム",
+            "一番くじ 僕のヒーローアカデミア～ねことひと休み～ - D賞 アクリルチャーム",
+            "一番くじ 僕のヒーローアカデミア Go And Go！ - H賞 アクリルキーホルダー"
+          ],
+          "folder_template": {
+            "folder_name": "아크릴 키링",
+            "family": "other",
+            "color_hint": "neutral",
+            "color_hex": "0xFF9CA3AF",
+            "color_group": "neutral",
+            "color_sort_order": 300,
+            "primary_icon_key": "category",
+            "icon_options": [
+              "category",
+              "folder",
+              "folder_special",
+              "inventory",
+              "package",
+              "archive",
+              "source",
+              "dashboard"
+            ],
+            "source_category": "아크릴 키링",
+            "requires_manual_review": true
+          },
+          "folder_creation_blocked_until": "category_mapping_manually_confirmed",
+          "recommended_action": "Keep this category only after checking sample names; update folder visual tokens if it remains public.",
+          "auto_apply_enabled": false
+        },
+        {
+          "category": "카드/브로마이드",
+          "rows": 1,
+          "review_priority": 90,
+          "suggested_family": "other",
+          "suggested_category": "카드/브로마이드",
+          "suggested_color_hint": "neutral",
+          "suggested_color_hex": "0xFF9CA3AF",
+          "suggested_color_group": "neutral",
+          "suggested_color_sort_order": 300,
+          "suggested_primary_icon_key": "category",
+          "suggested_icon_options": [
+            "category",
+            "folder",
+            "folder_special",
+            "inventory",
+            "package",
+            "archive",
+            "source",
+            "dashboard"
+          ],
+          "review_reason": "No exact mapping exists yet; keep in manual taxonomy review.",
+          "sample_names": [
+            "一番くじ 僕のヒーローアカデミア -更に向こうへ- - J賞 ヒーローカード風アクリルミラーカード"
+          ],
+          "folder_template": {
+            "folder_name": "카드/브로마이드",
+            "family": "other",
+            "color_hint": "neutral",
+            "color_hex": "0xFF9CA3AF",
+            "color_group": "neutral",
+            "color_sort_order": 300,
+            "primary_icon_key": "category",
+            "icon_options": [
+              "category",
+              "folder",
+              "folder_special",
+              "inventory",
+              "package",
+              "archive",
+              "source",
+              "dashboard"
+            ],
+            "source_category": "카드/브로마이드",
             "requires_manual_review": true
           },
           "folder_creation_blocked_until": "category_mapping_manually_confirmed",
