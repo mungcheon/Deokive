@@ -1,24 +1,24 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T09:33:42Z",
+  "generated_at": "2026-07-23T09:44:59Z",
   "summary": {
     "catalog_rows": 20348,
     "coverage": {
-      "source_url": 0.9686,
-      "image_url": 0.965,
+      "source_url": 0.9687,
+      "image_url": 0.9651,
       "release_date": 0.9309
     },
     "missing": {
-      "source_url": 639,
-      "image_url": 712,
+      "source_url": 637,
+      "image_url": 710,
       "release_date": 1406,
       "official_price_jpy": 566,
       "barcode": 10094,
       "name_ja": 527
     },
     "open_review_queues": {
-      "source_discovery_rows": 639,
-      "image_missing_rows": 712,
+      "source_discovery_rows": 637,
+      "image_missing_rows": 710,
       "dedupe_groups": 61,
       "animation_unknown_categories": 3,
       "ichiban_missing_release_date_rows": 8,
@@ -39,13 +39,13 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 634,
-      "source_discovery_actionable_rows": 634,
+      "source_discovery_action_rows": 632,
+      "source_discovery_actionable_rows": 632,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 5,
-      "source_discovery_focus_template_rows": 419,
+      "source_discovery_focus_template_rows": 417,
       "source_discovery_focus_template_work_order_packs": 23,
-      "source_discovery_focus_template_dry_run_skipped_rows": 419,
+      "source_discovery_focus_template_dry_run_skipped_rows": 417,
       "source_discovery_next_focus_fallback_rows": 0,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -91,13 +91,13 @@
     {
       "key": "source_url_coverage",
       "status": "pass",
-      "value": 0.9686,
+      "value": 0.9687,
       "target": 0.95
     },
     {
       "key": "image_url_coverage",
       "status": "pass",
-      "value": 0.965,
+      "value": 0.9651,
       "target": 0.95
     },
     {
@@ -105,8 +105,8 @@
       "status": "pass",
       "value": 1.0,
       "target": 1,
-      "image_url_rows": 19636,
-      "local_image_path_rows": 19636,
+      "image_url_rows": 19638,
+      "local_image_path_rows": 19638,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
@@ -121,7 +121,7 @@
     {
       "key": "source_discovery_backlog",
       "status": "warn",
-      "value": 639,
+      "value": 637,
       "target": 0
     },
     {
@@ -163,7 +163,7 @@
     {
       "workstream": "source_discovery",
       "status": "open",
-      "open_rows": 639,
+      "open_rows": 637,
       "primary_report": "data/source_discovery_queue_public.json",
       "next_step": "find_exact_official_source_url",
       "auto_apply_enabled": false
@@ -171,7 +171,7 @@
     {
       "workstream": "source_discovery_focus_template",
       "status": "manual_review",
-      "open_rows": 419,
+      "open_rows": 417,
       "work_order_pack_count": 23,
       "next_focus_pack_id": "source-discovery-focus-001",
       "next_source_store": "애니메이트",
@@ -180,7 +180,7 @@
       "next_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
       "template_confirmed_rows": 0,
       "dry_run_updated_rows": 0,
-      "dry_run_skipped_rows": 419,
+      "dry_run_skipped_rows": 417,
       "primary_report": "data/source_discovery_focus_confirmed_template_public.json",
       "next_step": "work_source_focus_template_work_order_top_to_bottom",
       "auto_apply_enabled": false
@@ -219,7 +219,7 @@
     {
       "workstream": "source_discovery_review_batches",
       "status": "open",
-      "open_rows": 639,
+      "open_rows": 637,
       "primary_report": "data/source_discovery_review_batches_public.json",
       "next_step": "work_source_discovery_batches_by_store",
       "auto_apply_enabled": false
@@ -227,14 +227,14 @@
     {
       "workstream": "source_discovery_action_queue",
       "status": "manual_review",
-      "open_rows": 634,
-      "actionable_source_rows": 634,
+      "open_rows": 632,
+      "actionable_source_rows": 632,
       "unqueued_actionable_source_rows": 0,
       "queue_coverage": 1.0,
       "by_review_state": [
         [
           "official_search_review_required",
-          622
+          620
         ],
         [
           "licensed_retailer_review_required",
@@ -244,7 +244,7 @@
       "by_workflow": [
         [
           "official_search_url_available",
-          622
+          620
         ],
         [
           "licensed_retailer_search_review",
@@ -254,7 +254,7 @@
       "by_source_store": [
         [
           "애니메이트",
-          146
+          144
         ],
         [
           "엔스카이",
@@ -417,7 +417,7 @@
         {
           "source_store": "애니메이트",
           "priority": 10,
-          "queued_source_rows": 146,
+          "queued_source_rows": 144,
           "batch_count": 8,
           "next_batch_id": "source-discovery-action-001",
           "batch_ids": [
@@ -433,23 +433,23 @@
           "allowed_source_domains": [
             "www.animate-onlineshop.jp"
           ],
-          "official_search_url_count": 146,
+          "official_search_url_count": 144,
           "workflow_rows": [
             [
               "official_search_url_available",
-              146
+              144
             ]
           ],
           "review_state_rows": [
             [
               "official_search_review_required",
-              146
+              144
             ]
           ],
           "category_rows": [
             [
               "아크릴 스탠드",
-              36
+              34
             ],
             [
               "문구",
@@ -1060,7 +1060,7 @@
     {
       "workstream": "image_enrichment",
       "status": "blocked",
-      "open_rows": 712,
+      "open_rows": 710,
       "primary_report": "data/catalog_image_enrichment_batches_public.json",
       "next_step": "resolve_blocker_summary_before_image_import",
       "auto_apply_enabled": false
@@ -1250,7 +1250,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 13944,
+      "open_rows": 13940,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -1258,7 +1258,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 13944,
+      "open_rows": 13940,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -1819,10 +1819,10 @@
     },
     {
       "source_store": "애니메이트",
-      "priority_score": 1785.0,
+      "priority_score": 1767.0,
       "rows": 470,
-      "missing_source_url": 146,
-      "missing_image_url": 146,
+      "missing_source_url": 144,
+      "missing_image_url": 144,
       "missing_release_date": 191,
       "missing_price_jpy": 2,
       "missing_barcode": 174,
@@ -2490,15 +2490,15 @@
       "ready_rows": 0,
       "generic_source_url_rows": 50,
       "gotouchi_official_review_rows": 23,
-      "blocked_rows": 634,
+      "blocked_rows": 632,
       "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import."
     },
     {
       "priority": 19,
       "workstream": "local_image_asset_audit",
       "public_report": "data/catalog_image_asset_audit_public.json",
-      "image_url_rows": 19636,
-      "local_image_path_rows": 19636,
+      "image_url_rows": 19638,
+      "local_image_path_rows": 19638,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
@@ -2717,14 +2717,14 @@
       "priority": 20,
       "workstream": "source_discovery",
       "public_report": "data/source_discovery_queue_public.json",
-      "ready_rows": 639,
+      "ready_rows": 637,
       "recommended_next_action": "Find exact official detail pages for rows missing source_url."
     },
     {
       "priority": 20,
       "workstream": "source_discovery_focus_template",
       "public_report": "data/source_discovery_focus_confirmed_template_public.json",
-      "template_items": 419,
+      "template_items": 417,
       "work_order_pack_count": 23,
       "next_focus_pack_id": "source-discovery-focus-001",
       "next_source_store": "애니메이트",
@@ -2732,7 +2732,7 @@
       "next_focus_pack_rows": 20,
       "next_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
       "dry_run_updated_rows": 0,
-      "dry_run_skipped_rows": 419,
+      "dry_run_skipped_rows": 417,
       "recommended_next_action": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack."
     },
     {
@@ -2767,22 +2767,22 @@
       "workstream": "source_discovery_review_batches",
       "public_report": "data/source_discovery_review_batches_public.json",
       "batch_count": 56,
-      "source_discovery_rows": 639,
+      "source_discovery_rows": 637,
       "recommended_next_action": "Assign full source discovery batches by store/workflow before image imports."
     },
     {
       "priority": 22,
       "workstream": "source_discovery_action_queue",
       "public_report": "data/source_discovery_action_queue_public.json",
-      "actionable_source_rows": 634,
-      "queued_source_rows": 634,
+      "actionable_source_rows": 632,
+      "queued_source_rows": 632,
       "unqueued_actionable_source_rows": 0,
       "queue_coverage": 1.0,
       "action_batch_count": 60,
       "by_review_state": [
         [
           "official_search_review_required",
-          622
+          620
         ],
         [
           "licensed_retailer_review_required",
@@ -2792,7 +2792,7 @@
       "by_workflow": [
         [
           "official_search_url_available",
-          622
+          620
         ],
         [
           "licensed_retailer_search_review",
@@ -2802,7 +2802,7 @@
       "by_source_store": [
         [
           "애니메이트",
-          146
+          144
         ],
         [
           "엔스카이",
@@ -2965,7 +2965,7 @@
         {
           "source_store": "애니메이트",
           "priority": 10,
-          "queued_source_rows": 146,
+          "queued_source_rows": 144,
           "batch_count": 8,
           "next_batch_id": "source-discovery-action-001",
           "batch_ids": [
@@ -2981,23 +2981,23 @@
           "allowed_source_domains": [
             "www.animate-onlineshop.jp"
           ],
-          "official_search_url_count": 146,
+          "official_search_url_count": 144,
           "workflow_rows": [
             [
               "official_search_url_available",
-              146
+              144
             ]
           ],
           "review_state_rows": [
             [
               "official_search_review_required",
-              146
+              144
             ]
           ],
           "category_rows": [
             [
               "아크릴 스탠드",
-              36
+              34
             ],
             [
               "문구",
@@ -3616,7 +3616,7 @@
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
       "field_store_group_count": 351,
-      "missing_cell_count": 13944,
+      "missing_cell_count": 13940,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {

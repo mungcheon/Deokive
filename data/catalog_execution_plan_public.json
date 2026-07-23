@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T09:34:13Z",
+  "generated_at": "2026-07-23T09:45:32Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 22,
     "blocked_action_count": 1,
     "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 33138,
+    "total_action_rows": 33126,
     "open_review_queues": {
-      "source_discovery_rows": 639,
-      "image_missing_rows": 712,
+      "source_discovery_rows": 637,
+      "image_missing_rows": 710,
       "dedupe_groups": 61,
       "animation_unknown_categories": 3,
       "ichiban_missing_release_date_rows": 8,
@@ -31,13 +31,13 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 634,
-      "source_discovery_actionable_rows": 634,
+      "source_discovery_action_rows": 632,
+      "source_discovery_actionable_rows": 632,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 5,
-      "source_discovery_focus_template_rows": 419,
+      "source_discovery_focus_template_rows": 417,
       "source_discovery_focus_template_work_order_packs": 23,
-      "source_discovery_focus_template_dry_run_skipped_rows": 419,
+      "source_discovery_focus_template_dry_run_skipped_rows": 417,
       "source_discovery_next_focus_fallback_rows": 0,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -129,13 +129,13 @@
     "image_action_source_url_update_template_rows": 50,
     "image_action_image_url_ready_rows": 0,
     "image_action_workstream_count": 4,
-    "source_focus_template_rows": 419,
+    "source_focus_template_rows": 417,
     "source_focus_template_work_order_pack_count": 23,
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_fallback_rows": 0,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
-    "source_discovery_action_rows": 634,
-    "source_discovery_actionable_rows": 634,
+    "source_discovery_action_rows": 632,
+    "source_discovery_actionable_rows": 632,
     "source_discovery_unqueued_actionable_rows": 0,
     "source_discovery_manual_research_backlog_rows": 5,
     "animation_unknown_category_rows": 391,
@@ -394,13 +394,13 @@
       "workstream": "source_discovery_focus_template",
       "public_report": "data/source_discovery_focus_confirmed_template_public.json",
       "status": "manual_review",
-      "rows": 419,
+      "rows": 417,
       "command": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack.",
       "next_step": "work_source_focus_template_work_order_top_to_bottom",
       "blocker": "Imports stay dry-run only until exact product URLs are manually confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
-        "template_items": 419,
+        "template_items": 417,
         "work_order_pack_count": 23,
         "next_focus_pack_id": "source-discovery-focus-001",
         "next_source_store": "애니메이트",
@@ -451,7 +451,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A9%8B%E7%94%B0%E8%87%B3%29"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%BC%86%E5%8E%9F%E3%82%8B%E3%81%8B%29"
           },
           {
             "priority": 3,
@@ -472,7 +472,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%82%98%EB%A3%A8%ED%86%A0%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=HUNTER%C3%97HUNTER%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E3%83%A1%E3%82%A4%E3%83%B34%E7%A8%AE"
           },
           {
             "priority": 4,
@@ -493,7 +493,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%B9%E3%83%86%E3%83%83%E3%82%AB%E3%83%BC%E3%82%BB%E3%83%83%E3%83%88"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%8F%E3%82%A4%E3%82%AD%E3%83%A5%E3%83%BC%21%21%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20%E7%83%8F%E9%87%8E%E9%AB%98%E6%A0%A1VS%E9%9F%B3%E9%A7%92%E9%AB%98%E6%A0%A1"
           },
           {
             "priority": 5,
@@ -514,7 +514,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E7%B4%85%E8%8E%89%E6%A0%96%29"
           },
           {
             "priority": 6,
@@ -535,7 +535,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%81%97%E3%82%93%E3%81%AE%E3%81%99%E3%81%91%29"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29"
           },
           {
             "priority": 7,
@@ -556,18 +556,18 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=ONE%20PIECE%20%E3%82%A8%E3%83%BC%E3%82%B9%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB"
           },
           {
             "priority": 8,
             "focus_pack_id": "source-discovery-focus-008",
             "is_current_pack": false,
             "source_store": "애니메이트",
-            "target_category": "태피스트리",
-            "row_count": 6,
+            "target_category": "피규어",
+            "row_count": 4,
             "confirmed_source_rows": 0,
-            "remaining_review_rows": 6,
-            "blocked_rows": 6,
+            "remaining_review_rows": 4,
+            "blocked_rows": 4,
             "blocked_reason": "exact_product_detail_source_url_not_confirmed",
             "blocked_until": "exact_product_detail_source_url_confirmed",
             "required_evidence": [
@@ -577,12 +577,12 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%BF%E3%82%AA%E3%83%AB%20%28%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E4%BB%AE%E9%9D%A2%29"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29"
           }
         ],
         "manual_confirmed_rows": 0,
         "dry_run_updated_rows": 0,
-        "dry_run_skipped_rows": 419
+        "dry_run_skipped_rows": 417
       }
     },
     {
@@ -590,7 +590,7 @@
       "workstream": "source_discovery_review_batches",
       "public_report": "data/source_discovery_review_batches_public.json",
       "status": "manual_review",
-      "rows": 639,
+      "rows": 637,
       "command": "Find exact official/detail source URLs for rows missing source_url.",
       "next_step": "attach_exact_source_url_before_image_import",
       "blocker": "Rows without exact source_url cannot safely import images.",
@@ -600,7 +600,7 @@
         "by_workflow": [
           [
             "official_search_url_available",
-            622
+            620
           ],
           [
             "licensed_retailer_search_review",
@@ -618,14 +618,14 @@
       "workstream": "source_discovery_action_queue",
       "public_report": "data/source_discovery_action_queue_public.json",
       "status": "manual_review",
-      "rows": 634,
+      "rows": 632,
       "command": "Confirm exact product/detail URLs from official search paths before broad source research.",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "blocker": "Auto source import is disabled; every source_url needs exact product evidence.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_source_rows": 634,
-        "queued_source_rows": 634,
+        "actionable_source_rows": 632,
+        "queued_source_rows": 632,
         "action_batch_count": 60,
         "manual_research_backlog_rows": 5,
         "manual_research_backlog_by_source_store": [
@@ -647,7 +647,7 @@
         "by_workflow": [
           [
             "official_search_url_available",
-            622
+            620
           ],
           [
             "licensed_retailer_search_review",
@@ -807,7 +807,7 @@
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "status": "blocked",
-      "rows": 712,
+      "rows": 710,
       "command": "Extract images only after exact source_url evidence is confirmed.",
       "next_step": "resolve_source_url_blockers_then_extract_images",
       "blocker": "No exact source_url-ready image rows are currently published.",
@@ -817,7 +817,7 @@
         "provider_candidate_items": 496,
         "manual_or_blocked_items": 228,
         "generic_source_url_rows": 50,
-        "needs_source_discovery_rows": 634,
+        "needs_source_discovery_rows": 632,
         "gotouchi_official_review_rows": 23
       }
     },
@@ -907,7 +907,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 13944,
+      "rows": 13940,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -919,8 +919,8 @@
           "release_date": 1406,
           "barcode": 10094,
           "official_price_jpy": 566,
-          "image_url": 712,
-          "source_url": 639
+          "image_url": 710,
+          "source_url": 637
         }
       }
     },

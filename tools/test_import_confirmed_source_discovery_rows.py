@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from import_confirmed_source_discovery_rows import import_rows
+from import_confirmed_source_discovery_rows import _dump_seed_payload, import_rows
 
 
 SOURCE = "https://www.goodsmile.info/ja/product/12345"
@@ -136,6 +136,21 @@ class ImportConfirmedSourceDiscoveryRowsTest(unittest.TestCase):
 
         self.assertEqual(result["updated"], [])
         self.assertEqual(result["skipped"][0]["reason"], "manual_confirmed_false")
+
+    def test_dump_seed_payload_preserves_public_catalog_wrapper(self) -> None:
+        payload = {
+            "meta": {"row_count": 1, "total_items": 1, "privacy": {"contains_user_accounts": False}},
+            "items": [_row()],
+        }
+        updated_rows = [_row(source_url=SOURCE)]
+
+        dumped = _dump_seed_payload(payload, updated_rows)
+
+        self.assertIsInstance(dumped, dict)
+        self.assertEqual(dumped["items"], updated_rows)
+        self.assertEqual(dumped["meta"]["row_count"], 1)
+        self.assertEqual(dumped["meta"]["total_items"], 1)
+        self.assertEqual(dumped["meta"]["privacy"], {"contains_user_accounts": False})
 
 
 if __name__ == "__main__":

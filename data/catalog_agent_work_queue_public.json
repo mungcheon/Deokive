@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T09:33:42Z",
+  "generated_at": "2026-07-23T09:44:59Z",
   "summary": {
     "batch_count": 155,
     "max_published_batches": 160,
-    "summed_batch_rows": 24101,
+    "summed_batch_rows": 24091,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -219,8 +219,8 @@
       ]
     ],
     "open_review_queues": {
-      "source_discovery_rows": 639,
-      "image_missing_rows": 712,
+      "source_discovery_rows": 637,
+      "image_missing_rows": 710,
       "dedupe_groups": 61,
       "animation_unknown_categories": 3,
       "ichiban_missing_release_date_rows": 8,
@@ -241,13 +241,13 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 634,
-      "source_discovery_actionable_rows": 634,
+      "source_discovery_action_rows": 632,
+      "source_discovery_actionable_rows": 632,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 5,
-      "source_discovery_focus_template_rows": 419,
+      "source_discovery_focus_template_rows": 417,
       "source_discovery_focus_template_work_order_packs": 23,
-      "source_discovery_focus_template_dry_run_skipped_rows": 419,
+      "source_discovery_focus_template_dry_run_skipped_rows": 417,
       "source_discovery_next_focus_fallback_rows": 0,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -3858,7 +3858,7 @@
       "priority": 20,
       "title": "애니메이트 이미지 보강 (find_source_then_extract_image)",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "rows": 146,
+      "rows": 144,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "acceptance_criteria": [
         "Exact product identity is verified before importing image_url.",
@@ -11504,90 +11504,6 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1695,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "문구",
-          "name_ko": "메이드 인 어비스 클리어 파일 A4 리코&레그",
-          "name_ja": "メイドインアビス クリアファイルA4 リコ＆レグ",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%AA%E3%82%B3%EF%BC%86%E3%83%AC%E3%82%B0",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%AA%E3%82%B3%EF%BC%86%E3%83%AC%E3%82%B0%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1695,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1695,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%82%A4%E3%83%89%E3%82%A4%E3%83%B3%E3%82%A2%E3%83%93%E3%82%B9%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E3%83%AA%E3%82%B3%EF%BC%86%E3%83%AC%E3%82%B0",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "메이드 인 어비스 클리어 파일 A4 리코&레그",
-            "name_ja": "メイドインアビス クリアファイルA4 リコ＆レグ",
-            "category": "문구",
-            "affiliation": "메이드 인 어비스",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1703,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "문구",
-          "name_ko": "단간론파 클리어 파일 세트 희망봉 학원",
-          "name_ja": "ダンガンロンパ クリアファイルセット 希望ヶ峰学園",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1703,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1703,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "단간론파 클리어 파일 세트 희망봉 학원",
-            "name_ja": "ダンガンロンパ クリアファイルセット 希望ヶ峰学園",
-            "category": "문구",
-            "affiliation": "단간론파",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
           "catalog_index": 1711,
           "workflow": "official_search_url_available",
           "review_state": "official_search_review_required",
@@ -11838,6 +11754,90 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1747,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "문구",
+          "name_ko": "원피스 클리어 파일 세트 와노쿠니편",
+          "name_ja": "ONE PIECE クリアファイルセット ワノ国編",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=ONE%20PIECE%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E3%83%AF%E3%83%8E%E5%9B%BD%E7%B7%A8",
+          "web_search_url": "https://www.google.com/search?q=ONE%20PIECE%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E3%83%AF%E3%83%8E%E5%9B%BD%E7%B7%A8%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1747,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1747,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=ONE%20PIECE%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E3%83%AF%E3%83%8E%E5%9B%BD%E7%B7%A8",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "원피스 클리어 파일 세트 와노쿠니편",
+            "name_ja": "ONE PIECE クリアファイルセット ワノ国編",
+            "category": "문구",
+            "affiliation": "원피스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1756,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "캔뱃지",
+          "name_ko": "체인소 맨 의상 변경 캔뱃지 파워",
+          "name_ja": "チェンソーマン 衣装替え缶バッジ パワー",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%91%E3%83%AF%E3%83%BC",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%91%E3%83%AF%E3%83%BC%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1756,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1756,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%91%E3%83%AF%E3%83%BC",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "체인소 맨 의상 변경 캔뱃지 파워",
+            "name_ja": "チェンソーマン 衣装替え缶バッジ パワー",
+            "category": "캔뱃지",
+            "affiliation": "체인소 맨",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
         }
       ],
       "review_state": "source_evidence_confirmation_required",
@@ -11858,90 +11858,6 @@
         "source_url templates are filled only after manual evidence confirmation."
       ],
       "sample_items": [
-        {
-          "catalog_index": 1823,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "생활잡화",
-          "name_ko": "나의 히어로 아카데미아 카페 클리어 보틀",
-          "name_ja": "僕のヒーローアカデミア カフェコラボ クリアボトル",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB",
-          "web_search_url": "https://www.google.com/search?q=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1823,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1823,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "나의 히어로 아카데미아 카페 클리어 보틀",
-            "name_ja": "僕のヒーローアカデミア カフェコラボ クリアボトル",
-            "category": "생활잡화",
-            "affiliation": "나의 히어로 아카데미아",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1831,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "생활잡화",
-          "name_ko": "귀멸의 칼날 카페 클리어 보틀",
-          "name_ja": "鬼滅の刃 カフェコラボ クリアボトル",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB",
-          "web_search_url": "https://www.google.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1831,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1831,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "귀멸의 칼날 카페 클리어 보틀",
-            "name_ja": "鬼滅の刃 カフェコラボ クリアボトル",
-            "category": "생활잡화",
-            "affiliation": "귀멸의 칼날",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
         {
           "catalog_index": 1838,
           "workflow": "official_search_url_available",
@@ -12193,6 +12109,90 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1975,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "인형",
+          "name_ko": "Mensore 리바이 봉제 인형",
+          "name_ja": "メンソーレ リヴァイ ぬいぐるみ",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AC%20%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%A1%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AC%20%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1975,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1975,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AC%20%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "Mensore 리바이 봉제 인형",
+            "name_ja": "メンソーレ リヴァイ ぬいぐるみ",
+            "category": "인형",
+            "affiliation": "진격의 거인",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1988,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "인형",
+          "name_ko": "최애의 아이 봉제 인형 (호시노 아이)",
+          "name_ja": "推しの子 ぬいぐるみ (星野アイ)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+          "web_search_url": "https://www.google.com/search?q=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1988,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1988,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "최애의 아이 봉제 인형 (호시노 아이)",
+            "name_ja": "推しの子 ぬいぐるみ (星野アイ)",
+            "category": "인형",
+            "affiliation": "최애의 아이",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
         }
       ],
       "review_state": "source_evidence_confirmation_required",
@@ -12213,90 +12213,6 @@
         "source_url templates are filled only after manual evidence confirmation."
       ],
       "sample_items": [
-        {
-          "catalog_index": 2061,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "인형",
-          "name_ko": "전생슬 봉제 인형 (리무루 인간형)",
-          "name_ja": "転スラ ぬいぐるみ (人型リムル)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%BA%BA%E5%9E%8B%E3%83%AA%E3%83%A0%E3%83%AB%29",
-          "web_search_url": "https://www.google.com/search?q=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%BA%BA%E5%9E%8B%E3%83%AA%E3%83%A0%E3%83%AB%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2061,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2061,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E4%BA%BA%E5%9E%8B%E3%83%AA%E3%83%A0%E3%83%AB%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "전생슬 봉제 인형 (리무루 인간형)",
-            "name_ja": "転スラ ぬいぐるみ (人型リムル)",
-            "category": "인형",
-            "affiliation": "전생슬",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 2062,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "인형",
-          "name_ko": "전생슬 봉제 인형 (밀림)",
-          "name_ja": "転スラ ぬいぐるみ (ミリム)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%9F%E3%83%AA%E3%83%A0%29",
-          "web_search_url": "https://www.google.com/search?q=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%9F%E3%83%AA%E3%83%A0%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2062,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2062,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%9F%E3%83%AA%E3%83%A0%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "전생슬 봉제 인형 (밀림)",
-            "name_ja": "転スラ ぬいぐるみ (ミリム)",
-            "category": "인형",
-            "affiliation": "전생슬",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
         {
           "catalog_index": 2066,
           "workflow": "official_search_url_available",
@@ -12548,6 +12464,90 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2077,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "캔뱃지",
+          "name_ko": "단간론파 캔뱃지 (모노쿠마)",
+          "name_ja": "ダンガンロンパ 缶バッジ (モノクマ)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2077,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2077,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "단간론파 캔뱃지 (모노쿠마)",
+            "name_ja": "ダンガンロンパ 缶バッジ (モノクマ)",
+            "category": "캔뱃지",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2080,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "키링",
+          "name_ko": "단간론파 키링 (코마에다)",
+          "name_ja": "ダンガンロンパ キーホルダー (狛枝)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E7%8B%9B%E6%9E%9D%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E7%8B%9B%E6%9E%9D%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2080,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2080,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E7%8B%9B%E6%9E%9D%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "단간론파 키링 (코마에다)",
+            "name_ja": "ダンガンロンパ キーホルダー (狛枝)",
+            "category": "키링",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
         }
       ],
       "review_state": "source_evidence_confirmation_required",
@@ -12568,90 +12568,6 @@
         "source_url templates are filled only after manual evidence confirmation."
       ],
       "sample_items": [
-        {
-          "catalog_index": 2096,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "캔뱃지",
-          "name_ko": "슈타인즈게이트 캔뱃지 (크리스)",
-          "name_ja": "シュタインズ・ゲート 缶バッジ (紅莉栖)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E7%B4%85%E8%8E%89%E6%A0%96%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E7%B4%85%E8%8E%89%E6%A0%96%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2096,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2096,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E7%B4%85%E8%8E%89%E6%A0%96%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "슈타인즈게이트 캔뱃지 (크리스)",
-            "name_ja": "シュタインズ・ゲート 缶バッジ (紅莉栖)",
-            "category": "캔뱃지",
-            "affiliation": "슈타인즈게이트",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 2097,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "캔뱃지",
-          "name_ko": "슈타인즈게이트 트레이딩 캔뱃지 (랜덤)",
-          "name_ja": "シュタインズ・ゲート トレーディング缶バッジ",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2097,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2097,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "슈타인즈게이트 트레이딩 캔뱃지 (랜덤)",
-            "name_ja": "シュタインズ・ゲート トレーディング缶バッジ",
-            "category": "캔뱃지",
-            "affiliation": "슈타인즈게이트",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
         {
           "catalog_index": 2098,
           "workflow": "official_search_url_available",
@@ -12903,6 +12819,90 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2107,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "인형",
+          "name_ko": "슈타인즈게이트 봉제 인형 (우파)",
+          "name_ja": "シュタインズ・ゲート ぬいぐるみ (うーぱ)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%81%86%E3%83%BC%E3%81%B1%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%81%86%E3%83%BC%E3%81%B1%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2107,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2107,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%81%86%E3%83%BC%E3%81%B1%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "슈타인즈게이트 봉제 인형 (우파)",
+            "name_ja": "シュタインズ・ゲート ぬいぐるみ (うーぱ)",
+            "category": "인형",
+            "affiliation": "슈타인즈게이트",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2108,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "의류",
+          "name_ko": "슈타인즈게이트 의류 라보 멤버 티셔츠",
+          "name_ja": "シュタインズ・ゲート ラボメンTシャツ",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%A9%E3%83%9C%E3%83%A1%E3%83%B3T%E3%82%B7%E3%83%A3%E3%83%84",
+          "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%A9%E3%83%9C%E3%83%A1%E3%83%B3T%E3%82%B7%E3%83%A3%E3%83%84%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2108,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2108,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%A9%E3%83%9C%E3%83%A1%E3%83%B3T%E3%82%B7%E3%83%A3%E3%83%84",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "슈타인즈게이트 의류 라보 멤버 티셔츠",
+            "name_ja": "シュタインズ・ゲート ラボメンTシャツ",
+            "category": "의류",
+            "affiliation": "슈타인즈게이트",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
         }
       ],
       "review_state": "source_evidence_confirmation_required",
@@ -12923,90 +12923,6 @@
         "source_url templates are filled only after manual evidence confirmation."
       ],
       "sample_items": [
-        {
-          "catalog_index": 2197,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "키링",
-          "name_ko": "이루마군 키링 (알리)",
-          "name_ja": "魔入りました！入間くん キーホルダー (アリ)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%A2%E3%83%AA%29",
-          "web_search_url": "https://www.google.com/search?q=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%A2%E3%83%AA%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2197,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2197,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%A2%E3%83%AA%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "이루마군 키링 (알리)",
-            "name_ja": "魔入りました！入間くん キーホルダー (アリ)",
-            "category": "키링",
-            "affiliation": "이루마군",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 2202,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "문구",
-          "name_ko": "이루마군 일러스트 카드 (한정)",
-          "name_ja": "魔入りました！入間くん イラストカード",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89",
-          "web_search_url": "https://www.google.com/search?q=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2202,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2202,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "이루마군 일러스트 카드 (한정)",
-            "name_ja": "魔入りました！入間くん イラストカード",
-            "category": "문구",
-            "affiliation": "이루마군",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
         {
           "catalog_index": 2219,
           "workflow": "official_search_url_available",
@@ -13252,6 +13168,90 @@
             "name_ko": "짱구는 못말려 트레이딩 캔뱃지 (가족)",
             "name_ja": "クレヨンしんちゃん トレーディング缶バッジ",
             "category": "캔뱃지",
+            "affiliation": "짱구는 못말려",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2227,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "키링",
+          "name_ko": "짱구는 못말려 키링 (흰둥이)",
+          "name_ja": "クレヨンしんちゃん キーホルダー (シロ)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%B7%E3%83%AD%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%B7%E3%83%AD%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2227,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2227,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%B7%E3%83%AD%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "짱구는 못말려 키링 (흰둥이)",
+            "name_ja": "クレヨンしんちゃん キーホルダー (シロ)",
+            "category": "키링",
+            "affiliation": "짱구는 못말려",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2228,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "애니메이트",
+          "category": "키링",
+          "name_ko": "짱구는 못말려 러버 스트랩 (카스카베 방위대)",
+          "name_ja": "クレヨンしんちゃん ラバーストラップ (春日部防衛隊)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%98%A5%E6%97%A5%E9%83%A8%E9%98%B2%E8%A1%9B%E9%9A%8A%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%98%A5%E6%97%A5%E9%83%A8%E9%98%B2%E8%A1%9B%E9%9A%8A%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2228,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2228,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%98%A5%E6%97%A5%E9%83%A8%E9%98%B2%E8%A1%9B%E9%9A%8A%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "짱구는 못말려 러버 스트랩 (카스카베 방위대)",
+            "name_ja": "クレヨンしんちゃん ラバーストラップ (春日部防衛隊)",
+            "category": "키링",
             "affiliation": "짱구는 못말려",
             "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
             "blocked_until": "exact_product_detail_source_url_confirmed"
@@ -13980,7 +13980,7 @@
       "priority": 28,
       "title": "애니메이트 source URL action",
       "public_report": "data/source_discovery_action_queue_public.json",
-      "rows": 6,
+      "rows": 4,
       "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
       "acceptance_criteria": [
         "Accepted source_url must be an exact product/detail page.",
@@ -13988,90 +13988,6 @@
         "source_url templates are filled only after manual evidence confirmation."
       ],
       "sample_items": [
-        {
-          "catalog_index": 2243,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "오버로드 아크릴 스탠드 (마레)",
-          "name_ja": "オーバーロード アクリルスタンド (マーレ)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%83%BC%E3%83%AC%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%83%BC%E3%83%AC%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2243,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2243,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%83%BC%E3%83%AC%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "오버로드 아크릴 스탠드 (마레)",
-            "name_ja": "オーバーロード アクリルスタンド (マーレ)",
-            "category": "아크릴 스탠드",
-            "affiliation": "오버로드",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 2244,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "오버로드 아크릴 스탠드 (데미우르고스)",
-          "name_ja": "オーバーロード アクリルスタンド (デミウルゴス)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%87%E3%83%9F%E3%82%A6%E3%83%AB%E3%82%B4%E3%82%B9%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%87%E3%83%9F%E3%82%A6%E3%83%AB%E3%82%B4%E3%82%B9%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2244,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2244,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%87%E3%83%9F%E3%82%A6%E3%83%AB%E3%82%B4%E3%82%B9%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "오버로드 아크릴 스탠드 (데미우르고스)",
-            "name_ja": "オーバーロード アクリルスタンド (デミウルゴス)",
-            "category": "아크릴 스탠드",
-            "affiliation": "오버로드",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
         {
           "catalog_index": 2252,
           "workflow": "official_search_url_available",
@@ -14594,26 +14510,6 @@
           "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=SPY%C3%97FAMILY%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
         },
         {
-          "catalog_index": 1134,
-          "name_ko": "강철의 연금술사 아크릴 스탠드 (알폰스)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B0%95%EC%B2%A0%EC%9D%98%20%EC%97%B0%EA%B8%88%EC%88%A0%EC%82%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%95%8C%ED%8F%B0%EC%8A%A4%29"
-        },
-        {
-          "catalog_index": 1133,
-          "name_ko": "강철의 연금술사 아크릴 스탠드 (에드워드)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B0%95%EC%B2%A0%EC%9D%98%20%EC%97%B0%EA%B8%88%EC%88%A0%EC%82%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%97%90%EB%93%9C%EC%9B%8C%EB%93%9C%29"
-        },
-        {
           "catalog_index": 1734,
           "name_ko": "귀멸의 칼날 클리어 파일 세트 주 9종",
           "name_ja": "鬼滅の刃 クリアファイルセット 柱9種",
@@ -14662,6 +14558,26 @@
           "source_store": "애니메이트",
           "source_url": null,
           "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%82%98%EB%A3%A8%ED%86%A0%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
+        },
+        {
+          "catalog_index": 1822,
+          "name_ko": "나의 히어로 아카데미아 다비 의상 변경 머그컵",
+          "name_ja": "僕のヒーローアカデミア 荼毘 衣装替え マグカップ",
+          "series_name": null,
+          "category": "머그컵",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E8%8D%BC%E6%AF%98%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97"
+        },
+        {
+          "catalog_index": 1721,
+          "name_ko": "나의 히어로 아카데미아 클리어 파일 세트 메인 4종",
+          "name_ja": "僕のヒーローアカデミア クリアファイルセット メイン4種",
+          "series_name": null,
+          "category": "문구",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E3%83%A1%E3%82%A4%E3%83%B34%E7%A8%AE"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -14682,26 +14598,6 @@
         "Generic search/listing pages stay in review and are not imported as final source_url."
       ],
       "sample_items": [
-        {
-          "catalog_index": 1071,
-          "name_ko": "도쿄 리벤저스 캔뱃지 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%8F%84%EC%BF%84%20%EB%A6%AC%EB%B2%A4%EC%A0%80%EC%8A%A4%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
-        },
-        {
-          "catalog_index": 2037,
-          "name_ko": "리제로 트레이딩 아크릴 (렘 의상시리즈)",
-          "name_ja": "Re:ゼロ トレーディングアクリル (レム衣装)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=Re%3A%E3%82%BC%E3%83%AD%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%20%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29"
-        },
         {
           "catalog_index": 1695,
           "name_ko": "메이드 인 어비스 클리어 파일 A4 리코&레그",
@@ -14761,6 +14657,26 @@
           "source_store": "애니메이트",
           "source_url": null,
           "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%AA%85%ED%83%90%EC%A0%95%20%EC%BD%94%EB%82%9C%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EC%BD%94%EB%82%9C%29"
+        },
+        {
+          "catalog_index": 2126,
+          "name_ko": "명탐정 코난 러버 스트랩 (카이토 키드)",
+          "name_ja": "名探偵コナン ラバーストラップ (怪盗キッド)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%90%8D%E6%8E%A2%E5%81%B5%E3%82%B3%E3%83%8A%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%80%AA%E7%9B%97%E3%82%AD%E3%83%83%E3%83%89%29"
+        },
+        {
+          "catalog_index": 1119,
+          "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -14781,26 +14697,6 @@
         "Generic search/listing pages stay in review and are not imported as final source_url."
       ],
       "sample_items": [
-        {
-          "catalog_index": 2100,
-          "name_ko": "슈타인즈게이트 러버 스트랩 (오카베)",
-          "name_ja": "シュタインズ・ゲート ラバーストラップ (岡部)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E5%B2%A1%E9%83%A8%29"
-        },
-        {
-          "catalog_index": 2101,
-          "name_ko": "슈타인즈게이트 러버 스트랩 (크리스)",
-          "name_ja": "シュタインズ・ゲート ラバーストラップ (紅莉栖)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E7%B4%85%E8%8E%89%E6%A0%96%29"
-        },
         {
           "catalog_index": 2176,
           "name_ko": "스킵과 로퍼 아크릴 스탠드 (무카이 유즈키)",
@@ -14860,6 +14756,26 @@
           "source_store": "애니메이트",
           "source_url": null,
           "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%B6%81%EC%82%B0%20%EB%A9%A4%EB%B2%84%20%EB%9E%9C%EB%8D%A4%29"
+        },
+        {
+          "catalog_index": 1123,
+          "name_ko": "신세기 에반게리온 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8B%A0%EC%84%B8%EA%B8%B0%20%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C"
+        },
+        {
+          "catalog_index": 1121,
+          "name_ko": "신세기 에반게리온 피규어 (아야나미 레이)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "피규어",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8B%A0%EC%84%B8%EA%B8%B0%20%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8%20%ED%94%BC%EA%B7%9C%EC%96%B4%20%28%EC%95%84%EC%95%BC%EB%82%98%EB%AF%B8%20%EB%A0%88%EC%9D%B4%29"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -14880,26 +14796,6 @@
         "Generic search/listing pages stay in review and are not imported as final source_url."
       ],
       "sample_items": [
-        {
-          "catalog_index": 2197,
-          "name_ko": "이루마군 키링 (알리)",
-          "name_ja": "魔入りました！入間くん キーホルダー (アリ)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%82%A2%E3%83%AA%29"
-        },
-        {
-          "catalog_index": 1711,
-          "name_ko": "장송의 프리렌 클리어 파일 세트 용사 일행",
-          "name_ja": "葬送のフリーレン クリアファイルセット 勇者一行",
-          "series_name": null,
-          "category": "문구",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%8B%87%E8%80%85%E4%B8%80%E8%A1%8C"
-        },
         {
           "catalog_index": 1807,
           "name_ko": "장송의 프리렌 카페 클리어 보틀",
@@ -14959,6 +14855,26 @@
           "source_store": "애니메이트",
           "source_url": null,
           "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E7%B4%85%E4%B8%B8%29"
+        },
+        {
+          "catalog_index": 2060,
+          "name_ko": "전생슬 봉제 인형 (리무루 슬라임)",
+          "name_ja": "転スラ ぬいぐるみ (スライム リムル)",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%A0%20%E3%83%AA%E3%83%A0%E3%83%AB%29"
+        },
+        {
+          "catalog_index": 2062,
+          "name_ko": "전생슬 봉제 인형 (밀림)",
+          "name_ja": "転スラ ぬいぐるみ (ミリム)",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%9F%E3%83%AA%E3%83%A0%29"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -14979,26 +14895,6 @@
         "Generic search/listing pages stay in review and are not imported as final source_url."
       ],
       "sample_items": [
-        {
-          "catalog_index": 1974,
-          "name_ko": "진격의 거인 디포르메 아크릴 마스코트 (조사병단)",
-          "name_ja": "進撃の巨人 デフォルメアクリルマスコット",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88"
-        },
-        {
-          "catalog_index": 1975,
-          "name_ko": "Mensore 리바이 봉제 인형",
-          "name_ja": "メンソーレ リヴァイ ぬいぐるみ",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%A1%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AC%20%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF"
-        },
         {
           "catalog_index": 1964,
           "name_ko": "진격의 거인 캔뱃지 세트 (조사병단)",
@@ -15058,6 +14954,26 @@
           "source_store": "애니메이트",
           "source_url": null,
           "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%B9%E3%83%86%E3%83%83%E3%82%AB%E3%83%BC%E3%82%BB%E3%83%83%E3%83%88"
+        },
+        {
+          "catalog_index": 2219,
+          "name_ko": "짱구는 못말려 아크릴 스탠드 (신노스케)",
+          "name_ja": "クレヨンしんちゃん アクリルスタンド (しんのすけ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%97%E3%82%93%E3%81%AE%E3%81%99%E3%81%91%29"
+        },
+        {
+          "catalog_index": 2221,
+          "name_ko": "짱구는 못말려 아크릴 스탠드 (액션가면)",
+          "name_ja": "クレヨンしんちゃん アクリルスタンド (アクション仮面)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E4%BB%AE%E9%9D%A2%29"
         }
       ],
       "review_state": "exact_source_discovery_required",
@@ -15559,105 +15475,6 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-78",
-      "agent_id": "agent-source-discovery",
-      "workstream": "source_url_discovery",
-      "priority": 30,
-      "title": "애니메이트 출처 URL 탐색: source-discovery-006",
-      "public_report": "data/source_discovery_review_batches_public.json",
-      "rows": 21,
-      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
-      "acceptance_criteria": [
-        "Candidate URL is an exact official or trusted licensed product/detail page.",
-        "Product title and image/metadata match the catalog row.",
-        "Generic search/listing pages stay in review and are not imported as final source_url."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1756,
-          "name_ko": "체인소 맨 의상 변경 캔뱃지 파워",
-          "name_ja": "チェンソーマン 衣装替え缶バッジ パワー",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E8%A1%A3%E8%A3%85%E6%9B%BF%E3%81%88%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%91%E3%83%AF%E3%83%BC"
-        },
-        {
-          "catalog_index": 1045,
-          "name_ko": "체인소맨 클리어 파일",
-          "name_ja": null,
-          "series_name": null,
-          "category": "문구",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
-        },
-        {
-          "catalog_index": 1043,
-          "name_ko": "체인소맨 봉제 인형 (포치타)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%8F%AC%EC%B9%98%ED%83%80%29"
-        },
-        {
-          "catalog_index": 1044,
-          "name_ko": "체인소맨 캔뱃지 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
-        },
-        {
-          "catalog_index": 2000,
-          "name_ko": "최애의 아이 디포르메 러버 마스코트",
-          "name_ja": "推しの子 デフォルメラバーマスコット",
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88"
-        },
-        {
-          "catalog_index": 1075,
-          "name_ko": "최애의 아이 클리어 파일",
-          "name_ja": null,
-          "series_name": null,
-          "category": "문구",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B5%9C%EC%95%A0%EC%9D%98%20%EC%95%84%EC%9D%B4%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
-        },
-        {
-          "catalog_index": 1992,
-          "name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
-          "name_ja": "推しの子 アクリルスタンド (あかね)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%82%E3%81%8B%E3%81%AD%29"
-        },
-        {
-          "catalog_index": 1991,
-          "name_ko": "최애의 아이 아크릴 스탠드 (카나)",
-          "name_ja": "推しの子 アクリルスタンド (かな)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": "애니메이트",
-          "source_url": null,
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%8B%E3%81%AA%29"
-        }
-      ],
-      "review_state": "exact_source_discovery_required",
-      "next_machine_step": "find_exact_official_product_source_url"
-    },
-    {
       "batch_id": "030-agent-image-action-46",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
@@ -16076,6 +15893,105 @@
       ],
       "review_state": "image_evidence_confirmation_required",
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
+      "batch_id": "030-agent-source-discovery-78",
+      "agent_id": "agent-source-discovery",
+      "workstream": "source_url_discovery",
+      "priority": 30,
+      "title": "애니메이트 출처 URL 탐색: source-discovery-006",
+      "public_report": "data/source_discovery_review_batches_public.json",
+      "rows": 19,
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "acceptance_criteria": [
+        "Candidate URL is an exact official or trusted licensed product/detail page.",
+        "Product title and image/metadata match the catalog row.",
+        "Generic search/listing pages stay in review and are not imported as final source_url."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1043,
+          "name_ko": "체인소맨 봉제 인형 (포치타)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%8F%AC%EC%B9%98%ED%83%80%29"
+        },
+        {
+          "catalog_index": 1044,
+          "name_ko": "체인소맨 캔뱃지 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
+        },
+        {
+          "catalog_index": 2000,
+          "name_ko": "최애의 아이 디포르메 러버 마스코트",
+          "name_ja": "推しの子 デフォルメラバーマスコット",
+          "series_name": null,
+          "category": "마스코트",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88"
+        },
+        {
+          "catalog_index": 1075,
+          "name_ko": "최애의 아이 클리어 파일",
+          "name_ja": null,
+          "series_name": null,
+          "category": "문구",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B5%9C%EC%95%A0%EC%9D%98%20%EC%95%84%EC%9D%B4%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
+        },
+        {
+          "catalog_index": 1992,
+          "name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
+          "name_ja": "推しの子 アクリルスタンド (あかね)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%82%E3%81%8B%E3%81%AD%29"
+        },
+        {
+          "catalog_index": 1991,
+          "name_ko": "최애의 아이 아크릴 스탠드 (카나)",
+          "name_ja": "推しの子 アクリルスタンド (かな)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%8B%E3%81%AA%29"
+        },
+        {
+          "catalog_index": 1072,
+          "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
+          "name_ja": "推しの子 アクリルスタンド (星野アイ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29"
+        },
+        {
+          "catalog_index": 1988,
+          "name_ko": "최애의 아이 봉제 인형 (호시노 아이)",
+          "name_ja": "推しの子 ぬいぐるみ (星野アイ)",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "애니메이트",
+          "source_url": null,
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29"
+        }
+      ],
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "030-agent-source-discovery-84",
@@ -25050,7 +24966,7 @@
       "priority": 50,
       "title": "메타데이터 검수: metadata-review-001",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 533,
+      "rows": 531,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -25149,7 +25065,7 @@
       "priority": 50,
       "title": "메타데이터 검수: metadata-review-004",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 470,
+      "rows": 468,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
