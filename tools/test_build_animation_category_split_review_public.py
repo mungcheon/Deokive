@@ -149,6 +149,55 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
         self.assertIn("クリアファイル", rules["clear_file"]["match_keywords"])
         self.assertEqual(rules["tableware_daily_goods"]["target_category"], "생활잡화")
         self.assertIn("食器", rules["tableware_daily_goods"]["match_keywords"])
+        self.assertEqual(rules["clock_calendar_daily_goods"]["target_category"], "생활잡화")
+        self.assertIn("アクリル時計", rules["clock_calendar_daily_goods"]["match_keywords"])
+        self.assertIn("アクリル万年カレンダー", rules["clock_calendar_daily_goods"]["match_keywords"])
+
+    def test_acrylic_clock_and_calendar_are_split_to_daily_goods(self) -> None:
+        payload = {
+            "batches": [
+                {
+                    "categories": [
+                        {
+                            "category": "아크릴",
+                            "rows": 2,
+                            "requires_name_level_split_review": True,
+                            "sample_names": [
+                                "一番くじ Pokémon 30th ANNIVERSARY vol.1 - A賞 30周年記念アクリル時計",
+                                "一番くじ Pokémon 30th ANNIVERSARY vol.2 - A賞 30周年記念アクリル万年カレンダー",
+                            ],
+                        }
+                    ]
+                }
+            ]
+        }
+        catalog_payload = {
+            "items": [
+                {
+                    "catalog_index": 12504,
+                    "name_ko": "一番くじ Pokémon 30th ANNIVERSARY vol.1 - A賞 30周年記念アクリル時計",
+                    "name_ja": "A賞 30周年記念アクリル時計",
+                    "category": "아크릴",
+                    "source_store": "이치방쿠지",
+                },
+                {
+                    "catalog_index": 13219,
+                    "name_ko": "一番くじ Pokémon 30th ANNIVERSARY vol.2 - A賞 30周年記念アクリル万年カレンダー",
+                    "name_ja": "A賞 30周年記念アクリル万年カレンダー",
+                    "category": "아크릴",
+                    "source_store": "이치방쿠지",
+                },
+            ]
+        }
+
+        report = split_review.build_report(payload, catalog_payload)
+        candidate = report["candidate_priority_queue"][0]
+
+        self.assertEqual(candidate["rule_id"], "clock_calendar_daily_goods")
+        self.assertEqual(candidate["source_category"], "아크릴")
+        self.assertEqual(candidate["target_category"], "생활잡화")
+        self.assertEqual(candidate["expected_update_rows"], 2)
+        self.assertEqual(candidate["matched_catalog_samples"][0]["catalog_index"], 12504)
 
 
 if __name__ == "__main__":

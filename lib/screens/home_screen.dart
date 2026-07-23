@@ -274,98 +274,106 @@ class _CatalogImportPanel extends StatelessWidget {
             border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
           ),
           padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 38,
-                    height: 38,
-                    decoration: BoxDecoration(
-                      color: palette.primary.withValues(alpha: 0.14),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.dataset_outlined,
-                      color: palette.primary,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          '굿즈 DB',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                        Wrap(
-                          spacing: 6,
-                          runSpacing: 4,
-                          children: [
-                            _CatalogMetaChip(
-                              label:
-                                  '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
-                              palette: palette,
-                            ),
-                            _CatalogMetaChip(
-                              label: '사진 ${health.imageCoverageLabel}',
-                              palette: palette,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Text(
-                '검색해서 내 굿즈함이나 위시리스트에 바로 추가해요.',
-                maxLines: 2,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
-                  height: 1.35,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 18),
-              SizedBox(
-                width: double.infinity,
-                height: 46,
-                child: FilledButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const CatalogDatabaseScreen(),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 156),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 38,
+                      height: 38,
+                      decoration: BoxDecoration(
+                        color: palette.primary.withValues(alpha: 0.14),
+                        shape: BoxShape.circle,
                       ),
-                    );
-                  },
-                  icon: const Icon(Icons.manage_search_rounded, size: 19),
-                  label: const Text(
-                    'DB 보기',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                      child: Icon(
+                        Icons.dataset_outlined,
+                        color: palette.primary,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            '굿즈 DB',
+                            maxLines: 1,
+                            softWrap: false,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _CatalogMetaChip(
+                                  label:
+                                      '정리 ${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
+                                  palette: palette,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: _CatalogMetaChip(
+                                  label: '사진 ${health.imageCoverageLabel}',
+                                  palette: palette,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  '중복과 예시 항목을 제외한 공개 DB에서 바로 추가해요.',
+                  maxLines: 1,
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
+                    height: 1.35,
+                    fontWeight: FontWeight.w600,
                   ),
-                  style: FilledButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
+                ),
+                const SizedBox(height: 18),
+                SizedBox(
+                  width: double.infinity,
+                  height: 46,
+                  child: FilledButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const CatalogDatabaseScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.manage_search_rounded, size: 19),
+                    label: const Text(
+                      'DB 보기',
+                      maxLines: 1,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    style: FilledButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -503,11 +511,18 @@ class _CatalogHealthSummary {
       'sample',
       'example',
       'placeholder',
+      'image_placeholder',
       'no_image',
       'no-image',
+      'noimage',
       'dummy',
       'test-image',
       'fixture',
+      'blank',
+      'default-image',
+      'default_image',
+      'coming-soon',
+      'coming_soon',
       '예시',
       '샘플',
       '테스트',

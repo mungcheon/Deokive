@@ -122,9 +122,14 @@ PRODUCT_TYPE_ALIASES: dict[str, tuple[str, str]] = {
     "プレート": ("생활잡화", "daily_goods"),
     "グラス": ("생활잡화", "daily_goods"),
     "カップ": ("생활잡화", "daily_goods"),
+    "時計": ("생활잡화", "daily_goods"),
+    "カレンダー": ("생활잡화", "daily_goods"),
     "식기": ("생활잡화", "daily_goods"),
     "컵": ("생활잡화", "daily_goods"),
     "머그": ("생활잡화", "daily_goods"),
+    "시계": ("생활잡화", "daily_goods"),
+    "캘린더": ("생활잡화", "daily_goods"),
+    "달력": ("생활잡화", "daily_goods"),
 }
 
 NOISE_MARKERS = {
@@ -254,6 +259,8 @@ def _recommended_manual_action(review: dict[str, Any]) -> str:
     kind = str(review.get("review_kind") or "")
     if kind == "product_type_like":
         return "review_samples_then_add_name_level_split_rule_if_consistent"
+    if kind == "same_category_product_word":
+        return "keep_as_context_keyword_do_not_promote_without_more_specific_type"
     if kind == "series_or_source_noise":
         return "keep_as_noise_do_not_promote_to_category_rule"
     return "inspect_samples_before_deciding_product_type_or_noise"
@@ -311,7 +318,12 @@ def _ranked_groups(rows: list[dict[str, Any]], field: str, *, limit: int) -> lis
     ]
 
 
-def _token_candidates(rows: list[dict[str, Any]], *, limit: int) -> list[dict[str, Any]]:
+def _token_candidates(
+    rows: list[dict[str, Any]],
+    *,
+    source_category: str,
+    limit: int,
+) -> list[dict[str, Any]]:
     token_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         seen: set[str] = set()
@@ -324,6 +336,17 @@ def _token_candidates(rows: list[dict[str, Any]], *, limit: int) -> list[dict[st
     candidates: list[dict[str, Any]] = []
     for token, group_rows in ranked:
         review = _candidate_review(token)
+        if (
+            review.get("review_kind") == "product_type_like"
+            and str(review.get("suggested_target_category") or "").strip() == source_category
+        ):
+            review = {
+                "review_kind": "same_category_product_word",
+                "review_reason": "Matches the current broad category but does not suggest a more specific split.",
+                "suggested_target_category": source_category,
+                "suggested_target_family": review.get("suggested_target_family") or "",
+                "suggested_rule_id": review.get("suggested_rule_id") or "",
+            }
         review_kind = str(review["review_kind"])
         review_score = _review_score(review, len(group_rows))
         candidates.append(
@@ -339,6 +362,7 @@ def _token_candidates(rows: list[dict[str, Any]], *, limit: int) -> list[dict[st
                 "suggested_use": (
                     "review_as_keyword_candidate"
                     if review_kind != "series_or_source_noise"
+                    and review_kind != "same_category_product_word"
                     else "do_not_promote_without_stronger_product_type_evidence"
                 ),
             }
@@ -360,7 +384,7 @@ def build_report(split_payload: dict[str, Any], catalog_payload: dict[str, Any],
     for source_category, keywords in sorted(rules.items()):
         source_rows = [row for row in rows if str(row.get("category") or "").strip() == source_category]
         unmatched = [row for row in source_rows if _is_unmatched(row, keywords)]
-        token_candidates = _token_candidates(unmatched, limit=limit)
+        token_candidates = _token_candidates(unmatched, source_category=source_category, limit=limit)
         promotable = [
             candidate for candidate in token_candidates if candidate.get("review_kind") == "product_type_like"
         ][:10]

@@ -128,6 +128,50 @@ class BuildAnimationCategoryUnmatchedKeywordReviewPublicTest(unittest.TestCase):
         self.assertEqual(candidates["食器"]["suggested_target_family"], "daily_goods")
         self.assertNotIn("コレクション", {row["token"] for row in report["top_product_type_candidates"]})
 
+    def test_same_category_acrylic_word_is_not_promoted_but_clock_is(self) -> None:
+        split_payload = {
+            "review_items": [
+                {
+                    "source_category": "아크릴",
+                    "split_candidates": [],
+                }
+            ]
+        }
+        catalog_payload = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "포켓몬 30주년 아크릴 시계",
+                    "name_ja": "30周年記念アクリル時計",
+                    "category": "아크릴",
+                },
+                {
+                    "catalog_index": 2,
+                    "name_ko": "포켓몬 30주년 아크릴 만년 캘린더",
+                    "name_ja": "30周年記念アクリル万年カレンダー",
+                    "category": "아크릴",
+                },
+            ]
+        }
+
+        report = keyword_review.build_report(split_payload, catalog_payload, limit=10)
+        top_tokens = {row["token"] for row in report["top_product_type_candidates"]}
+        token_rows = {
+            row["token"]: row
+            for item in report["review_items"]
+            for row in item["top_token_candidates"]
+        }
+
+        self.assertNotIn("アクリル", top_tokens)
+        self.assertEqual(token_rows["アクリル"]["review_kind"], "same_category_product_word")
+        self.assertEqual(
+            token_rows["アクリル"]["recommended_manual_action"],
+            "keep_as_context_keyword_do_not_promote_without_more_specific_type",
+        )
+        self.assertIn("時計", top_tokens)
+        self.assertEqual(token_rows["時計"]["suggested_target_category"], "생활잡화")
+        self.assertEqual(token_rows["時計"]["suggested_target_family"], "daily_goods")
+
 
 if __name__ == "__main__":
     unittest.main()
