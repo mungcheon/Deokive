@@ -22,6 +22,7 @@ class CatalogDatabaseScreen extends StatefulWidget {
 
 class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
   final TextEditingController _searchController = TextEditingController();
+  final Set<String> _importingEntryKeys = {};
   String _query = '';
   String? _category;
 
@@ -29,6 +30,26 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  Future<void> _addEntryFromList(
+    BuildContext context,
+    GoodsCatalogEntry entry,
+  ) async {
+    final key = _identityKey(entry);
+    if (_importingEntryKeys.contains(key)) return;
+    setState(() => _importingEntryKeys.add(key));
+    try {
+      await showCatalogGoodsImportFlowForEntry(
+        context,
+        entry: entry,
+        initialFolder: widget.initialFolder,
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _importingEntryKeys.remove(key));
+      }
+    }
   }
 
   List<GoodsCatalogEntry> _displayEntries(AppState appState) {
@@ -410,13 +431,11 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                           return _CatalogListTile(
                             entry: entry,
                             ownedCount: ownedCount,
+                            isAdding: _importingEntryKeys
+                                .contains(_identityKey(entry)),
                             onPreview: () =>
                                 _showAddSheet(context, appState, entry),
-                            onAdd: () => showCatalogGoodsImportFlowForEntry(
-                              context,
-                              entry: entry,
-                              initialFolder: widget.initialFolder,
-                            ),
+                            onAdd: () => _addEntryFromList(context, entry),
                           );
                         },
                       ),
@@ -432,12 +451,14 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
 class _CatalogListTile extends StatelessWidget {
   final GoodsCatalogEntry entry;
   final int ownedCount;
+  final bool isAdding;
   final VoidCallback onPreview;
   final Future<void> Function() onAdd;
 
   const _CatalogListTile({
     required this.entry,
     required this.ownedCount,
+    required this.isAdding,
     required this.onPreview,
     required this.onAdd,
   });
@@ -505,8 +526,10 @@ class _CatalogListTile extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               FilledButton.tonalIcon(
-                onPressed: () async => onAdd(),
-                icon: const Icon(Icons.add_rounded, size: 18),
+                onPressed: isAdding ? null : () async => onAdd(),
+                icon: isAdding
+                    ? const Icon(Icons.more_horiz_rounded, size: 18)
+                    : const Icon(Icons.add_rounded, size: 18),
                 label: const Text('추가'),
                 style: FilledButton.styleFrom(
                   foregroundColor: palette.primary,

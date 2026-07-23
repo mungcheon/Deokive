@@ -141,22 +141,26 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
   FolderItem? initialFolder,
 }) async {
   final folders = _sortedImportTargetFolders(appState, initialFolder);
+  if (folders.isEmpty) {
+    appState.ensureDefaultFoldersForImport();
+  }
+  final refreshedFolders = _sortedImportTargetFolders(appState, initialFolder);
   final wishlistFolder = _wishlistFolder(appState);
-  if (folders.isEmpty && wishlistFolder == null) {
+  if (refreshedFolders.isEmpty && wishlistFolder == null) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('먼저 굿즈를 넣을 폴더를 만들어 주세요.')),
     );
     return null;
   }
 
-  var selectedKind = folders.isNotEmpty
+  var selectedKind = refreshedFolders.isNotEmpty
       ? _CatalogImportKind.owned
       : _CatalogImportKind.wishlist;
   String? selectedId = initialFolder != null &&
-          folders.any((folder) => folder.id == initialFolder.id)
+          refreshedFolders.any((folder) => folder.id == initialFolder.id)
       ? initialFolder.id
-      : folders.isNotEmpty
-          ? folders.first.id
+      : refreshedFolders.isNotEmpty
+          ? refreshedFolders.first.id
           : null;
 
   return showModalBottomSheet<_CatalogImportDestination>(
@@ -174,9 +178,9 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
             builder: (context, setSheetState) {
               final selectedFolder = selectedId == null
                   ? null
-                  : folders.firstWhere(
+                  : refreshedFolders.firstWhere(
                       (folder) => folder.id == selectedId,
-                      orElse: () => folders.first,
+                      orElse: () => refreshedFolders.first,
                     );
               final destinationFolder =
                   selectedKind == _CatalogImportKind.wishlist
@@ -220,7 +224,7 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                             });
                           },
                         ),
-                      if (folders.isNotEmpty) ...[
+                      if (refreshedFolders.isNotEmpty) ...[
                         const SizedBox(height: 6),
                         _CatalogImportDestinationTile(
                           icon: Icons.inventory_2_rounded,
@@ -241,9 +245,9 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                       Expanded(
                         child: ListView.builder(
                           controller: scrollController,
-                          itemCount: folders.length,
+                          itemCount: refreshedFolders.length,
                           itemBuilder: (context, index) {
-                            final folder = folders[index];
+                            final folder = refreshedFolders[index];
                             final folderType = folder.isGroup ? '그룹' : '폴더';
                             final selected =
                                 selectedKind == _CatalogImportKind.owned &&

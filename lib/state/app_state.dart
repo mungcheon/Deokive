@@ -726,6 +726,15 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  void ensureDefaultFoldersForImport() {
+    final before = folders.length;
+    _ensureDefaultFolder();
+    if (folders.length != before) {
+      _saveAccountData();
+      notifyListeners();
+    }
+  }
+
   Future<void> _saveAccountData() async {
     try {
       final lastNickname = _bestKnownDeviceNickname;

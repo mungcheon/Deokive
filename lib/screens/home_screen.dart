@@ -276,7 +276,7 @@ class _CatalogImportPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 width: 38,
@@ -306,16 +306,17 @@ class _CatalogImportPanel extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Wrap(
-                      spacing: 6,
-                      runSpacing: 6,
-                      children: [
-                        _CatalogMetaChip(
-                          label:
-                              '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개 공개 데이터',
-                          palette: palette,
-                        ),
-                      ],
+                    Text(
+                      '공개 데이터 ${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
+                      maxLines: 1,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color:
+                            theme.colorScheme.onSurface.withValues(alpha: 0.62),
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 0,
+                      ),
                     ),
                   ],
                 ),
@@ -324,9 +325,9 @@ class _CatalogImportPanel extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '검색해서 내 굿즈함이나 위시리스트에 바로 담을 수 있어요.',
-            maxLines: 2,
-            softWrap: true,
+            '검색 후 선택한 굿즈를 내 굿즈함이나 위시리스트에 담을 수 있어요.',
+            maxLines: 1,
+            softWrap: false,
             overflow: TextOverflow.ellipsis,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
@@ -368,39 +369,6 @@ class _CatalogImportPanel extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _CatalogMetaChip extends StatelessWidget {
-  final String label;
-  final DeokivePalette palette;
-
-  const _CatalogMetaChip({
-    required this.label,
-    required this.palette,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: palette.primary.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Text(
-        label,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: theme.textTheme.labelSmall?.copyWith(
-          color: theme.colorScheme.onSurface.withValues(alpha: 0.68),
-          fontWeight: FontWeight.w800,
-          letterSpacing: 0,
-        ),
       ),
     );
   }

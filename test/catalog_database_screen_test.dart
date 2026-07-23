@@ -173,4 +173,47 @@ void main() {
     expect(savedItem.imageUrl, isNotNull);
     expect(savedItem.imageUrl, isNotEmpty);
   });
+
+  testWidgets('catalog database can add even when saved folders are empty',
+      (tester) async {
+    final appState = AppState()..isLoggedIn = false;
+    final entry = kFullCatalog.firstWhere(
+      (item) =>
+          (item.imageUrl ?? '').isEmpty && (item.localImagePath ?? '').isEmpty,
+    );
+    final palette = paletteSpecFor(AppPalette.zeroTwoPink);
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(
+        value: appState,
+        child: MaterialApp(
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(seedColor: palette.primary),
+            extensions: [
+              DeokivePalette(
+                primary: palette.primary,
+                accent: palette.accent,
+                background: palette.background,
+                text: palette.text,
+                softSurface: Colors.white,
+              ),
+            ],
+          ),
+          home: const CatalogDatabaseScreen(),
+        ),
+      ),
+    );
+
+    await tester.enterText(find.byType(TextField), entry.nameKo);
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, '추가').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(FilledButton).last);
+    await tester.pumpAndSettle();
+
+    expect(appState.folders.map((folder) => folder.name), contains('기본 폴더'));
+    expect(appState.goodsItems, hasLength(1));
+    expect(appState.goodsItems.single.folderId, 'default-folder');
+  });
 }
