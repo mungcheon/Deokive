@@ -3005,6 +3005,8 @@
     "normalization_review_queue_rows": 36,
     "normalization_review_queue_count": 4,
     "category_readiness_status": "normalization_review_required",
+    "manual_review_categories": 4,
+    "manual_review_rows": 36,
     "auto_apply_ready_rows": 0,
     "folder_visual_coverage_ready": true,
     "missing_image_rows": 560,
@@ -3017,7 +3019,37 @@
     "app_folder_icon_group_count": 9,
     "app_folder_palette_section_count": 8,
     "app_folder_palette_sorted_by_family": true,
-    "app_animation_visuals_covered": true
+    "app_animation_visuals_covered": true,
+    "category_readiness": {
+      "status": "normalization_review_required",
+      "auto_apply_ready_rows": 0,
+      "auto_apply_enabled": false,
+      "manual_confirmed_rows": 0,
+      "manual_review_categories": 4,
+      "manual_review_rows": 36,
+      "unknown_category_rows": 0,
+      "unknown_category_count": 0,
+      "normalization_review_queue_rows": 36,
+      "normalization_review_queue_count": 4,
+      "folder_visual_coverage_ready": true,
+      "app_folder_color_count": 188,
+      "app_folder_icon_option_count": 211,
+      "app_folder_palette_sorted_by_family": true,
+      "blocked_reasons": [
+        "canonical_category_normalization_manually_confirmed"
+      ],
+      "next_safe_phase": "confirm_category_normalization_before_import",
+      "safety_note": "Animation category changes affect navigation and folder semantics; preserve subtype labels as sub_series or notes unless manual review confirms a direct category change.",
+      "next_review_item": {
+        "review_id": "animation-category-normalization-001",
+        "category": "클리어파일",
+        "suggested_category": "문구",
+        "affected_catalog_rows": 8,
+        "mapping_mode": "canonical_category_normalization_review",
+        "blocked_until": "canonical_category_normalization_manually_confirmed",
+        "next_step": "confirm_category_normalization_before_import"
+      }
+    }
   },
   "ichiban_kuji_history": {
     "public_report": "data/ichiban_kuji_history_public.json",

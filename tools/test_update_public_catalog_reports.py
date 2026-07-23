@@ -559,9 +559,27 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["animation_category_review"]["normalization_review_queue_rows"],
             sum(int(row.get("affected_catalog_rows") or 0) for row in normalization_queue),
         )
+        self.assertEqual(quality["animation_category_review"]["manual_review_categories"], 4)
+        self.assertEqual(quality["animation_category_review"]["manual_review_rows"], 36)
         self.assertEqual(
             quality["animation_category_review"]["category_readiness_status"],
             "normalization_review_required",
+        )
+        self.assertEqual(
+            quality["animation_category_review"]["category_readiness"]["status"],
+            "normalization_review_required",
+        )
+        self.assertEqual(
+            quality["animation_category_review"]["category_readiness"]["manual_review_rows"],
+            36,
+        )
+        self.assertEqual(
+            quality["animation_category_review"]["category_readiness"]["next_review_item"]["category"],
+            normalization_queue[0]["category"],
+        )
+        self.assertEqual(
+            quality["animation_category_review"]["category_readiness"]["next_review_item"]["suggested_category"],
+            normalization_queue[0]["suggested_category"],
         )
         self.assertEqual(quality["animation_category_review"]["auto_apply_ready_rows"], 0)
         self.assertTrue(quality["animation_category_review"]["folder_visual_coverage_ready"])

@@ -9,6 +9,8 @@
     "normalization_review_queue_rows": 36,
     "normalization_review_queue_count": 4,
     "category_readiness_status": "normalization_review_required",
+    "manual_review_categories": 4,
+    "manual_review_rows": 36,
     "auto_apply_ready_rows": 0,
     "folder_visual_coverage_ready": true,
     "missing_image_rows": 560,
@@ -5250,6 +5252,8 @@
     "auto_apply_ready_rows": 0,
     "auto_apply_enabled": false,
     "manual_confirmed_rows": 0,
+    "manual_review_categories": 4,
+    "manual_review_rows": 36,
     "unknown_category_rows": 0,
     "unknown_category_count": 0,
     "normalization_review_queue_rows": 36,
@@ -5262,7 +5266,16 @@
       "canonical_category_normalization_manually_confirmed"
     ],
     "next_safe_phase": "confirm_category_normalization_before_import",
-    "safety_note": "Animation category changes affect navigation and folder semantics; preserve subtype labels as sub_series or notes unless manual review confirms a direct category change."
+    "safety_note": "Animation category changes affect navigation and folder semantics; preserve subtype labels as sub_series or notes unless manual review confirms a direct category change.",
+    "next_review_item": {
+      "review_id": "animation-category-normalization-001",
+      "category": "클리어파일",
+      "suggested_category": "문구",
+      "affected_catalog_rows": 8,
+      "mapping_mode": "canonical_category_normalization_review",
+      "blocked_until": "canonical_category_normalization_manually_confirmed",
+      "next_step": "confirm_category_normalization_before_import"
+    }
   },
   "unknown_categories": [],
   "taxonomy_review_queue": [],

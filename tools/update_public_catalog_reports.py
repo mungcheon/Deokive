@@ -5665,6 +5665,8 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
         "auto_apply_ready_rows": 0,
         "auto_apply_enabled": False,
         "manual_confirmed_rows": 0,
+        "manual_review_categories": len(normalization_review_queue) + len(unknown_categories),
+        "manual_review_rows": normalization_review_rows + unknown_category_rows,
         "unknown_category_rows": unknown_category_rows,
         "unknown_category_count": len(unknown_categories),
         "normalization_review_queue_rows": normalization_review_rows,
@@ -5694,6 +5696,23 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
             "preserve subtype labels as sub_series or notes unless manual review confirms a direct category change."
         ),
     }
+    next_review_item = normalization_review_queue[0] if normalization_review_queue else (
+        unknown_categories[0] if unknown_categories else {}
+    )
+    if next_review_item:
+        category_readiness["next_review_item"] = {
+            "review_id": next_review_item.get("review_id"),
+            "category": next_review_item.get("category"),
+            "suggested_category": next_review_item.get("suggested_category"),
+            "affected_catalog_rows": next_review_item.get("affected_catalog_rows")
+            or next_review_item.get("rows"),
+            "mapping_mode": next_review_item.get("mapping_mode")
+            or "unknown_category_mapping_review",
+            "blocked_until": next_review_item.get("blocked_until")
+            or "unknown_category_mapping_manually_confirmed",
+            "next_step": next_review_item.get("next_step")
+            or category_readiness["next_safe_phase"],
+        }
     category_readiness["blocked_reasons"] = [
         reason for reason in category_readiness["blocked_reasons"] if reason
     ]
@@ -5709,6 +5728,8 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
             "normalization_review_queue_rows": normalization_review_rows,
             "normalization_review_queue_count": len(normalization_review_queue),
             "category_readiness_status": category_completion_status,
+            "manual_review_categories": category_readiness["manual_review_categories"],
+            "manual_review_rows": category_readiness["manual_review_rows"],
             "auto_apply_ready_rows": 0,
             "folder_visual_coverage_ready": visual_coverage_ready,
             "missing_image_rows": sum(1 for item in rows if not present(item.get("image_url"))),
@@ -8182,6 +8203,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["animation_category_review"] = {
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
+            "category_readiness": animation_categories.get("category_readiness", {}),
         }
         target["animation_category_coverage_audit"] = {
             "public_report": f"data/{ANIMATION_CATEGORY_COVERAGE_AUDIT.name}",
