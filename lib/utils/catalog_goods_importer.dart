@@ -604,13 +604,17 @@ Future<Uint8List?> loadCatalogEntryBundledImageBytes(
 
 Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
   if (!assetPath.startsWith('assets/')) return null;
+  final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
   final paths = <Uri>[
-    Uri.base.resolve(assetPath),
-    Uri.base.resolve('assets/$assetPath'),
+    Uri.base.resolve(normalizedPath),
+    Uri.base.resolve('assets/$normalizedPath'),
   ];
   final origin = Uri.base.origin;
   if (origin.isNotEmpty) {
-    paths.add(Uri.parse(origin).resolve('/assets/$assetPath'));
+    paths.add(Uri.parse(origin).resolve('/$normalizedPath'));
+    paths.add(Uri.parse(origin).resolve('/assets/$normalizedPath'));
+    paths.add(Uri.parse(origin).resolve('/Deokive/$normalizedPath'));
+    paths.add(Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath'));
   }
   for (final uri in paths.toSet()) {
     try {

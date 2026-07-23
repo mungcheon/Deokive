@@ -196,18 +196,20 @@ List<String> _publicAssetUrls(String assetPath) {
   final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
   final candidates = <String>[
     Uri.base.resolve(normalizedPath).toString(),
+    Uri.base.resolve('assets/$normalizedPath').toString(),
   ];
-  if (!normalizedPath.startsWith('assets/')) {
-    candidates.add(Uri.base.resolve('assets/$normalizedPath').toString());
-  }
   final origin = Uri.base.origin;
   if (origin.isNotEmpty) {
     candidates.add(Uri.parse(origin).resolve('/$normalizedPath').toString());
-    if (!normalizedPath.startsWith('assets/')) {
-      candidates.add(
-        Uri.parse(origin).resolve('/assets/$normalizedPath').toString(),
-      );
-    }
+    candidates.add(
+      Uri.parse(origin).resolve('/assets/$normalizedPath').toString(),
+    );
+    candidates.add(
+      Uri.parse(origin).resolve('/Deokive/$normalizedPath').toString(),
+    );
+    candidates.add(
+      Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath').toString(),
+    );
   }
   return candidates.toSet().toList(growable: false);
 }
