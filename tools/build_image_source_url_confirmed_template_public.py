@@ -34,6 +34,10 @@ def candidate_lookup(candidate_report: dict[str, Any] | None) -> dict[int, dict[
     for row in candidate_report.get("queue") or []:
         if not isinstance(row, dict):
             continue
+        catalog_index = row.get("catalog_index")
+        if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
+            out[catalog_index] = row
+            continue
         row_index = row.get("row_index")
         if isinstance(row_index, int) and not isinstance(row_index, bool):
             out[row_index] = row
@@ -172,6 +176,8 @@ def _template_item(
         return None
     row_index = source_template.get("row_index", item.get("catalog_index"))
     candidate_summary = candidates_by_index.get(row_index) if isinstance(row_index, int) else None
+    if not _candidate_matches_item(candidate_summary, item):
+        candidate_summary = None
     candidate_summary = _candidate_summary(candidate_summary)
     top_candidates = candidate_summary.get("top_candidates", []) if candidate_summary else []
     top_candidate = top_candidates[0] if top_candidates else {}
@@ -197,13 +203,18 @@ def _template_item(
             "reason": "No candidate provider report exists for this source store yet.",
         }
     )
+    prefilled_candidate = (
+        top_candidate
+        if _can_prefill_candidate_hint(candidate_status, candidate_score)
+        else {}
+    )
     return {
         **source_template,
         "manual_confirmed": False,
         "manual_value": "",
-        "candidate_source_url": top_candidate.get("source_url") or "",
-        "candidate_image_url": top_candidate.get("image_url") or "",
-        "candidate_title": top_candidate.get("title") or "",
+        "candidate_source_url": prefilled_candidate.get("source_url") or "",
+        "candidate_image_url": prefilled_candidate.get("image_url") or "",
+        "candidate_title": prefilled_candidate.get("title") or "",
         "candidate_score": candidate_score,
         "candidate_status": candidate_status,
         "candidate_review_lane": candidate_review_lane,
@@ -215,7 +226,7 @@ def _template_item(
         "source_url_review_lane": _source_url_review_lane(candidate_status, candidate_score),
         "source_url_review_blockers": _source_url_review_blockers(candidate_status, candidate_score),
         "manual_confirmation_requirements": _manual_confirmation_requirements(),
-        "evidence_url": top_candidate.get("source_url") or "",
+        "evidence_url": prefilled_candidate.get("source_url") or "",
         "manual_note": "",
         "field": "source_url",
         "row_index": row_index,
@@ -234,6 +245,24 @@ def _template_item(
         "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
         "auto_apply_enabled": False,
     }
+
+
+def _candidate_matches_item(candidate_row: dict[str, Any] | None, item: dict[str, Any]) -> bool:
+    if not isinstance(candidate_row, dict):
+        return True
+    candidate_name = _compact_text(candidate_row.get("name_ko"))
+    item_name = _compact_text(item.get("name_ko"))
+    if candidate_name and item_name and candidate_name != item_name:
+        return False
+    return True
+
+
+def _can_prefill_candidate_hint(candidate_status: Any, candidate_score: Any) -> bool:
+    status = str(candidate_status or "")
+    score = candidate_score if isinstance(candidate_score, (int, float)) else None
+    if status.startswith("low_confidence") or status in {"", "no_candidate", "no_candidate_report"}:
+        return False
+    return score is not None and score >= 0.85
 
 
 def _source_url_review_lane(candidate_status: Any, candidate_score: Any) -> str:

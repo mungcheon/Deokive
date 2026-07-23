@@ -64,7 +64,8 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         candidate_report = {
             "queue": [
                 {
-                    "row_index": 10,
+                    "row_index": 99,
+                    "catalog_index": 10,
                     "candidate_status": "weak_manual_review_candidate",
                     "candidate_review_lane": "weak_candidate_review",
                     "match_diagnostics": {
@@ -103,7 +104,7 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
             report["summary"]["by_source_store"],
             [["Stellive Store", 1], ["Weverse Shop", 1]],
         )
-        self.assertEqual(report["summary"]["candidate_prefilled_rows"], 1)
+        self.assertEqual(report["summary"]["candidate_prefilled_rows"], 0)
         self.assertEqual(
             report["summary"]["by_candidate_status"],
             [["weak_manual_review_candidate", 1], ["no_candidate_report", 1]],
@@ -117,9 +118,9 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["field"], "source_url")
         self.assertEqual(item["row_index"], 10)
         self.assertEqual(item["manual_value"], "")
-        self.assertEqual(item["candidate_source_url"], "https://fanding.kr/@stellive/shop/100")
-        self.assertEqual(item["candidate_image_url"], "https://example.test/badge.webp")
-        self.assertEqual(item["candidate_title"], "Badge exact-ish")
+        self.assertEqual(item["candidate_source_url"], "")
+        self.assertEqual(item["candidate_image_url"], "")
+        self.assertEqual(item["candidate_title"], "")
         self.assertEqual(item["candidate_status"], "weak_manual_review_candidate")
         self.assertEqual(item["candidate_review_lane"], "weak_candidate_review")
         self.assertEqual(
@@ -158,6 +159,109 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
             missing_provider_item["match_diagnostics"]["diagnosis"],
             "no_store_specific_candidate_report",
         )
+
+    def test_low_confidence_candidate_is_not_prefilled(self) -> None:
+        action_queue = {
+            "batches": [
+                {
+                    "batch_id": "image-attachment-action-001",
+                    "source_store": "Stellive Store",
+                    "items": [
+                        {
+                            "catalog_index": 10,
+                            "source_store": "Stellive Store",
+                            "name_ko": "Badge",
+                            "category": "Can Badge",
+                            "source_url": "https://fanding.kr/@stellive/shop",
+                            "source_url_import_template": {
+                                "row_index": 10,
+                                "field": "source_url",
+                                "current_source_url": "https://fanding.kr/@stellive/shop",
+                            },
+                        },
+                    ],
+                }
+            ]
+        }
+        candidate_report = {
+            "queue": [
+                {
+                    "catalog_index": 10,
+                    "candidate_status": "low_confidence_candidate",
+                    "candidate_review_lane": "low_confidence_candidate_review",
+                    "top_candidates": [
+                        {
+                            "product_no": 100,
+                            "title": "Wrong-ish badge",
+                            "source_url": "https://fanding.kr/@stellive/shop/100",
+                            "image_url": "https://example.test/badge.webp",
+                            "score": 0.27,
+                        }
+                    ],
+                }
+            ]
+        }
+
+        report = template.build_template(action_queue, candidate_report)
+        item = report["items"][0]
+
+        self.assertEqual(report["summary"]["candidate_prefilled_rows"], 0)
+        self.assertEqual(item["candidate_source_url"], "")
+        self.assertEqual(item["candidate_image_url"], "")
+        self.assertEqual(item["candidate_title"], "")
+        self.assertEqual(item["evidence_url"], "")
+        self.assertEqual(item["candidate_options"][0]["product_no"], 100)
+        self.assertIn("candidate_score_too_low", item["source_url_review_blockers"])
+
+    def test_candidate_name_mismatch_is_not_attached(self) -> None:
+        action_queue = {
+            "batches": [
+                {
+                    "batch_id": "image-attachment-action-001",
+                    "source_store": "Stellive Store",
+                    "items": [
+                        {
+                            "catalog_index": 10,
+                            "source_store": "Stellive Store",
+                            "name_ko": "Correct Badge",
+                            "category": "Can Badge",
+                            "source_url": "https://fanding.kr/@stellive/shop",
+                            "source_url_import_template": {
+                                "row_index": 10,
+                                "field": "source_url",
+                                "current_source_url": "https://fanding.kr/@stellive/shop",
+                            },
+                        },
+                    ],
+                }
+            ]
+        }
+        candidate_report = {
+            "queue": [
+                {
+                    "catalog_index": 10,
+                    "name_ko": "Different Badge",
+                    "candidate_status": "weak_manual_review_candidate",
+                    "candidate_review_lane": "weak_candidate_review",
+                    "top_candidates": [
+                        {
+                            "product_no": 100,
+                            "title": "Different Badge",
+                            "source_url": "https://fanding.kr/@stellive/shop/100",
+                            "score": 0.9,
+                        }
+                    ],
+                }
+            ]
+        }
+
+        report = template.build_template(action_queue, candidate_report)
+        item = report["items"][0]
+
+        self.assertEqual(item["candidate_status"], "no_candidate_report")
+        self.assertEqual(item["candidate_source_url"], "")
+        self.assertEqual(item["candidate_options"], [])
+        self.assertEqual(item["source_url_review_lane"], "candidate_provider_missing")
 
 
 if __name__ == "__main__":

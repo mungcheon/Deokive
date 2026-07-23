@@ -570,6 +570,8 @@ def enrich(rows: list[dict[str, Any]]) -> tuple[int, list[dict[str, Any]], list[
                     updated += 1
                     changes.append(
                         {
+                            "catalog_index": row.get("catalog_index"),
+                            "row_index": row_index,
                             "name_ko": row.get("name_ko"),
                             "fields": changed_fields,
                             "source_url": row.get("source_url"),
@@ -582,6 +584,7 @@ def enrich(rows: list[dict[str, Any]]) -> tuple[int, list[dict[str, Any]], list[
                     continue
             candidate_item = {
                 "row_index": row_index,
+                "catalog_index": row.get("catalog_index"),
                 "name_ko": row.get("name_ko"),
                 "name_ja": row.get("name_ja"),
                 "name_en": row.get("name_en"),
@@ -639,6 +642,8 @@ def enrich(rows: list[dict[str, Any]]) -> tuple[int, list[dict[str, Any]], list[
             updated += 1
             changes.append(
                 {
+                    "catalog_index": row.get("catalog_index"),
+                    "row_index": row_index,
                     "name_ko": row.get("name_ko"),
                     "fields": changed_fields,
                     "source_url": row.get("source_url"),
