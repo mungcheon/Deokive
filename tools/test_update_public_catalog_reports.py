@@ -274,11 +274,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["zero_price_exception_policy_pass"], True)
             self.assertIs(quality["ichiban_kuji_prize_policy_audit"]["auto_apply_enabled"], False)
-        self.assertEqual(quality["ichiban_kuji_prize_policy_issue_queue"]["issue_rows"], 21)
+        self.assertEqual(quality["ichiban_kuji_prize_policy_issue_queue"]["issue_rows"], 20)
         self.assertEqual(quality["ichiban_kuji_prize_policy_issue_queue"]["zero_price_violation_rows"], 0)
         self.assertIs(quality["ichiban_kuji_prize_policy_issue_queue"]["zero_price_exception_policy_pass"], True)
         self.assertEqual(
             quality["ichiban_kuji_prize_policy_issue_queue"]["unnumbered_multi_item_prize_review_groups"],
+            0,
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["protected_unnumbered_multi_item_prize_groups"],
             6,
         )
         self.assertEqual(

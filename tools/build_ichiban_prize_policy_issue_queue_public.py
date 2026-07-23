@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import Counter
 from datetime import datetime, timezone
@@ -216,6 +217,80 @@ def _manual_multi_item_groups(policy_audit: dict[str, Any]) -> list[dict[str, An
     return batch_groups
 
 
+BRACKETED_LIMITED_LABEL_PATTERN = re.compile(r"【([^】]+)】")
+VOL_VARIANT_PATTERN = re.compile(r"\bvol\.\s*\d+\b", re.IGNORECASE)
+CIRCLED_NUMBER_PATTERN = re.compile(r"[①②③④⑤⑥⑦⑧⑨⑩]")
+RELATED_GOODS_PREFIXES = (
+    "菓子商品",
+    "玩具菓子",
+)
+
+
+def _display_name(row: dict[str, Any]) -> str:
+    return str(row.get("name_ja") or row.get("name_ko") or "").strip()
+
+
+def _suffixes_from(pattern: re.Pattern[str], names: list[str]) -> list[str]:
+    result: list[str] = []
+    for name in names:
+        match = pattern.search(name)
+        result.append(match.group(0) if match else "")
+    return result
+
+
+def _unique_nonempty(values: list[str]) -> bool:
+    cleaned = [value.strip() for value in values if value.strip()]
+    return len(cleaned) == len(values) and len(set(cleaned)) == len(values)
+
+
+def _already_distinct_parallel_prize_group(group: dict[str, Any]) -> bool:
+    rows = [row for row in group.get("sample_rows") or [] if isinstance(row, dict)]
+    if len(rows) < 2:
+        return False
+
+    names = [_display_name(row) for row in rows]
+    if not _unique_nonempty(names):
+        return False
+
+    bracket_labels = []
+    for name in names:
+        labels = BRACKETED_LIMITED_LABEL_PATTERN.findall(name)
+        bracket_labels.append(labels[-1] if labels else "")
+    if _unique_nonempty(bracket_labels):
+        return True
+
+    circled_labels = _suffixes_from(CIRCLED_NUMBER_PATTERN, names)
+    if _unique_nonempty(circled_labels):
+        return True
+
+    vol_labels = _suffixes_from(VOL_VARIANT_PATTERN, names)
+    if _unique_nonempty(vol_labels):
+        return True
+
+    if str(group.get("sub_series") or "").strip() == "関連商品":
+        prefixes = []
+        for name in names:
+            prefix = next((token for token in RELATED_GOODS_PREFIXES if name.startswith(token)), "")
+            prefixes.append(prefix)
+        if _unique_nonempty(prefixes):
+            return True
+
+    return False
+
+
+def _split_manual_multi_item_groups(
+    groups: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    review_groups: list[dict[str, Any]] = []
+    protected_groups: list[dict[str, Any]] = []
+    for group in groups:
+        if _already_distinct_parallel_prize_group(group):
+            protected_groups.append(group)
+        else:
+            review_groups.append(group)
+    return review_groups, protected_groups
+
+
 def _price_issue(
     *,
     issue_id: str,
@@ -340,7 +415,10 @@ def build_queue(
             }
         )
 
-    unnumbered_multi = _manual_multi_item_groups(policy_audit)
+    raw_unnumbered_multi = _manual_multi_item_groups(policy_audit)
+    unnumbered_multi, protected_unnumbered_multi = _split_manual_multi_item_groups(
+        raw_unnumbered_multi
+    )
     if unnumbered_multi:
         issues.append(
             {
@@ -391,6 +469,12 @@ def build_queue(
             ),
             "unnumbered_multi_item_prize_review_groups": len(unnumbered_multi),
             "unnumbered_multi_item_prize_review_rows": _rows_from_groups(unnumbered_multi),
+            "protected_unnumbered_multi_item_prize_groups": len(
+                protected_unnumbered_multi
+            ),
+            "protected_unnumbered_multi_item_prize_rows": _rows_from_groups(
+                protected_unnumbered_multi
+            ),
             "probable_reissue_work_order_rows": len(reissue_work_orders),
             "probable_reissue_review_groups": int(
                 dedupe_summary.get("ichiban_probable_reissue_review_groups")

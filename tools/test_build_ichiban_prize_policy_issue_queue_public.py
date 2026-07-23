@@ -241,6 +241,143 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             "official_prize_lineup_relationship_confirmed",
         )
 
+    def test_protects_already_distinct_limited_parallel_prize_rows(self) -> None:
+        report = queue.build_queue(
+            {
+                "summary": {
+                    "zero_price_violation_rows": 0,
+                    "zero_price_exception_policy_pass": True,
+                    "numbered_variant_coverage_policy_pass": True,
+                },
+                "multi_item_prize_label_groups": [
+                    {
+                        "source_url": "https://1kuji.com/products/jojo_anniv2",
+                        "sub_series": "A賞",
+                        "row_count": 2,
+                        "review_lane": "unnumbered_multi_item_prize_review",
+                        "sample_rows": [
+                            {
+                                "catalog_index": 15043,
+                                "name_ja": "A賞 ジョナサン波紋疾走フィギュア【書店限定】",
+                            },
+                            {
+                                "catalog_index": 15044,
+                                "name_ja": "A賞 ジョセフ波紋疾走フィギュア【ローソン限定】",
+                            },
+                        ],
+                    }
+                ],
+                "incomplete_numbered_variant_prize_label_groups": [],
+            },
+            {},
+            generated_at="2026-07-23T00:00:00Z",
+        )
+
+        self.assertEqual(report["summary"]["issue_rows"], 0)
+        self.assertEqual(report["summary"]["unnumbered_multi_item_prize_review_groups"], 0)
+        self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_groups"], 1)
+        self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_rows"], 2)
+        self.assertEqual(report["policy_status"]["unnumbered_multi_item_prizes"], "clear")
+
+    def test_keeps_unmarked_same_prize_rows_in_manual_review(self) -> None:
+        report = queue.build_queue(
+            {
+                "summary": {
+                    "zero_price_violation_rows": 0,
+                    "zero_price_exception_policy_pass": True,
+                    "numbered_variant_coverage_policy_pass": True,
+                },
+                "multi_item_prize_label_groups": [
+                    {
+                        "source_url": "https://1kuji.com/products/sample",
+                        "sub_series": "A賞",
+                        "row_count": 2,
+                        "review_lane": "unnumbered_multi_item_prize_review",
+                        "sample_rows": [
+                            {"catalog_index": 1, "name_ja": "A賞 アクリルスタンド"},
+                            {"catalog_index": 2, "name_ja": "A賞 アクリルスタンド"},
+                        ],
+                    }
+                ],
+                "incomplete_numbered_variant_prize_label_groups": [],
+            },
+            {},
+            generated_at="2026-07-23T00:00:00Z",
+        )
+
+        self.assertEqual(report["summary"]["issue_rows"], 1)
+        self.assertEqual(report["summary"]["unnumbered_multi_item_prize_review_groups"], 1)
+        self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_groups"], 0)
+        self.assertEqual(
+            report["issues"][0]["blocked_reason"],
+            "same_prize_label_has_multiple_unnumbered_rows",
+        )
+
+    def test_protects_numbered_volume_and_related_goods_parallel_rows(self) -> None:
+        report = queue.build_queue(
+            {
+                "summary": {
+                    "zero_price_violation_rows": 0,
+                    "zero_price_exception_policy_pass": True,
+                    "numbered_variant_coverage_policy_pass": True,
+                },
+                "multi_item_prize_label_groups": [
+                    {
+                        "source_url": "https://1kuji.com/products/myhero11",
+                        "sub_series": "OJコラボ賞",
+                        "row_count": 2,
+                        "review_lane": "unnumbered_multi_item_prize_review",
+                        "sample_rows": [
+                            {"catalog_index": 17180, "name_ja": "OJコラボ賞① 色紙"},
+                            {
+                                "catalog_index": 17181,
+                                "name_ja": "OJコラボ賞② クリアファイルセット",
+                            },
+                        ],
+                    },
+                    {
+                        "source_url": "https://1kuji.com/products/md_shopper",
+                        "sub_series": "めちゃでかショッパー",
+                        "row_count": 2,
+                        "review_lane": "unnumbered_multi_item_prize_review",
+                        "sample_rows": [
+                            {
+                                "catalog_index": 13318,
+                                "name_ja": "一番くじ めちゃでかショッパー(2026 vol.1)",
+                            },
+                            {
+                                "catalog_index": 13319,
+                                "name_ja": "一番くじ めちゃでかショッパー(2026 vol.2)",
+                            },
+                        ],
+                    },
+                    {
+                        "source_url": "https://1kuji.com/products/cho-birth",
+                        "sub_series": "関連商品",
+                        "row_count": 2,
+                        "review_lane": "unnumbered_multi_item_prize_review",
+                        "sample_rows": [
+                            {
+                                "catalog_index": 16170,
+                                "name_ja": "菓子商品 ワンピース ハッピーバースデーチョッパー",
+                            },
+                            {
+                                "catalog_index": 16171,
+                                "name_ja": "玩具菓子 HAPPYBIRTHDAYCHOPPER キーチェーンSP",
+                            },
+                        ],
+                    },
+                ],
+                "incomplete_numbered_variant_prize_label_groups": [],
+            },
+            {},
+            generated_at="2026-07-23T00:00:00Z",
+        )
+
+        self.assertEqual(report["summary"]["issue_rows"], 0)
+        self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_groups"], 3)
+        self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_rows"], 6)
+
 
 if __name__ == "__main__":
     unittest.main()
