@@ -819,10 +819,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(image_asset_gate.get("status"), "pass")
         self.assertEqual(image_asset_gate.get("image_url_without_local_path_rows"), 0)
         self.assertEqual(image_asset_gate.get("missing_local_image_files"), 0)
+        self.assertEqual(image_asset_gate.get("missing_web_public_asset_files"), 0)
+        self.assertEqual(image_asset_gate.get("web_public_asset_coverage"), 1.0)
         self.assertEqual(image_asset_gate.get("image_url_rows"), image_asset_summary.get("image_url_rows"))
         self.assertEqual(
             image_asset_next_action.get("local_asset_coverage"),
             image_asset_summary.get("local_asset_coverage"),
+        )
+        self.assertEqual(
+            image_asset_next_action.get("web_public_asset_coverage"),
+            image_asset_summary.get("web_public_asset_coverage"),
         )
         self.assertEqual(
             open_queues.get("source_discovery_action_rows"),

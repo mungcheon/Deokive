@@ -1866,13 +1866,18 @@ def build_operations_public(
         },
         {
             "key": "local_image_asset_coverage",
-            "status": "pass" if image_asset_summary.get("local_asset_coverage", 0) >= 1 else "warn",
+            "status": "pass"
+            if image_asset_summary.get("local_asset_coverage", 0) >= 1
+            and image_asset_summary.get("web_public_asset_coverage", 0) >= 1
+            else "warn",
             "value": image_asset_summary.get("local_asset_coverage", 0),
             "target": 1,
             "image_url_rows": image_asset_summary.get("image_url_rows", 0),
             "local_image_path_rows": image_asset_summary.get("local_image_path_rows", 0),
             "image_url_without_local_path_rows": image_asset_summary.get("image_url_without_local_path_rows", 0),
             "missing_local_image_files": image_asset_summary.get("missing_local_image_files", 0),
+            "missing_web_public_asset_files": image_asset_summary.get("missing_web_public_asset_files", 0),
+            "web_public_asset_coverage": image_asset_summary.get("web_public_asset_coverage", 0),
         },
         {
             "key": "release_date_coverage",
@@ -1994,7 +1999,9 @@ def build_operations_public(
             "local_image_path_rows": image_asset_summary.get("local_image_path_rows", 0),
             "image_url_without_local_path_rows": image_asset_summary.get("image_url_without_local_path_rows", 0),
             "missing_local_image_files": image_asset_summary.get("missing_local_image_files", 0),
+            "missing_web_public_asset_files": image_asset_summary.get("missing_web_public_asset_files", 0),
             "local_asset_coverage": image_asset_summary.get("local_asset_coverage", 0),
+            "web_public_asset_coverage": image_asset_summary.get("web_public_asset_coverage", 0),
             "recommended_next_action": "No download is needed for rows that already have image_url; remaining image work must first find exact image_url/source evidence.",
         } if image_asset_summary else None,
         {

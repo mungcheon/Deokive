@@ -19,8 +19,10 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
         self.assertEqual(summary["image_url_without_local_path_rows"], 0)
         self.assertEqual(summary["local_path_without_image_url_rows"], 0)
         self.assertEqual(summary["missing_local_image_files"], 0)
+        self.assertEqual(summary["missing_web_public_asset_files"], 0)
         self.assertEqual(summary["invalid_local_image_paths"], 0)
         self.assertEqual(summary["local_asset_coverage"], 1.0)
+        self.assertEqual(summary["web_public_asset_coverage"], 1.0)
         self.assertEqual(summary["status"], "pass")
         self.assertEqual(report["findings"], [])
 
@@ -55,6 +57,7 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
         report = target.build_report(catalog, generated_at="2026-01-01T00:00:00Z")
 
         self.assertEqual(report["summary"]["missing_local_image_files"], 1)
+        self.assertEqual(report["summary"]["missing_web_public_asset_files"], 1)
         self.assertEqual(report["summary"]["status"], "review_required")
 
 

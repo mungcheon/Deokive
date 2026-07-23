@@ -39,6 +39,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
 
     local_paths = [str(item.get("local_image_path")) for item in local_path_rows]
     missing_files = []
+    missing_web_public_files = []
     invalid_paths = []
     for item in local_path_rows:
         local_path = str(item.get("local_image_path") or "")
@@ -47,6 +48,8 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             continue
         if not (ROOT / local_path).is_file():
             missing_files.append(item)
+        if not (ROOT / "assets" / local_path).is_file():
+            missing_web_public_files.append(item)
 
     path_counts = Counter(local_paths)
     reused_paths = [path for path, count in path_counts.items() if count > 1]
@@ -60,6 +63,8 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         findings.append("some rows have local_image_path but no image_url")
     if missing_files:
         findings.append("some local_image_path files are missing from the repository")
+    if missing_web_public_files:
+        findings.append("some local_image_path files are missing from the Flutter web public asset path")
     if invalid_paths:
         findings.append("some local_image_path values are absolute or escape the repository")
 
@@ -78,8 +83,14 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "unique_local_image_paths": len(path_counts),
             "reused_local_image_paths": len(reused_paths),
             "missing_local_image_files": len(missing_files),
+            "missing_web_public_asset_files": len(missing_web_public_files),
             "invalid_local_image_paths": len(invalid_paths),
             "local_asset_coverage": round(len(both_rows) / len(image_url_rows), 4) if image_url_rows else 1.0,
+            "web_public_asset_coverage": round(
+                (len(local_path_rows) - len(missing_web_public_files)) / len(local_path_rows), 4
+            )
+            if local_path_rows
+            else 1.0,
             "status": "pass" if not findings else "review_required",
         },
         "breakdowns": {
@@ -91,6 +102,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "image_url_without_local_path": sample_rows(image_without_local),
             "local_path_without_image_url": sample_rows(local_without_image),
             "missing_local_image_files": sample_rows(missing_files),
+            "missing_web_public_asset_files": sample_rows(missing_web_public_files),
             "invalid_local_image_paths": sample_rows(invalid_paths),
             "reused_local_image_paths": [
                 {"local_image_path": path, "rows": count}
