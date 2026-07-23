@@ -70,6 +70,7 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
     AppState appState,
     GoodsCatalogEntry entry,
   ) async {
+    final parentContext = context;
     final ownedCount = matchingCatalogGoodsItems(
       goodsItems: appState.goodsItems,
       entry: entry,
@@ -196,8 +197,9 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                         child: FilledButton.icon(
                           onPressed: () async {
                             Navigator.pop(sheetContext);
+                            if (!parentContext.mounted) return;
                             await showCatalogGoodsImportFlowForEntry(
-                              context,
+                              parentContext,
                               entry: entry,
                               initialFolder: widget.initialFolder,
                             );

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T07:17:37Z",
+  "generated_at": "2026-07-23T07:48:18Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 22,
     "blocked_action_count": 1,
     "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 33162,
+    "total_action_rows": 33138,
     "open_review_queues": {
       "source_discovery_rows": 639,
       "image_missing_rows": 712,
@@ -31,13 +31,13 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 642,
-      "source_discovery_actionable_rows": 642,
+      "source_discovery_action_rows": 634,
+      "source_discovery_actionable_rows": 634,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 5,
-      "source_discovery_focus_template_rows": 427,
-      "source_discovery_focus_template_work_order_packs": 24,
-      "source_discovery_focus_template_dry_run_skipped_rows": 427,
+      "source_discovery_focus_template_rows": 419,
+      "source_discovery_focus_template_work_order_packs": 23,
+      "source_discovery_focus_template_dry_run_skipped_rows": 419,
       "source_discovery_next_focus_fallback_rows": 0,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -129,13 +129,13 @@
     "image_action_source_url_update_template_rows": 50,
     "image_action_image_url_ready_rows": 0,
     "image_action_workstream_count": 4,
-    "source_focus_template_rows": 427,
-    "source_focus_template_work_order_pack_count": 24,
+    "source_focus_template_rows": 419,
+    "source_focus_template_work_order_pack_count": 23,
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_fallback_rows": 0,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
-    "source_discovery_action_rows": 642,
-    "source_discovery_actionable_rows": 642,
+    "source_discovery_action_rows": 634,
+    "source_discovery_actionable_rows": 634,
     "source_discovery_unqueued_actionable_rows": 0,
     "source_discovery_manual_research_backlog_rows": 5,
     "animation_unknown_category_rows": 391,
@@ -394,14 +394,14 @@
       "workstream": "source_discovery_focus_template",
       "public_report": "data/source_discovery_focus_confirmed_template_public.json",
       "status": "manual_review",
-      "rows": 427,
+      "rows": 419,
       "command": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack.",
       "next_step": "work_source_focus_template_work_order_top_to_bottom",
       "blocker": "Imports stay dry-run only until exact product URLs are manually confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
-        "template_items": 427,
-        "work_order_pack_count": 24,
+        "template_items": 419,
+        "work_order_pack_count": 23,
         "next_focus_pack_id": "source-discovery-focus-001",
         "next_source_store": "애니메이트",
         "next_target_category": "아크릴 스탠드",
@@ -433,7 +433,7 @@
             "confirmed_source_rows": 0,
             "remaining_review_rows": 20,
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%87%E3%82%A3%E3%82%A2%E3%83%96%E3%83%AD%29"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A9%8B%E7%94%B0%E8%87%B3%29"
           },
           {
             "priority": 3,
@@ -445,7 +445,7 @@
             "confirmed_source_rows": 0,
             "remaining_review_rows": 20,
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%82%98%EB%A3%A8%ED%86%A0%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC"
           },
           {
             "priority": 4,
@@ -457,7 +457,7 @@
             "confirmed_source_rows": 0,
             "remaining_review_rows": 20,
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%B9%E3%83%86%E3%83%83%E3%82%AB%E3%83%BC%E3%82%BB%E3%83%83%E3%83%88"
           },
           {
             "priority": 5,
@@ -469,7 +469,7 @@
             "confirmed_source_rows": 0,
             "remaining_review_rows": 20,
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29"
           },
           {
             "priority": 6,
@@ -481,7 +481,7 @@
             "confirmed_source_rows": 0,
             "remaining_review_rows": 20,
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%9F%E3%83%AA%E3%83%A0%29"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%81%97%E3%82%93%E3%81%AE%E3%81%99%E3%81%91%29"
           },
           {
             "priority": 7,
@@ -493,24 +493,24 @@
             "confirmed_source_rows": 0,
             "remaining_review_rows": 20,
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E6%97%A5%E5%90%91%E5%89%B5%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AB%E3%83%95%E3%82%A7%E3%82%B3%E3%83%A9%E3%83%9C%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB"
           },
           {
             "priority": 8,
             "focus_pack_id": "source-discovery-focus-008",
             "is_current_pack": false,
             "source_store": "애니메이트",
-            "target_category": "타월",
-            "row_count": 8,
+            "target_category": "태피스트리",
+            "row_count": 6,
             "confirmed_source_rows": 0,
-            "remaining_review_rows": 8,
+            "remaining_review_rows": 6,
             "review_status": "not_started",
-            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20T%E3%82%B7%E3%83%A3%E3%83%84"
+            "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%BF%E3%82%AA%E3%83%AB%20%28%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E4%BB%AE%E9%9D%A2%29"
           }
         ],
         "manual_confirmed_rows": 0,
         "dry_run_updated_rows": 0,
-        "dry_run_skipped_rows": 427
+        "dry_run_skipped_rows": 419
       }
     },
     {
@@ -518,7 +518,7 @@
       "workstream": "source_discovery_review_batches",
       "public_report": "data/source_discovery_review_batches_public.json",
       "status": "manual_review",
-      "rows": 647,
+      "rows": 639,
       "command": "Find exact official/detail source URLs for rows missing source_url.",
       "next_step": "attach_exact_source_url_before_image_import",
       "blocker": "Rows without exact source_url cannot safely import images.",
@@ -528,7 +528,7 @@
         "by_workflow": [
           [
             "official_search_url_available",
-            630
+            622
           ],
           [
             "licensed_retailer_search_review",
@@ -546,15 +546,15 @@
       "workstream": "source_discovery_action_queue",
       "public_report": "data/source_discovery_action_queue_public.json",
       "status": "manual_review",
-      "rows": 642,
+      "rows": 634,
       "command": "Confirm exact product/detail URLs from official search paths before broad source research.",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "blocker": "Auto source import is disabled; every source_url needs exact product evidence.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_source_rows": 642,
-        "queued_source_rows": 642,
-        "action_batch_count": 61,
+        "actionable_source_rows": 634,
+        "queued_source_rows": 634,
+        "action_batch_count": 60,
         "manual_research_backlog_rows": 5,
         "manual_research_backlog_by_source_store": [
           [
@@ -575,7 +575,7 @@
         "by_workflow": [
           [
             "official_search_url_available",
-            630
+            622
           ],
           [
             "licensed_retailer_search_review",

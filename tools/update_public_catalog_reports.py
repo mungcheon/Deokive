@@ -5910,8 +5910,37 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
-    source_discovery_focus_template = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {})
-    source_discovery_focus_template_import = load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
+    import build_source_discovery_action_queue_public
+    import build_source_discovery_focus_confirmed_template_public
+    import build_source_discovery_focus_packs_public
+    import build_source_discovery_review_batches_public
+    import build_source_discovery_store_bottlenecks_public
+
+    source_discovery_review_batches = build_source_discovery_review_batches_public.build_report(
+        items,
+        batch_size=25,
+    )
+    source_discovery_action_queue = build_source_discovery_action_queue_public.build_report(
+        source_discovery_review_batches,
+    )
+    source_discovery_store_bottlenecks = build_source_discovery_store_bottlenecks_public.build_report(
+        source_discovery_action_queue,
+        generated_at=generated_at,
+    )
+    source_discovery_focus_packs = build_source_discovery_focus_packs_public.build_report(
+        source_discovery_action_queue,
+        source_discovery_store_bottlenecks,
+        generated_at=generated_at,
+    )
+    source_discovery_focus_template = build_source_discovery_focus_confirmed_template_public.build_template(
+        source_discovery_focus_packs,
+        generated_at=generated_at,
+    )
+    source_discovery_focus_template_import = build_source_discovery_import_dry_run_public(
+        source_discovery_focus_template,
+        items,
+        queue_path=SOURCE_DISCOVERY_FOCUS_TEMPLATE,
+    )
     source_discovery_next_focus_pack = build_source_discovery_next_focus_pack_public.build_report(
         source_discovery_focus_template,
         generated_at=generated_at,
@@ -5948,7 +5977,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         image_enrichment_batches,
         image_attachment_action_queue,
         load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {}) if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists() else {},
-        load_json(SOURCE_DISCOVERY_FOCUS_PACKS, {}) if SOURCE_DISCOVERY_FOCUS_PACKS.exists() else {},
+        source_discovery_focus_packs,
         source_discovery_focus_template,
         source_discovery_focus_template_import,
         load_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, {}) if IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.exists() else {},
@@ -6012,8 +6041,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             "source_discovery_focus_template_import_dry_run_public.json": source_discovery_focus_template_import,
             "source_discovery_next_focus_pack_fetch_audit_public.json": source_discovery_next_focus_fetch_audit,
             "source_discovery_next_focus_fallback_queue_public.json": source_discovery_next_focus_fallback_queue,
-            "source_discovery_review_batches_public.json": load_json(SOURCE_DISCOVERY_REVIEW_BATCHES, {}),
-            "source_discovery_action_queue_public.json": load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}),
+            "source_discovery_review_batches_public.json": source_discovery_review_batches,
+            "source_discovery_action_queue_public.json": source_discovery_action_queue,
             "ensky_cache_candidate_action_queue_public.json": load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {}),
             "catalog_metadata_review_batches_public.json": metadata_review_batches,
             "catalog_metadata_action_queue_public.json": metadata_action_queue,
@@ -6302,38 +6331,37 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{SOURCE_DISCOVERY.name}",
             **source_discovery["summary"],
         }
-        if SOURCE_DISCOVERY_REVIEW_BATCHES.exists():
-            target["source_discovery_review_batches"] = copy_report_summary(
-                SOURCE_DISCOVERY_REVIEW_BATCHES, "source_discovery_review_batches"
-            )
-        if SOURCE_DISCOVERY_ACTION_QUEUE.exists():
-            target["source_discovery_action_queue"] = copy_report_summary(
-                SOURCE_DISCOVERY_ACTION_QUEUE, "source_discovery_action_queue"
-            )
-            source_action_payload = load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {})
-            target["source_discovery_action_queue"]["top_source_store_workstreams"] = [
-                {
-                    "source_store": row.get("source_store"),
-                    "priority": row.get("priority"),
-                    "queued_source_rows": row.get("queued_source_rows"),
-                    "batch_count": row.get("batch_count", 0),
-                    "next_batch_id": row.get("next_batch_id"),
-                    "batch_ids": row.get("batch_ids", []),
-                    "allowed_source_domains": row.get("allowed_source_domains", []),
-                    "official_search_url_count": row.get("official_search_url_count", 0),
-                    "workflow_rows": row.get("workflow_rows", []),
-                    "review_state_rows": row.get("review_state_rows", []),
-                    "category_rows": row.get("category_rows", []),
-                    "recommended_next_step": row.get("recommended_next_step"),
-                    "auto_apply_enabled": row.get("auto_apply_enabled", False),
-                }
-                for row in source_action_payload.get("source_store_workstreams", [])
-                if isinstance(row, dict)
-            ][:8]
-        if SOURCE_DISCOVERY_STORE_BOTTLENECKS.exists():
-            target["source_discovery_store_bottlenecks"] = copy_report_summary(
-                SOURCE_DISCOVERY_STORE_BOTTLENECKS, "source_discovery_store_bottlenecks"
-            )
+        target["source_discovery_review_batches"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
+            **source_discovery_review_batches["summary"],
+        }
+        target["source_discovery_action_queue"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
+            **source_discovery_action_queue["summary"],
+        }
+        target["source_discovery_action_queue"]["top_source_store_workstreams"] = [
+            {
+                "source_store": row.get("source_store"),
+                "priority": row.get("priority"),
+                "queued_source_rows": row.get("queued_source_rows"),
+                "batch_count": row.get("batch_count", 0),
+                "next_batch_id": row.get("next_batch_id"),
+                "batch_ids": row.get("batch_ids", []),
+                "allowed_source_domains": row.get("allowed_source_domains", []),
+                "official_search_url_count": row.get("official_search_url_count", 0),
+                "workflow_rows": row.get("workflow_rows", []),
+                "review_state_rows": row.get("review_state_rows", []),
+                "category_rows": row.get("category_rows", []),
+                "recommended_next_step": row.get("recommended_next_step"),
+                "auto_apply_enabled": row.get("auto_apply_enabled", False),
+            }
+            for row in source_discovery_action_queue.get("source_store_workstreams", [])
+            if isinstance(row, dict)
+        ][:8]
+        target["source_discovery_store_bottlenecks"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_STORE_BOTTLENECKS.name}",
+            **source_discovery_store_bottlenecks["summary"],
+        }
         target["metadata_backlog"] = {
             "public_report": f"data/{METADATA_BACKLOG.name}",
             **metadata_backlog["summary"],
@@ -6503,6 +6531,12 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(CANDIDATE_SOURCE_URL_REVIEW_QUEUE, candidate_source_url_review_queue)
         write_json(GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE, gotouchi_official_candidate_review_queue)
         write_json(ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE, ichiban_kuji_prize_policy_issue_queue)
+        write_json(SOURCE_DISCOVERY_REVIEW_BATCHES, source_discovery_review_batches)
+        write_json(SOURCE_DISCOVERY_ACTION_QUEUE, source_discovery_action_queue)
+        write_json(SOURCE_DISCOVERY_STORE_BOTTLENECKS, source_discovery_store_bottlenecks)
+        write_json(SOURCE_DISCOVERY_FOCUS_PACKS, source_discovery_focus_packs)
+        write_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, source_discovery_focus_template)
+        write_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, source_discovery_focus_template_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, source_discovery_next_focus_detail_candidates)
@@ -6559,8 +6593,12 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DANGANRONPA_MISSING_MEDIA.relative_to(ROOT)),
             str(SOURCE_DETAIL.relative_to(ROOT)),
             str(SOURCE_DISCOVERY.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_REVIEW_BATCHES.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_ACTION_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_STORE_BOTTLENECKS.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_FOCUS_PACKS.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_FOCUS_TEMPLATE.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT.relative_to(ROOT)),
             str(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.relative_to(ROOT)),
             str(OFFICIAL_DETAIL_REVIEW_BATCHES.relative_to(ROOT)),
             str(METADATA_BACKLOG.relative_to(ROOT)),

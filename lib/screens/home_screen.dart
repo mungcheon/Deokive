@@ -9,7 +9,6 @@ import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
 import '../widgets/deokive_avatar.dart';
 import '../widgets/deokive_header_title.dart';
-import '../widgets/catalog_entry_image.dart';
 import '../widgets/showcase_background.dart';
 import 'avatar_editor_screen.dart';
 import 'badge_screen.dart';
@@ -277,10 +276,6 @@ class _CatalogImportPanel extends StatelessWidget {
     final theme = Theme.of(context);
     final entries = appState.curatedCatalogEntries;
     final health = _CatalogHealthSummary.from(entries);
-    final imageEntries = entries
-        .where((entry) => (entry.displayImagePath ?? '').trim().isNotEmpty)
-        .take(4)
-        .toList();
 
     return Container(
       decoration: BoxDecoration(
@@ -293,6 +288,7 @@ class _CatalogImportPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: 42,
@@ -313,6 +309,8 @@ class _CatalogImportPanel extends StatelessWidget {
                   children: [
                     Text(
                       '굿즈 DB',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w900,
@@ -320,26 +318,12 @@ class _CatalogImportPanel extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      '전체 DB를 보고 검색해서 내 굿즈함에 추가해요',
-                      style: TextStyle(fontSize: 12.5),
+                      '전체 DB에서 검색하고 내 굿즈함이나 위시리스트에 추가해요.',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 12.5, height: 1.35),
                     ),
                   ],
-                ),
-              ),
-              FilledButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const CatalogDatabaseScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.manage_search_rounded, size: 18),
-                label: const Text('DB 보기'),
-                style: FilledButton.styleFrom(
-                  visualDensity: VisualDensity.compact,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
                 ),
               ),
             ],
@@ -370,31 +354,34 @@ class _CatalogImportPanel extends StatelessWidget {
                 value: health.sourceCoverageLabel,
                 color: const Color(0xFF7B6EC8),
               ),
-              _CatalogMetricChip(
-                label: '중복후보',
-                value: '${health.duplicateBarcodeGroups}',
-                color: health.duplicateBarcodeGroups == 0
-                    ? const Color(0xFF4F8F7B)
-                    : const Color(0xFFD18A3B),
-              ),
             ],
           ),
-          if (imageEntries.isNotEmpty) ...[
-            const SizedBox(height: 12),
-            SizedBox(
-              height: 42,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  for (var i = 0; i < imageEntries.length; i++)
-                    Positioned(
-                      left: i * 25,
-                      child: _CatalogThumb(entry: imageEntries[i]),
-                    ),
-                ],
+          const SizedBox(height: 14),
+          SizedBox(
+            width: double.infinity,
+            height: 46,
+            child: FilledButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const CatalogDatabaseScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.manage_search_rounded, size: 19),
+              label: const Text(
+                'DB 보기',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              style: FilledButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
               ),
             ),
-          ],
+          ),
         ],
       ),
     );
@@ -404,14 +391,12 @@ class _CatalogImportPanel extends StatelessWidget {
 class _CatalogHealthSummary {
   final int totalCount;
   final int categoryCount;
-  final int duplicateBarcodeGroups;
   final double imageCoverage;
   final double sourceCoverage;
 
   const _CatalogHealthSummary({
     required this.totalCount,
     required this.categoryCount,
-    required this.duplicateBarcodeGroups,
     required this.imageCoverage,
     required this.sourceCoverage,
   });
@@ -421,18 +406,12 @@ class _CatalogHealthSummary {
 
   static _CatalogHealthSummary from(List<GoodsCatalogEntry> entries) {
     final categories = <String>{};
-    final barcodeCounts = <String, int>{};
     var imageCount = 0;
     var sourceCount = 0;
 
     for (final entry in entries) {
       final category = entry.normalizedCategory.trim();
       if (category.isNotEmpty) categories.add(category);
-
-      final barcode = entry.barcode?.trim() ?? '';
-      if (barcode.isNotEmpty) {
-        barcodeCounts[barcode] = (barcodeCounts[barcode] ?? 0) + 1;
-      }
 
       if ((entry.displayImagePath ?? '').trim().isNotEmpty) {
         imageCount += 1;
@@ -446,8 +425,6 @@ class _CatalogHealthSummary {
     return _CatalogHealthSummary(
       totalCount: total,
       categoryCount: categories.length,
-      duplicateBarcodeGroups:
-          barcodeCounts.values.where((count) => count > 1).length,
       imageCoverage: total == 0 ? 0 : imageCount / total,
       sourceCoverage: total == 0 ? 0 : sourceCount / total,
     );
@@ -482,6 +459,8 @@ class _CatalogMetricChip extends StatelessWidget {
         children: [
           Text(
             label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: color,
               fontSize: 12,
@@ -491,38 +470,14 @@ class _CatalogMetricChip extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             value,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w900,
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _CatalogThumb extends StatelessWidget {
-  final GoodsCatalogEntry entry;
-
-  const _CatalogThumb({required this.entry});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      width: 42,
-      height: 42,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: theme.colorScheme.surface, width: 2),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: CatalogEntryImage(
-        entry: entry,
-        width: 42,
-        height: 42,
-        shape: BoxShape.circle,
       ),
     );
   }
