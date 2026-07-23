@@ -102,6 +102,44 @@ class SourceDiscoveryNextFocusPackFetchAuditPublicTest(unittest.TestCase):
             "use_domain_limited_search_or_legacy_store_search_for_exact_detail_url",
         )
 
+    def test_build_report_marks_http_ok_no_results_as_fallback(self) -> None:
+        pack = {
+            "summary": {"focus_pack_id": "source-discovery-focus-001"},
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": "Animate",
+                    "category": "Acrylic stand",
+                    "name_ko": "A",
+                    "name_ja": "A",
+                    "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=A",
+                },
+            ],
+        }
+
+        def no_result_fetch(url: str) -> dict[str, object]:
+            return {
+                "fetch_status": "ok",
+                "http_status": 200,
+                "final_url": url,
+                "content_checked": True,
+                "no_results_page": True,
+                "product_detail_link_count": 0,
+            }
+
+        report = target.build_report(pack, fetcher=no_result_fetch)
+
+        self.assertEqual(report["summary"]["official_search_ok_rows"], 0)
+        self.assertEqual(report["summary"]["official_search_unavailable_rows"], 1)
+        self.assertEqual(report["summary"]["official_search_no_result_rows"], 1)
+        self.assertTrue(report["summary"]["fallback_web_search_required"])
+        self.assertTrue(report["items"][0]["needs_fallback_web_search"])
+        self.assertEqual(
+            report["items"][0]["fetch_block_reason"],
+            "official_search_returned_no_results",
+        )
+
     def test_fetcher_marks_missing_url_without_network(self) -> None:
         result = target.fetch_url("")
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T11:37:01Z",
+  "generated_at": "2026-07-23T11:46:19Z",
   "scope": "source_discovery_next_focus_fallback_queue",
   "source_reports": [
     "data/source_discovery_next_focus_pack_public.json",
@@ -8,18 +8,37 @@
   ],
   "summary": {
     "focus_pack_id": "source-discovery-focus-001",
-    "queue_rows": 0,
+    "queue_rows": 17,
     "manual_confirmed_rows": 0,
-    "fallback_reason": "none",
-    "by_http_status": [],
-    "by_source_store": [],
-    "by_category": [],
-    "fallback_query_count": 0,
-    "domain_limited_web_search_url_count": 0,
-    "work_order_steps": 0,
-    "work_order_lanes": [],
-    "first_domain_limited_web_search_url": "",
-    "first_fallback_store_search_url": "",
+    "fallback_reason": "official_search_url_unavailable",
+    "by_http_status": [
+      [
+        "200",
+        17
+      ]
+    ],
+    "by_source_store": [
+      [
+        "애니메이트",
+        17
+      ]
+    ],
+    "by_category": [
+      [
+        "아크릴 스탠드",
+        17
+      ]
+    ],
+    "fallback_query_count": 87,
+    "domain_limited_web_search_url_count": 87,
+    "work_order_steps": 3,
+    "work_order_lanes": [
+      "domain_limited_exact_title_search",
+      "legacy_mobile_store_search",
+      "evidence_fill_and_dry_run"
+    ],
+    "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+    "first_fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
     "auto_apply_enabled": false,
     "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
   },
@@ -30,6 +49,2107 @@
     "import_tool": "tools/import_confirmed_source_discovery_rows.py",
     "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json"
   },
-  "work_order": [],
-  "items": []
+  "work_order": [
+    {
+      "rank": 1,
+      "lane": "domain_limited_exact_title_search",
+      "description": "Open the first domain-limited query for each row and look for an exact Animate product detail page.",
+      "queue_rows": 17,
+      "query_count": 17,
+      "sample_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%A0%EC%A3%A0%EC%9D%98+%EA%B8%B0%EB%AC%98%ED%95%9C+%EB%AA%A8%ED%97%98+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%9C%ED%83%9C%EC%9B%85%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0+%EC%B2%B4%EB%A6%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%22"
+      ]
+    },
+    {
+      "rank": 2,
+      "lane": "legacy_mobile_store_search",
+      "description": "If web search is weak, open the legacy mobile Animate search URL and inspect product-detail results manually.",
+      "queue_rows": 17,
+      "sample_search_urls": [
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%A3%A0%EC%A3%A0%EC%9D%98%20%EA%B8%B0%EB%AC%98%ED%95%9C%20%EB%AA%A8%ED%97%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM%20DUNK%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%9C%ED%83%9C%EC%9B%85%29",
+        "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0%20%EC%B2%B4%EB%A6%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29"
+      ]
+    },
+    {
+      "rank": 3,
+      "lane": "evidence_fill_and_dry_run",
+      "description": "Only after exact identity is confirmed, fill manual_confirmed_source_url/manual_evidence_url and run the dry-run importer.",
+      "queue_rows": 17,
+      "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+      "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json"
+    }
+  ],
+  "items": [
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1072,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
+      "name_ja": "推しの子 アクリルスタンド (星野アイ)",
+      "search_query": "推しの子 アクリルスタンド (星野アイ)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+      "fallback_search_terms": [
+        "推しの子 アクリルスタンド (星野アイ)",
+        "최애의 아이 아크릴 스탠드 (호시노 아이)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B5%9C%EC%95%A0%EC%9D%98+%EC%95%84%EC%9D%B4+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%98%B8%EC%8B%9C%EB%85%B8+%EC%95%84%EC%9D%B4%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B5%9C%EC%95%A0%EC%9D%98+%EC%95%84%EC%9D%B4+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%98%B8%EC%8B%9C%EB%85%B8+%EC%95%84%EC%9D%B4%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B5%9C%EC%95%A0%EC%9D%98+%EC%95%84%EC%9D%B4+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%98%B8%EC%8B%9C%EB%85%B8+%EC%95%84%EC%9D%B4%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"推しの子 アクリルスタンド (星野アイ)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"推しの子 アクリルスタンド (星野アイ)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"推しの子 アクリルスタンド (星野アイ)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"최애의 아이 아크릴 스탠드 (호시노 아이)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B5%9C%EC%95%A0%EC%9D%98+%EC%95%84%EC%9D%B4+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%98%B8%EC%8B%9C%EB%85%B8+%EC%95%84%EC%9D%B4%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"최애의 아이 아크릴 스탠드 (호시노 아이)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B5%9C%EC%95%A0%EC%9D%98+%EC%95%84%EC%9D%B4+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%98%B8%EC%8B%9C%EB%85%B8+%EC%95%84%EC%9D%B4%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"최애의 아이 아크릴 스탠드 (호시노 아이)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B5%9C%EC%95%A0%EC%9D%98+%EC%95%84%EC%9D%B4+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%98%B8%EC%8B%9C%EB%85%B8+%EC%95%84%EC%9D%B4%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1072,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1072,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
+        "name_ja": "推しの子 アクリルスタンド (星野アイ)",
+        "category": "아크릴 스탠드",
+        "affiliation": "최애의 아이",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1082,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
+      "name_ja": null,
+      "search_query": "죠죠의 기묘한 모험 아크릴 스탠드",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%A0%EC%A3%A0%EC%9D%98%20%EA%B8%B0%EB%AC%98%ED%95%9C%20%EB%AA%A8%ED%97%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%EC%A3%A0%EC%A3%A0%EC%9D%98%20%EA%B8%B0%EB%AC%98%ED%95%9C%20%EB%AA%A8%ED%97%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%A3%A0%EC%A3%A0%EC%9D%98%20%EA%B8%B0%EB%AC%98%ED%95%9C%20%EB%AA%A8%ED%97%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "fallback_search_terms": [
+        "죠죠의 기묘한 모험 아크릴 스탠드"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%A0%EC%A3%A0%EC%9D%98+%EA%B8%B0%EB%AC%98%ED%95%9C+%EB%AA%A8%ED%97%98+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%A0%EC%A3%A0%EC%9D%98+%EA%B8%B0%EB%AC%98%ED%95%9C+%EB%AA%A8%ED%97%98+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%A0%EC%A3%A0%EC%9D%98+%EA%B8%B0%EB%AC%98%ED%95%9C+%EB%AA%A8%ED%97%98+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"죠죠의 기묘한 모험 아크릴 스탠드\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%A0%EC%A3%A0%EC%9D%98+%EA%B8%B0%EB%AC%98%ED%95%9C+%EB%AA%A8%ED%97%98+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"죠죠의 기묘한 모험 아크릴 스탠드\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%A0%EC%A3%A0%EC%9D%98+%EA%B8%B0%EB%AC%98%ED%95%9C+%EB%AA%A8%ED%97%98+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"죠죠의 기묘한 모험 아크릴 스탠드\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%A0%EC%A3%A0%EC%9D%98+%EA%B8%B0%EB%AC%98%ED%95%9C+%EB%AA%A8%ED%97%98+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1082,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1082,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%A0%EC%A3%A0%EC%9D%98%20%EA%B8%B0%EB%AC%98%ED%95%9C%20%EB%AA%A8%ED%97%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
+        "name_ja": null,
+        "category": "아크릴 스탠드",
+        "affiliation": "죠죠의 기묘한 모험",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1083,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "슬램덩크 아크릴 스탠드 (강백호)",
+      "name_ja": "SLAM DUNK アクリルスタンド (桜木花道)",
+      "search_query": "SLAM DUNK アクリルスタンド (桜木花道)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=SLAM%20DUNK%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=SLAM%20DUNK%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM%20DUNK%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
+      "fallback_search_terms": [
+        "SLAM DUNK アクリルスタンド (桜木花道)",
+        "슬램덩크 아크릴 스탠드 (강백호)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EA%B0%95%EB%B0%B1%ED%98%B8%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EA%B0%95%EB%B0%B1%ED%98%B8%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EA%B0%95%EB%B0%B1%ED%98%B8%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"SLAM DUNK アクリルスタンド (桜木花道)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"SLAM DUNK アクリルスタンド (桜木花道)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"SLAM DUNK アクリルスタンド (桜木花道)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슬램덩크 아크릴 스탠드 (강백호)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EA%B0%95%EB%B0%B1%ED%98%B8%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슬램덩크 아크릴 스탠드 (강백호)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EA%B0%95%EB%B0%B1%ED%98%B8%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슬램덩크 아크릴 스탠드 (강백호)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EA%B0%95%EB%B0%B1%ED%98%B8%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1083,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1083,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=SLAM%20DUNK%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "슬램덩크 아크릴 스탠드 (강백호)",
+        "name_ja": "SLAM DUNK アクリルスタンド (桜木花道)",
+        "category": "아크릴 스탠드",
+        "affiliation": "슬램덩크",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1084,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
+      "name_ja": null,
+      "search_query": "슬램덩크 아크릴 스탠드 (서태웅)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%9C%ED%83%9C%EC%9B%85%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%9C%ED%83%9C%EC%9B%85%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%9C%ED%83%9C%EC%9B%85%29",
+      "fallback_search_terms": [
+        "슬램덩크 아크릴 스탠드 (서태웅)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%9C%ED%83%9C%EC%9B%85%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%9C%ED%83%9C%EC%9B%85%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%9C%ED%83%9C%EC%9B%85%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슬램덩크 아크릴 스탠드 (서태웅)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%9C%ED%83%9C%EC%9B%85%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슬램덩크 아크릴 스탠드 (서태웅)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%9C%ED%83%9C%EC%9B%85%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슬램덩크 아크릴 스탠드 (서태웅)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%9C%ED%83%9C%EC%9B%85%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1084,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1084,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8A%AC%EB%9E%A8%EB%8D%A9%ED%81%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%9C%ED%83%9C%EC%9B%85%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
+        "name_ja": null,
+        "category": "아크릴 스탠드",
+        "affiliation": "슬램덩크",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1117,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+      "name_ja": null,
+      "search_query": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0%20%EC%B2%B4%EB%A6%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0%20%EC%B2%B4%EB%A6%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0%20%EC%B2%B4%EB%A6%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29",
+      "fallback_search_terms": [
+        "카드캡터 체리 아크릴 스탠드 (사쿠라)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0+%EC%B2%B4%EB%A6%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0+%EC%B2%B4%EB%A6%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0+%EC%B2%B4%EB%A6%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"카드캡터 체리 아크릴 스탠드 (사쿠라)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0+%EC%B2%B4%EB%A6%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"카드캡터 체리 아크릴 스탠드 (사쿠라)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0+%EC%B2%B4%EB%A6%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"카드캡터 체리 아크릴 스탠드 (사쿠라)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0+%EC%B2%B4%EB%A6%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1117,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1117,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B9%B4%EB%93%9C%EC%BA%A1%ED%84%B0%20%EC%B2%B4%EB%A6%AC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%82%AC%EC%BF%A0%EB%9D%BC%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+        "name_ja": null,
+        "category": "아크릴 스탠드",
+        "affiliation": "카드캡터 체리",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1119,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
+      "name_ja": null,
+      "search_query": "세일러문 아크릴 스탠드 (세일러문)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29",
+      "fallback_search_terms": [
+        "세일러문 아크릴 스탠드 (세일러문)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"세일러문 아크릴 스탠드 (세일러문)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"세일러문 아크릴 스탠드 (세일러문)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"세일러문 아크릴 스탠드 (세일러문)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1119,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1119,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%84%B8%EC%9D%BC%EB%9F%AC%EB%AC%B8%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
+        "name_ja": null,
+        "category": "아크릴 스탠드",
+        "affiliation": "세일러문",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1123,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "신세기 에반게리온 아크릴 스탠드",
+      "name_ja": null,
+      "search_query": "신세기 에반게리온 아크릴 스탠드",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8B%A0%EC%84%B8%EA%B8%B0%20%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%EC%8B%A0%EC%84%B8%EA%B8%B0%20%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%EC%8B%A0%EC%84%B8%EA%B8%B0%20%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "fallback_search_terms": [
+        "신세기 에반게리온 아크릴 스탠드"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8B%A0%EC%84%B8%EA%B8%B0+%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8B%A0%EC%84%B8%EA%B8%B0+%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8B%A0%EC%84%B8%EA%B8%B0+%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"신세기 에반게리온 아크릴 스탠드\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8B%A0%EC%84%B8%EA%B8%B0+%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"신세기 에반게리온 아크릴 스탠드\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8B%A0%EC%84%B8%EA%B8%B0+%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"신세기 에반게리온 아크릴 스탠드\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8B%A0%EC%84%B8%EA%B8%B0+%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1123,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1123,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%8B%A0%EC%84%B8%EA%B8%B0%20%EC%97%90%EB%B0%98%EA%B2%8C%EB%A6%AC%EC%98%A8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "신세기 에반게리온 아크릴 스탠드",
+        "name_ja": null,
+        "category": "아크릴 스탠드",
+        "affiliation": "신세기 에반게리온",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1632,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
+      "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+      "search_query": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29",
+      "fallback_search_terms": [
+        "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+        "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%9D%B4%ED%83%80%EB%8F%84%EB%A6%AC%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%9D%B4%ED%83%80%EB%8F%84%EB%A6%AC%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%9D%B4%ED%83%80%EB%8F%84%EB%A6%AC%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"呪術廻戦 学園シリーズ アクリルスタンド (虎杖)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"呪術廻戦 学園シリーズ アクリルスタンド (虎杖)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"呪術廻戦 学園シリーズ アクリルスタンド (虎杖)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"주술회전 학원 시리즈 아크릴 스탠드 (이타도리)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%9D%B4%ED%83%80%EB%8F%84%EB%A6%AC%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"주술회전 학원 시리즈 아크릴 스탠드 (이타도리)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%9D%B4%ED%83%80%EB%8F%84%EB%A6%AC%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"주술회전 학원 시리즈 아크릴 스탠드 (이타도리)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%9D%B4%ED%83%80%EB%8F%84%EB%A6%AC%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1632,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1632,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
+        "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+        "category": "아크릴 스탠드",
+        "affiliation": "주술회전",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1649,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "장송의 프리렌 트레이딩 아크릴 키 홀더 (의상 변경)",
+      "name_ja": "葬送のフリーレン トレーディングアクリルキーホルダー (衣装変更ver.)",
+      "search_query": "葬送のフリーレン トレーディングアクリルキーホルダー (衣装変更ver.)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29",
+      "fallback_search_terms": [
+        "葬送のフリーレン トレーディングアクリルキーホルダー (衣装変更ver.)",
+        "장송의 프리렌 트레이딩 아크릴 키 홀더 (의상 변경)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%9E%A5%EC%86%A1%EC%9D%98+%ED%94%84%EB%A6%AC%EB%A0%8C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%EC%9D%98%EC%83%81+%EB%B3%80%EA%B2%BD%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%9E%A5%EC%86%A1%EC%9D%98+%ED%94%84%EB%A6%AC%EB%A0%8C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%EC%9D%98%EC%83%81+%EB%B3%80%EA%B2%BD%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%9E%A5%EC%86%A1%EC%9D%98+%ED%94%84%EB%A6%AC%EB%A0%8C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%EC%9D%98%EC%83%81+%EB%B3%80%EA%B2%BD%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"葬送のフリーレン トレーディングアクリルキーホルダー (衣装変更ver.)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"葬送のフリーレン トレーディングアクリルキーホルダー (衣装変更ver.)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"葬送のフリーレン トレーディングアクリルキーホルダー (衣装変更ver.)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"장송의 프리렌 트레이딩 아크릴 키 홀더 (의상 변경)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%9E%A5%EC%86%A1%EC%9D%98+%ED%94%84%EB%A6%AC%EB%A0%8C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%EC%9D%98%EC%83%81+%EB%B3%80%EA%B2%BD%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"장송의 프리렌 트레이딩 아크릴 키 홀더 (의상 변경)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%9E%A5%EC%86%A1%EC%9D%98+%ED%94%84%EB%A6%AC%EB%A0%8C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%EC%9D%98%EC%83%81+%EB%B3%80%EA%B2%BD%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"장송의 프리렌 트레이딩 아크릴 키 홀더 (의상 변경)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%9E%A5%EC%86%A1%EC%9D%98+%ED%94%84%EB%A6%AC%EB%A0%8C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%EC%9D%98%EC%83%81+%EB%B3%80%EA%B2%BD%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1649,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1649,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E8%A1%A3%E8%A3%85%E5%A4%89%E6%9B%B4ver.%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "장송의 프리렌 트레이딩 아크릴 키 홀더 (의상 변경)",
+        "name_ja": "葬送のフリーレン トレーディングアクリルキーホルダー (衣装変更ver.)",
+        "category": "아크릴 스탠드",
+        "affiliation": "장송의 프리렌",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1657,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "귀멸의 칼날 트레이딩 아크릴 키 홀더 (학원 시리즈)",
+      "name_ja": "鬼滅の刃 トレーディングアクリルキーホルダー (学園シリーズ)",
+      "search_query": "鬼滅の刃 トレーディングアクリルキーホルダー (学園シリーズ)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29",
+      "fallback_search_terms": [
+        "鬼滅の刃 トレーディングアクリルキーホルダー (学園シリーズ)",
+        "귀멸의 칼날 트레이딩 아크릴 키 홀더 (학원 시리즈)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EA%B7%80%EB%A9%B8%EC%9D%98+%EC%B9%BC%EB%82%A0+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EA%B7%80%EB%A9%B8%EC%9D%98+%EC%B9%BC%EB%82%A0+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EA%B7%80%EB%A9%B8%EC%9D%98+%EC%B9%BC%EB%82%A0+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"鬼滅の刃 トレーディングアクリルキーホルダー (学園シリーズ)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"鬼滅の刃 トレーディングアクリルキーホルダー (学園シリーズ)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"鬼滅の刃 トレーディングアクリルキーホルダー (学園シリーズ)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"귀멸의 칼날 트레이딩 아크릴 키 홀더 (학원 시리즈)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EA%B7%80%EB%A9%B8%EC%9D%98+%EC%B9%BC%EB%82%A0+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"귀멸의 칼날 트레이딩 아크릴 키 홀더 (학원 시리즈)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EA%B7%80%EB%A9%B8%EC%9D%98+%EC%B9%BC%EB%82%A0+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"귀멸의 칼날 트레이딩 아크릴 키 홀더 (학원 시리즈)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EA%B7%80%EB%A9%B8%EC%9D%98+%EC%B9%BC%EB%82%A0+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4+%ED%99%80%EB%8D%94+%28%ED%95%99%EC%9B%90+%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1657,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1657,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "귀멸의 칼날 트레이딩 아크릴 키 홀더 (학원 시리즈)",
+        "name_ja": "鬼滅の刃 トレーディングアクリルキーホルダー (学園シリーズ)",
+        "category": "아크릴 스탠드",
+        "affiliation": "귀멸의 칼날",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 1974,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "진격의 거인 디포르메 아크릴 마스코트 (조사병단)",
+      "name_ja": "進撃の巨人 デフォルメアクリルマスコット",
+      "search_query": "進撃の巨人 デフォルメアクリルマスコット",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
+      "fallback_search_terms": [
+        "進撃の巨人 デフォルメアクリルマスコット",
+        "진격의 거인 디포르메 아크릴 마스코트 (조사병단)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A7%84%EA%B2%A9%EC%9D%98+%EA%B1%B0%EC%9D%B8+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EC%A1%B0%EC%82%AC%EB%B3%91%EB%8B%A8%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A7%84%EA%B2%A9%EC%9D%98+%EA%B1%B0%EC%9D%B8+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EC%A1%B0%EC%82%AC%EB%B3%91%EB%8B%A8%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A7%84%EA%B2%A9%EC%9D%98+%EA%B1%B0%EC%9D%B8+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EC%A1%B0%EC%82%AC%EB%B3%91%EB%8B%A8%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"進撃の巨人 デフォルメアクリルマスコット\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"進撃の巨人 デフォルメアクリルマスコット\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"進撃の巨人 デフォルメアクリルマスコット\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"진격의 거인 디포르메 아크릴 마스코트 (조사병단)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A7%84%EA%B2%A9%EC%9D%98+%EA%B1%B0%EC%9D%B8+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EC%A1%B0%EC%82%AC%EB%B3%91%EB%8B%A8%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"진격의 거인 디포르메 아크릴 마스코트 (조사병단)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A7%84%EA%B2%A9%EC%9D%98+%EA%B1%B0%EC%9D%B8+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EC%A1%B0%EC%82%AC%EB%B3%91%EB%8B%A8%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"진격의 거인 디포르메 아크릴 마스코트 (조사병단)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A7%84%EA%B2%A9%EC%9D%98+%EA%B1%B0%EC%9D%B8+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EC%A1%B0%EC%82%AC%EB%B3%91%EB%8B%A8%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 1974,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1974,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "진격의 거인 디포르메 아크릴 마스코트 (조사병단)",
+        "name_ja": "進撃の巨人 デフォルメアクリルマスコット",
+        "category": "아크릴 스탠드",
+        "affiliation": "진격의 거인",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 2037,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "리제로 트레이딩 아크릴 (렘 의상시리즈)",
+      "name_ja": "Re:ゼロ トレーディングアクリル (レム衣装)",
+      "search_query": "Re:ゼロ トレーディングアクリル (レム衣装)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=Re%3A%E3%82%BC%E3%83%AD%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%20%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=Re%3A%E3%82%BC%E3%83%AD%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%20%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=Re%3A%E3%82%BC%E3%83%AD%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%20%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29",
+      "fallback_search_terms": [
+        "Re:ゼロ トレーディングアクリル (レム衣装)",
+        "리제로 트레이딩 아크릴 (렘 의상시리즈)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EB%A6%AC%EC%A0%9C%EB%A1%9C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%28%EB%A0%98+%EC%9D%98%EC%83%81%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EB%A6%AC%EC%A0%9C%EB%A1%9C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%28%EB%A0%98+%EC%9D%98%EC%83%81%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EB%A6%AC%EC%A0%9C%EB%A1%9C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%28%EB%A0%98+%EC%9D%98%EC%83%81%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"Re:ゼロ トレーディングアクリル (レム衣装)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"Re:ゼロ トレーディングアクリル (レム衣装)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"Re:ゼロ トレーディングアクリル (レム衣装)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"리제로 트레이딩 아크릴 (렘 의상시리즈)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EB%A6%AC%EC%A0%9C%EB%A1%9C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%28%EB%A0%98+%EC%9D%98%EC%83%81%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"리제로 트레이딩 아크릴 (렘 의상시리즈)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EB%A6%AC%EC%A0%9C%EB%A1%9C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%28%EB%A0%98+%EC%9D%98%EC%83%81%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"리제로 트레이딩 아크릴 (렘 의상시리즈)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EB%A6%AC%EC%A0%9C%EB%A1%9C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%95%84%ED%81%AC%EB%A6%B4+%28%EB%A0%98+%EC%9D%98%EC%83%81%EC%8B%9C%EB%A6%AC%EC%A6%88%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 2037,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2037,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=Re%3A%E3%82%BC%E3%83%AD%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%20%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "리제로 트레이딩 아크릴 (렘 의상시리즈)",
+        "name_ja": "Re:ゼロ トレーディングアクリル (レム衣装)",
+        "category": "아크릴 스탠드",
+        "affiliation": "리제로",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 2042,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "주술회전 디포르메 아크릴 마스코트 (마히토)",
+      "name_ja": "呪術廻戦 デフォルメアクリルマスコット (真人)",
+      "search_query": "呪術廻戦 デフォルメアクリルマスコット (真人)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%9C%9F%E4%BA%BA%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%9C%9F%E4%BA%BA%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%9C%9F%E4%BA%BA%29",
+      "fallback_search_terms": [
+        "呪術廻戦 デフォルメアクリルマスコット (真人)",
+        "주술회전 디포르메 아크릴 마스코트 (마히토)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E7%9C%9F%E4%BA%BA%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E7%9C%9F%E4%BA%BA%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E7%9C%9F%E4%BA%BA%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EB%A7%88%ED%9E%88%ED%86%A0%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EB%A7%88%ED%9E%88%ED%86%A0%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EB%A7%88%ED%9E%88%ED%86%A0%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"呪術廻戦 デフォルメアクリルマスコット (真人)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E7%9C%9F%E4%BA%BA%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"呪術廻戦 デフォルメアクリルマスコット (真人)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E7%9C%9F%E4%BA%BA%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"呪術廻戦 デフォルメアクリルマスコット (真人)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E7%9C%9F%E4%BA%BA%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"주술회전 디포르메 아크릴 마스코트 (마히토)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EB%A7%88%ED%9E%88%ED%86%A0%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"주술회전 디포르메 아크릴 마스코트 (마히토)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EB%A7%88%ED%9E%88%ED%86%A0%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"주술회전 디포르메 아크릴 마스코트 (마히토)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84+%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94+%EC%95%84%ED%81%AC%EB%A6%B4+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%28%EB%A7%88%ED%9E%88%ED%86%A0%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 2042,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2042,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%9C%9F%E4%BA%BA%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "주술회전 디포르메 아크릴 마스코트 (마히토)",
+        "name_ja": "呪術廻戦 デフォルメアクリルマスコット (真人)",
+        "category": "아크릴 스탠드",
+        "affiliation": "주술회전",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 2066,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "전생슬 아크릴 스탠드 (베니마루)",
+      "name_ja": "転スラ アクリルスタンド (紅丸)",
+      "search_query": "転スラ アクリルスタンド (紅丸)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E7%B4%85%E4%B8%B8%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E7%B4%85%E4%B8%B8%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E7%B4%85%E4%B8%B8%29",
+      "fallback_search_terms": [
+        "転スラ アクリルスタンド (紅丸)",
+        "전생슬 아크릴 스탠드 (베니마루)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A0%84%EC%83%9D%EC%8A%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%B2%A0%EB%8B%88%EB%A7%88%EB%A3%A8%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A0%84%EC%83%9D%EC%8A%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%B2%A0%EB%8B%88%EB%A7%88%EB%A3%A8%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A0%84%EC%83%9D%EC%8A%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%B2%A0%EB%8B%88%EB%A7%88%EB%A3%A8%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"転スラ アクリルスタンド (紅丸)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"転スラ アクリルスタンド (紅丸)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"転スラ アクリルスタンド (紅丸)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"전생슬 아크릴 스탠드 (베니마루)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A0%84%EC%83%9D%EC%8A%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%B2%A0%EB%8B%88%EB%A7%88%EB%A3%A8%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"전생슬 아크릴 스탠드 (베니마루)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A0%84%EC%83%9D%EC%8A%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%B2%A0%EB%8B%88%EB%A7%88%EB%A3%A8%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"전생슬 아크릴 스탠드 (베니마루)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%A0%84%EC%83%9D%EC%8A%AC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%B2%A0%EB%8B%88%EB%A7%88%EB%A3%A8%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 2066,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2066,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E7%B4%85%E4%B8%B8%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "전생슬 아크릴 스탠드 (베니마루)",
+        "name_ja": "転スラ アクリルスタンド (紅丸)",
+        "category": "아크릴 스탠드",
+        "affiliation": "전생슬",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 2088,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "슈타인즈게이트 아크릴 스탠드 (오카베 린타로)",
+      "name_ja": "シュタインズ・ゲート アクリルスタンド (岡部倫太郎)",
+      "search_query": "シュタインズ・ゲート アクリルスタンド (岡部倫太郎)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29",
+      "fallback_search_terms": [
+        "シュタインズ・ゲート アクリルスタンド (岡部倫太郎)",
+        "슈타인즈게이트 아크릴 스탠드 (오카베 린타로)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%98%A4%EC%B9%B4%EB%B2%A0+%EB%A6%B0%ED%83%80%EB%A1%9C%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%98%A4%EC%B9%B4%EB%B2%A0+%EB%A6%B0%ED%83%80%EB%A1%9C%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%98%A4%EC%B9%B4%EB%B2%A0+%EB%A6%B0%ED%83%80%EB%A1%9C%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (岡部倫太郎)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (岡部倫太郎)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (岡部倫太郎)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (오카베 린타로)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%98%A4%EC%B9%B4%EB%B2%A0+%EB%A6%B0%ED%83%80%EB%A1%9C%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (오카베 린타로)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%98%A4%EC%B9%B4%EB%B2%A0+%EB%A6%B0%ED%83%80%EB%A1%9C%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (오카베 린타로)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EC%98%A4%EC%B9%B4%EB%B2%A0+%EB%A6%B0%ED%83%80%EB%A1%9C%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 2088,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2088,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "슈타인즈게이트 아크릴 스탠드 (오카베 린타로)",
+        "name_ja": "シュタインズ・ゲート アクリルスタンド (岡部倫太郎)",
+        "category": "아크릴 스탠드",
+        "affiliation": "슈타인즈게이트",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 2091,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "슈타인즈게이트 아크릴 스탠드 (하시다 이타루)",
+      "name_ja": "シュタインズ・ゲート アクリルスタンド (橋田至)",
+      "search_query": "シュタインズ・ゲート アクリルスタンド (橋田至)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A9%8B%E7%94%B0%E8%87%B3%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A9%8B%E7%94%B0%E8%87%B3%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A9%8B%E7%94%B0%E8%87%B3%29",
+      "fallback_search_terms": [
+        "シュタインズ・ゲート アクリルスタンド (橋田至)",
+        "슈타인즈게이트 아크릴 스탠드 (하시다 이타루)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A9%8B%E7%94%B0%E8%87%B3%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A9%8B%E7%94%B0%E8%87%B3%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A9%8B%E7%94%B0%E8%87%B3%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%95%98%EC%8B%9C%EB%8B%A4+%EC%9D%B4%ED%83%80%EB%A3%A8%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%95%98%EC%8B%9C%EB%8B%A4+%EC%9D%B4%ED%83%80%EB%A3%A8%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%95%98%EC%8B%9C%EB%8B%A4+%EC%9D%B4%ED%83%80%EB%A3%A8%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (橋田至)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A9%8B%E7%94%B0%E8%87%B3%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (橋田至)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A9%8B%E7%94%B0%E8%87%B3%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (橋田至)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A9%8B%E7%94%B0%E8%87%B3%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (하시다 이타루)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%95%98%EC%8B%9C%EB%8B%A4+%EC%9D%B4%ED%83%80%EB%A3%A8%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (하시다 이타루)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%95%98%EC%8B%9C%EB%8B%A4+%EC%9D%B4%ED%83%80%EB%A3%A8%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (하시다 이타루)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%95%98%EC%8B%9C%EB%8B%A4+%EC%9D%B4%ED%83%80%EB%A3%A8%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 2091,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2091,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A9%8B%E7%94%B0%E8%87%B3%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "슈타인즈게이트 아크릴 스탠드 (하시다 이타루)",
+        "name_ja": "シュタインズ・ゲート アクリルスタンド (橋田至)",
+        "category": "아크릴 스탠드",
+        "affiliation": "슈타인즈게이트",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "fallback_not_started",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "catalog_index": 2092,
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_sequence": 1,
+      "source_store": "애니메이트",
+      "category": "아크릴 스탠드",
+      "name_ko": "슈타인즈게이트 아크릴 스탠드 (페이리스 NyanNyan)",
+      "name_ja": "シュタインズ・ゲート アクリルスタンド (フェイリス・ニャンニャン)",
+      "search_query": "シュタインズ・ゲート アクリルスタンド (フェイリス・ニャンニャン)",
+      "review_state": "official_search_review_required",
+      "workflow": "official_search_url_available",
+      "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29",
+      "official_search_fetch_status": "ok",
+      "official_search_http_status": 200,
+      "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29",
+      "fallback_search_terms": [
+        "シュタインズ・ゲート アクリルスタンド (フェイリス・ニャンニャン)",
+        "슈타인즈게이트 아크릴 스탠드 (페이리스 NyanNyan)"
+      ],
+      "domain_limited_web_search_urls": [
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%8E%98%EC%9D%B4%EB%A6%AC%EC%8A%A4+NyanNyan%29%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%8E%98%EC%9D%B4%EB%A6%AC%EC%8A%A4+NyanNyan%29%22+%22pd%2F%22",
+        "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%8E%98%EC%9D%B4%EB%A6%AC%EC%8A%A4+NyanNyan%29%22+%22%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9%22"
+      ],
+      "fallback_search_queries": [
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (フェイリス・ニャンニャン)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (フェイリス・ニャンニャン)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"シュタインズ・ゲート アクリルスタンド (フェイリス・ニャンニャン)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        },
+        {
+          "purpose": "exact_title_detail_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (페이리스 NyanNyan)\"",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%8E%98%EC%9D%B4%EB%A6%AC%EC%8A%A4+NyanNyan%29%22"
+        },
+        {
+          "purpose": "exact_title_pd_path",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (페이리스 NyanNyan)\" pd/",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%8E%98%EC%9D%B4%EB%A6%AC%EC%8A%A4+NyanNyan%29%22+pd%2F"
+        },
+        {
+          "purpose": "exact_title_animate_product_page",
+          "query": "site:www.animate-onlineshop.jp/pn/ \"슈타인즈게이트 아크릴 스탠드 (페이리스 NyanNyan)\" アニメイト通販",
+          "search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%EC%8A%88%ED%83%80%EC%9D%B8%EC%A6%88%EA%B2%8C%EC%9D%B4%ED%8A%B8+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%ED%8E%98%EC%9D%B4%EB%A6%AC%EC%8A%A4+NyanNyan%29%22+%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E9%80%9A%E8%B2%A9"
+        }
+      ],
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "manual_review_checklist": [
+        "Open the search hint and keep evidence on www.animate-onlineshop.jp.",
+        "Confirm the page is an exact product/detail page, not a search result or category page.",
+        "Confirm product title, series, character/variant, category, and release context match this catalog row.",
+        "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "fallback_reason": "official_search_url_unavailable",
+      "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
+      "source_patch_template": {
+        "catalog_index": 2092,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "애니메이트",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2092,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29",
+        "candidate_source_url": "",
+        "source_store": "애니메이트",
+        "name_ko": "슈타인즈게이트 아크릴 스탠드 (페이리스 NyanNyan)",
+        "name_ja": "シュタインズ・ゲート アクリルスタンド (フェイリス・ニャンニャン)",
+        "category": "아크릴 스탠드",
+        "affiliation": "슈타인즈게이트",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    }
+  ]
 }

@@ -5144,6 +5144,7 @@ def validate_report_consistency(
     animation_action_queue_override: dict[str, Any] | None = None,
     animation_split_review_override: dict[str, Any] | None = None,
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
+    source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
 ) -> list[str]:
     findings: list[str] = []
     source_summary = source_discovery["summary"]
@@ -5440,7 +5441,9 @@ def validate_report_consistency(
             source_next_focus_pack_summary.get("focus_pack_progress_remaining_rows", 0)
         )
     source_next_focus_fallback_queue = (
-        load_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, {})
+        source_next_focus_fallback_queue_override
+        if source_next_focus_fallback_queue_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.exists()
         else {}
     )
@@ -6629,6 +6632,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_action_queue,
         animation_split_review,
         animation_unmatched_keyword_review,
+        source_discovery_next_focus_fallback_queue,
     )
     if consistency_findings:
         raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))

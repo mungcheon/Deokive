@@ -2500,7 +2500,7 @@
     "source_discovery_next_focus_pack_rows": 20,
     "source_discovery_focus_pack_progress_queues": 23,
     "source_discovery_focus_pack_progress_remaining_rows": 417,
-    "source_discovery_next_focus_fallback_rows": 0,
+    "source_discovery_next_focus_fallback_rows": 17,
     "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
     "source_detail_candidate_action_rows": 15,
     "source_detail_candidate_manual_confirmed_rows": 0,
@@ -2799,7 +2799,7 @@
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_focus_pack_progress_queues": 23,
       "source_discovery_focus_pack_progress_remaining_rows": 417,
-      "source_discovery_next_focus_fallback_rows": 0,
+      "source_discovery_next_focus_fallback_rows": 17,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
@@ -3783,11 +3783,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 22,
+    "action_count": 24,
     "blocked_action_count": 1,
-    "manual_review_action_count": 20,
+    "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 32624,
+    "total_action_rows": 32658,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -3821,7 +3821,7 @@
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_focus_pack_progress_queues": 23,
       "source_discovery_focus_pack_progress_remaining_rows": 417,
-      "source_discovery_next_focus_fallback_rows": 0,
+      "source_discovery_next_focus_fallback_rows": 17,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
@@ -3916,7 +3916,7 @@
     "source_focus_template_rows": 417,
     "source_focus_template_work_order_pack_count": 23,
     "source_focus_template_next_pack_rows": 20,
-    "source_next_focus_fallback_rows": 0,
+    "source_next_focus_fallback_rows": 17,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
     "source_discovery_action_rows": 632,
     "source_discovery_actionable_rows": 632,
@@ -5484,38 +5484,34 @@
   },
   "animation_category_action_queue": {
     "public_report": "data/animation_category_action_queue_public.json",
-    "actionable_categories": 7,
-    "queued_categories": 7,
-    "actionable_catalog_rows": 170,
-    "queued_catalog_rows": 170,
-    "action_batch_count": 2,
+    "actionable_categories": 2,
+    "queued_categories": 2,
+    "actionable_catalog_rows": 110,
+    "queued_catalog_rows": 110,
+    "action_batch_count": 1,
     "batch_size": 6,
     "max_categories": 24,
     "by_suggested_family": [
       [
-        "other",
-        6
+        "acrylic",
+        1
       ],
       [
-        "acrylic",
+        "other",
         1
       ]
     ],
     "by_color_group": [
       [
-        "neutral",
-        6
+        "blue",
+        1
       ],
       [
-        "blue",
+        "neutral",
         1
       ]
     ],
     "by_mapping_mode": [
-      [
-        "direct_category_mapping_review",
-        5
-      ],
       [
         "name_level_split_review_required",
         2
@@ -5523,36 +5519,27 @@
     ],
     "by_blocked_reason": [
       [
-        "direct_category_mapping_requires_sample_review",
-        5
-      ],
-      [
         "broad_source_category_requires_name_level_split",
         2
       ]
     ],
     "by_blocked_until": [
       [
-        "direct_category_mapping_manually_confirmed",
-        5
-      ],
-      [
         "name_level_split_rules_manually_confirmed",
         2
       ]
     ],
     "split_review_categories": 2,
-    "direct_mapping_categories": 5,
+    "direct_mapping_categories": 0,
     "app_folder_color_count": 188,
     "app_folder_icon_option_count": 211,
     "app_folder_icon_group_count": 9,
     "app_folder_palette_section_count": 8,
     "app_folder_palette_sorted_by_family": true,
     "app_animation_visuals_covered": true,
-    "work_order_steps": 3,
+    "work_order_steps": 2,
     "work_order_lanes": [
       "name_level_split_review",
-      "direct_category_mapping_review",
       "unmatched_keyword_review"
     ],
     "split_first_blocked_categories": [
@@ -6456,15 +6443,21 @@
     "public_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
     "focus_pack_id": "source-discovery-focus-001",
     "pack_items": 20,
-    "official_search_ok_rows": 20,
-    "official_search_unavailable_rows": 0,
+    "official_search_ok_rows": 3,
+    "official_search_unavailable_rows": 17,
     "store_fetch_blocked_rows": 0,
+    "official_search_no_result_rows": 17,
+    "official_search_with_product_detail_link_rows": 3,
     "store_fetch_blocked_by_netloc": [],
     "all_unavailable_rows_are_store_fetch_blocked": false,
     "status_counts": [
       [
+        "ok_200_no_results",
+        17
+      ],
+      [
         "ok_200",
-        20
+        3
       ]
     ],
     "http_status_counts": [
@@ -6473,9 +6466,9 @@
         20
       ]
     ],
-    "fallback_web_search_required": false,
+    "fallback_web_search_required": true,
     "auto_apply_enabled": false,
-    "recommended_next_action": "review_official_search_results_for_exact_detail_urls"
+    "recommended_next_action": "resolve_unavailable_official_search_urls_before_source_import"
   },
   "ichiban_kuji_prize_name_image_review": {
     "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
@@ -6543,18 +6536,37 @@
   "source_discovery_next_focus_fallback_queue": {
     "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
     "focus_pack_id": "source-discovery-focus-001",
-    "queue_rows": 0,
+    "queue_rows": 17,
     "manual_confirmed_rows": 0,
-    "fallback_reason": "none",
-    "by_http_status": [],
-    "by_source_store": [],
-    "by_category": [],
-    "fallback_query_count": 0,
-    "domain_limited_web_search_url_count": 0,
-    "work_order_steps": 0,
-    "work_order_lanes": [],
-    "first_domain_limited_web_search_url": "",
-    "first_fallback_store_search_url": "",
+    "fallback_reason": "official_search_url_unavailable",
+    "by_http_status": [
+      [
+        "200",
+        17
+      ]
+    ],
+    "by_source_store": [
+      [
+        "애니메이트",
+        17
+      ]
+    ],
+    "by_category": [
+      [
+        "아크릴 스탠드",
+        17
+      ]
+    ],
+    "fallback_query_count": 87,
+    "domain_limited_web_search_url_count": 87,
+    "work_order_steps": 3,
+    "work_order_lanes": [
+      "domain_limited_exact_title_search",
+      "legacy_mobile_store_search",
+      "evidence_fill_and_dry_run"
+    ],
+    "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+    "first_fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
     "auto_apply_enabled": false,
     "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
   },
@@ -6562,8 +6574,13 @@
     "public_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json",
     "write": false,
     "updated_rows": 0,
-    "skipped_rows": 0,
-    "skip_reason_counts": []
+    "skipped_rows": 17,
+    "skip_reason_counts": [
+      [
+        "manual_confirmed_false",
+        17
+      ]
+    ]
   },
   "source_discovery_next_focus_detail_candidates": {
     "public_report": "data/source_discovery_next_focus_detail_candidates_public.json",

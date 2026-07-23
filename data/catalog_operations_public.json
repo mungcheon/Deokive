@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T11:37:01Z",
+  "generated_at": "2026-07-23T11:46:19Z",
   "summary": {
     "catalog_rows": 20348,
     "coverage": {
@@ -49,7 +49,7 @@
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_focus_pack_progress_queues": 23,
       "source_discovery_focus_pack_progress_remaining_rows": 417,
-      "source_discovery_next_focus_fallback_rows": 0,
+      "source_discovery_next_focus_fallback_rows": 17,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
@@ -191,16 +191,20 @@
     },
     {
       "workstream": "source_discovery_next_focus_pack_fetch_audit",
-      "status": "ready_for_manual_review",
-      "open_rows": 0,
+      "status": "fallback_required",
+      "open_rows": 17,
       "focus_pack_id": "source-discovery-focus-001",
       "pack_items": 20,
-      "official_search_ok_rows": 20,
-      "official_search_unavailable_rows": 0,
+      "official_search_ok_rows": 3,
+      "official_search_unavailable_rows": 17,
       "status_counts": [
         [
+          "ok_200_no_results",
+          17
+        ],
+        [
           "ok_200",
-          20
+          3
         ]
       ],
       "primary_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
@@ -209,15 +213,29 @@
     },
     {
       "workstream": "source_discovery_next_focus_fallback_queue",
-      "status": "clear",
-      "open_rows": 0,
+      "status": "manual_review",
+      "open_rows": 17,
       "manual_confirmed_rows": 0,
-      "fallback_reason": "none",
-      "by_source_store": [],
-      "by_category": [],
+      "fallback_reason": "official_search_url_unavailable",
+      "by_source_store": [
+        [
+          "애니메이트",
+          17
+        ]
+      ],
+      "by_category": [
+        [
+          "아크릴 스탠드",
+          17
+        ]
+      ],
       "primary_report": "data/source_discovery_next_focus_fallback_queue_public.json",
       "next_step": "fill_exact_manual_confirmed_source_urls_from_fallback_research",
-      "work_order_lanes": [],
+      "work_order_lanes": [
+        "domain_limited_exact_title_search",
+        "legacy_mobile_store_search",
+        "evidence_fill_and_dry_run"
+      ],
       "auto_apply_enabled": false
     },
     {
@@ -2761,9 +2779,9 @@
       "public_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
       "focus_pack_id": "source-discovery-focus-001",
       "pack_items": 20,
-      "official_search_ok_rows": 20,
-      "official_search_unavailable_rows": 0,
-      "fallback_web_search_required": false,
+      "official_search_ok_rows": 3,
+      "official_search_unavailable_rows": 17,
+      "fallback_web_search_required": true,
       "recommended_next_action": "Use web search or store archives for the current focus pack before marking any source_url confirmed."
     },
     {
@@ -2771,14 +2789,28 @@
       "workstream": "source_discovery_next_focus_fallback_queue",
       "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
       "focus_pack_id": "source-discovery-focus-001",
-      "queue_rows": 0,
+      "queue_rows": 17,
       "manual_confirmed_rows": 0,
-      "fallback_reason": "none",
-      "by_source_store": [],
-      "by_category": [],
-      "work_order_steps": 0,
-      "work_order_lanes": [],
-      "first_domain_limited_web_search_url": "",
+      "fallback_reason": "official_search_url_unavailable",
+      "by_source_store": [
+        [
+          "애니메이트",
+          17
+        ]
+      ],
+      "by_category": [
+        [
+          "아크릴 스탠드",
+          17
+        ]
+      ],
+      "work_order_steps": 3,
+      "work_order_lanes": [
+        "domain_limited_exact_title_search",
+        "legacy_mobile_store_search",
+        "evidence_fill_and_dry_run"
+      ],
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
       "auto_apply_enabled": false,
       "recommended_next_action": "Review fallback rows and fill exact manual_confirmed_source_url values before source import."
     },
