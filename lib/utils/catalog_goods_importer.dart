@@ -552,7 +552,6 @@ DateTime? _parseCatalogReleaseDate(String? raw) {
       DateTime.tryParse('$value-01-01');
 }
 
-@visibleForTesting
 Future<Uint8List?> loadCatalogEntryImageBytes(GoodsCatalogEntry entry) async {
   final localBytes = await loadCatalogEntryBundledImageBytes(entry);
   if (localBytes != null) return localBytes;

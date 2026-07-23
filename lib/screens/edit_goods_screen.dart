@@ -1,10 +1,8 @@
 import 'dart:math' as math;
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -231,23 +229,8 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
   }
 
   Future<void> _attachCatalogImage(GoodsCatalogEntry entry) async {
-    final localPath = entry.localImagePath?.trim() ?? '';
-    if (localPath.isNotEmpty) {
-      final localBytes = await _downloadImageBytes(localPath);
-      if (!mounted) return;
-      if (localBytes != null) {
-        setState(() => selectedImages.add(localBytes));
-        return;
-      }
-    }
-
-    final raw = entry.imageUrl?.trim() ?? '';
-    if (raw.isEmpty) return;
-    var url = raw.replaceAll('&amp;', '&');
-    if (url.startsWith('//')) url = 'https:$url';
-    if (!url.startsWith('http')) return;
     final messenger = ScaffoldMessenger.of(context);
-    final bytes = await _downloadImageBytes(url);
+    final bytes = await loadCatalogEntryImageBytes(entry);
     if (!mounted) return;
     if (bytes == null) {
       messenger.showSnackBar(const SnackBar(
@@ -256,39 +239,6 @@ class _EditGoodsScreenState extends State<EditGoodsScreen> {
       return;
     }
     setState(() => selectedImages.add(bytes));
-  }
-
-  Future<Uint8List?> _downloadImageBytes(String url) async {
-    if (url.startsWith('assets/')) {
-      try {
-        final data = await rootBundle.load(url);
-        return data.buffer.asUint8List();
-      } catch (_) {
-        if (!kIsWeb) return null;
-      }
-    }
-
-    try {
-      final uri = Uri.parse(url);
-      final resolvedUri = uri.hasScheme
-          ? uri
-          : url.startsWith('assets/')
-              ? Uri.base.resolve('assets/$url')
-              : Uri.base.resolve(url);
-      final response = await http.get(
-        resolvedUri,
-        headers: const {
-          'User-Agent': 'Mozilla/5.0 (Linux; Android) Deokive/1.0',
-          'Accept': 'image/*,*/*',
-        },
-      ).timeout(const Duration(seconds: 12));
-      if (response.statusCode != 200 || response.bodyBytes.isEmpty) {
-        return null;
-      }
-      return response.bodyBytes;
-    } catch (_) {
-      return null;
-    }
   }
 
   Future<bool> _confirmAddShippingSchedule(DateTime shippingDate) async {
