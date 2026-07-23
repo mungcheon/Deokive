@@ -312,9 +312,8 @@ class _CatalogImportPanel extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '검색 후 내 굿즈함·위시리스트에 추가',
-                        maxLines: 1,
-                        softWrap: false,
+                        '중복·예시를 뺀 목록에서 검색해 추가해요',
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: theme.colorScheme.onSurface
@@ -334,14 +333,14 @@ class _CatalogImportPanel extends StatelessWidget {
               runSpacing: 6,
               children: [
                 _CatalogMetricPill(
-                  label: '실데이터',
+                  label: '등록',
                   value: '${_CatalogHealthSummary.formatCount(
                     health.uniqueCount,
                   )}개',
                   color: palette.primary,
                 ),
                 _CatalogMetricPill(
-                  label: '사진',
+                  label: '이미지',
                   value: _CatalogHealthSummary.formatCount(
                     health.imageCount,
                   ),
@@ -351,9 +350,8 @@ class _CatalogImportPanel extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'DB 전체 목록에서 필터링하고 선택한 굿즈만 추가해요.',
-              maxLines: 1,
-              softWrap: false,
+              'DB 보기에서 검색어와 분류로 필터링한 뒤 필요한 굿즈만 담을 수 있어요.',
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.58),
@@ -410,7 +408,7 @@ class _CatalogMetricPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      constraints: const BoxConstraints(maxWidth: 128),
+      constraints: const BoxConstraints(maxWidth: 116),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.10),
@@ -864,12 +862,17 @@ class _BadgeShowcase extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(3, (index) {
                       if (index < equippedBadges.length) {
-                        return _SimpleEmblemSlot(badge: equippedBadges[index]);
+                        return Expanded(
+                          child: _SimpleEmblemSlot(
+                            badge: equippedBadges[index],
+                          ),
+                        );
                       }
-                      return _EmptyEmblemSlot(accent: palette.primary);
+                      return Expanded(
+                        child: _EmptyEmblemSlot(accent: palette.primary),
+                      );
                     }),
                   ),
                 ],
@@ -890,8 +893,8 @@ class _SimpleEmblemSlot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      width: 96,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Column(
         children: [
           Container(
@@ -940,8 +943,8 @@ class _EmptyEmblemSlot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      width: 96,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Column(
         children: [
           Container(
