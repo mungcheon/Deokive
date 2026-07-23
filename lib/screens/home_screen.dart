@@ -322,8 +322,8 @@ class _CatalogImportPanel extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             'DB에서 원하는 굿즈를 찾아 내 굿즈함이나 위시리스트에 바로 추가해요.',
-            maxLines: 3,
-            overflow: TextOverflow.visible,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
               height: 1.35,
@@ -380,6 +380,8 @@ class _CatalogHealthSummary {
     final seenKeys = <String>{};
 
     for (final entry in entries) {
+      if (_isExampleEntry(entry)) continue;
+
       final key = _identityKey(entry);
       if (seenKeys.add(key)) {
         uniqueEntries.add(entry);
@@ -403,13 +405,10 @@ class _CatalogHealthSummary {
   }
 
   static String _identityKey(GoodsCatalogEntry entry) {
-    final sourceUrl = entry.sourceUrl?.trim().toLowerCase() ?? '';
-    if (sourceUrl.isNotEmpty) return 'source:$sourceUrl';
-
     final barcode = entry.barcode?.trim() ?? '';
     if (barcode.isNotEmpty) return 'barcode:$barcode';
 
-    return [
+    final identityParts = [
       entry.affiliation,
       entry.seriesName ?? '',
       entry.nameKo,
@@ -418,20 +417,58 @@ class _CatalogHealthSummary {
       entry.characterName,
       entry.subSeries ?? '',
     ].map((value) => value.trim().toLowerCase()).join('|');
+    if (identityParts.replaceAll('|', '').isNotEmpty) {
+      return 'identity:$identityParts';
+    }
+
+    final sourceUrl = entry.sourceUrl?.trim().toLowerCase() ?? '';
+    if (sourceUrl.isNotEmpty) return 'source:$sourceUrl';
+
+    return 'entry:${entry.id ?? entry.hashCode}';
+  }
+
+  static bool _isExampleEntry(GoodsCatalogEntry entry) {
+    final values = [
+      entry.nameKo,
+      entry.nameJa ?? '',
+      entry.nameEn ?? '',
+      entry.category,
+      entry.characterName,
+      entry.affiliation,
+      entry.seriesName ?? '',
+      entry.subSeries ?? '',
+      entry.sourceStore,
+      entry.sourceUrl ?? '',
+      entry.displayImagePath ?? '',
+    ].map((value) => value.trim().toLowerCase());
+
+    return values.any(_looksLikeExampleText);
   }
 
   static bool _hasRealDisplayImage(GoodsCatalogEntry entry) {
     final imagePath = (entry.displayImagePath ?? '').trim().toLowerCase();
     if (imagePath.isEmpty) return false;
 
-    return ![
+    return !_looksLikeExampleText(imagePath);
+  }
+
+  static bool _looksLikeExampleText(String value) {
+    if (value.isEmpty) return false;
+
+    return [
       'sample',
       'example',
       'placeholder',
       'no_image',
       'no-image',
       'dummy',
-    ].any(imagePath.contains);
+      'test-image',
+      'fixture',
+      '예시',
+      '샘플',
+      '테스트',
+      '더미',
+    ].any(value.contains);
   }
 
   static String _formatCoverage(double value) {
