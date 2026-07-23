@@ -1,8 +1,31 @@
 {
+  "schema_version": 2,
+  "generated_at": "2026-07-23T18:12:07Z",
+  "scope": "catalog_image_attachment_template_import_dry_run",
+  "summary": {
+    "template_items": 73,
+    "manual_confirmed_rows": 0,
+    "ready_image_rows": 0,
+    "source_url_update_required_rows": 50,
+    "representative_image_review_required_rows": 23,
+    "image_url_ready_rows": 0,
+    "updated_rows": 0,
+    "skipped_rows": 73,
+    "blocked_rows": 73,
+    "skip_reason_counts": [
+      [
+        "manual_confirmed_false",
+        73
+      ]
+    ],
+    "auto_apply_enabled": false,
+    "write": false
+  },
   "write": false,
-  "queue": "data\\catalog_image_attachment_confirmed_template_public.json",
+  "queue": "data/catalog_image_attachment_confirmed_template_public.json",
   "updated_rows": 0,
   "skipped_rows": 73,
+  "blocked_rows": 73,
   "skip_reason_counts": [
     [
       "manual_confirmed_false",
@@ -449,5 +472,17 @@
       "name_ko": "하치와레 ご当地 캔뱃지 (홋카이도)",
       "reason": "manual_confirmed_false"
     }
-  ]
+  ],
+  "automation_policy": {
+    "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+    "auto_apply_enabled": false,
+    "write_enabled": false,
+    "required_before_write": [
+      "manual_confirmed=true",
+      "field=image_url",
+      "manual_value is a direct product image URL",
+      "candidate_source_url or evidence_url points to the exact product page",
+      "source/image pair passes generic-image and product-source safety checks"
+    ]
+  }
 }

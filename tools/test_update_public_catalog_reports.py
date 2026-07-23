@@ -122,6 +122,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["image_attachment_action_queue"]["source_url_update_template_rows"],
         )
         self.assertIs(quality["image_source_url_confirmed_template"]["auto_apply_enabled"], False)
+        image_attachment_import = reports.load_json(reports.IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN)
+        self.assertEqual(
+            quality["image_attachment_template_import_dry_run"]["template_items"],
+            image_attachment_import["summary"]["template_items"],
+        )
+        self.assertEqual(quality["image_attachment_template_import_dry_run"]["updated_rows"], 0)
+        self.assertEqual(quality["image_attachment_template_import_dry_run"]["skipped_rows"], 73)
+        self.assertEqual(quality["image_attachment_template_import_dry_run"]["manual_confirmed_rows"], 0)
+        self.assertIs(quality["image_attachment_template_import_dry_run"]["auto_apply_enabled"], False)
         self.assertEqual(
             quality["source_url_update_queue_split"]["covered_rows"],
             quality["source_url_update_queue_split"]["source_url_update_required_rows"],
@@ -1616,6 +1625,53 @@ class PublicCatalogReportTests(unittest.TestCase):
                 for batch in animation_keyword_agent_batches
             )
         )
+
+
+    def test_image_attachment_template_import_dry_run_has_actionable_summary(self):
+        template = {
+            "items": [
+                {
+                    "manual_confirmed": False,
+                    "row_index": 0,
+                    "catalog_index": 10,
+                    "field": "image_url",
+                    "manual_value": "",
+                    "candidate_source_url": "",
+                    "name_ko": "Sample",
+                    "source_url_update_required": True,
+                    "representative_image_review_required": False,
+                    "image_url_ready": False,
+                }
+            ]
+        }
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 10,
+                    "name_ko": "Sample",
+                    "source_url": "https://fanding.kr/@stellive/shop",
+                    "image_url": None,
+                }
+            ]
+        }
+
+        dry_run = reports.build_image_attachment_template_import_dry_run_public(
+            template,
+            catalog,
+            "2026-07-24T00:00:00Z",
+        )
+
+        self.assertEqual(dry_run["schema_version"], 2)
+        self.assertEqual(dry_run["summary"]["template_items"], 1)
+        self.assertEqual(dry_run["summary"]["manual_confirmed_rows"], 0)
+        self.assertEqual(dry_run["summary"]["ready_image_rows"], 0)
+        self.assertEqual(dry_run["summary"]["source_url_update_required_rows"], 1)
+        self.assertEqual(dry_run["summary"]["updated_rows"], 0)
+        self.assertEqual(dry_run["summary"]["skipped_rows"], 1)
+        self.assertEqual(dry_run["summary"]["skip_reason_counts"], [("manual_confirmed_false", 1)])
+        self.assertIs(dry_run["summary"]["auto_apply_enabled"], False)
+        self.assertEqual(dry_run["queue"], "data/catalog_image_attachment_confirmed_template_public.json")
+        self.assertEqual(dry_run["skipped_sample"][0]["reason"], "manual_confirmed_false")
 
 
 if __name__ == "__main__":

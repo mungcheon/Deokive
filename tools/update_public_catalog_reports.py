@@ -30,6 +30,7 @@ import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_pack_public
 import import_confirmed_deduplication_rows
+import import_confirmed_image_attachment_rows
 import import_confirmed_source_discovery_rows
 
 
@@ -612,6 +613,81 @@ def build_deduplication_template_import_dry_run_public(
                 "same_sellable_product_confirmed=true",
                 "decision in drop_duplicates/merge_duplicates/remove_duplicate_rows",
                 "keep_catalog_index and drop_catalog_indexes verified against current catalog_public.json",
+            ],
+        },
+    }
+
+
+def build_image_attachment_template_import_dry_run_public(
+    template: dict[str, Any],
+    catalog: dict[str, Any],
+    generated_at: str,
+) -> dict[str, Any]:
+    seed_rows = [row for row in catalog.get("items", []) if isinstance(row, dict)]
+    result = import_confirmed_image_attachment_rows.import_rows(template, seed_rows)
+    items = [item for item in template.get("items", []) if isinstance(item, dict)]
+    skip_reasons = Counter(str(item.get("reason") or "unspecified") for item in result["skipped"])
+
+    def confirmed(value: Any) -> bool:
+        if isinstance(value, bool):
+            return value
+        return str(value or "").strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "y",
+            "confirmed",
+            "확인",
+            "확정",
+        }
+
+    ready_image_rows = sum(
+        1
+        for item in items
+        if confirmed(item.get("manual_confirmed"))
+        and str(item.get("field") or "").strip() == "image_url"
+        and str(item.get("manual_value") or "").strip()
+        and (str(item.get("candidate_source_url") or "").strip() or str(item.get("evidence_url") or "").strip())
+    )
+    summary = {
+        "template_items": len(items),
+        "manual_confirmed_rows": sum(1 for item in items if confirmed(item.get("manual_confirmed"))),
+        "ready_image_rows": ready_image_rows,
+        "source_url_update_required_rows": sum(1 for item in items if item.get("source_url_update_required") is True),
+        "representative_image_review_required_rows": sum(
+            1 for item in items if item.get("representative_image_review_required") is True
+        ),
+        "image_url_ready_rows": sum(1 for item in items if item.get("image_url_ready") is True),
+        "updated_rows": len(result["updated"]),
+        "skipped_rows": len(result["skipped"]),
+        "blocked_rows": len(result["skipped"]),
+        "skip_reason_counts": skip_reasons.most_common(),
+        "auto_apply_enabled": False,
+        "write": False,
+    }
+    return {
+        "schema_version": 2,
+        "generated_at": generated_at,
+        "scope": "catalog_image_attachment_template_import_dry_run",
+        "summary": summary,
+        "write": False,
+        "queue": str(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.relative_to(ROOT)).replace("\\", "/"),
+        "updated_rows": len(result["updated"]),
+        "skipped_rows": len(result["skipped"]),
+        "blocked_rows": len(result["skipped"]),
+        "skip_reason_counts": skip_reasons.most_common(),
+        "updated": result["updated"],
+        "skipped_sample": result["skipped"][:100],
+        "automation_policy": {
+            "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+            "auto_apply_enabled": False,
+            "write_enabled": False,
+            "required_before_write": [
+                "manual_confirmed=true",
+                "field=image_url",
+                "manual_value is a direct product image URL",
+                "candidate_source_url or evidence_url points to the exact product page",
+                "source/image pair passes generic-image and product-source safety checks",
             ],
         },
     }
@@ -6393,6 +6469,16 @@ def update_reports(write: bool) -> dict[str, Any]:
         load_json(STELLIVE_FANDING_CANDIDATES, {}) if STELLIVE_FANDING_CANDIDATES.exists() else None,
         generated_at=generated_at,
     )
+    image_attachment_confirmed_template = (
+        load_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, {})
+        if IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.exists()
+        else {"items": []}
+    )
+    image_attachment_template_import_dry_run = build_image_attachment_template_import_dry_run_public(
+        image_attachment_confirmed_template,
+        catalog,
+        generated_at,
+    )
     manual_source_url_search_queue = build_manual_source_url_search_queue_public.build_queue(
         image_source_url_confirmed_template,
         generated_at=generated_at,
@@ -6494,10 +6580,8 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_focus_packs,
         source_discovery_focus_template,
         source_discovery_focus_template_import,
-        load_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, {}) if IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.exists() else {},
-        load_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, {})
-        if IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.exists()
-        else {},
+        image_attachment_confirmed_template,
+        image_attachment_template_import_dry_run,
         source_discovery_next_focus_detail_candidates=source_discovery_next_focus_detail_candidates,
         source_discovery_next_focus_fallback_queue=source_discovery_next_focus_fallback_queue,
         generated_at=generated_at,
@@ -6776,6 +6860,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["image_source_url_confirmed_template"] = {
             "public_report": f"data/{IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.name}",
             **image_source_url_confirmed_template["summary"],
+        }
+        target["image_attachment_template_import_dry_run"] = {
+            "public_report": f"data/{IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.name}",
+            **image_attachment_template_import_dry_run["summary"],
         }
         target["manual_source_url_search_queue"] = {
             "public_report": f"data/{MANUAL_SOURCE_URL_SEARCH_QUEUE.name}",
@@ -7075,6 +7163,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority)
         write_json(MISSING_IMAGE_REPORT_COVERAGE, missing_image_report_coverage)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
+        write_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, image_attachment_template_import_dry_run)
         write_json(MANUAL_SOURCE_URL_SEARCH_QUEUE, manual_source_url_search_queue)
         write_json(PROVIDER_MISSING_SOURCE_URL_QUEUE, provider_missing_source_url_queue)
         write_json(CANDIDATE_SOURCE_URL_REVIEW_QUEUE, candidate_source_url_review_queue)
