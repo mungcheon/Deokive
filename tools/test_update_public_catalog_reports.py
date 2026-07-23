@@ -940,6 +940,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_action_summary.get("unqueued_actionable_source_rows"),
         )
         self.assertEqual(
+            open_queues.get("source_discovery_manual_research_backlog_rows"),
+            source_action_summary.get("manual_research_backlog_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_manual_identity_backfill_required_rows"),
+            source_action_summary.get("manual_research_identity_backfill_required_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_manual_official_lookup_rows"),
+            source_action_summary.get("manual_research_official_lookup_rows"),
+        )
+        self.assertEqual(
             source_scorecard.get("queue_coverage"),
             source_action_summary.get("queue_coverage"),
         )

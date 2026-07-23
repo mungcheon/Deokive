@@ -3116,6 +3116,12 @@ def build_operations_public(
         open_review_queues["source_discovery_manual_research_backlog_rows"] = (
             source_action_queue_summary.get("manual_research_backlog_rows", 0)
         )
+        open_review_queues["source_discovery_manual_identity_backfill_required_rows"] = (
+            source_action_queue_summary.get("manual_research_identity_backfill_required_rows", 0)
+        )
+        open_review_queues["source_discovery_manual_official_lookup_rows"] = (
+            source_action_queue_summary.get("manual_research_official_lookup_rows", 0)
+        )
     if source_focus_template_summary:
         open_review_queues["source_discovery_focus_template_rows"] = source_focus_template_summary.get(
             "template_items", 0
@@ -5413,6 +5419,12 @@ def validate_report_consistency(
         )
         expected_open_queues["source_discovery_manual_research_backlog_rows"] = (
             source_action_summary.get("manual_research_backlog_rows", 0)
+        )
+        expected_open_queues["source_discovery_manual_identity_backfill_required_rows"] = (
+            source_action_summary.get("manual_research_identity_backfill_required_rows", 0)
+        )
+        expected_open_queues["source_discovery_manual_official_lookup_rows"] = (
+            source_action_summary.get("manual_research_official_lookup_rows", 0)
         )
     source_focus_template = (
         load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {}) if SOURCE_DISCOVERY_FOCUS_TEMPLATE.exists() else {}
