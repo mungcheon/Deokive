@@ -43,7 +43,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('공개 굿즈 DB'), findsOneWidget);
-    expect(find.text('중복·예시를 뺀 목록에서 검색해 추가해요'), findsOneWidget);
+    expect(find.text('검색해서 내 굿즈함에 바로 담아요'), findsOneWidget);
     expect(find.widgetWithText(FilledButton, 'DB 보기'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

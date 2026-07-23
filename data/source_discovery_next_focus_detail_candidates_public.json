@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T19:45:06Z",
+  "generated_at": "2026-07-23T19:51:18Z",
   "scope": "source_discovery_next_focus_detail_candidates",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -32,7 +32,7 @@
       ],
       [
         "token_overlap_below_2",
-        21
+        22
       ],
       [
         "parenthetical_terms_missing",
@@ -61,8 +61,46 @@
         7
       ]
     ],
+    "review_decision_counts": [
+      [
+        "fallback_search_required",
+        13
+      ],
+      [
+        "catalog_variant_detail_required_before_import",
+        4
+      ],
+      [
+        "manual_candidate_identity_review_required",
+        3
+      ]
+    ],
+    "review_decision_reason_counts": [
+      [
+        "no_candidate_returned_from_provider_search",
+        13
+      ],
+      [
+        "multiple_variants_require_catalog_sub_series_or_character_detail",
+        4
+      ],
+      [
+        "candidate_title_has_weak_token_overlap",
+        4
+      ],
+      [
+        "catalog_row_is_too_broad_for_single_product_image",
+        2
+      ],
+      [
+        "candidate_title_does_not_preserve_catalog_variant_terms",
+        2
+      ]
+    ],
     "fallback_bridge_rows": 13,
     "manual_review_item_rows": 7,
+    "variant_detail_required_rows": 4,
+    "exact_candidate_confirmation_ready_items": 0,
     "blocked_candidate_research_item_rows": 0,
     "status_counts": [
       [
@@ -116,6 +154,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1072,
         "source_url": "<exact_product_detail_url>",
@@ -303,25 +349,6 @@
         },
         {
           "rank": 7,
-          "candidate_title": "【グッズ-スタンドポップ】ジョジョの奇妙な冒険 オラオラオーバードライブ アクリルスタンド　カーズ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E3%82%AB%E3%83%BC%E3%82%BA/pd/3505029/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595433158238_1_1781003121.jpg&width=400&height=400&square=1",
-          "token_overlap": 2,
-          "similarity": 1.0,
-          "type_compatible": true,
-          "all_distinctive_token_match": true,
-          "parenthetical_terms_match": true,
-          "product_source_url": true,
-          "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": false,
-          "exact_candidate_blockers": [
-            "rank_not_first",
-            "broad_query_without_variant"
-          ],
-          "review_status": "manual_candidate_review"
-        },
-        {
-          "rank": 8,
           "candidate_title": "【グッズ-スタンドポップ】アニメ『ジョジョの奇妙な冒険 ストーンオーシャン』 バストアップアクリルスタンド【RE】④ウェザー・R",
           "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%B3%E3%80%8F+%E3%83%90%E3%82%B9%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90RE%E3%80%91%E2%91%A3%E3%82%A6%E3%82%A7%E3%82%B6%E3%83%BC%E3%83%BBR/pd/3391250/",
           "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573699552328_1_1769771103.jpg&width=400&height=400&square=1",
@@ -339,9 +366,38 @@
             "broad_query_without_variant"
           ],
           "review_status": "manual_candidate_review"
+        },
+        {
+          "rank": 8,
+          "candidate_title": "【グッズ-スタンドポップ】アニメ『ジョジョの奇妙な冒険 ストーンオーシャン』 バストアップアクリルスタンド【RE】⑤ナルシソ・A",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%B3%E3%80%8F+%E3%83%90%E3%82%B9%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90RE%E3%80%91%E2%91%A4%E3%83%8A%E3%83%AB%E3%82%B7%E3%82%BD%E3%83%BBA/pd/3391251/",
+          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573699552335_1_1769771107.jpg&width=400&height=400&square=1",
+          "token_overlap": 1,
+          "similarity": 1.0,
+          "type_compatible": true,
+          "all_distinctive_token_match": true,
+          "parenthetical_terms_match": true,
+          "product_source_url": true,
+          "safe_source_image_pair": true,
+          "exact_candidate_gate_passed": false,
+          "exact_candidate_blockers": [
+            "rank_not_first",
+            "token_overlap_below_2",
+            "broad_query_without_variant"
+          ],
+          "review_status": "manual_candidate_review"
         }
       ],
       "review_bucket": "manual_candidate_identity_review",
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "catalog_row_is_too_broad_for_single_product_image",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1082,
         "source_url": "<exact_product_detail_url>",
@@ -415,6 +471,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1083,
         "source_url": "<exact_product_detail_url>",
@@ -488,6 +552,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1084,
         "source_url": "<exact_product_detail_url>",
@@ -708,6 +780,14 @@
         }
       ],
       "review_bucket": "manual_candidate_identity_review",
+      "review_decision": {
+        "decision": "manual_candidate_identity_review_required",
+        "severity": "manual_review",
+        "recommended_next_step": "review_candidate_variants_manually",
+        "reasons": [
+          "candidate_title_has_weak_token_overlap"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1117,
         "source_url": "<exact_product_detail_url>",
@@ -819,6 +899,14 @@
         }
       ],
       "review_bucket": "manual_candidate_identity_review",
+      "review_decision": {
+        "decision": "manual_candidate_identity_review_required",
+        "severity": "manual_review",
+        "recommended_next_step": "review_candidate_variants_manually",
+        "reasons": [
+          "candidate_title_has_weak_token_overlap"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1119,
         "source_url": "<exact_product_detail_url>",
@@ -1058,6 +1146,16 @@
         }
       ],
       "review_bucket": "manual_candidate_identity_review",
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "catalog_row_is_too_broad_for_single_product_image",
+          "candidate_title_has_weak_token_overlap",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1123,
         "source_url": "<exact_product_detail_url>",
@@ -1131,6 +1229,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1632,
         "source_url": "<exact_product_detail_url>",
@@ -1368,6 +1474,15 @@
         }
       ],
       "review_bucket": "manual_candidate_identity_review",
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "candidate_title_does_not_preserve_catalog_variant_terms",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1991,
         "source_url": "<exact_product_detail_url>",
@@ -1524,9 +1639,9 @@
         },
         {
           "rank": 5,
-          "candidate_title": "【グッズ-スタンドポップ】【推しの子】 黒川あかね ライトアップアクリルスタンド",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%83%A9%E3%82%A4%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3529862/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643407209_2_1783310713.jpg&width=400&height=400&square=1",
+          "candidate_title": "【グッズ-スタンドポップ】【推しの子】 描き下ろし 黒川あかね 星空メイドver. BIGアクリルスタンド",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E6%98%9F%E7%A9%BA%E3%83%A1%E3%82%A4%E3%83%89ver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3401347/",
+          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643172275_2_1770955512.jpg&width=400&height=400&square=1",
           "token_overlap": 2,
           "similarity": 1.0,
           "type_compatible": true,
@@ -1544,9 +1659,9 @@
         },
         {
           "rank": 6,
-          "candidate_title": "【グッズ-スタンドポップ】【推しの子】 描き下ろし 黒川あかね 星空メイドver. BIGアクリルスタンド",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E6%98%9F%E7%A9%BA%E3%83%A1%E3%82%A4%E3%83%89ver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3401347/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643172275_2_1770955512.jpg&width=400&height=400&square=1",
+          "candidate_title": "【グッズ-スタンドポップ】【推しの子】 黒川あかね ライトアップアクリルスタンド",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%83%A9%E3%82%A4%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3529862/",
+          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643407209_2_1783310713.jpg&width=400&height=400&square=1",
           "token_overlap": 2,
           "similarity": 1.0,
           "type_compatible": true,
@@ -1584,9 +1699,9 @@
         },
         {
           "rank": 8,
-          "candidate_title": "【グッズ-スタンドポップ】【推しの子】 アクリルスタンドフィギュア 黒川あかね カラフルver.",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%82%AB%E3%83%A9%E3%83%95%E3%83%ABver./pd/3420705/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550687026955_1_1773054306.jpg&width=400&height=400&square=1",
+          "candidate_title": "【グッズ-スタンドポップ】【推しの子】 『【47都道府県の子】』アクリルスタンドフィギュア 黒川あかね(新潟県)",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%80%8E%E3%80%9047%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%81%AE%E5%AD%90%E3%80%91%E3%80%8F%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD%28%E6%96%B0%E6%BD%9F%E7%9C%8C%29/pd/3316721/",
+          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11201256_691e915adc68e.jpg&width=400&height=400&square=1",
           "token_overlap": 2,
           "similarity": 1.0,
           "type_compatible": true,
@@ -1604,6 +1719,15 @@
         }
       ],
       "review_bucket": "manual_candidate_identity_review",
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "candidate_title_does_not_preserve_catalog_variant_terms",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 1992,
         "source_url": "<exact_product_detail_url>",
@@ -1677,6 +1801,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2037,
         "source_url": "<exact_product_detail_url>",
@@ -1750,6 +1882,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2066,
         "source_url": "<exact_product_detail_url>",
@@ -1985,6 +2125,14 @@
         }
       ],
       "review_bucket": "manual_candidate_identity_review",
+      "review_decision": {
+        "decision": "manual_candidate_identity_review_required",
+        "severity": "manual_review",
+        "recommended_next_step": "review_candidate_variants_manually",
+        "reasons": [
+          "candidate_title_has_weak_token_overlap"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2067,
         "source_url": "<exact_product_detail_url>",
@@ -2058,6 +2206,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2088,
         "source_url": "<exact_product_detail_url>",
@@ -2131,6 +2287,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2091,
         "source_url": "<exact_product_detail_url>",
@@ -2204,6 +2368,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2092,
         "source_url": "<exact_product_detail_url>",
@@ -2277,6 +2449,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2094,
         "source_url": "<exact_product_detail_url>",
@@ -2350,6 +2530,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2176,
         "source_url": "<exact_product_detail_url>",
@@ -2423,6 +2611,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2177,
         "source_url": "<exact_product_detail_url>",
@@ -2496,6 +2692,14 @@
       "candidate_count": 0,
       "candidates": [],
       "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "source_patch_template": {
         "catalog_index": 2190,
         "source_url": "<exact_product_detail_url>",
@@ -2556,6 +2760,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2570,8 +2782,17 @@
       "top_candidate_blockers": [
         "broad_query_without_variant"
       ],
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "catalog_row_is_too_broad_for_single_product_image",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
-      "recommended_next_step": "review_candidate_variants_manually"
+      "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import"
     },
     {
       "rank": 3,
@@ -2582,6 +2803,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2594,6 +2823,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2608,6 +2845,14 @@
       "top_candidate_blockers": [
         "token_overlap_below_2"
       ],
+      "review_decision": {
+        "decision": "manual_candidate_identity_review_required",
+        "severity": "manual_review",
+        "recommended_next_step": "review_candidate_variants_manually",
+        "reasons": [
+          "candidate_title_has_weak_token_overlap"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "review_candidate_variants_manually"
     },
@@ -2622,6 +2867,14 @@
       "top_candidate_blockers": [
         "token_overlap_below_2"
       ],
+      "review_decision": {
+        "decision": "manual_candidate_identity_review_required",
+        "severity": "manual_review",
+        "recommended_next_step": "review_candidate_variants_manually",
+        "reasons": [
+          "candidate_title_has_weak_token_overlap"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "review_candidate_variants_manually"
     },
@@ -2637,8 +2890,18 @@
         "token_overlap_below_2",
         "broad_query_without_variant"
       ],
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "catalog_row_is_too_broad_for_single_product_image",
+          "candidate_title_has_weak_token_overlap",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
-      "recommended_next_step": "review_candidate_variants_manually"
+      "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import"
     },
     {
       "rank": 8,
@@ -2649,6 +2912,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2664,8 +2935,17 @@
         "distinctive_tokens_missing",
         "parenthetical_terms_missing"
       ],
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "candidate_title_does_not_preserve_catalog_variant_terms",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
       "official_search_audit_status": "official_search_has_results",
-      "recommended_next_step": "review_candidate_variants_manually"
+      "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import"
     },
     {
       "rank": 10,
@@ -2679,8 +2959,17 @@
         "distinctive_tokens_missing",
         "parenthetical_terms_missing"
       ],
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "candidate_title_does_not_preserve_catalog_variant_terms",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
       "official_search_audit_status": "official_search_has_results",
-      "recommended_next_step": "review_candidate_variants_manually"
+      "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import"
     },
     {
       "rank": 11,
@@ -2691,6 +2980,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2703,6 +3000,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2717,6 +3022,14 @@
       "top_candidate_blockers": [
         "token_overlap_below_2"
       ],
+      "review_decision": {
+        "decision": "manual_candidate_identity_review_required",
+        "severity": "manual_review",
+        "recommended_next_step": "review_candidate_variants_manually",
+        "reasons": [
+          "candidate_title_has_weak_token_overlap"
+        ]
+      },
       "official_search_audit_status": "official_search_has_results",
       "recommended_next_step": "review_candidate_variants_manually"
     },
@@ -2729,6 +3042,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2741,6 +3062,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2753,6 +3082,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2765,6 +3102,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2777,6 +3122,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2789,6 +3142,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     },
@@ -2801,6 +3162,14 @@
       "candidate_count": 0,
       "top_candidate_title": "",
       "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
       "official_search_audit_status": "official_search_no_results",
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url"
     }
@@ -3078,12 +3447,12 @@
       "search_query": "ジョジョの奇妙な冒険 アクリルスタンド",
       "candidate_rank": 7,
       "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-スタンドポップ】ジョジョの奇妙な冒険 オラオラオーバードライブ アクリルスタンド　カーズ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E3%82%AB%E3%83%BC%E3%82%BA/pd/3505029/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595433158238_1_1781003121.jpg&width=400&height=400&square=1",
+      "candidate_title": "【グッズ-スタンドポップ】アニメ『ジョジョの奇妙な冒険 ストーンオーシャン』 バストアップアクリルスタンド【RE】④ウェザー・R",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%B3%E3%80%8F+%E3%83%90%E3%82%B9%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90RE%E3%80%91%E2%91%A3%E3%82%A6%E3%82%A7%E3%82%B6%E3%83%BC%E3%83%BBR/pd/3391250/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573699552328_1_1769771103.jpg&width=400&height=400&square=1",
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E3%82%AB%E3%83%BC%E3%82%BA/pd/3505029/",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%B3%E3%80%8F+%E3%83%90%E3%82%B9%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90RE%E3%80%91%E2%91%A3%E3%82%A6%E3%82%A7%E3%82%B6%E3%83%BC%E3%83%BBR/pd/3391250/",
       "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
       "blocked_until": "manual_confirmed_true"
     },
@@ -3101,12 +3470,12 @@
       "search_query": "ジョジョの奇妙な冒険 アクリルスタンド",
       "candidate_rank": 8,
       "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-スタンドポップ】アニメ『ジョジョの奇妙な冒険 ストーンオーシャン』 バストアップアクリルスタンド【RE】④ウェザー・R",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%B3%E3%80%8F+%E3%83%90%E3%82%B9%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90RE%E3%80%91%E2%91%A3%E3%82%A6%E3%82%A7%E3%82%B6%E3%83%BC%E3%83%BBR/pd/3391250/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573699552328_1_1769771103.jpg&width=400&height=400&square=1",
+      "candidate_title": "【グッズ-スタンドポップ】アニメ『ジョジョの奇妙な冒険 ストーンオーシャン』 バストアップアクリルスタンド【RE】⑤ナルシソ・A",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%B3%E3%80%8F+%E3%83%90%E3%82%B9%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90RE%E3%80%91%E2%91%A4%E3%83%8A%E3%83%AB%E3%82%B7%E3%82%BD%E3%83%BBA/pd/3391251/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573699552335_1_1769771107.jpg&width=400&height=400&square=1",
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%B3%E3%80%8F+%E3%83%90%E3%82%B9%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90RE%E3%80%91%E2%91%A3%E3%82%A6%E3%82%A7%E3%82%B6%E3%83%BC%E3%83%BBR/pd/3391250/",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%B3%E3%80%8F+%E3%83%90%E3%82%B9%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90RE%E3%80%91%E2%91%A4%E3%83%8A%E3%83%AB%E3%82%B7%E3%82%BD%E3%83%BBA/pd/3391251/",
       "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
       "blocked_until": "manual_confirmed_true"
     },
@@ -3814,12 +4183,12 @@
       "search_query": "推しの子 アクリルスタンド (あかね) 黒川あかね",
       "candidate_rank": 5,
       "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-スタンドポップ】【推しの子】 黒川あかね ライトアップアクリルスタンド",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%83%A9%E3%82%A4%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3529862/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643407209_2_1783310713.jpg&width=400&height=400&square=1",
+      "candidate_title": "【グッズ-スタンドポップ】【推しの子】 描き下ろし 黒川あかね 星空メイドver. BIGアクリルスタンド",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E6%98%9F%E7%A9%BA%E3%83%A1%E3%82%A4%E3%83%89ver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3401347/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643172275_2_1770955512.jpg&width=400&height=400&square=1",
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%83%A9%E3%82%A4%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3529862/",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E6%98%9F%E7%A9%BA%E3%83%A1%E3%82%A4%E3%83%89ver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3401347/",
       "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
       "blocked_until": "manual_confirmed_true"
     },
@@ -3837,12 +4206,12 @@
       "search_query": "推しの子 アクリルスタンド (あかね) 黒川あかね",
       "candidate_rank": 6,
       "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-スタンドポップ】【推しの子】 描き下ろし 黒川あかね 星空メイドver. BIGアクリルスタンド",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E6%98%9F%E7%A9%BA%E3%83%A1%E3%82%A4%E3%83%89ver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3401347/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643172275_2_1770955512.jpg&width=400&height=400&square=1",
+      "candidate_title": "【グッズ-スタンドポップ】【推しの子】 黒川あかね ライトアップアクリルスタンド",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%83%A9%E3%82%A4%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3529862/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643407209_2_1783310713.jpg&width=400&height=400&square=1",
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E6%98%9F%E7%A9%BA%E3%83%A1%E3%82%A4%E3%83%89ver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3401347/",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%83%A9%E3%82%A4%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3529862/",
       "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
       "blocked_until": "manual_confirmed_true"
     },
@@ -3883,12 +4252,12 @@
       "search_query": "推しの子 アクリルスタンド (あかね) 黒川あかね",
       "candidate_rank": 8,
       "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-スタンドポップ】【推しの子】 アクリルスタンドフィギュア 黒川あかね カラフルver.",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%82%AB%E3%83%A9%E3%83%95%E3%83%ABver./pd/3420705/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550687026955_1_1773054306.jpg&width=400&height=400&square=1",
+      "candidate_title": "【グッズ-スタンドポップ】【推しの子】 『【47都道府県の子】』アクリルスタンドフィギュア 黒川あかね(新潟県)",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%80%8E%E3%80%9047%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%81%AE%E5%AD%90%E3%80%91%E3%80%8F%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD%28%E6%96%B0%E6%BD%9F%E7%9C%8C%29/pd/3316721/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11201256_691e915adc68e.jpg&width=400&height=400&square=1",
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E3%82%AB%E3%83%A9%E3%83%95%E3%83%ABver./pd/3420705/",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%80%8E%E3%80%9047%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%81%AE%E5%AD%90%E3%80%91%E3%80%8F%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD%28%E6%96%B0%E6%BD%9F%E7%9C%8C%29/pd/3316721/",
       "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
       "blocked_until": "manual_confirmed_true"
     },

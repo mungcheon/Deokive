@@ -51,7 +51,7 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   if (destination == null || !context.mounted) return false;
 
   try {
-    final imageBytes = await loadCatalogEntryBundledImageBytes(entry);
+    final imageBytes = await loadCatalogEntryImageBytes(entry);
     if (!context.mounted) return false;
     final item = goodsItemFromCatalogEntry(
       appState: appState,

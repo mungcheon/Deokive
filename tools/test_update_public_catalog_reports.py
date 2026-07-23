@@ -184,6 +184,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_next_focus_detail_candidates"]["manual_review_item_rows"],
             7,
         )
+        self.assertEqual(
+            quality["source_discovery_next_focus_detail_candidates"]["variant_detail_required_rows"],
+            4,
+        )
+        self.assertEqual(
+            quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],
+            0,
+        )
+        self.assertGreater(
+            len(quality["source_discovery_next_focus_detail_candidates"]["review_decision_counts"]),
+            0,
+        )
         self.assertGreater(
             len(quality["source_discovery_next_focus_detail_candidates"]["candidate_blocker_counts"]),
             0,

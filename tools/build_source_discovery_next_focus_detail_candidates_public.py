@@ -188,6 +188,72 @@ def _review_bucket(item: dict[str, Any], candidate_payload: list[dict[str, Any]]
     return "blocked_candidate_research"
 
 
+def _manual_review_decision(item: dict[str, Any], candidate_payload: list[dict[str, Any]]) -> dict[str, Any]:
+    if not candidate_payload:
+        if item.get("needs_fallback_web_search"):
+            return {
+                "decision": "fallback_search_required",
+                "severity": "source_missing",
+                "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+                "reasons": ["no_candidate_returned_from_provider_search"],
+            }
+        return {
+            "decision": "manual_source_research_required",
+            "severity": "source_missing",
+            "recommended_next_step": "manual_source_research",
+            "reasons": ["no_candidate_returned_from_provider_search"],
+        }
+
+    top = candidate_payload[0]
+    blockers = list(top.get("exact_candidate_blockers") or [])
+    if not blockers:
+        return {
+            "decision": "exact_candidate_confirmation_ready",
+            "severity": "review_ready",
+            "recommended_next_step": "confirm_exact_candidate_identity",
+            "reasons": [],
+        }
+
+    reasons: list[str] = []
+    if "broad_query_without_variant" in blockers:
+        reasons.append("catalog_row_is_too_broad_for_single_product_image")
+    if "distinctive_tokens_missing" in blockers or "parenthetical_terms_missing" in blockers:
+        reasons.append("candidate_title_does_not_preserve_catalog_variant_terms")
+    if "goods_type_mismatch" in blockers:
+        reasons.append("candidate_goods_type_mismatch")
+    if "token_overlap_below_2" in blockers:
+        reasons.append("candidate_title_has_weak_token_overlap")
+    if "rank_not_first" in blockers:
+        reasons.append("top_candidate_not_rank_1")
+    if len(candidate_payload) > 1 and (
+        "broad_query_without_variant" in blockers
+        or "distinctive_tokens_missing" in blockers
+        or "parenthetical_terms_missing" in blockers
+    ):
+        reasons.append("multiple_variants_require_catalog_sub_series_or_character_detail")
+
+    if any(
+        reason in reasons
+        for reason in (
+            "catalog_row_is_too_broad_for_single_product_image",
+            "multiple_variants_require_catalog_sub_series_or_character_detail",
+            "candidate_title_does_not_preserve_catalog_variant_terms",
+        )
+    ):
+        return {
+            "decision": "catalog_variant_detail_required_before_import",
+            "severity": "metadata_required",
+            "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+            "reasons": reasons,
+        }
+    return {
+        "decision": "manual_candidate_identity_review_required",
+        "severity": "manual_review",
+        "recommended_next_step": "review_candidate_variants_manually",
+        "reasons": reasons or blockers,
+    }
+
+
 def _default_searcher() -> SearchFn:
     provider = AnimateSearchProvider("애니메이트", SEARCH_PROVIDERS["애니메이트"]["search_url"])
 
@@ -217,6 +283,8 @@ def build_report(
     audit_status_counts: Counter[str] = Counter()
     blocker_counts: Counter[str] = Counter()
     review_bucket_counts: Counter[str] = Counter()
+    decision_counts: Counter[str] = Counter()
+    decision_reason_counts: Counter[str] = Counter()
     fallback_bridge_items: list[dict[str, Any]] = []
     review_work_order_items: list[dict[str, Any]] = []
     candidate_rows = 0
@@ -261,7 +329,16 @@ def build_report(
             },
             candidate_payload,
         )
+        review_decision = _manual_review_decision(
+            {
+                **item,
+                "needs_fallback_web_search": needs_fallback_web_search,
+            },
+            candidate_payload,
+        )
         review_bucket_counts[review_bucket] += 1
+        decision_counts[str(review_decision.get("decision") or "")] += 1
+        decision_reason_counts.update(review_decision.get("reasons") or [])
         if review_bucket == "fallback_search_required":
             fallback_bridge_items.append(
                 {
@@ -288,16 +365,9 @@ def build_report(
                 "top_candidate_blockers": (
                     candidate_payload[0].get("exact_candidate_blockers") if candidate_payload else []
                 ),
+                "review_decision": review_decision,
                 "official_search_audit_status": audit_status,
-                "recommended_next_step": (
-                    "confirm_exact_candidate_identity"
-                    if review_bucket == "exact_candidate_shortlist_review"
-                    else "review_candidate_variants_manually"
-                    if review_bucket == "manual_candidate_identity_review"
-                    else "use_fallback_queue_to_find_exact_source_url"
-                    if review_bucket == "fallback_search_required"
-                    else "manual_source_research"
-                ),
+                "recommended_next_step": review_decision.get("recommended_next_step"),
             }
         )
         if candidate_payload:
@@ -375,6 +445,7 @@ def build_report(
                 "candidate_count": len(candidates),
                 "candidates": candidate_payload,
                 "review_bucket": review_bucket,
+                "review_decision": review_decision,
                 "source_patch_template": item.get("source_patch_template") or {},
                 "catalog_field_import_template": item.get("catalog_field_import_template") or {},
                 "auto_apply_enabled": False,
@@ -417,8 +488,12 @@ def build_report(
             ),
             "candidate_blocker_counts": _counter_rows(blocker_counts, "blocker"),
             "review_bucket_counts": _counter_rows(review_bucket_counts, "review_bucket"),
+            "review_decision_counts": _counter_rows(decision_counts, "review_decision"),
+            "review_decision_reason_counts": _counter_rows(decision_reason_counts, "reason"),
             "fallback_bridge_rows": len(fallback_bridge_items),
             "manual_review_item_rows": review_bucket_counts.get("manual_candidate_identity_review", 0),
+            "variant_detail_required_rows": decision_counts.get("catalog_variant_detail_required_before_import", 0),
+            "exact_candidate_confirmation_ready_items": decision_counts.get("exact_candidate_confirmation_ready", 0),
             "blocked_candidate_research_item_rows": review_bucket_counts.get("blocked_candidate_research", 0),
             "status_counts": [[key, value] for key, value in status_counts.most_common() if key],
             "official_search_audit_status_counts": [

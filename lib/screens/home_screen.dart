@@ -312,8 +312,9 @@ class _CatalogImportPanel extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '중복·예시를 뺀 목록에서 검색해 추가해요',
-                        maxLines: 2,
+                        '검색해서 내 굿즈함에 바로 담아요',
+                        maxLines: 1,
+                        softWrap: false,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: theme.colorScheme.onSurface
@@ -333,14 +334,14 @@ class _CatalogImportPanel extends StatelessWidget {
               runSpacing: 6,
               children: [
                 _CatalogMetricPill(
-                  label: '등록',
+                  label: '목록',
                   value: '${_CatalogHealthSummary.formatCount(
                     health.uniqueCount,
                   )}개',
                   color: palette.primary,
                 ),
                 _CatalogMetricPill(
-                  label: '이미지',
+                  label: '사진',
                   value: _CatalogHealthSummary.formatCount(
                     health.imageCount,
                   ),
@@ -350,7 +351,7 @@ class _CatalogImportPanel extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'DB 보기에서 검색어와 분류로 필터링한 뒤 필요한 굿즈만 담을 수 있어요.',
+              '전체 DB에서 필터링하고 원하는 폴더나 위시리스트에 추가할 수 있어요.',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodySmall?.copyWith(

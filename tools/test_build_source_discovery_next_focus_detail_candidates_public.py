@@ -94,9 +94,16 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             report["summary"]["review_bucket_counts"],
             [["exact_candidate_shortlist_review", 1], ["no_candidate_manual_source_research", 1]],
         )
+        self.assertEqual(
+            report["summary"]["review_decision_counts"],
+            [["exact_candidate_confirmation_ready", 1], ["manual_source_research_required", 1]],
+        )
+        self.assertEqual(report["summary"]["variant_detail_required_rows"], 0)
+        self.assertEqual(report["summary"]["exact_candidate_confirmation_ready_items"], 1)
         first = report["items"][0]
         self.assertEqual(first["manual_review_status"], "not_started")
         self.assertEqual(first["review_bucket"], "exact_candidate_shortlist_review")
+        self.assertEqual(first["review_decision"]["decision"], "exact_candidate_confirmation_ready")
         self.assertEqual(first["manual_confirmed_source_url"], "")
         self.assertEqual(first["affiliation"], "Series A")
         self.assertEqual(first["official_search_audit_status"], "official_search_no_results")
@@ -127,6 +134,10 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(
             report["candidate_review_work_order"][0]["recommended_next_step"],
             "confirm_exact_candidate_identity",
+        )
+        self.assertEqual(
+            report["candidate_review_work_order"][0]["review_decision"]["decision"],
+            "exact_candidate_confirmation_ready",
         )
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 
@@ -168,6 +179,8 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(report["summary"]["fallback_bridge_rows"], 1)
         self.assertEqual(report["summary"]["no_candidate_items"], 1)
         self.assertEqual(report["summary"]["review_bucket_counts"], [["fallback_search_required", 1]])
+        self.assertEqual(report["summary"]["review_decision_counts"], [["fallback_search_required", 1]])
+        self.assertEqual(report["items"][0]["review_decision"]["decision"], "fallback_search_required")
         self.assertEqual(report["fallback_bridge_items"][0]["catalog_index"], 9)
         self.assertEqual(
             report["fallback_bridge_items"][0]["fallback_queue_report"],
@@ -177,6 +190,56 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             report["candidate_review_work_order"][0]["recommended_next_step"],
             "use_fallback_queue_to_find_exact_source_url",
         )
+        self.assertEqual(
+            report["candidate_review_work_order"][0]["review_decision"]["decision"],
+            "fallback_search_required",
+        )
+
+    def test_build_report_marks_broad_variant_rows_before_import(self) -> None:
+        source = {
+            "summary": {
+                "focus_pack_id": "source-discovery-focus-001",
+                "source_store": "animate",
+                "target_category": "acrylic stand",
+            },
+            "items": [
+                {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "catalog_index": 10,
+                    "source_store": "animate",
+                    "category": "acrylic stand",
+                    "name_ko": "acrylic stand",
+                    "search_query": "acrylic stand",
+                }
+            ],
+        }
+
+        report = builder.build_report(
+            source,
+            search_fn=lambda _item: [
+                ProductImage(
+                    title="JoJo acrylic stand Iggy",
+                    image_url="https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550000000000_1.jpg&width=400&height=400&square=1",
+                    source_url="https://www.animate-onlineshop.jp/pn/test/pd/7654321/",
+                ),
+                ProductImage(
+                    title="JoJo acrylic stand Jotaro",
+                    image_url="https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550000000001_1.jpg&width=400&height=400&square=1",
+                    source_url="https://www.animate-onlineshop.jp/pn/test/pd/7654322/",
+                )
+            ],
+            generated_at="2026-07-23T00:00:00Z",
+        )
+
+        self.assertEqual(
+            report["summary"]["review_decision_counts"],
+            [["catalog_variant_detail_required_before_import", 1]],
+        )
+        self.assertEqual(report["summary"]["variant_detail_required_rows"], 1)
+        self.assertEqual(report["summary"]["exact_candidate_confirmation_ready_items"], 0)
+        decision = report["items"][0]["review_decision"]
+        self.assertEqual(decision["decision"], "catalog_variant_detail_required_before_import")
+        self.assertIn("catalog_row_is_too_broad_for_single_product_image", decision["reasons"])
 
     def test_build_report_uses_localized_animate_query_for_korean_only_rows(self) -> None:
         source = {
