@@ -278,6 +278,50 @@ def _already_distinct_parallel_prize_group(group: dict[str, Any]) -> bool:
     return False
 
 
+def _parallel_prize_protection_reason(group: dict[str, Any]) -> str:
+    rows = [row for row in group.get("sample_rows") or [] if isinstance(row, dict)]
+    names = [_display_name(row) for row in rows]
+
+    bracket_labels = []
+    for name in names:
+        labels = BRACKETED_LIMITED_LABEL_PATTERN.findall(name)
+        bracket_labels.append(labels[-1] if labels else "")
+    if _unique_nonempty(bracket_labels):
+        return "distinct_limited_shop_or_channel_labels"
+
+    circled_labels = _suffixes_from(CIRCLED_NUMBER_PATTERN, names)
+    if _unique_nonempty(circled_labels):
+        return "distinct_circled_number_labels"
+
+    vol_labels = _suffixes_from(VOL_VARIANT_PATTERN, names)
+    if _unique_nonempty(vol_labels):
+        return "distinct_volume_labels"
+
+    if str(group.get("sub_series") or "").strip() == "関連商品":
+        prefixes = []
+        for name in names:
+            prefix = next((token for token in RELATED_GOODS_PREFIXES if name.startswith(token)), "")
+            prefixes.append(prefix)
+        if _unique_nonempty(prefixes):
+            return "distinct_related_goods_prefixes"
+
+    return "distinct_parallel_prize_names"
+
+
+def _protected_parallel_prize_group(group: dict[str, Any]) -> dict[str, Any]:
+    compact = _compact_group(group)
+    compact.update(
+        {
+            "review_state": "protected_already_distinct_parallel_prizes",
+            "protection_reason": _parallel_prize_protection_reason(group),
+            "recommended_action": "Keep rows separate unless an official campaign comparison later proves they are accidental duplicates.",
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+        }
+    )
+    return compact
+
+
 def _split_manual_multi_item_groups(
     groups: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -450,6 +494,10 @@ def build_queue(
     blocked_until_counts = Counter(str(issue.get("blocked_until") or "") for issue in issues)
     blocked_until_counts.pop("", None)
     open_issue_rows = sum(int(issue.get("open_rows") or 0) for issue in issues)
+    protected_groups = [_protected_parallel_prize_group(group) for group in protected_unnumbered_multi]
+    protected_reason_counts = Counter(
+        str(group.get("protection_reason") or "unknown") for group in protected_groups
+    )
 
     return {
         "schema_version": 1,
@@ -475,6 +523,9 @@ def build_queue(
             "protected_unnumbered_multi_item_prize_rows": _rows_from_groups(
                 protected_unnumbered_multi
             ),
+            "protected_unnumbered_multi_item_prize_reason_counts": [
+                [reason, count] for reason, count in protected_reason_counts.most_common()
+            ],
             "probable_reissue_work_order_rows": len(reissue_work_orders),
             "probable_reissue_review_groups": int(
                 dedupe_summary.get("ichiban_probable_reissue_review_groups")
@@ -509,6 +560,7 @@ def build_queue(
             "probable_reissues": "manual_review" if reissue_work_orders else "clear",
             "unnumbered_multi_item_prizes": "manual_review" if unnumbered_multi else "clear",
         },
+        "protected_unnumbered_multi_item_prize_groups": protected_groups,
         "issues": sorted(issues, key=lambda row: int(row.get("priority") or 9999)),
     }
 

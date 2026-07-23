@@ -265,110 +265,119 @@ class _CatalogImportPanel extends StatelessWidget {
     final entries = appState.curatedCatalogEntries;
     final health = _CatalogHealthSummary.from(entries);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
-      ),
-      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 38,
-                height: 38,
-                decoration: BoxDecoration(
-                  color: palette.primary.withValues(alpha: 0.14),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.dataset_outlined,
-                  color: palette.primary,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '공개 굿즈 DB',
-                      maxLines: 1,
-                      softWrap: false,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개 등록',
-                      maxLines: 1,
-                      softWrap: false,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        color:
-                            theme.colorScheme.onSurface.withValues(alpha: 0.62),
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            '검색해서 내 굿즈함이나 위시리스트에 바로 추가해요.',
-            maxLines: 1,
-            softWrap: false,
-            overflow: TextOverflow.ellipsis,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
-              height: 1.35,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Divider(
-            height: 1,
-            color: theme.colorScheme.outline.withValues(alpha: 0.12),
-          ),
-          const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            height: 46,
-            child: FilledButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const CatalogDatabaseScreen(),
+    return Material(
+      color: theme.colorScheme.surface,
+      borderRadius: BorderRadius.circular(18),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
+        ),
+        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: palette.primary.withValues(alpha: 0.12),
+                    shape: BoxShape.circle,
                   ),
-                );
-              },
-              icon: const Icon(Icons.manage_search_rounded, size: 19),
-              label: const Text(
-                'DB 보기',
-                maxLines: 1,
-                softWrap: false,
-                overflow: TextOverflow.ellipsis,
-              ),
-              style: FilledButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  child: Icon(
+                    Icons.dataset_outlined,
+                    color: palette.primary,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        '공개 굿즈 DB',
+                        maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        '검색해서 내 굿즈함이나 위시리스트에 추가',
+                        maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurface
+                              .withValues(alpha: 0.62),
+                          height: 1.2,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Container(
+                  constraints: const BoxConstraints(maxWidth: 116),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 7,
+                  ),
+                  decoration: BoxDecoration(
+                    color: palette.primary.withValues(alpha: 0.10),
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                  child: Text(
+                    '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: palette.primary,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            SizedBox(
+              height: 46,
+              child: FilledButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const CatalogDatabaseScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.manage_search_rounded, size: 19),
+                label: const Text(
+                  'DB 보기',
+                  maxLines: 1,
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                style: FilledButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -376,44 +385,21 @@ class _CatalogImportPanel extends StatelessWidget {
 
 class _CatalogHealthSummary {
   final int uniqueCount;
-  final int duplicateCount;
-  final double imageCoverage;
 
   const _CatalogHealthSummary({
     required this.uniqueCount,
-    required this.duplicateCount,
-    required this.imageCoverage,
   });
 
-  String get imageCoverageLabel => _formatCoverage(imageCoverage);
-
   static _CatalogHealthSummary from(List<GoodsCatalogEntry> entries) {
-    final uniqueEntries = <GoodsCatalogEntry>[];
     final seenKeys = <String>{};
 
     for (final entry in entries) {
       if (_isExampleEntry(entry)) continue;
 
-      final key = _identityKey(entry);
-      if (seenKeys.add(key)) {
-        uniqueEntries.add(entry);
-      }
+      seenKeys.add(_identityKey(entry));
     }
 
-    var imageCount = 0;
-
-    for (final entry in uniqueEntries) {
-      if (_hasRealDisplayImage(entry)) {
-        imageCount += 1;
-      }
-    }
-
-    final total = uniqueEntries.length;
-    return _CatalogHealthSummary(
-      uniqueCount: total,
-      duplicateCount: entries.length - total,
-      imageCoverage: total == 0 ? 0 : imageCount / total,
-    );
+    return _CatalogHealthSummary(uniqueCount: seenKeys.length);
   }
 
   static String _identityKey(GoodsCatalogEntry entry) {
@@ -457,13 +443,6 @@ class _CatalogHealthSummary {
     return values.any(_looksLikeExampleText);
   }
 
-  static bool _hasRealDisplayImage(GoodsCatalogEntry entry) {
-    final imagePath = (entry.displayImagePath ?? '').trim().toLowerCase();
-    if (imagePath.isEmpty) return false;
-
-    return !_looksLikeExampleText(imagePath);
-  }
-
   static bool _looksLikeExampleText(String value) {
     if (value.isEmpty) return false;
 
@@ -488,10 +467,6 @@ class _CatalogHealthSummary {
       '테스트',
       '더미',
     ].any(value.contains);
-  }
-
-  static String _formatCoverage(double value) {
-    return '${(value * 100).round()}%';
   }
 
   static String formatCount(int value) {

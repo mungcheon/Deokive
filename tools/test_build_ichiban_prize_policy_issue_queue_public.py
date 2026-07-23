@@ -277,7 +277,16 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unnumbered_multi_item_prize_review_groups"], 0)
         self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_groups"], 1)
         self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_rows"], 2)
+        self.assertEqual(
+            report["summary"]["protected_unnumbered_multi_item_prize_reason_counts"],
+            [["distinct_limited_shop_or_channel_labels", 1]],
+        )
         self.assertEqual(report["policy_status"]["unnumbered_multi_item_prizes"], "clear")
+        self.assertEqual(len(report["protected_unnumbered_multi_item_prize_groups"]), 1)
+        self.assertEqual(
+            report["protected_unnumbered_multi_item_prize_groups"][0]["review_state"],
+            "protected_already_distinct_parallel_prizes",
+        )
 
     def test_keeps_unmarked_same_prize_rows_in_manual_review(self) -> None:
         report = queue.build_queue(
@@ -377,6 +386,15 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["issue_rows"], 0)
         self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_groups"], 3)
         self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_rows"], 6)
+        self.assertEqual(len(report["protected_unnumbered_multi_item_prize_groups"]), 3)
+        self.assertEqual(
+            dict(report["summary"]["protected_unnumbered_multi_item_prize_reason_counts"]),
+            {
+                "distinct_circled_number_labels": 1,
+                "distinct_related_goods_prefixes": 1,
+                "distinct_volume_labels": 1,
+            },
+        )
 
 
 if __name__ == "__main__":
