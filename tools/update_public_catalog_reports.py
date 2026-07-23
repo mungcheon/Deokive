@@ -7845,14 +7845,55 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["deduplication_review_batches"] = copy_report_summary(
                 DEDUPLICATION_REVIEW_BATCHES, "deduplication_review_batches"
             )
+        dedupe_action_queue_summary = {}
         if DEDUPLICATION_ACTION_QUEUE.exists():
+            dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {})
+            dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
             target["deduplication_action_queue"] = copy_report_summary(
                 DEDUPLICATION_ACTION_QUEUE, "deduplication_action_queue"
             )
         if DEDUPLICATION_FAST_REVIEW.exists():
+            dedupe_fast_review = load_json(DEDUPLICATION_FAST_REVIEW, {})
+            dedupe_fast_summary = dedupe_fast_review.get("summary", {})
             target["deduplication_fast_review"] = copy_report_summary(
                 DEDUPLICATION_FAST_REVIEW, "deduplication_fast_review"
             )
+            target["deduplication_queue_alignment"] = {
+                "public_reports": [
+                    f"data/{DEDUPLICATION.name}",
+                    f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+                    f"data/{DEDUPLICATION_FAST_REVIEW.name}",
+                    f"data/{NAME_DUPLICATE_AUDIT.name}",
+                ],
+                "duplicate_review_groups": deduplication["summary"].get("duplicate_groups", 0),
+                "actionable_groups": dedupe_action_queue_summary.get("actionable_groups", 0),
+                "queued_groups": dedupe_action_queue_summary.get("queued_groups", 0),
+                "non_action_queue_groups": max(
+                    0,
+                    int(deduplication["summary"].get("duplicate_groups") or 0)
+                    - int(dedupe_action_queue_summary.get("actionable_groups") or 0),
+                ),
+                "fast_review_groups": dedupe_fast_summary.get("fast_review_groups", 0),
+                "held_for_later_groups": dedupe_fast_summary.get("held_for_later_groups", 0),
+                "manual_confirmed_true": dedupe_fast_summary.get("manual_confirmed_true", 0),
+                "name_duplicate_protected_groups": name_duplicate_audit["summary"].get(
+                    "protected_groups", 0
+                ),
+                "ichiban_campaign_or_reissue_protected_groups": name_duplicate_audit[
+                    "summary"
+                ].get("ichiban_campaign_or_reissue_protected_groups", 0),
+                "queue_coverage": dedupe_action_queue_summary.get("queue_coverage", 0),
+                "next_step": "review_fast_same_barcode_groups_before_held_variant_groups",
+                "blocked_reason": "dedupe_requires_explicit_same_sellable_product_confirmation",
+                "explanation": (
+                    "Only high-confidence duplicate candidates enter the action queue. "
+                    "Remaining duplicate-review groups and same-name groups stay held or "
+                    "protected when barcode, variant, source, or reissue evidence is ambiguous."
+                ),
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+                "manual_confirmation_required": True,
+            }
         if DEDUPLICATION_CONFIRMED_TEMPLATE.exists():
             target["deduplication_confirmed_template"] = copy_report_summary(
                 DEDUPLICATION_CONFIRMED_TEMPLATE, "deduplication_confirmed_template"

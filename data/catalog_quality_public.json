@@ -8485,5 +8485,29 @@
       "image_missing_delta": -5,
       "note": "data/catalog_public.json is the GitHub Pages source of truth; server/catalog_seed_from_local.json is the local DB export safety source."
     }
+  },
+  "deduplication_queue_alignment": {
+    "public_reports": [
+      "data/catalog_deduplication_public.json",
+      "data/catalog_deduplication_action_queue_public.json",
+      "data/catalog_deduplication_fast_review_public.json",
+      "data/catalog_name_duplicate_audit_public.json"
+    ],
+    "duplicate_review_groups": 61,
+    "actionable_groups": 48,
+    "queued_groups": 48,
+    "non_action_queue_groups": 13,
+    "fast_review_groups": 42,
+    "held_for_later_groups": 6,
+    "manual_confirmed_true": 0,
+    "name_duplicate_protected_groups": 504,
+    "ichiban_campaign_or_reissue_protected_groups": 479,
+    "queue_coverage": 1.0,
+    "next_step": "review_fast_same_barcode_groups_before_held_variant_groups",
+    "blocked_reason": "dedupe_requires_explicit_same_sellable_product_confirmation",
+    "explanation": "Only high-confidence duplicate candidates enter the action queue. Remaining duplicate-review groups and same-name groups stay held or protected when barcode, variant, source, or reissue evidence is ambiguous.",
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false,
+    "manual_confirmation_required": true
   }
 }

@@ -348,6 +348,22 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
             self.assertEqual(quality["deduplication_fast_review"]["manual_confirmed_true"], 0)
             self.assertIs(quality["deduplication_fast_review"]["auto_delete_enabled"], False)
+            alignment = quality["deduplication_queue_alignment"]
+            self.assertEqual(alignment["duplicate_review_groups"], 61)
+            self.assertEqual(alignment["actionable_groups"], 48)
+            self.assertEqual(alignment["queued_groups"], 48)
+            self.assertEqual(alignment["non_action_queue_groups"], 13)
+            self.assertEqual(alignment["fast_review_groups"], 42)
+            self.assertEqual(alignment["held_for_later_groups"], 6)
+            self.assertEqual(alignment["name_duplicate_protected_groups"], 504)
+            self.assertEqual(
+                alignment["ichiban_campaign_or_reissue_protected_groups"],
+                479,
+            )
+            self.assertEqual(alignment["queue_coverage"], 1.0)
+            self.assertFalse(alignment["auto_merge_enabled"])
+            self.assertFalse(alignment["auto_delete_enabled"])
+            self.assertTrue(alignment["manual_confirmation_required"])
         if reports.DEDUPLICATION_CONFIRMED_TEMPLATE.exists():
             dedupe_template = reports.load_json(reports.DEDUPLICATION_CONFIRMED_TEMPLATE)
             self.assertEqual(
