@@ -208,12 +208,13 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
             ]
         }
         ichiban_policy_audit = {
-            "probable_reissue_review_groups": [
-                {
-                    "has_reissue_signal": True,
-                    "sample_rows": [
-                        {
-                            "catalog_index": 101,
+                "probable_reissue_review_groups": [
+                    {
+                        "has_reissue_signal": True,
+                        "normalized_name": "一番くじ Sample - A賞 Figure",
+                        "sample_rows": [
+                            {
+                                "catalog_index": 101,
                             "series_name": "一番くじ Sample",
                             "sub_series": "ラストワン賞",
                             "name_ja": "ラストワン賞 Sample Figure",
@@ -227,10 +228,10 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
                             "name_ja": "ラストワン賞 Sample Figure",
                             "official_price_jpy": 0,
                             "source_url": "https://1kuji.com/products/sample2",
-                        },
-                    ],
-                }
-            ]
+                            },
+                        ],
+                    }
+                ]
         }
 
         report = queue.build_report(
@@ -258,7 +259,17 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["ichiban_reissue_work_order_rows"], 1)
         self.assertEqual(report["summary"]["ichiban_reissue_decision_template_rows"], 1)
+        self.assertEqual(report["summary"]["ichiban_reissue_campaign_work_order_rows"], 1)
+        self.assertEqual(report["summary"]["ichiban_reissue_campaign_decision_template_rows"], 1)
         self.assertEqual(report["summary"]["ichiban_reissue_manual_confirmed_rows"], 0)
+        self.assertEqual(len(report["ichiban_reissue_campaign_work_order"]), 1)
+        campaign_order = report["ichiban_reissue_campaign_work_order"][0]
+        self.assertEqual(campaign_order["item_work_order_count"], 1)
+        self.assertEqual(campaign_order["catalog_row_count"], 2)
+        self.assertEqual(
+            campaign_order["decision_template"]["decision_options"][0],
+            "campaign_pair_reissue_keep_all_separate",
+        )
         self.assertEqual(
             report["ichiban_reissue_work_order"][0]["review_state"],
             "ichiban_reissue_identity_confirmation_required",
@@ -305,7 +316,16 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
                 "probable_reissue_review_groups": [
                     {
                         "has_reissue_signal": True,
-                        "sample_rows": [{"catalog_index": 1}, {"catalog_index": 2}],
+                        "sample_rows": [
+                            {
+                                "catalog_index": 1,
+                                "source_url": "https://1kuji.com/products/sample",
+                            },
+                            {
+                                "catalog_index": 2,
+                                "source_url": "https://1kuji.com/products/sample2",
+                            },
+                        ],
                     }
                 ],
             },
@@ -319,6 +339,7 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_reissue_protected_groups"], 0)
         self.assertEqual(len(report["ichiban_reissue_review_lane"]), 1)
         self.assertEqual(len(report["ichiban_reissue_work_order"]), 1)
+        self.assertEqual(len(report["ichiban_reissue_campaign_work_order"]), 1)
         self.assertEqual(
             report["ichiban_reissue_work_order"][0]["next_machine_step"],
             "compare_campaign_pages_then_record_reissue_or_duplicate_decision",
@@ -327,6 +348,65 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             report["ichiban_reissue_review_lane"][0]["next_machine_step"],
             "verify_ichiban_campaign_pages_before_dedupe",
+        )
+
+    def test_ichiban_reissue_campaign_work_order_groups_shared_url_pairs(self) -> None:
+        review_batches = {"batches": []}
+        ichiban_policy_audit = {
+            "probable_reissue_review_groups": [
+                {
+                    "normalized_name": "一番くじ Sample - A賞 Figure",
+                    "has_reissue_signal": True,
+                    "sample_rows": [
+                        {
+                            "catalog_index": 101,
+                            "sub_series": "A賞",
+                            "name_ja": "A賞 Figure",
+                            "source_url": "https://1kuji.com/products/sample",
+                        },
+                        {
+                            "catalog_index": 102,
+                            "sub_series": "A賞",
+                            "name_ja": "A賞 Figure",
+                            "source_url": "https://1kuji.com/products/sample2",
+                        },
+                    ],
+                },
+                {
+                    "normalized_name": "一番くじ Sample - B賞 Towel",
+                    "has_reissue_signal": True,
+                    "sample_rows": [
+                        {
+                            "catalog_index": 103,
+                            "sub_series": "B賞",
+                            "name_ja": "B賞 Towel",
+                            "source_url": "https://1kuji.com/products/sample",
+                        },
+                        {
+                            "catalog_index": 104,
+                            "sub_series": "B賞",
+                            "name_ja": "B賞 Towel",
+                            "source_url": "https://1kuji.com/products/sample2",
+                        },
+                    ],
+                },
+            ],
+        }
+
+        report = queue.build_report(
+            review_batches,
+            ichiban_policy_audit=ichiban_policy_audit,
+        )
+
+        self.assertEqual(report["summary"]["ichiban_reissue_work_order_rows"], 2)
+        self.assertEqual(report["summary"]["ichiban_reissue_campaign_work_order_rows"], 1)
+        campaign_order = report["ichiban_reissue_campaign_work_order"][0]
+        self.assertEqual(campaign_order["item_work_order_count"], 2)
+        self.assertEqual(campaign_order["catalog_indexes"], [101, 102, 103, 104])
+        self.assertEqual(campaign_order["prize_labels"], ["A賞", "B賞"])
+        self.assertEqual(
+            campaign_order["next_machine_step"],
+            "compare_campaign_pair_once_then_apply_decision_to_item_work_orders",
         )
 
     def test_ichiban_reissue_overlap_is_flagged_on_unprotected_dedupe_group(self) -> None:

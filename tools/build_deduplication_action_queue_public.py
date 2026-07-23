@@ -330,6 +330,88 @@ def ichiban_reissue_work_order(
     return orders
 
 
+def ichiban_reissue_campaign_work_order(
+    reissue_work_orders: list[dict[str, Any]],
+    *,
+    limit: int = 50,
+) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, ...], list[dict[str, Any]]] = {}
+    for order in reissue_work_orders:
+        source_urls = tuple(
+            sorted(str(url).strip() for url in order.get("source_urls") or [] if str(url).strip())
+        )
+        if len(source_urls) < 2:
+            continue
+        grouped.setdefault(source_urls, []).append(order)
+
+    campaign_orders: list[dict[str, Any]] = []
+    for rank, (source_urls, orders) in enumerate(
+        sorted(grouped.items(), key=lambda item: (-len(item[1]), item[0]))[:limit],
+        start=1,
+    ):
+        catalog_indexes = sorted(
+            {
+                catalog_index
+                for order in orders
+                for catalog_index in order.get("catalog_indexes") or []
+                if isinstance(catalog_index, int)
+            }
+        )
+        prize_labels = _unique_sorted(
+            [
+                label
+                for order in orders
+                for label in (order.get("prize_identity_summary") or {}).get("prize_labels") or []
+            ]
+        )
+        sample_rows = [
+            row
+            for order in orders[:4]
+            for row in order.get("sample_rows") or []
+            if isinstance(row, dict)
+        ][:12]
+        campaign_orders.append(
+            {
+                "campaign_work_order_id": f"ichiban-reissue-campaign-{rank:03d}",
+                "priority": rank,
+                "source_urls": list(source_urls),
+                "campaign_url_comparison": _campaign_url_comparison(list(source_urls)),
+                "item_work_order_count": len(orders),
+                "item_work_order_ids": [str(order.get("work_order_id") or "") for order in orders],
+                "catalog_indexes": catalog_indexes,
+                "catalog_row_count": len(catalog_indexes),
+                "prize_labels": prize_labels,
+                "review_state": "campaign_pair_reissue_or_duplicate_decision_required",
+                "next_machine_step": "compare_campaign_pair_once_then_apply_decision_to_item_work_orders",
+                "manual_review_checklist": [
+                    "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+                    "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+                    "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+                    "Do not delete or merge until every affected item work order has manual_confirmed=true.",
+                ],
+                "decision_template": {
+                    "campaign_work_order_id": f"ichiban-reissue-campaign-{rank:03d}",
+                    "manual_confirmed": False,
+                    "decision": "",
+                    "decision_options": [
+                        "campaign_pair_reissue_keep_all_separate",
+                        "campaign_pair_duplicate_review_each_item_keep_drop",
+                        "needs_more_source_evidence",
+                    ],
+                    "affected_item_work_order_ids": [
+                        str(order.get("work_order_id") or "") for order in orders
+                    ],
+                    "evidence_urls": list(source_urls),
+                    "manual_note": "",
+                },
+                "sample_rows": sample_rows,
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    return campaign_orders
+
+
 def ichiban_reissue_policy_summary(policy_audit: dict[str, Any] | None) -> dict[str, int]:
     if not policy_audit:
         return {
@@ -555,6 +637,7 @@ def build_report(
     reissue_policy = ichiban_reissue_policy_summary(ichiban_policy_audit)
     reissue_lane = ichiban_reissue_review_lane(ichiban_policy_audit)
     reissue_work_orders = ichiban_reissue_work_order(reissue_lane)
+    reissue_campaign_work_orders = ichiban_reissue_campaign_work_order(reissue_work_orders)
     protected_group_count = 0
     protected_row_indexes: set[int] = set()
 
@@ -658,6 +741,8 @@ def build_report(
             **reissue_policy,
             "ichiban_reissue_work_order_rows": len(reissue_work_orders),
             "ichiban_reissue_decision_template_rows": len(reissue_work_orders),
+            "ichiban_reissue_campaign_work_order_rows": len(reissue_campaign_work_orders),
+            "ichiban_reissue_campaign_decision_template_rows": len(reissue_campaign_work_orders),
             "ichiban_reissue_manual_confirmed_rows": sum(
                 1
                 for order in reissue_work_orders
@@ -674,10 +759,12 @@ def build_report(
             "Ichiban Kuji probable reissue rows stay out of this queue until a human confirms they are true duplicates, not re-releases.",
             "Use ichiban_reissue_review_lane for same-name 1kuji campaign rows before any dedupe import.",
             "Use ichiban_reissue_work_order to record whether each repeated-name campaign group is a reissue/campaign variant or an exact duplicate.",
+            "Use ichiban_reissue_campaign_work_order first when many item work orders share the same campaign URL pair.",
             "Every accepted group needs an explicit manual keep/drop decision before mutation.",
             f"Copy dedupe_decision_template rows into {CONFIRMED_QUEUE}, set manual_confirmed=true and decision=keep_drop_confirmed, then run {IMPORT_TOOL}.",
         ],
         "ichiban_reissue_review_lane": reissue_lane,
+        "ichiban_reissue_campaign_work_order": reissue_campaign_work_orders,
         "ichiban_reissue_work_order": reissue_work_orders,
         "batches": batches,
         "automation_policy": {
