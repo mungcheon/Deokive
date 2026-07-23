@@ -84,26 +84,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 '👉 사고 싶은 아이템은 위시리스트 폴더에 따로 모아두면 결제 추적과 분리돼서 편해요.',
           },
           {
-            'title': '바코드로 굿즈를 빠르게 등록',
-            'subtitle': '제품 바코드를 카메라로 스캔하면 이름·가격이 자동 입력됩니다.',
-            'icon': Icons.qr_code_scanner_rounded,
-            'detailTitle': '바코드로 굿즈를 빠르게 등록',
+            'title': 'DB에서 골라 바로 추가',
+            'subtitle': '검색한 DB 항목을 내 굿즈함이나 위시리스트로 복사해요.',
+            'icon': Icons.manage_search_rounded,
+            'detailTitle': 'DB에서 골라 바로 추가',
             'detailDate': '사용 가이드',
-            'detailContent': '1. 폴더 안에서 굿즈 추가 → [바코드 스캔] 선택\n'
-                '2. 카메라를 박스 바코드에 비추기\n'
-                '3. 카탈로그 매칭이 되면 이름·정가·이미지가 자동으로 채워져요\n\n'
-                '👉 카탈로그에 없는 신상품도 직접 정보를 입력해 추가하면 다음부터 같은 바코드가 자동 인식돼요.',
+            'detailContent': '1. 홈의 [DB 보기] 또는 굿즈 추가 화면에서 DB 열기\n'
+                '2. 상품명, 작품명, 캐릭터명으로 검색\n'
+                '3. 항목을 고른 뒤 내 굿즈함 또는 위시리스트에 추가\n\n'
+                '👉 DB 항목에 사진과 정가가 있으면 저장할 때 함께 들어가요.',
           },
           {
-            'title': '이미지로 비슷한 굿즈 찾기',
-            'subtitle': '사진 한 장으로 카탈로그에서 같은·유사한 굿즈를 찾아냅니다.',
-            'icon': Icons.image_search_rounded,
-            'detailTitle': '이미지로 비슷한 굿즈 찾기',
+            'title': '위시리스트도 같이 관리',
+            'subtitle': '아직 안 산 굿즈는 구매가 0원 상태로 따로 담아둘 수 있어요.',
+            'icon': Icons.favorite_border_rounded,
+            'detailTitle': '위시리스트도 같이 관리',
             'detailDate': '사용 가이드',
-            'detailContent': '1. 굿즈 추가 화면에서 [이미지 검색] 선택\n'
-                '2. 갤러리 또는 카메라로 굿즈 사진 선택\n'
-                '3. 카탈로그 전체와 비교해 비슷한 아이템 5개가 추천돼요\n\n'
-                '👉 박스에서 꺼낸 정면 사진이 가장 정확하게 매칭됩니다.',
+            'detailContent': 'DB에서 항목을 고를 때 내 굿즈함 대신 위시리스트를 선택할 수 있어요.\n\n'
+                '위시리스트에 넣은 굿즈는 구매가 0원, 상태는 위시로 저장해서 실제 보유 굿즈 통계와 섞이지 않게 관리합니다.\n\n'
+                '👉 사고 싶은 목록과 이미 가진 목록을 분리해두면 정리가 훨씬 편해요.',
           },
           {
             'title': '뱃지를 모아 등급을 올려보세요',
@@ -328,35 +327,47 @@ class _CatalogImportPanel extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 14),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            crossAxisAlignment: WrapCrossAlignment.center,
+          const SizedBox(height: 16),
+          Row(
             children: [
-              _CatalogMetricChip(
-                label: 'DB',
-                value: '${health.totalCount}',
-                color: palette.primary,
+              Expanded(
+                child: _CatalogMetricTile(
+                  label: '전체 DB',
+                  value: _CatalogHealthSummary.formatCount(health.totalCount),
+                  color: palette.primary,
+                ),
               ),
-              _CatalogMetricChip(
-                label: '분류',
-                value: '${health.categoryCount}',
-                color: palette.accent,
-              ),
-              _CatalogMetricChip(
-                label: '이미지',
-                value: health.imageCoverageLabel,
-                color: const Color(0xFF4F8F7B),
-              ),
-              _CatalogMetricChip(
-                label: '출처',
-                value: health.sourceCoverageLabel,
-                color: const Color(0xFF7B6EC8),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _CatalogMetricTile(
+                  label: '분류',
+                  value: '${health.categoryCount}',
+                  color: palette.accent,
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: _CatalogMetricTile(
+                  label: '사진 등록',
+                  value: health.imageCoverageLabel,
+                  color: const Color(0xFF4F8F7B),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _CatalogMetricTile(
+                  label: '출처 확인',
+                  value: health.sourceCoverageLabel,
+                  color: const Color(0xFF7B6EC8),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
             height: 46,
@@ -433,14 +444,27 @@ class _CatalogHealthSummary {
   static String _formatCoverage(double value) {
     return '${(value * 100).round()}%';
   }
+
+  static String formatCount(int value) {
+    final raw = value.toString();
+    final buffer = StringBuffer();
+    for (var i = 0; i < raw.length; i += 1) {
+      final remaining = raw.length - i;
+      buffer.write(raw[i]);
+      if (remaining > 1 && remaining % 3 == 1) {
+        buffer.write(',');
+      }
+    }
+    return buffer.toString();
+  }
 }
 
-class _CatalogMetricChip extends StatelessWidget {
+class _CatalogMetricTile extends StatelessWidget {
   final String label;
   final String value;
   final Color color;
 
-  const _CatalogMetricChip({
+  const _CatalogMetricTile({
     required this.label,
     required this.value,
     required this.color,
@@ -449,13 +473,16 @@ class _CatalogMetricChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      constraints: const BoxConstraints(minHeight: 58),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: color.withValues(alpha: 0.18)),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             label,
@@ -467,13 +494,13 @@ class _CatalogMetricChip extends StatelessWidget {
               fontWeight: FontWeight.w800,
             ),
           ),
-          const SizedBox(width: 6),
+          const SizedBox(height: 4),
           Text(
             value,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
-              fontSize: 12,
+              fontSize: 16,
               fontWeight: FontWeight.w900,
             ),
           ),
@@ -525,7 +552,7 @@ class _MapleProfileCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w900,
-              letterSpacing: 0.3,
+              letterSpacing: 0,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -686,6 +713,8 @@ class _StatTile extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: Colors.grey.shade700,
               fontSize: 11.5,
@@ -969,16 +998,21 @@ class _PromoSlideCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      fontSize: 17,
+                      fontSize: 16,
+                      height: 1.18,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     subtitle,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: 13.5,
+                      fontSize: 13,
                       color: Colors.grey.shade700,
                       height: 1.35,
                     ),
@@ -1091,7 +1125,7 @@ class _ScrollingText extends StatelessWidget {
       color: Colors.white,
       fontSize: 13,
       fontWeight: FontWeight.w800,
-      letterSpacing: 0.2,
+      letterSpacing: 0,
     );
 
     // Measure the text width to compute scroll distance.
