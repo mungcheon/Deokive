@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "source_discovery_next_focus_pack_public.json"
 DEFAULT_OUTPUT = DATA / "source_discovery_next_focus_detail_candidates_public.json"
+DEFAULT_FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
 
 
 SearchFn = Callable[[dict[str, Any]], list[ProductImage]]
@@ -45,6 +46,26 @@ def load_json(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"{path} must contain a JSON object")
     return payload
+
+
+def _catalog_index(value: Any) -> int | None:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _fetch_audit_by_index(fetch_audit: dict[str, Any] | None) -> dict[int, dict[str, Any]]:
+    if not isinstance(fetch_audit, dict):
+        return {}
+    rows: dict[int, dict[str, Any]] = {}
+    for item in fetch_audit.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        catalog_index = _catalog_index(item.get("catalog_index"))
+        if catalog_index is not None:
+            rows[catalog_index] = item
+    return rows
 
 
 def _query_for_item(item: dict[str, Any]) -> str:
@@ -158,19 +179,37 @@ def build_report(
     next_focus_pack: dict[str, Any],
     *,
     search_fn: SearchFn | None = None,
+    fetch_audit: dict[str, Any] | None = None,
     generated_at: str | None = None,
     candidate_limit: int = 5,
 ) -> dict[str, Any]:
     search = search_fn or _default_searcher()
+    audit_by_index = _fetch_audit_by_index(fetch_audit)
     items: list[dict[str, Any]] = []
     candidate_confirmation_template: list[dict[str, Any]] = []
     exact_candidate_confirmation_shortlist: list[dict[str, Any]] = []
     status_counts: Counter[str] = Counter()
+    audit_status_counts: Counter[str] = Counter()
     candidate_rows = 0
     items_with_candidates = 0
+    candidate_items_with_official_no_results = 0
+    candidate_rows_from_fallback_search = 0
     for item in next_focus_pack.get("items") or []:
         if not isinstance(item, dict):
             continue
+        audit_item = audit_by_index.get(_catalog_index(item.get("catalog_index")) or -1) or {}
+        official_search_no_results = bool(audit_item.get("no_results_page"))
+        needs_fallback_web_search = bool(audit_item.get("needs_fallback_web_search"))
+        audit_status = (
+            "official_search_no_results"
+            if official_search_no_results
+            else "official_search_unavailable"
+            if needs_fallback_web_search
+            else "official_search_has_results"
+            if audit_item
+            else "fetch_audit_missing"
+        )
+        audit_status_counts[audit_status] += 1
         query = _query_for_item(item)
         try:
             candidates = search(item)
@@ -186,6 +225,9 @@ def build_report(
         ]
         if candidate_payload:
             items_with_candidates += 1
+            if official_search_no_results:
+                candidate_items_with_official_no_results += 1
+                candidate_rows_from_fallback_search += len(candidate_payload)
         else:
             status_counts["no_candidates_found" if fetch_status == "ok" else "candidate_fetch_error"] += 1
         for candidate in candidate_payload:
@@ -244,6 +286,13 @@ def build_report(
                 "name_ja": item.get("name_ja"),
                 "search_query": query,
                 "official_search_url": item.get("official_search_url"),
+                "official_search_audit_status": audit_status,
+                "official_search_no_results": official_search_no_results,
+                "needs_fallback_web_search": needs_fallback_web_search,
+                "official_search_product_detail_link_count": int(
+                    audit_item.get("product_detail_link_count") or 0
+                ),
+                "official_search_fetch_block_reason": audit_item.get("fetch_block_reason") or "",
                 "fetch_status": fetch_status,
                 "fetch_error": fetch_error,
                 "candidate_count": len(candidates),
@@ -266,6 +315,8 @@ def build_report(
             "target_category": next_summary.get("target_category"),
             "pack_items": len(items),
             "items_with_candidates": items_with_candidates,
+            "items_with_candidates_from_official_no_results": candidate_items_with_official_no_results,
+            "candidate_rows_from_fallback_search": candidate_rows_from_fallback_search,
             "candidate_rows": candidate_rows,
             "exact_candidate_review_rows": status_counts.get("exact_candidate_review", 0),
             "manual_candidate_review_rows": status_counts.get("manual_candidate_review", 0),
@@ -287,6 +338,9 @@ def build_report(
                 1 for row in candidate_confirmation_template if row.get("manual_confirmed") is True
             ),
             "status_counts": [[key, value] for key, value in status_counts.most_common() if key],
+            "official_search_audit_status_counts": [
+                [key, value] for key, value in audit_status_counts.most_common() if key
+            ],
             "auto_apply_enabled": False,
         },
         "instructions": [
@@ -312,11 +366,13 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--fetch-audit", type=Path, default=DEFAULT_FETCH_AUDIT)
     parser.add_argument("--candidate-limit", type=int, default=5)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(load_json(args.input), candidate_limit=args.candidate_limit)
+    fetch_audit = load_json(args.fetch_audit) if args.fetch_audit.exists() else None
+    report = build_report(load_json(args.input), fetch_audit=fetch_audit, candidate_limit=args.candidate_limit)
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))

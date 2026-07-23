@@ -56,6 +56,23 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         report = builder.build_report(
             source,
             search_fn=search,
+            fetch_audit={
+                "items": [
+                    {
+                        "catalog_index": 1,
+                        "no_results_page": True,
+                        "needs_fallback_web_search": True,
+                        "product_detail_link_count": 0,
+                        "fetch_block_reason": "official_search_returned_no_results",
+                    },
+                    {
+                        "catalog_index": 2,
+                        "no_results_page": False,
+                        "needs_fallback_web_search": False,
+                        "product_detail_link_count": 1,
+                    },
+                ]
+            },
             generated_at="2026-07-23T00:00:00Z",
         )
 
@@ -63,6 +80,8 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(report["summary"]["focus_pack_id"], "source-discovery-focus-001")
         self.assertEqual(report["summary"]["pack_items"], 2)
         self.assertEqual(report["summary"]["items_with_candidates"], 1)
+        self.assertEqual(report["summary"]["items_with_candidates_from_official_no_results"], 1)
+        self.assertEqual(report["summary"]["candidate_rows_from_fallback_search"], 1)
         self.assertEqual(report["summary"]["candidate_rows"], 1)
         self.assertEqual(report["summary"]["exact_candidate_review_rows"], 1)
         self.assertEqual(report["summary"]["no_candidate_items"], 1)
@@ -74,6 +93,10 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(first["manual_review_status"], "not_started")
         self.assertEqual(first["manual_confirmed_source_url"], "")
         self.assertEqual(first["affiliation"], "Series A")
+        self.assertEqual(first["official_search_audit_status"], "official_search_no_results")
+        self.assertTrue(first["official_search_no_results"])
+        self.assertTrue(first["needs_fallback_web_search"])
+        self.assertEqual(first["official_search_fetch_block_reason"], "official_search_returned_no_results")
         self.assertEqual(first["candidates"][0]["review_status"], "exact_candidate_review")
         self.assertTrue(first["candidates"][0]["exact_candidate_gate_passed"])
         self.assertEqual(first["candidates"][0]["exact_candidate_blockers"], [])
