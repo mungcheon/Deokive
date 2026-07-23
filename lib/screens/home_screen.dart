@@ -271,7 +271,7 @@ class _CatalogImportPanel extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
       ),
-      padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -305,7 +305,7 @@ class _CatalogImportPanel extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${_CatalogHealthSummary.formatCount(health.totalCount)}개 · 사진 ${health.imageCoverageLabel}',
+                      '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개 · 사진 ${health.imageCoverageLabel}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodySmall?.copyWith(
@@ -320,6 +320,34 @@ class _CatalogImportPanel extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
+          Text(
+            '전체 DB에서 굿즈를 검색해 내 굿즈함이나 위시리스트에 바로 추가해요.',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
+              height: 1.35,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _CatalogStatusChip(
+                icon: Icons.layers_clear_rounded,
+                label: health.duplicateCount == 0
+                    ? '중복 없음'
+                    : '중복 ${_CatalogHealthSummary.formatCount(health.duplicateCount)}개 숨김',
+              ),
+              _CatalogStatusChip(
+                icon: Icons.image_outlined,
+                label: '예시사진 제외',
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
           SizedBox(
             width: double.infinity,
             height: 46,
@@ -351,31 +379,123 @@ class _CatalogImportPanel extends StatelessWidget {
   }
 }
 
+class _CatalogStatusChip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _CatalogStatusChip({
+    required this.icon,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final palette = theme.extension<DeokivePalette>()!;
+    final maxChipWidth = MediaQuery.sizeOf(context).width - 64;
+
+    return Container(
+      constraints: BoxConstraints(maxWidth: maxChipWidth),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      decoration: BoxDecoration(
+        color: palette.softSurface.withValues(alpha: 0.62),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: palette.primary.withValues(alpha: 0.14),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 15, color: palette.primary),
+          const SizedBox(width: 5),
+          Flexible(
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.70),
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _CatalogHealthSummary {
-  final int totalCount;
+  final int uniqueCount;
+  final int duplicateCount;
   final double imageCoverage;
 
   const _CatalogHealthSummary({
-    required this.totalCount,
+    required this.uniqueCount,
+    required this.duplicateCount,
     required this.imageCoverage,
   });
 
   String get imageCoverageLabel => _formatCoverage(imageCoverage);
 
   static _CatalogHealthSummary from(List<GoodsCatalogEntry> entries) {
-    var imageCount = 0;
+    final uniqueEntries = <GoodsCatalogEntry>[];
+    final seenKeys = <String>{};
 
     for (final entry in entries) {
-      if ((entry.displayImagePath ?? '').trim().isNotEmpty) {
+      final key = _identityKey(entry);
+      if (seenKeys.add(key)) {
+        uniqueEntries.add(entry);
+      }
+    }
+
+    var imageCount = 0;
+
+    for (final entry in uniqueEntries) {
+      if (_hasRealDisplayImage(entry)) {
         imageCount += 1;
       }
     }
 
-    final total = entries.length;
+    final total = uniqueEntries.length;
     return _CatalogHealthSummary(
-      totalCount: total,
+      uniqueCount: total,
+      duplicateCount: entries.length - total,
       imageCoverage: total == 0 ? 0 : imageCount / total,
     );
+  }
+
+  static String _identityKey(GoodsCatalogEntry entry) {
+    final sourceUrl = entry.sourceUrl?.trim().toLowerCase() ?? '';
+    if (sourceUrl.isNotEmpty) return 'source:$sourceUrl';
+
+    final barcode = entry.barcode?.trim() ?? '';
+    if (barcode.isNotEmpty) return 'barcode:$barcode';
+
+    return [
+      entry.affiliation,
+      entry.seriesName ?? '',
+      entry.nameKo,
+      entry.nameJa ?? '',
+      entry.category,
+      entry.characterName,
+      entry.subSeries ?? '',
+    ].map((value) => value.trim().toLowerCase()).join('|');
+  }
+
+  static bool _hasRealDisplayImage(GoodsCatalogEntry entry) {
+    final imagePath = (entry.displayImagePath ?? '').trim().toLowerCase();
+    if (imagePath.isEmpty) return false;
+
+    return ![
+      'sample',
+      'example',
+      'placeholder',
+      'no_image',
+      'no-image',
+      'dummy',
+    ].any(imagePath.contains);
   }
 
   static String _formatCoverage(double value) {
