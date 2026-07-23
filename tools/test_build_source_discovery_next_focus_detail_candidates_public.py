@@ -72,6 +72,8 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(first["manual_review_status"], "not_started")
         self.assertEqual(first["manual_confirmed_source_url"], "")
         self.assertEqual(first["candidates"][0]["review_status"], "exact_candidate_review")
+        self.assertTrue(first["candidates"][0]["exact_candidate_gate_passed"])
+        self.assertEqual(first["candidates"][0]["exact_candidate_blockers"], [])
         self.assertEqual(first["source_patch_template"]["catalog_index"], 1)
         template_row = report["candidate_confirmation_template"][0]
         self.assertFalse(template_row["manual_confirmed"])
@@ -84,6 +86,22 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         )
         self.assertEqual(template_row["manual_confirmed_source_url"], "")
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
+
+    def test_candidate_row_explains_manual_review_blockers(self) -> None:
+        row = builder._candidate_row(
+            "Oshi no Ko acrylic stand (Ruby)",
+            ProductImage(
+                title="Oshi no Ko acrylic stand Ai",
+                image_url="https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550000000000_1.jpg&width=400&height=400&square=1",
+                source_url="https://www.animate-onlineshop.jp/pn/test/pd/1234567/",
+            ),
+            1,
+        )
+
+        self.assertEqual(row["review_status"], "manual_candidate_review")
+        self.assertFalse(row["exact_candidate_gate_passed"])
+        self.assertIn("distinctive_tokens_missing", row["exact_candidate_blockers"])
+        self.assertIn("parenthetical_terms_missing", row["exact_candidate_blockers"])
 
 
 if __name__ == "__main__":

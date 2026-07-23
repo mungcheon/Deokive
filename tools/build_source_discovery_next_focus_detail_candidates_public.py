@@ -61,25 +61,14 @@ def _candidate_status(
     score: tuple[int, float],
     rank: int,
 ) -> str:
-    type_ok = _has_goods_type_compatibility(query, candidate.title)
-    distinctive_ok = _has_all_distinctive_token_matches(query, candidate.title)
-    parenthetical_ok = _parenthetical_terms_match(query, candidate.title)
+    blockers = _candidate_exact_review_blockers(query, candidate, score, rank)
     source_ok = bool(candidate.source_url and is_product_specific_source_url(candidate.source_url))
     pair_ok = bool(
         candidate.source_url
         and candidate.image_url
         and is_safe_source_image_pair(candidate.source_url, candidate.image_url)
     )
-    if (
-        rank == 1
-        and score[0] >= 2
-        and score[1] >= 0.62
-        and type_ok
-        and distinctive_ok
-        and parenthetical_ok
-        and source_ok
-        and pair_ok
-    ):
+    if not blockers:
         return "exact_candidate_review"
     if source_ok and pair_ok:
         return "manual_candidate_review"
@@ -90,8 +79,42 @@ def _candidate_status(
     return "weak_or_ambiguous"
 
 
+def _candidate_exact_review_blockers(
+    query: str,
+    candidate: ProductImage,
+    score: tuple[int, float],
+    rank: int,
+) -> list[str]:
+    blockers: list[str] = []
+    source_ok = bool(candidate.source_url and is_product_specific_source_url(candidate.source_url))
+    pair_ok = bool(
+        candidate.source_url
+        and candidate.image_url
+        and is_safe_source_image_pair(candidate.source_url, candidate.image_url)
+    )
+
+    if rank != 1:
+        blockers.append("rank_not_first")
+    if score[0] < 2:
+        blockers.append("token_overlap_below_2")
+    if score[1] < 0.62:
+        blockers.append("similarity_below_0_62")
+    if not _has_goods_type_compatibility(query, candidate.title):
+        blockers.append("goods_type_mismatch")
+    if not _has_all_distinctive_token_matches(query, candidate.title):
+        blockers.append("distinctive_tokens_missing")
+    if not _parenthetical_terms_match(query, candidate.title):
+        blockers.append("parenthetical_terms_missing")
+    if not source_ok:
+        blockers.append("non_product_source_url")
+    if not pair_ok:
+        blockers.append("unsafe_source_image_pair")
+    return blockers
+
+
 def _candidate_row(query: str, candidate: ProductImage, rank: int) -> dict[str, Any]:
     score = _score(query, candidate.title)
+    blockers = _candidate_exact_review_blockers(query, candidate, score, rank)
     return {
         "rank": rank,
         "candidate_title": candidate.title,
@@ -108,6 +131,8 @@ def _candidate_row(query: str, candidate: ProductImage, rank: int) -> dict[str, 
             and candidate.image_url
             and is_safe_source_image_pair(candidate.source_url, candidate.image_url)
         ),
+        "exact_candidate_gate_passed": not blockers,
+        "exact_candidate_blockers": blockers,
         "review_status": _candidate_status(query, candidate, score, rank),
     }
 
