@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "ichiban_duplicate_image_prune",
+  "summary": {
+    "input_rows": 20348,
+    "pruned_rows": 1,
+    "output_rows": 20347,
+    "write": true,
+    "rule": "legacy 1kuji root rows are removed only when an official 1kuji product row shares the same image"
+  },
+  "pruned_rows": [
+    {
+      "catalog_index": 1014,
+      "name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상 마리오 피규어",
+      "name_ja": null,
+      "source_url": "https://1kuji.com/",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/106489/2f6c6ea0-8514-49f3-a0fb-17bfccdd79b1.webp",
+      "local_image_path": "assets/catalog_images/e6fd4d8385ac90dba4a4.webp",
+      "reason": "legacy_root_kuji_row_duplicated_by_official_product_image",
+      "official_keep": {
+        "catalog_index": 12329,
+        "name_ko": "一番くじ スーパーマリオ with YOSHI - A賞 ヨッシーのぬいぐるみ with りんご",
+        "name_ja": "A賞 ヨッシーのぬいぐるみ with りんご",
+        "source_url": "https://1kuji.com/products/mario_yoshi"
+      }
+    }
+  ]
+}

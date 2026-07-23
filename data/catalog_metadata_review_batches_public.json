@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T14:14:59Z",
+  "generated_at": "2026-07-23T14:23:43Z",
   "summary": {
-    "catalog_rows": 20348,
+    "catalog_rows": 20347,
     "tracked_fields": [
       "name_ja",
       "barcode",
@@ -11,14 +11,14 @@
       "source_url",
       "official_price_jpy"
     ],
-    "field_store_group_count": 351,
+    "field_store_group_count": 350,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 13940,
+    "missing_cell_count": 13938,
     "field_missing_totals": {
-      "name_ja": 527,
+      "name_ja": 526,
       "release_date": 1406,
-      "barcode": 10094,
+      "barcode": 10093,
       "official_price_jpy": 566,
       "image_url": 710,
       "source_url": 637
@@ -26,7 +26,7 @@
     "top_source_stores_with_missing_metadata": [
       [
         "이치방쿠지",
-        8258
+        8256
       ],
       [
         "엔스카이",
@@ -12755,7 +12755,7 @@
       "batch_id": "metadata-review-018",
       "priority": 40,
       "group_count": 12,
-      "missing_cell_count": 9026,
+      "missing_cell_count": 9025,
       "field_counts": [
         [
           "official_price_jpy",
@@ -12983,7 +12983,7 @@
         {
           "field": "barcode",
           "source_store": "이치방쿠지",
-          "missing_rows": 7899,
+          "missing_rows": 7898,
           "priority": 50,
           "workflow": "barcode_evidence_review",
           "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
@@ -12991,25 +12991,16 @@
           "risk": "shared_variant_or_box_barcode",
           "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
           "sample_catalog_indexes": [
-            1014,
             11579,
             11580,
             11581,
             11582,
             11583,
             11584,
-            11585
+            11585,
+            11586
           ],
           "sample_items": [
-            {
-              "catalog_index": 1014,
-              "name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상 마리오 피규어",
-              "name_ja": null,
-              "series_name": "이치방쿠지 슈퍼마리오 with YOSHI",
-              "category": "피규어",
-              "source_url": "https://1kuji.com/",
-              "image_url": "https://assets.1kuji.com/uploads/product_item/image/106489/2f6c6ea0-8514-49f3-a0fb-17bfccdd79b1.webp"
-            },
             {
               "catalog_index": 11579,
               "name_ko": "一番くじ ちいかわ - A賞 ちいかわ ぬいぐるみ",
@@ -13072,6 +13063,15 @@
               "category": "키링",
               "source_url": "https://1kuji.com/products/chiikawa",
               "image_url": "https://assets.1kuji.com/uploads/product_item/image/19008/db27d581-616e-4b49-a594-7a0da5c78c7e.jpg"
+            },
+            {
+              "catalog_index": 11586,
+              "name_ko": "一番くじ ちいかわ - ラストワン賞 ラグマット",
+              "name_ja": "ラストワン賞 ラグマット",
+              "series_name": "一番くじ ちいかわ",
+              "category": "굿즈",
+              "source_url": "https://1kuji.com/products/chiikawa",
+              "image_url": "https://assets.1kuji.com/uploads/product_item/image/19009/72914666-f905-44fc-8bae-46844ce0171b.jpg"
             }
           ]
         },
@@ -21458,18 +21458,18 @@
     {
       "batch_id": "metadata-review-030",
       "priority": 60,
-      "group_count": 3,
-      "missing_cell_count": 3,
+      "group_count": 2,
+      "missing_cell_count": 2,
       "field_counts": [
         [
           "name_ja",
-          3
+          2
         ]
       ],
       "workflow_counts": [
         [
           "official_title_review",
-          3
+          2
         ]
       ],
       "review_state": "metadata_evidence_required",
@@ -21498,31 +21498,6 @@
               "category": "포토카드",
               "source_url": "https://x.com/bevir_news/status/1917410092015837672",
               "image_url": "https://www.waktaverse.app/_next/image?q=75&url=%2Fthumbs%2Fjingburger.png&w=3840"
-            }
-          ]
-        },
-        {
-          "field": "name_ja",
-          "source_store": "이치방쿠지",
-          "missing_rows": 1,
-          "priority": 60,
-          "workflow": "official_title_review",
-          "evidence_required": "original Japanese title from official or trusted listing",
-          "next_machine_step": "official_title_review",
-          "risk": "translated_or_inferred_title",
-          "recommended_action": "Verify original Japanese product titles from official listings.",
-          "sample_catalog_indexes": [
-            1014
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 1014,
-              "name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상 마리오 피규어",
-              "name_ja": null,
-              "series_name": "이치방쿠지 슈퍼마리오 with YOSHI",
-              "category": "피규어",
-              "source_url": "https://1kuji.com/",
-              "image_url": "https://assets.1kuji.com/uploads/product_item/image/106489/2f6c6ea0-8514-49f3-a0fb-17bfccdd79b1.webp"
             }
           ]
         },

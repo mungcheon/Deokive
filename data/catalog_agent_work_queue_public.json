@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T14:14:59Z",
+  "generated_at": "2026-07-23T14:23:43Z",
   "summary": {
-    "batch_count": 148,
+    "batch_count": 147,
     "max_published_batches": 160,
-    "summed_batch_rows": 20840,
+    "summed_batch_rows": 20838,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -96,10 +96,6 @@
         1
       ],
       [
-        "ichiban_kuji_prize_name_image_review",
-        1
-      ],
-      [
         "ichiban_kuji_metadata",
         1
       ]
@@ -188,10 +184,6 @@
       [
         "agent-source-focus-pack",
         1
-      ],
-      [
-        "agent-ichiban-prize-name-image",
-        1
       ]
     ],
     "open_review_queues": {
@@ -202,7 +194,7 @@
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 8070,
+      "requested_focus_open_rows": 8069,
       "danganronpa_missing_media_rows": 34,
       "confirmed_import_template_rows": 1141,
       "confirmed_import_action_queue_rows": 4637,
@@ -246,10 +238,10 @@
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
       "ichiban_metadata_queued_catalog_item_rows": 381,
-      "metadata_action_missing_cells": 2499,
-      "metadata_actionable_groups": 166,
+      "metadata_action_missing_cells": 2498,
+      "metadata_actionable_groups": 165,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2499,
+      "metadata_actionable_missing_cells": 2498,
       "metadata_unqueued_actionable_missing_cells": 0,
       "animation_category_review_rows": 0,
       "animation_category_action_rows": 0,
@@ -261,11 +253,11 @@
       "animation_category_unmatched_keyword_rows": 0,
       "animation_category_unmatched_keyword_candidates": 0,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
-      "ichiban_prize_name_image_review_rows": 1,
+      "ichiban_prize_name_image_review_rows": 0,
       "ichiban_prize_multi_item_rank_groups": 415,
       "ichiban_prize_name_image_patch_candidate_rows": 0,
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
-      "ichiban_prize_name_image_patch_blocked_rows": 1
+      "ichiban_prize_name_image_patch_blocked_rows": 0
     },
     "confirmed_import_template_rows": 1141,
     "confirmed_import_action_queue_rows": 4637,
@@ -11948,7 +11940,7 @@
       "priority": 30,
       "title": "요청 우선 보강: 이치방쿠지 굿즈",
       "public_report": "data/requested_focus_enrichment_public.json",
-      "rows": 7899,
+      "rows": 7898,
       "recommended_action": "verify_official_metadata",
       "acceptance_criteria": [
         "Confirm each update against exact official or trusted source evidence.",
@@ -11956,16 +11948,6 @@
         "Prepare catalog patches only for reviewed rows; auto-apply remains disabled."
       ],
       "sample_items": [
-        {
-          "catalog_index": 1014,
-          "name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상 마리오 피규어",
-          "name_ja": null,
-          "series_name": "이치방쿠지 슈퍼마리오 with YOSHI",
-          "category": "피규어",
-          "source_store": "이치방쿠지",
-          "source_url": "https://1kuji.com/",
-          "official_search_url": null
-        },
         {
           "catalog_index": 14193,
           "name_ko": "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
@@ -12032,6 +12014,16 @@
           "name_ja": "G賞 アクリッツ",
           "series_name": "一番くじ 呪術廻戦 －オンライン－",
           "category": "아크릴 스탠드",
+          "source_store": "이치방쿠지",
+          "source_url": "https://1kuji.com/products/jujutsu-o",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14200,
+          "name_ko": "一番くじ 呪術廻戦 －オンライン－ - ラストワン賞 ビジュアルタオル",
+          "name_ja": "ラストワン賞 ビジュアルタオル",
+          "series_name": "一番くじ 呪術廻戦 －オンライン－",
+          "category": "타월",
           "source_store": "이치방쿠지",
           "source_url": "https://1kuji.com/products/jujutsu-o",
           "official_search_url": null
@@ -21988,88 +21980,6 @@
       ],
       "review_state": "official_campaign_evidence_required",
       "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "056-agent-ichiban-prize-name-image-148",
-      "agent_id": "agent-ichiban-prize-name-image",
-      "workstream": "ichiban_kuji_prize_name_image_review",
-      "priority": 56,
-      "title": "Ichiban Kuji prize name/image structure review",
-      "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
-      "rows": 1,
-      "recommended_action": "Confirm each prize display name includes campaign, prize rank, prize item, and variant detail.",
-      "acceptance_criteria": [
-        "Display names include the release name, prize rank, and prize item name.",
-        "Same-prize multi-item rows include numbering, character, color, or item-type detail.",
-        "Images are only changed when same campaign, prize rank, and variant identity all match."
-      ],
-      "sample_items": [
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 1014,
-          "series_name": "이치방쿠지 슈퍼마리오 with YOSHI",
-          "prize_rank": "A상",
-          "prize_item_name": null,
-          "expected_prize_display_name": "A상",
-          "display_name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상 마리오 피규어",
-          "expected_display_name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상",
-          "category": "피규어",
-          "character_name": "마리오",
-          "official_price_jpy": 750,
-          "release_date": "2026-05-23",
-          "source_url": "https://1kuji.com/",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/106489/2f6c6ea0-8514-49f3-a0fb-17bfccdd79b1.webp",
-          "local_image_path": "assets/catalog_images/e6fd4d8385ac90dba4a4.webp",
-          "review_reason": "missing_required_name_component",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 1014,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_summary": {
-        "kuji_rows": 7899,
-        "review_rows": 1,
-        "name_structure_review_rows": 1,
-        "image_identity_review_rows": 0,
-        "same_campaign_prize_rank_name_duplicate_rows": 0,
-        "same_campaign_image_reused_different_name_rows": 0,
-        "multi_item_prize_rank_groups": 415,
-        "multi_item_prize_rank_catalog_rows": 2939,
-        "review_reason_counts": [
-          [
-            "missing_required_name_component",
-            1
-          ]
-        ],
-        "auto_apply_enabled": false,
-        "recommended_next_action": "confirm_ichiban_prize_names_and_images_against_official_campaign_lineups"
-      },
-      "review_state": "manual_prize_name_structure_confirmation_required",
-      "next_machine_step": "confirm_ichiban_prize_name_structure_templates"
     },
     {
       "batch_id": "057-agent-ichiban-reissue-dedupe-107",

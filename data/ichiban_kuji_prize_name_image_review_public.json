@@ -1,22 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T14:14:59Z",
+  "generated_at": "2026-07-23T14:23:43Z",
   "scope": "ichiban_kuji_prize_name_image_review",
   "summary": {
-    "kuji_rows": 7899,
-    "review_rows": 1,
-    "name_structure_review_rows": 1,
+    "kuji_rows": 7898,
+    "review_rows": 0,
+    "name_structure_review_rows": 0,
     "image_identity_review_rows": 0,
     "same_campaign_prize_rank_name_duplicate_rows": 0,
     "same_campaign_image_reused_different_name_rows": 0,
     "multi_item_prize_rank_groups": 415,
     "multi_item_prize_rank_catalog_rows": 2939,
-    "review_reason_counts": [
-      [
-        "missing_required_name_component",
-        1
-      ]
-    ],
+    "review_reason_counts": [],
     "auto_apply_enabled": false,
     "recommended_next_action": "confirm_ichiban_prize_names_and_images_against_official_campaign_lineups"
   },
@@ -31,53 +26,7 @@
     "last_one_and_double_chance_price_jpy": 0,
     "auto_apply_enabled": false
   },
-  "review_rows": [
-    {
-      "manual_review_status": "not_started",
-      "manual_confirmed": false,
-      "catalog_index": 1014,
-      "series_name": "이치방쿠지 슈퍼마리오 with YOSHI",
-      "prize_rank": "A상",
-      "prize_item_name": null,
-      "expected_prize_display_name": "A상",
-      "display_name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상 마리오 피규어",
-      "expected_display_name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상",
-      "category": "피규어",
-      "character_name": "마리오",
-      "official_price_jpy": 750,
-      "release_date": "2026-05-23",
-      "source_url": "https://1kuji.com/",
-      "image_url": "https://assets.1kuji.com/uploads/product_item/image/106489/2f6c6ea0-8514-49f3-a0fb-17bfccdd79b1.webp",
-      "local_image_path": "assets/catalog_images/e6fd4d8385ac90dba4a4.webp",
-      "review_reason": "missing_required_name_component",
-      "name_policy": {
-        "required_components": [
-          "ichiban_release_name(series_name)",
-          "prize_rank(sub_series)",
-          "prize_item_name(name_ja)",
-          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-        ],
-        "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-      },
-      "image_review_policy": {
-        "requires_same_campaign": true,
-        "requires_same_prize_rank": true,
-        "requires_same_variant_or_item": true,
-        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-      },
-      "manual_fix_template": {
-        "catalog_index": 1014,
-        "name_ko": "<confirmed_display_name_or_blank>",
-        "name_ja": "<confirmed_prize_item_name_or_blank>",
-        "sub_series": "<confirmed_prize_rank_or_blank>",
-        "image_url": "<confirmed_official_image_url_or_blank>",
-        "evidence_url": "https://1kuji.com/",
-        "manual_confirmed": false
-      },
-      "auto_apply_enabled": false
-    }
-  ],
+  "review_rows": [],
   "multi_item_prize_rank_groups": [
     {
       "source_url": "https://1kuji.com/products/p5r",

@@ -869,7 +869,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             {"confirm_manual_keep_drop_dedupe_decisions"},
         )
         self.assertGreater(len(ichiban_prize_policy_agent_batches), 0)
-        self.assertGreater(len(ichiban_prize_name_image_agent_batches), 0)
+        if open_queues.get("ichiban_prize_name_image_review_rows", 0):
+            self.assertGreater(len(ichiban_prize_name_image_agent_batches), 0)
+        else:
+            self.assertEqual(len(ichiban_prize_name_image_agent_batches), 0)
         if open_queues.get("ichiban_prize_name_image_patch_candidate_rows", 0):
             self.assertGreater(len(ichiban_prize_name_image_patch_agent_batches), 0)
         else:

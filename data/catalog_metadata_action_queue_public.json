@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T14:14:59Z",
+  "generated_at": "2026-07-23T14:23:43Z",
   "scope": "catalog_metadata_action_queue",
   "summary": {
-    "actionable_group_count": 166,
-    "queued_group_count": 166,
+    "actionable_group_count": 165,
+    "queued_group_count": 165,
     "unqueued_actionable_group_count": 0,
-    "actionable_missing_cells": 2499,
-    "queued_missing_cells": 2499,
+    "actionable_missing_cells": 2498,
+    "queued_missing_cells": 2498,
     "unqueued_actionable_missing_cells": 0,
     "group_queue_coverage": 1.0,
     "missing_cell_queue_coverage": 1.0,
@@ -20,11 +20,11 @@
         83
       ],
       [
-        "name_ja",
-        42
+        "official_price_jpy",
+        41
       ],
       [
-        "official_price_jpy",
+        "name_ja",
         41
       ]
     ],
@@ -51,10 +51,6 @@
       ],
       [
         "치이카와 모구모구 혼포",
-        3
-      ],
-      [
-        "이치방쿠지",
         3
       ],
       [
@@ -162,6 +158,10 @@
         2
       ],
       [
+        "이치방쿠지",
+        2
+      ],
+      [
         "MINISO 중국",
         2
       ],
@@ -201,13 +201,13 @@
       ],
       [
         "name_ja",
-        527
+        526
       ]
     ],
     "missing_cells_by_source_store": [
       [
         "이치방쿠지",
-        359
+        358
       ],
       [
         "Stellive Store",
@@ -531,7 +531,7 @@
     "excluded_field_missing_cells": [
       [
         "barcode",
-        10094
+        10093
       ],
       [
         "image_url",
@@ -14409,13 +14409,13 @@
     {
       "batch_id": "metadata-action-014",
       "priority": 30,
-      "group_count": 10,
-      "missing_cell_count": 13,
+      "group_count": 9,
+      "missing_cell_count": 12,
       "offset": 156,
       "field_counts": [
         [
           "name_ja",
-          10
+          9
         ]
       ],
       "source_store_counts": [
@@ -14452,10 +14452,6 @@
           1
         ],
         [
-          "이치방쿠지",
-          1
-        ],
-        [
           "텀블벅",
           1
         ]
@@ -14463,7 +14459,7 @@
       "missing_cells_by_field": [
         [
           "name_ja",
-          13
+          12
         ]
       ],
       "missing_cells_by_source_store": [
@@ -14497,10 +14493,6 @@
         ],
         [
           "이세계 페스티벌",
-          1
-        ],
-        [
-          "이치방쿠지",
           1
         ],
         [
@@ -14867,47 +14859,6 @@
             "target_missing_rows": 1,
             "target_catalog_indexes_sample": [
               2468
-            ],
-            "requires_exact_official_or_trusted_evidence": true,
-            "blocked_until": "manual_metadata_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "field": "name_ja",
-          "source_store": "이치방쿠지",
-          "missing_rows": 1,
-          "priority": 30,
-          "workflow": "official_title_review",
-          "evidence_required": "original Japanese title from official or trusted listing",
-          "risk": "translated_or_inferred_title",
-          "recommended_action": "Verify original Japanese product titles from official listings.",
-          "next_machine_step": "official_title_review",
-          "sample_catalog_indexes": [
-            1014
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 1014,
-              "name_ko": "이치방쿠지 슈퍼마리오 with YOSHI - A상 마리오 피규어",
-              "name_ja": null,
-              "series_name": "이치방쿠지 슈퍼마리오 with YOSHI",
-              "category": "피규어",
-              "source_url": "https://1kuji.com/",
-              "image_url": "https://assets.1kuji.com/uploads/product_item/image/106489/2f6c6ea0-8514-49f3-a0fb-17bfccdd79b1.webp"
-            }
-          ],
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "field": "name_ja",
-            "manual_value": "",
-            "evidence_url": "",
-            "source_store": "이치방쿠지",
-            "target_scope": "field_source_store_group",
-            "target_missing_rows": 1,
-            "target_catalog_indexes_sample": [
-              1014
             ],
             "requires_exact_official_or_trusted_evidence": true,
             "blocked_until": "manual_metadata_evidence_confirmed"
