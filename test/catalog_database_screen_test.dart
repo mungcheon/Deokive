@@ -171,7 +171,8 @@ void main() {
     expect(savedItem.folderId, 'default-folder');
     expect(savedItem.imageUrl, isNotNull);
     expect(savedItem.imageUrl, isNotEmpty);
-    expect(savedItem.imageBytesList, isNotEmpty);
+    expect(savedItem.imageUrl, entry.localImagePath);
+    expect(savedItem.imageBytesList, isEmpty);
   });
 
   testWidgets('catalog database can add even when saved folders are empty',

@@ -43,8 +43,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('굿즈 DB'), findsOneWidget);
-    expect(find.textContaining('중복·예시'), findsOneWidget);
-    expect(find.text('검색 후 내 굿즈함 또는 위시리스트에 추가할 수 있어요.'), findsOneWidget);
+    expect(find.textContaining('정리된 공개 DB'), findsOneWidget);
+    expect(find.text('검색 후 내 굿즈함 또는 위시리스트에 추가할 수 있어요.'),
+        findsNothing);
     expect(find.widgetWithText(FilledButton, 'DB 보기'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

@@ -51,18 +51,12 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   if (destination == null || !context.mounted) return false;
 
   try {
-    final imageBytes = await loadCatalogEntryImageBytes(
-      entry,
-      includeRemote: false,
-    );
-    if (!context.mounted) return false;
     final item = goodsItemFromCatalogEntry(
       appState: appState,
       entry: entry,
       folder: destination.folder,
       addToWishlist: destination.addToWishlist,
       wishlistTargetFolder: destination.wishlistTargetFolder,
-      imageBytes: imageBytes,
     );
     appState.addGoods(item);
   } catch (error) {

@@ -264,9 +264,8 @@ class _CatalogImportPanel extends StatelessWidget {
     final theme = Theme.of(context);
     final entries = appState.curatedCatalogEntries;
     final health = _CatalogHealthSummary.from(entries);
-    final subtitle = health.filteredOutCount > 0
-        ? '중복·예시 ${_CatalogHealthSummary.formatCount(health.filteredOutCount)}개 제외'
-        : '중복·예시 항목 제외 완료';
+    final subtitle =
+        '정리된 공개 DB ${_CatalogHealthSummary.formatCount(health.uniqueCount)}개';
 
     return Material(
       color: theme.colorScheme.surface,
@@ -337,33 +336,20 @@ class _CatalogImportPanel extends StatelessWidget {
               runSpacing: 6,
               children: [
                 _CatalogMetricPill(
-                  label: '정리',
+                  label: '전체',
                   value: '${_CatalogHealthSummary.formatCount(
                     health.uniqueCount,
                   )}개',
                   color: palette.primary,
                 ),
                 _CatalogMetricPill(
-                  label: '사진 있음',
+                  label: '사진',
                   value: _CatalogHealthSummary.formatCount(
                     health.imageCount,
                   ),
                   color: palette.accent,
                 ),
               ],
-            ),
-            const SizedBox(height: 10),
-            Text(
-              '검색 후 내 굿즈함 또는 위시리스트에 추가할 수 있어요.',
-              maxLines: 1,
-              softWrap: false,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.58),
-                height: 1.22,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0,
-              ),
             ),
             const SizedBox(height: 10),
             Divider(
