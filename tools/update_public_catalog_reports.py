@@ -7766,10 +7766,12 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["manual_source_url_search_queue"] = {
             "public_report": f"data/{MANUAL_SOURCE_URL_SEARCH_QUEUE.name}",
             **manual_source_url_search_queue["summary"],
+            "review_readiness": manual_source_url_search_queue.get("review_readiness", {}),
         }
         target["provider_missing_source_url_queue"] = {
             "public_report": f"data/{PROVIDER_MISSING_SOURCE_URL_QUEUE.name}",
             **provider_missing_source_url_queue["summary"],
+            "review_readiness": provider_missing_source_url_queue.get("review_readiness", {}),
         }
         target["candidate_source_url_review_queue"] = {
             "public_report": f"data/{CANDIDATE_SOURCE_URL_REVIEW_QUEUE.name}",

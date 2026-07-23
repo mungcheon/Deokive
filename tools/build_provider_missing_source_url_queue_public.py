@@ -107,6 +107,40 @@ def _build_workstreams(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return workstreams
 
 
+def _review_readiness(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    rows_with_search_url = [row for row in rows if row.get("store_search_url")]
+    rows_with_site_query = [row for row in rows if row.get("site_query")]
+    next_row = rows_with_search_url[0] if rows_with_search_url else (rows[0] if rows else {})
+    return {
+        "status": "provider_or_manual_refresh_required" if rows else "empty",
+        "auto_apply_ready_rows": 0,
+        "manual_review_rows": len(rows),
+        "rows_with_store_search_url": len(rows_with_search_url),
+        "rows_with_site_query": len(rows_with_site_query),
+        "rows_without_search_hint": max(0, len(rows) - len(rows_with_search_url)),
+        "next_review_row": {
+            "catalog_index": next_row.get("catalog_index"),
+            "name_ko": next_row.get("name_ko"),
+            "source_store": next_row.get("source_store"),
+            "category": next_row.get("category"),
+            "store_search_url": next_row.get("store_search_url"),
+            "site_query": next_row.get("site_query"),
+            "fallback_search_queries": (next_row.get("fallback_search_queries") or [])[:3],
+        }
+        if next_row
+        else {},
+        "blocked_reason": "no_candidate_provider_result" if rows else None,
+        "blocked_until": "provider_refreshed_or_manual_exact_source_url_found" if rows else None,
+        "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "provider_result_rechecked_or_manual_source_found",
+            "not_storefront_search_or_collection_url",
+        ],
+        "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+        "auto_apply_enabled": False,
+    }
+
+
 def build_queue(template: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     rows = [
         _queue_item(row)
@@ -131,6 +165,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
             "with_site_query": sum(1 for row in rows if row.get("site_query")),
             "auto_apply_enabled": False,
         },
+        "review_readiness": _review_readiness(rows),
         "instructions": [
             "This queue covers rows where no store-specific candidate provider result exists.",
             "Search hints are not evidence and must not be imported directly.",

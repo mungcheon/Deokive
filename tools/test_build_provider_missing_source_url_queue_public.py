@@ -51,6 +51,22 @@ class BuildProviderMissingSourceUrlQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["by_category"], [["photocard", 1]])
         self.assertEqual(report["summary"]["with_store_search_url"], 1)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
+        self.assertEqual(
+            report["review_readiness"]["status"],
+            "provider_or_manual_refresh_required",
+        )
+        self.assertEqual(report["review_readiness"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(report["review_readiness"]["manual_review_rows"], 1)
+        self.assertEqual(report["review_readiness"]["rows_with_store_search_url"], 1)
+        self.assertEqual(report["review_readiness"]["rows_with_site_query"], 1)
+        self.assertEqual(
+            report["review_readiness"]["next_review_row"]["catalog_index"],
+            1,
+        )
+        self.assertEqual(
+            report["review_readiness"]["blocked_until"],
+            "provider_refreshed_or_manual_exact_source_url_found",
+        )
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 
         item = report["items"][0]
@@ -72,6 +88,8 @@ class BuildProviderMissingSourceUrlQueuePublicTest(unittest.TestCase):
         report = queue.build_queue({"items": []})
 
         self.assertEqual(report["summary"]["provider_missing_rows"], 0)
+        self.assertEqual(report["review_readiness"]["status"], "empty")
+        self.assertEqual(report["review_readiness"]["manual_review_rows"], 0)
         self.assertEqual(report["workstreams"], [])
         self.assertEqual(report["items"], [])
 

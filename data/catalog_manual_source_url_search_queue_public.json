@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:13:02Z",
+  "generated_at": "2026-07-23T23:19:31Z",
   "scope": "catalog_manual_source_url_search_queue",
   "summary": {
     "manual_search_required_rows": 42,
@@ -35,6 +35,36 @@
     ],
     "with_store_search_url": 42,
     "with_site_query": 42,
+    "auto_apply_enabled": false
+  },
+  "review_readiness": {
+    "status": "manual_search_required",
+    "auto_apply_ready_rows": 0,
+    "manual_review_rows": 42,
+    "rows_with_store_search_url": 42,
+    "rows_with_site_query": 42,
+    "rows_without_search_hint": 0,
+    "next_review_row": {
+      "catalog_index": 2352,
+      "name_ko": "강지 마스코트 인형",
+      "source_store": "Stellive Store",
+      "category": "인형",
+      "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "강지 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 강지 마스코트 인형",
+        "강지 인형 스텔라이브"
+      ]
+    },
+    "blocked_reason": "no_exact_product_candidate",
+    "blocked_until": "manual_exact_product_source_url_found",
+    "required_evidence": [
+      "official_or_trusted_product_detail_source_url",
+      "title_character_variant_type_match",
+      "not_storefront_search_or_collection_url"
+    ],
+    "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
     "auto_apply_enabled": false
   },
   "instructions": [

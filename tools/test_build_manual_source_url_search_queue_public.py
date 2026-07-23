@@ -58,6 +58,19 @@ class BuildManualSourceUrlSearchQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["by_source_store"], [["Stellive Store", 1]])
         self.assertEqual(report["summary"]["by_category"], [["인형", 1]])
         self.assertFalse(report["summary"]["auto_apply_enabled"])
+        self.assertEqual(report["review_readiness"]["status"], "manual_search_required")
+        self.assertEqual(report["review_readiness"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(report["review_readiness"]["manual_review_rows"], 1)
+        self.assertEqual(report["review_readiness"]["rows_with_store_search_url"], 1)
+        self.assertEqual(report["review_readiness"]["rows_with_site_query"], 1)
+        self.assertEqual(
+            report["review_readiness"]["next_review_row"]["catalog_index"],
+            10,
+        )
+        self.assertEqual(
+            report["review_readiness"]["blocked_until"],
+            "manual_exact_product_source_url_found",
+        )
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 
         item = report["items"][0]
@@ -78,6 +91,8 @@ class BuildManualSourceUrlSearchQueuePublicTest(unittest.TestCase):
         report = queue.build_queue({"items": []})
 
         self.assertEqual(report["summary"]["manual_search_required_rows"], 0)
+        self.assertEqual(report["review_readiness"]["status"], "empty")
+        self.assertEqual(report["review_readiness"]["manual_review_rows"], 0)
         self.assertEqual(report["workstreams"], [])
         self.assertEqual(report["items"], [])
 
