@@ -6129,7 +6129,27 @@ def update_reports(write: bool) -> dict[str, Any]:
     )
 
     image_candidates = load_json(IMAGE_CANDIDATES, {})
-    image_candidates.setdefault("summary", {})
+    image_candidate_summary = image_candidates.setdefault("summary", {})
+    image_candidate_summary.update(
+        {
+            "rows": rows,
+            "missing_images": missing["image_url"],
+            "missing_with_source_url": summary["missing_with_source_url"],
+            "missing_with_exact_source_url": summary["missing_with_exact_source_url"],
+            "missing_with_generic_source_url": summary["missing_with_generic_source_url"],
+        }
+    )
+    image_backlog["candidate_review_summary"] = dict(image_candidate_summary)
+    quality["image_backlog"] = {
+        **(quality.get("image_backlog") if isinstance(quality.get("image_backlog"), dict) else {}),
+        "missing_images": missing["image_url"],
+        "provider_candidate_items": image_candidate_summary.get("provider_candidate_items", 0),
+        "manual_or_blocked_items": image_candidate_summary.get("manual_or_blocked_items", 0),
+        "missing_with_generic_source_url": summary["missing_with_generic_source_url"],
+        "public_report": f"data/{IMAGE_BACKLOG.name}",
+        "candidate_review_report": f"data/{IMAGE_CANDIDATES.name}",
+        "candidate_review_summary": dict(image_candidate_summary),
+    }
 
     for target in (quality, image_backlog, image_candidates):
         if GOTOUCHI.exists():

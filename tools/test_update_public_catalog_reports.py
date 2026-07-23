@@ -72,7 +72,21 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_detail_candidate_action_queue_public.json", updated_files)
 
         quality = reports.load_json(reports.QUALITY)
+        image_candidates = reports.load_json(reports.IMAGE_CANDIDATES)
+        self.assertEqual(image_candidates["summary"]["missing_images"], result["missing"]["image_url"])
+        self.assertEqual(image_candidates["summary"]["rows"], result["rows"])
+        image_backlog = reports.load_json(reports.IMAGE_BACKLOG)
+        self.assertEqual(image_backlog["summary"]["missing_images"], result["missing"]["image_url"])
+        self.assertEqual(
+            image_backlog["candidate_review_summary"]["missing_images"],
+            result["missing"]["image_url"],
+        )
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
+        self.assertEqual(quality["image_backlog"]["missing_images"], result["missing"]["image_url"])
+        self.assertEqual(
+            quality["image_backlog"]["candidate_review_summary"]["missing_images"],
+            result["missing"]["image_url"],
+        )
         if reports.ANIMATE_MISSING_IMAGE_SEARCH.exists():
             self.assertEqual(quality["animate_missing_image_search"]["missing_animate_image_rows"], 148)
             self.assertIs(quality["animate_missing_image_search"]["auto_apply_enabled"], False)
