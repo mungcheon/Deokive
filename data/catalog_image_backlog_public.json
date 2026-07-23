@@ -4012,6 +4012,9 @@
     "ichiban_reissue_review_rows": 92,
     "ichiban_probable_reissue_review_groups": 20,
     "ichiban_probable_reissue_sample_rows": 40,
+    "ichiban_reissue_work_order_rows": 20,
+    "ichiban_reissue_decision_template_rows": 20,
+    "ichiban_reissue_manual_confirmed_rows": 0,
     "ichiban_reissue_protected_groups": 0,
     "ichiban_reissue_protected_rows": 0,
     "auto_merge_enabled": false,
@@ -5708,17 +5711,19 @@
     "source_detail_unflagged_candidate_rows": 1,
     "source_detail_ready_unflagged_candidate_rows": 0,
     "manual_image_research_rows": 5,
-    "source_discovery_focus_pack_rows": 0,
-    "source_discovery_focus_pack_count": 0,
-    "source_discovery_not_started_focus_pack_count": 0,
-    "source_discovery_remaining_focus_review_rows": 0,
+    "source_discovery_focus_pack_rows": 427,
+    "source_discovery_focus_pack_count": 24,
+    "source_discovery_not_started_focus_pack_count": 24,
+    "source_discovery_remaining_focus_review_rows": 427,
     "source_discovery_confirmed_focus_source_rows": 0,
     "source_discovery_focus_template_rows": 427,
     "source_discovery_focus_template_confirmed_rows": 0,
+    "source_discovery_next_focus_pack_id": "source-discovery-focus-001",
+    "source_discovery_next_focus_pack_rows": 20,
     "source_discovery_focus_template_dry_run_updated_rows": 0,
     "source_discovery_focus_template_dry_run_skipped_rows": 427,
-    "source_discovery_focus_coverage": 0.0,
-    "source_discovery_non_focus_rows": 0,
+    "source_discovery_focus_coverage": 0.6651,
+    "source_discovery_non_focus_rows": 215,
     "action_queue_rows": 73,
     "direct_image_action_queue_rows": 73,
     "image_attachment_template_rows": 73,
@@ -5728,6 +5733,8 @@
     "image_attachment_template_dry_run_updated_rows": 0,
     "image_attachment_template_dry_run_skipped_rows": 73,
     "actionable_image_rows": 73,
+    "source_discovery_work_pack_count": 16,
+    "source_discovery_work_pack_rows": 573,
     "auto_apply_enabled": false
   },
   "source_discovery_store_bottlenecks": {
@@ -6348,50 +6355,26 @@
   },
   "source_discovery_next_focus_detail_candidates": {
     "public_report": "data/source_discovery_next_focus_detail_candidates_public.json",
-    "source_queue_rows": 20,
-    "supported_provider_rows": 20,
-    "unsupported_provider_rows": 0,
-    "supported_provider_stores": [
-      "AmiAmi",
-      "Cospa",
-      "FuRyu",
-      "Movic",
-      "Re-ment",
-      "Taito",
-      "굿스마일컴퍼니",
-      "애니메이트",
-      "엔스카이",
-      "코토부키야"
-    ],
-    "top_unsupported_provider_stores": [],
-    "scanned_rows": 20,
-    "processed_rows": 20,
-    "result_rows": 20,
-    "failure_count": 0,
-    "rate_limit_stopped": false,
-    "time_budget_seconds": null,
-    "time_budget_exhausted": false,
-    "start_index": 0,
-    "rate_limit_skipped_stores": [],
-    "rate_limit_failures": 0,
-    "provider_temporary_unavailable_failures": 0,
+    "focus_pack_id": "source-discovery-focus-001",
+    "source_store": "애니메이트",
+    "target_category": "아크릴 스탠드",
+    "pack_items": 20,
+    "items_with_candidates": 4,
+    "candidate_rows": 20,
+    "exact_candidate_review_rows": 0,
+    "manual_candidate_review_rows": 20,
+    "no_candidate_items": 16,
+    "candidate_fetch_error_items": 0,
     "status_counts": [
       [
-        "no_candidates",
+        "manual_candidate_review",
+        20
+      ],
+      [
+        "no_candidates_found",
         16
-      ],
-      [
-        "no_relevant_candidates",
-        3
-      ],
-      [
-        "candidate_review_needed",
-        1
       ]
     ],
-    "exact_candidate_rows": 0,
-    "candidate_review_rows": 1,
-    "no_relevant_candidate_rows": 3,
     "auto_apply_enabled": false
   }
 }

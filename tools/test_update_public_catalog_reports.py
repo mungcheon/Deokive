@@ -51,6 +51,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_discovery_next_focus_pack_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_pack_import_dry_run_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_pack_fetch_audit_public.json", updated_files)
+        self.assertIn("data/source_discovery_next_focus_detail_candidates_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_fallback_queue_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_fallback_import_dry_run_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
@@ -106,6 +107,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(quality["source_discovery_next_focus_pack_import_dry_run"]["updated_rows"], 0)
         self.assertEqual(quality["source_discovery_next_focus_pack_import_dry_run"]["skipped_rows"], 20)
         self.assertIs(quality["source_discovery_next_focus_pack_import_dry_run"]["write"], False)
+        self.assertEqual(
+            quality["source_discovery_next_focus_detail_candidates"]["pack_items"],
+            quality["source_discovery_next_focus_pack"]["pack_items"],
+        )
+        self.assertIs(
+            quality["source_discovery_next_focus_detail_candidates"]["auto_apply_enabled"],
+            False,
+        )
         if reports.SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists():
             self.assertEqual(
                 quality["source_discovery_next_focus_pack_fetch_audit"]["pack_items"],

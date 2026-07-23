@@ -222,6 +222,10 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             "data/source_discovery_next_focus_pack_public.json",
         )
         self.assertEqual(
+            work_order[2]["current_focus_pack"]["detail_candidates_report"],
+            "data/source_discovery_next_focus_detail_candidates_public.json",
+        )
+        self.assertEqual(
             work_order[2]["current_focus_pack"]["first_official_search_url"],
             "https://store-c.example/search?q=acrylic",
         )

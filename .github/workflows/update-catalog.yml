@@ -42,6 +42,7 @@ jobs:
           python tools/build_metadata_action_queue_public.py
           python tools/build_image_attachment_action_queue_public.py
           python tools/build_catalog_missing_image_actionability_public.py --write
+          python tools/build_source_discovery_next_focus_detail_candidates_public.py --write
           python tools/build_source_discovery_store_bottlenecks_public.py --write
           python tools/build_ensky_cache_candidate_action_queue_public.py --write
           python tools/build_source_detail_candidate_action_queue_public.py --write
@@ -154,6 +155,7 @@ jobs:
             data/catalog_metadata_action_queue_public.json \
             data/catalog_image_attachment_action_queue_public.json \
             data/catalog_missing_image_actionability_public.json \
+            data/source_discovery_next_focus_detail_candidates_public.json \
             data/catalog_deduplication_public.json \
             data/catalog_deduplication_review_batches_public.json \
             data/catalog_deduplication_action_queue_public.json \

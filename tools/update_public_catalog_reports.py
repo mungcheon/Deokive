@@ -16,6 +16,7 @@ import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
 import build_missing_image_report_coverage_public
 import build_missing_image_priority_public
+import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_pack_public
 import import_confirmed_source_discovery_rows
@@ -80,6 +81,7 @@ SOURCE_DISCOVERY = DATA / "source_discovery_queue_public.json"
 SOURCE_DISCOVERY_REVIEW_BATCHES = DATA / "source_discovery_review_batches_public.json"
 SOURCE_DISCOVERY_ACTION_QUEUE = DATA / "source_discovery_action_queue_public.json"
 SOURCE_DISCOVERY_STORE_BOTTLENECKS = DATA / "source_discovery_store_bottlenecks_public.json"
+SOURCE_DISCOVERY_FOCUS_PACKS = DATA / "source_discovery_focus_packs_public.json"
 SOURCE_DISCOVERY_FOCUS_TEMPLATE = DATA / "source_discovery_focus_confirmed_template_public.json"
 SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT = DATA / "source_discovery_focus_template_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_public.json"
@@ -5792,6 +5794,12 @@ def update_reports(write: bool) -> dict[str, Any]:
         items,
         queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_PACK,
     )
+    source_discovery_next_focus_detail_candidates = (
+        build_source_discovery_next_focus_detail_candidates_public.build_report(
+            source_discovery_next_focus_pack,
+            generated_at=generated_at,
+        )
+    )
     source_discovery_next_focus_fetch_audit = (
         load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists()
@@ -5813,7 +5821,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         image_enrichment_batches,
         image_attachment_action_queue,
         load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {}) if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists() else {},
-        source_discovery_next_focus_pack,
+        load_json(SOURCE_DISCOVERY_FOCUS_PACKS, {}) if SOURCE_DISCOVERY_FOCUS_PACKS.exists() else {},
         source_discovery_focus_template,
         source_discovery_focus_template_import,
         load_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, {}) if IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.exists() else {},
@@ -6302,6 +6310,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, source_discovery_next_focus_detail_candidates)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, source_discovery_next_focus_fallback_queue)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT, source_discovery_next_focus_fallback_import)
         write_json(MISSING_IMAGE_ACTIONABILITY, missing_image_actionability)
