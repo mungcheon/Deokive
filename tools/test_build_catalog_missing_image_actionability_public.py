@@ -61,7 +61,17 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 "non_focus_source_rows": 1,
             }
         }
-        focus_template = {"summary": {"template_items": 4, "manual_confirmed_rows": 0}}
+        focus_template = {
+            "summary": {
+                "template_items": 4,
+                "manual_confirmed_rows": 0,
+                "next_focus_pack_id": "source-discovery-focus-001",
+                "next_source_store": "Store C",
+                "next_target_category": "Acrylic",
+                "next_focus_pack_rows": 2,
+                "next_official_search_url": "https://store-c.example/search?q=acrylic",
+            }
+        }
         focus_template_dry_run = {"updated_rows": 0, "skipped_rows": 4}
         image_attachment_template = {
             "summary": {
@@ -149,6 +159,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_discovery_confirmed_focus_source_rows"], 0)
         self.assertEqual(report["summary"]["source_discovery_focus_template_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_focus_template_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["source_discovery_next_focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(report["summary"]["source_discovery_next_focus_pack_rows"], 2)
         self.assertEqual(report["summary"]["source_discovery_focus_template_dry_run_updated_rows"], 0)
         self.assertEqual(report["summary"]["source_discovery_focus_template_dry_run_skipped_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_focus_coverage"], 0.8)
@@ -205,6 +217,18 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(work_order[1]["row_count"], 1)
         self.assertEqual(work_order[2]["row_count"], 4)
         self.assertEqual(work_order[2]["top_work_packs"][0]["source_store"], "Store C")
+        self.assertEqual(
+            work_order[2]["current_focus_pack"]["focused_pack_report"],
+            "data/source_discovery_next_focus_pack_public.json",
+        )
+        self.assertEqual(
+            work_order[2]["current_focus_pack"]["first_official_search_url"],
+            "https://store-c.example/search?q=acrylic",
+        )
+        self.assertEqual(
+            report["next_source_discovery_focus_pack"]["confirmed_template"],
+            "data/source_discovery_focus_confirmed_template_public.json",
+        )
         self.assertFalse(work_order[0]["auto_apply_enabled"])
         self.assertTrue(work_order[0]["manual_confirmation_required"])
 
@@ -250,7 +274,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["source_discovery_work_packs"][0]["row_count"], 3)
         self.assertEqual(discover["top_work_packs"][0]["source_store"], "Animate")
         self.assertEqual(discover["top_work_packs"][0]["row_count"], 3)
-        self.assertIn("falls back", discover["notes"][1])
+        self.assertTrue(any("falls back" in note for note in discover["notes"]))
 
 
 if __name__ == "__main__":

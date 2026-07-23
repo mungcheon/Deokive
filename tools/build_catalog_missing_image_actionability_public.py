@@ -245,11 +245,30 @@ def build_source_discovery_work_packs(groups: list[dict[str, Any]], limit: int =
     return packs[:limit]
 
 
+def next_focus_pack_from_template_summary(summary: dict[str, Any]) -> dict[str, Any] | None:
+    focus_pack_id = summary.get("next_focus_pack_id")
+    if not focus_pack_id:
+        return None
+    return {
+        "focus_pack_id": focus_pack_id,
+        "source_store": summary.get("next_source_store"),
+        "target_category": summary.get("next_target_category"),
+        "row_count": summary.get("next_focus_pack_rows") or 0,
+        "first_official_search_url": summary.get("next_official_search_url"),
+        "focused_pack_report": "data/source_discovery_next_focus_pack_public.json",
+        "confirmed_template": "data/source_discovery_focus_confirmed_template_public.json",
+        "import_dry_run_report": "data/source_discovery_next_focus_pack_import_dry_run_public.json",
+        "next_step": "review_next_focus_pack_then_fill_confirmed_source_urls",
+        "auto_apply_enabled": False,
+    }
+
+
 def build_work_order(
     summary: dict[str, Any],
     readiness_rows: list[dict[str, Any]],
     source_store_priority: list[dict[str, Any]],
     source_discovery_work_packs: list[dict[str, Any]] | None = None,
+    next_source_discovery_focus_pack: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     readiness_by_name = {str(row.get("readiness") or ""): row for row in readiness_rows}
     source_discovery_row = readiness_by_name.get("source_url_discovery_required", {})
@@ -291,6 +310,7 @@ def build_work_order(
         notes: list[str] | None = None,
         top_stores: list[dict[str, Any]] | None = None,
         top_work_packs: list[dict[str, Any]] | None = None,
+        current_focus_pack: dict[str, Any] | None = None,
     ) -> None:
         if row_count <= 0:
             return
@@ -304,6 +324,7 @@ def build_work_order(
                 "template": template,
                 "top_source_stores": top_stores or [],
                 "top_work_packs": top_work_packs or [],
+                "current_focus_pack": current_focus_pack or {},
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
                 "notes": notes or [],
@@ -338,8 +359,10 @@ def build_work_order(
         template="source_discovery_focus_confirmed_template_public.json",
         top_stores=top_source_discovery_stores,
         top_work_packs=(source_discovery_work_packs or [])[:8],
+        current_focus_pack=next_source_discovery_focus_pack,
         notes=[
             "Focus packs cover the highest-volume official-store gaps before broad manual research.",
+            "Use current_focus_pack for the next concrete source discovery batch.",
             "If no focus pack is active yet, this lane falls back to every source_url_discovery_required missing-image row.",
         ],
     )
@@ -547,6 +570,7 @@ def build_report(
     readiness_rows = append_source_detail_readiness(base_readiness_rows, source_detail_missing)
     source_store_priority = summarize_source_stores(groups)
     source_discovery_work_packs = build_source_discovery_work_packs(groups)
+    next_source_discovery_focus_pack = next_focus_pack_from_template_summary(focus_template_summary)
     readiness_total = sum(int(row.get("rows") or 0) for row in base_readiness_rows)
     missing_image_rows = int(summary.get("missing_image_rows") or readiness_total)
 
@@ -592,6 +616,14 @@ def build_report(
         "source_discovery_confirmed_focus_source_rows": int(focus_summary.get("confirmed_focus_source_rows") or 0),
         "source_discovery_focus_template_rows": int(focus_template_summary.get("template_items") or 0),
         "source_discovery_focus_template_confirmed_rows": int(focus_template_summary.get("manual_confirmed_rows") or 0),
+        "source_discovery_next_focus_pack_id": (
+            next_source_discovery_focus_pack.get("focus_pack_id")
+            if next_source_discovery_focus_pack
+            else None
+        ),
+        "source_discovery_next_focus_pack_rows": int(
+            (next_source_discovery_focus_pack or {}).get("row_count") or 0
+        ),
         "source_discovery_focus_template_dry_run_updated_rows": int(
             focus_template_dry_run_summary.get("updated_rows") or 0
         ),
@@ -623,7 +655,13 @@ def build_report(
         "source_discovery_work_pack_rows": sum(int(row.get("row_count") or 0) for row in source_discovery_work_packs),
         "auto_apply_enabled": False,
     }
-    work_order = build_work_order(summary_out, readiness_rows, source_store_priority, source_discovery_work_packs)
+    work_order = build_work_order(
+        summary_out,
+        readiness_rows,
+        source_store_priority,
+        source_discovery_work_packs,
+        next_source_discovery_focus_pack,
+    )
 
     return {
         "schema_version": 1,
@@ -633,6 +671,7 @@ def build_report(
         "readiness": readiness_rows,
         "source_store_priority": source_store_priority,
         "source_discovery_work_packs": source_discovery_work_packs,
+        "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
         "recommended_order": [
             "source_url_replacement_required",
