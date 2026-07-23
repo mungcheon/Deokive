@@ -16,14 +16,6 @@ Future<bool> showCatalogGoodsImportFlow(
   FolderItem? initialFolder,
 }) async {
   final appState = context.read<AppState>();
-  if (!appState.isLoggedIn) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('로그인이 필요합니다. 내 굿즈 정보는 이 기기에만 저장돼요.'),
-      ),
-    );
-    return false;
-  }
 
   final entry = await showGoodsCatalogPicker(
     context,
@@ -46,14 +38,6 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   FolderItem? initialFolder,
 }) async {
   final appState = context.read<AppState>();
-  if (!appState.isLoggedIn) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('로그인이 필요합니다. 내 굿즈 정보는 이 기기에만 저장돼요.'),
-      ),
-    );
-    return false;
-  }
 
   final shouldContinue =
       await _confirmDuplicateImport(context, appState, entry);
@@ -66,7 +50,10 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   );
   if (destination == null || !context.mounted) return false;
 
-  final imageBytes = await loadCatalogEntryImageBytes(entry);
+  // DB imports should never feel blocked by a remote image request. The item
+  // keeps its catalog image reference either way, and bundled/cache images can
+  // still be copied into local storage when available.
+  final imageBytes = await loadCatalogEntryBundledImageBytes(entry);
   if (!context.mounted) return false;
 
   final item = goodsItemFromCatalogEntry(

@@ -279,19 +279,19 @@ class _CatalogImportPanel extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(color: palette.primary.withValues(alpha: 0.18)),
       ),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 42,
-                height: 42,
+                width: 38,
+                height: 38,
                 decoration: BoxDecoration(
                   color: palette.primary.withValues(alpha: 0.14),
                   shape: BoxShape.circle,
@@ -302,11 +302,11 @@ class _CatalogImportPanel extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       '굿즈 DB',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -315,59 +315,22 @@ class _CatalogImportPanel extends StatelessWidget {
                         fontWeight: FontWeight.w900,
                       ),
                     ),
-                    SizedBox(height: 2),
                     Text(
-                      '전체 DB에서 검색하고 내 굿즈함이나 위시리스트에 추가해요.',
-                      maxLines: 2,
+                      '${_CatalogHealthSummary.formatCount(health.totalCount)}개 항목 · 사진 ${health.imageCoverageLabel}',
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 12.5, height: 1.35),
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color:
+                            theme.colorScheme.onSurface.withValues(alpha: 0.62),
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: _CatalogMetricTile(
-                  label: '전체 DB',
-                  value: _CatalogHealthSummary.formatCount(health.totalCount),
-                  color: palette.primary,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _CatalogMetricTile(
-                  label: '분류',
-                  value: '${health.categoryCount}',
-                  color: palette.accent,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: _CatalogMetricTile(
-                  label: '사진 등록',
-                  value: health.imageCoverageLabel,
-                  color: const Color(0xFF4F8F7B),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _CatalogMetricTile(
-                  label: '출처 확인',
-                  value: health.sourceCoverageLabel,
-                  color: const Color(0xFF7B6EC8),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           SizedBox(
             width: double.infinity,
             height: 46,
@@ -401,43 +364,28 @@ class _CatalogImportPanel extends StatelessWidget {
 
 class _CatalogHealthSummary {
   final int totalCount;
-  final int categoryCount;
   final double imageCoverage;
-  final double sourceCoverage;
 
   const _CatalogHealthSummary({
     required this.totalCount,
-    required this.categoryCount,
     required this.imageCoverage,
-    required this.sourceCoverage,
   });
 
   String get imageCoverageLabel => _formatCoverage(imageCoverage);
-  String get sourceCoverageLabel => _formatCoverage(sourceCoverage);
 
   static _CatalogHealthSummary from(List<GoodsCatalogEntry> entries) {
-    final categories = <String>{};
     var imageCount = 0;
-    var sourceCount = 0;
 
     for (final entry in entries) {
-      final category = entry.normalizedCategory.trim();
-      if (category.isNotEmpty) categories.add(category);
-
       if ((entry.displayImagePath ?? '').trim().isNotEmpty) {
         imageCount += 1;
-      }
-      if ((entry.sourceUrl ?? '').trim().isNotEmpty) {
-        sourceCount += 1;
       }
     }
 
     final total = entries.length;
     return _CatalogHealthSummary(
       totalCount: total,
-      categoryCount: categories.length,
       imageCoverage: total == 0 ? 0 : imageCount / total,
-      sourceCoverage: total == 0 ? 0 : sourceCount / total,
     );
   }
 
@@ -456,57 +404,6 @@ class _CatalogHealthSummary {
       }
     }
     return buffer.toString();
-  }
-}
-
-class _CatalogMetricTile extends StatelessWidget {
-  final String label;
-  final String value;
-  final Color color;
-
-  const _CatalogMetricTile({
-    required this.label,
-    required this.value,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(minHeight: 58),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withValues(alpha: 0.18)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: color,
-              fontSize: 12,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }
 
