@@ -8,6 +8,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
+from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,6 +76,7 @@ def build_report(
     audited_items: list[dict[str, Any]] = []
     status_counts: Counter[str] = Counter()
     http_status_counts: Counter[str] = Counter()
+    blocked_store_rows: Counter[str] = Counter()
 
     for item in items:
         official_search_url = str(item.get("official_search_url") or "")
@@ -85,6 +87,10 @@ def build_report(
         status_counts[status_key] += 1
         http_status_counts[str(http_status) if http_status is not None else "none"] += 1
         is_ok = fetch_status == "ok" and 200 <= int(http_status or 0) < 400
+        netloc = urlsplit(official_search_url).netloc.lower()
+        store_fetch_blocked = fetch_status == "http_error" and int(http_status or 0) in {401, 403, 429}
+        if store_fetch_blocked:
+            blocked_store_rows[netloc or str(item.get("source_store") or "unknown")] += 1
         audited_items.append(
             {
                 "catalog_index": item.get("catalog_index"),
@@ -100,15 +106,24 @@ def build_report(
                 "final_url": result.get("final_url") or "",
                 "error": result.get("error") or "",
                 "needs_fallback_web_search": not is_ok,
+                "store_fetch_blocked": store_fetch_blocked,
+                "fetch_block_reason": (
+                    "store_access_blocked_not_product_identity_failure"
+                    if store_fetch_blocked
+                    else ""
+                ),
                 "recommended_next_action": (
                     "review_official_search_results_for_exact_detail_url"
                     if is_ok
+                    else "use_domain_limited_search_or_legacy_store_search_for_exact_detail_url"
+                    if store_fetch_blocked
                     else "use_web_search_or_store_archive_for_exact_detail_url"
                 ),
             }
         )
 
     unavailable_rows = [item for item in audited_items if item["needs_fallback_web_search"]]
+    store_fetch_blocked_rows = sum(blocked_store_rows.values())
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -119,6 +134,10 @@ def build_report(
             "pack_items": len(items),
             "official_search_ok_rows": len(items) - len(unavailable_rows),
             "official_search_unavailable_rows": len(unavailable_rows),
+            "store_fetch_blocked_rows": store_fetch_blocked_rows,
+            "store_fetch_blocked_by_netloc": blocked_store_rows.most_common(),
+            "all_unavailable_rows_are_store_fetch_blocked": bool(unavailable_rows)
+            and store_fetch_blocked_rows == len(unavailable_rows),
             "status_counts": status_counts.most_common(),
             "http_status_counts": http_status_counts.most_common(),
             "fallback_web_search_required": bool(unavailable_rows),
