@@ -8509,5 +8509,31 @@
     "auto_merge_enabled": false,
     "auto_delete_enabled": false,
     "manual_confirmation_required": true
+  },
+  "image_attachment_queue_alignment": {
+    "public_reports": [
+      "data/catalog_missing_image_priority_public.json",
+      "data/catalog_image_attachment_action_queue_public.json",
+      "data/catalog_image_attachment_confirmed_template_public.json",
+      "data/catalog_image_attachment_template_import_dry_run_public.json",
+      "data/catalog_missing_image_actionability_public.json"
+    ],
+    "missing_image_rows": 710,
+    "actionable_image_rows": 73,
+    "queued_image_rows": 73,
+    "unqueued_actionable_image_rows": 0,
+    "source_url_update_required_rows": 50,
+    "representative_image_review_required_rows": 23,
+    "image_url_ready_rows": 0,
+    "template_rows": 73,
+    "template_confirmed_rows": 0,
+    "dry_run_updated_rows": 0,
+    "dry_run_skipped_rows": 73,
+    "sample_queue_coverage": 1.0,
+    "next_step": "confirm_source_url_updates_before_representative_image_reviews",
+    "blocked_reason": "image_attachment_requires_source_or_representative_image_confirmation",
+    "explanation": "Image-missing rows are not auto-filled from search results. Queued rows first need source URL confirmation or representative image review, then confirmed template rows can be imported.",
+    "auto_apply_enabled": false,
+    "manual_confirmation_required": true
   }
 }

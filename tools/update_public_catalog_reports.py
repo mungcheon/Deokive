@@ -7725,9 +7725,60 @@ def update_reports(write: bool) -> dict[str, Any]:
                 REQUESTED_FOCUS_ACTION_QUEUE, "requested_focus_action_queue"
             )
         if IMAGE_ATTACHMENT_ACTION_QUEUE.exists():
+            image_attachment_action_summary = image_attachment_action_queue.get("summary", {})
             target["image_attachment_action_queue"] = copy_report_summary(
                 IMAGE_ATTACHMENT_ACTION_QUEUE, "image_attachment_action_queue"
             )
+            target["image_attachment_queue_alignment"] = {
+                "public_reports": [
+                    f"data/{MISSING_IMAGE_PRIORITY.name}",
+                    f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+                    f"data/{IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.name}",
+                    f"data/{IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.name}",
+                    f"data/{MISSING_IMAGE_ACTIONABILITY.name}",
+                ],
+                "missing_image_rows": missing_image_priority["summary"].get("missing_image_rows", 0),
+                "actionable_image_rows": image_attachment_action_summary.get(
+                    "actionable_image_rows", 0
+                ),
+                "queued_image_rows": image_attachment_action_summary.get("queued_image_rows", 0),
+                "unqueued_actionable_image_rows": image_attachment_action_summary.get(
+                    "unqueued_actionable_image_rows", 0
+                ),
+                "source_url_update_required_rows": image_attachment_action_summary.get(
+                    "source_url_update_required_rows", 0
+                ),
+                "representative_image_review_required_rows": image_attachment_action_summary.get(
+                    "representative_image_review_required_rows", 0
+                ),
+                "image_url_ready_rows": image_attachment_action_summary.get(
+                    "image_url_ready_rows", 0
+                ),
+                "template_rows": image_attachment_template_import_dry_run["summary"].get(
+                    "template_items", 0
+                ),
+                "template_confirmed_rows": image_attachment_template_import_dry_run[
+                    "summary"
+                ].get("manual_confirmed_rows", 0),
+                "dry_run_updated_rows": image_attachment_template_import_dry_run[
+                    "summary"
+                ].get("updated_rows", 0),
+                "dry_run_skipped_rows": image_attachment_template_import_dry_run[
+                    "summary"
+                ].get("skipped_rows", 0),
+                "sample_queue_coverage": image_attachment_action_summary.get(
+                    "sample_queue_coverage", 0
+                ),
+                "next_step": "confirm_source_url_updates_before_representative_image_reviews",
+                "blocked_reason": "image_attachment_requires_source_or_representative_image_confirmation",
+                "explanation": (
+                    "Image-missing rows are not auto-filled from search results. "
+                    "Queued rows first need source URL confirmation or representative "
+                    "image review, then confirmed template rows can be imported."
+                ),
+                "auto_apply_enabled": False,
+                "manual_confirmation_required": True,
+            }
         target["missing_image_actionability"] = {
             "public_report": f"data/{MISSING_IMAGE_ACTIONABILITY.name}",
             **missing_image_actionability["summary"],

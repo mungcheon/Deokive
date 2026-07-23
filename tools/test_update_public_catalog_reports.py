@@ -212,6 +212,21 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(quality["image_attachment_template_import_dry_run"]["skipped_rows"], 73)
         self.assertEqual(quality["image_attachment_template_import_dry_run"]["manual_confirmed_rows"], 0)
         self.assertIs(quality["image_attachment_template_import_dry_run"]["auto_apply_enabled"], False)
+        image_alignment = quality["image_attachment_queue_alignment"]
+        self.assertEqual(image_alignment["missing_image_rows"], result["missing"]["image_url"])
+        self.assertEqual(image_alignment["actionable_image_rows"], 73)
+        self.assertEqual(image_alignment["queued_image_rows"], 73)
+        self.assertEqual(image_alignment["unqueued_actionable_image_rows"], 0)
+        self.assertEqual(image_alignment["source_url_update_required_rows"], 50)
+        self.assertEqual(image_alignment["representative_image_review_required_rows"], 23)
+        self.assertEqual(image_alignment["image_url_ready_rows"], 0)
+        self.assertEqual(image_alignment["template_rows"], 73)
+        self.assertEqual(image_alignment["template_confirmed_rows"], 0)
+        self.assertEqual(image_alignment["dry_run_updated_rows"], 0)
+        self.assertEqual(image_alignment["dry_run_skipped_rows"], 73)
+        self.assertEqual(image_alignment["sample_queue_coverage"], 1.0)
+        self.assertIs(image_alignment["auto_apply_enabled"], False)
+        self.assertIs(image_alignment["manual_confirmation_required"], True)
         self.assertEqual(
             quality["source_url_update_queue_split"]["covered_rows"],
             quality["source_url_update_queue_split"]["source_url_update_required_rows"],
