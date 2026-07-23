@@ -89,6 +89,8 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(report["summary"]["exact_candidate_confirmation_shortlist_rows"], 1)
         self.assertEqual(report["summary"]["candidate_confirmation_exact_review_rows"], 1)
         self.assertEqual(report["summary"]["candidate_confirmation_manual_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["completion_readiness_status"], "exact_candidate_confirmation_ready")
+        self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
         self.assertEqual(report["summary"]["fallback_bridge_rows"], 0)
         self.assertEqual(
             report["summary"]["review_bucket_counts"],
@@ -100,6 +102,10 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         )
         self.assertEqual(report["summary"]["variant_detail_required_rows"], 0)
         self.assertEqual(report["summary"]["exact_candidate_confirmation_ready_items"], 1)
+        self.assertEqual(report["completion_readiness"]["status"], "exact_candidate_confirmation_ready")
+        self.assertEqual(report["completion_readiness"]["next_safe_phase"], "confirm_exact_candidate_identity")
+        self.assertEqual(report["completion_readiness"]["auto_apply_ready_rows"], 0)
+        self.assertIn("review-only", report["completion_readiness"]["safety_note"])
         first = report["items"][0]
         self.assertEqual(first["manual_review_status"], "not_started")
         self.assertEqual(first["review_bucket"], "exact_candidate_shortlist_review")
@@ -177,6 +183,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         )
 
         self.assertEqual(report["summary"]["fallback_bridge_rows"], 1)
+        self.assertEqual(report["summary"]["completion_readiness_status"], "fallback_search_required")
         self.assertEqual(report["summary"]["no_candidate_items"], 1)
         self.assertEqual(report["summary"]["review_bucket_counts"], [["fallback_search_required", 1]])
         self.assertEqual(report["summary"]["review_decision_counts"], [["fallback_search_required", 1]])
@@ -194,6 +201,12 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             report["candidate_review_work_order"][0]["review_decision"]["decision"],
             "fallback_search_required",
         )
+        self.assertEqual(report["completion_readiness"]["status"], "fallback_search_required")
+        self.assertEqual(
+            report["completion_readiness"]["next_safe_phase"],
+            "use_fallback_queue_to_find_exact_source_url",
+        )
+        self.assertIn("fallback_search_required", report["completion_readiness"]["blocked_reasons"])
 
     def test_build_report_marks_broad_variant_rows_before_import(self) -> None:
         source = {
@@ -236,10 +249,16 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             [["catalog_variant_detail_required_before_import", 1]],
         )
         self.assertEqual(report["summary"]["variant_detail_required_rows"], 1)
+        self.assertEqual(report["summary"]["completion_readiness_status"], "variant_detail_required")
         self.assertEqual(report["summary"]["exact_candidate_confirmation_ready_items"], 0)
         decision = report["items"][0]["review_decision"]
         self.assertEqual(decision["decision"], "catalog_variant_detail_required_before_import")
         self.assertIn("catalog_row_is_too_broad_for_single_product_image", decision["reasons"])
+        self.assertEqual(report["completion_readiness"]["status"], "variant_detail_required")
+        self.assertIn(
+            "catalog_variant_detail_required_before_import",
+            report["completion_readiness"]["blocked_reasons"],
+        )
 
     def test_build_report_uses_localized_animate_query_for_korean_only_rows(self) -> None:
         source = {

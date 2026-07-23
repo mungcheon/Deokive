@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T19:51:18Z",
+  "generated_at": "2026-07-23T22:35:57Z",
   "scope": "source_discovery_next_focus_detail_candidates",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -102,6 +102,8 @@
     "variant_detail_required_rows": 4,
     "exact_candidate_confirmation_ready_items": 0,
     "blocked_candidate_research_item_rows": 0,
+    "completion_readiness_status": "fallback_search_required",
+    "auto_apply_ready_rows": 0,
     "status_counts": [
       [
         "manual_candidate_review",
@@ -123,6 +125,28 @@
       ]
     ],
     "auto_apply_enabled": false
+  },
+  "completion_readiness": {
+    "status": "fallback_search_required",
+    "auto_apply_ready_rows": 0,
+    "auto_apply_enabled": false,
+    "manual_confirmed_rows": 0,
+    "pack_items": 20,
+    "candidate_rows": 50,
+    "exact_candidate_confirmation_ready_items": 0,
+    "fallback_bridge_rows": 13,
+    "manual_candidate_identity_review_rows": 7,
+    "variant_detail_required_rows": 4,
+    "blocked_candidate_research_item_rows": 0,
+    "no_candidate_items": 13,
+    "candidate_fetch_error_items": 0,
+    "blocked_reasons": [
+      "fallback_search_required",
+      "candidate_identity_review_required",
+      "catalog_variant_detail_required_before_import"
+    ],
+    "next_safe_phase": "use_fallback_queue_to_find_exact_source_url",
+    "safety_note": "Candidate rows are review-only. Source and image URLs require exact product, variant, category, and image identity confirmation before import."
   },
   "instructions": [
     "Review each candidate_source_url as an exact product/detail page before confirmation.",

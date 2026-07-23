@@ -453,6 +453,69 @@ def build_report(
         )
 
     next_summary = next_focus_pack.get("summary") if isinstance(next_focus_pack.get("summary"), dict) else {}
+    exact_ready_items = decision_counts.get("exact_candidate_confirmation_ready", 0)
+    fallback_rows = len(fallback_bridge_items)
+    manual_review_rows = review_bucket_counts.get("manual_candidate_identity_review", 0)
+    variant_detail_rows = decision_counts.get("catalog_variant_detail_required_before_import", 0)
+    blocked_research_rows = review_bucket_counts.get("blocked_candidate_research", 0)
+    no_candidate_rows = status_counts.get("no_candidates_found", 0)
+    candidate_fetch_error_rows = status_counts.get("candidate_fetch_error", 0)
+    manual_confirmed_rows = sum(
+        1 for row in candidate_confirmation_template if row.get("manual_confirmed") is True
+    )
+    readiness_status = (
+        "clear"
+        if not items
+        else "exact_candidate_confirmation_ready"
+        if exact_ready_items
+        else "fallback_search_required"
+        if fallback_rows
+        else "variant_detail_required"
+        if variant_detail_rows
+        else "manual_candidate_identity_review_required"
+        if manual_review_rows
+        else "candidate_research_required"
+    )
+    completion_readiness = {
+        "status": readiness_status,
+        "auto_apply_ready_rows": 0,
+        "auto_apply_enabled": False,
+        "manual_confirmed_rows": manual_confirmed_rows,
+        "pack_items": len(items),
+        "candidate_rows": candidate_rows,
+        "exact_candidate_confirmation_ready_items": exact_ready_items,
+        "fallback_bridge_rows": fallback_rows,
+        "manual_candidate_identity_review_rows": manual_review_rows,
+        "variant_detail_required_rows": variant_detail_rows,
+        "blocked_candidate_research_item_rows": blocked_research_rows,
+        "no_candidate_items": no_candidate_rows,
+        "candidate_fetch_error_items": candidate_fetch_error_rows,
+        "blocked_reasons": [
+            "fallback_search_required" if fallback_rows else None,
+            "candidate_identity_review_required" if manual_review_rows else None,
+            "catalog_variant_detail_required_before_import" if variant_detail_rows else None,
+            "candidate_fetch_error_requires_retry" if candidate_fetch_error_rows else None,
+            "candidate_research_required" if blocked_research_rows else None,
+        ],
+        "next_safe_phase": (
+            "confirm_exact_candidate_identity"
+            if exact_ready_items
+            else "use_fallback_queue_to_find_exact_source_url"
+            if fallback_rows
+            else "enrich_catalog_variant_or_sub_series_before_source_image_import"
+            if variant_detail_rows
+            else "review_candidate_variants_manually"
+            if manual_review_rows
+            else "rerun_or_expand_source_detail_search"
+        ),
+        "safety_note": (
+            "Candidate rows are review-only. Source and image URLs require exact product, "
+            "variant, category, and image identity confirmation before import."
+        ),
+    }
+    completion_readiness["blocked_reasons"] = [
+        reason for reason in completion_readiness["blocked_reasons"] if reason
+    ]
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -491,16 +554,19 @@ def build_report(
             "review_decision_counts": _counter_rows(decision_counts, "review_decision"),
             "review_decision_reason_counts": _counter_rows(decision_reason_counts, "reason"),
             "fallback_bridge_rows": len(fallback_bridge_items),
-            "manual_review_item_rows": review_bucket_counts.get("manual_candidate_identity_review", 0),
-            "variant_detail_required_rows": decision_counts.get("catalog_variant_detail_required_before_import", 0),
-            "exact_candidate_confirmation_ready_items": decision_counts.get("exact_candidate_confirmation_ready", 0),
-            "blocked_candidate_research_item_rows": review_bucket_counts.get("blocked_candidate_research", 0),
+            "manual_review_item_rows": manual_review_rows,
+            "variant_detail_required_rows": variant_detail_rows,
+            "exact_candidate_confirmation_ready_items": exact_ready_items,
+            "blocked_candidate_research_item_rows": blocked_research_rows,
+            "completion_readiness_status": readiness_status,
+            "auto_apply_ready_rows": 0,
             "status_counts": [[key, value] for key, value in status_counts.most_common() if key],
             "official_search_audit_status_counts": [
                 [key, value] for key, value in audit_status_counts.most_common() if key
             ],
             "auto_apply_enabled": False,
         },
+        "completion_readiness": completion_readiness,
         "instructions": [
             "Review each candidate_source_url as an exact product/detail page before confirmation.",
             "Only fill manual_confirmed_source_url and manual_confirmed_image_url after title, variant, category, and image identity match.",

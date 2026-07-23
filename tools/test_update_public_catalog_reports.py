@@ -270,6 +270,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],
             0,
         )
+        self.assertEqual(
+            quality["source_discovery_next_focus_detail_candidates"]["completion_readiness_status"],
+            "fallback_search_required",
+        )
+        self.assertEqual(
+            quality["source_discovery_next_focus_detail_candidates"]["auto_apply_ready_rows"],
+            0,
+        )
         self.assertGreater(
             len(quality["source_discovery_next_focus_detail_candidates"]["review_decision_counts"]),
             0,
