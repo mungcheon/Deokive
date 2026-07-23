@@ -218,7 +218,13 @@ def _matches(name: str, keywords: list[str]) -> bool:
     return any(keyword.casefold() in normalized for keyword in keywords)
 
 
-def _candidate_template(source_category: str, rule: dict[str, Any], matched_samples: list[str]) -> dict[str, Any]:
+def _candidate_template(
+    source_category: str,
+    rule: dict[str, Any],
+    matched_samples: list[str],
+    *,
+    expected_update_rows: int = 0,
+) -> dict[str, Any]:
     return {
         "manual_confirmed": False,
         "source_category": source_category,
@@ -233,6 +239,8 @@ def _candidate_template(source_category: str, rule: dict[str, Any], matched_samp
         "folder_icon_key": rule["folder_icon_key"],
         "folder_icon_options": rule["folder_icon_options"],
         "matched_sample_count": len(matched_samples),
+        "expected_update_rows": expected_update_rows,
+        "matched_catalog_row_count": expected_update_rows,
         "matched_sample_names": matched_samples[:8],
         "blocked_until": UNBLOCKS_WHEN,
         "review_evidence_required": [
@@ -311,7 +319,12 @@ def _review_item(row: dict[str, Any], catalog_rows: list[dict[str, Any]]) -> dic
                     "matched_sample_names": matched[:8],
                     "matched_catalog_row_count": len(catalog_matches),
                     "matched_catalog_samples": [_catalog_sample(catalog_row) for catalog_row in catalog_matches[:8]],
-                    "name_level_split_template": _candidate_template(source_category, rule, matched),
+                    "name_level_split_template": _candidate_template(
+                        source_category,
+                        rule,
+                        matched,
+                        expected_update_rows=len(catalog_matches),
+                    ),
                 }
             )
 

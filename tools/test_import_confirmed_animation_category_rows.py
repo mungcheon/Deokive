@@ -89,5 +89,83 @@ class ImportConfirmedAnimationCategoryRowsTest(unittest.TestCase):
         self.assertEqual(result["skipped"][0]["reason"], "category_contains_url")
 
 
+    def test_name_level_split_updates_only_keyword_matches(self) -> None:
+        result = import_rows(
+            {
+                "items": [
+                    _mapping(
+                        source_category="Goods",
+                        target_category="Acrylic Stand",
+                        match_keywords=["stand"],
+                        matched_catalog_row_count=2,
+                    )
+                ]
+            },
+            [
+                _row("Goods", catalog_index=1, name_ko="Acrylic stand A"),
+                _row("Goods", catalog_index=2, name_ko="Acrylic keyring B"),
+                _row("Goods", catalog_index=3, name_ko="Big stand C"),
+            ],
+        )
+
+        self.assertEqual(len(result["updated"]), 2)
+        self.assertEqual(result["seed_rows"][0]["category"], "Acrylic Stand")
+        self.assertEqual(result["seed_rows"][1]["category"], "Goods")
+        self.assertEqual(result["seed_rows"][2]["category"], "Acrylic Stand")
+        self.assertEqual(result["updated"][0]["match_keywords"], ["stand"])
+
+    def test_name_level_split_allows_multiple_keyword_mappings_for_same_source(self) -> None:
+        result = import_rows(
+            {
+                "items": [
+                    _mapping(
+                        source_category="Goods",
+                        target_category="Acrylic Stand",
+                        match_keywords=["stand"],
+                        matched_catalog_row_count=1,
+                    ),
+                    _mapping(
+                        source_category="Goods",
+                        target_category="Acrylic Keyring",
+                        match_keywords=["keyring"],
+                        matched_catalog_row_count=1,
+                    ),
+                ]
+            },
+            [
+                _row("Goods", catalog_index=1, name_ko="Acrylic stand A"),
+                _row("Goods", catalog_index=2, name_ko="Acrylic keyring B"),
+            ],
+        )
+
+        self.assertEqual(len(result["updated"]), 2)
+        self.assertEqual(result["seed_rows"][0]["category"], "Acrylic Stand")
+        self.assertEqual(result["seed_rows"][1]["category"], "Acrylic Keyring")
+        self.assertEqual(result["skipped"], [])
+
+    def test_name_level_split_rejects_keyword_count_mismatch(self) -> None:
+        result = import_rows(
+            {
+                "items": [
+                    _mapping(
+                        source_category="Goods",
+                        target_category="Acrylic Stand",
+                        match_keywords=["stand"],
+                        matched_catalog_row_count=2,
+                    )
+                ]
+            },
+            [
+                _row("Goods", catalog_index=1, name_ko="Acrylic stand A"),
+                _row("Goods", catalog_index=2, name_ko="Acrylic keyring B"),
+            ],
+        )
+
+        self.assertEqual(result["updated"], [])
+        self.assertEqual(result["skipped"][0]["reason"], "affected_catalog_rows_mismatch")
+        self.assertEqual(result["skipped"][0]["expected_rows"], 2)
+        self.assertEqual(result["skipped"][0]["matched_rows"], 1)
+
+
 if __name__ == "__main__":
     unittest.main()

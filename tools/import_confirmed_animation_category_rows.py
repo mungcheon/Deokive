@@ -55,6 +55,48 @@ def _count_source_category(seed_rows: list[dict[str, Any]], source_category: str
     return sum(1 for row in seed_rows if row.get("category") == source_category)
 
 
+def _item_name(row: dict[str, Any]) -> str:
+    return " ".join(
+        str(row.get(field) or "")
+        for field in ("name_ko", "name_ja", "name_en", "series_name", "sub_series")
+        if str(row.get(field) or "").strip()
+    )
+
+
+def _match_keywords(item: dict[str, Any]) -> list[str]:
+    raw_keywords = item.get("match_keywords")
+    if not isinstance(raw_keywords, list):
+        return []
+    return [str(keyword).strip() for keyword in raw_keywords if str(keyword).strip()]
+
+
+def _matches_keywords(row: dict[str, Any], keywords: list[str]) -> bool:
+    if not keywords:
+        return True
+    text = _item_name(row).casefold()
+    return any(keyword.casefold() in text for keyword in keywords)
+
+
+def _matching_row_indexes(
+    seed_rows: list[dict[str, Any]],
+    source_category: str,
+    keywords: list[str],
+) -> list[int]:
+    return [
+        index
+        for index, row in enumerate(seed_rows)
+        if row.get("category") == source_category and _matches_keywords(row, keywords)
+    ]
+
+
+def _expected_row_count(item: dict[str, Any]) -> int | None:
+    for field in ("expected_update_rows", "matched_catalog_row_count", "affected_catalog_rows"):
+        value = item.get(field)
+        if isinstance(value, int) and value >= 0:
+            return value
+    return None
+
+
 def import_rows(
     review_queue: dict[str, Any] | list[Any],
     seed_rows: list[dict[str, Any]],
@@ -64,7 +106,7 @@ def import_rows(
     normalized_seed = [dict(row) for row in seed_rows if isinstance(row, dict)]
     updated: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
-    seen_sources: set[str] = set()
+    seen_mappings: set[tuple[str, tuple[str, ...]]] = set()
 
     for item in _iter_items(review_queue):
         if not _confirmed(item.get("manual_confirmed")):
@@ -85,14 +127,17 @@ def import_rows(
         if source_category == target_category:
             skipped.append({"source_category": source_category, "target_category": target_category, "reason": "no_change"})
             continue
-        if source_category in seen_sources:
+        keywords = _match_keywords(item)
+        mapping_key = (source_category, tuple(keyword.casefold() for keyword in keywords))
+        if mapping_key in seen_mappings:
             skipped.append({"source_category": source_category, "target_category": target_category, "reason": "duplicate_source_mapping"})
             continue
-        seen_sources.add(source_category)
+        seen_mappings.add(mapping_key)
 
-        matched_rows = _count_source_category(normalized_seed, source_category)
-        expected_rows = item.get("affected_catalog_rows")
-        if isinstance(expected_rows, int) and expected_rows >= 0 and expected_rows != matched_rows and not allow_count_mismatch:
+        matched_indexes = _matching_row_indexes(normalized_seed, source_category, keywords)
+        matched_rows = len(matched_indexes)
+        expected_rows = _expected_row_count(item)
+        if expected_rows is not None and expected_rows != matched_rows and not allow_count_mismatch:
             skipped.append(
                 {
                     "source_category": source_category,
@@ -107,9 +152,8 @@ def import_rows(
             skipped.append({"source_category": source_category, "target_category": target_category, "reason": "source_category_not_found"})
             continue
 
-        for index, row in enumerate(normalized_seed):
-            if row.get("category") != source_category:
-                continue
+        for index in matched_indexes:
+            row = normalized_seed[index]
             row["category"] = target_category
             updated.append(
                 {
@@ -123,6 +167,7 @@ def import_rows(
                     "folder_name": item.get("folder_name"),
                     "folder_color_hex": item.get("folder_color_hex"),
                     "folder_icon_key": item.get("folder_icon_key"),
+                    "match_keywords": keywords,
                 }
             )
 
