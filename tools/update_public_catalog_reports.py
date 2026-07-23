@@ -67,6 +67,7 @@ ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_pu
 ANIMATION_CATEGORY_ACTION_QUEUE = DATA / "animation_category_action_queue_public.json"
 ANIMATION_CATEGORY_SPLIT_REVIEW = DATA / "animation_category_split_review_public.json"
 ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW = DATA / "animation_category_unmatched_keyword_review_public.json"
+ANIMATION_CATEGORY_COVERAGE_AUDIT = DATA / "animation_category_coverage_audit_public.json"
 ICHIIBAN_KUJI_HISTORY = DATA / "ichiban_kuji_history_public.json"
 ICHIIBAN_KUJI_CAMPAIGNS = DATA / "ichiban_kuji_campaigns.json"
 ICHIIBAN_KUJI_METADATA_PROBE = DATA / "ichiban_kuji_metadata_probe_public.json"
@@ -5316,6 +5317,101 @@ def build_animation_categories_public(items: list[dict[str, Any]]) -> dict[str, 
     }
 
 
+def build_animation_category_coverage_audit_public(
+    animation_categories: dict[str, Any],
+    generated_at: str,
+) -> dict[str, Any]:
+    summary = animation_categories.get("summary", {})
+    categories = [
+        row for row in animation_categories.get("categories", []) if isinstance(row, dict)
+    ]
+    visual_tokens = [
+        row
+        for row in animation_categories.get("folder_visual_tokens", [])
+        if isinstance(row, dict)
+    ]
+    token_categories = {str(row.get("category") or "") for row in visual_tokens}
+    missing_visual_token_categories = [
+        str(row.get("category") or "")
+        for row in categories
+        if str(row.get("category") or "") not in token_categories
+    ]
+    unknown_categories = [
+        row for row in animation_categories.get("unknown_categories", []) if isinstance(row, dict)
+    ]
+    normalization_suggestions = [
+        row
+        for row in animation_categories.get("normalization_suggestions", [])
+        if isinstance(row, dict)
+    ]
+    checks = [
+        {
+            "key": "unknown_categories_clear",
+            "status": "pass"
+            if int(summary.get("unknown_category_count") or 0) == 0
+            else "fail",
+            "value": int(summary.get("unknown_category_count") or 0),
+        },
+        {
+            "key": "folder_visual_tokens_cover_categories",
+            "status": "pass" if not missing_visual_token_categories else "fail",
+            "value": len(missing_visual_token_categories),
+            "missing_categories": missing_visual_token_categories[:50],
+        },
+        {
+            "key": "folder_palette_sorted_by_family",
+            "status": "pass"
+            if summary.get("app_folder_palette_sorted_by_family") is True
+            else "fail",
+            "value": bool(summary.get("app_folder_palette_sorted_by_family")),
+        },
+        {
+            "key": "app_animation_visuals_covered",
+            "status": "pass"
+            if summary.get("app_animation_visuals_covered") is True
+            else "fail",
+            "value": bool(summary.get("app_animation_visuals_covered")),
+        },
+    ]
+    failed_checks = [row for row in checks if row.get("status") != "pass"]
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "scope": "animation_category_coverage_audit",
+        "summary": {
+            "animation_goods_rows": int(summary.get("animation_goods_rows") or 0),
+            "category_count": int(summary.get("category_count") or len(categories)),
+            "unknown_category_count": int(summary.get("unknown_category_count") or 0),
+            "unknown_category_rows": int(summary.get("unknown_category_rows") or 0),
+            "normalization_suggestion_count": len(normalization_suggestions),
+            "folder_visual_token_count": len(visual_tokens),
+            "missing_visual_token_categories": len(missing_visual_token_categories),
+            "folder_color_palette_count": int(summary.get("folder_color_palette_count") or 0),
+            "folder_icon_option_count": int(summary.get("folder_icon_option_count") or 0),
+            "app_folder_color_count": int(summary.get("app_folder_color_count") or 0),
+            "app_folder_icon_option_count": int(summary.get("app_folder_icon_option_count") or 0),
+            "app_folder_palette_sorted_by_family": summary.get(
+                "app_folder_palette_sorted_by_family"
+            )
+            is True,
+            "app_animation_visuals_covered": summary.get("app_animation_visuals_covered")
+            is True,
+            "failed_check_count": len(failed_checks),
+            "status": "pass" if not failed_checks else "fail",
+            "auto_apply_enabled": False,
+        },
+        "checks": checks,
+        "normalization_suggestions": normalization_suggestions,
+        "unknown_categories": unknown_categories,
+        "category_families": animation_categories.get("category_families", []),
+        "folder_visual_tokens": visual_tokens,
+        "automation_policy": {
+            "auto_apply_enabled": False,
+            "reason": "Coverage audit only; category normalization suggestions require manual review before import.",
+        },
+    }
+
+
 def year_of(value: Any) -> str:
     text = str(value or "").strip()
     return text[:4] if len(text) >= 4 and text[:4].isdigit() else "unknown"
@@ -6384,6 +6480,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         generated_at,
     )
     animation_categories = build_animation_categories_public(items)
+    animation_category_coverage_audit = build_animation_category_coverage_audit_public(
+        animation_categories,
+        generated_at,
+    )
     animation_review_queue = [
         row
         for row in (
@@ -7043,6 +7143,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{ANIMATION_CATEGORIES.name}",
             **animation_categories["summary"],
         }
+        target["animation_category_coverage_audit"] = {
+            "public_report": f"data/{ANIMATION_CATEGORY_COVERAGE_AUDIT.name}",
+            **animation_category_coverage_audit["summary"],
+        }
         if ANIMATION_CATEGORY_REVIEW_BATCHES.exists():
             target["animation_category_review_batches"] = copy_report_summary(
                 ANIMATION_CATEGORY_REVIEW_BATCHES, "animation_category_review_batches"
@@ -7144,6 +7248,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_ENRICHMENT_BATCHES, image_enrichment_batches)
         write_json(DEDUPLICATION, deduplication)
         write_json(ANIMATION_CATEGORIES, animation_categories)
+        write_json(ANIMATION_CATEGORY_COVERAGE_AUDIT, animation_category_coverage_audit)
         write_json(ANIMATION_CATEGORY_REVIEW_BATCHES, animation_review_batches)
         write_json(ANIMATION_CATEGORY_ACTION_QUEUE, animation_action_queue)
         write_json(ANIMATION_CATEGORY_SPLIT_REVIEW, animation_split_review)
@@ -7254,6 +7359,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(DEDUPLICATION_CONFIRMED_TEMPLATE.relative_to(ROOT)),
             str(DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN.relative_to(ROOT)),
             str(ANIMATION_CATEGORIES.relative_to(ROOT)),
+            str(ANIMATION_CATEGORY_COVERAGE_AUDIT.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_REVIEW_BATCHES.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_ACTION_QUEUE.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_SPLIT_REVIEW.relative_to(ROOT)),

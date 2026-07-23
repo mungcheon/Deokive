@@ -45,6 +45,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_metadata_review_batches_public.json", updated_files)
         self.assertIn("data/catalog_metadata_action_queue_public.json", updated_files)
         self.assertIn("data/animation_category_review_batches_public.json", updated_files)
+        self.assertIn("data/animation_category_coverage_audit_public.json", updated_files)
         self.assertIn("data/animation_category_action_queue_public.json", updated_files)
         self.assertIn("data/danganronpa_missing_media_public.json", updated_files)
         self.assertIn("data/danganronpa_patch_template_dry_run_public.json", updated_files)
@@ -258,6 +259,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["deduplication_template_import_dry_run"]["manual_confirmed_rows"], 0)
             self.assertIs(quality["deduplication_template_import_dry_run"]["write"], False)
             self.assertIs(quality["deduplication_template_import_dry_run"]["auto_delete_enabled"], False)
+        self.assertEqual(quality["animation_category_coverage_audit"]["status"], "pass")
+        self.assertEqual(quality["animation_category_coverage_audit"]["unknown_category_count"], 0)
+        self.assertEqual(quality["animation_category_coverage_audit"]["failed_check_count"], 0)
+        self.assertIs(quality["animation_category_coverage_audit"]["auto_apply_enabled"], False)
         if reports.ICHIIBAN_KUJI_METADATA_FAST_REVIEW.exists():
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["fast_review_campaigns"], 20)
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["manual_confirmed_true"], 0)

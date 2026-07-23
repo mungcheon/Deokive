@@ -337,8 +337,9 @@ class _CatalogImportPanel extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              '중복 후보와 예시 이미지는 홈 집계에서 제외했어요. 전체 목록에서 검색어로 좁힌 뒤 원하는 항목만 담을 수 있어요.',
+              '중복 항목은 한 번만 집계해요. 전체 DB에서 검색한 뒤 내 굿즈함이나 위시리스트에 바로 담을 수 있어요.',
               maxLines: 2,
+              softWrap: true,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.58),

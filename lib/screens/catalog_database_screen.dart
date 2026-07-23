@@ -366,81 +366,85 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
               ),
             ],
           ),
-          body: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 10),
-                child: TextField(
-                  controller: _searchController,
-                  onChanged: (value) => setState(() => _query = value),
-                  textInputAction: TextInputAction.search,
-                  decoration: InputDecoration(
-                    hintText: '굿즈명, 작품, 캐릭터, 바코드 검색',
-                    prefixIcon: const Icon(Icons.search_rounded),
-                    suffixIcon: _query.isEmpty
-                        ? null
-                        : IconButton(
-                            tooltip: '검색어 지우기',
-                            onPressed: () {
-                              _searchController.clear();
-                              setState(() => _query = '');
-                            },
-                            icon: const Icon(Icons.close_rounded),
-                          ),
+          body: SafeArea(
+            top: false,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 10),
+                  child: TextField(
+                    controller: _searchController,
+                    onChanged: (value) => setState(() => _query = value),
+                    textInputAction: TextInputAction.search,
+                    decoration: InputDecoration(
+                      hintText: '굿즈명, 작품, 캐릭터, 바코드 검색',
+                      prefixIcon: const Icon(Icons.search_rounded),
+                      suffixIcon: _query.isEmpty
+                          ? null
+                          : IconButton(
+                              tooltip: '검색어 지우기',
+                              onPressed: () {
+                                _searchController.clear();
+                                setState(() => _query = '');
+                              },
+                              icon: const Icon(Icons.close_rounded),
+                            ),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 42,
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _FilterChip(
-                      label: '전체',
-                      selected: _category == null,
-                      color: palette.primary,
-                      onTap: () => setState(() => _category = null),
-                    ),
-                    for (final category in categories) ...[
-                      const SizedBox(width: 8),
+                SizedBox(
+                  height: 42,
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    scrollDirection: Axis.horizontal,
+                    children: [
                       _FilterChip(
-                        label: category,
-                        selected: _category == category,
+                        label: '전체',
+                        selected: _category == null,
                         color: palette.primary,
-                        onTap: () => setState(() => _category = category),
+                        onTap: () => setState(() => _category = null),
                       ),
+                      for (final category in categories) ...[
+                        const SizedBox(width: 8),
+                        _FilterChip(
+                          label: category,
+                          selected: _category == category,
+                          color: palette.primary,
+                          onTap: () => setState(() => _category = category),
+                        ),
+                      ],
                     ],
-                  ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Expanded(
-                child: entries.isEmpty
-                    ? const _EmptyCatalogResult()
-                    : ListView.separated(
-                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-                        itemCount: entries.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 10),
-                        itemBuilder: (context, index) {
-                          final entry = entries[index];
-                          final ownedCount = matchingCatalogGoodsItems(
-                            goodsItems: appState.goodsItems,
-                            entry: entry,
-                          ).fold<int>(0, (sum, item) => sum + item.quantity);
-                          return _CatalogListTile(
-                            entry: entry,
-                            ownedCount: ownedCount,
-                            isAdding: _importingEntryKeys
-                                .contains(_identityKey(entry)),
-                            onPreview: () =>
-                                _showAddSheet(context, appState, entry),
-                            onAdd: () => _addEntryFromList(context, entry),
-                          );
-                        },
-                      ),
-              ),
-            ],
+                const SizedBox(height: 8),
+                Expanded(
+                  child: entries.isEmpty
+                      ? const _EmptyCatalogResult()
+                      : ListView.separated(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+                          itemCount: entries.length,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            final entry = entries[index];
+                            final ownedCount = matchingCatalogGoodsItems(
+                              goodsItems: appState.goodsItems,
+                              entry: entry,
+                            ).fold<int>(0, (sum, item) => sum + item.quantity);
+                            return _CatalogListTile(
+                              entry: entry,
+                              ownedCount: ownedCount,
+                              isAdding: _importingEntryKeys
+                                  .contains(_identityKey(entry)),
+                              onPreview: () =>
+                                  _showAddSheet(context, appState, entry),
+                              onAdd: () => _addEntryFromList(context, entry),
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -470,76 +474,88 @@ class _CatalogListTile extends StatelessWidget {
     return Material(
       color: theme.colorScheme.surface,
       borderRadius: BorderRadius.circular(18),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(18),
-        onTap: onPreview,
-        child: Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(
-              color: ownedCount > 0
-                  ? palette.primary.withValues(alpha: 0.32)
-                  : theme.colorScheme.outline.withValues(alpha: 0.5),
-            ),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: ownedCount > 0
+                ? palette.primary.withValues(alpha: 0.32)
+                : theme.colorScheme.outline.withValues(alpha: 0.5),
           ),
-          child: Row(
-            children: [
-              _CatalogImage(entry: entry, size: 58),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      entry.nameKo,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 14.5,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      _entrySubtitle(entry),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color:
-                            theme.colorScheme.onSurface.withValues(alpha: 0.58),
-                      ),
-                    ),
-                    if (ownedCount > 0) ...[
-                      const SizedBox(height: 7),
+        ),
+        child: Row(
+          children: [
+            InkWell(
+              borderRadius: BorderRadius.circular(16),
+              onTap: onPreview,
+              child: _CatalogImage(entry: entry, size: 58),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: InkWell(
+                borderRadius: BorderRadius.circular(12),
+                onTap: onPreview,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        '내 굿즈함 $ownedCount개',
-                        style: TextStyle(
-                          color: palette.primary,
-                          fontSize: 12,
+                        entry.nameKo,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w900,
+                          fontSize: 14.5,
                         ),
                       ),
+                      const SizedBox(height: 5),
+                      Text(
+                        _entrySubtitle(entry),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurface
+                              .withValues(alpha: 0.58),
+                        ),
+                      ),
+                      if (ownedCount > 0) ...[
+                        const SizedBox(height: 7),
+                        Text(
+                          '내 굿즈함 $ownedCount개',
+                          style: TextStyle(
+                            color: palette.primary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
                     ],
-                  ],
+                  ),
                 ),
               ),
-              const SizedBox(width: 8),
-              FilledButton.tonalIcon(
-                onPressed: isAdding ? null : () async => onAdd(),
-                icon: isAdding
-                    ? const Icon(Icons.more_horiz_rounded, size: 18)
-                    : const Icon(Icons.add_rounded, size: 18),
-                label: const Text('추가'),
-                style: FilledButton.styleFrom(
-                  foregroundColor: palette.primary,
-                  minimumSize: const Size(68, 38),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
+            ),
+            const SizedBox(width: 8),
+            FilledButton.tonalIcon(
+              onPressed: isAdding ? null : () async => onAdd(),
+              icon: isAdding
+                  ? const Icon(Icons.more_horiz_rounded, size: 18)
+                  : const Icon(Icons.add_rounded, size: 18),
+              label: const Text(
+                '추가',
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
+              style: FilledButton.styleFrom(
+                foregroundColor: palette.primary,
+                minimumSize: const Size(70, 40),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+            ),
+          ],
         ),
       ),
     );
