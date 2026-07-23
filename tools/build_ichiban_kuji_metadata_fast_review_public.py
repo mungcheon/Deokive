@@ -87,6 +87,71 @@ def counter_rows(counter: Counter[str], field: str) -> list[dict[str, Any]]:
     return [{field: key, "campaigns": value} for key, value in counter.most_common()]
 
 
+def build_work_order(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_workflow: dict[str, list[dict[str, Any]]] = {}
+    for campaign in campaigns:
+        by_workflow.setdefault(str(campaign.get("workflow") or ""), []).append(campaign)
+
+    lanes = [
+        (
+            "confirm_release_dates",
+            "release_date_review",
+            "release_date",
+            "Confirm campaign release/sales start dates before price-only campaigns.",
+        ),
+        (
+            "confirm_draw_prices",
+            "price_review",
+            "official_price_jpy",
+            "Confirm labeled draw price / price-per-try from the official campaign page.",
+        ),
+        (
+            "confirm_release_and_draw_price",
+            "release_and_price_review",
+            "release_date_and_official_price_jpy",
+            "Confirm both labeled release date and draw price for the same campaign.",
+        ),
+    ]
+
+    work_order: list[dict[str, Any]] = []
+    for rank, (lane, workflow, field_group, note) in enumerate(lanes, start=1):
+        lane_campaigns = by_workflow.get(workflow, [])
+        if not lane_campaigns:
+            continue
+        work_order.append(
+            {
+                "rank": rank,
+                "lane": lane,
+                "workflow": workflow,
+                "field_group": field_group,
+                "campaign_count": len(lane_campaigns),
+                "catalog_item_rows": sum(
+                    int(campaign.get("catalog_item_rows") or 0) for campaign in lane_campaigns
+                ),
+                "template_rows": sum(
+                    len(campaign.get("campaign_field_patch_templates") or [])
+                    for campaign in lane_campaigns
+                ),
+                "first_campaign_slug": lane_campaigns[0].get("slug"),
+                "first_campaign_url": lane_campaigns[0].get("url"),
+                "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+                "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+                "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+                "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                "required_evidence": [
+                    "official_1kuji_campaign_page_or_captured_official_archive",
+                    "campaign_title_matches_catalog_series",
+                    "field_value_is_labeled_on_official_page",
+                    "double_chance_or_last_one_exception_values_are_not_used_as_draw_price",
+                ],
+                "notes": [note],
+            }
+        )
+    return work_order
+
+
 def build_report(
     action_queue: dict[str, Any],
     *,
@@ -115,6 +180,23 @@ def build_report(
         for campaign in fast_campaigns
         for template in campaign.get("campaign_field_patch_templates") or []
     )
+    campaign_patch_queue = [
+        {
+            "rank": rank,
+            "slug": campaign.get("slug"),
+            "url": campaign.get("url"),
+            "title": campaign.get("title"),
+            "workflow": campaign.get("workflow"),
+            "missing_fields": campaign.get("missing_fields") or [],
+            "catalog_item_rows": campaign.get("catalog_item_rows") or 0,
+            "template_rows": len(campaign.get("campaign_field_patch_templates") or []),
+            "sample_catalog_indexes": campaign.get("sample_catalog_indexes") or [],
+            "next_step": "fill_campaign_field_patch_templates_after_labeled_official_evidence",
+            "manual_confirmation_required": True,
+            "auto_apply_enabled": False,
+        }
+        for rank, campaign in enumerate(fast_campaigns, start=1)
+    ]
 
     return {
         "schema_version": 1,
@@ -124,6 +206,10 @@ def build_report(
             "fast_review_campaigns": len(fast_campaigns),
             "held_for_later_campaigns": len(held_campaigns),
             "fast_review_catalog_item_rows": sum(int(campaign.get("catalog_item_rows") or 0) for campaign in fast_campaigns),
+            "fast_review_template_rows": sum(
+                len(campaign.get("campaign_field_patch_templates") or [])
+                for campaign in fast_campaigns
+            ),
             "manual_confirmed_true": 0,
             "auto_apply_enabled": False,
         },
@@ -140,6 +226,8 @@ def build_report(
             ),
             "catalog_item_rows": sum(int(campaign.get("catalog_item_rows") or 0) for campaign in held_campaigns),
         },
+        "work_order": build_work_order(fast_campaigns),
+        "campaign_patch_queue": campaign_patch_queue,
         "automation_policy": {
             "auto_apply_release_date": False,
             "auto_apply_official_price_jpy": False,

@@ -51,19 +51,15 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   if (destination == null || !context.mounted) return false;
 
   try {
-    // DB imports should never feel blocked by a remote image request. The item
-    // keeps its catalog image reference either way, and bundled/cache images can
-    // still be copied into local storage when available.
-    final imageBytes = await loadCatalogEntryBundledImageBytes(entry);
-    if (!context.mounted) return false;
-
+    // DB imports should feel instant. Keep the catalog image reference instead
+    // of waiting on asset/network bytes; the image widget resolves that
+    // reference on demand in web/native builds.
     final item = goodsItemFromCatalogEntry(
       appState: appState,
       entry: entry,
       folder: destination.folder,
       addToWishlist: destination.addToWishlist,
       wishlistTargetFolder: destination.wishlistTargetFolder,
-      imageBytes: imageBytes,
     );
     appState.addGoods(item);
   } catch (error) {
@@ -79,7 +75,10 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
       content: Text("'${entry.nameKo}'을(를) ${destination.folder.name}에 추가했어요."),
       action: SnackBarAction(
         label: '폴더 보기',
-        onPressed: () => appState.setTab(2),
+        onPressed: () {
+          Navigator.of(context).popUntil((route) => route.isFirst);
+          appState.setTab(2);
+        },
       ),
     ),
   );

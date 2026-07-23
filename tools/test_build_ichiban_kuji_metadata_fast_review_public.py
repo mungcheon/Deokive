@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import sys
 import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from build_ichiban_kuji_metadata_fast_review_public import build_report
 
@@ -45,8 +49,17 @@ class IchibanKujiMetadataFastReviewTests(unittest.TestCase):
         self.assertEqual(report["summary"]["fast_review_campaigns"], 2)
         self.assertEqual(report["summary"]["held_for_later_campaigns"], 1)
         self.assertEqual(report["summary"]["fast_review_catalog_item_rows"], 10)
+        self.assertEqual(report["summary"]["fast_review_template_rows"], 2)
         self.assertEqual([item["slug"] for item in report["items"]], ["release", "large-price"])
         self.assertEqual(report["items"][0]["campaign_field_patch_templates"][0]["manual_confirmed"], False)
+        self.assertEqual([row["lane"] for row in report["work_order"]], ["confirm_release_dates", "confirm_draw_prices"])
+        self.assertEqual(report["work_order"][0]["campaign_count"], 1)
+        self.assertEqual(report["work_order"][0]["template_rows"], 1)
+        self.assertEqual(report["work_order"][0]["first_campaign_slug"], "release")
+        self.assertTrue(report["work_order"][0]["manual_confirmation_required"])
+        self.assertEqual(report["campaign_patch_queue"][0]["slug"], "release")
+        self.assertEqual(report["campaign_patch_queue"][1]["slug"], "large-price")
+        self.assertEqual(report["campaign_patch_queue"][1]["template_rows"], 1)
         self.assertIs(report["summary"]["auto_apply_enabled"], False)
         self.assertEqual(
             report["automation_policy"]["import_tool"],

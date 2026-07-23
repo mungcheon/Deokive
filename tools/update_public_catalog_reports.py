@@ -21,6 +21,7 @@ import build_image_source_url_confirmed_template_public
 import build_ichiban_prize_policy_issue_queue_public
 import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
+import build_ichiban_kuji_metadata_fast_review_public
 import build_manual_source_url_search_queue_public
 import build_missing_image_report_coverage_public
 import build_missing_image_priority_public
@@ -3421,6 +3422,14 @@ def build_agent_work_queue_public(
         if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists()
         else {}
     )
+    ichiban_metadata_fast_review = (
+        build_ichiban_kuji_metadata_fast_review_public.build_report(
+            ichiban_metadata_action_queue,
+            generated_at=generated_at,
+        )
+        if ichiban_metadata_action_queue
+        else {}
+    )
     ichiban_prize_policy_audit = (
         load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {})
         if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists()
@@ -5961,6 +5970,19 @@ def update_reports(write: bool) -> dict[str, Any]:
         unmatched_keyword_review=animation_unmatched_keyword_review,
     )
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
+    ichiban_metadata_action_queue = (
+        load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {})
+        if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists()
+        else {}
+    )
+    ichiban_metadata_fast_review = (
+        build_ichiban_kuji_metadata_fast_review_public.build_report(
+            ichiban_metadata_action_queue,
+            generated_at=generated_at,
+        )
+        if ichiban_metadata_action_queue
+        else {}
+    )
     ichiban_kuji_prize_name_image_review = build_ichiban_prize_name_image_review_public.build_report(
         catalog,
         generated_at=generated_at,
@@ -6586,10 +6608,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["ichiban_kuji_metadata_action_queue"] = copy_report_summary(
                 ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, "ichiban_kuji_metadata_action_queue"
             )
-        if ICHIIBAN_KUJI_METADATA_FAST_REVIEW.exists():
-            target["ichiban_kuji_metadata_fast_review"] = copy_report_summary(
-                ICHIIBAN_KUJI_METADATA_FAST_REVIEW, "ichiban_kuji_metadata_fast_review"
-            )
+        if ichiban_metadata_fast_review:
+            target["ichiban_kuji_metadata_fast_review"] = {
+                "public_report": f"data/{ICHIIBAN_KUJI_METADATA_FAST_REVIEW.name}",
+                **ichiban_metadata_fast_review.get("summary", {}),
+            }
         if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists():
             target["ichiban_kuji_prize_name_image_review"] = copy_report_summary(
                 ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, "ichiban_kuji_prize_name_image_review"
@@ -6658,6 +6681,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(ANIMATION_CATEGORY_SPLIT_REVIEW, animation_split_review)
         write_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, animation_unmatched_keyword_review)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
+        write_json(ICHIIBAN_KUJI_METADATA_FAST_REVIEW, ichiban_metadata_fast_review)
         write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, ichiban_kuji_prize_name_image_review)
         write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, ichiban_kuji_prize_name_image_patch_candidates)
         write_json(OPERATIONS_REPORT, operations)
