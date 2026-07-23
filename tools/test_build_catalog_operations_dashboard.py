@@ -624,6 +624,31 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                         "skip_reason_counts": [["manual_confirmed_false", 427]],
                     },
                 ),
+                "public_source_next_focus_pack": _write_json(
+                    root / "public_source_next_focus_pack.json",
+                    {
+                        "summary": {
+                            "focus_pack_id": "source-discovery-focus-001",
+                            "pack_items": 20,
+                            "focus_pack_progress_queue_count": 24,
+                            "focus_pack_progress_remaining_rows": 427,
+                        },
+                        "focus_pack_progress_queue": [
+                            {
+                                "focus_pack_id": "source-discovery-focus-001",
+                                "source_store": "Animate",
+                                "target_category": "Acrylic stand",
+                                "remaining_review_rows": 20,
+                            },
+                            {
+                                "focus_pack_id": "source-discovery-focus-002",
+                                "source_store": "Animate",
+                                "target_category": "Badge",
+                                "remaining_review_rows": 20,
+                            },
+                        ],
+                    },
+                ),
                 "public_image_attachment_template": _write_json(
                     root / "public_image_attachment_template.json",
                     {
@@ -659,7 +684,19 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                         "summary": {
                             "actionable_groups": 48,
                             "queued_groups": 48,
-                        }
+                            "ichiban_reissue_work_order_rows": 20,
+                        },
+                        "ichiban_reissue_work_order": [
+                            {
+                                "work_order_id": "ichiban-reissue-dedupe-001",
+                                "normalized_name": "一番くじ Sample - A賞 Figure",
+                                "campaign_url_comparison": {
+                                    "campaign_slugs": ["sample", "sample2"],
+                                    "campaign_slug_families": ["sample"],
+                                    "likely_same_campaign_family_reissue": True,
+                                },
+                            }
+                        ],
                     },
                 ),
                 "public_deduplication_fast_review": _write_json(
@@ -842,6 +879,8 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["public_image_recovery"]["focus_pack_count"], 24)
         self.assertEqual(payload["summary"]["public_image_recovery"]["remaining_focus_review_rows"], 427)
         self.assertEqual(payload["summary"]["public_image_recovery"]["template_rows"], 427)
+        self.assertEqual(payload["summary"]["public_image_recovery"]["focus_pack_progress_queue_count"], 24)
+        self.assertEqual(payload["summary"]["public_image_recovery"]["focus_pack_progress_remaining_rows"], 427)
         self.assertEqual(payload["summary"]["public_image_recovery"]["template_import_skipped_rows"], 427)
         self.assertEqual(payload["summary"]["public_image_recovery"]["image_attachment_template_rows"], 73)
         self.assertEqual(payload["summary"]["public_image_recovery"]["image_attachment_template_confirmed_rows"], 0)
@@ -855,6 +894,7 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["public_deduplication"]["duplicate_groups"], 104)
         self.assertEqual(payload["summary"]["public_deduplication"]["queued_groups"], 48)
         self.assertEqual(payload["summary"]["public_deduplication"]["fast_review_groups"], 42)
+        self.assertEqual(payload["summary"]["public_deduplication"]["ichiban_reissue_work_order_rows"], 20)
         self.assertEqual(payload["summary"]["public_deduplication"]["template_items"], 42)
         self.assertEqual(payload["summary"]["public_deduplication"]["template_import_skipped_rows"], 42)
         self.assertEqual(payload["summary"]["public_deduplication"]["auto_delete_enabled"], False)
@@ -986,6 +1026,11 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(public_image_board["next_target_category"], "Acrylic stand")
         self.assertEqual(public_image_board["next_focus_pack_rows"], 20)
         self.assertEqual(public_image_board["next_official_search_url"], "https://animate.example/search?q=stand")
+        self.assertEqual(public_image_board["current_focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(public_image_board["current_focus_pack_items"], 20)
+        self.assertEqual(public_image_board["focus_pack_progress_queue_count"], 24)
+        self.assertEqual(public_image_board["focus_pack_progress_remaining_rows"], 427)
+        self.assertEqual(public_image_board["focus_pack_progress_preview"][0]["remaining_review_rows"], 20)
         self.assertEqual(public_image_board["template_import_skipped_rows"], 427)
         self.assertEqual(public_image_board["image_attachment_template_items"], 73)
         self.assertEqual(public_image_board["image_attachment_template_source_update_required_rows"], 50)
@@ -1000,6 +1045,13 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(public_dedupe_board["template_import_skipped_rows"], 42)
         self.assertEqual(public_dedupe_board["status"], "manual_confirmation_needed")
         self.assertEqual(public_dedupe_board["auto_delete_enabled"], False)
+        self.assertEqual(public_dedupe_board["ichiban_reissue_work_order_rows"], 20)
+        self.assertEqual(
+            public_dedupe_board["ichiban_campaign_url_comparison_preview"][0]["campaign_url_comparison"][
+                "campaign_slug_families"
+            ],
+            ["sample"],
+        )
         source_url_board = next(item for item in payload["workboards"] if item["area"] == "Source URL bottlenecks")
         self.assertEqual(source_url_board["primary_metric"], 8)
         self.assertEqual(source_url_board["secondary_metric"], 6)

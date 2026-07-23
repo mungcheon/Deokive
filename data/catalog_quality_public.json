@@ -3394,6 +3394,9 @@
     "source_discovery_focus_template_rows": 417,
     "source_discovery_focus_template_work_order_packs": 23,
     "source_discovery_focus_template_dry_run_skipped_rows": 417,
+    "source_discovery_next_focus_pack_rows": 20,
+    "source_discovery_focus_pack_progress_queues": 23,
+    "source_discovery_focus_pack_progress_remaining_rows": 417,
     "source_discovery_next_focus_fallback_rows": 0,
     "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
     "source_detail_candidate_action_rows": 15,
@@ -3436,9 +3439,9 @@
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 155,
+    "batch_count": 156,
     "max_published_batches": 160,
-    "summed_batch_rows": 24091,
+    "summed_batch_rows": 24508,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3531,6 +3534,10 @@
       ],
       [
         "confirmed_import_readiness",
+        1
+      ],
+      [
+        "source_discovery_next_focus_pack",
         1
       ],
       [
@@ -3640,6 +3647,10 @@
         1
       ],
       [
+        "agent-source-focus-pack",
+        1
+      ],
+      [
         "agent-animation-category-action",
         1
       ],
@@ -3682,6 +3693,9 @@
       "source_discovery_focus_template_rows": 417,
       "source_discovery_focus_template_work_order_packs": 23,
       "source_discovery_focus_template_dry_run_skipped_rows": 417,
+      "source_discovery_next_focus_pack_rows": 20,
+      "source_discovery_focus_pack_progress_queues": 23,
+      "source_discovery_focus_pack_progress_remaining_rows": 417,
       "source_discovery_next_focus_fallback_rows": 0,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -4701,6 +4715,9 @@
       "source_discovery_focus_template_rows": 417,
       "source_discovery_focus_template_work_order_packs": 23,
       "source_discovery_focus_template_dry_run_skipped_rows": 417,
+      "source_discovery_next_focus_pack_rows": 20,
+      "source_discovery_focus_pack_progress_queues": 23,
+      "source_discovery_focus_pack_progress_remaining_rows": 417,
       "source_discovery_next_focus_fallback_rows": 0,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -6718,6 +6735,11 @@
         1
       ]
     ],
+    "candidate_priority_rows": 28,
+    "starter_confirmed_queue_rows": 28,
+    "top_candidate_expected_update_rows": 578,
+    "top_candidate_source_category": "아크릴",
+    "top_candidate_target_category": "아크릴 스탠드",
     "manual_confirmed_rows": 0,
     "auto_apply_enabled": false
   },
@@ -7339,6 +7361,8 @@
     "official_search_url_count": 20,
     "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
     "pack_queue_preview_count": 8,
+    "focus_pack_progress_queue_count": 23,
+    "focus_pack_progress_remaining_rows": 417,
     "next_pack_after_current": "source-discovery-focus-002",
     "auto_apply_enabled": false
   },

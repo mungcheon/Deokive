@@ -86,6 +86,7 @@ SOURCES = {
     "public_source_focus_packs": DATA / "source_discovery_focus_packs_public.json",
     "public_source_focus_template": DATA / "source_discovery_focus_confirmed_template_public.json",
     "public_source_focus_template_import": DATA / "source_discovery_focus_template_import_dry_run_public.json",
+    "public_source_next_focus_pack": DATA / "source_discovery_next_focus_pack_public.json",
     "public_image_attachment_template": DATA / "catalog_image_attachment_confirmed_template_public.json",
     "public_image_attachment_template_import": DATA / "catalog_image_attachment_template_import_dry_run_public.json",
     "public_deduplication": DATA / "catalog_deduplication_public.json",
@@ -232,6 +233,8 @@ def build() -> dict[str, Any]:
     public_focus_template = data.get("public_source_focus_template", {})
     public_focus_template_summary = public_focus_template.get("summary") or {}
     public_focus_template_import = data.get("public_source_focus_template_import", {})
+    public_source_next_focus_pack = data.get("public_source_next_focus_pack", {})
+    public_source_next_focus_summary = public_source_next_focus_pack.get("summary") or {}
     public_image_attachment_template = data.get("public_image_attachment_template", {})
     public_image_attachment_template_summary = public_image_attachment_template.get("summary") or {}
     public_image_attachment_template_import = data.get("public_image_attachment_template_import", {})
@@ -350,6 +353,16 @@ def build() -> dict[str, Any]:
             "next_focus_pack_rows": public_focus_template_summary.get("next_focus_pack_rows"),
             "next_official_search_url": public_focus_template_summary.get("next_official_search_url"),
             "work_order_pack_count": public_focus_template_summary.get("work_order_pack_count"),
+            "current_focus_pack_id": public_source_next_focus_summary.get("focus_pack_id"),
+            "current_focus_pack_items": public_source_next_focus_summary.get("pack_items"),
+            "focus_pack_progress_queue_count": public_source_next_focus_summary.get("focus_pack_progress_queue_count"),
+            "focus_pack_progress_remaining_rows": public_source_next_focus_summary.get(
+                "focus_pack_progress_remaining_rows"
+            ),
+            "focus_pack_progress_preview": _top(
+                public_source_next_focus_pack.get("focus_pack_progress_queue"),
+                5,
+            ),
             "template_import_updated_rows": public_focus_template_import.get("updated_rows"),
             "template_import_skipped_rows": public_focus_template_import.get("skipped_rows"),
             "template_import_skip_reason_counts": public_focus_template_import.get("skip_reason_counts"),
@@ -392,6 +405,17 @@ def build() -> dict[str, Any]:
             "template_import_skipped_rows": public_deduplication_template_import.get("skipped_rows"),
             "by_review_risk": public_deduplication_summary.get("by_review_risk"),
             "by_fast_review_lane": public_deduplication_template_summary.get("by_fast_review_lane"),
+            "ichiban_reissue_work_order_rows": public_deduplication_action_summary.get(
+                "ichiban_reissue_work_order_rows"
+            ),
+            "ichiban_campaign_url_comparison_preview": [
+                {
+                    "work_order_id": row.get("work_order_id"),
+                    "normalized_name": row.get("normalized_name"),
+                    "campaign_url_comparison": row.get("campaign_url_comparison"),
+                }
+                for row in _top(public_deduplication_action_queue.get("ichiban_reissue_work_order"), 5)
+            ],
             "auto_merge_enabled": public_deduplication_template_summary.get("auto_merge_enabled"),
             "auto_delete_enabled": public_deduplication_template_summary.get("auto_delete_enabled"),
         },
@@ -1224,6 +1248,14 @@ def build() -> dict[str, Any]:
                 "next_focus_pack_rows": public_focus_template_summary.get("next_focus_pack_rows"),
                 "next_official_search_url": public_focus_template_summary.get("next_official_search_url"),
                 "work_order_pack_count": public_focus_template_summary.get("work_order_pack_count"),
+                "current_focus_pack_id": public_source_next_focus_summary.get("focus_pack_id"),
+                "current_focus_pack_items": public_source_next_focus_summary.get("pack_items"),
+                "focus_pack_progress_queue_count": public_source_next_focus_summary.get(
+                    "focus_pack_progress_queue_count"
+                ),
+                "focus_pack_progress_remaining_rows": public_source_next_focus_summary.get(
+                    "focus_pack_progress_remaining_rows"
+                ),
                 "template_import_updated_rows": public_actionability_summary.get(
                     "source_discovery_focus_template_dry_run_updated_rows"
                 ),
@@ -1255,6 +1287,9 @@ def build() -> dict[str, Any]:
                 "queued_groups": public_deduplication_action_summary.get("queued_groups"),
                 "fast_review_groups": public_deduplication_fast_summary.get("fast_review_groups"),
                 "held_for_later_groups": public_deduplication_fast_summary.get("held_for_later_groups"),
+                "ichiban_reissue_work_order_rows": public_deduplication_action_summary.get(
+                    "ichiban_reissue_work_order_rows"
+                ),
                 "template_items": public_deduplication_template_summary.get("template_items"),
                 "template_manual_confirmed_rows": public_deduplication_template_summary.get("manual_confirmed_rows"),
                 "template_drop_candidate_rows": public_deduplication_template_summary.get("drop_candidate_rows"),

@@ -601,6 +601,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         source_focus_template = reports.load_json(reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE)
         source_focus_template_summary = source_focus_template.get("summary", {})
         source_focus_template_import = reports.load_json(reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT)
+        source_next_focus_pack = reports.load_json(reports.SOURCE_DISCOVERY_NEXT_FOCUS_PACK)
+        source_next_focus_pack_summary = source_next_focus_pack.get("summary", {})
         source_next_focus_fallback = reports.load_json(reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE)
         source_next_focus_fallback_summary = source_next_focus_fallback.get("summary", {})
         ensky_cache_action = reports.load_json(reports.ENSKY_CACHE_CANDIDATE_ACTION_QUEUE)
@@ -636,6 +638,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "source_discovery_focus_template"
+        )
+        source_next_focus_pack_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "source_discovery_next_focus_pack"
         )
         source_next_focus_fallback_next_action = next(
             row
@@ -821,6 +828,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "danganronpa_missing_media"
         ]
+        source_next_focus_pack_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "source_discovery_next_focus_pack"
+        ]
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
@@ -830,6 +842,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.IMAGE_ASSET_AUDIT.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}", report_links)
+        self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_ACTION_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.ANIMATION_CATEGORY_SPLIT_REVIEW.name}", report_links)
@@ -976,6 +989,29 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             open_queues.get("source_discovery_focus_template_dry_run_skipped_rows"),
             source_focus_template_import.get("skipped_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_next_focus_pack_rows"),
+            source_next_focus_pack_summary.get("pack_items"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_focus_pack_progress_queues"),
+            source_next_focus_pack_summary.get("focus_pack_progress_queue_count"),
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_focus_pack_progress_remaining_rows"),
+            source_next_focus_pack_summary.get("focus_pack_progress_remaining_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_pack_next_action.get("focus_pack_progress_queue_count"),
+            source_next_focus_pack_summary.get("focus_pack_progress_queue_count"),
+        )
+        self.assertGreater(len(source_next_focus_pack_agent_batches), 0)
+        self.assertEqual(
+            source_next_focus_pack_agent_batches[0]["review_summary"].get(
+                "focus_pack_progress_queue_count"
+            ),
+            len(source_next_focus_pack.get("focus_pack_progress_queue", [])),
         )
         for field in (
             "next_focus_pack_id",
@@ -1201,6 +1237,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             ichiban_reissue_dedupe_next_action.get("work_order_rows"),
             dedupe_action_summary.get("ichiban_reissue_work_order_rows"),
+        )
+        self.assertTrue(
+            ichiban_reissue_dedupe_next_action.get("campaign_url_comparison_preview")
         )
         self.assertEqual(
             ichiban_reissue_dedupe_next_action.get("decision_template_rows"),

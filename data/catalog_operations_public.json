@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T10:30:15Z",
+  "generated_at": "2026-07-23T11:23:13Z",
   "summary": {
     "catalog_rows": 20348,
     "coverage": {
@@ -46,6 +46,9 @@
       "source_discovery_focus_template_rows": 417,
       "source_discovery_focus_template_work_order_packs": 23,
       "source_discovery_focus_template_dry_run_skipped_rows": 417,
+      "source_discovery_next_focus_pack_rows": 20,
+      "source_discovery_focus_pack_progress_queues": 23,
+      "source_discovery_focus_pack_progress_remaining_rows": 417,
       "source_discovery_next_focus_fallback_rows": 0,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -2311,6 +2314,10 @@
       "public_report": "data/source_discovery_focus_confirmed_template_public.json"
     },
     {
+      "key": "source_discovery_next_focus_pack",
+      "public_report": "data/source_discovery_next_focus_pack_public.json"
+    },
+    {
       "key": "source_discovery_next_focus_detail_candidates",
       "public_report": "data/source_discovery_next_focus_detail_candidates_public.json"
     },
@@ -2736,6 +2743,18 @@
       "dry_run_updated_rows": 0,
       "dry_run_skipped_rows": 417,
       "recommended_next_action": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack."
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_next_focus_pack",
+      "public_report": "data/source_discovery_next_focus_pack_public.json",
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_items": 20,
+      "focus_pack_progress_queue_count": 23,
+      "focus_pack_progress_remaining_rows": 417,
+      "current_remaining_review_rows": 20,
+      "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+      "recommended_next_action": "Work the current source discovery focus pack first, then move down the progress queue."
     },
     {
       "priority": 20,
@@ -4014,6 +4033,115 @@
       "probable_reissue_groups": 20,
       "review_rows": 92,
       "work_order_rows": 20,
+      "campaign_url_comparison_preview": [
+        {
+          "work_order_id": "ichiban-reissue-dedupe-001",
+          "normalized_name": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "campaign_url_comparison": {
+            "source_url_count": 2,
+            "campaign_slugs": [
+              "haikyu4",
+              "haikyu8"
+            ],
+            "campaign_slug_families": [
+              "haikyu"
+            ],
+            "campaign_slug_family_count": 1,
+            "numeric_suffixes": [
+              "4",
+              "8"
+            ],
+            "has_numbered_campaign_suffixes": true,
+            "likely_same_campaign_family_reissue": true,
+            "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+          }
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-002",
+          "normalized_name": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
+          "campaign_url_comparison": {
+            "source_url_count": 2,
+            "campaign_slugs": [
+              "haikyu4",
+              "haikyu8"
+            ],
+            "campaign_slug_families": [
+              "haikyu"
+            ],
+            "campaign_slug_family_count": 1,
+            "numeric_suffixes": [
+              "4",
+              "8"
+            ],
+            "has_numbered_campaign_suffixes": true,
+            "likely_same_campaign_family_reissue": true,
+            "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+          }
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-003",
+          "normalized_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "campaign_url_comparison": {
+            "source_url_count": 2,
+            "campaign_slugs": [
+              "naruto_wcf",
+              "naruto_wcf2"
+            ],
+            "campaign_slug_families": [
+              "naruto_wcf"
+            ],
+            "campaign_slug_family_count": 1,
+            "numeric_suffixes": [
+              "2"
+            ],
+            "has_numbered_campaign_suffixes": true,
+            "likely_same_campaign_family_reissue": true,
+            "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+          }
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-004",
+          "normalized_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "campaign_url_comparison": {
+            "source_url_count": 2,
+            "campaign_slugs": [
+              "naruto_wcf",
+              "naruto_wcf2"
+            ],
+            "campaign_slug_families": [
+              "naruto_wcf"
+            ],
+            "campaign_slug_family_count": 1,
+            "numeric_suffixes": [
+              "2"
+            ],
+            "has_numbered_campaign_suffixes": true,
+            "likely_same_campaign_family_reissue": true,
+            "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+          }
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-005",
+          "normalized_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
+          "campaign_url_comparison": {
+            "source_url_count": 2,
+            "campaign_slugs": [
+              "naruto_wcf",
+              "naruto_wcf2"
+            ],
+            "campaign_slug_families": [
+              "naruto_wcf"
+            ],
+            "campaign_slug_family_count": 1,
+            "numeric_suffixes": [
+              "2"
+            ],
+            "has_numbered_campaign_suffixes": true,
+            "likely_same_campaign_family_reissue": true,
+            "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+          }
+        }
+      ],
       "decision_template_rows": 20,
       "manual_confirmed_rows": 0,
       "protected_groups": 0,

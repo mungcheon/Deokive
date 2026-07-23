@@ -308,15 +308,26 @@ class _CatalogImportPanel extends StatelessWidget {
                             fontWeight: FontWeight.w900,
                           ),
                         ),
-                        Text(
-                          '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개 · 사진 ${health.imageCoverageLabel}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onSurface
-                                .withValues(alpha: 0.62),
-                            fontWeight: FontWeight.w700,
-                          ),
+                        Wrap(
+                          spacing: 6,
+                          runSpacing: 4,
+                          children: [
+                            _CatalogMetaChip(
+                              label:
+                                  '${_CatalogHealthSummary.formatCount(health.uniqueCount)}개',
+                              palette: palette,
+                            ),
+                            _CatalogMetaChip(
+                              label: '사진 ${health.imageCoverageLabel}',
+                              palette: palette,
+                            ),
+                            if (health.duplicateCount > 0)
+                              _CatalogMetaChip(
+                                label:
+                                    '중복 ${_CatalogHealthSummary.formatCount(health.duplicateCount)}개 제외',
+                                palette: palette,
+                              ),
+                          ],
                         ),
                       ],
                     ),
@@ -326,10 +337,10 @@ class _CatalogImportPanel extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 isCompact
-                    ? '검색해서 내 굿즈함이나 위시리스트에 추가'
-                    : '검색한 굿즈를 내 굿즈함이나 위시리스트에 바로 추가해요.',
-                maxLines: 1,
-                softWrap: false,
+                    ? '검색해서 내 굿즈함이나 위시리스트에 추가해요.'
+                    : '공개 DB에서 찾은 굿즈를 내 굿즈함이나 위시리스트에 바로 추가해요.',
+                maxLines: 2,
+                softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
@@ -367,6 +378,39 @@ class _CatalogImportPanel extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _CatalogMetaChip extends StatelessWidget {
+  final String label;
+  final DeokivePalette palette;
+
+  const _CatalogMetaChip({
+    required this.label,
+    required this.palette,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: palette.primary.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        label,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: theme.textTheme.labelSmall?.copyWith(
+          color: theme.colorScheme.onSurface.withValues(alpha: 0.68),
+          fontWeight: FontWeight.w800,
+          letterSpacing: 0,
+        ),
+      ),
     );
   }
 }
