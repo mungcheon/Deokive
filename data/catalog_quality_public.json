@@ -6765,6 +6765,8 @@
     "completion_plan_phase_rows_total": 710,
     "completion_plan_phase_count": 5,
     "completion_plan_status": "balanced",
+    "blocking_dashboard_status": "manual_evidence_required",
+    "blocking_dashboard_queue_coverage": 0.7141,
     "manual_validation_focus": {
       "auto_import_ready_rows": 0,
       "manual_validation_required_rows": 710,
@@ -7293,6 +7295,80 @@
         "manual_confirmation_required": true,
         "reason": "Every open image row still needs source/product/image identity evidence."
       }
+    },
+    "blocking_dashboard": {
+      "status": "manual_evidence_required",
+      "total_open_rows": 710,
+      "auto_import_ready_rows": 0,
+      "manual_validation_required_rows": 710,
+      "queued_rows_total": 507,
+      "not_yet_queued_rows": 203,
+      "queue_coverage": 0.7141,
+      "top_blocked_reason": {
+        "blocked_reason": "missing_exact_source_url",
+        "rows": 632
+      },
+      "top_blocked_until": {
+        "blocked_until": "exact_product_source_url_discovered",
+        "rows": 632
+      },
+      "next_queue": {
+        "lane": "replace_generic_source_urls",
+        "row_count": 50,
+        "source": "catalog_image_attachment_action_queue_public.json",
+        "template": "catalog_image_attachment_confirmed_template_public.json",
+        "next_step": "replace_generic_source_url_then_extract_image",
+        "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+        "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+        "manual_confirmation_required": true,
+        "auto_apply_enabled": false
+      },
+      "next_phase": {
+        "phase_id": "replace_generic_source_urls",
+        "row_count": 50,
+        "source": "catalog_image_attachment_action_queue_public.json",
+        "template": "catalog_image_attachment_confirmed_template_public.json",
+        "next_step": "replace_generic_source_url_then_extract_image",
+        "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+        "blocked_until": "generic_source_url_replaced_with_exact_product_source"
+      },
+      "phase_status": "balanced",
+      "phase_count": 5,
+      "top_phase_rows": [
+        {
+          "phase_id": "replace_generic_source_urls",
+          "row_count": 50,
+          "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+          "next_step": "replace_generic_source_url_then_extract_image"
+        },
+        {
+          "phase_id": "review_representative_images",
+          "row_count": 23,
+          "blocked_reason": "representative_image_requires_product_type_review",
+          "next_step": "confirm_exact_product_type_then_attach_image"
+        },
+        {
+          "phase_id": "complete_source_discovery_focus_packs",
+          "row_count": 417,
+          "blocked_reason": "missing_exact_source_url",
+          "next_step": "fill_source_discovery_focus_confirmed_template"
+        },
+        {
+          "phase_id": "triage_remaining_source_discovery_backlog",
+          "row_count": 215,
+          "blocked_reason": "missing_exact_source_url",
+          "next_step": "promote_next_store_groups_into_focus_packs"
+        },
+        {
+          "phase_id": "manual_nonstandard_image_research",
+          "row_count": 5,
+          "blocked_reason": "structured_source_discovery_not_available",
+          "next_step": "manual_official_source_and_image_evidence_recorded"
+        }
+      ],
+      "manual_only": true,
+      "auto_apply_enabled": false,
+      "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
     }
   },
   "source_discovery_store_bottlenecks": {

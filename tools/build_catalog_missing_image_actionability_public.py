@@ -941,6 +941,96 @@ def build_execution_queue_summary(
     }
 
 
+def build_blocking_dashboard(
+    summary: dict[str, Any],
+    manual_validation_focus: dict[str, Any],
+    execution_queue_summary: dict[str, Any],
+    completion_plan: dict[str, Any],
+) -> dict[str, Any]:
+    blocked_reasons = [
+        row
+        for row in summary.get("by_blocked_reason") or []
+        if isinstance(row, dict) and int(row.get("rows") or 0) > 0
+    ]
+    blocked_until = [
+        row
+        for row in summary.get("by_blocked_until") or []
+        if isinstance(row, dict) and int(row.get("rows") or 0) > 0
+    ]
+    phases = [
+        phase
+        for phase in completion_plan.get("phases") or []
+        if isinstance(phase, dict) and int(phase.get("row_count") or 0) > 0
+    ]
+    next_queue = execution_queue_summary.get("next_queue") or {}
+    next_phase = phases[0] if phases else {}
+    total_open_rows = int(summary.get("missing_image_rows") or 0)
+    auto_import_ready_rows = int(
+        execution_queue_summary.get("auto_import_ready_rows") or 0
+    )
+    manual_validation_required_rows = int(
+        manual_validation_focus.get("manual_validation_required_rows") or 0
+    )
+    queued_rows_total = int(execution_queue_summary.get("queued_rows_total") or 0)
+    not_yet_queued_rows = int(execution_queue_summary.get("not_yet_queued_rows") or 0)
+    progress_blocked = manual_validation_required_rows > auto_import_ready_rows
+
+    return {
+        "status": "manual_evidence_required" if progress_blocked else "ready_for_import_review",
+        "total_open_rows": total_open_rows,
+        "auto_import_ready_rows": auto_import_ready_rows,
+        "manual_validation_required_rows": manual_validation_required_rows,
+        "queued_rows_total": queued_rows_total,
+        "not_yet_queued_rows": not_yet_queued_rows,
+        "queue_coverage": round(queued_rows_total / total_open_rows, 4)
+        if total_open_rows
+        else 1.0,
+        "top_blocked_reason": blocked_reasons[0] if blocked_reasons else {},
+        "top_blocked_until": blocked_until[0] if blocked_until else {},
+        "next_queue": {
+            "lane": next_queue.get("lane"),
+            "row_count": next_queue.get("row_count") or 0,
+            "source": next_queue.get("source"),
+            "template": next_queue.get("template"),
+            "next_step": next_queue.get("next_step"),
+            "blocked_reason": next_queue.get("blocked_reason"),
+            "blocked_until": next_queue.get("blocked_until"),
+            "manual_confirmation_required": bool(
+                next_queue.get("manual_confirmation_required", True)
+            ),
+            "auto_apply_enabled": bool(next_queue.get("auto_apply_enabled", False)),
+        },
+        "next_phase": {
+            "phase_id": next_phase.get("phase_id"),
+            "row_count": next_phase.get("row_count") or 0,
+            "source": next_phase.get("source"),
+            "template": next_phase.get("template"),
+            "next_step": next_phase.get("next_step"),
+            "blocked_reason": next_phase.get("blocked_reason"),
+            "blocked_until": next_phase.get("blocked_until"),
+        },
+        "phase_status": completion_plan.get("status"),
+        "phase_count": completion_plan.get("phase_count") or 0,
+        "top_phase_rows": [
+            {
+                "phase_id": phase.get("phase_id"),
+                "row_count": phase.get("row_count") or 0,
+                "blocked_reason": phase.get("blocked_reason"),
+                "next_step": phase.get("next_step"),
+            }
+            for phase in phases[:5]
+        ],
+        "manual_only": True,
+        "auto_apply_enabled": False,
+        "operator_message": (
+            "No missing-image DB row can be imported automatically yet; fill the "
+            "next confirmation template with exact product source/image evidence first."
+            if progress_blocked
+            else "Confirmed rows are available for import review."
+        ),
+    }
+
+
 def build_phase_queue_breakdown(
     completion_plan: dict[str, Any],
     queues: list[dict[str, Any]],
@@ -1323,12 +1413,20 @@ def build_report(
         work_order,
         completion_plan,
     )
+    blocking_dashboard = build_blocking_dashboard(
+        summary_out,
+        manual_validation_focus,
+        execution_queue_summary,
+        completion_plan,
+    )
     summary_out.update(
         {
             "completion_plan_total_open_rows": int(completion_plan.get("total_open_rows") or 0),
             "completion_plan_phase_rows_total": int(completion_plan.get("phase_rows_total") or 0),
             "completion_plan_phase_count": int(completion_plan.get("phase_count") or 0),
             "completion_plan_status": completion_plan.get("status"),
+            "blocking_dashboard_status": blocking_dashboard.get("status"),
+            "blocking_dashboard_queue_coverage": blocking_dashboard.get("queue_coverage"),
         }
     )
 
@@ -1344,6 +1442,7 @@ def build_report(
         "work_order": work_order,
         "manual_validation_focus": manual_validation_focus,
         "execution_queue_summary": execution_queue_summary,
+        "blocking_dashboard": blocking_dashboard,
         "completion_plan": completion_plan,
         "recommended_order": [
             "source_url_replacement_required",

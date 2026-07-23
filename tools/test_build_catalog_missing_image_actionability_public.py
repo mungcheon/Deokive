@@ -387,6 +387,18 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(execution_queue["not_yet_queued_rows"], 0)
         self.assertEqual(execution_queue["unqueued_phase_rows_total"], 0)
         self.assertGreater(execution_queue["overlay_queue_rows"], 0)
+        blocking_dashboard = report["blocking_dashboard"]
+        self.assertEqual(blocking_dashboard["status"], "manual_evidence_required")
+        self.assertEqual(blocking_dashboard["total_open_rows"], 6)
+        self.assertEqual(blocking_dashboard["auto_import_ready_rows"], 1)
+        self.assertEqual(blocking_dashboard["manual_validation_required_rows"], 6)
+        self.assertEqual(blocking_dashboard["next_queue"]["lane"], "confirm_source_detail_candidates")
+        self.assertEqual(blocking_dashboard["next_phase"]["phase_id"], "replace_generic_source_urls")
+        self.assertEqual(
+            blocking_dashboard["top_blocked_reason"]["blocked_reason"],
+            "generic_or_listing_source_url_cannot_support_image_import",
+        )
+        self.assertFalse(blocking_dashboard["auto_apply_enabled"])
         phase_breakdown = {
             row["phase_id"]: row for row in execution_queue["phase_queue_breakdown"]
         }

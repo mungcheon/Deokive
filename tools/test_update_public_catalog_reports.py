@@ -185,6 +185,24 @@ class PublicCatalogReportTests(unittest.TestCase):
                 ]["lane"],
                 "replace_generic_source_urls",
             )
+            self.assertEqual(
+                quality["missing_image_actionability"]["blocking_dashboard"][
+                    "status"
+                ],
+                "manual_evidence_required",
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"]["blocking_dashboard"][
+                    "total_open_rows"
+                ],
+                result["missing"]["image_url"],
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"]["blocking_dashboard"][
+                    "next_queue"
+                ]["lane"],
+                "replace_generic_source_urls",
+            )
             self.assertEqual(completion_plan["total_open_rows"], result["missing"]["image_url"])
             self.assertEqual(completion_plan["phase_rows_total"], result["missing"]["image_url"])
             self.assertEqual(completion_plan["status"], "balanced")

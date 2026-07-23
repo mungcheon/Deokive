@@ -7878,6 +7878,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "execution_queue_summary",
                 {},
             ),
+            "blocking_dashboard": missing_image_actionability.get(
+                "blocking_dashboard",
+                {},
+            ),
         }
         target["danganronpa_missing_media"] = {
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
