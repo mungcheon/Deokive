@@ -40,9 +40,90 @@ WORKFLOW_NEXT_STEPS = {
 READINESS_ORDER = {
     "image_url_candidate_review": 10,
     "source_url_replacement_required": 20,
+    "representative_image_review_required": 25,
     "source_url_discovery_required": 30,
     "manual_research_required": 40,
 }
+
+
+READINESS_BLOCKERS = {
+    "image_url_candidate_review": {
+        "blocked_until": "manual_image_url_confirmed_from_exact_source",
+        "blocked_reason": "candidate_image_requires_manual_review",
+        "required_evidence": [
+            "exact_product_source_url",
+            "image_url_from_accepted_source_or_trusted_official_cdn",
+            "same_product_title_character_variant_type_confirmed",
+        ],
+    },
+    "source_detail_candidate_review": {
+        "blocked_until": "source_detail_candidate_identity_confirmed",
+        "blocked_reason": "source_and_image_candidate_identity_requires_manual_review",
+        "required_evidence": [
+            "candidate_source_url_exact_product_page",
+            "candidate_image_url_matches_same_product",
+            "candidate_title_character_variant_type_confirmed",
+        ],
+    },
+    "source_detail_candidate_recheck_required": {
+        "blocked_until": "candidate_identity_rechecked_or_replaced",
+        "blocked_reason": "candidate_identity_warning_requires_recheck",
+        "required_evidence": [
+            "candidate_identity_flags_resolved",
+            "replacement_candidate_source_url_if_current_candidate_is_wrong",
+            "manual_note_explaining_keep_or_reject_decision",
+        ],
+    },
+    "source_url_replacement_required": {
+        "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+        "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+        "required_evidence": [
+            "exact_product_source_url",
+            "existing_generic_source_url_replaced_or_preserved_with_reason",
+            "image_url_from_exact_source_after_replacement",
+        ],
+    },
+    "representative_image_review_required": {
+        "blocked_until": "representative_image_exact_product_type_confirmed",
+        "blocked_reason": "representative_image_requires_product_type_review",
+        "required_evidence": [
+            "official_source_matches_exact_product_type",
+            "representative_image_is_not_wrong_variant_or_lineup_only",
+            "manual_note_for_representative_image_choice",
+        ],
+    },
+    "source_url_discovery_required": {
+        "blocked_until": "exact_product_source_url_discovered",
+        "blocked_reason": "missing_exact_source_url",
+        "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn",
+        ],
+    },
+    "manual_research_required": {
+        "blocked_until": "manual_official_source_and_image_evidence_recorded",
+        "blocked_reason": "structured_source_discovery_not_available",
+        "required_evidence": [
+            "trusted_source_url_or_manual_evidence_url",
+            "image_url_source_explained",
+            "manual_note_for_nonstandard_source",
+        ],
+    },
+}
+
+
+def readiness_blocker(readiness: str) -> dict[str, Any]:
+    return dict(
+        READINESS_BLOCKERS.get(
+            readiness,
+            {
+                "blocked_until": "manual_review_completed",
+                "blocked_reason": "manual_review_required",
+                "required_evidence": ["manual_confirmation"],
+            },
+        )
+    )
 
 
 def now_utc() -> str:
@@ -63,8 +144,10 @@ def counter_rows(counter: Counter[str], field: str, limit: int = 30) -> list[dic
 def workflow_readiness(workflow: str) -> str:
     if workflow == "extract_from_existing_source_url":
         return "image_url_candidate_review"
-    if workflow in {"replace_generic_source_then_extract_image", "review_gotouchi_official_candidates"}:
+    if workflow == "replace_generic_source_then_extract_image":
         return "source_url_replacement_required"
+    if workflow == "review_gotouchi_official_candidates":
+        return "representative_image_review_required"
     if workflow == "find_source_then_extract_image":
         return "source_url_discovery_required"
     return "manual_research_required"
@@ -132,6 +215,7 @@ def summarize_groups(groups: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "by_source_store": counter_rows(bucket["source_store_rows"], "source_store"),
                 "sample_items": bucket["sample_items"],
                 "auto_apply_enabled": False,
+                **readiness_blocker(readiness),
             }
         )
     return sorted(rows_out, key=lambda row: (int(row["priority"]), str(row["readiness"])))
@@ -182,6 +266,7 @@ def summarize_source_stores(groups: list[dict[str, Any]], limit: int = 30) -> li
                 "missing_image_rows": bucket["missing_image_rows"],
                 "primary_workflow": primary_workflow,
                 "recommended_next_step": WORKFLOW_NEXT_STEPS.get(primary_workflow, "manual_review"),
+                **readiness_blocker(workflow_readiness(primary_workflow)),
                 "readiness_rows": [
                     {"readiness": readiness, "rows": count}
                     for readiness, count in bucket["readiness_rows"].most_common()
@@ -234,6 +319,7 @@ def build_source_discovery_work_packs(groups: list[dict[str, Any]], limit: int =
                     "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
                     "Attach image_url only after exact source_url is confirmed.",
                 ],
+                **readiness_blocker("source_url_discovery_required"),
                 "sample_category_counts": counter_rows(category_counts, "category", limit=8),
                 "sample_affiliation_counts": counter_rows(affiliation_counts, "affiliation", limit=8),
                 "sample_items": samples[:10],
@@ -261,6 +347,7 @@ def next_focus_pack_from_template_summary(summary: dict[str, Any]) -> dict[str, 
         "import_dry_run_report": "data/source_discovery_next_focus_pack_import_dry_run_public.json",
         "next_step": "review_next_focus_pack_then_fill_confirmed_source_urls",
         "auto_apply_enabled": False,
+        **readiness_blocker("source_url_discovery_required"),
     }
 
 
@@ -312,6 +399,9 @@ def build_work_order(
         top_stores: list[dict[str, Any]] | None = None,
         top_work_packs: list[dict[str, Any]] | None = None,
         current_focus_pack: dict[str, Any] | None = None,
+        blocked_until: str | None = None,
+        blocked_reason: str | None = None,
+        required_evidence: list[str] | None = None,
     ) -> None:
         if row_count <= 0:
             return
@@ -328,6 +418,9 @@ def build_work_order(
                 "current_focus_pack": current_focus_pack or {},
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
+                "blocked_until": blocked_until or "manual_confirmation_completed",
+                "blocked_reason": blocked_reason or "manual_review_required",
+                "required_evidence": required_evidence or ["manual_confirmation"],
                 "notes": notes or [],
             }
         )
@@ -339,6 +432,7 @@ def build_work_order(
         row_count=int(summary.get("source_detail_candidate_review_rows") or 0),
         next_step="confirm_exact_identity_then_import_source_and_image",
         template="source_detail_candidate_confirmed_rows_public.json",
+        **readiness_blocker("source_detail_candidate_review"),
         notes=["Use only exact product detail candidates; recheck title/variant before import."],
     )
     add(
@@ -349,6 +443,7 @@ def build_work_order(
         next_step="replace_generic_source_url_then_extract_image",
         template="catalog_image_attachment_confirmed_template_public.json",
         top_stores=top_generic_source_stores,
+        **readiness_blocker("source_url_replacement_required"),
         notes=["Rows already have generic storefront URLs; replace with exact product URLs first."],
     )
     add(
@@ -361,6 +456,7 @@ def build_work_order(
         top_stores=top_source_discovery_stores,
         top_work_packs=(source_discovery_work_packs or [])[:8],
         current_focus_pack=next_source_discovery_focus_pack,
+        **readiness_blocker("source_url_discovery_required"),
         notes=[
             "Focus packs cover the highest-volume official-store gaps before broad manual research.",
             "Use current_focus_pack for the next concrete source discovery batch.",
@@ -374,6 +470,7 @@ def build_work_order(
         row_count=int(summary.get("image_attachment_template_representative_review_rows") or 0),
         next_step="confirm_exact_product_type_then_attach_image",
         template="catalog_image_attachment_confirmed_template_public.json",
+        **readiness_blocker("representative_image_review_required"),
         notes=["Representative images are allowed only when the official source matches the exact product type."],
     )
     add(
@@ -383,6 +480,7 @@ def build_work_order(
         row_count=int(summary.get("source_detail_candidate_recheck_required_rows") or 0),
         next_step="refresh_or_replace_candidate_before_import",
         template="source_detail_candidate_confirmed_rows_public.json",
+        **readiness_blocker("source_detail_candidate_recheck_required"),
         notes=["Do not import candidates with identity warning flags until the candidate is refreshed or replaced."],
     )
     manual_row = readiness_by_name.get("manual_research_required", {})
@@ -393,6 +491,7 @@ def build_work_order(
         row_count=int(manual_row.get("rows") or summary.get("manual_image_research_rows") or 0),
         next_step="manual_official_source_and_image_research",
         template="manual_image_source_discovery_public.json",
+        **readiness_blocker("manual_research_required"),
         notes=["Use this after structured source discovery lanes are exhausted."],
     )
     return rows
@@ -472,6 +571,7 @@ def append_source_detail_readiness(
                 "by_source_store": counter_rows(Counter(str(item.get("source_store") or "") for item in ready_items), "source_store"),
                 "sample_items": ready_samples,
                 "auto_apply_enabled": False,
+                **readiness_blocker("source_detail_candidate_review"),
             }
         )
     if recheck_items:
@@ -503,6 +603,7 @@ def append_source_detail_readiness(
                     for item in recheck_items[:12]
                 ],
                 "auto_apply_enabled": False,
+                **readiness_blocker("source_detail_candidate_recheck_required"),
             }
         )
     return sorted(out, key=lambda row: (int(row["priority"]), str(row["readiness"])))
@@ -574,6 +675,16 @@ def build_report(
     next_source_discovery_focus_pack = next_focus_pack_from_template_summary(focus_template_summary)
     readiness_total = sum(int(row.get("rows") or 0) for row in base_readiness_rows)
     missing_image_rows = int(summary.get("missing_image_rows") or readiness_total)
+    blocked_reason_counts = Counter(
+        str(row.get("blocked_reason") or "manual_review_required")
+        for row in readiness_rows
+        for _ in range(int(row.get("rows") or 0))
+    )
+    blocked_until_counts = Counter(
+        str(row.get("blocked_until") or "manual_confirmation_completed")
+        for row in readiness_rows
+        for _ in range(int(row.get("rows") or 0))
+    )
 
     immediate_rows = sum(
         count
@@ -654,6 +765,8 @@ def build_report(
         "actionable_image_rows": int(action_summary.get("actionable_image_rows") or 0) + len(source_detail_ready),
         "source_discovery_work_pack_count": len(source_discovery_work_packs),
         "source_discovery_work_pack_rows": sum(int(row.get("row_count") or 0) for row in source_discovery_work_packs),
+        "by_blocked_reason": counter_rows(blocked_reason_counts, "blocked_reason"),
+        "by_blocked_until": counter_rows(blocked_until_counts, "blocked_until"),
         "auto_apply_enabled": False,
     }
     work_order = build_work_order(
@@ -676,6 +789,7 @@ def build_report(
         "work_order": work_order,
         "recommended_order": [
             "source_url_replacement_required",
+            "representative_image_review_required",
             "source_url_discovery_required",
             "manual_research_required",
             "image_url_candidate_review",
@@ -686,6 +800,7 @@ def build_report(
             "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
             "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
             "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
+            "by_blocked_reason and by_blocked_until summarize the highest-volume blockers before image attachment can be imported.",
             "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",
             "source_discovery_focus_template_rows is a blank public confirmation template; import remains dry-run safe until rows are manually confirmed.",
             "source_discovery_work_packs split the largest missing-image source discovery lane into practical store packs.",
@@ -696,6 +811,13 @@ def build_report(
             "auto_apply_catalog_changes": False,
             "requires_exact_product_identity": True,
             "requires_exact_source_url_before_image_url": True,
+            "blocked_until_default": "exact_product_identity_and_source_url_confirmed",
+            "required_evidence": [
+                "exact_product_source_url",
+                "image_url_from_accepted_source_or_trusted_official_cdn",
+                "title_character_variant_type_match",
+                "manual_confirmation_for_public_template_rows",
+            ],
             "private_collection_storage": "local_device_only",
         },
     }

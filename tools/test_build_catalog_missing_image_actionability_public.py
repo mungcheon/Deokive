@@ -13,13 +13,14 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
     def test_build_report_classifies_missing_image_work_by_next_required_action(self) -> None:
         enrichment = {
             "summary": {
-                "missing_image_rows": 5,
+                "missing_image_rows": 6,
                 "manual_image_research_rows": 1,
                 "by_workflow": [
                     ["extract_from_existing_source_url", 1],
                     ["replace_generic_source_then_extract_image", 2],
                     ["find_source_then_extract_image", 1],
                     ["manual_image_research", 1],
+                    ["review_gotouchi_official_candidates", 1],
                 ],
             },
             "groups": [
@@ -46,6 +47,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                     "source_store": "Store D",
                     "missing_image_rows": 1,
                     "sample_items": [{"catalog_index": 4, "name_ko": "Manual"}],
+                },
+                {
+                    "workflow": "review_gotouchi_official_candidates",
+                    "source_store": "Gotouchi",
+                    "missing_image_rows": 1,
+                    "sample_items": [{"catalog_index": 9, "name_ko": "Representative"}],
                 },
             ],
         }
@@ -141,11 +148,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
 
         self.assertEqual(report["generated_at"], "2026-07-22T00:00:00Z")
         self.assertFalse(report["summary"]["auto_apply_enabled"])
-        self.assertEqual(report["summary"]["missing_image_rows"], 5)
-        self.assertEqual(report["summary"]["readiness_classified_rows"], 5)
+        self.assertEqual(report["summary"]["missing_image_rows"], 6)
+        self.assertEqual(report["summary"]["readiness_classified_rows"], 6)
         self.assertEqual(report["summary"]["unclassified_rows"], 0)
         self.assertEqual(report["summary"]["exact_source_ready_rows"], 1)
         self.assertEqual(report["summary"]["source_first_rows"], 3)
+        self.assertEqual(report["summary"]["review_before_attach_rows"], 1)
         self.assertEqual(report["summary"]["source_detail_candidate_review_rows"], 1)
         self.assertEqual(report["summary"]["source_detail_candidate_recheck_required_rows"], 2)
         self.assertEqual(report["summary"]["source_detail_identity_warning_rows"], 2)
@@ -174,6 +182,18 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["image_attachment_template_dry_run_skipped_rows"], 2)
         self.assertEqual(report["summary"]["action_queue_rows"], 3)
         self.assertEqual(report["summary"]["actionable_image_rows"], 4)
+        self.assertEqual(
+            report["summary"]["by_blocked_reason"][0],
+            {
+                "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+                "rows": 2,
+            },
+        )
+        self.assertIn("exact_product_source_url", report["automation_policy"]["required_evidence"])
+        self.assertEqual(
+            report["automation_policy"]["blocked_until_default"],
+            "exact_product_identity_and_source_url_confirmed",
+        )
         self.assertEqual(report["summary"]["source_discovery_work_pack_count"], 1)
         self.assertEqual(report["summary"]["source_discovery_work_pack_rows"], 1)
         work_packs = report["source_discovery_work_packs"]
@@ -190,8 +210,14 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         source_detail_row = next(row for row in report["readiness"] if row["readiness"] == "source_detail_candidate_recheck_required")
         self.assertEqual(source_detail_row["sample_items"][0]["candidate_identity_flags"], ["only_generic_shared_tokens"])
         self.assertEqual(readiness["source_url_replacement_required"], 2)
+        self.assertEqual(readiness["representative_image_review_required"], 1)
         self.assertEqual(readiness["source_url_discovery_required"], 1)
         self.assertEqual(readiness["manual_research_required"], 1)
+        source_discovery_readiness = next(
+            row for row in report["readiness"] if row["readiness"] == "source_url_discovery_required"
+        )
+        self.assertEqual(source_discovery_readiness["blocked_reason"], "missing_exact_source_url")
+        self.assertIn("official_or_trusted_product_detail_source_url", source_discovery_readiness["required_evidence"])
         store_priority = {row["source_store"]: row for row in report["source_store_priority"]}
         self.assertEqual(store_priority["Store B"]["missing_image_rows"], 2)
         self.assertEqual(store_priority["Store B"]["primary_workflow"], "replace_generic_source_then_extract_image")
@@ -200,6 +226,14 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             "replace_generic_source_url_then_extract_image",
         )
         self.assertFalse(store_priority["Store B"]["auto_apply_enabled"])
+        self.assertEqual(
+            store_priority["Store B"]["blocked_until"],
+            "generic_source_url_replaced_with_exact_product_source",
+        )
+        self.assertEqual(
+            store_priority["Gotouchi"]["blocked_reason"],
+            "representative_image_requires_product_type_review",
+        )
         self.assertEqual(store_priority["Store B"]["sample_items"][0]["readiness"], "source_url_replacement_required")
         work_order = report["work_order"]
         self.assertEqual(
@@ -216,6 +250,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(work_order[0]["row_count"], 1)
         self.assertEqual(work_order[1]["row_count"], 1)
         self.assertEqual(work_order[2]["row_count"], 4)
+        self.assertEqual(work_order[2]["blocked_reason"], "missing_exact_source_url")
+        self.assertIn("title_character_variant_type_match", work_order[2]["required_evidence"])
         self.assertEqual(work_order[2]["top_work_packs"][0]["source_store"], "Store C")
         self.assertEqual(
             work_order[2]["current_focus_pack"]["focused_pack_report"],
@@ -232,6 +268,10 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(
             report["next_source_discovery_focus_pack"]["confirmed_template"],
             "data/source_discovery_focus_confirmed_template_public.json",
+        )
+        self.assertEqual(
+            report["next_source_discovery_focus_pack"]["blocked_until"],
+            "exact_product_source_url_discovered",
         )
         self.assertFalse(work_order[0]["auto_apply_enabled"])
         self.assertTrue(work_order[0]["manual_confirmation_required"])

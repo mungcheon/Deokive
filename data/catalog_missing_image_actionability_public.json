@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T08:19:37Z",
+  "generated_at": "2026-07-23T08:25:01Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 712,
@@ -39,35 +39,69 @@
     "actionable_image_rows": 73,
     "source_discovery_work_pack_count": 16,
     "source_discovery_work_pack_rows": 571,
+    "by_blocked_reason": [
+      {
+        "blocked_reason": "missing_exact_source_url",
+        "rows": 634
+      },
+      {
+        "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+        "rows": 50
+      },
+      {
+        "blocked_reason": "representative_image_requires_product_type_review",
+        "rows": 23
+      },
+      {
+        "blocked_reason": "candidate_identity_warning_requires_recheck",
+        "rows": 12
+      },
+      {
+        "blocked_reason": "structured_source_discovery_not_available",
+        "rows": 5
+      }
+    ],
+    "by_blocked_until": [
+      {
+        "blocked_until": "exact_product_source_url_discovered",
+        "rows": 634
+      },
+      {
+        "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+        "rows": 50
+      },
+      {
+        "blocked_until": "representative_image_exact_product_type_confirmed",
+        "rows": 23
+      },
+      {
+        "blocked_until": "candidate_identity_rechecked_or_replaced",
+        "rows": 12
+      },
+      {
+        "blocked_until": "manual_official_source_and_image_evidence_recorded",
+        "rows": 5
+      }
+    ],
     "auto_apply_enabled": false
   },
   "readiness": [
     {
       "readiness": "source_url_replacement_required",
       "priority": 20,
-      "rows": 73,
+      "rows": 50,
       "workflow_rows": [
         {
           "workflow": "replace_generic_source_then_extract_image",
           "label": "일반 상점/목록 URL을 상품 상세 URL로 교체 후 이미지 첨부",
           "rows": 50,
           "next_step": "replace_generic_source_url_then_extract_image"
-        },
-        {
-          "workflow": "review_gotouchi_official_candidates",
-          "label": "고토치 공식 후보가 상품 종류까지 맞는지 검토 후 이미지 첨부",
-          "rows": 23,
-          "next_step": "confirm_exact_product_type_then_attach_image"
         }
       ],
       "by_source_store": [
         {
           "source_store": "Stellive Store",
           "rows": 45
-        },
-        {
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "rows": 23
         },
         {
           "source_store": "Weverse Shop",
@@ -212,7 +246,175 @@
           "workflow": "replace_generic_source_then_extract_image"
         }
       ],
-      "auto_apply_enabled": false
+      "auto_apply_enabled": false,
+      "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+      "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+      "required_evidence": [
+        "exact_product_source_url",
+        "existing_generic_source_url_replaced_or_preserved_with_reason",
+        "image_url_from_exact_source_after_replacement"
+      ]
+    },
+    {
+      "readiness": "representative_image_review_required",
+      "priority": 25,
+      "rows": 23,
+      "workflow_rows": [
+        {
+          "workflow": "review_gotouchi_official_candidates",
+          "label": "고토치 공식 후보가 상품 종류까지 맞는지 검토 후 이미지 첨부",
+          "rows": 23,
+          "next_step": "confirm_exact_product_type_then_attach_image"
+        }
+      ],
+      "by_source_store": [
+        {
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "rows": 23
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 936,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 937,
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 938,
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 941,
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 942,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 943,
+          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 944,
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 945,
+          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 946,
+          "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+          "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 950,
+          "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+          "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 953,
+          "name_ko": "하치와레 ご当地 마스코트 (후쿠오카 라멘)",
+          "name_ja": "ハチワレ ご当地マスコット (福岡 ラーメン)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        },
+        {
+          "catalog_index": 954,
+          "name_ko": "치이카와 ご当地 마스코트 (나고야 샤치호코)",
+          "name_ja": "ちいかわ ご当地マスコット (名古屋 金鯱)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates"
+        }
+      ],
+      "auto_apply_enabled": false,
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "blocked_reason": "representative_image_requires_product_type_review",
+      "required_evidence": [
+        "official_source_matches_exact_product_type",
+        "representative_image_is_not_wrong_variant_or_lineup_only",
+        "manual_note_for_representative_image_choice"
+      ]
     },
     {
       "readiness": "source_detail_candidate_recheck_required",
@@ -387,7 +589,14 @@
           "workflow": "recheck_source_detail_candidate_identity"
         }
       ],
-      "auto_apply_enabled": false
+      "auto_apply_enabled": false,
+      "blocked_until": "candidate_identity_rechecked_or_replaced",
+      "blocked_reason": "candidate_identity_warning_requires_recheck",
+      "required_evidence": [
+        "candidate_identity_flags_resolved",
+        "replacement_candidate_source_url_if_current_candidate_is_wrong",
+        "manual_note_explaining_keep_or_reject_decision"
+      ]
     },
     {
       "readiness": "source_url_discovery_required",
@@ -657,7 +866,14 @@
           "workflow": "find_source_then_extract_image"
         }
       ],
-      "auto_apply_enabled": false
+      "auto_apply_enabled": false,
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ]
     },
     {
       "readiness": "manual_research_required",
@@ -738,7 +954,14 @@
           "workflow": "manual_image_research"
         }
       ],
-      "auto_apply_enabled": false
+      "auto_apply_enabled": false,
+      "blocked_until": "manual_official_source_and_image_evidence_recorded",
+      "blocked_reason": "structured_source_discovery_not_available",
+      "required_evidence": [
+        "trusted_source_url_or_manual_evidence_url",
+        "image_url_source_explained",
+        "manual_note_for_nonstandard_source"
+      ]
     }
   ],
   "source_store_priority": [
@@ -748,6 +971,13 @@
       "missing_image_rows": 45,
       "primary_workflow": "replace_generic_source_then_extract_image",
       "recommended_next_step": "replace_generic_source_url_then_extract_image",
+      "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+      "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+      "required_evidence": [
+        "exact_product_source_url",
+        "existing_generic_source_url_replaced_or_preserved_with_reason",
+        "image_url_from_exact_source_after_replacement"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_replacement_required",
@@ -863,131 +1093,18 @@
       "auto_apply_enabled": false
     },
     {
-      "source_store": "ご当地ちいかわ 공식(API)",
-      "priority": 20,
-      "missing_image_rows": 23,
-      "primary_workflow": "review_gotouchi_official_candidates",
-      "recommended_next_step": "confirm_exact_product_type_then_attach_image",
-      "readiness_rows": [
-        {
-          "readiness": "source_url_replacement_required",
-          "rows": 23
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "review_gotouchi_official_candidates",
-          "label": "고토치 공식 후보가 상품 종류까지 맞는지 검토 후 이미지 첨부",
-          "rows": 23,
-          "next_step": "confirm_exact_product_type_then_attach_image"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 936,
-          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
-          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "affiliation": null,
-          "category": "아크릴 키링",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null,
-          "workflow": "review_gotouchi_official_candidates",
-          "readiness": "source_url_replacement_required"
-        },
-        {
-          "catalog_index": 937,
-          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
-          "name_ja": "うさぎ ご当地マスコット (浅草)",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "affiliation": null,
-          "category": "마스코트",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null,
-          "workflow": "review_gotouchi_official_candidates",
-          "readiness": "source_url_replacement_required"
-        },
-        {
-          "catalog_index": 938,
-          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
-          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "affiliation": null,
-          "category": "타월",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null,
-          "workflow": "review_gotouchi_official_candidates",
-          "readiness": "source_url_replacement_required"
-        },
-        {
-          "catalog_index": 941,
-          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
-          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "affiliation": null,
-          "category": "마스코트",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null,
-          "workflow": "review_gotouchi_official_candidates",
-          "readiness": "source_url_replacement_required"
-        },
-        {
-          "catalog_index": 942,
-          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
-          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "affiliation": null,
-          "category": "아크릴 키링",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null,
-          "workflow": "review_gotouchi_official_candidates",
-          "readiness": "source_url_replacement_required"
-        },
-        {
-          "catalog_index": 943,
-          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
-          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "affiliation": null,
-          "category": "타월",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null,
-          "workflow": "review_gotouchi_official_candidates",
-          "readiness": "source_url_replacement_required"
-        },
-        {
-          "catalog_index": 944,
-          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
-          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "affiliation": null,
-          "category": "마스코트",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null,
-          "workflow": "review_gotouchi_official_candidates",
-          "readiness": "source_url_replacement_required"
-        },
-        {
-          "catalog_index": 945,
-          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
-          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "affiliation": null,
-          "category": "마스코트",
-          "source_url": "https://www.jp-api.com/contents/NOD62/",
-          "official_search_url": null,
-          "workflow": "review_gotouchi_official_candidates",
-          "readiness": "source_url_replacement_required"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
       "source_store": "Weverse Shop",
       "priority": 20,
       "missing_image_rows": 3,
       "primary_workflow": "replace_generic_source_then_extract_image",
       "recommended_next_step": "replace_generic_source_url_then_extract_image",
+      "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+      "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+      "required_evidence": [
+        "exact_product_source_url",
+        "existing_generic_source_url_replaced_or_preserved_with_reason",
+        "image_url_from_exact_source_after_replacement"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_replacement_required",
@@ -1048,6 +1165,13 @@
       "missing_image_rows": 2,
       "primary_workflow": "replace_generic_source_then_extract_image",
       "recommended_next_step": "replace_generic_source_url_then_extract_image",
+      "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+      "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+      "required_evidence": [
+        "exact_product_source_url",
+        "existing_generic_source_url_replaced_or_preserved_with_reason",
+        "image_url_from_exact_source_after_replacement"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_replacement_required",
@@ -1091,11 +1215,145 @@
       "auto_apply_enabled": false
     },
     {
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "priority": 25,
+      "missing_image_rows": 23,
+      "primary_workflow": "review_gotouchi_official_candidates",
+      "recommended_next_step": "confirm_exact_product_type_then_attach_image",
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "blocked_reason": "representative_image_requires_product_type_review",
+      "required_evidence": [
+        "official_source_matches_exact_product_type",
+        "representative_image_is_not_wrong_variant_or_lineup_only",
+        "manual_note_for_representative_image_choice"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "representative_image_review_required",
+          "rows": 23
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "review_gotouchi_official_candidates",
+          "label": "고토치 공식 후보가 상품 종류까지 맞는지 검토 후 이미지 첨부",
+          "rows": 23,
+          "next_step": "confirm_exact_product_type_then_attach_image"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 936,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates",
+          "readiness": "representative_image_review_required"
+        },
+        {
+          "catalog_index": 937,
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates",
+          "readiness": "representative_image_review_required"
+        },
+        {
+          "catalog_index": 938,
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates",
+          "readiness": "representative_image_review_required"
+        },
+        {
+          "catalog_index": 941,
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates",
+          "readiness": "representative_image_review_required"
+        },
+        {
+          "catalog_index": 942,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates",
+          "readiness": "representative_image_review_required"
+        },
+        {
+          "catalog_index": 943,
+          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates",
+          "readiness": "representative_image_review_required"
+        },
+        {
+          "catalog_index": 944,
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates",
+          "readiness": "representative_image_review_required"
+        },
+        {
+          "catalog_index": 945,
+          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "workflow": "review_gotouchi_official_candidates",
+          "readiness": "representative_image_review_required"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
       "source_store": "애니메이트",
       "priority": 30,
       "missing_image_rows": 146,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -1216,6 +1474,13 @@
       "missing_image_rows": 137,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -1336,6 +1601,13 @@
       "missing_image_rows": 56,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -1456,6 +1728,13 @@
       "missing_image_rows": 44,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -1576,6 +1855,13 @@
       "missing_image_rows": 36,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -1696,6 +1982,13 @@
       "missing_image_rows": 23,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -1816,6 +2109,13 @@
       "missing_image_rows": 21,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -1936,6 +2236,13 @@
       "missing_image_rows": 15,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -2056,6 +2363,13 @@
       "missing_image_rows": 15,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -2176,6 +2490,13 @@
       "missing_image_rows": 15,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -2296,6 +2617,13 @@
       "missing_image_rows": 13,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -2416,6 +2744,13 @@
       "missing_image_rows": 12,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -2536,6 +2871,13 @@
       "missing_image_rows": 11,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -2656,6 +2998,13 @@
       "missing_image_rows": 11,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -2776,6 +3125,13 @@
       "missing_image_rows": 9,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -2896,6 +3252,13 @@
       "missing_image_rows": 7,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3004,6 +3367,13 @@
       "missing_image_rows": 6,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3100,6 +3470,13 @@
       "missing_image_rows": 5,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3184,6 +3561,13 @@
       "missing_image_rows": 5,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3268,6 +3652,13 @@
       "missing_image_rows": 5,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3352,6 +3743,13 @@
       "missing_image_rows": 4,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3424,6 +3822,13 @@
       "missing_image_rows": 4,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3496,6 +3901,13 @@
       "missing_image_rows": 4,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3568,6 +3980,13 @@
       "missing_image_rows": 4,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3640,6 +4059,13 @@
       "missing_image_rows": 3,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3700,6 +4126,13 @@
       "missing_image_rows": 3,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
@@ -3771,6 +4204,13 @@
         "Confirm the exact official product detail page, not a search/listing page.",
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
+      ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
       ],
       "sample_category_counts": [
         {
@@ -3927,6 +4367,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "키링",
@@ -4065,6 +4512,13 @@
         "Confirm the exact official product detail page, not a search/listing page.",
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
+      ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
       ],
       "sample_category_counts": [
         {
@@ -4221,6 +4675,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "피규어",
@@ -4359,6 +4820,13 @@
         "Confirm the exact official product detail page, not a search/listing page.",
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
+      ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
       ],
       "sample_category_counts": [
         {
@@ -4507,6 +4975,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "캔뱃지",
@@ -4650,6 +5125,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "피규어",
@@ -4776,6 +5258,13 @@
         "Confirm the exact official product detail page, not a search/listing page.",
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
+      ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
       ],
       "sample_category_counts": [
         {
@@ -4907,6 +5396,13 @@
         "Confirm the exact official product detail page, not a search/listing page.",
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
+      ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
       ],
       "sample_category_counts": [
         {
@@ -5055,6 +5551,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "마스코트",
@@ -5194,6 +5697,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "아크릴 스탠드",
@@ -5329,6 +5839,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "문구",
@@ -5459,6 +5976,13 @@
         "Confirm the exact official product detail page, not a search/listing page.",
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
+      ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
       ],
       "sample_category_counts": [
         {
@@ -5595,6 +6119,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "피규어",
@@ -5726,6 +6257,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "피규어",
@@ -5843,6 +6381,13 @@
         "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
         "Attach image_url only after exact source_url is confirmed."
       ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "sample_category_counts": [
         {
           "category": "인형",
@@ -5944,7 +6489,14 @@
     "confirmed_template": "data/source_discovery_focus_confirmed_template_public.json",
     "import_dry_run_report": "data/source_discovery_next_focus_pack_import_dry_run_public.json",
     "next_step": "review_next_focus_pack_then_fill_confirmed_source_urls",
-    "auto_apply_enabled": false
+    "auto_apply_enabled": false,
+    "blocked_until": "exact_product_source_url_discovered",
+    "blocked_reason": "missing_exact_source_url",
+    "required_evidence": [
+      "official_or_trusted_product_detail_source_url",
+      "title_character_variant_type_match",
+      "image_url_from_confirmed_source_or_trusted_official_cdn"
+    ]
   },
   "work_order": [
     {
@@ -5978,6 +6530,13 @@
       "current_focus_pack": {},
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
+      "blocked_until": "generic_source_url_replaced_with_exact_product_source",
+      "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
+      "required_evidence": [
+        "exact_product_source_url",
+        "existing_generic_source_url_replaced_or_preserved_with_reason",
+        "image_url_from_exact_source_after_replacement"
+      ],
       "notes": [
         "Rows already have generic storefront URLs; replace with exact product URLs first."
       ]
@@ -6055,6 +6614,13 @@
             "Confirm the exact official product detail page, not a search/listing page.",
             "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
             "Attach image_url only after exact source_url is confirmed."
+          ],
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
           ],
           "sample_category_counts": [
             {
@@ -6211,6 +6777,13 @@
             "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
             "Attach image_url only after exact source_url is confirmed."
           ],
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
+          ],
           "sample_category_counts": [
             {
               "category": "키링",
@@ -6349,6 +6922,13 @@
             "Confirm the exact official product detail page, not a search/listing page.",
             "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
             "Attach image_url only after exact source_url is confirmed."
+          ],
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
           ],
           "sample_category_counts": [
             {
@@ -6505,6 +7085,13 @@
             "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
             "Attach image_url only after exact source_url is confirmed."
           ],
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
+          ],
           "sample_category_counts": [
             {
               "category": "피규어",
@@ -6643,6 +7230,13 @@
             "Confirm the exact official product detail page, not a search/listing page.",
             "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
             "Attach image_url only after exact source_url is confirmed."
+          ],
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
           ],
           "sample_category_counts": [
             {
@@ -6791,6 +7385,13 @@
             "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
             "Attach image_url only after exact source_url is confirmed."
           ],
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
+          ],
           "sample_category_counts": [
             {
               "category": "캔뱃지",
@@ -6934,6 +7535,13 @@
             "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
             "Attach image_url only after exact source_url is confirmed."
           ],
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
+          ],
           "sample_category_counts": [
             {
               "category": "피규어",
@@ -7060,6 +7668,13 @@
             "Confirm the exact official product detail page, not a search/listing page.",
             "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
             "Attach image_url only after exact source_url is confirmed."
+          ],
+          "blocked_until": "exact_product_source_url_discovered",
+          "blocked_reason": "missing_exact_source_url",
+          "required_evidence": [
+            "official_or_trusted_product_detail_source_url",
+            "title_character_variant_type_match",
+            "image_url_from_confirmed_source_or_trusted_official_cdn"
           ],
           "sample_category_counts": [
             {
@@ -7188,10 +7803,24 @@
         "confirmed_template": "data/source_discovery_focus_confirmed_template_public.json",
         "import_dry_run_report": "data/source_discovery_next_focus_pack_import_dry_run_public.json",
         "next_step": "review_next_focus_pack_then_fill_confirmed_source_urls",
-        "auto_apply_enabled": false
+        "auto_apply_enabled": false,
+        "blocked_until": "exact_product_source_url_discovered",
+        "blocked_reason": "missing_exact_source_url",
+        "required_evidence": [
+          "official_or_trusted_product_detail_source_url",
+          "title_character_variant_type_match",
+          "image_url_from_confirmed_source_or_trusted_official_cdn"
+        ]
       },
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
       "notes": [
         "Focus packs cover the highest-volume official-store gaps before broad manual research.",
         "Use current_focus_pack for the next concrete source discovery batch.",
@@ -7210,6 +7839,13 @@
       "current_focus_pack": {},
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "blocked_reason": "representative_image_requires_product_type_review",
+      "required_evidence": [
+        "official_source_matches_exact_product_type",
+        "representative_image_is_not_wrong_variant_or_lineup_only",
+        "manual_note_for_representative_image_choice"
+      ],
       "notes": [
         "Representative images are allowed only when the official source matches the exact product type."
       ]
@@ -7226,6 +7862,13 @@
       "current_focus_pack": {},
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
+      "blocked_until": "candidate_identity_rechecked_or_replaced",
+      "blocked_reason": "candidate_identity_warning_requires_recheck",
+      "required_evidence": [
+        "candidate_identity_flags_resolved",
+        "replacement_candidate_source_url_if_current_candidate_is_wrong",
+        "manual_note_explaining_keep_or_reject_decision"
+      ],
       "notes": [
         "Do not import candidates with identity warning flags until the candidate is refreshed or replaced."
       ]
@@ -7242,6 +7885,13 @@
       "current_focus_pack": {},
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
+      "blocked_until": "manual_official_source_and_image_evidence_recorded",
+      "blocked_reason": "structured_source_discovery_not_available",
+      "required_evidence": [
+        "trusted_source_url_or_manual_evidence_url",
+        "image_url_source_explained",
+        "manual_note_for_nonstandard_source"
+      ],
       "notes": [
         "Use this after structured source discovery lanes are exhausted."
       ]
@@ -7249,6 +7899,7 @@
   ],
   "recommended_order": [
     "source_url_replacement_required",
+    "representative_image_review_required",
     "source_url_discovery_required",
     "manual_research_required",
     "image_url_candidate_review"
@@ -7259,6 +7910,7 @@
     "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
     "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
     "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
+    "by_blocked_reason and by_blocked_until summarize the highest-volume blockers before image attachment can be imported.",
     "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",
     "source_discovery_focus_template_rows is a blank public confirmation template; import remains dry-run safe until rows are manually confirmed.",
     "source_discovery_work_packs split the largest missing-image source discovery lane into practical store packs.",
@@ -7269,6 +7921,13 @@
     "auto_apply_catalog_changes": false,
     "requires_exact_product_identity": true,
     "requires_exact_source_url_before_image_url": true,
+    "blocked_until_default": "exact_product_identity_and_source_url_confirmed",
+    "required_evidence": [
+      "exact_product_source_url",
+      "image_url_from_accepted_source_or_trusted_official_cdn",
+      "title_character_variant_type_match",
+      "manual_confirmation_for_public_template_rows"
+    ],
     "private_collection_storage": "local_device_only"
   }
 }
