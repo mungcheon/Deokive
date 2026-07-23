@@ -140,6 +140,56 @@ def _build_lane_workstreams(items: list[dict[str, Any]]) -> list[dict[str, Any]]
     return workstreams
 
 
+def _review_readiness(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    rows_with_options = [row for row in rows if row.get("candidate_options")]
+    single_option_rows = [
+        row for row in rows_with_options if int(row.get("candidate_count") or 0) == 1
+    ]
+    low_confidence_rows = [
+        row
+        for row in rows
+        if _compact_text(row.get("source_url_review_lane"))
+        == "low_confidence_candidate_review"
+    ]
+    weak_rows = [
+        row
+        for row in rows
+        if _compact_text(row.get("source_url_review_lane")) == "weak_candidate_review"
+    ]
+    top = rows_with_options[0] if rows_with_options else {}
+    top_candidate = top.get("top_candidate") if isinstance(top.get("top_candidate"), dict) else {}
+    return {
+        "status": "manual_candidate_review_required" if rows else "empty",
+        "auto_apply_ready_rows": 0,
+        "manual_review_rows": len(rows),
+        "rows_with_candidate_options": len(rows_with_options),
+        "single_candidate_option_rows": len(single_option_rows),
+        "low_confidence_rows": len(low_confidence_rows),
+        "weak_candidate_rows": len(weak_rows),
+        "next_review_row": {
+            "catalog_index": top.get("catalog_index"),
+            "name_ko": top.get("name_ko"),
+            "source_store": top.get("source_store"),
+            "category": top.get("category"),
+            "candidate_count": top.get("candidate_count") or 0,
+            "top_candidate_title": top_candidate.get("title"),
+            "top_candidate_source_url": top_candidate.get("source_url"),
+            "store_search_url": top.get("store_search_url"),
+        }
+        if top
+        else {},
+        "blocked_reason": "candidate_source_url_identity_not_confirmed" if rows else None,
+        "blocked_until": "manual_exact_product_source_url_confirmation" if rows else None,
+        "required_evidence": [
+            "candidate_source_url_is_exact_product_detail_page",
+            "candidate_title_matches_catalog_name_character_variant",
+            "candidate_image_matches_product_or_is_rejected_with_reason",
+        ],
+        "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+        "auto_apply_enabled": False,
+    }
+
+
 def build_queue(template: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     rows = [
         _queue_item(row)
@@ -164,6 +214,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
             "with_store_search_url": sum(1 for row in rows if row.get("store_search_url")),
             "auto_apply_enabled": False,
         },
+        "review_readiness": _review_readiness(rows),
         "instructions": [
             "This queue covers low-confidence and weak candidate source URLs.",
             "Candidate URLs are review hints only, not import evidence.",

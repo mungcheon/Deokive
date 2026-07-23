@@ -72,6 +72,22 @@ class BuildCandidateSourceUrlReviewQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["with_candidate_options"], 1)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
+        self.assertEqual(
+            report["review_readiness"]["status"],
+            "manual_candidate_review_required",
+        )
+        self.assertEqual(report["review_readiness"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(report["review_readiness"]["manual_review_rows"], 2)
+        self.assertEqual(report["review_readiness"]["rows_with_candidate_options"], 1)
+        self.assertEqual(report["review_readiness"]["single_candidate_option_rows"], 1)
+        self.assertEqual(
+            report["review_readiness"]["next_review_row"]["catalog_index"],
+            1,
+        )
+        self.assertEqual(
+            report["review_readiness"]["blocked_until"],
+            "manual_exact_product_source_url_confirmation",
+        )
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 
         item = report["items"][0]
@@ -87,6 +103,8 @@ class BuildCandidateSourceUrlReviewQueuePublicTest(unittest.TestCase):
         report = queue.build_queue({"items": []})
 
         self.assertEqual(report["summary"]["candidate_review_rows"], 0)
+        self.assertEqual(report["review_readiness"]["status"], "empty")
+        self.assertEqual(report["review_readiness"]["manual_review_rows"], 0)
         self.assertEqual(report["workstreams"], [])
         self.assertEqual(report["items"], [])
 

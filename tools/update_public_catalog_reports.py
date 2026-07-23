@@ -7774,6 +7774,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["candidate_source_url_review_queue"] = {
             "public_report": f"data/{CANDIDATE_SOURCE_URL_REVIEW_QUEUE.name}",
             **candidate_source_url_review_queue["summary"],
+            "review_readiness": candidate_source_url_review_queue.get("review_readiness", {}),
         }
         target["source_url_update_queue_split"] = {
             "public_reports": [

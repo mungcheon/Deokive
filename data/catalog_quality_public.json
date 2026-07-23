@@ -8313,7 +8313,35 @@
     ],
     "with_candidate_options": 3,
     "with_store_search_url": 3,
-    "auto_apply_enabled": false
+    "auto_apply_enabled": false,
+    "review_readiness": {
+      "status": "manual_candidate_review_required",
+      "auto_apply_ready_rows": 0,
+      "manual_review_rows": 3,
+      "rows_with_candidate_options": 3,
+      "single_candidate_option_rows": 2,
+      "low_confidence_rows": 2,
+      "weak_candidate_rows": 1,
+      "next_review_row": {
+        "catalog_index": 2325,
+        "name_ko": "스텔라이브 1주년 뱃지 세트",
+        "source_store": "Stellive Store",
+        "category": "캔뱃지",
+        "candidate_count": 5,
+        "top_candidate_title": "S.S.Stellive 메탈 뱃지",
+        "top_candidate_source_url": "https://fanding.kr/@stellive/shop/3700",
+        "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8"
+      },
+      "blocked_reason": "candidate_source_url_identity_not_confirmed",
+      "blocked_until": "manual_exact_product_source_url_confirmation",
+      "required_evidence": [
+        "candidate_source_url_is_exact_product_detail_page",
+        "candidate_title_matches_catalog_name_character_variant",
+        "candidate_image_matches_product_or_is_rejected_with_reason"
+      ],
+      "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+      "auto_apply_enabled": false
+    }
   },
   "source_url_update_queue_split": {
     "public_reports": [
