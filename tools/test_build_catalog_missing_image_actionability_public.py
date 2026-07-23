@@ -185,6 +185,44 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertFalse(work_order[0]["auto_apply_enabled"])
         self.assertTrue(work_order[0]["manual_confirmation_required"])
 
+    def test_work_order_falls_back_to_source_discovery_readiness_when_focus_pack_is_empty(self) -> None:
+        enrichment = {
+            "summary": {
+                "missing_image_rows": 4,
+                "by_workflow": [["find_source_then_extract_image", 4]],
+            },
+            "groups": [
+                {
+                    "workflow": "find_source_then_extract_image",
+                    "source_store": "Animate",
+                    "missing_image_rows": 3,
+                    "sample_items": [{"catalog_index": 1, "name_ko": "Needs source"}],
+                },
+                {
+                    "workflow": "find_source_then_extract_image",
+                    "source_store": "Ensky",
+                    "missing_image_rows": 1,
+                    "sample_items": [{"catalog_index": 2, "name_ko": "Needs source too"}],
+                },
+            ],
+        }
+
+        report = actionability.build_report(
+            enrichment,
+            {"summary": {}},
+            {"batches": []},
+            {"summary": {"remaining_focus_review_rows": 0}},
+            generated_at="2026-07-22T00:00:00Z",
+        )
+
+        work_order = report["work_order"]
+        self.assertEqual([row["lane"] for row in work_order], ["discover_exact_source_urls"])
+        discover = work_order[0]
+        self.assertEqual(discover["row_count"], 4)
+        self.assertEqual(discover["top_source_stores"][0]["source_store"], "Animate")
+        self.assertEqual(discover["top_source_stores"][0]["missing_image_rows"], 3)
+        self.assertIn("falls back", discover["notes"][1])
+
 
 if __name__ == "__main__":
     unittest.main()

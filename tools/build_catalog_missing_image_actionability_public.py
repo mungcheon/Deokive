@@ -208,6 +208,10 @@ def build_work_order(
     source_store_priority: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     readiness_by_name = {str(row.get("readiness") or ""): row for row in readiness_rows}
+    source_discovery_row = readiness_by_name.get("source_url_discovery_required", {})
+    source_discovery_rows = int(source_discovery_row.get("rows") or 0)
+    focus_source_rows = int(summary.get("source_discovery_remaining_focus_review_rows") or 0)
+    source_discovery_work_order_rows = focus_source_rows or source_discovery_rows
     top_generic_source_stores = [
         {
             "source_store": row.get("source_store"),
@@ -283,11 +287,14 @@ def build_work_order(
         rank=3,
         lane="discover_exact_source_urls",
         source="source_discovery_action_queue_public.json",
-        row_count=int(summary.get("source_discovery_remaining_focus_review_rows") or 0),
+        row_count=source_discovery_work_order_rows,
         next_step="confirm_exact_source_url_then_fill_source_templates",
         template="source_discovery_focus_confirmed_template_public.json",
         top_stores=top_source_discovery_stores,
-        notes=["Focus packs cover the highest-volume official-store gaps before broad manual research."],
+        notes=[
+            "Focus packs cover the highest-volume official-store gaps before broad manual research.",
+            "If no focus pack is active yet, this lane falls back to every source_url_discovery_required missing-image row.",
+        ],
     )
     add(
         rank=4,

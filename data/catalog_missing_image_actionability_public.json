@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T00:58:29Z",
+  "generated_at": "2026-07-23T01:01:00Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 714,
@@ -3782,6 +3782,70 @@
       "auto_apply_enabled": false,
       "notes": [
         "Rows already have generic storefront URLs; replace with exact product URLs first."
+      ]
+    },
+    {
+      "rank": 3,
+      "lane": "discover_exact_source_urls",
+      "source": "source_discovery_action_queue_public.json",
+      "row_count": 636,
+      "next_step": "confirm_exact_source_url_then_fill_source_templates",
+      "template": "source_discovery_focus_confirmed_template_public.json",
+      "top_source_stores": [
+        {
+          "source_store": "애니메이트",
+          "missing_image_rows": 148,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "엔스카이",
+          "missing_image_rows": 137,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "굿스마일컴퍼니",
+          "missing_image_rows": 56,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "코토부키야",
+          "missing_image_rows": 44,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "Movic",
+          "missing_image_rows": 36,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "점프 캐릭터즈 스토어",
+          "missing_image_rows": 23,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "FuRyu",
+          "missing_image_rows": 21,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        },
+        {
+          "source_store": "Taito",
+          "missing_image_rows": 15,
+          "primary_workflow": "find_source_then_extract_image",
+          "recommended_next_step": "find_exact_official_source_url_then_extract_image"
+        }
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "notes": [
+        "Focus packs cover the highest-volume official-store gaps before broad manual research.",
+        "If no focus pack is active yet, this lane falls back to every source_url_discovery_required missing-image row."
       ]
     },
     {

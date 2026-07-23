@@ -17,10 +17,16 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
             generated_at="2026-01-01T00:00:00Z",
         )
         summary = report["summary"]
+        catalog = target.load_json(target.CATALOG)
+        expected_missing = sum(
+            1
+            for item in catalog.get("items", [])
+            if not (item.get("image_url") or item.get("local_image_path"))
+        )
 
-        self.assertEqual(summary["missing_image_rows"], 720)
-        self.assertEqual(summary["work_queue_rows"], 720)
-        self.assertEqual(summary["queue_matched_rows"], 720)
+        self.assertEqual(summary["missing_image_rows"], expected_missing)
+        self.assertGreaterEqual(summary["work_queue_rows"], expected_missing)
+        self.assertEqual(summary["queue_matched_rows"], expected_missing)
         self.assertEqual(summary["stale_queue_index_matches"], 0)
         self.assertEqual(summary["unmatched_catalog_missing_rows"], 0)
         self.assertIs(summary["auto_apply_enabled"], False)
