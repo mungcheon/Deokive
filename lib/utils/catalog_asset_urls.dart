@@ -1,4 +1,4 @@
-const catalogAssetVersion = '20260723-imagefix6';
+const catalogAssetVersion = '20260723-imagefix7';
 
 List<String> publicCatalogAssetUrls(String assetPath) {
   final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
@@ -8,19 +8,19 @@ List<String> publicCatalogAssetUrls(String assetPath) {
 
   final flutterAssetPath = 'assets/$normalizedPath';
   final candidates = <String>[
-    _versionedAssetUrl(Uri.base.resolve(flutterAssetPath)),
     _versionedAssetUrl(Uri.base.resolve(normalizedPath)),
+    _versionedAssetUrl(Uri.base.resolve(flutterAssetPath)),
   ];
 
   final base = Uri.base;
   if (base.scheme == 'http' || base.scheme == 'https') {
     final root = Uri.parse(base.origin);
-    candidates.add(_versionedAssetUrl(root.resolve('/$flutterAssetPath')));
     candidates.add(_versionedAssetUrl(root.resolve('/$normalizedPath')));
-    candidates
-        .add(_versionedAssetUrl(root.resolve('/Deokive/$flutterAssetPath')));
+    candidates.add(_versionedAssetUrl(root.resolve('/$flutterAssetPath')));
     candidates
         .add(_versionedAssetUrl(root.resolve('/Deokive/$normalizedPath')));
+    candidates
+        .add(_versionedAssetUrl(root.resolve('/Deokive/$flutterAssetPath')));
   }
 
   return candidates.toSet().toList(growable: false);

@@ -7,6 +7,10 @@ void main() {
     final urls = publicCatalogAssetUrls('assets/catalog_images/sample.webp');
 
     expect(
+      urls.first,
+      endsWith('/assets/catalog_images/sample.webp?v=$catalogAssetVersion'),
+    );
+    expect(
       urls,
       contains(
         endsWith(
