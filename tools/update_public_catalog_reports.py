@@ -8239,6 +8239,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["ichiban_kuji_prize_policy_issue_queue"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.name}",
             **ichiban_kuji_prize_policy_issue_queue.get("summary", {}),
+            "completion_readiness": ichiban_kuji_prize_policy_issue_queue.get(
+                "completion_readiness",
+                {},
+            ),
         }
         target["ichiban_kuji_historical_roadmap"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORICAL_ROADMAP.name}",

@@ -8532,6 +8532,9 @@
     "probable_reissue_sample_rows": 40,
     "repeated_name_different_source_groups": 46,
     "manual_confirmed_rows": 0,
+    "manual_review_rows": 40,
+    "auto_apply_ready_rows": 0,
+    "completion_readiness_status": "ichiban_reissue_review_required",
     "lane_counts": [
       [
         "probable_reissue_or_campaign_variant_review",
@@ -8552,7 +8555,34 @@
     ],
     "auto_apply_enabled": false,
     "auto_merge_enabled": false,
-    "auto_delete_enabled": false
+    "auto_delete_enabled": false,
+    "completion_readiness": {
+      "status": "ichiban_reissue_review_required",
+      "zero_price_policy_ready": true,
+      "numbered_variant_policy_ready": true,
+      "same_rank_unnumbered_policy_ready": true,
+      "reissue_identity_policy_ready": false,
+      "issue_rows": 20,
+      "open_issue_rows": 40,
+      "manual_review_rows": 40,
+      "auto_apply_ready_rows": 0,
+      "zero_price_violation_rows": 0,
+      "unnumbered_multi_item_prize_review_groups": 0,
+      "unnumbered_multi_item_prize_review_rows": 0,
+      "protected_unnumbered_multi_item_prize_groups": 6,
+      "protected_unnumbered_multi_item_prize_rows": 12,
+      "probable_reissue_work_order_rows": 20,
+      "probable_reissue_review_groups": 20,
+      "repeated_name_different_source_groups": 46,
+      "blocked_reasons": [
+        "same_name_across_campaign_urls_requires_keep_or_merge_decision"
+      ],
+      "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+      "auto_apply_enabled": false,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "safety_note": "Last One and Double Chance zero-price rows are policy exceptions; same-name Ichiban Kuji rows across campaign URLs must not be merged until official campaign evidence confirms the identity decision."
+    }
   },
   "danganronpa_patch_template_dry_run": {
     "public_report": "data/danganronpa_patch_template_dry_run_public.json",

@@ -124,6 +124,27 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
         )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["summary"]["auto_delete_enabled"])
+        self.assertEqual(
+            report["summary"]["completion_readiness_status"],
+            "zero_price_policy_fix_required",
+        )
+        self.assertEqual(report["summary"]["manual_review_rows"], 5)
+        self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(
+            report["completion_readiness"]["status"],
+            "zero_price_policy_fix_required",
+        )
+        self.assertFalse(report["completion_readiness"]["zero_price_policy_ready"])
+        self.assertTrue(report["completion_readiness"]["numbered_variant_policy_ready"])
+        self.assertFalse(report["completion_readiness"]["reissue_identity_policy_ready"])
+        self.assertEqual(
+            report["completion_readiness"]["next_safe_phase"],
+            "fix_last_one_double_chance_zero_price_policy",
+        )
+        self.assertIn(
+            "last_one_or_double_chance_zero_price_policy_not_clean",
+            report["completion_readiness"]["blocked_reasons"],
+        )
         self.assertEqual(report["policy_status"]["last_one_and_double_chance_prices"], "manual_fix_required")
         self.assertEqual(report["policy_status"]["probable_reissues"], "manual_review")
         self.assertEqual(report["issues"][0]["issue_id"], "ichiban-last-one-price-policy")
@@ -192,6 +213,13 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["issue_rows"], 0)
         self.assertTrue(report["summary"]["zero_price_exception_policy_pass"])
+        self.assertEqual(report["summary"]["completion_readiness_status"], "no_open_policy_issues")
+        self.assertEqual(report["completion_readiness"]["status"], "no_open_policy_issues")
+        self.assertTrue(report["completion_readiness"]["zero_price_policy_ready"])
+        self.assertTrue(report["completion_readiness"]["numbered_variant_policy_ready"])
+        self.assertTrue(report["completion_readiness"]["same_rank_unnumbered_policy_ready"])
+        self.assertTrue(report["completion_readiness"]["reissue_identity_policy_ready"])
+        self.assertEqual(report["completion_readiness"]["blocked_reasons"], ["none"])
         self.assertEqual(report["policy_status"]["last_one_and_double_chance_prices"], "pass")
         self.assertEqual(report["policy_status"]["unnumbered_multi_item_prizes"], "clear")
 
@@ -276,6 +304,9 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["issue_rows"], 0)
         self.assertEqual(report["summary"]["unnumbered_multi_item_prize_review_groups"], 0)
         self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_groups"], 1)
+        self.assertEqual(report["summary"]["completion_readiness_status"], "no_open_policy_issues")
+        self.assertEqual(report["completion_readiness"]["protected_unnumbered_multi_item_prize_groups"], 1)
+        self.assertTrue(report["completion_readiness"]["same_rank_unnumbered_policy_ready"])
         self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_rows"], 2)
         self.assertEqual(
             report["summary"]["protected_unnumbered_multi_item_prize_reason_counts"],
@@ -317,6 +348,15 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["issue_rows"], 1)
         self.assertEqual(report["summary"]["unnumbered_multi_item_prize_review_groups"], 1)
         self.assertEqual(report["summary"]["protected_unnumbered_multi_item_prize_groups"], 0)
+        self.assertEqual(
+            report["summary"]["completion_readiness_status"],
+            "unnumbered_multi_item_prize_review_required",
+        )
+        self.assertFalse(report["completion_readiness"]["same_rank_unnumbered_policy_ready"])
+        self.assertIn(
+            "unnumbered_same_rank_prize_groups_require_lineup_review",
+            report["completion_readiness"]["blocked_reasons"],
+        )
         self.assertEqual(
             report["issues"][0]["blocked_reason"],
             "same_prize_label_has_multiple_unnumbered_rows",

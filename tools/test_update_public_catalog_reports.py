@@ -631,6 +631,38 @@ class PublicCatalogReportTests(unittest.TestCase):
             20,
         )
         self.assertEqual(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["completion_readiness_status"],
+            "ichiban_reissue_review_required",
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["completion_readiness"]["status"],
+            "ichiban_reissue_review_required",
+        )
+        self.assertIs(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["completion_readiness"][
+                "zero_price_policy_ready"
+            ],
+            True,
+        )
+        self.assertIs(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["completion_readiness"][
+                "numbered_variant_policy_ready"
+            ],
+            True,
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_prize_policy_issue_queue"]["completion_readiness"][
+                "auto_apply_ready_rows"
+            ],
+            0,
+        )
+        self.assertIn(
+            "same_name_across_campaign_urls_requires_keep_or_merge_decision",
+            quality["ichiban_kuji_prize_policy_issue_queue"]["completion_readiness"][
+                "blocked_reasons"
+            ],
+        )
+        self.assertEqual(
             quality["ichiban_kuji_prize_policy_issue_queue"]["numbered_variant_created_rows"],
             2518,
         )

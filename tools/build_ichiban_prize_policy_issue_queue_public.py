@@ -393,6 +393,85 @@ def _reissue_work_order(row: dict[str, Any], rank: int) -> dict[str, Any]:
     }
 
 
+def _completion_readiness(
+    *,
+    issue_count: int,
+    open_issue_rows: int,
+    zero_price_violation_rows: int,
+    zero_price_exception_policy_pass: bool,
+    numbered_variant_coverage_policy_pass: bool,
+    unnumbered_multi_item_prize_review_groups: int,
+    unnumbered_multi_item_prize_review_rows: int,
+    protected_unnumbered_multi_item_prize_groups: int,
+    protected_unnumbered_multi_item_prize_rows: int,
+    probable_reissue_work_order_rows: int,
+    probable_reissue_review_groups: int,
+    repeated_name_different_source_groups: int,
+) -> dict[str, Any]:
+    zero_price_policy_ready = (
+        zero_price_exception_policy_pass is True and zero_price_violation_rows == 0
+    )
+    numbered_variant_policy_ready = numbered_variant_coverage_policy_pass is True
+
+    blocked_reasons: list[str] = []
+    next_safe_phase = "archive_prize_policy_completion"
+    status = "no_open_policy_issues"
+
+    if not zero_price_policy_ready:
+        status = "zero_price_policy_fix_required"
+        next_safe_phase = "fix_last_one_double_chance_zero_price_policy"
+        blocked_reasons.append("last_one_or_double_chance_zero_price_policy_not_clean")
+    if not numbered_variant_policy_ready:
+        if status == "no_open_policy_issues":
+            status = "numbered_variant_review_required"
+            next_safe_phase = "verify_numbered_same_rank_variants"
+        blocked_reasons.append("numbered_same_rank_variant_coverage_not_clean")
+    if unnumbered_multi_item_prize_review_groups:
+        if status == "no_open_policy_issues":
+            status = "unnumbered_multi_item_prize_review_required"
+            next_safe_phase = "verify_unnumbered_same_rank_prize_relationship"
+        blocked_reasons.append("unnumbered_same_rank_prize_groups_require_lineup_review")
+    if probable_reissue_work_order_rows or probable_reissue_review_groups:
+        if status == "no_open_policy_issues":
+            status = "ichiban_reissue_review_required"
+            next_safe_phase = "verify_ichiban_campaign_pages_before_dedupe"
+        blocked_reasons.append("same_name_across_campaign_urls_requires_keep_or_merge_decision")
+
+    if not blocked_reasons:
+        blocked_reasons.append("none")
+
+    return {
+        "status": status,
+        "zero_price_policy_ready": zero_price_policy_ready,
+        "numbered_variant_policy_ready": numbered_variant_policy_ready,
+        "same_rank_unnumbered_policy_ready": unnumbered_multi_item_prize_review_groups == 0,
+        "reissue_identity_policy_ready": probable_reissue_work_order_rows == 0
+        and probable_reissue_review_groups == 0,
+        "issue_rows": issue_count,
+        "open_issue_rows": open_issue_rows,
+        "manual_review_rows": open_issue_rows,
+        "auto_apply_ready_rows": 0,
+        "zero_price_violation_rows": zero_price_violation_rows,
+        "unnumbered_multi_item_prize_review_groups": unnumbered_multi_item_prize_review_groups,
+        "unnumbered_multi_item_prize_review_rows": unnumbered_multi_item_prize_review_rows,
+        "protected_unnumbered_multi_item_prize_groups": protected_unnumbered_multi_item_prize_groups,
+        "protected_unnumbered_multi_item_prize_rows": protected_unnumbered_multi_item_prize_rows,
+        "probable_reissue_work_order_rows": probable_reissue_work_order_rows,
+        "probable_reissue_review_groups": probable_reissue_review_groups,
+        "repeated_name_different_source_groups": repeated_name_different_source_groups,
+        "blocked_reasons": blocked_reasons,
+        "next_safe_phase": next_safe_phase,
+        "auto_apply_enabled": False,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+        "safety_note": (
+            "Last One and Double Chance zero-price rows are policy exceptions; "
+            "same-name Ichiban Kuji rows across campaign URLs must not be merged "
+            "until official campaign evidence confirms the identity decision."
+        ),
+    }
+
+
 def build_queue(
     policy_audit: dict[str, Any],
     dedupe_action_queue: dict[str, Any] | None = None,
@@ -498,6 +577,40 @@ def build_queue(
     protected_reason_counts = Counter(
         str(group.get("protection_reason") or "unknown") for group in protected_groups
     )
+    zero_price_violation_rows = int(summary.get("zero_price_violation_rows") or 0)
+    zero_price_exception_policy_pass = bool(summary.get("zero_price_exception_policy_pass"))
+    numbered_variant_coverage_policy_pass = bool(
+        summary.get("numbered_variant_coverage_policy_pass")
+    )
+    unnumbered_multi_item_prize_review_groups = len(unnumbered_multi)
+    unnumbered_multi_item_prize_review_rows = _rows_from_groups(unnumbered_multi)
+    protected_unnumbered_multi_item_prize_groups = len(protected_unnumbered_multi)
+    protected_unnumbered_multi_item_prize_rows = _rows_from_groups(
+        protected_unnumbered_multi
+    )
+    probable_reissue_work_order_rows = len(reissue_work_orders)
+    probable_reissue_review_groups = int(
+        dedupe_summary.get("ichiban_probable_reissue_review_groups")
+        or summary.get("probable_reissue_review_groups")
+        or 0
+    )
+    repeated_name_different_source_groups = int(
+        summary.get("repeated_name_different_source_groups") or 0
+    )
+    completion_readiness = _completion_readiness(
+        issue_count=len(issues),
+        open_issue_rows=open_issue_rows,
+        zero_price_violation_rows=zero_price_violation_rows,
+        zero_price_exception_policy_pass=zero_price_exception_policy_pass,
+        numbered_variant_coverage_policy_pass=numbered_variant_coverage_policy_pass,
+        unnumbered_multi_item_prize_review_groups=unnumbered_multi_item_prize_review_groups,
+        unnumbered_multi_item_prize_review_rows=unnumbered_multi_item_prize_review_rows,
+        protected_unnumbered_multi_item_prize_groups=protected_unnumbered_multi_item_prize_groups,
+        protected_unnumbered_multi_item_prize_rows=protected_unnumbered_multi_item_prize_rows,
+        probable_reissue_work_order_rows=probable_reissue_work_order_rows,
+        probable_reissue_review_groups=probable_reissue_review_groups,
+        repeated_name_different_source_groups=repeated_name_different_source_groups,
+    )
 
     return {
         "schema_version": 1,
@@ -506,39 +619,32 @@ def build_queue(
         "summary": {
             "issue_rows": len(issues),
             "open_issue_rows": open_issue_rows,
-            "zero_price_violation_rows": int(summary.get("zero_price_violation_rows") or 0),
+            "zero_price_violation_rows": zero_price_violation_rows,
             "last_one_nonzero_price_rows": int(summary.get("last_one_nonzero_price_rows") or 0),
             "double_chance_nonzero_price_rows": int(summary.get("double_chance_nonzero_price_rows") or 0),
-            "zero_price_exception_policy_pass": bool(summary.get("zero_price_exception_policy_pass")),
-            "numbered_variant_coverage_policy_pass": bool(summary.get("numbered_variant_coverage_policy_pass")),
+            "zero_price_exception_policy_pass": zero_price_exception_policy_pass,
+            "numbered_variant_coverage_policy_pass": numbered_variant_coverage_policy_pass,
             "numbered_variant_created_rows": int(summary.get("numbered_variant_created_rows") or 0),
             "numbered_variant_application_skipped_rows": int(
                 summary.get("numbered_variant_application_skipped_rows") or 0
             ),
-            "unnumbered_multi_item_prize_review_groups": len(unnumbered_multi),
-            "unnumbered_multi_item_prize_review_rows": _rows_from_groups(unnumbered_multi),
-            "protected_unnumbered_multi_item_prize_groups": len(
-                protected_unnumbered_multi
-            ),
-            "protected_unnumbered_multi_item_prize_rows": _rows_from_groups(
-                protected_unnumbered_multi
-            ),
+            "unnumbered_multi_item_prize_review_groups": unnumbered_multi_item_prize_review_groups,
+            "unnumbered_multi_item_prize_review_rows": unnumbered_multi_item_prize_review_rows,
+            "protected_unnumbered_multi_item_prize_groups": protected_unnumbered_multi_item_prize_groups,
+            "protected_unnumbered_multi_item_prize_rows": protected_unnumbered_multi_item_prize_rows,
             "protected_unnumbered_multi_item_prize_reason_counts": [
                 [reason, count] for reason, count in protected_reason_counts.most_common()
             ],
-            "probable_reissue_work_order_rows": len(reissue_work_orders),
-            "probable_reissue_review_groups": int(
-                dedupe_summary.get("ichiban_probable_reissue_review_groups")
-                or summary.get("probable_reissue_review_groups")
-                or 0
-            ),
+            "probable_reissue_work_order_rows": probable_reissue_work_order_rows,
+            "probable_reissue_review_groups": probable_reissue_review_groups,
             "probable_reissue_sample_rows": int(
                 dedupe_summary.get("ichiban_probable_reissue_sample_rows") or 0
             ),
-            "repeated_name_different_source_groups": int(
-                summary.get("repeated_name_different_source_groups") or 0
-            ),
+            "repeated_name_different_source_groups": repeated_name_different_source_groups,
             "manual_confirmed_rows": 0,
+            "manual_review_rows": open_issue_rows,
+            "auto_apply_ready_rows": 0,
+            "completion_readiness_status": completion_readiness["status"],
             "lane_counts": [[lane, count] for lane, count in lane_counts.most_common()],
             "by_blocked_reason": [
                 [reason, count] for reason, count in blocked_reason_counts.most_common()
@@ -552,14 +658,15 @@ def build_queue(
         },
         "policy_status": {
             "last_one_and_double_chance_prices": (
-                "pass" if bool(summary.get("zero_price_exception_policy_pass")) else "manual_fix_required"
+                "pass" if zero_price_exception_policy_pass else "manual_fix_required"
             ),
             "numbered_variants": (
-                "pass" if bool(summary.get("numbered_variant_coverage_policy_pass")) else "manual_review"
+                "pass" if numbered_variant_coverage_policy_pass else "manual_review"
             ),
             "probable_reissues": "manual_review" if reissue_work_orders else "clear",
             "unnumbered_multi_item_prizes": "manual_review" if unnumbered_multi else "clear",
         },
+        "completion_readiness": completion_readiness,
         "protected_unnumbered_multi_item_prize_groups": protected_groups,
         "issues": sorted(issues, key=lambda row: int(row.get("priority") or 9999)),
     }
