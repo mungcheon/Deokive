@@ -85,6 +85,9 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["matched_catalog_rule_hits"], 2)
         self.assertEqual(report["summary"]["matched_catalog_rows"], 2)
         self.assertEqual(report["summary"]["unmatched_catalog_rows"], 1)
+        self.assertEqual(report["summary"]["candidate_priority_rows"], 4)
+        self.assertEqual(report["summary"]["top_candidate_expected_update_rows"], 1)
+        self.assertEqual(report["summary"]["top_candidate_source_category"], "굿즈")
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_category_changes"])
@@ -114,6 +117,14 @@ class BuildAnimationCategorySplitReviewPublicTest(unittest.TestCase):
         self.assertEqual(collab["name_level_split_template"]["folder_icon_key"], "diversity_3")
         self.assertEqual(item["unmatched_sample_names"], ["분류 안 되는 샘플"])
         self.assertEqual(item["unmatched_catalog_samples"][0]["catalog_index"], 103)
+        priority = report["candidate_priority_queue"][0]
+        self.assertEqual(priority["source_category"], "굿즈")
+        self.assertEqual(priority["expected_update_rows"], 1)
+        self.assertFalse(priority["auto_apply_enabled"])
+        self.assertEqual(
+            priority["manual_confirmation_template"]["blocked_until"],
+            "name_level_split_manually_confirmed",
+        )
 
     def test_unicode_stationery_and_tableware_split_rules_are_available(self) -> None:
         rules = {rule["rule_id"]: rule for rule in split_review.SPLIT_RULES}

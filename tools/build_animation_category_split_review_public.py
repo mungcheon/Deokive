@@ -437,6 +437,37 @@ def build_report(payload: dict[str, Any], catalog_payload: dict[str, Any] | list
     catalog_rows = _catalog_rows(catalog_payload or {})
     rows = [_review_item(row, catalog_rows) for row in _split_rows(payload)]
     rows.sort(key=lambda row: (-int(row.get("affected_catalog_rows") or 0), str(row.get("source_category") or "")))
+    candidate_priority_queue: list[dict[str, Any]] = []
+    for row in rows:
+        for candidate in row.get("split_candidates", []):
+            if not isinstance(candidate, dict):
+                continue
+            candidate_priority_queue.append(
+                {
+                    "source_category": row.get("source_category"),
+                    "rule_id": candidate.get("rule_id"),
+                    "target_category": candidate.get("target_category"),
+                    "target_family": candidate.get("target_family"),
+                    "folder_color_group": candidate.get("folder_color_group"),
+                    "folder_color_hint": candidate.get("folder_color_hint"),
+                    "folder_icon_key": candidate.get("folder_icon_key"),
+                    "expected_update_rows": int(candidate.get("matched_catalog_row_count") or 0),
+                    "matched_sample_count": int(candidate.get("matched_sample_count") or 0),
+                    "matched_sample_names": candidate.get("matched_sample_names") or [],
+                    "matched_catalog_samples": candidate.get("matched_catalog_samples") or [],
+                    "manual_confirmation_template": candidate.get("name_level_split_template") or {},
+                    "blocked_until": UNBLOCKS_WHEN,
+                    "auto_apply_enabled": False,
+                }
+            )
+    candidate_priority_queue.sort(
+        key=lambda candidate: (
+            -int(candidate.get("expected_update_rows") or 0),
+            -int(candidate.get("matched_sample_count") or 0),
+            str(candidate.get("source_category") or ""),
+            str(candidate.get("rule_id") or ""),
+        )
+    )
     family_counts = Counter(
         candidate["target_family"] for row in rows for candidate in row.get("split_candidates", [])
     )
@@ -461,10 +492,23 @@ def build_report(payload: dict[str, Any], catalog_payload: dict[str, Any] | list
             "matched_catalog_rows": matched_catalog_rows,
             "unmatched_catalog_rows": unmatched_catalog_rows,
             "by_target_family": family_counts.most_common(),
+            "candidate_priority_rows": len(candidate_priority_queue),
+            "top_candidate_expected_update_rows": int(
+                candidate_priority_queue[0].get("expected_update_rows") or 0
+            )
+            if candidate_priority_queue
+            else 0,
+            "top_candidate_source_category": candidate_priority_queue[0].get("source_category")
+            if candidate_priority_queue
+            else None,
+            "top_candidate_target_category": candidate_priority_queue[0].get("target_category")
+            if candidate_priority_queue
+            else None,
             "manual_confirmed_rows": 0,
             "auto_apply_enabled": False,
         },
         "review_items": rows,
+        "candidate_priority_queue": candidate_priority_queue,
         "automation_policy": {
             "auto_apply_category_changes": False,
             "auto_create_folders": False,
@@ -478,6 +522,7 @@ def build_report(payload: dict[str, Any], catalog_payload: dict[str, Any] | list
         "instructions": [
             "Review each name_level_split_template and set manual_confirmed=true only after checking real item names.",
             "Leave unmatched_sample_names in the source category until a safer keyword or official category is confirmed.",
+            "Use candidate_priority_queue to confirm the largest name-level split rules first.",
             "Use price and release metadata from the existing catalog; this report only prepares category/folder changes.",
             "Folder colors remain grouped by color family so similar colors stay sorted together in the app.",
         ],
