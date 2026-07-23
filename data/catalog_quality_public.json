@@ -6742,6 +6742,7 @@
     "source_first_rows": 682,
     "review_before_attach_rows": 23,
     "source_detail_candidate_review_rows": 0,
+    "source_detail_candidate_count_review_required_rows": 1,
     "source_detail_candidate_recheck_required_rows": 11,
     "source_detail_identity_warning_rows": 11,
     "source_detail_unflagged_candidate_rows": 1,
@@ -6791,6 +6792,10 @@
       {
         "blocked_reason": "structured_source_discovery_not_available",
         "rows": 5
+      },
+      {
+        "blocked_reason": "large_candidate_set_requires_exact_identity_review",
+        "rows": 1
       }
     ],
     "by_blocked_until": [
@@ -6813,6 +6818,10 @@
       {
         "blocked_until": "manual_official_source_and_image_evidence_recorded",
         "rows": 5
+      },
+      {
+        "blocked_until": "large_candidate_set_exact_identity_confirmed",
+        "rows": 1
       }
     ],
     "auto_apply_enabled": false

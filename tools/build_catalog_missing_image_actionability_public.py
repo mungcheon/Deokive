@@ -74,6 +74,16 @@ READINESS_BLOCKERS = {
             "manual_note_explaining_keep_or_reject_decision",
         ],
     },
+    "source_detail_candidate_count_review_required": {
+        "blocked_until": "large_candidate_set_exact_identity_confirmed",
+        "blocked_reason": "large_candidate_set_requires_exact_identity_review",
+        "required_evidence": [
+            "candidate_count_review_completed",
+            "candidate_source_url_exact_product_page",
+            "candidate_title_character_variant_type_confirmed",
+            "candidate_image_url_matches_same_product",
+        ],
+    },
     "source_url_replacement_required": {
         "blocked_until": "generic_source_url_replaced_with_exact_product_source",
         "blocked_reason": "generic_or_listing_source_url_cannot_support_image_import",
@@ -437,6 +447,19 @@ def build_work_order(
     )
     add(
         rank=2,
+        lane="review_large_source_detail_candidate_sets",
+        source="source_detail_candidate_action_queue_public.json",
+        row_count=int(summary.get("source_detail_candidate_count_review_required_rows") or 0),
+        next_step="confirm_large_candidate_set_exact_identity_before_import",
+        template="source_detail_candidate_confirmed_rows_public.json",
+        **readiness_blocker("source_detail_candidate_count_review_required"),
+        notes=[
+            "These rows have a high-scoring candidate, but the source search returned many candidates.",
+            "Do not import until the exact product detail page and image are confirmed.",
+        ],
+    )
+    add(
+        rank=3,
         lane="replace_generic_source_urls",
         source="catalog_image_attachment_action_queue_public.json",
         row_count=int(summary.get("image_attachment_template_source_update_required_rows") or 0),
@@ -447,7 +470,7 @@ def build_work_order(
         notes=["Rows already have generic storefront URLs; replace with exact product URLs first."],
     )
     add(
-        rank=3,
+        rank=4,
         lane="discover_exact_source_urls",
         source="source_discovery_action_queue_public.json",
         row_count=source_discovery_work_order_rows,
@@ -464,7 +487,7 @@ def build_work_order(
         ],
     )
     add(
-        rank=4,
+        rank=5,
         lane="review_representative_images",
         source="catalog_image_attachment_action_queue_public.json",
         row_count=int(summary.get("image_attachment_template_representative_review_rows") or 0),
@@ -474,7 +497,7 @@ def build_work_order(
         notes=["Representative images are allowed only when the official source matches the exact product type."],
     )
     add(
-        rank=5,
+        rank=6,
         lane="recheck_source_detail_candidates",
         source="source_detail_candidate_action_queue_public.json",
         row_count=int(summary.get("source_detail_candidate_recheck_required_rows") or 0),
@@ -485,7 +508,7 @@ def build_work_order(
     )
     manual_row = readiness_by_name.get("manual_research_required", {})
     add(
-        rank=6,
+        rank=7,
         lane="manual_image_research",
         source="catalog_image_enrichment_batches_public.json",
         row_count=int(manual_row.get("rows") or summary.get("manual_image_research_rows") or 0),
@@ -532,12 +555,17 @@ def append_source_detail_readiness(
         for item in source_detail_missing
         if item.get("recommended_action") in ready_actions
     ]
+    count_review_items = [
+        item
+        for item in source_detail_missing
+        if item.get("recommended_action") == "review_large_candidate_set_before_source_or_image_patch"
+    ]
     recheck_items = [
         item
         for item in source_detail_missing
         if item.get("recommended_action") == "recheck_candidate_identity_before_source_or_image_patch"
     ]
-    if not ready_items and not recheck_items:
+    if not ready_items and not count_review_items and not recheck_items:
         return readiness_rows
     ready_samples = [
         {
@@ -572,6 +600,43 @@ def append_source_detail_readiness(
                 "sample_items": ready_samples,
                 "auto_apply_enabled": False,
                 **readiness_blocker("source_detail_candidate_review"),
+            }
+        )
+    if count_review_items:
+        out.append(
+            {
+                "readiness": "source_detail_candidate_count_review_required",
+                "priority": READINESS_ORDER["source_url_discovery_required"] - 2,
+                "rows": len(count_review_items),
+                "workflow_rows": [
+                    {
+                        "workflow": "review_large_candidate_set_before_source_or_image_patch",
+                        "label": "Review high-scoring candidates that came from a large result set",
+                        "rows": len(count_review_items),
+                        "next_step": "confirm_large_candidate_set_exact_identity_before_import",
+                    }
+                ],
+                "by_source_store": counter_rows(
+                    Counter(str(item.get("source_store") or "") for item in count_review_items),
+                    "source_store",
+                ),
+                "sample_items": [
+                    {
+                        "catalog_index": item.get("catalog_index"),
+                        "name_ko": item.get("name_ko"),
+                        "name_ja": item.get("name_ja"),
+                        "source_store": item.get("source_store"),
+                        "candidate_title": item.get("candidate_title"),
+                        "candidate_source_url": item.get("candidate_source_url"),
+                        "candidate_count": item.get("candidate_count"),
+                        "candidate_count_bucket": item.get("candidate_count_bucket"),
+                        "candidate_count_review_required": item.get("candidate_count_review_required"),
+                        "workflow": "review_large_candidate_set_before_source_or_image_patch",
+                    }
+                    for item in count_review_items[:12]
+                ],
+                "auto_apply_enabled": False,
+                **readiness_blocker("source_detail_candidate_count_review_required"),
             }
         )
     if recheck_items:
@@ -710,6 +775,11 @@ def build_report(
         "source_first_rows": source_first_rows,
         "review_before_attach_rows": review_before_attach_rows,
         "source_detail_candidate_review_rows": len(source_detail_ready),
+        "source_detail_candidate_count_review_required_rows": sum(
+            1
+            for item in source_detail_missing
+            if item.get("candidate_count_review_required") is True
+        ),
         "source_detail_candidate_recheck_required_rows": len(source_detail_recheck),
         "source_detail_identity_warning_rows": sum(
             1 for item in source_detail_missing if item.get("candidate_identity_flags")
@@ -799,6 +869,7 @@ def build_report(
             "source_first_rows must receive or replace source_url before any image_url import.",
             "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
             "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
+            "source_detail_candidate_count_review_required_rows are high-scoring candidates from large result sets; confirm exact identity before importing.",
             "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
             "by_blocked_reason and by_blocked_until summarize the highest-volume blockers before image attachment can be imported.",
             "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",

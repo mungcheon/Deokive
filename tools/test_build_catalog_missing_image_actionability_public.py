@@ -123,6 +123,18 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                             "current_catalog_state": {"catalog_has_display_image": False},
                         },
                         {
+                            "catalog_index": 9,
+                            "name_ko": "Large candidate set",
+                            "source_store": "Store G",
+                            "candidate_title": "Large candidate set",
+                            "candidate_count": 23,
+                            "candidate_count_bucket": "large_candidate_set",
+                            "candidate_count_review_required": True,
+                            "candidate_identity_flags": [],
+                            "recommended_action": "review_large_candidate_set_before_source_or_image_patch",
+                            "current_catalog_state": {"catalog_has_display_image": False},
+                        },
+                        {
                             "catalog_index": 6,
                             "name_ko": "Already solved",
                             "source_store": "Store E",
@@ -155,9 +167,10 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_first_rows"], 3)
         self.assertEqual(report["summary"]["review_before_attach_rows"], 1)
         self.assertEqual(report["summary"]["source_detail_candidate_review_rows"], 1)
+        self.assertEqual(report["summary"]["source_detail_candidate_count_review_required_rows"], 1)
         self.assertEqual(report["summary"]["source_detail_candidate_recheck_required_rows"], 2)
         self.assertEqual(report["summary"]["source_detail_identity_warning_rows"], 2)
-        self.assertEqual(report["summary"]["source_detail_unflagged_candidate_rows"], 1)
+        self.assertEqual(report["summary"]["source_detail_unflagged_candidate_rows"], 2)
         self.assertEqual(report["summary"]["source_detail_ready_unflagged_candidate_rows"], 1)
         self.assertEqual(report["summary"]["manual_image_research_rows"], 1)
         self.assertEqual(report["summary"]["source_discovery_focus_pack_rows"], 4)
@@ -206,7 +219,18 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         readiness = {row["readiness"]: row["rows"] for row in report["readiness"]}
         self.assertEqual(readiness["image_url_candidate_review"], 1)
         self.assertEqual(readiness["source_detail_candidate_review"], 1)
+        self.assertEqual(readiness["source_detail_candidate_count_review_required"], 1)
         self.assertEqual(readiness["source_detail_candidate_recheck_required"], 2)
+        count_review_row = next(
+            row
+            for row in report["readiness"]
+            if row["readiness"] == "source_detail_candidate_count_review_required"
+        )
+        self.assertEqual(
+            count_review_row["blocked_reason"],
+            "large_candidate_set_requires_exact_identity_review",
+        )
+        self.assertTrue(count_review_row["sample_items"][0]["candidate_count_review_required"])
         source_detail_row = next(row for row in report["readiness"] if row["readiness"] == "source_detail_candidate_recheck_required")
         self.assertEqual(source_detail_row["sample_items"][0]["candidate_identity_flags"], ["only_generic_shared_tokens"])
         self.assertEqual(readiness["source_url_replacement_required"], 2)
@@ -240,6 +264,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             [row["lane"] for row in work_order],
             [
                 "confirm_source_detail_candidates",
+                "review_large_source_detail_candidate_sets",
                 "replace_generic_source_urls",
                 "discover_exact_source_urls",
                 "review_representative_images",
@@ -249,20 +274,22 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         )
         self.assertEqual(work_order[0]["row_count"], 1)
         self.assertEqual(work_order[1]["row_count"], 1)
-        self.assertEqual(work_order[2]["row_count"], 4)
-        self.assertEqual(work_order[2]["blocked_reason"], "missing_exact_source_url")
-        self.assertIn("title_character_variant_type_match", work_order[2]["required_evidence"])
-        self.assertEqual(work_order[2]["top_work_packs"][0]["source_store"], "Store C")
+        self.assertEqual(work_order[1]["blocked_reason"], "large_candidate_set_requires_exact_identity_review")
+        self.assertEqual(work_order[2]["row_count"], 1)
+        self.assertEqual(work_order[3]["row_count"], 4)
+        self.assertEqual(work_order[3]["blocked_reason"], "missing_exact_source_url")
+        self.assertIn("title_character_variant_type_match", work_order[3]["required_evidence"])
+        self.assertEqual(work_order[3]["top_work_packs"][0]["source_store"], "Store C")
         self.assertEqual(
-            work_order[2]["current_focus_pack"]["focused_pack_report"],
+            work_order[3]["current_focus_pack"]["focused_pack_report"],
             "data/source_discovery_next_focus_pack_public.json",
         )
         self.assertEqual(
-            work_order[2]["current_focus_pack"]["detail_candidates_report"],
+            work_order[3]["current_focus_pack"]["detail_candidates_report"],
             "data/source_discovery_next_focus_detail_candidates_public.json",
         )
         self.assertEqual(
-            work_order[2]["current_focus_pack"]["first_official_search_url"],
+            work_order[3]["current_focus_pack"]["first_official_search_url"],
             "https://store-c.example/search?q=acrylic",
         )
         self.assertEqual(

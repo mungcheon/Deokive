@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T10:21:27Z",
+  "generated_at": "2026-07-23T10:30:15Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 710,
@@ -10,6 +10,7 @@
     "source_first_rows": 682,
     "review_before_attach_rows": 23,
     "source_detail_candidate_review_rows": 0,
+    "source_detail_candidate_count_review_required_rows": 1,
     "source_detail_candidate_recheck_required_rows": 11,
     "source_detail_identity_warning_rows": 11,
     "source_detail_unflagged_candidate_rows": 1,
@@ -59,6 +60,10 @@
       {
         "blocked_reason": "structured_source_discovery_not_available",
         "rows": 5
+      },
+      {
+        "blocked_reason": "large_candidate_set_requires_exact_identity_review",
+        "rows": 1
       }
     ],
     "by_blocked_until": [
@@ -81,6 +86,10 @@
       {
         "blocked_until": "manual_official_source_and_image_evidence_recorded",
         "rows": 5
+      },
+      {
+        "blocked_until": "large_candidate_set_exact_identity_confirmed",
+        "rows": 1
       }
     ],
     "auto_apply_enabled": false
@@ -414,6 +423,48 @@
         "official_source_matches_exact_product_type",
         "representative_image_is_not_wrong_variant_or_lineup_only",
         "manual_note_for_representative_image_choice"
+      ]
+    },
+    {
+      "readiness": "source_detail_candidate_count_review_required",
+      "priority": 28,
+      "rows": 1,
+      "workflow_rows": [
+        {
+          "workflow": "review_large_candidate_set_before_source_or_image_patch",
+          "label": "Review high-scoring candidates that came from a large result set",
+          "rows": 1,
+          "next_step": "confirm_large_candidate_set_exact_identity_before_import"
+        }
+      ],
+      "by_source_store": [
+        {
+          "source_store": "애니메이트",
+          "rows": 1
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2235,
+          "name_ko": "짱구는 못말려 의류 신짱 액션가면 티셔츠",
+          "name_ja": "クレヨンしんちゃん Tシャツ",
+          "source_store": "애니메이트",
+          "candidate_title": "【グッズ-Tシャツ】クレヨンしんちゃん  OMOCHABOKO ポケット付きTシャツしんちゃんM",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-T%E3%82%B7%E3%83%A3%E3%83%84%E3%80%91%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93++OMOCHABOKO+%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88%E4%BB%98%E3%81%8DT%E3%82%B7%E3%83%A3%E3%83%84%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93M/pd/1795295/",
+          "candidate_count": 23,
+          "candidate_count_bucket": "large_candidate_set",
+          "candidate_count_review_required": true,
+          "workflow": "review_large_candidate_set_before_source_or_image_patch"
+        }
+      ],
+      "auto_apply_enabled": false,
+      "blocked_until": "large_candidate_set_exact_identity_confirmed",
+      "blocked_reason": "large_candidate_set_requires_exact_identity_review",
+      "required_evidence": [
+        "candidate_count_review_completed",
+        "candidate_source_url_exact_product_page",
+        "candidate_title_character_variant_type_confirmed",
+        "candidate_image_url_matches_same_product"
       ]
     },
     {
@@ -6491,6 +6542,31 @@
   "work_order": [
     {
       "rank": 2,
+      "lane": "review_large_source_detail_candidate_sets",
+      "source": "source_detail_candidate_action_queue_public.json",
+      "row_count": 1,
+      "next_step": "confirm_large_candidate_set_exact_identity_before_import",
+      "template": "source_detail_candidate_confirmed_rows_public.json",
+      "top_source_stores": [],
+      "top_work_packs": [],
+      "current_focus_pack": {},
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "blocked_until": "large_candidate_set_exact_identity_confirmed",
+      "blocked_reason": "large_candidate_set_requires_exact_identity_review",
+      "required_evidence": [
+        "candidate_count_review_completed",
+        "candidate_source_url_exact_product_page",
+        "candidate_title_character_variant_type_confirmed",
+        "candidate_image_url_matches_same_product"
+      ],
+      "notes": [
+        "These rows have a high-scoring candidate, but the source search returned many candidates.",
+        "Do not import until the exact product detail page and image are confirmed."
+      ]
+    },
+    {
+      "rank": 3,
       "lane": "replace_generic_source_urls",
       "source": "catalog_image_attachment_action_queue_public.json",
       "row_count": 50,
@@ -6532,7 +6608,7 @@
       ]
     },
     {
-      "rank": 3,
+      "rank": 4,
       "lane": "discover_exact_source_urls",
       "source": "source_discovery_action_queue_public.json",
       "row_count": 417,
@@ -7818,7 +7894,7 @@
       ]
     },
     {
-      "rank": 4,
+      "rank": 5,
       "lane": "review_representative_images",
       "source": "catalog_image_attachment_action_queue_public.json",
       "row_count": 23,
@@ -7841,7 +7917,7 @@
       ]
     },
     {
-      "rank": 5,
+      "rank": 6,
       "lane": "recheck_source_detail_candidates",
       "source": "source_detail_candidate_action_queue_public.json",
       "row_count": 11,
@@ -7864,7 +7940,7 @@
       ]
     },
     {
-      "rank": 6,
+      "rank": 7,
       "lane": "manual_image_research",
       "source": "catalog_image_enrichment_batches_public.json",
       "row_count": 5,
@@ -7899,6 +7975,7 @@
     "source_first_rows must receive or replace source_url before any image_url import.",
     "action_queue_rows is a review sample queue, not permission for automatic catalog mutation.",
     "source_detail_candidate_review_rows are separate source_url/image_url candidate pairs and still require exact identity confirmation.",
+    "source_detail_candidate_count_review_required_rows are high-scoring candidates from large result sets; confirm exact identity before importing.",
     "source_detail_identity_warning_rows counts candidates with generic-only shared tokens, crossover titles, or missing variant hints.",
     "by_blocked_reason and by_blocked_until summarize the highest-volume blockers before image attachment can be imported.",
     "source_discovery_focus_pack_rows summarizes the top-store source discovery packs that should be handled before broad manual research.",
