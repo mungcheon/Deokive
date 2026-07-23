@@ -174,13 +174,26 @@ def import_rows(
     return {"seed_rows": normalized_seed, "updated": updated, "skipped": skipped}
 
 
-def _load_seed(path: Path) -> list[dict[str, Any]]:
+def _load_seed_payload(path: Path) -> tuple[Any, list[dict[str, Any]]]:
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
     if isinstance(payload, dict) and isinstance(payload.get("items"), list):
-        return [row for row in payload["items"] if isinstance(row, dict)]
+        return payload, [row for row in payload["items"] if isinstance(row, dict)]
     if isinstance(payload, list):
-        return [row for row in payload if isinstance(row, dict)]
+        return payload, [row for row in payload if isinstance(row, dict)]
     raise SystemExit(f"{path} must contain a JSON list or an object with items")
+
+
+def _with_updated_seed_rows(seed_payload: Any, seed_rows: list[dict[str, Any]]) -> Any:
+    if isinstance(seed_payload, dict) and isinstance(seed_payload.get("items"), list):
+        updated_payload = dict(seed_payload)
+        updated_payload["items"] = seed_rows
+        meta = dict(updated_payload.get("meta") or {})
+        if meta:
+            meta["row_count"] = len(seed_rows)
+            meta["total_items"] = len(seed_rows)
+            updated_payload["meta"] = meta
+        return updated_payload
+    return seed_rows
 
 
 def main() -> int:
@@ -211,7 +224,7 @@ def main() -> int:
         return 0
 
     review_queue = json.loads(args.queue.read_text(encoding="utf-8-sig"))
-    seed_rows = _load_seed(args.seed)
+    seed_payload, seed_rows = _load_seed_payload(args.seed)
     result = import_rows(review_queue, seed_rows, allow_count_mismatch=args.allow_count_mismatch)
     skip_reasons = Counter(str(item.get("reason") or "unspecified") for item in result["skipped"])
     report = {
@@ -226,7 +239,8 @@ def main() -> int:
     }
     args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if args.write and result["updated"]:
-        args.seed.write_text(json.dumps(result["seed_rows"], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        updated_seed_payload = _with_updated_seed_rows(seed_payload, result["seed_rows"])
+        args.seed.write_text(json.dumps(updated_seed_payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     print(json.dumps({k: report[k] for k in ("updated_rows", "skipped_rows", "queue", "write")}, ensure_ascii=False, indent=2))
     if not args.write:
         print("Dry run only. Copy the template, confirm exact category mappings, review the report, then re-run with --write.")
