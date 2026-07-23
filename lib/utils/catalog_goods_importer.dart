@@ -608,19 +608,19 @@ Future<Uint8List?> _loadWebAssetBytes(String assetPath) async {
   if (!assetPath.startsWith('assets/')) return null;
   final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
   final paths = <Uri>[
-    _versionedCatalogAssetUri(Uri.base.resolve(normalizedPath)),
     _versionedCatalogAssetUri(Uri.base.resolve('assets/$normalizedPath')),
+    _versionedCatalogAssetUri(Uri.base.resolve(normalizedPath)),
   ];
   final origin = Uri.base.origin;
   if (origin.isNotEmpty) {
     paths.add(_versionedCatalogAssetUri(
-        Uri.parse(origin).resolve('/$normalizedPath')));
-    paths.add(_versionedCatalogAssetUri(
         Uri.parse(origin).resolve('/assets/$normalizedPath')));
     paths.add(_versionedCatalogAssetUri(
-        Uri.parse(origin).resolve('/Deokive/$normalizedPath')));
+        Uri.parse(origin).resolve('/$normalizedPath')));
     paths.add(_versionedCatalogAssetUri(
         Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath')));
+    paths.add(_versionedCatalogAssetUri(
+        Uri.parse(origin).resolve('/Deokive/$normalizedPath')));
   }
   for (final uri in paths.toSet()) {
     try {

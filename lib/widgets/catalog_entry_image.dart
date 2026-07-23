@@ -197,22 +197,22 @@ class _RemoteCatalogImage extends StatelessWidget {
 List<String> _publicAssetUrls(String assetPath) {
   final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
   final candidates = <String>[
-    _versionedAssetUrl(Uri.base.resolve(normalizedPath)),
     _versionedAssetUrl(Uri.base.resolve('assets/$normalizedPath')),
+    _versionedAssetUrl(Uri.base.resolve(normalizedPath)),
   ];
   final origin = Uri.base.origin;
   if (origin.isNotEmpty) {
-    candidates
-        .add(_versionedAssetUrl(Uri.parse(origin).resolve('/$normalizedPath')));
     candidates.add(
       _versionedAssetUrl(Uri.parse(origin).resolve('/assets/$normalizedPath')),
     );
-    candidates.add(
-      _versionedAssetUrl(Uri.parse(origin).resolve('/Deokive/$normalizedPath')),
-    );
+    candidates
+        .add(_versionedAssetUrl(Uri.parse(origin).resolve('/$normalizedPath')));
     candidates.add(
       _versionedAssetUrl(
           Uri.parse(origin).resolve('/Deokive/assets/$normalizedPath')),
+    );
+    candidates.add(
+      _versionedAssetUrl(Uri.parse(origin).resolve('/Deokive/$normalizedPath')),
     );
   }
   return candidates.toSet().toList(growable: false);
