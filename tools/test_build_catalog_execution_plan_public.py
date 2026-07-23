@@ -546,6 +546,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(
             report["summary"]["dedupe_ichiban_probable_reissue_review_groups"], 20
         )
+        ichiban_reissue_dedupe_action = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "ichiban_kuji_reissue_dedupe_review"
+        )
+        self.assertEqual(ichiban_reissue_dedupe_action["rows"], 46)
+        self.assertEqual(
+            ichiban_reissue_dedupe_action["evidence"]["ichiban_probable_reissue_review_groups"],
+            20,
+        )
         kuji_action = next(
             action
             for action in report["actions"]

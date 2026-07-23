@@ -724,6 +724,39 @@ def _build_plan(load_report) -> dict[str, Any]:
 
     actions.append(
         _action(
+            priority=52,
+            workstream="ichiban_kuji_reissue_dedupe_review",
+            public_report="data/catalog_deduplication_action_queue_public.json",
+            status="manual_review",
+            rows=_count(dedupe_action_summary, "ichiban_reissue_review_groups"),
+            command="Verify same-name Ichiban Kuji rows against campaign pages before any dedupe decision.",
+            next_step="verify_ichiban_campaign_pages_before_dedupe",
+            blocker="Same display names can be re-releases or campaign-specific prizes; do not merge until official campaign evidence is checked.",
+            evidence={
+                "ichiban_reissue_review_groups": _count(
+                    dedupe_action_summary, "ichiban_reissue_review_groups"
+                ),
+                "ichiban_reissue_review_rows": _count(
+                    dedupe_action_summary, "ichiban_reissue_review_rows"
+                ),
+                "ichiban_probable_reissue_review_groups": _count(
+                    dedupe_action_summary, "ichiban_probable_reissue_review_groups"
+                ),
+                "ichiban_probable_reissue_sample_rows": _count(
+                    dedupe_action_summary, "ichiban_probable_reissue_sample_rows"
+                ),
+                "ichiban_reissue_protected_groups": _count(
+                    dedupe_action_summary, "ichiban_reissue_protected_groups"
+                ),
+                "ichiban_reissue_protected_rows": _count(
+                    dedupe_action_summary, "ichiban_reissue_protected_rows"
+                ),
+            },
+        )
+    )
+
+    actions.append(
+        _action(
             priority=60,
             workstream="ichiban_kuji_metadata",
             public_report="data/ichiban_kuji_metadata_review_batches_public.json",

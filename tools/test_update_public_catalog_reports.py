@@ -615,6 +615,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "deduplication_action_queue"
         )
+        ichiban_reissue_dedupe_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "ichiban_kuji_reissue_dedupe_review"
+        )
+        ichiban_reissue_dedupe_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "ichiban_kuji_reissue_dedupe_review"
+        )
         ichiban_action = reports.load_json(reports.ICHIIBAN_KUJI_METADATA_ACTION_QUEUE)
         ichiban_action_summary = ichiban_action.get("summary", {})
         ichiban_prize_audit = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT)
@@ -708,6 +718,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             batch
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "deduplication_action_queue"
+        ]
+        ichiban_reissue_dedupe_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "ichiban_kuji_reissue_dedupe_review"
         ]
         ichiban_prize_policy_agent_batches = [
             batch
@@ -1072,6 +1087,25 @@ class PublicCatalogReportTests(unittest.TestCase):
         ):
             self.assertEqual(dedupe_scorecard.get(field), dedupe_action_summary.get(field))
             self.assertEqual(dedupe_next_action.get(field), dedupe_action_summary.get(field))
+        self.assertEqual(
+            open_queues.get("ichiban_reissue_dedupe_review_groups"),
+            dedupe_action_summary.get("ichiban_reissue_review_groups"),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_probable_reissue_dedupe_review_groups"),
+            dedupe_action_summary.get("ichiban_probable_reissue_review_groups"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_scorecard.get("open_rows"),
+            dedupe_action_summary.get("ichiban_reissue_review_groups"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("review_groups"),
+            dedupe_action_summary.get("ichiban_reissue_review_groups"),
+        )
+        self.assertGreater(len(ichiban_reissue_dedupe_agent_batches), 0)
+        self.assertEqual(ichiban_reissue_dedupe_agent_batches[0]["rows"], 2)
+        self.assertEqual(len(ichiban_reissue_dedupe_agent_batches[0]["sample_items"]), 2)
         self.assertEqual(
             open_queues.get("ichiban_metadata_action_campaigns"),
             ichiban_action_summary.get("queued_action_campaigns"),

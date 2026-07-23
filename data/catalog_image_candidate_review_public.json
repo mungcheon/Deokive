@@ -1454,10 +1454,10 @@
   "source_detail_candidate_probe": {
     "public_report": "data/source_detail_probe_public.json",
     "source_queue_rows": 445,
-    "report_count": 22,
+    "report_count": 23,
     "stores_scanned": 10,
-    "scanned_rows": 1680,
-    "processed_rows": 785,
+    "scanned_rows": 1700,
+    "processed_rows": 805,
     "unique_processed_store_row_pairs": 445,
     "exact_candidate_rows": 0,
     "candidate_review_rows": 15,
@@ -1491,7 +1491,8 @@
         2
       ]
     ],
-    "auto_apply_enabled": false
+    "auto_apply_enabled": false,
+    "raw_candidate_review_rows": 16
   },
   "source_discovery_queue": {
     "public_report": "data/source_discovery_queue_public.json",
@@ -2074,6 +2075,8 @@
     "dedupe_action_groups": 48,
     "dedupe_actionable_groups": 48,
     "dedupe_unqueued_actionable_groups": 0,
+    "ichiban_reissue_dedupe_review_groups": 46,
+    "ichiban_probable_reissue_dedupe_review_groups": 20,
     "requested_focus_review_rows": 6275,
     "requested_focus_action_rows": 600,
     "requested_focus_actionable_rows": 600,
@@ -2127,9 +2130,9 @@
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 147,
+    "batch_count": 155,
     "max_published_batches": 160,
-    "summed_batch_rows": 24345,
+    "summed_batch_rows": 24361,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2166,6 +2169,10 @@
       ],
       [
         "metadata_action_queue",
+        8
+      ],
+      [
+        "ichiban_kuji_reissue_dedupe_review",
         8
       ],
       [
@@ -2279,6 +2286,10 @@
         8
       ],
       [
+        "agent-ichiban-reissue-dedupe",
+        8
+      ],
+      [
         "agent-image-action",
         7
       ],
@@ -2351,6 +2362,8 @@
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
       "dedupe_unqueued_actionable_groups": 0,
+      "ichiban_reissue_dedupe_review_groups": 46,
+      "ichiban_probable_reissue_dedupe_review_groups": 20,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 600,
       "requested_focus_actionable_rows": 600,
@@ -3346,11 +3359,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 21,
+    "action_count": 22,
     "blocked_action_count": 1,
-    "manual_review_action_count": 19,
+    "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 33122,
+    "total_action_rows": 33168,
     "open_review_queues": {
       "source_discovery_rows": 641,
       "image_missing_rows": 714,
@@ -3367,6 +3380,8 @@
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
       "dedupe_unqueued_actionable_groups": 0,
+      "ichiban_reissue_dedupe_review_groups": 46,
+      "ichiban_probable_reissue_dedupe_review_groups": 20,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 600,
       "requested_focus_actionable_rows": 600,
@@ -5280,7 +5295,8 @@
     "source_detail_candidate_review_rows": 0,
     "source_detail_candidate_recheck_required_rows": 12,
     "source_detail_identity_warning_rows": 11,
-    "source_detail_unflagged_candidate_rows": 0,
+    "source_detail_unflagged_candidate_rows": 1,
+    "source_detail_ready_unflagged_candidate_rows": 0,
     "manual_image_research_rows": 5,
     "source_discovery_focus_pack_rows": 0,
     "source_discovery_focus_pack_count": 0,
@@ -5894,5 +5910,53 @@
     "updated_rows": 0,
     "skipped_rows": 0,
     "skip_reason_counts": []
+  },
+  "source_discovery_next_focus_detail_candidates": {
+    "public_report": "data/source_discovery_next_focus_detail_candidates_public.json",
+    "source_queue_rows": 20,
+    "supported_provider_rows": 20,
+    "unsupported_provider_rows": 0,
+    "supported_provider_stores": [
+      "AmiAmi",
+      "Cospa",
+      "FuRyu",
+      "Movic",
+      "Re-ment",
+      "Taito",
+      "굿스마일컴퍼니",
+      "애니메이트",
+      "엔스카이",
+      "코토부키야"
+    ],
+    "top_unsupported_provider_stores": [],
+    "scanned_rows": 20,
+    "processed_rows": 20,
+    "result_rows": 20,
+    "failure_count": 0,
+    "rate_limit_stopped": false,
+    "time_budget_seconds": null,
+    "time_budget_exhausted": false,
+    "start_index": 0,
+    "rate_limit_skipped_stores": [],
+    "rate_limit_failures": 0,
+    "provider_temporary_unavailable_failures": 0,
+    "status_counts": [
+      [
+        "no_candidates",
+        16
+      ],
+      [
+        "no_relevant_candidates",
+        3
+      ],
+      [
+        "candidate_review_needed",
+        1
+      ]
+    ],
+    "exact_candidate_rows": 0,
+    "candidate_review_rows": 1,
+    "no_relevant_candidate_rows": 3,
+    "auto_apply_enabled": false
   }
 }

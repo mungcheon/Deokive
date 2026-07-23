@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T01:33:18Z",
+  "generated_at": "2026-07-23T02:13:50Z",
   "summary": {
-    "batch_count": 147,
+    "batch_count": 155,
     "max_published_batches": 160,
-    "summed_batch_rows": 24345,
+    "summed_batch_rows": 24361,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -41,6 +41,10 @@
       ],
       [
         "metadata_action_queue",
+        8
+      ],
+      [
+        "ichiban_kuji_reissue_dedupe_review",
         8
       ],
       [
@@ -154,6 +158,10 @@
         8
       ],
       [
+        "agent-ichiban-reissue-dedupe",
+        8
+      ],
+      [
         "agent-image-action",
         7
       ],
@@ -226,6 +234,8 @@
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
       "dedupe_unqueued_actionable_groups": 0,
+      "ichiban_reissue_dedupe_review_groups": 46,
+      "ichiban_probable_reissue_dedupe_review_groups": 20,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 600,
       "requested_focus_actionable_rows": 600,
@@ -6860,7 +6870,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-ichiban-action-120",
+      "batch_id": "020-agent-ichiban-action-128",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 20,
@@ -7051,7 +7061,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "022-agent-animation-category-action-140",
+      "batch_id": "022-agent-animation-category-action-148",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -7889,7 +7899,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "026-agent-animation-category-split-141",
+      "batch_id": "026-agent-animation-category-split-149",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 26,
@@ -8995,7 +9005,7 @@
       "next_machine_step": "confirm_animation_category_name_split_templates"
     },
     {
-      "batch_id": "027-agent-animation-category-split-142",
+      "batch_id": "027-agent-animation-category-split-150",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 27,
@@ -13549,7 +13559,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-animation-category-split-143",
+      "batch_id": "028-agent-animation-category-split-151",
       "agent_id": "agent-animation-category-split",
       "workstream": "animation_category_split_review",
       "priority": 28,
@@ -13824,7 +13834,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-ichiban-action-121",
+      "batch_id": "030-agent-ichiban-action-129",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 30,
@@ -17065,7 +17075,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "034-agent-animation-keyword-review-144",
+      "batch_id": "034-agent-animation-keyword-review-152",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 34,
@@ -17677,7 +17687,7 @@
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "035-agent-animation-keyword-review-145",
+      "batch_id": "035-agent-animation-keyword-review-153",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 35,
@@ -17916,7 +17926,7 @@
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "036-agent-animation-keyword-review-146",
+      "batch_id": "036-agent-animation-keyword-review-154",
       "agent_id": "agent-animation-keyword-review",
       "workstream": "animation_category_unmatched_keyword_review",
       "priority": 36,
@@ -18500,7 +18510,7 @@
       "next_machine_step": "review_unmatched_animation_keyword_candidates"
     },
     {
-      "batch_id": "038-agent-ichiban-action-122",
+      "batch_id": "038-agent-ichiban-action-130",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -21022,7 +21032,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-123",
+      "batch_id": "048-agent-ichiban-action-131",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -21790,7 +21800,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-124",
+      "batch_id": "048-agent-ichiban-action-132",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -22576,7 +22586,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-125",
+      "batch_id": "048-agent-ichiban-action-133",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -23368,7 +23378,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-126",
+      "batch_id": "048-agent-ichiban-action-134",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -24160,7 +24170,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-127",
+      "batch_id": "048-agent-ichiban-action-135",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -25161,7 +25171,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-prize-name-image-139",
+      "batch_id": "056-agent-ichiban-prize-name-image-147",
       "agent_id": "agent-ichiban-prize-name-image",
       "workstream": "ichiban_kuji_prize_name_image_review",
       "priority": 56,
@@ -25562,6 +25572,166 @@
       "next_machine_step": "confirm_ichiban_prize_name_structure_templates"
     },
     {
+      "batch_id": "056-agent-ichiban-reissue-dedupe-105",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 56,
+      "title": "Ichiban Kuji reissue dedupe check 001",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 14798,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "name_ja": "ラストワン賞 スペシャル缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/haikyu8",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14818,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "name_ja": "ラストワン賞 スペシャル缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/haikyu4",
+          "official_search_url": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
+      "batch_id": "057-agent-ichiban-reissue-dedupe-106",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 57,
+      "title": "Ichiban Kuji reissue dedupe check 002",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 14797,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
+          "name_ja": "缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/haikyu8",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14817,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
+          "name_ja": "缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/haikyu4",
+          "official_search_url": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
+      "batch_id": "058-agent-ichiban-reissue-dedupe-107",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 58,
+      "title": "Ichiban Kuji reissue dedupe check 003",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 14302,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/naruto_wcf2",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14305,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/naruto_wcf",
+          "official_search_url": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
+      "batch_id": "059-agent-ichiban-reissue-dedupe-108",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 59,
+      "title": "Ichiban Kuji reissue dedupe check 004",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 14303,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/naruto_wcf2",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14306,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/naruto_wcf",
+          "official_search_url": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
       "batch_id": "060-agent-metadata-100",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
@@ -25956,6 +26126,166 @@
       ],
       "review_state": "metadata_evidence_required",
       "next_machine_step": "collect_official_metadata_evidence"
+    },
+    {
+      "batch_id": "060-agent-ichiban-reissue-dedupe-109",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 60,
+      "title": "Ichiban Kuji reissue dedupe check 005",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 14304,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
+          "name_ja": "C賞 ワールドコレクタブルフィギュア",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/naruto_wcf2",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 14307,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
+          "name_ja": "C賞 ワールドコレクタブルフィギュア",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/naruto_wcf",
+          "official_search_url": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
+      "batch_id": "061-agent-ichiban-reissue-dedupe-110",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 61,
+      "title": "Ichiban Kuji reissue dedupe check 006",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 16103,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+          "name_ja": "A賞 シャンクスフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/onep8",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 16141,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+          "name_ja": "A賞 シャンクスフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/onep6",
+          "official_search_url": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
+      "batch_id": "062-agent-ichiban-reissue-dedupe-111",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 62,
+      "title": "Ichiban Kuji reissue dedupe check 007",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 16104,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+          "name_ja": "B賞 ミホークフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/onep8",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 16142,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+          "name_ja": "B賞 ミホークフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/onep6",
+          "official_search_url": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
+    },
+    {
+      "batch_id": "063-agent-ichiban-reissue-dedupe-112",
+      "agent_id": "agent-ichiban-reissue-dedupe",
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "priority": 63,
+      "title": "Ichiban Kuji reissue dedupe check 008",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "rows": 2,
+      "recommended_action": "same displayed item name appears under multiple 1kuji campaign URLs; confirm re-release or exact duplicate before dedupe",
+      "acceptance_criteria": [
+        "Compare every source_url campaign page before marking rows as exact duplicates.",
+        "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+        "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+        "Auto-merge and auto-delete remain disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 16105,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+          "name_ja": "C賞 ルフィフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/onep8",
+          "official_search_url": null
+        },
+        {
+          "catalog_index": 16143,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+          "name_ja": "C賞 ルフィフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "category": null,
+          "source_store": null,
+          "source_url": "https://1kuji.com/products/onep6",
+          "official_search_url": null
+        }
+      ],
+      "review_state": "official_campaign_evidence_required",
+      "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
       "batch_id": "070-agent-metadata-101",
@@ -26354,7 +26684,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-135",
+      "batch_id": "085-agent-ichiban-prize-policy-143",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -26671,7 +27001,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-134",
+      "batch_id": "085-agent-ichiban-prize-policy-142",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -26893,7 +27223,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-dedupe-action-105",
+      "batch_id": "085-agent-dedupe-action-113",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -27774,7 +28104,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-106",
+      "batch_id": "085-agent-dedupe-action-114",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -28654,7 +28984,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-107",
+      "batch_id": "085-agent-dedupe-action-115",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -29535,7 +29865,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-108",
+      "batch_id": "085-agent-dedupe-action-116",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -30412,7 +30742,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-109",
+      "batch_id": "085-agent-dedupe-action-117",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -31246,7 +31576,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "086-agent-ichiban-prize-policy-136",
+      "batch_id": "086-agent-ichiban-prize-policy-144",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 86,
@@ -31558,7 +31888,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "087-agent-ichiban-prize-policy-137",
+      "batch_id": "087-agent-ichiban-prize-policy-145",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 87,
@@ -31878,7 +32208,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "088-agent-ichiban-prize-policy-138",
+      "batch_id": "088-agent-ichiban-prize-policy-146",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 88,
@@ -32193,7 +32523,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "090-agent-dedupe-110",
+      "batch_id": "090-agent-dedupe-118",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32232,7 +32562,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-111",
+      "batch_id": "090-agent-dedupe-119",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32271,7 +32601,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-112",
+      "batch_id": "090-agent-dedupe-120",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32310,7 +32640,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-113",
+      "batch_id": "090-agent-dedupe-121",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32349,7 +32679,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-114",
+      "batch_id": "090-agent-dedupe-122",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32388,7 +32718,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-115",
+      "batch_id": "090-agent-dedupe-123",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32427,7 +32757,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-116",
+      "batch_id": "090-agent-dedupe-124",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32466,7 +32796,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-117",
+      "batch_id": "090-agent-dedupe-125",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32505,7 +32835,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-118",
+      "batch_id": "090-agent-dedupe-126",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32544,7 +32874,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-119",
+      "batch_id": "090-agent-dedupe-127",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -32583,7 +32913,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "110-agent-ichiban-kuji-128",
+      "batch_id": "110-agent-ichiban-kuji-136",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_metadata",
       "priority": 110,
@@ -32642,7 +32972,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-132",
+      "batch_id": "120-agent-ichiban-kuji-140",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -32701,7 +33031,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-131",
+      "batch_id": "120-agent-ichiban-kuji-139",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -32760,7 +33090,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-130",
+      "batch_id": "120-agent-ichiban-kuji-138",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -32819,7 +33149,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-129",
+      "batch_id": "120-agent-ichiban-kuji-137",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -32878,7 +33208,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "120-agent-ichiban-kuji-133",
+      "batch_id": "120-agent-ichiban-kuji-141",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_price",
       "priority": 120,
@@ -32937,7 +33267,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "160-agent-animation-taxonomy-147",
+      "batch_id": "160-agent-animation-taxonomy-155",
       "agent_id": "agent-animation-taxonomy",
       "workstream": "animation_category_review",
       "priority": 160,

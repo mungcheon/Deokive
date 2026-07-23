@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T01:33:18Z",
+  "generated_at": "2026-07-23T02:13:50Z",
   "summary": {
     "catalog_rows": 20348,
     "coverage": {
@@ -32,6 +32,8 @@
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
       "dedupe_unqueued_actionable_groups": 0,
+      "ichiban_reissue_dedupe_review_groups": 46,
+      "ichiban_probable_reissue_dedupe_review_groups": 20,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 600,
       "requested_focus_actionable_rows": 600,
@@ -1643,6 +1645,17 @@
       "auto_apply_enabled": false
     },
     {
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "status": "manual_review",
+      "open_rows": 46,
+      "probable_reissue_groups": 20,
+      "review_rows": 92,
+      "protected_groups": 0,
+      "primary_report": "data/catalog_deduplication_action_queue_public.json",
+      "next_step": "verify_ichiban_campaign_pages_before_dedupe",
+      "auto_apply_enabled": false
+    },
+    {
       "workstream": "ichiban_kuji_history",
       "status": "open",
       "open_rows": 42,
@@ -2292,6 +2305,10 @@
       "public_report": "data/source_discovery_focus_confirmed_template_public.json"
     },
     {
+      "key": "source_discovery_next_focus_detail_candidates",
+      "public_report": "data/source_discovery_next_focus_detail_candidates_public.json"
+    },
+    {
       "key": "source_discovery_next_focus_fallback_queue",
       "public_report": "data/source_discovery_next_focus_fallback_queue_public.json"
     },
@@ -2395,7 +2412,7 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 23,
+      "action_count": 22,
       "blocked_action_count": 1,
       "manual_review_action_count": 20,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
@@ -3980,6 +3997,16 @@
       "ichiban_probable_reissue_review_groups": 20,
       "ichiban_reissue_protected_groups": 0,
       "recommended_next_action": "Review queued high/medium-confidence duplicate groups, then expand remaining actionable groups."
+    },
+    {
+      "priority": 43,
+      "workstream": "ichiban_kuji_reissue_dedupe_review",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "review_groups": 46,
+      "probable_reissue_groups": 20,
+      "review_rows": 92,
+      "protected_groups": 0,
+      "recommended_next_action": "Verify same-name 1kuji rows against their campaign pages before any dedupe import."
     },
     {
       "priority": 50,

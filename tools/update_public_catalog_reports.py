@@ -2255,6 +2255,18 @@ def build_operations_public(
             "recommended_next_action": "Review queued high/medium-confidence duplicate groups, then expand remaining actionable groups.",
         } if dedupe_action_queue_summary else None,
         {
+            "priority": 43,
+            "workstream": "ichiban_kuji_reissue_dedupe_review",
+            "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            "review_groups": dedupe_action_queue_summary.get("ichiban_reissue_review_groups", 0),
+            "probable_reissue_groups": dedupe_action_queue_summary.get(
+                "ichiban_probable_reissue_review_groups", 0
+            ),
+            "review_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_rows", 0),
+            "protected_groups": dedupe_action_queue_summary.get("ichiban_reissue_protected_groups", 0),
+            "recommended_next_action": "Verify same-name 1kuji rows against their campaign pages before any dedupe import.",
+        } if dedupe_action_queue_summary else None,
+        {
             "priority": 50,
             "workstream": "ichiban_kuji_history",
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
@@ -2771,6 +2783,21 @@ def build_operations_public(
             "auto_apply_enabled": dedupe_action_queue_summary.get("auto_delete_enabled", False),
         } if dedupe_action_queue_summary else None,
         {
+            "workstream": "ichiban_kuji_reissue_dedupe_review",
+            "status": "manual_review"
+            if dedupe_action_queue_summary.get("ichiban_reissue_review_groups", 0)
+            else "clear",
+            "open_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_groups", 0),
+            "probable_reissue_groups": dedupe_action_queue_summary.get(
+                "ichiban_probable_reissue_review_groups", 0
+            ),
+            "review_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_rows", 0),
+            "protected_groups": dedupe_action_queue_summary.get("ichiban_reissue_protected_groups", 0),
+            "primary_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            "next_step": "verify_ichiban_campaign_pages_before_dedupe",
+            "auto_apply_enabled": False,
+        } if dedupe_action_queue_summary else None,
+        {
             "workstream": "ichiban_kuji_history",
             "status": "open" if kuji_summary.get("campaign_metadata_review_queue_rows", 0) else "clear",
             "open_rows": kuji_summary.get("campaign_metadata_review_queue_rows", 0),
@@ -2965,6 +2992,12 @@ def build_operations_public(
         open_review_queues["dedupe_actionable_groups"] = dedupe_action_queue_summary.get("actionable_groups", 0)
         open_review_queues["dedupe_unqueued_actionable_groups"] = dedupe_action_queue_summary.get(
             "unqueued_actionable_groups", 0
+        )
+        open_review_queues["ichiban_reissue_dedupe_review_groups"] = dedupe_action_queue_summary.get(
+            "ichiban_reissue_review_groups", 0
+        )
+        open_review_queues["ichiban_probable_reissue_dedupe_review_groups"] = dedupe_action_queue_summary.get(
+            "ichiban_probable_reissue_review_groups", 0
         )
     if requested_focus_review_batches_summary:
         open_review_queues["requested_focus_review_rows"] = requested_focus_review_batches_summary.get("review_row_count", 0)
@@ -3776,6 +3809,29 @@ def build_agent_work_queue_public(
             )
 
     dedupe_action_batches = [batch for batch in dedupe_action_queue.get("batches", []) if isinstance(batch, dict)]
+    ichiban_reissue_review_lane = [
+        lane for lane in dedupe_action_queue.get("ichiban_reissue_review_lane", []) if isinstance(lane, dict)
+    ]
+    for lane_index, lane in enumerate(ichiban_reissue_review_lane[:8], start=1):
+        add_batch(
+            agent_id="agent-ichiban-reissue-dedupe",
+            workstream="ichiban_kuji_reissue_dedupe_review",
+            priority=55 + lane_index,
+            title=f"Ichiban Kuji reissue dedupe check {lane_index:03d}",
+            public_report=DEDUPLICATION_ACTION_QUEUE,
+            rows=int(lane.get("row_count") or 0),
+            recommended_action=str(
+                lane.get("review_reason")
+                or "Verify campaign-specific 1kuji rows before dedupe decisions."
+            ),
+            acceptance_criteria=[
+                "Compare every source_url campaign page before marking rows as exact duplicates.",
+                "Preserve same-name rows when they belong to different releases, reruns, or campaign pages.",
+                "Only record a keep/drop dedupe decision when official evidence proves the rows are the same sellable item.",
+                "Auto-merge and auto-delete remain disabled.",
+            ],
+            samples=[compact_sample(item) for item in lane.get("sample_rows", []) if isinstance(item, dict)],
+        )
     for action_batch in dedupe_action_batches[:6]:
         add_batch(
             agent_id="agent-dedupe-action",
@@ -5340,6 +5396,12 @@ def validate_report_consistency(
         expected_open_queues["dedupe_unqueued_actionable_groups"] = dedupe_action_summary.get(
             "unqueued_actionable_groups", 0
         )
+        expected_open_queues["ichiban_reissue_dedupe_review_groups"] = dedupe_action_summary.get(
+            "ichiban_reissue_review_groups", 0
+        )
+        expected_open_queues["ichiban_probable_reissue_dedupe_review_groups"] = dedupe_action_summary.get(
+            "ichiban_probable_reissue_review_groups", 0
+        )
     if animation_review_summary:
         expected_open_queues["animation_category_review_rows"] = animation_review_summary.get("source_rows", 0)
     animation_action_queue = (
@@ -6019,7 +6081,15 @@ def update_reports(write: bool) -> dict[str, Any]:
                 DANGANRONPA_SOURCE_DETAIL_PROBE, "danganronpa_source_detail_probe"
             )
         if SOURCE_DETAIL.exists():
-            target["source_detail_candidate_probe"] = copy_report_summary(SOURCE_DETAIL, "source_detail")
+            source_detail_probe_summary = copy_report_summary(SOURCE_DETAIL, "source_detail")
+            if "unique_review_candidate_rows" in source_detail_probe_summary:
+                source_detail_probe_summary["raw_candidate_review_rows"] = source_detail_probe_summary.get(
+                    "candidate_review_rows", 0
+                )
+                source_detail_probe_summary["candidate_review_rows"] = source_detail_probe_summary.get(
+                    "unique_review_candidate_rows", 0
+                )
+            target["source_detail_candidate_probe"] = source_detail_probe_summary
         if SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists():
             target["source_detail_candidate_action_queue"] = copy_report_summary(
                 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, "source_detail_candidate_action_queue"
