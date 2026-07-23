@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T08:51:16Z",
+  "generated_at": "2026-07-23T09:09:53Z",
   "scope": "source_discovery_next_focus_detail_candidates",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -61,7 +61,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -77,7 +85,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "최애의 아이",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -105,7 +127,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -121,7 +151,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "죠죠의 기묘한 모험",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -149,7 +193,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -165,7 +217,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "슬램덩크",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -193,7 +259,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -209,7 +283,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "슬램덩크",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -237,7 +325,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -253,7 +349,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "카드캡터 체리",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -281,7 +391,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -297,7 +415,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "세일러문",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -325,7 +457,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -341,7 +481,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "신세기 에반게리온",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -369,7 +523,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -385,7 +547,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "강철의 연금술사",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -413,7 +589,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -429,7 +613,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "강철의 연금술사",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -457,7 +655,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -473,7 +679,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "주술회전",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -501,7 +721,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -517,7 +745,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "장송의 프리렌",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -545,7 +787,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -561,7 +811,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "귀멸의 칼날",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -589,7 +853,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -605,7 +877,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "진격의 거인",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -741,7 +1027,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -757,7 +1051,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "최애의 아이",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -890,7 +1198,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -906,7 +1222,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "최애의 아이",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -934,7 +1264,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -950,7 +1288,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "리제로",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -978,7 +1330,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -994,7 +1354,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "주술회전",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -1022,7 +1396,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -1038,7 +1420,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "전생슬",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -1165,7 +1561,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -1181,7 +1585,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "전생슬",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     },
@@ -1209,7 +1627,15 @@
         "source_store": "애니메이트",
         "evidence_url": "<official_or_trusted_evidence_url>",
         "manual_confirmed": false,
-        "requires_exact_identity_match": true
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
       },
       "catalog_field_import_template": {
         "manual_confirmed": false,
@@ -1225,7 +1651,21 @@
         "category": "아크릴 스탠드",
         "affiliation": "슈타인즈게이트",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
       },
       "auto_apply_enabled": false
     }

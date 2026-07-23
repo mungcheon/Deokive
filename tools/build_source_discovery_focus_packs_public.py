@@ -15,6 +15,22 @@ DEFAULT_ACTION_QUEUE = DATA / "source_discovery_action_queue_public.json"
 DEFAULT_BOTTLENECKS = DATA / "source_discovery_store_bottlenecks_public.json"
 DEFAULT_OUTPUT = DATA / "source_discovery_focus_packs_public.json"
 
+SOURCE_DISCOVERY_BLOCKED_REASON = "exact_product_detail_source_url_not_confirmed"
+SOURCE_DISCOVERY_BLOCKED_UNTIL = "exact_product_detail_source_url_confirmed"
+SOURCE_DISCOVERY_REQUIRED_EVIDENCE = [
+    "exact_product_detail_url_on_allowed_domain",
+    "page_is_not_search_or_category_result",
+    "product_title_series_character_variant_category_match",
+    "source_page_has_verifiable_product_image_before_image_url_import",
+]
+IMAGE_ATTACHMENT_BLOCKED_REASON = "image_url_requires_verified_exact_source_product_image"
+IMAGE_ATTACHMENT_BLOCKED_UNTIL = "exact_source_page_product_image_confirmed"
+IMAGE_ATTACHMENT_REQUIRED_EVIDENCE = [
+    "product_image_visible_on_confirmed_source_page",
+    "image_url_from_allowed_domain_or_official_cdn",
+    "image_identity_matches_catalog_row",
+]
+
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -84,11 +100,28 @@ def _review_checklist(item: dict[str, Any]) -> list[str]:
 
 
 def compact_item(item: dict[str, Any]) -> dict[str, Any]:
+    source_patch_template = dict(item.get("source_patch_template") or {})
+    catalog_field_import_template = dict(item.get("catalog_field_import_template") or {})
+    source_patch_template.setdefault("blocked_reason", SOURCE_DISCOVERY_BLOCKED_REASON)
+    source_patch_template.setdefault("blocked_until", SOURCE_DISCOVERY_BLOCKED_UNTIL)
+    source_patch_template.setdefault("required_evidence", SOURCE_DISCOVERY_REQUIRED_EVIDENCE)
+    catalog_field_import_template.setdefault("blocked_reason", SOURCE_DISCOVERY_BLOCKED_REASON)
+    catalog_field_import_template.setdefault("blocked_until", SOURCE_DISCOVERY_BLOCKED_UNTIL)
+    catalog_field_import_template.setdefault("required_evidence", SOURCE_DISCOVERY_REQUIRED_EVIDENCE)
+    catalog_field_import_template.setdefault("image_url_blocked_reason", IMAGE_ATTACHMENT_BLOCKED_REASON)
+    catalog_field_import_template.setdefault("image_url_blocked_until", IMAGE_ATTACHMENT_BLOCKED_UNTIL)
+    catalog_field_import_template.setdefault("image_url_required_evidence", IMAGE_ATTACHMENT_REQUIRED_EVIDENCE)
     return {
         "manual_review_status": "not_started",
         "manual_confirmed_source_url": "",
         "manual_confirmed_image_url": "",
         "manual_note": "",
+        "blocked_reason": SOURCE_DISCOVERY_BLOCKED_REASON,
+        "blocked_until": SOURCE_DISCOVERY_BLOCKED_UNTIL,
+        "required_evidence": SOURCE_DISCOVERY_REQUIRED_EVIDENCE,
+        "image_url_blocked_reason": IMAGE_ATTACHMENT_BLOCKED_REASON,
+        "image_url_blocked_until": IMAGE_ATTACHMENT_BLOCKED_UNTIL,
+        "image_url_required_evidence": IMAGE_ATTACHMENT_REQUIRED_EVIDENCE,
         "catalog_index": item.get("catalog_index"),
         "source_store": item.get("source_store"),
         "category": item.get("category"),
@@ -101,8 +134,8 @@ def compact_item(item: dict[str, Any]) -> dict[str, Any]:
         "web_search_url": item.get("web_search_url"),
         "allowed_source_domains": item.get("allowed_source_domains") or [],
         "manual_review_checklist": _review_checklist(item),
-        "source_patch_template": item.get("source_patch_template") or {},
-        "catalog_field_import_template": item.get("catalog_field_import_template") or {},
+        "source_patch_template": source_patch_template,
+        "catalog_field_import_template": catalog_field_import_template,
         "acceptance_rule": item.get("acceptance_rule"),
         "auto_apply_enabled": False,
     }
@@ -175,14 +208,20 @@ def build_report(
                 "pack_sequence": offset // pack_size + 1,
                 "row_count": len(chunk),
                 "offset": offset,
-        "source_store_total_rows": len(rows),
-        "source_store_remaining_after_pack": max(len(rows) - offset - len(chunk), 0),
-        "review_status": "not_started",
-        "confirmed_source_rows": 0,
-        "remaining_review_rows": len(chunk),
-        "needs_manual_review_rows": len(chunk),
-        "blocked_rows": 0,
-        "batch_ids": batch_ids,
+                "source_store_total_rows": len(rows),
+                "source_store_remaining_after_pack": max(len(rows) - offset - len(chunk), 0),
+                "review_status": "not_started",
+                "confirmed_source_rows": 0,
+                "remaining_review_rows": len(chunk),
+                "needs_manual_review_rows": len(chunk),
+                "blocked_rows": len(chunk),
+                "blocked_reason": SOURCE_DISCOVERY_BLOCKED_REASON,
+                "blocked_until": SOURCE_DISCOVERY_BLOCKED_UNTIL,
+                "required_evidence": SOURCE_DISCOVERY_REQUIRED_EVIDENCE,
+                "image_url_blocked_reason": IMAGE_ATTACHMENT_BLOCKED_REASON,
+                "image_url_blocked_until": IMAGE_ATTACHMENT_BLOCKED_UNTIL,
+                "image_url_required_evidence": IMAGE_ATTACHMENT_REQUIRED_EVIDENCE,
+                "batch_ids": batch_ids,
                 "target_category": category_counts.most_common(1)[0][0] if category_counts else None,
                 "category_rows": counter_pairs(category_counts, "category"),
                 "allowed_source_domains": counter_pairs(domain_counts, "domain"),
@@ -199,6 +238,10 @@ def build_report(
                     "row_count": len(chunk),
                     "review_status": pack["review_status"],
                     "remaining_review_rows": pack["remaining_review_rows"],
+                    "blocked_rows": pack["blocked_rows"],
+                    "blocked_reason": pack["blocked_reason"],
+                    "blocked_until": pack["blocked_until"],
+                    "required_evidence": pack["required_evidence"],
                     "target_category": pack["target_category"],
                     "first_batch_id": batch_ids[0] if batch_ids else None,
                     "first_official_search_url": pack["first_official_search_url"],
@@ -222,6 +265,13 @@ def build_report(
             "completed_focus_pack_count": 0,
             "remaining_focus_review_rows": focus_rows,
             "confirmed_focus_source_rows": 0,
+            "blocked_focus_rows": focus_rows,
+            "blocked_reason_counts": [
+                {"blocked_reason": SOURCE_DISCOVERY_BLOCKED_REASON, "rows": focus_rows}
+            ],
+            "blocked_until_counts": [
+                {"blocked_until": SOURCE_DISCOVERY_BLOCKED_UNTIL, "rows": focus_rows}
+            ],
             "pack_size": pack_size,
             "actionable_source_rows": actionable_source_rows,
             "focus_coverage": round(focus_rows / actionable_source_rows, 4) if actionable_source_rows else 0,

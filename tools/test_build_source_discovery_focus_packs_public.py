@@ -86,6 +86,11 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["completed_focus_pack_count"], 0)
         self.assertEqual(report["summary"]["remaining_focus_review_rows"], 3)
         self.assertEqual(report["summary"]["confirmed_focus_source_rows"], 0)
+        self.assertEqual(report["summary"]["blocked_focus_rows"], 3)
+        self.assertEqual(
+            report["summary"]["blocked_reason_counts"][0]["blocked_reason"],
+            "exact_product_detail_source_url_not_confirmed",
+        )
         self.assertEqual(report["summary"]["focus_coverage"], 0.6)
         self.assertEqual(report["summary"]["non_focus_source_rows"], 2)
         self.assertEqual(report["summary"]["focus_source_stores"], ["Animate", "Ensky"])
@@ -96,10 +101,23 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
         self.assertEqual(report["packs"][0]["confirmed_source_rows"], 0)
         self.assertEqual(report["packs"][0]["remaining_review_rows"], 1)
         self.assertEqual(report["packs"][0]["needs_manual_review_rows"], 1)
+        self.assertEqual(report["packs"][0]["blocked_rows"], 1)
+        self.assertEqual(
+            report["packs"][0]["blocked_until"],
+            "exact_product_detail_source_url_confirmed",
+        )
         self.assertEqual(report["packs"][0]["target_category"], "Acrylic")
         self.assertEqual(report["packs"][0]["items"][0]["catalog_index"], 1)
         self.assertEqual(report["packs"][0]["items"][0]["manual_review_status"], "not_started")
         self.assertEqual(report["packs"][0]["items"][0]["manual_confirmed_source_url"], "")
+        self.assertEqual(
+            report["packs"][0]["items"][0]["blocked_reason"],
+            "exact_product_detail_source_url_not_confirmed",
+        )
+        self.assertIn(
+            "product_title_series_character_variant_category_match",
+            report["packs"][0]["items"][0]["required_evidence"],
+        )
         self.assertEqual(report["packs"][0]["items"][0]["search_query"], "a")
         self.assertEqual(report["packs"][0]["items"][0]["review_state"], "official_search_review_required")
         self.assertEqual(report["packs"][0]["items"][0]["workflow"], "official_search_url_available")
@@ -108,9 +126,18 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
             report["packs"][0]["items"][0]["manual_review_checklist"][1],
         )
         self.assertEqual(report["packs"][0]["items"][0]["catalog_field_import_template"]["field"], "source_url")
+        self.assertEqual(
+            report["packs"][0]["items"][0]["catalog_field_import_template"]["blocked_until"],
+            "exact_product_detail_source_url_confirmed",
+        )
+        self.assertEqual(
+            report["packs"][0]["items"][0]["catalog_field_import_template"]["image_url_blocked_until"],
+            "exact_source_page_product_image_confirmed",
+        )
         self.assertEqual(report["work_order"][0]["first_batch_id"], "b1")
         self.assertEqual(report["work_order"][0]["review_status"], "not_started")
         self.assertEqual(report["work_order"][0]["remaining_review_rows"], 1)
+        self.assertEqual(report["work_order"][0]["blocked_rows"], 1)
         self.assertFalse(report["packs"][0]["auto_apply_enabled"])
 
 

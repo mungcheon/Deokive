@@ -84,6 +84,15 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["pack_items"], 2)
         self.assertEqual(report["summary"]["confirmed_source_rows"], 0)
         self.assertEqual(report["summary"]["remaining_review_rows"], 2)
+        self.assertEqual(report["summary"]["blocked_rows"], 2)
+        self.assertEqual(
+            report["summary"]["by_blocked_reason"],
+            [["exact_product_detail_source_url_not_confirmed", 2]],
+        )
+        self.assertIn(
+            "source_page_has_verifiable_product_image_before_image_url_import",
+            report["summary"]["required_evidence"],
+        )
         self.assertEqual(report["summary"]["source_store"], "Animate")
         self.assertEqual(report["summary"]["target_category"], "Acrylic stand")
         self.assertEqual(report["summary"]["official_search_url_count"], 2)
@@ -96,14 +105,34 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         )
         self.assertTrue(report["pack_queue_preview"][0]["is_current_pack"])
         self.assertFalse(report["pack_queue_preview"][1]["is_current_pack"])
+        self.assertEqual(
+            report["pack_queue_preview"][0]["blocked_reason"],
+            "exact_product_detail_source_url_not_confirmed",
+        )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual([item["catalog_index"] for item in report["items"]], [10, 11])
         self.assertEqual(report["items"][0]["manual_confirmed_source_url"], "")
+        self.assertEqual(
+            report["items"][0]["blocked_until"],
+            "exact_product_detail_source_url_confirmed",
+        )
+        self.assertEqual(
+            report["items"][0]["image_url_blocked_reason"],
+            "image_url_requires_verified_exact_source_product_image",
+        )
         self.assertEqual(report["items"][0]["search_query"], "Stand A Acrylic")
         self.assertEqual(report["items"][0]["review_state"], "official_search_review_required")
         self.assertEqual(report["items"][0]["workflow"], "official_search_url_available")
         self.assertEqual(report["items"][0]["manual_review_checklist"], ["Confirm exact product page"])
         self.assertEqual(report["items"][0]["source_patch_template"]["catalog_index"], 10)
+        self.assertEqual(
+            report["items"][0]["source_patch_template"]["blocked_reason"],
+            "exact_product_detail_source_url_not_confirmed",
+        )
+        self.assertEqual(
+            report["items"][0]["catalog_field_import_template"]["image_url_blocked_until"],
+            "exact_source_page_product_image_confirmed",
+        )
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 
     def test_build_report_advances_after_current_pack_is_confirmed(self) -> None:
