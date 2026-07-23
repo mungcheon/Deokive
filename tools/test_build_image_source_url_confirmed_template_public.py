@@ -136,6 +136,11 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertIn("manual_confirmed=true", item["manual_confirmation_requirements"][-1])
         self.assertEqual(item["candidate_options"][0]["product_no"], 100)
         self.assertEqual(item["current_source_url"], "https://fanding.kr/@stellive/shop")
+        self.assertEqual(
+            item["store_search_hints"]["store_search_url"],
+            "https://stellive.fanding.kr/search?keyword=Badge",
+        )
+        self.assertEqual(item["store_search_hints"]["site_query"], "site:fanding.kr/@stellive/shop")
         self.assertEqual(item["next_after_confirmed_source_url"], "extract_or_confirm_product_page_image_url")
         self.assertFalse(item["auto_apply_enabled"])
 
@@ -262,6 +267,44 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["candidate_source_url"], "")
         self.assertEqual(item["candidate_options"], [])
         self.assertEqual(item["source_url_review_lane"], "candidate_provider_missing")
+
+    def test_stellive_rows_generate_official_store_search_hints(self) -> None:
+        action_queue = {
+            "batches": [
+                {
+                    "batch_id": "image-attachment-action-001",
+                    "source_store": "Stellive Store",
+                    "items": [
+                        {
+                            "catalog_index": 10,
+                            "source_store": "Stellive Store",
+                            "name_ko": "Mascot plush",
+                            "category": "Plush",
+                            "source_url": "https://fanding.kr/@stellive/shop",
+                            "source_url_import_template": {
+                                "row_index": 10,
+                                "field": "source_url",
+                                "current_source_url": "https://fanding.kr/@stellive/shop",
+                            },
+                        },
+                    ],
+                }
+            ]
+        }
+
+        report = template.build_template(action_queue, None)
+        item = report["items"][0]
+
+        self.assertEqual(item["store_search_hints"]["storefront_url"], "https://fanding.kr/@stellive/shop")
+        self.assertEqual(item["store_search_hints"]["site_query"], "site:fanding.kr/@stellive/shop")
+        self.assertEqual(
+            item["store_search_hints"]["store_search_url"],
+            "https://stellive.fanding.kr/search?keyword=Mascot+plush",
+        )
+        self.assertIn(
+            'site:fanding.kr/@stellive/shop "Mascot plush Plush"',
+            item["fallback_search_queries"],
+        )
 
 
 if __name__ == "__main__":

@@ -97,6 +97,12 @@ def _store_search_scope(source_store: Any, current_source_url: Any) -> dict[str,
             "site_query": "site:shop.weverse.io",
             "search_url_template": "https://shop.weverse.io/search?keyword={query}",
         }
+    if "stellive" in store or "fanding" in current_url:
+        return {
+            "storefront_url": current_url or "https://fanding.kr/@stellive/shop",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_url_template": "https://stellive.fanding.kr/search?keyword={query}",
+        }
     if "pokemon" in store or "포켓몬" in store:
         return {
             "storefront_url": current_url or "https://www.pokemoncenter-online.com/",
@@ -138,11 +144,15 @@ def _generated_store_search_hints(source_template: dict[str, Any], item: dict[st
     current_url = _compact_text(item.get("source_url") or source_template.get("current_source_url"))
     name = _first_non_empty(item.get("name_ja"), item.get("name_ko"))
     scope = _store_search_scope(source_store, current_url)
+    official_search_url = _compact_text(item.get("official_search_url"))
     encoded_name = quote_plus(name) if name else ""
     search_url = (
-        scope["search_url_template"].format(query=encoded_name)
-        if scope["search_url_template"] and encoded_name
-        else ""
+        official_search_url
+        or (
+            scope["search_url_template"].format(query=encoded_name)
+            if scope["search_url_template"] and encoded_name
+            else ""
+        )
     )
     return {
         "source_store": source_store,

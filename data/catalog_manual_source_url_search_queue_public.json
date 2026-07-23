@@ -1,0 +1,3300 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-23T05:38:01Z",
+  "scope": "catalog_manual_source_url_search_queue",
+  "summary": {
+    "manual_search_required_rows": 42,
+    "workstream_count": 5,
+    "by_source_store": [
+      [
+        "Stellive Store",
+        42
+      ]
+    ],
+    "by_category": [
+      [
+        "액세서리",
+        16
+      ],
+      [
+        "인형",
+        14
+      ],
+      [
+        "아크릴 스탠드",
+        10
+      ],
+      [
+        "머그컵",
+        1
+      ],
+      [
+        "의류",
+        1
+      ]
+    ],
+    "with_store_search_url": 42,
+    "with_site_query": 42,
+    "auto_apply_enabled": false
+  },
+  "instructions": [
+    "This queue covers source_url rows with no usable candidate options.",
+    "Search hints are not evidence and must not be imported directly.",
+    "Use only official product/detail pages as confirmed source_url evidence.",
+    "Dry-run tools/import_confirmed_catalog_field_rows.py after manual confirmations.",
+    "Then rebuild image attachment queues to extract or confirm image_url."
+  ],
+  "workstreams": [
+    {
+      "category": "액세서리",
+      "row_count": 16,
+      "by_source_store": [
+        [
+          "Stellive Store",
+          16
+        ]
+      ],
+      "store_search_url_count": 16,
+      "sample_rows": [
+        {
+          "row_index": 2355,
+          "catalog_index": 2355,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "아이리 칸나 생일 기념 굿즈 박스 액세서리",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 생일 기념 굿즈 박스",
+            "아이리 액세서리 (전) 스텔라이브",
+            "아이리 생일 액세서리"
+          ],
+          "source_url_import_template": {
+            "row_index": 2355,
+            "catalog_index": 2355,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2357,
+          "catalog_index": 2357,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 키링 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "아이리 칸나 키링 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 키링 세트",
+            "아이리 액세서리 (전) 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2357,
+            "catalog_index": 2357,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2362,
+          "catalog_index": 2362,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 생일 기념 굿즈",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "쿠루미 노아 생일 기념 굿즈 액세서리",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 기념 굿즈",
+            "노아 액세서리 스텔라이브",
+            "노아 생일 액세서리"
+          ],
+          "source_url_import_template": {
+            "row_index": 2362,
+            "catalog_index": 2362,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2401,
+          "catalog_index": 2401,
+          "source_store": "Stellive Store",
+          "name_ko": "강지 클리어 파일 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "강지 클리어 파일 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 강지 클리어 파일 세트",
+            "강지 액세서리 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2401,
+            "catalog_index": 2401,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2405,
+          "catalog_index": 2405,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 아크릴 키링",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "아이리 칸나 아크릴 키링 액세서리",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 아크릴 키링",
+            "아이리 액세서리 (전) 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2405,
+            "catalog_index": 2405,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2416,
+          "catalog_index": 2416,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 클리어 파일 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "쿠루미 노아 클리어 파일 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 클리어 파일 세트",
+            "노아 액세서리 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2416,
+            "catalog_index": 2416,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2433,
+          "catalog_index": 2433,
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 생일 굿즈 박스",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "하나코 코코나 생일 굿즈 박스 액세서리",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 생일 굿즈 박스",
+            "코코나 액세서리 스텔라이브",
+            "코코나 생일 액세서리"
+          ],
+          "source_url_import_template": {
+            "row_index": 2433,
+            "catalog_index": 2433,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2436,
+          "catalog_index": 2436,
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 클리어 파일 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "하나코 코코나 클리어 파일 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 클리어 파일 세트",
+            "코코나 액세서리 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2436,
+            "catalog_index": 2436,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2437,
+          "catalog_index": 2437,
+          "source_store": "Stellive Store",
+          "name_ko": "비비 데뷔 굿즈 박스",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "비비 데뷔 굿즈 박스 액세서리",
+            "site:fanding.kr/@stellive/shop 비비 데뷔 굿즈 박스",
+            "비비 액세서리 스텔라이브",
+            "비비 데뷔 액세서리"
+          ],
+          "source_url_import_template": {
+            "row_index": 2437,
+            "catalog_index": 2437,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2440,
+          "catalog_index": 2440,
+          "source_store": "Stellive Store",
+          "name_ko": "비비 아크릴 키링",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "비비 아크릴 키링 액세서리",
+            "site:fanding.kr/@stellive/shop 비비 아크릴 키링",
+            "비비 액세서리 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2440,
+            "catalog_index": 2440,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "액세서리",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Open store_search_url when it is available.",
+        "Use fallback_search_queries if the store search page has no exact result.",
+        "Confirm the exact product/detail page and variant before importing.",
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+      ],
+      "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+      "auto_apply_enabled": false
+    },
+    {
+      "category": "인형",
+      "row_count": 14,
+      "by_source_store": [
+        [
+          "Stellive Store",
+          14
+        ]
+      ],
+      "store_search_url_count": 14,
+      "sample_rows": [
+        {
+          "row_index": 2352,
+          "catalog_index": 2352,
+          "source_store": "Stellive Store",
+          "name_ko": "강지 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "강지 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 강지 마스코트 인형",
+            "강지 인형 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2352,
+            "catalog_index": 2352,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2356,
+          "catalog_index": 2356,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "아이리 칸나 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 마스코트 인형",
+            "아이리 인형 (전) 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2356,
+            "catalog_index": 2356,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2363,
+          "catalog_index": 2363,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "쿠루미 노아 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 마스코트 인형",
+            "노아 인형 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2363,
+            "catalog_index": 2363,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2372,
+          "catalog_index": 2372,
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "하나코 코코나 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 마스코트 인형",
+            "코코나 인형 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2372,
+            "catalog_index": 2372,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2374,
+          "catalog_index": 2374,
+          "source_store": "Stellive Store",
+          "name_ko": "비비 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "비비 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 비비 마스코트 인형",
+            "비비 인형 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2374,
+            "catalog_index": 2374,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2376,
+          "catalog_index": 2376,
+          "source_store": "Stellive Store",
+          "name_ko": "린 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "린 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 린 마스코트 인형",
+            "린 인형 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2376,
+            "catalog_index": 2376,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2399,
+          "catalog_index": 2399,
+          "source_store": "Stellive Store",
+          "name_ko": "강지 마스코트 봉제 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "강지 마스코트 봉제 인형 인형",
+            "site:fanding.kr/@stellive/shop 강지 마스코트 봉제 인형",
+            "강지 인형 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2399,
+            "catalog_index": 2399,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2404,
+          "catalog_index": 2404,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 봉제 인형 (천사 ver.)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EC%B2%9C%EC%82%AC%20ver.%29",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "아이리 칸나 봉제 인형 (천사 ver.) 인형",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 봉제 인형 (천사 ver.)",
+            "아이리 인형 (전) 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2404,
+            "catalog_index": 2404,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2414,
+          "catalog_index": 2414,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 봉제 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "쿠루미 노아 봉제 인형 인형",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 봉제 인형",
+            "노아 인형 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2414,
+            "catalog_index": 2414,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2434,
+          "catalog_index": 2434,
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 마스코트 봉제 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "하나코 코코나 마스코트 봉제 인형 인형",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 마스코트 봉제 인형",
+            "코코나 인형 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2434,
+            "catalog_index": 2434,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "인형",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Open store_search_url when it is available.",
+        "Use fallback_search_queries if the store search page has no exact result.",
+        "Confirm the exact product/detail page and variant before importing.",
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+      ],
+      "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+      "auto_apply_enabled": false
+    },
+    {
+      "category": "아크릴 스탠드",
+      "row_count": 10,
+      "by_source_store": [
+        [
+          "Stellive Store",
+          10
+        ]
+      ],
+      "store_search_url_count": 10,
+      "sample_rows": [
+        {
+          "row_index": 2361,
+          "catalog_index": 2361,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "쿠루미 노아 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 데뷔 기념 아크릴 스탠드",
+            "노아 아크릴 스탠드 스텔라이브",
+            "노아 데뷔 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2361,
+            "catalog_index": 2361,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2373,
+          "catalog_index": 2373,
+          "source_store": "Stellive Store",
+          "name_ko": "비비 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "비비 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 비비 데뷔 기념 아크릴 스탠드",
+            "비비 아크릴 스탠드 스텔라이브",
+            "비비 데뷔 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2373,
+            "catalog_index": 2373,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2375,
+          "catalog_index": 2375,
+          "source_store": "Stellive Store",
+          "name_ko": "린 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "린 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 린 데뷔 기념 아크릴 스탠드",
+            "린 아크릴 스탠드 스텔라이브",
+            "린 데뷔 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2375,
+            "catalog_index": 2375,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2412,
+          "catalog_index": 2412,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 데뷔 1주년 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "쿠루미 노아 데뷔 1주년 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 데뷔 1주년 아크릴 스탠드",
+            "노아 아크릴 스탠드 스텔라이브",
+            "노아 1주년 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2412,
+            "catalog_index": 2412,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2413,
+          "catalog_index": 2413,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.) 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+            "노아 아크릴 스탠드 스텔라이브",
+            "노아 생일 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2413,
+            "catalog_index": 2413,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2422,
+          "catalog_index": 2422,
+          "source_store": "Stellive Store",
+          "name_ko": "네네코 마시로 데뷔 1주년 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "네네코 마시로 데뷔 1주년 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 네네코 마시로 데뷔 1주년 아크릴 스탠드",
+            "네네코 아크릴 스탠드 스텔라이브",
+            "네네코 1주년 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2422,
+            "catalog_index": 2422,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2438,
+          "catalog_index": 2438,
+          "source_store": "Stellive Store",
+          "name_ko": "비비 생일 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "비비 생일 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 비비 생일 아크릴 스탠드",
+            "비비 아크릴 스탠드 스텔라이브",
+            "비비 생일 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2438,
+            "catalog_index": 2438,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2445,
+          "catalog_index": 2445,
+          "source_store": "Stellive Store",
+          "name_ko": "마유 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "마유 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 마유 데뷔 기념 아크릴 스탠드",
+            "마유 아크릴 스탠드 스텔라이브",
+            "마유 데뷔 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2445,
+            "catalog_index": 2445,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2458,
+          "catalog_index": 2458,
+          "source_store": "Stellive Store",
+          "name_ko": "후야 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "후야 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 후야 데뷔 기념 아크릴 스탠드",
+            "후야 아크릴 스탠드 스텔라이브",
+            "후야 데뷔 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2458,
+            "catalog_index": 2458,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 2460,
+          "catalog_index": 2460,
+          "source_store": "Stellive Store",
+          "name_ko": "후야 첫 생일 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "후야 첫 생일 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 후야 첫 생일 기념 아크릴 스탠드",
+            "후야 아크릴 스탠드 스텔라이브",
+            "후야 생일 아크릴 스탠드"
+          ],
+          "source_url_import_template": {
+            "row_index": 2460,
+            "catalog_index": 2460,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-003",
+          "priority_bucket": "아크릴 스탠드",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Open store_search_url when it is available.",
+        "Use fallback_search_queries if the store search page has no exact result.",
+        "Confirm the exact product/detail page and variant before importing.",
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+      ],
+      "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+      "auto_apply_enabled": false
+    },
+    {
+      "category": "머그컵",
+      "row_count": 1,
+      "by_source_store": [
+        [
+          "Stellive Store",
+          1
+        ]
+      ],
+      "store_search_url_count": 1,
+      "sample_rows": [
+        {
+          "row_index": 2406,
+          "catalog_index": 2406,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 머그컵",
+          "name_ja": null,
+          "series_name": null,
+          "category": "머그컵",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A8%B8%EA%B7%B8%EC%BB%B5",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "아이리 칸나 머그컵 머그컵",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 머그컵",
+            "아이리 머그컵 (전) 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2406,
+            "catalog_index": 2406,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-001",
+          "priority_bucket": "머그컵",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Open store_search_url when it is available.",
+        "Use fallback_search_queries if the store search page has no exact result.",
+        "Confirm the exact product/detail page and variant before importing.",
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+      ],
+      "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+      "auto_apply_enabled": false
+    },
+    {
+      "category": "의류",
+      "row_count": 1,
+      "by_source_store": [
+        [
+          "Stellive Store",
+          1
+        ]
+      ],
+      "store_search_url_count": 1,
+      "sample_rows": [
+        {
+          "row_index": 2435,
+          "catalog_index": 2435,
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 토트백",
+          "name_ja": null,
+          "series_name": null,
+          "category": "의류",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "storefront_url": "https://fanding.kr/@stellive/shop",
+          "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1",
+          "site_query": "site:fanding.kr/@stellive/shop",
+          "fallback_search_queries": [
+            "하나코 코코나 토트백 의류",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 토트백",
+            "코코나 의류 스텔라이브"
+          ],
+          "source_url_import_template": {
+            "row_index": 2435,
+            "catalog_index": 2435,
+            "field": "source_url",
+            "manual_confirmed": false,
+            "manual_value": "",
+            "evidence_url": "",
+            "current_source_url": "https://fanding.kr/@stellive/shop",
+            "manual_note": ""
+          },
+          "review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate_source_url or manually found source URL.",
+            "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+            "Confirm title, character, product type, variant, and release context match the catalog row.",
+            "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+          ],
+          "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+          "batch_id": "image-attachment-action-002",
+          "priority_bucket": "의류",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Open store_search_url when it is available.",
+        "Use fallback_search_queries if the store search page has no exact result.",
+        "Confirm the exact product/detail page and variant before importing.",
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+      ],
+      "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
+      "auto_apply_enabled": false
+    }
+  ],
+  "items": [
+    {
+      "row_index": 2352,
+      "catalog_index": 2352,
+      "source_store": "Stellive Store",
+      "name_ko": "강지 마스코트 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "강지 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 강지 마스코트 인형",
+        "강지 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2352,
+        "catalog_index": 2352,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2356,
+      "catalog_index": 2356,
+      "source_store": "Stellive Store",
+      "name_ko": "아이리 칸나 마스코트 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "아이리 칸나 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 마스코트 인형",
+        "아이리 인형 (전) 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2356,
+        "catalog_index": 2356,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2363,
+      "catalog_index": 2363,
+      "source_store": "Stellive Store",
+      "name_ko": "쿠루미 노아 마스코트 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "쿠루미 노아 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 마스코트 인형",
+        "노아 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2363,
+        "catalog_index": 2363,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2372,
+      "catalog_index": 2372,
+      "source_store": "Stellive Store",
+      "name_ko": "하나코 코코나 마스코트 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "하나코 코코나 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 마스코트 인형",
+        "코코나 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2372,
+        "catalog_index": 2372,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2374,
+      "catalog_index": 2374,
+      "source_store": "Stellive Store",
+      "name_ko": "비비 마스코트 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "비비 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 비비 마스코트 인형",
+        "비비 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2374,
+        "catalog_index": 2374,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2376,
+      "catalog_index": 2376,
+      "source_store": "Stellive Store",
+      "name_ko": "린 마스코트 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "린 마스코트 인형 인형",
+        "site:fanding.kr/@stellive/shop 린 마스코트 인형",
+        "린 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2376,
+        "catalog_index": 2376,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2399,
+      "catalog_index": 2399,
+      "source_store": "Stellive Store",
+      "name_ko": "강지 마스코트 봉제 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "강지 마스코트 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 강지 마스코트 봉제 인형",
+        "강지 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2399,
+        "catalog_index": 2399,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2404,
+      "catalog_index": 2404,
+      "source_store": "Stellive Store",
+      "name_ko": "아이리 칸나 봉제 인형 (천사 ver.)",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EC%B2%9C%EC%82%AC%20ver.%29",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "아이리 칸나 봉제 인형 (천사 ver.) 인형",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 봉제 인형 (천사 ver.)",
+        "아이리 인형 (전) 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2404,
+        "catalog_index": 2404,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2414,
+      "catalog_index": 2414,
+      "source_store": "Stellive Store",
+      "name_ko": "쿠루미 노아 봉제 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "쿠루미 노아 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 봉제 인형",
+        "노아 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2414,
+        "catalog_index": 2414,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2434,
+      "catalog_index": 2434,
+      "source_store": "Stellive Store",
+      "name_ko": "하나코 코코나 마스코트 봉제 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "하나코 코코나 마스코트 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 마스코트 봉제 인형",
+        "코코나 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2434,
+        "catalog_index": 2434,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2439,
+      "catalog_index": 2439,
+      "source_store": "Stellive Store",
+      "name_ko": "비비 봉제 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "비비 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 비비 봉제 인형",
+        "비비 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2439,
+        "catalog_index": 2439,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2443,
+      "catalog_index": 2443,
+      "source_store": "Stellive Store",
+      "name_ko": "린 봉제 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "린 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 린 봉제 인형",
+        "린 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2443,
+        "catalog_index": 2443,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2447,
+      "catalog_index": 2447,
+      "source_store": "Stellive Store",
+      "name_ko": "마유 봉제 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "마유 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 마유 봉제 인형",
+        "마유 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2447,
+        "catalog_index": 2447,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2461,
+      "catalog_index": 2461,
+      "source_store": "Stellive Store",
+      "name_ko": "후야 마스코트 봉제 인형",
+      "name_ja": null,
+      "series_name": null,
+      "category": "인형",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "후야 마스코트 봉제 인형 인형",
+        "site:fanding.kr/@stellive/shop 후야 마스코트 봉제 인형",
+        "후야 인형 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2461,
+        "catalog_index": 2461,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-003",
+      "priority_bucket": "인형",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2361,
+      "catalog_index": 2361,
+      "source_store": "Stellive Store",
+      "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "쿠루미 노아 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 데뷔 기념 아크릴 스탠드",
+        "노아 아크릴 스탠드 스텔라이브",
+        "노아 데뷔 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2361,
+        "catalog_index": 2361,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2373,
+      "catalog_index": 2373,
+      "source_store": "Stellive Store",
+      "name_ko": "비비 데뷔 기념 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "비비 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 비비 데뷔 기념 아크릴 스탠드",
+        "비비 아크릴 스탠드 스텔라이브",
+        "비비 데뷔 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2373,
+        "catalog_index": 2373,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2375,
+      "catalog_index": 2375,
+      "source_store": "Stellive Store",
+      "name_ko": "린 데뷔 기념 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "린 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 린 데뷔 기념 아크릴 스탠드",
+        "린 아크릴 스탠드 스텔라이브",
+        "린 데뷔 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2375,
+        "catalog_index": 2375,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2412,
+      "catalog_index": 2412,
+      "source_store": "Stellive Store",
+      "name_ko": "쿠루미 노아 데뷔 1주년 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "쿠루미 노아 데뷔 1주년 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 데뷔 1주년 아크릴 스탠드",
+        "노아 아크릴 스탠드 스텔라이브",
+        "노아 1주년 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2412,
+        "catalog_index": 2412,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2413,
+      "catalog_index": 2413,
+      "source_store": "Stellive Store",
+      "name_ko": "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.) 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+        "노아 아크릴 스탠드 스텔라이브",
+        "노아 생일 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2413,
+        "catalog_index": 2413,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2422,
+      "catalog_index": 2422,
+      "source_store": "Stellive Store",
+      "name_ko": "네네코 마시로 데뷔 1주년 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "네네코 마시로 데뷔 1주년 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 네네코 마시로 데뷔 1주년 아크릴 스탠드",
+        "네네코 아크릴 스탠드 스텔라이브",
+        "네네코 1주년 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2422,
+        "catalog_index": 2422,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2438,
+      "catalog_index": 2438,
+      "source_store": "Stellive Store",
+      "name_ko": "비비 생일 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "비비 생일 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 비비 생일 아크릴 스탠드",
+        "비비 아크릴 스탠드 스텔라이브",
+        "비비 생일 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2438,
+        "catalog_index": 2438,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2445,
+      "catalog_index": 2445,
+      "source_store": "Stellive Store",
+      "name_ko": "마유 데뷔 기념 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "마유 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 마유 데뷔 기념 아크릴 스탠드",
+        "마유 아크릴 스탠드 스텔라이브",
+        "마유 데뷔 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2445,
+        "catalog_index": 2445,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2458,
+      "catalog_index": 2458,
+      "source_store": "Stellive Store",
+      "name_ko": "후야 데뷔 기념 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "후야 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 후야 데뷔 기념 아크릴 스탠드",
+        "후야 아크릴 스탠드 스텔라이브",
+        "후야 데뷔 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2458,
+        "catalog_index": 2458,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2460,
+      "catalog_index": 2460,
+      "source_store": "Stellive Store",
+      "name_ko": "후야 첫 생일 기념 아크릴 스탠드",
+      "name_ja": null,
+      "series_name": null,
+      "category": "아크릴 스탠드",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "후야 첫 생일 기념 아크릴 스탠드 아크릴 스탠드",
+        "site:fanding.kr/@stellive/shop 후야 첫 생일 기념 아크릴 스탠드",
+        "후야 아크릴 스탠드 스텔라이브",
+        "후야 생일 아크릴 스탠드"
+      ],
+      "source_url_import_template": {
+        "row_index": 2460,
+        "catalog_index": 2460,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-003",
+      "priority_bucket": "아크릴 스탠드",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2355,
+      "catalog_index": 2355,
+      "source_store": "Stellive Store",
+      "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "아이리 칸나 생일 기념 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 생일 기념 굿즈 박스",
+        "아이리 액세서리 (전) 스텔라이브",
+        "아이리 생일 액세서리"
+      ],
+      "source_url_import_template": {
+        "row_index": 2355,
+        "catalog_index": 2355,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2357,
+      "catalog_index": 2357,
+      "source_store": "Stellive Store",
+      "name_ko": "아이리 칸나 키링 세트",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "아이리 칸나 키링 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 키링 세트",
+        "아이리 액세서리 (전) 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2357,
+        "catalog_index": 2357,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2362,
+      "catalog_index": 2362,
+      "source_store": "Stellive Store",
+      "name_ko": "쿠루미 노아 생일 기념 굿즈",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "쿠루미 노아 생일 기념 굿즈 액세서리",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 기념 굿즈",
+        "노아 액세서리 스텔라이브",
+        "노아 생일 액세서리"
+      ],
+      "source_url_import_template": {
+        "row_index": 2362,
+        "catalog_index": 2362,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2401,
+      "catalog_index": 2401,
+      "source_store": "Stellive Store",
+      "name_ko": "강지 클리어 파일 세트",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "강지 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 강지 클리어 파일 세트",
+        "강지 액세서리 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2401,
+        "catalog_index": 2401,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2405,
+      "catalog_index": 2405,
+      "source_store": "Stellive Store",
+      "name_ko": "아이리 칸나 아크릴 키링",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "아이리 칸나 아크릴 키링 액세서리",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 아크릴 키링",
+        "아이리 액세서리 (전) 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2405,
+        "catalog_index": 2405,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2416,
+      "catalog_index": 2416,
+      "source_store": "Stellive Store",
+      "name_ko": "쿠루미 노아 클리어 파일 세트",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "쿠루미 노아 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 쿠루미 노아 클리어 파일 세트",
+        "노아 액세서리 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2416,
+        "catalog_index": 2416,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2433,
+      "catalog_index": 2433,
+      "source_store": "Stellive Store",
+      "name_ko": "하나코 코코나 생일 굿즈 박스",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "하나코 코코나 생일 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 생일 굿즈 박스",
+        "코코나 액세서리 스텔라이브",
+        "코코나 생일 액세서리"
+      ],
+      "source_url_import_template": {
+        "row_index": 2433,
+        "catalog_index": 2433,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2436,
+      "catalog_index": 2436,
+      "source_store": "Stellive Store",
+      "name_ko": "하나코 코코나 클리어 파일 세트",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "하나코 코코나 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 클리어 파일 세트",
+        "코코나 액세서리 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2436,
+        "catalog_index": 2436,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2437,
+      "catalog_index": 2437,
+      "source_store": "Stellive Store",
+      "name_ko": "비비 데뷔 굿즈 박스",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "비비 데뷔 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 비비 데뷔 굿즈 박스",
+        "비비 액세서리 스텔라이브",
+        "비비 데뷔 액세서리"
+      ],
+      "source_url_import_template": {
+        "row_index": 2437,
+        "catalog_index": 2437,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2440,
+      "catalog_index": 2440,
+      "source_store": "Stellive Store",
+      "name_ko": "비비 아크릴 키링",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "비비 아크릴 키링 액세서리",
+        "site:fanding.kr/@stellive/shop 비비 아크릴 키링",
+        "비비 액세서리 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2440,
+        "catalog_index": 2440,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2446,
+      "catalog_index": 2446,
+      "source_store": "Stellive Store",
+      "name_ko": "마유 데뷔 굿즈 박스",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "마유 데뷔 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 마유 데뷔 굿즈 박스",
+        "마유 액세서리 스텔라이브",
+        "마유 데뷔 액세서리"
+      ],
+      "source_url_import_template": {
+        "row_index": 2446,
+        "catalog_index": 2446,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2448,
+      "catalog_index": 2448,
+      "source_store": "Stellive Store",
+      "name_ko": "마유 아크릴 키링",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "마유 아크릴 키링 액세서리",
+        "site:fanding.kr/@stellive/shop 마유 아크릴 키링",
+        "마유 액세서리 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2448,
+        "catalog_index": 2448,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2453,
+      "catalog_index": 2453,
+      "source_store": "Stellive Store",
+      "name_ko": "스텔라이브 1주년 단체 클리어 파일 세트",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%8B%A8%EC%B2%B4%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "스텔라이브 1주년 단체 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 스텔라이브 1주년 단체 클리어 파일 세트",
+        "1주년 액세서리"
+      ],
+      "source_url_import_template": {
+        "row_index": 2453,
+        "catalog_index": 2453,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2459,
+      "catalog_index": 2459,
+      "source_store": "Stellive Store",
+      "name_ko": "후야 데뷔 굿즈 박스",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "후야 데뷔 굿즈 박스 액세서리",
+        "site:fanding.kr/@stellive/shop 후야 데뷔 굿즈 박스",
+        "후야 액세서리 스텔라이브",
+        "후야 데뷔 액세서리"
+      ],
+      "source_url_import_template": {
+        "row_index": 2459,
+        "catalog_index": 2459,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-003",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2462,
+      "catalog_index": 2462,
+      "source_store": "Stellive Store",
+      "name_ko": "후야 아크릴 키링",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "후야 아크릴 키링 액세서리",
+        "site:fanding.kr/@stellive/shop 후야 아크릴 키링",
+        "후야 액세서리 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2462,
+        "catalog_index": 2462,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-003",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2464,
+      "catalog_index": 2464,
+      "source_store": "Stellive Store",
+      "name_ko": "후야 클리어 파일 세트",
+      "name_ja": null,
+      "series_name": null,
+      "category": "액세서리",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "후야 클리어 파일 세트 액세서리",
+        "site:fanding.kr/@stellive/shop 후야 클리어 파일 세트",
+        "후야 액세서리 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2464,
+        "catalog_index": 2464,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-003",
+      "priority_bucket": "액세서리",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2406,
+      "catalog_index": 2406,
+      "source_store": "Stellive Store",
+      "name_ko": "아이리 칸나 머그컵",
+      "name_ja": null,
+      "series_name": null,
+      "category": "머그컵",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A8%B8%EA%B7%B8%EC%BB%B5",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "아이리 칸나 머그컵 머그컵",
+        "site:fanding.kr/@stellive/shop 아이리 칸나 머그컵",
+        "아이리 머그컵 (전) 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2406,
+        "catalog_index": 2406,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-001",
+      "priority_bucket": "머그컵",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 2435,
+      "catalog_index": 2435,
+      "source_store": "Stellive Store",
+      "name_ko": "하나코 코코나 토트백",
+      "name_ja": null,
+      "series_name": null,
+      "category": "의류",
+      "current_source_url": "https://fanding.kr/@stellive/shop",
+      "storefront_url": "https://fanding.kr/@stellive/shop",
+      "store_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1",
+      "site_query": "site:fanding.kr/@stellive/shop",
+      "fallback_search_queries": [
+        "하나코 코코나 토트백 의류",
+        "site:fanding.kr/@stellive/shop 하나코 코코나 토트백",
+        "코코나 의류 스텔라이브"
+      ],
+      "source_url_import_template": {
+        "row_index": 2435,
+        "catalog_index": 2435,
+        "field": "source_url",
+        "manual_confirmed": false,
+        "manual_value": "",
+        "evidence_url": "",
+        "current_source_url": "https://fanding.kr/@stellive/shop",
+        "manual_note": ""
+      },
+      "review_blockers": [
+        "no_exact_product_candidate",
+        "manual_product_detail_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate_source_url or manually found source URL.",
+        "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
+        "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Only then copy the exact product URL into manual_value and set manual_confirmed=true."
+      ],
+      "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+      "batch_id": "image-attachment-action-002",
+      "priority_bucket": "의류",
+      "auto_apply_enabled": false
+    }
+  ],
+  "automation_policy": {
+    "auto_apply_source_url": false,
+    "requires_manual_review": true,
+    "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+    "private_collection_storage": "local_device_only"
+  }
+}
