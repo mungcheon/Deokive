@@ -65,11 +65,24 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(report["summary"]["candidate_rows"], 1)
         self.assertEqual(report["summary"]["exact_candidate_review_rows"], 1)
         self.assertEqual(report["summary"]["no_candidate_items"], 1)
+        self.assertEqual(report["summary"]["candidate_confirmation_template_rows"], 1)
+        self.assertEqual(report["summary"]["candidate_confirmation_exact_review_rows"], 1)
+        self.assertEqual(report["summary"]["candidate_confirmation_manual_confirmed_rows"], 0)
         first = report["items"][0]
         self.assertEqual(first["manual_review_status"], "not_started")
         self.assertEqual(first["manual_confirmed_source_url"], "")
         self.assertEqual(first["candidates"][0]["review_status"], "exact_candidate_review")
         self.assertEqual(first["source_patch_template"]["catalog_index"], 1)
+        template_row = report["candidate_confirmation_template"][0]
+        self.assertFalse(template_row["manual_confirmed"])
+        self.assertEqual(template_row["catalog_index"], 1)
+        self.assertEqual(template_row["candidate_rank"], 1)
+        self.assertEqual(template_row["candidate_review_status"], "exact_candidate_review")
+        self.assertEqual(
+            template_row["candidate_source_url"],
+            "https://www.animate-onlineshop.jp/pn/test/pd/1234567/",
+        )
+        self.assertEqual(template_row["manual_confirmed_source_url"], "")
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 
 
