@@ -1324,6 +1324,12 @@ class PublicCatalogReportTests(unittest.TestCase):
                 for batch in animation_keyword_agent_batches
             )
         )
+        self.assertTrue(
+            all(
+                "sample_source" in batch.get("review_summary", {})
+                for batch in animation_keyword_agent_batches
+            )
+        )
 
 
 if __name__ == "__main__":

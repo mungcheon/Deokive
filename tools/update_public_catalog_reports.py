@@ -4141,6 +4141,12 @@ def build_agent_work_queue_public(
         row for row in animation_unmatched_keyword_review.get("review_items", []) if isinstance(row, dict)
     ]
     for keyword_index, keyword_item in enumerate(animation_keyword_items[:4]):
+        product_type_candidates = [
+            row for row in keyword_item.get("promotable_token_candidates", []) if isinstance(row, dict)
+        ]
+        top_token_candidates = [
+            row for row in keyword_item.get("top_token_candidates", []) if isinstance(row, dict)
+        ]
         add_batch(
             agent_id="agent-animation-keyword-review",
             workstream="animation_category_unmatched_keyword_review",
@@ -4156,11 +4162,12 @@ def build_agent_work_queue_public(
                 "Series names, character names, and store-only tokens are not promoted as product categories.",
                 "Accepted keywords map to an existing app folder color and icon family.",
             ],
-            samples=[row for row in keyword_item.get("top_token_candidates", []) if isinstance(row, dict)][:12],
+            samples=(product_type_candidates or top_token_candidates)[:12],
             review_summary={
                 "unmatched_rows": int(keyword_item.get("unmatched_rows") or 0),
-                "token_candidate_count": len(keyword_item.get("top_token_candidates", [])),
-                "product_type_candidate_count": len(keyword_item.get("promotable_token_candidates", [])),
+                "token_candidate_count": len(top_token_candidates),
+                "product_type_candidate_count": len(product_type_candidates),
+                "sample_source": "product_type_candidates" if product_type_candidates else "top_token_candidates",
                 "source_category_rows": int(keyword_item.get("source_category_rows") or 0),
             },
         )

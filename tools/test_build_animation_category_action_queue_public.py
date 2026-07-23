@@ -72,7 +72,10 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
                 "unmatched_rows": 42,
                 "token_candidate_count": 7,
                 "product_type_candidate_count": 2,
-            }
+            },
+            "top_product_type_candidates": [
+                {"source_category": "Goods", "token": "stand", "row_count": 6},
+            ],
         }
 
         report = action.build_queue(
@@ -126,6 +129,8 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["work_order"][1]["affected_catalog_rows"], 42)
         self.assertEqual(report["work_order"][1]["token_candidate_count"], 7)
         self.assertEqual(report["work_order"][1]["product_type_candidate_count"], 2)
+        self.assertEqual(report["work_order"][1]["top_product_type_candidate_count"], 1)
+        self.assertEqual(report["work_order"][1]["top_product_type_candidates"][0]["token"], "stand")
         self.assertEqual(
             report["work_order"][1]["next_step"],
             "review_unmatched_animation_keyword_candidates",

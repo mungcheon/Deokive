@@ -356,13 +356,25 @@ def build_report(split_payload: dict[str, Any], catalog_payload: dict[str, Any],
             }
         )
 
-    token_candidate_count = sum(len(item["top_token_candidates"]) for item in review_items)
-    product_type_candidate_count = sum(
-        1
+    top_product_type_candidates = [
+        {
+            "source_category": item["source_category"],
+            **candidate,
+        }
         for item in review_items
-        for candidate in item["top_token_candidates"]
-        if candidate.get("review_kind") == "product_type_like"
+        for candidate in item["promotable_token_candidates"]
+    ]
+    top_product_type_candidates.sort(
+        key=lambda candidate: (
+            -int(candidate.get("review_score") or 0),
+            -int(candidate.get("row_count") or 0),
+            str(candidate.get("source_category") or ""),
+            str(candidate.get("token") or ""),
+        )
     )
+
+    token_candidate_count = sum(len(item["top_token_candidates"]) for item in review_items)
+    product_type_candidate_count = len(top_product_type_candidates)
     noise_candidate_count = sum(
         1
         for item in review_items
@@ -381,11 +393,14 @@ def build_report(split_payload: dict[str, Any], catalog_payload: dict[str, Any],
             "product_type_candidate_count": product_type_candidate_count,
             "noise_candidate_count": noise_candidate_count,
             "manual_confirmed_rows": 0,
+            "top_product_type_candidate_count": len(top_product_type_candidates[:20]),
             "auto_apply_enabled": False,
         },
         "review_items": review_items,
+        "top_product_type_candidates": top_product_type_candidates[:20],
         "instructions": [
             "Use top_token_candidates only as review hints, not as automatic category changes.",
+            "Review top_product_type_candidates first; they are the shortest path to reducing broad-category unmatched rows.",
             "Prefer product-type keywords over series, character, or store-only words.",
             "Add a split rule only when sample rows consistently share the same goods type.",
         ],

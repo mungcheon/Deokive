@@ -57,6 +57,10 @@ class BuildAnimationCategoryUnmatchedKeywordReviewPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unmatched_rows"], 2)
         self.assertGreater(report["summary"]["token_candidate_count"], 0)
         self.assertGreater(report["summary"]["product_type_candidate_count"], 0)
+        self.assertEqual(
+            report["summary"]["top_product_type_candidate_count"],
+            len(report["top_product_type_candidates"]),
+        )
         self.assertGreaterEqual(report["summary"]["noise_candidate_count"], 0)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         item = report["review_items"][0]
@@ -81,6 +85,8 @@ class BuildAnimationCategoryUnmatchedKeywordReviewPublicTest(unittest.TestCase):
             {row["review_kind"] for row in item["review_kind_counts"]},
         )
         self.assertEqual(item["promotable_token_candidates"][0]["token"], "카메라")
+        self.assertEqual(report["top_product_type_candidates"][0]["source_category"], "굿즈")
+        self.assertEqual(report["top_product_type_candidates"][0]["token"], "카메라")
         self.assertEqual(item["sample_unmatched_rows"][0]["catalog_index"], 2)
 
 

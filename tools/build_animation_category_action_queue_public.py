@@ -177,6 +177,15 @@ def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, 
     unmatched_rows = int(unmatched_summary.get("unmatched_rows") or 0)
     token_candidates = int(unmatched_summary.get("token_candidate_count") or 0)
     product_type_candidates = int(unmatched_summary.get("product_type_candidate_count") or 0)
+    top_product_type_candidates = (
+        [
+            row
+            for row in unmatched_keyword_review.get("top_product_type_candidates", [])
+            if isinstance(row, dict)
+        ]
+        if isinstance(unmatched_keyword_review, dict)
+        else []
+    )
     orders: list[dict[str, Any]] = []
 
     if split_rows:
@@ -225,6 +234,8 @@ def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, 
                 "affected_catalog_rows": unmatched_rows,
                 "token_candidate_count": token_candidates,
                 "product_type_candidate_count": product_type_candidates,
+                "top_product_type_candidate_count": len(top_product_type_candidates),
+                "top_product_type_candidates": top_product_type_candidates[:12],
                 "next_step": "review_unmatched_animation_keyword_candidates",
                 "template": "server/animation_category_name_split_confirmed_rows.template.json",
                 "manual_confirmation_required": True,
