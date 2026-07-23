@@ -203,6 +203,48 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         self.assertEqual(report["focus_pack_progress_queue"][0]["focus_pack_id"], "source-discovery-focus-002")
         self.assertEqual([item["catalog_index"] for item in report["items"]], [12])
 
+    def test_build_report_preserves_unicode_catalog_fields(self) -> None:
+        template = {
+            "summary": {"template_items": 1, "work_order_pack_count": 1},
+            "work_order": [
+                {
+                    "priority": 1,
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": "애니메이트",
+                    "row_count": 1,
+                    "review_status": "not_started",
+                    "remaining_review_rows": 1,
+                    "target_category": "아크릴 스탠드",
+                    "first_official_search_url": "https://animate.example/search",
+                },
+            ],
+            "items": [
+                {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "catalog_index": 1072,
+                    "source_store": "애니메이트",
+                    "category": "아크릴 스탠드",
+                    "affiliation": "최애의 아이",
+                    "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
+                    "name_ja": "推しの子 アクリルスタンド (星野アイ)",
+                    "search_query": "推しの子 アクリルスタンド (星野アイ)",
+                    "catalog_field_import_template": {"affiliation": "최애의 아이"},
+                },
+            ],
+        }
+
+        report = builder.build_report(template, generated_at="2026-07-22T00:00:00Z")
+        item = report["items"][0]
+
+        self.assertEqual(report["summary"]["source_store"], "애니메이트")
+        self.assertEqual(report["summary"]["target_category"], "아크릴 스탠드")
+        self.assertEqual(item["source_store"], "애니메이트")
+        self.assertEqual(item["category"], "아크릴 스탠드")
+        self.assertEqual(item["affiliation"], "최애의 아이")
+        self.assertEqual(item["name_ko"], "최애의 아이 아크릴 스탠드 (호시노 아이)")
+        self.assertEqual(item["name_ja"], "推しの子 アクリルスタンド (星野アイ)")
+        self.assertEqual(item["search_query"], "推しの子 アクリルスタンド (星野アイ)")
+
 
 if __name__ == "__main__":
     unittest.main()
