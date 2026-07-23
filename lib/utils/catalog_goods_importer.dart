@@ -51,15 +51,12 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
   if (destination == null || !context.mounted) return false;
 
   try {
-    final imageBytes = await loadCatalogEntryImageBytes(entry);
-    if (!context.mounted) return false;
     final item = goodsItemFromCatalogEntry(
       appState: appState,
       entry: entry,
       folder: destination.folder,
       addToWishlist: destination.addToWishlist,
       wishlistTargetFolder: destination.wishlistTargetFolder,
-      imageBytes: imageBytes,
     );
     appState.addGoods(item);
   } catch (error) {
@@ -72,7 +69,11 @@ Future<bool> showCatalogGoodsImportFlowForEntry(
 
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text("'${entry.nameKo}'을(를) ${destination.folder.name}에 추가했어요."),
+      content: Text(
+        destination.addToWishlist
+            ? "'${entry.nameKo}'을(를) 위시리스트에 추가했어요."
+            : "'${entry.nameKo}'을(를) ${destination.folder.name}에 추가했어요.",
+      ),
       action: SnackBarAction(
         label: '폴더 보기',
         onPressed: () {
