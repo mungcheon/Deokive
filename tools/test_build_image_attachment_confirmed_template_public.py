@@ -41,13 +41,33 @@ class BuildImageAttachmentConfirmedTemplatePublicTest(unittest.TestCase):
             ]
         }
 
-        template = builder.build_template(action_queue, generated_at="2026-07-22T00:00:00Z")
+        source_url_template = {
+            "items": [
+                {
+                    "row_index": 10,
+                    "catalog_index": 10,
+                    "candidate_source_url": "https://fanding.kr/@stellive/shop/100",
+                    "candidate_image_url": "https://cdn.example.test/badge.webp",
+                    "candidate_title": "Badge exact-ish",
+                    "source_url_review_lane": "weak_candidate_review",
+                    "source_url_review_blockers": ["weak_candidate_only"],
+                }
+            ]
+        }
+
+        template = builder.build_template(
+            action_queue,
+            source_url_template,
+            generated_at="2026-07-22T00:00:00Z",
+        )
 
         self.assertEqual(template["generated_at"], "2026-07-22T00:00:00Z")
         self.assertEqual(template["summary"]["template_items"], 1)
         self.assertEqual(template["summary"]["manual_confirmed_rows"], 0)
         self.assertEqual(template["summary"]["source_url_update_required_rows"], 1)
         self.assertEqual(template["summary"]["representative_image_review_required_rows"], 0)
+        self.assertEqual(template["summary"]["source_url_candidate_prefilled_rows"], 1)
+        self.assertEqual(template["summary"]["by_source_url_review_lane"], [["weak_candidate_review", 1]])
         self.assertEqual(template["summary"]["by_batch"], [["image-attachment-action-001", 1]])
         self.assertFalse(template["summary"]["auto_apply_enabled"])
         self.assertEqual(template["automation_policy"]["import_tool"], "tools/import_confirmed_image_attachment_rows.py")
@@ -55,7 +75,12 @@ class BuildImageAttachmentConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertFalse(item["manual_confirmed"])
         self.assertEqual(item["field"], "image_url")
         self.assertEqual(item["manual_value"], "")
-        self.assertEqual(item["candidate_source_url"], "")
+        self.assertEqual(item["candidate_source_url"], "https://fanding.kr/@stellive/shop/100")
+        self.assertEqual(item["candidate_image_url"], "https://cdn.example.test/badge.webp")
+        self.assertEqual(item["candidate_title"], "Badge exact-ish")
+        self.assertEqual(item["source_url_review_lane"], "weak_candidate_review")
+        self.assertEqual(item["source_url_review_blockers"], ["weak_candidate_only"])
+        self.assertEqual(item["evidence_url"], "https://fanding.kr/@stellive/shop/100")
         self.assertEqual(item["current_source_url"], "https://fanding.kr/@stellive/shop")
         self.assertEqual(item["row_index"], 10)
         self.assertEqual(item["catalog_index"], 10)
