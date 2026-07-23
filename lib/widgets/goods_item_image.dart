@@ -1,8 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/goods_item.dart';
 
-const _goodsAssetVersion = '20260723-imagefix3';
+const _goodsAssetVersion = '20260723-imagefix4';
 
 class GoodsItemImage extends StatelessWidget {
   final GoodsItem item;
@@ -45,6 +46,9 @@ class GoodsItemImage extends StatelessWidget {
           fit: fit,
           errorBuilder: (_, __, ___) => _placeholder(),
         );
+      }
+      if (kIsWeb) {
+        return _publicAssetFallback(normalizedImageUrl);
       }
       return Image.asset(
         normalizedImageUrl,

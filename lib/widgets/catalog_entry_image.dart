@@ -1,8 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/goods_catalog_entry.dart';
 
-const _catalogAssetVersion = '20260723-imagefix3';
+const _catalogAssetVersion = '20260723-imagefix4';
 
 class CatalogEntryImage extends StatelessWidget {
   final GoodsCatalogEntry entry;
@@ -54,18 +55,27 @@ class CatalogEntryImage extends StatelessWidget {
         height: height,
         placeholder: placeholder,
       );
-      image = Image.asset(
-        localPath,
-        width: width,
-        height: height,
-        fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => _PublicCatalogAssetImage(
+      if (kIsWeb) {
+        image = _PublicCatalogAssetImage(
           assetPath: localPath,
           width: width,
           height: height,
           fallback: remotePath.isEmpty ? placeholder : remoteFallback,
-        ),
-      );
+        );
+      } else {
+        image = Image.asset(
+          localPath,
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => _PublicCatalogAssetImage(
+            assetPath: localPath,
+            width: width,
+            height: height,
+            fallback: remotePath.isEmpty ? placeholder : remoteFallback,
+          ),
+        );
+      }
     } else {
       image = _RemoteCatalogImage(
         imageUrl: remotePath,

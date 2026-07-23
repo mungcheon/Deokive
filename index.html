@@ -254,22 +254,16 @@
     });
     window.addEventListener('load', async function () {
       if (!('serviceWorker' in navigator)) return;
-      const host = window.location.hostname;
-      const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
-      if (isLocalHost) {
-        try {
-          const regs = await navigator.serviceWorker.getRegistrations();
-          for (const reg of regs) {
-            await reg.unregister();
-          }
-          if ('caches' in window) {
-            const keys = await caches.keys();
-            await Promise.all(keys.map((key) => caches.delete(key)));
-          }
-        } catch (_) {}
-        return;
-      }
-      navigator.serviceWorker.register('deokive_service_worker.js?v=20260723-imagefix3');
+      try {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const reg of regs) {
+          await reg.unregister();
+        }
+        if ('caches' in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.map((key) => caches.delete(key)));
+        }
+      } catch (_) {}
     });
   </script>
 </body>

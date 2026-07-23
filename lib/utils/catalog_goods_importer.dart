@@ -10,7 +10,7 @@ import '../models/goods_item.dart';
 import '../state/app_state.dart';
 import '../widgets/goods_name_search_field.dart';
 
-const _catalogImportAssetVersion = '20260723-imagefix3';
+const _catalogImportAssetVersion = '20260723-imagefix4';
 
 Future<bool> showCatalogGoodsImportFlow(
   BuildContext context, {
