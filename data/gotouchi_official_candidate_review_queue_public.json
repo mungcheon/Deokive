@@ -1,0 +1,3987 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-23T05:45:23Z",
+  "scope": "gotouchi_official_candidate_review_queue",
+  "summary": {
+    "review_rows": 23,
+    "workstream_count": 3,
+    "by_candidate_status": [
+      [
+        "motif_only_type_mismatch",
+        16
+      ],
+      [
+        "no_official_candidate",
+        6
+      ],
+      [
+        "rejected_visual_mismatch",
+        1
+      ]
+    ],
+    "by_category": [
+      [
+        "마스코트",
+        12
+      ],
+      [
+        "아크릴 키링",
+        4
+      ],
+      [
+        "타월",
+        3
+      ],
+      [
+        "마그넷",
+        2
+      ],
+      [
+        "캔뱃지",
+        2
+      ]
+    ],
+    "by_character_name": [],
+    "with_candidate_options": 17,
+    "without_candidate_options": 6,
+    "manual_confirmed_true": 0,
+    "auto_apply_enabled": false
+  },
+  "instructions": [
+    "This queue covers Gotouchi rows that require official candidate visual review.",
+    "Candidate images are review hints only and must not be imported automatically.",
+    "Set image_url_import_template.manual_confirmed=true only after visual identity review.",
+    "Use tools/import_confirmed_image_attachment_rows.py as a dry-run before write imports."
+  ],
+  "workstreams": [
+    {
+      "candidate_status": "motif_only_type_mismatch",
+      "row_count": 16,
+      "by_category": [
+        [
+          "마스코트",
+          6
+        ],
+        [
+          "아크릴 키링",
+          3
+        ],
+        [
+          "타월",
+          3
+        ],
+        [
+          "캔뱃지",
+          2
+        ],
+        [
+          "마그넷",
+          2
+        ]
+      ],
+      "by_character_name": [],
+      "candidate_rows": 16,
+      "rows": [
+        {
+          "row_index": 956,
+          "catalog_index": 956,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 마스코트 (고베 포트타워)",
+          "name_ja": "ちいかわ ご当地マスコット (神戸 ポートタワー)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "神戸",
+            "ポートタワー"
+          ],
+          "candidate_count": 1,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550230_0_b.png",
+              "alt": "ポートタワー ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "ポートタワー"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550230_0_b.png",
+            "alt": "ポートタワー ダイカットキーホルダー",
+            "type": "diecut_keyholder",
+            "row_type": "plush_keychain",
+            "type_match": false,
+            "matched_motifs": [
+              "ポートタワー"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 956,
+            "catalog_index": 956,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550230_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 936,
+          "catalog_index": 936,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "category": "아크릴 키링",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "acrylic_keyholder",
+          "motifs": [
+            "浅草",
+            "雷門"
+          ],
+          "candidate_count": 2,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_567562_0_b.png",
+              "alt": "雷門 ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "matched_motifs": [
+                "雷門"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550249_0_b.png",
+              "alt": "雷門 キャラットソックス",
+              "type": "socks",
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "matched_motifs": [
+                "雷門"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "image_url": "https://www.jp-api.com/images/tphoto_567562_0_b.png",
+            "alt": "雷門 ぬいぐるみキーチェーン",
+            "type": "plush_keychain",
+            "row_type": "acrylic_keyholder",
+            "type_match": false,
+            "matched_motifs": [
+              "雷門"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 936,
+            "catalog_index": 936,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_567562_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 946,
+          "catalog_index": 946,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+          "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+          "category": "아크릴 키링",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "acrylic_keyholder",
+          "motifs": [
+            "京都",
+            "清水寺"
+          ],
+          "candidate_count": 2,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+              "alt": "ニデック京都タワー ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "matched_motifs": [
+                "京都"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+              "alt": "ニデック京都タワー 記念メダル",
+              "type": "misc",
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "matched_motifs": [
+                "京都"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+            "alt": "ニデック京都タワー ダイカットキーホルダー",
+            "type": "diecut_keyholder",
+            "row_type": "acrylic_keyholder",
+            "type_match": false,
+            "matched_motifs": [
+              "京都"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 946,
+            "catalog_index": 946,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 958,
+          "catalog_index": 958,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 마스코트 (요코하마 차이나타운)",
+          "name_ja": "ちいかわ ご当地マスコット (横浜 中華街)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "横浜",
+            "中華街"
+          ],
+          "candidate_count": 2,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_567689_0_b.png",
+              "alt": "中華街 キャラットソックス",
+              "type": "socks",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "中華街"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550144_0_b.png",
+              "alt": "中華街 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "中華街"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "image_url": "https://www.jp-api.com/images/tphoto_567689_0_b.png",
+            "alt": "中華街 キャラットソックス",
+            "type": "socks",
+            "row_type": "plush_keychain",
+            "type_match": false,
+            "matched_motifs": [
+              "中華街"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 958,
+            "catalog_index": 958,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_567689_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 970,
+          "catalog_index": 970,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 캔뱃지 (교토)",
+          "name_ja": "ちいかわ ご当地缶バッジ (京都)",
+          "category": "캔뱃지",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "badge",
+          "motifs": [
+            "京都"
+          ],
+          "candidate_count": 2,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+              "alt": "ニデック京都タワー ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "badge",
+              "type_match": false,
+              "matched_motifs": [
+                "京都"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+              "alt": "ニデック京都タワー 記念メダル",
+              "type": "misc",
+              "row_type": "badge",
+              "type_match": false,
+              "matched_motifs": [
+                "京都"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+            "alt": "ニデック京都タワー ダイカットキーホルダー",
+            "type": "diecut_keyholder",
+            "row_type": "badge",
+            "type_match": false,
+            "matched_motifs": [
+              "京都"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 970,
+            "catalog_index": 970,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-007",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 943,
+          "catalog_index": 943,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+          "category": "타월",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "towel",
+          "motifs": [
+            "大阪"
+          ],
+          "candidate_count": 3,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+              "alt": "大阪のおばちゃん ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_567658_0_b.png",
+              "alt": "大阪城 キャラットソックス",
+              "type": "socks",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550133_0_b.png",
+              "alt": "大阪城 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+            "alt": "大阪のおばちゃん ダイカットキーホルダー",
+            "type": "diecut_keyholder",
+            "row_type": "towel",
+            "type_match": false,
+            "matched_motifs": [
+              "大阪"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 943,
+            "catalog_index": 943,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 950,
+          "catalog_index": 950,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+          "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+          "category": "타월",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "towel",
+          "motifs": [
+            "北海道"
+          ],
+          "candidate_count": 3,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+              "alt": "北海道 ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+              "alt": "北海道 キャラットソックス",
+              "type": "socks",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+              "alt": "北海道 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+            "alt": "北海道 ぬいぐるみキーチェーン",
+            "type": "plush_keychain",
+            "row_type": "towel",
+            "type_match": false,
+            "matched_motifs": [
+              "北海道"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 950,
+            "catalog_index": 950,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 969,
+          "catalog_index": 969,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 러버 마그넷 (오사카)",
+          "name_ja": "ちいかわ ご当地ラバーマグネット (大阪)",
+          "category": "마그넷",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "magnet",
+          "motifs": [
+            "大阪"
+          ],
+          "candidate_count": 3,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+              "alt": "大阪のおばちゃん ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "magnet",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_567658_0_b.png",
+              "alt": "大阪城 キャラットソックス",
+              "type": "socks",
+              "row_type": "magnet",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550133_0_b.png",
+              "alt": "大阪城 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "magnet",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+            "alt": "大阪のおばちゃん ダイカットキーホルダー",
+            "type": "diecut_keyholder",
+            "row_type": "magnet",
+            "type_match": false,
+            "matched_motifs": [
+              "大阪"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 969,
+            "catalog_index": 969,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-007",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 971,
+          "catalog_index": 971,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "하치와레 ご当地 캔뱃지 (홋카이도)",
+          "name_ja": "ハチワレ ご当地缶バッジ (北海道)",
+          "category": "캔뱃지",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "badge",
+          "motifs": [
+            "北海道"
+          ],
+          "candidate_count": 3,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+              "alt": "北海道 ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "badge",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+              "alt": "北海道 キャラットソックス",
+              "type": "socks",
+              "row_type": "badge",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+              "alt": "北海道 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "badge",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+            "alt": "北海道 ぬいぐるみキーチェーン",
+            "type": "plush_keychain",
+            "row_type": "badge",
+            "type_match": false,
+            "matched_motifs": [
+              "北海道"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 971,
+            "catalog_index": 971,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-007",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 941,
+          "catalog_index": 941,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "大阪",
+            "通天閣"
+          ],
+          "candidate_count": 4,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+              "alt": "大阪のおばちゃん ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_567658_0_b.png",
+              "alt": "大阪城 キャラットソックス",
+              "type": "socks",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550133_0_b.png",
+              "alt": "大阪城 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550220_0_b.png",
+              "alt": "通天閣 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "通天閣"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+            "alt": "大阪のおばちゃん ダイカットキーホルダー",
+            "type": "diecut_keyholder",
+            "row_type": "plush_keychain",
+            "type_match": false,
+            "matched_motifs": [
+              "大阪"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 941,
+            "catalog_index": 941,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 942,
+          "catalog_index": 942,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "category": "아크릴 키링",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "acrylic_keyholder",
+          "motifs": [
+            "大阪",
+            "たこ焼き",
+            "たこ焼"
+          ],
+          "candidate_count": 4,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+              "alt": "たこ焼 ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "matched_motifs": [
+                "たこ焼き",
+                "たこ焼"
+              ],
+              "score": 4
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+              "alt": "大阪のおばちゃん ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_567658_0_b.png",
+              "alt": "大阪城 キャラットソックス",
+              "type": "socks",
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550133_0_b.png",
+              "alt": "大阪城 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "matched_motifs": [
+                "大阪"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+            "alt": "たこ焼 ぬいぐるみキーチェーン",
+            "type": "plush_keychain",
+            "row_type": "acrylic_keyholder",
+            "type_match": false,
+            "matched_motifs": [
+              "たこ焼き",
+              "たこ焼"
+            ],
+            "score": 4
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 942,
+            "catalog_index": 942,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 953,
+          "catalog_index": 953,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "하치와레 ご当地 마스코트 (후쿠오카 라멘)",
+          "name_ja": "ハチワレ ご当地マスコット (福岡 ラーメン)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "福岡",
+            "ラーメン"
+          ],
+          "candidate_count": 4,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_562341_0_b.png",
+              "alt": "とんこつラーメン キャラットソックス",
+              "type": "socks",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "ラーメン"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550162_0_b.png",
+              "alt": "とんこつラーメン ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "ラーメン"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_568776_0_b.png",
+              "alt": "尾道ラーメン キャラットソックス",
+              "type": "socks",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "ラーメン"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550231_0_b.png",
+              "alt": "尾道ラーメン ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "ラーメン"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+            "image_url": "https://www.jp-api.com/images/tphoto_562341_0_b.png",
+            "alt": "とんこつラーメン キャラットソックス",
+            "type": "socks",
+            "row_type": "plush_keychain",
+            "type_match": false,
+            "matched_motifs": [
+              "ラーメン"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 953,
+            "catalog_index": 953,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE3/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE3/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_562341_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 938,
+          "catalog_index": 938,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+          "category": "타월",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "towel",
+          "motifs": [
+            "東京"
+          ],
+          "candidate_count": 5,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+              "alt": "東京スカイツリー ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550237_0_b.png",
+              "alt": "東京スカイツリー キャラットソックス",
+              "type": "socks",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+              "alt": "東京タワー ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_567656_0_b.png",
+              "alt": "東京タワー キャラットソックス",
+              "type": "socks",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550214_0_b.png",
+              "alt": "東京タワー ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "towel",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+            "alt": "東京スカイツリー ぬいぐるみキーチェーン",
+            "type": "plush_keychain",
+            "row_type": "towel",
+            "type_match": false,
+            "matched_motifs": [
+              "東京"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 938,
+            "catalog_index": 938,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE5/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE5/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 944,
+          "catalog_index": 944,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "京都",
+            "舞妓"
+          ],
+          "candidate_count": 5,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+              "alt": "ニデック京都タワー ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "京都"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+              "alt": "ニデック京都タワー 記念メダル",
+              "type": "misc",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "京都"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_566998_0_b.png",
+              "alt": "舞妓 がま口",
+              "type": "misc",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "舞妓"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_565955_0_b.png",
+              "alt": "舞妓 ティッシュケース",
+              "type": "misc",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "舞妓"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_566999_0_b.png",
+              "alt": "舞妓 ポーチ",
+              "type": "misc",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "舞妓"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+            "alt": "ニデック京都タワー ダイカットキーホルダー",
+            "type": "diecut_keyholder",
+            "row_type": "plush_keychain",
+            "type_match": false,
+            "matched_motifs": [
+              "京都"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 944,
+            "catalog_index": 944,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 945,
+          "catalog_index": 945,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "京都",
+            "舞妓"
+          ],
+          "candidate_count": 5,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+              "alt": "ニデック京都タワー ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "京都"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+              "alt": "ニデック京都タワー 記念メダル",
+              "type": "misc",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "京都"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_566998_0_b.png",
+              "alt": "舞妓 がま口",
+              "type": "misc",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "舞妓"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_565955_0_b.png",
+              "alt": "舞妓 ティッシュケース",
+              "type": "misc",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "舞妓"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_566999_0_b.png",
+              "alt": "舞妓 ポーチ",
+              "type": "misc",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "舞妓"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+            "alt": "ニデック京都タワー ダイカットキーホルダー",
+            "type": "diecut_keyholder",
+            "row_type": "plush_keychain",
+            "type_match": false,
+            "matched_motifs": [
+              "京都"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 945,
+            "catalog_index": 945,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 968,
+          "catalog_index": 968,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 러버 마그넷 (도쿄)",
+          "name_ja": "ちいかわ ご当地ラバーマグネット (東京)",
+          "category": "마그넷",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "motif_only_type_mismatch",
+          "row_type": "magnet",
+          "motifs": [
+            "東京"
+          ],
+          "candidate_count": 5,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+              "alt": "東京スカイツリー ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "magnet",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550237_0_b.png",
+              "alt": "東京スカイツリー キャラットソックス",
+              "type": "socks",
+              "row_type": "magnet",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+              "alt": "東京タワー ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "magnet",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_567656_0_b.png",
+              "alt": "東京タワー キャラットソックス",
+              "type": "socks",
+              "row_type": "magnet",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550214_0_b.png",
+              "alt": "東京タワー ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "magnet",
+              "type_match": false,
+              "matched_motifs": [
+                "東京"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+            "alt": "東京スカイツリー ぬいぐるみキーチェーン",
+            "type": "plush_keychain",
+            "row_type": "magnet",
+            "type_match": false,
+            "matched_motifs": [
+              "東京"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 968,
+            "catalog_index": 968,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE5/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE5/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "motif_match_only",
+            "product_type_mismatch",
+            "visual_identity_review_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Review motif-only/type-mismatch rows before rows with no candidates.",
+        "Do not import image_url unless manual visual identity review passes.",
+        "Use representative_image=true only for acceptable representative display images."
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "candidate_status": "no_official_candidate",
+      "row_count": 6,
+      "by_category": [
+        [
+          "마스코트",
+          5
+        ],
+        [
+          "아크릴 키링",
+          1
+        ]
+      ],
+      "by_character_name": [],
+      "candidate_rows": 0,
+      "rows": [
+        {
+          "row_index": 937,
+          "catalog_index": 937,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "no_official_candidate",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "浅草"
+          ],
+          "candidate_count": 0,
+          "candidate_options": [],
+          "top_candidate": {},
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 937,
+            "catalog_index": 937,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_image_url": "",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "no_official_candidate_image",
+            "manual_external_official_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 954,
+          "catalog_index": 954,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 마스코트 (나고야 샤치호코)",
+          "name_ja": "ちいかわ ご当地マスコット (名古屋 金鯱)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "no_official_candidate",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "名古屋",
+            "金鯱"
+          ],
+          "candidate_count": 0,
+          "candidate_options": [],
+          "top_candidate": {},
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 954,
+            "catalog_index": 954,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_image_url": "",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "no_official_candidate_image",
+            "manual_external_official_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 955,
+          "catalog_index": 955,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 마스코트 (나고야 테바사키)",
+          "name_ja": "うさぎ ご当地マスコット (名古屋 手羽先)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "no_official_candidate",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "名古屋",
+            "手羽先"
+          ],
+          "candidate_count": 0,
+          "candidate_options": [],
+          "top_candidate": {},
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 955,
+            "catalog_index": 955,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_image_url": "",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "no_official_candidate_image",
+            "manual_external_official_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 957,
+          "catalog_index": 957,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "하치와레 ご当地 아크릴 키홀더 (고베)",
+          "name_ja": "ハチワレ ご当地アクリルキーホルダー (神戸)",
+          "category": "아크릴 키링",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "no_official_candidate",
+          "row_type": "acrylic_keyholder",
+          "motifs": [
+            "神戸"
+          ],
+          "candidate_count": 0,
+          "candidate_options": [],
+          "top_candidate": {},
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 957,
+            "catalog_index": 957,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_image_url": "",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "no_official_candidate_image",
+            "manual_external_official_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 959,
+          "catalog_index": 959,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "하치와레 ご当地 마스코트 (요코하마 마린타워)",
+          "name_ja": "ハチワレ ご当地マスコット (横浜 マリンタワー)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "no_official_candidate",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "横浜",
+            "マリンタワー"
+          ],
+          "candidate_count": 0,
+          "candidate_options": [],
+          "top_candidate": {},
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 959,
+            "catalog_index": 959,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_image_url": "",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "no_official_candidate_image",
+            "manual_external_official_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        },
+        {
+          "row_index": 960,
+          "catalog_index": 960,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 마스코트 (카와고에 토키노카네)",
+          "name_ja": "ちいかわ ご当地マスコット (川越 時の鐘)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "no_official_candidate",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "川越",
+            "時の鐘"
+          ],
+          "candidate_count": 0,
+          "candidate_options": [],
+          "top_candidate": {},
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 960,
+            "catalog_index": 960,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+            "candidate_image_url": "",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "no_official_candidate_image",
+            "manual_external_official_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Review motif-only/type-mismatch rows before rows with no candidates.",
+        "Do not import image_url unless manual visual identity review passes.",
+        "Use representative_image=true only for acceptable representative display images."
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "candidate_status": "rejected_visual_mismatch",
+      "row_count": 1,
+      "by_category": [
+        [
+          "마스코트",
+          1
+        ]
+      ],
+      "by_character_name": [],
+      "candidate_rows": 1,
+      "rows": [
+        {
+          "row_index": 967,
+          "catalog_index": 967,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+          "name_ja": "ラッコ ご当地マスコット (北海道)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "rejected_visual_mismatch",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "北海道"
+          ],
+          "candidate_count": 3,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+              "alt": "北海道 ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "plush_keychain",
+              "type_match": true,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 5
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+              "alt": "北海道 キャラットソックス",
+              "type": "socks",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+              "alt": "北海道 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+            "alt": "北海道 ぬいぐるみキーチェーン",
+            "type": "plush_keychain",
+            "row_type": "plush_keychain",
+            "type_match": true,
+            "matched_motifs": [
+              "北海道"
+            ],
+            "score": 5
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 967,
+            "catalog_index": 967,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "visual_mismatch",
+            "do_not_import_without_stronger_evidence"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Review motif-only/type-mismatch rows before rows with no candidates.",
+        "Do not import image_url unless manual visual identity review passes.",
+        "Use representative_image=true only for acceptable representative display images."
+      ],
+      "auto_apply_enabled": false
+    }
+  ],
+  "items": [
+    {
+      "row_index": 936,
+      "catalog_index": 936,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+      "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+      "category": "아크릴 키링",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "acrylic_keyholder",
+      "motifs": [
+        "浅草",
+        "雷門"
+      ],
+      "candidate_count": 2,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_567562_0_b.png",
+          "alt": "雷門 ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "acrylic_keyholder",
+          "type_match": false,
+          "matched_motifs": [
+            "雷門"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550249_0_b.png",
+          "alt": "雷門 キャラットソックス",
+          "type": "socks",
+          "row_type": "acrylic_keyholder",
+          "type_match": false,
+          "matched_motifs": [
+            "雷門"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "image_url": "https://www.jp-api.com/images/tphoto_567562_0_b.png",
+        "alt": "雷門 ぬいぐるみキーチェーン",
+        "type": "plush_keychain",
+        "row_type": "acrylic_keyholder",
+        "type_match": false,
+        "matched_motifs": [
+          "雷門"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 936,
+        "catalog_index": 936,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_567562_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 937,
+      "catalog_index": 937,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+      "name_ja": "うさぎ ご当地マスコット (浅草)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "no_official_candidate",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "浅草"
+      ],
+      "candidate_count": 0,
+      "candidate_options": [],
+      "top_candidate": {},
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 937,
+        "catalog_index": 937,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_image_url": "",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "no_official_candidate_image",
+        "manual_external_official_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 938,
+      "catalog_index": 938,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+      "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+      "category": "타월",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "towel",
+      "motifs": [
+        "東京"
+      ],
+      "candidate_count": 5,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+          "alt": "東京スカイツリー ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550237_0_b.png",
+          "alt": "東京スカイツリー キャラットソックス",
+          "type": "socks",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/",
+          "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+          "alt": "東京タワー ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_567656_0_b.png",
+          "alt": "東京タワー キャラットソックス",
+          "type": "socks",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550214_0_b.png",
+          "alt": "東京タワー ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+        "alt": "東京スカイツリー ぬいぐるみキーチェーン",
+        "type": "plush_keychain",
+        "row_type": "towel",
+        "type_match": false,
+        "matched_motifs": [
+          "東京"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 938,
+        "catalog_index": 938,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE5/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE5/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 941,
+      "catalog_index": 941,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+      "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "大阪",
+        "通天閣"
+      ],
+      "candidate_count": 4,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+          "alt": "大阪のおばちゃん ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_567658_0_b.png",
+          "alt": "大阪城 キャラットソックス",
+          "type": "socks",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550133_0_b.png",
+          "alt": "大阪城 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550220_0_b.png",
+          "alt": "通天閣 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "通天閣"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+        "alt": "大阪のおばちゃん ダイカットキーホルダー",
+        "type": "diecut_keyholder",
+        "row_type": "plush_keychain",
+        "type_match": false,
+        "matched_motifs": [
+          "大阪"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 941,
+        "catalog_index": 941,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 942,
+      "catalog_index": 942,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+      "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+      "category": "아크릴 키링",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "acrylic_keyholder",
+      "motifs": [
+        "大阪",
+        "たこ焼き",
+        "たこ焼"
+      ],
+      "candidate_count": 4,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+          "alt": "たこ焼 ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "acrylic_keyholder",
+          "type_match": false,
+          "matched_motifs": [
+            "たこ焼き",
+            "たこ焼"
+          ],
+          "score": 4
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+          "alt": "大阪のおばちゃん ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "acrylic_keyholder",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_567658_0_b.png",
+          "alt": "大阪城 キャラットソックス",
+          "type": "socks",
+          "row_type": "acrylic_keyholder",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550133_0_b.png",
+          "alt": "大阪城 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "acrylic_keyholder",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+        "alt": "たこ焼 ぬいぐるみキーチェーン",
+        "type": "plush_keychain",
+        "row_type": "acrylic_keyholder",
+        "type_match": false,
+        "matched_motifs": [
+          "たこ焼き",
+          "たこ焼"
+        ],
+        "score": 4
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 942,
+        "catalog_index": 942,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 943,
+      "catalog_index": 943,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+      "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+      "category": "타월",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "towel",
+      "motifs": [
+        "大阪"
+      ],
+      "candidate_count": 3,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+          "alt": "大阪のおばちゃん ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_567658_0_b.png",
+          "alt": "大阪城 キャラットソックス",
+          "type": "socks",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550133_0_b.png",
+          "alt": "大阪城 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+        "alt": "大阪のおばちゃん ダイカットキーホルダー",
+        "type": "diecut_keyholder",
+        "row_type": "towel",
+        "type_match": false,
+        "matched_motifs": [
+          "大阪"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 943,
+        "catalog_index": 943,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 944,
+      "catalog_index": 944,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+      "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "京都",
+        "舞妓"
+      ],
+      "candidate_count": 5,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+          "alt": "ニデック京都タワー ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "京都"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/",
+          "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+          "alt": "ニデック京都タワー 記念メダル",
+          "type": "misc",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "京都"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_566998_0_b.png",
+          "alt": "舞妓 がま口",
+          "type": "misc",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "舞妓"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_565955_0_b.png",
+          "alt": "舞妓 ティッシュケース",
+          "type": "misc",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "舞妓"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_566999_0_b.png",
+          "alt": "舞妓 ポーチ",
+          "type": "misc",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "舞妓"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+        "alt": "ニデック京都タワー ダイカットキーホルダー",
+        "type": "diecut_keyholder",
+        "row_type": "plush_keychain",
+        "type_match": false,
+        "matched_motifs": [
+          "京都"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 944,
+        "catalog_index": 944,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 945,
+      "catalog_index": 945,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+      "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "京都",
+        "舞妓"
+      ],
+      "candidate_count": 5,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+          "alt": "ニデック京都タワー ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "京都"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/",
+          "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+          "alt": "ニデック京都タワー 記念メダル",
+          "type": "misc",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "京都"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_566998_0_b.png",
+          "alt": "舞妓 がま口",
+          "type": "misc",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "舞妓"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_565955_0_b.png",
+          "alt": "舞妓 ティッシュケース",
+          "type": "misc",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "舞妓"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_566999_0_b.png",
+          "alt": "舞妓 ポーチ",
+          "type": "misc",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "舞妓"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+        "alt": "ニデック京都タワー ダイカットキーホルダー",
+        "type": "diecut_keyholder",
+        "row_type": "plush_keychain",
+        "type_match": false,
+        "matched_motifs": [
+          "京都"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 945,
+        "catalog_index": 945,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 946,
+      "catalog_index": 946,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+      "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+      "category": "아크릴 키링",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "acrylic_keyholder",
+      "motifs": [
+        "京都",
+        "清水寺"
+      ],
+      "candidate_count": 2,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+          "alt": "ニデック京都タワー ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "acrylic_keyholder",
+          "type_match": false,
+          "matched_motifs": [
+            "京都"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/",
+          "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+          "alt": "ニデック京都タワー 記念メダル",
+          "type": "misc",
+          "row_type": "acrylic_keyholder",
+          "type_match": false,
+          "matched_motifs": [
+            "京都"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+        "alt": "ニデック京都タワー ダイカットキーホルダー",
+        "type": "diecut_keyholder",
+        "row_type": "acrylic_keyholder",
+        "type_match": false,
+        "matched_motifs": [
+          "京都"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 946,
+        "catalog_index": 946,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 950,
+      "catalog_index": 950,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+      "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+      "category": "타월",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "towel",
+      "motifs": [
+        "北海道"
+      ],
+      "candidate_count": 3,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+          "alt": "北海道 ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+          "alt": "北海道 キャラットソックス",
+          "type": "socks",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+          "alt": "北海道 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "towel",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+        "alt": "北海道 ぬいぐるみキーチェーン",
+        "type": "plush_keychain",
+        "row_type": "towel",
+        "type_match": false,
+        "matched_motifs": [
+          "北海道"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 950,
+        "catalog_index": 950,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 953,
+      "catalog_index": 953,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "하치와레 ご当地 마스코트 (후쿠오카 라멘)",
+      "name_ja": "ハチワレ ご当地マスコット (福岡 ラーメン)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "福岡",
+        "ラーメン"
+      ],
+      "candidate_count": 4,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+          "image_url": "https://www.jp-api.com/images/tphoto_562341_0_b.png",
+          "alt": "とんこつラーメン キャラットソックス",
+          "type": "socks",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "ラーメン"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550162_0_b.png",
+          "alt": "とんこつラーメン ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "ラーメン"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_568776_0_b.png",
+          "alt": "尾道ラーメン キャラットソックス",
+          "type": "socks",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "ラーメン"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550231_0_b.png",
+          "alt": "尾道ラーメン ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "ラーメン"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+        "image_url": "https://www.jp-api.com/images/tphoto_562341_0_b.png",
+        "alt": "とんこつラーメン キャラットソックス",
+        "type": "socks",
+        "row_type": "plush_keychain",
+        "type_match": false,
+        "matched_motifs": [
+          "ラーメン"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 953,
+        "catalog_index": 953,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE3/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE3/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_562341_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 954,
+      "catalog_index": 954,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 마스코트 (나고야 샤치호코)",
+      "name_ja": "ちいかわ ご当地マスコット (名古屋 金鯱)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "no_official_candidate",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "名古屋",
+        "金鯱"
+      ],
+      "candidate_count": 0,
+      "candidate_options": [],
+      "top_candidate": {},
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 954,
+        "catalog_index": 954,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_image_url": "",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "no_official_candidate_image",
+        "manual_external_official_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 955,
+      "catalog_index": 955,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "우사기 ご当地 마스코트 (나고야 테바사키)",
+      "name_ja": "うさぎ ご当地マスコット (名古屋 手羽先)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "no_official_candidate",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "名古屋",
+        "手羽先"
+      ],
+      "candidate_count": 0,
+      "candidate_options": [],
+      "top_candidate": {},
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 955,
+        "catalog_index": 955,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_image_url": "",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "no_official_candidate_image",
+        "manual_external_official_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 956,
+      "catalog_index": 956,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 마스코트 (고베 포트타워)",
+      "name_ja": "ちいかわ ご当地マスコット (神戸 ポートタワー)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "神戸",
+        "ポートタワー"
+      ],
+      "candidate_count": 1,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550230_0_b.png",
+          "alt": "ポートタワー ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "ポートタワー"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550230_0_b.png",
+        "alt": "ポートタワー ダイカットキーホルダー",
+        "type": "diecut_keyholder",
+        "row_type": "plush_keychain",
+        "type_match": false,
+        "matched_motifs": [
+          "ポートタワー"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 956,
+        "catalog_index": 956,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550230_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 957,
+      "catalog_index": 957,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "하치와레 ご当地 아크릴 키홀더 (고베)",
+      "name_ja": "ハチワレ ご当地アクリルキーホルダー (神戸)",
+      "category": "아크릴 키링",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "no_official_candidate",
+      "row_type": "acrylic_keyholder",
+      "motifs": [
+        "神戸"
+      ],
+      "candidate_count": 0,
+      "candidate_options": [],
+      "top_candidate": {},
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 957,
+        "catalog_index": 957,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_image_url": "",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "no_official_candidate_image",
+        "manual_external_official_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 958,
+      "catalog_index": 958,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 마스코트 (요코하마 차이나타운)",
+      "name_ja": "ちいかわ ご当地マスコット (横浜 中華街)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "横浜",
+        "中華街"
+      ],
+      "candidate_count": 2,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_567689_0_b.png",
+          "alt": "中華街 キャラットソックス",
+          "type": "socks",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "中華街"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550144_0_b.png",
+          "alt": "中華街 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "中華街"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "image_url": "https://www.jp-api.com/images/tphoto_567689_0_b.png",
+        "alt": "中華街 キャラットソックス",
+        "type": "socks",
+        "row_type": "plush_keychain",
+        "type_match": false,
+        "matched_motifs": [
+          "中華街"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 958,
+        "catalog_index": 958,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_567689_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 959,
+      "catalog_index": 959,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "하치와레 ご当地 마스코트 (요코하마 마린타워)",
+      "name_ja": "ハチワレ ご当地マスコット (横浜 マリンタワー)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "no_official_candidate",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "横浜",
+        "マリンタワー"
+      ],
+      "candidate_count": 0,
+      "candidate_options": [],
+      "top_candidate": {},
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 959,
+        "catalog_index": 959,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_image_url": "",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "no_official_candidate_image",
+        "manual_external_official_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 960,
+      "catalog_index": 960,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 마스코트 (카와고에 토키노카네)",
+      "name_ja": "ちいかわ ご当地マスコット (川越 時の鐘)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "no_official_candidate",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "川越",
+        "時の鐘"
+      ],
+      "candidate_count": 0,
+      "candidate_options": [],
+      "top_candidate": {},
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 960,
+        "catalog_index": 960,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+        "candidate_image_url": "",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "no_official_candidate_image",
+        "manual_external_official_search_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 967,
+      "catalog_index": 967,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+      "name_ja": "ラッコ ご当地マスコット (北海道)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "rejected_visual_mismatch",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "北海道"
+      ],
+      "candidate_count": 3,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+          "alt": "北海道 ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "plush_keychain",
+          "type_match": true,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 5
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+          "alt": "北海道 キャラットソックス",
+          "type": "socks",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+          "alt": "北海道 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+        "alt": "北海道 ぬいぐるみキーチェーン",
+        "type": "plush_keychain",
+        "row_type": "plush_keychain",
+        "type_match": true,
+        "matched_motifs": [
+          "北海道"
+        ],
+        "score": 5
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 967,
+        "catalog_index": 967,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "visual_mismatch",
+        "do_not_import_without_stronger_evidence"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 968,
+      "catalog_index": 968,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 러버 마그넷 (도쿄)",
+      "name_ja": "ちいかわ ご当地ラバーマグネット (東京)",
+      "category": "마그넷",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "magnet",
+      "motifs": [
+        "東京"
+      ],
+      "candidate_count": 5,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+          "alt": "東京スカイツリー ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "magnet",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550237_0_b.png",
+          "alt": "東京スカイツリー キャラットソックス",
+          "type": "socks",
+          "row_type": "magnet",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/",
+          "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+          "alt": "東京タワー ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "magnet",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_567656_0_b.png",
+          "alt": "東京タワー キャラットソックス",
+          "type": "socks",
+          "row_type": "magnet",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550214_0_b.png",
+          "alt": "東京タワー ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "magnet",
+          "type_match": false,
+          "matched_motifs": [
+            "東京"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+        "alt": "東京スカイツリー ぬいぐるみキーチェーン",
+        "type": "plush_keychain",
+        "row_type": "magnet",
+        "type_match": false,
+        "matched_motifs": [
+          "東京"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 968,
+        "catalog_index": 968,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE5/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE5/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550179_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 969,
+      "catalog_index": 969,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 러버 마그넷 (오사카)",
+      "name_ja": "ちいかわ ご当地ラバーマグネット (大阪)",
+      "category": "마그넷",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "magnet",
+      "motifs": [
+        "大阪"
+      ],
+      "candidate_count": 3,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+          "alt": "大阪のおばちゃん ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "magnet",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_567658_0_b.png",
+          "alt": "大阪城 キャラットソックス",
+          "type": "socks",
+          "row_type": "magnet",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550133_0_b.png",
+          "alt": "大阪城 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "magnet",
+          "type_match": false,
+          "matched_motifs": [
+            "大阪"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+        "alt": "大阪のおばちゃん ダイカットキーホルダー",
+        "type": "diecut_keyholder",
+        "row_type": "magnet",
+        "type_match": false,
+        "matched_motifs": [
+          "大阪"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 969,
+        "catalog_index": 969,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550221_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-007",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 970,
+      "catalog_index": 970,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 캔뱃지 (교토)",
+      "name_ja": "ちいかわ ご当地缶バッジ (京都)",
+      "category": "캔뱃지",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "badge",
+      "motifs": [
+        "京都"
+      ],
+      "candidate_count": 2,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+          "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+          "alt": "ニデック京都タワー ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "badge",
+          "type_match": false,
+          "matched_motifs": [
+            "京都"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/",
+          "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+          "alt": "ニデック京都タワー 記念メダル",
+          "type": "misc",
+          "row_type": "badge",
+          "type_match": false,
+          "matched_motifs": [
+            "京都"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+        "alt": "ニデック京都タワー ダイカットキーホルダー",
+        "type": "diecut_keyholder",
+        "row_type": "badge",
+        "type_match": false,
+        "matched_motifs": [
+          "京都"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 970,
+        "catalog_index": 970,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE2/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-007",
+      "auto_apply_enabled": false
+    },
+    {
+      "row_index": 971,
+      "catalog_index": 971,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "하치와레 ご当地 캔뱃지 (홋카이도)",
+      "name_ja": "ハチワレ ご当地缶バッジ (北海道)",
+      "category": "캔뱃지",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "motif_only_type_mismatch",
+      "row_type": "badge",
+      "motifs": [
+        "北海道"
+      ],
+      "candidate_count": 3,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+          "alt": "北海道 ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "badge",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+          "alt": "北海道 キャラットソックス",
+          "type": "socks",
+          "row_type": "badge",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+          "alt": "北海道 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "badge",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+        "alt": "北海道 ぬいぐるみキーチェーン",
+        "type": "plush_keychain",
+        "row_type": "badge",
+        "type_match": false,
+        "matched_motifs": [
+          "北海道"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 971,
+        "catalog_index": 971,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "motif_match_only",
+        "product_type_mismatch",
+        "visual_identity_review_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-007",
+      "auto_apply_enabled": false
+    }
+  ],
+  "automation_policy": {
+    "auto_apply_image_url": false,
+    "requires_manual_review": true,
+    "requires_representative_image_flag": true,
+    "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+    "private_collection_storage": "local_device_only"
+  }
+}
