@@ -142,9 +142,13 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertGreater(quality["source_discovery_store_bottlenecks"]["store_count"], 0)
             self.assertIs(quality["source_discovery_store_bottlenecks"]["auto_apply_enabled"], False)
         if reports.SOURCE_DETAIL.exists():
+            source_detail_summary = reports.load_json(reports.SOURCE_DETAIL)["summary"]
             self.assertEqual(
                 quality["source_detail_candidate_probe"]["candidate_review_rows"],
-                reports.load_json(reports.SOURCE_DETAIL)["summary"]["candidate_review_rows"],
+                source_detail_summary.get(
+                    "unique_review_candidate_rows",
+                    source_detail_summary["candidate_review_rows"],
+                ),
             )
             self.assertIs(quality["source_detail_candidate_probe"]["auto_apply_enabled"], False)
         if reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.exists():

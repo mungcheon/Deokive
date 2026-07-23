@@ -85,6 +85,7 @@ SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT = DATA / "source_discovery_focus_template
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT = DATA / "source_discovery_next_focus_pack_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES = DATA / "source_discovery_next_focus_detail_candidates_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE = DATA / "source_discovery_next_focus_fallback_queue_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT = DATA / "source_discovery_next_focus_fallback_import_dry_run_public.json"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
@@ -3159,6 +3160,7 @@ def build_operations_public(
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
             {"key": "source_discovery_focus_template", "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}"},
+            {"key": "source_discovery_next_focus_detail_candidates", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}"},
             {"key": "source_discovery_next_focus_fallback_queue", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}"},
             {"key": "ensky_cache_candidate_action_queue", "public_report": f"data/{ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.name}"},
             {"key": "source_detail_candidate_action_queue", "public_report": f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}"},
@@ -5917,6 +5919,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["source_discovery_next_focus_pack_fetch_audit"] = copy_report_summary(
                 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, "source_discovery_next_focus_pack_fetch_audit"
             )
+        if SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.exists():
+            target["source_discovery_next_focus_detail_candidates"] = copy_report_summary(
+                SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, "source_discovery_next_focus_detail_candidates"
+            )
         target["source_discovery_next_focus_fallback_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
             **source_discovery_next_focus_fallback_queue["summary"],
@@ -6250,6 +6256,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
