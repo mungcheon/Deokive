@@ -30,6 +30,11 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertEqual(summary["stale_queue_index_matches"], 0)
         self.assertEqual(summary["unmatched_catalog_missing_rows"], 0)
         self.assertIn("safe_existing_image_reuse_candidate_rows", summary)
+        self.assertIn("source_discovery_starter_queue_groups", summary)
+        self.assertEqual(
+            summary["source_discovery_starter_queue_rows"],
+            summary["missing_source_url_rows"],
+        )
         self.assertIs(summary["auto_apply_enabled"], False)
         self.assertEqual(
             sum(row["rows"] for row in report["breakdowns"]["by_source_url_state"]),
@@ -40,6 +45,7 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
             summary["missing_source_url_rows"],
         )
         self.assertGreater(len(report["focus_groups"]), 0)
+        self.assertGreater(len(report["source_discovery_starter_queue"]), 0)
         self.assertGreater(len(report["breakdowns"]["by_source_store"]), 0)
         self.assertTrue(report["automation_policy"]["requires_exact_product_identity"])
 
@@ -103,6 +109,60 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
             report["focus_groups"][0]["recommended_workflow"],
             "official_prize_provider_search_then_exact_detail_match",
         )
+        self.assertEqual(report["summary"]["source_discovery_starter_queue_rows"], 0)
+        self.assertEqual(report["source_discovery_starter_queue"], [])
+
+    def test_source_discovery_starter_queue_groups_missing_source_rows(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "Hunter Charm A",
+                    "name_ja": "HUNTER チャーム A",
+                    "source_store": "엔스카이",
+                    "affiliation": "헌터X헌터",
+                    "category": "키링",
+                },
+                {
+                    "catalog_index": 2,
+                    "name_ko": "Hunter Charm B",
+                    "name_ja": "HUNTER チャーム B",
+                    "source_store": "엔스카이",
+                    "affiliation": "헌터X헌터",
+                    "category": "키링",
+                },
+            ]
+        }
+        queue = {
+            "items": [
+                {
+                    "row_index": 1,
+                    "source_store": "엔스카이",
+                    "strategy": "official_search",
+                    "priority": 10,
+                    "query": "HUNTER チャーム A",
+                    "search_url": "https://www.enskyshop.com/search?q=HUNTER",
+                },
+                {
+                    "row_index": 2,
+                    "source_store": "엔스카이",
+                    "strategy": "official_search",
+                    "priority": 10,
+                    "query": "HUNTER チャーム B",
+                    "search_url": "https://www.enskyshop.com/search?q=HUNTER+B",
+                },
+            ]
+        }
+
+        report = target.build_report(catalog, queue, generated_at="2026-01-01T00:00:00Z")
+        starter_queue = report["source_discovery_starter_queue"]
+
+        self.assertEqual(report["summary"]["source_discovery_starter_queue_groups"], 1)
+        self.assertEqual(report["summary"]["source_discovery_starter_queue_rows"], 2)
+        self.assertEqual(starter_queue[0]["rows"], 2)
+        self.assertEqual(starter_queue[0]["recommended_workflow"], "official_storefront_search_then_exact_detail_match")
+        self.assertEqual(len(starter_queue[0]["sample_items"]), 2)
+        self.assertEqual(starter_queue[0]["sample_items"][0]["search_url"], "https://www.enskyshop.com/search?q=HUNTER")
 
     def test_reports_existing_image_reuse_candidates_for_exact_identity(self) -> None:
         catalog = {

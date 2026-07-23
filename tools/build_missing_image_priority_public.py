@@ -136,6 +136,62 @@ def counter_rows(counter: Counter[str], field: str, limit: int = 40) -> list[dic
     return [{field: key, "rows": count} for key, count in counter.most_common(limit)]
 
 
+def compact_starter_item(item: dict[str, Any], queue_row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "catalog_index": item.get("catalog_index"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "source_store": item.get("source_store") or queue_row.get("source_store"),
+        "affiliation": item.get("affiliation"),
+        "category": item.get("category"),
+        "priority": queue_row.get("priority"),
+        "strategy": queue_row.get("strategy"),
+        "search_query": queue_row.get("query") or item.get("name_ja") or item.get("name_ko"),
+        "search_url": queue_row.get("search_url"),
+        "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source",
+        ],
+    }
+
+
+def starter_queue_rows(groups: dict[tuple[str, str, str, str], dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for group in groups.values():
+        primary_strategy = ""
+        if group["strategy_rows"]:
+            primary_strategy = group["strategy_rows"].most_common(1)[0][0]
+        rows.append(
+            {
+                "source_store": group["source_store"],
+                "affiliation": group["affiliation"],
+                "category": group["category"],
+                "primary_strategy": primary_strategy,
+                "priority": group["priority"],
+                "rows": group["rows"],
+                "sample_items": group["sample_items"],
+                "recommended_workflow": recommended_workflow(
+                    group["source_store"],
+                    group["rows"],
+                ),
+                "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+                "blocked_until": "exact_source_url_and_image_url_confirmed",
+                "auto_apply_enabled": False,
+            }
+        )
+    rows.sort(
+        key=lambda row: (
+            int(row.get("priority") or 999),
+            -int(row.get("rows") or 0),
+            str(row.get("source_store") or ""),
+            str(row.get("affiliation") or ""),
+            str(row.get("category") or ""),
+        )
+    )
+    return rows
+
+
 def source_url_state(item: dict[str, Any], queue_row: dict[str, Any] | None) -> str:
     if not present(item.get("source_url")):
         return "missing_source_url"
@@ -172,6 +228,7 @@ def build_report(
     stale_index_matches = []
     unmatched_catalog_rows = []
     reuse_candidates = reusable_image_candidates(catalog)
+    source_discovery_groups: dict[tuple[str, str, str, str], dict[str, Any]] = {}
 
     for item in missing_rows:
         catalog_index = item.get("catalog_index")
@@ -205,6 +262,27 @@ def build_report(
 
         if state == "missing_source_url":
             missing_source_url_rows += 1
+            group_key = (source_store, affiliation, category, strategy)
+            group = source_discovery_groups.setdefault(
+                group_key,
+                {
+                    "source_store": source_store,
+                    "affiliation": affiliation,
+                    "category": category,
+                    "priority": int((queue_row or {}).get("priority") or 999),
+                    "rows": 0,
+                    "strategy_rows": Counter(),
+                    "sample_items": [],
+                },
+            )
+            group["rows"] += 1
+            group["priority"] = min(
+                int(group["priority"]),
+                int((queue_row or {}).get("priority") or 999),
+            )
+            group["strategy_rows"][strategy] += 1
+            if len(group["sample_items"]) < 5:
+                group["sample_items"].append(compact_starter_item(item, queue_row or {}))
         elif state == "generic_source_url":
             generic_source_url_rows += 1
         elif state == "product_detail_source_url":
@@ -227,6 +305,7 @@ def build_report(
     ][:30]
 
     high_priority_rows.sort(key=lambda row: (row[0], row[1].get("catalog_index") or 0))
+    source_discovery_starter_queue = starter_queue_rows(source_discovery_groups)
 
     return {
         "schema_version": 1,
@@ -243,6 +322,10 @@ def build_report(
             "product_source_url_rows": product_source_url_rows,
             "high_priority_rows": len(high_priority_rows),
             "safe_existing_image_reuse_candidate_rows": len(reuse_candidates),
+            "source_discovery_starter_queue_groups": len(source_discovery_starter_queue),
+            "source_discovery_starter_queue_rows": sum(
+                int(row.get("rows") or 0) for row in source_discovery_starter_queue
+            ),
             "auto_apply_enabled": False,
         },
         "breakdowns": {
@@ -268,6 +351,7 @@ def build_report(
             },
         },
         "focus_groups": focus_groups,
+        "source_discovery_starter_queue": source_discovery_starter_queue[:30],
         "high_priority_samples": [
             {
                 "catalog_index": item.get("catalog_index"),
