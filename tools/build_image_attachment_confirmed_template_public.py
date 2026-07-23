@@ -2,10 +2,17 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,6 +77,7 @@ def _template_item(
         **template,
         "manual_confirmed": False,
         "manual_value": "",
+        "review_lane": item.get("review_lane"),
         "candidate_source_url": candidate_source_url,
         "candidate_image_url": candidate_image_url,
         "candidate_title": candidate_title,
@@ -90,6 +98,8 @@ def _template_item(
         "workflow": item.get("workflow") or batch.get("workflow"),
         "batch_id": batch.get("batch_id"),
         "required_before_image_import": item.get("required_before_image_import") or [],
+        "image_import_blockers": item.get("image_import_blockers") or [],
+        "manual_confirmation_requirements": item.get("manual_confirmation_requirements") or [],
         "source_url_update_required": bool(item.get("source_url_update_required")),
         "representative_image": bool(item.get("representative_image_review_required")),
         "representative_image_review_required": bool(item.get("representative_image_review_required")),
@@ -110,6 +120,8 @@ def build_template(
     by_workflow: Counter[str] = Counter()
     by_store: Counter[str] = Counter()
     by_category: Counter[str] = Counter()
+    by_review_lane: Counter[str] = Counter()
+    by_image_import_blocker: Counter[str] = Counter()
     by_source_url_review_lane: Counter[str] = Counter()
     hints_by_index = source_url_hint_lookup(source_url_template)
 
@@ -126,6 +138,9 @@ def build_template(
             by_workflow[str(row.get("workflow") or "")] += 1
             by_store[str(row.get("source_store") or "")] += 1
             by_category[str(row.get("category") or "")] += 1
+            by_review_lane[str(row.get("review_lane") or "")] += 1
+            for blocker in row.get("image_import_blockers") or []:
+                by_image_import_blocker[str(blocker)] += 1
             by_source_url_review_lane[str(row.get("source_url_review_lane") or "")] += 1
 
     return {
@@ -148,6 +163,10 @@ def build_template(
             "by_workflow": [[key, value] for key, value in by_workflow.most_common(20) if key],
             "by_source_store": [[key, value] for key, value in by_store.most_common(20) if key],
             "by_category": [[key, value] for key, value in by_category.most_common(20) if key],
+            "by_review_lane": [[key, value] for key, value in by_review_lane.most_common(20) if key],
+            "by_image_import_blocker": [
+                [key, value] for key, value in by_image_import_blocker.most_common(20) if key
+            ],
             "by_source_url_review_lane": [
                 [key, value] for key, value in by_source_url_review_lane.most_common(20) if key
             ],

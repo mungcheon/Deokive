@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T04:22:23Z",
+  "generated_at": "2026-07-23T10:49:16Z",
   "scope": "catalog_image_attachment_confirmed_template",
   "summary": {
     "template_items": 73,
@@ -8,7 +8,7 @@
     "source_url_update_required_rows": 50,
     "representative_image_review_required_rows": 23,
     "image_url_ready_rows": 0,
-    "source_url_candidate_prefilled_rows": 3,
+    "source_url_candidate_prefilled_rows": 0,
     "batch_count": 7,
     "by_batch": [
       [
@@ -118,6 +118,38 @@
         1
       ]
     ],
+    "by_review_lane": [
+      [
+        "source_url_replacement_first",
+        50
+      ],
+      [
+        "representative_image_candidate_review",
+        23
+      ]
+    ],
+    "by_image_import_blocker": [
+      [
+        "generic_storefront_source_url",
+        50
+      ],
+      [
+        "missing_exact_product_detail_url",
+        50
+      ],
+      [
+        "missing_product_page_image_url",
+        50
+      ],
+      [
+        "representative_image_may_not_match_exact_variant",
+        23
+      ],
+      [
+        "product_type_confirmation_required",
+        23
+      ]
+    ],
     "by_source_url_review_lane": [
       [
         "manual_search_required",
@@ -154,8 +186,8 @@
       "row_index": 2325,
       "field": "image_url",
       "manual_value": "",
-      "evidence_url": "https://fanding.kr/@stellive/shop/3700",
-      "candidate_source_url": "https://fanding.kr/@stellive/shop/3700",
+      "evidence_url": "",
+      "candidate_source_url": "",
       "source_store": "Stellive Store",
       "name_ko": "스텔라이브 1주년 뱃지 세트",
       "name_ja": null,
@@ -166,8 +198,9 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
-      "candidate_image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
-      "candidate_title": "S.S.Stellive 메탈 뱃지",
+      "review_lane": "source_url_replacement_first",
+      "candidate_image_url": "",
+      "candidate_title": "",
       "source_url_review_lane": "low_confidence_candidate_review",
       "source_url_review_blockers": [
         "candidate_score_too_low",
@@ -182,6 +215,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -207,6 +250,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -223,6 +267,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -248,6 +302,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -264,6 +319,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -289,6 +354,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -305,6 +371,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -330,6 +406,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -346,6 +423,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -371,6 +458,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -387,6 +475,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -412,6 +510,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -428,6 +527,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -453,6 +562,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -469,6 +579,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -494,6 +614,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -510,6 +631,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -535,6 +666,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -551,6 +683,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -576,6 +718,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -592,6 +735,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -617,6 +770,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -633,6 +787,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -658,6 +822,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -674,6 +839,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -699,6 +874,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -715,6 +891,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -740,6 +926,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -756,6 +943,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -781,6 +978,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -797,6 +995,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -822,6 +1030,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -838,6 +1047,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -863,6 +1082,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -880,6 +1100,16 @@
         "replace_generic_source_url",
         "confirm_product_page_image_url"
       ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
+      ],
       "source_url_update_required": true,
       "representative_image": false,
       "representative_image_review_required": false,
@@ -892,8 +1122,8 @@
       "row_index": 2407,
       "field": "image_url",
       "manual_value": "",
-      "evidence_url": "https://fanding.kr/@stellive/shop/55",
-      "candidate_source_url": "https://fanding.kr/@stellive/shop/55",
+      "evidence_url": "",
+      "candidate_source_url": "",
       "source_store": "Stellive Store",
       "name_ko": "아카네 리제 데뷔 2주년 아크릴 스탠드",
       "name_ja": null,
@@ -904,8 +1134,9 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
-      "candidate_image_url": "https://uploads.cdn.fanding.com/upload/image/funding/2023/09/27/8KCuOE72LrfFmJdk.webp",
-      "candidate_title": "2023 리제 아크릴 스탠드",
+      "review_lane": "source_url_replacement_first",
+      "candidate_image_url": "",
+      "candidate_title": "",
       "source_url_review_lane": "weak_candidate_review",
       "source_url_review_blockers": [
         "weak_candidate_only",
@@ -920,6 +1151,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -945,6 +1186,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -961,6 +1203,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -986,6 +1238,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1002,6 +1255,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1027,6 +1290,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1043,6 +1307,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1068,6 +1342,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1084,6 +1359,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1109,6 +1394,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1125,6 +1411,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1150,6 +1446,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1166,6 +1463,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1191,6 +1498,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1207,6 +1515,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1232,6 +1550,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1248,6 +1567,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1273,6 +1602,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1289,6 +1619,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1314,6 +1654,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1330,6 +1671,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1355,6 +1706,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1371,6 +1723,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1396,6 +1758,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1412,6 +1775,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1437,6 +1810,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1453,6 +1827,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1478,6 +1862,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1494,6 +1879,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1519,6 +1914,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1535,6 +1931,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1560,6 +1966,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1576,6 +1983,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1601,6 +2018,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1617,6 +2035,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1642,6 +2070,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1658,6 +2087,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1683,6 +2122,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1700,6 +2140,16 @@
         "replace_generic_source_url",
         "confirm_product_page_image_url"
       ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
+      ],
       "source_url_update_required": true,
       "representative_image": false,
       "representative_image_review_required": false,
@@ -1712,8 +2162,8 @@
       "row_index": 2454,
       "field": "image_url",
       "manual_value": "",
-      "evidence_url": "https://fanding.kr/@stellive/shop/33",
-      "candidate_source_url": "https://fanding.kr/@stellive/shop/33",
+      "evidence_url": "",
+      "candidate_source_url": "",
       "source_store": "Stellive Store",
       "name_ko": "스텔라이브 2주년 단체 굿즈 박스",
       "name_ja": null,
@@ -1724,8 +2174,9 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
-      "candidate_image_url": "https://uploads.cdn.fanding.com/upload/image/funding/2023/03/13/y21D3X0bkYUacf5u.webp",
-      "candidate_title": "스텔라이브 키캡 세트",
+      "review_lane": "source_url_replacement_first",
+      "candidate_image_url": "",
+      "candidate_title": "",
       "source_url_review_lane": "low_confidence_candidate_review",
       "source_url_review_blockers": [
         "candidate_score_too_low",
@@ -1740,6 +2191,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1765,6 +2226,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1781,6 +2243,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1806,6 +2278,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1822,6 +2295,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1847,6 +2330,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1863,6 +2347,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1888,6 +2382,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1904,6 +2399,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1929,6 +2434,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1945,6 +2451,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -1970,6 +2486,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "manual_search_required",
@@ -1986,6 +2503,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -2011,6 +2538,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "candidate_provider_missing",
@@ -2027,6 +2555,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -2052,6 +2590,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "candidate_provider_missing",
@@ -2068,6 +2607,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -2093,6 +2642,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "candidate_provider_missing",
@@ -2109,6 +2659,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -2134,6 +2694,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "candidate_provider_missing",
@@ -2150,6 +2711,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -2175,6 +2746,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": false,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "source_url_replacement_first",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "candidate_provider_missing",
@@ -2191,6 +2763,16 @@
         "confirm_exact_product_source_url",
         "replace_generic_source_url",
         "confirm_product_page_image_url"
+      ],
+      "image_import_blockers": [
+        "generic_storefront_source_url",
+        "missing_exact_product_detail_url",
+        "missing_product_page_image_url"
+      ],
+      "manual_confirmation_requirements": [
+        "Find the exact product detail page, not a storefront or search page.",
+        "Fill source_url_import_template.manual_value with that exact product URL.",
+        "Only after source_url is replaced, confirm and attach the product image URL."
       ],
       "source_url_update_required": true,
       "representative_image": false,
@@ -2216,6 +2798,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2228,6 +2811,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2253,6 +2845,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2265,6 +2858,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2290,6 +2892,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2302,6 +2905,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2327,6 +2939,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2339,6 +2952,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2364,6 +2986,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2376,6 +2999,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2401,6 +3033,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2413,6 +3046,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2438,6 +3080,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2450,6 +3093,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2475,6 +3127,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2487,6 +3140,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2512,6 +3174,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2524,6 +3187,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2549,6 +3221,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2561,6 +3234,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2586,6 +3268,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2598,6 +3281,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2623,6 +3315,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2635,6 +3328,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2660,6 +3362,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2672,6 +3375,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2697,6 +3409,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2709,6 +3422,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2734,6 +3456,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2746,6 +3469,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2771,6 +3503,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2783,6 +3516,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2808,6 +3550,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2820,6 +3563,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2845,6 +3597,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2857,6 +3610,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2882,6 +3644,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2894,6 +3657,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2919,6 +3691,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2931,6 +3704,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2956,6 +3738,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -2968,6 +3751,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -2993,6 +3785,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -3005,6 +3798,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,
@@ -3030,6 +3832,7 @@
       "requires_exact_source_url": true,
       "requires_representative_image_flag": true,
       "blocked_until": "manual_confirmed_image_url",
+      "review_lane": "representative_image_candidate_review",
       "candidate_image_url": "",
       "candidate_title": "",
       "source_url_review_lane": "",
@@ -3042,6 +3845,15 @@
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
+      ],
+      "image_import_blockers": [
+        "representative_image_may_not_match_exact_variant",
+        "product_type_confirmation_required"
+      ],
+      "manual_confirmation_requirements": [
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Do not auto-apply if the official candidate shows a different product type."
       ],
       "source_url_update_required": false,
       "representative_image": true,

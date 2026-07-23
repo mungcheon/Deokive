@@ -29,7 +29,16 @@ class BuildImageAttachmentConfirmedTemplatePublicTest(unittest.TestCase):
                             "source_url_update_required": True,
                             "representative_image_review_required": False,
                             "image_url_ready": False,
+                            "review_lane": "source_url_replacement_first",
                             "required_before_image_import": ["confirm_exact_product_source_url"],
+                            "image_import_blockers": [
+                                "generic_storefront_source_url",
+                                "missing_exact_product_detail_url",
+                            ],
+                            "manual_confirmation_requirements": [
+                                "Find the exact product detail page.",
+                                "Attach only exact product images.",
+                            ],
                             "catalog_field_import_template": {
                                 "row_index": 10,
                                 "field": "image_url",
@@ -67,6 +76,11 @@ class BuildImageAttachmentConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(template["summary"]["source_url_update_required_rows"], 1)
         self.assertEqual(template["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(template["summary"]["source_url_candidate_prefilled_rows"], 1)
+        self.assertEqual(template["summary"]["by_review_lane"], [["source_url_replacement_first", 1]])
+        self.assertEqual(
+            template["summary"]["by_image_import_blocker"],
+            [["generic_storefront_source_url", 1], ["missing_exact_product_detail_url", 1]],
+        )
         self.assertEqual(template["summary"]["by_source_url_review_lane"], [["weak_candidate_review", 1]])
         self.assertEqual(template["summary"]["by_batch"], [["image-attachment-action-001", 1]])
         self.assertFalse(template["summary"]["auto_apply_enabled"])
@@ -80,6 +94,15 @@ class BuildImageAttachmentConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["candidate_title"], "Badge exact-ish")
         self.assertEqual(item["source_url_review_lane"], "weak_candidate_review")
         self.assertEqual(item["source_url_review_blockers"], ["weak_candidate_only"])
+        self.assertEqual(item["review_lane"], "source_url_replacement_first")
+        self.assertEqual(
+            item["image_import_blockers"],
+            ["generic_storefront_source_url", "missing_exact_product_detail_url"],
+        )
+        self.assertEqual(
+            item["manual_confirmation_requirements"],
+            ["Find the exact product detail page.", "Attach only exact product images."],
+        )
         self.assertEqual(item["evidence_url"], "https://fanding.kr/@stellive/shop/100")
         self.assertEqual(item["current_source_url"], "https://fanding.kr/@stellive/shop")
         self.assertEqual(item["row_index"], 10)
