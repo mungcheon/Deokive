@@ -70,6 +70,8 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
             report["summary"]["work_order_lanes"],
             ["confirm_release_dates", "confirm_draw_prices"],
         )
+        self.assertEqual(report["summary"]["campaign_patch_work_order_rows"], 2)
+        self.assertEqual(report["summary"]["campaign_patch_work_order_template_rows"], 2)
         self.assertEqual([step["lane"] for step in report["work_order"]], ["confirm_release_dates", "confirm_draw_prices"])
         self.assertEqual(report["work_order"][0]["campaign_count"], 1)
         self.assertEqual(report["work_order"][0]["catalog_item_rows"], 8)
@@ -89,6 +91,22 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
             {"release_date": 1, "official_price_jpy": 1},
         )
         self.assertEqual([row["slug"] for row in report["batches"][0]["campaigns"]], ["release", "price"])
+        self.assertEqual(
+            [row["slug"] for row in report["campaign_patch_work_order"]],
+            ["release", "price"],
+        )
+        first_work_item = report["campaign_patch_work_order"][0]
+        self.assertEqual(first_work_item["fields_to_confirm"], ["release_date"])
+        self.assertEqual(first_work_item["field_patch_template_count"], 1)
+        self.assertFalse(first_work_item["manual_confirmed"])
+        self.assertEqual(
+            first_work_item["blocked_until"],
+            "labeled_official_1kuji_campaign_metadata_confirmed",
+        )
+        self.assertEqual(
+            first_work_item["field_patch_templates"][0]["field"],
+            "release_date",
+        )
         self.assertEqual(
             report["batches"][0]["review_state"],
             "manual_official_campaign_metadata_confirmation_required",
@@ -151,6 +169,7 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["campaign_queue_coverage"], 0.6667)
         self.assertEqual(report["summary"]["action_batch_count"], 2)
         self.assertEqual(report["summary"]["work_order_steps"], 1)
+        self.assertEqual(report["summary"]["campaign_patch_work_order_rows"], 2)
         self.assertEqual(report["work_order"][0]["campaign_count"], 2)
 
 

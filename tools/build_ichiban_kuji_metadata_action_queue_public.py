@@ -190,6 +190,47 @@ def _work_order(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return work_order
 
 
+def _campaign_patch_work_order(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for index, campaign in enumerate(campaigns, start=1):
+        templates = [
+            template
+            for template in campaign.get("campaign_field_patch_templates") or []
+            if isinstance(template, dict)
+        ]
+        fields = [
+            str(template.get("field") or "")
+            for template in templates
+            if template.get("field")
+        ]
+        rows.append(
+            {
+                "rank": index,
+                "review_lane": campaign.get("review_lane"),
+                "slug": campaign.get("slug"),
+                "title": campaign.get("title"),
+                "url": campaign.get("url"),
+                "catalog_item_rows": campaign.get("catalog_item_rows"),
+                "fields_to_confirm": fields,
+                "field_patch_template_count": len(templates),
+                "sample_catalog_indexes": campaign.get("sample_catalog_indexes") or [],
+                "sample_names": campaign.get("sample_names") or [],
+                "manual_confirmation_requirements": campaign.get(
+                    "manual_confirmation_requirements"
+                )
+                or [],
+                "field_patch_templates": templates,
+                "manual_confirmed": False,
+                "manual_confirmation_template": CONFIRMED_TEMPLATE,
+                "confirmed_queue": CONFIRMED_QUEUE,
+                "import_tool": IMPORT_TOOL,
+                "blocked_until": UNBLOCKS_WHEN,
+                "auto_apply_enabled": False,
+            }
+        )
+    return rows
+
+
 def _compact_campaign(campaign: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
     templates = [
         template
@@ -252,6 +293,7 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
     )
     published = campaigns[:max_campaigns]
     work_order = _work_order(published)
+    campaign_patch_work_order = _campaign_patch_work_order(published)
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(published), batch_size):
@@ -310,6 +352,11 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
             "field_patch_template_counts": patch_template_counts.most_common(),
             "work_order_steps": len(work_order),
             "work_order_lanes": [step["lane"] for step in work_order],
+            "campaign_patch_work_order_rows": len(campaign_patch_work_order),
+            "campaign_patch_work_order_template_rows": sum(
+                int(row.get("field_patch_template_count") or 0)
+                for row in campaign_patch_work_order
+            ),
             "skipped_without_templates": skipped_without_templates,
             "auto_apply_enabled": False,
         },
@@ -320,6 +367,7 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
             f"Copy {CONFIRMED_TEMPLATE} to {CONFIRMED_QUEUE}, fill manual_value and confirmation flags, then run {IMPORT_TOOL}.",
         ],
         "work_order": work_order,
+        "campaign_patch_work_order": campaign_patch_work_order,
         "batches": batches,
         "automation_policy": {
             "auto_apply_release_date": False,
