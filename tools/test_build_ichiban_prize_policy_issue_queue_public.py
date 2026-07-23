@@ -79,13 +79,42 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
                 ["probable_reissue_or_campaign_variant_review", 1],
             ],
         )
+        self.assertEqual(
+            dict(report["summary"]["by_blocked_reason"]),
+            {
+                "zero_price_exception_identity_requires_confirmation": 1,
+                "same_prize_label_has_multiple_unnumbered_rows": 1,
+                "same_name_across_campaign_urls_may_be_reissue": 1,
+            },
+        )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["summary"]["auto_delete_enabled"])
         self.assertEqual(report["policy_status"]["last_one_and_double_chance_prices"], "manual_fix_required")
         self.assertEqual(report["policy_status"]["probable_reissues"], "manual_review")
         self.assertEqual(report["issues"][0]["issue_id"], "ichiban-last-one-price-policy")
+        self.assertEqual(
+            report["issues"][0]["blocked_until"],
+            "last_one_or_double_chance_identity_confirmed",
+        )
+        self.assertIn(
+            "official_campaign_page_confirms_exception_prize",
+            report["issues"][0]["required_evidence"],
+        )
         self.assertEqual(report["issues"][1]["issue_id"], "ichiban-unnumbered-multi-item-prize-review")
+        self.assertEqual(
+            report["issues"][1]["blocked_reason"],
+            "same_prize_label_has_multiple_unnumbered_rows",
+        )
+        self.assertIn(
+            "decision_separate_prizes_selectable_variants_or_duplicate",
+            report["issues"][1]["required_evidence"],
+        )
         self.assertEqual(report["issues"][2]["issue_id"], "ichiban-reissue-review-001")
+        self.assertEqual(
+            report["issues"][2]["blocked_reason"],
+            "same_name_across_campaign_urls_may_be_reissue",
+        )
+        self.assertIn("release_periods_compared", report["issues"][2]["required_evidence"])
 
     def test_clean_price_policy_still_surfaces_remaining_reviews(self) -> None:
         report = queue.build_queue(
@@ -150,6 +179,10 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unnumbered_multi_item_prize_review_rows"], 2)
         self.assertEqual(report["policy_status"]["unnumbered_multi_item_prizes"], "manual_review")
         self.assertEqual(report["issues"][0]["issue_id"], "ichiban-unnumbered-multi-item-prize-review")
+        self.assertEqual(
+            report["issues"][0]["blocked_until"],
+            "official_prize_lineup_relationship_confirmed",
+        )
 
 
 if __name__ == "__main__":

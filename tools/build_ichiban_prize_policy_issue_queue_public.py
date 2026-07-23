@@ -20,6 +20,60 @@ DEFAULT_DEDUPE_ACTION_QUEUE = DATA / "catalog_deduplication_action_queue_public.
 DEFAULT_OUTPUT = DATA / "ichiban_kuji_prize_policy_issue_queue_public.json"
 
 
+LANE_BLOCKERS = {
+    "zero_price_policy_violation": {
+        "blocked_until": "last_one_or_double_chance_identity_confirmed",
+        "blocked_reason": "zero_price_exception_identity_requires_confirmation",
+        "required_evidence": [
+            "prize_label_is_last_one_or_double_chance",
+            "official_campaign_page_confirms_exception_prize",
+            "manual_note_before_setting_price_to_zero",
+        ],
+    },
+    "numbered_variant_gap_review": {
+        "blocked_until": "official_variant_number_coverage_confirmed",
+        "blocked_reason": "numbered_variant_sequence_gap_requires_official_lineup_review",
+        "required_evidence": [
+            "official_variant_count",
+            "all_variant_numbers_or_missing_numbers_confirmed",
+            "image_url_for_each_confirmed_variant",
+        ],
+    },
+    "unnumbered_multi_item_prize_review": {
+        "blocked_until": "official_prize_lineup_relationship_confirmed",
+        "blocked_reason": "same_prize_label_has_multiple_unnumbered_rows",
+        "required_evidence": [
+            "official_campaign_page_prize_block",
+            "decision_separate_prizes_selectable_variants_or_duplicate",
+            "manual_note_for_keep_separate_or_split_or_dedupe",
+        ],
+    },
+    "probable_reissue_or_campaign_variant_review": {
+        "blocked_until": "campaign_reissue_or_exact_duplicate_decision_confirmed",
+        "blocked_reason": "same_name_across_campaign_urls_may_be_reissue",
+        "required_evidence": [
+            "campaign_titles_compared",
+            "release_periods_compared",
+            "prize_lineups_compared",
+            "manual_decision_keep_separate_or_keep_drop",
+        ],
+    },
+}
+
+
+def lane_blocker(lane: str) -> dict[str, Any]:
+    return dict(
+        LANE_BLOCKERS.get(
+            lane,
+            {
+                "blocked_until": "manual_review_completed",
+                "blocked_reason": "manual_review_required",
+                "required_evidence": ["manual_confirmation"],
+            },
+        )
+    )
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -100,6 +154,7 @@ def _price_issue(
         "items": rows,
         "manual_confirmed": False,
         "auto_apply_enabled": False,
+        **lane_blocker("zero_price_policy_violation"),
     }
 
 
@@ -122,6 +177,7 @@ def _reissue_work_order(row: dict[str, Any], rank: int) -> dict[str, Any]:
         "manual_confirmed": False,
         "auto_merge_enabled": False,
         "auto_delete_enabled": False,
+        **lane_blocker("probable_reissue_or_campaign_variant_review"),
     }
 
 
@@ -187,6 +243,7 @@ def build_queue(
                 "groups": [_compact_group(group) for group in incomplete_numbered],
                 "manual_confirmed": False,
                 "auto_apply_enabled": False,
+                **lane_blocker("numbered_variant_gap_review"),
             }
         )
 
@@ -205,6 +262,7 @@ def build_queue(
                 "groups": [_compact_group(group) for group in unnumbered_multi],
                 "manual_confirmed": False,
                 "auto_apply_enabled": False,
+                **lane_blocker("unnumbered_multi_item_prize_review"),
             }
         )
 
@@ -216,6 +274,10 @@ def build_queue(
 
     lane_counts = Counter(str(issue.get("lane") or "") for issue in issues)
     lane_counts.pop("", None)
+    blocked_reason_counts = Counter(str(issue.get("blocked_reason") or "") for issue in issues)
+    blocked_reason_counts.pop("", None)
+    blocked_until_counts = Counter(str(issue.get("blocked_until") or "") for issue in issues)
+    blocked_until_counts.pop("", None)
     open_issue_rows = sum(int(issue.get("open_rows") or 0) for issue in issues)
 
     return {
@@ -250,6 +312,12 @@ def build_queue(
             ),
             "manual_confirmed_rows": 0,
             "lane_counts": [[lane, count] for lane, count in lane_counts.most_common()],
+            "by_blocked_reason": [
+                [reason, count] for reason, count in blocked_reason_counts.most_common()
+            ],
+            "by_blocked_until": [
+                [reason, count] for reason, count in blocked_until_counts.most_common()
+            ],
             "auto_apply_enabled": False,
             "auto_merge_enabled": False,
             "auto_delete_enabled": False,
