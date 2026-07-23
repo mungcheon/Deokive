@@ -267,8 +267,6 @@ class _CatalogImportPanel extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isCompact = constraints.maxWidth < 360;
-
         return Container(
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
@@ -278,6 +276,7 @@ class _CatalogImportPanel extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -321,12 +320,6 @@ class _CatalogImportPanel extends StatelessWidget {
                               label: '사진 ${health.imageCoverageLabel}',
                               palette: palette,
                             ),
-                            if (health.duplicateCount > 0)
-                              _CatalogMetaChip(
-                                label:
-                                    '중복 ${_CatalogHealthSummary.formatCount(health.duplicateCount)}개 제외',
-                                palette: palette,
-                              ),
                           ],
                         ),
                       ],
@@ -336,9 +329,7 @@ class _CatalogImportPanel extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                isCompact
-                    ? '검색해서 내 굿즈함이나 위시리스트에 추가해요.'
-                    : '공개 DB에서 찾은 굿즈를 내 굿즈함이나 위시리스트에 바로 추가해요.',
+                '검색해서 내 굿즈함이나 위시리스트에 바로 추가해요.',
                 maxLines: 2,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
