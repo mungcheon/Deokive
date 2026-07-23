@@ -335,7 +335,7 @@ class _CatalogImportPanel extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  '중복과 예시 항목을 제외한 공개 DB에서 바로 추가해요.',
+                  '공개 DB에서 검색하고 내 굿즈함에 바로 담아요.',
                   maxLines: 1,
                   softWrap: false,
                   overflow: TextOverflow.ellipsis,

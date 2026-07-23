@@ -316,8 +316,13 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                           return _CatalogListTile(
                             entry: entry,
                             ownedCount: ownedCount,
-                            onTap: () =>
+                            onPreview: () =>
                                 _showAddSheet(context, appState, entry),
+                            onAdd: () => showCatalogGoodsImportFlowForEntry(
+                              context,
+                              entry: entry,
+                              initialFolder: widget.initialFolder,
+                            ),
                           );
                         },
                       ),
@@ -333,12 +338,14 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
 class _CatalogListTile extends StatelessWidget {
   final GoodsCatalogEntry entry;
   final int ownedCount;
-  final VoidCallback onTap;
+  final VoidCallback onPreview;
+  final VoidCallback onAdd;
 
   const _CatalogListTile({
     required this.entry,
     required this.ownedCount,
-    required this.onTap,
+    required this.onPreview,
+    required this.onAdd,
   });
 
   @override
@@ -350,7 +357,7 @@ class _CatalogListTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(18),
       child: InkWell(
         borderRadius: BorderRadius.circular(18),
-        onTap: onTap,
+        onTap: onPreview,
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
@@ -404,7 +411,7 @@ class _CatalogListTile extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               FilledButton.tonalIcon(
-                onPressed: onTap,
+                onPressed: onAdd,
                 icon: const Icon(Icons.add_rounded, size: 18),
                 label: const Text('추가'),
                 style: FilledButton.styleFrom(

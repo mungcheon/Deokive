@@ -51,7 +51,7 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(FilledButton, '추가').first);
+    await tester.tap(find.text(entry.nameKo).first);
     await tester.pumpAndSettle();
 
     await tester.tap(find.byType(FilledButton).last);
@@ -112,8 +112,6 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(FilledButton).last);
-    await tester.pumpAndSettle();
 
     expect(appState.goodsItems, hasLength(1));
     expect(appState.goodsItems.single.name, entry.nameKo);
@@ -165,8 +163,6 @@ void main() {
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).first);
-    await tester.pumpAndSettle();
-    await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();
