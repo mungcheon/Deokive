@@ -6205,6 +6205,36 @@ def build_ichiban_kuji_historical_roadmap_public(
             patch_candidates, "open_candidate_rows"
         ),
         "roadmap_phase_count": len(phases),
+        "completion_readiness": {
+            "status": "manual_review_required",
+            "manual_metadata_campaigns": value(metadata_action, "actionable_campaigns"),
+            "manual_reissue_review_groups": value(
+                prize_policy,
+                "probable_reissue_review_groups",
+            ),
+            "manual_prize_name_image_patch_rows": value(
+                patch_candidates,
+                "open_candidate_rows",
+            )
+            + value(prize_name_image, "review_rows"),
+            "zero_price_policy_ready": prize_policy.get(
+                "zero_price_exception_policy_pass",
+                False,
+            )
+            is True
+            and value(prize_policy, "zero_price_violation_rows") == 0,
+            "numbered_variant_policy_ready": prize_policy.get(
+                "numbered_variant_coverage_policy_pass",
+                False,
+            )
+            is True,
+            "blocked_auto_apply_reasons": [
+                "campaign_metadata_requires_official_confirmation",
+                "same_name_reissue_groups_require_keep_or_merge_decisions",
+                "prize_name_image_patches_require_official_lineup_confirmation",
+            ],
+            "next_safe_phase": "confirm_ichiban_campaign_metadata",
+        },
         "auto_apply_enabled": False,
         "auto_merge_enabled": False,
         "auto_delete_enabled": False,

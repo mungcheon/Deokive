@@ -488,6 +488,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["ichiban_kuji_historical_roadmap"]["metadata_actionable_campaigns"],
             roadmap["summary"]["metadata_actionable_campaigns"],
         )
+        self.assertEqual(
+            quality["ichiban_kuji_historical_roadmap"]["completion_readiness"][
+                "status"
+            ],
+            "manual_review_required",
+        )
+        self.assertIs(
+            quality["ichiban_kuji_historical_roadmap"]["completion_readiness"][
+                "zero_price_policy_ready"
+            ],
+            True,
+        )
         ichiban_history = reports.load_json(reports.ICHIIBAN_KUJI_HISTORY)
         self.assertEqual(
             ichiban_history["summary"]["official_price_jpy_review_queue_campaigns"],
@@ -954,6 +966,23 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(summary["metadata_review_queue_covers_all_price_campaign_groups"])
         self.assertEqual(summary["probable_reissue_review_groups"], 2)
         self.assertEqual(summary["roadmap_phase_count"], 5)
+        self.assertEqual(
+            summary["completion_readiness"],
+            {
+                "status": "manual_review_required",
+                "manual_metadata_campaigns": 2,
+                "manual_reissue_review_groups": 2,
+                "manual_prize_name_image_patch_rows": 10,
+                "zero_price_policy_ready": True,
+                "numbered_variant_policy_ready": True,
+                "blocked_auto_apply_reasons": [
+                    "campaign_metadata_requires_official_confirmation",
+                    "same_name_reissue_groups_require_keep_or_merge_decisions",
+                    "prize_name_image_patches_require_official_lineup_confirmation",
+                ],
+                "next_safe_phase": "confirm_ichiban_campaign_metadata",
+            },
+        )
         self.assertEqual(roadmap["phases"][0]["phase"], "confirm_ichiban_campaign_metadata")
         self.assertEqual(roadmap["phases"][0]["rows"], 2)
         self.assertEqual(

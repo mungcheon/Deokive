@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T21:16:36Z",
+  "generated_at": "2026-07-23T22:12:17Z",
   "summary": {
     "catalog_ichiban_rows": 7898,
     "campaign_rows": 614,
@@ -28,6 +28,20 @@
     "prize_name_image_review_rows": 0,
     "prize_name_image_patch_open_rows": 0,
     "roadmap_phase_count": 5,
+    "completion_readiness": {
+      "status": "manual_review_required",
+      "manual_metadata_campaigns": 44,
+      "manual_reissue_review_groups": 20,
+      "manual_prize_name_image_patch_rows": 0,
+      "zero_price_policy_ready": true,
+      "numbered_variant_policy_ready": true,
+      "blocked_auto_apply_reasons": [
+        "campaign_metadata_requires_official_confirmation",
+        "same_name_reissue_groups_require_keep_or_merge_decisions",
+        "prize_name_image_patches_require_official_lineup_confirmation"
+      ],
+      "next_safe_phase": "confirm_ichiban_campaign_metadata"
+    },
     "auto_apply_enabled": false,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
