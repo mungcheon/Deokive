@@ -113,6 +113,11 @@ def _next_work_order(template: dict[str, Any]) -> dict[str, Any]:
 
 
 def _pack_queue_preview(template: dict[str, Any], focus_pack_id: Any, *, limit: int = 8) -> list[dict[str, Any]]:
+    rows = _focus_pack_progress_queue(template, focus_pack_id)
+    return rows[:limit]
+
+
+def _focus_pack_progress_queue(template: dict[str, Any], focus_pack_id: Any) -> list[dict[str, Any]]:
     progress = _pack_progress(template)
     rows: list[dict[str, Any]] = []
     work_order = template.get("work_order")
@@ -149,8 +154,6 @@ def _pack_queue_preview(template: dict[str, Any], focus_pack_id: Any, *, limit: 
                 "first_official_search_url": row.get("first_official_search_url"),
             }
         )
-        if len(rows) >= limit:
-            break
     return rows
 
 
@@ -209,6 +212,7 @@ def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
 def build_report(template: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     next_pack = _next_work_order(template)
     focus_pack_id = next_pack.get("focus_pack_id")
+    focus_pack_progress_queue = _focus_pack_progress_queue(template, focus_pack_id)
     pack_queue_preview = _pack_queue_preview(template, focus_pack_id)
     items = [
         _compact_item(item)
@@ -245,6 +249,10 @@ def build_report(template: dict[str, Any], *, generated_at: str | None = None) -
             "official_search_url_count": len(official_search_urls),
             "first_official_search_url": next_pack.get("first_official_search_url"),
             "pack_queue_preview_count": len(pack_queue_preview),
+            "focus_pack_progress_queue_count": len(focus_pack_progress_queue),
+            "focus_pack_progress_remaining_rows": sum(
+                int(row.get("remaining_review_rows") or 0) for row in focus_pack_progress_queue
+            ),
             "next_pack_after_current": (
                 pack_queue_preview[1].get("focus_pack_id")
                 if len(pack_queue_preview) > 1
@@ -260,6 +268,7 @@ def build_report(template: dict[str, Any], *, generated_at: str | None = None) -
         ],
         "next_pack": next_pack,
         "pack_queue_preview": pack_queue_preview,
+        "focus_pack_progress_queue": focus_pack_progress_queue,
         "official_search_urls": official_search_urls,
         "items": items,
         "automation_policy": {

@@ -99,9 +99,15 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["official_search_url_count"], 2)
         self.assertEqual(report["summary"]["template_items"], 3)
         self.assertEqual(report["summary"]["pack_queue_preview_count"], 2)
+        self.assertEqual(report["summary"]["focus_pack_progress_queue_count"], 2)
+        self.assertEqual(report["summary"]["focus_pack_progress_remaining_rows"], 3)
         self.assertEqual(report["summary"]["next_pack_after_current"], "source-discovery-focus-002")
         self.assertEqual(
             [row["focus_pack_id"] for row in report["pack_queue_preview"]],
+            ["source-discovery-focus-001", "source-discovery-focus-002"],
+        )
+        self.assertEqual(
+            [row["focus_pack_id"] for row in report["focus_pack_progress_queue"]],
             ["source-discovery-focus-001", "source-discovery-focus-002"],
         )
         self.assertTrue(report["pack_queue_preview"][0]["is_current_pack"])
@@ -190,8 +196,11 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["confirmed_source_rows"], 0)
         self.assertEqual(report["summary"]["remaining_review_rows"], 1)
         self.assertEqual(report["summary"]["pack_queue_preview_count"], 1)
+        self.assertEqual(report["summary"]["focus_pack_progress_queue_count"], 1)
+        self.assertEqual(report["summary"]["focus_pack_progress_remaining_rows"], 1)
         self.assertIsNone(report["summary"]["next_pack_after_current"])
         self.assertEqual(report["pack_queue_preview"][0]["focus_pack_id"], "source-discovery-focus-002")
+        self.assertEqual(report["focus_pack_progress_queue"][0]["focus_pack_id"], "source-discovery-focus-002")
         self.assertEqual([item["catalog_index"] for item in report["items"]], [12])
 
 
