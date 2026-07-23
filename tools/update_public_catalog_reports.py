@@ -3373,8 +3373,18 @@ def compact_sample(item: dict[str, Any]) -> dict[str, Any]:
         "category": item.get("category"),
         "source_store": item.get("source_store"),
         "source_url": item.get("source_url"),
-        "official_search_url": item.get("official_search_url"),
+        "official_search_url": normalize_public_search_url(item.get("official_search_url")),
     }
+
+
+def normalize_public_search_url(value: Any) -> str:
+    url = str(value or "").strip()
+    if not url:
+        return ""
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.netloc.lower() == "stellive.fanding.kr" and parsed.path.rstrip("/") == "/search":
+        return urllib.parse.urlunsplit(("https", "fanding.kr", "/@stellive/shop", parsed.query, parsed.fragment))
+    return url
 
 
 def build_agent_work_queue_public(

@@ -7,6 +7,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 
 
 try:
@@ -393,6 +394,7 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     source_url_template = _source_url_import_template(item, group) if source_url_update_required else None
     review_lane = _review_lane(workflow)
     source_search_url = _source_search_url(item, template)
+    catalog_template = _normalized_catalog_field_template(template, source_search_url)
     return {
         "catalog_index": item.get("catalog_index"),
         "workflow": workflow,
@@ -412,7 +414,7 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "image_import_blockers": _image_import_blockers(workflow),
         "manual_confirmation_requirements": _manual_confirmation_requirements(workflow),
         "source_url_import_template": source_url_template,
-        "catalog_field_import_template": template,
+        "catalog_field_import_template": catalog_template,
         "review_state": "exact_product_image_confirmation_required",
         "auto_apply_enabled": False,
     }
@@ -420,12 +422,32 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
 
 def _source_search_url(item: dict[str, Any], template: dict[str, Any] | None = None) -> Any:
     template = template if isinstance(template, dict) else {}
-    return (
+    return _normalize_source_search_url(
         item.get("official_search_url")
         or item.get("source_search_url")
         or template.get("official_search_url")
         or template.get("source_search_url")
     )
+
+
+def _normalize_source_search_url(value: Any) -> str:
+    url = str(value or "").strip()
+    if not url:
+        return ""
+    parsed = urlsplit(url)
+    if parsed.netloc.lower() == "stellive.fanding.kr" and parsed.path.rstrip("/") == "/search":
+        return urlunsplit(("https", "fanding.kr", "/@stellive/shop", parsed.query, parsed.fragment))
+    return url
+
+
+def _normalized_catalog_field_template(template: dict[str, Any], source_search_url: str) -> dict[str, Any]:
+    normalized = dict(template)
+    if source_search_url:
+        if normalized.get("official_search_url"):
+            normalized["official_search_url"] = source_search_url
+        if normalized.get("source_search_url"):
+            normalized["source_search_url"] = source_search_url
+    return normalized
 
 
 def _source_url_import_template(item: dict[str, Any], group: dict[str, Any]) -> dict[str, Any]:

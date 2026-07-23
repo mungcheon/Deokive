@@ -25,7 +25,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
                             "source_url": "https://example.com/shop",
                             "catalog_field_import_template": {
                                 "field": "image_url",
-                                "source_search_url": "https://example.com/search?q=badge",
+                                "source_search_url": "https://stellive.fanding.kr/search?keyword=Badge",
                             },
                         },
                         {
@@ -124,10 +124,17 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(source_template["candidate_source_url"], "")
         self.assertEqual(source_template["current_source_url"], "https://example.com/shop")
         self.assertFalse(source_template["manual_confirmed"])
-        self.assertEqual(report["batches"][0]["items"][1]["source_search_url"], "https://example.com/search?q=badge")
+        self.assertEqual(
+            report["batches"][0]["items"][1]["source_search_url"],
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
+        )
         self.assertEqual(
             report["batches"][0]["items"][1]["source_url_import_template"]["source_search_url"],
-            "https://example.com/search?q=badge",
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
+        )
+        self.assertEqual(
+            report["batches"][0]["items"][1]["catalog_field_import_template"]["source_search_url"],
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
         )
         self.assertEqual(
             report["batches"][0]["items"][0]["required_before_image_import"],
@@ -145,7 +152,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(work_order["sample_items"][0]["catalog_index"], 2)
         self.assertEqual(
             work_order["sample_items"][0]["source_url_import_template"]["source_search_url"],
-            "https://example.com/search?q=badge",
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
         )
         self.assertEqual(
             work_order["sample_items"][0]["source_url_import_template"]["field"],

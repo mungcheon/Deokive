@@ -138,7 +138,7 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["current_source_url"], "https://fanding.kr/@stellive/shop")
         self.assertEqual(
             item["store_search_hints"]["store_search_url"],
-            "https://stellive.fanding.kr/search?keyword=Badge",
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
         )
         self.assertEqual(item["store_search_hints"]["site_query"], "site:fanding.kr/@stellive/shop")
         self.assertEqual(item["next_after_confirmed_source_url"], "extract_or_confirm_product_page_image_url")
@@ -299,7 +299,7 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["store_search_hints"]["site_query"], "site:fanding.kr/@stellive/shop")
         self.assertEqual(
             item["store_search_hints"]["store_search_url"],
-            "https://stellive.fanding.kr/search?keyword=Mascot+plush",
+            "https://fanding.kr/@stellive/shop?keyword=Mascot+plush",
         )
         self.assertIn(
             'site:fanding.kr/@stellive/shop "Mascot plush Plush"',

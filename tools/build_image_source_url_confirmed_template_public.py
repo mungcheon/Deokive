@@ -6,7 +6,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, urlsplit, urlunsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -101,7 +101,7 @@ def _store_search_scope(source_store: Any, current_source_url: Any) -> dict[str,
         return {
             "storefront_url": current_url or "https://fanding.kr/@stellive/shop",
             "site_query": "site:fanding.kr/@stellive/shop",
-            "search_url_template": "https://stellive.fanding.kr/search?keyword={query}",
+            "search_url_template": "https://fanding.kr/@stellive/shop?keyword={query}",
         }
     if "pokemon" in store or "포켓몬" in store:
         return {
@@ -114,6 +114,16 @@ def _store_search_scope(source_store: Any, current_source_url: Any) -> dict[str,
         "site_query": "",
         "search_url_template": "",
     }
+
+
+def _normalized_store_search_url(value: Any, scope: dict[str, str]) -> str:
+    url = _compact_text(value)
+    if not url:
+        return ""
+    parsed = urlsplit(url)
+    if parsed.netloc.lower() == "stellive.fanding.kr" and parsed.path.rstrip("/") == "/search":
+        return urlunsplit(("https", "fanding.kr", "/@stellive/shop", parsed.query, parsed.fragment))
+    return url
 
 
 def _generated_search_queries(source_template: dict[str, Any], item: dict[str, Any]) -> list[str]:
@@ -144,7 +154,7 @@ def _generated_store_search_hints(source_template: dict[str, Any], item: dict[st
     current_url = _compact_text(item.get("source_url") or source_template.get("current_source_url"))
     name = _first_non_empty(item.get("name_ja"), item.get("name_ko"))
     scope = _store_search_scope(source_store, current_url)
-    official_search_url = _compact_text(item.get("official_search_url"))
+    official_search_url = _normalized_store_search_url(item.get("official_search_url"), scope)
     encoded_name = quote_plus(name) if name else ""
     search_url = (
         official_search_url
