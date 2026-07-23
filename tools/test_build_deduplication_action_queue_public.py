@@ -218,6 +218,17 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
             report["ichiban_reissue_review_lane"][0]["review_state"],
             "probable_reissue_manual_confirmation_required",
         )
+        self.assertEqual(report["summary"]["ichiban_reissue_work_order_rows"], 1)
+        self.assertEqual(report["summary"]["ichiban_reissue_decision_template_rows"], 1)
+        self.assertEqual(report["summary"]["ichiban_reissue_manual_confirmed_rows"], 0)
+        self.assertEqual(
+            report["ichiban_reissue_work_order"][0]["review_state"],
+            "ichiban_reissue_identity_confirmation_required",
+        )
+        self.assertIn(
+            "reissue_or_campaign_variant_keep_separate",
+            report["ichiban_reissue_work_order"][0]["decision_template"]["decision_options"],
+        )
         self.assertIn(
             "ichiban_reissue_manual_confirmation_required",
             report["ichiban_reissue_review_lane"][0]["merge_blockers"],
@@ -248,6 +259,12 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_probable_reissue_sample_rows"], 2)
         self.assertEqual(report["summary"]["ichiban_reissue_protected_groups"], 0)
         self.assertEqual(len(report["ichiban_reissue_review_lane"]), 1)
+        self.assertEqual(len(report["ichiban_reissue_work_order"]), 1)
+        self.assertEqual(
+            report["ichiban_reissue_work_order"][0]["next_machine_step"],
+            "compare_campaign_pages_then_record_reissue_or_duplicate_decision",
+        )
+        self.assertFalse(report["ichiban_reissue_work_order"][0]["decision_template"]["manual_confirmed"])
         self.assertEqual(
             report["ichiban_reissue_review_lane"][0]["next_machine_step"],
             "verify_ichiban_campaign_pages_before_dedupe",

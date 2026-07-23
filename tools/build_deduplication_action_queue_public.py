@@ -141,6 +141,66 @@ def ichiban_reissue_review_lane(
     return lane[:limit]
 
 
+def ichiban_reissue_work_order(
+    review_lane: list[dict[str, Any]],
+    *,
+    limit: int = 50,
+) -> list[dict[str, Any]]:
+    orders: list[dict[str, Any]] = []
+    for rank, row in enumerate(review_lane[:limit], start=1):
+        sample_rows = [sample for sample in row.get("sample_rows") or [] if isinstance(sample, dict)]
+        catalog_indexes = sorted(
+            {
+                catalog_index
+                for sample in sample_rows
+                if isinstance((catalog_index := sample.get("catalog_index")), int)
+            }
+        )
+        source_urls = [str(url).strip() for url in row.get("source_urls") or [] if str(url).strip()]
+        orders.append(
+            {
+                "work_order_id": f"ichiban-reissue-dedupe-{rank:03d}",
+                "priority": rank,
+                "normalized_name": row.get("normalized_name"),
+                "row_count": row.get("row_count"),
+                "source_url_count": row.get("source_url_count"),
+                "catalog_indexes": catalog_indexes,
+                "source_urls": source_urls,
+                "campaign_slug_families": row.get("campaign_slug_families") or [],
+                "reissue_signal_reasons": row.get("reissue_signal_reasons") or [],
+                "review_state": "ichiban_reissue_identity_confirmation_required",
+                "next_machine_step": "compare_campaign_pages_then_record_reissue_or_duplicate_decision",
+                "manual_review_checklist": [
+                    "Open every source_url and compare official campaign title/release period/prize lineup.",
+                    "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+                    "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+                    "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+                    "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls.",
+                ],
+                "decision_template": {
+                    "work_order_id": f"ichiban-reissue-dedupe-{rank:03d}",
+                    "manual_confirmed": False,
+                    "decision": "",
+                    "decision_options": [
+                        "reissue_or_campaign_variant_keep_separate",
+                        "same_sellable_product_keep_drop_confirmed",
+                        "needs_more_source_evidence",
+                    ],
+                    "keep_catalog_index": None,
+                    "drop_catalog_indexes": [],
+                    "evidence_urls": source_urls,
+                    "manual_note": "",
+                    "protected_if_reissue": True,
+                },
+                "sample_rows": sample_rows,
+                "merge_blockers": ["ichiban_reissue_manual_confirmation_required"],
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    return orders
+
+
 def ichiban_reissue_policy_summary(policy_audit: dict[str, Any] | None) -> dict[str, int]:
     if not policy_audit:
         return {
@@ -339,6 +399,7 @@ def build_report(
     reissue_review_index = ichiban_reissue_review_index(ichiban_policy_audit)
     reissue_policy = ichiban_reissue_policy_summary(ichiban_policy_audit)
     reissue_lane = ichiban_reissue_review_lane(ichiban_policy_audit)
+    reissue_work_orders = ichiban_reissue_work_order(reissue_lane)
     protected_group_count = 0
     protected_row_indexes: set[int] = set()
 
@@ -416,6 +477,13 @@ def build_report(
             "by_key_type": _counter_pairs(actionable, "key_type"),
             "excluded_review_confidence": _counter_to_pairs(excluded),
             **reissue_policy,
+            "ichiban_reissue_work_order_rows": len(reissue_work_orders),
+            "ichiban_reissue_decision_template_rows": len(reissue_work_orders),
+            "ichiban_reissue_manual_confirmed_rows": sum(
+                1
+                for order in reissue_work_orders
+                if order.get("decision_template", {}).get("manual_confirmed") is True
+            ),
             "ichiban_reissue_protected_groups": protected_group_count,
             "ichiban_reissue_protected_rows": len(protected_row_indexes),
             "auto_merge_enabled": False,
@@ -426,10 +494,12 @@ def build_report(
             "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",
             "Ichiban Kuji probable reissue rows stay out of this queue until a human confirms they are true duplicates, not re-releases.",
             "Use ichiban_reissue_review_lane for same-name 1kuji campaign rows before any dedupe import.",
+            "Use ichiban_reissue_work_order to record whether each repeated-name campaign group is a reissue/campaign variant or an exact duplicate.",
             "Every accepted group needs an explicit manual keep/drop decision before mutation.",
             f"Copy dedupe_decision_template rows into {CONFIRMED_QUEUE}, set manual_confirmed=true and decision=keep_drop_confirmed, then run {IMPORT_TOOL}.",
         ],
         "ichiban_reissue_review_lane": reissue_lane,
+        "ichiban_reissue_work_order": reissue_work_orders,
         "batches": batches,
         "automation_policy": {
             "auto_merge": False,
