@@ -10919,6 +10919,137 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "missing_image_completion_gate",
                     {},
                 ).get("next_queue_rows", 0),
+                "execution_queue_count": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("execution_queue_summary", {}).get("queue_count", 0),
+                "manual_validation_required_rows": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("blocking_dashboard", {}).get(
+                    "manual_validation_required_rows",
+                    0,
+                ),
+                "source_first_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("source_first_rows", 0),
+                "review_before_attach_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("review_before_attach_rows", 0),
+                "manual_image_research_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("manual_image_research_rows", 0),
+                "source_discovery_focus_pack_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("source_discovery_focus_pack_rows", 0),
+                "source_discovery_remaining_focus_review_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("source_discovery_remaining_focus_review_rows", 0),
+                "source_discovery_next_focus_pack_rows": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("source_discovery_next_focus_pack_rows", 0),
+                "source_discovery_next_focus_pack_id": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("source_discovery_next_focus_pack_id"),
+                "source_discovery_next_focus_action_lanes": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("source_discovery_next_focus_action_lanes", []),
+                "source_discovery_focus_pack_count": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("source_discovery_focus_pack_count", 0),
+                "source_discovery_not_started_focus_pack_count": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("source_discovery_not_started_focus_pack_count", 0),
+                "source_discovery_focus_coverage": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("source_discovery_focus_coverage", 0),
+                "source_discovery_non_focus_rows": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("source_discovery_non_focus_rows", 0),
+                "action_queue_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("action_queue_rows", 0),
+                "direct_image_action_rows": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("direct_image_action_queue_rows", 0),
+                "source_url_update_required_rows": target.get(
+                    "image_attachment_action_queue",
+                    {},
+                ).get("source_url_update_required_rows", 0),
+                "source_url_update_primary_review_url_rows": target.get(
+                    "image_attachment_action_queue",
+                    {},
+                ).get("source_url_update_primary_review_url_rows", 0),
+                "source_url_update_review_start_coverage": target.get(
+                    "image_attachment_action_queue",
+                    {},
+                ).get("source_url_update_review_start_coverage", 0),
+                "representative_image_review_required_rows": target.get(
+                    "image_attachment_action_queue",
+                    {},
+                ).get("representative_image_review_required_rows", 0),
+                "next_representative_review_batch_rows": target.get(
+                    "image_attachment_action_queue",
+                    {},
+                ).get("next_representative_image_review_batch_rows", 0),
+                "next_representative_review_primary_url_rows": target.get(
+                    "image_attachment_action_queue",
+                    {},
+                ).get("next_representative_image_review_batch_primary_review_url_rows", 0),
+                "local_download_ready_rows": target.get(
+                    "image_attachment_action_queue",
+                    {},
+                ).get("local_image_download_instruction_ready_rows", 0),
+                "attachment_template_rows": target.get(
+                    "image_attachment_template_import_dry_run",
+                    {},
+                ).get("template_items", 0),
+                "attachment_template_manual_rows": target.get(
+                    "image_attachment_template_import_dry_run",
+                    {},
+                ).get("manual_confirmed_rows", 0),
+                "attachment_dry_run_ready_rows": target.get(
+                    "image_attachment_template_import_dry_run",
+                    {},
+                ).get("ready_image_rows", 0),
+                "attachment_dry_run_blocked_rows": target.get(
+                    "image_attachment_template_import_dry_run",
+                    {},
+                ).get("blocked_rows", 0),
+                "assigned_report_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("assigned_report_rows", 0),
+                "unassigned_missing_image_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("unassigned_missing_image_rows", 0),
+                "known_image_assets_complete": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("known_image_assets_complete", False),
+                "known_image_download_blocker_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("known_image_download_blocker_rows", 0),
+                "top_blocked_reasons": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("by_blocked_reason", [])[:5],
                 "next_safe_phase": target.get(
                     "missing_image_completion_gate",
                     {},

@@ -1464,6 +1464,106 @@ class PublicCatalogReportTests(unittest.TestCase):
             "replace_generic_source_urls",
         )
         self.assertEqual(pillars["missing_images"]["next_queue_rows"], 50)
+        self.assertEqual(pillars["missing_images"]["execution_queue_count"], 5)
+        self.assertEqual(
+            pillars["missing_images"]["manual_validation_required_rows"],
+            745,
+        )
+        self.assertEqual(pillars["missing_images"]["source_first_rows"], 717)
+        self.assertEqual(pillars["missing_images"]["review_before_attach_rows"], 23)
+        self.assertEqual(pillars["missing_images"]["manual_image_research_rows"], 5)
+        self.assertEqual(
+            pillars["missing_images"]["source_discovery_focus_pack_rows"],
+            452,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_discovery_remaining_focus_review_rows"],
+            452,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_discovery_next_focus_pack_rows"],
+            20,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_discovery_next_focus_pack_id"],
+            "source-discovery-focus-001",
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_discovery_next_focus_action_lanes"],
+            [["exact_source_url_review", 20]],
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_discovery_focus_pack_count"],
+            25,
+        )
+        self.assertEqual(
+            pillars["missing_images"][
+                "source_discovery_not_started_focus_pack_count"
+            ],
+            25,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_discovery_focus_coverage"],
+            0.6777,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_discovery_non_focus_rows"],
+            215,
+        )
+        self.assertEqual(pillars["missing_images"]["action_queue_rows"], 73)
+        self.assertEqual(pillars["missing_images"]["direct_image_action_rows"], 73)
+        self.assertEqual(
+            pillars["missing_images"]["source_url_update_required_rows"],
+            50,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_url_update_primary_review_url_rows"],
+            50,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["source_url_update_review_start_coverage"],
+            1.0,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["representative_image_review_required_rows"],
+            23,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["next_representative_review_batch_rows"],
+            10,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["next_representative_review_primary_url_rows"],
+            10,
+        )
+        self.assertEqual(pillars["missing_images"]["local_download_ready_rows"], 73)
+        self.assertEqual(pillars["missing_images"]["attachment_template_rows"], 73)
+        self.assertEqual(
+            pillars["missing_images"]["attachment_template_manual_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["attachment_dry_run_ready_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["attachment_dry_run_blocked_rows"],
+            73,
+        )
+        self.assertEqual(pillars["missing_images"]["assigned_report_rows"], 745)
+        self.assertEqual(
+            pillars["missing_images"]["unassigned_missing_image_rows"],
+            0,
+        )
+        self.assertTrue(pillars["missing_images"]["known_image_assets_complete"])
+        self.assertEqual(
+            pillars["missing_images"]["known_image_download_blocker_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["missing_images"]["top_blocked_reasons"][0],
+            {"blocked_reason": "missing_exact_source_url", "rows": 667},
+        )
         self.assertEqual(pillars["source_url_updates"]["open_rows"], 50)
         self.assertEqual(pillars["source_url_updates"]["queued_rows"], 50)
         self.assertEqual(pillars["source_url_updates"]["unqueued_rows"], 0)
