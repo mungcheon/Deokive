@@ -2699,6 +2699,30 @@ class PublicCatalogReportTests(unittest.TestCase):
                 ),
                 False,
             )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("review_summary", {}).get(
+                    "primary_manual_review_url_rows"
+                ),
+                source_next_focus_exact_url_audit_summary.get(
+                    "primary_manual_review_url_rows"
+                ),
+            )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("review_summary", {}).get(
+                    "primary_manual_review_url_kind_counts"
+                ),
+                source_next_focus_exact_url_audit_summary.get(
+                    "primary_manual_review_url_kind_counts"
+                ),
+            )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("review_summary", {}).get(
+                    "domain_limited_web_search_role_counts"
+                ),
+                source_next_focus_exact_url_audit_summary.get(
+                    "domain_limited_web_search_role_counts"
+                ),
+            )
             self.assertTrue(
                 all(
                     item.get("broad_result_page") is True

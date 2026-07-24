@@ -5750,6 +5750,17 @@ def build_agent_work_queue_public(
                     exact_url_audit_summary.get("fallback_to_domain_limited_web_search_rows")
                     or len(exact_url_fallback_rows)
                 ),
+                "primary_manual_review_url_rows": int(
+                    exact_url_audit_summary.get("primary_manual_review_url_rows") or 0
+                ),
+                "primary_manual_review_url_kind_counts": exact_url_audit_summary.get(
+                    "primary_manual_review_url_kind_counts",
+                    [],
+                ),
+                "domain_limited_web_search_role_counts": exact_url_audit_summary.get(
+                    "domain_limited_web_search_role_counts",
+                    [],
+                ),
                 "auto_apply_enabled": bool(exact_url_audit_summary.get("auto_apply_enabled") is True),
             },
         )
