@@ -2240,7 +2240,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20314,
+    "summed_batch_rows": 20332,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2292,15 +2292,15 @@
         7
       ],
       [
-        "deduplication_review",
-        6
-      ],
-      [
         "ichiban_kuji_prize_policy_audit",
         5
       ],
       [
         "deduplication_action_queue",
+        5
+      ],
+      [
+        "deduplication_review",
         5
       ],
       [
@@ -2341,6 +2341,10 @@
       ],
       [
         "source_discovery_next_focus_pack",
+        1
+      ],
+      [
+        "source_discovery_next_focus_exact_url_candidate_audit",
         1
       ],
       [
@@ -2406,15 +2410,15 @@
         8
       ],
       [
-        "agent-dedupe",
-        6
-      ],
-      [
         "agent-ichiban-prize-policy",
         5
       ],
       [
         "agent-dedupe-action",
+        5
+      ],
+      [
+        "agent-dedupe",
         5
       ],
       [
@@ -2430,12 +2434,12 @@
         3
       ],
       [
-        "agent-source-detail-candidate",
+        "agent-source-fallback",
         3
       ],
       [
-        "agent-source-fallback",
-        2
+        "agent-source-detail-candidate",
+        3
       ],
       [
         "agent-gotouchi-review",
@@ -9579,5 +9583,19 @@
     ],
     "auto_apply_enabled": false,
     "write": false
+  },
+  "source_discovery_next_focus_exact_url_candidate_audit": {
+    "public_report": "data/source_discovery_next_focus_exact_url_candidate_audit_public.json",
+    "queue_rows": 20,
+    "audited_rows": 20,
+    "store_search_ok_rows": 20,
+    "store_search_broad_result_rows": 20,
+    "exact_title_candidate_rows": 0,
+    "auto_apply_ready_rows": 0,
+    "manual_review_candidate_rows": 0,
+    "broad_result_link_threshold": 30,
+    "fallback_to_domain_limited_web_search_rows": 20,
+    "auto_apply_enabled": false,
+    "recommended_next_action": "Use exact title candidates only after manual review; broad Ensky search result pages are not source_url evidence."
   }
 }

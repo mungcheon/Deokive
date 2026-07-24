@@ -4827,6 +4827,7 @@ def build_operations_public(
             {"key": "source_discovery_next_focus_pack", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}"},
             {"key": "source_discovery_next_focus_detail_candidates", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}"},
             {"key": "source_discovery_next_focus_fallback_queue", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}"},
+            {"key": "source_discovery_next_focus_exact_url_candidate_audit", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.name}"},
             {"key": "ensky_cache_candidate_action_queue", "public_report": f"data/{ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.name}"},
             {"key": "source_detail_candidate_action_queue", "public_report": f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}"},
             {"key": "official_detail_review_batches", "public_report": f"data/{OFFICIAL_DETAIL_REVIEW_BATCHES.name}"},
@@ -4906,6 +4907,7 @@ def build_agent_work_queue_public(
     source_next_focus_detail_candidates_override: dict[str, Any] | None = None,
     source_next_focus_metadata_field_import_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
+    source_next_focus_exact_url_candidate_audit_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
     requested_focus_action_queue_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
@@ -4965,6 +4967,13 @@ def build_agent_work_queue_public(
         if source_next_focus_fallback_queue_override is not None
         else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.exists()
+        else {}
+    )
+    source_next_focus_exact_url_candidate_audit = (
+        source_next_focus_exact_url_candidate_audit_override
+        if source_next_focus_exact_url_candidate_audit_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.exists()
         else {}
     )
     source_discovery_starter_queue = (
@@ -5118,7 +5127,10 @@ def build_agent_work_queue_public(
             return "candidate_review_required"
         if workstream == "source_discovery_starter_queue":
             return "exact_source_discovery_required"
-        if workstream == "source_discovery_next_focus_fallback_queue":
+        if workstream in {
+            "source_discovery_next_focus_fallback_queue",
+            "source_discovery_next_focus_exact_url_candidate_audit",
+        }:
             return "exact_source_discovery_required"
         if workstream == "source_url_discovery":
             return "exact_source_discovery_required"
@@ -5578,6 +5590,61 @@ def build_agent_work_queue_public(
                     "first_domain_limited_web_search_url"
                 ),
                 "work_order_lanes": fallback_summary.get("work_order_lanes", []),
+            },
+        )
+
+    exact_url_audit_summary = source_next_focus_exact_url_candidate_audit.get("summary", {})
+    exact_url_audit_items = [
+        row
+        for row in source_next_focus_exact_url_candidate_audit.get("items", [])
+        if isinstance(row, dict)
+    ]
+    exact_url_fallback_rows = [
+        row
+        for row in exact_url_audit_items
+        if row.get("recommended_next_action") == "use_domain_limited_web_search_url"
+        or row.get("broad_result_page") is True
+    ]
+    if exact_url_fallback_rows:
+        add_batch(
+            agent_id="agent-source-fallback",
+            workstream="source_discovery_next_focus_exact_url_candidate_audit",
+            priority=20,
+            title="포커스팩 broad search exact URL 재탐색",
+            public_report=SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT,
+            rows=int(
+                exact_url_audit_summary.get("fallback_to_domain_limited_web_search_rows")
+                or len(exact_url_fallback_rows)
+            ),
+            recommended_action=(
+                "Treat broad Ensky search pages as non-evidence, then use domain-limited web search "
+                "to find exact product/detail source URLs before any import."
+            ),
+            acceptance_criteria=[
+                "Do not import fallback_store_search_url values as source_url evidence.",
+                "Accepted source_url must be an exact product/detail page for the same title and variant.",
+                "Rows with no exact title candidate remain manual-search tasks; auto-apply stays disabled.",
+                "Only attach image_url after the exact source page identity and product image are verified.",
+            ],
+            samples=exact_url_fallback_rows[:8],
+            review_summary={
+                "queue_rows": int(exact_url_audit_summary.get("queue_rows") or len(exact_url_audit_items)),
+                "audited_rows": int(exact_url_audit_summary.get("audited_rows") or len(exact_url_audit_items)),
+                "store_search_broad_result_rows": int(
+                    exact_url_audit_summary.get("store_search_broad_result_rows")
+                    or len(exact_url_fallback_rows)
+                ),
+                "exact_title_candidate_rows": int(
+                    exact_url_audit_summary.get("exact_title_candidate_rows") or 0
+                ),
+                "auto_apply_ready_rows": int(
+                    exact_url_audit_summary.get("auto_apply_ready_rows") or 0
+                ),
+                "fallback_to_domain_limited_web_search_rows": int(
+                    exact_url_audit_summary.get("fallback_to_domain_limited_web_search_rows")
+                    or len(exact_url_fallback_rows)
+                ),
+                "auto_apply_enabled": bool(exact_url_audit_summary.get("auto_apply_enabled") is True),
             },
         )
 
@@ -8810,6 +8877,7 @@ def validate_report_consistency(
         f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
         f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}",
         f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
+        f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.name}",
         f"data/{METADATA_BACKLOG.name}",
         f"data/{METADATA_REVIEW_BATCHES.name}",
         f"data/{METADATA_ACTION_QUEUE.name}",
@@ -9407,11 +9475,17 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_next_focus_detail_candidates,
         source_discovery_next_focus_metadata_field_import,
         source_discovery_next_focus_fallback_queue,
-        source_discovery_starter_queue,
-        requested_focus_action_queue,
-        image_attachment_action_queue,
-        deduplication_action_queue,
-        ichiban_kuji_prize_policy_issue_queue,
+        source_next_focus_exact_url_candidate_audit_override=load_json(
+            SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT,
+            {},
+        )
+        if SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.exists()
+        else {},
+        source_discovery_starter_queue_override=source_discovery_starter_queue,
+        requested_focus_action_queue_override=requested_focus_action_queue,
+        image_attachment_action_queue_override=image_attachment_action_queue,
+        deduplication_action_queue_override=deduplication_action_queue,
+        ichiban_prize_policy_issue_queue_override=ichiban_kuji_prize_policy_issue_queue,
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 

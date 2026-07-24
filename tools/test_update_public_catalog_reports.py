@@ -1944,6 +1944,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             reports.SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES
         )
         source_next_focus_detail_summary = source_next_focus_detail.get("summary", {})
+        source_next_focus_exact_url_audit = reports.load_json(
+            reports.SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT
+        )
+        source_next_focus_exact_url_audit_summary = source_next_focus_exact_url_audit.get("summary", {})
         fallback_agent_batches = [
             batch
             for batch in batches
@@ -1991,6 +1995,49 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
         else:
             self.assertEqual(fallback_ready_agent_batches, [])
+        exact_url_audit_agent_batches = [
+            batch
+            for batch in batches
+            if batch.get("workstream") == "source_discovery_next_focus_exact_url_candidate_audit"
+        ]
+        if source_next_focus_exact_url_audit_summary.get(
+            "fallback_to_domain_limited_web_search_rows",
+            0,
+        ):
+            exact_url_audit_agent_batch = exact_url_audit_agent_batches[0]
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("rows"),
+                source_next_focus_exact_url_audit_summary.get(
+                    "fallback_to_domain_limited_web_search_rows"
+                ),
+            )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("public_report"),
+                f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.name}",
+            )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("review_state"),
+                "exact_source_discovery_required",
+            )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("next_machine_step"),
+                "find_exact_official_product_source_url",
+            )
+            self.assertIs(
+                exact_url_audit_agent_batch.get("review_summary", {}).get(
+                    "auto_apply_enabled"
+                ),
+                False,
+            )
+            self.assertTrue(
+                all(
+                    item.get("broad_result_page") is True
+                    for item in exact_url_audit_agent_batch.get("sample_items", [])
+                    if isinstance(item, dict)
+                )
+            )
+        else:
+            self.assertEqual(exact_url_audit_agent_batches, [])
         variant_metadata_agent_batch = next(
             batch
             for batch in batches
