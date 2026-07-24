@@ -11023,6 +11023,85 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "ichiban_kuji_historical_roadmap",
                     {},
                 ).get("metadata_action_queue_coverage", 0),
+                "metadata_campaigns": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("metadata_actionable_campaigns", 0),
+                "metadata_queued_campaigns": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("metadata_queued_action_campaigns", 0),
+                "metadata_unqueued_campaigns": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("metadata_unqueued_action_campaigns", 0),
+                "metadata_queue_coverage": target.get(
+                    "ichiban_kuji_metadata_action_queue",
+                    {},
+                ).get("campaign_queue_coverage", 0),
+                "metadata_next_queue_lane": (
+                    target.get("ichiban_kuji_metadata_action_queue", {})
+                    .get("work_order_lanes", [None])[0]
+                    if target.get("ichiban_kuji_metadata_action_queue", {}).get(
+                        "work_order_lanes"
+                    )
+                    else None
+                ),
+                "metadata_next_queue_rows": target.get(
+                    "ichiban_kuji_metadata_action_queue",
+                    {},
+                ).get("next_campaign_patch_review_batch_rows", 0),
+                "metadata_next_queue_template_rows": target.get(
+                    "ichiban_kuji_metadata_action_queue",
+                    {},
+                ).get("next_campaign_patch_review_batch_template_rows", 0),
+                "metadata_next_queue_primary_review_url_rows": target.get(
+                    "ichiban_kuji_metadata_action_queue",
+                    {},
+                ).get("next_campaign_patch_review_batch_primary_review_url_rows", 0),
+                "metadata_next_queue_field_counts": target.get(
+                    "ichiban_kuji_metadata_action_queue",
+                    {},
+                ).get("next_campaign_patch_review_batch_field_counts", []),
+                "reissue_review_groups": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("probable_reissue_review_groups", 0),
+                "reissue_work_order_rows": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("probable_reissue_work_order_rows", 0),
+                "reissue_campaign_review_batch_rows": target.get(
+                    "ichiban_kuji_reissue_decision_template",
+                    {},
+                ).get("campaign_review_batch_rows", 0),
+                "reissue_campaign_review_batch_item_rows": target.get(
+                    "ichiban_kuji_reissue_decision_template",
+                    {},
+                ).get("campaign_review_batch_item_work_order_rows", 0),
+                "reissue_campaign_review_batch_catalog_index_rows": target.get(
+                    "ichiban_kuji_reissue_decision_template",
+                    {},
+                ).get("campaign_review_batch_catalog_index_rows", 0),
+                "reissue_templates_with_evidence_urls": target.get(
+                    "ichiban_kuji_reissue_decision_template",
+                    {},
+                ).get("item_templates_with_evidence_urls", 0),
+                "zero_price_policy_ready": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("zero_price_exception_policy_pass", False),
+                "numbered_variant_policy_ready": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("numbered_variant_coverage_policy_pass", False),
+                "last_one_and_double_chance_zero_price_protected": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("price_and_prize_policy_gate", {}).get(
+                    "last_one_and_double_chance_zero_price_protected",
+                    False,
+                ),
                 "next_safe_phase": target.get(
                     "ichiban_kuji_historical_roadmap",
                     {},
