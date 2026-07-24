@@ -2643,7 +2643,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20267,
+    "summed_batch_rows": 20269,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2675,10 +2675,6 @@
         9
       ],
       [
-        "deduplication_review",
-        9
-      ],
-      [
         "danganronpa_missing_media",
         8
       ],
@@ -2692,6 +2688,10 @@
       ],
       [
         "metadata_action_queue",
+        8
+      ],
+      [
+        "deduplication_review",
         8
       ],
       [
@@ -2743,6 +2743,10 @@
         1
       ],
       [
+        "source_discovery_next_focus_detail_candidates",
+        1
+      ],
+      [
         "animation_category_action_queue",
         1
       ]
@@ -2781,10 +2785,6 @@
         9
       ],
       [
-        "agent-dedupe",
-        9
-      ],
-      [
         "agent-danganronpa-media",
         8
       ],
@@ -2798,6 +2798,10 @@
       ],
       [
         "agent-metadata-action",
+        8
+      ],
+      [
+        "agent-dedupe",
         8
       ],
       [
@@ -2821,11 +2825,11 @@
         3
       ],
       [
-        "agent-source-fallback",
-        2
+        "agent-source-detail-candidate",
+        3
       ],
       [
-        "agent-source-detail-candidate",
+        "agent-source-fallback",
         2
       ],
       [
@@ -4057,6 +4061,11 @@
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_detail_pack_items": 20,
     "source_next_focus_detail_action_lane_count": 3,
+    "source_next_focus_detail_metadata_enrichment_template_rows": 4,
+    "source_next_focus_detail_metadata_field_import_template_rows": 12,
+    "source_next_focus_detail_metadata_field_import_supported_rows": 12,
+    "source_next_focus_detail_metadata_field_import_dry_run_updated_rows": 0,
+    "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": 12,
     "source_next_focus_detail_action_lanes": [
       [
         "fallback_source_search",
@@ -7971,6 +7980,9 @@
     "candidate_confirmation_exact_review_rows": 0,
     "candidate_confirmation_manual_review_rows": 50,
     "candidate_confirmation_manual_confirmed_rows": 0,
+    "metadata_enrichment_template_rows": 4,
+    "metadata_field_import_template_rows": 12,
+    "metadata_field_import_supported_rows": 12,
     "candidate_blocker_counts": [
       [
         "rank_not_first",
@@ -9102,5 +9114,22 @@
       ]
     ],
     "auto_apply_enabled": false
+  },
+  "source_discovery_next_focus_metadata_field_import_dry_run": {
+    "public_report": "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
+    "template_items": 12,
+    "manual_confirmed_rows": 0,
+    "ready_field_rows": 0,
+    "updated_rows": 0,
+    "skipped_rows": 12,
+    "blocked_rows": 12,
+    "skip_reason_counts": [
+      [
+        "manual_confirmed_false",
+        12
+      ]
+    ],
+    "auto_apply_enabled": false,
+    "write": false
   }
 }
