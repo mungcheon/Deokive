@@ -49,6 +49,9 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["summary"]["manual_confirmed_campaign_rows"], 0)
         self.assertEqual(report["summary"]["manual_confirmed_item_rows"], 0)
         self.assertEqual(report["summary"]["same_sellable_product_keep_drop_ready_rows"], 0)
+        self.assertEqual(report["summary"]["campaign_covered_item_template_rows"], 1)
+        self.assertEqual(report["summary"]["standalone_item_template_rows"], 0)
+        self.assertEqual(report["summary"]["campaign_item_decision_preview_rows"], 2)
         self.assertFalse(report["summary"]["auto_merge_enabled"])
         self.assertFalse(report["summary"]["auto_delete_enabled"])
         self.assertTrue(report["summary"]["manual_review_required_before_mutation"])
@@ -59,6 +62,24 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(
             report["campaign_templates"][0]["affected_item_work_order_ids"],
             ["item-001", "item-002"],
+        )
+        self.assertEqual(report["campaign_templates"][0]["item_decision_application_preview_rows"], 2)
+        self.assertEqual(
+            report["campaign_templates"][0]["item_decision_application_preview"][0][
+                "suggested_decision_if_campaign_is_reissue"
+            ],
+            "reissue_or_campaign_variant_keep_separate",
+        )
+        self.assertEqual(
+            report["campaign_templates"][0]["item_decision_application_preview"][0][
+                "suggested_decision_if_campaign_is_duplicate"
+            ],
+            "same_sellable_product_keep_drop_confirmed",
+        )
+        self.assertFalse(
+            report["campaign_templates"][0]["item_decision_application_preview"][0][
+                "manual_confirmed"
+            ]
         )
         self.assertEqual(report["item_templates"][0]["drop_catalog_indexes"], [2])
         self.assertFalse(report["automation_policy"]["auto_merge_enabled"])

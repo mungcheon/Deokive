@@ -94,14 +94,63 @@ def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _campaign_item_decision_preview(
+    campaign: dict[str, Any],
+    item_templates_by_id: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    previews: list[dict[str, Any]] = []
+    affected_ids = campaign.get("affected_item_work_order_ids") or []
+    for work_order_id in affected_ids:
+        if not isinstance(work_order_id, str):
+            continue
+        item = item_templates_by_id.get(work_order_id, {})
+        previews.append(
+            {
+                "work_order_id": work_order_id,
+                "catalog_indexes": item.get("catalog_indexes") or [],
+                "source_urls": item.get("source_urls") or campaign.get("source_urls") or [],
+                "suggested_decision_if_campaign_is_reissue": (
+                    "reissue_or_campaign_variant_keep_separate"
+                ),
+                "suggested_decision_if_campaign_is_duplicate": (
+                    "same_sellable_product_keep_drop_confirmed"
+                ),
+                "keep_drop_still_requires_item_review": True,
+                "manual_confirmed": False,
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    return previews
+
+
 def build_report(action_queue: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     item_templates = [_item_template(row) for row in _safe_list(action_queue.get("ichiban_reissue_work_order"))]
     campaign_templates = [
         _campaign_template(row) for row in _safe_list(action_queue.get("ichiban_reissue_campaign_work_order"))
     ]
+    item_templates_by_id = {
+        str(item.get("work_order_id")): item
+        for item in item_templates
+        if item.get("work_order_id")
+    }
+    for campaign in campaign_templates:
+        campaign["item_decision_application_preview"] = _campaign_item_decision_preview(
+            campaign,
+            item_templates_by_id,
+        )
+        campaign["item_decision_application_preview_rows"] = len(
+            campaign["item_decision_application_preview"]
+        )
 
     item_decisions = Counter(item["decision"] or "unconfirmed" for item in item_templates)
     campaign_decisions = Counter(item["decision"] or "unconfirmed" for item in campaign_templates)
+    campaign_covered_item_ids = {
+        work_order_id
+        for campaign in campaign_templates
+        for work_order_id in campaign.get("affected_item_work_order_ids", [])
+        if isinstance(work_order_id, str)
+    }
     summary = {
         "item_template_rows": len(item_templates),
         "campaign_template_rows": len(campaign_templates),
@@ -123,6 +172,16 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         ),
         "item_decision_counts": [[key, count] for key, count in sorted(item_decisions.items())],
         "campaign_decision_counts": [[key, count] for key, count in sorted(campaign_decisions.items())],
+        "campaign_covered_item_template_rows": sum(
+            1 for item in item_templates if item.get("work_order_id") in campaign_covered_item_ids
+        ),
+        "standalone_item_template_rows": sum(
+            1 for item in item_templates if item.get("work_order_id") not in campaign_covered_item_ids
+        ),
+        "campaign_item_decision_preview_rows": sum(
+            int(campaign.get("item_decision_application_preview_rows") or 0)
+            for campaign in campaign_templates
+        ),
         "auto_merge_enabled": False,
         "auto_delete_enabled": False,
         "manual_review_required_before_mutation": True,
