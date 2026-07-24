@@ -4461,6 +4461,11 @@ def build_agent_work_queue_public(
         if DEDUPLICATION_ACTION_QUEUE.exists()
         else {}
     )
+    ichiban_reissue_decision_template = (
+        load_json(ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE, {})
+        if ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE.exists()
+        else {}
+    )
     metadata_review_batches = (
         metadata_review_batches_override
         if metadata_review_batches_override is not None
@@ -5184,6 +5189,61 @@ def build_agent_work_queue_public(
             )
 
     dedupe_action_batches = [batch for batch in dedupe_action_queue.get("batches", []) if isinstance(batch, dict)]
+    reissue_campaign_review_batch = [
+        row
+        for row in ichiban_reissue_decision_template.get(
+            "next_campaign_review_batch", []
+        )
+        if isinstance(row, dict)
+    ]
+    reissue_decision_summary = ichiban_reissue_decision_template.get("summary", {})
+    if reissue_campaign_review_batch:
+        add_batch(
+            agent_id="agent-ichiban-reissue-dedupe",
+            workstream="ichiban_kuji_reissue_dedupe_review",
+            priority=54,
+            title="Ichiban Kuji reissue campaign decisions first",
+            public_report=ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE,
+            rows=len(reissue_campaign_review_batch),
+            recommended_action=(
+                "Compare campaign page pairs first; campaign decisions can settle "
+                "many same-prize item duplicate candidates safely."
+            ),
+            acceptance_criteria=[
+                "Open every source_url in each campaign pair before judging item-level duplicates.",
+                "Mark campaign waves or reissues as keep-separate before any keep/drop item work.",
+                "Use same-sellable keep/drop only after the campaign context is confirmed as duplicate.",
+                "Auto-merge and auto-delete remain disabled.",
+            ],
+            samples=reissue_campaign_review_batch,
+            review_summary={
+                "campaign_review_batch_rows": len(reissue_campaign_review_batch),
+                "campaign_review_batch_item_work_order_rows": int(
+                    reissue_decision_summary.get(
+                        "campaign_review_batch_item_work_order_rows"
+                    )
+                    or 0
+                ),
+                "campaign_review_batch_catalog_index_rows": int(
+                    reissue_decision_summary.get(
+                        "campaign_review_batch_catalog_index_rows"
+                    )
+                    or 0
+                ),
+                "campaign_review_batch_visible_item_preview_rows": int(
+                    reissue_decision_summary.get(
+                        "campaign_review_batch_visible_item_preview_rows"
+                    )
+                    or 0
+                ),
+                "campaign_review_batch_truncated_campaigns": int(
+                    reissue_decision_summary.get(
+                        "campaign_review_batch_truncated_campaigns"
+                    )
+                    or 0
+                ),
+            },
+        )
     ichiban_reissue_review_lane = [
         lane for lane in dedupe_action_queue.get("ichiban_reissue_review_lane", []) if isinstance(lane, dict)
     ]

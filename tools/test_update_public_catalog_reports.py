@@ -1843,6 +1843,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         dedupe_action = reports.load_json(reports.DEDUPLICATION_ACTION_QUEUE)
         dedupe_action_summary = dedupe_action.get("summary", {})
+        reissue_decision = reports.load_json(reports.ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE)
+        reissue_decision_summary = reissue_decision.get("summary", {})
         dedupe_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
@@ -1980,6 +1982,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "ichiban_kuji_reissue_dedupe_review"
         ]
+        ichiban_reissue_campaign_first_batch = next(
+            batch
+            for batch in ichiban_reissue_dedupe_agent_batches
+            if batch.get("title") == "Ichiban Kuji reissue campaign decisions first"
+        )
         ichiban_prize_policy_agent_batches = [
             batch
             for batch in agent_queue.get("batches", [])
@@ -2779,20 +2786,47 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertGreater(len(ichiban_reissue_dedupe_agent_batches), 0)
         self.assertEqual(
-            ichiban_reissue_dedupe_agent_batches[0].get("public_report"),
+            ichiban_reissue_campaign_first_batch.get("rows"),
+            reissue_decision_summary.get("campaign_review_batch_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(
+                "campaign_review_batch_item_work_order_rows"
+            ),
+            reissue_decision_summary.get("campaign_review_batch_item_work_order_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(
+                "campaign_review_batch_visible_item_preview_rows"
+            ),
+            reissue_decision_summary.get("campaign_review_batch_visible_item_preview_rows"),
+        )
+        self.assertTrue(
+            all(
+                item.get("source_urls")
+                for item in ichiban_reissue_campaign_first_batch.get("sample_items", [])
+            )
+        )
+        ichiban_reissue_lane_batch = next(
+            batch
+            for batch in ichiban_reissue_dedupe_agent_batches
+            if batch.get("title") != "Ichiban Kuji reissue campaign decisions first"
+        )
+        self.assertEqual(
+            ichiban_reissue_lane_batch.get("public_report"),
             "data/ichiban_kuji_reissue_decision_template_public.json",
         )
-        self.assertEqual(ichiban_reissue_dedupe_agent_batches[0]["rows"], 2)
-        self.assertEqual(len(ichiban_reissue_dedupe_agent_batches[0]["sample_items"]), 2)
+        self.assertEqual(ichiban_reissue_lane_batch["rows"], 2)
+        self.assertEqual(len(ichiban_reissue_lane_batch["sample_items"]), 2)
         self.assertTrue(
-            ichiban_reissue_dedupe_agent_batches[0].get("review_summary", {}).get("first_evidence_url")
+            ichiban_reissue_lane_batch.get("review_summary", {}).get("first_evidence_url")
         )
         self.assertGreater(
-            ichiban_reissue_dedupe_agent_batches[0].get("review_summary", {}).get("source_url_count", 0),
+            ichiban_reissue_lane_batch.get("review_summary", {}).get("source_url_count", 0),
             1,
         )
         self.assertTrue(
-            all(item.get("source_url") for item in ichiban_reissue_dedupe_agent_batches[0]["sample_items"])
+            all(item.get("source_url") for item in ichiban_reissue_lane_batch["sample_items"])
         )
         self.assertEqual(
             open_queues.get("ichiban_metadata_action_campaigns"),
