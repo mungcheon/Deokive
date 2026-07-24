@@ -496,7 +496,7 @@ class _CatalogImportActionLabel extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          inherit: true,
+          inherit: false,
           color: color,
           fontSize: 15,
           fontWeight: FontWeight.w900,

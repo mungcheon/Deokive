@@ -638,8 +638,8 @@ class _CatalogAddButton extends StatelessWidget {
                     ),
                   )
                 else
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(minWidth: 62),
+                  SizedBox(
+                    width: 62,
                     child: _CatalogAddButtonLabel(
                       label: label,
                       color: foreground,
@@ -693,7 +693,7 @@ class _CatalogAddButtonLabel extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          inherit: true,
+          inherit: false,
           color: color,
           fontSize: 13,
           fontWeight: FontWeight.w900,
