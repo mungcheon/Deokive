@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T03:34:44Z",
+  "generated_at": "2026-07-24T03:53:42Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 22,
+    "action_count": 23,
     "blocked_action_count": 1,
-    "manual_review_action_count": 19,
+    "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 32615,
+    "total_action_rows": 32635,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -148,6 +148,22 @@
     "source_focus_template_rows": 417,
     "source_focus_template_work_order_pack_count": 23,
     "source_focus_template_next_pack_rows": 20,
+    "source_next_focus_detail_pack_items": 20,
+    "source_next_focus_detail_action_lane_count": 3,
+    "source_next_focus_detail_action_lanes": [
+      [
+        "fallback_source_search",
+        13
+      ],
+      [
+        "catalog_variant_metadata_enrichment",
+        4
+      ],
+      [
+        "manual_candidate_identity_review",
+        3
+      ]
+    ],
     "source_next_focus_fallback_rows": 17,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
     "source_discovery_starter_queue_rows": 637,
@@ -603,6 +619,41 @@
         "manual_confirmed_rows": 0,
         "dry_run_updated_rows": 0,
         "dry_run_skipped_rows": 417
+      }
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_next_focus_detail_candidates",
+      "public_report": "data/source_discovery_next_focus_detail_candidates_public.json",
+      "status": "manual_review",
+      "rows": 20,
+      "command": "Work the current focus pack by next_action_lanes so fallback search, variant metadata, and identity review are not mixed.",
+      "next_step": "resolve_current_focus_pack_lanes_before_source_import",
+      "blocker": "Rows still need exact product identity or source evidence before source/image import.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "focus_pack_id": "source-discovery-focus-001",
+        "pack_items": 20,
+        "items_with_candidates": 7,
+        "candidate_rows": 50,
+        "next_action_lane_count": 3,
+        "next_action_lanes": [
+          [
+            "fallback_source_search",
+            13
+          ],
+          [
+            "catalog_variant_metadata_enrichment",
+            4
+          ],
+          [
+            "manual_candidate_identity_review",
+            3
+          ]
+        ],
+        "completion_readiness_status": "fallback_search_required",
+        "auto_apply_ready_rows": 0,
+        "auto_apply_enabled": false
       }
     },
     {

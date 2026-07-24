@@ -7907,6 +7907,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "source_discovery_starter_queue_public.json": source_discovery_starter_queue,
             "source_discovery_next_focus_pack_public.json": source_discovery_next_focus_pack,
             "source_discovery_next_focus_pack_fetch_audit_public.json": source_discovery_next_focus_fetch_audit,
+            "source_discovery_next_focus_detail_candidates_public.json": source_discovery_next_focus_detail_candidates,
             "source_discovery_next_focus_fallback_queue_public.json": source_discovery_next_focus_fallback_queue,
             "source_discovery_review_batches_public.json": source_discovery_review_batches,
             "source_discovery_action_queue_public.json": source_discovery_action_queue,

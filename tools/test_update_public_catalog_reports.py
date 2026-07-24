@@ -1532,6 +1532,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         source_focus_template_import = reports.load_json(reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT)
         source_next_focus_pack = reports.load_json(reports.SOURCE_DISCOVERY_NEXT_FOCUS_PACK)
         source_next_focus_pack_summary = source_next_focus_pack.get("summary", {})
+        source_next_focus_detail = reports.load_json(reports.SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES)
+        source_next_focus_detail_summary = source_next_focus_detail.get("summary", {})
         source_next_focus_fallback = reports.load_json(reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE)
         source_next_focus_fallback_summary = source_next_focus_fallback.get("summary", {})
         source_discovery_starter = reports.load_json(reports.SOURCE_DISCOVERY_STARTER_QUEUE)
@@ -1635,6 +1637,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             if row.get("workstream") == "ichiban_kuji_reissue_dedupe_review"
         )
         execution_plan = reports.load_json(reports.EXECUTION_PLAN)
+        source_next_focus_detail_execution_action = next(
+            row
+            for row in execution_plan.get("actions", [])
+            if row.get("workstream") == "source_discovery_next_focus_detail_candidates"
+        )
         ichiban_reissue_execution_action = next(
             row
             for row in execution_plan.get("actions", [])
@@ -2121,6 +2128,22 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_next_focus_fallback_scorecard.get("work_order_lanes"),
             source_next_focus_fallback_summary.get("work_order_lanes"),
+        )
+        self.assertEqual(
+            execution_plan["summary"].get("source_next_focus_detail_action_lane_count"),
+            source_next_focus_detail_summary.get("next_action_lane_count"),
+        )
+        self.assertEqual(
+            execution_plan["summary"].get("source_next_focus_detail_action_lanes"),
+            source_next_focus_detail_summary.get("next_action_lanes"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_execution_action.get("rows"),
+            source_next_focus_detail_summary.get("pack_items"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_execution_action["evidence"].get("next_action_lanes"),
+            source_next_focus_detail_summary.get("next_action_lanes"),
         )
         self.assertEqual(
             quality["source_discovery_action_queue"].get("top_source_store_workstreams"),

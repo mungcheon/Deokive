@@ -115,6 +115,9 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_focus_template_import = load_report("source_discovery_focus_template_import_dry_run_public.json")
     source_next_focus_pack = load_report("source_discovery_next_focus_pack_public.json")
     source_next_focus_fetch_audit = load_report("source_discovery_next_focus_pack_fetch_audit_public.json")
+    source_next_focus_detail_candidates = load_report(
+        "source_discovery_next_focus_detail_candidates_public.json"
+    )
     source_next_focus_fallback_queue = load_report("source_discovery_next_focus_fallback_queue_public.json")
     source_discovery_starter_queue = load_report("source_discovery_starter_queue_public.json")
     source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
@@ -152,6 +155,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_action_summary = _summary(source_action_queue)
     source_focus_template_summary = _summary(source_focus_template)
     source_next_focus_fetch_audit_summary = _summary(source_next_focus_fetch_audit)
+    source_next_focus_detail_summary = _summary(source_next_focus_detail_candidates)
     source_next_focus_fallback_summary = _summary(source_next_focus_fallback_queue)
     source_discovery_starter_summary = _summary(source_discovery_starter_queue)
     source_detail_candidate_action_summary = _summary(source_detail_candidate_action_queue)
@@ -374,6 +378,48 @@ def _build_plan(load_report) -> dict[str, Any]:
                         source_next_focus_fetch_audit_summary, "official_search_unavailable_rows"
                     ),
                     "status_counts": source_next_focus_fetch_audit_summary.get("status_counts", []),
+                },
+            )
+        )
+
+    if source_next_focus_detail_summary:
+        lane_counts = source_next_focus_detail_summary.get("next_action_lanes")
+        if not isinstance(lane_counts, list):
+            lane_counts = []
+        actions.append(
+            _action(
+                priority=20,
+                workstream="source_discovery_next_focus_detail_candidates",
+                public_report="data/source_discovery_next_focus_detail_candidates_public.json",
+                status=(
+                    "manual_review"
+                    if _count(source_next_focus_detail_summary, "next_action_lane_count")
+                    else "clear"
+                ),
+                rows=_count(source_next_focus_detail_summary, "pack_items"),
+                command="Work the current focus pack by next_action_lanes so fallback search, variant metadata, and identity review are not mixed.",
+                next_step="resolve_current_focus_pack_lanes_before_source_import",
+                blocker="Rows still need exact product identity or source evidence before source/image import.",
+                evidence={
+                    "focus_pack_id": source_next_focus_detail_summary.get("focus_pack_id"),
+                    "pack_items": _count(source_next_focus_detail_summary, "pack_items"),
+                    "items_with_candidates": _count(
+                        source_next_focus_detail_summary, "items_with_candidates"
+                    ),
+                    "candidate_rows": _count(source_next_focus_detail_summary, "candidate_rows"),
+                    "next_action_lane_count": _count(
+                        source_next_focus_detail_summary, "next_action_lane_count"
+                    ),
+                    "next_action_lanes": lane_counts,
+                    "completion_readiness_status": source_next_focus_detail_summary.get(
+                        "completion_readiness_status"
+                    ),
+                    "auto_apply_ready_rows": _count(
+                        source_next_focus_detail_summary, "auto_apply_ready_rows"
+                    ),
+                    "auto_apply_enabled": bool(
+                        source_next_focus_detail_summary.get("auto_apply_enabled", False)
+                    ),
                 },
             )
         )
@@ -1228,6 +1274,15 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "source_focus_template_next_pack_rows": _count(
                 source_focus_template_summary, "next_focus_pack_rows"
+            ),
+            "source_next_focus_detail_pack_items": _count(
+                source_next_focus_detail_summary, "pack_items"
+            ),
+            "source_next_focus_detail_action_lane_count": _count(
+                source_next_focus_detail_summary, "next_action_lane_count"
+            ),
+            "source_next_focus_detail_action_lanes": (
+                source_next_focus_detail_summary.get("next_action_lanes") or []
             ),
             "source_next_focus_fallback_rows": _count(source_next_focus_fallback_summary, "queue_rows"),
             "source_next_focus_fallback_manual_confirmed_rows": _count(
