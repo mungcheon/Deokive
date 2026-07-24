@@ -65,6 +65,9 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_search_hint_rows"], 1)
         self.assertEqual(report["summary"]["source_url_update_missing_search_hint_rows"], 1)
+        self.assertEqual(report["summary"]["source_url_update_fallback_web_search_rows"], 1)
+        self.assertEqual(report["summary"]["source_url_update_any_search_hint_rows"], 2)
+        self.assertEqual(report["summary"]["source_url_update_missing_any_search_hint_rows"], 0)
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["workstream_count"], 1)
@@ -124,6 +127,18 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(source_template["candidate_source_url"], "")
         self.assertEqual(source_template["current_source_url"], "https://example.com/shop")
         self.assertFalse(source_template["manual_confirmed"])
+        self.assertIn(
+            "google.com/search",
+            report["batches"][0]["items"][0]["first_fallback_web_search_url"],
+        )
+        self.assertIn(
+            "site%3Aexample.com",
+            report["batches"][0]["items"][0]["first_fallback_web_search_url"],
+        )
+        self.assertEqual(
+            source_template["first_fallback_web_search_url"],
+            report["batches"][0]["items"][0]["first_fallback_web_search_url"],
+        )
         self.assertEqual(
             report["batches"][0]["items"][1]["source_search_url"],
             "https://fanding.kr/@stellive/shop?keyword=Badge",
@@ -148,6 +163,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(work_order["source_store"], "Stellive Store")
         self.assertEqual(work_order["row_count"], 2)
         self.assertEqual(work_order["source_url_update_template_rows"], 2)
+        self.assertEqual(work_order["fallback_web_search_url_rows"], 1)
         self.assertEqual(work_order["current_source_urls"], [{"source_url": "https://example.com/shop", "rows": 2}])
         self.assertEqual(work_order["sample_items"][0]["catalog_index"], 2)
         self.assertEqual(
@@ -158,7 +174,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             work_order["sample_items"][0]["source_url_import_template"]["field"],
             "source_url",
         )
-        self.assertIn("exact product detail page", work_order["recommended_review_order"][1])
+        self.assertIn(
+            "first_fallback_web_search_url",
+            work_order["recommended_review_order"][1],
+        )
+        self.assertIn("exact product detail page", work_order["recommended_review_order"][2])
 
     def test_max_batches_caps_published_batches_not_actionable_summary(self) -> None:
         enrichment = {

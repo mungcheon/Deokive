@@ -18,6 +18,7 @@ import build_animation_category_review_batches_public
 import build_animation_category_split_review_public
 import build_animation_category_unmatched_keyword_review_public
 import build_gotouchi_official_candidate_review_queue_public
+import build_image_attachment_action_queue_public
 import build_image_source_url_confirmed_template_public
 import build_ichiban_prize_policy_issue_queue_public
 import build_ichiban_prize_name_image_patch_candidates_public
@@ -2173,6 +2174,7 @@ def build_operations_public(
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     ichiban_reissue_decision_template_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
+    image_attachment_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -2285,7 +2287,11 @@ def build_operations_public(
     image_summary = image_enrichment_batches["summary"]
     image_asset_summary = image_asset_audit.get("summary", {})
     image_action_queue = (
-        load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
+        image_attachment_action_queue_override
+        if image_attachment_action_queue_override is not None
+        else load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {})
+        if IMAGE_ATTACHMENT_ACTION_QUEUE.exists()
+        else {}
     )
     image_action_queue_summary = image_action_queue.get("summary", {})
     image_action_workstreams = [
@@ -3914,6 +3920,15 @@ def build_operations_public(
         )
         open_review_queues["image_attachment_source_url_missing_search_hint_rows"] = image_action_queue_summary.get(
             "source_url_update_missing_search_hint_rows", 0
+        )
+        open_review_queues["image_attachment_source_url_fallback_web_search_rows"] = (
+            image_action_queue_summary.get("source_url_update_fallback_web_search_rows", 0)
+        )
+        open_review_queues["image_attachment_source_url_any_search_hint_rows"] = (
+            image_action_queue_summary.get("source_url_update_any_search_hint_rows", 0)
+        )
+        open_review_queues["image_attachment_source_url_missing_any_search_hint_rows"] = (
+            image_action_queue_summary.get("source_url_update_missing_any_search_hint_rows", 0)
         )
     if ichiban_kuji_metadata_action_queue_summary:
         open_review_queues["ichiban_metadata_action_campaigns"] = ichiban_kuji_metadata_action_queue_summary.get(
@@ -6666,6 +6681,7 @@ def validate_report_consistency(
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
+    image_attachment_action_queue_override: dict[str, Any] | None = None,
 ) -> list[str]:
     findings: list[str] = []
     source_summary = source_discovery["summary"]
@@ -7070,7 +7086,11 @@ def validate_report_consistency(
             "unqueued_actionable_missing_cells", 0
         )
     image_action_queue = (
-        load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
+        image_attachment_action_queue_override
+        if image_attachment_action_queue_override is not None
+        else load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {})
+        if IMAGE_ATTACHMENT_ACTION_QUEUE.exists()
+        else {}
     )
     image_action_summary = image_action_queue.get("summary", {})
     if image_action_summary:
@@ -7084,6 +7104,15 @@ def validate_report_consistency(
         )
         expected_open_queues["image_attachment_source_url_missing_search_hint_rows"] = image_action_summary.get(
             "source_url_update_missing_search_hint_rows", 0
+        )
+        expected_open_queues["image_attachment_source_url_fallback_web_search_rows"] = image_action_summary.get(
+            "source_url_update_fallback_web_search_rows", 0
+        )
+        expected_open_queues["image_attachment_source_url_any_search_hint_rows"] = image_action_summary.get(
+            "source_url_update_any_search_hint_rows", 0
+        )
+        expected_open_queues["image_attachment_source_url_missing_any_search_hint_rows"] = image_action_summary.get(
+            "source_url_update_missing_any_search_hint_rows", 0
         )
     ichiban_action_queue = (
         load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}) if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists() else {}
@@ -7632,7 +7661,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         raise ValueError("generic source patch candidate count does not match item count")
     if patch_candidate_summary.get("auto_apply_enabled") is not False:
         raise ValueError("generic source patch candidates must stay manual-review only")
-    image_attachment_action_queue = load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {})
+    image_attachment_action_queue = build_image_attachment_action_queue_public.build_report(
+        image_enrichment_batches,
+        {"items": items},
+    )
     image_source_url_confirmed_template = build_image_source_url_confirmed_template_public.build_template(
         image_attachment_action_queue,
         load_json(STELLIVE_FANDING_CANDIDATES, {}) if STELLIVE_FANDING_CANDIDATES.exists() else None,
@@ -7840,6 +7872,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_unmatched_keyword_review,
         ichiban_kuji_reissue_decision_template,
         source_discovery_starter_queue,
+        image_attachment_action_queue,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -8655,6 +8688,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_unmatched_keyword_review,
         source_discovery_next_focus_fallback_queue,
         source_discovery_starter_queue,
+        image_attachment_action_queue_override=image_attachment_action_queue,
     )
     if consistency_findings:
         raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))
@@ -8696,6 +8730,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority_public)
         write_json(SOURCE_DISCOVERY_STARTER_QUEUE, source_discovery_starter_queue)
         write_json(MISSING_IMAGE_REPORT_COVERAGE, missing_image_report_coverage)
+        write_json(IMAGE_ATTACHMENT_ACTION_QUEUE, image_attachment_action_queue)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, image_attachment_template_import_dry_run)
         write_json(MANUAL_SOURCE_URL_SEARCH_QUEUE, manual_source_url_search_queue)

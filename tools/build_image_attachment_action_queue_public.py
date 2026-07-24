@@ -7,7 +7,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import quote_plus, urlsplit, urlunsplit
 
 
 try:
@@ -112,6 +112,9 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                         "category": item.get("category"),
                         "source_url": item.get("source_url"),
                         "official_search_url": item.get("official_search_url"),
+                        "first_fallback_web_search_url": item.get(
+                            "first_fallback_web_search_url"
+                        ),
                         "source_url_update_required": item.get("source_url_update_required"),
                         "representative_image_review_required": item.get(
                             "representative_image_review_required"
@@ -173,6 +176,7 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
                 "categories": Counter(),
                 "official_search_url_rows": 0,
                 "missing_official_search_url_rows": 0,
+                "fallback_web_search_url_rows": 0,
             },
         )
         bucket["rows"].append(item)
@@ -186,6 +190,8 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
             bucket["official_search_url_rows"] += 1
         else:
             bucket["missing_official_search_url_rows"] += 1
+        if item.get("fallback_web_search_urls"):
+            bucket["fallback_web_search_url_rows"] += 1
 
     work_order: list[dict[str, Any]] = []
     for bucket in grouped.values():
@@ -209,6 +215,8 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
                 "category": row.get("category"),
                 "current_source_url": row.get("source_url"),
                 "official_search_url": row.get("official_search_url"),
+                "first_fallback_web_search_url": row.get("first_fallback_web_search_url"),
+                "fallback_web_search_urls": row.get("fallback_web_search_urls") or [],
                 "source_url_import_template": row.get("source_url_import_template"),
             }
             for row in rows[:12]
@@ -224,12 +232,14 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
                 "missing_official_search_url_rows": bucket[
                     "missing_official_search_url_rows"
                 ],
+                "fallback_web_search_url_rows": bucket["fallback_web_search_url_rows"],
                 "current_source_urls": current_source_urls,
                 "category_rows": [
                     [category, count] for category, count in bucket["categories"].most_common()
                 ],
                 "recommended_review_order": [
                     "Open official_search_url when present.",
+                    "If official_search_url is empty, open first_fallback_web_search_url as a starting point.",
                     "Confirm the exact product detail page, not a storefront/search page.",
                     "Fill source_url_import_template.manual_value and evidence_url.",
                     "After source_url is confirmed, run image extraction/attachment review.",
@@ -394,7 +404,13 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     source_url_template = _source_url_import_template(item, group) if source_url_update_required else None
     review_lane = _review_lane(workflow)
     source_search_url = _source_search_url(item, template)
+    fallback_web_search_urls = _fallback_web_search_urls(item, group, source_search_url)
     catalog_template = _normalized_catalog_field_template(template, source_search_url)
+    if source_url_template is not None:
+        source_url_template["first_fallback_web_search_url"] = (
+            fallback_web_search_urls[0] if fallback_web_search_urls else ""
+        )
+        source_url_template["fallback_web_search_urls"] = fallback_web_search_urls
     return {
         "catalog_index": item.get("catalog_index"),
         "workflow": workflow,
@@ -407,6 +423,10 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "source_url": item.get("source_url"),
         "official_search_url": source_search_url,
         "source_search_url": source_search_url,
+        "first_fallback_web_search_url": fallback_web_search_urls[0]
+        if fallback_web_search_urls
+        else "",
+        "fallback_web_search_urls": fallback_web_search_urls,
         "source_url_update_required": source_url_update_required,
         "representative_image_review_required": representative_image_review_required,
         "image_url_ready": image_url_ready,
@@ -438,6 +458,65 @@ def _normalize_source_search_url(value: Any) -> str:
     if parsed.netloc.lower() == "stellive.fanding.kr" and parsed.path.rstrip("/") == "/search":
         return urlunsplit(("https", "fanding.kr", "/@stellive/shop", parsed.query, parsed.fragment))
     return url
+
+
+def _fallback_web_search_urls(
+    item: dict[str, Any],
+    group: dict[str, Any],
+    source_search_url: str,
+    *,
+    limit: int = 4,
+) -> list[str]:
+    if source_search_url:
+        return []
+    name = str(item.get("name_ja") or item.get("name_ko") or "").strip()
+    if not name:
+        return []
+    series = str(item.get("series_name") or "").strip()
+    category = str(item.get("category") or "").strip()
+    source_store = str(item.get("source_store") or group.get("source_store") or "").strip()
+    source_url = str(item.get("source_url") or "").strip()
+    host = urlsplit(source_url).netloc.lower()
+    host = host[4:] if host.startswith("www.") else host
+    domain_terms = []
+    if host:
+        domain_terms.append(f"site:{host}")
+    store_domains = _store_search_domains(source_store)
+    for domain in store_domains:
+        if domain and domain not in {term.removeprefix("site:") for term in domain_terms}:
+            domain_terms.append(f"site:{domain}")
+
+    base_terms = " ".join(part for part in [name, series, category] if part)
+    queries = []
+    for domain_term in domain_terms:
+        queries.append(" ".join(part for part in [domain_term, base_terms] if part))
+    queries.append(" ".join(part for part in [source_store, base_terms] if part))
+
+    urls: list[str] = []
+    seen: set[str] = set()
+    for query in queries:
+        query = query.strip()
+        if not query:
+            continue
+        url = f"https://www.google.com/search?q={quote_plus(query)}"
+        if url in seen:
+            continue
+        seen.add(url)
+        urls.append(url)
+        if len(urls) >= limit:
+            break
+    return urls
+
+
+def _store_search_domains(source_store: str) -> list[str]:
+    normalized = source_store.lower()
+    if "weverse" in normalized:
+        return ["shop.weverse.io"]
+    if "포켓몬" in source_store or "pokemon" in normalized:
+        return ["pokemoncenter-online.com", "pokemoncenter.co.kr"]
+    if "stellive" in normalized or "스텔라이브" in source_store:
+        return ["fanding.kr", "stellive.fanding.kr"]
+    return []
 
 
 def _normalized_catalog_field_template(template: dict[str, Any], source_search_url: str) -> dict[str, Any]:
@@ -570,6 +649,21 @@ def build_report(
         if item.get("source_url_update_required")
         and (item.get("source_search_url") or item.get("official_search_url"))
     )
+    source_url_update_fallback_web_search_rows = sum(
+        1
+        for item in action_items
+        if item.get("source_url_update_required") and item.get("fallback_web_search_urls")
+    )
+    source_url_update_any_search_hint_rows = sum(
+        1
+        for item in action_items
+        if item.get("source_url_update_required")
+        and (
+            item.get("source_search_url")
+            or item.get("official_search_url")
+            or item.get("fallback_web_search_urls")
+        )
+    )
     representative_image_review_required_rows = sum(
         1 for item in action_items if item.get("representative_image_review_required")
     )
@@ -612,6 +706,13 @@ def build_report(
             "source_url_update_search_hint_rows": source_url_update_search_hint_rows,
             "source_url_update_missing_search_hint_rows": (
                 source_url_update_required_rows - source_url_update_search_hint_rows
+            ),
+            "source_url_update_fallback_web_search_rows": (
+                source_url_update_fallback_web_search_rows
+            ),
+            "source_url_update_any_search_hint_rows": source_url_update_any_search_hint_rows,
+            "source_url_update_missing_any_search_hint_rows": (
+                source_url_update_required_rows - source_url_update_any_search_hint_rows
             ),
             "representative_image_review_required_rows": representative_image_review_required_rows,
             "image_url_ready_rows": image_url_ready_rows,

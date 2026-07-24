@@ -1874,6 +1874,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues.get("image_attachment_source_url_missing_search_hint_rows"),
             image_action_summary.get("source_url_update_missing_search_hint_rows"),
         )
+        self.assertEqual(
+            open_queues.get("image_attachment_source_url_fallback_web_search_rows"),
+            image_action_summary.get("source_url_update_fallback_web_search_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("image_attachment_source_url_any_search_hint_rows"),
+            image_action_summary.get("source_url_update_any_search_hint_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("image_attachment_source_url_missing_any_search_hint_rows"),
+            image_action_summary.get("source_url_update_missing_any_search_hint_rows"),
+        )
         self.assertEqual(image_asset_gate.get("status"), "pass")
         self.assertEqual(image_asset_gate.get("image_url_without_local_path_rows"), 0)
         self.assertEqual(image_asset_gate.get("missing_local_image_files"), 0)
