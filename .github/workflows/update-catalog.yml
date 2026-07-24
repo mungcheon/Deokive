@@ -59,6 +59,7 @@ jobs:
       - name: Refresh public catalog reports
         run: |
           python tools/update_public_catalog_reports.py --write
+          python tools/build_requested_focus_source_candidates_public.py
           python tools/build_catalog_execution_plan_public.py
           python tools/update_public_catalog_reports.py --write
 
@@ -174,6 +175,7 @@ jobs:
             data/requested_focus_review_batches_public.json \
             data/requested_focus_action_queue_public.json \
             data/requested_focus_next_work_public.json \
+            data/requested_focus_source_candidates_public.json \
             data/catalog_confirmed_import_readiness_public.json \
             data/catalog_execution_plan_public.json \
             data/danganronpa_missing_media_public.json \
