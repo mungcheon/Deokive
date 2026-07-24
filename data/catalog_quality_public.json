@@ -4961,6 +4961,8 @@
     "source_next_focus_detail_metadata_enrichment_template_rows": 4,
     "source_next_focus_detail_metadata_field_import_template_rows": 12,
     "source_next_focus_detail_metadata_field_import_supported_rows": 12,
+    "source_next_focus_detail_metadata_field_import_dry_run_updated_rows": 0,
+    "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": 12,
     "source_next_focus_detail_action_lanes": [
       [
         "fallback_source_search",
@@ -10057,5 +10059,22 @@
       ]
     ],
     "auto_apply_enabled": false
+  },
+  "source_discovery_next_focus_metadata_field_import_dry_run": {
+    "public_report": "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
+    "template_items": 12,
+    "manual_confirmed_rows": 0,
+    "ready_field_rows": 0,
+    "updated_rows": 0,
+    "skipped_rows": 12,
+    "blocked_rows": 12,
+    "skip_reason_counts": [
+      [
+        "manual_confirmed_false",
+        12
+      ]
+    ],
+    "auto_apply_enabled": false,
+    "write": false
   }
 }

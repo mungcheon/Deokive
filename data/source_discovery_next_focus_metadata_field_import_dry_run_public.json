@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-24T11:33:31Z",
+  "scope": "source_discovery_next_focus_metadata_field_import_dry_run",
+  "summary": {
+    "template_items": 12,
+    "manual_confirmed_rows": 0,
+    "ready_field_rows": 0,
+    "updated_rows": 0,
+    "skipped_rows": 12,
+    "blocked_rows": 12,
+    "skip_reason_counts": [
+      [
+        "manual_confirmed_false",
+        12
+      ]
+    ],
+    "auto_apply_enabled": false,
+    "write": false
+  },
+  "write": false,
+  "queue": "data/source_discovery_next_focus_detail_candidates_public.json",
+  "updated_rows": 0,
+  "skipped_rows": 12,
+  "skip_reason_counts": [
+    [
+      "manual_confirmed_false",
+      12
+    ]
+  ],
+  "updated": [],
+  "skipped_sample": [
+    {
+      "field": "sub_series",
+      "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "name_ja",
+      "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "character_name",
+      "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "sub_series",
+      "name_ko": "신세기 에반게리온 아크릴 스탠드",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "name_ja",
+      "name_ko": "신세기 에반게리온 아크릴 스탠드",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "character_name",
+      "name_ko": "신세기 에반게리온 아크릴 스탠드",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "sub_series",
+      "name_ko": "최애의 아이 아크릴 스탠드 (카나)",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "name_ja",
+      "name_ko": "최애의 아이 아크릴 스탠드 (카나)",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "character_name",
+      "name_ko": "최애의 아이 아크릴 스탠드 (카나)",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "sub_series",
+      "name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "name_ja",
+      "name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "field": "character_name",
+      "name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
+      "reason": "manual_confirmed_false"
+    }
+  ],
+  "automation_policy": {
+    "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+    "auto_apply_enabled": false,
+    "write_enabled": false,
+    "required_before_write": [
+      "manual_confirmed=true",
+      "field in sub_series/name_ja/character_name",
+      "manual_value is filled from exact official product evidence",
+      "evidence_url or candidate_source_url points to the exact product detail page"
+    ]
+  }
+}

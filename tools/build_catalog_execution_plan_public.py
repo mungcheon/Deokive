@@ -120,6 +120,9 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_next_focus_detail_candidates = load_report(
         "source_discovery_next_focus_detail_candidates_public.json"
     )
+    source_next_focus_metadata_field_import = load_report(
+        "source_discovery_next_focus_metadata_field_import_dry_run_public.json"
+    )
     source_next_focus_fallback_queue = load_report("source_discovery_next_focus_fallback_queue_public.json")
     source_next_focus_exact_url_review_queue = load_report(
         "source_discovery_next_focus_exact_url_review_queue_public.json"
@@ -180,6 +183,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_focus_template_summary = _summary(source_focus_template)
     source_next_focus_fetch_audit_summary = _summary(source_next_focus_fetch_audit)
     source_next_focus_detail_summary = _summary(source_next_focus_detail_candidates)
+    source_next_focus_metadata_field_import_summary = _summary(source_next_focus_metadata_field_import)
     source_next_focus_fallback_summary = _summary(source_next_focus_fallback_queue)
     source_next_focus_exact_url_summary = _summary(source_next_focus_exact_url_review_queue)
     source_next_focus_identity_backfill_summary = _summary(
@@ -578,6 +582,19 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "metadata_field_import_supported_rows": _count(
                         source_next_focus_detail_summary,
                         "metadata_field_import_supported_rows",
+                    ),
+                    "metadata_field_import_dry_run_updated_rows": _count(
+                        source_next_focus_metadata_field_import_summary,
+                        "updated_rows",
+                    ),
+                    "metadata_field_import_dry_run_skipped_rows": _count(
+                        source_next_focus_metadata_field_import_summary,
+                        "skipped_rows",
+                    ),
+                    "metadata_field_import_dry_run_skip_reason_counts": (
+                        source_next_focus_metadata_field_import_summary.get(
+                            "skip_reason_counts", []
+                        )
                     ),
                     "next_action_lane_count": _count(
                         source_next_focus_detail_summary, "next_action_lane_count"
@@ -1981,6 +1998,14 @@ def _build_plan(load_report) -> dict[str, Any]:
             "source_next_focus_detail_metadata_field_import_supported_rows": _count(
                 source_next_focus_detail_summary,
                 "metadata_field_import_supported_rows",
+            ),
+            "source_next_focus_detail_metadata_field_import_dry_run_updated_rows": _count(
+                source_next_focus_metadata_field_import_summary,
+                "updated_rows",
+            ),
+            "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": _count(
+                source_next_focus_metadata_field_import_summary,
+                "skipped_rows",
             ),
             "source_next_focus_detail_action_lanes": (
                 source_next_focus_detail_summary.get("next_action_lanes") or []

@@ -42,6 +42,7 @@ import build_source_discovery_next_focus_identity_candidate_review_public
 import build_source_discovery_next_focus_pack_public
 import build_source_discovery_next_focus_split_queues_public
 import import_confirmed_deduplication_rows
+import import_confirmed_catalog_field_rows
 import import_confirmed_image_attachment_rows
 import import_confirmed_source_discovery_rows
 
@@ -123,6 +124,7 @@ SOURCE_DISCOVERY_NEXT_FOCUS_PACK = DATA / "source_discovery_next_focus_pack_publ
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT = DATA / "source_discovery_next_focus_pack_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES = DATA / "source_discovery_next_focus_detail_candidates_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT = DATA / "source_discovery_next_focus_metadata_field_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE = DATA / "source_discovery_next_focus_fallback_queue_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT = DATA / "source_discovery_next_focus_fallback_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE = DATA / "source_discovery_next_focus_exact_url_review_queue_public.json"
@@ -795,6 +797,62 @@ def build_source_discovery_import_dry_run_public(
         "skip_reason_counts": skip_reasons.most_common(),
         "updated": result["updated"],
         "skipped_sample": result["skipped"][:100],
+    }
+
+
+def build_metadata_field_import_dry_run_public(
+    queue: dict[str, Any],
+    seed_rows: list[dict[str, Any]],
+    generated_at: str,
+    *,
+    queue_path: Path,
+) -> dict[str, Any]:
+    normalized_queue = import_confirmed_catalog_field_rows._normalize_review_queue(queue)
+    result = import_confirmed_catalog_field_rows.import_rows(normalized_queue, seed_rows)
+    items = [item for item in normalized_queue.get("items", []) if isinstance(item, dict)]
+    skip_reasons = Counter(str(item.get("reason") or "unspecified") for item in result["skipped"])
+    confirmed = sum(1 for item in items if import_confirmed_catalog_field_rows._confirmed(item.get("manual_confirmed")))
+    ready_rows = sum(
+        1
+        for item in items
+        if import_confirmed_catalog_field_rows._confirmed(item.get("manual_confirmed"))
+        and str(item.get("manual_value") or "").strip()
+        and str(item.get("field") or "").strip() in import_confirmed_catalog_field_rows.ALLOWED_FIELDS
+    )
+    summary = {
+        "template_items": len(items),
+        "manual_confirmed_rows": confirmed,
+        "ready_field_rows": ready_rows,
+        "updated_rows": len(result["updated"]),
+        "skipped_rows": len(result["skipped"]),
+        "blocked_rows": len(result["skipped"]),
+        "skip_reason_counts": skip_reasons.most_common(),
+        "auto_apply_enabled": False,
+        "write": False,
+    }
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at,
+        "scope": "source_discovery_next_focus_metadata_field_import_dry_run",
+        "summary": summary,
+        "write": False,
+        "queue": str(queue_path.relative_to(ROOT)).replace("\\", "/"),
+        "updated_rows": len(result["updated"]),
+        "skipped_rows": len(result["skipped"]),
+        "skip_reason_counts": skip_reasons.most_common(),
+        "updated": result["updated"],
+        "skipped_sample": result["skipped"][:100],
+        "automation_policy": {
+            "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+            "auto_apply_enabled": False,
+            "write_enabled": False,
+            "required_before_write": [
+                "manual_confirmed=true",
+                "field in sub_series/name_ja/character_name",
+                "manual_value is filled from exact official product evidence",
+                "evidence_url or candidate_source_url points to the exact product detail page",
+            ],
+        },
     }
 
 
@@ -2272,6 +2330,7 @@ def build_operations_public(
     ichiban_prize_name_image_patch_candidates_override: dict[str, Any] | None = None,
     source_next_focus_pack_override: dict[str, Any] | None = None,
     source_next_focus_detail_candidates_override: dict[str, Any] | None = None,
+    source_next_focus_metadata_field_import_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     deduplication_template_import_dry_run_override: dict[str, Any] | None = None,
     animation_review_batches_override: dict[str, Any] | None = None,
@@ -2338,6 +2397,14 @@ def build_operations_public(
         else {}
     )
     source_next_focus_detail_candidates_summary = source_next_focus_detail_candidates.get("summary", {})
+    source_next_focus_metadata_field_import = (
+        source_next_focus_metadata_field_import_override
+        if source_next_focus_metadata_field_import_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT.exists()
+        else {}
+    )
+    source_next_focus_metadata_field_import_summary = source_next_focus_metadata_field_import.get("summary", {})
     source_next_focus_fallback_queue = (
         source_next_focus_fallback_queue_override
         if source_next_focus_fallback_queue_override is not None
@@ -2978,6 +3045,12 @@ def build_operations_public(
                 "metadata_field_import_supported_rows",
                 0,
             ),
+            "metadata_field_import_dry_run_updated_rows": source_next_focus_metadata_field_import_summary.get("updated_rows", 0),
+            "metadata_field_import_dry_run_skipped_rows": source_next_focus_metadata_field_import_summary.get("skipped_rows", 0),
+            "metadata_field_import_dry_run_skip_reason_counts": source_next_focus_metadata_field_import_summary.get(
+                "skip_reason_counts",
+                [],
+            ),
             "next_action_lane_count": source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0),
             "next_action_lanes": source_next_focus_detail_candidates_summary.get("next_action_lanes", []),
             "completion_readiness_status": source_next_focus_detail_candidates_summary.get(
@@ -3599,6 +3672,12 @@ def build_operations_public(
             "metadata_field_import_supported_rows": source_next_focus_detail_candidates_summary.get(
                 "metadata_field_import_supported_rows",
                 0,
+            ),
+            "metadata_field_import_dry_run_updated_rows": source_next_focus_metadata_field_import_summary.get("updated_rows", 0),
+            "metadata_field_import_dry_run_skipped_rows": source_next_focus_metadata_field_import_summary.get("skipped_rows", 0),
+            "metadata_field_import_dry_run_skip_reason_counts": source_next_focus_metadata_field_import_summary.get(
+                "skip_reason_counts",
+                [],
             ),
             "next_action_lane_count": source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0),
             "next_action_lanes": source_next_focus_detail_candidates_summary.get("next_action_lanes", []),
@@ -4485,6 +4564,7 @@ def build_agent_work_queue_public(
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     source_next_focus_pack_override: dict[str, Any] | None = None,
     source_next_focus_detail_candidates_override: dict[str, Any] | None = None,
+    source_next_focus_metadata_field_import_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
     requested_focus_action_queue_override: dict[str, Any] | None = None,
@@ -4531,6 +4611,13 @@ def build_agent_work_queue_public(
         if source_next_focus_detail_candidates_override is not None
         else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.exists()
+        else {}
+    )
+    source_next_focus_metadata_field_import = (
+        source_next_focus_metadata_field_import_override
+        if source_next_focus_metadata_field_import_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT.exists()
         else {}
     )
     source_next_focus_fallback_queue = (
@@ -5087,6 +5174,7 @@ def build_agent_work_queue_public(
         )
 
     source_detail_summary = source_next_focus_detail_candidates.get("summary", {})
+    metadata_field_import_summary = source_next_focus_metadata_field_import.get("summary", {})
     metadata_enrichment_rows = [
         row
         for row in source_next_focus_detail_candidates.get("metadata_enrichment_template", [])
@@ -5120,6 +5208,15 @@ def build_agent_work_queue_public(
                 "metadata_field_import_template_rows": len(metadata_field_import_rows),
                 "metadata_field_import_supported_rows": sum(
                     1 for row in metadata_field_import_rows if row.get("import_supported") is True
+                ),
+                "metadata_field_import_dry_run_updated_rows": int(
+                    metadata_field_import_summary.get("updated_rows") or 0
+                ),
+                "metadata_field_import_dry_run_skipped_rows": int(
+                    metadata_field_import_summary.get("skipped_rows") or 0
+                ),
+                "metadata_field_import_dry_run_skip_reason_counts": metadata_field_import_summary.get(
+                    "skip_reason_counts", []
                 ),
                 "variant_detail_required_rows": int(
                     source_detail_summary.get("variant_detail_required_rows") or 0
@@ -8647,6 +8744,12 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
+    source_discovery_next_focus_metadata_field_import = build_metadata_field_import_dry_run_public(
+        source_discovery_next_focus_detail_candidates,
+        items,
+        generated_at,
+        queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES,
+    )
     (
         source_discovery_next_focus_exact_url_queue,
         source_discovery_next_focus_identity_backfill_queue,
@@ -8714,6 +8817,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_prize_name_image_patch_candidates,
         source_discovery_next_focus_pack,
         source_discovery_next_focus_detail_candidates,
+        source_discovery_next_focus_metadata_field_import,
         source_discovery_next_focus_fallback_queue,
         deduplication_template_import_dry_run,
         animation_review_batches,
@@ -8747,6 +8851,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_unmatched_keyword_review,
         source_discovery_next_focus_pack,
         source_discovery_next_focus_detail_candidates,
+        source_discovery_next_focus_metadata_field_import,
         source_discovery_next_focus_fallback_queue,
         source_discovery_starter_queue,
         requested_focus_action_queue,
@@ -8768,6 +8873,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "source_discovery_next_focus_pack_public.json": source_discovery_next_focus_pack,
             "source_discovery_next_focus_pack_fetch_audit_public.json": source_discovery_next_focus_fetch_audit,
             "source_discovery_next_focus_detail_candidates_public.json": source_discovery_next_focus_detail_candidates,
+            "source_discovery_next_focus_metadata_field_import_dry_run_public.json": source_discovery_next_focus_metadata_field_import,
             "source_discovery_next_focus_fallback_queue_public.json": source_discovery_next_focus_fallback_queue,
             "source_discovery_review_batches_public.json": source_discovery_review_batches,
             "source_discovery_action_queue_public.json": source_discovery_action_queue,
@@ -8937,6 +9043,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["source_discovery_next_focus_detail_candidates"] = {
                 "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}",
                 **source_discovery_next_focus_detail_candidates["summary"],
+            }
+        if source_discovery_next_focus_metadata_field_import.get("summary"):
+            target["source_discovery_next_focus_metadata_field_import_dry_run"] = {
+                "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT.name}",
+                **source_discovery_next_focus_metadata_field_import["summary"],
             }
         target["source_discovery_next_focus_fallback_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
@@ -9684,6 +9795,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, source_discovery_next_focus_detail_candidates)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT, source_discovery_next_focus_metadata_field_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, source_discovery_next_focus_fallback_queue)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE, source_discovery_next_focus_exact_url_queue)
         write_json(
@@ -9741,6 +9853,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE.relative_to(ROOT)),

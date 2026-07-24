@@ -172,6 +172,37 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "auto_apply_enabled": False,
                 }
             },
+            "source_discovery_next_focus_detail_candidates_public.json": {
+                "summary": {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "pack_items": 4,
+                    "items_with_candidates": 3,
+                    "candidate_rows": 6,
+                    "metadata_enrichment_template_rows": 2,
+                    "metadata_field_import_template_rows": 12,
+                    "metadata_field_import_supported_rows": 12,
+                    "next_action_lane_count": 2,
+                    "next_action_lanes": [
+                        ["metadata_field_import_review", 12],
+                        ["variant_disambiguation_required", 1],
+                    ],
+                    "completion_readiness_status": "manual_review_required",
+                    "auto_apply_ready_rows": 0,
+                    "auto_apply_enabled": False,
+                }
+            },
+            "source_discovery_next_focus_metadata_field_import_dry_run_public.json": {
+                "summary": {
+                    "template_items": 12,
+                    "manual_confirmed_rows": 0,
+                    "ready_field_rows": 0,
+                    "updated_rows": 0,
+                    "skipped_rows": 12,
+                    "skip_reason_counts": [["manual_confirmed_false", 12]],
+                    "auto_apply_enabled": False,
+                    "write": False,
+                }
+            },
             "source_discovery_next_focus_fallback_queue_public.json": {
                 "summary": {
                     "focus_pack_id": "source-discovery-focus-001",
@@ -957,6 +988,34 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertIn("not fetchable", fetch_audit["blocker"])
         self.assertEqual(fetch_audit["evidence"]["focus_pack_id"], "source-discovery-focus-001")
         self.assertEqual(fetch_audit["evidence"]["official_search_unavailable_rows"], 4)
+        detail_candidates = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "source_discovery_next_focus_detail_candidates"
+        )
+        self.assertEqual(detail_candidates["priority"], 20)
+        self.assertEqual(detail_candidates["rows"], 4)
+        self.assertEqual(detail_candidates["evidence"]["metadata_field_import_template_rows"], 12)
+        self.assertEqual(detail_candidates["evidence"]["metadata_field_import_supported_rows"], 12)
+        self.assertEqual(detail_candidates["evidence"]["metadata_field_import_dry_run_updated_rows"], 0)
+        self.assertEqual(detail_candidates["evidence"]["metadata_field_import_dry_run_skipped_rows"], 12)
+        self.assertEqual(
+            detail_candidates["evidence"]["metadata_field_import_dry_run_skip_reason_counts"],
+            [["manual_confirmed_false", 12]],
+        )
+        self.assertEqual(
+            detail_candidates["evidence"]["next_action_lanes"],
+            [["metadata_field_import_review", 12], ["variant_disambiguation_required", 1]],
+        )
+        self.assertEqual(report["summary"]["source_next_focus_detail_pack_items"], 4)
+        self.assertEqual(
+            report["summary"]["source_next_focus_detail_metadata_field_import_dry_run_updated_rows"],
+            0,
+        )
+        self.assertEqual(
+            report["summary"]["source_next_focus_detail_metadata_field_import_dry_run_skipped_rows"],
+            12,
+        )
         fallback_queue = next(
             action
             for action in report["actions"]

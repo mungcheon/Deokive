@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T11:11:49Z",
+  "generated_at": "2026-07-24T11:34:01Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
@@ -210,6 +210,8 @@
     "source_next_focus_detail_metadata_enrichment_template_rows": 4,
     "source_next_focus_detail_metadata_field_import_template_rows": 12,
     "source_next_focus_detail_metadata_field_import_supported_rows": 12,
+    "source_next_focus_detail_metadata_field_import_dry_run_updated_rows": 0,
+    "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": 12,
     "source_next_focus_detail_action_lanes": [
       [
         "fallback_source_search",
@@ -915,6 +917,14 @@
         "metadata_enrichment_template_rows": 4,
         "metadata_field_import_template_rows": 12,
         "metadata_field_import_supported_rows": 12,
+        "metadata_field_import_dry_run_updated_rows": 0,
+        "metadata_field_import_dry_run_skipped_rows": 12,
+        "metadata_field_import_dry_run_skip_reason_counts": [
+          [
+            "manual_confirmed_false",
+            12
+          ]
+        ],
         "next_action_lane_count": 3,
         "next_action_lanes": [
           [

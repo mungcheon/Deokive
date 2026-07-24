@@ -129,6 +129,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_discovery_next_focus_pack_import_dry_run_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_pack_fetch_audit_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_detail_candidates_public.json", updated_files)
+        self.assertIn(
+            "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
+            updated_files,
+        )
         self.assertIn("data/source_discovery_next_focus_fallback_queue_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_exact_url_review_queue_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_identity_backfill_queue_public.json", updated_files)
@@ -474,6 +478,22 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["metadata_field_import_supported_rows"],
             12,
+        )
+        self.assertEqual(
+            quality["source_discovery_next_focus_metadata_field_import_dry_run"]["template_items"],
+            12,
+        )
+        self.assertEqual(
+            quality["source_discovery_next_focus_metadata_field_import_dry_run"]["updated_rows"],
+            0,
+        )
+        self.assertEqual(
+            quality["source_discovery_next_focus_metadata_field_import_dry_run"]["skipped_rows"],
+            12,
+        )
+        self.assertEqual(
+            quality["source_discovery_next_focus_metadata_field_import_dry_run"]["skip_reason_counts"],
+            [["manual_confirmed_false", 12]],
         )
         self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],
@@ -2571,6 +2591,21 @@ class PublicCatalogReportTests(unittest.TestCase):
             ),
             source_next_focus_detail_summary.get("metadata_field_import_supported_rows"),
         )
+        field_import_dry_run = quality[
+            "source_discovery_next_focus_metadata_field_import_dry_run"
+        ]
+        self.assertEqual(
+            execution_plan["summary"].get(
+                "source_next_focus_detail_metadata_field_import_dry_run_updated_rows"
+            ),
+            field_import_dry_run.get("updated_rows"),
+        )
+        self.assertEqual(
+            execution_plan["summary"].get(
+                "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows"
+            ),
+            field_import_dry_run.get("skipped_rows"),
+        )
         self.assertEqual(
             source_next_focus_detail_execution_action.get("rows"),
             source_next_focus_detail_summary.get("pack_items"),
@@ -2594,6 +2629,24 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_detail_summary.get("metadata_field_import_supported_rows"),
         )
         self.assertEqual(
+            source_next_focus_detail_execution_action["evidence"].get(
+                "metadata_field_import_dry_run_updated_rows"
+            ),
+            field_import_dry_run.get("updated_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_execution_action["evidence"].get(
+                "metadata_field_import_dry_run_skipped_rows"
+            ),
+            field_import_dry_run.get("skipped_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_execution_action["evidence"].get(
+                "metadata_field_import_dry_run_skip_reason_counts"
+            ),
+            field_import_dry_run.get("skip_reason_counts"),
+        )
+        self.assertEqual(
             source_next_focus_detail_execution_action["evidence"].get("next_action_lanes"),
             source_next_focus_detail_summary.get("next_action_lanes"),
         )
@@ -2614,6 +2667,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_detail_summary.get("metadata_field_import_supported_rows"),
         )
         self.assertEqual(
+            source_next_focus_detail_scorecard.get("metadata_field_import_dry_run_updated_rows"),
+            field_import_dry_run.get("updated_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_scorecard.get("metadata_field_import_dry_run_skipped_rows"),
+            field_import_dry_run.get("skipped_rows"),
+        )
+        self.assertEqual(
             source_next_focus_detail_next_action.get("next_action_lanes"),
             source_next_focus_detail_summary.get("next_action_lanes"),
         )
@@ -2628,6 +2689,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_next_focus_detail_next_action.get("metadata_field_import_supported_rows"),
             source_next_focus_detail_summary.get("metadata_field_import_supported_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_next_action.get("metadata_field_import_dry_run_updated_rows"),
+            field_import_dry_run.get("updated_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_next_action.get("metadata_field_import_dry_run_skipped_rows"),
+            field_import_dry_run.get("skipped_rows"),
         )
         self.assertEqual(
             source_next_focus_detail_scorecard.get("open_rows"),
