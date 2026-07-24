@@ -787,10 +787,15 @@
 
     .quick-owned,
     .choose-owned {
+      appearance: none;
       border-left: 1px solid rgba(255, 126, 178, 0.16);
       cursor: pointer;
       line-height: 1.15;
+      min-width: 0;
+      opacity: 1;
+      text-align: center;
       transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+      -webkit-text-fill-color: currentColor;
       white-space: normal;
     }
 
@@ -821,6 +826,7 @@
     .choose-owned.added::before {
       content: "✓";
       margin-right: 4px;
+      -webkit-text-fill-color: currentColor;
     }
 
     .more {
