@@ -1167,6 +1167,22 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "manual_note": "",
             },
         )
+        price_candidate = price_policy_reviews[0]["official_price_candidate"]
+        self.assertEqual(price_candidate["official_price_candidate_jpy"], 500)
+        self.assertEqual(
+            price_candidate["candidate_status"],
+            "secondary_official_evidence_requires_manual_confirmation",
+        )
+        self.assertTrue(price_candidate["candidate_requires_manual_confirmation"])
+        self.assertIn(
+            "https://one-piece.com/figure/o1841/index.html",
+            price_candidate["candidate_evidence_urls"],
+        )
+        self.assertIn(
+            "https://natalie.mu/comic/news/44718",
+            price_candidate["candidate_evidence_urls"],
+        )
+        self.assertIn("onep8", price_candidate["candidate_scope_note"])
         self.assertTrue(
             price_policy_reviews[0]["missing_regular_price_samples"][0][
                 "first_evidence_url"

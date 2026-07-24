@@ -494,6 +494,39 @@ def _campaign_review_readiness(
     }
 
 
+def _known_price_candidate_for_campaign(campaign: dict[str, Any]) -> dict[str, Any] | None:
+    comparison = campaign.get("campaign_url_comparison") or {}
+    slugs = {
+        str(slug)
+        for slug in comparison.get("campaign_slugs") or []
+        if isinstance(slug, str)
+    }
+    if {"onep6", "onep8"} <= slugs:
+        return {
+            "official_price_candidate_jpy": 500,
+            "candidate_status": "secondary_official_evidence_requires_manual_confirmation",
+            "candidate_evidence_urls": [
+                "https://one-piece.com/figure/o1841/index.html",
+                "https://one-piece.com/figure/o1843/index.html",
+                "https://one-piece.com/figure/o1845/index.html",
+                "https://one-piece.com/figure/o1847/index.html",
+                "https://natalie.mu/comic/news/44718",
+            ],
+            "candidate_evidence_summary": (
+                "ONE PIECE official figure pages and Natalie list the March 2011 "
+                "Marineford Final Battle campaign price as 1 try / 500 JPY tax included. "
+                "Confirm whether the September 2011 onep8 campaign used the same draw price "
+                "before importing."
+            ),
+            "candidate_scope_note": (
+                "Candidate covers the March 2011 onep6 campaign directly; onep8 still needs "
+                "manual confirmation because the official 1kuji page copy lacks a price line."
+            ),
+            "candidate_requires_manual_confirmation": True,
+        }
+    return None
+
+
 def _price_policy_blocked_campaign_reviews(
     next_campaign_review_batch: list[dict[str, Any]],
     *,
@@ -565,6 +598,9 @@ def _price_policy_blocked_campaign_reviews(
                     "manual_price_evidence_url": "",
                     "manual_note": "",
                 },
+                "official_price_candidate": _known_price_candidate_for_campaign(
+                    campaign
+                ),
                 "unblocks_next_phase": "campaign_reissue_or_duplicate_identity_review",
             }
         )
