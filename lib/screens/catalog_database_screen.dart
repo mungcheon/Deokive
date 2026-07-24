@@ -8,10 +8,10 @@ import '../theme/deokive_palette.dart';
 import '../utils/catalog_goods_importer.dart';
 import '../widgets/catalog_entry_image.dart';
 
-const _catalogAddButtonBackground = Color(0xFF252938);
+const _catalogAddButtonBackground = Color(0xFF1E2330);
 const _catalogAddButtonForeground = Colors.white;
-const _catalogAddButtonDisabledBackground = Color(0xFFE7E9EE);
-const _catalogAddButtonDisabledForeground = Color(0xFF5D6575);
+const _catalogAddButtonDisabledBackground = Color(0xFFDDE1E8);
+const _catalogAddButtonDisabledForeground = Color(0xFF303747);
 
 class CatalogDatabaseScreen extends StatefulWidget {
   final FolderItem? initialFolder;
@@ -588,11 +588,11 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 124,
+        minWidth: expanded ? 0 : 136,
         minHeight: 40,
         maxHeight: 40,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 14),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: background,
@@ -612,7 +612,7 @@ class _CatalogAddButton extends StatelessWidget {
         child: DefaultTextStyle.merge(
           style: TextStyle(
             color: foreground,
-            fontSize: 12.5,
+            fontSize: 13,
             fontWeight: FontWeight.w900,
             height: 1,
           ),
@@ -628,7 +628,7 @@ class _CatalogAddButton extends StatelessWidget {
                     label,
                     style: TextStyle(
                       color: foreground,
-                      fontSize: 12.5,
+                      fontSize: 13,
                       fontWeight: FontWeight.w900,
                       height: 1,
                     ),
