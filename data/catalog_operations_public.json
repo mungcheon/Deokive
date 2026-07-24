@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T01:43:23Z",
+  "generated_at": "2026-07-24T02:34:11Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -53,6 +53,8 @@
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_focus_pack_progress_queues": 23,
       "source_discovery_focus_pack_progress_remaining_rows": 417,
+      "source_discovery_starter_queue_rows": 637,
+      "source_discovery_starter_queue_groups": 339,
       "source_discovery_next_focus_fallback_rows": 17,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -242,6 +244,16 @@
         "legacy_mobile_store_search",
         "evidence_fill_and_dry_run"
       ],
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "source_discovery_starter_queue",
+      "status": "manual_review",
+      "open_rows": 637,
+      "starter_queue_groups": 339,
+      "coverage_matches_missing_source_url_rows": true,
+      "primary_report": "data/source_discovery_starter_queue_public.json",
+      "next_step": "find_exact_official_product_source_url",
       "auto_apply_enabled": false
     },
     {
@@ -2366,6 +2378,10 @@
       "public_report": "data/source_discovery_focus_confirmed_template_public.json"
     },
     {
+      "key": "source_discovery_starter_queue",
+      "public_report": "data/source_discovery_starter_queue_public.json"
+    },
+    {
       "key": "source_discovery_next_focus_pack",
       "public_report": "data/source_discovery_next_focus_pack_public.json"
     },
@@ -2477,9 +2493,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 21,
+      "action_count": 22,
       "blocked_action_count": 1,
-      "manual_review_action_count": 18,
+      "manual_review_action_count": 19,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -2785,6 +2801,22 @@
       "manual_confirmed_rows": 0,
       "auto_apply_enabled": false,
       "recommended_next_action": "Review weak generic storefront candidates before preparing any catalog patch."
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_starter_queue",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "starter_queue_rows": 637,
+      "starter_queue_groups": 339,
+      "coverage_matches_missing_source_url_rows": true,
+      "top_group_keys": [
+        "엔스카이 | 원피스 | 키링",
+        "엔스카이 | 장송의 프리렌 | 인형",
+        "FuRyu | 나의 히어로 아카데미아 | 피규어",
+        "굿스마일컴퍼니 | 원피스 | 피규어",
+        "엔스카이 | 헌터X헌터 | 마스코트"
+      ],
+      "recommended_next_action": "Open starter search URLs and confirm exact official product/detail source pages before image import."
     },
     {
       "priority": 20,

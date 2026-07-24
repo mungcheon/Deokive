@@ -136,6 +136,31 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "auto_apply_enabled": False,
                 }
             },
+            "source_discovery_starter_queue_public.json": {
+                "summary": {
+                    "starter_queue_rows": 12,
+                    "starter_queue_groups": 3,
+                    "coverage_matches_missing_source_url_rows": True,
+                    "by_source_store": [["Animate", 8], ["Good Smile Company", 4]],
+                    "auto_apply_enabled": False,
+                },
+                "groups": [
+                    {
+                        "group_key": "Animate|Acrylic stand",
+                        "rows": 8,
+                        "source_store": "Animate",
+                        "category": "Acrylic stand",
+                        "official_search_url": "https://animate.example/search?q=acrylic",
+                    },
+                    {
+                        "group_key": "Good Smile Company|Figure",
+                        "rows": 4,
+                        "source_store": "Good Smile Company",
+                        "category": "Figure",
+                        "official_search_url": "https://goodsmile.example/search?q=figure",
+                    },
+                ],
+            },
             "catalog_metadata_review_batches_public.json": {
                 "summary": {"missing_cell_count": 20, "batch_count": 2, "field_missing_totals": {"barcode": 20}}
             },
@@ -491,6 +516,19 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             ],
         )
         self.assertEqual(report["summary"]["source_next_focus_fallback_rows"], 4)
+        source_starter = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "source_discovery_starter_queue"
+        )
+        self.assertEqual(source_starter["priority"], 20)
+        self.assertEqual(source_starter["rows"], 12)
+        self.assertEqual(source_starter["next_step"], "find_exact_official_product_source_url")
+        self.assertTrue(source_starter["evidence"]["coverage_matches_missing_source_url_rows"])
+        self.assertEqual(source_starter["evidence"]["starter_queue_groups"], 3)
+        self.assertEqual(source_starter["evidence"]["top_groups"][0]["group_key"], "Animate|Acrylic stand")
+        self.assertEqual(report["summary"]["source_discovery_starter_queue_rows"], 12)
+        self.assertEqual(report["summary"]["source_discovery_starter_queue_groups"], 3)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
         self.assertEqual(image["evidence"]["provider_candidate_items"], 7)

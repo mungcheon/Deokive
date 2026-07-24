@@ -68,6 +68,15 @@ def _pair_counts(value: Any) -> dict[str, int]:
     return counts
 
 
+def _starter_group_key(group: dict[str, Any]) -> str:
+    parts = [
+        str(group.get("source_store") or "").strip(),
+        str(group.get("affiliation") or "").strip(),
+        str(group.get("category") or "").strip(),
+    ]
+    return " | ".join(part for part in parts if part) or "unknown_group"
+
+
 def _action(
     *,
     priority: int,
@@ -107,6 +116,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_next_focus_pack = load_report("source_discovery_next_focus_pack_public.json")
     source_next_focus_fetch_audit = load_report("source_discovery_next_focus_pack_fetch_audit_public.json")
     source_next_focus_fallback_queue = load_report("source_discovery_next_focus_fallback_queue_public.json")
+    source_discovery_starter_queue = load_report("source_discovery_starter_queue_public.json")
     source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
     ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
     metadata_batches = load_report("catalog_metadata_review_batches_public.json")
@@ -143,6 +153,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_focus_template_summary = _summary(source_focus_template)
     source_next_focus_fetch_audit_summary = _summary(source_next_focus_fetch_audit)
     source_next_focus_fallback_summary = _summary(source_next_focus_fallback_queue)
+    source_discovery_starter_summary = _summary(source_discovery_starter_queue)
     source_detail_candidate_action_summary = _summary(source_detail_candidate_action_queue)
     ensky_cache_candidate_action_summary = _summary(ensky_cache_candidate_action_queue)
     metadata_summary = _summary(metadata_batches)
@@ -394,6 +405,46 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "first_fallback_store_search_url": source_next_focus_fallback_summary.get(
                         "first_fallback_store_search_url"
                     ),
+                },
+            )
+        )
+
+    if source_discovery_starter_summary:
+        actions.append(
+            _action(
+                priority=20,
+                workstream="source_discovery_starter_queue",
+                public_report="data/source_discovery_starter_queue_public.json",
+                status=(
+                    "manual_review"
+                    if _count(source_discovery_starter_summary, "starter_queue_rows")
+                    else "clear"
+                ),
+                rows=_count(source_discovery_starter_summary, "starter_queue_rows"),
+                command=(
+                    "Open starter search URLs and confirm exact official product/detail source pages for every "
+                    "missing-source group before image imports."
+                ),
+                next_step="find_exact_official_product_source_url",
+                blocker="Auto source/image import is disabled until exact product evidence is manually confirmed.",
+                evidence={
+                    "starter_queue_rows": _count(source_discovery_starter_summary, "starter_queue_rows"),
+                    "starter_queue_groups": _count(source_discovery_starter_summary, "starter_queue_groups"),
+                    "coverage_matches_missing_source_url_rows": bool(
+                        source_discovery_starter_summary.get("coverage_matches_missing_source_url_rows", False)
+                    ),
+                    "by_source_store": source_discovery_starter_summary.get("by_source_store", []),
+                    "top_groups": [
+                        {
+                            "group_key": row.get("group_key") or _starter_group_key(row),
+                            "rows": row.get("rows", 0),
+                            "source_store": row.get("source_store"),
+                            "category": row.get("category"),
+                            "official_search_url": row.get("official_search_url"),
+                        }
+                        for row in source_discovery_starter_queue.get("groups", [])
+                        if isinstance(row, dict)
+                    ][:8],
                 },
             )
         )
@@ -1154,6 +1205,12 @@ def _build_plan(load_report) -> dict[str, Any]:
             "source_next_focus_fallback_rows": _count(source_next_focus_fallback_summary, "queue_rows"),
             "source_next_focus_fallback_manual_confirmed_rows": _count(
                 source_next_focus_fallback_summary, "manual_confirmed_rows"
+            ),
+            "source_discovery_starter_queue_rows": _count(
+                source_discovery_starter_summary, "starter_queue_rows"
+            ),
+            "source_discovery_starter_queue_groups": _count(
+                source_discovery_starter_summary, "starter_queue_groups"
             ),
             "source_discovery_action_rows": _count(source_action_summary, "queued_source_rows"),
             "source_discovery_actionable_rows": _count(source_action_summary, "actionable_source_rows"),

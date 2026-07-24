@@ -1629,6 +1629,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for row in execution_plan.get("actions", [])
             if row.get("workstream") == "ichiban_kuji_reissue_dedupe_review"
         )
+        source_discovery_starter_execution_action = next(
+            row
+            for row in execution_plan.get("actions", [])
+            if row.get("workstream") == "source_discovery_starter_queue"
+        )
         ichiban_action = reports.load_json(reports.ICHIIBAN_KUJI_METADATA_ACTION_QUEUE)
         ichiban_action_summary = ichiban_action.get("summary", {})
         ichiban_prize_audit = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT)
@@ -1758,6 +1763,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "source_discovery_starter_queue"
         ]
+        source_discovery_starter_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "source_discovery_starter_queue"
+        )
+        source_discovery_starter_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "source_discovery_starter_queue"
+        )
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
@@ -1771,6 +1786,9 @@ class PublicCatalogReportTests(unittest.TestCase):
             f"data/{reports.SOURCE_DISCOVERY_STARTER_QUEUE.name}",
             {batch.get("public_report") for batch in agent_queue.get("batches", [])},
         )
+        self.assertIn(f"data/{reports.SOURCE_DISCOVERY_STARTER_QUEUE.name}", next_action_reports)
+        self.assertIn(f"data/{reports.SOURCE_DISCOVERY_STARTER_QUEUE.name}", scorecard_reports)
+        self.assertIn(f"data/{reports.SOURCE_DISCOVERY_STARTER_QUEUE.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}", report_links)
@@ -1983,6 +2001,46 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_discovery_starter_summary["starter_queue_rows"],
             quality["source_discovery_starter_queue"]["starter_queue_rows"],
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_starter_queue_rows"),
+            source_discovery_starter_summary["starter_queue_rows"],
+        )
+        self.assertEqual(
+            open_queues.get("source_discovery_starter_queue_groups"),
+            source_discovery_starter_summary["starter_queue_groups"],
+        )
+        self.assertEqual(
+            source_discovery_starter_scorecard["open_rows"],
+            source_discovery_starter_summary["starter_queue_rows"],
+        )
+        self.assertEqual(
+            source_discovery_starter_scorecard["starter_queue_groups"],
+            source_discovery_starter_summary["starter_queue_groups"],
+        )
+        self.assertEqual(
+            source_discovery_starter_next_action["starter_queue_rows"],
+            source_discovery_starter_summary["starter_queue_rows"],
+        )
+        self.assertEqual(
+            source_discovery_starter_next_action["starter_queue_groups"],
+            source_discovery_starter_summary["starter_queue_groups"],
+        )
+        self.assertEqual(
+            source_discovery_starter_scorecard["next_step"],
+            "find_exact_official_product_source_url",
+        )
+        self.assertEqual(
+            source_discovery_starter_execution_action["rows"],
+            source_discovery_starter_summary["starter_queue_rows"],
+        )
+        self.assertEqual(
+            source_discovery_starter_execution_action["next_step"],
+            "find_exact_official_product_source_url",
+        )
+        self.assertEqual(
+            source_discovery_starter_execution_action["evidence"]["starter_queue_groups"],
+            source_discovery_starter_summary["starter_queue_groups"],
         )
         self.assertEqual(
             {batch.get("review_state") for batch in source_discovery_starter_agent_batches},

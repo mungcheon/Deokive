@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T01:43:50Z",
+  "generated_at": "2026-07-24T02:34:41Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 21,
+    "action_count": 22,
     "blocked_action_count": 1,
-    "manual_review_action_count": 18,
+    "manual_review_action_count": 19,
     "pending_import_action_count": 0,
-    "total_action_rows": 31978,
+    "total_action_rows": 32615,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -45,6 +45,8 @@
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_focus_pack_progress_queues": 23,
       "source_discovery_focus_pack_progress_remaining_rows": 417,
+      "source_discovery_starter_queue_rows": 637,
+      "source_discovery_starter_queue_groups": 339,
       "source_discovery_next_focus_fallback_rows": 17,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -144,6 +146,8 @@
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_fallback_rows": 17,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
+    "source_discovery_starter_queue_rows": 637,
+    "source_discovery_starter_queue_groups": 339,
     "source_discovery_action_rows": 632,
     "source_discovery_actionable_rows": 632,
     "source_discovery_unqueued_actionable_rows": 0,
@@ -690,6 +694,81 @@
             "manual_official_research",
             5
           ]
+        ]
+      }
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_starter_queue",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "status": "manual_review",
+      "rows": 637,
+      "command": "Open starter search URLs and confirm exact official product/detail source pages for every missing-source group before image imports.",
+      "next_step": "find_exact_official_product_source_url",
+      "blocker": "Auto source/image import is disabled until exact product evidence is manually confirmed.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "starter_queue_rows": 637,
+        "starter_queue_groups": 339,
+        "coverage_matches_missing_source_url_rows": true,
+        "by_source_store": [],
+        "top_groups": [
+          {
+            "group_key": "엔스카이 | 원피스 | 키링",
+            "rows": 9,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "official_search_url": null
+          },
+          {
+            "group_key": "엔스카이 | 장송의 프리렌 | 인형",
+            "rows": 9,
+            "source_store": "엔스카이",
+            "category": "인형",
+            "official_search_url": null
+          },
+          {
+            "group_key": "FuRyu | 나의 히어로 아카데미아 | 피규어",
+            "rows": 8,
+            "source_store": "FuRyu",
+            "category": "피규어",
+            "official_search_url": null
+          },
+          {
+            "group_key": "굿스마일컴퍼니 | 원피스 | 피규어",
+            "rows": 7,
+            "source_store": "굿스마일컴퍼니",
+            "category": "피규어",
+            "official_search_url": null
+          },
+          {
+            "group_key": "엔스카이 | 헌터X헌터 | 마스코트",
+            "rows": 7,
+            "source_store": "엔스카이",
+            "category": "마스코트",
+            "official_search_url": null
+          },
+          {
+            "group_key": "굿스마일컴퍼니 | 하츠네 미쿠 | 아크릴 스탠드",
+            "rows": 6,
+            "source_store": "굿스마일컴퍼니",
+            "category": "아크릴 스탠드",
+            "official_search_url": null
+          },
+          {
+            "group_key": "굿스마일컴퍼니 | 하츠네 미쿠 | 캔뱃지",
+            "rows": 6,
+            "source_store": "굿스마일컴퍼니",
+            "category": "캔뱃지",
+            "official_search_url": null
+          },
+          {
+            "group_key": "엔스카이 | 헌터X헌터 | 인형",
+            "rows": 6,
+            "source_store": "엔스카이",
+            "category": "인형",
+            "official_search_url": null
+          }
         ]
       }
     },

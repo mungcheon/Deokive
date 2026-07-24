@@ -2172,6 +2172,7 @@ def build_operations_public(
     animation_split_review_override: dict[str, Any] | None = None,
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     ichiban_reissue_decision_template_override: dict[str, Any] | None = None,
+    source_discovery_starter_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -2225,6 +2226,23 @@ def build_operations_public(
         else {}
     )
     source_next_focus_fallback_queue_summary = source_next_focus_fallback_queue.get("summary", {})
+    source_discovery_starter_queue = (
+        source_discovery_starter_queue_override
+        if source_discovery_starter_queue_override is not None
+        else load_json(SOURCE_DISCOVERY_STARTER_QUEUE, {})
+        if SOURCE_DISCOVERY_STARTER_QUEUE.exists()
+        else {}
+    )
+    source_discovery_starter_queue_summary = source_discovery_starter_queue.get("summary", {})
+
+    def starter_group_key(group: dict[str, Any]) -> str:
+        parts = [
+            str(group.get("source_store") or "").strip(),
+            str(group.get("affiliation") or "").strip(),
+            str(group.get("category") or "").strip(),
+        ]
+        return " | ".join(part for part in parts if part) or "unknown_group"
+
     def compact_source_workstream(row: dict[str, Any]) -> dict[str, Any]:
         return {
             "source_store": row.get("source_store"),
@@ -2680,6 +2698,23 @@ def build_operations_public(
             "auto_apply_enabled": generic_patch_summary.get("auto_apply_enabled", False),
             "recommended_next_action": "Review weak generic storefront candidates before preparing any catalog patch.",
         },
+        {
+            "priority": 20,
+            "workstream": "source_discovery_starter_queue",
+            "public_report": f"data/{SOURCE_DISCOVERY_STARTER_QUEUE.name}",
+            "starter_queue_rows": source_discovery_starter_queue_summary.get("starter_queue_rows", 0),
+            "starter_queue_groups": source_discovery_starter_queue_summary.get("starter_queue_groups", 0),
+            "coverage_matches_missing_source_url_rows": source_discovery_starter_queue_summary.get(
+                "coverage_matches_missing_source_url_rows",
+                False,
+            ),
+            "top_group_keys": [
+                starter_group_key(group)
+                for group in source_discovery_starter_queue.get("groups", [])[:5]
+                if isinstance(group, dict)
+            ],
+            "recommended_next_action": "Open starter search URLs and confirm exact official product/detail source pages before image import.",
+        } if source_discovery_starter_queue_summary else None,
         {
             "priority": 20,
             "workstream": "source_discovery",
@@ -3294,6 +3329,23 @@ def build_operations_public(
             "auto_apply_enabled": source_next_focus_fallback_queue_summary.get("auto_apply_enabled", False),
         } if source_next_focus_fallback_queue_summary else None,
         {
+            "workstream": "source_discovery_starter_queue",
+            "status": (
+                "manual_review"
+                if source_discovery_starter_queue_summary.get("starter_queue_rows", 0)
+                else "clear"
+            ),
+            "open_rows": source_discovery_starter_queue_summary.get("starter_queue_rows", 0),
+            "starter_queue_groups": source_discovery_starter_queue_summary.get("starter_queue_groups", 0),
+            "coverage_matches_missing_source_url_rows": source_discovery_starter_queue_summary.get(
+                "coverage_matches_missing_source_url_rows",
+                False,
+            ),
+            "primary_report": f"data/{SOURCE_DISCOVERY_STARTER_QUEUE.name}",
+            "next_step": "find_exact_official_product_source_url",
+            "auto_apply_enabled": source_discovery_starter_queue_summary.get("auto_apply_enabled", False),
+        } if source_discovery_starter_queue_summary else None,
+        {
             "workstream": "source_discovery_review_batches",
             "status": "open" if source_review_batches_summary.get("source_discovery_rows", 0) else "clear",
             "open_rows": source_review_batches_summary.get("source_discovery_rows", 0),
@@ -3792,6 +3844,13 @@ def build_operations_public(
         open_review_queues["source_discovery_focus_pack_progress_remaining_rows"] = (
             source_next_focus_pack_summary.get("focus_pack_progress_remaining_rows", 0)
         )
+    if source_discovery_starter_queue_summary:
+        open_review_queues["source_discovery_starter_queue_rows"] = source_discovery_starter_queue_summary.get(
+            "starter_queue_rows", 0
+        )
+        open_review_queues["source_discovery_starter_queue_groups"] = source_discovery_starter_queue_summary.get(
+            "starter_queue_groups", 0
+        )
     if source_next_focus_fallback_queue_summary:
         open_review_queues["source_discovery_next_focus_fallback_rows"] = (
             source_next_focus_fallback_queue_summary.get("queue_rows", 0)
@@ -3962,6 +4021,7 @@ def build_operations_public(
             {"key": "source_discovery", "public_report": f"data/{SOURCE_DISCOVERY.name}"},
             {"key": "source_discovery_review_batches", "public_report": f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}"},
             {"key": "source_discovery_focus_template", "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}"},
+            {"key": "source_discovery_starter_queue", "public_report": f"data/{SOURCE_DISCOVERY_STARTER_QUEUE.name}"},
             {"key": "source_discovery_next_focus_pack", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}"},
             {"key": "source_discovery_next_focus_detail_candidates", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}"},
             {"key": "source_discovery_next_focus_fallback_queue", "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}"},
@@ -6595,6 +6655,7 @@ def validate_report_consistency(
     animation_split_review_override: dict[str, Any] | None = None,
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
+    source_discovery_starter_queue_override: dict[str, Any] | None = None,
 ) -> list[str]:
     findings: list[str] = []
     source_summary = source_discovery["summary"]
@@ -6898,6 +6959,21 @@ def validate_report_consistency(
         )
         expected_open_queues["source_discovery_focus_pack_progress_remaining_rows"] = (
             source_next_focus_pack_summary.get("focus_pack_progress_remaining_rows", 0)
+        )
+    source_discovery_starter_queue = (
+        source_discovery_starter_queue_override
+        if source_discovery_starter_queue_override is not None
+        else load_json(SOURCE_DISCOVERY_STARTER_QUEUE, {})
+        if SOURCE_DISCOVERY_STARTER_QUEUE.exists()
+        else {}
+    )
+    source_discovery_starter_summary = source_discovery_starter_queue.get("summary", {})
+    if source_discovery_starter_summary:
+        expected_open_queues["source_discovery_starter_queue_rows"] = source_discovery_starter_summary.get(
+            "starter_queue_rows", 0
+        )
+        expected_open_queues["source_discovery_starter_queue_groups"] = source_discovery_starter_summary.get(
+            "starter_queue_groups", 0
         )
     source_next_focus_fallback_queue = (
         source_next_focus_fallback_queue_override
@@ -7753,6 +7829,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_split_review,
         animation_unmatched_keyword_review,
         ichiban_kuji_reissue_decision_template,
+        source_discovery_starter_queue,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -7784,6 +7861,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "source_discovery_focus_confirmed_template_public.json": source_discovery_focus_template,
             "source_discovery_focus_template_import_dry_run_public.json": source_discovery_focus_template_import,
             "source_discovery_completion_roadmap_public.json": source_discovery_completion_roadmap,
+            "source_discovery_starter_queue_public.json": source_discovery_starter_queue,
             "source_discovery_next_focus_pack_public.json": source_discovery_next_focus_pack,
             "source_discovery_next_focus_pack_fetch_audit_public.json": source_discovery_next_focus_fetch_audit,
             "source_discovery_next_focus_fallback_queue_public.json": source_discovery_next_focus_fallback_queue,
@@ -8566,6 +8644,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_split_review,
         animation_unmatched_keyword_review,
         source_discovery_next_focus_fallback_queue,
+        source_discovery_starter_queue,
     )
     if consistency_findings:
         raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))
