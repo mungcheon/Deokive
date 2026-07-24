@@ -235,10 +235,9 @@ void main() {
     final addTextStyle = tester.widget<Text>(addTextFinder).style!;
     final addIconTheme = IconTheme.of(tester.element(addIconFinder));
 
-    expect(addTextStyle.color, Colors.white);
-    expect(addTextStyle.shadows, isNotNull);
-    expect(addTextStyle.shadows, isNotEmpty);
-    expect(addIconTheme.color, Colors.white);
+    expect(addTextStyle.color, const Color(0xFF161A22));
+    expect(addTextStyle.shadows, isEmpty);
+    expect(addIconTheme.color, const Color(0xFF161A22));
     expect(tester.getSize(addTextFinder).width, greaterThan(0));
     expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(46));
     expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(118));
@@ -302,10 +301,9 @@ void main() {
     final addTextStyle = tester.widget<Text>(addTextFinder).style!;
     final addIconTheme = IconTheme.of(tester.element(addIconFinder));
 
-    expect(addTextStyle.color, Colors.white);
-    expect(addTextStyle.shadows, isNotNull);
-    expect(addTextStyle.shadows, isNotEmpty);
-    expect(addIconTheme.color, Colors.white);
+    expect(addTextStyle.color, const Color(0xFF161A22));
+    expect(addTextStyle.shadows, isEmpty);
+    expect(addIconTheme.color, const Color(0xFF161A22));
     expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(116));
   });
 
@@ -365,9 +363,9 @@ void main() {
     final addTextStyle = tester.widget<Text>(addTextFinder).style!;
     final addIconTheme = IconTheme.of(tester.element(addIconFinder));
 
-    expect(addTextStyle.color, Colors.white);
+    expect(addTextStyle.color, const Color(0xFF161A22));
     expect(addTextStyle.fontFamilyFallback, contains('Malgun Gothic'));
-    expect(addIconTheme.color, Colors.white);
+    expect(addIconTheme.color, const Color(0xFF161A22));
     expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(78));
   });
 

@@ -8,10 +8,10 @@ import '../theme/deokive_palette.dart';
 import '../utils/catalog_goods_importer.dart';
 import '../widgets/catalog_entry_image.dart';
 
-const _catalogAddButtonBackground = Color(0xFF1E2330);
-const _catalogAddButtonForeground = Color(0xFFFFFFFF);
+const _catalogAddButtonBackground = Color(0xFFFFD84D);
+const _catalogAddButtonForeground = Color(0xFF161A22);
 const _catalogAddButtonDisabledBackground = Color(0xFFDDE1E8);
-const _catalogAddButtonDisabledForeground = Color(0xFF303747);
+const _catalogAddButtonDisabledForeground = Color(0xFF596070);
 
 class CatalogDatabaseScreen extends StatefulWidget {
   final FolderItem? initialFolder;
@@ -600,13 +600,13 @@ class _CatalogAddButton extends StatelessWidget {
         border: Border.all(
           color: disabled
               ? _catalogAddButtonDisabledForeground.withValues(alpha: 0.12)
-              : Colors.white.withValues(alpha: 0.14),
+              : _catalogAddButtonForeground.withValues(alpha: 0.1),
         ),
         boxShadow: disabled
             ? null
             : [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.12),
+                  color: _catalogAddButtonBackground.withValues(alpha: 0.34),
                   blurRadius: 12,
                   offset: const Offset(0, 5),
                 ),
@@ -700,13 +700,7 @@ class _CatalogAddButtonLabel extends StatelessWidget {
           height: 1,
           decoration: TextDecoration.none,
           fontFamilyFallback: _fontFallback,
-          shadows: [
-            Shadow(
-              color: Colors.black.withValues(alpha: 0.32),
-              blurRadius: 2,
-              offset: const Offset(0, 1),
-            ),
-          ],
+          shadows: const [],
         ),
         strutStyle: const StrutStyle(
           fontSize: 13,

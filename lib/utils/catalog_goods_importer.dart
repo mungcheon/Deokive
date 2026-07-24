@@ -11,8 +11,8 @@ import '../state/app_state.dart';
 import '../widgets/goods_name_search_field.dart';
 import 'catalog_asset_urls.dart';
 
-const _catalogImportButtonBackground = Color(0xFF252938);
-const _catalogImportButtonForeground = Color(0xFFFFFFFF);
+const _catalogImportButtonBackground = Color(0xFFFFD84D);
+const _catalogImportButtonForeground = Color(0xFF161A22);
 const _catalogImportButtonDisabledBackground = Color(0xFFE7E9EE);
 const _catalogImportButtonDisabledForeground = Color(0xFF5D6575);
 
@@ -423,7 +423,7 @@ class _CatalogImportActionButton extends StatelessWidget {
         border: Border.all(
           color: onPressed == null
               ? foregroundColor.withValues(alpha: 0.12)
-              : Colors.white.withValues(alpha: 0.14),
+              : foregroundColor.withValues(alpha: 0.1),
         ),
       ),
       child: IconTheme(
@@ -503,13 +503,7 @@ class _CatalogImportActionLabel extends StatelessWidget {
           height: 1,
           decoration: TextDecoration.none,
           fontFamilyFallback: _fontFallback,
-          shadows: [
-            Shadow(
-              color: Colors.black.withValues(alpha: 0.28),
-              blurRadius: 2,
-              offset: const Offset(0, 1),
-            ),
-          ],
+          shadows: const [],
         ),
         strutStyle: const StrutStyle(
           fontSize: 15,
