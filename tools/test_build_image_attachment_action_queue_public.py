@@ -69,6 +69,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_any_search_hint_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_missing_any_search_hint_rows"], 0)
         self.assertEqual(report["summary"]["primary_review_url_rows"], 2)
+        self.assertEqual(report["summary"]["primary_review_url_missing_rows"], 0)
         self.assertEqual(
             dict(report["summary"]["primary_review_url_kind_counts"]),
             {"source_search_url": 1, "fallback_web_search": 1},
@@ -80,6 +81,8 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["first_primary_review_url_kind"], "fallback_web_search")
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
+        self.assertEqual(report["summary"]["blocked_before_image_import_rows"], 2)
+        self.assertEqual(report["summary"]["download_ready_after_manual_image_url_rows"], 2)
         self.assertEqual(report["summary"]["suggested_local_image_path_rows"], 2)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["source_url_update_workstream_count"], 1)
@@ -87,6 +90,29 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_template_batch_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
+        self.assertEqual(
+            report["attachment_readiness"],
+            {
+                "row_count": 2,
+                "local_image_download_instruction_ready_rows": 2,
+                "suggested_local_image_path_rows": 2,
+                "primary_review_url_rows": 2,
+                "primary_review_url_missing_rows": 0,
+                "blocked_by_source_url_rows": 2,
+                "blocked_by_representative_review_rows": 0,
+                "image_url_review_ready_rows": 0,
+                "blocked_before_image_import_rows": 2,
+                "can_import_image_urls_now_rows": 0,
+                "download_ready_after_manual_image_url_rows": 2,
+                "readiness_lane_counts": [
+                    ["source_url_replacement_first", 2],
+                    ["representative_image_candidate_review", 0],
+                    ["image_url_review_ready", 0],
+                ],
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+            },
+        )
         self.assertEqual(
             report["execution_readiness"]["status"],
             "source_url_replacement_required",
@@ -130,7 +156,17 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["workstreams"][0]["source_store"], "Stellive Store")
         self.assertEqual(report["workstreams"][0]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(report["workstreams"][0]["source_url_update_template_rows"], 2)
+        self.assertEqual(
+            report["workstreams"][0]["attachment_readiness"]["blocked_by_source_url_rows"],
+            2,
+        )
         self.assertEqual(report["workstreams"][0]["review_summary"]["review_lane"], "source_url_replacement_first")
+        self.assertEqual(
+            report["workstreams"][0]["review_summary"]["attachment_readiness"][
+                "download_ready_after_manual_image_url_rows"
+            ],
+            2,
+        )
         self.assertIn(
             "generic_storefront_source_url",
             report["workstreams"][0]["review_summary"]["primary_blockers"],
@@ -143,6 +179,10 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["next_actions"][0]["first_primary_review_url_kind"], "fallback_web_search")
         self.assertEqual(report["batches"][0]["workflow"], "replace_generic_source_then_extract_image")
         self.assertEqual(report["batches"][0]["primary_review_url_rows"], 2)
+        self.assertEqual(
+            report["batches"][0]["attachment_readiness"]["blocked_before_image_import_rows"],
+            2,
+        )
         self.assertEqual(
             report["batches"][0]["first_primary_review_url"],
             report["batches"][0]["items"][0]["primary_review_url"],

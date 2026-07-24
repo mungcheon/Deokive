@@ -79,6 +79,43 @@ def _list_counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]
     return [[name, count] for name, count in counts.most_common()]
 
 
+def _attachment_readiness(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    local_download_ready_rows = sum(
+        1
+        for row in rows
+        if (row.get("local_image_download_instruction") or {}).get("status")
+        == "ready_after_manual_image_url_confirmation"
+    )
+    source_blocked_rows = sum(1 for row in rows if row.get("source_url_update_required"))
+    representative_blocked_rows = sum(
+        1 for row in rows if row.get("representative_image_review_required")
+    )
+    image_url_ready_rows = sum(1 for row in rows if row.get("image_url_ready"))
+    primary_review_url_rows = sum(1 for row in rows if row.get("primary_review_url"))
+    return {
+        "row_count": len(rows),
+        "local_image_download_instruction_ready_rows": local_download_ready_rows,
+        "suggested_local_image_path_rows": sum(
+            1 for row in rows if row.get("suggested_local_image_path")
+        ),
+        "primary_review_url_rows": primary_review_url_rows,
+        "primary_review_url_missing_rows": len(rows) - primary_review_url_rows,
+        "blocked_by_source_url_rows": source_blocked_rows,
+        "blocked_by_representative_review_rows": representative_blocked_rows,
+        "image_url_review_ready_rows": image_url_ready_rows,
+        "blocked_before_image_import_rows": source_blocked_rows + representative_blocked_rows,
+        "can_import_image_urls_now_rows": image_url_ready_rows,
+        "download_ready_after_manual_image_url_rows": local_download_ready_rows,
+        "readiness_lane_counts": [
+            ["source_url_replacement_first", source_blocked_rows],
+            ["representative_image_candidate_review", representative_blocked_rows],
+            ["image_url_review_ready", image_url_ready_rows],
+        ],
+        "manual_confirmation_required": bool(rows),
+        "auto_apply_enabled": False,
+    }
+
+
 def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[tuple[str, str], dict[str, Any]] = {}
     for batch in batches:
@@ -101,6 +138,7 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "first_primary_review_url_kind": "manual_lookup_required",
                 "category_rows": Counter(),
                 "sample_items": [],
+                "items": [],
             },
         )
         bucket["priority"] = min(int(bucket["priority"]), int(batch.get("priority") or 99))
@@ -149,6 +187,7 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                         ),
                     }
                 )
+            bucket["items"].append(item)
 
     rows = []
     for bucket in grouped.values():
@@ -177,6 +216,7 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "category_rows": [
                     [category, count] for category, count in bucket["category_rows"].most_common()
                 ],
+                "attachment_readiness": _attachment_readiness(bucket["items"]),
                 "review_summary": _workstream_review_summary(workflow, bucket),
                 "sample_items": bucket["sample_items"],
                 "auto_apply_enabled": False,
@@ -897,6 +937,7 @@ def build_report(
                     "category_counts": _counter_pairs(chunk, "category"),
                     "review_lane_counts": review_lane_counts,
                     "image_import_blocker_counts": image_import_blocker_counts,
+                    "attachment_readiness": _attachment_readiness(chunk),
                     "suggested_local_image_path_rows": sum(
                         1 for row in chunk if row.get("suggested_local_image_path")
                     ),
@@ -957,6 +998,7 @@ def build_report(
     )
     primary_review_url_rows = sum(1 for item in action_items if item.get("primary_review_url"))
     primary_review_url_kind_counts = _counter_pairs(action_items, "primary_review_url_kind")
+    attachment_readiness = _attachment_readiness(action_items)
     first_primary_review_item = next(
         (item for item in action_items if item.get("primary_review_url")),
         {},
@@ -1017,6 +1059,9 @@ def build_report(
             ),
             "primary_review_url_rows": primary_review_url_rows,
             "primary_review_url_kind_counts": primary_review_url_kind_counts,
+            "primary_review_url_missing_rows": attachment_readiness[
+                "primary_review_url_missing_rows"
+            ],
             "first_primary_review_url": first_primary_review_item.get(
                 "primary_review_url", ""
             ),
@@ -1025,6 +1070,12 @@ def build_report(
             ),
             "representative_image_review_required_rows": representative_image_review_required_rows,
             "image_url_ready_rows": image_url_ready_rows,
+            "blocked_before_image_import_rows": attachment_readiness[
+                "blocked_before_image_import_rows"
+            ],
+            "download_ready_after_manual_image_url_rows": attachment_readiness[
+                "download_ready_after_manual_image_url_rows"
+            ],
             "suggested_local_image_path_rows": suggested_local_image_path_rows,
             "local_image_download_instruction_ready_rows": sum(
                 1
@@ -1044,6 +1095,7 @@ def build_report(
             "excluded_workflow_rows": [[key, value] for key, value in excluded_workflows.most_common()],
             "auto_apply_enabled": False,
         },
+        "attachment_readiness": attachment_readiness,
         "instructions": [
             "Use this queue for image-url work that is closer to actionable than broad source discovery.",
             "Every image still needs exact product evidence before catalog mutation.",
@@ -1182,6 +1234,7 @@ def _manual_confirmation_requirements(workflow: str) -> list[str]:
 
 
 def _workstream_review_summary(workflow: str, bucket: dict[str, Any]) -> dict[str, Any]:
+    attachment_readiness = _attachment_readiness(bucket.get("items") or [])
     return {
         "review_lane": _review_lane(workflow),
         "queued_rows": bucket["queued_image_rows"],
@@ -1192,6 +1245,7 @@ def _workstream_review_summary(workflow: str, bucket: dict[str, Any]) -> dict[st
         "first_primary_review_url": bucket["first_primary_review_url"],
         "first_primary_review_url_kind": bucket["first_primary_review_url_kind"],
         "primary_blockers": _image_import_blockers(workflow),
+        "attachment_readiness": attachment_readiness,
         "manual_confirmation_requirements": _manual_confirmation_requirements(workflow),
     }
 
