@@ -348,19 +348,26 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                           final buttonForeground = canImport
                               ? _catalogImportButtonForeground
                               : _catalogImportButtonDisabledForeground;
+                          final buttonBackground = canImport
+                              ? _catalogImportButtonBackground
+                              : _catalogImportButtonDisabledBackground;
+                          final label =
+                              selectedKind == _CatalogImportKind.wishlist
+                                  ? '위시리스트에 추가'
+                                  : '선택한 폴더에 추가';
                           return SizedBox(
                             width: double.infinity,
                             height: 48,
                             child: FilledButton.icon(
+                              key: const Key(
+                                'catalog-import-destination-add-button',
+                              ),
                               style: FilledButton.styleFrom(
-                                backgroundColor: _catalogImportButtonBackground,
-                                foregroundColor: _catalogImportButtonForeground,
-                                disabledBackgroundColor:
-                                    _catalogImportButtonDisabledBackground,
-                                disabledForegroundColor:
-                                    _catalogImportButtonDisabledForeground,
+                                backgroundColor: buttonBackground,
+                                foregroundColor: buttonForeground,
+                                disabledBackgroundColor: buttonBackground,
+                                disabledForegroundColor: buttonForeground,
                                 textStyle: const TextStyle(
-                                  color: _catalogImportButtonForeground,
                                   fontWeight: FontWeight.w900,
                                 ),
                               ),
@@ -379,13 +386,16 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                                 Icons.add_rounded,
                                 color: buttonForeground,
                               ),
-                              label: Text(
-                                selectedKind == _CatalogImportKind.wishlist
-                                    ? '위시리스트에 추가'
-                                    : '선택한 폴더에 추가',
-                                style: TextStyle(
-                                  color: buttonForeground,
-                                  fontWeight: FontWeight.w900,
+                              label: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  label,
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  style: TextStyle(
+                                    color: buttonForeground,
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                               ),
                             ),

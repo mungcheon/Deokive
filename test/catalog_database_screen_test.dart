@@ -235,6 +235,70 @@ void main() {
     expect(addIcon.color, Colors.white);
   });
 
+  testWidgets('catalog destination add button keeps visible foreground',
+      (tester) async {
+    final appState = AppState()
+      ..isLoggedIn = false
+      ..folders.add(
+        const FolderItem(
+          id: 'default-folder',
+          name: 'Default',
+          icon: Icons.folder_rounded,
+          color: Colors.blue,
+        ),
+      );
+    final entry = kFullCatalog.firstWhere(
+      (item) => item.nameKo.trim().isNotEmpty,
+    );
+    final palette = paletteSpecFor(AppPalette.zeroTwoPink);
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(
+        value: appState,
+        child: MaterialApp(
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(seedColor: palette.primary),
+            extensions: [
+              DeokivePalette(
+                primary: palette.primary,
+                accent: palette.accent,
+                background: palette.background,
+                text: palette.text,
+                softSurface: Colors.white,
+              ),
+            ],
+          ),
+          home: const CatalogDatabaseScreen(),
+        ),
+      ),
+    );
+
+    await tester.enterText(find.byType(TextField), entry.nameKo);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('catalog-add-list-button')).first);
+    await tester.pumpAndSettle();
+
+    final buttonFinder = find.byKey(
+      const Key('catalog-import-destination-add-button'),
+    );
+    final addText = tester.widget<Text>(
+      find.descendant(
+        of: buttonFinder,
+        matching: find.text('선택한 폴더에 추가'),
+      ),
+    );
+    final addIcon = tester.widget<Icon>(
+      find.descendant(
+        of: buttonFinder,
+        matching: find.byIcon(Icons.add_rounded),
+      ),
+    );
+
+    expect(addText.style?.color, Colors.white);
+    expect(addIcon.color, Colors.white);
+  });
+
   testWidgets('catalog database can add even when saved folders are empty',
       (tester) async {
     final appState = AppState()..isLoggedIn = false;

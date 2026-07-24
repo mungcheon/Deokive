@@ -584,6 +584,18 @@ class _CatalogAddButton extends StatelessWidget {
     final foreground = disabled
         ? _catalogAddButtonDisabledForeground
         : _catalogAddButtonForeground;
+    final labelText = Text(
+      label,
+      maxLines: 1,
+      softWrap: false,
+      overflow: TextOverflow.visible,
+      style: TextStyle(
+        color: foreground,
+        fontSize: 13,
+        fontWeight: FontWeight.w900,
+        height: 1,
+      ),
+    );
 
     final content = AnimatedContainer(
       duration: const Duration(milliseconds: 140),
@@ -622,25 +634,16 @@ class _CatalogAddButton extends StatelessWidget {
               children: [
                 Icon(icon, color: foreground),
                 const SizedBox(width: 5),
-                Flexible(
-                  fit: FlexFit.loose,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      label,
-                      maxLines: 1,
-                      softWrap: false,
-                      overflow: TextOverflow.visible,
-                      style: TextStyle(
-                        color: foreground,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w900,
-                        height: 1,
-                      ),
+                if (expanded)
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.center,
+                      child: labelText,
                     ),
-                  ),
-                ),
+                  )
+                else
+                  labelText,
               ],
             ),
           ),
