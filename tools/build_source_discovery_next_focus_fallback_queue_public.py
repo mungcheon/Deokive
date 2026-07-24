@@ -270,6 +270,18 @@ def _first_value(values: list[Any] | None) -> str:
     return first if isinstance(first, str) else ""
 
 
+def _fallback_reason(item: dict[str, Any], audit_item: dict[str, Any]) -> str:
+    if not str(item.get("official_search_url") or "").strip():
+        return "official_search_url_unavailable"
+    fetch_status = str(audit_item.get("fetch_status") or "").strip()
+    http_status = audit_item.get("http_status")
+    if fetch_status == "ok_200_broad_result_set" or http_status == 200:
+        return "broad_official_search_result_requires_exact_detail_url"
+    if fetch_status:
+        return f"official_search_fetch_{fetch_status}"
+    return "official_search_needs_exact_detail_url_confirmation"
+
+
 def _has_variant_marker(value: Any) -> bool:
     text = str(value or "")
     return any(marker in text for marker in ("(", ")", "（", "）", "①", "②", "③", "④", "⑤"))
@@ -472,7 +484,7 @@ def build_report(
                 "allowed_source_domains": item.get("allowed_source_domains") or [],
                 "manual_review_checklist": item.get("manual_review_checklist") or [],
                 "acceptance_rule": item.get("acceptance_rule"),
-                "fallback_reason": "official_search_url_unavailable",
+                "fallback_reason": _fallback_reason(item, audit_item),
                 "review_instruction": (
                     "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. "
                     "Only fill manual_confirmed_source_url when title, product type, and character/variant match."
@@ -497,6 +509,7 @@ def build_report(
     by_status = Counter(str(item.get("official_search_http_status")) for item in queue_items)
     by_store = Counter(str(item.get("source_store") or "unknown") for item in queue_items)
     by_category = Counter(str(item.get("category") or "unknown") for item in queue_items)
+    by_fallback_reason = Counter(str(item.get("fallback_reason") or "unknown") for item in queue_items)
     fallback_query_count = sum(len(item.get("fallback_search_queries") or []) for item in queue_items)
     domain_limited_web_search_url_count = sum(
         len(item.get("domain_limited_web_search_urls") or []) for item in queue_items
@@ -523,7 +536,10 @@ def build_report(
             "focus_pack_id": (next_pack.get("summary") or {}).get("focus_pack_id"),
             "queue_rows": len(queue_items),
             "manual_confirmed_rows": sum(1 for item in queue_items if item.get("manual_confirmed") is True),
-            "fallback_reason": "official_search_url_unavailable" if queue_items else "none",
+            "fallback_reason": (
+                by_fallback_reason.most_common(1)[0][0] if queue_items else "none"
+            ),
+            "by_fallback_reason": by_fallback_reason.most_common(),
             "by_http_status": by_status.most_common(),
             "by_source_store": by_store.most_common(),
             "by_category": by_category.most_common(),

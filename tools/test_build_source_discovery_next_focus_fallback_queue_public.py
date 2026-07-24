@@ -81,6 +81,14 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["queue_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
+        self.assertEqual(
+            report["summary"]["fallback_reason"],
+            "official_search_fetch_http_error",
+        )
+        self.assertEqual(
+            report["summary"]["by_fallback_reason"],
+            [("official_search_fetch_http_error", 1)],
+        )
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
         self.assertEqual(
@@ -131,6 +139,7 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["search_query"], "A acrylic")
         self.assertEqual(item["review_state"], "official_search_review_required")
         self.assertEqual(item["workflow"], "official_search_url_available")
+        self.assertEqual(item["fallback_reason"], "official_search_fetch_http_error")
         self.assertEqual(item["manual_review_checklist"], ["Confirm exact product page"])
         self.assertIn("sphone/products/list.php", item["fallback_store_search_url"])
         self.assertEqual(item["primary_review_url_kind"], "domain_limited_web_search")
@@ -228,6 +237,18 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
 
         item = report["items"][0]
         review_row = report["review_table"][0]
+        self.assertEqual(
+            report["summary"]["fallback_reason"],
+            "broad_official_search_result_requires_exact_detail_url",
+        )
+        self.assertEqual(
+            report["summary"]["by_fallback_reason"],
+            [("broad_official_search_result_requires_exact_detail_url", 1)],
+        )
+        self.assertEqual(
+            item["fallback_reason"],
+            "broad_official_search_result_requires_exact_detail_url",
+        )
         self.assertIn("site%3Awww.enskyshop.com%2Fproducts%2Fdetail", item["domain_limited_web_search_urls"][0])
         self.assertIn(
             "https://www.enskyshop.com/products/detail/...",
