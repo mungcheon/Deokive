@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from image_enrichment_safety import is_safe_source_image_pair
+
 try:
     sys.stdout.reconfigure(encoding="utf-8")
 except Exception:
@@ -27,6 +29,15 @@ def _source_url_from_confirmation(item: dict[str, Any]) -> str:
         item.get("source_url")
         or item.get("manual_value")
         or item.get("candidate_source_url")
+        or ""
+    ).strip()
+
+
+def _image_url_from_confirmation(item: dict[str, Any]) -> str:
+    return str(
+        item.get("manual_image_url")
+        or item.get("manual_confirmed_image_url")
+        or item.get("confirmed_image_url")
         or ""
     ).strip()
 
@@ -76,6 +87,61 @@ def _is_product_detail_url(source_url: str) -> bool:
     return True
 
 
+def _attach_confirmed_image(
+    row: dict[str, Any],
+    item: dict[str, Any],
+    catalog_index: str,
+    source_url: str,
+    image_changes: list[dict[str, Any]],
+    image_skipped: list[dict[str, Any]],
+) -> tuple[str, bool]:
+    image_url = _image_url_from_confirmation(item)
+    if not image_url:
+        return "", False
+    if row.get("image_url") and row.get("image_url") != image_url:
+        image_skipped.append(
+            {
+                "catalog_index": catalog_index,
+                "name_ko": row.get("name_ko"),
+                "reason": "image_url_already_different",
+                "existing": row.get("image_url"),
+                "image_url": image_url,
+            }
+        )
+        return image_url, False
+    if not is_safe_source_image_pair(source_url, image_url):
+        image_skipped.append(
+            {
+                "catalog_index": catalog_index,
+                "name_ko": row.get("name_ko"),
+                "reason": "unsafe_source_image_pair",
+                "source_url": source_url,
+                "image_url": image_url,
+            }
+        )
+        return image_url, False
+    if row.get("image_url") == image_url:
+        image_skipped.append(
+            {
+                "catalog_index": catalog_index,
+                "name_ko": row.get("name_ko"),
+                "reason": "image_url_already_set",
+            }
+        )
+        return image_url, False
+    row["image_url"] = image_url
+    image_changes.append(
+        {
+            "catalog_index": catalog_index,
+            "name_ko": row.get("name_ko"),
+            "source_store": row.get("source_store"),
+            "source_url": source_url,
+            "image_url": image_url,
+        }
+    )
+    return image_url, True
+
+
 def import_confirmed(rows: list[dict[str, Any]], confirmations: list[dict[str, Any]]) -> dict[str, Any]:
     by_index = {
         str(row.get("catalog_index")): row
@@ -83,7 +149,9 @@ def import_confirmed(rows: list[dict[str, Any]], confirmations: list[dict[str, A
         if isinstance(row, dict) and row.get("catalog_index") is not None
     }
     changes: list[dict[str, Any]] = []
+    image_changes: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
+    image_skipped: list[dict[str, Any]] = []
 
     for item in confirmations:
         catalog_index = _confirmation_row_key(item)
@@ -104,7 +172,11 @@ def import_confirmed(rows: list[dict[str, Any]], confirmations: list[dict[str, A
         if not row:
             skipped.append({"catalog_index": catalog_index, "reason": "row_not_found"})
             continue
-        expected_image = str(item.get("image_url") or "")
+        expected_image = str(
+            item.get("current_image_url")
+            or item.get("expected_image_url")
+            or ""
+        )
         if expected_image and str(row.get("image_url") or "") != expected_image:
             skipped.append(
                 {
@@ -143,6 +215,28 @@ def import_confirmed(rows: list[dict[str, Any]], confirmations: list[dict[str, A
             )
             continue
         if row.get("source_url") == source_url:
+            image_url, image_updated = _attach_confirmed_image(
+                row,
+                item,
+                catalog_index,
+                source_url,
+                image_changes,
+                image_skipped,
+            )
+            if image_updated:
+                changes.append(
+                    {
+                        "catalog_index": catalog_index,
+                        "name_ko": row.get("name_ko"),
+                        "source_store": row.get("source_store"),
+                        "source_url": source_url,
+                        "source_updated": False,
+                        "image_url": image_url,
+                        "image_updated": True,
+                        "evidence": item.get("evidence"),
+                    }
+                )
+                continue
             skipped.append({"catalog_index": catalog_index, "name_ko": row.get("name_ko"), "reason": "already_set"})
             continue
         current_source_url = str(item.get("current_source_url") or "").strip()
@@ -150,16 +244,32 @@ def import_confirmed(rows: list[dict[str, Any]], confirmations: list[dict[str, A
             skipped.append({"catalog_index": catalog_index, "name_ko": row.get("name_ko"), "reason": "source_url_already_different"})
             continue
         row["source_url"] = source_url
+        image_url, image_updated = _attach_confirmed_image(
+            row,
+            item,
+            catalog_index,
+            source_url,
+            image_changes,
+            image_skipped,
+        )
         changes.append(
             {
                 "catalog_index": catalog_index,
                 "name_ko": row.get("name_ko"),
                 "source_store": row.get("source_store"),
                 "source_url": source_url,
+                "source_updated": True,
+                "image_url": image_url or None,
+                "image_updated": image_updated,
                 "evidence": item.get("evidence"),
             }
         )
-    return {"changes": changes, "skipped": skipped}
+    return {
+        "changes": changes,
+        "image_changes": image_changes,
+        "skipped": skipped,
+        "image_skipped": image_skipped,
+    }
 
 
 def main() -> int:
@@ -184,7 +294,9 @@ def main() -> int:
                 "updated_rows": len(result["changes"]) if args.write else 0,
                 "write": args.write,
                 "changes": result["changes"],
+                "image_changes": result["image_changes"],
                 "skipped": result["skipped"],
+                "image_skipped": result["image_skipped"],
             },
             ensure_ascii=False,
             indent=2,
@@ -198,6 +310,7 @@ def main() -> int:
         json.dumps(
             {
                 "change_candidates": len(result["changes"]),
+                "image_change_candidates": len(result["image_changes"]),
                 "updated_rows": len(result["changes"]) if args.write else 0,
                 "skipped": len(result["skipped"]),
                 "report": str(args.report),

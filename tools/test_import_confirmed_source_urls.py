@@ -38,6 +38,99 @@ class ImportConfirmedSourceUrlsTests(unittest.TestCase):
         self.assertEqual(len(result["changes"]), 1)
         self.assertEqual(result["skipped"], [])
 
+    def test_import_can_attach_confirmed_image_with_source_url(self) -> None:
+        rows = [
+            {
+                "catalog_index": 2325,
+                "name_ko": "스텔라이브 1주년 뱃지 세트",
+                "source_store": "Stellive Store",
+                "source_url": "https://fanding.kr/@stellive/shop",
+            }
+        ]
+
+        result = importer.import_confirmed(
+            rows,
+            [
+                {
+                    "catalog_index": 2325,
+                    "name_ko": "스텔라이브 1주년 뱃지 세트",
+                    "manual_confirmed": True,
+                    "manual_value": "https://fanding.kr/@stellive/shop/3700",
+                    "current_source_url": "https://fanding.kr/@stellive/shop",
+                    "manual_image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
+                }
+            ],
+        )
+
+        self.assertEqual(rows[0]["source_url"], "https://fanding.kr/@stellive/shop/3700")
+        self.assertEqual(
+            rows[0]["image_url"],
+            "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
+        )
+        self.assertEqual(len(result["changes"]), 1)
+        self.assertEqual(len(result["image_changes"]), 1)
+        self.assertTrue(result["changes"][0]["image_updated"])
+
+    def test_import_can_attach_image_when_source_url_already_confirmed(self) -> None:
+        rows = [
+            {
+                "catalog_index": 2325,
+                "name_ko": "스텔라이브 1주년 뱃지 세트",
+                "source_store": "Stellive Store",
+                "source_url": "https://fanding.kr/@stellive/shop/3700",
+            }
+        ]
+
+        result = importer.import_confirmed(
+            rows,
+            [
+                {
+                    "catalog_index": 2325,
+                    "name_ko": "스텔라이브 1주년 뱃지 세트",
+                    "manual_confirmed": True,
+                    "manual_value": "https://fanding.kr/@stellive/shop/3700",
+                    "manual_confirmed_image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
+                }
+            ],
+        )
+
+        self.assertEqual(
+            rows[0]["image_url"],
+            "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
+        )
+        self.assertEqual(len(result["changes"]), 1)
+        self.assertFalse(result["changes"][0]["source_updated"])
+        self.assertTrue(result["changes"][0]["image_updated"])
+
+    def test_import_rejects_unsafe_confirmed_image_pair(self) -> None:
+        rows = [
+            {
+                "catalog_index": 2325,
+                "name_ko": "스텔라이브 1주년 뱃지 세트",
+                "source_store": "Stellive Store",
+                "source_url": "https://fanding.kr/@stellive/shop",
+            }
+        ]
+
+        result = importer.import_confirmed(
+            rows,
+            [
+                {
+                    "catalog_index": 2325,
+                    "name_ko": "스텔라이브 1주년 뱃지 세트",
+                    "manual_confirmed": True,
+                    "manual_value": "https://fanding.kr/@stellive/shop/3700",
+                    "current_source_url": "https://fanding.kr/@stellive/shop",
+                    "manual_image_url": "https://uploads.cdn.fanding.com/upload/image/noimage.webp",
+                }
+            ],
+        )
+
+        self.assertNotIn("image_url", rows[0])
+        self.assertEqual(len(result["changes"]), 1)
+        self.assertFalse(result["changes"][0]["image_updated"])
+        self.assertEqual(result["image_skipped"][0]["reason"], "unsafe_source_image_pair")
+
     def test_import_accepts_public_template_items_and_row_index(self) -> None:
         rows = [
             {
