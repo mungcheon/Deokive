@@ -214,6 +214,12 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "manual_confirmed_rows": 0,
                 }
             },
+            "source_discovery_next_focus_fallback_import_dry_run_public.json": {
+                "write": False,
+                "updated_rows": 0,
+                "skipped_rows": 4,
+                "skip_reason_counts": [["manual_confirmed_false", 4]],
+            },
             "source_discovery_starter_queue_public.json": {
                 "summary": {
                     "starter_queue_rows": 12,
@@ -814,6 +820,17 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             fallback_queue["evidence"]["identity_candidate_review_candidate_rows"], 2
         )
         self.assertEqual(
+            fallback_queue["evidence"]["fallback_import_dry_run_updated_rows"], 0
+        )
+        self.assertEqual(
+            fallback_queue["evidence"]["fallback_import_dry_run_skipped_rows"], 4
+        )
+        self.assertEqual(
+            fallback_queue["evidence"]["fallback_import_dry_run_skip_reason_counts"],
+            [["manual_confirmed_false", 4]],
+        )
+        self.assertFalse(fallback_queue["evidence"]["fallback_import_dry_run_write"])
+        self.assertEqual(
             fallback_queue["evidence"]["metadata_backfill_required_rows"], 1
         )
         self.assertEqual(
@@ -861,6 +878,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(
             report["summary"]["source_next_focus_identity_candidate_review_candidate_rows"],
             2,
+        )
+        self.assertEqual(
+            report["summary"]["source_next_focus_fallback_import_dry_run_updated_rows"],
+            0,
+        )
+        self.assertEqual(
+            report["summary"]["source_next_focus_fallback_import_dry_run_skipped_rows"],
+            4,
         )
         source_starter = next(
             action

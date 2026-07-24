@@ -130,6 +130,9 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_next_focus_identity_candidate_review_queue = load_report(
         "source_discovery_next_focus_identity_candidate_review_queue_public.json"
     )
+    source_next_focus_fallback_import_dry_run = load_report(
+        "source_discovery_next_focus_fallback_import_dry_run_public.json"
+    )
     source_discovery_starter_queue = load_report("source_discovery_starter_queue_public.json")
     source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
     ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
@@ -522,6 +525,20 @@ def _build_plan(load_report) -> dict[str, Any]:
                     ),
                     "identity_candidate_review_candidate_rows": _count(
                         source_next_focus_identity_candidate_summary, "candidate_rows"
+                    ),
+                    "fallback_import_dry_run_updated_rows": _count(
+                        source_next_focus_fallback_import_dry_run, "updated_rows"
+                    ),
+                    "fallback_import_dry_run_skipped_rows": _count(
+                        source_next_focus_fallback_import_dry_run, "skipped_rows"
+                    ),
+                    "fallback_import_dry_run_skip_reason_counts": (
+                        source_next_focus_fallback_import_dry_run.get(
+                            "skip_reason_counts", []
+                        )
+                    ),
+                    "fallback_import_dry_run_write": bool(
+                        source_next_focus_fallback_import_dry_run.get("write", False)
                     ),
                     "metadata_backfill_required_rows": _count(
                         source_next_focus_fallback_summary, "metadata_backfill_required_rows"
@@ -1803,6 +1820,12 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "source_next_focus_identity_candidate_review_candidate_rows": _count(
                 source_next_focus_identity_candidate_summary, "candidate_rows"
+            ),
+            "source_next_focus_fallback_import_dry_run_updated_rows": _count(
+                source_next_focus_fallback_import_dry_run, "updated_rows"
+            ),
+            "source_next_focus_fallback_import_dry_run_skipped_rows": _count(
+                source_next_focus_fallback_import_dry_run, "skipped_rows"
             ),
             "source_discovery_starter_queue_rows": _count(
                 source_discovery_starter_summary, "starter_queue_rows"

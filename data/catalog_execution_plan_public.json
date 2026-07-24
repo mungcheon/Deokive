@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T08:00:06Z",
+  "generated_at": "2026-07-24T08:02:51Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
@@ -206,6 +206,8 @@
     "source_next_focus_identity_backfill_rows": 2,
     "source_next_focus_identity_candidate_review_rows": 2,
     "source_next_focus_identity_candidate_review_candidate_rows": 5,
+    "source_next_focus_fallback_import_dry_run_updated_rows": 0,
+    "source_next_focus_fallback_import_dry_run_skipped_rows": 17,
     "source_discovery_starter_queue_rows": 637,
     "source_discovery_starter_queue_groups": 339,
     "source_discovery_action_rows": 632,
@@ -879,6 +881,15 @@
         "identity_backfill_queue_rows": 2,
         "identity_candidate_review_queue_rows": 2,
         "identity_candidate_review_candidate_rows": 5,
+        "fallback_import_dry_run_updated_rows": 0,
+        "fallback_import_dry_run_skipped_rows": 17,
+        "fallback_import_dry_run_skip_reason_counts": [
+          [
+            "manual_confirmed_false",
+            17
+          ]
+        ],
+        "fallback_import_dry_run_write": false,
         "metadata_backfill_required_rows": 5,
         "variant_disambiguation_required_rows": 2,
         "by_identity_review_status": [
