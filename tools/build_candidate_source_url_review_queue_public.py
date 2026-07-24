@@ -82,6 +82,11 @@ def _queue_item(row: dict[str, Any]) -> dict[str, Any]:
     hints = hints if isinstance(hints, dict) else {}
     candidates = _candidate_options(row)
     top = candidates[0] if candidates else {}
+    source_url_import_template = _manual_import_template(row)
+    if top:
+        source_url_import_template["candidate_source_url_hint"] = top.get("source_url") or ""
+        source_url_import_template["candidate_image_url_hint"] = top.get("image_url") or ""
+        source_url_import_template["candidate_title_hint"] = top.get("title") or ""
     return {
         "row_index": row.get("row_index"),
         "catalog_index": row.get("catalog_index"),
@@ -102,7 +107,7 @@ def _queue_item(row: dict[str, Any]) -> dict[str, Any]:
         "store_search_url": hints.get("store_search_url") or "",
         "site_query": hints.get("site_query") or "",
         "fallback_search_queries": row.get("fallback_search_queries") or [],
-        "source_url_import_template": _manual_import_template(row),
+        "source_url_import_template": source_url_import_template,
         "review_blockers": row.get("source_url_review_blockers") or [],
         "manual_confirmation_requirements": row.get("manual_confirmation_requirements") or [],
         "next_after_confirmed_source_url": row.get("next_after_confirmed_source_url")

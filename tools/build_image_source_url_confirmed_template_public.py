@@ -228,6 +228,8 @@ def _template_item(
         if _can_prefill_candidate_hint(candidate_status, candidate_score)
         else {}
     )
+    candidate_source_url_hint = top_candidate.get("source_url") or ""
+    candidate_image_url_hint = top_candidate.get("image_url") or ""
     return {
         **source_template,
         "manual_confirmed": False,
@@ -236,7 +238,10 @@ def _template_item(
         "manual_image_note": "",
         "candidate_source_url": prefilled_candidate.get("source_url") or "",
         "candidate_image_url": prefilled_candidate.get("image_url") or "",
+        "candidate_source_url_hint": candidate_source_url_hint,
+        "candidate_image_url_hint": candidate_image_url_hint,
         "candidate_title": prefilled_candidate.get("title") or "",
+        "candidate_title_hint": top_candidate.get("title") or "",
         "candidate_score": candidate_score,
         "candidate_status": candidate_status,
         "candidate_review_lane": candidate_review_lane,
@@ -361,7 +366,12 @@ def build_template(
 
     manual_image_url_slot_rows = sum(1 for item in items if "manual_image_url" in item)
     manual_image_url_filled_rows = sum(1 for item in items if _compact_text(item.get("manual_image_url")))
-    candidate_image_url_hint_rows = sum(1 for item in items if _compact_text(item.get("candidate_image_url")))
+    candidate_image_url_hint_rows = sum(
+        1
+        for item in items
+        if _compact_text(item.get("candidate_image_url_hint"))
+        or _compact_text(item.get("candidate_image_url"))
+    )
     source_and_image_manual_ready_rows = sum(
         1
         for item in items
@@ -404,6 +414,7 @@ def build_template(
             "Put the verified product detail URL in manual_value.",
             "Use evidence_url for the same official/detail page or a stronger supporting URL.",
             "candidate_source_url is only a review hint and must not be imported without manual_confirmed=true.",
+            "candidate_source_url_hint and candidate_image_url_hint are low-confidence review aids; copy them into manual fields only after exact product identity is proven.",
             "After source_url is confirmed, use catalog_image_attachment_confirmed_template_public.json for image_url.",
             "Dry-run tools/import_confirmed_catalog_field_rows.py before any --write import.",
         ],
