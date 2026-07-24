@@ -24,11 +24,29 @@ class SourceDiscoveryNextFocusLiveSourceProbePublicTest(unittest.TestCase):
         self.assertEqual(candidates[1]["page_title"], "Detail Product")
 
     def test_extract_candidates_uses_decoded_url_title_when_anchor_text_is_empty(self) -> None:
-        page = '<a href="/pn/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/pd/123/"><img alt=""></a>'
+        page = '<a href="/pn/%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB+%E5%95%86%E5%93%81/pd/123/"><img alt=""></a>'
 
         candidates = probe.extract_candidates(page, base_url="https://www.animate-onlineshop.jp/")
 
-        self.assertEqual(candidates[0]["page_title"], "サンプル")
+        self.assertEqual(candidates[0]["page_title"], "サンプル 商品")
+
+    def test_match_score_uses_search_term_and_preserves_hangul(self) -> None:
+        row = {
+            "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+            "search_term": "カードキャプターさくら アクリルスタンド 木之本桜",
+            "category": "아크릴 스탠드",
+        }
+
+        score = probe._match_score(
+            row,
+            "カードキャプターさくら クリアカード編 木之本 桜 アクリルスタンド",
+        )
+
+        self.assertIn("カードキャプターさくら", score["matched_tokens"])
+        self.assertIn("アクリルスタンド", score["matched_tokens"])
+        self.assertEqual(score["field_scores"]["search_term"]["score"], 1.0)
+        self.assertEqual(score["best_field_score"], 1.0)
+        self.assertGreater(score["score"], 0)
 
     def test_build_report_marks_rows_without_candidates_for_alternate_research(self) -> None:
         queue = {

@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 from urllib.parse import urljoin, urlsplit
-from urllib.parse import unquote
+from urllib.parse import unquote_plus
 
 import requests
 
@@ -47,34 +47,60 @@ def _title_from_source_url(value: str) -> str:
     match = re.search(r"/pn/([^/]+)/pd/\d+/?", parsed.path)
     if not match:
         return ""
-    return unquote(match.group(1)).strip()
+    return unquote_plus(match.group(1)).strip()
 
 
 def _key(value: Any) -> str:
-    return re.sub(r"[^0-9a-z\u3040-\u30ff\u3400-\u9fff]+", "", html.unescape(str(value or "")).lower())
+    return re.sub(
+        r"[^0-9a-z\u3040-\u30ff\u3400-\u9fff\uac00-\ud7a3]+",
+        "",
+        html.unescape(str(value or "")).lower(),
+    )
 
 
 def _tokens(value: Any) -> list[str]:
     return [
         token
-        for token in (_key(part) for part in re.split(r"[\s()（）・/【】\\[\\]「」『』:：_-]+", str(value or "")))
+        for token in (_key(part) for part in re.split(r"[\s()（）・/【】「」『』:：_\-]+", str(value or "")))
         if len(token) >= 2
     ]
+
+
+def _field_match_score(value: Any, title_key: str) -> dict[str, Any]:
+    tokens: list[str] = []
+    for token in _tokens(value):
+        if token not in tokens:
+            tokens.append(token)
+    matched = [token for token in tokens if token in title_key]
+    return {
+        "tokens": tokens,
+        "matched_tokens": matched,
+        "required_token_count": len(tokens),
+        "matched_token_count": len(matched),
+        "score": round(len(matched) / len(tokens), 4) if tokens else 0,
+    }
 
 
 def _match_score(row: dict[str, Any], title: str) -> dict[str, Any]:
     title_key = _key(title)
     source_tokens: list[str] = []
-    for field in ("name_ja", "name_ko", "category"):
+    for field in ("name_ja", "search_term", "name_ko", "category"):
         for token in _tokens(row.get(field)):
             if token not in source_tokens:
                 source_tokens.append(token)
     matched = [token for token in source_tokens if token in title_key]
+    field_scores = {
+        field: _field_match_score(row.get(field), title_key)
+        for field in ("name_ja", "search_term", "name_ko", "category")
+    }
+    best_field_score = max((float(item.get("score") or 0) for item in field_scores.values()), default=0)
     return {
         "matched_tokens": matched,
         "required_token_count": len(source_tokens),
         "matched_token_count": len(matched),
         "score": round(len(matched) / len(source_tokens), 4) if source_tokens else 0,
+        "field_scores": field_scores,
+        "best_field_score": best_field_score,
     }
 
 
@@ -139,6 +165,7 @@ def build_report(
             "catalog_index": item.get("catalog_index"),
             "name_ko": item.get("name_ko"),
             "name_ja": item.get("name_ja"),
+            "search_term": item.get("search_term"),
             "source_store": item.get("source_store"),
             "category": item.get("category"),
             "review_url": review_url,
@@ -167,7 +194,7 @@ def build_report(
         strong_candidates = [
             candidate
             for candidate in candidates
-            if float((candidate.get("title_match") or {}).get("score") or 0) >= 0.75
+            if float((candidate.get("title_match") or {}).get("best_field_score") or 0) >= 0.75
         ]
         out_items.append(
             {
@@ -177,6 +204,7 @@ def build_report(
                 "final_url": final_url,
                 "candidate_count": len(candidates),
                 "strong_title_match_candidate_count": len(strong_candidates),
+                "strong_title_match_candidates": strong_candidates[:10],
                 "candidates": candidates[:10],
                 "blocked_until": (
                     "manual_exact_product_identity_confirmation"
@@ -187,6 +215,7 @@ def build_report(
         )
 
     candidate_rows = [item for item in out_items if item.get("candidate_count")]
+    strong_candidate_rows = [item for item in out_items if item.get("strong_title_match_candidate_count")]
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -196,6 +225,10 @@ def build_report(
             "probed_rows": len(out_items),
             "detail_candidate_rows": len(candidate_rows),
             "detail_candidate_total": sum(int(item.get("candidate_count") or 0) for item in out_items),
+            "strong_title_match_candidate_rows": len(strong_candidate_rows),
+            "strong_title_match_candidate_total": sum(
+                int(item.get("strong_title_match_candidate_count") or 0) for item in out_items
+            ),
             "no_detail_candidate_rows": sum(
                 1 for item in out_items if item.get("probe_status") == "no_detail_candidates_on_search_page"
             ),
