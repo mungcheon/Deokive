@@ -584,27 +584,15 @@ class _CatalogAddButton extends StatelessWidget {
     final foreground = disabled
         ? _catalogAddButtonDisabledForeground
         : _catalogAddButtonForeground;
-    final labelText = Text(
-      label,
-      maxLines: 1,
-      softWrap: false,
-      overflow: TextOverflow.visible,
-      style: TextStyle(
-        color: foreground,
-        fontSize: 13,
-        fontWeight: FontWeight.w900,
-        height: 1,
-      ),
-    );
-
     final content = AnimatedContainer(
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints.tightFor(
-        width: expanded ? null : 126,
+        width: expanded ? null : 98,
         height: 40,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(999),
@@ -632,18 +620,26 @@ class _CatalogAddButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: foreground),
+                Icon(icon, color: foreground, size: 17),
                 const SizedBox(width: 5),
-                if (expanded)
-                  Expanded(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.center,
-                      child: labelText,
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      label,
+                      maxLines: 1,
+                      softWrap: false,
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(
+                        color: foreground,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w900,
+                        height: 1,
+                      ),
                     ),
-                  )
-                else
-                  labelText,
+                  ),
+                ),
               ],
             ),
           ),

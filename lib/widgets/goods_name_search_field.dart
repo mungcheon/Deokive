@@ -391,21 +391,33 @@ class _CatalogRow extends StatelessWidget {
                     size: 16,
                     color: _catalogPickerActionForeground,
                   ),
-                  label: Text(
-                    actionLabel,
-                    maxLines: 1,
-                    softWrap: false,
-                    style: const TextStyle(
-                      color: _catalogPickerActionForeground,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w900,
+                  label: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      actionLabel,
+                      maxLines: 1,
+                      softWrap: false,
+                      style: const TextStyle(
+                        color: _catalogPickerActionForeground,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        height: 1,
+                      ),
                     ),
                   ),
                   style: FilledButton.styleFrom(
                     backgroundColor: _catalogPickerActionBackground,
                     foregroundColor: _catalogPickerActionForeground,
+                    disabledBackgroundColor: _catalogPickerActionBackground,
+                    disabledForegroundColor: _catalogPickerActionForeground,
+                    minimumSize: const Size(64, 34),
                     visualDensity: VisualDensity.compact,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
+                    textStyle: const TextStyle(
+                      color: _catalogPickerActionForeground,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
               ],
