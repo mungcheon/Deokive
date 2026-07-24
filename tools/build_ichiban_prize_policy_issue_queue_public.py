@@ -114,7 +114,7 @@ def _unique_sorted(values: list[Any]) -> list[Any]:
 
 
 def _compact_review_row(row: dict[str, Any]) -> dict[str, Any]:
-    return {
+    compact = {
         key: row.get(key)
         for key in [
             "catalog_index",
@@ -134,6 +134,80 @@ def _compact_review_row(row: dict[str, Any]) -> dict[str, Any]:
             "release_date",
         ]
         if row.get(key) not in (None, "")
+    }
+    components = _prize_name_components(row)
+    if components:
+        compact["prize_name_components"] = components
+    return compact
+
+
+def _first_present(row: dict[str, Any], *keys: str) -> str:
+    for key in keys:
+        value = str(row.get(key) or "").strip()
+        if value:
+            return value
+    return ""
+
+
+def _prize_name_components(row: dict[str, Any]) -> dict[str, Any]:
+    campaign_title = _first_present(row, "campaign_title", "series_name")
+    prize_rank = _first_present(row, "prize_rank", "sub_series")
+    prize_item_name = _first_present(row, "prize_item_name", "name_ja", "name_ko")
+    prize_item_name_without_rank = _strip_leading_prize_rank(prize_item_name, prize_rank)
+    variant_name = _first_present(row, "variant_name")
+    components = {
+        "campaign_title": campaign_title,
+        "prize_rank": prize_rank,
+        "prize_item_name": prize_item_name,
+        "prize_item_name_without_rank": prize_item_name_without_rank,
+        "variant_name": variant_name,
+        "source_url": _first_present(row, "source_url"),
+        "identity_label": _first_present(row, "identity_label"),
+    }
+    components["display_name_template"] = "campaign_title - prize_rank prize_item_name"
+    components["display_name"] = " - ".join(
+        [
+            campaign_title,
+            " ".join(part for part in [prize_rank, prize_item_name_without_rank] if part).strip(),
+        ]
+    ).strip(" -")
+    components["has_variant_name"] = bool(variant_name)
+    return {key: value for key, value in components.items() if value not in (None, "")}
+
+
+def _strip_leading_prize_rank(prize_item_name: str, prize_rank: str) -> str:
+    prize_item_name = prize_item_name.strip()
+    prize_rank = prize_rank.strip()
+    if prize_item_name and prize_rank and prize_item_name.startswith(prize_rank):
+        return prize_item_name[len(prize_rank):].strip(" 　:-－ー")
+    return prize_item_name
+
+
+def _prize_component_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    components = [_prize_name_components(row) for row in rows]
+    return {
+        "component_rows": len(components),
+        "campaign_titles": _unique_sorted([row.get("campaign_title") for row in components]),
+        "prize_ranks": _unique_sorted([row.get("prize_rank") for row in components]),
+        "prize_item_names": _unique_sorted([row.get("prize_item_name") for row in components]),
+        "prize_item_names_without_rank": _unique_sorted(
+            [row.get("prize_item_name_without_rank") for row in components]
+        ),
+        "variant_names": _unique_sorted([row.get("variant_name") for row in components]),
+        "display_names": _unique_sorted([row.get("display_name") for row in components]),
+        "source_urls": _unique_sorted([row.get("source_url") for row in components]),
+        "distinct_component_keys": len(
+            {
+                (
+                    str(row.get("campaign_title") or ""),
+                    str(row.get("prize_rank") or ""),
+                    str(row.get("prize_item_name") or ""),
+                    str(row.get("variant_name") or ""),
+                )
+                for row in components
+            }
+        ),
+        "rows_with_variant_name": sum(1 for row in components if row.get("variant_name")),
     }
 
 
@@ -184,6 +258,7 @@ def _source_url_evidence_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]
                 "variant_names": summary["variant_names"],
                 "identity_labels": summary["identity_labels"],
                 "display_names": summary["display_names"],
+                "prize_name_component_summary": _prize_component_summary(source_rows),
                 "official_price_jpy_values": summary["official_price_jpy_values"],
                 "release_dates": summary["release_dates"],
                 "rows_with_image_reference": summary["rows_with_image_reference"],
@@ -401,6 +476,7 @@ def _reissue_work_order(row: dict[str, Any], rank: int) -> dict[str, Any]:
         "decision_options": decision_template.get("decision_options") or [],
         "decision_template": decision_template,
         "prize_identity_summary": row.get("prize_identity_summary") or {},
+        "prize_name_component_summary": _prize_component_summary(sample_rows),
         "zero_price_exception_policy": row.get("zero_price_exception_policy") or {},
         "source_url_evidence_rows": _source_url_evidence_rows(sample_rows),
         "sample_rows": [_compact_review_row(item) for item in sample_rows],

@@ -260,6 +260,41 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             report["issues"][2]["source_url_evidence_rows"][0]["identity_labels"],
             ["一番くじ Sample / A賞 / Figure"],
         )
+        self.assertEqual(
+            report["issues"][2]["prize_name_component_summary"]["display_names"],
+            ["一番くじ Sample - A賞 Figure"],
+        )
+        self.assertEqual(
+            report["issues"][2]["prize_name_component_summary"][
+                "prize_item_names_without_rank"
+            ],
+            ["Figure"],
+        )
+        self.assertEqual(
+            report["issues"][2]["prize_name_component_summary"]["distinct_component_keys"],
+            1,
+        )
+        self.assertEqual(
+            report["issues"][2]["source_url_evidence_rows"][0][
+                "prize_name_component_summary"
+            ]["display_names"],
+            ["一番くじ Sample - A賞 Figure"],
+        )
+        self.assertEqual(
+            report["issues"][2]["sample_rows"][0]["prize_name_components"],
+            {
+                "campaign_title": "一番くじ Sample",
+                "prize_rank": "A賞",
+                "prize_item_name": "Figure",
+                "prize_item_name_without_rank": "Figure",
+                "variant_name": "Figure",
+                "source_url": "https://1kuji.com/products/sample",
+                "identity_label": "一番くじ Sample / A賞 / Figure",
+                "display_name_template": "campaign_title - prize_rank prize_item_name",
+                "display_name": "一番くじ Sample - A賞 Figure",
+                "has_variant_name": True,
+            },
+        )
         self.assertTrue(report["issues"][2]["zero_price_exception_policy"]["current_group_pass"])
         self.assertEqual(len(report["campaign_first_review_plan"]), 1)
         self.assertEqual(
