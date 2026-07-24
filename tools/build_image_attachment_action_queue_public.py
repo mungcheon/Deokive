@@ -1461,6 +1461,11 @@ def build_report(
         1 for item in action_items if item.get("suggested_local_image_path")
     )
     primary_review_url_rows = sum(1 for item in action_items if item.get("primary_review_url"))
+    source_url_update_primary_review_url_rows = sum(
+        1
+        for item in action_items
+        if item.get("source_url_update_required") and item.get("primary_review_url")
+    )
     primary_review_url_kind_counts = _counter_pairs(action_items, "primary_review_url_kind")
     attachment_readiness = _attachment_readiness(action_items)
     first_primary_review_item = next(
@@ -1528,6 +1533,18 @@ def build_report(
             "source_url_update_any_search_hint_rows": source_url_update_any_search_hint_rows,
             "source_url_update_missing_any_search_hint_rows": (
                 source_url_update_required_rows - source_url_update_any_search_hint_rows
+            ),
+            "source_url_update_primary_review_url_rows": source_url_update_primary_review_url_rows,
+            "source_url_update_missing_primary_review_url_rows": (
+                source_url_update_required_rows - source_url_update_primary_review_url_rows
+            ),
+            "source_url_update_review_start_coverage": (
+                round(
+                    source_url_update_primary_review_url_rows / source_url_update_required_rows,
+                    4,
+                )
+                if source_url_update_required_rows
+                else 0
             ),
             "source_url_candidate_status_counts": _counter_pairs(
                 next_source_url_review_batch,

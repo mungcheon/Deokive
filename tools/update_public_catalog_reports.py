@@ -3146,6 +3146,18 @@ def build_operations_public(
                 "source_url_update_missing_search_hint_rows",
                 0,
             ),
+            "source_url_update_primary_review_url_rows": image_action_queue_summary.get(
+                "source_url_update_primary_review_url_rows",
+                0,
+            ),
+            "source_url_update_missing_primary_review_url_rows": image_action_queue_summary.get(
+                "source_url_update_missing_primary_review_url_rows",
+                0,
+            ),
+            "source_url_update_review_start_coverage": image_action_queue_summary.get(
+                "source_url_update_review_start_coverage",
+                0,
+            ),
             "primary_review_url_rows": image_action_queue_summary.get("primary_review_url_rows", 0),
             "primary_review_url_missing_rows": image_action_queue_summary.get(
                 "primary_review_url_missing_rows", 0
@@ -4206,6 +4218,18 @@ def build_operations_public(
                 "source_url_update_missing_search_hint_rows",
                 0,
             ),
+            "source_url_update_primary_review_url_rows": image_action_queue_summary.get(
+                "source_url_update_primary_review_url_rows",
+                0,
+            ),
+            "source_url_update_missing_primary_review_url_rows": image_action_queue_summary.get(
+                "source_url_update_missing_primary_review_url_rows",
+                0,
+            ),
+            "source_url_update_review_start_coverage": image_action_queue_summary.get(
+                "source_url_update_review_start_coverage",
+                0,
+            ),
             "primary_review_url_rows": image_action_queue_summary.get("primary_review_url_rows", 0),
             "primary_review_url_missing_rows": image_action_queue_summary.get(
                 "primary_review_url_missing_rows", 0
@@ -4687,6 +4711,12 @@ def build_operations_public(
         )
         open_review_queues["image_attachment_source_url_missing_any_search_hint_rows"] = (
             image_action_queue_summary.get("source_url_update_missing_any_search_hint_rows", 0)
+        )
+        open_review_queues["image_attachment_source_url_primary_review_url_rows"] = (
+            image_action_queue_summary.get("source_url_update_primary_review_url_rows", 0)
+        )
+        open_review_queues["image_attachment_source_url_missing_primary_review_url_rows"] = (
+            image_action_queue_summary.get("source_url_update_missing_primary_review_url_rows", 0)
         )
         open_review_queues["image_attachment_local_download_ready_rows"] = (
             image_action_queue_summary.get("local_image_download_instruction_ready_rows", 0)
@@ -8583,6 +8613,12 @@ def validate_report_consistency(
         )
         expected_open_queues["image_attachment_source_url_missing_any_search_hint_rows"] = image_action_summary.get(
             "source_url_update_missing_any_search_hint_rows", 0
+        )
+        expected_open_queues["image_attachment_source_url_primary_review_url_rows"] = image_action_summary.get(
+            "source_url_update_primary_review_url_rows", 0
+        )
+        expected_open_queues["image_attachment_source_url_missing_primary_review_url_rows"] = image_action_summary.get(
+            "source_url_update_missing_primary_review_url_rows", 0
         )
         expected_open_queues["image_attachment_local_download_ready_rows"] = image_action_summary.get(
             "local_image_download_instruction_ready_rows", 0

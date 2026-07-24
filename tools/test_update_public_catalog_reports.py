@@ -2811,6 +2811,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues.get("image_attachment_source_url_missing_any_search_hint_rows"),
             image_action_summary.get("source_url_update_missing_any_search_hint_rows"),
         )
+        self.assertEqual(
+            open_queues.get("image_attachment_source_url_primary_review_url_rows"),
+            image_action_summary.get("source_url_update_primary_review_url_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("image_attachment_source_url_missing_primary_review_url_rows"),
+            image_action_summary.get("source_url_update_missing_primary_review_url_rows"),
+        )
         self.assertEqual(image_asset_gate.get("status"), "pass")
         self.assertEqual(image_asset_gate.get("image_url_without_local_path_rows"), 0)
         self.assertEqual(image_asset_gate.get("missing_local_image_files"), 0)
@@ -3465,6 +3473,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             image_scorecard.get("source_url_update_missing_search_hint_rows"),
             image_action_summary.get("source_url_update_missing_search_hint_rows"),
+        )
+        self.assertEqual(
+            image_scorecard.get("source_url_update_primary_review_url_rows"),
+            image_action_summary.get("source_url_update_primary_review_url_rows"),
+        )
+        self.assertEqual(
+            image_scorecard.get("source_url_update_missing_primary_review_url_rows"),
+            image_action_summary.get("source_url_update_missing_primary_review_url_rows"),
+        )
+        self.assertEqual(
+            image_next_action.get("source_url_update_review_start_coverage"),
+            image_action_summary.get("source_url_update_review_start_coverage"),
         )
         self.assertEqual(
             image_scorecard.get("primary_review_url_rows"),

@@ -98,6 +98,9 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_fallback_web_search_rows"], 1)
         self.assertEqual(report["summary"]["source_url_update_any_search_hint_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_missing_any_search_hint_rows"], 0)
+        self.assertEqual(report["summary"]["source_url_update_primary_review_url_rows"], 2)
+        self.assertEqual(report["summary"]["source_url_update_missing_primary_review_url_rows"], 0)
+        self.assertEqual(report["summary"]["source_url_update_review_start_coverage"], 1.0)
         self.assertEqual(
             report["summary"]["source_url_candidate_status_counts"],
             [["low_confidence_candidate", 1]],
