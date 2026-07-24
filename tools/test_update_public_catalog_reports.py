@@ -14,6 +14,29 @@ from build_metadata_action_queue_public import build_report as build_metadata_ac
 class PublicCatalogReportTests(unittest.TestCase):
     def test_enrich_image_action_queue_source_url_review_adds_candidate_context(self):
         action_queue = {
+            "summary": {
+                "source_url_candidate_status_counts": [],
+                "source_url_review_lane_counts": [],
+            },
+            "batches": [
+                {
+                    "workflow": "replace_generic_source_then_extract_image",
+                    "items": [
+                        {
+                            "row_index": 10,
+                            "candidate_options": [],
+                            "source_url_import_template": {
+                                "row_index": 10,
+                                "candidate_options": [],
+                                "source_url_review_guidance": {
+                                    "candidate_status": "",
+                                    "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+                                },
+                            },
+                        }
+                    ],
+                }
+            ],
             "next_source_url_review_batch": [
                 {
                     "row_index": 10,
@@ -57,6 +80,170 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(row["candidate_options"][0]["title"], "Badge maybe")
         self.assertEqual(row["source_url_review_blockers"], ["candidate_score_too_low"])
         self.assertEqual(row["match_diagnostics"]["diagnosis"], "needs_review")
+        self.assertEqual(
+            enriched["summary"]["source_url_candidate_status_counts"],
+            [["low_confidence_candidate", 1]],
+        )
+
+    def test_enrich_image_action_queue_source_url_review_preserves_existing_candidates(self):
+        action_queue = {
+            "summary": {
+                "source_url_candidate_status_counts": [],
+                "source_url_review_lane_counts": [],
+            },
+            "batches": [
+                {
+                    "workflow": "replace_generic_source_then_extract_image",
+                    "items": [
+                        {
+                            "row_index": 10,
+                            "candidate_options": [],
+                            "source_url_import_template": {
+                                "row_index": 10,
+                                "candidate_options": [],
+                                "source_url_review_guidance": {
+                                    "candidate_status": "",
+                                    "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+                                },
+                            },
+                        }
+                    ],
+                }
+            ],
+            "next_source_url_review_batch": [
+                {
+                    "row_index": 10,
+                    "name_ko": "Badge",
+                    "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=Badge",
+                    "candidate_options": [],
+                }
+            ],
+        }
+        source_url_template = {
+            "items": [
+                {
+                    "row_index": 10,
+                    "candidate_status": "no_candidate",
+                    "candidate_options": [],
+                    "source_url_review_lane": "manual_search_required",
+                }
+            ]
+        }
+        existing_action_queue = {
+            "next_source_url_review_batch": [
+                {
+                    "row_index": 10,
+                    "candidate_status": "low_confidence_candidate",
+                    "candidate_review_lane": "low_confidence_candidate_review",
+                    "candidate_score": 0.27,
+                    "candidate_count": 2,
+                    "candidate_options": [
+                        {
+                            "source_url": "https://fanding.kr/@stellive/shop/3700",
+                            "title": "Existing Badge candidate",
+                        }
+                    ],
+                    "source_url_review_lane": "low_confidence_candidate_review",
+                    "source_url_review_blockers": ["candidate_score_too_low"],
+                    "match_diagnostics": {"diagnosis": "existing_review"},
+                    "fallback_search_queries": ["site:fanding.kr Badge"],
+                    "store_search_hints": {"store_search_url": "https://fanding.kr"},
+                    "source_url_import_template": {
+                        "row_index": 10,
+                        "candidate_status": "low_confidence_candidate",
+                        "candidate_options": [
+                            {
+                                "source_url": "https://fanding.kr/@stellive/shop/3700",
+                                "title": "Existing nested Badge candidate",
+                            }
+                        ],
+                        "source_url_review_guidance": {
+                            "candidate_status": "low_confidence_candidate",
+                            "candidate_review_note": "Review the existing candidate before applying.",
+                        },
+                    },
+                }
+            ]
+        }
+
+        enriched = reports.enrich_image_action_queue_source_url_review(
+            action_queue,
+            source_url_template,
+            existing_action_queue=existing_action_queue,
+        )
+
+        row = enriched["next_source_url_review_batch"][0]
+        self.assertEqual(row["candidate_status"], "low_confidence_candidate")
+        self.assertEqual(
+            row["candidate_options"][0]["title"], "Existing Badge candidate"
+        )
+        batch_row = enriched["batches"][0]["items"][0]
+        self.assertEqual(
+            batch_row["candidate_options"][0]["title"], "Existing Badge candidate"
+        )
+        self.assertEqual(
+            batch_row["source_url_import_template"]["candidate_options"][0]["title"],
+            "Existing nested Badge candidate",
+        )
+        self.assertEqual(
+            batch_row["source_url_import_template"]["source_url_review_guidance"][
+                "candidate_status"
+            ],
+            "low_confidence_candidate",
+        )
+        self.assertEqual(row["match_diagnostics"]["diagnosis"], "existing_review")
+        self.assertEqual(
+            enriched["summary"]["source_url_candidate_status_counts"],
+            [["low_confidence_candidate", 1]],
+        )
+
+    def test_enrich_image_action_queue_source_url_review_matches_catalog_index_batches(self):
+        action_queue = {
+            "summary": {
+                "source_url_candidate_status_counts": [],
+                "source_url_review_lane_counts": [],
+            },
+            "batches": [
+                {
+                    "workflow": "replace_generic_source_then_extract_image",
+                    "items": [
+                        {
+                            "catalog_index": 2325,
+                            "name_ko": "Catalog-only Badge",
+                            "candidate_options": [],
+                        }
+                    ],
+                }
+            ],
+            "next_source_url_review_batch": [],
+        }
+        source_url_template = {
+            "items": [
+                {
+                    "catalog_index": 2325,
+                    "candidate_status": "low_confidence_candidate",
+                    "candidate_options": [
+                        {
+                            "source_url": "https://example.com/catalog-only",
+                            "title": "Catalog-index candidate",
+                        }
+                    ],
+                    "source_url_review_lane": "low_confidence_candidate_review",
+                }
+            ]
+        }
+
+        enriched = reports.enrich_image_action_queue_source_url_review(
+            action_queue,
+            source_url_template,
+        )
+
+        batch_row = enriched["batches"][0]["items"][0]
+        self.assertEqual(batch_row["candidate_status"], "low_confidence_candidate")
+        self.assertEqual(
+            batch_row["candidate_options"][0]["title"],
+            "Catalog-index candidate",
+        )
 
     def test_write_json_skips_identical_payloads(self):
         with tempfile.TemporaryDirectory() as temp_dir:

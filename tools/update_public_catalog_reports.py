@@ -499,39 +499,243 @@ def write_json(path: Path, data: Any) -> None:
 def enrich_image_action_queue_source_url_review(
     image_action_queue: dict[str, Any],
     source_url_template: dict[str, Any],
+    existing_action_queue: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    template_rows = {
-        row.get("row_index"): row
-        for row in source_url_template.get("items") or []
-        if isinstance(row, dict)
-    }
+    template_rows = _image_source_candidate_rows_by_index(source_url_template)
+    existing_rows = _image_source_candidate_rows_by_index(existing_action_queue or {})
     enriched = dict(image_action_queue)
     enriched_batch = []
     for row in image_action_queue.get("next_source_url_review_batch") or []:
         if not isinstance(row, dict):
             continue
-        template = template_rows.get(row.get("row_index"))
+        template = _find_image_source_candidate_row(row, template_rows)
+        existing = _find_image_source_candidate_row(row, existing_rows)
         if not isinstance(template, dict):
-            enriched_batch.append(row)
+            enriched_batch.append(_merge_existing_image_source_candidate(row, existing))
             continue
+        enriched_row = {
+            **row,
+            "candidate_status": template.get("candidate_status"),
+            "candidate_review_lane": template.get("candidate_review_lane"),
+            "candidate_score": template.get("candidate_score"),
+            "candidate_count": template.get("candidate_count"),
+            "candidate_options": template.get("candidate_options") or [],
+            "source_url_review_lane": template.get("source_url_review_lane"),
+            "source_url_review_blockers": template.get("source_url_review_blockers")
+            or [],
+            "match_diagnostics": template.get("match_diagnostics") or {},
+            "fallback_search_queries": template.get("fallback_search_queries") or [],
+            "store_search_hints": template.get("store_search_hints") or {},
+        }
         enriched_batch.append(
-            {
-                **row,
-                "candidate_status": template.get("candidate_status"),
-                "candidate_review_lane": template.get("candidate_review_lane"),
-                "candidate_score": template.get("candidate_score"),
-                "candidate_count": template.get("candidate_count"),
-                "candidate_options": template.get("candidate_options") or [],
-                "source_url_review_lane": template.get("source_url_review_lane"),
-                "source_url_review_blockers": template.get("source_url_review_blockers")
-                or [],
-                "match_diagnostics": template.get("match_diagnostics") or {},
-                "fallback_search_queries": template.get("fallback_search_queries") or [],
-                "store_search_hints": template.get("store_search_hints") or {},
-            }
+            _merge_existing_image_source_candidate(enriched_row, existing)
         )
     enriched["next_source_url_review_batch"] = enriched_batch
+    enriched["batches"] = _merge_existing_image_source_candidate_batches(
+        image_action_queue.get("batches") or [],
+        template_rows,
+        existing_rows,
+    )
+    summary = dict(enriched.get("summary") or {})
+    summary["source_url_candidate_status_counts"] = _count_pairs(
+        enriched_batch, "candidate_status"
+    )
+    summary["source_url_review_lane_counts"] = _count_pairs(
+        enriched_batch, "source_url_review_lane"
+    )
+    enriched["summary"] = summary
     return enriched
+
+
+def _merge_existing_image_source_candidate_batches(
+    batches: list[dict[str, Any]],
+    template_rows: dict[tuple[str, Any], dict[str, Any]],
+    existing_rows: dict[tuple[str, Any], dict[str, Any]],
+) -> list[dict[str, Any]]:
+    enriched_batches = []
+    for batch in batches:
+        if not isinstance(batch, dict):
+            continue
+        enriched_batch = dict(batch)
+        if batch.get("workflow") != "replace_generic_source_then_extract_image":
+            enriched_batches.append(enriched_batch)
+            continue
+        items = []
+        for item in batch.get("items") or []:
+            if not isinstance(item, dict):
+                continue
+            template = _find_image_source_candidate_row(item, template_rows)
+            existing = _find_image_source_candidate_row(item, existing_rows)
+            enriched_item = dict(item)
+            if isinstance(template, dict):
+                enriched_item.update(
+                    {
+                        "candidate_status": template.get("candidate_status"),
+                        "candidate_review_lane": template.get(
+                            "candidate_review_lane"
+                        ),
+                        "candidate_score": template.get("candidate_score"),
+                        "candidate_count": template.get("candidate_count"),
+                        "candidate_options": template.get("candidate_options")
+                        or [],
+                        "source_url_review_lane": template.get(
+                            "source_url_review_lane"
+                        ),
+                        "source_url_review_blockers": template.get(
+                            "source_url_review_blockers"
+                        )
+                        or [],
+                        "match_diagnostics": template.get("match_diagnostics")
+                        or {},
+                        "fallback_search_queries": template.get(
+                            "fallback_search_queries"
+                        )
+                        or [],
+                        "store_search_hints": template.get("store_search_hints")
+                        or {},
+                    }
+                )
+            items.append(_merge_existing_image_source_candidate(enriched_item, existing))
+        enriched_batch["items"] = items
+        enriched_batches.append(enriched_batch)
+    return enriched_batches
+
+
+def _image_source_candidate_rows_by_index(
+    existing_action_queue: dict[str, Any],
+) -> dict[tuple[str, Any], dict[str, Any]]:
+    rows: dict[tuple[str, Any], dict[str, Any]] = {}
+
+    def add_row(row: dict[str, Any]) -> None:
+        for key in _image_source_candidate_identity_keys(row):
+            if key not in rows or row.get("candidate_options"):
+                rows[key] = row
+
+    for row in existing_action_queue.get("next_source_url_review_batch") or []:
+        if isinstance(row, dict):
+            add_row(row)
+    for row in existing_action_queue.get("items") or []:
+        if isinstance(row, dict):
+            add_row(row)
+    for batch in existing_action_queue.get("batches") or []:
+        if not isinstance(batch, dict):
+            continue
+        for row in batch.get("items") or []:
+            if not isinstance(row, dict):
+                continue
+            add_row(row)
+    return rows
+
+
+def _find_image_source_candidate_row(
+    row: dict[str, Any],
+    rows_by_key: dict[tuple[str, Any], dict[str, Any]],
+) -> dict[str, Any] | None:
+    for key in _image_source_candidate_identity_keys(row):
+        existing = rows_by_key.get(key)
+        if isinstance(existing, dict):
+            return existing
+    return None
+
+
+def _image_source_candidate_identity_keys(row: dict[str, Any]) -> list[tuple[str, Any]]:
+    keys: list[tuple[str, Any]] = []
+    for field in ("row_index", "catalog_index"):
+        value = row.get(field)
+        if value not in (None, ""):
+            keys.append((field, value))
+    return keys
+
+
+def _merge_existing_image_source_candidate(
+    row: dict[str, Any],
+    existing: dict[str, Any] | None,
+) -> dict[str, Any]:
+    if not isinstance(existing, dict):
+        return row
+    preserved = dict(row)
+    if not row.get("candidate_options"):
+        _copy_non_empty_image_source_candidate_context(preserved, existing)
+    _merge_existing_image_source_nested_review_context(preserved, existing)
+    return preserved
+
+
+def _copy_non_empty_image_source_candidate_context(
+    target: dict[str, Any],
+    source: dict[str, Any],
+) -> None:
+    for key in _IMAGE_SOURCE_CANDIDATE_CONTEXT_KEYS:
+        value = source.get(key)
+        if value not in (None, "", [], {}):
+            target[key] = value
+
+
+_IMAGE_SOURCE_CANDIDATE_CONTEXT_KEYS = (
+    "candidate_status",
+    "candidate_review_lane",
+    "candidate_score",
+    "candidate_count",
+    "candidate_options",
+    "source_url_review_lane",
+    "source_url_review_blockers",
+    "match_diagnostics",
+    "fallback_search_queries",
+    "store_search_hints",
+)
+
+
+def _merge_existing_image_source_nested_review_context(
+    row: dict[str, Any],
+    existing: dict[str, Any],
+) -> None:
+    for template_key in ("source_url_import_template", "catalog_field_import_template"):
+        target_template = row.get(template_key)
+        existing_template = existing.get(template_key)
+        if not isinstance(target_template, dict) or not isinstance(
+            existing_template, dict
+        ):
+            continue
+        merged_template = dict(target_template)
+        _copy_non_empty_image_source_candidate_context(
+            merged_template, existing_template
+        )
+        _merge_existing_source_url_review_guidance(
+            merged_template, existing_template
+        )
+        row[template_key] = merged_template
+
+    _merge_existing_source_url_review_guidance(row, existing)
+
+
+def _merge_existing_source_url_review_guidance(
+    target: dict[str, Any],
+    source: dict[str, Any],
+) -> None:
+    target_guidance = target.get("source_url_review_guidance")
+    source_guidance = source.get("source_url_review_guidance")
+    if not isinstance(target_guidance, dict) or not isinstance(source_guidance, dict):
+        return
+    merged_guidance = dict(target_guidance)
+    for key in (
+        "candidate_status",
+        "candidate_review_note",
+        "candidate_summary",
+        "candidate_source_url",
+        "top_candidate_title",
+    ):
+        value = source_guidance.get(key)
+        if value not in (None, "", [], {}):
+            merged_guidance[key] = value
+    target["source_url_review_guidance"] = merged_guidance
+
+
+def _count_pairs(rows: list[dict[str, Any]], field: str) -> list[list[Any]]:
+    counts = Counter(
+        str(row.get(field) or "").strip()
+        for row in rows
+        if isinstance(row, dict) and str(row.get(field) or "").strip()
+    )
+    return [[key, value] for key, value in counts.most_common()]
 
 
 def now_utc() -> str:
@@ -8833,6 +9037,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         {"items": items},
         load_json(GOTOUCHI, {}) if GOTOUCHI.exists() else None,
     )
+    existing_image_attachment_action_queue = (
+        load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {})
+        if IMAGE_ATTACHMENT_ACTION_QUEUE.exists()
+        else {}
+    )
     image_source_url_confirmed_template = build_image_source_url_confirmed_template_public.build_template(
         image_attachment_action_queue,
         load_json(STELLIVE_FANDING_CANDIDATES, {}) if STELLIVE_FANDING_CANDIDATES.exists() else None,
@@ -8841,6 +9050,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     image_attachment_action_queue = enrich_image_action_queue_source_url_review(
         image_attachment_action_queue,
         image_source_url_confirmed_template,
+        existing_action_queue=existing_image_attachment_action_queue,
     )
     image_attachment_confirmed_template = (
         load_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, {})
