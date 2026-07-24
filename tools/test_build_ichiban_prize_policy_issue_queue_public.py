@@ -49,6 +49,39 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
                     "ichiban_probable_reissue_review_groups": 1,
                     "ichiban_probable_reissue_sample_rows": 2,
                 },
+                "ichiban_reissue_campaign_work_order": [
+                    {
+                        "campaign_work_order_id": "ichiban-reissue-campaign-001",
+                        "source_urls": [
+                            "https://1kuji.com/products/sample",
+                            "https://1kuji.com/products/sample-2",
+                        ],
+                        "first_evidence_url": "https://1kuji.com/products/sample",
+                        "evidence_url_count": 2,
+                        "item_work_order_count": 1,
+                        "item_work_order_ids": ["ichiban-reissue-dedupe-001"],
+                        "catalog_indexes": [6, 7],
+                        "prize_labels": ["A賞"],
+                        "campaign_url_comparison": {
+                            "likely_same_campaign_family_reissue": True,
+                        },
+                        "decision_template": {
+                            "campaign_work_order_id": "ichiban-reissue-campaign-001",
+                            "manual_confirmed": False,
+                            "decision": "",
+                            "decision_options": [
+                                "campaign_pair_reissue_keep_all_separate",
+                                "campaign_pair_duplicate_review_each_item_keep_drop",
+                                "needs_more_source_evidence",
+                            ],
+                            "affected_item_work_order_ids": ["ichiban-reissue-dedupe-001"],
+                            "evidence_urls": [
+                                "https://1kuji.com/products/sample",
+                                "https://1kuji.com/products/sample-2",
+                            ],
+                        },
+                    }
+                ],
                 "ichiban_reissue_work_order": [
                     {
                         "normalized_name": "sample prize",
@@ -116,6 +149,13 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["zero_price_violation_rows"], 1)
         self.assertEqual(report["summary"]["unnumbered_multi_item_prize_review_groups"], 1)
         self.assertEqual(report["summary"]["probable_reissue_work_order_rows"], 1)
+        self.assertEqual(report["summary"]["campaign_first_review_plan_rows"], 1)
+        self.assertEqual(report["summary"]["campaign_first_review_item_work_order_rows"], 1)
+        self.assertEqual(report["summary"]["campaign_first_review_plans_with_evidence_urls"], 1)
+        self.assertEqual(
+            report["summary"]["campaign_first_review_first_evidence_url"],
+            "https://1kuji.com/products/sample",
+        )
         self.assertEqual(
             report["summary"]["lane_counts"],
             [
@@ -186,6 +226,8 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
         )
         self.assertIn("release_periods_compared", report["issues"][2]["required_evidence"])
         self.assertEqual(report["issues"][2]["work_order_id"], "ichiban-reissue-dedupe-001")
+        self.assertEqual(report["issues"][2]["first_evidence_url"], "https://1kuji.com/products/sample")
+        self.assertEqual(report["issues"][2]["evidence_url_count"], 2)
         self.assertEqual(report["issues"][2]["source_url_count"], 2)
         self.assertTrue(
             report["issues"][2]["campaign_url_comparison"][
@@ -219,6 +261,19 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             ["一番くじ Sample / A賞 / Figure"],
         )
         self.assertTrue(report["issues"][2]["zero_price_exception_policy"]["current_group_pass"])
+        self.assertEqual(len(report["campaign_first_review_plan"]), 1)
+        self.assertEqual(
+            report["campaign_first_review_plan"][0]["campaign_work_order_id"],
+            "ichiban-reissue-campaign-001",
+        )
+        self.assertEqual(
+            report["campaign_first_review_plan"][0]["affected_item_work_order_ids"],
+            ["ichiban-reissue-dedupe-001"],
+        )
+        self.assertEqual(
+            report["campaign_first_review_plan"][0]["decision_options"][0],
+            "campaign_pair_reissue_keep_all_separate",
+        )
 
     def test_clean_price_policy_still_surfaces_remaining_reviews(self) -> None:
         report = queue.build_queue(

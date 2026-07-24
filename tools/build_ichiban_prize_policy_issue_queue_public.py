@@ -387,8 +387,12 @@ def _reissue_work_order(row: dict[str, Any], rank: int) -> dict[str, Any]:
         "review_reason": "Same displayed item appears under multiple 1kuji campaign URLs; protect as possible reissue until manually confirmed.",
         "recommended_action": "Compare campaign title, release period, and prize lineup before deciding keep-separate or keep/drop.",
         "work_order_id": row.get("work_order_id"),
+        "campaign_work_order_id": row.get("campaign_work_order_id"),
         "catalog_indexes": row.get("catalog_indexes") or [],
         "source_urls": row.get("source_urls") or [],
+        "first_evidence_url": row.get("first_evidence_url") or _first_url(row.get("source_urls") or []),
+        "evidence_url_count": row.get("evidence_url_count")
+        or sum(1 for url in row.get("source_urls") or [] if str(url or "").strip()),
         "source_url_count": row.get("source_url_count"),
         "campaign_slug_families": row.get("campaign_slug_families") or [],
         "campaign_url_comparison": row.get("campaign_url_comparison") or {},
@@ -406,6 +410,57 @@ def _reissue_work_order(row: dict[str, Any], rank: int) -> dict[str, Any]:
         "auto_delete_enabled": False,
         **lane_blocker("probable_reissue_or_campaign_variant_review"),
     }
+
+
+def _first_url(urls: Any) -> str:
+    if not isinstance(urls, list):
+        return ""
+    for url in urls:
+        text = str(url or "").strip()
+        if text:
+            return text
+    return ""
+
+
+def _campaign_first_review_plan(dedupe_action_queue: dict[str, Any]) -> list[dict[str, Any]]:
+    rows = [
+        row
+        for row in dedupe_action_queue.get("ichiban_reissue_campaign_work_order") or []
+        if isinstance(row, dict)
+    ]
+    plan: list[dict[str, Any]] = []
+    for rank, row in enumerate(rows, start=1):
+        decision_template = row.get("decision_template") if isinstance(row.get("decision_template"), dict) else {}
+        source_urls = row.get("source_urls") or []
+        plan.append(
+            {
+                "rank": rank,
+                "campaign_work_order_id": row.get("campaign_work_order_id"),
+                "priority": 250 + rank,
+                "lane": "campaign_pair_reissue_or_duplicate_review",
+                "review_state": row.get("review_state") or "campaign_pair_reissue_or_duplicate_decision_required",
+                "source_urls": source_urls,
+                "first_evidence_url": row.get("first_evidence_url") or _first_url(source_urls),
+                "evidence_url_count": row.get("evidence_url_count")
+                or sum(1 for url in source_urls if str(url or "").strip()),
+                "campaign_url_comparison": row.get("campaign_url_comparison") or {},
+                "item_work_order_count": row.get("item_work_order_count") or 0,
+                "affected_item_work_order_ids": decision_template.get("affected_item_work_order_ids")
+                or row.get("item_work_order_ids")
+                or [],
+                "catalog_indexes": row.get("catalog_indexes") or [],
+                "prize_labels": row.get("prize_labels") or [],
+                "decision_options": decision_template.get("decision_options") or [],
+                "decision_template": decision_template,
+                "recommended_action": "Decide whether this campaign URL pair is a reissue/wave or exact duplicate before item-level keep/drop review.",
+                "manual_review_checklist": row.get("manual_review_checklist") or [],
+                "manual_confirmed": False,
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+                **lane_blocker("probable_reissue_or_campaign_variant_review"),
+            }
+        )
+    return plan
 
 
 def _completion_readiness(
@@ -578,6 +633,7 @@ def build_queue(
     reissue_work_orders = [
         row for row in dedupe_action_queue.get("ichiban_reissue_work_order") or [] if isinstance(row, dict)
     ]
+    campaign_first_review_plan = _campaign_first_review_plan(dedupe_action_queue)
     for rank, row in enumerate(reissue_work_orders, start=1):
         issues.append(_reissue_work_order(row, rank))
 
@@ -604,6 +660,7 @@ def build_queue(
         protected_unnumbered_multi
     )
     probable_reissue_work_order_rows = len(reissue_work_orders)
+    campaign_first_review_plan_rows = len(campaign_first_review_plan)
     probable_reissue_review_groups = int(
         dedupe_summary.get("ichiban_probable_reissue_review_groups")
         or summary.get("probable_reissue_review_groups")
@@ -651,6 +708,17 @@ def build_queue(
                 [reason, count] for reason, count in protected_reason_counts.most_common()
             ],
             "probable_reissue_work_order_rows": probable_reissue_work_order_rows,
+            "campaign_first_review_plan_rows": campaign_first_review_plan_rows,
+            "campaign_first_review_item_work_order_rows": sum(
+                int(row.get("item_work_order_count") or 0)
+                for row in campaign_first_review_plan
+            ),
+            "campaign_first_review_plans_with_evidence_urls": sum(
+                1 for row in campaign_first_review_plan if row.get("first_evidence_url")
+            ),
+            "campaign_first_review_first_evidence_url": _first_url(
+                [row.get("first_evidence_url") for row in campaign_first_review_plan]
+            ),
             "probable_reissue_review_groups": probable_reissue_review_groups,
             "probable_reissue_sample_rows": int(
                 dedupe_summary.get("ichiban_probable_reissue_sample_rows") or 0
@@ -683,6 +751,7 @@ def build_queue(
         },
         "completion_readiness": completion_readiness,
         "protected_unnumbered_multi_item_prize_groups": protected_groups,
+        "campaign_first_review_plan": campaign_first_review_plan,
         "issues": sorted(issues, key=lambda row: int(row.get("priority") or 9999)),
     }
 
