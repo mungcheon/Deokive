@@ -309,6 +309,68 @@ void main() {
     expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(116));
   });
 
+  testWidgets('catalog add sheet button keeps visible foreground',
+      (tester) async {
+    final appState = AppState()
+      ..isLoggedIn = false
+      ..folders.add(
+        const FolderItem(
+          id: 'default-folder',
+          name: 'Default',
+          icon: Icons.folder_rounded,
+          color: Colors.blue,
+        ),
+      );
+    final entry = kFullCatalog.firstWhere(
+      (item) => item.nameKo.trim().isNotEmpty,
+    );
+    final palette = paletteSpecFor(AppPalette.zeroTwoPink);
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(
+        value: appState,
+        child: MaterialApp(
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(seedColor: palette.primary),
+            extensions: [
+              DeokivePalette(
+                primary: palette.primary,
+                accent: palette.accent,
+                background: palette.background,
+                text: palette.text,
+                softSurface: Colors.white,
+              ),
+            ],
+          ),
+          home: const CatalogDatabaseScreen(),
+        ),
+      ),
+    );
+
+    await tester.enterText(find.byType(TextField), entry.nameKo);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(entry.nameKo).last);
+    await tester.pumpAndSettle();
+
+    final buttonFinder = find.byKey(const Key('catalog-add-sheet-button'));
+    final addTextFinder = find.descendant(
+      of: buttonFinder,
+      matching: find.text('내 굿즈에 추가'),
+    );
+    final addIconFinder = find.descendant(
+      of: buttonFinder,
+      matching: find.byIcon(Icons.add_rounded),
+    );
+    final addTextStyle = tester.widget<Text>(addTextFinder).style!;
+    final addIconTheme = IconTheme.of(tester.element(addIconFinder));
+
+    expect(addTextStyle.color, Colors.white);
+    expect(addTextStyle.fontFamilyFallback, contains('Malgun Gothic'));
+    expect(addIconTheme.color, Colors.white);
+    expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(78));
+  });
+
   testWidgets('catalog database can add even when saved folders are empty',
       (tester) async {
     final appState = AppState()..isLoggedIn = false;

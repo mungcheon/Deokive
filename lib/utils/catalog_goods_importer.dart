@@ -472,6 +472,15 @@ class _CatalogImportActionButton extends StatelessWidget {
 }
 
 class _CatalogImportActionLabel extends StatelessWidget {
+  static const _fontFallback = <String>[
+    'Apple SD Gothic Neo',
+    'Malgun Gothic',
+    'Noto Sans KR',
+    'Roboto',
+    'Arial',
+    'sans-serif',
+  ];
+
   final String label;
   final Color color;
 
@@ -487,11 +496,13 @@ class _CatalogImportActionLabel extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          inherit: false,
+          inherit: true,
           color: color,
           fontSize: 15,
           fontWeight: FontWeight.w900,
           height: 1,
+          decoration: TextDecoration.none,
+          fontFamilyFallback: _fontFallback,
           shadows: [
             Shadow(
               color: Colors.black.withValues(alpha: 0.28),
