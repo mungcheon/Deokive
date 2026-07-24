@@ -2960,6 +2960,18 @@ def build_operations_public(
             "public_report": f"data/{SOURCE_DISCOVERY_STARTER_QUEUE.name}",
             "starter_queue_rows": source_discovery_starter_queue_summary.get("starter_queue_rows", 0),
             "starter_queue_groups": source_discovery_starter_queue_summary.get("starter_queue_groups", 0),
+            "next_review_batch_rows": source_discovery_starter_queue_summary.get("next_review_batch_rows", 0),
+            "next_review_batch_group_count": source_discovery_starter_queue_summary.get(
+                "next_review_batch_group_count", 0
+            ),
+            "next_review_batch_primary_source_store": source_discovery_starter_queue_summary.get(
+                "next_review_batch_primary_source_store"
+            ),
+            "next_review_batch": [
+                row
+                for row in source_discovery_starter_queue.get("next_review_batch", [])
+                if isinstance(row, dict)
+            ][:20],
             "coverage_matches_missing_source_url_rows": source_discovery_starter_queue_summary.get(
                 "coverage_matches_missing_source_url_rows",
                 False,
@@ -4860,6 +4872,7 @@ def build_agent_work_queue_public(
         recommended_action: str,
         acceptance_criteria: list[str],
         samples: list[dict[str, Any]],
+        sample_limit: int = 8,
         review_summary: dict[str, Any] | None = None,
     ) -> None:
         if rows <= 0:
@@ -4874,7 +4887,7 @@ def build_agent_work_queue_public(
             "rows": rows,
             "recommended_action": recommended_action,
             "acceptance_criteria": acceptance_criteria,
-            "sample_items": samples[:8],
+            "sample_items": samples[:sample_limit],
         }
         if review_summary is not None:
             batch["review_summary"] = review_summary
@@ -6040,6 +6053,44 @@ def build_agent_work_queue_public(
     starter_groups = [
         row for row in source_discovery_starter_queue.get("groups", []) if isinstance(row, dict)
     ]
+    starter_next_review_batch = [
+        row
+        for row in source_discovery_starter_queue.get("next_review_batch", [])
+        if isinstance(row, dict)
+    ]
+    if starter_next_review_batch:
+        add_batch(
+            agent_id="agent-source-starter",
+            workstream="source_discovery_starter_next_review_batch",
+            priority=20,
+            title="Next missing-image source review batch",
+            public_report=SOURCE_DISCOVERY_STARTER_QUEUE,
+            rows=len(starter_next_review_batch),
+            recommended_action=(
+                "Open this flat 20-row batch first and confirm exact product/detail source pages "
+                "before broad missing-image research."
+            ),
+            acceptance_criteria=[
+                "Open search_url first when present; otherwise use the fallback web search URL.",
+                "Accepted source_url must be an exact official or licensed product/detail page.",
+                "Only prepare image_url when the exact product image is visible on the accepted source.",
+                "Keep auto-apply disabled; produce reviewed template rows only.",
+            ],
+            samples=starter_next_review_batch,
+            sample_limit=20,
+            review_summary={
+                "next_review_batch_rows": len(starter_next_review_batch),
+                "next_review_batch_group_count": int(
+                    source_discovery_starter_queue.get("summary", {}).get(
+                        "next_review_batch_group_count", 0
+                    )
+                    or 0
+                ),
+                "next_review_batch_primary_source_store": source_discovery_starter_queue.get(
+                    "summary", {}
+                ).get("next_review_batch_primary_source_store"),
+            },
+        )
     for group in starter_groups[:10]:
         sample_items = [item for item in group.get("sample_items", []) if isinstance(item, dict)]
         add_batch(
@@ -6151,6 +6202,21 @@ def build_agent_work_queue_public(
             "image_missing_evidence_top_categories": image_missing_evidence_priority.get(
                 "by_category", []
             )[:8],
+            "source_discovery_starter_next_review_batch_rows": int(
+                source_discovery_starter_queue.get("summary", {}).get(
+                    "next_review_batch_rows", 0
+                )
+                or 0
+            ),
+            "source_discovery_starter_next_review_batch_group_count": int(
+                source_discovery_starter_queue.get("summary", {}).get(
+                    "next_review_batch_group_count", 0
+                )
+                or 0
+            ),
+            "source_discovery_starter_next_review_batch_primary_source_store": source_discovery_starter_queue.get(
+                "summary", {}
+            ).get("next_review_batch_primary_source_store"),
         },
         "top_next_batches": top_next_batches,
         "instructions": [

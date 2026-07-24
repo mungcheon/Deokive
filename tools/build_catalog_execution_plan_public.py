@@ -784,6 +784,20 @@ def _build_plan(load_report) -> dict[str, Any]:
                 evidence={
                     "starter_queue_rows": _count(source_discovery_starter_summary, "starter_queue_rows"),
                     "starter_queue_groups": _count(source_discovery_starter_summary, "starter_queue_groups"),
+                    "next_review_batch_rows": _count(
+                        source_discovery_starter_summary, "next_review_batch_rows"
+                    ),
+                    "next_review_batch_group_count": _count(
+                        source_discovery_starter_summary, "next_review_batch_group_count"
+                    ),
+                    "next_review_batch_primary_source_store": source_discovery_starter_summary.get(
+                        "next_review_batch_primary_source_store"
+                    ),
+                    "next_review_batch": [
+                        row
+                        for row in source_discovery_starter_queue.get("next_review_batch", [])
+                        if isinstance(row, dict)
+                    ][:20],
                     "coverage_matches_missing_source_url_rows": bool(
                         source_discovery_starter_summary.get("coverage_matches_missing_source_url_rows", False)
                     ),
@@ -2092,6 +2106,15 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "source_discovery_starter_queue_groups": _count(
                 source_discovery_starter_summary, "starter_queue_groups"
+            ),
+            "source_discovery_starter_next_review_batch_rows": _count(
+                source_discovery_starter_summary, "next_review_batch_rows"
+            ),
+            "source_discovery_starter_next_review_batch_group_count": _count(
+                source_discovery_starter_summary, "next_review_batch_group_count"
+            ),
+            "source_discovery_starter_next_review_batch_primary_source_store": source_discovery_starter_summary.get(
+                "next_review_batch_primary_source_store"
             ),
             "source_discovery_action_rows": _count(source_action_summary, "queued_source_rows"),
             "source_discovery_actionable_rows": _count(source_action_summary, "actionable_source_rows"),

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T14:03:27Z",
+  "generated_at": "2026-07-24T14:14:40Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20271,
+    "summed_batch_rows": 20289,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -52,11 +52,11 @@
         8
       ],
       [
-        "deduplication_review",
-        8
+        "ichiban_kuji_metadata_action_queue",
+        7
       ],
       [
-        "ichiban_kuji_metadata_action_queue",
+        "deduplication_review",
         7
       ],
       [
@@ -104,6 +104,10 @@
         1
       ],
       [
+        "source_discovery_starter_next_review_batch",
+        1
+      ],
+      [
         "source_discovery_next_focus_detail_candidates",
         1
       ],
@@ -130,11 +134,11 @@
         12
       ],
       [
-        "agent-source-action",
-        10
+        "agent-source-starter",
+        11
       ],
       [
-        "agent-source-starter",
+        "agent-source-action",
         10
       ],
       [
@@ -163,7 +167,7 @@
       ],
       [
         "agent-dedupe",
-        8
+        7
       ],
       [
         "agent-ichiban-prize-policy",
@@ -381,7 +385,10 @@
         "머그컵",
         23
       ]
-    ]
+    ],
+    "source_discovery_starter_next_review_batch_rows": 20,
+    "source_discovery_starter_next_review_batch_group_count": 4,
+    "source_discovery_starter_next_review_batch_primary_source_store": "엔스카이"
   },
   "top_next_batches": [
     {
@@ -10058,6 +10065,611 @@
       },
       "review_state": "image_evidence_confirmation_required",
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
+      "batch_id": "020-agent-source-starter-159",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_next_review_batch",
+      "priority": 20,
+      "title": "Next missing-image source review batch",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 20,
+      "recommended_action": "Open this flat 20-row batch first and confirm exact product/detail source pages before broad missing-image research.",
+      "acceptance_criteria": [
+        "Open search_url first when present; otherwise use the fallback web search URL.",
+        "Accepted source_url must be an exact official or licensed product/detail page.",
+        "Only prepare image_url when the exact product image is visible on the accepted source.",
+        "Keep auto-apply disabled; produce reviewed template rows only."
+      ],
+      "sample_items": [
+        {
+          "group_rank": 1,
+          "item_rank": 1,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1585,
+          "name_ko": "우솝 러버 스트랩",
+          "name_ja": "ウソップ ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ウソップ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 1,
+          "item_rank": 2,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1586,
+          "name_ko": "토니토니 쵸파 러버 스트랩",
+          "name_ja": "チョッパー ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "チョッパー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 1,
+          "item_rank": 3,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1587,
+          "name_ko": "니코 로빈 러버 스트랩",
+          "name_ja": "ニコ・ロビン ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ニコ・ロビン ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 1,
+          "item_rank": 4,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1588,
+          "name_ko": "프랑키 러버 스트랩",
+          "name_ja": "フランキー ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "フランキー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 1,
+          "item_rank": 5,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1589,
+          "name_ko": "브룩 러버 스트랩",
+          "name_ja": "ブルック ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ブルック ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 2,
+          "item_rank": 1,
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1517,
+          "name_ko": "치비누이 펀",
+          "name_ja": "ちびぬい フェルン",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい フェルン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 2,
+          "item_rank": 2,
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1518,
+          "name_ko": "치비누이 슈타르크",
+          "name_ja": "ちびぬい シュタルク",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい シュタルク",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 2,
+          "item_rank": 3,
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1519,
+          "name_ko": "치비누이 히멜",
+          "name_ja": "ちびぬい ヒンメル",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい ヒンメル",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 2,
+          "item_rank": 4,
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1520,
+          "name_ko": "치비누이 아이젠",
+          "name_ja": "ちびぬい アイゼン",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい アイゼン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 2,
+          "item_rank": 5,
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "group_rows": 9,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1521,
+          "name_ko": "치비누이 하이터",
+          "name_ja": "ちびぬい ハイター",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい ハイター",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 3,
+          "item_rank": 1,
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "group_rows": 8,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+          "first_group_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1253,
+          "name_ko": "쵸코노세 프리미엄 피규어 미도리야 이즈쿠",
+          "name_ja": "ちょこのせプレミアムフィギュア 緑谷出久",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちょこのせプレミアムフィギュア 緑谷出久",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 3,
+          "item_rank": 2,
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "group_rows": 8,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+          "first_group_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1254,
+          "name_ko": "쵸코노세 프리미엄 피규어 바쿠고 카츠키",
+          "name_ja": "ちょこのせプレミアムフィギュア 爆豪勝己",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちょこのせプレミアムフィギュア 爆豪勝己",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 3,
+          "item_rank": 3,
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "group_rows": 8,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+          "first_group_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1255,
+          "name_ko": "쵸코노세 프리미엄 피규어 토도로키 쇼토",
+          "name_ja": "ちょこのせプレミアムフィギュア 轟焦凍",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちょこのせプレミアムフィギュア 轟焦凍",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 3,
+          "item_rank": 4,
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "group_rows": 8,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+          "first_group_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1256,
+          "name_ko": "누들 스토퍼 피규어 미도리야 이즈쿠",
+          "name_ja": "ぬーどるストッパーフィギュア 緑谷出久",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬーどるストッパーフィギュア 緑谷出久",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 3,
+          "item_rank": 5,
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "group_rows": 8,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+          "first_group_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1257,
+          "name_ko": "누들 스토퍼 피규어 바쿠고 카츠키",
+          "name_ja": "ぬーどるストッパーフィギュア 爆豪勝己",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬーどるストッパーフィギュア 爆豪勝己",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 4,
+          "item_rank": 1,
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "group_rows": 7,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "manual_exact_image_research",
+          "first_group_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1922,
+          "name_ko": "POP UP PARADE 우솝",
+          "name_ja": "POP UP PARADE ウソップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE ウソップ",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 4,
+          "item_rank": 2,
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "group_rows": 7,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "manual_exact_image_research",
+          "first_group_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1923,
+          "name_ko": "POP UP PARADE 토니토니 쵸파",
+          "name_ja": "POP UP PARADE トニートニー・チョッパー",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE トニートニー・チョッパー",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%88%E3%83%8B%E3%83%BC%E3%83%88%E3%83%8B%E3%83%BC%E3%83%BB%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 4,
+          "item_rank": 3,
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "group_rows": 7,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "manual_exact_image_research",
+          "first_group_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1924,
+          "name_ko": "POP UP PARADE 니코 로빈",
+          "name_ja": "POP UP PARADE ニコ・ロビン",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE ニコ・ロビン",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 4,
+          "item_rank": 4,
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "group_rows": 7,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "manual_exact_image_research",
+          "first_group_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1925,
+          "name_ko": "POP UP PARADE 프랑키",
+          "name_ja": "POP UP PARADE フランキー",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE フランキー",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 4,
+          "item_rank": 5,
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "group_rows": 7,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "manual_exact_image_research",
+          "first_group_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1926,
+          "name_ko": "POP UP PARADE 브룩",
+          "name_ja": "POP UP PARADE ブルック",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE ブルック",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        }
+      ],
+      "review_summary": {
+        "next_review_batch_rows": 20,
+        "next_review_batch_group_count": 4,
+        "next_review_batch_primary_source_store": "엔스카이"
+      },
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
     },
     {
       "batch_id": "020-agent-source-fallback-51",
@@ -22682,7 +23294,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "031-agent-source-starter-159",
+      "batch_id": "031-agent-source-starter-160",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -22791,7 +23403,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-160",
+      "batch_id": "031-agent-source-starter-161",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -22900,7 +23512,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-161",
+      "batch_id": "031-agent-source-starter-162",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23009,7 +23621,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-162",
+      "batch_id": "031-agent-source-starter-163",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23118,7 +23730,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-163",
+      "batch_id": "031-agent-source-starter-164",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23227,7 +23839,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-164",
+      "batch_id": "031-agent-source-starter-165",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23336,7 +23948,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-165",
+      "batch_id": "031-agent-source-starter-166",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23445,7 +24057,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-166",
+      "batch_id": "031-agent-source-starter-167",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23554,7 +24166,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-167",
+      "batch_id": "031-agent-source-starter-168",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23663,7 +24275,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-168",
+      "batch_id": "031-agent-source-starter-169",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -41372,45 +41984,6 @@
           "category": "인형",
           "source_store": "치이카와 마켓",
           "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
-          "official_search_url": ""
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-135",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 583,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (우사기)",
-          "name_ja": "ちいかわパーク ふわころ人形 S (うさぎ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359098",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 3643,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (토끼)",
-          "name_ja": "ちいかわ ちいかわパーク ぷわころぬいぐるみS（うさぎ）",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359098",
           "official_search_url": ""
         }
       ],

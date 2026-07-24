@@ -2196,6 +2196,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "source_discovery_starter_queue"
         ]
+        source_discovery_starter_next_agent_batch = next(
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "source_discovery_starter_next_review_batch"
+        )
         source_discovery_starter_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
@@ -2521,6 +2526,34 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_discovery_starter_next_action["starter_queue_groups"],
             source_discovery_starter_summary["starter_queue_groups"],
         )
+        self.assertEqual(
+            source_discovery_starter_next_action["next_review_batch_rows"],
+            source_discovery_starter_summary["next_review_batch_rows"],
+        )
+        self.assertEqual(
+            source_discovery_starter_next_action["next_review_batch_primary_source_store"],
+            source_discovery_starter_summary["next_review_batch_primary_source_store"],
+        )
+        self.assertEqual(
+            len(source_discovery_starter_next_action["next_review_batch"]),
+            source_discovery_starter_summary["next_review_batch_rows"],
+        )
+        self.assertEqual(
+            agent_queue["summary"]["source_discovery_starter_next_review_batch_rows"],
+            source_discovery_starter_summary["next_review_batch_rows"],
+        )
+        self.assertEqual(
+            agent_queue["summary"]["source_discovery_starter_next_review_batch_primary_source_store"],
+            source_discovery_starter_summary["next_review_batch_primary_source_store"],
+        )
+        self.assertEqual(
+            source_discovery_starter_next_agent_batch["rows"],
+            source_discovery_starter_summary["next_review_batch_rows"],
+        )
+        self.assertEqual(
+            len(source_discovery_starter_next_agent_batch["sample_items"]),
+            source_discovery_starter_summary["next_review_batch_rows"],
+        )
         self.assertGreater(len(source_discovery_starter_next_action["top_search_urls"]), 0)
         self.assertGreater(len(source_discovery_starter_next_action["top_fallback_web_search_urls"]), 0)
         self.assertEqual(
@@ -2538,6 +2571,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_discovery_starter_execution_action["evidence"]["starter_queue_groups"],
             source_discovery_starter_summary["starter_queue_groups"],
+        )
+        self.assertEqual(
+            source_discovery_starter_execution_action["evidence"]["next_review_batch_rows"],
+            source_discovery_starter_summary["next_review_batch_rows"],
+        )
+        self.assertEqual(
+            len(source_discovery_starter_execution_action["evidence"]["next_review_batch"]),
+            source_discovery_starter_summary["next_review_batch_rows"],
         )
         self.assertGreater(
             len(source_discovery_starter_execution_action["evidence"]["top_groups"][0]["search_urls"]),
