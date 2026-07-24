@@ -11106,6 +11106,9 @@
         "open_rows": 48,
         "manual_review_rows": 48,
         "auto_apply_ready_rows": 0,
+        "queued_rows": 48,
+        "unqueued_rows": 0,
+        "queue_coverage": 1.0,
         "next_safe_phase": "review_duplicate_decisions",
         "public_report": "data/catalog_deduplication_action_queue_public.json"
       },
@@ -11116,6 +11119,11 @@
         "open_rows": 745,
         "manual_review_rows": 745,
         "auto_apply_ready_rows": 0,
+        "queued_rows": 542,
+        "unqueued_rows": 203,
+        "queue_coverage": 0.7275,
+        "next_queue_lane": "replace_generic_source_urls",
+        "next_queue_rows": 50,
         "next_safe_phase": "replace_generic_source_urls",
         "public_report": "data/catalog_missing_image_actionability_public.json"
       },
@@ -11126,6 +11134,11 @@
         "open_rows": 50,
         "manual_review_rows": 50,
         "auto_apply_ready_rows": 0,
+        "queued_rows": 50,
+        "unqueued_rows": 0,
+        "queue_coverage": 1.0,
+        "next_queue_lane": "candidate_review_required",
+        "next_queue_rows": 3,
         "next_safe_phase": "review_candidate_source_urls",
         "public_report": "data/catalog_image_source_url_confirmed_template_public.json"
       },
@@ -11136,6 +11149,9 @@
         "open_rows": 36,
         "manual_review_rows": 36,
         "auto_apply_ready_rows": 0,
+        "queued_rows": 0,
+        "unqueued_rows": 36,
+        "queue_coverage": 0,
         "next_safe_phase": "confirm_category_normalization_before_import",
         "public_report": "data/animation_category_coverage_audit_public.json"
       },
@@ -11146,6 +11162,9 @@
         "open_rows": 64,
         "manual_review_rows": 64,
         "auto_apply_ready_rows": 0,
+        "queued_rows": 44,
+        "unqueued_rows": 20,
+        "queue_coverage": 0,
         "next_safe_phase": "confirm_ichiban_campaign_metadata",
         "public_report": "data/ichiban_kuji_historical_roadmap_public.json"
       }

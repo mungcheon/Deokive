@@ -10777,6 +10777,18 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "deduplication_action_queue",
                     {},
                 ).get("auto_merge_ready_groups", 0),
+                "queued_rows": target.get("deduplication_action_queue", {}).get(
+                    "queued_groups",
+                    0,
+                ),
+                "unqueued_rows": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("unqueued_actionable_groups", 0),
+                "queue_coverage": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("queue_coverage", 0),
                 "next_safe_phase": target.get(
                     "deduplication_action_queue",
                     {},
@@ -10802,6 +10814,26 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "missing_image_completion_gate",
                     {},
                 ).get("auto_apply_ready_rows", 0),
+                "queued_rows": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("execution_queue_summary", {}).get("queued_rows_total", 0),
+                "unqueued_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("not_yet_queued_rows", 0),
+                "queue_coverage": target.get(
+                    "missing_image_actionability",
+                    {},
+                ).get("blocking_dashboard", {}).get("queue_coverage", 0),
+                "next_queue_lane": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("next_queue_lane"),
+                "next_queue_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("next_queue_rows", 0),
                 "next_safe_phase": target.get(
                     "missing_image_completion_gate",
                     {},
@@ -10827,6 +10859,33 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "source_url_update_execution_gate",
                     {},
                 ).get("auto_apply_ready_rows", 0),
+                "queued_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("covered_rows", 0),
+                "unqueued_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("uncovered_rows", 0),
+                "queue_coverage": 1.0
+                if target.get("source_url_update_execution_gate", {}).get(
+                    "source_url_update_required_rows",
+                    0,
+                )
+                and target.get("source_url_update_execution_gate", {}).get(
+                    "uncovered_rows",
+                    0,
+                )
+                == 0
+                else 0,
+                "next_queue_lane": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("next_review_lane"),
+                "next_queue_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("next_review_rows", 0),
                 "next_safe_phase": target.get(
                     "source_url_update_execution_gate",
                     {},
@@ -10852,6 +10911,20 @@ def update_reports(write: bool) -> dict[str, Any]:
                     {},
                 ).get("normalization_review_blocker_rows", 0),
                 "auto_apply_ready_rows": 0,
+                "queued_rows": target.get(
+                    "animation_category_action_queue",
+                    {},
+                ).get("queued_catalog_rows", 0),
+                "unqueued_rows": target.get(
+                    "animation_category_coverage_audit",
+                    {},
+                ).get("normalization_review_blocker_rows", 0),
+                "queue_coverage": 1.0
+                if target.get("animation_category_action_queue", {}).get(
+                    "queued_catalog_rows",
+                    0,
+                )
+                else 0,
                 "next_safe_phase": target.get(
                     "animation_category_coverage_audit",
                     {},
@@ -10884,6 +10957,18 @@ def update_reports(write: bool) -> dict[str, Any]:
                     0,
                 ),
                 "auto_apply_ready_rows": 0,
+                "queued_rows": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("metadata_actionable_campaigns", 0),
+                "unqueued_rows": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("probable_reissue_work_order_rows", 0),
+                "queue_coverage": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("metadata_action_queue_coverage", 0),
                 "next_safe_phase": target.get(
                     "ichiban_kuji_historical_roadmap",
                     {},

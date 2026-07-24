@@ -1402,10 +1402,31 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(pillars["dedupe"]["status"], "blocked_until_manual_review")
         self.assertEqual(pillars["dedupe"]["open_rows"], 48)
         self.assertEqual(pillars["dedupe"]["manual_review_rows"], 48)
+        self.assertEqual(pillars["dedupe"]["queued_rows"], 48)
+        self.assertEqual(pillars["dedupe"]["unqueued_rows"], 0)
         self.assertEqual(pillars["missing_images"]["open_rows"], 745)
+        self.assertEqual(pillars["missing_images"]["queued_rows"], 542)
+        self.assertEqual(pillars["missing_images"]["unqueued_rows"], 203)
+        self.assertEqual(pillars["missing_images"]["queue_coverage"], 0.7275)
+        self.assertEqual(
+            pillars["missing_images"]["next_queue_lane"],
+            "replace_generic_source_urls",
+        )
+        self.assertEqual(pillars["missing_images"]["next_queue_rows"], 50)
         self.assertEqual(pillars["source_url_updates"]["open_rows"], 50)
+        self.assertEqual(pillars["source_url_updates"]["queued_rows"], 50)
+        self.assertEqual(pillars["source_url_updates"]["unqueued_rows"], 0)
+        self.assertEqual(
+            pillars["source_url_updates"]["next_queue_lane"],
+            "candidate_review_required",
+        )
+        self.assertEqual(pillars["source_url_updates"]["next_queue_rows"], 3)
         self.assertEqual(pillars["animation_categories"]["manual_review_rows"], 36)
+        self.assertIn("queued_rows", pillars["animation_categories"])
+        self.assertIn("unqueued_rows", pillars["animation_categories"])
         self.assertEqual(pillars["ichiban_kuji_history"]["manual_review_rows"], 64)
+        self.assertEqual(pillars["ichiban_kuji_history"]["queued_rows"], 44)
+        self.assertEqual(pillars["ichiban_kuji_history"]["unqueued_rows"], 20)
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         agent_queue = reports.load_json(reports.AGENT_WORK_QUEUE)
         execution_plan = reports.load_json(reports.EXECUTION_PLAN)
