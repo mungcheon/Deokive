@@ -183,6 +183,7 @@ def _review_table(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def _manual_entry_template(queue_items: list[dict[str, Any]]) -> dict[str, Any]:
     return {
+        "focused_template_file": "server/source_discovery_next_focus_fallback_confirmed_rows.template.json",
         "target_file": "server/source_discovery_confirmed_rows.json",
         "copy_from": "review_table",
         "required_fields": [

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T00:28:10Z",
+  "generated_at": "2026-07-24T00:33:40Z",
   "scope": "source_discovery_next_focus_fallback_queue",
   "source_reports": [
     "data/source_discovery_next_focus_pack_public.json",
@@ -52,6 +52,7 @@
     "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json"
   },
   "manual_entry_template": {
+    "focused_template_file": "server/source_discovery_next_focus_fallback_confirmed_rows.template.json",
     "target_file": "server/source_discovery_confirmed_rows.json",
     "copy_from": "review_table",
     "required_fields": [
