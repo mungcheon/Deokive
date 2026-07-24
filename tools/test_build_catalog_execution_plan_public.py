@@ -476,10 +476,20 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                 "summary": {
                     "unknown_category_count": 3,
                     "unknown_category_rows": 39,
+                    "category_readiness_status": "normalization_review_required",
+                    "normalization_review_queue_count": 4,
+                    "normalization_review_queue_rows": 36,
                     "app_folder_color_count": 188,
                     "app_folder_icon_option_count": 211,
                     "app_folder_palette_sorted_by_family": True,
                     "app_animation_visuals_covered": True,
+                }
+            },
+            "animation_category_coverage_audit_public.json": {
+                "summary": {
+                    "status": "pass",
+                    "failed_check_count": 0,
+                    "missing_visual_token_categories": 0,
                 }
             },
             "animation_category_action_queue_public.json": {
@@ -488,6 +498,12 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "queued_categories": 2,
                     "queued_catalog_rows": 12,
                     "action_batch_count": 1,
+                    "normalization_review_categories": 4,
+                    "normalization_review_rows": 36,
+                    "normalization_review_target_categories": [["문구", 3]],
+                    "target_visual_token_rows": 4,
+                    "target_visual_token_catalog_rows": 36,
+                    "target_visual_palette_ordered": True,
                     "split_review_categories": 2,
                     "direct_mapping_categories": 0,
                     "by_suggested_family": [["acrylic", 1], ["keyring", 1]],
@@ -965,9 +981,29 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             for action in report["actions"]
             if action["workstream"] == "animation_category_action_queue"
         )
-        self.assertEqual(animation_action["rows"], 12)
+        self.assertEqual(animation_action["rows"], 36)
+        self.assertEqual(
+            animation_action["evidence"]["category_readiness_status"],
+            "normalization_review_required",
+        )
         self.assertEqual(animation_action["evidence"]["queued_categories"], 2)
         self.assertEqual(animation_action["evidence"]["unknown_category_rows"], 39)
+        self.assertEqual(animation_action["evidence"]["normalization_review_categories"], 4)
+        self.assertEqual(animation_action["evidence"]["normalization_review_rows"], 36)
+        self.assertEqual(
+            animation_action["evidence"]["normalization_review_target_categories"],
+            [["문구", 3]],
+        )
+        self.assertEqual(animation_action["evidence"]["target_visual_token_rows"], 4)
+        self.assertEqual(
+            animation_action["evidence"]["target_visual_token_catalog_rows"], 36
+        )
+        self.assertTrue(animation_action["evidence"]["target_visual_palette_ordered"])
+        self.assertEqual(animation_action["evidence"]["coverage_audit_status"], "pass")
+        self.assertEqual(animation_action["evidence"]["failed_check_count"], 0)
+        self.assertEqual(
+            animation_action["evidence"]["missing_visual_token_categories"], 0
+        )
         self.assertEqual(animation_action["evidence"]["app_folder_color_count"], 188)
         self.assertEqual(animation_action["evidence"]["app_folder_icon_option_count"], 211)
         self.assertTrue(animation_action["evidence"]["app_folder_palette_sorted_by_family"])
@@ -980,6 +1016,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(animation_action["evidence"]["unmatched_keyword_candidates"], 4)
         self.assertEqual(report["summary"]["animation_unknown_category_rows"], 39)
         self.assertEqual(report["summary"]["animation_unknown_category_count"], 3)
+        self.assertEqual(
+            report["summary"]["animation_category_readiness_status"],
+            "normalization_review_required",
+        )
+        self.assertEqual(report["summary"]["animation_normalization_review_categories"], 4)
+        self.assertEqual(report["summary"]["animation_normalization_review_rows"], 36)
+        self.assertEqual(report["summary"]["animation_coverage_audit_status"], "pass")
+        self.assertEqual(report["summary"]["animation_missing_visual_token_categories"], 0)
+        self.assertEqual(report["summary"]["animation_failed_visual_check_count"], 0)
         self.assertEqual(report["summary"]["animation_candidate_split_rules"], 5)
         self.assertEqual(report["summary"]["animation_split_matched_catalog_rows"], 30)
         self.assertEqual(report["summary"]["animation_unmatched_keyword_candidates"], 4)

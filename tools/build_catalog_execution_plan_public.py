@@ -143,6 +143,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_name_image = load_report("ichiban_kuji_prize_name_image_review_public.json")
     kuji_name_image_patch = load_report("ichiban_kuji_prize_name_image_patch_candidates_public.json")
     animation_goods_categories = load_report("animation_goods_categories_public.json")
+    animation_coverage_audit = load_report("animation_category_coverage_audit_public.json")
     animation_batches = load_report("animation_category_review_batches_public.json")
     animation_action_queue = load_report("animation_category_action_queue_public.json")
     animation_split_review = load_report("animation_category_split_review_public.json")
@@ -193,6 +194,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_name_image_summary = _summary(kuji_name_image)
     kuji_name_image_patch_summary = _summary(kuji_name_image_patch)
     animation_goods_summary = _summary(animation_goods_categories)
+    animation_coverage_summary = _summary(animation_coverage_audit)
     animation_summary = _summary(animation_batches)
     animation_action_summary = _summary(animation_action_queue)
     animation_split_summary = _summary(animation_split_review)
@@ -1286,16 +1288,47 @@ def _build_plan(load_report) -> dict[str, Any]:
             workstream="animation_category_action_queue",
             public_report="data/animation_category_action_queue_public.json",
             status="manual_review",
-            rows=_count(animation_action_summary, "queued_catalog_rows"),
+            rows=max(
+                _count(animation_action_summary, "queued_catalog_rows"),
+                _count(animation_action_summary, "normalization_review_rows"),
+            ),
             command="Confirm animation category-to-folder mapping templates before catalog mutation.",
             next_step="fill_confirmed_animation_category_mapping_templates",
             blocker="Folder/category mappings remain manual-only until sample names confirm product type.",
             evidence={
+                "category_readiness_status": animation_goods_summary.get(
+                    "category_readiness_status"
+                ),
                 "actionable_categories": _count(animation_action_summary, "actionable_categories"),
                 "queued_categories": _count(animation_action_summary, "queued_categories"),
                 "queued_catalog_rows": _count(animation_action_summary, "queued_catalog_rows"),
                 "action_batch_count": _count(animation_action_summary, "action_batch_count"),
                 "unknown_category_rows": _count(animation_goods_summary, "unknown_category_rows"),
+                "normalization_review_categories": _count(
+                    animation_action_summary, "normalization_review_categories"
+                )
+                or _count(animation_goods_summary, "normalization_review_queue_count"),
+                "normalization_review_rows": _count(
+                    animation_action_summary, "normalization_review_rows"
+                )
+                or _count(animation_goods_summary, "normalization_review_queue_rows"),
+                "normalization_review_target_categories": animation_action_summary.get(
+                    "normalization_review_target_categories", []
+                ),
+                "target_visual_token_rows": _count(
+                    animation_action_summary, "target_visual_token_rows"
+                ),
+                "target_visual_token_catalog_rows": _count(
+                    animation_action_summary, "target_visual_token_catalog_rows"
+                ),
+                "target_visual_palette_ordered": bool(
+                    animation_action_summary.get("target_visual_palette_ordered")
+                ),
+                "coverage_audit_status": animation_coverage_summary.get("status"),
+                "failed_check_count": _count(animation_coverage_summary, "failed_check_count"),
+                "missing_visual_token_categories": _count(
+                    animation_coverage_summary, "missing_visual_token_categories"
+                ),
                 "app_folder_color_count": _count(
                     animation_action_summary, "app_folder_color_count"
                 )
@@ -1323,6 +1356,9 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "unmatched_catalog_rows": _count(animation_split_summary, "unmatched_catalog_rows"),
                 "unmatched_keyword_candidates": _count(animation_unmatched_summary, "token_candidate_count"),
                 "unmatched_keyword_product_type_candidates": animation_unmatched_product_type_candidates,
+                "auto_apply_enabled": bool(
+                    animation_action_summary.get("auto_apply_enabled", False)
+                ),
             },
         )
     )
@@ -1531,6 +1567,24 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "animation_unknown_category_rows": _count(animation_goods_summary, "unknown_category_rows"),
             "animation_unknown_category_count": _count(animation_goods_summary, "unknown_category_count"),
+            "animation_category_readiness_status": animation_goods_summary.get(
+                "category_readiness_status"
+            ),
+            "animation_normalization_review_categories": _count(
+                animation_action_summary, "normalization_review_categories"
+            )
+            or _count(animation_goods_summary, "normalization_review_queue_count"),
+            "animation_normalization_review_rows": _count(
+                animation_action_summary, "normalization_review_rows"
+            )
+            or _count(animation_goods_summary, "normalization_review_queue_rows"),
+            "animation_coverage_audit_status": animation_coverage_summary.get("status"),
+            "animation_missing_visual_token_categories": _count(
+                animation_coverage_summary, "missing_visual_token_categories"
+            ),
+            "animation_failed_visual_check_count": _count(
+                animation_coverage_summary, "failed_check_count"
+            ),
             "animation_split_review_categories": _count(animation_split_summary, "split_review_categories"),
             "animation_candidate_split_rules": _count(animation_split_summary, "candidate_split_rules"),
             "animation_split_matched_catalog_rows": _count(animation_split_summary, "matched_catalog_rows"),
