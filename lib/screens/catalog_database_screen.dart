@@ -584,133 +584,63 @@ class _CatalogAddButton extends StatelessWidget {
     final foreground = disabled
         ? _catalogAddButtonDisabledForeground
         : _catalogAddButtonForeground;
-    final content = AnimatedContainer(
-      duration: const Duration(milliseconds: 140),
+    return SizedBox(
       height: 40,
-      constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 136,
-        minHeight: 40,
-        maxHeight: 40,
-      ),
-      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 13),
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: disabled
-              ? _catalogAddButtonDisabledForeground.withValues(alpha: 0.12)
-              : _catalogAddButtonForeground.withValues(alpha: 0.1),
-        ),
-        boxShadow: disabled
-            ? null
-            : [
-                BoxShadow(
-                  color: _catalogAddButtonBackground.withValues(alpha: 0.34),
-                  blurRadius: 12,
-                  offset: const Offset(0, 5),
-                ),
-              ],
-      ),
-      child: IconTheme(
-        data: IconThemeData(color: foreground, size: 17),
-        child: DefaultTextStyle.merge(
+      width: expanded ? double.infinity : 136,
+      child: FilledButton.icon(
+        onPressed: disabled ? null : onPressed,
+        icon: Icon(icon, color: foreground, size: 17),
+        label: Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: foreground,
             fontSize: 13,
             fontWeight: FontWeight.w900,
             height: 1,
+            decoration: TextDecoration.none,
+            fontFamilyFallback: _kCatalogButtonFontFallback,
+            shadows: const [],
           ),
-          child: Center(
-            child: Row(
-              mainAxisSize: expanded ? MainAxisSize.max : MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(icon, color: foreground),
-                const SizedBox(width: 6),
-                if (expanded)
-                  Flexible(
-                    child: Center(
-                      child: _CatalogAddButtonLabel(
-                        label: label,
-                        color: foreground,
-                      ),
-                    ),
-                  )
-                else
-                  SizedBox(
-                    width: 82,
-                    child: _CatalogAddButtonLabel(
-                      label: label,
-                      color: foreground,
-                    ),
-                  ),
-              ],
+        ),
+        style: FilledButton.styleFrom(
+          backgroundColor: background,
+          disabledBackgroundColor: background,
+          foregroundColor: foreground,
+          disabledForegroundColor: foreground,
+          elevation: disabled ? 0 : 5,
+          shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
+          padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 13),
+          minimumSize: Size(expanded ? 0 : 136, 40),
+          fixedSize: Size(expanded ? double.infinity : 136, 40),
+          shape: const StadiumBorder(),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          visualDensity: VisualDensity.compact,
+        ).copyWith(
+          side: WidgetStatePropertyAll(
+            BorderSide(
+              color: disabled
+                  ? _catalogAddButtonDisabledForeground.withValues(alpha: 0.12)
+                  : _catalogAddButtonForeground.withValues(alpha: 0.1),
             ),
           ),
         ),
       ),
     );
-
-    if (disabled || onPressed == null) {
-      return content;
-    }
-
-    return Material(
-      color: Colors.transparent,
-      borderRadius: BorderRadius.circular(999),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(999),
-        onTap: onPressed,
-        child: content,
-      ),
-    );
   }
 }
 
-class _CatalogAddButtonLabel extends StatelessWidget {
-  static const _fontFallback = <String>[
-    'Apple SD Gothic Neo',
-    'Malgun Gothic',
-    'Noto Sans KR',
-    'Roboto',
-    'Arial',
-    'sans-serif',
-  ];
-
-  final String label;
-  final Color color;
-
-  const _CatalogAddButtonLabel({
-    required this.label,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: TextStyle(
-        color: color,
-        fontSize: 13,
-        fontWeight: FontWeight.w900,
-        height: 1,
-        decoration: TextDecoration.none,
-        fontFamilyFallback: _fontFallback,
-        shadows: const [],
-      ),
-      strutStyle: const StrutStyle(
-        fontSize: 13,
-        height: 1.15,
-        forceStrutHeight: true,
-      ),
-      maxLines: 1,
-      softWrap: false,
-      overflow: TextOverflow.ellipsis,
-      textAlign: TextAlign.center,
-    );
-  }
-}
+const _kCatalogButtonFontFallback = <String>[
+  'Apple SD Gothic Neo',
+  'Malgun Gothic',
+  'Noto Sans KR',
+  'Roboto',
+  'Arial',
+  'sans-serif',
+];
 
 class _CatalogImage extends StatelessWidget {
   final GoodsCatalogEntry entry;

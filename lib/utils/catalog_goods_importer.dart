@@ -412,111 +412,61 @@ class _CatalogImportActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final content = AnimatedContainer(
-      duration: const Duration(milliseconds: 140),
+    return SizedBox(
       width: double.infinity,
       height: 48,
-      padding: const EdgeInsets.symmetric(horizontal: 18),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: onPressed == null
-              ? foregroundColor.withValues(alpha: 0.12)
-              : foregroundColor.withValues(alpha: 0.1),
-        ),
-      ),
-      child: IconTheme(
-        data: IconThemeData(color: foregroundColor, size: 19),
-        child: DefaultTextStyle.merge(
+      child: FilledButton.icon(
+        onPressed: onPressed,
+        icon: Icon(icon, color: foregroundColor, size: 19),
+        label: Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: foregroundColor,
             fontSize: 15,
             fontWeight: FontWeight.w900,
             height: 1,
+            decoration: TextDecoration.none,
+            fontFamilyFallback: _kCatalogImportButtonFontFallback,
+            shadows: const [],
           ),
-          child: Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 22,
-                  child: Icon(icon, color: foregroundColor),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Center(
-                    child: _CatalogImportActionLabel(
-                      label: label,
-                      color: foregroundColor,
-                    ),
-                  ),
-                ),
-              ],
+        ),
+        style: FilledButton.styleFrom(
+          backgroundColor: backgroundColor,
+          disabledBackgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
+          disabledForegroundColor: foregroundColor,
+          elevation: onPressed == null ? 0 : 3,
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          minimumSize: const Size.fromHeight(48),
+          fixedSize: const Size.fromHeight(48),
+          shape: const StadiumBorder(),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        ).copyWith(
+          side: WidgetStatePropertyAll(
+            BorderSide(
+              color: onPressed == null
+                  ? foregroundColor.withValues(alpha: 0.12)
+                  : foregroundColor.withValues(alpha: 0.1),
             ),
           ),
         ),
       ),
     );
-
-    if (onPressed == null) return content;
-
-    return Material(
-      color: Colors.transparent,
-      borderRadius: BorderRadius.circular(999),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(999),
-        onTap: onPressed,
-        child: content,
-      ),
-    );
   }
 }
 
-class _CatalogImportActionLabel extends StatelessWidget {
-  static const _fontFallback = <String>[
-    'Apple SD Gothic Neo',
-    'Malgun Gothic',
-    'Noto Sans KR',
-    'Roboto',
-    'Arial',
-    'sans-serif',
-  ];
-
-  final String label;
-  final Color color;
-
-  const _CatalogImportActionLabel({
-    required this.label,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: TextStyle(
-        color: color,
-        fontSize: 15,
-        fontWeight: FontWeight.w900,
-        height: 1,
-        decoration: TextDecoration.none,
-        fontFamilyFallback: _fontFallback,
-        shadows: const [],
-      ),
-      strutStyle: const StrutStyle(
-        fontSize: 15,
-        height: 1.15,
-        forceStrutHeight: true,
-      ),
-      maxLines: 1,
-      softWrap: false,
-      overflow: TextOverflow.ellipsis,
-      textAlign: TextAlign.center,
-    );
-  }
-}
+const _kCatalogImportButtonFontFallback = <String>[
+  'Apple SD Gothic Neo',
+  'Malgun Gothic',
+  'Noto Sans KR',
+  'Roboto',
+  'Arial',
+  'sans-serif',
+];
 
 class _CatalogImportDestination {
   final FolderItem folder;
