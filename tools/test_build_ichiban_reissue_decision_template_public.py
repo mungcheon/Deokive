@@ -20,9 +20,12 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                         "item_work_order_count": 2,
                         "sample_rows": [
                             {
+                                "name_ko": "一番くじ Sample - A賞 Figure",
+                                "name_ja": "一番くじ Sample - A賞 Figure",
                                 "campaign_title": "一番くじ Sample",
                                 "prize_rank": "A賞",
                                 "prize_item_name": "Figure",
+                                "variant_name": "Normal color",
                                 "identity_label": "一番くじ Sample / A賞 / Figure",
                             }
                         ],
@@ -41,9 +44,12 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                         "source_urls": ["https://1kuji.com/products/a", "https://1kuji.com/products/a2"],
                         "sample_rows": [
                             {
+                                "name_ko": "一番くじ Sample - A賞 Figure",
+                                "name_ja": "一番くじ Sample - A賞 Figure",
                                 "campaign_title": "一番くじ Sample",
                                 "prize_rank": "A賞",
                                 "prize_item_name": "Figure",
+                                "variant_name": "Normal color",
                                 "identity_label": "一番くじ Sample / A賞 / Figure",
                             }
                         ],
@@ -71,6 +77,9 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["summary"]["campaign_review_batch_rows"], 1)
         self.assertEqual(report["summary"]["campaign_review_batch_item_work_order_rows"], 2)
         self.assertEqual(report["summary"]["campaign_review_batch_catalog_index_rows"], 0)
+        self.assertEqual(report["summary"]["campaign_review_batch_item_preview_rows"], 2)
+        self.assertEqual(report["summary"]["campaign_review_batch_visible_item_preview_rows"], 2)
+        self.assertEqual(report["summary"]["campaign_review_batch_truncated_campaigns"], 0)
         self.assertEqual(report["summary"]["item_templates_with_evidence_urls"], 1)
         self.assertEqual(report["summary"]["campaign_templates_with_evidence_urls"], 1)
         self.assertEqual(report["summary"]["item_templates_with_identity_fields"], 1)
@@ -128,6 +137,32 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         )
         self.assertEqual(report["next_campaign_review_batch"][0]["campaign_work_order_id"], "campaign-001")
         self.assertEqual(report["next_campaign_review_batch"][0]["item_work_order_count"], 2)
+        self.assertEqual(report["next_campaign_review_batch"][0]["item_review_preview_rows"], 2)
+        self.assertEqual(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0]["work_order_id"],
+            "item-001",
+        )
+        self.assertEqual(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0]["prize_rank"],
+            "A賞",
+        )
+        self.assertEqual(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0]["prize_item_name"],
+            "Figure",
+        )
+        self.assertEqual(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0]["variant_name"],
+            "Normal color",
+        )
+        self.assertEqual(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0]["sample_name_ko"],
+            "一番くじ Sample - A賞 Figure",
+        )
+        self.assertTrue(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0][
+                "keep_drop_still_requires_item_review"
+            ]
+        )
         self.assertFalse(report["next_campaign_review_batch"][0]["manual_confirmed"])
         self.assertFalse(report["automation_policy"]["auto_merge_enabled"])
 

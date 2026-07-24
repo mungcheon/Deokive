@@ -218,7 +218,46 @@ def _campaign_item_decision_preview(
     return previews
 
 
-def _next_campaign_review_batch(campaign_templates: list[dict[str, Any]], *, limit: int = 4) -> list[dict[str, Any]]:
+def _compact_campaign_item_preview(
+    preview: dict[str, Any],
+    item_templates_by_id: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    work_order_id = str(preview.get("work_order_id") or "")
+    item = item_templates_by_id.get(work_order_id, {})
+    sample_rows = item.get("sample_rows") or []
+    sample = sample_rows[0] if sample_rows and isinstance(sample_rows[0], dict) else {}
+    return {
+        "work_order_id": work_order_id,
+        "catalog_indexes": preview.get("catalog_indexes") or [],
+        "first_evidence_url": preview.get("first_evidence_url") or "",
+        "campaign_title": sample.get("campaign_title") or "",
+        "prize_rank": sample.get("prize_rank") or sample.get("sub_series") or "",
+        "prize_item_name": sample.get("prize_item_name") or "",
+        "variant_name": sample.get("variant_name") or sample.get("identity_label") or "",
+        "sample_name_ko": sample.get("name_ko") or "",
+        "sample_name_ja": sample.get("name_ja") or "",
+        "suggested_decision_if_campaign_is_reissue": preview.get(
+            "suggested_decision_if_campaign_is_reissue"
+        ),
+        "suggested_decision_if_campaign_is_duplicate": preview.get(
+            "suggested_decision_if_campaign_is_duplicate"
+        ),
+        "keep_drop_still_requires_item_review": bool(
+            preview.get("keep_drop_still_requires_item_review")
+        ),
+        "manual_confirmed": False,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+    }
+
+
+def _next_campaign_review_batch(
+    campaign_templates: list[dict[str, Any]],
+    item_templates_by_id: dict[str, dict[str, Any]],
+    *,
+    limit: int = 4,
+    item_preview_limit: int = 6,
+) -> list[dict[str, Any]]:
     def score(campaign: dict[str, Any]) -> tuple[int, int, int, int]:
         risk = campaign.get("review_risk_summary") or {}
         return (
@@ -231,6 +270,11 @@ def _next_campaign_review_batch(campaign_templates: list[dict[str, Any]], *, lim
     ordered = sorted(campaign_templates, key=score, reverse=True)
     batch: list[dict[str, Any]] = []
     for campaign in ordered[:limit]:
+        item_previews = [
+            _compact_campaign_item_preview(preview, item_templates_by_id)
+            for preview in (campaign.get("item_decision_application_preview") or [])
+            if isinstance(preview, dict)
+        ]
         batch.append(
             {
                 "campaign_work_order_id": campaign.get("campaign_work_order_id"),
@@ -244,6 +288,9 @@ def _next_campaign_review_batch(campaign_templates: list[dict[str, Any]], *, lim
                 "recommended_review_lane": campaign.get("recommended_review_lane"),
                 "recommended_reviewer_action": campaign.get("recommended_reviewer_action"),
                 "affected_item_work_order_ids": campaign.get("affected_item_work_order_ids") or [],
+                "item_review_preview_rows": len(item_previews),
+                "item_review_preview": item_previews[:item_preview_limit],
+                "item_review_preview_truncated": len(item_previews) > item_preview_limit,
                 "manual_confirmed": False,
             }
         )
@@ -268,7 +315,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         campaign["item_decision_application_preview_rows"] = len(
             campaign["item_decision_application_preview"]
         )
-    next_campaign_review_batch = _next_campaign_review_batch(campaign_templates)
+    next_campaign_review_batch = _next_campaign_review_batch(campaign_templates, item_templates_by_id)
 
     item_decisions = Counter(item["decision"] or "unconfirmed" for item in item_templates)
     campaign_decisions = Counter(item["decision"] or "unconfirmed" for item in campaign_templates)
@@ -338,6 +385,19 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             for campaign in campaign_templates
             if campaign.get("campaign_work_order_id")
             in {row.get("campaign_work_order_id") for row in next_campaign_review_batch}
+        ),
+        "campaign_review_batch_item_preview_rows": sum(
+            int(campaign.get("item_review_preview_rows") or 0)
+            for campaign in next_campaign_review_batch
+        ),
+        "campaign_review_batch_visible_item_preview_rows": sum(
+            len(campaign.get("item_review_preview") or [])
+            for campaign in next_campaign_review_batch
+        ),
+        "campaign_review_batch_truncated_campaigns": sum(
+            1
+            for campaign in next_campaign_review_batch
+            if campaign.get("item_review_preview_truncated")
         ),
         "first_item_evidence_url": _first_url(
             [item.get("first_evidence_url") for item in item_templates]
