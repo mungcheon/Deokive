@@ -1126,6 +1126,52 @@ class PublicCatalogReportTests(unittest.TestCase):
             reissue_blocking_dashboard["last_one_double_chance_expected_price_jpy"],
             0,
         )
+        price_policy_reviews = reissue_blocking_dashboard[
+            "price_policy_blocked_campaign_reviews"
+        ]
+        self.assertEqual(len(price_policy_reviews), 1)
+        self.assertEqual(
+            reissue_blocking_dashboard["next_price_policy_review"],
+            price_policy_reviews[0],
+        )
+        self.assertEqual(
+            price_policy_reviews[0]["campaign_work_order_id"],
+            "ichiban-reissue-campaign-001",
+        )
+        self.assertEqual(
+            price_policy_reviews[0]["price_policy_blockers"],
+            ["non_exception_official_price_missing"],
+        )
+        self.assertEqual(
+            price_policy_reviews[0]["non_exception_missing_price_sample_rows"],
+            8,
+        )
+        self.assertEqual(
+            price_policy_reviews[0]["missing_regular_price_sample_rows_visible"],
+            6,
+        )
+        self.assertEqual(
+            price_policy_reviews[0]["missing_regular_price_sample_rows_hidden"],
+            2,
+        )
+        self.assertEqual(
+            price_policy_reviews[0]["last_one_double_chance_expected_price_jpy"],
+            0,
+        )
+        self.assertEqual(
+            price_policy_reviews[0]["manual_resolution_fields"],
+            {
+                "official_draw_price_jpy": None,
+                "manual_price_confirmed": False,
+                "manual_price_evidence_url": "",
+                "manual_note": "",
+            },
+        )
+        self.assertTrue(
+            price_policy_reviews[0]["missing_regular_price_samples"][0][
+                "first_evidence_url"
+            ]
+        )
         self.assertEqual(
             reissue_blocking_dashboard["campaigns_missing_evidence_urls"],
             0,

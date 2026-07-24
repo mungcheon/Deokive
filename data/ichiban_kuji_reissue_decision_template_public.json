@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T23:08:22Z",
+  "generated_at": "2026-07-24T23:38:13Z",
   "scope": "ichiban_kuji_reissue_decision_template",
   "source_report": "data/catalog_deduplication_action_queue_public.json",
   "summary": {
@@ -88,6 +88,194 @@
     "non_exception_missing_price_sample_rows": 8,
     "zero_price_exception_sample_rows": 2,
     "last_one_double_chance_expected_price_jpy": 0,
+    "price_policy_blocked_campaign_reviews": [
+      {
+        "campaign_work_order_id": "ichiban-reissue-campaign-001",
+        "first_evidence_url": "https://1kuji.com/products/onep6",
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "item_work_order_count": 8,
+        "price_policy_blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 8,
+        "zero_price_exception_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "missing_regular_price_samples": [
+          {
+            "work_order_id": "ichiban-reissue-dedupe-006",
+            "catalog_indexes": [
+              16103,
+              16141
+            ],
+            "prize_rank": "A賞",
+            "prize_item_name": "シャンクスフィギュア",
+            "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
+            "first_evidence_url": "https://1kuji.com/products/onep6"
+          },
+          {
+            "work_order_id": "ichiban-reissue-dedupe-007",
+            "catalog_indexes": [
+              16104,
+              16142
+            ],
+            "prize_rank": "B賞",
+            "prize_item_name": "ミホークフィギュア",
+            "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
+            "first_evidence_url": "https://1kuji.com/products/onep6"
+          },
+          {
+            "work_order_id": "ichiban-reissue-dedupe-008",
+            "catalog_indexes": [
+              16105,
+              16143
+            ],
+            "prize_rank": "C賞",
+            "prize_item_name": "ルフィフィギュア",
+            "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / C賞 / ルフィフィギュア",
+            "first_evidence_url": "https://1kuji.com/products/onep6"
+          },
+          {
+            "work_order_id": "ichiban-reissue-dedupe-009",
+            "catalog_indexes": [
+              16106,
+              16144
+            ],
+            "prize_rank": "D賞",
+            "prize_item_name": "スポーツタオル",
+            "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / D賞 / スポーツタオル",
+            "first_evidence_url": "https://1kuji.com/products/onep6"
+          },
+          {
+            "work_order_id": "ichiban-reissue-dedupe-010",
+            "catalog_indexes": [
+              16107,
+              16145
+            ],
+            "prize_rank": "E賞",
+            "prize_item_name": "カードスタンドフィギュア",
+            "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / E賞 / カードスタンドフィギュア",
+            "first_evidence_url": "https://1kuji.com/products/onep6"
+          },
+          {
+            "work_order_id": "ichiban-reissue-dedupe-011",
+            "catalog_indexes": [
+              16108,
+              16146
+            ],
+            "prize_rank": "F賞",
+            "prize_item_name": "湯のみ",
+            "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / F賞 / 湯のみ",
+            "first_evidence_url": "https://1kuji.com/products/onep6"
+          }
+        ],
+        "missing_regular_price_sample_rows_visible": 6,
+        "missing_regular_price_sample_rows_hidden": 2,
+        "zero_price_exception_samples": [],
+        "manual_resolution_fields": {
+          "official_draw_price_jpy": null,
+          "manual_price_confirmed": false,
+          "manual_price_evidence_url": "",
+          "manual_note": ""
+        },
+        "unblocks_next_phase": "campaign_reissue_or_duplicate_identity_review"
+      }
+    ],
+    "next_price_policy_review": {
+      "campaign_work_order_id": "ichiban-reissue-campaign-001",
+      "first_evidence_url": "https://1kuji.com/products/onep6",
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "item_work_order_count": 8,
+      "price_policy_blockers": [
+        "non_exception_official_price_missing"
+      ],
+      "non_exception_missing_price_sample_rows": 8,
+      "zero_price_exception_sample_rows": 0,
+      "last_one_double_chance_expected_price_jpy": 0,
+      "missing_regular_price_samples": [
+        {
+          "work_order_id": "ichiban-reissue-dedupe-006",
+          "catalog_indexes": [
+            16103,
+            16141
+          ],
+          "prize_rank": "A賞",
+          "prize_item_name": "シャンクスフィギュア",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
+          "first_evidence_url": "https://1kuji.com/products/onep6"
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-007",
+          "catalog_indexes": [
+            16104,
+            16142
+          ],
+          "prize_rank": "B賞",
+          "prize_item_name": "ミホークフィギュア",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
+          "first_evidence_url": "https://1kuji.com/products/onep6"
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-008",
+          "catalog_indexes": [
+            16105,
+            16143
+          ],
+          "prize_rank": "C賞",
+          "prize_item_name": "ルフィフィギュア",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / C賞 / ルフィフィギュア",
+          "first_evidence_url": "https://1kuji.com/products/onep6"
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-009",
+          "catalog_indexes": [
+            16106,
+            16144
+          ],
+          "prize_rank": "D賞",
+          "prize_item_name": "スポーツタオル",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / D賞 / スポーツタオル",
+          "first_evidence_url": "https://1kuji.com/products/onep6"
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-010",
+          "catalog_indexes": [
+            16107,
+            16145
+          ],
+          "prize_rank": "E賞",
+          "prize_item_name": "カードスタンドフィギュア",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / E賞 / カードスタンドフィギュア",
+          "first_evidence_url": "https://1kuji.com/products/onep6"
+        },
+        {
+          "work_order_id": "ichiban-reissue-dedupe-011",
+          "catalog_indexes": [
+            16108,
+            16146
+          ],
+          "prize_rank": "F賞",
+          "prize_item_name": "湯のみ",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / F賞 / 湯のみ",
+          "first_evidence_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "missing_regular_price_sample_rows_visible": 6,
+      "missing_regular_price_sample_rows_hidden": 2,
+      "zero_price_exception_samples": [],
+      "manual_resolution_fields": {
+        "official_draw_price_jpy": null,
+        "manual_price_confirmed": false,
+        "manual_price_evidence_url": "",
+        "manual_note": ""
+      },
+      "unblocks_next_phase": "campaign_reissue_or_duplicate_identity_review"
+    },
     "first_campaign_review": {
       "campaign_work_order_id": "ichiban-reissue-campaign-001",
       "first_evidence_url": "https://1kuji.com/products/onep6",

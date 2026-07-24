@@ -494,6 +494,85 @@ def _campaign_review_readiness(
     }
 
 
+def _price_policy_blocked_campaign_reviews(
+    next_campaign_review_batch: list[dict[str, Any]],
+    *,
+    limit: int = 5,
+    sample_limit: int = 6,
+) -> list[dict[str, Any]]:
+    reviews: list[dict[str, Any]] = []
+    for campaign in next_campaign_review_batch:
+        price_policy = campaign.get("price_policy_review") or {}
+        if not price_policy.get("blocks_keep_drop_decision"):
+            continue
+        missing_samples: list[dict[str, Any]] = []
+        zero_exception_samples: list[dict[str, Any]] = []
+        for preview in campaign.get("item_review_preview") or []:
+            if not isinstance(preview, dict):
+                continue
+            preview_price_policy = preview.get("price_policy_review") or {}
+            if int(preview_price_policy.get("non_exception_missing_price_sample_rows") or 0):
+                missing_samples.append(
+                    {
+                        "work_order_id": preview.get("work_order_id"),
+                        "catalog_indexes": preview.get("catalog_indexes") or [],
+                        "prize_rank": preview.get("prize_rank") or "",
+                        "prize_item_name": preview.get("prize_item_name") or "",
+                        "identity_label": preview.get("identity_label") or "",
+                        "first_evidence_url": preview.get("first_evidence_url") or "",
+                    }
+                )
+            if int(preview_price_policy.get("zero_price_exception_sample_rows") or 0):
+                zero_exception_samples.append(
+                    {
+                        "work_order_id": preview.get("work_order_id"),
+                        "catalog_indexes": preview.get("catalog_indexes") or [],
+                        "prize_rank": preview.get("prize_rank") or "",
+                        "prize_item_name": preview.get("prize_item_name") or "",
+                        "identity_label": preview.get("identity_label") or "",
+                        "expected_official_price_jpy": 0,
+                    }
+                )
+        reviews.append(
+            {
+                "campaign_work_order_id": campaign.get("campaign_work_order_id"),
+                "first_evidence_url": campaign.get("first_evidence_url") or "",
+                "source_urls": campaign.get("source_urls") or [],
+                "item_work_order_count": int(campaign.get("item_work_order_count") or 0),
+                "price_policy_blockers": price_policy.get("blockers") or [],
+                "non_exception_missing_price_sample_rows": int(
+                    price_policy.get("non_exception_missing_price_sample_rows") or 0
+                ),
+                "zero_price_exception_sample_rows": int(
+                    price_policy.get("zero_price_exception_sample_rows") or 0
+                ),
+                "last_one_double_chance_expected_price_jpy": int(
+                    price_policy.get("last_one_double_chance_expected_price_jpy") or 0
+                ),
+                "missing_regular_price_samples": missing_samples[:sample_limit],
+                "missing_regular_price_sample_rows_visible": min(
+                    len(missing_samples),
+                    sample_limit,
+                ),
+                "missing_regular_price_sample_rows_hidden": max(
+                    0,
+                    len(missing_samples) - sample_limit,
+                ),
+                "zero_price_exception_samples": zero_exception_samples[:sample_limit],
+                "manual_resolution_fields": {
+                    "official_draw_price_jpy": None,
+                    "manual_price_confirmed": False,
+                    "manual_price_evidence_url": "",
+                    "manual_note": "",
+                },
+                "unblocks_next_phase": "campaign_reissue_or_duplicate_identity_review",
+            }
+        )
+        if len(reviews) >= limit:
+            break
+    return reviews
+
+
 def _blocking_dashboard(
     summary: dict[str, Any],
     *,
@@ -517,6 +596,9 @@ def _blocking_dashboard(
     )
     manual_required = bool(item_rows or campaign_rows)
     first_campaign = next_campaign_review_batch[0] if next_campaign_review_batch else {}
+    price_policy_reviews = _price_policy_blocked_campaign_reviews(
+        next_campaign_review_batch
+    )
 
     if missing_evidence_campaigns:
         status = "campaign_evidence_url_required"
@@ -563,6 +645,10 @@ def _blocking_dashboard(
         "non_exception_missing_price_sample_rows": missing_regular_price_rows,
         "zero_price_exception_sample_rows": zero_price_exception_rows,
         "last_one_double_chance_expected_price_jpy": 0,
+        "price_policy_blocked_campaign_reviews": price_policy_reviews,
+        "next_price_policy_review": price_policy_reviews[0]
+        if price_policy_reviews
+        else None,
         "first_campaign_review": {
             "campaign_work_order_id": first_campaign.get("campaign_work_order_id"),
             "first_evidence_url": first_campaign.get("first_evidence_url"),
