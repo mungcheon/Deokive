@@ -71,6 +71,8 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queue_coverage"], 1.0)
         self.assertEqual(report["summary"]["source_patch_template_count"], 2)
         self.assertEqual(report["summary"]["catalog_field_import_template_count"], 2)
+        self.assertEqual(report["summary"]["source_discovery_template_rows"], 2)
+        self.assertEqual(report["summary"]["source_discovery_template_batch_count"], 1)
         self.assertEqual(report["summary"]["missing_template_item_count"], 0)
         self.assertEqual(report["summary"]["source_store_workstream_count"], 1)
         self.assertEqual(report["summary"]["high_volume_source_store_workstream_count"], 0)
@@ -101,6 +103,23 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
             report["batches"][0]["items"][0]["source_patch_template"]["catalog_index"],
             1,
         )
+        flat_template = report["source_discovery_template"]
+        self.assertEqual([row["catalog_index"] for row in flat_template], [1, 2])
+        self.assertEqual(flat_template[0]["source_store"], "Animate")
+        self.assertEqual(flat_template[0]["official_search_url"], "https://animate.example/search?q=stand")
+        self.assertEqual(flat_template[0]["allowed_source_domains"], ["animate.example"])
+        self.assertEqual(flat_template[0]["source_patch_template"]["catalog_index"], 1)
+        self.assertEqual(flat_template[0]["catalog_field_import_template"]["field"], "source_url")
+        self.assertEqual(flat_template[0]["manual_value"], "")
+        self.assertFalse(flat_template[0]["manual_confirmed"])
+        template_batch = report["source_discovery_template_batches"][0]
+        self.assertEqual(template_batch["template_batch_id"], "source-discovery-template-001")
+        self.assertEqual(template_batch["source_store"], "Animate")
+        self.assertEqual(template_batch["row_count"], 2)
+        self.assertEqual(template_batch["official_search_url_rows"], 2)
+        self.assertEqual(template_batch["fallback_web_search_url_rows"], 0)
+        self.assertEqual(template_batch["allowed_source_domains"], ["animate.example"])
+        self.assertEqual([row["catalog_index"] for row in template_batch["rows"]], [1, 2])
 
     def test_max_rows_caps_queue_not_actionable_summary(self) -> None:
         review = {
@@ -121,6 +140,8 @@ class BuildSourceDiscoveryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queued_source_rows"], 2)
         self.assertEqual(report["summary"]["unqueued_actionable_source_rows"], 1)
         self.assertEqual(report["summary"]["queue_coverage"], 0.6667)
+        self.assertEqual(report["summary"]["source_discovery_template_rows"], 0)
+        self.assertEqual(report["summary"]["source_discovery_template_batch_count"], 0)
         self.assertEqual(report["summary"]["missing_template_item_count"], 2)
         self.assertEqual(report["summary"]["missing_template_sample_catalog_indexes"], [1, 2])
         self.assertEqual(report["summary"]["action_batch_count"], 2)

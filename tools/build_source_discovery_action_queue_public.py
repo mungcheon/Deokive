@@ -121,6 +121,92 @@ def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, A
     return sorted(rows, key=lambda row: (int(row["priority"]), -int(row["queued_source_rows"]), str(row["source_store"])))
 
 
+def _source_discovery_templates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    templates = []
+    for item in items:
+        source_patch = item.get("source_patch_template")
+        field_template = item.get("catalog_field_import_template")
+        source_patch = source_patch if isinstance(source_patch, dict) else {}
+        field_template = field_template if isinstance(field_template, dict) else {}
+        if not source_patch and not field_template:
+            continue
+        templates.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "source_store": item.get("source_store"),
+                "category": item.get("category"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "name_en": item.get("name_en"),
+                "character_name": item.get("character_name"),
+                "affiliation": item.get("affiliation"),
+                "series_name": item.get("series_name"),
+                "sub_series": item.get("sub_series"),
+                "official_search_url": item.get("official_search_url"),
+                "web_search_url": item.get("web_search_url"),
+                "allowed_source_domains": item.get("allowed_source_domains") or [],
+                "acceptance_rule": item.get("acceptance_rule"),
+                "source_patch_template": source_patch,
+                "catalog_field_import_template": field_template,
+                "manual_value": field_template.get("manual_value", ""),
+                "evidence_url": field_template.get("evidence_url", ""),
+                "manual_confirmed": bool(field_template.get("manual_confirmed")),
+                "blocked_until": "exact_product_detail_source_url_confirmed",
+                "auto_apply_enabled": False,
+            }
+        )
+    return sorted(
+        templates,
+        key=lambda row: (
+            str(row.get("source_store") or ""),
+            0 if row.get("official_search_url") else 1,
+            int(row.get("catalog_index") or 999_999_999),
+        ),
+    )
+
+
+def _source_discovery_template_batches(
+    templates: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for row in templates:
+        source_store = str(row.get("source_store") or "unknown")
+        grouped.setdefault(source_store, []).append(row)
+
+    batches = []
+    for index, (source_store, rows) in enumerate(
+        sorted(grouped.items(), key=lambda item: (-len(item[1]), item[0])),
+        start=1,
+    ):
+        batches.append(
+            {
+                "template_batch_id": f"source-discovery-template-{index:03d}",
+                "source_store": source_store,
+                "row_count": len(rows),
+                "official_search_url_rows": sum(
+                    1 for row in rows if row.get("official_search_url")
+                ),
+                "fallback_web_search_url_rows": sum(
+                    1
+                    for row in rows
+                    if row.get("web_search_url") and not row.get("official_search_url")
+                ),
+                "allowed_source_domains": sorted(
+                    {
+                        domain
+                        for row in rows
+                        for domain in (row.get("allowed_source_domains") or [])
+                        if isinstance(domain, str) and domain
+                    }
+                ),
+                "rows": rows,
+                "manual_review_required": True,
+                "auto_apply_enabled": False,
+            }
+        )
+    return batches
+
+
 def _compact_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     template = item.get("catalog_field_import_template")
     template = template if isinstance(template, dict) else {}
@@ -282,6 +368,10 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             )
 
     source_store_workstreams = _source_store_workstreams(batches)
+    source_discovery_template = _source_discovery_templates(published)
+    source_discovery_template_batches = _source_discovery_template_batches(
+        source_discovery_template
+    )
 
     return {
         "schema_version": 1,
@@ -297,6 +387,8 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "max_rows": max_rows,
             "source_patch_template_count": source_patch_template_count,
             "catalog_field_import_template_count": catalog_field_import_template_count,
+            "source_discovery_template_rows": len(source_discovery_template),
+            "source_discovery_template_batch_count": len(source_discovery_template_batches),
             "missing_template_item_count": len(missing_template_items),
             "missing_template_sample_catalog_indexes": missing_template_items[:25],
             "by_review_state": _counter_pairs(action_items, "review_state"),
@@ -331,6 +423,8 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "After source_url is confirmed, image_url can be handled by the image attachment queues.",
         ],
         "source_store_workstreams": source_store_workstreams,
+        "source_discovery_template": source_discovery_template,
+        "source_discovery_template_batches": source_discovery_template_batches,
         "manual_research_backlog": [
             {
                 "catalog_index": item.get("catalog_index"),
