@@ -98,6 +98,55 @@ def _field_confirmation_rules(fields: list[str]) -> list[str]:
     return rules
 
 
+FIELD_REVIEW_GUIDANCE = {
+    "release_date": {
+        "manual_value_format": "YYYY-MM-DD",
+        "accepted_evidence": [
+            "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+            "captured official 1kuji archive evidence with the matching campaign title",
+        ],
+        "do_not_use": [
+            "double chance entry deadlines",
+            "prize shipping or delivery dates",
+            "unlabeled dates from reseller listings or fan summaries",
+        ],
+        "review_notes": [
+            "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+            "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note.",
+        ],
+    },
+    "official_price_jpy": {
+        "manual_value_format": "integer JPY draw price, no currency symbol",
+        "accepted_evidence": [
+            "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+            "captured official 1kuji archive evidence with the matching campaign title",
+        ],
+        "do_not_use": [
+            "resale, marketplace, or shop listing prices",
+            "Last One prize value",
+            "Double Chance prize value",
+            "0 unless the reviewed template explicitly targets a zero-price prize exception",
+        ],
+        "review_notes": [
+            "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+            "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values.",
+        ],
+    },
+}
+
+
+def _field_review_guidance(field: Any) -> dict[str, Any]:
+    return dict(FIELD_REVIEW_GUIDANCE.get(str(field or ""), {}))
+
+
+def _enrich_field_patch_template(template: dict[str, Any]) -> dict[str, Any]:
+    enriched = dict(template)
+    guidance = _field_review_guidance(enriched.get("field"))
+    if guidance and "field_review_guidance" not in enriched:
+        enriched["field_review_guidance"] = guidance
+    return enriched
+
+
 def _patch_summary(templates: list[dict[str, Any]], catalog_item_rows: Any) -> dict[str, Any]:
     fields = [str(template.get("field") or "") for template in templates if template.get("field")]
     target_scopes = sorted(
@@ -226,7 +275,7 @@ def _campaign_patch_work_order(campaigns: list[dict[str, Any]]) -> list[dict[str
     rows: list[dict[str, Any]] = []
     for index, campaign in enumerate(campaigns, start=1):
         templates = [
-            template
+            _enrich_field_patch_template(template)
             for template in campaign.get("campaign_field_patch_templates") or []
             if isinstance(template, dict)
         ]
@@ -301,6 +350,9 @@ def _next_campaign_patch_review_batch(
                         "evidence_url": template.get("evidence_url")
                         or row.get("primary_review_url")
                         or "",
+                        "field_review_guidance": _field_review_guidance(
+                            template.get("field")
+                        ),
                     }
                     for template in templates
                 ],
@@ -324,7 +376,7 @@ def _next_campaign_patch_review_batch(
 
 def _compact_campaign(campaign: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
     templates = [
-        template
+        _enrich_field_patch_template(template)
         for template in campaign.get("campaign_field_patch_templates") or []
         if isinstance(template, dict)
     ]
@@ -434,6 +486,16 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
         for template in row.get("campaign_field_patch_templates") or []
         if isinstance(template, dict) and template.get("field")
     )
+    field_review_guidance_counts = Counter(
+        template["field"]
+        for row in campaigns
+        for template in row.get("campaign_field_patch_templates") or []
+        if (
+            isinstance(template, dict)
+            and template.get("field")
+            and template.get("field_review_guidance")
+        )
+    )
     review_url_kind_counts = Counter(
         str(row.get("primary_review_url_kind") or "")
         for row in campaigns
@@ -455,6 +517,7 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
             "by_workflow": _counter_pairs(campaigns, "workflow"),
             "field_patch_template_count": sum(patch_template_counts.values()),
             "field_patch_template_counts": patch_template_counts.most_common(),
+            "field_review_guidance_template_counts": field_review_guidance_counts.most_common(),
             "primary_review_url_rows": sum(1 for row in campaigns if row.get("primary_review_url")),
             "queued_primary_review_url_rows": sum(1 for row in published if row.get("primary_review_url")),
             "primary_review_url_kind_counts": review_url_kind_counts.most_common(),

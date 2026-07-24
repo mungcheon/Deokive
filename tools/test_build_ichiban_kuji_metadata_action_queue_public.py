@@ -65,6 +65,10 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["campaign_queue_coverage"], 1.0)
         self.assertEqual(report["summary"]["queued_catalog_item_rows"], 20)
         self.assertEqual(dict(report["summary"]["field_patch_template_counts"]), {"official_price_jpy": 1, "release_date": 1})
+        self.assertEqual(
+            dict(report["summary"]["field_review_guidance_template_counts"]),
+            {"release_date": 1, "official_price_jpy": 1},
+        )
         self.assertEqual(report["summary"]["work_order_steps"], 2)
         self.assertEqual(
             report["summary"]["work_order_lanes"],
@@ -131,6 +135,14 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
             first_work_item["field_patch_templates"][0]["field"],
             "release_date",
         )
+        self.assertEqual(
+            first_work_item["field_patch_templates"][0]["field_review_guidance"]["manual_value_format"],
+            "YYYY-MM-DD",
+        )
+        self.assertIn(
+            "double chance entry deadlines",
+            first_work_item["field_patch_templates"][0]["field_review_guidance"]["do_not_use"],
+        )
         next_review = report["next_campaign_patch_review_batch"][0]
         self.assertFalse(next_review["manual_confirmed"])
         self.assertEqual(next_review["slug"], "release")
@@ -142,6 +154,10 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             next_review["manual_value_fields_to_fill"][0]["evidence_url"],
             "https://1kuji.com/products/release",
+        )
+        self.assertEqual(
+            next_review["manual_value_fields_to_fill"][0]["field_review_guidance"]["manual_value_format"],
+            "YYYY-MM-DD",
         )
         self.assertIn(
             "For release_date, ignore double chance deadlines and prize shipping dates.",
@@ -190,6 +206,12 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
             "official_price_jpy_must_be_labeled_draw_price_or_price_per_try",
             price_campaign["manual_confirmation_requirements"],
         )
+        price_guidance = price_campaign["campaign_field_patch_templates"][0]["field_review_guidance"]
+        self.assertEqual(
+            price_guidance["manual_value_format"],
+            "integer JPY draw price, no currency symbol",
+        )
+        self.assertIn("resale, marketplace, or shop listing prices", price_guidance["do_not_use"])
 
     def test_max_campaigns_caps_published_queue_not_actionable_summary(self) -> None:
         review = {

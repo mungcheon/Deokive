@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T09:19:33Z",
+  "generated_at": "2026-07-24T12:34:37Z",
   "scope": "ichiban_kuji_metadata_action_queue",
   "summary": {
     "actionable_campaigns": 44,
@@ -23,6 +23,16 @@
     ],
     "field_patch_template_count": 44,
     "field_patch_template_counts": [
+      [
+        "official_price_jpy",
+        42
+      ],
+      [
+        "release_date",
+        2
+      ]
+    ],
+    "field_review_guidance_template_counts": [
       [
         "official_price_jpy",
         42
@@ -252,7 +262,23 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "YYYY-MM-DD",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "double chance entry deadlines",
+              "prize shipping or delivery dates",
+              "unlabeled dates from reseller listings or fan summaries"
+            ],
+            "review_notes": [
+              "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+              "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -329,7 +355,23 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "YYYY-MM-DD",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "double chance entry deadlines",
+              "prize shipping or delivery dates",
+              "unlabeled dates from reseller listings or fan summaries"
+            ],
+            "review_notes": [
+              "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+              "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -403,7 +445,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -477,7 +536,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -554,7 +630,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -628,7 +721,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -702,7 +812,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -776,7 +903,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -850,7 +994,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -924,7 +1085,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1001,7 +1179,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1078,7 +1273,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1155,7 +1367,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1232,7 +1461,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1288,7 +1534,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1365,7 +1628,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1442,7 +1722,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1516,7 +1813,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1593,7 +1907,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1670,7 +2001,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1747,7 +2095,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1821,7 +2186,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1895,7 +2277,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -1972,7 +2371,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2049,7 +2465,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2126,7 +2559,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2200,7 +2650,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2277,7 +2744,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2354,7 +2838,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2431,7 +2932,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2508,7 +3026,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2585,7 +3120,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2662,7 +3214,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2739,7 +3308,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2816,7 +3402,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2890,7 +3493,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -2967,7 +3587,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -3044,7 +3681,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -3121,7 +3775,24 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -3198,7 +3869,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -3275,7 +3963,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -3352,7 +4057,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -3429,7 +4151,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -3506,7 +4245,24 @@
           ],
           "requires_full_campaign_index_expansion": true,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_confirmed": false,
@@ -3577,14 +4333,46 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "YYYY-MM-DD",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "double chance entry deadlines",
+              "prize shipping or delivery dates",
+              "unlabeled dates from reseller listings or fan summaries"
+            ],
+            "review_notes": [
+              "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+              "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+            ]
+          }
         }
       ],
       "manual_value_fields_to_fill": [
         {
           "field": "release_date",
           "manual_value": "",
-          "evidence_url": "https://1kuji.com/products/jujutsu-o"
+          "evidence_url": "https://1kuji.com/products/jujutsu-o",
+          "field_review_guidance": {
+            "manual_value_format": "YYYY-MM-DD",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "double chance entry deadlines",
+              "prize shipping or delivery dates",
+              "unlabeled dates from reseller listings or fan summaries"
+            ],
+            "review_notes": [
+              "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+              "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+            ]
+          }
         }
       ],
       "operator_checklist": [
@@ -3660,14 +4448,46 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "YYYY-MM-DD",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "double chance entry deadlines",
+              "prize shipping or delivery dates",
+              "unlabeled dates from reseller listings or fan summaries"
+            ],
+            "review_notes": [
+              "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+              "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+            ]
+          }
         }
       ],
       "manual_value_fields_to_fill": [
         {
           "field": "release_date",
           "manual_value": "",
-          "evidence_url": "https://1kuji.com/products/myhero_o5"
+          "evidence_url": "https://1kuji.com/products/myhero_o5",
+          "field_review_guidance": {
+            "manual_value_format": "YYYY-MM-DD",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "double chance entry deadlines",
+              "prize shipping or delivery dates",
+              "unlabeled dates from reseller listings or fan summaries"
+            ],
+            "review_notes": [
+              "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+              "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+            ]
+          }
         }
       ],
       "operator_checklist": [
@@ -3740,14 +4560,48 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_value_fields_to_fill": [
         {
           "field": "official_price_jpy",
           "manual_value": "",
-          "evidence_url": "https://1kuji.com/products/10"
+          "evidence_url": "https://1kuji.com/products/10",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "operator_checklist": [
@@ -3820,14 +4674,48 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_value_fields_to_fill": [
         {
           "field": "official_price_jpy",
           "manual_value": "",
-          "evidence_url": "https://1kuji.com/products/38"
+          "evidence_url": "https://1kuji.com/products/38",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "operator_checklist": [
@@ -3903,14 +4791,48 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_value_fields_to_fill": [
         {
           "field": "official_price_jpy",
           "manual_value": "",
-          "evidence_url": "https://1kuji.com/products/49"
+          "evidence_url": "https://1kuji.com/products/49",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "operator_checklist": [
@@ -3983,14 +4905,48 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_value_fields_to_fill": [
         {
           "field": "official_price_jpy",
           "manual_value": "",
-          "evidence_url": "https://1kuji.com/products/53"
+          "evidence_url": "https://1kuji.com/products/53",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "operator_checklist": [
@@ -4063,14 +5019,48 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_value_fields_to_fill": [
         {
           "field": "official_price_jpy",
           "manual_value": "",
-          "evidence_url": "https://1kuji.com/products/64"
+          "evidence_url": "https://1kuji.com/products/64",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "operator_checklist": [
@@ -4143,14 +5133,48 @@
           ],
           "requires_full_campaign_index_expansion": false,
           "requires_labeled_official_evidence": true,
-          "blocked_until": "manual_official_evidence_confirmed"
+          "blocked_until": "manual_official_evidence_confirmed",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "manual_value_fields_to_fill": [
         {
           "field": "official_price_jpy",
           "manual_value": "",
-          "evidence_url": "https://1kuji.com/products/71"
+          "evidence_url": "https://1kuji.com/products/71",
+          "field_review_guidance": {
+            "manual_value_format": "integer JPY draw price, no currency symbol",
+            "accepted_evidence": [
+              "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+              "captured official 1kuji archive evidence with the matching campaign title"
+            ],
+            "do_not_use": [
+              "resale, marketplace, or shop listing prices",
+              "Last One prize value",
+              "Double Chance prize value",
+              "0 unless the reviewed template explicitly targets a zero-price prize exception"
+            ],
+            "review_notes": [
+              "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+              "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+            ]
+          }
         }
       ],
       "operator_checklist": [
@@ -4306,7 +5330,23 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "YYYY-MM-DD",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "double chance entry deadlines",
+                  "prize shipping or delivery dates",
+                  "unlabeled dates from reseller listings or fan summaries"
+                ],
+                "review_notes": [
+                  "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+                  "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -4408,7 +5448,23 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "YYYY-MM-DD",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "double chance entry deadlines",
+                  "prize shipping or delivery dates",
+                  "unlabeled dates from reseller listings or fan summaries"
+                ],
+                "review_notes": [
+                  "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+                  "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -4508,7 +5564,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -4608,7 +5681,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -4711,7 +5801,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -4811,7 +5918,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -4911,7 +6035,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5011,7 +6152,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5146,7 +6304,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5246,7 +6421,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5349,7 +6541,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5452,7 +6661,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5555,7 +6781,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5658,7 +6901,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5740,7 +7000,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5843,7 +7120,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -5981,7 +7275,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6081,7 +7392,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6184,7 +7512,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6287,7 +7632,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6390,7 +7752,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6490,7 +7869,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6590,7 +7986,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6693,7 +8106,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6831,7 +8261,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -6934,7 +8381,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7034,7 +8498,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7137,7 +8618,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7240,7 +8738,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7343,7 +8858,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7446,7 +8978,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7549,7 +9098,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7687,7 +9253,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7790,7 +9373,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7893,7 +9493,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -7993,7 +9610,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -8096,7 +9730,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -8199,7 +9850,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -8302,7 +9970,24 @@
               ],
               "requires_full_campaign_index_expansion": false,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -8405,7 +10090,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -8543,7 +10245,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -8646,7 +10365,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -8749,7 +10485,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
@@ -8852,7 +10605,24 @@
               ],
               "requires_full_campaign_index_expansion": true,
               "requires_labeled_official_evidence": true,
-              "blocked_until": "manual_official_evidence_confirmed"
+              "blocked_until": "manual_official_evidence_confirmed",
+              "field_review_guidance": {
+                "manual_value_format": "integer JPY draw price, no currency symbol",
+                "accepted_evidence": [
+                  "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+                  "captured official 1kuji archive evidence with the matching campaign title"
+                ],
+                "do_not_use": [
+                  "resale, marketplace, or shop listing prices",
+                  "Last One prize value",
+                  "Double Chance prize value",
+                  "0 unless the reviewed template explicitly targets a zero-price prize exception"
+                ],
+                "review_notes": [
+                  "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+                  "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+                ]
+              }
             }
           ],
           "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
