@@ -80,6 +80,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["first_primary_review_url_kind"], "fallback_web_search")
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
+        self.assertEqual(report["summary"]["suggested_local_image_path_rows"], 2)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["source_url_update_workstream_count"], 1)
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 1)
@@ -163,6 +164,18 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertTrue(report["batches"][0]["items"][0]["source_url_update_required"])
         self.assertFalse(report["batches"][0]["items"][0]["image_url_ready"])
         self.assertEqual(
+            report["batches"][0]["items"][0]["suggested_local_image_path"],
+            "assets/catalog_images/catalog_1.webp",
+        )
+        self.assertEqual(
+            report["batches"][0]["items"][0]["catalog_field_import_template"]["suggested_local_image_path"],
+            "assets/catalog_images/catalog_1.webp",
+        )
+        self.assertEqual(
+            report["batches"][0]["items"][0]["local_image_download_instruction"]["target_public_asset_path"],
+            "assets/assets/catalog_images/catalog_1.webp",
+        )
+        self.assertEqual(
             report["batches"][0]["items"][0]["image_import_blockers"],
             [
                 "generic_storefront_source_url",
@@ -213,6 +226,10 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             "https://fanding.kr/@stellive/shop?keyword=Badge",
         )
         self.assertEqual(
+            report["workstreams"][0]["sample_items"][0]["suggested_local_image_path"],
+            "assets/catalog_images/catalog_1.webp",
+        )
+        self.assertEqual(
             report["batches"][0]["items"][0]["required_before_image_import"],
             [
                 "confirm_exact_product_source_url",
@@ -227,6 +244,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(work_order["fallback_web_search_url_rows"], 1)
         self.assertEqual(work_order["current_source_urls"], [{"source_url": "https://example.com/shop", "rows": 2}])
         self.assertEqual(work_order["sample_items"][0]["catalog_index"], 2)
+        self.assertEqual(
+            work_order["sample_items"][0]["suggested_local_image_path"],
+            "assets/catalog_images/catalog_2.webp",
+        )
+        self.assertEqual(
+            work_order["sample_items"][0]["local_image_download_instruction"]["target_local_image_path"],
+            "assets/catalog_images/catalog_2.webp",
+        )
         self.assertEqual(
             work_order["sample_items"][0]["source_url_import_template"]["source_search_url"],
             "https://fanding.kr/@stellive/shop?keyword=Badge",

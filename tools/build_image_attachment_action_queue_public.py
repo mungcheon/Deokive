@@ -127,6 +127,9 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                         "first_fallback_web_search_url": item.get(
                             "first_fallback_web_search_url"
                         ),
+                        "suggested_local_image_path": item.get(
+                            "suggested_local_image_path"
+                        ),
                         "source_url_update_required": item.get("source_url_update_required"),
                         "representative_image_review_required": item.get(
                             "representative_image_review_required"
@@ -234,6 +237,10 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
                 "primary_review_url_kind": row.get("primary_review_url_kind"),
                 "first_fallback_web_search_url": row.get("first_fallback_web_search_url"),
                 "fallback_web_search_urls": row.get("fallback_web_search_urls") or [],
+                "suggested_local_image_path": row.get("suggested_local_image_path"),
+                "local_image_download_instruction": row.get(
+                    "local_image_download_instruction"
+                ),
                 "source_url_import_template": row.get("source_url_import_template"),
             }
             for row in rows[:12]
@@ -557,6 +564,10 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     source_search_url = _source_search_url(item, template)
     fallback_web_search_urls = _fallback_web_search_urls(item, group, source_search_url)
     catalog_template = _normalized_catalog_field_template(template, source_search_url)
+    suggested_local_image_path = _suggested_local_image_path(item)
+    if suggested_local_image_path:
+        catalog_template["suggested_local_image_path"] = suggested_local_image_path
+        catalog_template["local_image_path_field"] = "local_image_path"
     if source_url_template is not None:
         source_url_template["first_fallback_web_search_url"] = (
             fallback_web_search_urls[0] if fallback_web_search_urls else ""
@@ -586,6 +597,10 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "manual_confirmation_requirements": _manual_confirmation_requirements(workflow),
         "source_url_import_template": source_url_template,
         "catalog_field_import_template": catalog_template,
+        "suggested_local_image_path": suggested_local_image_path,
+        "local_image_download_instruction": _local_image_download_instruction(
+            suggested_local_image_path
+        ),
         "review_state": "exact_product_image_confirmation_required",
         "auto_apply_enabled": False,
     }
@@ -596,6 +611,36 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         source_url_template["primary_review_url"] = primary_review_url
         source_url_template["primary_review_url_kind"] = primary_review_url_kind
     return compact
+
+
+def _suggested_local_image_path(item: dict[str, Any]) -> str:
+    catalog_index = item.get("catalog_index")
+    if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
+        return f"assets/catalog_images/catalog_{catalog_index}.webp"
+    row_index = item.get("row_index")
+    if isinstance(row_index, int) and not isinstance(row_index, bool):
+        return f"assets/catalog_images/catalog_{row_index}.webp"
+    return ""
+
+
+def _local_image_download_instruction(suggested_local_image_path: str) -> dict[str, Any]:
+    if not suggested_local_image_path:
+        return {
+            "status": "manual_path_required",
+            "target_local_image_path": "",
+            "target_public_asset_path": "",
+            "after_manual_image_url_confirmed": [],
+        }
+    return {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": suggested_local_image_path,
+        "target_public_asset_path": f"assets/{suggested_local_image_path}",
+        "after_manual_image_url_confirmed": [
+            "download_confirmed_image_url_to_target_local_image_path",
+            "write_local_image_path_with_image_url_import",
+            "verify_file_exists_in_assets_and_web_public_assets",
+        ],
+    }
 
 
 def _primary_review_url(item: dict[str, Any]) -> tuple[str, str]:
@@ -879,6 +924,9 @@ def build_report(
         1 for item in action_items if item.get("representative_image_review_required")
     )
     image_url_ready_rows = sum(1 for item in action_items if item.get("image_url_ready"))
+    suggested_local_image_path_rows = sum(
+        1 for item in action_items if item.get("suggested_local_image_path")
+    )
     primary_review_url_rows = sum(1 for item in action_items if item.get("primary_review_url"))
     primary_review_url_kind_counts = _counter_pairs(action_items, "primary_review_url_kind")
     first_primary_review_item = next(
@@ -945,6 +993,7 @@ def build_report(
             ),
             "representative_image_review_required_rows": representative_image_review_required_rows,
             "image_url_ready_rows": image_url_ready_rows,
+            "suggested_local_image_path_rows": suggested_local_image_path_rows,
             "workstream_count": len(workstreams),
             "source_url_update_workstream_count": sum(
                 1 for row in workstreams if row.get("source_url_update_template_rows")
