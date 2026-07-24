@@ -588,11 +588,11 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 118,
+        minWidth: expanded ? 0 : 132,
         minHeight: 40,
         maxHeight: 40,
       ),
-      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 15),
+      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 16),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: background,
@@ -638,9 +638,12 @@ class _CatalogAddButton extends StatelessWidget {
                     ),
                   )
                 else
-                  _CatalogAddButtonLabel(
-                    label: label,
-                    color: foreground,
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minWidth: 62),
+                    child: _CatalogAddButtonLabel(
+                      label: label,
+                      color: foreground,
+                    ),
                   ),
               ],
             ),
