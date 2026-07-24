@@ -91,6 +91,14 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
             report["summary"]["first_fallback_store_search_url"],
         )
         self.assertEqual(
+            report["summary"]["first_primary_review_url_kind"],
+            "domain_limited_web_search",
+        )
+        self.assertIn(
+            "site%3Awww.animate-onlineshop.jp",
+            report["summary"]["first_primary_review_url"],
+        )
+        self.assertEqual(
             [step["lane"] for step in report["work_order"]],
             [
                 "domain_limited_exact_title_search",
@@ -108,6 +116,8 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["workflow"], "official_search_url_available")
         self.assertEqual(item["manual_review_checklist"], ["Confirm exact product page"])
         self.assertIn("sphone/products/list.php", item["fallback_store_search_url"])
+        self.assertEqual(item["primary_review_url_kind"], "domain_limited_web_search")
+        self.assertEqual(item["primary_review_url"], item["domain_limited_web_search_urls"][0])
         self.assertEqual(item["fallback_search_terms"], ["A"])
         self.assertEqual(len(item["fallback_search_queries"]), 3)
         self.assertTrue(
@@ -118,6 +128,10 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertIn("site%3Awww.animate-onlineshop.jp", item["domain_limited_web_search_urls"][0])
         self.assertEqual(item["source_patch_template"]["catalog_index"], 1)
         self.assertEqual(item["catalog_field_import_template"]["field"], "source_url")
+        review_row = report["review_table"][0]
+        self.assertEqual(review_row["review_priority"], 1)
+        self.assertEqual(review_row["primary_review_url"], item["primary_review_url"])
+        self.assertEqual(review_row["primary_review_url_kind"], "domain_limited_web_search")
 
     def test_fallback_terms_prefer_localized_animate_query(self) -> None:
         next_pack = {

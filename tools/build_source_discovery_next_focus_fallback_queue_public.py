@@ -181,13 +181,17 @@ def _identity_review(item: dict[str, Any]) -> dict[str, Any]:
 
 def _review_table(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for item in queue_items:
+    for priority, item in enumerate(queue_items, start=1):
         field_template = item.get("catalog_field_import_template")
         if not isinstance(field_template, dict):
             field_template = {}
         identity_review = _identity_review(item)
+        first_domain_url = _first_value(item.get("domain_limited_web_search_urls"))
+        fallback_store_url = item.get("fallback_store_search_url") or ""
+        primary_review_url = first_domain_url or fallback_store_url
         rows.append(
             {
+                "review_priority": priority,
                 "catalog_index": item.get("catalog_index"),
                 "focus_pack_id": item.get("focus_pack_id"),
                 "source_store": item.get("source_store"),
@@ -195,10 +199,16 @@ def _review_table(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "name_ko": item.get("name_ko"),
                 "name_ja": item.get("name_ja"),
                 "search_term": _first_value(item.get("fallback_search_terms")),
-                "first_domain_limited_web_search_url": _first_value(
-                    item.get("domain_limited_web_search_urls")
+                "primary_review_url": primary_review_url,
+                "primary_review_url_kind": (
+                    "domain_limited_web_search"
+                    if first_domain_url
+                    else "legacy_mobile_store_search"
+                    if fallback_store_url
+                    else "missing_review_url"
                 ),
-                "fallback_store_search_url": item.get("fallback_store_search_url") or "",
+                "first_domain_limited_web_search_url": first_domain_url,
+                "fallback_store_search_url": fallback_store_url,
                 "manual_confirmed": False,
                 "manual_confirmed_source_url": "",
                 "manual_confirmed_image_url": "",
@@ -305,6 +315,16 @@ def build_report(
                 "auto_apply_enabled": False,
             }
         )
+        first_domain_url = _first_value(queue_items[-1].get("domain_limited_web_search_urls"))
+        fallback_store_url = queue_items[-1].get("fallback_store_search_url") or ""
+        queue_items[-1]["primary_review_url"] = first_domain_url or fallback_store_url
+        queue_items[-1]["primary_review_url_kind"] = (
+            "domain_limited_web_search"
+            if first_domain_url
+            else "legacy_mobile_store_search"
+            if fallback_store_url
+            else "missing_review_url"
+        )
 
     by_status = Counter(str(item.get("official_search_http_status")) for item in queue_items)
     by_store = Counter(str(item.get("source_store") or "unknown") for item in queue_items)
@@ -356,6 +376,12 @@ def build_report(
             ),
             "first_fallback_store_search_url": (
                 queue_items[0].get("fallback_store_search_url", "") if queue_items else ""
+            ),
+            "first_primary_review_url": (
+                queue_items[0].get("primary_review_url", "") if queue_items else ""
+            ),
+            "first_primary_review_url_kind": (
+                queue_items[0].get("primary_review_url_kind", "") if queue_items else ""
             ),
             "auto_apply_enabled": False,
             "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
