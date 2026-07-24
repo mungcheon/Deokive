@@ -10904,13 +10904,24 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["deduplication_action_queue"] = {
                 "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
                 **dedupe_action_queue_summary,
+                "completion_readiness": deduplication_action_queue.get(
+                    "completion_readiness",
+                    {},
+                ),
             }
         elif DEDUPLICATION_ACTION_QUEUE.exists():
             dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {})
             dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
-            target["deduplication_action_queue"] = copy_report_summary(
-                DEDUPLICATION_ACTION_QUEUE, "deduplication_action_queue"
-            )
+            target["deduplication_action_queue"] = {
+                **copy_report_summary(
+                    DEDUPLICATION_ACTION_QUEUE,
+                    "deduplication_action_queue",
+                ),
+                "completion_readiness": dedupe_action_queue.get(
+                    "completion_readiness",
+                    {},
+                ),
+            }
         if DEDUPLICATION_FAST_REVIEW.exists():
             dedupe_fast_review = load_json(DEDUPLICATION_FAST_REVIEW, {})
             dedupe_fast_summary = dedupe_fast_review.get("summary", {})

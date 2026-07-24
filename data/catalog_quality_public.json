@@ -5473,7 +5473,31 @@
     "auto_delete_ready_groups": 0,
     "explicit_keep_drop_required_groups": 48,
     "auto_merge_enabled": false,
-    "auto_delete_enabled": false
+    "auto_delete_enabled": false,
+    "completion_readiness": {
+      "status": "ichiban_reissue_review_required",
+      "auto_merge_ready_groups": 0,
+      "auto_delete_ready_groups": 0,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "manual_confirmed_groups": 0,
+      "actionable_groups": 48,
+      "queued_groups": 48,
+      "unqueued_actionable_groups": 0,
+      "explicit_keep_drop_required_groups": 48,
+      "ichiban_reissue_review_groups": 46,
+      "ichiban_probable_reissue_review_groups": 20,
+      "ichiban_reissue_work_order_rows": 20,
+      "ichiban_reissue_manual_confirmed_rows": 0,
+      "ichiban_reissue_protected_groups": 0,
+      "blocked_reasons": [
+        "explicit_manual_keep_drop_confirmation_required",
+        "ichiban_reissue_manual_confirmation_required",
+        "variant_or_retailer_identity_review_required"
+      ],
+      "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+      "safety_note": "Duplicate evidence can represent retailer mirrors, variants, or reissues. No catalog row may be merged or deleted until an explicit manual keep/drop decision is recorded."
+    }
   },
   "image_attachment_action_queue": {
     "public_report": "data/catalog_image_attachment_action_queue_public.json",

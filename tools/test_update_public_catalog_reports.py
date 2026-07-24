@@ -1284,6 +1284,28 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["deduplication_action_queue"]["ichiban_reissue_work_order_rows"],
                 dedupe_action_summary["ichiban_reissue_work_order_rows"],
             )
+            dedupe_readiness = dedupe_action.get("completion_readiness") or {}
+            quality_dedupe_readiness = quality["deduplication_action_queue"][
+                "completion_readiness"
+            ]
+            self.assertEqual(
+                quality_dedupe_readiness["status"],
+                dedupe_readiness["status"],
+            )
+            self.assertEqual(
+                quality_dedupe_readiness["explicit_keep_drop_required_groups"],
+                dedupe_action_summary["explicit_keep_drop_required_groups"],
+            )
+            self.assertEqual(
+                quality_dedupe_readiness["ichiban_reissue_work_order_rows"],
+                dedupe_action_summary["ichiban_reissue_work_order_rows"],
+            )
+            self.assertEqual(
+                quality_dedupe_readiness["next_safe_phase"],
+                "verify_ichiban_campaign_pages_before_dedupe",
+            )
+            self.assertFalse(quality_dedupe_readiness["auto_merge_enabled"])
+            self.assertFalse(quality_dedupe_readiness["auto_delete_enabled"])
             self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
             self.assertEqual(
                 quality["deduplication_fast_review"]["image_url_only_same_identity_groups"],
