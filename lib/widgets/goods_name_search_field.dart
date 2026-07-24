@@ -384,45 +384,65 @@ class _CatalogRow extends StatelessWidget {
                     ),
                   ),
                 const SizedBox(height: 8),
-                FilledButton.icon(
+                _CatalogPickerActionButton(
                   onPressed: () => Navigator.pop(context, entry),
-                  icon: Icon(
-                    Icons.add_rounded,
-                    size: 16,
-                    color: _catalogPickerActionForeground,
-                  ),
-                  label: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      actionLabel,
-                      maxLines: 1,
-                      softWrap: false,
-                      style: const TextStyle(
-                        color: _catalogPickerActionForeground,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w900,
-                        height: 1,
-                      ),
-                    ),
-                  ),
-                  style: FilledButton.styleFrom(
-                    backgroundColor: _catalogPickerActionBackground,
-                    foregroundColor: _catalogPickerActionForeground,
-                    disabledBackgroundColor: _catalogPickerActionBackground,
-                    disabledForegroundColor: _catalogPickerActionForeground,
-                    minimumSize: const Size(64, 34),
-                    visualDensity: VisualDensity.compact,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    textStyle: const TextStyle(
-                      color: _catalogPickerActionForeground,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
+                  label: actionLabel,
                 ),
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CatalogPickerActionButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onPressed;
+
+  const _CatalogPickerActionButton({
+    required this.label,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: _catalogPickerActionBackground,
+      borderRadius: BorderRadius.circular(999),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(999),
+        onTap: onPressed,
+        child: Container(
+          constraints: const BoxConstraints(minWidth: 70, minHeight: 34),
+          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.add_rounded,
+                size: 16,
+                color: _catalogPickerActionForeground,
+              ),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: _catalogPickerActionForeground,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w900,
+                    height: 1,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

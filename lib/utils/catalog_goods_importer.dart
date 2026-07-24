@@ -355,50 +355,25 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                               selectedKind == _CatalogImportKind.wishlist
                                   ? '위시리스트에 추가'
                                   : '선택한 폴더에 추가';
-                          return SizedBox(
-                            width: double.infinity,
-                            height: 48,
-                            child: FilledButton.icon(
-                              key: const Key(
-                                'catalog-import-destination-add-button',
-                              ),
-                              style: FilledButton.styleFrom(
-                                backgroundColor: buttonBackground,
-                                foregroundColor: buttonForeground,
-                                disabledBackgroundColor: buttonBackground,
-                                disabledForegroundColor: buttonForeground,
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              onPressed: canImport
-                                  ? () => Navigator.pop(
-                                        sheetContext,
-                                        _CatalogImportDestination(
-                                          folder: destinationFolder,
-                                          addToWishlist: selectedKind ==
-                                              _CatalogImportKind.wishlist,
-                                          wishlistTargetFolder: selectedFolder,
-                                        ),
-                                      )
-                                  : null,
-                              icon: Icon(
-                                Icons.add_rounded,
-                                color: buttonForeground,
-                              ),
-                              label: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  label,
-                                  maxLines: 1,
-                                  softWrap: false,
-                                  style: TextStyle(
-                                    color: buttonForeground,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                              ),
+                          return _CatalogImportActionButton(
+                            key: const Key(
+                              'catalog-import-destination-add-button',
                             ),
+                            label: label,
+                            icon: Icons.add_rounded,
+                            backgroundColor: buttonBackground,
+                            foregroundColor: buttonForeground,
+                            onPressed: canImport
+                                ? () => Navigator.pop(
+                                      sheetContext,
+                                      _CatalogImportDestination(
+                                        folder: destinationFolder,
+                                        addToWishlist: selectedKind ==
+                                            _CatalogImportKind.wishlist,
+                                        wishlistTargetFolder: selectedFolder,
+                                      ),
+                                    )
+                                : null,
                           );
                         },
                       ),
@@ -417,6 +392,74 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
 enum _CatalogImportKind {
   wishlist,
   owned,
+}
+
+class _CatalogImportActionButton extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final Color backgroundColor;
+  final Color foregroundColor;
+  final VoidCallback? onPressed;
+
+  const _CatalogImportActionButton({
+    super.key,
+    required this.label,
+    required this.icon,
+    required this.backgroundColor,
+    required this.foregroundColor,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final content = AnimatedContainer(
+      duration: const Duration(milliseconds: 140),
+      width: double.infinity,
+      height: 48,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Center(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: foregroundColor, size: 19),
+            const SizedBox(width: 7),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: foregroundColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w900,
+                  height: 1,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (onPressed == null) return content;
+
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(999),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(999),
+        onTap: onPressed,
+        child: content,
+      ),
+    );
+  }
 }
 
 class _CatalogImportDestination {

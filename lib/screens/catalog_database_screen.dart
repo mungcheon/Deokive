@@ -588,10 +588,10 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints.tightFor(
-        width: expanded ? null : 98,
+        width: expanded ? null : 106,
         height: 40,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: background,
@@ -607,42 +607,28 @@ class _CatalogAddButton extends StatelessWidget {
               ],
       ),
       child: Center(
-        child: DefaultTextStyle.merge(
-          style: TextStyle(
-            color: foreground,
-            fontSize: 13,
-            fontWeight: FontWeight.w900,
-            height: 1,
-          ),
-          child: IconTheme.merge(
-            data: IconThemeData(color: foreground, size: 17),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(icon, color: foreground, size: 17),
-                const SizedBox(width: 5),
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      label,
-                      maxLines: 1,
-                      softWrap: false,
-                      overflow: TextOverflow.visible,
-                      style: TextStyle(
-                        color: foreground,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w900,
-                        height: 1,
-                      ),
-                    ),
-                  ),
+        child: Row(
+          mainAxisSize: expanded ? MainAxisSize.max : MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: foreground, size: 17),
+            const SizedBox(width: 5),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: foreground,
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w900,
+                  height: 1,
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

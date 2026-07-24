@@ -58,7 +58,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Default'), findsOneWidget);
 
-    await tester.tap(find.byType(FilledButton).last);
+    await tester.tap(
+      find.byKey(const Key('catalog-import-destination-add-button')),
+    );
     await tester.pumpAndSettle();
 
     expect(appState.goodsItems, hasLength(1));
@@ -110,7 +112,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('catalog-add-list-button')).first);
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(FilledButton).last);
+    await tester.tap(
+      find.byKey(const Key('catalog-import-destination-add-button')),
+    );
     await tester.pumpAndSettle();
 
     expect(appState.goodsItems, hasLength(1));
@@ -163,7 +167,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('catalog-add-list-button')).first);
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(FilledButton).last);
+    await tester.tap(
+      find.byKey(const Key('catalog-import-destination-add-button')),
+    );
     await tester.pumpAndSettle();
 
     final savedItem = appState.goodsItems.single;
@@ -334,7 +340,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('catalog-add-list-button')).first);
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(FilledButton).last);
+    await tester.tap(
+      find.byKey(const Key('catalog-import-destination-add-button')),
+    );
     await tester.pumpAndSettle();
 
     expect(appState.folders.map((folder) => folder.name), contains('기본 폴더'));
