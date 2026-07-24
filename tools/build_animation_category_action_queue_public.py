@@ -320,6 +320,57 @@ def _visual_review_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _next_normalization_review_batch(
+    rows: list[dict[str, Any]],
+    *,
+    limit: int = 8,
+) -> list[dict[str, Any]]:
+    batch: list[dict[str, Any]] = []
+    ordered = sorted(
+        rows,
+        key=lambda row: (
+            int(row.get("review_priority") or 999),
+            -int(row.get("rows") or 0),
+            str(row.get("category") or ""),
+        ),
+    )
+    for row in ordered[:limit]:
+        template = row.get("category_mapping_template")
+        if not isinstance(template, dict):
+            template = {}
+        preserve_source = bool(template.get("preserve_source_category_as_sub_series"))
+        batch.append(
+            {
+                "manual_confirmed": False,
+                "review_id": row.get("review_id"),
+                "source_category": row.get("category"),
+                "target_category": row.get("suggested_category"),
+                "affected_catalog_rows": int(row.get("rows") or 0),
+                "sample_names": row.get("sample_names") or [],
+                "preserve_source_category_as_sub_series": preserve_source,
+                "folder_color_group": template.get("folder_color_group") or row.get("suggested_color_group"),
+                "folder_color_hex": template.get("folder_color_hex") or row.get("suggested_color_hex"),
+                "folder_icon_key": template.get("folder_icon_key") or row.get("suggested_primary_icon_key"),
+                "category_mapping_template": template,
+                "blocked_until": row.get("blocked_until"),
+                "operator_checklist": [
+                    "Confirm sample names belong under the target canonical category.",
+                    "Keep preserve_source_category_as_sub_series=true when the source label helps search.",
+                    "Set manual_confirmed=true only after reviewing the source and target category.",
+                ],
+                "manual_value_fields_to_fill": [
+                    "manual_confirmed",
+                    "source_category",
+                    "target_category",
+                    "preserve_source_category_as_sub_series",
+                    "manual_note",
+                ],
+                "auto_apply_enabled": False,
+            }
+        )
+    return batch
+
+
 def _compact_normalization(
     row: dict[str, Any],
     review_priority: int,
@@ -620,6 +671,7 @@ def build_queue(
     )
     work_order = _work_order(queued, unmatched_keyword_review, normalization_rows)
     target_visual_summary = _visual_review_summary(queued + normalization_rows)
+    next_normalization_review_batch = _next_normalization_review_batch(normalization_rows)
     summary = {
         "actionable_categories": len(rows),
         "queued_categories": len(queued),
@@ -640,6 +692,18 @@ def build_queue(
         "normalization_review_target_categories": Counter(
             str(row.get("suggested_category") or "") for row in normalization_rows
         ).most_common(),
+        "next_normalization_review_batch_rows": len(next_normalization_review_batch),
+        "next_normalization_review_batch_catalog_rows": sum(
+            int(row.get("affected_catalog_rows") or 0) for row in next_normalization_review_batch
+        ),
+        "next_normalization_review_batch_target_categories": Counter(
+            str(row.get("target_category") or "") for row in next_normalization_review_batch
+        ).most_common(),
+        "next_normalization_review_batch_preserve_sub_series_rows": sum(
+            1
+            for row in next_normalization_review_batch
+            if row.get("preserve_source_category_as_sub_series")
+        ),
         "target_visual_token_rows": target_visual_summary["visual_token_rows"],
         "target_visual_token_catalog_rows": target_visual_summary["affected_catalog_rows"],
         "target_visual_color_groups": target_visual_summary["color_group_counts"],
@@ -675,6 +739,7 @@ def build_queue(
         "summary": summary,
         "app_folder_visual_catalog": app_visual_catalog,
         "target_visual_token_summary": target_visual_summary,
+        "next_normalization_review_batch": next_normalization_review_batch,
         "work_order": work_order,
         "batches": batches,
         "automation_policy": {

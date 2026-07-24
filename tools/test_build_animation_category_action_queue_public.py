@@ -138,6 +138,13 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["normalization_review_categories"], 1)
         self.assertEqual(report["summary"]["normalization_review_rows"], 8)
         self.assertEqual(report["summary"]["normalization_review_target_categories"], [("Stationery", 1)])
+        self.assertEqual(report["summary"]["next_normalization_review_batch_rows"], 1)
+        self.assertEqual(report["summary"]["next_normalization_review_batch_catalog_rows"], 8)
+        self.assertEqual(
+            report["summary"]["next_normalization_review_batch_target_categories"],
+            [("Stationery", 1)],
+        )
+        self.assertEqual(report["summary"]["next_normalization_review_batch_preserve_sub_series_rows"], 1)
         self.assertEqual(report["summary"]["target_visual_token_rows"], 2)
         self.assertEqual(report["summary"]["target_visual_token_catalog_rows"], 105)
         self.assertEqual(report["summary"]["target_visual_color_groups"], [("mint", 1), ("blue", 1)])
@@ -296,6 +303,27 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             normalization_batch["target_visual_token_summary"]["tokens"][0]["color_sort_order"],
             130,
         )
+        next_normalization = report["next_normalization_review_batch"][0]
+        self.assertFalse(next_normalization["manual_confirmed"])
+        self.assertEqual(next_normalization["source_category"], "Clear File")
+        self.assertEqual(next_normalization["target_category"], "Stationery")
+        self.assertEqual(next_normalization["affected_catalog_rows"], 8)
+        self.assertTrue(next_normalization["preserve_source_category_as_sub_series"])
+        self.assertEqual(next_normalization["folder_color_group"], "mint")
+        self.assertEqual(next_normalization["folder_icon_key"], "sticky_note_2")
+        self.assertEqual(
+            next_normalization["category_mapping_template"]["target_category"],
+            "Stationery",
+        )
+        self.assertIn(
+            "manual_note",
+            next_normalization["manual_value_fields_to_fill"],
+        )
+        self.assertIn(
+            "Confirm sample names belong under the target canonical category.",
+            next_normalization["operator_checklist"],
+        )
+        self.assertFalse(next_normalization["auto_apply_enabled"])
 
 
 if __name__ == "__main__":
