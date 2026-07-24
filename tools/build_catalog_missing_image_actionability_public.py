@@ -785,12 +785,63 @@ def build_completion_plan(
 
     phase_total = sum(int(phase.get("row_count") or 0) for phase in phases)
     missing_image_rows = int(summary.get("missing_image_rows") or phase_total)
+    review_start_rows = []
+    missing_review_start_phase_ids = []
+    for phase in phases:
+        review_start = phase.get("review_start") or {}
+        current_batch = phase.get("current_batch") or {}
+        first_url = (
+            review_start.get("first_primary_review_url")
+            or current_batch.get("first_official_search_url")
+            or current_batch.get("official_search_url")
+            or current_batch.get("first_primary_review_url")
+            or ""
+        )
+        has_review_start = bool(str(first_url or "").strip())
+        review_start_rows.append(
+            {
+                "phase_id": phase.get("phase_id"),
+                "row_count": phase.get("row_count") or 0,
+                "has_review_start": has_review_start,
+                "first_review_url": first_url,
+                "review_url_kind": review_start.get("first_primary_review_url_kind")
+                or current_batch.get("first_official_search_url_kind")
+                or "official_search_url"
+                if first_url
+                else "",
+                "next_step": phase.get("next_step"),
+                "source": phase.get("source"),
+            }
+        )
+        if not has_review_start:
+            missing_review_start_phase_ids.append(phase.get("phase_id"))
+    review_start_ready_rows = sum(
+        int(row.get("row_count") or 0)
+        for row in review_start_rows
+        if row.get("has_review_start")
+    )
     return {
         "total_open_rows": missing_image_rows,
         "phase_rows_total": phase_total,
         "phase_count": len(phases),
         "status": "balanced" if phase_total == missing_image_rows else "needs_review",
         "phases": phases,
+        "review_start_coverage": {
+            "phase_count": len(phases),
+            "phases_with_review_start": sum(
+                1 for row in review_start_rows if row.get("has_review_start")
+            ),
+            "phases_missing_review_start": len(missing_review_start_phase_ids),
+            "rows_with_review_start": review_start_ready_rows,
+            "rows_missing_review_start": max(0, phase_total - review_start_ready_rows),
+            "missing_review_start_phase_ids": missing_review_start_phase_ids,
+            "phase_review_starts": review_start_rows,
+            "status": "all_phases_have_review_start"
+            if phases and not missing_review_start_phase_ids
+            else "some_phases_need_manual_research_start"
+            if missing_review_start_phase_ids
+            else "no_open_phases",
+        },
         "current_focus_pack": next_source_discovery_focus_pack or {},
         "overlay_review_flags": {
             "source_detail_candidate_recheck_required_rows": int(
@@ -997,6 +1048,7 @@ def build_blocking_dashboard(
     ]
     next_queue = execution_queue_summary.get("next_queue") or {}
     next_phase = phases[0] if phases else {}
+    review_start_coverage = completion_plan.get("review_start_coverage") or {}
     total_open_rows = int(summary.get("missing_image_rows") or 0)
     auto_import_ready_rows = int(
         execution_queue_summary.get("auto_import_ready_rows") or 0
@@ -1044,6 +1096,19 @@ def build_blocking_dashboard(
         },
         "phase_status": completion_plan.get("status"),
         "phase_count": completion_plan.get("phase_count") or 0,
+        "review_start_coverage_status": review_start_coverage.get("status"),
+        "phases_with_review_start": int(
+            review_start_coverage.get("phases_with_review_start") or 0
+        ),
+        "phases_missing_review_start": int(
+            review_start_coverage.get("phases_missing_review_start") or 0
+        ),
+        "rows_with_review_start": int(
+            review_start_coverage.get("rows_with_review_start") or 0
+        ),
+        "rows_missing_review_start": int(
+            review_start_coverage.get("rows_missing_review_start") or 0
+        ),
         "top_phase_rows": [
             {
                 "phase_id": phase.get("phase_id"),
@@ -1570,6 +1635,33 @@ def build_report(
             "completion_plan_phase_rows_total": int(completion_plan.get("phase_rows_total") or 0),
             "completion_plan_phase_count": int(completion_plan.get("phase_count") or 0),
             "completion_plan_status": completion_plan.get("status"),
+            "completion_plan_review_start_status": (
+                (completion_plan.get("review_start_coverage") or {}).get("status")
+            ),
+            "completion_plan_phases_with_review_start": int(
+                (completion_plan.get("review_start_coverage") or {}).get(
+                    "phases_with_review_start"
+                )
+                or 0
+            ),
+            "completion_plan_phases_missing_review_start": int(
+                (completion_plan.get("review_start_coverage") or {}).get(
+                    "phases_missing_review_start"
+                )
+                or 0
+            ),
+            "completion_plan_rows_with_review_start": int(
+                (completion_plan.get("review_start_coverage") or {}).get(
+                    "rows_with_review_start"
+                )
+                or 0
+            ),
+            "completion_plan_rows_missing_review_start": int(
+                (completion_plan.get("review_start_coverage") or {}).get(
+                    "rows_missing_review_start"
+                )
+                or 0
+            ),
             "blocking_dashboard_status": blocking_dashboard.get("status"),
             "blocking_dashboard_queue_coverage": blocking_dashboard.get("queue_coverage"),
         }

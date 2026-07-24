@@ -487,8 +487,46 @@ class PublicCatalogReportTests(unittest.TestCase):
                 len(completion_plan["phases"]),
             )
             self.assertEqual(
+                completion_plan["review_start_coverage"]["status"],
+                "some_phases_need_manual_research_start",
+            )
+            self.assertEqual(
+                completion_plan["review_start_coverage"]["phases_with_review_start"],
+                3,
+            )
+            self.assertEqual(
+                completion_plan["review_start_coverage"]["phases_missing_review_start"],
+                1,
+            )
+            self.assertEqual(
+                completion_plan["review_start_coverage"]["rows_with_review_start"],
+                740,
+            )
+            self.assertEqual(
+                completion_plan["review_start_coverage"]["rows_missing_review_start"],
+                5,
+            )
+            self.assertEqual(
+                completion_plan["review_start_coverage"][
+                    "missing_review_start_phase_ids"
+                ],
+                ["manual_nonstandard_image_research"],
+            )
+            self.assertEqual(
                 quality["missing_image_actionability"]["completion_plan_phase_rows_total"],
                 result["missing"]["image_url"],
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"][
+                    "completion_plan_rows_with_review_start"
+                ],
+                740,
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"][
+                    "completion_plan_rows_missing_review_start"
+                ],
+                5,
             )
             self.assertIs(completion_plan["automation_policy"]["auto_apply_catalog_changes"], False)
             self.assertIs(quality["missing_image_actionability"]["auto_apply_enabled"], False)

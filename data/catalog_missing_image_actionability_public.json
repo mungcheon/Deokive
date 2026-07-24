@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T20:53:12Z",
+  "generated_at": "2026-07-24T22:08:12Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 745,
@@ -121,6 +121,11 @@
     "completion_plan_phase_rows_total": 745,
     "completion_plan_phase_count": 4,
     "completion_plan_status": "balanced",
+    "completion_plan_review_start_status": "some_phases_need_manual_research_start",
+    "completion_plan_phases_with_review_start": 3,
+    "completion_plan_phases_missing_review_start": 1,
+    "completion_plan_rows_with_review_start": 740,
+    "completion_plan_rows_missing_review_start": 5,
     "blocking_dashboard_status": "manual_evidence_required",
     "blocking_dashboard_queue_coverage": 1.0
   },
@@ -9279,6 +9284,11 @@
     },
     "phase_status": "balanced",
     "phase_count": 4,
+    "review_start_coverage_status": "some_phases_need_manual_research_start",
+    "phases_with_review_start": 3,
+    "phases_missing_review_start": 1,
+    "rows_with_review_start": 740,
+    "rows_missing_review_start": 5,
     "top_phase_rows": [
       {
         "phase_id": "replace_generic_source_urls",
@@ -10957,6 +10967,55 @@
         ]
       }
     ],
+    "review_start_coverage": {
+      "phase_count": 4,
+      "phases_with_review_start": 3,
+      "phases_missing_review_start": 1,
+      "rows_with_review_start": 740,
+      "rows_missing_review_start": 5,
+      "missing_review_start_phase_ids": [
+        "manual_nonstandard_image_research"
+      ],
+      "phase_review_starts": [
+        {
+          "phase_id": "replace_generic_source_urls",
+          "row_count": 50,
+          "has_review_start": true,
+          "first_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "review_url_kind": "source_search_url",
+          "next_step": "replace_generic_source_url_then_extract_image",
+          "source": "catalog_image_attachment_action_queue_public.json"
+        },
+        {
+          "phase_id": "review_representative_images",
+          "row_count": 23,
+          "has_review_start": true,
+          "first_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_url_kind": "current_source_url",
+          "next_step": "confirm_exact_product_type_then_attach_image",
+          "source": "catalog_image_attachment_action_queue_public.json"
+        },
+        {
+          "phase_id": "complete_source_discovery_focus_packs",
+          "row_count": 667,
+          "has_review_start": true,
+          "first_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+          "review_url_kind": "official_search_url",
+          "next_step": "fill_source_discovery_focus_confirmed_template",
+          "source": "source_discovery_focus_packs_public.json"
+        },
+        {
+          "phase_id": "manual_nonstandard_image_research",
+          "row_count": 5,
+          "has_review_start": false,
+          "first_review_url": "",
+          "review_url_kind": "",
+          "next_step": "manual_official_source_and_image_evidence_recorded",
+          "source": "catalog_image_enrichment_batches_public.json"
+        }
+      ],
+      "status": "some_phases_need_manual_research_start"
+    },
     "current_focus_pack": {
       "focus_pack_id": "source-discovery-focus-001",
       "source_store": "엔스카이",
