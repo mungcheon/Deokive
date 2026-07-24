@@ -39,7 +39,61 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
             report["download_readiness"]["next_safe_phase"],
             "find_exact_image_urls_for_missing_rows",
         )
+        self.assertEqual(
+            report["missing_image_evidence_priority"]["rows"],
+            summary["missing_image_url_rows"],
+        )
+        self.assertGreater(
+            len(report["missing_image_evidence_priority"]["by_source_store"]),
+            0,
+        )
+        self.assertGreater(
+            len(report["missing_image_evidence_priority"]["sample_rows"]),
+            0,
+        )
         self.assertEqual(report["findings"], [])
+
+    def test_report_prioritizes_missing_image_evidence_rows(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "A",
+                    "source_store": "Store A",
+                    "category": "Figure",
+                    "affiliation": "Series A",
+                },
+                {
+                    "catalog_index": 2,
+                    "name_ko": "B",
+                    "source_store": "Store A",
+                    "category": "Acrylic",
+                    "affiliation": "Series B",
+                },
+                {
+                    "catalog_index": 3,
+                    "name_ko": "C",
+                    "source_store": "Store B",
+                    "category": "Figure",
+                    "affiliation": "Series A",
+                    "image_url": "https://example.com/c.jpg",
+                    "local_image_path": "assets/catalog_images/does-not-exist-for-audit-test.webp",
+                },
+            ]
+        }
+
+        report = target.build_report(catalog, generated_at="2026-01-01T00:00:00Z")
+        priority = report["missing_image_evidence_priority"]
+
+        self.assertEqual(priority["rows"], 2)
+        self.assertEqual(priority["by_source_store"][0], ["Store A", 2])
+        self.assertEqual(priority["by_category"], [["Figure", 1], ["Acrylic", 1]])
+        self.assertEqual(priority["by_affiliation"], [["Series A", 1], ["Series B", 1]])
+        self.assertEqual(priority["sample_rows"][0]["catalog_index"], 1)
+        self.assertEqual(
+            report["download_readiness"]["missing_image_evidence_priority"],
+            priority,
+        )
 
     def test_report_flags_image_url_without_local_path(self) -> None:
         catalog = {

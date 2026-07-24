@@ -32,6 +32,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
     items: list[dict[str, Any]] = catalog["items"]
     rows = len(items)
     image_url_rows = [item for item in items if present(item.get("image_url"))]
+    missing_image_url_items = [item for item in items if not present(item.get("image_url"))]
     local_path_rows = [item for item in items if present(item.get("local_image_path"))]
     both_rows = [item for item in items if present(item.get("image_url")) and present(item.get("local_image_path"))]
     image_without_local = [item for item in items if present(item.get("image_url")) and not present(item.get("local_image_path"))]
@@ -74,7 +75,16 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         + len(missing_web_public_files)
         + len(invalid_paths)
     )
-    missing_image_url_rows = rows - len(image_url_rows)
+    missing_image_url_rows = len(missing_image_url_items)
+    missing_image_priority = {
+        "rows": missing_image_url_rows,
+        "by_source_store": _field_counts(missing_image_url_items, "source_store", limit=20),
+        "by_category": _field_counts(missing_image_url_items, "category", limit=20),
+        "by_affiliation": _field_counts(missing_image_url_items, "affiliation", limit=20),
+        "by_series_name": _field_counts(missing_image_url_items, "series_name", limit=20),
+        "top_source_store": _field_counts(missing_image_url_items, "source_store", limit=1),
+        "sample_rows": sample_rows(missing_image_url_items, limit=30),
+    }
     download_readiness = {
         "status": (
             "known_image_assets_complete"
@@ -90,6 +100,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         "missing_image_url_rows": missing_image_url_rows,
         "rows_still_requiring_image_url_evidence": missing_image_url_rows,
         "download_complete_for_known_image_urls": known_image_download_blockers == 0,
+        "missing_image_evidence_priority": missing_image_priority,
         "next_safe_phase": (
             "find_exact_image_urls_for_missing_rows"
             if known_image_download_blockers == 0 and missing_image_url_rows
@@ -140,6 +151,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "auto_download_ready_rows": 0,
         },
         "download_readiness": download_readiness,
+        "missing_image_evidence_priority": missing_image_priority,
         "breakdowns": {
             "by_extension": extension_counts.most_common(),
             "by_directory": directory_counts.most_common(20),
@@ -169,9 +181,17 @@ def sample_rows(rows: list[dict[str, Any]], limit: int = 20) -> list[dict[str, A
             "image_url": item.get("image_url"),
             "local_image_path": item.get("local_image_path"),
             "source_store": item.get("source_store"),
+            "category": item.get("category"),
+            "affiliation": item.get("affiliation"),
+            "series_name": item.get("series_name"),
         }
         for item in rows[:limit]
     ]
+
+
+def _field_counts(rows: list[dict[str, Any]], field: str, *, limit: int) -> list[list[Any]]:
+    counts = Counter(str(item.get(field) or "(blank)") for item in rows)
+    return [[value, count] for value, count in counts.most_common(limit)]
 
 
 def write_report(report: dict[str, Any], path: Path = REPORT) -> None:
