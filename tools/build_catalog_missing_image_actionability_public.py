@@ -1234,9 +1234,10 @@ def append_source_detail_readiness(
                         "name_ja": item.get("name_ja"),
                         "source_store": item.get("source_store"),
                         "candidate_title": item.get("candidate_title"),
-                        "candidate_source_url": item.get("candidate_source_url"),
+                        "rejected_candidate_source_url": item.get("candidate_source_url"),
                         "candidate_identity_flags": item.get("candidate_identity_flags") or [],
                         "workflow": "recheck_source_detail_candidate_identity",
+                        "candidate_status": "recheck_required_not_actionable",
                     }
                     for item in recheck_items[:12]
                 ],

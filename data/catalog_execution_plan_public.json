@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T16:22:39Z",
+  "generated_at": "2026-07-24T17:26:07Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 24,
+    "action_count": 23,
     "blocked_action_count": 1,
-    "manual_review_action_count": 21,
+    "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 32791,
+    "total_action_rows": 32776,
     "open_review_queues": {
       "source_discovery_rows": 672,
       "image_missing_rows": 745,
@@ -201,15 +201,15 @@
     "image_download_readiness_status": "known_image_assets_complete",
     "image_url_without_local_path_rows": 0,
     "image_missing_local_image_files": 0,
-    "image_rows_still_requiring_url_evidence": 710,
+    "image_rows_still_requiring_url_evidence": 745,
     "image_missing_evidence_top_source_stores": [
+      [
+        "엔스카이",
+        172
+      ],
       [
         "애니메이트",
         144
-      ],
-      [
-        "엔스카이",
-        137
       ],
       [
         "굿스마일컴퍼니",
@@ -247,27 +247,27 @@
       ],
       [
         "캔뱃지",
-        90
+        95
       ],
       [
         "인형",
-        77
+        83
       ],
       [
         "키링",
-        65
+        77
       ],
       [
         "마스코트",
-        62
+        63
       ],
       [
         "문구",
-        49
+        53
       ],
       [
         "머그컵",
-        23
+        28
       ]
     ],
     "image_auto_download_ready_rows": 0,
@@ -297,13 +297,13 @@
     "source_next_focus_fallback_rows": 0,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
     "source_next_focus_source_confirmation_ready_rows": 0,
-    "source_next_focus_exact_url_review_rows": 15,
+    "source_next_focus_exact_url_review_rows": 0,
     "source_next_focus_exact_url_manual_confirmed_rows": 0,
-    "source_next_focus_identity_backfill_rows": 2,
-    "source_next_focus_identity_candidate_review_rows": 2,
-    "source_next_focus_identity_candidate_review_candidate_rows": 5,
+    "source_next_focus_identity_backfill_rows": 0,
+    "source_next_focus_identity_candidate_review_rows": 0,
+    "source_next_focus_identity_candidate_review_candidate_rows": 0,
     "source_next_focus_fallback_import_dry_run_updated_rows": 0,
-    "source_next_focus_fallback_import_dry_run_skipped_rows": 17,
+    "source_next_focus_fallback_import_dry_run_skipped_rows": 0,
     "source_discovery_starter_queue_rows": 672,
     "source_discovery_starter_queue_groups": 353,
     "source_discovery_starter_next_review_batch_rows": 20,
@@ -1012,50 +1012,6 @@
         ],
         "completion_readiness_status": "variant_detail_required",
         "auto_apply_ready_rows": 0,
-        "auto_apply_enabled": false
-      }
-    },
-    {
-      "priority": 20,
-      "workstream": "source_discovery_next_focus_exact_url_review_queue",
-      "public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
-      "status": "manual_review",
-      "rows": 15,
-      "command": "Confirm exact product detail URLs from the fallback queue before image attachment.",
-      "next_step": "copy_exact_confirmed_source_urls_into_focus_template",
-      "blocker": "Exact source URL review is manual-only until product identity is confirmed.",
-      "auto_apply_enabled": false,
-      "evidence": {
-        "queue_rows": 15,
-        "manual_confirmed_rows": 0,
-        "blocked_identity_rows": 2,
-        "by_source_store": [
-          [
-            "애니메이트",
-            15
-          ]
-        ],
-        "by_category": [
-          [
-            "아크릴 스탠드",
-            15
-          ]
-        ],
-        "by_identity_review_status": [
-          [
-            "exact_page_match_review_ready",
-            15
-          ]
-        ],
-        "primary_review_url_rows": 15,
-        "primary_review_url_kind_counts": [
-          [
-            "domain_limited_web_search",
-            15
-          ]
-        ],
-        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
-        "first_primary_review_url_kind": "domain_limited_web_search",
         "auto_apply_enabled": false
       }
     },
@@ -2347,24 +2303,24 @@
       "evidence": {
         "known_image_asset_status": "pass",
         "download_readiness_status": "known_image_assets_complete",
-        "image_url_rows": 19637,
-        "local_image_path_rows": 19637,
+        "image_url_rows": 19602,
+        "local_image_path_rows": 19602,
         "image_url_without_local_path_rows": 0,
         "missing_local_image_files": 0,
         "missing_web_public_asset_files": 0,
         "known_image_download_blocker_rows": 0,
         "auto_download_ready_rows": 0,
-        "rows_still_requiring_image_url_evidence": 710,
+        "rows_still_requiring_image_url_evidence": 745,
         "missing_image_evidence_priority": {
-          "rows": 710,
+          "rows": 745,
           "by_source_store": [
+            [
+              "엔스카이",
+              172
+            ],
             [
               "애니메이트",
               144
-            ],
-            [
-              "엔스카이",
-              137
             ],
             [
               "굿스마일컴퍼니",
@@ -2450,27 +2406,27 @@
             ],
             [
               "캔뱃지",
-              90
+              95
             ],
             [
               "인형",
-              77
+              83
             ],
             [
               "키링",
-              65
+              77
             ],
             [
               "마스코트",
-              62
+              63
             ],
             [
               "문구",
-              49
+              53
             ],
             [
               "머그컵",
-              23
+              28
             ],
             [
               "포토카드",
@@ -2498,7 +2454,7 @@
             ],
             [
               "응원용품",
-              4
+              6
             ],
             [
               "응원봉",
@@ -2524,7 +2480,7 @@
           "by_affiliation": [
             [
               "원피스",
-              80
+              82
             ],
             [
               "치이카와",
@@ -2539,16 +2495,20 @@
               50
             ],
             [
+              "나의 히어로 아카데미아",
+              45
+            ],
+            [
+              "귀멸의 칼날",
+              43
+            ],
+            [
               "메이드 인 어비스",
               41
             ],
             [
               "스텔라이브",
               41
-            ],
-            [
-              "나의 히어로 아카데미아",
-              36
             ],
             [
               "하츠네 미쿠",
@@ -2560,15 +2520,11 @@
             ],
             [
               "체인소 맨",
-              32
+              34
             ],
             [
               "장송의 프리렌",
               31
-            ],
-            [
-              "귀멸의 칼날",
-              25
             ],
             [
               "짱구는 못말려",
@@ -2599,14 +2555,14 @@
               10
             ],
             [
-              "리제로",
-              8
+              "SPY×FAMILY",
+              10
             ]
           ],
           "by_series_name": [
             [
               "(blank)",
-              660
+              695
             ],
             [
               "ご当地",
@@ -2623,8 +2579,8 @@
           ],
           "top_source_store": [
             [
-              "애니메이트",
-              144
+              "엔스카이",
+              172
             ]
           ],
           "sample_rows": [
@@ -2994,7 +2950,7 @@
         "image_attachment_template_confirmed_rows": 0,
         "image_attachment_template_dry_run_updated_rows": 0,
         "image_attachment_template_dry_run_skipped_rows": 73,
-        "source_discovery_focus_template_rows": 417,
+        "source_discovery_focus_template_rows": 452,
         "source_discovery_focus_template_confirmed_rows": 0,
         "workstream_count": 4,
         "source_url_update_workstream_count": 3,

@@ -5187,6 +5187,25 @@ def build_agent_work_queue_public(
         batch["next_machine_step"] = next_machine_step_for_state(review_state)
         batches.append(batch)
 
+    def source_detail_candidate_agent_sample(item: dict[str, Any]) -> dict[str, Any]:
+        sample = dict(item)
+        if (
+            item.get("recommended_action")
+            == "recheck_candidate_identity_before_source_or_image_patch"
+        ):
+            candidate_source_url = sample.pop("candidate_source_url", None)
+            candidate_image_url = sample.pop("candidate_image_url", None)
+            sample.pop("source_patch_template", None)
+            sample.pop("image_patch_template", None)
+            if candidate_source_url:
+                sample["rejected_candidate_source_url"] = candidate_source_url
+            if candidate_image_url:
+                sample["rejected_candidate_image_url"] = candidate_image_url
+            sample["candidate_status"] = "recheck_required_not_actionable"
+            sample["blocked_until"] = "candidate_identity_rechecked_or_replaced"
+            sample["safe_source_image_pair"] = False
+        return sample
+
     danganronpa_items = danganronpa_missing_media.get("items", [])
     danganronpa_by_store: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for item in danganronpa_items:
@@ -5699,7 +5718,11 @@ def build_agent_work_queue_public(
                 "Accept image_url only when it comes from the accepted source page or trusted official CDN.",
                 "Leave manual_confirmed false for related products, bundles, or wrong variants.",
             ],
-            samples=[item for item in action_batch.get("items", []) if isinstance(item, dict)],
+            samples=[
+                source_detail_candidate_agent_sample(item)
+                for item in action_batch.get("items", [])
+                if isinstance(item, dict)
+            ],
         )
     if source_review_batch_rows:
         for source_batch in source_review_batch_rows[:12]:

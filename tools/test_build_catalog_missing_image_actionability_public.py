@@ -372,6 +372,15 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertTrue(count_review_row["sample_items"][0]["candidate_count_review_required"])
         source_detail_row = next(row for row in report["readiness"] if row["readiness"] == "source_detail_candidate_recheck_required")
         self.assertEqual(source_detail_row["sample_items"][0]["candidate_identity_flags"], ["only_generic_shared_tokens"])
+        self.assertNotIn("candidate_source_url", source_detail_row["sample_items"][0])
+        self.assertEqual(
+            source_detail_row["sample_items"][0]["rejected_candidate_source_url"],
+            "https://example.test/item",
+        )
+        self.assertEqual(
+            source_detail_row["sample_items"][0]["candidate_status"],
+            "recheck_required_not_actionable",
+        )
         self.assertEqual(readiness["source_url_replacement_required"], 2)
         self.assertEqual(readiness["representative_image_review_required"], 1)
         self.assertEqual(readiness["source_url_discovery_required"], 1)
