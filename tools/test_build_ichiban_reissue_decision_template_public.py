@@ -52,6 +52,10 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["summary"]["campaign_covered_item_template_rows"], 1)
         self.assertEqual(report["summary"]["standalone_item_template_rows"], 0)
         self.assertEqual(report["summary"]["campaign_item_decision_preview_rows"], 2)
+        self.assertEqual(report["summary"]["item_templates_with_evidence_urls"], 1)
+        self.assertEqual(report["summary"]["campaign_templates_with_evidence_urls"], 1)
+        self.assertEqual(report["summary"]["first_item_evidence_url"], "https://1kuji.com/products/a")
+        self.assertEqual(report["summary"]["first_campaign_evidence_url"], "https://1kuji.com/products/a")
         self.assertFalse(report["summary"]["auto_merge_enabled"])
         self.assertFalse(report["summary"]["auto_delete_enabled"])
         self.assertTrue(report["summary"]["manual_review_required_before_mutation"])
@@ -64,6 +68,8 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
             ["item-001", "item-002"],
         )
         self.assertEqual(report["campaign_templates"][0]["item_decision_application_preview_rows"], 2)
+        self.assertEqual(report["campaign_templates"][0]["first_evidence_url"], "https://1kuji.com/products/a")
+        self.assertEqual(report["campaign_templates"][0]["evidence_url_count"], 2)
         self.assertEqual(
             report["campaign_templates"][0]["item_decision_application_preview"][0][
                 "suggested_decision_if_campaign_is_reissue"
@@ -81,7 +87,13 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                 "manual_confirmed"
             ]
         )
+        self.assertEqual(
+            report["campaign_templates"][0]["item_decision_application_preview"][0]["first_evidence_url"],
+            "https://1kuji.com/products/a",
+        )
         self.assertEqual(report["item_templates"][0]["drop_catalog_indexes"], [2])
+        self.assertEqual(report["item_templates"][0]["first_evidence_url"], "https://1kuji.com/products/a")
+        self.assertEqual(report["item_templates"][0]["evidence_url_count"], 2)
         self.assertFalse(report["automation_policy"]["auto_merge_enabled"])
 
 

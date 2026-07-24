@@ -45,6 +45,19 @@ def _copy_template(row: dict[str, Any]) -> dict[str, Any]:
     return template
 
 
+def _first_url(urls: Any) -> str:
+    if not isinstance(urls, list):
+        return ""
+    for url in urls:
+        if isinstance(url, str) and url.strip():
+            return url.strip()
+    return ""
+
+
+def _evidence_url_count(row: dict[str, Any]) -> int:
+    return sum(1 for url in row.get("source_urls") or [] if isinstance(url, str) and url.strip())
+
+
 def _item_template(row: dict[str, Any]) -> dict[str, Any]:
     template = _copy_template(row)
     return {
@@ -54,6 +67,8 @@ def _item_template(row: dict[str, Any]) -> dict[str, Any]:
         "normalized_name": row.get("normalized_name"),
         "catalog_indexes": row.get("catalog_indexes") or [],
         "source_urls": row.get("source_urls") or [],
+        "first_evidence_url": _first_url(row.get("source_urls")),
+        "evidence_url_count": _evidence_url_count(row),
         "campaign_slug_families": row.get("campaign_slug_families") or [],
         "campaign_url_comparison": row.get("campaign_url_comparison") or {},
         "reissue_signal_reasons": row.get("reissue_signal_reasons") or [],
@@ -77,6 +92,8 @@ def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
         "campaign_work_order_id": row.get("campaign_work_order_id"),
         "priority": row.get("priority"),
         "source_urls": row.get("source_urls") or [],
+        "first_evidence_url": _first_url(row.get("source_urls")),
+        "evidence_url_count": _evidence_url_count(row),
         "item_work_order_count": row.get("item_work_order_count") or 0,
         "affected_item_work_order_ids": template.get("affected_item_work_order_ids") or [],
         "catalog_indexes": row.get("catalog_indexes") or [],
@@ -109,6 +126,8 @@ def _campaign_item_decision_preview(
                 "work_order_id": work_order_id,
                 "catalog_indexes": item.get("catalog_indexes") or [],
                 "source_urls": item.get("source_urls") or campaign.get("source_urls") or [],
+                "first_evidence_url": item.get("first_evidence_url")
+                or _first_url(campaign.get("source_urls")),
                 "suggested_decision_if_campaign_is_reissue": (
                     "reissue_or_campaign_variant_keep_separate"
                 ),
@@ -181,6 +200,16 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         "campaign_item_decision_preview_rows": sum(
             int(campaign.get("item_decision_application_preview_rows") or 0)
             for campaign in campaign_templates
+        ),
+        "item_templates_with_evidence_urls": sum(1 for item in item_templates if item.get("first_evidence_url")),
+        "campaign_templates_with_evidence_urls": sum(
+            1 for campaign in campaign_templates if campaign.get("first_evidence_url")
+        ),
+        "first_item_evidence_url": _first_url(
+            [item.get("first_evidence_url") for item in item_templates]
+        ),
+        "first_campaign_evidence_url": _first_url(
+            [campaign.get("first_evidence_url") for campaign in campaign_templates]
         ),
         "auto_merge_enabled": False,
         "auto_delete_enabled": False,

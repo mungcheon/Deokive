@@ -2465,6 +2465,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(ichiban_reissue_dedupe_agent_batches[0]["rows"], 2)
         self.assertEqual(len(ichiban_reissue_dedupe_agent_batches[0]["sample_items"]), 2)
+        self.assertTrue(
+            ichiban_reissue_dedupe_agent_batches[0].get("review_summary", {}).get("first_evidence_url")
+        )
+        self.assertGreater(
+            ichiban_reissue_dedupe_agent_batches[0].get("review_summary", {}).get("source_url_count", 0),
+            1,
+        )
+        self.assertTrue(
+            all(item.get("source_url") for item in ichiban_reissue_dedupe_agent_batches[0]["sample_items"])
+        )
         self.assertEqual(
             open_queues.get("ichiban_metadata_action_campaigns"),
             ichiban_action_summary.get("queued_action_campaigns"),

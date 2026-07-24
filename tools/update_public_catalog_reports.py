@@ -4888,11 +4888,25 @@ def build_agent_work_queue_public(
             samples=[
                 {
                     **compact_sample(item),
+                    "source_url": item.get("source_url"),
                     "campaign_url_comparison": lane.get("campaign_url_comparison"),
                 }
                 for item in lane.get("sample_rows", [])
                 if isinstance(item, dict)
             ],
+            review_summary={
+                "source_url_count": int(lane.get("source_url_count") or 0),
+                "first_evidence_url": next(
+                    (
+                        str(url).strip()
+                        for url in lane.get("source_urls", [])
+                        if isinstance(url, str) and url.strip()
+                    ),
+                    "",
+                ),
+                "has_reissue_signal": bool(lane.get("has_reissue_signal")),
+                "reissue_signal_reasons": lane.get("reissue_signal_reasons") or [],
+            },
         )
     for action_batch in dedupe_action_batches[:6]:
         add_batch(
