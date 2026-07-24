@@ -68,6 +68,16 @@ def _pair_counts(value: Any) -> dict[str, int]:
     return counts
 
 
+def _workflow_row(report: dict[str, Any], workflow: str) -> dict[str, Any]:
+    rows = report.get("workflows")
+    if not isinstance(rows, list):
+        return {}
+    for row in rows:
+        if isinstance(row, dict) and row.get("workflow") == workflow:
+            return row
+    return {}
+
+
 def _starter_group_key(group: dict[str, Any]) -> str:
     parts = [
         str(group.get("source_store") or "").strip(),
@@ -242,6 +252,15 @@ def _build_plan(load_report) -> dict[str, Any]:
     confirmed_work_order = confirmed_readiness.get("work_order")
     if not isinstance(confirmed_work_order, list):
         confirmed_work_order = []
+    variant_metadata_workflow = _workflow_row(confirmed_readiness, "variant_metadata")
+    variant_metadata_template_rows = _count(variant_metadata_workflow, "template_items")
+    variant_metadata_manual_confirmed_rows = _count(
+        variant_metadata_workflow, "manual_confirmed_true"
+    )
+    variant_metadata_skipped_rows = _count(variant_metadata_workflow, "skipped_rows")
+    open_queues[
+        "confirmed_import_variant_metadata_template_rows"
+    ] = variant_metadata_template_rows
 
     actions: list[dict[str, Any]] = []
     requested_template_counts = _pair_counts(requested_summary.get("field_patch_template_counts", []))
@@ -281,6 +300,9 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "manual_confirmed_ready_rows": manual_confirmed_ready_rows,
                 "manual_confirmation_backlog_rows": manual_confirmation_backlog_rows,
                 "blocked_confirmed_rows": blocked_confirmed_rows,
+                "variant_metadata_template_rows": variant_metadata_template_rows,
+                "variant_metadata_manual_confirmed_rows": variant_metadata_manual_confirmed_rows,
+                "variant_metadata_skipped_rows": variant_metadata_skipped_rows,
                 "work_order_lanes": _count(confirmed_summary, "work_order_lanes"),
                 "top_work_order_row_count": _count(
                     confirmed_summary, "top_work_order_row_count"
@@ -1741,6 +1763,9 @@ def _build_plan(load_report) -> dict[str, Any]:
             "confirmed_import_manual_confirmed_ready_rows": manual_confirmed_ready_rows,
             "confirmed_import_manual_confirmation_backlog_rows": manual_confirmation_backlog_rows,
             "confirmed_import_blocked_confirmed_rows": blocked_confirmed_rows,
+            "confirmed_import_variant_metadata_template_rows": variant_metadata_template_rows,
+            "confirmed_import_variant_metadata_manual_confirmed_rows": variant_metadata_manual_confirmed_rows,
+            "confirmed_import_variant_metadata_skipped_rows": variant_metadata_skipped_rows,
             "confirmed_import_workflow_count": _count(confirmed_summary, "workflow_count"),
             "confirmed_import_work_order_lanes": _count(
                 confirmed_summary, "work_order_lanes"

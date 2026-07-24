@@ -739,6 +739,15 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                         "auto_apply_enabled": False,
                     }
                 ],
+                "workflows": [
+                    {
+                        "workflow": "variant_metadata",
+                        "public_workstream": "catalog_variant_metadata_enrichment",
+                        "template_items": 2,
+                        "manual_confirmed_true": 0,
+                        "skipped_rows": 2,
+                    }
+                ],
             },
         }
 
@@ -755,6 +764,9 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(first["evidence"]["public_action_queue_batches"], 2)
         self.assertEqual(first["evidence"]["manual_confirmed_ready_rows"], 0)
         self.assertEqual(first["evidence"]["manual_confirmation_backlog_rows"], 9)
+        self.assertEqual(first["evidence"]["variant_metadata_template_rows"], 2)
+        self.assertEqual(first["evidence"]["variant_metadata_manual_confirmed_rows"], 0)
+        self.assertEqual(first["evidence"]["variant_metadata_skipped_rows"], 2)
         self.assertEqual(first["evidence"]["workflow_count"], 2)
         self.assertEqual(first["evidence"]["work_order_lanes"], 2)
         self.assertEqual(first["evidence"]["top_work_order_row_count"], 4)
@@ -777,6 +789,9 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["confirmed_import_manual_confirmed_ready_rows"], 0)
         self.assertEqual(report["summary"]["confirmed_import_manual_confirmation_backlog_rows"], 9)
         self.assertEqual(report["summary"]["confirmed_import_blocked_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["confirmed_import_variant_metadata_template_rows"], 2)
+        self.assertEqual(report["summary"]["confirmed_import_variant_metadata_manual_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["confirmed_import_variant_metadata_skipped_rows"], 2)
         self.assertEqual(report["summary"]["confirmed_import_workflow_count"], 2)
         self.assertEqual(report["summary"]["confirmed_import_work_order_lanes"], 2)
         self.assertEqual(report["summary"]["confirmed_import_top_work_order_row_count"], 4)
