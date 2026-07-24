@@ -10987,5 +10987,42 @@
     "fallback_to_domain_limited_web_search_rows": 20,
     "auto_apply_enabled": false,
     "recommended_next_action": "Use exact title candidates only after manual review; broad Ensky search result pages are not source_url evidence."
+  },
+  "missing_image_completion_gate": {
+    "public_reports": [
+      "data/catalog_missing_image_actionability_public.json",
+      "data/catalog_image_attachment_action_queue_public.json",
+      "data/catalog_image_attachment_template_import_dry_run_public.json",
+      "data/catalog_image_asset_audit_public.json",
+      "data/catalog_missing_image_report_coverage_public.json"
+    ],
+    "status": "manual_evidence_required",
+    "missing_image_rows": 745,
+    "assigned_report_rows": 745,
+    "unassigned_missing_image_rows": 0,
+    "action_queue_rows": 73,
+    "source_first_rows": 717,
+    "review_before_attach_rows": 23,
+    "manual_image_research_rows": 5,
+    "source_discovery_focus_pack_rows": 452,
+    "source_discovery_remaining_focus_review_rows": 452,
+    "not_yet_queued_rows": 203,
+    "next_queue_lane": "replace_generic_source_urls",
+    "next_queue_rows": 50,
+    "next_queue_template": "catalog_image_attachment_confirmed_template_public.json",
+    "image_url_ready_rows": 0,
+    "blocked_before_image_import_rows": 73,
+    "download_ready_after_manual_image_url_rows": 73,
+    "known_image_assets_complete": true,
+    "known_image_download_blocker_rows": 0,
+    "auto_apply_ready_rows": 0,
+    "auto_apply_enabled": false,
+    "manual_evidence_required": true,
+    "next_safe_phase": "replace_generic_source_urls",
+    "blocked_reasons": [
+      "missing_image_rows_require_manual_evidence",
+      "image_attachment_template_has_no_manual_confirmations",
+      "source_discovery_focus_packs_require_review"
+    ]
   }
 }

@@ -496,6 +496,38 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertIs(completion_plan["automation_policy"]["auto_apply_catalog_changes"], False)
             self.assertIs(quality["missing_image_actionability"]["auto_apply_enabled"], False)
+            missing_image_gate = quality["missing_image_completion_gate"]
+            self.assertEqual(missing_image_gate["status"], "manual_evidence_required")
+            self.assertEqual(missing_image_gate["missing_image_rows"], result["missing"]["image_url"])
+            self.assertEqual(missing_image_gate["assigned_report_rows"], result["missing"]["image_url"])
+            self.assertEqual(missing_image_gate["unassigned_missing_image_rows"], 0)
+            self.assertEqual(missing_image_gate["action_queue_rows"], 73)
+            self.assertEqual(missing_image_gate["source_first_rows"], 717)
+            self.assertEqual(missing_image_gate["review_before_attach_rows"], 23)
+            self.assertEqual(missing_image_gate["manual_image_research_rows"], 5)
+            self.assertEqual(missing_image_gate["source_discovery_focus_pack_rows"], 452)
+            self.assertEqual(missing_image_gate["not_yet_queued_rows"], 203)
+            self.assertEqual(missing_image_gate["next_queue_lane"], "replace_generic_source_urls")
+            self.assertEqual(missing_image_gate["next_queue_rows"], 50)
+            self.assertEqual(
+                missing_image_gate["next_queue_template"],
+                "catalog_image_attachment_confirmed_template_public.json",
+            )
+            self.assertEqual(missing_image_gate["image_url_ready_rows"], 0)
+            self.assertEqual(missing_image_gate["blocked_before_image_import_rows"], 73)
+            self.assertEqual(
+                missing_image_gate["download_ready_after_manual_image_url_rows"],
+                73,
+            )
+            self.assertTrue(missing_image_gate["known_image_assets_complete"])
+            self.assertEqual(missing_image_gate["known_image_download_blocker_rows"], 0)
+            self.assertEqual(missing_image_gate["auto_apply_ready_rows"], 0)
+            self.assertFalse(missing_image_gate["auto_apply_enabled"])
+            self.assertTrue(missing_image_gate["manual_evidence_required"])
+            self.assertIn(
+                "missing_image_rows_require_manual_evidence",
+                missing_image_gate["blocked_reasons"],
+            )
         self.assertEqual(
             quality["image_source_url_confirmed_template"]["template_items"],
             quality["image_attachment_action_queue"]["source_url_update_template_rows"],

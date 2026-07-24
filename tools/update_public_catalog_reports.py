@@ -10087,8 +10087,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{REQUESTED_FOCUS_NEXT_WORK.name}",
             **requested_focus_next_work["summary"],
         }
+        image_attachment_action_summary = image_attachment_action_queue.get("summary", {})
         if IMAGE_ATTACHMENT_ACTION_QUEUE.exists():
-            image_attachment_action_summary = image_attachment_action_queue.get("summary", {})
             target["image_attachment_action_queue"] = copy_report_summary(
                 IMAGE_ATTACHMENT_ACTION_QUEUE, "image_attachment_action_queue"
             )
@@ -10175,6 +10175,109 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "blocking_dashboard",
                 {},
             ),
+        }
+        missing_image_summary = missing_image_actionability.get("summary", {})
+        missing_image_execution = missing_image_actionability.get(
+            "execution_queue_summary", {}
+        )
+        missing_image_blocking = missing_image_actionability.get(
+            "blocking_dashboard", {}
+        )
+        target["missing_image_completion_gate"] = {
+            "public_reports": [
+                f"data/{MISSING_IMAGE_ACTIONABILITY.name}",
+                f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+                f"data/{IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.name}",
+                f"data/{IMAGE_ASSET_AUDIT.name}",
+                f"data/{MISSING_IMAGE_REPORT_COVERAGE.name}",
+            ],
+            "status": missing_image_blocking.get(
+                "status", "manual_evidence_required"
+            ),
+            "missing_image_rows": missing_image_summary.get(
+                "missing_image_rows", 0
+            ),
+            "assigned_report_rows": missing_image_report_coverage["summary"].get(
+                "assigned_report_rows", 0
+            ),
+            "unassigned_missing_image_rows": missing_image_report_coverage[
+                "summary"
+            ].get("unassigned_missing_image_rows", 0),
+            "action_queue_rows": missing_image_summary.get("action_queue_rows", 0),
+            "source_first_rows": missing_image_summary.get("source_first_rows", 0),
+            "review_before_attach_rows": missing_image_summary.get(
+                "review_before_attach_rows", 0
+            ),
+            "manual_image_research_rows": missing_image_summary.get(
+                "manual_image_research_rows", 0
+            ),
+            "source_discovery_focus_pack_rows": missing_image_summary.get(
+                "source_discovery_focus_pack_rows", 0
+            ),
+            "source_discovery_remaining_focus_review_rows": (
+                missing_image_summary.get(
+                    "source_discovery_remaining_focus_review_rows", 0
+                )
+            ),
+            "not_yet_queued_rows": missing_image_execution.get(
+                "not_yet_queued_rows", 0
+            ),
+            "next_queue_lane": missing_image_execution.get("next_queue", {}).get(
+                "lane"
+            ),
+            "next_queue_rows": missing_image_execution.get("next_queue", {}).get(
+                "rows",
+                missing_image_execution.get("next_queue", {}).get("row_count", 0),
+            ),
+            "next_queue_template": missing_image_execution.get(
+                "next_queue", {}
+            ).get("template"),
+            "image_url_ready_rows": image_attachment_action_summary.get(
+                "image_url_ready_rows", 0
+            ),
+            "blocked_before_image_import_rows": image_attachment_action_summary.get(
+                "blocked_before_image_import_rows", 0
+            ),
+            "download_ready_after_manual_image_url_rows": (
+                image_attachment_action_summary.get(
+                    "download_ready_after_manual_image_url_rows", 0
+                )
+            ),
+            "known_image_assets_complete": image_asset_audit["summary"].get(
+                "download_readiness_status"
+            )
+            == "known_image_assets_complete",
+            "known_image_download_blocker_rows": image_asset_audit["summary"].get(
+                "known_image_download_blocker_rows", 0
+            ),
+            "auto_apply_ready_rows": missing_image_execution.get(
+                "auto_import_ready_rows", 0
+            ),
+            "auto_apply_enabled": False,
+            "manual_evidence_required": True,
+            "next_safe_phase": missing_image_execution.get("next_queue", {}).get(
+                "lane", "replace_generic_source_urls"
+            ),
+            "blocked_reasons": [
+                reason
+                for reason in [
+                    "missing_image_rows_require_manual_evidence"
+                    if missing_image_summary.get("missing_image_rows", 0)
+                    else None,
+                    "image_attachment_template_has_no_manual_confirmations"
+                    if image_attachment_template_import_dry_run["summary"].get(
+                        "manual_confirmed_rows", 0
+                    )
+                    == 0
+                    else None,
+                    "source_discovery_focus_packs_require_review"
+                    if missing_image_summary.get(
+                        "source_discovery_remaining_focus_review_rows", 0
+                    )
+                    else None,
+                ]
+                if reason
+            ],
         }
         target["danganronpa_missing_media"] = {
             "public_report": f"data/{DANGANRONPA_MISSING_MEDIA.name}",
