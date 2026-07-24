@@ -416,7 +416,7 @@ class _CatalogPickerActionButton extends StatelessWidget {
         onTap: onPressed,
         child: Container(
           constraints: const BoxConstraints(minWidth: 104, minHeight: 34),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
           child: IconTheme(
             data: const IconThemeData(
               color: _catalogPickerActionForeground,
@@ -449,6 +449,13 @@ class _CatalogPickerActionButton extends StatelessWidget {
                           fontSize: 12,
                           fontWeight: FontWeight.w900,
                           height: 1,
+                          shadows: [
+                            Shadow(
+                              color: Color(0x33000000),
+                              blurRadius: 2,
+                              offset: Offset(0, 1),
+                            ),
+                          ],
                         ),
                         maxLines: 1,
                         softWrap: false,
