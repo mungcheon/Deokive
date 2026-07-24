@@ -3063,10 +3063,53 @@
     "missing_official_price_jpy_campaign_groups": 41,
     "official_price_jpy_review_queue_campaigns": 41,
     "avg_missing_price_rows_per_campaign_group": 8.54,
+    "metadata_resolution_readiness_status": "manual_campaign_metadata_review_required",
+    "metadata_manual_review_campaigns": 42,
+    "metadata_auto_apply_ready_campaigns": 0,
     "metadata_review_queue_covers_all_price_campaign_groups": true,
     "campaign_metadata_review_queue_rows": 42,
     "image_coverage": 1.0,
-    "source_url_coverage": 1.0
+    "source_url_coverage": 1.0,
+    "metadata_resolution_readiness": {
+      "status": "manual_campaign_metadata_review_required",
+      "manual_review_campaigns": 42,
+      "manual_review_catalog_item_rows": 358,
+      "release_date_review_queue_campaigns": 1,
+      "price_review_queue_campaigns": 41,
+      "missing_release_date_rows": 8,
+      "missing_official_price_jpy_rows": 350,
+      "review_queue_covers_all_price_campaign_groups": true,
+      "auto_apply_ready_campaigns": 0,
+      "auto_apply_enabled": false,
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "blocked_reasons": [
+        "campaign_metadata_requires_labeled_official_evidence"
+      ],
+      "next_safe_phase": "verify_labeled_official_release_date",
+      "next_review_campaign": {
+        "group_key": "https://1kuji.com/products/jujutsu-o",
+        "url": "https://1kuji.com/products/jujutsu-o",
+        "slug": "jujutsu-o",
+        "title": "一番くじ 呪術廻戦 －オンライン－",
+        "catalog_item_rows": 8,
+        "missing_fields": [
+          "release_date"
+        ],
+        "review_priority": 10,
+        "sample_catalog_indexes": [
+          14193,
+          14194,
+          14195,
+          14196,
+          14197,
+          14198,
+          14199,
+          14200
+        ],
+        "source_evidence_required": "official_1kuji_campaign_page"
+      },
+      "safety_note": "Apply release dates and draw prices only after a labeled official 1kuji campaign page or captured official archive confirms the field for the same campaign URL."
+    }
   },
   "metadata_backlog": {
     "public_report": "data/catalog_metadata_backlog_public.json",

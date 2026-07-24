@@ -729,6 +729,40 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
             "campaign_draw_price",
         )
+        self.assertEqual(
+            ichiban_history["summary"]["metadata_resolution_readiness_status"],
+            "manual_campaign_metadata_review_required",
+        )
+        self.assertEqual(
+            ichiban_history["summary"]["metadata_manual_review_campaigns"],
+            42,
+        )
+        self.assertEqual(
+            ichiban_history["summary"]["metadata_auto_apply_ready_campaigns"],
+            0,
+        )
+        self.assertEqual(
+            ichiban_history["metadata_resolution_readiness"]["status"],
+            "manual_campaign_metadata_review_required",
+        )
+        self.assertEqual(
+            ichiban_history["metadata_resolution_readiness"]["manual_review_campaigns"],
+            ichiban_history["summary"]["campaign_metadata_review_queue_rows"],
+        )
+        self.assertEqual(
+            ichiban_history["metadata_resolution_readiness"]["next_review_campaign"]["slug"],
+            "jujutsu-o",
+        )
+        self.assertIn(
+            "release_date",
+            ichiban_history["metadata_resolution_readiness"]["next_review_campaign"][
+                "missing_fields"
+            ],
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_history"]["metadata_resolution_readiness"]["next_safe_phase"],
+            "verify_labeled_official_release_date",
+        )
         self.assertIn(
             "do not overwrite zero-price Last One or Double Chance exception rows",
             ichiban_history["metadata_resolution_summary"]["guardrails"],

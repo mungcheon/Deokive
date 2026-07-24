@@ -6021,6 +6021,59 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
         ],
         "auto_apply_enabled": False,
     }
+    next_review_campaign = campaign_metadata_review_queue[0] if campaign_metadata_review_queue else {}
+    next_review_missing_fields = list(next_review_campaign.get("missing_fields") or [])
+    metadata_resolution_readiness = {
+        "status": (
+            "manual_campaign_metadata_review_required"
+            if campaign_metadata_review_queue
+            else "metadata_complete"
+        ),
+        "manual_review_campaigns": len(campaign_metadata_review_queue),
+        "manual_review_catalog_item_rows": sum(
+            int(row.get("catalog_item_rows") or 0)
+            for row in campaign_metadata_review_queue
+        ),
+        "release_date_review_queue_campaigns": release_review_queue_campaigns,
+        "price_review_queue_campaigns": price_review_queue_campaigns,
+        "missing_release_date_rows": len(missing_release),
+        "missing_official_price_jpy_rows": len(missing_price),
+        "review_queue_covers_all_price_campaign_groups": (
+            price_review_queue_campaigns == len(missing_price_groups)
+        ),
+        "auto_apply_ready_campaigns": 0,
+        "auto_apply_enabled": False,
+        "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+        "blocked_reasons": (
+            ["campaign_metadata_requires_labeled_official_evidence"]
+            if campaign_metadata_review_queue
+            else ["none"]
+        ),
+        "next_safe_phase": (
+            "verify_labeled_official_release_date"
+            if "release_date" in next_review_missing_fields
+            else "verify_labeled_official_price_jpy"
+            if "official_price_jpy" in next_review_missing_fields
+            else "archive_ichiban_metadata_completion"
+        ),
+        "next_review_campaign": {
+            "group_key": next_review_campaign.get("group_key"),
+            "url": next_review_campaign.get("url"),
+            "slug": next_review_campaign.get("slug"),
+            "title": next_review_campaign.get("title"),
+            "catalog_item_rows": next_review_campaign.get("catalog_item_rows"),
+            "missing_fields": next_review_missing_fields,
+            "review_priority": next_review_campaign.get("review_priority"),
+            "sample_catalog_indexes": next_review_campaign.get("sample_catalog_indexes", []),
+            "source_evidence_required": next_review_campaign.get("source_evidence_required"),
+        }
+        if next_review_campaign
+        else {},
+        "safety_note": (
+            "Apply release dates and draw prices only after a labeled official 1kuji "
+            "campaign page or captured official archive confirms the field for the same campaign URL."
+        ),
+    }
 
     latest_campaigns = sorted(
         campaign_rows,
@@ -6041,6 +6094,9 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
             "missing_official_price_jpy_campaign_groups": len(missing_price_groups),
             "official_price_jpy_review_queue_campaigns": price_review_queue_campaigns,
             "avg_missing_price_rows_per_campaign_group": price_rows_per_campaign,
+            "metadata_resolution_readiness_status": metadata_resolution_readiness["status"],
+            "metadata_manual_review_campaigns": metadata_resolution_readiness["manual_review_campaigns"],
+            "metadata_auto_apply_ready_campaigns": 0,
             "metadata_review_queue_covers_all_price_campaign_groups": (
                 price_review_queue_campaigns == len(missing_price_groups)
             ),
@@ -6097,6 +6153,7 @@ def build_ichiban_kuji_history_public(items: list[dict[str, Any]]) -> dict[str, 
         "missing_official_price_jpy_campaigns": missing_price_groups,
         "campaign_metadata_review_queue": campaign_metadata_review_queue[:120],
         "metadata_resolution_summary": metadata_resolution_summary,
+        "metadata_resolution_readiness": metadata_resolution_readiness,
         "automation_policy": {
             "auto_import_campaigns": False,
             "requires_manual_review": True,
@@ -8228,6 +8285,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["ichiban_kuji_history"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORY.name}",
             **ichiban_kuji_history["summary"],
+            "metadata_resolution_readiness": ichiban_kuji_history.get(
+                "metadata_resolution_readiness",
+                {},
+            ),
         }
         if ICHIIBAN_KUJI_METADATA_PROBE.exists():
             target["ichiban_kuji_metadata_probe"] = copy_report_summary(
