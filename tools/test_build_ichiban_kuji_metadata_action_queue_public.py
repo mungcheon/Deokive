@@ -72,6 +72,13 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["campaign_patch_work_order_rows"], 2)
         self.assertEqual(report["summary"]["campaign_patch_work_order_template_rows"], 2)
+        self.assertEqual(report["summary"]["next_campaign_patch_review_batch_rows"], 2)
+        self.assertEqual(report["summary"]["next_campaign_patch_review_batch_template_rows"], 2)
+        self.assertEqual(report["summary"]["next_campaign_patch_review_batch_primary_review_url_rows"], 2)
+        self.assertEqual(
+            dict(report["summary"]["next_campaign_patch_review_batch_field_counts"]),
+            {"release_date": 1, "official_price_jpy": 1},
+        )
         self.assertEqual(report["summary"]["primary_review_url_rows"], 2)
         self.assertEqual(report["summary"]["queued_primary_review_url_rows"], 2)
         self.assertEqual(
@@ -124,6 +131,27 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
             first_work_item["field_patch_templates"][0]["field"],
             "release_date",
         )
+        next_review = report["next_campaign_patch_review_batch"][0]
+        self.assertFalse(next_review["manual_confirmed"])
+        self.assertEqual(next_review["slug"], "release")
+        self.assertEqual(next_review["review_lane"], "confirm_campaign_release_date")
+        self.assertEqual(next_review["fields_to_confirm"], ["release_date"])
+        self.assertEqual(next_review["primary_review_url"], "https://1kuji.com/products/release")
+        self.assertEqual(next_review["manual_value_fields_to_fill"][0]["field"], "release_date")
+        self.assertEqual(next_review["manual_value_fields_to_fill"][0]["manual_value"], "")
+        self.assertEqual(
+            next_review["manual_value_fields_to_fill"][0]["evidence_url"],
+            "https://1kuji.com/products/release",
+        )
+        self.assertIn(
+            "For release_date, ignore double chance deadlines and prize shipping dates.",
+            next_review["operator_checklist"],
+        )
+        self.assertEqual(
+            next_review["manual_confirmation_template"],
+            "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+        )
+        self.assertFalse(next_review["auto_apply_enabled"])
         self.assertEqual(
             report["batches"][0]["review_state"],
             "manual_official_campaign_metadata_confirmation_required",
@@ -190,6 +218,8 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["action_batch_count"], 2)
         self.assertEqual(report["summary"]["work_order_steps"], 1)
         self.assertEqual(report["summary"]["campaign_patch_work_order_rows"], 2)
+        self.assertEqual(report["summary"]["next_campaign_patch_review_batch_rows"], 2)
+        self.assertEqual(report["summary"]["next_campaign_patch_review_batch_template_rows"], 2)
         self.assertEqual(report["summary"]["primary_review_url_rows"], 0)
         self.assertEqual(report["work_order"][0]["campaign_count"], 2)
 

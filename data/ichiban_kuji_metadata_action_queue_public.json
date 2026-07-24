@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T05:42:42Z",
+  "generated_at": "2026-07-24T09:19:33Z",
   "scope": "ichiban_kuji_metadata_action_queue",
   "summary": {
     "actionable_campaigns": 44,
@@ -48,6 +48,19 @@
     ],
     "campaign_patch_work_order_rows": 44,
     "campaign_patch_work_order_template_rows": 44,
+    "next_campaign_patch_review_batch_rows": 8,
+    "next_campaign_patch_review_batch_template_rows": 8,
+    "next_campaign_patch_review_batch_primary_review_url_rows": 8,
+    "next_campaign_patch_review_batch_field_counts": [
+      [
+        "official_price_jpy",
+        6
+      ],
+      [
+        "release_date",
+        2
+      ]
+    ],
     "skipped_without_templates": 0,
     "auto_apply_enabled": false
   },
@@ -3501,6 +3514,657 @@
       "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
       "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
       "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "auto_apply_enabled": false
+    }
+  ],
+  "next_campaign_patch_review_batch": [
+    {
+      "manual_confirmed": false,
+      "rank": 1,
+      "review_lane": "confirm_campaign_release_date",
+      "slug": "jujutsu-o",
+      "title": "一番くじ 呪術廻戦 －オンライン－",
+      "primary_review_url": "https://1kuji.com/products/jujutsu-o",
+      "primary_review_url_kind": "official_1kuji_campaign_page",
+      "evidence_urls": [
+        "https://1kuji.com/products/jujutsu-o"
+      ],
+      "catalog_item_rows": 8,
+      "fields_to_confirm": [
+        "release_date"
+      ],
+      "sample_catalog_indexes": [
+        14193,
+        14194,
+        14195,
+        14196,
+        14197,
+        14198,
+        14199,
+        14200
+      ],
+      "sample_names": [
+        "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
+        "一番くじ 呪術廻戦 －オンライン－ - B賞 伏黒恵ビジュアルクロス",
+        "一番くじ 呪術廻戦 －オンライン－ - C賞 釘崎野薔薇ビジュアルクロス",
+        "一番くじ 呪術廻戦 －オンライン－ - D賞 五条悟ビジュアルクロス",
+        "一番くじ 呪術廻戦 －オンライン－ - E賞 クリアボトル",
+        "一番くじ 呪術廻戦 －オンライン－ - F賞 アクリルスタンド",
+        "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
+        "一番くじ 呪術廻戦 －オンライン－ - ラストワン賞 ビジュアルタオル"
+      ],
+      "field_patch_templates": [
+        {
+          "manual_confirmed": false,
+          "manual_note": "",
+          "field": "release_date",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/jujutsu-o",
+          "campaign_slug": "jujutsu-o",
+          "campaign_title": "一番くじ 呪術廻戦 －オンライン－",
+          "workflow": "release_date_review",
+          "target_scope": "all_catalog_rows_for_campaign_url",
+          "target_catalog_item_rows": 8,
+          "target_catalog_indexes_sample": [
+            14193,
+            14194,
+            14195,
+            14196,
+            14197,
+            14198,
+            14199,
+            14200
+          ],
+          "requires_full_campaign_index_expansion": false,
+          "requires_labeled_official_evidence": true,
+          "blocked_until": "manual_official_evidence_confirmed"
+        }
+      ],
+      "manual_value_fields_to_fill": [
+        {
+          "field": "release_date",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/jujutsu-o"
+        }
+      ],
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm the campaign title matches the catalog series.",
+        "Use only labeled official 1kuji campaign metadata.",
+        "For release_date, ignore double chance deadlines and prize shipping dates.",
+        "For official_price_jpy, use the draw price or price-per-try, not Last One or Double Chance exception values.",
+        "Set manual_confirmed=true only after every field in fields_to_confirm is filled."
+      ],
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "rank": 2,
+      "review_lane": "confirm_campaign_release_date",
+      "slug": "myhero_o5",
+      "title": "一番くじ 僕のヴィランアカデミア",
+      "primary_review_url": "https://1kuji.com/products/myhero_o5",
+      "primary_review_url_kind": "official_1kuji_campaign_page",
+      "evidence_urls": [
+        "https://1kuji.com/products/myhero_o5"
+      ],
+      "catalog_item_rows": 8,
+      "fields_to_confirm": [
+        "release_date"
+      ],
+      "sample_catalog_indexes": [
+        17067,
+        17068,
+        17069,
+        17070,
+        17071,
+        17072,
+        17073,
+        17074
+      ],
+      "sample_names": [
+        "一番くじ 僕のヴィランアカデミア - A賞 死柄木弔;MASTERLISE",
+        "一番くじ 僕のヴィランアカデミア - B賞 荼毘;MASTERLISE",
+        "一番くじ 僕のヴィランアカデミア - C賞 トガヒミコ;MASTERLISE",
+        "一番くじ 僕のヴィランアカデミア - D賞 トゥワイス;MASTERLISE",
+        "一番くじ 僕のヴィランアカデミア - E賞 タンブラー",
+        "一番くじ 僕のヴィランアカデミア - F賞 タオル",
+        "一番くじ 僕のヴィランアカデミア - G賞 ラバーチャーム",
+        "一番くじ 僕のヴィランアカデミア - ラストワン賞 トガヒミコ;MASTERLISE ラストワンver."
+      ],
+      "field_patch_templates": [
+        {
+          "manual_confirmed": false,
+          "manual_note": "",
+          "field": "release_date",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/myhero_o5",
+          "campaign_slug": "myhero_o5",
+          "campaign_title": "一番くじ 僕のヴィランアカデミア",
+          "workflow": "release_date_review",
+          "target_scope": "all_catalog_rows_for_campaign_url",
+          "target_catalog_item_rows": 8,
+          "target_catalog_indexes_sample": [
+            17067,
+            17068,
+            17069,
+            17070,
+            17071,
+            17072,
+            17073,
+            17074
+          ],
+          "requires_full_campaign_index_expansion": false,
+          "requires_labeled_official_evidence": true,
+          "blocked_until": "manual_official_evidence_confirmed"
+        }
+      ],
+      "manual_value_fields_to_fill": [
+        {
+          "field": "release_date",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/myhero_o5"
+        }
+      ],
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm the campaign title matches the catalog series.",
+        "Use only labeled official 1kuji campaign metadata.",
+        "For release_date, ignore double chance deadlines and prize shipping dates.",
+        "For official_price_jpy, use the draw price or price-per-try, not Last One or Double Chance exception values.",
+        "Set manual_confirmed=true only after every field in fields_to_confirm is filled."
+      ],
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "rank": 3,
+      "review_lane": "confirm_campaign_draw_price",
+      "slug": "10",
+      "title": "一番くじドラゴンボールＺ限界突破編",
+      "primary_review_url": "https://1kuji.com/products/10",
+      "primary_review_url_kind": "official_1kuji_campaign_page",
+      "evidence_urls": [
+        "https://1kuji.com/products/10"
+      ],
+      "catalog_item_rows": 7,
+      "fields_to_confirm": [
+        "official_price_jpy"
+      ],
+      "sample_catalog_indexes": [
+        16816,
+        16817,
+        16818,
+        16819,
+        16820,
+        16821,
+        16822
+      ],
+      "sample_names": [
+        "一番くじドラゴンボールＺ限界突破編 - 大猿フィギュア賞",
+        "一番くじドラゴンボールＺ限界突破編 - 限界突破！フィギュア賞",
+        "一番くじドラゴンボールＺ限界突破編 - 飲茶セット賞",
+        "一番くじドラゴンボールＺ限界突破編 - 魔封波小物入れ賞",
+        "一番くじドラゴンボールＺ限界突破編 - ソフビ貯金箱賞",
+        "一番くじドラゴンボールＺ限界突破編 - ホイポイカプセルボールペン賞",
+        "一番くじドラゴンボールＺ限界突破編 - メモスタンド賞"
+      ],
+      "field_patch_templates": [
+        {
+          "manual_confirmed": false,
+          "manual_note": "",
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/10",
+          "campaign_slug": "10",
+          "campaign_title": "一番くじドラゴンボールＺ限界突破編",
+          "workflow": "price_review",
+          "target_scope": "all_catalog_rows_for_campaign_url",
+          "target_catalog_item_rows": 7,
+          "target_catalog_indexes_sample": [
+            16816,
+            16817,
+            16818,
+            16819,
+            16820,
+            16821,
+            16822
+          ],
+          "requires_full_campaign_index_expansion": false,
+          "requires_labeled_official_evidence": true,
+          "blocked_until": "manual_official_evidence_confirmed"
+        }
+      ],
+      "manual_value_fields_to_fill": [
+        {
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/10"
+        }
+      ],
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm the campaign title matches the catalog series.",
+        "Use only labeled official 1kuji campaign metadata.",
+        "For release_date, ignore double chance deadlines and prize shipping dates.",
+        "For official_price_jpy, use the draw price or price-per-try, not Last One or Double Chance exception values.",
+        "Set manual_confirmed=true only after every field in fields_to_confirm is filled."
+      ],
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "rank": 4,
+      "review_lane": "confirm_campaign_draw_price",
+      "slug": "38",
+      "title": "一番くじ機動戦士ガンダム00",
+      "primary_review_url": "https://1kuji.com/products/38",
+      "primary_review_url_kind": "official_1kuji_campaign_page",
+      "evidence_urls": [
+        "https://1kuji.com/products/38"
+      ],
+      "catalog_item_rows": 7,
+      "fields_to_confirm": [
+        "official_price_jpy"
+      ],
+      "sample_catalog_indexes": [
+        17583,
+        17584,
+        17585,
+        17586,
+        17587,
+        17588,
+        17589
+      ],
+      "sample_names": [
+        "一番くじ機動戦士ガンダム00 - ヘッドディスプレイ賞",
+        "一番くじ機動戦士ガンダム00 - 王 留美フィギュア賞",
+        "一番くじ機動戦士ガンダム00 - ハロぬいぐるみ賞",
+        "一番くじ機動戦士ガンダム00 - バスタオル賞",
+        "一番くじ機動戦士ガンダム00 - タンブラー賞",
+        "一番くじ機動戦士ガンダム00 - ポスター賞",
+        "一番くじ機動戦士ガンダム00 - ネックペン賞"
+      ],
+      "field_patch_templates": [
+        {
+          "manual_confirmed": false,
+          "manual_note": "",
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/38",
+          "campaign_slug": "38",
+          "campaign_title": "一番くじ機動戦士ガンダム00",
+          "workflow": "price_review",
+          "target_scope": "all_catalog_rows_for_campaign_url",
+          "target_catalog_item_rows": 7,
+          "target_catalog_indexes_sample": [
+            17583,
+            17584,
+            17585,
+            17586,
+            17587,
+            17588,
+            17589
+          ],
+          "requires_full_campaign_index_expansion": false,
+          "requires_labeled_official_evidence": true,
+          "blocked_until": "manual_official_evidence_confirmed"
+        }
+      ],
+      "manual_value_fields_to_fill": [
+        {
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/38"
+        }
+      ],
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm the campaign title matches the catalog series.",
+        "Use only labeled official 1kuji campaign metadata.",
+        "For release_date, ignore double chance deadlines and prize shipping dates.",
+        "For official_price_jpy, use the draw price or price-per-try, not Last One or Double Chance exception values.",
+        "Set manual_confirmed=true only after every field in fields_to_confirm is filled."
+      ],
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "rank": 5,
+      "review_lane": "confirm_campaign_draw_price",
+      "slug": "49",
+      "title": "一番くじテレビアニメ「ワンピース」",
+      "primary_review_url": "https://1kuji.com/products/49",
+      "primary_review_url_kind": "official_1kuji_campaign_page",
+      "evidence_urls": [
+        "https://1kuji.com/products/49"
+      ],
+      "catalog_item_rows": 8,
+      "fields_to_confirm": [
+        "official_price_jpy"
+      ],
+      "sample_catalog_indexes": [
+        16216,
+        16217,
+        16218,
+        16219,
+        16220,
+        16221,
+        16222,
+        16223
+      ],
+      "sample_names": [
+        "一番くじテレビアニメ「ワンピース」 - サウザンド・サニー号賞",
+        "一番くじテレビアニメ「ワンピース」 - ルフィフィギュア賞",
+        "一番くじテレビアニメ「ワンピース」 - フランキーフィギュア賞",
+        "一番くじテレビアニメ「ワンピース」 - チョッパーぬいぐるみ賞",
+        "一番くじテレビアニメ「ワンピース」 - ファスナー付きクリアケース賞",
+        "一番くじテレビアニメ「ワンピース」 - レリーフ名刺ケース賞",
+        "一番くじテレビアニメ「ワンピース」 - チョッパーペン賞",
+        "一番くじテレビアニメ「ワンピース」 - ボールチェーン付きマスコット賞"
+      ],
+      "field_patch_templates": [
+        {
+          "manual_confirmed": false,
+          "manual_note": "",
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/49",
+          "campaign_slug": "49",
+          "campaign_title": "一番くじテレビアニメ「ワンピース」",
+          "workflow": "price_review",
+          "target_scope": "all_catalog_rows_for_campaign_url",
+          "target_catalog_item_rows": 8,
+          "target_catalog_indexes_sample": [
+            16216,
+            16217,
+            16218,
+            16219,
+            16220,
+            16221,
+            16222,
+            16223
+          ],
+          "requires_full_campaign_index_expansion": false,
+          "requires_labeled_official_evidence": true,
+          "blocked_until": "manual_official_evidence_confirmed"
+        }
+      ],
+      "manual_value_fields_to_fill": [
+        {
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/49"
+        }
+      ],
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm the campaign title matches the catalog series.",
+        "Use only labeled official 1kuji campaign metadata.",
+        "For release_date, ignore double chance deadlines and prize shipping dates.",
+        "For official_price_jpy, use the draw price or price-per-try, not Last One or Double Chance exception values.",
+        "Set manual_confirmed=true only after every field in fields_to_confirm is filled."
+      ],
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "rank": 6,
+      "review_lane": "confirm_campaign_draw_price",
+      "slug": "53",
+      "title": "一番くじドラゴンボール 摩訶不思議アドベンチャー編",
+      "primary_review_url": "https://1kuji.com/products/53",
+      "primary_review_url_kind": "official_1kuji_campaign_page",
+      "evidence_urls": [
+        "https://1kuji.com/products/53"
+      ],
+      "catalog_item_rows": 7,
+      "fields_to_confirm": [
+        "official_price_jpy"
+      ],
+      "sample_catalog_indexes": [
+        16809,
+        16810,
+        16811,
+        16812,
+        16813,
+        16814,
+        16815
+      ],
+      "sample_names": [
+        "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ａ賞 亀仙人フィギュア",
+        "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｂ賞 ブルマフィギュア",
+        "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｃ賞 四星球クッション",
+        "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｄ賞 孫悟空ソフビ",
+        "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｅ賞 カリン塔ペン",
+        "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｆ賞 天下一メモスタンド",
+        "一番くじドラゴンボール 摩訶不思議アドベンチャー編 - Ｇ賞 ぬいぐるみ"
+      ],
+      "field_patch_templates": [
+        {
+          "manual_confirmed": false,
+          "manual_note": "",
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/53",
+          "campaign_slug": "53",
+          "campaign_title": "一番くじドラゴンボール 摩訶不思議アドベンチャー編",
+          "workflow": "price_review",
+          "target_scope": "all_catalog_rows_for_campaign_url",
+          "target_catalog_item_rows": 7,
+          "target_catalog_indexes_sample": [
+            16809,
+            16810,
+            16811,
+            16812,
+            16813,
+            16814,
+            16815
+          ],
+          "requires_full_campaign_index_expansion": false,
+          "requires_labeled_official_evidence": true,
+          "blocked_until": "manual_official_evidence_confirmed"
+        }
+      ],
+      "manual_value_fields_to_fill": [
+        {
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/53"
+        }
+      ],
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm the campaign title matches the catalog series.",
+        "Use only labeled official 1kuji campaign metadata.",
+        "For release_date, ignore double chance deadlines and prize shipping dates.",
+        "For official_price_jpy, use the draw price or price-per-try, not Last One or Double Chance exception values.",
+        "Set manual_confirmed=true only after every field in fields_to_confirm is filled."
+      ],
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "rank": 7,
+      "review_lane": "confirm_campaign_draw_price",
+      "slug": "64",
+      "title": "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～",
+      "primary_review_url": "https://1kuji.com/products/64",
+      "primary_review_url_kind": "official_1kuji_campaign_page",
+      "evidence_urls": [
+        "https://1kuji.com/products/64"
+      ],
+      "catalog_item_rows": 7,
+      "fields_to_confirm": [
+        "official_price_jpy"
+      ],
+      "sample_catalog_indexes": [
+        17576,
+        17577,
+        17578,
+        17579,
+        17580,
+        17581,
+        17582
+      ],
+      "sample_names": [
+        "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - A賞 シャア胸像型バンク",
+        "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - B賞 赤い彗星アズナぶる×2",
+        "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - C賞 測ったなシャア！メジャー",
+        "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - D賞 悩ましのクッション",
+        "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - E賞 メモスタンド",
+        "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - F賞 ライバルおめん",
+        "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～ - G賞 ロングタオル"
+      ],
+      "field_patch_templates": [
+        {
+          "manual_confirmed": false,
+          "manual_note": "",
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/64",
+          "campaign_slug": "64",
+          "campaign_title": "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～",
+          "workflow": "price_review",
+          "target_scope": "all_catalog_rows_for_campaign_url",
+          "target_catalog_item_rows": 7,
+          "target_catalog_indexes_sample": [
+            17576,
+            17577,
+            17578,
+            17579,
+            17580,
+            17581,
+            17582
+          ],
+          "requires_full_campaign_index_expansion": false,
+          "requires_labeled_official_evidence": true,
+          "blocked_until": "manual_official_evidence_confirmed"
+        }
+      ],
+      "manual_value_fields_to_fill": [
+        {
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/64"
+        }
+      ],
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm the campaign title matches the catalog series.",
+        "Use only labeled official 1kuji campaign metadata.",
+        "For release_date, ignore double chance deadlines and prize shipping dates.",
+        "For official_price_jpy, use the draw price or price-per-try, not Last One or Double Chance exception values.",
+        "Set manual_confirmed=true only after every field in fields_to_confirm is filled."
+      ],
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "rank": 8,
+      "review_lane": "confirm_campaign_draw_price",
+      "slug": "71",
+      "title": "一番くじワンピース～スリラーバーク編～",
+      "primary_review_url": "https://1kuji.com/products/71",
+      "primary_review_url_kind": "official_1kuji_campaign_page",
+      "evidence_urls": [
+        "https://1kuji.com/products/71"
+      ],
+      "catalog_item_rows": 7,
+      "fields_to_confirm": [
+        "official_price_jpy"
+      ],
+      "sample_catalog_indexes": [
+        16209,
+        16210,
+        16211,
+        16212,
+        16213,
+        16214,
+        16215
+      ],
+      "sample_names": [
+        "一番くじワンピース～スリラーバーク編～ - A賞 オーズ ビッグソフビ",
+        "一番くじワンピース～スリラーバーク編～ - B賞 モンキー･D･ルフィ（ナイトメアVer.）フィギュア",
+        "一番くじワンピース～スリラーバーク編～ - C賞 チョッパー ぬいぐるみ",
+        "一番くじワンピース～スリラーバーク編～ - D賞 クマシー ぬいぐるみ",
+        "一番くじワンピース～スリラーバーク編～ - E賞 ネガティブ メモスタンド",
+        "一番くじワンピース～スリラーバーク編～ - F賞 キーホルダー",
+        "一番くじワンピース～スリラーバーク編～ - G賞 バンダナ"
+      ],
+      "field_patch_templates": [
+        {
+          "manual_confirmed": false,
+          "manual_note": "",
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/71",
+          "campaign_slug": "71",
+          "campaign_title": "一番くじワンピース～スリラーバーク編～",
+          "workflow": "price_review",
+          "target_scope": "all_catalog_rows_for_campaign_url",
+          "target_catalog_item_rows": 7,
+          "target_catalog_indexes_sample": [
+            16209,
+            16210,
+            16211,
+            16212,
+            16213,
+            16214,
+            16215
+          ],
+          "requires_full_campaign_index_expansion": false,
+          "requires_labeled_official_evidence": true,
+          "blocked_until": "manual_official_evidence_confirmed"
+        }
+      ],
+      "manual_value_fields_to_fill": [
+        {
+          "field": "official_price_jpy",
+          "manual_value": "",
+          "evidence_url": "https://1kuji.com/products/71"
+        }
+      ],
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm the campaign title matches the catalog series.",
+        "Use only labeled official 1kuji campaign metadata.",
+        "For release_date, ignore double chance deadlines and prize shipping dates.",
+        "For official_price_jpy, use the draw price or price-per-try, not Last One or Double Chance exception values.",
+        "Set manual_confirmed=true only after every field in fields_to_confirm is filled."
+      ],
+      "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+      "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
       "auto_apply_enabled": false
     }
   ],
