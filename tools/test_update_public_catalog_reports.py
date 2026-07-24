@@ -4946,6 +4946,59 @@ class PublicCatalogReportTests(unittest.TestCase):
         animation_visual_catalog = animation_action.get("app_folder_visual_catalog") or {}
         self.assertEqual(len(animation_visual_catalog.get("palette_color_families") or []), 8)
         self.assertEqual(len(animation_visual_catalog.get("palette_picker_order") or []), 188)
+        animation_blocking_dashboard = animation_action.get("blocking_dashboard") or {}
+        self.assertEqual(
+            animation_blocking_dashboard.get("status"),
+            "normalization_review_required",
+        )
+        self.assertEqual(
+            animation_blocking_dashboard.get("queued_catalog_rows"),
+            animation_action_summary.get("queued_catalog_rows"),
+        )
+        self.assertEqual(
+            animation_blocking_dashboard.get("normalization_review_rows"),
+            animation_action_summary.get("normalization_review_rows"),
+        )
+        self.assertEqual(
+            animation_blocking_dashboard.get(
+                "next_normalization_review_batch_catalog_rows"
+            ),
+            36,
+        )
+        self.assertEqual(
+            animation_blocking_dashboard.get("first_normalization_review", {}).get(
+                "source_category"
+            ),
+            "클리어파일",
+        )
+        self.assertEqual(
+            animation_blocking_dashboard.get("first_work_order_lane"),
+            "canonical_category_normalization_review",
+        )
+        self.assertEqual(
+            animation_blocking_dashboard.get("next_safe_phase"),
+            "confirm_canonical_animation_category_normalization",
+        )
+        self.assertTrue(
+            animation_blocking_dashboard.get("manual_review_required_before_import")
+        )
+        self.assertFalse(animation_blocking_dashboard.get("auto_apply_enabled"))
+        self.assertTrue(
+            animation_blocking_dashboard.get("folder_visual_coverage_ready")
+        )
+        quality_animation_action = quality.get("animation_category_action_queue") or {}
+        self.assertEqual(
+            quality_animation_action.get("blocking_dashboard", {}).get("status"),
+            animation_blocking_dashboard.get("status"),
+        )
+        self.assertEqual(
+            quality_animation_action.get("blocking_dashboard", {}).get(
+                "next_normalization_review_batch_catalog_rows"
+            ),
+            animation_blocking_dashboard.get(
+                "next_normalization_review_batch_catalog_rows"
+            ),
+        )
         self.assertEqual(
             animation_scorecard.get("app_folder_color_count"),
             animation_action_summary.get("app_folder_color_count"),

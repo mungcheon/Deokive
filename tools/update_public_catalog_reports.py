@@ -10963,9 +10963,13 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["animation_category_review_batches"] = copy_report_summary(
                 ANIMATION_CATEGORY_REVIEW_BATCHES, "animation_category_review_batches"
             )
-        target["animation_category_action_queue"] = report_summary(
-            animation_action_queue, ANIMATION_CATEGORY_ACTION_QUEUE
-        )
+        target["animation_category_action_queue"] = {
+            **report_summary(animation_action_queue, ANIMATION_CATEGORY_ACTION_QUEUE),
+            "blocking_dashboard": animation_action_queue.get(
+                "blocking_dashboard",
+                {},
+            ),
+        }
         if ANIMATION_CATEGORY_SPLIT_REVIEW.exists():
             target["animation_category_split_review"] = copy_report_summary(
                 ANIMATION_CATEGORY_SPLIT_REVIEW, "animation_category_split_review"

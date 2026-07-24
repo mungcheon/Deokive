@@ -7260,7 +7260,74 @@
     "unmatched_keyword_review_rows": 0,
     "unmatched_keyword_candidate_count": 0,
     "unmatched_keyword_product_type_candidate_count": 0,
-    "auto_apply_enabled": false
+    "auto_apply_enabled": false,
+    "blocking_dashboard": {
+      "status": "normalization_review_required",
+      "manual_review_required_before_import": true,
+      "auto_apply_enabled": false,
+      "next_safe_phase": "confirm_canonical_animation_category_normalization",
+      "blocked_until": [
+        "canonical_category_normalization_manually_confirmed"
+      ],
+      "queued_catalog_rows": 36,
+      "queued_categories": 4,
+      "normalization_review_rows": 36,
+      "normalization_review_categories": 4,
+      "next_normalization_review_batch_rows": 4,
+      "next_normalization_review_batch_catalog_rows": 36,
+      "next_normalization_review_batch_source_target_pairs": [
+        {
+          "review_id": "animation-category-normalization-001",
+          "source_category": "클리어파일",
+          "target_category": "문구",
+          "affected_catalog_rows": 8,
+          "preserve_source_category_as_sub_series": true,
+          "folder_color_group": "violet",
+          "folder_icon_key": "sticky_note"
+        },
+        {
+          "review_id": "animation-category-normalization-002",
+          "source_category": "카드",
+          "target_category": "문구",
+          "affected_catalog_rows": 3,
+          "preserve_source_category_as_sub_series": true,
+          "folder_color_group": "violet",
+          "folder_icon_key": "sticky_note"
+        },
+        {
+          "review_id": "animation-category-normalization-003",
+          "source_category": "스티커",
+          "target_category": "문구",
+          "affected_catalog_rows": 24,
+          "preserve_source_category_as_sub_series": true,
+          "folder_color_group": "violet",
+          "folder_icon_key": "sticky_note"
+        },
+        {
+          "review_id": "animation-category-normalization-004",
+          "source_category": "파우치",
+          "target_category": "가방",
+          "affected_catalog_rows": 1,
+          "preserve_source_category_as_sub_series": true,
+          "folder_color_group": "green",
+          "folder_icon_key": "inventory"
+        }
+      ],
+      "first_normalization_review": {
+        "review_id": "animation-category-normalization-001",
+        "source_category": "클리어파일",
+        "target_category": "문구",
+        "affected_catalog_rows": 8,
+        "preserve_source_category_as_sub_series": true
+      },
+      "first_work_order_lane": "canonical_category_normalization_review",
+      "first_work_order_next_step": "confirm_canonical_animation_category_normalization",
+      "folder_visual_coverage_ready": true,
+      "app_folder_color_count": 188,
+      "app_folder_icon_option_count": 211,
+      "app_folder_palette_sorted_by_family": true,
+      "safety_note": "Folder colors and icons are available, but category normalization changes must be manually confirmed before any import writes."
+    }
   },
   "image_asset_audit": {
     "public_report": "data/catalog_image_asset_audit_public.json",

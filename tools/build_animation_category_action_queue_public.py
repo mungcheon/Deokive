@@ -625,6 +625,104 @@ def _work_order(
     return orders
 
 
+def _blocking_dashboard(
+    summary: dict[str, Any],
+    *,
+    next_normalization_review_batch: list[dict[str, Any]],
+    work_order: list[dict[str, Any]],
+    app_visual_catalog: dict[str, Any],
+) -> dict[str, Any]:
+    normalization_rows = int(summary.get("normalization_review_rows") or 0)
+    direct_rows = int(summary.get("direct_mapping_queued_catalog_rows") or 0)
+    unmatched_rows = int(summary.get("unmatched_keyword_review_rows") or 0)
+    split_categories = int(summary.get("split_review_categories") or 0)
+    queued_rows = int(summary.get("queued_catalog_rows") or 0)
+    visual_ready = bool(app_visual_catalog.get("animation_visuals_covered"))
+    manual_required = bool(
+        normalization_rows
+        or direct_rows
+        or unmatched_rows
+        or split_categories
+        or queued_rows
+    )
+
+    if normalization_rows:
+        status = "normalization_review_required"
+        next_safe_phase = "confirm_canonical_animation_category_normalization"
+    elif split_categories:
+        status = "name_level_split_review_required"
+        next_safe_phase = "confirm_animation_category_name_split_templates"
+    elif direct_rows:
+        status = "direct_mapping_review_required"
+        next_safe_phase = "fill_confirmed_animation_category_mapping_templates"
+    elif unmatched_rows:
+        status = "unmatched_keyword_review_required"
+        next_safe_phase = "review_unmatched_animation_keyword_candidates"
+    else:
+        status = "ready_for_manual_import" if visual_ready else "visual_token_review_required"
+        next_safe_phase = "run_confirmed_animation_category_import" if visual_ready else "complete_folder_visual_tokens"
+
+    first_review = next_normalization_review_batch[0] if next_normalization_review_batch else {}
+    first_work_order = work_order[0] if work_order else {}
+    blockers = []
+    if normalization_rows:
+        blockers.append("canonical_category_normalization_manually_confirmed")
+    if split_categories:
+        blockers.append("name_level_split_rules_manually_confirmed")
+    if direct_rows:
+        blockers.append("direct_category_mapping_manually_confirmed")
+    if unmatched_rows:
+        blockers.append("unmatched_keywords_classified_or_rejected")
+    if not visual_ready:
+        blockers.append("folder_color_and_icon_visual_tokens_completed")
+
+    return {
+        "status": status,
+        "manual_review_required_before_import": manual_required,
+        "auto_apply_enabled": False,
+        "next_safe_phase": next_safe_phase,
+        "blocked_until": blockers,
+        "queued_catalog_rows": queued_rows,
+        "queued_categories": int(summary.get("queued_categories") or 0),
+        "normalization_review_rows": normalization_rows,
+        "normalization_review_categories": int(
+            summary.get("normalization_review_categories") or 0
+        ),
+        "next_normalization_review_batch_rows": len(next_normalization_review_batch),
+        "next_normalization_review_batch_catalog_rows": int(
+            summary.get("next_normalization_review_batch_catalog_rows") or 0
+        ),
+        "next_normalization_review_batch_source_target_pairs": summary.get(
+            "next_normalization_review_batch_source_target_pairs", []
+        ),
+        "first_normalization_review": {
+            "review_id": first_review.get("review_id"),
+            "source_category": first_review.get("source_category"),
+            "target_category": first_review.get("target_category"),
+            "affected_catalog_rows": int(first_review.get("affected_catalog_rows") or 0),
+            "preserve_source_category_as_sub_series": bool(
+                first_review.get("preserve_source_category_as_sub_series")
+            ),
+        }
+        if first_review
+        else {},
+        "first_work_order_lane": first_work_order.get("lane"),
+        "first_work_order_next_step": first_work_order.get("next_step"),
+        "folder_visual_coverage_ready": visual_ready,
+        "app_folder_color_count": int(app_visual_catalog.get("color_count") or 0),
+        "app_folder_icon_option_count": int(app_visual_catalog.get("icon_count") or 0),
+        "app_folder_palette_sorted_by_family": bool(
+            app_visual_catalog.get("palette_sorted_by_family")
+        ),
+        "safety_note": (
+            "Folder colors and icons are available, but category normalization "
+            "changes must be manually confirmed before any import writes."
+            if manual_required
+            else "No open animation category blockers remain in the public action queue."
+        ),
+    }
+
+
 def build_queue(
     payload: dict[str, Any],
     *,
@@ -806,11 +904,18 @@ def build_queue(
         ),
         "auto_apply_enabled": False,
     }
+    blocking_dashboard = _blocking_dashboard(
+        summary,
+        next_normalization_review_batch=next_normalization_review_batch,
+        work_order=work_order,
+        app_visual_catalog=app_visual_catalog,
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
         "scope": "animation_category_action_queue",
         "summary": summary,
+        "blocking_dashboard": blocking_dashboard,
         "app_folder_visual_catalog": app_visual_catalog,
         "target_visual_token_summary": target_visual_summary,
         "next_normalization_review_batch": next_normalization_review_batch,
