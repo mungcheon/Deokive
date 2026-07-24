@@ -4040,6 +4040,7 @@ def build_agent_work_queue_public(
     animation_split_review_override: dict[str, Any] | None = None,
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     source_next_focus_pack_override: dict[str, Any] | None = None,
+    source_discovery_starter_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -4069,6 +4070,13 @@ def build_agent_work_queue_public(
         if source_next_focus_pack_override is not None
         else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_PACK.exists()
+        else {}
+    )
+    source_discovery_starter_queue = (
+        source_discovery_starter_queue_override
+        if source_discovery_starter_queue_override is not None
+        else load_json(SOURCE_DISCOVERY_STARTER_QUEUE, {})
+        if SOURCE_DISCOVERY_STARTER_QUEUE.exists()
         else {}
     )
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
@@ -4192,6 +4200,8 @@ def build_agent_work_queue_public(
             return "source_evidence_confirmation_required"
         if workstream == "source_detail_candidate_action_queue":
             return "candidate_review_required"
+        if workstream == "source_discovery_starter_queue":
+            return "exact_source_discovery_required"
         if workstream == "source_url_discovery":
             return "exact_source_discovery_required"
         if workstream == "metadata_backlog":
@@ -5042,6 +5052,38 @@ def build_agent_work_queue_public(
                 ],
                 samples=[row for row in unknown_categories if isinstance(row, dict)],
             )
+
+    starter_groups = [
+        row for row in source_discovery_starter_queue.get("groups", []) if isinstance(row, dict)
+    ]
+    for group in starter_groups[:10]:
+        sample_items = [item for item in group.get("sample_items", []) if isinstance(item, dict)]
+        add_batch(
+            agent_id="agent-source-starter",
+            workstream="source_discovery_starter_queue",
+            priority=21 + int(group.get("priority") or 99),
+            title=(
+                f"{group.get('source_store')} {group.get('affiliation')} "
+                f"{group.get('category')} source starter"
+            ),
+            public_report=SOURCE_DISCOVERY_STARTER_QUEUE,
+            rows=int(group.get("rows") or 0),
+            recommended_action=str(
+                group.get("next_step")
+                or "Open search URLs and confirm exact product source pages."
+            ),
+            acceptance_criteria=[
+                "Open the provided search_url values before using web-wide fallback search.",
+                "Accepted source_url must be an exact product/detail page for the same item or product line.",
+                "Product image evidence must be visible on the confirmed source before image_url import.",
+                "Keep auto-apply disabled; only prepare manually reviewed source/image templates.",
+            ],
+            samples=sample_items,
+            review_summary={
+                "starter_group_rows": int(group.get("rows") or 0),
+                "starter_sample_rows": len(sample_items),
+            },
+        )
 
     batches.sort(key=lambda row: (row["priority"], -row["rows"], row["batch_id"]))
     published_batches = batches[:MAX_AGENT_WORK_QUEUE_BATCHES]
@@ -7213,6 +7255,7 @@ def validate_report_consistency(
         f"data/{SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}",
         f"data/{SOURCE_DISCOVERY.name}",
         f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
+        f"data/{SOURCE_DISCOVERY_STARTER_QUEUE.name}",
         f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
         f"data/{METADATA_BACKLOG.name}",
         f"data/{METADATA_REVIEW_BATCHES.name}",
@@ -7729,6 +7772,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_split_review,
         animation_unmatched_keyword_review,
         source_discovery_next_focus_pack,
+        source_discovery_starter_queue,
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 

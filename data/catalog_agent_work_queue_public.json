@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T01:43:23Z",
+  "generated_at": "2026-07-24T02:17:16Z",
   "summary": {
-    "batch_count": 147,
+    "batch_count": 157,
     "max_published_batches": 160,
-    "summed_batch_rows": 20470,
+    "summed_batch_rows": 20540,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -25,6 +25,10 @@
       ],
       [
         "source_discovery_action_queue",
+        10
+      ],
+      [
+        "source_discovery_starter_queue",
         10
       ],
       [
@@ -119,6 +123,10 @@
       ],
       [
         "agent-source-action",
+        10
+      ],
+      [
+        "agent-source-starter",
         10
       ],
       [
@@ -14986,6 +14994,1096 @@
       ],
       "review_state": "manual_review_required",
       "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "031-agent-source-starter-148",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "엔스카이 원피스 키링 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 9,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1585,
+          "name_ko": "우솝 러버 스트랩",
+          "name_ja": "ウソップ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ウソップ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1586,
+          "name_ko": "토니토니 쵸파 러버 스트랩",
+          "name_ja": "チョッパー ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "チョッパー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1587,
+          "name_ko": "니코 로빈 러버 스트랩",
+          "name_ja": "ニコ・ロビン ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ニコ・ロビン ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1588,
+          "name_ko": "프랑키 러버 스트랩",
+          "name_ja": "フランキー ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "フランキー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1589,
+          "name_ko": "브룩 러버 스트랩",
+          "name_ja": "ブルック ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ブルック ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 9,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-149",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "엔스카이 장송의 프리렌 인형 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 9,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1517,
+          "name_ko": "치비누이 펀",
+          "name_ja": "ちびぬい フェルン",
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい フェルン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1518,
+          "name_ko": "치비누이 슈타르크",
+          "name_ja": "ちびぬい シュタルク",
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい シュタルク",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1519,
+          "name_ko": "치비누이 히멜",
+          "name_ja": "ちびぬい ヒンメル",
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい ヒンメル",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1520,
+          "name_ko": "치비누이 아이젠",
+          "name_ja": "ちびぬい アイゼン",
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい アイゼン",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1521,
+          "name_ko": "치비누이 하이터",
+          "name_ja": "ちびぬい ハイター",
+          "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい ハイター",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 9,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-150",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "FuRyu 나의 히어로 아카데미아 피규어 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 8,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1253,
+          "name_ko": "쵸코노세 프리미엄 피규어 미도리야 이즈쿠",
+          "name_ja": "ちょこのせプレミアムフィギュア 緑谷出久",
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちょこのせプレミアムフィギュア 緑谷出久",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1254,
+          "name_ko": "쵸코노세 프리미엄 피규어 바쿠고 카츠키",
+          "name_ja": "ちょこのせプレミアムフィギュア 爆豪勝己",
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちょこのせプレミアムフィギュア 爆豪勝己",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1255,
+          "name_ko": "쵸코노세 프리미엄 피규어 토도로키 쇼토",
+          "name_ja": "ちょこのせプレミアムフィギュア 轟焦凍",
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちょこのせプレミアムフィギュア 轟焦凍",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1256,
+          "name_ko": "누들 스토퍼 피규어 미도리야 이즈쿠",
+          "name_ja": "ぬーどるストッパーフィギュア 緑谷出久",
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬーどるストッパーフィギュア 緑谷出久",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1257,
+          "name_ko": "누들 스토퍼 피규어 바쿠고 카츠키",
+          "name_ja": "ぬーどるストッパーフィギュア 爆豪勝己",
+          "source_store": "FuRyu",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬーどるストッパーフィギュア 爆豪勝己",
+          "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 8,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-151",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "굿스마일컴퍼니 원피스 피규어 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 7,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1922,
+          "name_ko": "POP UP PARADE 우솝",
+          "name_ja": "POP UP PARADE ウソップ",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE ウソップ",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1923,
+          "name_ko": "POP UP PARADE 토니토니 쵸파",
+          "name_ja": "POP UP PARADE トニートニー・チョッパー",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE トニートニー・チョッパー",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%88%E3%83%8B%E3%83%BC%E3%83%88%E3%83%8B%E3%83%BC%E3%83%BB%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1924,
+          "name_ko": "POP UP PARADE 니코 로빈",
+          "name_ja": "POP UP PARADE ニコ・ロビン",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE ニコ・ロビン",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1925,
+          "name_ko": "POP UP PARADE 프랑키",
+          "name_ja": "POP UP PARADE フランキー",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE フランキー",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1926,
+          "name_ko": "POP UP PARADE 브룩",
+          "name_ja": "POP UP PARADE ブルック",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "원피스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "POP UP PARADE ブルック",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 7,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-152",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "엔스카이 헌터X헌터 마스코트 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 7,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1328,
+          "name_ko": "오만쥬 니기니기 마스코트 곤 프릭스",
+          "name_ja": "おまんじゅうにぎにぎマスコット ゴン＝フリークス",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット ゴン＝フリークス",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1329,
+          "name_ko": "오만쥬 니기니기 마스코트 키루아 조르딕",
+          "name_ja": "おまんじゅうにぎにぎマスコット キルア＝ゾルディック",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット キルア＝ゾルディック",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1330,
+          "name_ko": "오만쥬 니기니기 마스코트 쿠라피카",
+          "name_ja": "おまんじゅうにぎにぎマスコット クラピカ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット クラピカ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1331,
+          "name_ko": "오만쥬 니기니기 마스코트 레오리오",
+          "name_ja": "おまんじゅうにぎにぎマスコット レオリオ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット レオリオ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1332,
+          "name_ko": "오만쥬 니기니기 마스코트 히소카",
+          "name_ja": "おまんじゅうにぎにぎマスコット ヒソカ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット ヒソカ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%92%E3%82%BD%E3%82%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 7,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-153",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "굿스마일컴퍼니 하츠네 미쿠 아크릴 스탠드 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 6,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1603,
+          "name_ko": "하츠네 미쿠 아크릴 스탠드 (매지컬 미라이 2024)",
+          "name_ja": "初音ミク アクリルスタンド (マジカルミライ 2024)",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "初音ミク アクリルスタンド (マジカルミライ 2024)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%B8%E3%82%AB%E3%83%AB%E3%83%9F%E3%83%A9%E3%82%A4%202024%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1604,
+          "name_ko": "하츠네 미쿠 아크릴 스탠드 (벚꽃 미쿠)",
+          "name_ja": "初音ミク アクリルスタンド (桜ミク)",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "初音ミク アクリルスタンド (桜ミク)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%A1%9C%E3%83%9F%E3%82%AF%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1605,
+          "name_ko": "카가미네 린 아크릴 스탠드 (매지컬 미라이)",
+          "name_ja": "鏡音リン アクリルスタンド (マジカルミライ)",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "鏡音リン アクリルスタンド (マジカルミライ)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E9%8F%A1%E9%9F%B3%E3%83%AA%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%B8%E3%82%AB%E3%83%AB%E3%83%9F%E3%83%A9%E3%82%A4%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1607,
+          "name_ko": "메구리네 루카 아크릴 스탠드",
+          "name_ja": "巡音ルカ アクリルスタンド",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "巡音ルカ アクリルスタンド",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%B7%A1%E9%9F%B3%E3%83%AB%E3%82%AB%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1608,
+          "name_ko": "하츠네 미쿠 빅 아크릴 스탠드 (눈 미쿠)",
+          "name_ja": "初音ミク ビッグアクリルスタンド (雪ミク)",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "初音ミク ビッグアクリルスタンド (雪ミク)",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E9%9B%AA%E3%83%9F%E3%82%AF%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 6,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-154",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "굿스마일컴퍼니 하츠네 미쿠 캔뱃지 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 6,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1763,
+          "name_ko": "하츠네 미쿠 트레이딩 캔뱃지 오리지널",
+          "name_ja": "初音ミク トレーディング缶バッジ オリジナル",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "初音ミク トレーディング缶バッジ オリジナル",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%8A%E3%83%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1764,
+          "name_ko": "하츠네 미쿠 트레이딩 캔뱃지 매지컬 미라이",
+          "name_ja": "初音ミク トレーディング缶バッジ マジカルミライ",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "初音ミク トレーディング缶バッジ マジカルミライ",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%9E%E3%82%B8%E3%82%AB%E3%83%AB%E3%83%9F%E3%83%A9%E3%82%A4",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1765,
+          "name_ko": "하츠네 미쿠 트레이딩 캔뱃지 눈 미쿠",
+          "name_ja": "初音ミク トレーディング缶バッジ 雪ミク",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "初音ミク トレーディング缶バッジ 雪ミク",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E9%9B%AA%E3%83%9F%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1766,
+          "name_ko": "하츠네 미쿠 트레이딩 캔뱃지 벚꽃 미쿠",
+          "name_ja": "初音ミク トレーディング缶バッジ 桜ミク",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "初音ミク トレーディング缶バッジ 桜ミク",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E6%A1%9C%E3%83%9F%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1767,
+          "name_ko": "하츠네 미쿠 메탈릭 캔뱃지 오리지널",
+          "name_ja": "初音ミク メタリック缶バッジ オリジナル",
+          "source_store": "굿스마일컴퍼니",
+          "affiliation": "하츠네 미쿠",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "初音ミク メタリック缶バッジ オリジナル",
+          "search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%8A%E3%83%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 6,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-155",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "엔스카이 헌터X헌터 인형 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 6,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1333,
+          "name_ko": "치비누이 곤 프릭스",
+          "name_ja": "ちびぐるみ ゴン＝フリークス",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぐるみ ゴン＝フリークス",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%90%E3%82%8B%E3%81%BF%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1334,
+          "name_ko": "치비누이 키루아 조르딕",
+          "name_ja": "ちびぬい キルア＝ゾルディック",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい キルア＝ゾルディック",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1335,
+          "name_ko": "치비누이 쿠라피카",
+          "name_ja": "ちびぬい クラピカ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい クラピカ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1336,
+          "name_ko": "치비누이 레오리오",
+          "name_ja": "ちびぬい レオリオ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬい レオリオ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1337,
+          "name_ko": "누이푸페 곤 프릭스",
+          "name_ja": "ぬいぺぺ ゴン＝フリークス",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬいぺぺ ゴン＝フリークス",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%BA%E3%81%BA%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 6,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-156",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "엔스카이 헌터X헌터 키링 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 6,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1543,
+          "name_ko": "곤 프릭스 러버 스트랩",
+          "name_ja": "ゴン=フリークス ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ゴン=フリークス ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1544,
+          "name_ko": "키루아 조르딕 러버 스트랩",
+          "name_ja": "キルア=ゾルディック ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "キルア=ゾルディック ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1545,
+          "name_ko": "쿠라피카 러버 스트랩",
+          "name_ja": "クラピカ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "クラピカ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1546,
+          "name_ko": "레오리오 러버 스트랩",
+          "name_ja": "レオリオ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "レオリオ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1547,
+          "name_ko": "히소카 러버 스트랩",
+          "name_ja": "ヒソカ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "헌터X헌터",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ヒソカ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%82%BD%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 6,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "031-agent-source-starter-157",
+      "agent_id": "agent-source-starter",
+      "workstream": "source_discovery_starter_queue",
+      "priority": 31,
+      "title": "코토부키야 헌터X헌터 피규어 source starter",
+      "public_report": "data/source_discovery_starter_queue_public.json",
+      "rows": 6,
+      "recommended_action": "open_search_urls_and_confirm_exact_product_source_pages",
+      "acceptance_criteria": [
+        "Open the provided search_url values before using web-wide fallback search.",
+        "Accepted source_url must be an exact product/detail page for the same item or product line.",
+        "Product image evidence must be visible on the confirmed source before image_url import.",
+        "Keep auto-apply disabled; only prepare manually reviewed source/image templates."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1302,
+          "name_ko": "ARTFX J 곤 프릭스",
+          "name_ja": "ARTFX J ゴン＝フリークス",
+          "source_store": "코토부키야",
+          "affiliation": "헌터X헌터",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ARTFX J ゴン＝フリークス",
+          "search_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=ARTFX%20J%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1303,
+          "name_ko": "ARTFX J 키루아 조르딕",
+          "name_ja": "ARTFX J キルア＝ゾルディック",
+          "source_store": "코토부키야",
+          "affiliation": "헌터X헌터",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ARTFX J キルア＝ゾルディック",
+          "search_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=ARTFX%20J%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1304,
+          "name_ko": "ARTFX J 쿠라피카",
+          "name_ja": "ARTFX J クラピカ",
+          "source_store": "코토부키야",
+          "affiliation": "헌터X헌터",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ARTFX J クラピカ",
+          "search_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=ARTFX%20J%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1305,
+          "name_ko": "ARTFX J 히소카",
+          "name_ja": "ARTFX J ヒソカ",
+          "source_store": "코토부키야",
+          "affiliation": "헌터X헌터",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ARTFX J ヒソカ",
+          "search_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=ARTFX%20J%20%E3%83%92%E3%82%BD%E3%82%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1306,
+          "name_ko": "ARTFX J 일루미 조르딕",
+          "name_ja": "ARTFX J イルミ＝ゾルディック",
+          "source_store": "코토부키야",
+          "affiliation": "헌터X헌터",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ARTFX J イルミ＝ゾルディック",
+          "search_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=ARTFX%20J%20%E3%82%A4%E3%83%AB%E3%83%9F%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "review_summary": {
+        "starter_group_rows": 6,
+        "starter_sample_rows": 5
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "032-agent-source-detail-candidate-73",

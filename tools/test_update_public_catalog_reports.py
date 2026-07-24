@@ -1523,6 +1523,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         source_next_focus_pack_summary = source_next_focus_pack.get("summary", {})
         source_next_focus_fallback = reports.load_json(reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE)
         source_next_focus_fallback_summary = source_next_focus_fallback.get("summary", {})
+        source_discovery_starter = reports.load_json(reports.SOURCE_DISCOVERY_STARTER_QUEUE)
+        source_discovery_starter_summary = source_discovery_starter.get("summary", {})
         ensky_cache_action = reports.load_json(reports.ENSKY_CACHE_CANDIDATE_ACTION_QUEUE)
         ensky_cache_action_summary = ensky_cache_action.get("summary", {})
         source_detail_action = reports.load_json(reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE)
@@ -1751,6 +1753,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "source_discovery_next_focus_pack"
         ]
+        source_discovery_starter_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "source_discovery_starter_queue"
+        ]
         self.assertIn(f"data/{reports.IMAGE_ENRICHMENT_BATCHES.name}", scorecard_reports)
         self.assertIn(f"data/{reports.REQUESTED_FOCUS.name}", scorecard_reports)
         self.assertIn(f"data/{reports.DANGANRONPA_MISSING_MEDIA.name}", scorecard_reports)
@@ -1760,6 +1767,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn(f"data/{reports.CONFIRMED_IMPORT_READINESS.name}", report_links)
         self.assertIn(f"data/{reports.IMAGE_ASSET_AUDIT.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE.name}", report_links)
+        self.assertIn(
+            f"data/{reports.SOURCE_DISCOVERY_STARTER_QUEUE.name}",
+            {batch.get("public_report") for batch in agent_queue.get("batches", [])},
+        )
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}", report_links)
         self.assertIn(f"data/{reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}", report_links)
@@ -1963,6 +1974,23 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "focus_pack_progress_queue_count"
             ),
             len(source_next_focus_pack.get("focus_pack_progress_queue", [])),
+        )
+        self.assertEqual(len(source_discovery_starter_agent_batches), 10)
+        self.assertEqual(
+            sum(batch["rows"] for batch in source_discovery_starter_agent_batches),
+            sum(group["rows"] for group in source_discovery_starter["groups"][:10]),
+        )
+        self.assertEqual(
+            source_discovery_starter_summary["starter_queue_rows"],
+            quality["source_discovery_starter_queue"]["starter_queue_rows"],
+        )
+        self.assertEqual(
+            {batch.get("review_state") for batch in source_discovery_starter_agent_batches},
+            {"exact_source_discovery_required"},
+        )
+        self.assertEqual(
+            {batch.get("next_machine_step") for batch in source_discovery_starter_agent_batches},
+            {"find_exact_official_product_source_url"},
         )
         for field in (
             "next_focus_pack_id",
