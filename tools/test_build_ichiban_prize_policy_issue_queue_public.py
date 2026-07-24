@@ -82,6 +82,11 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
                         "sample_rows": [
                             {
                                 "catalog_index": 6,
+                                "campaign_title": "一番くじ Sample",
+                                "prize_rank": "A賞",
+                                "prize_item_name": "Figure",
+                                "variant_name": "Figure",
+                                "identity_label": "一番くじ Sample / A賞 / Figure",
                                 "source_url": "https://1kuji.com/products/sample",
                                 "sub_series": "A賞",
                                 "official_price_jpy": 790,
@@ -89,6 +94,11 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
                             },
                             {
                                 "catalog_index": 7,
+                                "campaign_title": "一番くじ Sample",
+                                "prize_rank": "A賞",
+                                "prize_item_name": "Figure",
+                                "variant_name": "Figure",
+                                "identity_label": "一番くじ Sample / A賞 / Figure",
                                 "source_url": "https://1kuji.com/products/sample-2",
                                 "sub_series": "A賞",
                                 "official_price_jpy": 790,
@@ -192,6 +202,22 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             1,
         )
         self.assertEqual(report["issues"][2]["prize_identity_summary"]["prize_labels"], ["A賞"])
+        self.assertEqual(
+            report["issues"][2]["source_url_evidence_rows"][0]["campaign_titles"],
+            ["一番くじ Sample"],
+        )
+        self.assertEqual(
+            report["issues"][2]["source_url_evidence_rows"][0]["prize_ranks"],
+            ["A賞"],
+        )
+        self.assertEqual(
+            report["issues"][2]["source_url_evidence_rows"][0]["prize_item_names"],
+            ["Figure"],
+        )
+        self.assertEqual(
+            report["issues"][2]["source_url_evidence_rows"][0]["identity_labels"],
+            ["一番くじ Sample / A賞 / Figure"],
+        )
         self.assertTrue(report["issues"][2]["zero_price_exception_policy"]["current_group_pass"])
 
     def test_clean_price_policy_still_surfaces_remaining_reviews(self) -> None:

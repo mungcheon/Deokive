@@ -320,12 +320,35 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         )
         identity_summary = report["ichiban_reissue_work_order"][0]["prize_identity_summary"]
         self.assertEqual(identity_summary["prize_labels"], ["ラストワン賞"])
+        self.assertEqual(identity_summary["campaign_titles"], ["一番くじ Sample"])
+        self.assertEqual(identity_summary["prize_ranks"], ["ラストワン賞"])
+        self.assertEqual(identity_summary["prize_item_names"], ["Sample Figure"])
+        self.assertEqual(
+            identity_summary["identity_labels"],
+            ["一番くじ Sample / ラストワン賞 / Sample Figure"],
+        )
         self.assertEqual(identity_summary["official_price_jpy_values"], [0])
         self.assertEqual(identity_summary["zero_price_exception_rows"], 2)
         self.assertTrue(identity_summary["zero_price_exception_policy_pass"])
         self.assertIn(
-            "sub_series_or_prize_rank",
+            "prize_rank_or_sub_series",
             identity_summary["identity_fields_required"],
+        )
+        self.assertIn(
+            "variant_name_when_same_rank_has_multiple_kinds",
+            identity_summary["identity_fields_required"],
+        )
+        self.assertEqual(
+            report["ichiban_reissue_work_order"][0]["sample_rows"][0]["campaign_title"],
+            "一番くじ Sample",
+        )
+        self.assertEqual(
+            report["ichiban_reissue_work_order"][0]["sample_rows"][0]["prize_rank"],
+            "ラストワン賞",
+        )
+        self.assertEqual(
+            report["ichiban_reissue_work_order"][0]["sample_rows"][0]["prize_item_name"],
+            "Sample Figure",
         )
         self.assertTrue(
             report["ichiban_reissue_work_order"][0]["zero_price_exception_policy"][

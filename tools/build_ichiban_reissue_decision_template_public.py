@@ -58,6 +58,17 @@ def _evidence_url_count(row: dict[str, Any]) -> int:
     return sum(1 for url in row.get("source_urls") or [] if isinstance(url, str) and url.strip())
 
 
+def _sample_rows_with_identity(rows: list[dict[str, Any]]) -> int:
+    return sum(
+        1
+        for row in rows
+        if row.get("campaign_title")
+        and (row.get("prize_rank") or row.get("sub_series"))
+        and row.get("prize_item_name")
+        and row.get("identity_label")
+    )
+
+
 def _item_template(row: dict[str, Any]) -> dict[str, Any]:
     template = _copy_template(row)
     return {
@@ -74,6 +85,7 @@ def _item_template(row: dict[str, Any]) -> dict[str, Any]:
         "reissue_signal_reasons": row.get("reissue_signal_reasons") or [],
         "manual_review_checklist": row.get("manual_review_checklist") or [],
         "sample_rows": row.get("sample_rows") or [],
+        "sample_rows_with_identity_fields": _sample_rows_with_identity(row.get("sample_rows") or []),
         "decision_template": template,
         "manual_confirmed": False,
         "decision": template.get("decision") or "",
@@ -101,6 +113,7 @@ def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
         "campaign_url_comparison": row.get("campaign_url_comparison") or {},
         "manual_review_checklist": row.get("manual_review_checklist") or [],
         "sample_rows": row.get("sample_rows") or [],
+        "sample_rows_with_identity_fields": _sample_rows_with_identity(row.get("sample_rows") or []),
         "decision_template": template,
         "manual_confirmed": False,
         "decision": template.get("decision") or "",
@@ -202,8 +215,14 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             for campaign in campaign_templates
         ),
         "item_templates_with_evidence_urls": sum(1 for item in item_templates if item.get("first_evidence_url")),
+        "item_templates_with_identity_fields": sum(
+            1 for item in item_templates if int(item.get("sample_rows_with_identity_fields") or 0) > 0
+        ),
         "campaign_templates_with_evidence_urls": sum(
             1 for campaign in campaign_templates if campaign.get("first_evidence_url")
+        ),
+        "campaign_templates_with_identity_fields": sum(
+            1 for campaign in campaign_templates if int(campaign.get("sample_rows_with_identity_fields") or 0) > 0
         ),
         "first_item_evidence_url": _first_url(
             [item.get("first_evidence_url") for item in item_templates]

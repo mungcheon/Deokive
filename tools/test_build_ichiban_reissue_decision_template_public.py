@@ -18,6 +18,14 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                         "campaign_work_order_id": "campaign-001",
                         "source_urls": ["https://1kuji.com/products/a", "https://1kuji.com/products/a2"],
                         "item_work_order_count": 2,
+                        "sample_rows": [
+                            {
+                                "campaign_title": "一番くじ Sample",
+                                "prize_rank": "A賞",
+                                "prize_item_name": "Figure",
+                                "identity_label": "一番くじ Sample / A賞 / Figure",
+                            }
+                        ],
                         "decision_template": {
                             "campaign_work_order_id": "campaign-001",
                             "manual_confirmed": True,
@@ -31,6 +39,14 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                         "work_order_id": "item-001",
                         "catalog_indexes": [1, 2],
                         "source_urls": ["https://1kuji.com/products/a", "https://1kuji.com/products/a2"],
+                        "sample_rows": [
+                            {
+                                "campaign_title": "一番くじ Sample",
+                                "prize_rank": "A賞",
+                                "prize_item_name": "Figure",
+                                "identity_label": "一番くじ Sample / A賞 / Figure",
+                            }
+                        ],
                         "decision_template": {
                             "work_order_id": "item-001",
                             "manual_confirmed": True,
@@ -54,6 +70,8 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["summary"]["campaign_item_decision_preview_rows"], 2)
         self.assertEqual(report["summary"]["item_templates_with_evidence_urls"], 1)
         self.assertEqual(report["summary"]["campaign_templates_with_evidence_urls"], 1)
+        self.assertEqual(report["summary"]["item_templates_with_identity_fields"], 1)
+        self.assertEqual(report["summary"]["campaign_templates_with_identity_fields"], 1)
         self.assertEqual(report["summary"]["first_item_evidence_url"], "https://1kuji.com/products/a")
         self.assertEqual(report["summary"]["first_campaign_evidence_url"], "https://1kuji.com/products/a")
         self.assertFalse(report["summary"]["auto_merge_enabled"])
@@ -70,6 +88,7 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["campaign_templates"][0]["item_decision_application_preview_rows"], 2)
         self.assertEqual(report["campaign_templates"][0]["first_evidence_url"], "https://1kuji.com/products/a")
         self.assertEqual(report["campaign_templates"][0]["evidence_url_count"], 2)
+        self.assertEqual(report["campaign_templates"][0]["sample_rows_with_identity_fields"], 1)
         self.assertEqual(
             report["campaign_templates"][0]["item_decision_application_preview"][0][
                 "suggested_decision_if_campaign_is_reissue"
@@ -94,6 +113,7 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["item_templates"][0]["drop_catalog_indexes"], [2])
         self.assertEqual(report["item_templates"][0]["first_evidence_url"], "https://1kuji.com/products/a")
         self.assertEqual(report["item_templates"][0]["evidence_url_count"], 2)
+        self.assertEqual(report["item_templates"][0]["sample_rows_with_identity_fields"], 1)
         self.assertFalse(report["automation_policy"]["auto_merge_enabled"])
 
 

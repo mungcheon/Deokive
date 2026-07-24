@@ -93,6 +93,54 @@ def _price_value(row: dict[str, Any]) -> int | None:
     return None
 
 
+def _prize_rank(row: dict[str, Any]) -> str:
+    rank = str(row.get("sub_series") or "").strip()
+    if rank and "賞" in rank:
+        return rank
+    name = str(row.get("name_ja") or row.get("name_ko") or "").strip()
+    if " - " in name:
+        name = name.rsplit(" - ", 1)[-1]
+    if "賞" in name:
+        return name.split("賞", 1)[0].strip() + "賞"
+    return ""
+
+
+def _prize_item_name(row: dict[str, Any]) -> str:
+    name = str(row.get("name_ja") or row.get("name_ko") or "").strip()
+    rank = _prize_rank(row)
+    if " - " in name:
+        name = name.rsplit(" - ", 1)[-1].strip()
+    if rank and name.startswith(rank):
+        return name[len(rank):].strip(" 　-:：")
+    return name
+
+
+def _variant_name(row: dict[str, Any]) -> str:
+    item_name = _prize_item_name(row)
+    if not item_name:
+        return ""
+    if any(marker in item_name for marker in ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"]):
+        return item_name
+    if any(marker in item_name for marker in ["【", "（", "(", "vol.", "Vol.", "第"]):
+        return item_name
+    return ""
+
+
+def _identity_label(row: dict[str, Any]) -> str:
+    parts = [str(row.get("series_name") or "").strip(), _prize_rank(row), _prize_item_name(row)]
+    return " / ".join(part for part in parts if part)
+
+
+def _enrich_sample_row(row: dict[str, Any]) -> dict[str, Any]:
+    enriched = dict(row)
+    enriched.setdefault("campaign_title", row.get("series_name"))
+    enriched.setdefault("prize_rank", _prize_rank(row))
+    enriched.setdefault("prize_item_name", _prize_item_name(row))
+    enriched.setdefault("variant_name", _variant_name(row))
+    enriched.setdefault("identity_label", _identity_label(row))
+    return enriched
+
+
 def _prize_identity_summary(sample_rows: list[dict[str, Any]]) -> dict[str, Any]:
     prize_labels = [
         row.get("sub_series") or row.get("name_ja") or row.get("name_ko")
@@ -112,7 +160,12 @@ def _prize_identity_summary(sample_rows: list[dict[str, Any]]) -> dict[str, Any]
     ]
     return {
         "series_names": _unique_sorted([row.get("series_name") for row in sample_rows]),
+        "campaign_titles": _unique_sorted([row.get("campaign_title") or row.get("series_name") for row in sample_rows]),
         "prize_labels": _unique_sorted(prize_labels),
+        "prize_ranks": _unique_sorted([row.get("prize_rank") or _prize_rank(row) for row in sample_rows]),
+        "prize_item_names": _unique_sorted([row.get("prize_item_name") or _prize_item_name(row) for row in sample_rows]),
+        "variant_names": _unique_sorted([row.get("variant_name") or _variant_name(row) for row in sample_rows]),
+        "identity_labels": _unique_sorted([row.get("identity_label") or _identity_label(row) for row in sample_rows]),
         "prize_label_count": len(_unique_sorted(prize_labels)),
         "display_names": _unique_sorted([row.get("name_ja") or row.get("name_ko") for row in sample_rows]),
         "display_name_count": len(_unique_sorted([row.get("name_ja") or row.get("name_ko") for row in sample_rows])),
@@ -123,10 +176,11 @@ def _prize_identity_summary(sample_rows: list[dict[str, Any]]) -> dict[str, Any]
         "zero_price_exception_nonzero_rows": len(nonzero_exception_rows),
         "zero_price_exception_policy_pass": len(nonzero_exception_rows) == 0,
         "identity_fields_required": [
-            "series_name",
+            "campaign_title_or_series_name",
             "source_url",
-            "sub_series_or_prize_rank",
-            "name_ja_or_official_prize_name",
+            "prize_rank_or_sub_series",
+            "prize_item_name_or_name_ja",
+            "variant_name_when_same_rank_has_multiple_kinds",
             "official_price_jpy",
             "image_url",
         ],
@@ -237,7 +291,7 @@ def ichiban_reissue_review_lane(
     for group in policy_audit.get("probable_reissue_review_groups") or []:
         if not isinstance(group, dict):
             continue
-        sample_rows = [row for row in group.get("sample_rows") or [] if isinstance(row, dict)]
+        sample_rows = [_enrich_sample_row(row) for row in group.get("sample_rows") or [] if isinstance(row, dict)]
         prize_identity = _prize_identity_summary(sample_rows)
         source_urls = group.get("source_urls") or _unique_sorted([row.get("source_url") for row in sample_rows])
         lane.append(
@@ -275,7 +329,7 @@ def ichiban_reissue_work_order(
 ) -> list[dict[str, Any]]:
     orders: list[dict[str, Any]] = []
     for rank, row in enumerate(review_lane[:limit], start=1):
-        sample_rows = [sample for sample in row.get("sample_rows") or [] if isinstance(sample, dict)]
+        sample_rows = [_enrich_sample_row(sample) for sample in row.get("sample_rows") or [] if isinstance(sample, dict)]
         catalog_indexes = sorted(
             {
                 catalog_index
@@ -375,7 +429,7 @@ def ichiban_reissue_campaign_work_order(
             ]
         )
         sample_rows = [
-            row
+            _enrich_sample_row(row)
             for order in orders[:4]
             for row in order.get("sample_rows") or []
             if isinstance(row, dict)
