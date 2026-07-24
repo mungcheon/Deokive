@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T07:55:28Z",
+  "generated_at": "2026-07-24T08:00:06Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 24,
+    "action_count": 25,
     "blocked_action_count": 1,
-    "manual_review_action_count": 21,
+    "manual_review_action_count": 22,
     "pending_import_action_count": 0,
-    "total_action_rows": 32671,
+    "total_action_rows": 32686,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -200,6 +200,12 @@
     ],
     "source_next_focus_fallback_rows": 17,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
+    "source_next_focus_source_confirmation_ready_rows": 15,
+    "source_next_focus_exact_url_review_rows": 15,
+    "source_next_focus_exact_url_manual_confirmed_rows": 0,
+    "source_next_focus_identity_backfill_rows": 2,
+    "source_next_focus_identity_candidate_review_rows": 2,
+    "source_next_focus_identity_candidate_review_candidate_rows": 5,
     "source_discovery_starter_queue_rows": 637,
     "source_discovery_starter_queue_groups": 339,
     "source_discovery_action_rows": 632,
@@ -812,6 +818,50 @@
     },
     {
       "priority": 20,
+      "workstream": "source_discovery_next_focus_exact_url_review_queue",
+      "public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+      "status": "manual_review",
+      "rows": 15,
+      "command": "Confirm exact product detail URLs from the fallback queue before image attachment.",
+      "next_step": "copy_exact_confirmed_source_urls_into_focus_template",
+      "blocker": "Exact source URL review is manual-only until product identity is confirmed.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "queue_rows": 15,
+        "manual_confirmed_rows": 0,
+        "blocked_identity_rows": 2,
+        "by_source_store": [
+          [
+            "애니메이트",
+            15
+          ]
+        ],
+        "by_category": [
+          [
+            "아크릴 스탠드",
+            15
+          ]
+        ],
+        "by_identity_review_status": [
+          [
+            "exact_page_match_review_ready",
+            15
+          ]
+        ],
+        "primary_review_url_rows": 15,
+        "primary_review_url_kind_counts": [
+          [
+            "domain_limited_web_search",
+            15
+          ]
+        ],
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+        "first_primary_review_url_kind": "domain_limited_web_search",
+        "auto_apply_enabled": false
+      }
+    },
+    {
+      "priority": 20,
       "workstream": "source_discovery_next_focus_fallback_queue",
       "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
       "status": "manual_review",
@@ -824,6 +874,23 @@
         "focus_pack_id": "source-discovery-focus-001",
         "queue_rows": 17,
         "manual_confirmed_rows": 0,
+        "source_confirmation_ready_rows": 15,
+        "exact_url_review_queue_rows": 15,
+        "identity_backfill_queue_rows": 2,
+        "identity_candidate_review_queue_rows": 2,
+        "identity_candidate_review_candidate_rows": 5,
+        "metadata_backfill_required_rows": 5,
+        "variant_disambiguation_required_rows": 2,
+        "by_identity_review_status": [
+          [
+            "exact_page_match_review_ready",
+            15
+          ],
+          [
+            "variant_disambiguation_required",
+            2
+          ]
+        ],
         "fallback_reason": "official_search_url_unavailable",
         "by_http_status": [
           [

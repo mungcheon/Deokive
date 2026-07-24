@@ -121,6 +121,15 @@ def _build_plan(load_report) -> dict[str, Any]:
         "source_discovery_next_focus_detail_candidates_public.json"
     )
     source_next_focus_fallback_queue = load_report("source_discovery_next_focus_fallback_queue_public.json")
+    source_next_focus_exact_url_review_queue = load_report(
+        "source_discovery_next_focus_exact_url_review_queue_public.json"
+    )
+    source_next_focus_identity_backfill_queue = load_report(
+        "source_discovery_next_focus_identity_backfill_queue_public.json"
+    )
+    source_next_focus_identity_candidate_review_queue = load_report(
+        "source_discovery_next_focus_identity_candidate_review_queue_public.json"
+    )
     source_discovery_starter_queue = load_report("source_discovery_starter_queue_public.json")
     source_detail_candidate_action_queue = load_report("source_detail_candidate_action_queue_public.json")
     ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
@@ -167,6 +176,13 @@ def _build_plan(load_report) -> dict[str, Any]:
     source_next_focus_fetch_audit_summary = _summary(source_next_focus_fetch_audit)
     source_next_focus_detail_summary = _summary(source_next_focus_detail_candidates)
     source_next_focus_fallback_summary = _summary(source_next_focus_fallback_queue)
+    source_next_focus_exact_url_summary = _summary(source_next_focus_exact_url_review_queue)
+    source_next_focus_identity_backfill_summary = _summary(
+        source_next_focus_identity_backfill_queue
+    )
+    source_next_focus_identity_candidate_summary = _summary(
+        source_next_focus_identity_candidate_review_queue
+    )
     source_discovery_starter_summary = _summary(source_discovery_starter_queue)
     source_detail_candidate_action_summary = _summary(source_detail_candidate_action_queue)
     ensky_cache_candidate_action_summary = _summary(ensky_cache_candidate_action_queue)
@@ -492,6 +508,31 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "focus_pack_id": source_next_focus_fallback_summary.get("focus_pack_id"),
                     "queue_rows": _count(source_next_focus_fallback_summary, "queue_rows"),
                     "manual_confirmed_rows": _count(source_next_focus_fallback_summary, "manual_confirmed_rows"),
+                    "source_confirmation_ready_rows": _count(
+                        source_next_focus_fallback_summary, "source_confirmation_ready_rows"
+                    ),
+                    "exact_url_review_queue_rows": _count(
+                        source_next_focus_exact_url_summary, "queue_rows"
+                    ),
+                    "identity_backfill_queue_rows": _count(
+                        source_next_focus_identity_backfill_summary, "queue_rows"
+                    ),
+                    "identity_candidate_review_queue_rows": _count(
+                        source_next_focus_identity_candidate_summary, "queue_rows"
+                    ),
+                    "identity_candidate_review_candidate_rows": _count(
+                        source_next_focus_identity_candidate_summary, "candidate_rows"
+                    ),
+                    "metadata_backfill_required_rows": _count(
+                        source_next_focus_fallback_summary, "metadata_backfill_required_rows"
+                    ),
+                    "variant_disambiguation_required_rows": _count(
+                        source_next_focus_fallback_summary,
+                        "variant_disambiguation_required_rows",
+                    ),
+                    "by_identity_review_status": source_next_focus_fallback_summary.get(
+                        "by_identity_review_status", []
+                    ),
                     "fallback_reason": source_next_focus_fallback_summary.get("fallback_reason"),
                     "by_http_status": source_next_focus_fallback_summary.get("by_http_status", []),
                     "by_source_store": source_next_focus_fallback_summary.get("by_source_store", []),
@@ -509,6 +550,53 @@ def _build_plan(load_report) -> dict[str, Any]:
                     ),
                     "first_primary_review_url_kind": source_next_focus_fallback_summary.get(
                         "first_primary_review_url_kind"
+                    ),
+                },
+            )
+        )
+
+    if source_next_focus_exact_url_summary:
+        actions.append(
+            _action(
+                priority=20,
+                workstream="source_discovery_next_focus_exact_url_review_queue",
+                public_report="data/source_discovery_next_focus_exact_url_review_queue_public.json",
+                status="manual_review"
+                if _count(source_next_focus_exact_url_summary, "queue_rows")
+                else "clear",
+                rows=_count(source_next_focus_exact_url_summary, "queue_rows"),
+                command="Confirm exact product detail URLs from the fallback queue before image attachment.",
+                next_step="copy_exact_confirmed_source_urls_into_focus_template",
+                blocker="Exact source URL review is manual-only until product identity is confirmed.",
+                evidence={
+                    "queue_rows": _count(source_next_focus_exact_url_summary, "queue_rows"),
+                    "manual_confirmed_rows": _count(
+                        source_next_focus_exact_url_summary, "manual_confirmed_rows"
+                    ),
+                    "blocked_identity_rows": _count(
+                        source_next_focus_exact_url_summary, "blocked_identity_rows"
+                    ),
+                    "by_source_store": source_next_focus_exact_url_summary.get(
+                        "by_source_store", []
+                    ),
+                    "by_category": source_next_focus_exact_url_summary.get("by_category", []),
+                    "by_identity_review_status": source_next_focus_exact_url_summary.get(
+                        "by_identity_review_status", []
+                    ),
+                    "primary_review_url_rows": _count(
+                        source_next_focus_exact_url_summary, "primary_review_url_rows"
+                    ),
+                    "primary_review_url_kind_counts": source_next_focus_exact_url_summary.get(
+                        "primary_review_url_kind_counts", []
+                    ),
+                    "first_primary_review_url": source_next_focus_exact_url_summary.get(
+                        "first_primary_review_url"
+                    ),
+                    "first_primary_review_url_kind": source_next_focus_exact_url_summary.get(
+                        "first_primary_review_url_kind"
+                    ),
+                    "auto_apply_enabled": bool(
+                        source_next_focus_exact_url_summary.get("auto_apply_enabled", False)
                     ),
                 },
             )
@@ -1697,6 +1785,24 @@ def _build_plan(load_report) -> dict[str, Any]:
             "source_next_focus_fallback_rows": _count(source_next_focus_fallback_summary, "queue_rows"),
             "source_next_focus_fallback_manual_confirmed_rows": _count(
                 source_next_focus_fallback_summary, "manual_confirmed_rows"
+            ),
+            "source_next_focus_source_confirmation_ready_rows": _count(
+                source_next_focus_fallback_summary, "source_confirmation_ready_rows"
+            ),
+            "source_next_focus_exact_url_review_rows": _count(
+                source_next_focus_exact_url_summary, "queue_rows"
+            ),
+            "source_next_focus_exact_url_manual_confirmed_rows": _count(
+                source_next_focus_exact_url_summary, "manual_confirmed_rows"
+            ),
+            "source_next_focus_identity_backfill_rows": _count(
+                source_next_focus_identity_backfill_summary, "queue_rows"
+            ),
+            "source_next_focus_identity_candidate_review_rows": _count(
+                source_next_focus_identity_candidate_summary, "queue_rows"
+            ),
+            "source_next_focus_identity_candidate_review_candidate_rows": _count(
+                source_next_focus_identity_candidate_summary, "candidate_rows"
             ),
             "source_discovery_starter_queue_rows": _count(
                 source_discovery_starter_summary, "starter_queue_rows"

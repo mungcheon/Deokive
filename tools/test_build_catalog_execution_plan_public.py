@@ -160,6 +160,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "focus_pack_id": "source-discovery-focus-001",
                     "queue_rows": 4,
                     "manual_confirmed_rows": 0,
+                    "source_confirmation_ready_rows": 3,
+                    "metadata_backfill_required_rows": 1,
+                    "variant_disambiguation_required_rows": 1,
+                    "by_identity_review_status": [
+                        ["exact_page_match_review_ready", 3],
+                        ["variant_disambiguation_required", 1],
+                    ],
                     "fallback_reason": "official_search_url_unavailable",
                     "by_http_status": [["404", 4]],
                     "by_source_store": [["Animate", 4]],
@@ -173,6 +180,38 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "first_domain_limited_web_search_url": "https://google.example/search?q=site%3Aanimate",
                     "first_fallback_store_search_url": "https://animate.example/sphone/products/list.php",
                     "auto_apply_enabled": False,
+                }
+            },
+            "source_discovery_next_focus_exact_url_review_queue_public.json": {
+                "summary": {
+                    "queue_rows": 3,
+                    "manual_confirmed_rows": 0,
+                    "blocked_identity_rows": 1,
+                    "by_source_store": [["Animate", 3]],
+                    "by_category": [["Acrylic stand", 3]],
+                    "by_identity_review_status": [
+                        ["exact_page_match_review_ready", 3]
+                    ],
+                    "primary_review_url_rows": 3,
+                    "primary_review_url_kind_counts": [
+                        ["domain_limited_web_search", 3]
+                    ],
+                    "first_primary_review_url": "https://google.example/search?q=exact",
+                    "first_primary_review_url_kind": "domain_limited_web_search",
+                    "auto_apply_enabled": False,
+                }
+            },
+            "source_discovery_next_focus_identity_backfill_queue_public.json": {
+                "summary": {
+                    "queue_rows": 1,
+                    "manual_confirmed_rows": 0,
+                }
+            },
+            "source_discovery_next_focus_identity_candidate_review_queue_public.json": {
+                "summary": {
+                    "queue_rows": 1,
+                    "candidate_rows": 2,
+                    "manual_confirmed_rows": 0,
                 }
             },
             "source_discovery_starter_queue_public.json": {
@@ -765,6 +804,25 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(fallback_queue["priority"], 20)
         self.assertEqual(fallback_queue["rows"], 4)
         self.assertEqual(fallback_queue["evidence"]["by_source_store"], [["Animate", 4]])
+        self.assertEqual(fallback_queue["evidence"]["source_confirmation_ready_rows"], 3)
+        self.assertEqual(fallback_queue["evidence"]["exact_url_review_queue_rows"], 3)
+        self.assertEqual(fallback_queue["evidence"]["identity_backfill_queue_rows"], 1)
+        self.assertEqual(
+            fallback_queue["evidence"]["identity_candidate_review_queue_rows"], 1
+        )
+        self.assertEqual(
+            fallback_queue["evidence"]["identity_candidate_review_candidate_rows"], 2
+        )
+        self.assertEqual(
+            fallback_queue["evidence"]["metadata_backfill_required_rows"], 1
+        )
+        self.assertEqual(
+            fallback_queue["evidence"]["variant_disambiguation_required_rows"], 1
+        )
+        self.assertEqual(
+            fallback_queue["evidence"]["by_identity_review_status"][0][0],
+            "exact_page_match_review_ready",
+        )
         self.assertEqual(fallback_queue["evidence"]["work_order_steps"], 3)
         self.assertEqual(
             fallback_queue["evidence"]["work_order_lanes"],
@@ -775,6 +833,35 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             ],
         )
         self.assertEqual(report["summary"]["source_next_focus_fallback_rows"], 4)
+        exact_url_queue = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "source_discovery_next_focus_exact_url_review_queue"
+        )
+        self.assertEqual(exact_url_queue["priority"], 20)
+        self.assertEqual(exact_url_queue["rows"], 3)
+        self.assertEqual(exact_url_queue["evidence"]["blocked_identity_rows"], 1)
+        self.assertEqual(exact_url_queue["evidence"]["primary_review_url_rows"], 3)
+        self.assertEqual(
+            exact_url_queue["evidence"]["first_primary_review_url"],
+            "https://google.example/search?q=exact",
+        )
+        self.assertFalse(exact_url_queue["evidence"]["auto_apply_enabled"])
+        self.assertEqual(
+            report["summary"]["source_next_focus_source_confirmation_ready_rows"], 3
+        )
+        self.assertEqual(report["summary"]["source_next_focus_exact_url_review_rows"], 3)
+        self.assertEqual(
+            report["summary"]["source_next_focus_exact_url_manual_confirmed_rows"], 0
+        )
+        self.assertEqual(report["summary"]["source_next_focus_identity_backfill_rows"], 1)
+        self.assertEqual(
+            report["summary"]["source_next_focus_identity_candidate_review_rows"], 1
+        )
+        self.assertEqual(
+            report["summary"]["source_next_focus_identity_candidate_review_candidate_rows"],
+            2,
+        )
         source_starter = next(
             action
             for action in report["actions"]
