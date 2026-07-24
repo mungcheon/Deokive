@@ -588,11 +588,11 @@ class _CatalogAddButton extends StatelessWidget {
     final content = AnimatedContainer(
       duration: const Duration(milliseconds: 140),
       height: 40,
-      constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 118,
-        maxWidth: expanded ? double.infinity : 136,
+      constraints: BoxConstraints.tightFor(
+        width: expanded ? null : 126,
+        height: 40,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(999),
@@ -623,16 +623,21 @@ class _CatalogAddButton extends StatelessWidget {
                 Icon(icon, color: foreground),
                 const SizedBox(width: 5),
                 Flexible(
-                  child: Text(
-                    label,
-                    maxLines: 1,
-                    softWrap: false,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: foreground,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w900,
-                      height: 1,
+                  fit: FlexFit.loose,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      label,
+                      maxLines: 1,
+                      softWrap: false,
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(
+                        color: foreground,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w900,
+                        height: 1,
+                      ),
                     ),
                   ),
                 ),
