@@ -259,6 +259,56 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
     return work_order
 
 
+def _source_url_update_templates(action_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows = [
+        item["source_url_import_template"]
+        for item in action_items
+        if isinstance(item.get("source_url_import_template"), dict)
+    ]
+    return sorted(
+        rows,
+        key=lambda row: (
+            str(row.get("source_store") or ""),
+            0 if row.get("source_search_url") or row.get("official_search_url") else 1,
+            int(row.get("row_index") or 999_999_999),
+        ),
+    )
+
+
+def _build_source_url_update_template_batches(
+    templates: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for row in templates:
+        source_store = str(row.get("source_store") or "unknown")
+        grouped.setdefault(source_store, []).append(row)
+
+    batches = []
+    for index, (source_store, rows) in enumerate(
+        sorted(grouped.items(), key=lambda item: (-len(item[1]), item[0])),
+        start=1,
+    ):
+        batches.append(
+            {
+                "template_batch_id": f"source-url-update-template-{index:03d}",
+                "source_store": source_store,
+                "row_count": len(rows),
+                "official_search_url_rows": sum(
+                    1
+                    for row in rows
+                    if row.get("source_search_url") or row.get("official_search_url")
+                ),
+                "fallback_web_search_url_rows": sum(
+                    1 for row in rows if row.get("fallback_web_search_urls")
+                ),
+                "rows": rows,
+                "manual_review_required": True,
+                "auto_apply_enabled": False,
+            }
+        )
+    return batches
+
+
 def _first_workstream_batch_id(workstreams: list[dict[str, Any]], field: str) -> Any:
     return next(
         (
@@ -669,6 +719,10 @@ def build_report(
     )
     image_url_ready_rows = sum(1 for item in action_items if item.get("image_url_ready"))
     source_url_update_work_order = _build_source_url_update_work_order(action_items)
+    source_url_update_template = _source_url_update_templates(action_items)
+    source_url_update_template_batches = _build_source_url_update_template_batches(
+        source_url_update_template
+    )
     execution_readiness = _build_execution_readiness(
         source_url_update_required_rows=source_url_update_required_rows,
         representative_image_review_required_rows=representative_image_review_required_rows,
@@ -721,6 +775,7 @@ def build_report(
                 1 for row in workstreams if row.get("source_url_update_template_rows")
             ),
             "source_url_update_work_order_count": len(source_url_update_work_order),
+            "source_url_update_template_batch_count": len(source_url_update_template_batches),
             "representative_image_review_workstream_count": sum(
                 1 for row in workstreams if row.get("representative_image_review_rows")
             ),
@@ -737,6 +792,8 @@ def build_report(
         "execution_readiness": execution_readiness,
         "workstreams": workstreams,
         "source_url_update_work_order": source_url_update_work_order,
+        "source_url_update_template": source_url_update_template,
+        "source_url_update_template_batches": source_url_update_template_batches,
         "next_operator_actions": next_operator_actions,
         "next_actions": [
             {

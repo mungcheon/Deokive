@@ -73,6 +73,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["source_url_update_workstream_count"], 1)
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 1)
+        self.assertEqual(report["summary"]["source_url_update_template_batch_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(
@@ -179,6 +180,22 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             work_order["recommended_review_order"][1],
         )
         self.assertIn("exact product detail page", work_order["recommended_review_order"][2])
+        flat_template = report["source_url_update_template"]
+        self.assertEqual([row["row_index"] for row in flat_template], [2, 1])
+        self.assertEqual(flat_template[0]["field"], "source_url")
+        self.assertEqual(flat_template[0]["manual_value"], "")
+        self.assertEqual(
+            flat_template[0]["source_search_url"],
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
+        )
+        self.assertEqual(flat_template[1]["first_fallback_web_search_url"], report["batches"][0]["items"][0]["first_fallback_web_search_url"])
+        template_batch = report["source_url_update_template_batches"][0]
+        self.assertEqual(template_batch["template_batch_id"], "source-url-update-template-001")
+        self.assertEqual(template_batch["source_store"], "Stellive Store")
+        self.assertEqual(template_batch["row_count"], 2)
+        self.assertEqual(template_batch["official_search_url_rows"], 1)
+        self.assertEqual(template_batch["fallback_web_search_url_rows"], 1)
+        self.assertEqual([row["row_index"] for row in template_batch["rows"]], [2, 1])
 
     def test_max_batches_caps_published_batches_not_actionable_summary(self) -> None:
         enrichment = {
@@ -208,6 +225,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 3)
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 0)
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 0)
+        self.assertEqual(report["summary"]["source_url_update_template_batch_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 1)
