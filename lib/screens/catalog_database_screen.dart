@@ -588,7 +588,7 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 112,
+        minWidth: expanded ? 0 : 118,
         minHeight: 40,
         maxHeight: 40,
       ),
@@ -676,6 +676,13 @@ class _CatalogAddButtonLabel extends StatelessWidget {
         fontSize: 13,
         fontWeight: FontWeight.w900,
         height: 1,
+        shadows: const [
+          Shadow(
+            color: Color(0x66000000),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
       ),
       maxLines: 1,
       softWrap: false,

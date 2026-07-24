@@ -232,15 +232,15 @@ void main() {
       of: buttonFinder,
       matching: find.byIcon(Icons.add_rounded),
     );
-    final addTextStyle = DefaultTextStyle.of(
-      tester.element(addTextFinder),
-    ).style;
+    final addTextStyle = tester.widget<Text>(addTextFinder).style!;
     final addIconTheme = IconTheme.of(tester.element(addIconFinder));
 
     expect(addTextStyle.color, Colors.white);
+    expect(addTextStyle.shadows, isNotNull);
+    expect(addTextStyle.shadows, isNotEmpty);
     expect(addIconTheme.color, Colors.white);
     expect(tester.getSize(addTextFinder).width, greaterThan(0));
-    expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(112));
+    expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(118));
   });
 
   testWidgets('catalog destination add button keeps visible foreground',
@@ -298,12 +298,12 @@ void main() {
       of: buttonFinder,
       matching: find.byIcon(Icons.add_rounded),
     );
-    final addTextStyle = DefaultTextStyle.of(
-      tester.element(addTextFinder),
-    ).style;
+    final addTextStyle = tester.widget<Text>(addTextFinder).style!;
     final addIconTheme = IconTheme.of(tester.element(addIconFinder));
 
     expect(addTextStyle.color, Colors.white);
+    expect(addTextStyle.shadows, isNotNull);
+    expect(addTextStyle.shadows, isNotEmpty);
     expect(addIconTheme.color, Colors.white);
   });
 

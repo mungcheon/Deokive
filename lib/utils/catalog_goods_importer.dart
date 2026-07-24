@@ -482,6 +482,13 @@ class _CatalogImportActionLabel extends StatelessWidget {
         fontSize: 15,
         fontWeight: FontWeight.w900,
         height: 1,
+        shadows: const [
+          Shadow(
+            color: Color(0x66000000),
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
       ),
       maxLines: 1,
       softWrap: false,
