@@ -438,9 +438,12 @@ class _CatalogImportActionButton extends StatelessWidget {
                 Icon(icon, color: foregroundColor),
                 const SizedBox(width: 7),
                 Flexible(
-                  child: _CatalogImportActionLabel(
-                    label: label,
-                    color: foregroundColor,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: _CatalogImportActionLabel(
+                      label: label,
+                      color: foregroundColor,
+                    ),
                   ),
                 ),
               ],
