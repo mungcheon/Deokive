@@ -212,6 +212,9 @@ def _build_plan(load_report) -> dict[str, Any]:
         "animation_category_unmatched_keyword_product_type_candidates"
     ] = animation_unmatched_product_type_candidates
     confirmed_summary = _summary(confirmed_readiness)
+    confirmed_work_order = confirmed_readiness.get("work_order")
+    if not isinstance(confirmed_work_order, list):
+        confirmed_work_order = []
 
     actions: list[dict[str, Any]] = []
     requested_template_counts = _pair_counts(requested_summary.get("field_patch_template_counts", []))
@@ -242,6 +245,8 @@ def _build_plan(load_report) -> dict[str, Any]:
             next_step="confirm_exact_rows_then_run_guarded_import",
             blocker=None if pending_import_rows else "No public workflow has manual_confirmed=true rows yet.",
             evidence={
+                "workflow_count": _count(confirmed_summary, "workflow_count"),
+                "confirmed_files": _count(confirmed_summary, "confirmed_files"),
                 "template_items": template_items,
                 "public_action_queue_rows": public_action_queue_rows,
                 "public_action_queue_batches": public_action_queue_batches,
@@ -249,6 +254,32 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "manual_confirmed_ready_rows": manual_confirmed_ready_rows,
                 "manual_confirmation_backlog_rows": manual_confirmation_backlog_rows,
                 "blocked_confirmed_rows": blocked_confirmed_rows,
+                "work_order_lanes": _count(confirmed_summary, "work_order_lanes"),
+                "top_work_order_row_count": _count(
+                    confirmed_summary, "top_work_order_row_count"
+                ),
+                "top_work_order_lane": confirmed_summary.get("top_work_order_lane"),
+                "top_work_order_workflow": confirmed_summary.get(
+                    "top_work_order_workflow"
+                ),
+                "by_status": confirmed_summary.get("by_status", []),
+                "top_work_orders": [
+                    {
+                        "workflow": row.get("workflow"),
+                        "public_workstream": row.get("public_workstream"),
+                        "lane": row.get("lane"),
+                        "row_count": row.get("row_count", 0),
+                        "batch_count": row.get("batch_count", 0),
+                        "next_step": row.get("next_step"),
+                        "template_file_exists": row.get("template_file_exists"),
+                        "manual_confirmation_required": row.get(
+                            "manual_confirmation_required"
+                        ),
+                        "auto_apply_enabled": row.get("auto_apply_enabled"),
+                    }
+                    for row in confirmed_work_order
+                    if isinstance(row, dict)
+                ][:8],
             },
         )
     )
@@ -1462,6 +1493,19 @@ def _build_plan(load_report) -> dict[str, Any]:
             "confirmed_import_manual_confirmed_ready_rows": manual_confirmed_ready_rows,
             "confirmed_import_manual_confirmation_backlog_rows": manual_confirmation_backlog_rows,
             "confirmed_import_blocked_confirmed_rows": blocked_confirmed_rows,
+            "confirmed_import_workflow_count": _count(confirmed_summary, "workflow_count"),
+            "confirmed_import_work_order_lanes": _count(
+                confirmed_summary, "work_order_lanes"
+            ),
+            "confirmed_import_top_work_order_row_count": _count(
+                confirmed_summary, "top_work_order_row_count"
+            ),
+            "confirmed_import_top_work_order_lane": confirmed_summary.get(
+                "top_work_order_lane"
+            ),
+            "confirmed_import_top_work_order_workflow": confirmed_summary.get(
+                "top_work_order_workflow"
+            ),
             "requested_focus_actionable_template_rows": requested_actionable_template_rows,
             "requested_focus_barcode_template_rows": requested_barcode_template_rows,
             "danganronpa_missing_media_rows": _count(danganronpa_media_summary, "missing_media_rows"),

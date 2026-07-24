@@ -564,12 +564,31 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             },
             "catalog_confirmed_import_readiness_public.json": {
                 "summary": {
+                    "workflow_count": 2,
                     "template_items": 3,
                     "public_action_queue_rows": 6,
                     "public_action_queue_batches": 2,
                     "ready_or_pending_import_rows": 0,
                     "blocked_confirmed_rows": 0,
-                }
+                    "work_order_lanes": 2,
+                    "top_work_order_row_count": 4,
+                    "top_work_order_lane": "confirm_template_rows",
+                    "top_work_order_workflow": "source_discovery",
+                    "by_status": [["template_ready_for_manual_confirmation", 1]],
+                },
+                "work_order": [
+                    {
+                        "workflow": "source_discovery",
+                        "public_workstream": "source_discovery_source_urls",
+                        "lane": "confirm_template_rows",
+                        "row_count": 4,
+                        "batch_count": 0,
+                        "next_step": "review_template_rows_then_copy_exact_confirmed_rows",
+                        "template_file_exists": True,
+                        "manual_confirmation_required": True,
+                        "auto_apply_enabled": False,
+                    }
+                ],
             },
         }
 
@@ -586,6 +605,21 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(first["evidence"]["public_action_queue_batches"], 2)
         self.assertEqual(first["evidence"]["manual_confirmed_ready_rows"], 0)
         self.assertEqual(first["evidence"]["manual_confirmation_backlog_rows"], 9)
+        self.assertEqual(first["evidence"]["workflow_count"], 2)
+        self.assertEqual(first["evidence"]["work_order_lanes"], 2)
+        self.assertEqual(first["evidence"]["top_work_order_row_count"], 4)
+        self.assertEqual(first["evidence"]["top_work_order_lane"], "confirm_template_rows")
+        self.assertEqual(first["evidence"]["top_work_order_workflow"], "source_discovery")
+        self.assertEqual(
+            first["evidence"]["by_status"],
+            [["template_ready_for_manual_confirmation", 1]],
+        )
+        self.assertEqual(
+            first["evidence"]["top_work_orders"][0]["public_workstream"],
+            "source_discovery_source_urls",
+        )
+        self.assertTrue(first["evidence"]["top_work_orders"][0]["template_file_exists"])
+        self.assertFalse(first["evidence"]["top_work_orders"][0]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["confirmed_import_template_rows"], 3)
         self.assertEqual(report["summary"]["confirmed_import_action_queue_rows"], 6)
         self.assertEqual(report["summary"]["confirmed_import_action_queue_batches"], 2)
@@ -593,6 +627,17 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["confirmed_import_manual_confirmed_ready_rows"], 0)
         self.assertEqual(report["summary"]["confirmed_import_manual_confirmation_backlog_rows"], 9)
         self.assertEqual(report["summary"]["confirmed_import_blocked_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["confirmed_import_workflow_count"], 2)
+        self.assertEqual(report["summary"]["confirmed_import_work_order_lanes"], 2)
+        self.assertEqual(report["summary"]["confirmed_import_top_work_order_row_count"], 4)
+        self.assertEqual(
+            report["summary"]["confirmed_import_top_work_order_lane"],
+            "confirm_template_rows",
+        )
+        self.assertEqual(
+            report["summary"]["confirmed_import_top_work_order_workflow"],
+            "source_discovery",
+        )
         requested = next(
             action
             for action in report["actions"]

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T07:52:09Z",
+  "generated_at": "2026-07-24T07:55:28Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 24,
@@ -101,6 +101,11 @@
     "confirmed_import_manual_confirmed_ready_rows": 0,
     "confirmed_import_manual_confirmation_backlog_rows": 5410,
     "confirmed_import_blocked_confirmed_rows": 0,
+    "confirmed_import_workflow_count": 12,
+    "confirmed_import_work_order_lanes": 11,
+    "confirmed_import_top_work_order_row_count": 641,
+    "confirmed_import_top_work_order_lane": "confirm_template_rows",
+    "confirmed_import_top_work_order_workflow": "source_discovery",
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
     "danganronpa_missing_media_rows": 34,
@@ -235,13 +240,127 @@
       "blocker": "No public workflow has manual_confirmed=true rows yet.",
       "auto_apply_enabled": false,
       "evidence": {
+        "workflow_count": 12,
+        "confirmed_files": 2,
         "template_items": 1158,
         "public_action_queue_rows": 4252,
         "public_action_queue_batches": 178,
         "ready_or_pending_import_rows": 0,
         "manual_confirmed_ready_rows": 0,
         "manual_confirmation_backlog_rows": 5410,
-        "blocked_confirmed_rows": 0
+        "blocked_confirmed_rows": 0,
+        "work_order_lanes": 11,
+        "top_work_order_row_count": 641,
+        "top_work_order_lane": "confirm_template_rows",
+        "top_work_order_workflow": "source_discovery",
+        "by_status": [
+          [
+            "public_action_queue_ready_for_confirmation",
+            5
+          ],
+          [
+            "no_current_candidates",
+            3
+          ],
+          [
+            "template_ready_for_manual_confirmation",
+            3
+          ],
+          [
+            "confirmed_file_empty",
+            1
+          ]
+        ],
+        "top_work_orders": [
+          {
+            "workflow": "source_discovery",
+            "public_workstream": "source_discovery_source_urls",
+            "lane": "confirm_template_rows",
+            "row_count": 641,
+            "batch_count": 0,
+            "next_step": "review_template_rows_then_copy_exact_confirmed_rows",
+            "template_file_exists": true,
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          {
+            "workflow": "catalog_field",
+            "public_workstream": "metadata_field_values",
+            "lane": "confirm_template_rows",
+            "row_count": 500,
+            "batch_count": 0,
+            "next_step": "review_template_rows_then_copy_exact_confirmed_rows",
+            "template_file_exists": true,
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          {
+            "workflow": "source_discovery_next_focus_fallback",
+            "public_workstream": "source_discovery_next_focus_fallback_source_urls",
+            "lane": "confirm_template_rows",
+            "row_count": 17,
+            "batch_count": 0,
+            "next_step": "review_template_rows_then_copy_exact_confirmed_rows",
+            "template_file_exists": true,
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          {
+            "workflow": "catalog_field",
+            "public_workstream": "metadata_field_values",
+            "lane": "convert_public_action_queue_to_confirmed_rows",
+            "row_count": 2498,
+            "batch_count": 14,
+            "next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
+            "template_file_exists": null,
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          {
+            "workflow": "source_discovery",
+            "public_workstream": "source_discovery_source_urls",
+            "lane": "convert_public_action_queue_to_confirmed_rows",
+            "row_count": 632,
+            "batch_count": 60,
+            "next_step": "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
+            "template_file_exists": null,
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          {
+            "workflow": "focus_image",
+            "public_workstream": "requested_focus_image_urls",
+            "lane": "convert_public_action_queue_to_confirmed_rows",
+            "row_count": 600,
+            "batch_count": 86,
+            "next_step": "confirm_requested_focus_templates_then_run_import_confirmed_requested_focus_rows",
+            "template_file_exists": null,
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          {
+            "workflow": "ichiban_metadata",
+            "public_workstream": "ichiban_kuji_metadata",
+            "lane": "convert_public_action_queue_to_confirmed_rows",
+            "row_count": 381,
+            "batch_count": 6,
+            "next_step": "fill_confirmed_ichiban_campaign_patch_templates_then_run_import_confirmed_ichiban_metadata_rows",
+            "template_file_exists": null,
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          {
+            "workflow": "catalog_image",
+            "public_workstream": "exact_image_urls",
+            "lane": "convert_public_action_queue_to_confirmed_rows",
+            "row_count": 73,
+            "batch_count": 7,
+            "next_step": "confirm_exact_image_url_templates_then_run_import_confirmed_image_attachment_rows",
+            "template_file_exists": null,
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          }
+        ]
       }
     },
     {
