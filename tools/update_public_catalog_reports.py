@@ -10689,6 +10689,175 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{AGENT_WORK_QUEUE.name}",
             **agent_work_queue["summary"],
         }
+        goal_pillars = [
+            {
+                "pillar": "dedupe",
+                "label": "Deduplicate catalog rows",
+                "status": target.get("deduplication_action_queue", {}).get(
+                    "dedupe_safety_gate_status",
+                    target.get("deduplication_action_queue", {}).get(
+                        "completion_readiness_status",
+                        "unknown",
+                    ),
+                ),
+                "open_rows": target.get("deduplication_action_queue", {}).get(
+                    "queued_groups",
+                    0,
+                ),
+                "manual_review_rows": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("explicit_keep_drop_required_groups", 0),
+                "auto_apply_ready_rows": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("auto_merge_ready_groups", 0),
+                "next_safe_phase": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("next_safe_phase", "review_duplicate_decisions"),
+                "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            },
+            {
+                "pillar": "missing_images",
+                "label": "Resolve missing catalog images",
+                "status": target.get("missing_image_completion_gate", {}).get(
+                    "status",
+                    "unknown",
+                ),
+                "open_rows": target.get("missing_image_completion_gate", {}).get(
+                    "missing_image_rows",
+                    0,
+                ),
+                "manual_review_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("missing_image_rows", 0),
+                "auto_apply_ready_rows": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("auto_apply_ready_rows", 0),
+                "next_safe_phase": target.get(
+                    "missing_image_completion_gate",
+                    {},
+                ).get("next_safe_phase", "replace_generic_source_urls"),
+                "public_report": f"data/{MISSING_IMAGE_ACTIONABILITY.name}",
+            },
+            {
+                "pillar": "source_url_updates",
+                "label": "Replace generic source URLs before image import",
+                "status": target.get("source_url_update_execution_gate", {}).get(
+                    "status",
+                    "unknown",
+                ),
+                "open_rows": target.get("source_url_update_execution_gate", {}).get(
+                    "source_url_update_required_rows",
+                    0,
+                ),
+                "manual_review_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("source_url_update_required_rows", 0),
+                "auto_apply_ready_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("auto_apply_ready_rows", 0),
+                "next_safe_phase": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("next_safe_phase", "review_candidate_source_urls"),
+                "public_report": f"data/{IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.name}",
+            },
+            {
+                "pillar": "animation_categories",
+                "label": "Normalize animation goods categories and folder visuals",
+                "status": target.get("animation_category_coverage_audit", {}).get(
+                    "visual_taxonomy_gate_status",
+                    target.get("animation_category_review", {}).get(
+                        "category_readiness_status",
+                        "unknown",
+                    ),
+                ),
+                "open_rows": target.get("animation_category_coverage_audit", {}).get(
+                    "normalization_review_blocker_rows",
+                    0,
+                ),
+                "manual_review_rows": target.get(
+                    "animation_category_coverage_audit",
+                    {},
+                ).get("normalization_review_blocker_rows", 0),
+                "auto_apply_ready_rows": 0,
+                "next_safe_phase": target.get(
+                    "animation_category_coverage_audit",
+                    {},
+                ).get("next_safe_phase", "confirm_category_normalization_before_import"),
+                "public_report": f"data/{ANIMATION_CATEGORY_COVERAGE_AUDIT.name}",
+            },
+            {
+                "pillar": "ichiban_kuji_history",
+                "label": "Organize historical Ichiban Kuji metadata and reissues",
+                "status": target.get("ichiban_kuji_historical_roadmap", {}).get(
+                    "price_and_prize_policy_gate_status",
+                    target.get("ichiban_kuji_historical_roadmap", {})
+                    .get("completion_readiness", {})
+                    .get("status", "unknown"),
+                ),
+                "open_rows": target.get("ichiban_kuji_historical_roadmap", {}).get(
+                    "metadata_actionable_campaigns",
+                    0,
+                )
+                + target.get("ichiban_kuji_historical_roadmap", {}).get(
+                    "probable_reissue_work_order_rows",
+                    0,
+                ),
+                "manual_review_rows": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("metadata_actionable_campaigns", 0)
+                + target.get("ichiban_kuji_historical_roadmap", {}).get(
+                    "probable_reissue_work_order_rows",
+                    0,
+                ),
+                "auto_apply_ready_rows": 0,
+                "next_safe_phase": target.get(
+                    "ichiban_kuji_historical_roadmap",
+                    {},
+                ).get("completion_readiness", {}).get(
+                    "next_safe_phase",
+                    "confirm_ichiban_campaign_metadata",
+                ),
+                "public_report": f"data/{ICHIIBAN_KUJI_HISTORICAL_ROADMAP.name}",
+            },
+        ]
+        target["catalog_goal_progress_gate"] = {
+            "status": "manual_review_required",
+            "pillar_count": len(goal_pillars),
+            "manual_review_pillar_count": sum(
+                1
+                for row in goal_pillars
+                if int(row.get("manual_review_rows") or 0) > 0
+                or str(row.get("status") or "").lower()
+                not in {"pass", "ready", "no_open_policy_issues"}
+            ),
+            "auto_apply_ready_rows": sum(
+                int(row.get("auto_apply_ready_rows") or 0) for row in goal_pillars
+            ),
+            "manual_review_rows": sum(
+                int(row.get("manual_review_rows") or 0) for row in goal_pillars
+            ),
+            "next_safe_phase": "review_candidate_source_urls",
+            "pillars": goal_pillars,
+            "blocked_reasons": [
+                "dedupe_requires_manual_keep_or_merge_decisions",
+                "missing_images_require_manual_source_or_image_evidence",
+                "source_url_updates_require_exact_source_confirmation",
+                "animation_category_normalization_requires_manual_confirmation",
+                "ichiban_reissue_and_campaign_metadata_require_manual_review",
+            ],
+            "auto_apply_enabled": False,
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+        }
 
     consistency_findings = validate_report_consistency(
         rows,

@@ -11066,5 +11066,75 @@
       "source_url_template_has_no_manual_confirmations",
       "source_url_candidates_require_manual_review"
     ]
+  },
+  "catalog_goal_progress_gate": {
+    "status": "manual_review_required",
+    "pillar_count": 5,
+    "manual_review_pillar_count": 5,
+    "auto_apply_ready_rows": 0,
+    "manual_review_rows": 943,
+    "next_safe_phase": "review_candidate_source_urls",
+    "pillars": [
+      {
+        "pillar": "dedupe",
+        "label": "Deduplicate catalog rows",
+        "status": "blocked_until_manual_review",
+        "open_rows": 48,
+        "manual_review_rows": 48,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "review_duplicate_decisions",
+        "public_report": "data/catalog_deduplication_action_queue_public.json"
+      },
+      {
+        "pillar": "missing_images",
+        "label": "Resolve missing catalog images",
+        "status": "manual_evidence_required",
+        "open_rows": 745,
+        "manual_review_rows": 745,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "replace_generic_source_urls",
+        "public_report": "data/catalog_missing_image_actionability_public.json"
+      },
+      {
+        "pillar": "source_url_updates",
+        "label": "Replace generic source URLs before image import",
+        "status": "manual_source_url_confirmation_required",
+        "open_rows": 50,
+        "manual_review_rows": 50,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "review_candidate_source_urls",
+        "public_report": "data/catalog_image_source_url_confirmed_template_public.json"
+      },
+      {
+        "pillar": "animation_categories",
+        "label": "Normalize animation goods categories and folder visuals",
+        "status": "visual_coverage_passed_normalization_review_pending",
+        "open_rows": 36,
+        "manual_review_rows": 36,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "confirm_category_normalization_before_import",
+        "public_report": "data/animation_category_coverage_audit_public.json"
+      },
+      {
+        "pillar": "ichiban_kuji_history",
+        "label": "Organize historical Ichiban Kuji metadata and reissues",
+        "status": "reissue_review_required",
+        "open_rows": 64,
+        "manual_review_rows": 64,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "confirm_ichiban_campaign_metadata",
+        "public_report": "data/ichiban_kuji_historical_roadmap_public.json"
+      }
+    ],
+    "blocked_reasons": [
+      "dedupe_requires_manual_keep_or_merge_decisions",
+      "missing_images_require_manual_source_or_image_evidence",
+      "source_url_updates_require_exact_source_confirmation",
+      "animation_category_normalization_requires_manual_confirmation",
+      "ichiban_reissue_and_campaign_metadata_require_manual_review"
+    ],
+    "auto_apply_enabled": false,
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false
   }
 }

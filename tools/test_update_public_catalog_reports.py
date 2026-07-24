@@ -1381,6 +1381,38 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "price_and_prize_policy_gate"
             ]["blocked_reasons"],
         )
+        goal_gate = quality["catalog_goal_progress_gate"]
+        self.assertEqual(goal_gate["status"], "manual_review_required")
+        self.assertEqual(goal_gate["pillar_count"], 5)
+        self.assertEqual(goal_gate["manual_review_pillar_count"], 5)
+        self.assertEqual(goal_gate["auto_apply_ready_rows"], 0)
+        self.assertEqual(goal_gate["manual_review_rows"], 943)
+        self.assertEqual(goal_gate["next_safe_phase"], "review_candidate_source_urls")
+        pillars = {row["pillar"]: row for row in goal_gate["pillars"]}
+        self.assertEqual(
+            set(pillars),
+            {
+                "dedupe",
+                "missing_images",
+                "source_url_updates",
+                "animation_categories",
+                "ichiban_kuji_history",
+            },
+        )
+        self.assertEqual(pillars["dedupe"]["status"], "blocked_until_manual_review")
+        self.assertEqual(pillars["dedupe"]["open_rows"], 48)
+        self.assertEqual(pillars["dedupe"]["manual_review_rows"], 48)
+        self.assertEqual(pillars["missing_images"]["open_rows"], 745)
+        self.assertEqual(pillars["source_url_updates"]["open_rows"], 50)
+        self.assertEqual(pillars["animation_categories"]["manual_review_rows"], 36)
+        self.assertEqual(pillars["ichiban_kuji_history"]["manual_review_rows"], 64)
+        self.assertFalse(goal_gate["auto_apply_enabled"])
+        self.assertFalse(goal_gate["auto_merge_enabled"])
+        self.assertFalse(goal_gate["auto_delete_enabled"])
+        self.assertIn(
+            "missing_images_require_manual_source_or_image_evidence",
+            goal_gate["blocked_reasons"],
+        )
         ichiban_history = reports.load_json(reports.ICHIIBAN_KUJI_HISTORY)
         self.assertEqual(
             ichiban_history["summary"]["official_price_jpy_review_queue_campaigns"],
