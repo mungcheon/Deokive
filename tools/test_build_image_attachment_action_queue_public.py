@@ -95,6 +95,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             dict(report["summary"]["next_source_url_review_batch_primary_review_url_kind_counts"]),
             {"source_search_url": 1, "fallback_web_search": 1},
         )
+        self.assertEqual(report["summary"]["next_representative_image_review_batch_rows"], 0)
+        self.assertEqual(report["summary"]["next_representative_image_review_batch_store_count"], 0)
+        self.assertEqual(report["summary"]["next_representative_image_review_batch_primary_review_url_rows"], 0)
+        self.assertEqual(report["summary"]["next_representative_image_review_batch_local_path_rows"], 0)
+        self.assertEqual(
+            report["summary"]["next_representative_image_review_batch_primary_review_url_kind_counts"],
+            [],
+        )
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(
@@ -383,6 +391,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 0)
         self.assertEqual(report["summary"]["source_url_update_template_batch_count"], 0)
         self.assertEqual(report["summary"]["next_source_url_review_batch_rows"], 0)
+        self.assertEqual(report["summary"]["next_representative_image_review_batch_rows"], 3)
+        self.assertEqual(report["summary"]["next_representative_image_review_batch_store_count"], 3)
+        self.assertEqual(report["summary"]["next_representative_image_review_batch_primary_review_url_rows"], 3)
+        self.assertEqual(report["summary"]["next_representative_image_review_batch_local_path_rows"], 3)
+        self.assertEqual(
+            dict(report["summary"]["next_representative_image_review_batch_primary_review_url_kind_counts"]),
+            {"fallback_web_search": 3},
+        )
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 1)
@@ -405,6 +421,30 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             "product_type_confirmation_required",
             report["batches"][0]["items"][0]["image_import_blockers"],
         )
+        representative_review = report["next_representative_image_review_batch"][0]
+        self.assertFalse(representative_review["manual_confirmed"])
+        self.assertEqual(representative_review["catalog_index"], 0)
+        self.assertEqual(representative_review["source_store"], "Store 0")
+        self.assertEqual(representative_review["name_ko"], "Item 0")
+        self.assertEqual(
+            representative_review["primary_review_url"],
+            report["batches"][0]["items"][0]["first_fallback_web_search_url"],
+        )
+        self.assertEqual(representative_review["primary_review_url_kind"], "fallback_web_search")
+        self.assertEqual(
+            representative_review["suggested_local_image_path"],
+            "assets/catalog_images/catalog_0.webp",
+        )
+        self.assertEqual(representative_review["manual_image_url"], "")
+        self.assertIn(
+            "Confirm character, regional motif, product type, and variant.",
+            representative_review["operator_checklist"],
+        )
+        self.assertEqual(
+            representative_review["unblocks"],
+            "manual_catalog_image_url_import",
+        )
+        self.assertFalse(representative_review["auto_apply_enabled"])
 
     def test_catalog_images_are_skipped_from_action_items(self) -> None:
         enrichment = {

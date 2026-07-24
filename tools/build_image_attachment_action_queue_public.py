@@ -429,6 +429,70 @@ def _build_next_source_url_review_batch(
     return rows
 
 
+def _build_next_representative_image_review_batch(
+    action_items: list[dict[str, Any]],
+    *,
+    limit: int = 10,
+) -> list[dict[str, Any]]:
+    review_rows = [
+        item
+        for item in action_items
+        if item.get("representative_image_review_required")
+    ]
+    review_rows.sort(
+        key=lambda row: (
+            0 if row.get("primary_review_url") else 1,
+            str(row.get("source_store") or ""),
+            int(row.get("catalog_index") or 999_999_999),
+        )
+    )
+    rows: list[dict[str, Any]] = []
+    for row in review_rows[:limit]:
+        template = row.get("catalog_field_import_template")
+        if not isinstance(template, dict):
+            template = {}
+        rows.append(
+            {
+                "manual_confirmed": False,
+                "catalog_index": row.get("catalog_index"),
+                "source_store": row.get("source_store"),
+                "name_ko": row.get("name_ko"),
+                "name_ja": row.get("name_ja"),
+                "series_name": row.get("series_name"),
+                "category": row.get("category"),
+                "source_url": row.get("source_url"),
+                "primary_review_url": row.get("primary_review_url"),
+                "primary_review_url_kind": row.get("primary_review_url_kind"),
+                "first_fallback_web_search_url": row.get(
+                    "first_fallback_web_search_url"
+                ),
+                "fallback_web_search_urls": row.get("fallback_web_search_urls")
+                or [],
+                "manual_image_url": "",
+                "evidence_url": "",
+                "candidate_source_url": template.get("candidate_source_url")
+                or row.get("source_url")
+                or "",
+                "suggested_local_image_path": row.get("suggested_local_image_path"),
+                "local_image_download_instruction": row.get(
+                    "local_image_download_instruction"
+                ),
+                "catalog_field_import_template": template,
+                "blocked_until": "representative_image_exact_product_type_confirmed",
+                "operator_checklist": [
+                    "Open primary_review_url first.",
+                    "Confirm character, regional motif, product type, and variant.",
+                    "Use representative images only when the exact variant cannot be separated safely.",
+                    "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+                    "Leave manual_confirmed=false if the official candidate shows a different product type.",
+                ],
+                "unblocks": "manual_catalog_image_url_import",
+                "auto_apply_enabled": False,
+            }
+        )
+    return rows
+
+
 def _first_workstream_batch_id(workstreams: list[dict[str, Any]], field: str) -> Any:
     return next(
         (
@@ -1054,6 +1118,9 @@ def build_report(
     next_source_url_review_batch = _build_next_source_url_review_batch(
         source_url_update_template
     )
+    next_representative_image_review_batch = (
+        _build_next_representative_image_review_batch(action_items)
+    )
     execution_readiness = _build_execution_readiness(
         source_url_update_required_rows=source_url_update_required_rows,
         representative_image_review_required_rows=representative_image_review_required_rows,
@@ -1150,6 +1217,30 @@ def build_report(
                 next_source_url_review_batch,
                 "primary_review_url_kind",
             ),
+            "next_representative_image_review_batch_rows": len(
+                next_representative_image_review_batch
+            ),
+            "next_representative_image_review_batch_store_count": len(
+                {
+                    row.get("source_store")
+                    for row in next_representative_image_review_batch
+                    if row.get("source_store")
+                }
+            ),
+            "next_representative_image_review_batch_primary_review_url_rows": sum(
+                1
+                for row in next_representative_image_review_batch
+                if row.get("primary_review_url")
+            ),
+            "next_representative_image_review_batch_local_path_rows": sum(
+                1
+                for row in next_representative_image_review_batch
+                if row.get("suggested_local_image_path")
+            ),
+            "next_representative_image_review_batch_primary_review_url_kind_counts": _counter_pairs(
+                next_representative_image_review_batch,
+                "primary_review_url_kind",
+            ),
             "representative_image_review_workstream_count": sum(
                 1 for row in workstreams if row.get("representative_image_review_rows")
             ),
@@ -1170,6 +1261,7 @@ def build_report(
         "source_url_update_template": source_url_update_template,
         "source_url_update_template_batches": source_url_update_template_batches,
         "next_source_url_review_batch": next_source_url_review_batch,
+        "next_representative_image_review_batch": next_representative_image_review_batch,
         "next_operator_actions": next_operator_actions,
         "next_actions": [
             {

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T08:53:07Z",
+  "generated_at": "2026-07-24T09:12:02Z",
   "scope": "catalog_image_attachment_action_queue",
   "summary": {
     "actionable_image_rows": 73,
@@ -113,6 +113,16 @@
     "next_source_url_review_batch_primary_review_url_kind_counts": [
       [
         "source_search_url",
+        10
+      ]
+    ],
+    "next_representative_image_review_batch_rows": 10,
+    "next_representative_image_review_batch_store_count": 1,
+    "next_representative_image_review_batch_primary_review_url_rows": 10,
+    "next_representative_image_review_batch_local_path_rows": 10,
+    "next_representative_image_review_batch_primary_review_url_kind_counts": [
+      [
+        "current_source_url",
         10
       ]
     ],
@@ -4678,6 +4688,628 @@
         "Leave manual_confirmed=false until the source URL proves the exact item identity."
       ],
       "unblocks": "image_url_extraction_and_attachment_review",
+      "auto_apply_enabled": false
+    }
+  ],
+  "next_representative_image_review_batch": [
+    {
+      "manual_confirmed": false,
+      "catalog_index": 936,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+      "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+      "series_name": "ご当地",
+      "category": "아크릴 키링",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E6%B5%85%E8%8D%89+%E9%9B%B7%E9%96%80%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E6%B5%85%E8%8D%89+%E9%9B%B7%E9%96%80%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E6%B5%85%E8%8D%89+%E9%9B%B7%E9%96%80%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_936.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_936.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_936.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 936,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+        "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+        "category": "아크릴 키링",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_936.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 937,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+      "name_ja": "うさぎ ご当地マスコット (浅草)",
+      "series_name": "ご当地",
+      "category": "마스코트",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E6%B5%85%E8%8D%89%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E6%B5%85%E8%8D%89%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E6%B5%85%E8%8D%89%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_937.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_937.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_937.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 937,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+        "name_ja": "うさぎ ご当地マスコット (浅草)",
+        "category": "마스코트",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_937.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 938,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+      "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+      "series_name": "ご当地",
+      "category": "타월",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E6%9D%B1%E4%BA%AC%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E6%9D%B1%E4%BA%AC%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E6%9D%B1%E4%BA%AC%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_938.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_938.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_938.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 938,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+        "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+        "category": "타월",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_938.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 941,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+      "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+      "series_name": "ご当地",
+      "category": "마스코트",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%A4%A7%E9%98%AA+%E9%80%9A%E5%A4%A9%E9%96%A3%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%A4%A7%E9%98%AA+%E9%80%9A%E5%A4%A9%E9%96%A3%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%A4%A7%E9%98%AA+%E9%80%9A%E5%A4%A9%E9%96%A3%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_941.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_941.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_941.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 941,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+        "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+        "category": "마스코트",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_941.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 942,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+      "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+      "series_name": "ご当地",
+      "category": "아크릴 키링",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%A4%A7%E9%98%AA+%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%A4%A7%E9%98%AA+%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%A4%A7%E9%98%AA+%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_942.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_942.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_942.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 942,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+        "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+        "category": "아크릴 키링",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_942.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 943,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+      "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+      "series_name": "ご当地",
+      "category": "타월",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%A4%A7%E9%98%AA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%A4%A7%E9%98%AA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%A4%A7%E9%98%AA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_943.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_943.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_943.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 943,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+        "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+        "category": "타월",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_943.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 944,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+      "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+      "series_name": "ご当地",
+      "category": "마스코트",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_944.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_944.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_944.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 944,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+        "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+        "category": "마스코트",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_944.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 945,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+      "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+      "series_name": "ご当地",
+      "category": "마스코트",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_945.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_945.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_945.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 945,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+        "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+        "category": "마스코트",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_945.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 946,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+      "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+      "series_name": "ご当地",
+      "category": "아크릴 키링",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E4%BA%AC%E9%83%BD+%E6%B8%85%E6%B0%B4%E5%AF%BA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E4%BA%AC%E9%83%BD+%E6%B8%85%E6%B0%B4%E5%AF%BA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E4%BA%AC%E9%83%BD+%E6%B8%85%E6%B0%B4%E5%AF%BA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_946.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_946.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_946.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 946,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+        "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+        "category": "아크릴 키링",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_946.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "catalog_index": 950,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+      "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+      "series_name": "ご当地",
+      "category": "타월",
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "primary_review_url_kind": "current_source_url",
+      "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+        "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94"
+      ],
+      "manual_image_url": "",
+      "evidence_url": "",
+      "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+      "suggested_local_image_path": "assets/catalog_images/catalog_950.webp",
+      "local_image_download_instruction": {
+        "status": "ready_after_manual_image_url_confirmation",
+        "target_local_image_path": "assets/catalog_images/catalog_950.webp",
+        "target_public_asset_path": "assets/assets/catalog_images/catalog_950.webp",
+        "after_manual_image_url_confirmed": [
+          "download_confirmed_image_url_to_target_local_image_path",
+          "write_local_image_path_with_image_url_import",
+          "verify_file_exists_in_assets_and_web_public_assets"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 950,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+        "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+        "category": "타월",
+        "affiliation": "치이카와",
+        "source_search_url": null,
+        "workflow": "review_gotouchi_official_candidates",
+        "requires_exact_source_url": true,
+        "requires_representative_image_flag": true,
+        "blocked_until": "exact_product_source_url_confirmed",
+        "suggested_local_image_path": "assets/catalog_images/catalog_950.webp",
+        "local_image_path_field": "local_image_path"
+      },
+      "blocked_until": "representative_image_exact_product_type_confirmed",
+      "operator_checklist": [
+        "Open primary_review_url first.",
+        "Confirm character, regional motif, product type, and variant.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+        "Leave manual_confirmed=false if the official candidate shows a different product type."
+      ],
+      "unblocks": "manual_catalog_image_url_import",
       "auto_apply_enabled": false
     }
   ],

@@ -65,6 +65,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                     ["source_search_url", 1],
                     ["current_source_url", 1],
                 ],
+                "next_representative_image_review_batch_rows": 1,
+                "next_representative_image_review_batch_primary_review_url_rows": 1,
+                "next_representative_image_review_batch_local_path_rows": 1,
+                "next_representative_image_review_batch_primary_review_url_kind_counts": [
+                    ["current_source_url", 1],
+                ],
             },
             "batches": [
                 {
@@ -301,6 +307,23 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(
             report["summary"]["direct_image_action_primary_review_url_kind_counts"],
             [["source_search_url", 1], ["current_source_url", 1]],
+        )
+        self.assertEqual(report["summary"]["direct_image_action_next_representative_review_batch_rows"], 1)
+        self.assertEqual(
+            report["summary"][
+                "direct_image_action_next_representative_review_batch_primary_review_url_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
+            report["summary"]["direct_image_action_next_representative_review_batch_local_path_rows"],
+            1,
+        )
+        self.assertEqual(
+            report["summary"][
+                "direct_image_action_next_representative_review_batch_primary_review_url_kind_counts"
+            ],
+            [["current_source_url", 1]],
         )
         self.assertEqual(report["summary"]["direct_image_action_workflows_with_review_start"], 2)
         self.assertEqual(report["summary"]["image_attachment_template_rows"], 2)

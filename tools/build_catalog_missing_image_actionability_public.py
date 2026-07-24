@@ -1454,6 +1454,25 @@ def build_report(
         "direct_image_action_primary_review_url_kind_counts": (
             action_summary.get("primary_review_url_kind_counts") or []
         ),
+        "direct_image_action_next_representative_review_batch_rows": int(
+            action_summary.get("next_representative_image_review_batch_rows") or 0
+        ),
+        "direct_image_action_next_representative_review_batch_primary_review_url_rows": int(
+            action_summary.get(
+                "next_representative_image_review_batch_primary_review_url_rows"
+            )
+            or 0
+        ),
+        "direct_image_action_next_representative_review_batch_local_path_rows": int(
+            action_summary.get("next_representative_image_review_batch_local_path_rows")
+            or 0
+        ),
+        "direct_image_action_next_representative_review_batch_primary_review_url_kind_counts": (
+            action_summary.get(
+                "next_representative_image_review_batch_primary_review_url_kind_counts"
+            )
+            or []
+        ),
         "direct_image_action_workflows_with_review_start": len(image_action_review_starts),
         "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
         "image_attachment_template_confirmed_rows": int(
