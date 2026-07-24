@@ -211,6 +211,50 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
             generated_at="2026-01-01T00:00:00Z",
         )
         self.assertEqual(starter_queue_report["summary"]["groups_with_search_urls"], 1)
+        self.assertEqual(starter_queue_report["summary"]["groups_with_fallback_web_search_urls"], 0)
+        self.assertEqual(starter_queue_report["summary"]["groups_with_any_search_url"], 1)
+
+    def test_source_discovery_starter_queue_adds_fallback_web_search_when_no_store_search_url(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "치이카와 중국 한정 마스코트",
+                    "name_ja": "ちいかわ 中国限定マスコット",
+                    "source_store": "치이카와 중국 팝업스토어",
+                    "affiliation": "치이카와",
+                    "category": "마스코트",
+                }
+            ]
+        }
+        queue = {
+            "items": [
+                {
+                    "row_index": 1,
+                    "source_store": "치이카와 중국 팝업스토어",
+                    "strategy": "manual_review",
+                    "priority": 50,
+                    "query": "ちいかわ 中国限定マスコット",
+                }
+            ]
+        }
+
+        report = target.build_report(catalog, queue, generated_at="2026-01-01T00:00:00Z")
+        starter_group = report["source_discovery_starter_queue"][0]
+
+        self.assertEqual(starter_group["search_urls"], [])
+        self.assertIsNone(starter_group["first_search_url"])
+        self.assertEqual(starter_group["fallback_web_search_url_count"], 1)
+        self.assertIn("google.com/search", starter_group["first_fallback_web_search_url"])
+        self.assertIn("%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F", starter_group["first_fallback_web_search_url"])
+
+        starter_queue_report = target.build_starter_queue_report(
+            report,
+            generated_at="2026-01-01T00:00:00Z",
+        )
+        self.assertEqual(starter_queue_report["summary"]["groups_with_search_urls"], 0)
+        self.assertEqual(starter_queue_report["summary"]["groups_with_fallback_web_search_urls"], 1)
+        self.assertEqual(starter_queue_report["summary"]["groups_with_any_search_url"], 1)
 
     def test_reports_existing_image_reuse_candidates_for_exact_identity(self) -> None:
         catalog = {

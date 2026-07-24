@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import urllib.parse
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -168,6 +169,48 @@ def unique_sample_search_urls(sample_items: list[dict[str, Any]], limit: int = 5
     return urls
 
 
+def starter_fallback_search_query(group: dict[str, Any]) -> str:
+    sample_items = group.get("sample_items")
+    sample_name = ""
+    if isinstance(sample_items, list) and sample_items:
+        first = sample_items[0]
+        if isinstance(first, dict):
+            sample_name = str(first.get("search_query") or first.get("name_ja") or first.get("name_ko") or "").strip()
+    parts = [
+        sample_name,
+        str(group.get("source_store") or "").strip(),
+        str(group.get("affiliation") or "").strip(),
+        str(group.get("category") or "").strip(),
+        "official goods",
+    ]
+    return " ".join(part for part in parts if part)
+
+
+def starter_fallback_web_search_urls(group: dict[str, Any], limit: int = 3) -> list[str]:
+    urls: list[str] = []
+    sample_items = group.get("sample_items")
+    if isinstance(sample_items, list):
+        for item in sample_items:
+            if not isinstance(item, dict):
+                continue
+            query = " ".join(
+                part
+                for part in [
+                    str(item.get("search_query") or item.get("name_ja") or item.get("name_ko") or "").strip(),
+                    str(group.get("source_store") or "").strip(),
+                    str(group.get("affiliation") or "").strip(),
+                    "official goods",
+                ]
+                if part
+            )
+            if query:
+                urls.append("https://www.google.com/search?q=" + urllib.parse.quote(query))
+            if len(urls) >= limit:
+                return urls
+    query = starter_fallback_search_query(group)
+    return ["https://www.google.com/search?q=" + urllib.parse.quote(query)] if query else []
+
+
 def starter_queue_rows(groups: dict[tuple[str, str, str, str], dict[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for group in groups.values():
@@ -175,6 +218,7 @@ def starter_queue_rows(groups: dict[tuple[str, str, str, str], dict[str, Any]]) 
         if group["strategy_rows"]:
             primary_strategy = group["strategy_rows"].most_common(1)[0][0]
         search_urls = unique_sample_search_urls(group["sample_items"])
+        fallback_web_search_urls = [] if search_urls else starter_fallback_web_search_urls(group)
         rows.append(
             {
                 "source_store": group["source_store"],
@@ -186,6 +230,11 @@ def starter_queue_rows(groups: dict[tuple[str, str, str, str], dict[str, Any]]) 
                 "first_search_url": search_urls[0] if search_urls else None,
                 "search_urls": search_urls,
                 "search_url_count": len(search_urls),
+                "first_fallback_web_search_url": (
+                    fallback_web_search_urls[0] if fallback_web_search_urls else None
+                ),
+                "fallback_web_search_urls": fallback_web_search_urls,
+                "fallback_web_search_url_count": len(fallback_web_search_urls),
                 "sample_items": group["sample_items"],
                 "recommended_workflow": recommended_workflow(
                     group["source_store"],
@@ -438,6 +487,11 @@ def build_starter_queue_report(
         for group in groups
         if isinstance(group.get("search_urls"), list) and group.get("search_urls")
     )
+    groups_with_fallback_web_search_urls = sum(
+        1
+        for group in groups
+        if isinstance(group.get("fallback_web_search_urls"), list) and group.get("fallback_web_search_urls")
+    )
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -448,6 +502,8 @@ def build_starter_queue_report(
             "starter_queue_rows": rows,
             "sample_item_rows": sample_items,
             "groups_with_search_urls": groups_with_search_urls,
+            "groups_with_fallback_web_search_urls": groups_with_fallback_web_search_urls,
+            "groups_with_any_search_url": groups_with_search_urls + groups_with_fallback_web_search_urls,
             "missing_source_url_rows": int(summary.get("missing_source_url_rows") or 0),
             "coverage_matches_missing_source_url_rows": rows
             == int(summary.get("missing_source_url_rows") or 0),
@@ -456,6 +512,7 @@ def build_starter_queue_report(
         "instructions": [
             "Use this queue for missing-image rows that do not yet have exact source_url evidence.",
             "Open the provided search_url values and confirm the exact product/detail page before importing any source_url or image_url.",
+            "If a group has no store search_url values, use fallback_web_search_urls as a starting point only; the accepted source_url still must be an exact official or licensed product/detail page.",
             "Do not use representative or similar images unless a later manual review report explicitly allows that row.",
         ],
         "groups": groups,

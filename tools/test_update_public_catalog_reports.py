@@ -2027,6 +2027,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_discovery_starter_summary["starter_queue_groups"],
         )
         self.assertGreater(len(source_discovery_starter_next_action["top_search_urls"]), 0)
+        self.assertGreater(len(source_discovery_starter_next_action["top_fallback_web_search_urls"]), 0)
         self.assertEqual(
             source_discovery_starter_scorecard["next_step"],
             "find_exact_official_product_source_url",

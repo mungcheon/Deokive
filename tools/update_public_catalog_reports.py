@@ -2718,6 +2718,11 @@ def build_operations_public(
                 for group in source_discovery_starter_queue.get("groups", [])[:5]
                 if isinstance(group, dict) and group.get("first_search_url")
             ],
+            "top_fallback_web_search_urls": [
+                group.get("first_fallback_web_search_url")
+                for group in source_discovery_starter_queue.get("groups", [])
+                if isinstance(group, dict) and group.get("first_fallback_web_search_url")
+            ][:5],
             "recommended_next_action": "Open starter search URLs and confirm exact official product/detail source pages before image import.",
         } if source_discovery_starter_queue_summary else None,
         {

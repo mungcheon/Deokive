@@ -442,9 +442,23 @@ def _build_plan(load_report) -> dict[str, Any]:
                             "category": row.get("category"),
                             "first_search_url": row.get("first_search_url"),
                             "search_urls": row.get("search_urls", []),
+                            "first_fallback_web_search_url": row.get("first_fallback_web_search_url"),
+                            "fallback_web_search_urls": row.get("fallback_web_search_urls", []),
                         }
                         for row in source_discovery_starter_queue.get("groups", [])
                         if isinstance(row, dict)
+                    ][:8],
+                    "fallback_groups": [
+                        {
+                            "group_key": row.get("group_key") or _starter_group_key(row),
+                            "rows": row.get("rows", 0),
+                            "source_store": row.get("source_store"),
+                            "category": row.get("category"),
+                            "first_fallback_web_search_url": row.get("first_fallback_web_search_url"),
+                            "fallback_web_search_urls": row.get("fallback_web_search_urls", []),
+                        }
+                        for row in source_discovery_starter_queue.get("groups", [])
+                        if isinstance(row, dict) and row.get("fallback_web_search_urls")
                     ][:8],
                 },
             )

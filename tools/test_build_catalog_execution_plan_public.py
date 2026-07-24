@@ -161,6 +161,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                         "first_search_url": "https://goodsmile.example/search?q=figure",
                         "search_urls": ["https://goodsmile.example/search?q=figure"],
                     },
+                    {
+                        "group_key": "Fallback|Mascot",
+                        "rows": 1,
+                        "source_store": "Fallback Store",
+                        "category": "Mascot",
+                        "first_fallback_web_search_url": "https://www.google.com/search?q=fallback",
+                        "fallback_web_search_urls": ["https://www.google.com/search?q=fallback"],
+                    },
                 ],
             },
             "catalog_metadata_review_batches_public.json": {
@@ -532,6 +540,10 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(
             source_starter["evidence"]["top_groups"][0]["first_search_url"],
             "https://animate.example/search?q=acrylic",
+        )
+        self.assertEqual(
+            source_starter["evidence"]["fallback_groups"][0]["first_fallback_web_search_url"],
+            "https://www.google.com/search?q=fallback",
         )
         self.assertEqual(report["summary"]["source_discovery_starter_queue_rows"], 12)
         self.assertEqual(report["summary"]["source_discovery_starter_queue_groups"], 3)
