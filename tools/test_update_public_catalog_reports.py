@@ -1183,6 +1183,62 @@ class PublicCatalogReportTests(unittest.TestCase):
             price_candidate["candidate_evidence_urls"],
         )
         self.assertIn("onep8", price_candidate["candidate_scope_note"])
+        price_patch_template = reissue_blocking_dashboard[
+            "price_candidate_patch_template"
+        ]
+        self.assertEqual(
+            price_patch_template["status"],
+            "manual_price_confirmation_required",
+        )
+        self.assertFalse(price_patch_template["auto_apply_enabled"])
+        self.assertEqual(price_patch_template["ready_to_import_rows"], 0)
+        self.assertEqual(price_patch_template["template_rows"], 16)
+        self.assertEqual(
+            price_patch_template["manual_confirmation_required_rows"],
+            16,
+        )
+        self.assertEqual(price_patch_template["direct_candidate_rows"], 8)
+        self.assertEqual(
+            price_patch_template["same_family_requires_confirmation_rows"],
+            8,
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["price_candidate_patch_rows"],
+            16,
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["price_candidate_patch_ready_to_import_rows"],
+            0,
+        )
+        price_patch_rows = price_patch_template["rows"]
+        self.assertEqual(
+            {row["candidate_official_price_jpy"] for row in price_patch_rows},
+            {500},
+        )
+        self.assertEqual(
+            {
+                row["source_url"].rstrip("/").split("/")[-1]
+                for row in price_patch_rows
+            },
+            {"onep6", "onep8"},
+        )
+        self.assertEqual(
+            {
+                row["confirmation_scope"]
+                for row in price_patch_rows
+                if row["source_url"].endswith("/onep6")
+            },
+            {"secondary_official_evidence_direct_candidate"},
+        )
+        self.assertEqual(
+            {
+                row["confirmation_scope"]
+                for row in price_patch_rows
+                if row["source_url"].endswith("/onep8")
+            },
+            {"same_family_reissue_price_candidate_requires_campaign_confirmation"},
+        )
+        self.assertFalse(any(row["manual_price_confirmed"] for row in price_patch_rows))
         self.assertTrue(
             price_policy_reviews[0]["missing_regular_price_samples"][0][
                 "first_evidence_url"

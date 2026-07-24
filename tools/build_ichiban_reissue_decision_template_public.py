@@ -583,6 +583,7 @@ def _price_policy_blocked_campaign_reviews(
                     price_policy.get("last_one_double_chance_expected_price_jpy") or 0
                 ),
                 "missing_regular_price_samples": missing_samples[:sample_limit],
+                "missing_regular_price_patch_samples": missing_samples,
                 "missing_regular_price_sample_rows_visible": min(
                     len(missing_samples),
                     sample_limit,
@@ -607,6 +608,103 @@ def _price_policy_blocked_campaign_reviews(
         if len(reviews) >= limit:
             break
     return reviews
+
+
+def _source_url_for_known_onep_price_candidate(
+    catalog_index: int,
+    source_urls: list[Any],
+) -> str:
+    onep6 = next((str(url) for url in source_urls if str(url).endswith("/onep6")), "")
+    onep8 = next((str(url) for url in source_urls if str(url).endswith("/onep8")), "")
+    if onep6 and onep8:
+        return onep6 if catalog_index >= 16141 else onep8
+    return str(source_urls[0]) if source_urls else ""
+
+
+def _price_candidate_patch_template(
+    price_policy_reviews: list[dict[str, Any]],
+) -> dict[str, Any]:
+    rows: list[dict[str, Any]] = []
+
+    for review in price_policy_reviews:
+        candidate = review.get("official_price_candidate")
+        if not isinstance(candidate, dict):
+            continue
+        candidate_price = candidate.get("official_price_candidate_jpy")
+        if candidate_price is None:
+            continue
+        evidence_urls = candidate.get("candidate_evidence_urls") or []
+        source_urls = review.get("source_urls") or []
+
+        patch_samples = (
+            review.get("missing_regular_price_patch_samples")
+            or review.get("missing_regular_price_samples")
+            or []
+        )
+        for sample in patch_samples:
+            if not isinstance(sample, dict):
+                continue
+            for catalog_index in sample.get("catalog_indexes") or []:
+                source_url = _source_url_for_known_onep_price_candidate(
+                    int(catalog_index),
+                    source_urls,
+                )
+                source_slug = source_url.rstrip("/").split("/")[-1]
+                direct_evidence = source_slug == "onep6"
+                rows.append(
+                    {
+                        "campaign_work_order_id": review.get(
+                            "campaign_work_order_id"
+                        ),
+                        "work_order_id": sample.get("work_order_id"),
+                        "catalog_index": int(catalog_index),
+                        "source_url": source_url,
+                        "prize_rank": sample.get("prize_rank") or "",
+                        "prize_item_name": sample.get("prize_item_name") or "",
+                        "identity_label": sample.get("identity_label") or "",
+                        "current_official_price_jpy": None,
+                        "candidate_official_price_jpy": candidate_price,
+                        "candidate_status": candidate.get("candidate_status") or "",
+                        "candidate_evidence_urls": evidence_urls,
+                        "confirmation_scope": (
+                            "secondary_official_evidence_direct_candidate"
+                            if direct_evidence
+                            else "same_family_reissue_price_candidate_requires_campaign_confirmation"
+                        ),
+                        "manual_price_confirmed": False,
+                        "manual_price_evidence_url": "",
+                        "manual_note": "",
+                        "auto_apply_enabled": False,
+                        "blocked_until": "manual_price_confirmed",
+                    }
+                )
+
+    direct_rows = sum(
+        1
+        for row in rows
+        if row["confirmation_scope"] == "secondary_official_evidence_direct_candidate"
+    )
+    same_family_rows = sum(
+        1
+        for row in rows
+        if row["confirmation_scope"]
+        == "same_family_reissue_price_candidate_requires_campaign_confirmation"
+    )
+    return {
+        "status": "manual_price_confirmation_required",
+        "auto_apply_enabled": False,
+        "ready_to_import_rows": 0,
+        "template_rows": len(rows),
+        "manual_confirmation_required_rows": len(rows),
+        "direct_candidate_rows": direct_rows,
+        "same_family_requires_confirmation_rows": same_family_rows,
+        "rows": rows,
+        "import_instructions": [
+            "Confirm official_draw_price_jpy on the campaign page before editing catalog rows.",
+            "Set manual_price_confirmed=true and manual_price_evidence_url only for rows whose source campaign price is confirmed.",
+            "Keep auto_apply_enabled=false until every intended price row has human confirmation.",
+        ],
+    }
 
 
 def _blocking_dashboard(
@@ -634,6 +732,9 @@ def _blocking_dashboard(
     first_campaign = next_campaign_review_batch[0] if next_campaign_review_batch else {}
     price_policy_reviews = _price_policy_blocked_campaign_reviews(
         next_campaign_review_batch
+    )
+    price_candidate_patch_template = _price_candidate_patch_template(
+        price_policy_reviews
     )
 
     if missing_evidence_campaigns:
@@ -685,6 +786,11 @@ def _blocking_dashboard(
         "next_price_policy_review": price_policy_reviews[0]
         if price_policy_reviews
         else None,
+        "price_candidate_patch_template": price_candidate_patch_template,
+        "price_candidate_patch_rows": price_candidate_patch_template["template_rows"],
+        "price_candidate_patch_ready_to_import_rows": price_candidate_patch_template[
+            "ready_to_import_rows"
+        ],
         "first_campaign_review": {
             "campaign_work_order_id": first_campaign.get("campaign_work_order_id"),
             "first_evidence_url": first_campaign.get("first_evidence_url"),
