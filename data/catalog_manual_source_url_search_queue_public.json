@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:05Z",
+  "generated_at": "2026-07-24T19:55:55Z",
   "scope": "catalog_manual_source_url_search_queue",
   "summary": {
     "manual_search_required_rows": 42,
@@ -71,7 +71,7 @@
     "This queue covers source_url rows with no usable candidate options.",
     "Search hints are not evidence and must not be imported directly.",
     "Use only official product/detail pages as confirmed source_url evidence.",
-    "Dry-run tools/import_confirmed_catalog_field_rows.py after manual confirmations.",
+    "Dry-run tools/import_confirmed_source_urls.py after manual confirmations.",
     "Then rebuild image attachment queues to extract or confirm image_url."
   ],
   "workstreams": [
@@ -3324,7 +3324,7 @@
   "automation_policy": {
     "auto_apply_source_url": false,
     "requires_manual_review": true,
-    "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+    "import_tool": "tools/import_confirmed_source_urls.py",
     "private_collection_storage": "local_device_only"
   }
 }

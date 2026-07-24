@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:05Z",
+  "generated_at": "2026-07-24T19:55:55Z",
   "scope": "catalog_candidate_source_url_review_queue",
   "summary": {
     "candidate_review_rows": 3,
@@ -81,7 +81,7 @@
     "This queue covers low-confidence and weak candidate source URLs.",
     "Candidate URLs are review hints only, not import evidence.",
     "Leave manual_value blank when no candidate is an exact product/detail page.",
-    "Dry-run tools/import_confirmed_catalog_field_rows.py after manual confirmations.",
+    "Dry-run tools/import_confirmed_source_urls.py after manual confirmations.",
     "Then rebuild image attachment queues to extract or confirm image_url."
   ],
   "workstreams": [
@@ -847,7 +847,7 @@
   "automation_policy": {
     "auto_apply_source_url": false,
     "requires_manual_review": true,
-    "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+    "import_tool": "tools/import_confirmed_source_urls.py",
     "private_collection_storage": "local_device_only"
   }
 }

@@ -179,7 +179,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
             "This queue covers source_url rows with no usable candidate options.",
             "Search hints are not evidence and must not be imported directly.",
             "Use only official product/detail pages as confirmed source_url evidence.",
-            "Dry-run tools/import_confirmed_catalog_field_rows.py after manual confirmations.",
+            "Dry-run tools/import_confirmed_source_urls.py after manual confirmations.",
             "Then rebuild image attachment queues to extract or confirm image_url.",
         ],
         "workstreams": workstreams,
@@ -187,7 +187,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
         "automation_policy": {
             "auto_apply_source_url": False,
             "requires_manual_review": True,
-            "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+            "import_tool": "tools/import_confirmed_source_urls.py",
             "private_collection_storage": "local_device_only",
         },
     }

@@ -170,7 +170,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
             "This queue covers rows where no store-specific candidate provider result exists.",
             "Search hints are not evidence and must not be imported directly.",
             "Use only official product/detail pages as confirmed source_url evidence.",
-            "After manual source URLs are confirmed, dry-run tools/import_confirmed_catalog_field_rows.py.",
+            "After manual source URLs are confirmed, dry-run tools/import_confirmed_source_urls.py.",
             "Then rebuild the image attachment queue to extract or confirm image_url.",
         ],
         "workstreams": workstreams,
@@ -178,7 +178,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
         "automation_policy": {
             "auto_apply_source_url": False,
             "requires_manual_review": True,
-            "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+            "import_tool": "tools/import_confirmed_source_urls.py",
             "private_collection_storage": "local_device_only",
         },
     }

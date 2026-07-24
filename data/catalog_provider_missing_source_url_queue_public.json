@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:05Z",
+  "generated_at": "2026-07-24T19:55:55Z",
   "scope": "catalog_provider_missing_source_url_queue",
   "summary": {
     "provider_missing_rows": 5,
@@ -67,7 +67,7 @@
     "This queue covers rows where no store-specific candidate provider result exists.",
     "Search hints are not evidence and must not be imported directly.",
     "Use only official product/detail pages as confirmed source_url evidence.",
-    "After manual source URLs are confirmed, dry-run tools/import_confirmed_catalog_field_rows.py.",
+    "After manual source URLs are confirmed, dry-run tools/import_confirmed_source_urls.py.",
     "Then rebuild the image attachment queue to extract or confirm image_url."
   ],
   "workstreams": [
@@ -549,7 +549,7 @@
   "automation_policy": {
     "auto_apply_source_url": false,
     "requires_manual_review": true,
-    "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+    "import_tool": "tools/import_confirmed_source_urls.py",
     "private_collection_storage": "local_device_only"
   }
 }

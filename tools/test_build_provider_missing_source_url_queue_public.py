@@ -68,6 +68,14 @@ class BuildProviderMissingSourceUrlQueuePublicTest(unittest.TestCase):
             "provider_refreshed_or_manual_exact_source_url_found",
         )
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
+        self.assertEqual(
+            report["automation_policy"]["import_tool"],
+            "tools/import_confirmed_source_urls.py",
+        )
+        self.assertIn(
+            "tools/import_confirmed_source_urls.py",
+            report["instructions"][3],
+        )
 
         item = report["items"][0]
         self.assertEqual(item["catalog_index"], 1)
