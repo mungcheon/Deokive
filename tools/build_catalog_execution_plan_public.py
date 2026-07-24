@@ -1807,6 +1807,22 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "normalization_review_target_categories": animation_action_summary.get(
                     "normalization_review_target_categories", []
                 ),
+                "next_normalization_review_batch_review_ids": animation_action_summary.get(
+                    "next_normalization_review_batch_review_ids", []
+                ),
+                "next_normalization_review_batch_source_categories": animation_action_summary.get(
+                    "next_normalization_review_batch_source_categories", []
+                ),
+                "next_normalization_review_batch_target_categories": animation_action_summary.get(
+                    "next_normalization_review_batch_target_categories", []
+                ),
+                "next_normalization_review_batch_source_target_pairs": animation_action_summary.get(
+                    "next_normalization_review_batch_source_target_pairs", []
+                ),
+                "next_normalization_review_batch_preserve_sub_series_rows": _count(
+                    animation_action_summary,
+                    "next_normalization_review_batch_preserve_sub_series_rows",
+                ),
                 "target_visual_token_rows": _count(
                     animation_action_summary, "target_visual_token_rows"
                 ),

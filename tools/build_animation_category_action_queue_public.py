@@ -720,6 +720,23 @@ def build_queue(
     normalization_batch_target_categories = Counter(
         str(row.get("target_category") or "") for row in next_normalization_review_batch
     ).most_common()
+    normalization_batch_source_categories = Counter(
+        str(row.get("source_category") or "") for row in next_normalization_review_batch
+    ).most_common()
+    normalization_batch_source_target_pairs = [
+        {
+            "review_id": row.get("review_id"),
+            "source_category": row.get("source_category"),
+            "target_category": row.get("target_category"),
+            "affected_catalog_rows": int(row.get("affected_catalog_rows") or 0),
+            "preserve_source_category_as_sub_series": bool(
+                row.get("preserve_source_category_as_sub_series")
+            ),
+            "folder_color_group": row.get("folder_color_group"),
+            "folder_icon_key": row.get("folder_icon_key"),
+        }
+        for row in next_normalization_review_batch
+    ]
     queued_review_categories = len(queued) + len(next_normalization_review_batch)
     queued_review_catalog_rows = queued_rows + normalization_batch_rows
     summary = {
@@ -749,6 +766,13 @@ def build_queue(
         "next_normalization_review_batch_rows": len(next_normalization_review_batch),
         "next_normalization_review_batch_catalog_rows": normalization_batch_rows,
         "next_normalization_review_batch_target_categories": normalization_batch_target_categories,
+        "next_normalization_review_batch_source_categories": normalization_batch_source_categories,
+        "next_normalization_review_batch_source_target_pairs": normalization_batch_source_target_pairs,
+        "next_normalization_review_batch_review_ids": [
+            row.get("review_id")
+            for row in next_normalization_review_batch
+            if row.get("review_id")
+        ],
         "next_normalization_review_batch_preserve_sub_series_rows": sum(
             1
             for row in next_normalization_review_batch

@@ -4752,6 +4752,32 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_next_action.get("direct_mapping_categories"),
             animation_action_summary.get("direct_mapping_categories"),
         )
+        self.assertEqual(
+            animation_action_summary.get(
+                "next_normalization_review_batch_review_ids"
+            ),
+            [
+                "animation-category-normalization-001",
+                "animation-category-normalization-002",
+                "animation-category-normalization-003",
+                "animation-category-normalization-004",
+            ],
+        )
+        self.assertEqual(
+            len(
+                animation_action_summary.get(
+                    "next_normalization_review_batch_source_target_pairs"
+                )
+                or []
+            ),
+            4,
+        )
+        self.assertEqual(
+            animation_action_summary.get(
+                "next_normalization_review_batch_preserve_sub_series_rows"
+            ),
+            4,
+        )
         self.assertEqual(animation_action_summary.get("app_folder_color_count"), 188)
         self.assertEqual(animation_action_summary.get("app_folder_icon_option_count"), 211)
         self.assertTrue(animation_action_summary.get("app_folder_palette_sorted_by_family"))
@@ -4807,6 +4833,24 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(
             all(
                 "split_review_categories" in batch.get("review_summary", {})
+                for batch in animation_agent_batches
+            )
+        )
+        self.assertTrue(
+            all(
+                "next_normalization_review_batch_source_target_pairs"
+                in batch.get("review_summary", {})
+                for batch in animation_agent_batches
+            )
+        )
+        self.assertTrue(
+            all(
+                batch.get("review_summary", {}).get(
+                    "next_normalization_review_batch_preserve_sub_series_rows"
+                )
+                == animation_action_summary.get(
+                    "next_normalization_review_batch_preserve_sub_series_rows"
+                )
                 for batch in animation_agent_batches
             )
         )

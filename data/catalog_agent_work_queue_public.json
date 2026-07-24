@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T21:58:06Z",
+  "generated_at": "2026-07-24T22:04:01Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
@@ -17467,6 +17467,81 @@
         "split_review_categories": 0,
         "direct_mapping_categories": 0,
         "category_count": 4,
+        "normalization_review_categories": 4,
+        "normalization_review_rows": 36,
+        "next_normalization_review_batch_review_ids": [
+          "animation-category-normalization-001",
+          "animation-category-normalization-002",
+          "animation-category-normalization-003",
+          "animation-category-normalization-004"
+        ],
+        "next_normalization_review_batch_source_categories": [
+          [
+            "클리어파일",
+            1
+          ],
+          [
+            "카드",
+            1
+          ],
+          [
+            "스티커",
+            1
+          ],
+          [
+            "파우치",
+            1
+          ]
+        ],
+        "next_normalization_review_batch_target_categories": [
+          [
+            "문구",
+            3
+          ],
+          [
+            "가방",
+            1
+          ]
+        ],
+        "next_normalization_review_batch_source_target_pairs": [
+          {
+            "review_id": "animation-category-normalization-001",
+            "source_category": "클리어파일",
+            "target_category": "문구",
+            "affected_catalog_rows": 8,
+            "preserve_source_category_as_sub_series": true,
+            "folder_color_group": "violet",
+            "folder_icon_key": "sticky_note"
+          },
+          {
+            "review_id": "animation-category-normalization-002",
+            "source_category": "카드",
+            "target_category": "문구",
+            "affected_catalog_rows": 3,
+            "preserve_source_category_as_sub_series": true,
+            "folder_color_group": "violet",
+            "folder_icon_key": "sticky_note"
+          },
+          {
+            "review_id": "animation-category-normalization-003",
+            "source_category": "스티커",
+            "target_category": "문구",
+            "affected_catalog_rows": 24,
+            "preserve_source_category_as_sub_series": true,
+            "folder_color_group": "violet",
+            "folder_icon_key": "sticky_note"
+          },
+          {
+            "review_id": "animation-category-normalization-004",
+            "source_category": "파우치",
+            "target_category": "가방",
+            "affected_catalog_rows": 1,
+            "preserve_source_category_as_sub_series": true,
+            "folder_color_group": "green",
+            "folder_icon_key": "inventory"
+          }
+        ],
+        "next_normalization_review_batch_preserve_sub_series_rows": 4,
         "work_order_lanes": [
           "canonical_category_normalization_review"
         ],

@@ -148,6 +148,28 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             report["summary"]["next_normalization_review_batch_target_categories"],
             [("Stationery", 1)],
         )
+        self.assertEqual(
+            report["summary"]["next_normalization_review_batch_source_categories"],
+            [("Clear File", 1)],
+        )
+        self.assertEqual(
+            report["summary"]["next_normalization_review_batch_review_ids"],
+            ["animation-category-normalization-001"],
+        )
+        self.assertEqual(
+            report["summary"]["next_normalization_review_batch_source_target_pairs"],
+            [
+                {
+                    "review_id": "animation-category-normalization-001",
+                    "source_category": "Clear File",
+                    "target_category": "Stationery",
+                    "affected_catalog_rows": 8,
+                    "preserve_source_category_as_sub_series": True,
+                    "folder_color_group": "mint",
+                    "folder_icon_key": "sticky_note_2",
+                }
+            ],
+        )
         self.assertEqual(report["summary"]["next_normalization_review_batch_preserve_sub_series_rows"], 1)
         self.assertEqual(report["summary"]["target_visual_token_rows"], 2)
         self.assertEqual(report["summary"]["target_visual_token_catalog_rows"], 105)

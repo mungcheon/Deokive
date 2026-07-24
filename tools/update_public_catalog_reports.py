@@ -3980,6 +3980,21 @@ def build_operations_public(
             "split_first_blocked_categories": animation_action_queue_summary.get(
                 "split_first_blocked_categories", []
             ),
+            "next_normalization_review_batch_review_ids": animation_action_queue_summary.get(
+                "next_normalization_review_batch_review_ids", []
+            ),
+            "next_normalization_review_batch_source_categories": animation_action_queue_summary.get(
+                "next_normalization_review_batch_source_categories", []
+            ),
+            "next_normalization_review_batch_target_categories": animation_action_queue_summary.get(
+                "next_normalization_review_batch_target_categories", []
+            ),
+            "next_normalization_review_batch_source_target_pairs": animation_action_queue_summary.get(
+                "next_normalization_review_batch_source_target_pairs", []
+            ),
+            "next_normalization_review_batch_preserve_sub_series_rows": animation_action_queue_summary.get(
+                "next_normalization_review_batch_preserve_sub_series_rows", 0
+            ),
             "app_folder_color_count": animation_action_queue_summary.get("app_folder_color_count", 0),
             "app_folder_icon_option_count": animation_action_queue_summary.get("app_folder_icon_option_count", 0),
             "app_folder_palette_sorted_by_family": animation_action_queue_summary.get(
@@ -6552,6 +6567,49 @@ def build_agent_work_queue_public(
                 "split_review_categories": mapping_mode_counts.get("name_level_split_review_required", 0),
                 "direct_mapping_categories": mapping_mode_counts.get("direct_category_mapping_review", 0),
                 "category_count": int(action_batch.get("category_count") or 0),
+                "normalization_review_categories": int(
+                    animation_action_queue_summary.get(
+                        "normalization_review_categories", 0
+                    )
+                    or 0
+                ),
+                "normalization_review_rows": int(
+                    animation_action_queue_summary.get(
+                        "normalization_review_rows", 0
+                    )
+                    or 0
+                ),
+                "next_normalization_review_batch_review_ids": (
+                    animation_action_queue_summary.get(
+                        "next_normalization_review_batch_review_ids", []
+                    )
+                    or []
+                ),
+                "next_normalization_review_batch_source_categories": (
+                    animation_action_queue_summary.get(
+                        "next_normalization_review_batch_source_categories", []
+                    )
+                    or []
+                ),
+                "next_normalization_review_batch_target_categories": (
+                    animation_action_queue_summary.get(
+                        "next_normalization_review_batch_target_categories", []
+                    )
+                    or []
+                ),
+                "next_normalization_review_batch_source_target_pairs": (
+                    animation_action_queue_summary.get(
+                        "next_normalization_review_batch_source_target_pairs", []
+                    )
+                    or []
+                ),
+                "next_normalization_review_batch_preserve_sub_series_rows": int(
+                    animation_action_queue_summary.get(
+                        "next_normalization_review_batch_preserve_sub_series_rows",
+                        0,
+                    )
+                    or 0
+                ),
                 "work_order_lanes": animation_action_queue_summary.get("work_order_lanes", []),
                 "split_first_blocked_categories": animation_action_queue_summary.get(
                     "split_first_blocked_categories", []
