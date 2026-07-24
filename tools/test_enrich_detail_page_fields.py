@@ -6,7 +6,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from enrich_detail_page_fields import _extract_fields, _fetch_text, _row_contains, _safe_title_match, load_catalog, write_catalog
+from enrich_detail_page_fields import (
+    _extract_fields,
+    _fetch_text,
+    _row_contains,
+    _safe_title_match,
+    enrich,
+    load_catalog,
+    write_catalog,
+)
 
 
 class DetailPageFieldEnrichmentSafetyTest(unittest.TestCase):
@@ -121,6 +129,41 @@ class DetailPageFieldEnrichmentSafetyTest(unittest.TestCase):
 
         self.assertIsNone(source)
         self.assertEqual(reason, "http_error_429")
+
+    def test_enrich_offset_skips_processable_rows_before_fetching(self) -> None:
+        rows = [
+            {
+                "name_ko": "first",
+                "name_ja": "TVアニメ『呪術廻戦』 アクリルスタンド5 /(1)虎杖悠仁",
+                "source_store": "엔스카이",
+                "source_url": "https://www.enskyshop.com/products/detail/31157",
+            },
+            {
+                "name_ko": "second",
+                "name_ja": "TVアニメ『呪術廻戦』 アクリルスタンド5 /(2)伏黒恵",
+                "source_store": "엔스카이",
+                "source_url": "https://www.enskyshop.com/products/detail/31158",
+            },
+        ]
+        fetched: list[str] = []
+
+        def fake_fetch(url: str):
+            fetched.append(url)
+            return (
+                "<html><title>TVアニメ『呪術廻戦』 アクリルスタンド5 /(2)伏黒恵 ｜ エンスカイショップ</title>"
+                "商品コード 4970381922535 初回出荷開始日 2026年6月</html>",
+                None,
+            )
+
+        from unittest.mock import patch
+
+        with patch("enrich_detail_page_fields._fetch_text", side_effect=fake_fetch):
+            updated, changes, rejected = enrich(rows, max_rows=1, offset=1)
+
+        self.assertEqual(fetched, ["https://www.enskyshop.com/products/detail/31158"])
+        self.assertEqual(updated, 1)
+        self.assertEqual(changes[0]["name_ko"], "second")
+        self.assertEqual(rejected, [])
 
 
 if __name__ == "__main__":

@@ -260,9 +260,11 @@ def enrich(
     rows: list[dict[str, Any]],
     max_rows: int | None = None,
     filter_text: list[str] | None = None,
+    offset: int = 0,
 ) -> tuple[int, list[dict[str, Any]], list[dict[str, Any]]]:
     updated = 0
     processed = 0
+    seen_processable = 0
     changes: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []
     cache: dict[str, tuple[str | None, str | None]] = {}
@@ -280,6 +282,10 @@ def enrich(
             continue
         if not is_product_specific_source_url(source_url):
             continue
+        if seen_processable < offset:
+            seen_processable += 1
+            continue
+        seen_processable += 1
         if max_rows is not None and processed >= max_rows:
             break
         processed += 1
@@ -380,6 +386,7 @@ def main() -> int:
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--max-rows", type=int, default=None)
+    parser.add_argument("--offset", type=int, default=0)
     parser.add_argument(
         "--filter-text",
         action="append",
@@ -389,13 +396,14 @@ def main() -> int:
     args = parser.parse_args()
 
     rows, wrapper = load_catalog(args.input)
-    updated, changes, rejected = enrich(rows, args.max_rows, args.filter_text)
+    updated, changes, rejected = enrich(rows, args.max_rows, args.filter_text, args.offset)
     args.report.write_text(
         json.dumps(
             {
                 "updated_rows": updated,
                 "write": args.write,
                 "filter_text": args.filter_text,
+                "offset": args.offset,
                 "changes": changes,
                 "rejected_sample": rejected[:200],
             },
