@@ -1604,9 +1604,28 @@ class PublicCatalogReportTests(unittest.TestCase):
             if batch.get("workstream") == "image_attachment_action_queue"
         )
         self.assertGreater(image_action_summary.get("primary_review_url_rows", 0), 0)
+        self.assertEqual(
+            sum(count for _, count in image_action_summary.get("by_review_lane", [])),
+            image_action_summary.get("sample_action_item_rows"),
+        )
+        self.assertEqual(
+            image_action_summary.get("local_image_download_instruction_ready_rows"),
+            image_action_summary.get("suggested_local_image_path_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("image_attachment_local_download_ready_rows"),
+            image_action_summary.get("local_image_download_instruction_ready_rows"),
+        )
         self.assertGreater(
             first_image_action_batch.get("review_summary", {}).get("primary_review_url_rows", 0),
             0,
+        )
+        self.assertEqual(
+            first_image_action_batch.get("review_summary", {}).get("suggested_local_image_path_rows"),
+            first_image_action_batch.get("rows"),
+        )
+        self.assertTrue(
+            first_image_action_batch.get("review_summary", {}).get("image_import_blocker_counts")
         )
         self.assertTrue(
             first_image_action_batch.get("review_summary", {}).get("first_primary_review_url")
@@ -2481,8 +2500,24 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_action_summary.get("primary_review_url_rows"),
         )
         self.assertEqual(
+            image_scorecard.get("by_review_lane"),
+            image_action_summary.get("by_review_lane"),
+        )
+        self.assertEqual(
+            image_scorecard.get("image_import_blocker_counts"),
+            image_action_summary.get("image_import_blocker_counts"),
+        )
+        self.assertEqual(
+            image_scorecard.get("local_image_download_instruction_ready_rows"),
+            image_action_summary.get("local_image_download_instruction_ready_rows"),
+        )
+        self.assertEqual(
             image_next_action.get("primary_review_url_rows"),
             image_action_summary.get("primary_review_url_rows"),
+        )
+        self.assertEqual(
+            image_next_action.get("by_review_lane"),
+            image_action_summary.get("by_review_lane"),
         )
         self.assertEqual(
             image_next_action.get("primary_review_url_kind_counts"),

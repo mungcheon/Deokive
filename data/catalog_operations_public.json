@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T06:23:18Z",
+  "generated_at": "2026-07-24T06:28:59Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -75,6 +75,7 @@
       "image_attachment_source_url_fallback_web_search_rows": 5,
       "image_attachment_source_url_any_search_hint_rows": 50,
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
+      "image_attachment_local_download_ready_rows": 73,
       "ichiban_metadata_action_campaigns": 44,
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -1182,6 +1183,40 @@
           5
         ]
       ],
+      "by_review_lane": [
+        [
+          "source_url_replacement_first",
+          50
+        ],
+        [
+          "representative_image_candidate_review",
+          23
+        ]
+      ],
+      "image_import_blocker_counts": [
+        [
+          "generic_storefront_source_url",
+          50
+        ],
+        [
+          "missing_exact_product_detail_url",
+          50
+        ],
+        [
+          "missing_product_page_image_url",
+          50
+        ],
+        [
+          "representative_image_may_not_match_exact_variant",
+          23
+        ],
+        [
+          "product_type_confirmation_required",
+          23
+        ]
+      ],
+      "suggested_local_image_path_rows": 73,
+      "local_image_download_instruction_ready_rows": 73,
       "by_workflow": [
         [
           "replace_generic_source_then_extract_image",
@@ -2736,6 +2771,40 @@
           5
         ]
       ],
+      "by_review_lane": [
+        [
+          "source_url_replacement_first",
+          50
+        ],
+        [
+          "representative_image_candidate_review",
+          23
+        ]
+      ],
+      "image_import_blocker_counts": [
+        [
+          "generic_storefront_source_url",
+          50
+        ],
+        [
+          "missing_exact_product_detail_url",
+          50
+        ],
+        [
+          "missing_product_page_image_url",
+          50
+        ],
+        [
+          "representative_image_may_not_match_exact_variant",
+          23
+        ],
+        [
+          "product_type_confirmation_required",
+          23
+        ]
+      ],
+      "suggested_local_image_path_rows": 73,
+      "local_image_download_instruction_ready_rows": 73,
       "workstream_count": 4,
       "source_url_update_workstream_count": 3,
       "representative_image_review_workstream_count": 1,

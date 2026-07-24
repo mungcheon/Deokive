@@ -3506,6 +3506,7 @@
     "image_attachment_source_url_fallback_web_search_rows": 5,
     "image_attachment_source_url_any_search_hint_rows": 50,
     "image_attachment_source_url_missing_any_search_hint_rows": 0,
+    "image_attachment_local_download_ready_rows": 73,
     "ichiban_metadata_action_campaigns": 44,
     "ichiban_metadata_actionable_campaigns": 44,
     "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -3801,6 +3802,7 @@
       "image_attachment_source_url_fallback_web_search_rows": 5,
       "image_attachment_source_url_any_search_hint_rows": 50,
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
+      "image_attachment_local_download_ready_rows": 73,
       "ichiban_metadata_action_campaigns": 44,
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -4810,6 +4812,7 @@
       "image_attachment_source_url_fallback_web_search_rows": 5,
       "image_attachment_source_url_any_search_hint_rows": 50,
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
+      "image_attachment_local_download_ready_rows": 73,
       "ichiban_metadata_action_campaigns": 44,
       "ichiban_metadata_actionable_campaigns": 44,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -5228,6 +5231,38 @@
         2
       ]
     ],
+    "by_review_lane": [
+      [
+        "source_url_replacement_first",
+        50
+      ],
+      [
+        "representative_image_candidate_review",
+        23
+      ]
+    ],
+    "image_import_blocker_counts": [
+      [
+        "generic_storefront_source_url",
+        50
+      ],
+      [
+        "missing_exact_product_detail_url",
+        50
+      ],
+      [
+        "missing_product_page_image_url",
+        50
+      ],
+      [
+        "representative_image_may_not_match_exact_variant",
+        23
+      ],
+      [
+        "product_type_confirmation_required",
+        23
+      ]
+    ],
     "source_url_update_required_rows": 50,
     "source_url_update_template_rows": 50,
     "source_url_update_search_hint_rows": 45,
@@ -5255,6 +5290,7 @@
     "representative_image_review_required_rows": 23,
     "image_url_ready_rows": 0,
     "suggested_local_image_path_rows": 73,
+    "local_image_download_instruction_ready_rows": 73,
     "workstream_count": 4,
     "source_url_update_workstream_count": 3,
     "source_url_update_work_order_count": 3,
@@ -6043,6 +6079,19 @@
     "action_batch_count": 14,
     "batch_size": 12,
     "max_groups": 200,
+    "primary_review_url_groups": 130,
+    "first_primary_review_url": "https://www.enskyshop.com/products/detail/24195",
+    "first_primary_review_url_kind": "sample_source_url",
+    "primary_review_url_kind_counts": [
+      [
+        "sample_source_url",
+        130
+      ],
+      [
+        "manual_lookup_required",
+        35
+      ]
+    ],
     "field_counts": [
       [
         "release_date",
@@ -6402,6 +6451,8 @@
         "missing_rows": 350,
         "priority": 20,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://1kuji.com/products/naru",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6410,6 +6461,8 @@
         "missing_rows": 227,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://www.enskyshop.com/products/detail/24195",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6418,6 +6471,8 @@
         "missing_rows": 191,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%B4%E3%81%9F%E3%81%AC%E3%81%84+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/1992397/",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6426,6 +6481,8 @@
         "missing_rows": 114,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://www.goodsmile.info/ja/product/13483/",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6434,6 +6491,8 @@
         "missing_rows": 98,
         "priority": 20,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://fanding.kr/@stellive/shop",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6442,6 +6501,8 @@
         "missing_rows": 97,
         "priority": 30,
         "workflow": "official_title_review",
+        "primary_review_url": "https://fanding.kr/@stellive/shop",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify original Japanese product titles from official listings."
       },
       {
@@ -6450,6 +6511,8 @@
         "missing_rows": 93,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://fanding.kr/@stellive/shop",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6458,6 +6521,8 @@
         "missing_rows": 84,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://bsp-prize.jp/item/2784575/",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6466,6 +6531,8 @@
         "missing_rows": 79,
         "priority": 30,
         "workflow": "official_title_review",
+        "primary_review_url": "https://nagano-market.jp/ko/products/4571609375012",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify original Japanese product titles from official listings."
       },
       {
@@ -6474,6 +6541,8 @@
         "missing_rows": 74,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://www.movic.jp/shop/g/g02330-00350-00624/",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6482,6 +6551,8 @@
         "missing_rows": 63,
         "priority": 30,
         "workflow": "official_title_review",
+        "primary_review_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%B4%E3%81%9F%E3%81%AC%E3%81%84+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/1992397/",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify original Japanese product titles from official listings."
       },
       {
@@ -6490,6 +6561,8 @@
         "missing_rows": 62,
         "priority": 30,
         "workflow": "official_title_review",
+        "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367451",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify original Japanese product titles from official listings."
       },
       {
@@ -6498,6 +6571,8 @@
         "missing_rows": 50,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://www.kotobukiya.co.jp/product/detail/p4934054089062/",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6506,6 +6581,8 @@
         "missing_rows": 39,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6514,6 +6591,8 @@
         "missing_rows": 34,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://blog.piapro.net/2020/10/w201029-2.html",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6522,6 +6601,8 @@
         "missing_rows": 33,
         "priority": 30,
         "workflow": "official_title_review",
+        "primary_review_url": "https://shop.weverse.io/home",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify original Japanese product titles from official listings."
       },
       {
@@ -6530,6 +6611,8 @@
         "missing_rows": 32,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://shop.weverse.io/home",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6538,6 +6621,8 @@
         "missing_rows": 26,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://www.taito.co.jp/taito-prize/0452060600",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6546,6 +6631,8 @@
         "missing_rows": 24,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": null,
+        "primary_review_url_kind": "manual_lookup_required",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -6554,6 +6641,8 @@
         "missing_rows": 20,
         "priority": 10,
         "workflow": "official_metadata_review",
+        "primary_review_url": "https://nagano-market.jp/ko",
+        "primary_review_url_kind": "sample_source_url",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       }
     ],

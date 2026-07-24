@@ -2736,6 +2736,16 @@ def build_operations_public(
             "primary_review_url_kind_counts": image_action_queue_summary.get(
                 "primary_review_url_kind_counts", []
             ),
+            "by_review_lane": image_action_queue_summary.get("by_review_lane", []),
+            "image_import_blocker_counts": image_action_queue_summary.get(
+                "image_import_blocker_counts", []
+            ),
+            "suggested_local_image_path_rows": image_action_queue_summary.get(
+                "suggested_local_image_path_rows", 0
+            ),
+            "local_image_download_instruction_ready_rows": image_action_queue_summary.get(
+                "local_image_download_instruction_ready_rows", 0
+            ),
             "workstream_count": image_action_queue_summary.get("workstream_count", 0),
             "source_url_update_workstream_count": image_action_queue_summary.get(
                 "source_url_update_workstream_count", 0
@@ -3617,6 +3627,16 @@ def build_operations_public(
             "primary_review_url_kind_counts": image_action_queue_summary.get(
                 "primary_review_url_kind_counts", []
             ),
+            "by_review_lane": image_action_queue_summary.get("by_review_lane", []),
+            "image_import_blocker_counts": image_action_queue_summary.get(
+                "image_import_blocker_counts", []
+            ),
+            "suggested_local_image_path_rows": image_action_queue_summary.get(
+                "suggested_local_image_path_rows", 0
+            ),
+            "local_image_download_instruction_ready_rows": image_action_queue_summary.get(
+                "local_image_download_instruction_ready_rows", 0
+            ),
             "by_workflow": image_action_queue_summary.get("by_workflow", []),
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
             "top_image_attachment_workstreams": image_action_workstreams,
@@ -4060,6 +4080,9 @@ def build_operations_public(
         )
         open_review_queues["image_attachment_source_url_missing_any_search_hint_rows"] = (
             image_action_queue_summary.get("source_url_update_missing_any_search_hint_rows", 0)
+        )
+        open_review_queues["image_attachment_local_download_ready_rows"] = (
+            image_action_queue_summary.get("local_image_download_instruction_ready_rows", 0)
         )
     if ichiban_kuji_metadata_action_queue_summary:
         open_review_queues["ichiban_metadata_action_campaigns"] = ichiban_kuji_metadata_action_queue_summary.get(
@@ -4655,6 +4678,16 @@ def build_agent_work_queue_public(
                     "first_primary_review_url": action_batch.get("first_primary_review_url"),
                     "first_primary_review_url_kind": action_batch.get(
                         "first_primary_review_url_kind"
+                    ),
+                    "review_lane_counts": action_batch.get("review_lane_counts", []),
+                    "image_import_blocker_counts": action_batch.get(
+                        "image_import_blocker_counts", []
+                    ),
+                    "suggested_local_image_path_rows": int(
+                        action_batch.get("suggested_local_image_path_rows") or 0
+                    ),
+                    "local_image_download_instruction_ready_rows": int(
+                        action_batch.get("local_image_download_instruction_ready_rows") or 0
                     ),
                     "workflow": action_batch.get("workflow"),
                     "source_store": action_batch.get("source_store"),
@@ -7356,6 +7389,9 @@ def validate_report_consistency(
         )
         expected_open_queues["image_attachment_source_url_missing_any_search_hint_rows"] = image_action_summary.get(
             "source_url_update_missing_any_search_hint_rows", 0
+        )
+        expected_open_queues["image_attachment_local_download_ready_rows"] = image_action_summary.get(
+            "local_image_download_instruction_ready_rows", 0
         )
     ichiban_action_queue = (
         load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}) if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists() else {}

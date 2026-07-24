@@ -66,6 +66,19 @@ def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     return [[name, count] for name, count in counts.most_common()]
 
 
+def _list_counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
+    counts = Counter()
+    for row in rows:
+        values = row.get(key)
+        if not isinstance(values, list):
+            continue
+        for value in values:
+            name = str(value or "")
+            if name:
+                counts[name] += 1
+    return [[name, count] for name, count in counts.most_common()]
+
+
 def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[tuple[str, str], dict[str, Any]] = {}
     for batch in batches:
@@ -858,6 +871,10 @@ def build_report(
                 (row for row in chunk if row.get("primary_review_url")),
                 {},
             )
+            review_lane_counts = _counter_pairs(chunk, "review_lane")
+            image_import_blocker_counts = _list_counter_pairs(
+                chunk, "image_import_blockers"
+            )
             batches.append(
                 {
                     "batch_id": f"image-attachment-action-{len(batches) + 1:03d}",
@@ -878,6 +895,17 @@ def build_report(
                         "review_gotouchi_official_candidates": "Confirm motif candidate matches product type before image import.",
                     }.get(workflow, "Review image evidence before import."),
                     "category_counts": _counter_pairs(chunk, "category"),
+                    "review_lane_counts": review_lane_counts,
+                    "image_import_blocker_counts": image_import_blocker_counts,
+                    "suggested_local_image_path_rows": sum(
+                        1 for row in chunk if row.get("suggested_local_image_path")
+                    ),
+                    "local_image_download_instruction_ready_rows": sum(
+                        1
+                        for row in chunk
+                        if (row.get("local_image_download_instruction") or {}).get("status")
+                        == "ready_after_manual_image_url_confirmation"
+                    ),
                     "primary_review_url_rows": sum(
                         1 for row in chunk if row.get("primary_review_url")
                     ),
@@ -970,6 +998,10 @@ def build_report(
             "max_batches": max_batches,
             "by_workflow": _counter_pairs(action_items, "workflow"),
             "by_source_store": _counter_pairs(action_items, "source_store"),
+            "by_review_lane": _counter_pairs(action_items, "review_lane"),
+            "image_import_blocker_counts": _list_counter_pairs(
+                action_items, "image_import_blockers"
+            ),
             "source_url_update_required_rows": source_url_update_required_rows,
             "source_url_update_template_rows": source_url_update_template_rows,
             "source_url_update_search_hint_rows": source_url_update_search_hint_rows,
@@ -994,6 +1026,12 @@ def build_report(
             "representative_image_review_required_rows": representative_image_review_required_rows,
             "image_url_ready_rows": image_url_ready_rows,
             "suggested_local_image_path_rows": suggested_local_image_path_rows,
+            "local_image_download_instruction_ready_rows": sum(
+                1
+                for item in action_items
+                if (item.get("local_image_download_instruction") or {}).get("status")
+                == "ready_after_manual_image_url_confirmation"
+            ),
             "workstream_count": len(workstreams),
             "source_url_update_workstream_count": sum(
                 1 for row in workstreams if row.get("source_url_update_template_rows")
