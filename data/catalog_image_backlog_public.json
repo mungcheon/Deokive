@@ -2562,9 +2562,10 @@
     "danganronpa_missing_media_rows": 34,
     "danganronpa_patch_template_pending_rows": 34,
     "danganronpa_patch_template_ready_rows": 0,
-    "confirmed_import_template_rows": 1158,
+    "confirmed_import_template_rows": 1160,
     "confirmed_import_action_queue_rows": 4252,
     "confirmed_import_pending_rows": 0,
+    "confirmed_import_variant_metadata_template_rows": 2,
     "dedupe_action_groups": 48,
     "dedupe_actionable_groups": 48,
     "dedupe_unqueued_actionable_groups": 0,
@@ -2643,7 +2644,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20269,
+    "summed_batch_rows": 20297,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2691,12 +2692,12 @@
         8
       ],
       [
-        "deduplication_review",
-        8
-      ],
-      [
         "ichiban_kuji_metadata_action_queue",
         7
+      ],
+      [
+        "deduplication_review",
+        6
       ],
       [
         "ichiban_kuji_prize_policy_audit",
@@ -2735,11 +2736,19 @@
         1
       ],
       [
+        "image_attachment_source_url_next_review_batch",
+        1
+      ],
+      [
         "confirmed_import_readiness",
         1
       ],
       [
         "source_discovery_next_focus_pack",
+        1
+      ],
+      [
+        "source_discovery_starter_next_review_batch",
         1
       ],
       [
@@ -2769,12 +2778,16 @@
         12
       ],
       [
+        "agent-source-starter",
+        11
+      ],
+      [
         "agent-source-action",
         10
       ],
       [
-        "agent-source-starter",
-        10
+        "agent-image-action",
+        9
       ],
       [
         "agent-ichiban-action",
@@ -2789,10 +2802,6 @@
         8
       ],
       [
-        "agent-image-action",
-        8
-      ],
-      [
         "agent-source-image",
         8
       ],
@@ -2802,7 +2811,7 @@
       ],
       [
         "agent-dedupe",
-        8
+        6
       ],
       [
         "agent-ichiban-prize-policy",
@@ -2861,9 +2870,10 @@
       "danganronpa_missing_media_rows": 34,
       "danganronpa_patch_template_pending_rows": 34,
       "danganronpa_patch_template_ready_rows": 0,
-      "confirmed_import_template_rows": 1158,
+      "confirmed_import_template_rows": 1160,
       "confirmed_import_action_queue_rows": 4252,
       "confirmed_import_pending_rows": 0,
+      "confirmed_import_variant_metadata_template_rows": 2,
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
       "dedupe_unqueued_actionable_groups": 0,
@@ -2938,16 +2948,91 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0
     },
-    "confirmed_import_template_rows": 1158,
+    "confirmed_import_template_rows": 1160,
     "confirmed_import_action_queue_rows": 4252,
     "confirmed_import_manual_confirmed_ready_rows": 0,
     "confirmed_import_pending_rows": 0,
     "confirmed_import_blocked_confirmed_rows": 0,
-    "confirmed_import_manual_confirmation_backlog_rows": 5410,
-    "confirmed_import_work_order_lanes": 11,
+    "confirmed_import_variant_metadata_template_rows": 2,
+    "confirmed_import_variant_metadata_manual_confirmed_rows": 0,
+    "confirmed_import_variant_metadata_skipped_rows": 2,
+    "confirmed_import_manual_confirmation_backlog_rows": 5412,
+    "confirmed_import_work_order_lanes": 12,
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
-    "confirmed_import_top_work_order_row_count": 641
+    "confirmed_import_top_work_order_row_count": 641,
+    "image_rows_still_requiring_url_evidence": 710,
+    "image_missing_evidence_top_source_stores": [
+      [
+        "애니메이트",
+        144
+      ],
+      [
+        "엔스카이",
+        137
+      ],
+      [
+        "굿스마일컴퍼니",
+        56
+      ],
+      [
+        "Stellive Store",
+        45
+      ],
+      [
+        "코토부키야",
+        44
+      ],
+      [
+        "Movic",
+        36
+      ],
+      [
+        "ご当地ちいかわ 공식(API)",
+        23
+      ],
+      [
+        "점프 캐릭터즈 스토어",
+        23
+      ]
+    ],
+    "image_missing_evidence_top_categories": [
+      [
+        "피규어",
+        125
+      ],
+      [
+        "아크릴 스탠드",
+        110
+      ],
+      [
+        "캔뱃지",
+        90
+      ],
+      [
+        "인형",
+        77
+      ],
+      [
+        "키링",
+        65
+      ],
+      [
+        "마스코트",
+        62
+      ],
+      [
+        "문구",
+        49
+      ],
+      [
+        "머그컵",
+        23
+      ]
+    ],
+    "source_discovery_starter_next_review_batch_rows": 20,
+    "source_discovery_starter_next_review_batch_group_count": 4,
+    "source_discovery_starter_next_review_batch_primary_source_store": "엔스카이"
   },
   "generic_source_patch_candidates": {
     "public_report": "data/generic_source_patch_candidates_public.json",
@@ -3206,24 +3291,32 @@
   },
   "ichiban_kuji_metadata_probe": {
     "public_report": "data/ichiban_kuji_metadata_probe_public.json",
-    "urls_with_missing_metadata": 44,
-    "audited_urls": 44,
+    "urls_with_missing_metadata": 42,
+    "audited_urls": 42,
     "failure_count": 0,
-    "rows_missing_release_date": 16,
-    "rows_missing_official_price_jpy": 365,
+    "rows_missing_release_date": 8,
+    "rows_missing_official_price_jpy": 350,
     "safe_release_url_count": 0,
     "safe_price_url_count": 0,
     "safe_release_row_count": 0,
     "safe_price_row_count": 0,
-    "ambiguous_page_count": 44,
+    "unsafe_price_candidate_url_count": 41,
+    "unsafe_price_candidate_row_count": 350,
+    "ambiguous_page_count": 42,
     "blocked_reasons": [
       [
         "no labeled yen price in expected product-info area",
-        365
+        350
       ],
       [
-        "no exact release-date label; unlabeled/double-chance dates are unsafe",
-        16
+        "release label says undecided",
+        8
+      ]
+    ],
+    "unsafe_price_candidate_reasons": [
+      [
+        "likely_copyright_or_non_price_yen_noise",
+        84
       ]
     ],
     "auto_apply_enabled": false
@@ -3819,19 +3912,22 @@
   },
   "confirmed_import_readiness": {
     "public_report": "data/catalog_confirmed_import_readiness_public.json",
-    "workflow_count": 12,
-    "confirmed_files": 2,
-    "template_items": 1158,
+    "workflow_count": 13,
+    "confirmed_files": 3,
+    "template_items": 1160,
     "public_action_queue_rows": 4252,
-    "public_action_queue_batches": 178,
+    "public_action_queue_batches": 179,
     "manual_confirmed_true": 0,
     "updated_rows": 0,
-    "skipped_rows": 17,
+    "skipped_rows": 31,
     "duplicates": 0,
     "ready_or_pending_import_rows": 0,
     "blocked_confirmed_rows": 0,
-    "manual_confirmation_backlog_rows": 5410,
-    "work_order_lanes": 11,
+    "variant_metadata_template_rows": 2,
+    "variant_metadata_manual_confirmed_rows": 0,
+    "variant_metadata_skipped_rows": 2,
+    "manual_confirmation_backlog_rows": 5412,
+    "work_order_lanes": 12,
     "top_work_order_row_count": 641,
     "top_work_order_lane": "confirm_template_rows",
     "top_work_order_workflow": "source_discovery",
@@ -3841,11 +3937,11 @@
         5
       ],
       [
-        "no_current_candidates",
-        3
+        "template_ready_for_manual_confirmation",
+        4
       ],
       [
-        "template_ready_for_manual_confirmation",
+        "no_current_candidates",
         3
       ],
       [
@@ -3861,7 +3957,7 @@
     "blocked_action_count": 1,
     "manual_review_action_count": 22,
     "pending_import_action_count": 0,
-    "total_action_rows": 32686,
+    "total_action_rows": 32688,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -3874,9 +3970,10 @@
       "danganronpa_missing_media_rows": 34,
       "danganronpa_patch_template_pending_rows": 34,
       "danganronpa_patch_template_ready_rows": 0,
-      "confirmed_import_template_rows": 1158,
+      "confirmed_import_template_rows": 1160,
       "confirmed_import_action_queue_rows": 4252,
       "confirmed_import_pending_rows": 0,
+      "confirmed_import_variant_metadata_template_rows": 2,
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
       "dedupe_unqueued_actionable_groups": 0,
@@ -3951,15 +4048,18 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0
     },
-    "confirmed_import_template_rows": 1158,
+    "confirmed_import_template_rows": 1160,
     "confirmed_import_action_queue_rows": 4252,
-    "confirmed_import_action_queue_batches": 178,
+    "confirmed_import_action_queue_batches": 179,
     "confirmed_import_pending_rows": 0,
     "confirmed_import_manual_confirmed_ready_rows": 0,
-    "confirmed_import_manual_confirmation_backlog_rows": 5410,
+    "confirmed_import_manual_confirmation_backlog_rows": 5412,
     "confirmed_import_blocked_confirmed_rows": 0,
-    "confirmed_import_workflow_count": 12,
-    "confirmed_import_work_order_lanes": 11,
+    "confirmed_import_variant_metadata_template_rows": 2,
+    "confirmed_import_variant_metadata_manual_confirmed_rows": 0,
+    "confirmed_import_variant_metadata_skipped_rows": 2,
+    "confirmed_import_workflow_count": 13,
+    "confirmed_import_work_order_lanes": 12,
     "confirmed_import_top_work_order_row_count": 641,
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
@@ -4052,6 +4152,74 @@
     "image_url_without_local_path_rows": 0,
     "image_missing_local_image_files": 0,
     "image_rows_still_requiring_url_evidence": 710,
+    "image_missing_evidence_top_source_stores": [
+      [
+        "애니메이트",
+        144
+      ],
+      [
+        "엔스카이",
+        137
+      ],
+      [
+        "굿스마일컴퍼니",
+        56
+      ],
+      [
+        "Stellive Store",
+        45
+      ],
+      [
+        "코토부키야",
+        44
+      ],
+      [
+        "Movic",
+        36
+      ],
+      [
+        "ご当地ちいかわ 공식(API)",
+        23
+      ],
+      [
+        "점프 캐릭터즈 스토어",
+        23
+      ]
+    ],
+    "image_missing_evidence_top_categories": [
+      [
+        "피규어",
+        125
+      ],
+      [
+        "아크릴 스탠드",
+        110
+      ],
+      [
+        "캔뱃지",
+        90
+      ],
+      [
+        "인형",
+        77
+      ],
+      [
+        "키링",
+        65
+      ],
+      [
+        "마스코트",
+        62
+      ],
+      [
+        "문구",
+        49
+      ],
+      [
+        "머그컵",
+        23
+      ]
+    ],
     "image_auto_download_ready_rows": 0,
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
@@ -4092,6 +4260,9 @@
     "source_next_focus_fallback_import_dry_run_skipped_rows": 17,
     "source_discovery_starter_queue_rows": 637,
     "source_discovery_starter_queue_groups": 339,
+    "source_discovery_starter_next_review_batch_rows": 20,
+    "source_discovery_starter_next_review_batch_group_count": 4,
+    "source_discovery_starter_next_review_batch_primary_source_store": "엔스카이",
     "source_discovery_action_rows": 632,
     "source_discovery_actionable_rows": 632,
     "source_discovery_template_rows": 632,
@@ -4453,6 +4624,26 @@
     "source_url_update_fallback_web_search_rows": 5,
     "source_url_update_any_search_hint_rows": 50,
     "source_url_update_missing_any_search_hint_rows": 0,
+    "source_url_candidate_status_counts": [
+      [
+        "no_candidate",
+        9
+      ],
+      [
+        "low_confidence_candidate",
+        1
+      ]
+    ],
+    "source_url_review_lane_counts": [
+      [
+        "manual_search_required",
+        9
+      ],
+      [
+        "low_confidence_candidate_review",
+        1
+      ]
+    ],
     "primary_review_url_rows": 73,
     "primary_review_url_kind_counts": [
       [
@@ -4472,6 +4663,64 @@
     "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
     "first_primary_review_url_kind": "source_search_url",
     "representative_image_review_required_rows": 23,
+    "representative_candidate_status_counts": [
+      [
+        "motif_only_type_mismatch",
+        16
+      ],
+      [
+        "no_official_candidate",
+        6
+      ],
+      [
+        "rejected_visual_mismatch",
+        1
+      ]
+    ],
+    "representative_candidate_review_guidance": [
+      {
+        "status": "motif_only_type_mismatch",
+        "rows": 16,
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
+      {
+        "status": "no_official_candidate",
+        "rows": 6,
+        "risk": "no_official_candidate_image_found_for_exact_item",
+        "recommended_action": "search_official_or_trusted_source_before_import",
+        "required_evidence": [
+          "exact product name or official listing context",
+          "same character",
+          "same regional motif",
+          "same product type"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
+      {
+        "status": "rejected_visual_mismatch",
+        "rows": 1,
+        "risk": "candidate_was_rejected_by_visual_or_identity_check",
+        "recommended_action": "do_not_reuse_rejected_candidate_search_new_evidence",
+        "required_evidence": [
+          "fresh image URL from exact product evidence",
+          "same character",
+          "same regional motif",
+          "same product type"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      }
+    ],
     "image_url_ready_rows": 0,
     "blocked_before_image_import_rows": 73,
     "download_ready_after_manual_image_url_rows": 73,
@@ -4499,6 +4748,46 @@
         "current_source_url",
         10
       ]
+    ],
+    "next_representative_image_review_batch_candidate_status_counts": [
+      [
+        "motif_only_type_mismatch",
+        9
+      ],
+      [
+        "no_official_candidate",
+        1
+      ]
+    ],
+    "next_representative_image_review_batch_guidance": [
+      {
+        "status": "motif_only_type_mismatch",
+        "rows": 9,
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
+      {
+        "status": "no_official_candidate",
+        "rows": 1,
+        "risk": "no_official_candidate_image_found_for_exact_item",
+        "recommended_action": "search_official_or_trusted_source_before_import",
+        "required_evidence": [
+          "exact product name or official listing context",
+          "same character",
+          "same regional motif",
+          "same product type"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      }
     ],
     "representative_image_review_workstream_count": 1,
     "excluded_workflow_rows": [
@@ -4535,6 +4824,16 @@
     ],
     "field_patch_template_count": 44,
     "field_patch_template_counts": [
+      [
+        "official_price_jpy",
+        42
+      ],
+      [
+        "release_date",
+        2
+      ]
+    ],
+    "field_review_guidance_template_counts": [
       [
         "official_price_jpy",
         42
@@ -5992,6 +6291,611 @@
       "missing_image_url_rows": 710,
       "rows_still_requiring_image_url_evidence": 710,
       "download_complete_for_known_image_urls": true,
+      "missing_image_evidence_priority": {
+        "rows": 710,
+        "by_source_store": [
+          [
+            "애니메이트",
+            144
+          ],
+          [
+            "엔스카이",
+            137
+          ],
+          [
+            "굿스마일컴퍼니",
+            56
+          ],
+          [
+            "Stellive Store",
+            45
+          ],
+          [
+            "코토부키야",
+            44
+          ],
+          [
+            "Movic",
+            36
+          ],
+          [
+            "ご当地ちいかわ 공식(API)",
+            23
+          ],
+          [
+            "점프 캐릭터즈 스토어",
+            23
+          ],
+          [
+            "FuRyu",
+            21
+          ],
+          [
+            "치이카와 중국 팝업스토어",
+            15
+          ],
+          [
+            "Taito",
+            15
+          ],
+          [
+            "무기와라스토어",
+            15
+          ],
+          [
+            "귀멸의 칼날 공식",
+            13
+          ],
+          [
+            "AmiAmi",
+            12
+          ],
+          [
+            "반다이",
+            11
+          ],
+          [
+            "Cospa",
+            11
+          ],
+          [
+            "메가하우스",
+            9
+          ],
+          [
+            "MINISO 중국",
+            7
+          ],
+          [
+            "산리오",
+            6
+          ],
+          [
+            "치이카와샵 용산",
+            5
+          ]
+        ],
+        "by_category": [
+          [
+            "피규어",
+            125
+          ],
+          [
+            "아크릴 스탠드",
+            110
+          ],
+          [
+            "캔뱃지",
+            90
+          ],
+          [
+            "인형",
+            77
+          ],
+          [
+            "키링",
+            65
+          ],
+          [
+            "마스코트",
+            62
+          ],
+          [
+            "문구",
+            49
+          ],
+          [
+            "머그컵",
+            23
+          ],
+          [
+            "포토카드",
+            17
+          ],
+          [
+            "액세서리",
+            17
+          ],
+          [
+            "타월",
+            16
+          ],
+          [
+            "아크릴 키링",
+            11
+          ],
+          [
+            "생활잡화",
+            10
+          ],
+          [
+            "가방",
+            9
+          ],
+          [
+            "응원용품",
+            4
+          ],
+          [
+            "응원봉",
+            4
+          ],
+          [
+            "의류",
+            4
+          ],
+          [
+            "캡슐토이",
+            3
+          ],
+          [
+            "마그넷",
+            2
+          ],
+          [
+            "태피스트리",
+            2
+          ]
+        ],
+        "by_affiliation": [
+          [
+            "원피스",
+            80
+          ],
+          [
+            "치이카와",
+            61
+          ],
+          [
+            "헌터X헌터",
+            51
+          ],
+          [
+            "주술회전",
+            50
+          ],
+          [
+            "메이드 인 어비스",
+            41
+          ],
+          [
+            "스텔라이브",
+            41
+          ],
+          [
+            "나의 히어로 아카데미아",
+            36
+          ],
+          [
+            "하츠네 미쿠",
+            34
+          ],
+          [
+            "단간론파",
+            34
+          ],
+          [
+            "체인소 맨",
+            32
+          ],
+          [
+            "장송의 프리렌",
+            31
+          ],
+          [
+            "귀멸의 칼날",
+            25
+          ],
+          [
+            "짱구는 못말려",
+            18
+          ],
+          [
+            "슈타인즈게이트",
+            17
+          ],
+          [
+            "블루록",
+            12
+          ],
+          [
+            "전생슬",
+            12
+          ],
+          [
+            "최애의 아이",
+            11
+          ],
+          [
+            "봇치 더 록",
+            11
+          ],
+          [
+            "진격의 거인",
+            10
+          ],
+          [
+            "리제로",
+            8
+          ]
+        ],
+        "by_series_name": [
+          [
+            "(blank)",
+            660
+          ],
+          [
+            "ご当地",
+            23
+          ],
+          [
+            "中国限定",
+            22
+          ],
+          [
+            "한국 한정",
+            5
+          ]
+        ],
+        "top_source_store": [
+          [
+            "애니메이트",
+            144
+          ]
+        ],
+        "sample_rows": [
+          {
+            "catalog_index": 922,
+            "name_ko": "치이카와 러버 스트랩 (우사기)",
+            "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 923,
+            "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+            "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 924,
+            "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+            "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 925,
+            "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+            "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 926,
+            "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+            "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 928,
+            "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+            "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 929,
+            "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+            "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 930,
+            "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+            "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 931,
+            "name_ko": "치이카와 스탠드 미니 (모몽가)",
+            "name_ja": "ちいかわ スタンドミニ (モモンガ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 932,
+            "name_ko": "치이카와 트레이딩 아크릴 키홀더 (라부라부)",
+            "name_ja": "ちいかわ トレーディングアクリルキーホルダー (らぶらぶシリーズ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 933,
+            "name_ko": "치이카와 아크릴 피규어 (라부라부 시리즈)",
+            "name_ja": "ちいかわ アクリルフィギュア (らぶらぶシリーズ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 936,
+            "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+            "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 937,
+            "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+            "name_ja": "うさぎ ご当地マスコット (浅草)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 938,
+            "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+            "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "타월",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 941,
+            "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+            "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 942,
+            "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+            "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 943,
+            "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+            "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "타월",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 944,
+            "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+            "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 945,
+            "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+            "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 946,
+            "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+            "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 950,
+            "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+            "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "타월",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 953,
+            "name_ko": "하치와레 ご当地 마스코트 (후쿠오카 라멘)",
+            "name_ja": "ハチワレ ご当地マスコット (福岡 ラーメン)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 954,
+            "name_ko": "치이카와 ご当地 마스코트 (나고야 샤치호코)",
+            "name_ja": "ちいかわ ご当地マスコット (名古屋 金鯱)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 955,
+            "name_ko": "우사기 ご当地 마스코트 (나고야 테바사키)",
+            "name_ja": "うさぎ ご当地マスコット (名古屋 手羽先)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 956,
+            "name_ko": "치이카와 ご当地 마스코트 (고베 포트타워)",
+            "name_ja": "ちいかわ ご当地マスコット (神戸 ポートタワー)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 957,
+            "name_ko": "하치와레 ご当地 아크릴 키홀더 (고베)",
+            "name_ja": "ハチワレ ご当地アクリルキーホルダー (神戸)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 958,
+            "name_ko": "치이카와 ご当地 마스코트 (요코하마 차이나타운)",
+            "name_ja": "ちいかわ ご当地マスコット (横浜 中華街)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 959,
+            "name_ko": "하치와레 ご当地 마스코트 (요코하마 마린타워)",
+            "name_ja": "ハチワレ ご当地マスコット (横浜 マリンタワー)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 960,
+            "name_ko": "치이카와 ご当地 마스코트 (카와고에 토키노카네)",
+            "name_ja": "ちいかわ ご当地マスコット (川越 時の鐘)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          },
+          {
+            "catalog_index": 967,
+            "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+            "name_ja": "ラッコ ご当地マスコット (北海道)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": "ご当地"
+          }
+        ]
+      },
       "next_safe_phase": "find_exact_image_urls_for_missing_rows",
       "auto_download_ready_rows": 0,
       "auto_apply_enabled": false,
@@ -7983,6 +8887,20 @@
     "metadata_enrichment_template_rows": 4,
     "metadata_field_import_template_rows": 12,
     "metadata_field_import_supported_rows": 12,
+    "metadata_field_review_counts": [
+      [
+        "sub_series",
+        4
+      ],
+      [
+        "name_ja",
+        4
+      ],
+      [
+        "character_name",
+        4
+      ]
+    ],
     "candidate_blocker_counts": [
       [
         "rank_not_first",
@@ -9007,6 +9925,20 @@
         4
       ]
     ],
+    "item_review_lane_counts": [
+      [
+        "same_campaign_family_reissue_review",
+        20
+      ]
+    ],
+    "campaign_review_lane_counts": [
+      [
+        "campaign_pair_first",
+        4
+      ]
+    ],
+    "same_campaign_family_reissue_item_rows": 20,
+    "zero_price_exception_reissue_item_rows": 0,
     "campaign_covered_item_template_rows": 20,
     "standalone_item_template_rows": 0,
     "campaign_item_decision_preview_rows": 20,

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T14:19:32Z",
+  "generated_at": "2026-07-24T14:55:13Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
@@ -4052,7 +4052,14 @@
             "site:fanding.kr/@stellive/shop 스텔라이브 1주년 뱃지 세트",
             "1주년 캔뱃지"
           ],
-          "store_search_hints": {},
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4089,7 +4096,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "low_confidence_candidate_review"
         },
         {
           "manual_confirmed": false,
@@ -4112,11 +4120,38 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "강지",
+              "마스코트",
+              "인형"
+            ],
+            "query_members": [
+              "강지"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "강지 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 강지 마스코트 인형",
+            "강지 인형 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4153,7 +4188,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "manual_confirmed": false,
@@ -4176,11 +4212,45 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "굿즈",
+              "기념",
+              "박스",
+              "생일",
+              "아이리",
+              "칸나"
+            ],
+            "query_members": [
+              "아이리",
+              "칸나"
+            ],
+            "query_events": [
+              "생일"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "아이리 칸나 생일 기념 굿즈 박스 액세서리",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 생일 기념 굿즈 박스",
+            "아이리 액세서리 (전) 스텔라이브",
+            "아이리 생일 액세서리"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4217,7 +4287,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "manual_confirmed": false,
@@ -4240,11 +4311,40 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "마스코트",
+              "아이리",
+              "인형",
+              "칸나"
+            ],
+            "query_members": [
+              "아이리",
+              "칸나"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "아이리 칸나 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 마스코트 인형",
+            "아이리 인형 (전) 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4281,7 +4381,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "manual_confirmed": false,
@@ -4304,11 +4405,40 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "세트",
+              "아이리",
+              "칸나",
+              "키링"
+            ],
+            "query_members": [
+              "아이리",
+              "칸나"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "아이리 칸나 키링 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 키링 세트",
+            "아이리 액세서리 (전) 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4345,7 +4475,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "manual_confirmed": false,
@@ -4368,11 +4499,45 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "기념",
+              "노아",
+              "데뷔",
+              "스탠드",
+              "아크릴",
+              "쿠루미"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [
+              "데뷔"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 데뷔 기념 아크릴 스탠드",
+            "노아 아크릴 스탠드 스텔라이브",
+            "노아 데뷔 아크릴 스탠드"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4409,7 +4574,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "manual_confirmed": false,
@@ -4432,11 +4598,44 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "굿즈",
+              "기념",
+              "노아",
+              "생일",
+              "쿠루미"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [
+              "생일"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 생일 기념 굿즈 액세서리",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 기념 굿즈",
+            "노아 액세서리 스텔라이브",
+            "노아 생일 액세서리"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4473,7 +4672,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "manual_confirmed": false,
@@ -4496,11 +4696,40 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "노아",
+              "마스코트",
+              "인형",
+              "쿠루미"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 마스코트 인형",
+            "노아 인형 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4537,7 +4766,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "manual_confirmed": false,
@@ -4560,11 +4790,40 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "마스코트",
+              "인형",
+              "코코나",
+              "하나코"
+            ],
+            "query_members": [
+              "코코나",
+              "하나코"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "하나코 코코나 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 마스코트 인형",
+            "코코나 인형 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4601,7 +4860,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "manual_confirmed": false,
@@ -4624,11 +4884,43 @@
           ],
           "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "기념",
+              "데뷔",
+              "비비",
+              "스탠드",
+              "아크릴"
+            ],
+            "query_members": [
+              "비비"
+            ],
+            "query_events": [
+              "데뷔"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "비비 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 비비 데뷔 기념 아크릴 스탠드",
+            "비비 아크릴 스탠드 스텔라이브",
+            "비비 데뷔 아크릴 스탠드"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
@@ -4665,7 +4957,8 @@
             "Leave manual_confirmed=false until the source URL proves the exact item identity."
           ],
           "unblocks": "image_url_extraction_and_attachment_review",
-          "auto_apply_enabled": false
+          "auto_apply_enabled": false,
+          "candidate_review_lane": "manual_search_required"
         }
       ],
       "review_summary": {
@@ -8506,7 +8799,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "low_confidence_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -8524,13 +8817,113 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "Candidate options are review hints only; do not copy the top candidate without exact title/member/event/type confirmation.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "low_confidence_candidate",
+            "candidate_score": 0.2733,
+            "candidate_count": 5,
+            "candidate_options": [
+              {
+                "product_no": 3700,
+                "title": "S.S.Stellive 메탈 뱃지",
+                "source_url": "https://fanding.kr/@stellive/shop/3700",
+                "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
+                "release_date": "2026-07-14",
+                "score": 0.2733,
+                "shared_tokens": [
+                  "뱃지"
+                ],
+                "query_overlap": 0.25,
+                "title_overlap": 0.3333
+              },
+              {
+                "product_no": 3701,
+                "title": "S.S.Stellive 레트로 병뚜껑 뱃지",
+                "source_url": "https://fanding.kr/@stellive/shop/3701",
+                "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/C07F2nrzsNcKbkI8.webp",
+                "release_date": "2026-07-14",
+                "score": 0.25,
+                "shared_tokens": [
+                  "뱃지"
+                ],
+                "query_overlap": 0.25,
+                "title_overlap": 0.25
+              },
+              {
+                "product_no": 374,
+                "title": "Milky Way 메탈 로고 뱃지",
+                "source_url": "https://fanding.kr/@stellive/shop/374",
+                "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2024/03/08/NAw8o0XVptGYd7T2.webp",
+                "release_date": "2024-03-12",
+                "score": 0.236,
+                "shared_tokens": [
+                  "뱃지"
+                ],
+                "query_overlap": 0.25,
+                "title_overlap": 0.2
+              },
+              {
+                "product_no": 3529,
+                "title": "2026 AKANE LIZE : OVT. 금속 뱃지",
+                "source_url": "https://fanding.kr/@stellive/shop/3529",
+                "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/06/01/C6HgOuTKy05X4jkJ.webp",
+                "release_date": "2026-06-02",
+                "score": 0.2267,
+                "shared_tokens": [
+                  "뱃지"
+                ],
+                "query_overlap": 0.25,
+                "title_overlap": 0.1667
+              },
+              {
+                "product_no": 3729,
+                "title": "2026 AKANE LIZE : OVT. 금속 뱃지 [2차 판매]",
+                "source_url": "https://fanding.kr/@stellive/shop/3729",
+                "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/13/6GerTYx8UF1V3EXI.webp",
+                "release_date": "2026-07-14",
+                "score": 0.2267,
+                "shared_tokens": [
+                  "뱃지"
+                ],
+                "query_overlap": 0.25,
+                "title_overlap": 0.1667
+              }
+            ],
+            "source_url_review_lane": "low_confidence_candidate_review",
+            "source_url_review_blockers": [
+              "candidate_score_too_low",
+              "exact_product_identity_unconfirmed"
+            ],
+            "match_diagnostics": {
+              "query_tokens": [
+                "1주년",
+                "뱃지",
+                "세트",
+                "스텔라이브"
+              ],
+              "query_members": [],
+              "query_events": [
+                "1주년"
+              ],
+              "top_candidate_title": "S.S.Stellive 메탈 뱃지",
+              "top_candidate_score": 0.2733,
+              "top_candidate_shared_tokens": [
+                "뱃지"
+              ],
+              "top_candidate_query_overlap": 0.25,
+              "top_candidate_title_overlap": 0.3333,
+              "diagnosis": "candidate_exists_but_score_below_manual_review_threshold"
+            },
+            "fallback_search_queries": [
+              "스텔라이브 1주년 뱃지 세트 캔뱃지",
+              "site:fanding.kr/@stellive/shop 스텔라이브 1주년 뱃지 세트",
+              "1주년 캔뱃지"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -8556,15 +8949,114 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
-          "candidate_score": null,
-          "candidate_count": null,
-          "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "source_url_review_lane": "low_confidence_candidate_review",
+          "source_url_review_blockers": [
+            "candidate_score_too_low",
+            "exact_product_identity_unconfirmed"
+          ],
+          "candidate_status": "low_confidence_candidate",
+          "candidate_score": 0.2733,
+          "candidate_count": 5,
+          "candidate_options": [
+            {
+              "product_no": 3700,
+              "title": "S.S.Stellive 메탈 뱃지",
+              "source_url": "https://fanding.kr/@stellive/shop/3700",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
+              "release_date": "2026-07-14",
+              "score": 0.2733,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.3333
+            },
+            {
+              "product_no": 3701,
+              "title": "S.S.Stellive 레트로 병뚜껑 뱃지",
+              "source_url": "https://fanding.kr/@stellive/shop/3701",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/C07F2nrzsNcKbkI8.webp",
+              "release_date": "2026-07-14",
+              "score": 0.25,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.25
+            },
+            {
+              "product_no": 374,
+              "title": "Milky Way 메탈 로고 뱃지",
+              "source_url": "https://fanding.kr/@stellive/shop/374",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2024/03/08/NAw8o0XVptGYd7T2.webp",
+              "release_date": "2024-03-12",
+              "score": 0.236,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.2
+            },
+            {
+              "product_no": 3529,
+              "title": "2026 AKANE LIZE : OVT. 금속 뱃지",
+              "source_url": "https://fanding.kr/@stellive/shop/3529",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/06/01/C6HgOuTKy05X4jkJ.webp",
+              "release_date": "2026-06-02",
+              "score": 0.2267,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.1667
+            },
+            {
+              "product_no": 3729,
+              "title": "2026 AKANE LIZE : OVT. 금속 뱃지 [2차 판매]",
+              "source_url": "https://fanding.kr/@stellive/shop/3729",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/13/6GerTYx8UF1V3EXI.webp",
+              "release_date": "2026-07-14",
+              "score": 0.2267,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.1667
+            }
+          ],
+          "match_diagnostics": {
+            "query_tokens": [
+              "1주년",
+              "뱃지",
+              "세트",
+              "스텔라이브"
+            ],
+            "query_members": [],
+            "query_events": [
+              "1주년"
+            ],
+            "top_candidate_title": "S.S.Stellive 메탈 뱃지",
+            "top_candidate_score": 0.2733,
+            "top_candidate_shared_tokens": [
+              "뱃지"
+            ],
+            "top_candidate_query_overlap": 0.25,
+            "top_candidate_title_overlap": 0.3333,
+            "diagnosis": "candidate_exists_but_score_below_manual_review_threshold"
+          },
+          "fallback_search_queries": [
+            "스텔라이브 1주년 뱃지 세트 캔뱃지",
+            "site:fanding.kr/@stellive/shop 스텔라이브 1주년 뱃지 세트",
+            "1주년 캔뱃지"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2325.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -8583,7 +9075,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "low_confidence_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -8601,9 +9093,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "Candidate options are review hints only; do not copy the top candidate without exact title/member/event/type confirmation.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "low_confidence_candidate_review"
         },
         {
           "catalog_index": 2352,
@@ -8659,7 +9152,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -8677,13 +9170,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -8709,15 +9208,45 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "강지",
+              "마스코트",
+              "인형"
+            ],
+            "query_members": [
+              "강지"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "강지 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 강지 마스코트 인형",
+            "강지 인형 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2352.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -8736,7 +9265,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -8754,9 +9283,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2355,
@@ -8812,7 +9342,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -8830,13 +9360,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -8862,15 +9398,52 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "굿즈",
+              "기념",
+              "박스",
+              "생일",
+              "아이리",
+              "칸나"
+            ],
+            "query_members": [
+              "아이리",
+              "칸나"
+            ],
+            "query_events": [
+              "생일"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "아이리 칸나 생일 기념 굿즈 박스 액세서리",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 생일 기념 굿즈 박스",
+            "아이리 액세서리 (전) 스텔라이브",
+            "아이리 생일 액세서리"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2355.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -8889,7 +9462,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -8907,9 +9480,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2356,
@@ -8965,7 +9539,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -8983,13 +9557,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -9015,15 +9595,47 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "마스코트",
+              "아이리",
+              "인형",
+              "칸나"
+            ],
+            "query_members": [
+              "아이리",
+              "칸나"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "아이리 칸나 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 마스코트 인형",
+            "아이리 인형 (전) 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2356.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -9042,7 +9654,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -9060,9 +9672,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2357,
@@ -9118,7 +9731,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -9136,13 +9749,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -9168,15 +9787,47 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "세트",
+              "아이리",
+              "칸나",
+              "키링"
+            ],
+            "query_members": [
+              "아이리",
+              "칸나"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "아이리 칸나 키링 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 아이리 칸나 키링 세트",
+            "아이리 액세서리 (전) 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2357.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -9195,7 +9846,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -9213,9 +9864,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2361,
@@ -9271,7 +9923,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -9289,13 +9941,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -9321,15 +9979,52 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "기념",
+              "노아",
+              "데뷔",
+              "스탠드",
+              "아크릴",
+              "쿠루미"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [
+              "데뷔"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 데뷔 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 데뷔 기념 아크릴 스탠드",
+            "노아 아크릴 스탠드 스텔라이브",
+            "노아 데뷔 아크릴 스탠드"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2361.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -9348,7 +10043,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -9366,9 +10061,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2362,
@@ -9424,7 +10120,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -9442,13 +10138,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -9474,15 +10176,51 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "굿즈",
+              "기념",
+              "노아",
+              "생일",
+              "쿠루미"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [
+              "생일"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 생일 기념 굿즈 액세서리",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 기념 굿즈",
+            "노아 액세서리 스텔라이브",
+            "노아 생일 액세서리"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2362.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -9501,7 +10239,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -9519,9 +10257,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2363,
@@ -9577,7 +10316,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -9595,13 +10334,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -9627,15 +10372,47 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "노아",
+              "마스코트",
+              "인형",
+              "쿠루미"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 마스코트 인형 인형",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 마스코트 인형",
+            "노아 인형 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2363.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -9654,7 +10431,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -9672,9 +10449,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         }
       ],
       "review_summary": {
@@ -9811,7 +10589,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -9829,13 +10607,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -9861,15 +10645,51 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "노아",
+              "생일",
+              "스탠드",
+              "아크릴",
+              "쿠루미"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [
+              "생일"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.) 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+            "노아 아크릴 스탠드 스텔라이브",
+            "노아 생일 아크릴 스탠드"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2413.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -9888,7 +10708,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -9906,9 +10726,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2414,
@@ -9964,7 +10785,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -9982,13 +10803,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -10014,15 +10841,47 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "노아",
+              "봉제",
+              "인형",
+              "쿠루미"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 봉제 인형 인형",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 봉제 인형",
+            "노아 인형 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2414.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -10041,7 +10900,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -10059,9 +10918,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2416,
@@ -10117,7 +10977,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -10135,13 +10995,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -10167,15 +11033,48 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "노아",
+              "세트",
+              "쿠루미",
+              "클리어",
+              "파일"
+            ],
+            "query_members": [
+              "노아",
+              "쿠루미"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "쿠루미 노아 클리어 파일 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 쿠루미 노아 클리어 파일 세트",
+            "노아 액세서리 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2416.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -10194,7 +11093,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -10212,9 +11111,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2422,
@@ -10270,7 +11170,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -10288,13 +11188,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -10320,15 +11226,53 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "1주년",
+              "네네코",
+              "데뷔",
+              "마시로",
+              "스탠드",
+              "아크릴"
+            ],
+            "query_members": [
+              "네네코",
+              "마시로"
+            ],
+            "query_events": [
+              "1주년",
+              "데뷔"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "네네코 마시로 데뷔 1주년 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 네네코 마시로 데뷔 1주년 아크릴 스탠드",
+            "네네코 아크릴 스탠드 스텔라이브",
+            "네네코 1주년 아크릴 스탠드"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2422.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -10347,7 +11291,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -10365,9 +11309,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2433,
@@ -10423,7 +11368,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -10441,13 +11386,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -10473,15 +11424,51 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "굿즈",
+              "박스",
+              "생일",
+              "코코나",
+              "하나코"
+            ],
+            "query_members": [
+              "코코나",
+              "하나코"
+            ],
+            "query_events": [
+              "생일"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "하나코 코코나 생일 굿즈 박스 액세서리",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 생일 굿즈 박스",
+            "코코나 액세서리 스텔라이브",
+            "코코나 생일 액세서리"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2433.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -10500,7 +11487,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -10518,9 +11505,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2434,
@@ -10576,7 +11564,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -10594,13 +11582,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -10626,15 +11620,48 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "마스코트",
+              "봉제",
+              "인형",
+              "코코나",
+              "하나코"
+            ],
+            "query_members": [
+              "코코나",
+              "하나코"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "하나코 코코나 마스코트 봉제 인형 인형",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 마스코트 봉제 인형",
+            "코코나 인형 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2434.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -10653,7 +11680,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -10671,9 +11698,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2435,
@@ -10729,7 +11757,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -10747,13 +11775,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -10779,15 +11813,46 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "코코나",
+              "토트백",
+              "하나코"
+            ],
+            "query_members": [
+              "코코나",
+              "하나코"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "하나코 코코나 토트백 의류",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 토트백",
+            "코코나 의류 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2435.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -10806,7 +11871,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -10824,9 +11889,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2436,
@@ -10882,7 +11948,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -10900,13 +11966,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -10932,15 +12004,48 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "세트",
+              "코코나",
+              "클리어",
+              "파일",
+              "하나코"
+            ],
+            "query_members": [
+              "코코나",
+              "하나코"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "하나코 코코나 클리어 파일 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 하나코 코코나 클리어 파일 세트",
+            "코코나 액세서리 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2436.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -10959,7 +12064,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -10977,9 +12082,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         }
       ],
       "review_summary": {
@@ -13249,7 +14355,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -13267,13 +14373,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -13299,15 +14411,49 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "굿즈",
+              "데뷔",
+              "박스",
+              "후야"
+            ],
+            "query_members": [
+              "후야"
+            ],
+            "query_events": [
+              "데뷔"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "후야 데뷔 굿즈 박스 액세서리",
+            "site:fanding.kr/@stellive/shop 후야 데뷔 굿즈 박스",
+            "후야 액세서리 스텔라이브",
+            "후야 데뷔 액세서리"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2459.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -13326,7 +14472,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -13344,9 +14490,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2460,
@@ -13402,7 +14549,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -13420,13 +14567,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -13452,15 +14605,50 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "기념",
+              "생일",
+              "스탠드",
+              "아크릴",
+              "후야"
+            ],
+            "query_members": [
+              "후야"
+            ],
+            "query_events": [
+              "생일"
+            ],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_event_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "후야 첫 생일 기념 아크릴 스탠드 아크릴 스탠드",
+            "site:fanding.kr/@stellive/shop 후야 첫 생일 기념 아크릴 스탠드",
+            "후야 아크릴 스탠드 스텔라이브",
+            "후야 생일 아크릴 스탠드"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2460.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -13479,7 +14667,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -13497,9 +14685,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2461,
@@ -13555,7 +14744,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -13573,13 +14762,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -13605,15 +14800,46 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "마스코트",
+              "봉제",
+              "인형",
+              "후야"
+            ],
+            "query_members": [
+              "후야"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "후야 마스코트 봉제 인형 인형",
+            "site:fanding.kr/@stellive/shop 후야 마스코트 봉제 인형",
+            "후야 인형 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2461.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -13632,7 +14858,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -13650,9 +14876,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2462,
@@ -13708,7 +14935,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -13726,13 +14953,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -13758,15 +14991,45 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "아크릴",
+              "키링",
+              "후야"
+            ],
+            "query_members": [
+              "후야"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "후야 아크릴 키링 액세서리",
+            "site:fanding.kr/@stellive/shop 후야 아크릴 키링",
+            "후야 액세서리 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2462.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -13785,7 +15048,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -13803,9 +15066,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         },
         {
           "catalog_index": 2464,
@@ -13861,7 +15125,7 @@
             "source_url_review_guidance": {
               "source_store": "Stellive Store",
               "primary_review_url_kind": "source_search_url",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "https://fanding.kr/@stellive/shop/{product_no}",
                 "page title/product card must preserve member, event, product type, and variant terms"
@@ -13879,13 +15143,19 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "",
             "fallback_web_search_urls": [],
             "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
-            "primary_review_url_kind": "source_search_url"
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "manual_search_required",
+            "source_url_review_blockers": [
+              "no_exact_product_candidate",
+              "manual_product_detail_search_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -13911,15 +15181,46 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "query_tokens": [
+              "세트",
+              "클리어",
+              "파일",
+              "후야"
+            ],
+            "query_members": [
+              "후야"
+            ],
+            "query_events": [],
+            "top_candidate_title": null,
+            "top_candidate_score": null,
+            "top_candidate_shared_tokens": [],
+            "top_candidate_query_overlap": null,
+            "top_candidate_title_overlap": null,
+            "diagnosis": "no_product_matched_member_and_product_type_filters"
+          },
+          "fallback_search_queries": [
+            "후야 클리어 파일 세트 액세서리",
+            "site:fanding.kr/@stellive/shop 후야 클리어 파일 세트",
+            "후야 액세서리 스텔라이브"
+          ],
+          "store_search_hints": {
+            "source_store": "Stellive Store",
+            "storefront_url": "https://fanding.kr/@stellive/shop",
+            "store_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%9B%84%EC%95%BC%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "site_query": "site:fanding.kr/@stellive/shop",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_2464.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -13938,7 +15239,7 @@
           "source_url_review_guidance": {
             "source_store": "Stellive Store",
             "primary_review_url_kind": "source_search_url",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "https://fanding.kr/@stellive/shop/{product_no}",
               "page title/product card must preserve member, event, product type, and variant terms"
@@ -13956,9 +15257,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "manual_search_required"
         }
       ],
       "review_summary": {
@@ -14482,7 +15784,7 @@
             "source_url_review_guidance": {
               "source_store": "Weverse Shop",
               "primary_review_url_kind": "fallback_web_search",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "shop.weverse.io product detail URL for the exact artist/item",
                 "avoid collection, category, cart, search, or sold-out mirror pages unless they identify the exact product"
@@ -14500,7 +15802,7 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
@@ -14509,7 +15811,13 @@
               "https://www.google.com/search?q=Weverse+Shop+SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C"
             ],
             "primary_review_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
-            "primary_review_url_kind": "fallback_web_search"
+            "primary_review_url_kind": "fallback_web_search",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "candidate_provider_missing",
+            "source_url_review_blockers": [
+              "no_candidate_provider_result",
+              "manual_or_provider_refresh_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -14535,15 +15843,33 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "candidate_provider_missing",
+          "source_url_review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "diagnosis": "no_store_specific_candidate_report",
+            "reason": "No candidate provider report exists for this source store yet."
+          },
+          "fallback_search_queries": [
+            "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤) 포토카드\"",
+            "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤)\"",
+            "\"SEVENTEEN 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+            "SEVENTEEN 포토카드 (랜덤) 포토카드"
+          ],
+          "store_search_hints": {
+            "source_store": "Weverse Shop",
+            "storefront_url": "https://shop.weverse.io/home",
+            "store_search_url": "https://shop.weverse.io/search?keyword=SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+            "site_query": "site:shop.weverse.io",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_17613.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -14562,7 +15888,7 @@
           "source_url_review_guidance": {
             "source_store": "Weverse Shop",
             "primary_review_url_kind": "fallback_web_search",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "shop.weverse.io product detail URL for the exact artist/item",
               "avoid collection, category, cart, search, or sold-out mirror pages unless they identify the exact product"
@@ -14580,9 +15906,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "candidate_provider_missing"
         },
         {
           "catalog_index": 17622,
@@ -14641,7 +15968,7 @@
             "source_url_review_guidance": {
               "source_store": "Weverse Shop",
               "primary_review_url_kind": "fallback_web_search",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "shop.weverse.io product detail URL for the exact artist/item",
                 "avoid collection, category, cart, search, or sold-out mirror pages unless they identify the exact product"
@@ -14659,7 +15986,7 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
@@ -14668,7 +15995,13 @@
               "https://www.google.com/search?q=Weverse+Shop+ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C"
             ],
             "primary_review_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
-            "primary_review_url_kind": "fallback_web_search"
+            "primary_review_url_kind": "fallback_web_search",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "candidate_provider_missing",
+            "source_url_review_blockers": [
+              "no_candidate_provider_result",
+              "manual_or_provider_refresh_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -14694,15 +16027,33 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "candidate_provider_missing",
+          "source_url_review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "diagnosis": "no_store_specific_candidate_report",
+            "reason": "No candidate provider report exists for this source store yet."
+          },
+          "fallback_search_queries": [
+            "site:shop.weverse.io \"ZEROBASEONE 포토카드 (랜덤) 포토카드\"",
+            "site:shop.weverse.io \"ZEROBASEONE 포토카드 (랜덤)\"",
+            "\"ZEROBASEONE 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+            "ZEROBASEONE 포토카드 (랜덤) 포토카드"
+          ],
+          "store_search_hints": {
+            "source_store": "Weverse Shop",
+            "storefront_url": "https://shop.weverse.io/home",
+            "store_search_url": "https://shop.weverse.io/search?keyword=ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+            "site_query": "site:shop.weverse.io",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_17622.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -14721,7 +16072,7 @@
           "source_url_review_guidance": {
             "source_store": "Weverse Shop",
             "primary_review_url_kind": "fallback_web_search",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "shop.weverse.io product detail URL for the exact artist/item",
               "avoid collection, category, cart, search, or sold-out mirror pages unless they identify the exact product"
@@ -14739,9 +16090,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "candidate_provider_missing"
         },
         {
           "catalog_index": 17623,
@@ -14800,7 +16152,7 @@
             "source_url_review_guidance": {
               "source_store": "Weverse Shop",
               "primary_review_url_kind": "fallback_web_search",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "shop.weverse.io product detail URL for the exact artist/item",
                 "avoid collection, category, cart, search, or sold-out mirror pages unless they identify the exact product"
@@ -14818,7 +16170,7 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
@@ -14827,7 +16179,13 @@
               "https://www.google.com/search?q=Weverse+Shop+ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C"
             ],
             "primary_review_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
-            "primary_review_url_kind": "fallback_web_search"
+            "primary_review_url_kind": "fallback_web_search",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "candidate_provider_missing",
+            "source_url_review_blockers": [
+              "no_candidate_provider_result",
+              "manual_or_provider_refresh_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -14853,15 +16211,33 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "candidate_provider_missing",
+          "source_url_review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "diagnosis": "no_store_specific_candidate_report",
+            "reason": "No candidate provider report exists for this source store yet."
+          },
+          "fallback_search_queries": [
+            "site:shop.weverse.io \"ILLIT 포토카드 (랜덤) 포토카드\"",
+            "site:shop.weverse.io \"ILLIT 포토카드 (랜덤)\"",
+            "\"ILLIT 포토카드 (랜덤) 포토카드\" \"Weverse Shop\"",
+            "ILLIT 포토카드 (랜덤) 포토카드"
+          ],
+          "store_search_hints": {
+            "source_store": "Weverse Shop",
+            "storefront_url": "https://shop.weverse.io/home",
+            "store_search_url": "https://shop.weverse.io/search?keyword=ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+            "site_query": "site:shop.weverse.io",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_17623.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -14880,7 +16256,7 @@
           "source_url_review_guidance": {
             "source_store": "Weverse Shop",
             "primary_review_url_kind": "fallback_web_search",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "shop.weverse.io product detail URL for the exact artist/item",
               "avoid collection, category, cart, search, or sold-out mirror pages unless they identify the exact product"
@@ -14898,9 +16274,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "candidate_provider_missing"
         }
       ],
       "review_summary": {
@@ -15237,7 +16614,7 @@
             "source_url_review_guidance": {
               "source_store": "포켓몬 센터",
               "primary_review_url_kind": "fallback_web_search",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "pokemoncenter-online.com product detail URL for the exact product",
                 "confirm official product name, Pokemon/character, and goods type before using the URL"
@@ -15255,7 +16632,7 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29+%EC%9D%B8%ED%98%95",
@@ -15265,7 +16642,13 @@
               "https://www.google.com/search?q=%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%84%BC%ED%84%B0+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29+%EC%9D%B8%ED%98%95"
             ],
             "primary_review_url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29+%EC%9D%B8%ED%98%95",
-            "primary_review_url_kind": "fallback_web_search"
+            "primary_review_url_kind": "fallback_web_search",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "candidate_provider_missing",
+            "source_url_review_blockers": [
+              "no_candidate_provider_result",
+              "manual_or_provider_refresh_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -15291,15 +16674,33 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "candidate_provider_missing",
+          "source_url_review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "diagnosis": "no_store_specific_candidate_report",
+            "reason": "No candidate provider report exists for this source store yet."
+          },
+          "fallback_search_queries": [
+            "site:pokemoncenter-online.com \"ポケモン ぬいぐるみ (ピカチュウ) 인형\"",
+            "site:pokemoncenter-online.com \"포켓몬 봉제 인형 (피카츄)\"",
+            "\"ポケモン ぬいぐるみ (ピカチュウ) 인형\" \"포켓몬 센터\"",
+            "ポケモン ぬいぐるみ (ピカチュウ) 인형"
+          ],
+          "store_search_hints": {
+            "source_store": "포켓몬 센터",
+            "storefront_url": "https://www.pokemoncenter-online.com/",
+            "store_search_url": "https://www.pokemoncenter-online.com/search/?keyword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29",
+            "site_query": "site:pokemoncenter-online.com",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_1098.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -15318,7 +16719,7 @@
           "source_url_review_guidance": {
             "source_store": "포켓몬 센터",
             "primary_review_url_kind": "fallback_web_search",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "pokemoncenter-online.com product detail URL for the exact product",
               "confirm official product name, Pokemon/character, and goods type before using the URL"
@@ -15336,9 +16737,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "candidate_provider_missing"
         },
         {
           "catalog_index": 17593,
@@ -15398,7 +16800,7 @@
             "source_url_review_guidance": {
               "source_store": "포켓몬 센터",
               "primary_review_url_kind": "fallback_web_search",
-              "candidate_status": "",
+              "candidate_status": "no_candidate",
               "accepted_url_patterns": [
                 "pokemoncenter-online.com product detail URL for the exact product",
                 "confirm official product name, Pokemon/character, and goods type before using the URL"
@@ -15416,7 +16818,7 @@
                 "category/listing page",
                 "low-score candidate with only generic token overlap"
               ],
-              "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+              "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C",
@@ -15426,7 +16828,13 @@
               "https://www.google.com/search?q=%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%84%BC%ED%84%B0+%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C"
             ],
             "primary_review_url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C",
-            "primary_review_url_kind": "fallback_web_search"
+            "primary_review_url_kind": "fallback_web_search",
+            "candidate_status": "no_candidate",
+            "source_url_review_lane": "candidate_provider_missing",
+            "source_url_review_blockers": [
+              "no_candidate_provider_result",
+              "manual_or_provider_refresh_required"
+            ]
           },
           "catalog_field_import_template": {
             "manual_confirmed": false,
@@ -15452,15 +16860,33 @@
           "representative_candidate_status": null,
           "representative_candidate_review_guidance": {},
           "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
+          "source_url_review_lane": "candidate_provider_missing",
+          "source_url_review_blockers": [
+            "no_candidate_provider_result",
+            "manual_or_provider_refresh_required"
+          ],
+          "candidate_status": "no_candidate",
           "candidate_score": null,
-          "candidate_count": null,
+          "candidate_count": 0,
           "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
+          "match_diagnostics": {
+            "diagnosis": "no_store_specific_candidate_report",
+            "reason": "No candidate provider report exists for this source store yet."
+          },
+          "fallback_search_queries": [
+            "site:pokemoncenter-online.com \"포켓몬 카드 게임 부스터 팩 트레이딩 카드\"",
+            "site:pokemoncenter-online.com \"포켓몬 카드 게임 부스터 팩\"",
+            "\"포켓몬 카드 게임 부스터 팩 트레이딩 카드\" \"포켓몬 센터\"",
+            "포켓몬 카드 게임 부스터 팩 트레이딩 카드"
+          ],
+          "store_search_hints": {
+            "source_store": "포켓몬 센터",
+            "storefront_url": "https://www.pokemoncenter-online.com/",
+            "store_search_url": "https://www.pokemoncenter-online.com/search/?keyword=%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9",
+            "site_query": "site:pokemoncenter-online.com",
+            "search_scope": "official_store_or_site_restricted_search_hint",
+            "manual_note": "Hints are not evidence. Confirm the exact product/detail page before importing."
+          },
           "suggested_local_image_path": "assets/catalog_images/catalog_17593.webp",
           "local_image_download_instruction": {
             "status": "ready_after_manual_image_url_confirmation",
@@ -15479,7 +16905,7 @@
           "source_url_review_guidance": {
             "source_store": "포켓몬 센터",
             "primary_review_url_kind": "fallback_web_search",
-            "candidate_status": "",
+            "candidate_status": "no_candidate",
             "accepted_url_patterns": [
               "pokemoncenter-online.com product detail URL for the exact product",
               "confirm official product name, Pokemon/character, and goods type before using the URL"
@@ -15497,9 +16923,10 @@
               "category/listing page",
               "low-score candidate with only generic token overlap"
             ],
-            "candidate_review_note": "Manual confirmation is still required before any source_url mutation.",
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
-          }
+          },
+          "candidate_review_lane": "candidate_provider_missing"
         }
       ],
       "review_summary": {
