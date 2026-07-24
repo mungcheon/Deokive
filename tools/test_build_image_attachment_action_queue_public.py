@@ -73,6 +73,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             dict(report["summary"]["primary_review_url_kind_counts"]),
             {"source_search_url": 1, "fallback_web_search": 1},
         )
+        self.assertEqual(
+            report["summary"]["first_primary_review_url"],
+            report["batches"][0]["items"][0]["primary_review_url"],
+        )
+        self.assertEqual(report["summary"]["first_primary_review_url_kind"], "fallback_web_search")
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["workstream_count"], 1)
@@ -92,10 +97,30 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["execution_readiness"]["recommended_first_batch_id"],
             "image-attachment-action-001",
         )
+        self.assertEqual(
+            report["execution_readiness"]["evidence"][
+                "source_url_replacement_first_primary_review_url"
+            ],
+            report["batches"][0]["items"][0]["primary_review_url"],
+        )
+        self.assertEqual(
+            report["execution_readiness"]["evidence"][
+                "source_url_replacement_first_primary_review_url_kind"
+            ],
+            "fallback_web_search",
+        )
         self.assertEqual(len(report["next_operator_actions"]), 1)
         self.assertEqual(
             report["next_operator_actions"][0]["lane"],
             "source_url_replacement_first",
+        )
+        self.assertEqual(
+            report["next_operator_actions"][0]["first_primary_review_url"],
+            report["batches"][0]["items"][0]["primary_review_url"],
+        )
+        self.assertEqual(
+            report["next_operator_actions"][0]["first_primary_review_url_kind"],
+            "fallback_web_search",
         )
         self.assertEqual(
             report["next_operator_actions"][0]["status"],
@@ -110,6 +135,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["workstreams"][0]["review_summary"]["primary_blockers"],
         )
         self.assertEqual(report["next_actions"][0]["next_batch_id"], "image-attachment-action-001")
+        self.assertEqual(
+            report["next_actions"][0]["first_primary_review_url"],
+            report["batches"][0]["items"][0]["primary_review_url"],
+        )
+        self.assertEqual(report["next_actions"][0]["first_primary_review_url_kind"], "fallback_web_search")
         self.assertEqual(report["batches"][0]["workflow"], "replace_generic_source_then_extract_image")
         self.assertEqual(report["batches"][0]["primary_review_url_rows"], 2)
         self.assertEqual(

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T04:51:30Z",
+  "generated_at": "2026-07-24T05:47:26Z",
   "scope": "catalog_image_attachment_action_queue",
   "summary": {
     "actionable_image_rows": 73,
@@ -62,6 +62,8 @@
         5
       ]
     ],
+    "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+    "first_primary_review_url_kind": "source_search_url",
     "representative_image_review_required_rows": 23,
     "image_url_ready_rows": 0,
     "workstream_count": 4,
@@ -103,8 +105,14 @@
     "blocking_reason": "Exact product source URLs must be confirmed before image URLs can be attached.",
     "evidence": {
       "source_url_replacement_next_batch_id": "image-attachment-action-001",
+      "source_url_replacement_first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+      "source_url_replacement_first_primary_review_url_kind": "source_search_url",
       "representative_review_next_batch_id": "image-attachment-action-006",
-      "image_url_ready_next_batch_id": null
+      "representative_review_first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "representative_review_first_primary_review_url_kind": "current_source_url",
+      "image_url_ready_next_batch_id": null,
+      "image_url_ready_first_primary_review_url": "",
+      "image_url_ready_first_primary_review_url_kind": ""
     }
   },
   "workstreams": [
@@ -3894,6 +3902,8 @@
       "rows": 50,
       "work_order_count": 3,
       "next_batch_id": "image-attachment-action-001",
+      "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+      "first_primary_review_url_kind": "source_search_url",
       "status": "manual_source_url_confirmation_required",
       "operator_step": "Fill source_url_import_template with exact product detail URLs before image attachment.",
       "unblocks": "image_url_extraction_and_attachment_review",
@@ -3905,6 +3915,8 @@
       "workflow": "review_gotouchi_official_candidates",
       "rows": 23,
       "next_batch_id": "image-attachment-action-006",
+      "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "first_primary_review_url_kind": "current_source_url",
       "status": "manual_variant_confirmation_required",
       "operator_step": "Confirm product type and variant before accepting representative official images.",
       "unblocks": "manual_catalog_image_url_import",
@@ -3918,6 +3930,8 @@
       "rows": 50,
       "workstream_count": 3,
       "next_batch_id": "image-attachment-action-001",
+      "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+      "first_primary_review_url_kind": "source_search_url",
       "recommended_next_action": "Confirm exact product detail URLs for generic storefront rows before image import."
     },
     {
@@ -3926,6 +3940,8 @@
       "rows": 23,
       "workstream_count": 1,
       "next_batch_id": "image-attachment-action-006",
+      "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "first_primary_review_url_kind": "current_source_url",
       "recommended_next_action": "Confirm representative official candidates only when product type and variant match."
     }
   ],

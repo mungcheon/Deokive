@@ -337,6 +337,21 @@ def _first_workstream_batch_id(workstreams: list[dict[str, Any]], field: str) ->
     )
 
 
+def _first_workstream_review_value(
+    workstreams: list[dict[str, Any]],
+    field: str,
+    value_key: str,
+) -> Any:
+    return next(
+        (
+            row.get(value_key)
+            for row in workstreams
+            if int(row.get(field) or 0) > 0 and row.get(value_key)
+        ),
+        "",
+    )
+
+
 def _build_execution_readiness(
     *,
     source_url_update_required_rows: int,
@@ -348,10 +363,40 @@ def _build_execution_readiness(
     source_url_batch_id = _first_workstream_batch_id(
         workstreams, "source_url_update_template_rows"
     )
+    source_url_review_url = _first_workstream_review_value(
+        workstreams,
+        "source_url_update_template_rows",
+        "first_primary_review_url",
+    )
+    source_url_review_url_kind = _first_workstream_review_value(
+        workstreams,
+        "source_url_update_template_rows",
+        "first_primary_review_url_kind",
+    )
     representative_batch_id = _first_workstream_batch_id(
         workstreams, "representative_image_review_rows"
     )
+    representative_review_url = _first_workstream_review_value(
+        workstreams,
+        "representative_image_review_rows",
+        "first_primary_review_url",
+    )
+    representative_review_url_kind = _first_workstream_review_value(
+        workstreams,
+        "representative_image_review_rows",
+        "first_primary_review_url_kind",
+    )
     image_ready_batch_id = _first_workstream_batch_id(workstreams, "image_url_ready_rows")
+    image_ready_review_url = _first_workstream_review_value(
+        workstreams,
+        "image_url_ready_rows",
+        "first_primary_review_url",
+    )
+    image_ready_review_url_kind = _first_workstream_review_value(
+        workstreams,
+        "image_url_ready_rows",
+        "first_primary_review_url_kind",
+    )
     blocked_before_image_import_rows = (
         source_url_update_required_rows + representative_image_review_required_rows
     )
@@ -392,8 +437,14 @@ def _build_execution_readiness(
         "blocking_reason": blocking_reason,
         "evidence": {
             "source_url_replacement_next_batch_id": source_url_batch_id,
+            "source_url_replacement_first_primary_review_url": source_url_review_url,
+            "source_url_replacement_first_primary_review_url_kind": source_url_review_url_kind,
             "representative_review_next_batch_id": representative_batch_id,
+            "representative_review_first_primary_review_url": representative_review_url,
+            "representative_review_first_primary_review_url_kind": representative_review_url_kind,
             "image_url_ready_next_batch_id": image_ready_batch_id,
+            "image_url_ready_first_primary_review_url": image_ready_review_url,
+            "image_url_ready_first_primary_review_url_kind": image_ready_review_url_kind,
         },
     }
 
@@ -409,6 +460,11 @@ def _build_next_operator_actions(
     actions: list[dict[str, Any]] = []
 
     if source_url_update_required_rows:
+        first_review_url = _first_workstream_review_value(
+            workstreams,
+            "source_url_update_template_rows",
+            "first_primary_review_url",
+        )
         actions.append(
             {
                 "priority": 1,
@@ -419,6 +475,12 @@ def _build_next_operator_actions(
                 "next_batch_id": _first_workstream_batch_id(
                     workstreams, "source_url_update_template_rows"
                 ),
+                "first_primary_review_url": first_review_url,
+                "first_primary_review_url_kind": _first_workstream_review_value(
+                    workstreams,
+                    "source_url_update_template_rows",
+                    "first_primary_review_url_kind",
+                ),
                 "status": "manual_source_url_confirmation_required",
                 "operator_step": "Fill source_url_import_template with exact product detail URLs before image attachment.",
                 "unblocks": "image_url_extraction_and_attachment_review",
@@ -427,6 +489,11 @@ def _build_next_operator_actions(
         )
 
     if image_url_ready_rows:
+        first_review_url = _first_workstream_review_value(
+            workstreams,
+            "image_url_ready_rows",
+            "first_primary_review_url",
+        )
         actions.append(
             {
                 "priority": 2,
@@ -434,6 +501,12 @@ def _build_next_operator_actions(
                 "workflow": "extract_from_existing_source_url",
                 "rows": image_url_ready_rows,
                 "next_batch_id": _first_workstream_batch_id(workstreams, "image_url_ready_rows"),
+                "first_primary_review_url": first_review_url,
+                "first_primary_review_url_kind": _first_workstream_review_value(
+                    workstreams,
+                    "image_url_ready_rows",
+                    "first_primary_review_url_kind",
+                ),
                 "status": "manual_image_url_confirmation_required",
                 "operator_step": "Confirm exact product image URLs and fill the image attachment template.",
                 "unblocks": "manual_catalog_image_url_import",
@@ -442,6 +515,11 @@ def _build_next_operator_actions(
         )
 
     if representative_image_review_required_rows:
+        first_review_url = _first_workstream_review_value(
+            workstreams,
+            "representative_image_review_rows",
+            "first_primary_review_url",
+        )
         actions.append(
             {
                 "priority": 3,
@@ -450,6 +528,12 @@ def _build_next_operator_actions(
                 "rows": representative_image_review_required_rows,
                 "next_batch_id": _first_workstream_batch_id(
                     workstreams, "representative_image_review_rows"
+                ),
+                "first_primary_review_url": first_review_url,
+                "first_primary_review_url_kind": _first_workstream_review_value(
+                    workstreams,
+                    "representative_image_review_rows",
+                    "first_primary_review_url_kind",
                 ),
                 "status": "manual_variant_confirmation_required",
                 "operator_step": "Confirm product type and variant before accepting representative official images.",
@@ -797,6 +881,10 @@ def build_report(
     image_url_ready_rows = sum(1 for item in action_items if item.get("image_url_ready"))
     primary_review_url_rows = sum(1 for item in action_items if item.get("primary_review_url"))
     primary_review_url_kind_counts = _counter_pairs(action_items, "primary_review_url_kind")
+    first_primary_review_item = next(
+        (item for item in action_items if item.get("primary_review_url")),
+        {},
+    )
     source_url_update_work_order = _build_source_url_update_work_order(action_items)
     source_url_update_template = _source_url_update_templates(action_items)
     source_url_update_template_batches = _build_source_url_update_template_batches(
@@ -849,6 +937,12 @@ def build_report(
             ),
             "primary_review_url_rows": primary_review_url_rows,
             "primary_review_url_kind_counts": primary_review_url_kind_counts,
+            "first_primary_review_url": first_primary_review_item.get(
+                "primary_review_url", ""
+            ),
+            "first_primary_review_url_kind": first_primary_review_item.get(
+                "primary_review_url_kind", "manual_lookup_required"
+            ),
             "representative_image_review_required_rows": representative_image_review_required_rows,
             "image_url_ready_rows": image_url_ready_rows,
             "workstream_count": len(workstreams),
@@ -892,6 +986,16 @@ def build_report(
                     ),
                     None,
                 ),
+                "first_primary_review_url": _first_workstream_review_value(
+                    workstreams,
+                    "source_url_update_template_rows",
+                    "first_primary_review_url",
+                ),
+                "first_primary_review_url_kind": _first_workstream_review_value(
+                    workstreams,
+                    "source_url_update_template_rows",
+                    "first_primary_review_url_kind",
+                ),
                 "recommended_next_action": "Confirm exact product detail URLs for generic storefront rows before image import.",
             },
             {
@@ -908,6 +1012,16 @@ def build_report(
                         if row.get("representative_image_review_rows")
                     ),
                     None,
+                ),
+                "first_primary_review_url": _first_workstream_review_value(
+                    workstreams,
+                    "representative_image_review_rows",
+                    "first_primary_review_url",
+                ),
+                "first_primary_review_url_kind": _first_workstream_review_value(
+                    workstreams,
+                    "representative_image_review_rows",
+                    "first_primary_review_url_kind",
                 ),
                 "recommended_next_action": "Confirm representative official candidates only when product type and variant match.",
             },
