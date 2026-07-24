@@ -54,7 +54,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "known_image_download_blocker_rows": 0,
                     "auto_download_ready_rows": 0,
                     "rows_still_requiring_image_url_evidence": 10,
-                }
+                },
+                "missing_image_evidence_priority": {
+                    "rows": 10,
+                    "by_source_store": [["Animate", 6], ["Ensky", 4]],
+                    "by_category": [["Acrylic stand", 5], ["Figure", 5]],
+                    "sample_rows": [{"catalog_index": 1, "name_ko": "Missing image"}],
+                },
             },
             "catalog_image_attachment_action_queue_public.json": {
                 "summary": {
@@ -1167,6 +1173,10 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(
             image["evidence"]["rows_still_requiring_image_url_evidence"], 10
         )
+        self.assertEqual(
+            image["evidence"]["missing_image_evidence_priority"]["by_source_store"][0],
+            ["Animate", 6],
+        )
         self.assertEqual(image["evidence"]["provider_candidate_items"], 7)
         self.assertEqual(image["evidence"]["manual_or_blocked_items"], 3)
         image_action = next(
@@ -1225,6 +1235,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["image_url_without_local_path_rows"], 0)
         self.assertEqual(report["summary"]["image_missing_local_image_files"], 0)
         self.assertEqual(report["summary"]["image_rows_still_requiring_url_evidence"], 10)
+        self.assertEqual(
+            report["summary"]["image_missing_evidence_top_source_stores"][0],
+            ["Animate", 6],
+        )
+        self.assertEqual(
+            report["summary"]["image_missing_evidence_top_categories"][0],
+            ["Acrylic stand", 5],
+        )
         self.assertEqual(report["summary"]["image_auto_download_ready_rows"], 0)
         self.assertEqual(report["summary"]["image_attachment_template_rows"], 2)
         self.assertEqual(report["summary"]["image_attachment_template_confirmed_rows"], 0)

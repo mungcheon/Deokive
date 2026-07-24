@@ -186,6 +186,11 @@ def _build_plan(load_report) -> dict[str, Any]:
     image_summary = _summary(image_batches)
     image_candidate_summary = _summary(image_candidates)
     image_asset_summary = _summary(image_asset_audit)
+    image_missing_evidence_priority = (
+        image_asset_audit.get("missing_image_evidence_priority")
+        or (image_asset_audit.get("download_readiness") or {}).get("missing_image_evidence_priority")
+        or {}
+    )
     image_action_summary = _summary(image_action_queue)
     image_actionability_summary = _summary(image_actionability)
     source_summary = _summary(source_batches)
@@ -982,6 +987,7 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "rows_still_requiring_image_url_evidence": _count(
                     image_asset_summary, "rows_still_requiring_image_url_evidence"
                 ),
+                "missing_image_evidence_priority": image_missing_evidence_priority,
                 "source_url_ready_rows": ready_image_rows,
                 "provider_candidate_items": _count(image_candidate_summary, "provider_candidate_items"),
                 "manual_or_blocked_items": _count(image_candidate_summary, "manual_or_blocked_items"),
@@ -1998,6 +2004,12 @@ def _build_plan(load_report) -> dict[str, Any]:
             "image_rows_still_requiring_url_evidence": _count(
                 image_asset_summary, "rows_still_requiring_image_url_evidence"
             ),
+            "image_missing_evidence_top_source_stores": image_missing_evidence_priority.get(
+                "by_source_store", []
+            )[:8],
+            "image_missing_evidence_top_categories": image_missing_evidence_priority.get(
+                "by_category", []
+            )[:8],
             "image_auto_download_ready_rows": _count(
                 image_asset_summary, "auto_download_ready_rows"
             ),

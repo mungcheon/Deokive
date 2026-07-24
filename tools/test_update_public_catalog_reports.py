@@ -2360,6 +2360,30 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_asset_summary.get("web_public_asset_coverage"),
         )
         self.assertEqual(
+            image_asset_next_action.get("rows_still_requiring_image_url_evidence"),
+            image_asset_summary.get("rows_still_requiring_image_url_evidence"),
+        )
+        self.assertEqual(
+            image_asset_next_action.get("missing_image_evidence_priority"),
+            image_asset.get("missing_image_evidence_priority"),
+        )
+        self.assertEqual(
+            agent_queue["summary"].get("image_rows_still_requiring_url_evidence"),
+            image_asset_summary.get("rows_still_requiring_image_url_evidence"),
+        )
+        self.assertEqual(
+            agent_queue["summary"].get("image_missing_evidence_top_source_stores"),
+            (image_asset.get("missing_image_evidence_priority") or {}).get(
+                "by_source_store", []
+            )[:8],
+        )
+        self.assertEqual(
+            agent_queue["summary"].get("image_missing_evidence_top_categories"),
+            (image_asset.get("missing_image_evidence_priority") or {}).get(
+                "by_category", []
+            )[:8],
+        )
+        self.assertEqual(
             open_queues.get("source_discovery_action_rows"),
             source_action_summary.get("queued_source_rows"),
         )

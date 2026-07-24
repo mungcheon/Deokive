@@ -2471,6 +2471,11 @@ def build_operations_public(
 
     image_summary = image_enrichment_batches["summary"]
     image_asset_summary = image_asset_audit.get("summary", {})
+    image_missing_evidence_priority = (
+        image_asset_audit.get("missing_image_evidence_priority")
+        or (image_asset_audit.get("download_readiness") or {}).get("missing_image_evidence_priority")
+        or {}
+    )
     image_action_queue = (
         image_attachment_action_queue_override
         if image_attachment_action_queue_override is not None
@@ -2865,6 +2870,10 @@ def build_operations_public(
             "missing_web_public_asset_files": image_asset_summary.get("missing_web_public_asset_files", 0),
             "local_asset_coverage": image_asset_summary.get("local_asset_coverage", 0),
             "web_public_asset_coverage": image_asset_summary.get("web_public_asset_coverage", 0),
+            "rows_still_requiring_image_url_evidence": image_asset_summary.get(
+                "rows_still_requiring_image_url_evidence", 0
+            ),
+            "missing_image_evidence_priority": image_missing_evidence_priority,
             "recommended_next_action": "No download is needed for rows that already have image_url; remaining image work must first find exact image_url/source evidence.",
         } if image_asset_summary else None,
         {
@@ -6079,6 +6088,18 @@ def build_agent_work_queue_public(
     confirmed_variant_metadata_skipped_rows = int(
         confirmed_summary.get("variant_metadata_skipped_rows") or 0
     )
+    image_asset_next_action = next(
+        (
+            row
+            for row in operations.get("next_actions", [])
+            if isinstance(row, dict)
+            and row.get("workstream") == "local_image_asset_audit"
+        ),
+        {},
+    )
+    image_missing_evidence_priority = (
+        image_asset_next_action.get("missing_image_evidence_priority") or {}
+    )
     top_next_batches = [
         {
             "batch_id": batch["batch_id"],
@@ -6121,6 +6142,15 @@ def build_agent_work_queue_public(
             "confirmed_import_top_work_order_lane": confirmed_summary.get("top_work_order_lane"),
             "confirmed_import_top_work_order_workflow": confirmed_summary.get("top_work_order_workflow"),
             "confirmed_import_top_work_order_row_count": int(confirmed_summary.get("top_work_order_row_count") or 0),
+            "image_rows_still_requiring_url_evidence": int(
+                image_asset_next_action.get("rows_still_requiring_image_url_evidence") or 0
+            ),
+            "image_missing_evidence_top_source_stores": image_missing_evidence_priority.get(
+                "by_source_store", []
+            )[:8],
+            "image_missing_evidence_top_categories": image_missing_evidence_priority.get(
+                "by_category", []
+            )[:8],
         },
         "top_next_batches": top_next_batches,
         "instructions": [
