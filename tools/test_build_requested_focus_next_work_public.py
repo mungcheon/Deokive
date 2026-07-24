@@ -105,6 +105,19 @@ class BuildRequestedFocusNextWorkPublicTest(unittest.TestCase):
         self.assertEqual(report["next_batch"]["items"][0]["manual_value_field"], "source_url")
         self.assertFalse(report["next_batch"]["items"][0]["manual_confirmed"])
         self.assertEqual(report["next_batch"]["first_primary_review_url"], "https://example.com/search")
+        template = report["confirmed_rows_template"]
+        self.assertEqual(template["target_confirmed_queue"], "server/catalog_field_confirmed_rows.json")
+        self.assertEqual(len(template["items"]), 2)
+        self.assertEqual(template["items"][0]["field"], "source_url")
+        self.assertEqual(template["items"][0]["row_index"], 1)
+        self.assertEqual(template["items"][0]["source_store"], "애니메이트")
+        self.assertEqual(template["items"][0]["name_ko"], "단간론파 클리어 파일")
+        self.assertEqual(template["items"][0]["manual_value"], "")
+        self.assertEqual(template["items"][0]["evidence_url"], "")
+        self.assertFalse(template["items"][0]["manual_confirmed"])
+        self.assertEqual(template["items"][0]["review_batch_id"], "requested-focus-action-001")
+        self.assertEqual(report["summary"]["confirmed_rows_template_rows"], 2)
+        self.assertEqual(report["summary"]["confirmed_rows_manual_confirmed_rows"], 0)
         self.assertEqual(len(report["preview_batches"]), 2)
 
 

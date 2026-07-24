@@ -69,6 +69,8 @@ def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
 def _compact_batch(batch: dict[str, Any]) -> dict[str, Any]:
     items = [item for item in batch.get("items") or [] if isinstance(item, dict)]
     compact_items = [_compact_item(item) for item in items]
+    for item in compact_items:
+        item["review_batch_id"] = batch.get("batch_id")
     return {
         "batch_id": batch.get("batch_id"),
         "priority": batch.get("priority"),
@@ -90,6 +92,29 @@ def _compact_batch(batch: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _confirmed_row_template(item: dict[str, Any]) -> dict[str, Any]:
+    field = str(item.get("manual_value_field") or item.get("missing_field") or "").strip()
+    return {
+        "manual_confirmed": False,
+        "field": field,
+        "row_index": item.get("catalog_index"),
+        "source_store": item.get("source_store"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "category": item.get("category"),
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": item.get("review_batch_id"),
+        "primary_review_url": item.get("primary_review_url"),
+        "primary_review_url_kind": item.get("primary_review_url_kind"),
+        "blocked_until": item.get("blocked_until"),
+        "blocked_reason": item.get("blocked_reason"),
+        "required_evidence": item.get("required_evidence") or [],
+    }
+
+
 def build_report(
     action_queue: dict[str, Any],
     *,
@@ -100,6 +125,11 @@ def build_report(
     next_batch = _compact_batch(batches[0]) if batches else None
     preview = [_compact_batch(batch) for batch in batches[:preview_batches]]
     preview_items = [item for batch in preview for item in batch.get("items", [])]
+    confirmed_rows_template = (
+        [_confirmed_row_template(item) for item in next_batch.get("items", [])]
+        if next_batch
+        else []
+    )
     summary = action_queue.get("summary") if isinstance(action_queue.get("summary"), dict) else {}
     return {
         "schema_version": 1,
@@ -118,6 +148,10 @@ def build_report(
             "next_source_store": next_batch.get("source_store") if next_batch else "",
             "next_row_count": int(next_batch.get("row_count") or 0) if next_batch else 0,
             "next_review_url": next_batch.get("first_primary_review_url") if next_batch else "",
+            "confirmed_rows_template_rows": len(confirmed_rows_template),
+            "confirmed_rows_manual_confirmed_rows": sum(
+                1 for item in confirmed_rows_template if item.get("manual_confirmed") is True
+            ),
             "preview_field_counts": _count_pairs(preview_items, "missing_field"),
             "preview_topic_counts": _count_pairs(preview_items, "topic_id"),
             "preview_source_store_counts": _count_pairs(preview_items, "source_store"),
@@ -126,9 +160,15 @@ def build_report(
         "instructions": [
             "Start with next_batch, confirm exact evidence, then copy confirmed values into the linked catalog_field_import_template fields.",
             "Do not import from this report directly; it is a small review surface for the requested_focus_action_queue.",
+            "confirmed_rows_template is intentionally manual_confirmed=false; fill manual_value/evidence_url only after exact product identity is proven.",
             "Rows remain blocked until manual_confirmed is true with a matching evidence_url and manual note when needed.",
         ],
         "next_batch": next_batch,
+        "confirmed_rows_template": {
+            "target_confirmed_queue": "server/catalog_field_confirmed_rows.json",
+            "dry_run_command": "python tools/import_confirmed_catalog_field_rows.py --queue server/catalog_field_confirmed_rows.json",
+            "items": confirmed_rows_template,
+        },
         "preview_batches": preview,
     }
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T08:22:18Z",
+  "generated_at": "2026-07-24T08:26:18Z",
   "scope": "requested_focus_next_work",
   "summary": {
     "source_report": "data/requested_focus_action_queue_public.json",
@@ -15,6 +15,8 @@
     "next_source_store": "애니메이트",
     "next_row_count": 9,
     "next_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EB%AC%B8%EA%B5%AC%22",
+    "confirmed_rows_template_rows": 9,
+    "confirmed_rows_manual_confirmed_rows": 0,
     "preview_field_counts": [
       [
         "source_url",
@@ -58,6 +60,7 @@
   "instructions": [
     "Start with next_batch, confirm exact evidence, then copy confirmed values into the linked catalog_field_import_template fields.",
     "Do not import from this report directly; it is a small review surface for the requested_focus_action_queue.",
+    "confirmed_rows_template is intentionally manual_confirmed=false; fill manual_value/evidence_url only after exact product identity is proven.",
     "Rows remain blocked until manual_confirmed is true with a matching evidence_url and manual note when needed."
   ],
   "next_batch": {
@@ -136,7 +139,8 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       },
       {
         "catalog_index": 1802,
@@ -164,7 +168,8 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       },
       {
         "catalog_index": 2077,
@@ -192,7 +197,8 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       },
       {
         "catalog_index": 2080,
@@ -220,7 +226,8 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       },
       {
         "catalog_index": 2081,
@@ -248,7 +255,8 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       },
       {
         "catalog_index": 2082,
@@ -276,7 +284,8 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       },
       {
         "catalog_index": 2083,
@@ -304,7 +313,8 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       },
       {
         "catalog_index": 2084,
@@ -332,7 +342,8 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       },
       {
         "catalog_index": 2085,
@@ -360,10 +371,224 @@
           "exact_official_or_trusted_product_source_url",
           "title_character_variant_type_match",
           "manual_note_for_source_choice"
-        ]
+        ],
+        "review_batch_id": "requested-focus-action-001"
       }
     ],
     "auto_apply_enabled": false
+  },
+  "confirmed_rows_template": {
+    "target_confirmed_queue": "server/catalog_field_confirmed_rows.json",
+    "dry_run_command": "python tools/import_confirmed_catalog_field_rows.py --queue server/catalog_field_confirmed_rows.json",
+    "items": [
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 1703,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 클리어 파일 세트 희망봉 학원",
+        "name_ja": "ダンガンロンパ クリアファイルセット 希望ヶ峰学園",
+        "category": "문구",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EB%AC%B8%EA%B5%AC%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      },
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 1802,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 히나타 하지메 클리어 보틀",
+        "name_ja": "ダンガンロンパ 日向創 クリアボトル",
+        "category": "생활잡화",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E6%97%A5%E5%90%91%E5%89%B5%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EC%83%9D%ED%99%9C%EC%9E%A1%ED%99%94%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      },
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 2077,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 캔뱃지 (모노쿠마)",
+        "name_ja": "ダンガンロンパ 缶バッジ (モノクマ)",
+        "category": "캔뱃지",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EC%BA%94%EB%B1%83%EC%A7%80%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      },
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 2080,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 키링 (코마에다)",
+        "name_ja": "ダンガンロンパ キーホルダー (狛枝)",
+        "category": "키링",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E7%8B%9B%E6%9E%9D%29%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%ED%82%A4%EB%A7%81%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      },
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 2081,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 클리어 파일 (V3 캐스트)",
+        "name_ja": "ダンガンロンパ クリアファイル (V3キャスト)",
+        "category": "문구",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20%28V3%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%29%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EB%AC%B8%EA%B5%AC%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      },
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 2082,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 머그컵 (모노쿠마)",
+        "name_ja": "ダンガンロンパ マグカップ (モノクマ)",
+        "category": "머그컵",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EB%A8%B8%EA%B7%B8%EC%BB%B5%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      },
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 2083,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 러버 마스코트 (모노쿠마)",
+        "name_ja": "ダンガンロンパ ラバーマスコット (モノクマ)",
+        "category": "마스코트",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      },
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 2084,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 러버 마스코트 (코마에다)",
+        "name_ja": "ダンガンロンパ ラバーマスコット (狛枝)",
+        "category": "마스코트",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%8B%9B%E6%9E%9D%29%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      },
+      {
+        "manual_confirmed": false,
+        "field": "source_url",
+        "row_index": 2085,
+        "source_store": "애니메이트",
+        "name_ko": "단간론파 태피스트리 (모노쿠마)",
+        "name_ja": "ダンガンロンパ タペストリー (モノクマ)",
+        "category": "태피스트리",
+        "manual_value": "",
+        "evidence_url": "",
+        "candidate_source_url": "",
+        "manual_note": "",
+        "review_batch_id": "requested-focus-action-001",
+        "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%ED%83%9C%ED%94%BC%EC%8A%A4%ED%8A%B8%EB%A6%AC%22",
+        "primary_review_url_kind": "domain_limited_web_search",
+        "blocked_until": "exact_product_source_url_confirmed",
+        "blocked_reason": "missing_exact_source_url_for_requested_focus",
+        "required_evidence": [
+          "exact_official_or_trusted_product_source_url",
+          "title_character_variant_type_match",
+          "manual_note_for_source_choice"
+        ]
+      }
+    ]
   },
   "preview_batches": [
     {
@@ -442,7 +667,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         },
         {
           "catalog_index": 1802,
@@ -470,7 +696,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         },
         {
           "catalog_index": 2077,
@@ -498,7 +725,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         },
         {
           "catalog_index": 2080,
@@ -526,7 +754,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         },
         {
           "catalog_index": 2081,
@@ -554,7 +783,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         },
         {
           "catalog_index": 2082,
@@ -582,7 +812,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         },
         {
           "catalog_index": 2083,
@@ -610,7 +841,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         },
         {
           "catalog_index": 2084,
@@ -638,7 +870,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         },
         {
           "catalog_index": 2085,
@@ -666,7 +899,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-001"
         }
       ],
       "auto_apply_enabled": false
@@ -739,7 +973,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-002"
         },
         {
           "catalog_index": 1698,
@@ -767,7 +1002,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-002"
         },
         {
           "catalog_index": 1699,
@@ -795,7 +1031,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-002"
         },
         {
           "catalog_index": 1700,
@@ -823,7 +1060,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-002"
         },
         {
           "catalog_index": 1702,
@@ -851,7 +1089,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-002"
         },
         {
           "catalog_index": 1798,
@@ -879,7 +1118,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-002"
         },
         {
           "catalog_index": 1799,
@@ -907,7 +1147,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-002"
         }
       ],
       "auto_apply_enabled": false
@@ -968,7 +1209,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-003"
         },
         {
           "catalog_index": 1474,
@@ -996,7 +1238,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-003"
         },
         {
           "catalog_index": 1475,
@@ -1024,7 +1267,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-003"
         },
         {
           "catalog_index": 1476,
@@ -1052,7 +1296,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-003"
         },
         {
           "catalog_index": 1477,
@@ -1080,7 +1325,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-003"
         },
         {
           "catalog_index": 1478,
@@ -1108,7 +1354,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-003"
         }
       ],
       "auto_apply_enabled": false
@@ -1165,7 +1412,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-004"
         },
         {
           "catalog_index": 1471,
@@ -1193,7 +1441,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-004"
         },
         {
           "catalog_index": 1472,
@@ -1221,7 +1470,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-004"
         }
       ],
       "auto_apply_enabled": false
@@ -1278,7 +1528,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-005"
         },
         {
           "catalog_index": 1468,
@@ -1306,7 +1557,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-005"
         },
         {
           "catalog_index": 1469,
@@ -1334,7 +1586,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-005"
         }
       ],
       "auto_apply_enabled": false
@@ -1391,7 +1644,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-006"
         },
         {
           "catalog_index": 1454,
@@ -1419,7 +1673,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-006"
         },
         {
           "catalog_index": 1455,
@@ -1447,7 +1702,8 @@
             "exact_official_or_trusted_product_source_url",
             "title_character_variant_type_match",
             "manual_note_for_source_choice"
-          ]
+          ],
+          "review_batch_id": "requested-focus-action-006"
         }
       ],
       "auto_apply_enabled": false
