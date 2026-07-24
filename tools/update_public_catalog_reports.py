@@ -8365,6 +8365,12 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "source_url_update_required_rows": image_attachment_action_summary.get(
                     "source_url_update_required_rows", 0
                 ),
+                "source_url_update_template_rows": image_attachment_action_summary.get(
+                    "source_url_update_template_rows", 0
+                ),
+                "source_url_update_template_batch_count": image_attachment_action_summary.get(
+                    "source_url_update_template_batch_count", 0
+                ),
                 "representative_image_review_required_rows": image_attachment_action_summary.get(
                     "representative_image_review_required_rows", 0
                 ),
@@ -8461,6 +8467,51 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["source_discovery_action_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
             **source_discovery_action_queue["summary"],
+        }
+        source_discovery_focus_template_import_summary = (
+            source_discovery_focus_template_import.get("summary")
+            if isinstance(source_discovery_focus_template_import.get("summary"), dict)
+            else source_discovery_focus_template_import
+        )
+        target["source_discovery_queue_alignment"] = {
+            "public_reports": [
+                f"data/{SOURCE_DISCOVERY_ACTION_QUEUE.name}",
+                f"data/{SOURCE_DISCOVERY_FOCUS_PACKS.name}",
+                f"data/{SOURCE_DISCOVERY_FOCUS_TEMPLATE.name}",
+                f"data/{SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT.name}",
+                f"data/{SOURCE_DISCOVERY_STORE_BOTTLENECKS.name}",
+            ],
+            "missing_source_url_rows": source_discovery_starter_queue["summary"].get(
+                "missing_source_url_rows", 0
+            ),
+            "actionable_source_rows": source_discovery_action_queue["summary"].get(
+                "actionable_source_rows", 0
+            ),
+            "queued_source_rows": source_discovery_action_queue["summary"].get(
+                "queued_source_rows", 0
+            ),
+            "source_discovery_template_rows": source_discovery_action_queue[
+                "summary"
+            ].get("source_discovery_template_rows", 0),
+            "source_discovery_template_batch_count": source_discovery_action_queue[
+                "summary"
+            ].get("source_discovery_template_batch_count", 0),
+            "focus_template_items": source_discovery_focus_template[
+                "summary"
+            ].get("template_items", 0),
+            "focus_template_confirmed_rows": source_discovery_focus_template_import_summary.get(
+                "manual_confirmed_rows", 0
+            ),
+            "dry_run_updated_rows": source_discovery_focus_template_import_summary.get(
+                "updated_rows", 0
+            ),
+            "dry_run_skipped_rows": source_discovery_focus_template_import_summary.get(
+                "skipped_rows", 0
+            ),
+            "next_step": "confirm_exact_product_detail_source_urls",
+            "blocked_reason": "source_discovery_requires_exact_product_evidence",
+            "manual_confirmation_required": True,
+            "auto_apply_enabled": False,
         }
         target["source_discovery_action_queue"]["top_source_store_workstreams"] = [
             {

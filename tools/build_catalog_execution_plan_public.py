@@ -478,6 +478,12 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "actionable_source_rows": _count(source_action_summary, "actionable_source_rows"),
                 "queued_source_rows": _count(source_action_summary, "queued_source_rows"),
                 "action_batch_count": _count(source_action_summary, "action_batch_count"),
+                "source_discovery_template_rows": _count(
+                    source_action_summary, "source_discovery_template_rows"
+                ),
+                "source_discovery_template_batch_count": _count(
+                    source_action_summary, "source_discovery_template_batch_count"
+                ),
                 "manual_research_backlog_rows": _count(
                     source_action_summary, "manual_research_backlog_rows"
                 ),
@@ -595,6 +601,9 @@ def _build_plan(load_report) -> dict[str, Any]:
                 ),
                 "source_url_update_template_rows": _count(
                     image_action_summary, "source_url_update_template_rows"
+                ),
+                "source_url_update_template_batch_count": _count(
+                    image_action_summary, "source_url_update_template_batch_count"
                 ),
                 "representative_image_review_required_rows": _count(
                     image_action_summary, "representative_image_review_required_rows"
@@ -1208,6 +1217,9 @@ def _build_plan(load_report) -> dict[str, Any]:
             "image_action_source_url_update_template_rows": _count(
                 image_action_summary, "source_url_update_template_rows"
             ),
+            "image_action_source_url_update_template_batch_count": _count(
+                image_action_summary, "source_url_update_template_batch_count"
+            ),
             "image_action_image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
             "image_action_workstream_count": _count(image_action_summary, "workstream_count"),
             "source_focus_template_rows": _count(source_focus_template_summary, "template_items"),
@@ -1229,6 +1241,12 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "source_discovery_action_rows": _count(source_action_summary, "queued_source_rows"),
             "source_discovery_actionable_rows": _count(source_action_summary, "actionable_source_rows"),
+            "source_discovery_template_rows": _count(
+                source_action_summary, "source_discovery_template_rows"
+            ),
+            "source_discovery_template_batch_count": _count(
+                source_action_summary, "source_discovery_template_batch_count"
+            ),
             "source_discovery_unqueued_actionable_rows": _count(
                 source_action_summary, "unqueued_actionable_source_rows"
             ),

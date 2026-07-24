@@ -4867,6 +4867,7 @@
     "image_candidate_provider_items": 496,
     "image_candidate_manual_or_blocked_items": 228,
     "image_action_source_url_update_template_rows": 50,
+    "image_action_source_url_update_template_batch_count": 3,
     "image_action_image_url_ready_rows": 0,
     "image_action_workstream_count": 4,
     "source_focus_template_rows": 417,
@@ -4878,6 +4879,8 @@
     "source_discovery_starter_queue_groups": 339,
     "source_discovery_action_rows": 632,
     "source_discovery_actionable_rows": 632,
+    "source_discovery_template_rows": 632,
+    "source_discovery_template_batch_count": 40,
     "source_discovery_unqueued_actionable_rows": 0,
     "source_discovery_manual_research_backlog_rows": 5,
     "animation_unknown_category_rows": 0,
@@ -5179,6 +5182,7 @@
     "workstream_count": 4,
     "source_url_update_workstream_count": 3,
     "source_url_update_work_order_count": 3,
+    "source_url_update_template_batch_count": 3,
     "representative_image_review_workstream_count": 1,
     "excluded_workflow_rows": [
       [
@@ -5244,6 +5248,8 @@
     "max_rows": 1000,
     "source_patch_template_count": 632,
     "catalog_field_import_template_count": 632,
+    "source_discovery_template_rows": 632,
+    "source_discovery_template_batch_count": 40,
     "missing_template_item_count": 0,
     "missing_template_sample_catalog_indexes": [],
     "by_review_state": [
@@ -8996,6 +9002,8 @@
     "queued_image_rows": 73,
     "unqueued_actionable_image_rows": 0,
     "source_url_update_required_rows": 50,
+    "source_url_update_template_rows": 50,
+    "source_url_update_template_batch_count": 3,
     "representative_image_review_required_rows": 23,
     "image_url_ready_rows": 0,
     "template_rows": 73,
@@ -9180,6 +9188,9 @@
         4
       ]
     ],
+    "campaign_covered_item_template_rows": 20,
+    "standalone_item_template_rows": 0,
+    "campaign_item_decision_preview_rows": 20,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false,
     "manual_review_required_before_mutation": true,
@@ -9195,6 +9206,28 @@
     "groups_with_any_search_url": 339,
     "missing_source_url_rows": 637,
     "coverage_matches_missing_source_url_rows": true,
+    "auto_apply_enabled": false
+  },
+  "source_discovery_queue_alignment": {
+    "public_reports": [
+      "data/source_discovery_action_queue_public.json",
+      "data/source_discovery_focus_packs_public.json",
+      "data/source_discovery_focus_confirmed_template_public.json",
+      "data/source_discovery_focus_template_import_dry_run_public.json",
+      "data/source_discovery_store_bottlenecks_public.json"
+    ],
+    "missing_source_url_rows": 637,
+    "actionable_source_rows": 632,
+    "queued_source_rows": 632,
+    "source_discovery_template_rows": 632,
+    "source_discovery_template_batch_count": 40,
+    "focus_template_items": 417,
+    "focus_template_confirmed_rows": 0,
+    "dry_run_updated_rows": 0,
+    "dry_run_skipped_rows": 417,
+    "next_step": "confirm_exact_product_detail_source_urls",
+    "blocked_reason": "source_discovery_requires_exact_product_evidence",
+    "manual_confirmation_required": true,
     "auto_apply_enabled": false
   }
 }

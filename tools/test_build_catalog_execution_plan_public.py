@@ -33,6 +33,7 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "excluded_workflow_rows": [["find_source_then_extract_image", 8]],
                     "source_url_update_required_rows": 2,
                     "source_url_update_template_rows": 2,
+                    "source_url_update_template_batch_count": 1,
                     "representative_image_review_required_rows": 0,
                     "image_url_ready_rows": 0,
                     "workstream_count": 1,
@@ -61,6 +62,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "unqueued_actionable_source_rows": 4,
                     "action_batch_count": 1,
                     "manual_research_backlog_rows": 2,
+                    "source_discovery_template_rows": 4,
+                    "source_discovery_template_batch_count": 1,
                     "manual_research_backlog_by_source_store": [["Idol official", 2]],
                     "excluded_review_state_rows": [["manual_official_research_required", 2]],
                 }
@@ -464,6 +467,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(source_action["rows"], 4)
         self.assertEqual(source_action["evidence"]["actionable_source_rows"], 8)
         self.assertEqual(source_action["evidence"]["queued_source_rows"], 4)
+        self.assertEqual(source_action["evidence"]["source_discovery_template_rows"], 4)
+        self.assertEqual(source_action["evidence"]["source_discovery_template_batch_count"], 1)
         self.assertEqual(source_action["evidence"]["manual_research_backlog_rows"], 2)
         self.assertEqual(
             source_action["evidence"]["manual_research_backlog_by_source_store"],
@@ -471,6 +476,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["source_discovery_action_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_actionable_rows"], 8)
+        self.assertEqual(report["summary"]["source_discovery_template_rows"], 4)
+        self.assertEqual(report["summary"]["source_discovery_template_batch_count"], 1)
         self.assertEqual(report["summary"]["source_discovery_unqueued_actionable_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_manual_research_backlog_rows"], 2)
         source_focus = next(
@@ -561,6 +568,7 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(image_action["evidence"]["actionable_image_rows"], 2)
         self.assertEqual(image_action["evidence"]["source_url_update_required_rows"], 2)
         self.assertEqual(image_action["evidence"]["source_url_update_template_rows"], 2)
+        self.assertEqual(image_action["evidence"]["source_url_update_template_batch_count"], 1)
         self.assertEqual(image_action["evidence"]["image_url_ready_rows"], 0)
         self.assertEqual(image_action["evidence"]["workstream_count"], 1)
         self.assertEqual(image_action["evidence"]["source_url_update_workstream_count"], 1)
@@ -572,6 +580,7 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["image_candidate_provider_items"], 7)
         self.assertEqual(report["summary"]["image_candidate_manual_or_blocked_items"], 3)
         self.assertEqual(report["summary"]["image_action_source_url_update_template_rows"], 2)
+        self.assertEqual(report["summary"]["image_action_source_url_update_template_batch_count"], 1)
         self.assertEqual(report["summary"]["image_action_image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["image_action_workstream_count"], 1)
         metadata_action = next(

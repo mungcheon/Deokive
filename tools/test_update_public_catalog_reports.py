@@ -253,6 +253,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(image_alignment["queued_image_rows"], 73)
         self.assertEqual(image_alignment["unqueued_actionable_image_rows"], 0)
         self.assertEqual(image_alignment["source_url_update_required_rows"], 50)
+        self.assertEqual(image_alignment["source_url_update_template_rows"], 50)
+        self.assertEqual(image_alignment["source_url_update_template_batch_count"], 3)
         self.assertEqual(image_alignment["representative_image_review_required_rows"], 23)
         self.assertEqual(image_alignment["image_url_ready_rows"], 0)
         self.assertEqual(image_alignment["template_rows"], 73)
@@ -535,6 +537,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertGreater(quality["stellive_fanding_candidates"]["missing_image_candidate_rows"], 0)
             self.assertIs(quality["stellive_fanding_candidates"]["auto_apply_enabled"], False)
         if reports.SOURCE_DISCOVERY_STORE_BOTTLENECKS.exists():
+            source_alignment = quality["source_discovery_queue_alignment"]
+            self.assertEqual(source_alignment["missing_source_url_rows"], 637)
+            self.assertEqual(source_alignment["actionable_source_rows"], 632)
+            self.assertEqual(source_alignment["queued_source_rows"], 632)
+            self.assertEqual(source_alignment["source_discovery_template_rows"], 632)
+            self.assertEqual(source_alignment["source_discovery_template_batch_count"], 40)
+            self.assertEqual(source_alignment["focus_template_confirmed_rows"], 0)
+            self.assertIs(source_alignment["auto_apply_enabled"], False)
+            self.assertIs(source_alignment["manual_confirmation_required"], True)
             self.assertEqual(
                 quality["source_discovery_store_bottlenecks"]["queued_source_rows"],
                 quality["source_discovery_action_queue"]["queued_source_rows"],
