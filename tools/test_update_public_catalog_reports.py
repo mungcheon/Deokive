@@ -1643,6 +1643,12 @@ class PublicCatalogReportTests(unittest.TestCase):
             batch
             for batch in batches
             if batch.get("workstream") == "image_attachment_action_queue"
+            and batch.get("title") != "대표 이미지 후보 다음 10개 검수"
+        )
+        representative_image_agent_batch = next(
+            batch
+            for batch in batches
+            if batch.get("title") == "대표 이미지 후보 다음 10개 검수"
         )
         self.assertGreater(image_action_summary.get("primary_review_url_rows", 0), 0)
         self.assertEqual(
@@ -1691,6 +1697,31 @@ class PublicCatalogReportTests(unittest.TestCase):
             any(
                 item.get("primary_review_url")
                 for item in first_image_action_batch.get("sample_items", [])
+                if isinstance(item, dict)
+            )
+        )
+        self.assertEqual(
+            representative_image_agent_batch.get("rows"),
+            image_action_summary.get("next_representative_image_review_batch_rows"),
+        )
+        self.assertEqual(
+            representative_image_agent_batch.get("review_summary", {}).get(
+                "next_representative_image_review_batch_primary_review_url_rows"
+            ),
+            image_action_summary.get(
+                "next_representative_image_review_batch_primary_review_url_rows"
+            ),
+        )
+        self.assertEqual(
+            representative_image_agent_batch.get("review_summary", {}).get(
+                "next_representative_image_review_batch_local_path_rows"
+            ),
+            image_action_summary.get("next_representative_image_review_batch_local_path_rows"),
+        )
+        self.assertTrue(
+            all(
+                item.get("suggested_local_image_path")
+                for item in representative_image_agent_batch.get("sample_items", [])
                 if isinstance(item, dict)
             )
         )

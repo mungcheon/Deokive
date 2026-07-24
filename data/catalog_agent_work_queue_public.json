@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T09:31:05Z",
+  "generated_at": "2026-07-24T09:35:53Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20372,
+    "summed_batch_rows": 20309,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -40,6 +40,10 @@
         8
       ],
       [
+        "image_attachment_action_queue",
+        8
+      ],
+      [
         "image_url_attachment",
         8
       ],
@@ -53,10 +57,6 @@
       ],
       [
         "ichiban_kuji_metadata_action_queue",
-        7
-      ],
-      [
-        "image_attachment_action_queue",
         7
       ],
       [
@@ -110,10 +110,6 @@
       [
         "ichiban_kuji_metadata",
         1
-      ],
-      [
-        "ichiban_kuji_price",
-        1
       ]
     ],
     "by_agent": [
@@ -154,6 +150,10 @@
         8
       ],
       [
+        "agent-image-action",
+        8
+      ],
+      [
         "agent-source-image",
         8
       ],
@@ -164,10 +164,6 @@
       [
         "agent-ichiban-reissue-dedupe",
         8
-      ],
-      [
-        "agent-image-action",
-        7
       ],
       [
         "agent-ichiban-prize-policy",
@@ -194,10 +190,6 @@
         2
       ],
       [
-        "agent-ichiban-kuji",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
@@ -215,6 +207,10 @@
       ],
       [
         "agent-animation-category-action",
+        1
+      ],
+      [
+        "agent-ichiban-kuji",
         1
       ]
     ],
@@ -3505,7 +3501,7 @@
       "next_machine_step": "confirm_exact_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-51",
+      "batch_id": "015-agent-generic-source-cleanup-52",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3611,7 +3607,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-52",
+      "batch_id": "015-agent-generic-source-cleanup-53",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3667,7 +3663,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-53",
+      "batch_id": "015-agent-generic-source-cleanup-54",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3740,7 +3736,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-54",
+      "batch_id": "018-agent-gotouchi-review-55",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -3847,7 +3843,7 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "018-agent-ichiban-action-134",
+      "batch_id": "018-agent-ichiban-action-135",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 18,
@@ -4531,7 +4527,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "019-agent-confirmed-import-50",
+      "batch_id": "019-agent-confirmed-import-51",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -4739,7 +4735,534 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-focus-pack-48",
+      "batch_id": "019-agent-image-action-41",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_action_queue",
+      "priority": 19,
+      "title": "대표 이미지 후보 다음 10개 검수",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 10,
+      "recommended_action": "Open each primary_review_url, confirm the representative image matches product type and variant, then fill manual_image_url and evidence_url.",
+      "acceptance_criteria": [
+        "Confirm character, regional motif, product type, and variant before import.",
+        "Use representative images only when the exact variant cannot be separated safely.",
+        "Every accepted row keeps a suggested_local_image_path for later local download.",
+        "Prepare reviewed image templates only; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "manual_confirmed": false,
+          "catalog_index": 936,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "series_name": "ご当地",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E6%B5%85%E8%8D%89+%E9%9B%B7%E9%96%80%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E6%B5%85%E8%8D%89+%E9%9B%B7%E9%96%80%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E6%B5%85%E8%8D%89+%E9%9B%B7%E9%96%80%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "suggested_local_image_path": "assets/catalog_images/catalog_936.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_936.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_936.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 936,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+            "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_936.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 937,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E6%B5%85%E8%8D%89%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E6%B5%85%E8%8D%89%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E6%B5%85%E8%8D%89%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "suggested_local_image_path": "assets/catalog_images/catalog_937.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_937.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_937.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 937,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+            "name_ja": "うさぎ ご当地マスコット (浅草)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_937.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 938,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+          "series_name": "ご当地",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E6%9D%B1%E4%BA%AC%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E6%9D%B1%E4%BA%AC%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E6%9D%B1%E4%BA%AC%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "suggested_local_image_path": "assets/catalog_images/catalog_938.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_938.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_938.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 938,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+            "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+            "category": "타월",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_938.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 941,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%A4%A7%E9%98%AA+%E9%80%9A%E5%A4%A9%E9%96%A3%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%A4%A7%E9%98%AA+%E9%80%9A%E5%A4%A9%E9%96%A3%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%A4%A7%E9%98%AA+%E9%80%9A%E5%A4%A9%E9%96%A3%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "suggested_local_image_path": "assets/catalog_images/catalog_941.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_941.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_941.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 941,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+            "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_941.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 942,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "series_name": "ご当地",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%A4%A7%E9%98%AA+%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%A4%A7%E9%98%AA+%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%A4%A7%E9%98%AA+%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "suggested_local_image_path": "assets/catalog_images/catalog_942.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_942.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_942.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 942,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+            "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_942.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 943,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+          "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+          "series_name": "ご当地",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%A4%A7%E9%98%AA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%A4%A7%E9%98%AA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%A4%A7%E9%98%AA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "suggested_local_image_path": "assets/catalog_images/catalog_943.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_943.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_943.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 943,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+            "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+            "category": "타월",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_943.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 944,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "suggested_local_image_path": "assets/catalog_images/catalog_944.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_944.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_944.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 944,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+            "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_944.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 945,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+          "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "suggested_local_image_path": "assets/catalog_images/catalog_945.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_945.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_945.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 945,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+            "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_945.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_summary": {
+        "next_representative_image_review_batch_rows": 10,
+        "next_representative_image_review_batch_primary_review_url_rows": 10,
+        "next_representative_image_review_batch_local_path_rows": 10,
+        "next_representative_image_review_batch_primary_review_url_kind_counts": [
+          [
+            "current_source_url",
+            10
+          ]
+        ]
+      },
+      "review_state": "image_evidence_confirmation_required",
+      "next_machine_step": "confirm_source_then_fill_image_url_templates"
+    },
+    {
+      "batch_id": "020-agent-source-focus-pack-49",
       "agent_id": "agent-source-focus-pack",
       "workstream": "source_discovery_next_focus_pack",
       "priority": 20,
@@ -4930,7 +5453,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-55",
+      "batch_id": "020-agent-source-image-56",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5029,7 +5552,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-56",
+      "batch_id": "020-agent-source-image-57",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5227,7 +5750,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-57",
+      "batch_id": "020-agent-source-image-58",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5326,7 +5849,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-58",
+      "batch_id": "020-agent-source-image-59",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5425,7 +5948,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-59",
+      "batch_id": "020-agent-source-image-60",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5524,7 +6047,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-60",
+      "batch_id": "020-agent-source-image-61",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5623,7 +6146,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-61",
+      "batch_id": "020-agent-source-image-62",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5722,7 +6245,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-image-action-41",
+      "batch_id": "020-agent-image-action-42",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -6547,7 +7070,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-image-action-42",
+      "batch_id": "020-agent-image-action-43",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -7372,7 +7895,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-fallback-49",
+      "batch_id": "020-agent-source-fallback-50",
       "agent_id": "agent-source-fallback",
       "workstream": "source_discovery_next_focus_fallback_queue",
       "priority": 20,
@@ -7634,7 +8157,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "020-agent-source-image-62",
+      "batch_id": "020-agent-source-image-63",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8756,7 +9279,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-image-action-43",
+      "batch_id": "020-agent-image-action-44",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -9302,7 +9825,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-image-action-44",
+      "batch_id": "020-agent-image-action-45",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -9841,7 +10364,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-ichiban-action-135",
+      "batch_id": "020-agent-ichiban-action-136",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 20,
@@ -9876,7 +10399,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "020-agent-image-action-45",
+      "batch_id": "020-agent-image-action-46",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -10159,7 +10682,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "022-agent-animation-category-action-154",
+      "batch_id": "022-agent-animation-category-action-155",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -10631,7 +11154,7 @@
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
     },
     {
-      "batch_id": "022-agent-source-detail-candidate-73",
+      "batch_id": "022-agent-source-detail-candidate-74",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 22,
@@ -11229,7 +11752,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "028-agent-source-action-63",
+      "batch_id": "028-agent-source-action-64",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -11600,7 +12123,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-64",
+      "batch_id": "028-agent-source-action-65",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -11971,7 +12494,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-65",
+      "batch_id": "028-agent-source-action-66",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -12342,7 +12865,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-66",
+      "batch_id": "028-agent-source-action-67",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -12713,7 +13236,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-67",
+      "batch_id": "028-agent-source-action-68",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13084,7 +13607,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-68",
+      "batch_id": "028-agent-source-action-69",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13455,7 +13978,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-69",
+      "batch_id": "028-agent-source-action-70",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13826,7 +14349,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-71",
+      "batch_id": "028-agent-source-action-72",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -14197,7 +14720,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-72",
+      "batch_id": "028-agent-source-action-73",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -14568,7 +15091,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-70",
+      "batch_id": "028-agent-source-action-71",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -14862,7 +15385,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-ichiban-action-136",
+      "batch_id": "030-agent-ichiban-action-137",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 30,
@@ -14921,7 +15444,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "030-agent-source-discovery-75",
+      "batch_id": "030-agent-source-discovery-76",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15020,7 +15543,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-76",
+      "batch_id": "030-agent-source-discovery-77",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15119,7 +15642,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-77",
+      "batch_id": "030-agent-source-discovery-78",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15218,7 +15741,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-78",
+      "batch_id": "030-agent-source-discovery-79",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15317,7 +15840,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-79",
+      "batch_id": "030-agent-source-discovery-80",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15416,7 +15939,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-81",
+      "batch_id": "030-agent-source-discovery-82",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15515,7 +16038,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-82",
+      "batch_id": "030-agent-source-discovery-83",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15614,7 +16137,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-83",
+      "batch_id": "030-agent-source-discovery-84",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15713,7 +16236,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-84",
+      "batch_id": "030-agent-source-discovery-85",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15812,7 +16335,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-85",
+      "batch_id": "030-agent-source-discovery-86",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15911,7 +16434,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-image-action-46",
+      "batch_id": "030-agent-image-action-47",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 30,
@@ -16556,7 +17079,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "030-agent-source-discovery-80",
+      "batch_id": "030-agent-source-discovery-81",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16655,7 +17178,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-86",
+      "batch_id": "030-agent-source-discovery-87",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -17378,7 +17901,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-image-action-47",
+      "batch_id": "030-agent-image-action-48",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 30,
@@ -18087,7 +18610,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "031-agent-source-starter-155",
+      "batch_id": "031-agent-source-starter-156",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18196,7 +18719,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-156",
+      "batch_id": "031-agent-source-starter-157",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18305,7 +18828,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-157",
+      "batch_id": "031-agent-source-starter-158",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18414,7 +18937,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-158",
+      "batch_id": "031-agent-source-starter-159",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18523,7 +19046,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-159",
+      "batch_id": "031-agent-source-starter-160",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18632,7 +19155,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-160",
+      "batch_id": "031-agent-source-starter-161",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18741,7 +19264,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-161",
+      "batch_id": "031-agent-source-starter-162",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18850,7 +19373,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-162",
+      "batch_id": "031-agent-source-starter-163",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18959,7 +19482,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-163",
+      "batch_id": "031-agent-source-starter-164",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19068,7 +19591,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-164",
+      "batch_id": "031-agent-source-starter-165",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19177,7 +19700,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "032-agent-source-detail-candidate-74",
+      "batch_id": "032-agent-source-detail-candidate-75",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 32,
@@ -19557,7 +20080,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "038-agent-ichiban-action-137",
+      "batch_id": "038-agent-ichiban-action-138",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -21434,7 +21957,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "045-agent-metadata-action-87",
+      "batch_id": "045-agent-metadata-action-88",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -21550,7 +22073,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-93",
+      "batch_id": "045-agent-metadata-action-94",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -21666,7 +22189,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-88",
+      "batch_id": "045-agent-metadata-action-89",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -21782,7 +22305,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-89",
+      "batch_id": "045-agent-metadata-action-90",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -21898,7 +22421,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-90",
+      "batch_id": "045-agent-metadata-action-91",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22014,7 +22537,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-91",
+      "batch_id": "045-agent-metadata-action-92",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22130,7 +22653,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-92",
+      "batch_id": "045-agent-metadata-action-93",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22246,7 +22769,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-138",
+      "batch_id": "048-agent-ichiban-action-139",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -23062,7 +23585,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-139",
+      "batch_id": "048-agent-ichiban-action-140",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -23896,7 +24419,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-140",
+      "batch_id": "048-agent-ichiban-action-141",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -24736,7 +25259,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-141",
+      "batch_id": "048-agent-ichiban-action-142",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -25576,7 +26099,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-142",
+      "batch_id": "048-agent-ichiban-action-143",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -26007,7 +26530,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "050-agent-metadata-95",
+      "batch_id": "050-agent-metadata-96",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -26106,7 +26629,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-98",
+      "batch_id": "050-agent-metadata-99",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -26205,7 +26728,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-96",
+      "batch_id": "050-agent-metadata-97",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -26403,7 +26926,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-97",
+      "batch_id": "050-agent-metadata-98",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -26502,7 +27025,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "051-agent-ichiban-campaign-first-115",
+      "batch_id": "051-agent-ichiban-campaign-first-116",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 51,
@@ -26603,7 +27126,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "052-agent-ichiban-campaign-first-116",
+      "batch_id": "052-agent-ichiban-campaign-first-117",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 52,
@@ -26698,7 +27221,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "053-agent-ichiban-campaign-first-117",
+      "batch_id": "053-agent-ichiban-campaign-first-118",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 53,
@@ -26773,7 +27296,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-campaign-first-118",
+      "batch_id": "054-agent-ichiban-campaign-first-119",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 54,
@@ -26844,7 +27367,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "055-agent-metadata-action-94",
+      "batch_id": "055-agent-metadata-action-95",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 55,
@@ -26960,7 +27483,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-reissue-dedupe-107",
+      "batch_id": "056-agent-ichiban-reissue-dedupe-108",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 56,
@@ -27010,7 +27533,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "057-agent-ichiban-reissue-dedupe-108",
+      "batch_id": "057-agent-ichiban-reissue-dedupe-109",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 57,
@@ -27060,7 +27583,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "058-agent-ichiban-reissue-dedupe-109",
+      "batch_id": "058-agent-ichiban-reissue-dedupe-110",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 58,
@@ -27110,7 +27633,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "059-agent-ichiban-reissue-dedupe-110",
+      "batch_id": "059-agent-ichiban-reissue-dedupe-111",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 59,
@@ -27160,7 +27683,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "060-agent-metadata-102",
+      "batch_id": "060-agent-metadata-103",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -27259,7 +27782,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-99",
+      "batch_id": "060-agent-metadata-100",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -27358,7 +27881,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-100",
+      "batch_id": "060-agent-metadata-101",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -27457,7 +27980,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-101",
+      "batch_id": "060-agent-metadata-102",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -27556,7 +28079,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-ichiban-reissue-dedupe-111",
+      "batch_id": "060-agent-ichiban-reissue-dedupe-112",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 60,
@@ -27606,7 +28129,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "061-agent-ichiban-reissue-dedupe-112",
+      "batch_id": "061-agent-ichiban-reissue-dedupe-113",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 61,
@@ -27656,7 +28179,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "062-agent-ichiban-reissue-dedupe-113",
+      "batch_id": "062-agent-ichiban-reissue-dedupe-114",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 62,
@@ -27706,7 +28229,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "063-agent-ichiban-reissue-dedupe-114",
+      "batch_id": "063-agent-ichiban-reissue-dedupe-115",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 63,
@@ -27756,7 +28279,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "070-agent-metadata-103",
+      "batch_id": "070-agent-metadata-104",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -27855,7 +28378,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-104",
+      "batch_id": "070-agent-metadata-105",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -27954,7 +28477,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-105",
+      "batch_id": "070-agent-metadata-106",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -28053,7 +28576,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-106",
+      "batch_id": "070-agent-metadata-107",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -28152,7 +28675,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-150",
+      "batch_id": "085-agent-ichiban-prize-policy-151",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -28469,7 +28992,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-149",
+      "batch_id": "085-agent-ichiban-prize-policy-150",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -28691,7 +29214,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-dedupe-action-119",
+      "batch_id": "085-agent-dedupe-action-120",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -29714,7 +30237,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-120",
+      "batch_id": "085-agent-dedupe-action-121",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -30735,7 +31258,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-121",
+      "batch_id": "085-agent-dedupe-action-122",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -31758,7 +32281,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-122",
+      "batch_id": "085-agent-dedupe-action-123",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -32773,7 +33296,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-123",
+      "batch_id": "085-agent-dedupe-action-124",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -33741,7 +34264,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "086-agent-ichiban-prize-policy-151",
+      "batch_id": "086-agent-ichiban-prize-policy-152",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 86,
@@ -34053,7 +34576,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "087-agent-ichiban-prize-policy-152",
+      "batch_id": "087-agent-ichiban-prize-policy-153",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 87,
@@ -34373,7 +34896,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "088-agent-ichiban-prize-policy-153",
+      "batch_id": "088-agent-ichiban-prize-policy-154",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 88,
@@ -34688,7 +35211,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "090-agent-dedupe-124",
+      "batch_id": "090-agent-dedupe-125",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -34727,7 +35250,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-125",
+      "batch_id": "090-agent-dedupe-126",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -34766,7 +35289,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-126",
+      "batch_id": "090-agent-dedupe-127",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -34805,7 +35328,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-127",
+      "batch_id": "090-agent-dedupe-128",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -34844,7 +35367,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-128",
+      "batch_id": "090-agent-dedupe-129",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -34883,7 +35406,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-129",
+      "batch_id": "090-agent-dedupe-130",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -34922,7 +35445,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-130",
+      "batch_id": "090-agent-dedupe-131",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -34961,7 +35484,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-131",
+      "batch_id": "090-agent-dedupe-132",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35000,7 +35523,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-132",
+      "batch_id": "090-agent-dedupe-133",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35039,7 +35562,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-133",
+      "batch_id": "090-agent-dedupe-134",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35078,7 +35601,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "110-agent-ichiban-kuji-143",
+      "batch_id": "110-agent-ichiban-kuji-144",
       "agent_id": "agent-ichiban-kuji",
       "workstream": "ichiban_kuji_metadata",
       "priority": 110,
@@ -35131,65 +35654,6 @@
           "catalog_index": 14200,
           "name_ko": "一番くじ 呪術廻戦 －オンライン－ - ラストワン賞 ビジュアルタオル",
           "source_url": "https://1kuji.com/products/jujutsu-o"
-        }
-      ],
-      "review_state": "official_campaign_evidence_required",
-      "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "120-agent-ichiban-kuji-147",
-      "agent_id": "agent-ichiban-kuji",
-      "workstream": "ichiban_kuji_price",
-      "priority": 120,
-      "title": "이치방쿠지 메타데이터 검수: ichiban-metadata-review-005",
-      "public_report": "data/ichiban_kuji_metadata_review_batches_public.json",
-      "rows": 73,
-      "recommended_action": "Verify labeled official campaign metadata before preparing any catalog patch.",
-      "acceptance_criteria": [
-        "Official 1kuji campaign page or captured official evidence confirms the value.",
-        "Unlabeled dates, double-chance dates, and inferred prices remain blocked.",
-        "All updated catalog rows belong to the reviewed campaign group."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 16030,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - A賞 ゴール・D・ロジャーフィギュア",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16031,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - B賞 モンキー・D・ルフィフィギュア",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16032,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - C賞 ラブーンぬいぐるみ",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16033,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - D賞 クッション",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16034,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - E賞 フェイスタオル",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16035,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - F賞 カードスタンドフィギュア",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16036,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - G賞 グラス",
-          "source_url": "https://1kuji.com/products/onep12"
-        },
-        {
-          "catalog_index": 16037,
-          "name_ko": "一番くじ ワンピース ～The Legend of GOL・D・ROGER編～ - H賞 クリアファイル&ステッカー",
-          "source_url": "https://1kuji.com/products/onep12"
         }
       ],
       "review_state": "official_campaign_evidence_required",

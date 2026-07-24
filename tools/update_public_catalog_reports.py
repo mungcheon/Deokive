@@ -4778,6 +4778,55 @@ def build_agent_work_queue_public(
             )
 
     image_action_batches = [batch for batch in image_action_queue.get("batches", []) if isinstance(batch, dict)]
+    image_next_representative_batch = [
+        row
+        for row in image_action_queue.get("next_representative_image_review_batch", [])
+        if isinstance(row, dict)
+    ]
+    image_action_summary = image_action_queue.get("summary", {})
+    if image_next_representative_batch:
+        add_batch(
+            agent_id="agent-image-action",
+            workstream="image_attachment_action_queue",
+            priority=19,
+            title="대표 이미지 후보 다음 10개 검수",
+            public_report=IMAGE_ATTACHMENT_ACTION_QUEUE,
+            rows=len(image_next_representative_batch),
+            recommended_action=(
+                "Open each primary_review_url, confirm the representative image matches "
+                "product type and variant, then fill manual_image_url and evidence_url."
+            ),
+            acceptance_criteria=[
+                "Confirm character, regional motif, product type, and variant before import.",
+                "Use representative images only when the exact variant cannot be separated safely.",
+                "Every accepted row keeps a suggested_local_image_path for later local download.",
+                "Prepare reviewed image templates only; auto-apply remains disabled.",
+            ],
+            samples=image_next_representative_batch,
+            review_summary={
+                "next_representative_image_review_batch_rows": len(
+                    image_next_representative_batch
+                ),
+                "next_representative_image_review_batch_primary_review_url_rows": int(
+                    image_action_summary.get(
+                        "next_representative_image_review_batch_primary_review_url_rows"
+                    )
+                    or 0
+                ),
+                "next_representative_image_review_batch_local_path_rows": int(
+                    image_action_summary.get(
+                        "next_representative_image_review_batch_local_path_rows"
+                    )
+                    or 0
+                ),
+                "next_representative_image_review_batch_primary_review_url_kind_counts": (
+                    image_action_summary.get(
+                        "next_representative_image_review_batch_primary_review_url_kind_counts",
+                        [],
+                    )
+                ),
+            },
+        )
     if image_action_batches:
         for action_batch in image_action_batches[:10]:
             add_batch(
