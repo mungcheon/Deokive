@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T11:38:54Z",
+  "generated_at": "2026-07-24T12:03:58Z",
   "scope": "ichiban_kuji_reissue_decision_template",
   "source_report": "data/catalog_deduplication_action_queue_public.json",
   "summary": {
@@ -269,6 +269,28 @@
           "likely_same_campaign_family_reissue",
           "high_impact_campaign_pair"
         ]
+      },
+      "campaign_decision_guidance": {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": true,
+        "high_impact_campaign_pair": true,
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds",
+          "non-exception official price confirmed or explicitly left unknown"
+        ],
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "manual_confirmed_allowed": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
       },
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
@@ -840,6 +862,27 @@
           "high_impact_campaign_pair"
         ]
       },
+      "campaign_decision_guidance": {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": true,
+        "high_impact_campaign_pair": true,
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds"
+        ],
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "manual_confirmed_allowed": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "decision_template": {
@@ -1309,6 +1352,27 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "campaign_decision_guidance": {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": true,
+        "high_impact_campaign_pair": false,
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds"
+        ],
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "manual_confirmed_allowed": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "decision_template": {
@@ -1583,6 +1647,28 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "campaign_decision_guidance": {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": true,
+        "high_impact_campaign_pair": false,
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds",
+          "Last One or Double Chance rows keep official_price_jpy=0"
+        ],
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "manual_confirmed_allowed": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "decision_template": {
@@ -1748,6 +1834,28 @@
       ],
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
+      "campaign_decision_guidance": {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": true,
+        "high_impact_campaign_pair": true,
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds",
+          "non-exception official price confirmed or explicitly left unknown"
+        ],
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "manual_confirmed_allowed": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
       "affected_item_work_order_ids": [
         "ichiban-reissue-dedupe-006",
         "ichiban-reissue-dedupe-007",
@@ -1770,7 +1878,8 @@
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "A賞",
           "prize_item_name": "シャンクスフィギュア",
-          "variant_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
+          "variant_name": "",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
           "sample_name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
           "sample_name_ja": "A賞 シャンクスフィギュア",
           "campaign_url_comparison": {
@@ -1814,7 +1923,8 @@
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "B賞",
           "prize_item_name": "ミホークフィギュア",
-          "variant_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
+          "variant_name": "",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
           "sample_name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
           "sample_name_ja": "B賞 ミホークフィギュア",
           "campaign_url_comparison": {
@@ -1858,7 +1968,8 @@
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "C賞",
           "prize_item_name": "ルフィフィギュア",
-          "variant_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ / C賞 / ルフィフィギュア",
+          "variant_name": "",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / C賞 / ルフィフィギュア",
           "sample_name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
           "sample_name_ja": "C賞 ルフィフィギュア",
           "campaign_url_comparison": {
@@ -1902,7 +2013,8 @@
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "D賞",
           "prize_item_name": "スポーツタオル",
-          "variant_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ / D賞 / スポーツタオル",
+          "variant_name": "",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / D賞 / スポーツタオル",
           "sample_name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - D賞 スポーツタオル",
           "sample_name_ja": "D賞 スポーツタオル",
           "campaign_url_comparison": {
@@ -1946,7 +2058,8 @@
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "E賞",
           "prize_item_name": "カードスタンドフィギュア",
-          "variant_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ / E賞 / カードスタンドフィギュア",
+          "variant_name": "",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / E賞 / カードスタンドフィギュア",
           "sample_name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - E賞 カードスタンドフィギュア",
           "sample_name_ja": "E賞 カードスタンドフィギュア",
           "campaign_url_comparison": {
@@ -1990,7 +2103,8 @@
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "F賞",
           "prize_item_name": "湯のみ",
-          "variant_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ / F賞 / 湯のみ",
+          "variant_name": "",
+          "identity_label": "一番くじ ワンピース ～マリンフォード最終決戦編～ / F賞 / 湯のみ",
           "sample_name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - F賞 湯のみ",
           "sample_name_ja": "F賞 湯のみ",
           "campaign_url_comparison": {
@@ -2071,6 +2185,27 @@
       ],
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
+      "campaign_decision_guidance": {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": true,
+        "high_impact_campaign_pair": true,
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds"
+        ],
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "manual_confirmed_allowed": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
       "affected_item_work_order_ids": [
         "ichiban-reissue-dedupe-014",
         "ichiban-reissue-dedupe-015",
@@ -2092,7 +2227,8 @@
           "campaign_title": "一番くじ 鬼滅の刃",
           "prize_rank": "A賞",
           "prize_item_name": "竈門炭治郎 フィギュア",
-          "variant_name": "一番くじ 鬼滅の刃 / A賞 / 竈門炭治郎 フィギュア",
+          "variant_name": "",
+          "identity_label": "一番くじ 鬼滅の刃 / A賞 / 竈門炭治郎 フィギュア",
           "sample_name_ko": "一番くじ 鬼滅の刃 - A賞 竈門炭治郎 フィギュア",
           "sample_name_ja": "A賞 竈門炭治郎 フィギュア",
           "campaign_url_comparison": {
@@ -2134,7 +2270,8 @@
           "campaign_title": "一番くじ 鬼滅の刃",
           "prize_rank": "B賞",
           "prize_item_name": "竈門禰豆子 フィギュア",
-          "variant_name": "一番くじ 鬼滅の刃 / B賞 / 竈門禰豆子 フィギュア",
+          "variant_name": "",
+          "identity_label": "一番くじ 鬼滅の刃 / B賞 / 竈門禰豆子 フィギュア",
           "sample_name_ko": "一番くじ 鬼滅の刃 - B賞 竈門禰豆子 フィギュア",
           "sample_name_ja": "B賞 竈門禰豆子 フィギュア",
           "campaign_url_comparison": {
@@ -2176,7 +2313,8 @@
           "campaign_title": "一番くじ 鬼滅の刃",
           "prize_rank": "C賞",
           "prize_item_name": "竈門炭治郎 ちょこのっこ ぬいぐるみ",
-          "variant_name": "一番くじ 鬼滅の刃 / C賞 / 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "variant_name": "",
+          "identity_label": "一番くじ 鬼滅の刃 / C賞 / 竈門炭治郎 ちょこのっこ ぬいぐるみ",
           "sample_name_ko": "一番くじ 鬼滅の刃 - C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
           "sample_name_ja": "C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
           "campaign_url_comparison": {
@@ -2218,7 +2356,8 @@
           "campaign_title": "一番くじ 鬼滅の刃",
           "prize_rank": "D賞",
           "prize_item_name": "竈門禰豆子 ちょこのっこ ぬいぐるみ",
-          "variant_name": "一番くじ 鬼滅の刃 / D賞 / 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "variant_name": "",
+          "identity_label": "一番くじ 鬼滅の刃 / D賞 / 竈門禰豆子 ちょこのっこ ぬいぐるみ",
           "sample_name_ko": "一番くじ 鬼滅の刃 - D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
           "sample_name_ja": "D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
           "campaign_url_comparison": {
@@ -2260,7 +2399,8 @@
           "campaign_title": "一番くじ 鬼滅の刃",
           "prize_rank": "E賞",
           "prize_item_name": "ミニ色紙",
-          "variant_name": "一番くじ 鬼滅の刃 / E賞 / ミニ色紙",
+          "variant_name": "",
+          "identity_label": "一番くじ 鬼滅の刃 / E賞 / ミニ色紙",
           "sample_name_ko": "一番くじ 鬼滅の刃 - E賞 ミニ色紙",
           "sample_name_ja": "E賞 ミニ色紙",
           "campaign_url_comparison": {
@@ -2302,7 +2442,8 @@
           "campaign_title": "一番くじ 鬼滅の刃",
           "prize_rank": "F賞",
           "prize_item_name": "ラバーストラップ",
-          "variant_name": "一番くじ 鬼滅の刃 / F賞 / ラバーストラップ",
+          "variant_name": "",
+          "identity_label": "一番くじ 鬼滅の刃 / F賞 / ラバーストラップ",
           "sample_name_ko": "一番くじ 鬼滅の刃 - F賞 ラバーストラップ",
           "sample_name_ja": "F賞 ラバーストラップ",
           "campaign_url_comparison": {
@@ -2376,6 +2517,27 @@
       ],
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
+      "campaign_decision_guidance": {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": true,
+        "high_impact_campaign_pair": false,
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds"
+        ],
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "manual_confirmed_allowed": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
       "affected_item_work_order_ids": [
         "ichiban-reissue-dedupe-003",
         "ichiban-reissue-dedupe-004",
@@ -2393,7 +2555,8 @@
           "campaign_title": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
           "prize_rank": "A賞",
           "prize_item_name": "ナルトワールドコレクタブルフィギュア メタリックカラーver.",
-          "variant_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / A賞 / ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "variant_name": "",
+          "identity_label": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / A賞 / ナルトワールドコレクタブルフィギュア メタリックカラーver.",
           "sample_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
           "sample_name_ja": "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
           "campaign_url_comparison": {
@@ -2435,7 +2598,8 @@
           "campaign_title": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
           "prize_rank": "B賞",
           "prize_item_name": "ワールドコレクタブルフィギュア メタリックカラーver.",
-          "variant_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / B賞 / ワールドコレクタブルフィギュア メタリックカラーver.",
+          "variant_name": "",
+          "identity_label": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / B賞 / ワールドコレクタブルフィギュア メタリックカラーver.",
           "sample_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
           "sample_name_ja": "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
           "campaign_url_comparison": {
@@ -2477,7 +2641,8 @@
           "campaign_title": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
           "prize_rank": "C賞",
           "prize_item_name": "ワールドコレクタブルフィギュア",
-          "variant_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / C賞 / ワールドコレクタブルフィギュア",
+          "variant_name": "",
+          "identity_label": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / C賞 / ワールドコレクタブルフィギュア",
           "sample_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
           "sample_name_ja": "C賞 ワールドコレクタブルフィギュア",
           "campaign_url_comparison": {
@@ -2552,6 +2717,28 @@
       ],
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
+      "campaign_decision_guidance": {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": true,
+        "high_impact_campaign_pair": false,
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds",
+          "Last One or Double Chance rows keep official_price_jpy=0"
+        ],
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "manual_confirmed_allowed": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
       "affected_item_work_order_ids": [
         "ichiban-reissue-dedupe-001",
         "ichiban-reissue-dedupe-002"
@@ -2568,7 +2755,8 @@
           "campaign_title": "一番おみくじ ハイキュー!! 缶バッジ",
           "prize_rank": "ラストワン賞",
           "prize_item_name": "スペシャル缶バッジ",
-          "variant_name": "一番おみくじ ハイキュー!! 缶バッジ / ラストワン賞 / スペシャル缶バッジ",
+          "variant_name": "",
+          "identity_label": "一番おみくじ ハイキュー!! 缶バッジ / ラストワン賞 / スペシャル缶バッジ",
           "sample_name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
           "sample_name_ja": "ラストワン賞 スペシャル缶バッジ",
           "campaign_url_comparison": {
@@ -2612,7 +2800,8 @@
           "campaign_title": "一番おみくじ ハイキュー!! 缶バッジ",
           "prize_rank": "缶バッジ",
           "prize_item_name": "缶バッジ",
-          "variant_name": "一番おみくじ ハイキュー!! 缶バッジ / 缶バッジ",
+          "variant_name": "",
+          "identity_label": "一番おみくじ ハイキュー!! 缶バッジ / 缶バッジ",
           "sample_name_ko": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
           "sample_name_ja": "缶バッジ",
           "campaign_url_comparison": {

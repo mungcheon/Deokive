@@ -118,6 +118,22 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["campaign_templates"][0]["evidence_url_count"], 2)
         self.assertEqual(report["campaign_templates"][0]["sample_rows_with_identity_fields"], 1)
         self.assertEqual(report["campaign_templates"][0]["recommended_review_lane"], "campaign_pair_first")
+        self.assertEqual(
+            report["campaign_templates"][0]["campaign_decision_guidance"]["status"],
+            "campaign_pair_reissue_decision_required",
+        )
+        self.assertEqual(
+            report["campaign_templates"][0]["campaign_decision_guidance"][
+                "recommended_first_decision"
+            ],
+            "campaign_pair_reissue_keep_all_separate",
+        )
+        self.assertIn(
+            "variant names checked when one rank contains multiple kinds",
+            report["campaign_templates"][0]["campaign_decision_guidance"][
+                "required_evidence"
+            ],
+        )
         self.assertIn(
             "identity_fields_complete",
             report["campaign_templates"][0]["review_risk_summary"]["review_risk_tags"],
@@ -191,6 +207,16 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
             "Normal color",
         )
         self.assertEqual(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0]["identity_label"],
+            "一番くじ Sample / A賞 / Figure",
+        )
+        self.assertEqual(
+            report["next_campaign_review_batch"][0]["campaign_decision_guidance"][
+                "recommended_first_decision"
+            ],
+            "campaign_pair_reissue_keep_all_separate",
+        )
+        self.assertEqual(
             report["next_campaign_review_batch"][0]["item_review_preview"][0]["sample_name_ko"],
             "一番くじ Sample - A賞 Figure",
         )
@@ -212,6 +238,69 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         )
         self.assertFalse(report["next_campaign_review_batch"][0]["manual_confirmed"])
         self.assertFalse(report["automation_policy"]["auto_merge_enabled"])
+
+    def test_blank_variant_name_stays_blank_in_campaign_preview(self):
+        report = builder.build_report(
+            {
+                "ichiban_reissue_campaign_work_order": [
+                    {
+                        "campaign_work_order_id": "campaign-blank-variant",
+                        "source_urls": [
+                            "https://1kuji.com/products/a",
+                            "https://1kuji.com/products/a2",
+                        ],
+                        "item_work_order_count": 1,
+                        "sample_rows": [
+                            {
+                                "name_ko": "Sample - B Prize",
+                                "campaign_title": "Sample",
+                                "prize_rank": "B賞",
+                                "prize_item_name": "Prize",
+                                "variant_name": "",
+                                "identity_label": "Sample / B賞 / Prize",
+                            }
+                        ],
+                        "campaign_url_comparison": {
+                            "likely_same_campaign_family_reissue": True,
+                        },
+                        "decision_template": {
+                            "campaign_work_order_id": "campaign-blank-variant",
+                            "affected_item_work_order_ids": ["item-blank-variant"],
+                        },
+                    }
+                ],
+                "ichiban_reissue_work_order": [
+                    {
+                        "work_order_id": "item-blank-variant",
+                        "catalog_indexes": [11, 12],
+                        "source_urls": [
+                            "https://1kuji.com/products/a",
+                            "https://1kuji.com/products/a2",
+                        ],
+                        "sample_rows": [
+                            {
+                                "name_ko": "Sample - B Prize",
+                                "campaign_title": "Sample",
+                                "prize_rank": "B賞",
+                                "prize_item_name": "Prize",
+                                "variant_name": "",
+                                "identity_label": "Sample / B賞 / Prize",
+                            }
+                        ],
+                        "campaign_url_comparison": {
+                            "likely_same_campaign_family_reissue": True,
+                        },
+                        "decision_template": {"work_order_id": "item-blank-variant"},
+                    }
+                ],
+            },
+            generated_at="2026-07-24T00:00:00Z",
+        )
+
+        preview = report["next_campaign_review_batch"][0]["item_review_preview"][0]
+        self.assertEqual(preview["variant_name"], "")
+        self.assertEqual(preview["identity_label"], "Sample / B賞 / Prize")
+        self.assertNotEqual(preview["variant_name"], preview["identity_label"])
 
 
 if __name__ == "__main__":

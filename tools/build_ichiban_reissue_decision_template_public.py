@@ -120,6 +120,43 @@ def _reissue_review_lane(row: dict[str, Any], risk_summary: dict[str, Any]) -> s
     return "item_pair_review"
 
 
+def _campaign_decision_guidance(row: dict[str, Any], risk_summary: dict[str, Any]) -> dict[str, Any]:
+    comparison = row.get("campaign_url_comparison") or {}
+    high_impact = int(row.get("item_work_order_count") or 0) >= 5
+    required_evidence = [
+        "official campaign title on every source URL",
+        "sale or release period on every source URL",
+        "full prize lineup compared by rank",
+        "same-rank prize item names compared",
+        "variant names checked when one rank contains multiple kinds",
+    ]
+    if int(risk_summary.get("non_exception_missing_price_sample_rows") or 0) > 0:
+        required_evidence.append("non-exception official price confirmed or explicitly left unknown")
+    if int(risk_summary.get("zero_price_exception_sample_rows") or 0) > 0:
+        required_evidence.append("Last One or Double Chance rows keep official_price_jpy=0")
+    return {
+        "status": "campaign_pair_reissue_decision_required",
+        "likely_same_campaign_family_reissue": bool(
+            comparison.get("likely_same_campaign_family_reissue")
+        ),
+        "high_impact_campaign_pair": high_impact,
+        "required_evidence": required_evidence,
+        "decision_options": [
+            "campaign_pair_reissue_keep_all_separate",
+            "campaign_pair_duplicate_review_each_item_keep_drop",
+            "needs_more_source_evidence",
+        ],
+        "recommended_first_decision": (
+            "campaign_pair_reissue_keep_all_separate"
+            if comparison.get("likely_same_campaign_family_reissue")
+            else "needs_more_source_evidence"
+        ),
+        "manual_confirmed_allowed": False,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+    }
+
+
 def _item_template(row: dict[str, Any]) -> dict[str, Any]:
     template = _copy_template(row)
     sample_rows = row.get("sample_rows") or []
@@ -171,6 +208,10 @@ def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
         review_tags.append("likely_same_campaign_family_reissue")
     if int(row.get("item_work_order_count") or 0) >= 5:
         review_tags.append("high_impact_campaign_pair")
+    risk_summary = {
+        **risk_summary,
+        "review_risk_tags": review_tags,
+    }
     return {
         "campaign_work_order_id": row.get("campaign_work_order_id"),
         "priority": row.get("priority"),
@@ -185,10 +226,8 @@ def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
         "manual_review_checklist": row.get("manual_review_checklist") or [],
         "sample_rows": sample_rows,
         "sample_rows_with_identity_fields": _sample_rows_with_identity(sample_rows),
-        "review_risk_summary": {
-            **risk_summary,
-            "review_risk_tags": review_tags,
-        },
+        "review_risk_summary": risk_summary,
+        "campaign_decision_guidance": _campaign_decision_guidance(row, risk_summary),
         "recommended_review_lane": (
             "campaign_pair_first"
             if int(row.get("item_work_order_count") or 0) > 1
@@ -257,7 +296,8 @@ def _compact_campaign_item_preview(
         "campaign_title": sample.get("campaign_title") or "",
         "prize_rank": sample.get("prize_rank") or sample.get("sub_series") or "",
         "prize_item_name": sample.get("prize_item_name") or "",
-        "variant_name": sample.get("variant_name") or sample.get("identity_label") or "",
+        "variant_name": sample.get("variant_name") or "",
+        "identity_label": sample.get("identity_label") or "",
         "sample_name_ko": sample.get("name_ko") or "",
         "sample_name_ja": sample.get("name_ja") or "",
         "campaign_url_comparison": item.get("campaign_url_comparison") or {},
@@ -315,6 +355,8 @@ def _next_campaign_review_batch(
                 "review_risk_tags": (campaign.get("review_risk_summary") or {}).get("review_risk_tags") or [],
                 "recommended_review_lane": campaign.get("recommended_review_lane"),
                 "recommended_reviewer_action": campaign.get("recommended_reviewer_action"),
+                "campaign_decision_guidance": campaign.get("campaign_decision_guidance")
+                or {},
                 "affected_item_work_order_ids": campaign.get("affected_item_work_order_ids") or [],
                 "item_review_preview_rows": len(item_previews),
                 "item_review_preview": item_previews[:item_preview_limit],
