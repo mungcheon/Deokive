@@ -488,29 +488,41 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertEqual(
                 completion_plan["review_start_coverage"]["status"],
-                "some_phases_need_manual_research_start",
+                "all_phases_have_review_start",
             )
             self.assertEqual(
                 completion_plan["review_start_coverage"]["phases_with_review_start"],
-                3,
+                4,
             )
             self.assertEqual(
                 completion_plan["review_start_coverage"]["phases_missing_review_start"],
-                1,
+                0,
             )
             self.assertEqual(
                 completion_plan["review_start_coverage"]["rows_with_review_start"],
-                740,
+                745,
             )
             self.assertEqual(
                 completion_plan["review_start_coverage"]["rows_missing_review_start"],
-                5,
+                0,
             )
             self.assertEqual(
                 completion_plan["review_start_coverage"][
                     "missing_review_start_phase_ids"
                 ],
-                ["manual_nonstandard_image_research"],
+                [],
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"][
+                    "manual_image_research_review_start_rows"
+                ],
+                5,
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"][
+                    "manual_image_research_review_start_kind"
+                ],
+                "fallback_web_search",
             )
             self.assertEqual(
                 quality["missing_image_actionability"]["completion_plan_phase_rows_total"],
@@ -520,13 +532,13 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["missing_image_actionability"][
                     "completion_plan_rows_with_review_start"
                 ],
-                740,
+                745,
             )
             self.assertEqual(
                 quality["missing_image_actionability"][
                     "completion_plan_rows_missing_review_start"
                 ],
-                5,
+                0,
             )
             self.assertIs(completion_plan["automation_policy"]["auto_apply_catalog_changes"], False)
             self.assertIs(quality["missing_image_actionability"]["auto_apply_enabled"], False)

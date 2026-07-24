@@ -6,6 +6,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote_plus
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -185,6 +186,80 @@ def compact_sample(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any
         "category": item.get("category"),
         "source_url": item.get("source_url"),
         "official_search_url": item.get("official_search_url"),
+    }
+
+
+def manual_search_query(item: dict[str, Any]) -> str:
+    raw_parts = [
+        item.get("source_store"),
+        item.get("affiliation"),
+        item.get("name_ja"),
+        item.get("name_ko"),
+        item.get("category"),
+        "official goods image",
+    ]
+    parts: list[str] = []
+    seen: set[str] = set()
+    for part in raw_parts:
+        text = str(part or "").strip()
+        key = text.casefold()
+        if not text or key in seen:
+            continue
+        parts.append(text)
+        seen.add(key)
+    return " ".join(parts)
+
+
+def manual_search_url(item: dict[str, Any]) -> str:
+    query = manual_search_query(item)
+    if not query:
+        return ""
+    return f"https://www.google.com/search?q={quote_plus(query)}"
+
+
+def build_manual_research_review_start(manual_row: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(manual_row, dict) or int(manual_row.get("rows") or 0) <= 0:
+        return {}
+    sample_items = [
+        item
+        for item in (manual_row.get("sample_items") or [])
+        if isinstance(item, dict)
+    ]
+    search_items: list[dict[str, Any]] = []
+    for item in sample_items[:8]:
+        url = manual_search_url(item)
+        if not url:
+            continue
+        search_items.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "source_store": item.get("source_store"),
+                "affiliation": item.get("affiliation"),
+                "category": item.get("category"),
+                "manual_search_query": manual_search_query(item),
+                "manual_search_url": url,
+            }
+        )
+    if not search_items:
+        return {}
+    return {
+        "batch_id": "manual-nonstandard-image-research-start",
+        "workflow": "manual_image_research",
+        "source_store": search_items[0].get("source_store") or "",
+        "row_count": int(manual_row.get("rows") or len(search_items)),
+        "primary_review_url_rows": len(search_items),
+        "first_primary_review_url": search_items[0]["manual_search_url"],
+        "first_primary_review_url_kind": "fallback_web_search",
+        "manual_confirmation_required": True,
+        "auto_apply_enabled": False,
+        "items": search_items,
+        "review_checklist": [
+            "Open the fallback web search and find an official, manufacturer, or trusted store page.",
+            "Do not attach images from unrelated resale/listing pages without a note explaining why the evidence is acceptable.",
+            "Record trusted_source_url_or_manual_evidence_url, image_url_source_explained, and manual_note_for_nonstandard_source before import.",
+        ],
     }
 
 
@@ -473,6 +548,7 @@ def build_work_order(
     source_discovery_work_packs: list[dict[str, Any]] | None = None,
     next_source_discovery_focus_pack: dict[str, Any] | None = None,
     image_action_review_starts: dict[str, dict[str, Any]] | None = None,
+    manual_research_review_start: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     readiness_by_name = {str(row.get("readiness") or ""): row for row in readiness_rows}
     source_discovery_row = readiness_by_name.get("source_url_discovery_required", {})
@@ -628,8 +704,12 @@ def build_work_order(
         row_count=int(manual_row.get("rows") or summary.get("manual_image_research_rows") or 0),
         next_step="manual_official_source_and_image_research",
         template="manual_image_source_discovery_public.json",
+        review_start=manual_research_review_start,
         **readiness_blocker("manual_research_required"),
-        notes=["Use this after structured source discovery lanes are exhausted."],
+        notes=[
+            "Use this after structured source discovery lanes are exhausted.",
+            "Fallback web searches are only a starting point; import still requires trusted source/image evidence.",
+        ],
     )
     return rows
 
@@ -640,6 +720,7 @@ def build_completion_plan(
     source_discovery_work_packs: list[dict[str, Any]] | None = None,
     next_source_discovery_focus_pack: dict[str, Any] | None = None,
     image_action_review_starts: dict[str, dict[str, Any]] | None = None,
+    manual_research_review_start: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     generic_source_rows = int(summary.get("image_attachment_template_source_update_required_rows") or 0)
     representative_rows = int(summary.get("image_attachment_template_representative_review_rows") or 0)
@@ -778,8 +859,10 @@ def build_completion_plan(
         next_step="manual_official_source_and_image_evidence_recorded",
         template="manual_image_source_discovery_public.json",
         blocker="manual_research_required",
+        review_start=manual_research_review_start,
         notes=[
             "Use trusted official/manufacturer evidence and record why the source is acceptable.",
+            "Fallback web searches are review starts only; no image/source import is automatic.",
         ],
     )
 
@@ -1440,6 +1523,17 @@ def build_report(
     source_store_priority = summarize_source_stores(groups)
     source_discovery_work_packs = build_source_discovery_work_packs(groups)
     image_action_review_starts = build_image_action_review_starts(action_queue)
+    manual_research_row = next(
+        (
+            row
+            for row in readiness_rows
+            if str(row.get("readiness") or "") == "manual_research_required"
+        ),
+        {},
+    )
+    manual_research_review_start = build_manual_research_review_start(
+        manual_research_row
+    )
     next_source_discovery_focus_pack = enrich_next_focus_pack(
         next_focus_pack_from_template_summary(focus_template_summary),
         source_discovery_next_focus_detail_candidates,
@@ -1579,6 +1673,12 @@ def build_report(
             or []
         ),
         "direct_image_action_workflows_with_review_start": len(image_action_review_starts),
+        "manual_image_research_review_start_rows": int(
+            manual_research_review_start.get("primary_review_url_rows") or 0
+        ),
+        "manual_image_research_review_start_kind": (
+            manual_research_review_start.get("first_primary_review_url_kind") or ""
+        ),
         "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
         "image_attachment_template_confirmed_rows": int(
             image_attachment_template_summary.get("manual_confirmed_rows") or 0
@@ -1609,6 +1709,7 @@ def build_report(
         source_discovery_work_packs,
         next_source_discovery_focus_pack,
         image_action_review_starts,
+        manual_research_review_start,
     )
     manual_validation_focus = build_manual_validation_focus(summary_out, work_order)
     completion_plan = build_completion_plan(
@@ -1617,6 +1718,7 @@ def build_report(
         source_discovery_work_packs,
         next_source_discovery_focus_pack,
         image_action_review_starts,
+        manual_research_review_start,
     )
     execution_queue_summary = build_execution_queue_summary(
         summary_out,
@@ -1676,6 +1778,7 @@ def build_report(
         "source_store_priority": source_store_priority,
         "source_discovery_work_packs": source_discovery_work_packs,
         "image_action_review_starts": image_action_review_starts,
+        "manual_research_review_start": manual_research_review_start,
         "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
         "manual_validation_focus": manual_validation_focus,

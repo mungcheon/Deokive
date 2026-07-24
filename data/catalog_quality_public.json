@@ -8247,6 +8247,8 @@
       ]
     ],
     "direct_image_action_workflows_with_review_start": 2,
+    "manual_image_research_review_start_rows": 5,
+    "manual_image_research_review_start_kind": "fallback_web_search",
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 50,
@@ -8305,11 +8307,11 @@
     "completion_plan_phase_rows_total": 745,
     "completion_plan_phase_count": 4,
     "completion_plan_status": "balanced",
-    "completion_plan_review_start_status": "some_phases_need_manual_research_start",
-    "completion_plan_phases_with_review_start": 3,
-    "completion_plan_phases_missing_review_start": 1,
-    "completion_plan_rows_with_review_start": 740,
-    "completion_plan_rows_missing_review_start": 5,
+    "completion_plan_review_start_status": "all_phases_have_review_start",
+    "completion_plan_phases_with_review_start": 4,
+    "completion_plan_phases_missing_review_start": 0,
+    "completion_plan_rows_with_review_start": 745,
+    "completion_plan_rows_missing_review_start": 0,
     "blocking_dashboard_status": "manual_evidence_required",
     "blocking_dashboard_queue_coverage": 1.0,
     "manual_validation_focus": {
@@ -8741,7 +8743,74 @@
           ],
           "top_source_stores": [],
           "current_focus_pack": {},
-          "review_start": {}
+          "review_start": {
+            "batch_id": "manual-nonstandard-image-research-start",
+            "workflow": "manual_image_research",
+            "source_store": "아이돌 공식",
+            "row_count": 5,
+            "primary_review_url_rows": 5,
+            "first_primary_review_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%8F%8C+%EA%B3%B5%EC%8B%9D+%ED%8F%AC%ED%86%A0%EB%B6%81+official+goods+image",
+            "first_primary_review_url_kind": "fallback_web_search",
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false,
+            "items": [
+              {
+                "catalog_index": 2316,
+                "name_ko": "포토북",
+                "name_ja": null,
+                "source_store": "아이돌 공식",
+                "affiliation": null,
+                "category": "포토북",
+                "manual_search_query": "아이돌 공식 포토북 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%8F%8C+%EA%B3%B5%EC%8B%9D+%ED%8F%AC%ED%86%A0%EB%B6%81+official+goods+image"
+              },
+              {
+                "catalog_index": 2317,
+                "name_ko": "시즌 그리팅 (Seasons Greetings)",
+                "name_ja": null,
+                "source_store": "아이돌 공식",
+                "affiliation": null,
+                "category": "시즌 그리팅",
+                "manual_search_query": "아이돌 공식 시즌 그리팅 (Seasons Greetings) 시즌 그리팅 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%8F%8C+%EA%B3%B5%EC%8B%9D+%EC%8B%9C%EC%A6%8C+%EA%B7%B8%EB%A6%AC%ED%8C%85+%28Seasons+Greetings%29+%EC%8B%9C%EC%A6%8C+%EA%B7%B8%EB%A6%AC%ED%8C%85+official+goods+image"
+              },
+              {
+                "catalog_index": 2318,
+                "name_ko": "컴백 트레이딩 카드",
+                "name_ja": null,
+                "source_store": "아이돌 공식",
+                "affiliation": null,
+                "category": "트레이딩 카드",
+                "manual_search_query": "아이돌 공식 컴백 트레이딩 카드 트레이딩 카드 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%8F%8C+%EA%B3%B5%EC%8B%9D+%EC%BB%B4%EB%B0%B1+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C+official+goods+image"
+              },
+              {
+                "catalog_index": 2415,
+                "name_ko": "쿠루미 노아 콘서트 티셔츠",
+                "name_ja": null,
+                "source_store": "SVC 공식",
+                "affiliation": null,
+                "category": "의류",
+                "manual_search_query": "SVC 공식 쿠루미 노아 콘서트 티셔츠 의류 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=SVC+%EA%B3%B5%EC%8B%9D+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%BD%98%EC%84%9C%ED%8A%B8+%ED%8B%B0%EC%85%94%EC%B8%A0+%EC%9D%98%EB%A5%98+official+goods+image"
+              },
+              {
+                "catalog_index": 2421,
+                "name_ko": "시라유키 히나 타올",
+                "name_ja": null,
+                "source_store": "SVC 공식",
+                "affiliation": null,
+                "category": "타월",
+                "manual_search_query": "SVC 공식 시라유키 히나 타올 타월 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=SVC+%EA%B3%B5%EC%8B%9D+%EC%8B%9C%EB%9D%BC%EC%9C%A0%ED%82%A4+%ED%9E%88%EB%82%98+%ED%83%80%EC%98%AC+%ED%83%80%EC%9B%94+official+goods+image"
+              }
+            ],
+            "review_checklist": [
+              "Open the fallback web search and find an official, manufacturer, or trusted store page.",
+              "Do not attach images from unrelated resale/listing pages without a note explaining why the evidence is acceptable.",
+              "Record trusted_source_url_or_manual_evidence_url, image_url_source_explained, and manual_note_for_nonstandard_source before import."
+            ]
+          }
         }
       ],
       "blocked_summary": {
@@ -9013,7 +9082,74 @@
             "image_url_source_explained",
             "manual_note_for_nonstandard_source"
           ],
-          "review_start": {}
+          "review_start": {
+            "batch_id": "manual-nonstandard-image-research-start",
+            "workflow": "manual_image_research",
+            "source_store": "아이돌 공식",
+            "row_count": 5,
+            "primary_review_url_rows": 5,
+            "first_primary_review_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%8F%8C+%EA%B3%B5%EC%8B%9D+%ED%8F%AC%ED%86%A0%EB%B6%81+official+goods+image",
+            "first_primary_review_url_kind": "fallback_web_search",
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false,
+            "items": [
+              {
+                "catalog_index": 2316,
+                "name_ko": "포토북",
+                "name_ja": null,
+                "source_store": "아이돌 공식",
+                "affiliation": null,
+                "category": "포토북",
+                "manual_search_query": "아이돌 공식 포토북 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%8F%8C+%EA%B3%B5%EC%8B%9D+%ED%8F%AC%ED%86%A0%EB%B6%81+official+goods+image"
+              },
+              {
+                "catalog_index": 2317,
+                "name_ko": "시즌 그리팅 (Seasons Greetings)",
+                "name_ja": null,
+                "source_store": "아이돌 공식",
+                "affiliation": null,
+                "category": "시즌 그리팅",
+                "manual_search_query": "아이돌 공식 시즌 그리팅 (Seasons Greetings) 시즌 그리팅 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%8F%8C+%EA%B3%B5%EC%8B%9D+%EC%8B%9C%EC%A6%8C+%EA%B7%B8%EB%A6%AC%ED%8C%85+%28Seasons+Greetings%29+%EC%8B%9C%EC%A6%8C+%EA%B7%B8%EB%A6%AC%ED%8C%85+official+goods+image"
+              },
+              {
+                "catalog_index": 2318,
+                "name_ko": "컴백 트레이딩 카드",
+                "name_ja": null,
+                "source_store": "아이돌 공식",
+                "affiliation": null,
+                "category": "트레이딩 카드",
+                "manual_search_query": "아이돌 공식 컴백 트레이딩 카드 트레이딩 카드 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%8F%8C+%EA%B3%B5%EC%8B%9D+%EC%BB%B4%EB%B0%B1+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C+official+goods+image"
+              },
+              {
+                "catalog_index": 2415,
+                "name_ko": "쿠루미 노아 콘서트 티셔츠",
+                "name_ja": null,
+                "source_store": "SVC 공식",
+                "affiliation": null,
+                "category": "의류",
+                "manual_search_query": "SVC 공식 쿠루미 노아 콘서트 티셔츠 의류 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=SVC+%EA%B3%B5%EC%8B%9D+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%BD%98%EC%84%9C%ED%8A%B8+%ED%8B%B0%EC%85%94%EC%B8%A0+%EC%9D%98%EB%A5%98+official+goods+image"
+              },
+              {
+                "catalog_index": 2421,
+                "name_ko": "시라유키 히나 타올",
+                "name_ja": null,
+                "source_store": "SVC 공식",
+                "affiliation": null,
+                "category": "타월",
+                "manual_search_query": "SVC 공식 시라유키 히나 타올 타월 official goods image",
+                "manual_search_url": "https://www.google.com/search?q=SVC+%EA%B3%B5%EC%8B%9D+%EC%8B%9C%EB%9D%BC%EC%9C%A0%ED%82%A4+%ED%9E%88%EB%82%98+%ED%83%80%EC%98%AC+%ED%83%80%EC%9B%94+official+goods+image"
+              }
+            ],
+            "review_checklist": [
+              "Open the fallback web search and find an official, manufacturer, or trusted store page.",
+              "Do not attach images from unrelated resale/listing pages without a note explaining why the evidence is acceptable.",
+              "Record trusted_source_url_or_manual_evidence_url, image_url_source_explained, and manual_note_for_nonstandard_source before import."
+            ]
+          }
         }
       ],
       "phase_queue_breakdown": [
@@ -9108,11 +9244,11 @@
       },
       "phase_status": "balanced",
       "phase_count": 4,
-      "review_start_coverage_status": "some_phases_need_manual_research_start",
-      "phases_with_review_start": 3,
-      "phases_missing_review_start": 1,
-      "rows_with_review_start": 740,
-      "rows_missing_review_start": 5,
+      "review_start_coverage_status": "all_phases_have_review_start",
+      "phases_with_review_start": 4,
+      "phases_missing_review_start": 0,
+      "rows_with_review_start": 745,
+      "rows_missing_review_start": 0,
       "top_phase_rows": [
         {
           "phase_id": "replace_generic_source_urls",

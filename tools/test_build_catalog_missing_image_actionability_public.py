@@ -540,14 +540,14 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         review_start_coverage = report["completion_plan"]["review_start_coverage"]
         self.assertEqual(
             review_start_coverage["status"],
-            "some_phases_need_manual_research_start",
+            "all_phases_have_review_start",
         )
-        self.assertEqual(review_start_coverage["phases_with_review_start"], 3)
-        self.assertEqual(review_start_coverage["phases_missing_review_start"], 1)
-        self.assertEqual(review_start_coverage["rows_missing_review_start"], 1)
+        self.assertEqual(review_start_coverage["phases_with_review_start"], 4)
+        self.assertEqual(review_start_coverage["phases_missing_review_start"], 0)
+        self.assertEqual(review_start_coverage["rows_missing_review_start"], 0)
         self.assertEqual(
             review_start_coverage["missing_review_start_phase_ids"],
-            ["manual_nonstandard_image_research"],
+            [],
         )
         self.assertEqual(
             review_start_coverage["phase_review_starts"][0]["phase_id"],
@@ -563,10 +563,26 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             "https://gotouchi.example/item",
         )
         self.assertEqual(
-            blocking_dashboard["review_start_coverage_status"],
-            "some_phases_need_manual_research_start",
+            completion_phases["manual_nonstandard_image_research"]["review_start"][
+                "first_primary_review_url_kind"
+            ],
+            "fallback_web_search",
         )
-        self.assertEqual(blocking_dashboard["phases_missing_review_start"], 1)
+        self.assertEqual(
+            completion_phases["manual_nonstandard_image_research"]["review_start"][
+                "first_primary_review_url"
+            ],
+            "https://www.google.com/search?q=Store+D+Manual+official+goods+image",
+        )
+        self.assertEqual(
+            report["manual_research_review_start"]["primary_review_url_rows"],
+            1,
+        )
+        self.assertEqual(
+            blocking_dashboard["review_start_coverage_status"],
+            "all_phases_have_review_start",
+        )
+        self.assertEqual(blocking_dashboard["phases_missing_review_start"], 0)
         self.assertEqual(
             phase_breakdown["complete_source_discovery_focus_packs"][
                 "direct_queue_lane"
