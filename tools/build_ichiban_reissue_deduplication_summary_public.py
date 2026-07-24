@@ -16,6 +16,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "ichiban_kuji_reissue_deduplication_public.json"
 DEFAULT_OUTPUT = DEFAULT_INPUT
+TIMESTAMP_ONLY_KEYS = {"generated_at", "summary_generated_at"}
 
 
 def _compact(value: Any) -> str:
@@ -121,13 +122,34 @@ def build_summary(report: dict[str, Any], *, asset_root: Path | None = None) -> 
     return summary
 
 
-def build_report(report: dict[str, Any], *, asset_root: Path | None = None) -> dict[str, Any]:
+def build_report(
+    report: dict[str, Any],
+    *,
+    asset_root: Path | None = None,
+    summary_generated_at: str | None = None,
+) -> dict[str, Any]:
     out = dict(report)
     out["summary"] = build_summary(out, asset_root=asset_root)
-    out["summary_generated_at"] = (
+    out["summary_generated_at"] = summary_generated_at or (
         dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     )
     return out
+
+
+def _without_timestamp_only_keys(payload: dict[str, Any]) -> dict[str, Any]:
+    return {key: value for key, value in payload.items() if key not in TIMESTAMP_ONLY_KEYS}
+
+
+def write_report(report: dict[str, Any], path: Path = DEFAULT_OUTPUT) -> None:
+    serialized = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+    if path.exists():
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8-sig"))
+        except json.JSONDecodeError:
+            existing = None
+        if isinstance(existing, dict) and _without_timestamp_only_keys(existing) == _without_timestamp_only_keys(report):
+            return
+    path.write_text(serialized, encoding="utf-8")
 
 
 def main() -> int:
@@ -143,7 +165,7 @@ def main() -> int:
 
     updated = build_report(report, asset_root=args.asset_root)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(updated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_report(updated, args.output)
 
     print(
         json.dumps(

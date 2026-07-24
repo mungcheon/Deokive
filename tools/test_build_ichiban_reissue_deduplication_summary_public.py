@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+import json
 from pathlib import Path
 
-from tools.build_ichiban_reissue_deduplication_summary_public import build_summary
+from tools.build_ichiban_reissue_deduplication_summary_public import build_report, build_summary, write_report
 
 
 class BuildIchibanReissueDeduplicationSummaryPublicTest(unittest.TestCase):
@@ -117,6 +118,28 @@ class BuildIchibanReissueDeduplicationSummaryPublicTest(unittest.TestCase):
             summary = build_summary(report, asset_root=root)
 
         self.assertEqual(summary["missing_local_image_files"], 1)
+
+    def test_write_report_skips_summary_timestamp_only_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "report.json"
+            report = build_report(
+                {
+                    "duplicate_groups_removed": 0,
+                    "duplicate_rows_removed": 0,
+                    "groups": [],
+                },
+                summary_generated_at="2026-01-01T00:00:00Z",
+            )
+            write_report(report, path)
+            before = path.stat().st_mtime_ns
+
+            timestamp_only = dict(report)
+            timestamp_only["summary_generated_at"] = "2026-01-01T00:01:00Z"
+            write_report(timestamp_only, path)
+
+            self.assertEqual(path.stat().st_mtime_ns, before)
+            saved = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(saved["summary_generated_at"], "2026-01-01T00:00:00Z")
 
 
 if __name__ == "__main__":
