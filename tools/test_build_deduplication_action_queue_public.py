@@ -84,6 +84,12 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["auto_merge_ready_groups"], 0)
         self.assertEqual(report["summary"]["auto_delete_ready_groups"], 0)
         self.assertEqual(report["summary"]["explicit_keep_drop_required_groups"], 2)
+        self.assertEqual(report["summary"]["primary_review_url_groups"], 1)
+        self.assertEqual(report["summary"]["first_primary_review_url"], "https://example.test/item")
+        self.assertEqual(
+            dict(report["summary"]["by_primary_review_url_kind"]),
+            {"keep_source_url": 1},
+        )
         self.assertEqual(report["completion_readiness"]["status"], "manual_keep_drop_confirmation_required")
         self.assertEqual(report["completion_readiness"]["next_safe_phase"], "record_manual_keep_drop_decisions")
         self.assertIn(
@@ -129,11 +135,16 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
             report["batches"][0]["unblocks_when"],
             "explicit_manual_keep_drop_decision_confirmed",
         )
+        self.assertEqual(report["batches"][0]["primary_review_url_groups"], 1)
+        self.assertEqual(report["batches"][0]["first_primary_review_url"], "https://example.test/item")
         self.assertEqual(
             report["batches"][0]["groups"][0]["confirmed_queue"],
             "server/catalog_dedupe_confirmed_decisions.json",
         )
         first_group = report["batches"][0]["groups"][0]
+        self.assertEqual(first_group["primary_review_url"], "https://example.test/item")
+        self.assertEqual(first_group["primary_review_url_kind"], "keep_source_url")
+        self.assertEqual(first_group["review_url_count"], 2)
         self.assertEqual(first_group["keep_basis"]["basis"], "richest_or_equal_catalog_row")
         self.assertEqual(first_group["keep_basis"]["keep_richness"], 9)
         self.assertTrue(first_group["keep_basis"]["keep_has_image"])

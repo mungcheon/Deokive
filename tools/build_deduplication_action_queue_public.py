@@ -585,6 +585,38 @@ def _row_comparison_summary(group: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _review_url_summary(group: dict[str, Any]) -> dict[str, Any]:
+    rows = [row for row in group.get("rows") or [] if isinstance(row, dict)]
+    keep_index = group.get("keep_catalog_index")
+    keep_row = next((row for row in rows if row.get("catalog_index") == keep_index), None)
+    source_urls = _unique_sorted([row.get("source_url") for row in rows])
+    image_urls = _unique_sorted([row.get("image_url") for row in rows])
+    source_url_set = set(source_urls)
+    review_urls = source_urls + [url for url in image_urls if url not in source_url_set]
+
+    primary_url = ""
+    primary_kind = ""
+    if keep_row and _present(keep_row.get("source_url")):
+        primary_url = str(keep_row.get("source_url") or "").strip()
+        primary_kind = "keep_source_url"
+    elif source_urls:
+        primary_url = source_urls[0]
+        primary_kind = "candidate_source_url"
+    elif keep_row and _present(keep_row.get("image_url")):
+        primary_url = str(keep_row.get("image_url") or "").strip()
+        primary_kind = "keep_image_url"
+    elif image_urls:
+        primary_url = image_urls[0]
+        primary_kind = "candidate_image_url"
+
+    return {
+        "primary_review_url": primary_url,
+        "primary_review_url_kind": primary_kind,
+        "review_urls": review_urls,
+        "review_url_count": len(review_urls),
+    }
+
+
 def _confirmation_risk_flags(group: dict[str, Any], comparison: dict[str, Any]) -> list[str]:
     flags: list[str] = []
     if comparison.get("name_differs"):
@@ -644,6 +676,7 @@ def _compact_group(
         "merge_blockers": group.get("merge_blockers") or [],
         "keep_basis": _keep_basis(group),
         "row_comparison_summary": comparison,
+        **_review_url_summary(group),
         "confirmation_risk_flags": _confirmation_risk_flags(group, comparison),
         "identity_checklist": group.get("identity_checklist") or batch.get("identity_checklist") or [],
         "recommended_action": group.get("recommended_action") or batch.get("recommended_action"),
@@ -760,6 +793,13 @@ def build_report(
             for reason in group.get("manual_review_required_reasons", [])
         ]
     )
+    primary_review_url_kind_counts = _counter_from_values(
+        [
+            str(group.get("primary_review_url_kind") or "")
+            for group in actionable
+            if group.get("primary_review_url")
+        ]
+    )
     manual_confirmed_reissue_rows = sum(
         1
         for order in reissue_work_orders
@@ -836,6 +876,11 @@ def build_report(
                 "review_confidence_counts": _counter_pairs(groups, "review_confidence"),
                 "key_type_counts": _counter_pairs(groups, "key_type"),
                 "review_risk_counts": _counter_pairs(groups, "review_risk"),
+                "primary_review_url_groups": sum(1 for group in groups if group.get("primary_review_url")),
+                "first_primary_review_url": next(
+                    (str(group.get("primary_review_url")) for group in groups if group.get("primary_review_url")),
+                    "",
+                ),
                 "groups": groups,
                 "auto_merge_enabled": False,
                 "auto_delete_enabled": False,
@@ -859,6 +904,12 @@ def build_report(
             "by_merge_blocker": merge_blocker_counts,
             "by_confirmation_risk_flag": confirmation_risk_counts,
             "by_manual_review_required_reason": manual_reason_counts,
+            "primary_review_url_groups": sum(1 for group in actionable if group.get("primary_review_url")),
+            "first_primary_review_url": next(
+                (str(group.get("primary_review_url")) for group in actionable if group.get("primary_review_url")),
+                "",
+            ),
+            "by_primary_review_url_kind": primary_review_url_kind_counts,
             "excluded_review_confidence": _counter_to_pairs(excluded),
             **reissue_policy,
             "ichiban_reissue_work_order_rows": len(reissue_work_orders),

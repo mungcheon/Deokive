@@ -18,6 +18,7 @@ import build_animation_category_review_batches_public
 import build_animation_category_split_review_public
 import build_animation_category_unmatched_keyword_review_public
 import build_deduplication_action_queue_public
+import build_deduplication_fast_review_public
 import build_gotouchi_official_candidate_review_queue_public
 import build_image_attachment_action_queue_public
 import build_image_source_url_confirmed_template_public
@@ -7944,6 +7945,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         batch_size=10,
         ichiban_policy_audit=ichiban_prize_policy_audit_source,
     )
+    deduplication_fast_review = build_deduplication_fast_review_public.build_report(
+        deduplication_action_queue,
+        generated_at=generated_at,
+    )
     ichiban_kuji_prize_policy_issue_queue = (
         build_ichiban_prize_policy_issue_queue_public.build_queue(
             ichiban_prize_policy_audit_source,
@@ -9003,6 +9008,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_ENRICHMENT_BATCHES, image_enrichment_batches)
         write_json(DEDUPLICATION, deduplication)
         write_json(DEDUPLICATION_ACTION_QUEUE, deduplication_action_queue)
+        write_json(DEDUPLICATION_FAST_REVIEW, deduplication_fast_review)
         write_json(NAME_DUPLICATE_AUDIT, name_duplicate_audit)
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ANIMATION_CATEGORY_COVERAGE_AUDIT, animation_category_coverage_audit)

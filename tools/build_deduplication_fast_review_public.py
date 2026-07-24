@@ -74,6 +74,48 @@ def keep_reason(group: dict[str, Any], rows: list[dict[str, Any]]) -> str:
     return "keep_row_requires_manual_recheck"
 
 
+def _unique_urls(values: list[Any]) -> list[str]:
+    urls: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        url = str(value or "").strip()
+        if not url or url in seen:
+            continue
+        seen.add(url)
+        urls.append(url)
+    return urls
+
+
+def review_url_summary(group: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, Any]:
+    keep_index = group.get("keep_catalog_index")
+    keep_row = next((row for row in rows if row.get("catalog_index") == keep_index), None)
+    source_urls = _unique_urls([row.get("source_url") for row in rows])
+    image_urls = _unique_urls([row.get("image_url") for row in rows])
+    review_urls = source_urls + [url for url in image_urls if url not in set(source_urls)]
+
+    primary_url = ""
+    primary_kind = ""
+    if keep_row and keep_row.get("source_url"):
+        primary_url = str(keep_row.get("source_url") or "").strip()
+        primary_kind = "keep_source_url"
+    elif source_urls:
+        primary_url = source_urls[0]
+        primary_kind = "candidate_source_url"
+    elif keep_row and keep_row.get("image_url"):
+        primary_url = str(keep_row.get("image_url") or "").strip()
+        primary_kind = "keep_image_url"
+    elif image_urls:
+        primary_url = image_urls[0]
+        primary_kind = "candidate_image_url"
+
+    return {
+        "primary_review_url": primary_url,
+        "primary_review_url_kind": primary_kind,
+        "review_urls": review_urls,
+        "review_url_count": len(review_urls),
+    }
+
+
 def identity_delta(rows: list[dict[str, Any]]) -> dict[str, Any]:
     normalized_names = sorted({normalize_name(row.get("name_ko")) for row in rows if row.get("name_ko")})
     source_urls = sorted({str(row.get("source_url") or "") for row in rows if row.get("source_url")})
@@ -116,6 +158,7 @@ def compact_group(group: dict[str, Any]) -> dict[str, Any]:
         }
     )
     delta = identity_delta(rows)
+    review_urls = review_url_summary(group, rows)
     warning = fast_review_warning(delta)
     return {
         "key_type": group.get("key_type"),
@@ -133,6 +176,7 @@ def compact_group(group: dict[str, Any]) -> dict[str, Any]:
         "same_image_url": same_image_url,
         "fast_review_lane": fast_review_lane,
         "fast_review_warning": warning,
+        **review_urls,
         "keep_reason": keep_reason(group, rows),
         "identity_delta": delta,
         "dedupe_decision_template": decision_template,
@@ -167,6 +211,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
     by_blocker = Counter()
     by_fast_review_lane = Counter()
     by_fast_review_warning = Counter()
+    by_primary_review_url_kind = Counter()
     same_barcode_groups = 0
     same_source_url_groups = 0
     same_image_url_groups = 0
@@ -186,6 +231,8 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             image_delta_groups += 1
         by_fast_review_lane[str(group.get("fast_review_lane") or "unknown")] += 1
         by_fast_review_warning[str(group.get("fast_review_warning") or "unknown")] += 1
+        if group.get("primary_review_url"):
+            by_primary_review_url_kind[str(group.get("primary_review_url_kind") or "unknown")] += 1
         for store in group.get("stores") or []:
             by_store[str(store)] += 1
         for category in group.get("categories") or []:
@@ -210,6 +257,11 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
                 1 for group in fast_groups if group.get("fast_review_warning") != "no_identity_delta_detected"
             ),
             "manual_confirmed_true": 0,
+            "primary_review_url_groups": sum(1 for group in fast_groups if group.get("primary_review_url")),
+            "first_primary_review_url": next(
+                (str(group.get("primary_review_url")) for group in fast_groups if group.get("primary_review_url")),
+                "",
+            ),
             "auto_merge_enabled": False,
             "auto_delete_enabled": False,
         },
@@ -219,6 +271,10 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             "by_source_store": counter_rows(by_store, "source_store"),
             "by_category": counter_rows(by_category, "category"),
             "by_merge_blocker": counter_rows(by_blocker, "merge_blocker"),
+            "by_primary_review_url_kind": counter_rows(
+                by_primary_review_url_kind,
+                "primary_review_url_kind",
+            ),
         },
         "items": fast_groups,
         "held_for_later_summary": {

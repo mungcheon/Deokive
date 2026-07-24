@@ -72,6 +72,8 @@ class DeduplicationFastReviewTests(unittest.TestCase):
         self.assertEqual(report["summary"]["name_delta_groups"], 1)
         self.assertEqual(report["summary"]["image_delta_groups"], 1)
         self.assertEqual(report["summary"]["variant_warning_groups"], 1)
+        self.assertEqual(report["summary"]["primary_review_url_groups"], 1)
+        self.assertEqual(report["summary"]["first_primary_review_url"], "https://example.test/item")
         self.assertIs(report["summary"]["auto_delete_enabled"], False)
         self.assertIs(report["items"][0]["dedupe_decision_template"]["manual_confirmed"], False)
         self.assertEqual(
@@ -80,6 +82,9 @@ class DeduplicationFastReviewTests(unittest.TestCase):
         )
         self.assertEqual(report["items"][0]["fast_review_lane"], "same_barcode_and_source_url")
         self.assertEqual(report["items"][0]["fast_review_warning"], "name_delta_requires_variant_check")
+        self.assertEqual(report["items"][0]["primary_review_url"], "https://example.test/item")
+        self.assertEqual(report["items"][0]["primary_review_url_kind"], "keep_source_url")
+        self.assertEqual(report["items"][0]["review_url_count"], 3)
         self.assertEqual(report["items"][0]["keep_reason"], "keeps_richest_catalog_row")
         self.assertTrue(report["items"][0]["identity_delta"]["name_differs"])
         self.assertFalse(report["items"][0]["identity_delta"]["source_url_differs"])
@@ -92,6 +97,10 @@ class DeduplicationFastReviewTests(unittest.TestCase):
         self.assertEqual(
             report["breakdowns"]["by_fast_review_warning"],
             [{"fast_review_warning": "name_delta_requires_variant_check", "groups": 1}],
+        )
+        self.assertEqual(
+            report["breakdowns"]["by_primary_review_url_kind"],
+            [{"primary_review_url_kind": "keep_source_url", "groups": 1}],
         )
         self.assertEqual(report["automation_policy"]["import_tool"], "tools/import_confirmed_dedupe_decisions.py")
 
