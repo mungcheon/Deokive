@@ -416,7 +416,7 @@ class _CatalogImportActionButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       width: double.infinity,
       height: 48,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 18),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(999),
@@ -440,8 +440,11 @@ class _CatalogImportActionButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: foregroundColor),
-                const SizedBox(width: 7),
+                SizedBox(
+                  width: 22,
+                  child: Icon(icon, color: foregroundColor),
+                ),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Center(
                     child: _CatalogImportActionLabel(

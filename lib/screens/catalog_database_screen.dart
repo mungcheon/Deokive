@@ -588,7 +588,7 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 128,
+        minWidth: expanded ? 0 : 136,
         minHeight: 40,
         maxHeight: 40,
       ),
@@ -627,7 +627,7 @@ class _CatalogAddButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(icon, color: foreground),
-                const SizedBox(width: 5),
+                const SizedBox(width: 6),
                 if (expanded)
                   Flexible(
                     child: Center(
@@ -639,7 +639,7 @@ class _CatalogAddButton extends StatelessWidget {
                   )
                 else
                   SizedBox(
-                    width: 72,
+                    width: 82,
                     child: _CatalogAddButtonLabel(
                       label: label,
                       color: foreground,
