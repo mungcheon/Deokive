@@ -667,6 +667,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
             0,
         )
+        self.assertEqual(
+            quality["manual_source_url_search_queue"]["manual_image_url_slot_rows"],
+            42,
+        )
+        self.assertEqual(
+            quality["manual_source_url_search_queue"]["manual_image_url_slot_coverage"],
+            1.0,
+        )
         self.assertIs(quality["manual_source_url_search_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["provider_missing_source_url_queue"]["provider_missing_rows"], 5)
         self.assertEqual(quality["provider_missing_source_url_queue"]["with_store_search_url"], 5)
@@ -687,6 +695,14 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "auto_apply_ready_rows"
             ],
             0,
+        )
+        self.assertEqual(
+            quality["provider_missing_source_url_queue"]["manual_image_url_slot_rows"],
+            5,
+        )
+        self.assertEqual(
+            quality["provider_missing_source_url_queue"]["manual_image_url_slot_coverage"],
+            1.0,
         )
         self.assertIs(quality["provider_missing_source_url_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["candidate_source_url_review_queue"]["candidate_review_rows"], 3)

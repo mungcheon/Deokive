@@ -50,6 +50,8 @@ class BuildProviderMissingSourceUrlQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["by_source_store"], [["Weverse Shop", 1]])
         self.assertEqual(report["summary"]["by_category"], [["photocard", 1]])
         self.assertEqual(report["summary"]["with_store_search_url"], 1)
+        self.assertEqual(report["summary"]["manual_image_url_slot_rows"], 1)
+        self.assertEqual(report["summary"]["manual_image_url_slot_coverage"], 1.0)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(
             report["review_readiness"]["status"],
@@ -74,7 +76,7 @@ class BuildProviderMissingSourceUrlQueuePublicTest(unittest.TestCase):
         )
         self.assertIn(
             "tools/import_confirmed_source_urls.py",
-            report["instructions"][3],
+            report["instructions"][4],
         )
 
         item = report["items"][0]
@@ -84,6 +86,8 @@ class BuildProviderMissingSourceUrlQueuePublicTest(unittest.TestCase):
         self.assertEqual(item["source_url_import_template"]["field"], "source_url")
         self.assertFalse(item["source_url_import_template"]["manual_confirmed"])
         self.assertEqual(item["source_url_import_template"]["manual_value"], "")
+        self.assertEqual(item["source_url_import_template"]["manual_image_url"], "")
+        self.assertEqual(item["source_url_import_template"]["manual_image_note"], "")
         self.assertIn("no_candidate_provider_result", item["review_blockers"])
 
         workstream = report["workstreams"][0]
@@ -96,6 +100,8 @@ class BuildProviderMissingSourceUrlQueuePublicTest(unittest.TestCase):
         report = queue.build_queue({"items": []})
 
         self.assertEqual(report["summary"]["provider_missing_rows"], 0)
+        self.assertEqual(report["summary"]["manual_image_url_slot_rows"], 0)
+        self.assertEqual(report["summary"]["manual_image_url_slot_coverage"], 1.0)
         self.assertEqual(report["review_readiness"]["status"], "empty")
         self.assertEqual(report["review_readiness"]["manual_review_rows"], 0)
         self.assertEqual(report["workstreams"], [])

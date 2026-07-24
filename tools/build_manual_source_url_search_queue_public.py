@@ -55,6 +55,8 @@ def _manual_import_template(row: dict[str, Any]) -> dict[str, Any]:
         "field": "source_url",
         "manual_confirmed": False,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": row.get("current_source_url"),
         "manual_note": "",
@@ -108,6 +110,7 @@ def _build_category_workstreams(items: list[dict[str, Any]]) -> list[dict[str, A
                     "Use fallback_search_queries if the store search page has no exact result.",
                     "Confirm the exact product/detail page and variant before importing.",
                     "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review.",
+                    "If the exact product image is confirmed on the same page, fill manual_image_url too.",
                 ],
                 "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
                 "auto_apply_enabled": False,
@@ -160,6 +163,12 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
     ]
     rows.sort(key=_priority_score)
     workstreams = _build_category_workstreams(rows)
+    import_templates = [
+        row.get("source_url_import_template")
+        for row in rows
+        if isinstance(row.get("source_url_import_template"), dict)
+    ]
+    manual_image_url_slot_rows = sum(1 for template in import_templates if "manual_image_url" in template)
 
     return {
         "schema_version": 1,
@@ -172,6 +181,8 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
             "by_category": _counter_pairs(rows, "category"),
             "with_store_search_url": sum(1 for row in rows if row.get("store_search_url")),
             "with_site_query": sum(1 for row in rows if row.get("site_query")),
+            "manual_image_url_slot_rows": manual_image_url_slot_rows,
+            "manual_image_url_slot_coverage": round(manual_image_url_slot_rows / len(rows), 4) if rows else 1.0,
             "auto_apply_enabled": False,
         },
         "review_readiness": _review_readiness(rows),
@@ -179,6 +190,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
             "This queue covers source_url rows with no usable candidate options.",
             "Search hints are not evidence and must not be imported directly.",
             "Use only official product/detail pages as confirmed source_url evidence.",
+            "When the exact product page image is also confirmed, put it in source_url_import_template.manual_image_url.",
             "Dry-run tools/import_confirmed_source_urls.py after manual confirmations.",
             "Then rebuild image attachment queues to extract or confirm image_url.",
         ],

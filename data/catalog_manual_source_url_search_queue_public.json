@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T20:00:25Z",
+  "generated_at": "2026-07-24T20:17:59Z",
   "scope": "catalog_manual_source_url_search_queue",
   "summary": {
     "manual_search_required_rows": 42,
@@ -35,6 +35,8 @@
     ],
     "with_store_search_url": 42,
     "with_site_query": 42,
+    "manual_image_url_slot_rows": 42,
+    "manual_image_url_slot_coverage": 1.0,
     "auto_apply_enabled": false
   },
   "review_readiness": {
@@ -71,6 +73,7 @@
     "This queue covers source_url rows with no usable candidate options.",
     "Search hints are not evidence and must not be imported directly.",
     "Use only official product/detail pages as confirmed source_url evidence.",
+    "When the exact product page image is also confirmed, put it in source_url_import_template.manual_image_url.",
     "Dry-run tools/import_confirmed_source_urls.py after manual confirmations.",
     "Then rebuild image attachment queues to extract or confirm image_url."
   ],
@@ -110,6 +113,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -153,6 +158,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -197,6 +204,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -240,6 +249,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -283,6 +294,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -326,6 +339,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -370,6 +385,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -413,6 +430,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -457,6 +476,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -500,6 +521,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -525,7 +548,8 @@
         "Open store_search_url when it is available.",
         "Use fallback_search_queries if the store search page has no exact result.",
         "Confirm the exact product/detail page and variant before importing.",
-        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review.",
+        "If the exact product image is confirmed on the same page, fill manual_image_url too."
       ],
       "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
       "auto_apply_enabled": false
@@ -564,6 +588,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -607,6 +633,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -650,6 +678,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -693,6 +723,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -736,6 +768,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -779,6 +813,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -822,6 +858,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -865,6 +903,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -908,6 +948,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -951,6 +993,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -976,7 +1020,8 @@
         "Open store_search_url when it is available.",
         "Use fallback_search_queries if the store search page has no exact result.",
         "Confirm the exact product/detail page and variant before importing.",
-        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review.",
+        "If the exact product image is confirmed on the same page, fill manual_image_url too."
       ],
       "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
       "auto_apply_enabled": false
@@ -1016,6 +1061,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1060,6 +1107,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1104,6 +1153,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1148,6 +1199,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1192,6 +1245,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1236,6 +1291,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1280,6 +1337,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1324,6 +1383,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1368,6 +1429,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1412,6 +1475,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1437,7 +1502,8 @@
         "Open store_search_url when it is available.",
         "Use fallback_search_queries if the store search page has no exact result.",
         "Confirm the exact product/detail page and variant before importing.",
-        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review.",
+        "If the exact product image is confirmed on the same page, fill manual_image_url too."
       ],
       "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
       "auto_apply_enabled": false
@@ -1476,6 +1542,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1501,7 +1569,8 @@
         "Open store_search_url when it is available.",
         "Use fallback_search_queries if the store search page has no exact result.",
         "Confirm the exact product/detail page and variant before importing.",
-        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review.",
+        "If the exact product image is confirmed on the same page, fill manual_image_url too."
       ],
       "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
       "auto_apply_enabled": false
@@ -1540,6 +1609,8 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "manual_note": ""
@@ -1565,7 +1636,8 @@
         "Open store_search_url when it is available.",
         "Use fallback_search_queries if the store search page has no exact result.",
         "Confirm the exact product/detail page and variant before importing.",
-        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review."
+        "Fill source_url_import_template.manual_value and set manual_confirmed=true only after review.",
+        "If the exact product image is confirmed on the same page, fill manual_image_url too."
       ],
       "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
       "auto_apply_enabled": false
@@ -1595,6 +1667,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1638,6 +1712,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1681,6 +1757,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1724,6 +1802,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1767,6 +1847,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1810,6 +1892,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1853,6 +1937,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1896,6 +1982,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1939,6 +2027,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -1982,6 +2072,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2025,6 +2117,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2068,6 +2162,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2111,6 +2207,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2154,6 +2252,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2198,6 +2298,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2242,6 +2344,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2286,6 +2390,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2330,6 +2436,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2374,6 +2482,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2418,6 +2528,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2462,6 +2574,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2506,6 +2620,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2550,6 +2666,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2594,6 +2712,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2638,6 +2758,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2681,6 +2803,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2725,6 +2849,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2768,6 +2894,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2811,6 +2939,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2854,6 +2984,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2898,6 +3030,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2941,6 +3075,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -2985,6 +3121,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3028,6 +3166,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3072,6 +3212,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3115,6 +3257,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3158,6 +3302,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3202,6 +3348,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3245,6 +3393,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3288,6 +3438,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3331,6 +3483,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
@@ -3374,6 +3528,8 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "manual_note": ""
