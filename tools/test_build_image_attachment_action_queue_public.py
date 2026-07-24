@@ -68,6 +68,8 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_fallback_web_search_rows"], 1)
         self.assertEqual(report["summary"]["source_url_update_any_search_hint_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_missing_any_search_hint_rows"], 0)
+        self.assertEqual(report["summary"]["source_url_candidate_status_counts"], [])
+        self.assertEqual(report["summary"]["source_url_review_lane_counts"], [])
         self.assertEqual(report["summary"]["primary_review_url_rows"], 2)
         self.assertEqual(report["summary"]["primary_review_url_missing_rows"], 0)
         self.assertEqual(
@@ -80,6 +82,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["first_primary_review_url_kind"], "fallback_web_search")
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
+        self.assertEqual(report["summary"]["representative_candidate_status_counts"], [])
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["blocked_before_image_import_rows"], 2)
         self.assertEqual(report["summary"]["download_ready_after_manual_image_url_rows"], 2)
@@ -101,6 +104,10 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["next_representative_image_review_batch_local_path_rows"], 0)
         self.assertEqual(
             report["summary"]["next_representative_image_review_batch_primary_review_url_kind_counts"],
+            [],
+        )
+        self.assertEqual(
+            report["summary"]["next_representative_image_review_batch_candidate_status_counts"],
             [],
         )
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 0)
@@ -168,6 +175,8 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["next_operator_actions"][0]["status"],
             "manual_source_url_confirmation_required",
         )
+        self.assertEqual(report["next_operator_actions"][0]["candidate_status_counts"], [])
+        self.assertEqual(report["next_operator_actions"][0]["candidate_review_lane_counts"], [])
         self.assertEqual(report["workstreams"][0]["source_store"], "Stellive Store")
         self.assertEqual(report["workstreams"][0]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(report["workstreams"][0]["source_url_update_template_rows"], 2)
@@ -409,6 +418,10 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["unqueued_actionable_image_rows"], 2)
         self.assertEqual(report["summary"]["sample_queue_coverage"], 0.3333)
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 3)
+        self.assertEqual(
+            report["summary"]["representative_candidate_status_counts"],
+            [["motif_only_type_mismatch", 3]],
+        )
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 0)
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 0)
         self.assertEqual(report["summary"]["source_url_update_template_batch_count"], 0)
@@ -420,6 +433,10 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             dict(report["summary"]["next_representative_image_review_batch_primary_review_url_kind_counts"]),
             {"fallback_web_search": 3},
+        )
+        self.assertEqual(
+            report["summary"]["next_representative_image_review_batch_candidate_status_counts"],
+            [["motif_only_type_mismatch", 3]],
         )
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["summary"]["workstream_count"], 1)
@@ -433,6 +450,10 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             report["next_operator_actions"][0]["status"],
             "manual_variant_confirmation_required",
+        )
+        self.assertEqual(
+            report["next_operator_actions"][0]["representative_candidate_status_counts"],
+            [["motif_only_type_mismatch", 3]],
         )
         self.assertEqual(report["next_actions"][1]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(

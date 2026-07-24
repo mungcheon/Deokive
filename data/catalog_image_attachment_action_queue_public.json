@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T10:25:29Z",
+  "generated_at": "2026-07-24T11:44:24Z",
   "scope": "catalog_image_attachment_action_queue",
   "summary": {
     "actionable_image_rows": 73,
@@ -79,6 +79,8 @@
     "source_url_update_fallback_web_search_rows": 5,
     "source_url_update_any_search_hint_rows": 50,
     "source_url_update_missing_any_search_hint_rows": 0,
+    "source_url_candidate_status_counts": [],
+    "source_url_review_lane_counts": [],
     "primary_review_url_rows": 73,
     "primary_review_url_kind_counts": [
       [
@@ -98,6 +100,20 @@
     "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
     "first_primary_review_url_kind": "source_search_url",
     "representative_image_review_required_rows": 23,
+    "representative_candidate_status_counts": [
+      [
+        "motif_only_type_mismatch",
+        16
+      ],
+      [
+        "no_official_candidate",
+        6
+      ],
+      [
+        "rejected_visual_mismatch",
+        1
+      ]
+    ],
     "image_url_ready_rows": 0,
     "blocked_before_image_import_rows": 73,
     "download_ready_after_manual_image_url_rows": 73,
@@ -124,6 +140,16 @@
       [
         "current_source_url",
         10
+      ]
+    ],
+    "next_representative_image_review_batch_candidate_status_counts": [
+      [
+        "motif_only_type_mismatch",
+        9
+      ],
+      [
+        "no_official_candidate",
+        1
       ]
     ],
     "representative_image_review_workstream_count": 1,
@@ -6638,6 +6664,8 @@
       "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
       "first_primary_review_url_kind": "source_search_url",
       "status": "manual_source_url_confirmation_required",
+      "candidate_status_counts": [],
+      "candidate_review_lane_counts": [],
       "operator_step": "Fill source_url_import_template with exact product detail URLs before image attachment.",
       "unblocks": "image_url_extraction_and_attachment_review",
       "auto_apply_enabled": false
@@ -6651,6 +6679,16 @@
       "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
       "first_primary_review_url_kind": "current_source_url",
       "status": "manual_variant_confirmation_required",
+      "representative_candidate_status_counts": [
+        [
+          "motif_only_type_mismatch",
+          9
+        ],
+        [
+          "no_official_candidate",
+          1
+        ]
+      ],
       "operator_step": "Confirm product type and variant before accepting representative official images.",
       "unblocks": "manual_catalog_image_url_import",
       "auto_apply_enabled": false

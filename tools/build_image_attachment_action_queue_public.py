@@ -675,6 +675,8 @@ def _build_next_operator_actions(
     image_url_ready_rows: int,
     workstreams: list[dict[str, Any]],
     source_url_update_work_order: list[dict[str, Any]],
+    next_source_url_review_batch: list[dict[str, Any]],
+    next_representative_image_review_batch: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     actions: list[dict[str, Any]] = []
 
@@ -701,6 +703,14 @@ def _build_next_operator_actions(
                     "first_primary_review_url_kind",
                 ),
                 "status": "manual_source_url_confirmation_required",
+                "candidate_status_counts": _counter_pairs(
+                    next_source_url_review_batch,
+                    "candidate_status",
+                ),
+                "candidate_review_lane_counts": _counter_pairs(
+                    next_source_url_review_batch,
+                    "source_url_review_lane",
+                ),
                 "operator_step": "Fill source_url_import_template with exact product detail URLs before image attachment.",
                 "unblocks": "image_url_extraction_and_attachment_review",
                 "auto_apply_enabled": False,
@@ -755,6 +765,10 @@ def _build_next_operator_actions(
                     "first_primary_review_url_kind",
                 ),
                 "status": "manual_variant_confirmation_required",
+                "representative_candidate_status_counts": _counter_pairs(
+                    next_representative_image_review_batch,
+                    "representative_candidate_status",
+                ),
                 "operator_step": "Confirm product type and variant before accepting representative official images.",
                 "unblocks": "manual_catalog_image_url_import",
                 "auto_apply_enabled": False,
@@ -1199,6 +1213,8 @@ def build_report(
         image_url_ready_rows=image_url_ready_rows,
         workstreams=workstreams,
         source_url_update_work_order=source_url_update_work_order,
+        next_source_url_review_batch=next_source_url_review_batch,
+        next_representative_image_review_batch=next_representative_image_review_batch,
     )
     return {
         "schema_version": 1,
@@ -1235,6 +1251,14 @@ def build_report(
             "source_url_update_missing_any_search_hint_rows": (
                 source_url_update_required_rows - source_url_update_any_search_hint_rows
             ),
+            "source_url_candidate_status_counts": _counter_pairs(
+                next_source_url_review_batch,
+                "candidate_status",
+            ),
+            "source_url_review_lane_counts": _counter_pairs(
+                next_source_url_review_batch,
+                "source_url_review_lane",
+            ),
             "primary_review_url_rows": primary_review_url_rows,
             "primary_review_url_kind_counts": primary_review_url_kind_counts,
             "primary_review_url_missing_rows": attachment_readiness[
@@ -1247,6 +1271,10 @@ def build_report(
                 "primary_review_url_kind", "manual_lookup_required"
             ),
             "representative_image_review_required_rows": representative_image_review_required_rows,
+            "representative_candidate_status_counts": _counter_pairs(
+                action_items,
+                "representative_candidate_status",
+            ),
             "image_url_ready_rows": image_url_ready_rows,
             "blocked_before_image_import_rows": attachment_readiness[
                 "blocked_before_image_import_rows"
@@ -1305,6 +1333,10 @@ def build_report(
             "next_representative_image_review_batch_primary_review_url_kind_counts": _counter_pairs(
                 next_representative_image_review_batch,
                 "primary_review_url_kind",
+            ),
+            "next_representative_image_review_batch_candidate_status_counts": _counter_pairs(
+                next_representative_image_review_batch,
+                "representative_candidate_status",
             ),
             "representative_image_review_workstream_count": sum(
                 1 for row in workstreams if row.get("representative_image_review_rows")
