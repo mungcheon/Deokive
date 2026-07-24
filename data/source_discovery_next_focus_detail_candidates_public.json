@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T11:15:00Z",
+  "generated_at": "2026-07-24T12:16:44Z",
   "scope": "source_discovery_next_focus_detail_candidates",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -24,6 +24,20 @@
     "metadata_enrichment_template_rows": 4,
     "metadata_field_import_template_rows": 12,
     "metadata_field_import_supported_rows": 12,
+    "metadata_field_review_counts": [
+      [
+        "sub_series",
+        4
+      ],
+      [
+        "name_ja",
+        4
+      ],
+      [
+        "character_name",
+        4
+      ]
+    ],
     "candidate_blocker_counts": [
       [
         "rank_not_first",
@@ -4301,6 +4315,23 @@
       "field": "sub_series",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "sub_series",
+        "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "value is visible in the product title, official page heading, or official product description",
+          "value narrows a broad catalog row without replacing the base series or category"
+        ],
+        "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
+        "do_not_use": [
+          "generic goods type such as acrylic stand",
+          "store-only category labels",
+          "machine-translated guesses not present on the evidence page"
+        ]
+      },
+      "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+      "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4329,6 +4360,23 @@
       "field": "name_ja",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "name_ja",
+        "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "official Japanese title or heading is visible on the evidence page",
+          "variant and character wording match the image/product option being imported"
+        ],
+        "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
+        "do_not_use": [
+          "Korean/English translation as a substitute",
+          "series-only names when the candidate is a specific variant",
+          "normalized names that remove official brackets, prize labels, or character labels"
+        ]
+      },
+      "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+      "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4357,6 +4405,23 @@
       "field": "character_name",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "character_name",
+        "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "character or option name is visible in the official title, selected variation, image alt text, or description",
+          "for multi-character designs, keep the combined official option name instead of choosing one character"
+        ],
+        "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
+        "do_not_use": [
+          "guessing from image appearance alone",
+          "dropping secondary characters from paired or group designs",
+          "translated nicknames when the official option name is available"
+        ]
+      },
+      "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+      "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4385,6 +4450,23 @@
       "field": "sub_series",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "sub_series",
+        "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "value is visible in the product title, official page heading, or official product description",
+          "value narrows a broad catalog row without replacing the base series or category"
+        ],
+        "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
+        "do_not_use": [
+          "generic goods type such as acrylic stand",
+          "store-only category labels",
+          "machine-translated guesses not present on the evidence page"
+        ]
+      },
+      "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+      "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4413,6 +4495,23 @@
       "field": "name_ja",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "name_ja",
+        "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "official Japanese title or heading is visible on the evidence page",
+          "variant and character wording match the image/product option being imported"
+        ],
+        "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
+        "do_not_use": [
+          "Korean/English translation as a substitute",
+          "series-only names when the candidate is a specific variant",
+          "normalized names that remove official brackets, prize labels, or character labels"
+        ]
+      },
+      "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+      "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4441,6 +4540,23 @@
       "field": "character_name",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "character_name",
+        "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "character or option name is visible in the official title, selected variation, image alt text, or description",
+          "for multi-character designs, keep the combined official option name instead of choosing one character"
+        ],
+        "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
+        "do_not_use": [
+          "guessing from image appearance alone",
+          "dropping secondary characters from paired or group designs",
+          "translated nicknames when the official option name is available"
+        ]
+      },
+      "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+      "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4469,6 +4585,23 @@
       "field": "sub_series",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "sub_series",
+        "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "value is visible in the product title, official page heading, or official product description",
+          "value narrows a broad catalog row without replacing the base series or category"
+        ],
+        "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
+        "do_not_use": [
+          "generic goods type such as acrylic stand",
+          "store-only category labels",
+          "machine-translated guesses not present on the evidence page"
+        ]
+      },
+      "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+      "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4497,6 +4630,23 @@
       "field": "name_ja",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "name_ja",
+        "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "official Japanese title or heading is visible on the evidence page",
+          "variant and character wording match the image/product option being imported"
+        ],
+        "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
+        "do_not_use": [
+          "Korean/English translation as a substitute",
+          "series-only names when the candidate is a specific variant",
+          "normalized names that remove official brackets, prize labels, or character labels"
+        ]
+      },
+      "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+      "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4525,6 +4675,23 @@
       "field": "character_name",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "character_name",
+        "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "character or option name is visible in the official title, selected variation, image alt text, or description",
+          "for multi-character designs, keep the combined official option name instead of choosing one character"
+        ],
+        "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
+        "do_not_use": [
+          "guessing from image appearance alone",
+          "dropping secondary characters from paired or group designs",
+          "translated nicknames when the official option name is available"
+        ]
+      },
+      "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+      "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4553,6 +4720,23 @@
       "field": "sub_series",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "sub_series",
+        "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "value is visible in the product title, official page heading, or official product description",
+          "value narrows a broad catalog row without replacing the base series or category"
+        ],
+        "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
+        "do_not_use": [
+          "generic goods type such as acrylic stand",
+          "store-only category labels",
+          "machine-translated guesses not present on the evidence page"
+        ]
+      },
+      "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+      "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4581,6 +4765,23 @@
       "field": "name_ja",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "name_ja",
+        "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "official Japanese title or heading is visible on the evidence page",
+          "variant and character wording match the image/product option being imported"
+        ],
+        "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
+        "do_not_use": [
+          "Korean/English translation as a substitute",
+          "series-only names when the candidate is a specific variant",
+          "normalized names that remove official brackets, prize labels, or character labels"
+        ]
+      },
+      "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+      "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
@@ -4609,6 +4810,23 @@
       "field": "character_name",
       "import_tool": "tools/import_confirmed_catalog_field_rows.py",
       "import_supported": true,
+      "field_review_guidance": {
+        "field": "character_name",
+        "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+        "required_evidence": [
+          "candidate product/detail page is the exact catalog row variant",
+          "character or option name is visible in the official title, selected variation, image alt text, or description",
+          "for multi-character designs, keep the combined official option name instead of choosing one character"
+        ],
+        "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
+        "do_not_use": [
+          "guessing from image appearance alone",
+          "dropping secondary characters from paired or group designs",
+          "translated nicknames when the official option name is available"
+        ]
+      },
+      "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+      "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     }
   ],

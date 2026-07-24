@@ -139,17 +139,84 @@ def _metadata_field_template_rows(
     rows: list[dict[str, Any]] = []
     supported_fields = {"sub_series", "name_ja", "character_name"}
     for field in ("sub_series", "name_ja", "character_name"):
+        guidance = _metadata_field_review_guidance(field)
         row = {
             **base,
             "field": field,
             "import_tool": "tools/import_confirmed_catalog_field_rows.py",
             "import_supported": field in supported_fields,
+            "field_review_guidance": guidance,
+            "manual_value_format": guidance["manual_value_format"],
+            "manual_confirmed_allowed_when": guidance["manual_confirmed_allowed_when"],
             "review_note": (
                 "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
             ),
         }
         rows.append(row)
     return rows
+
+
+def _metadata_field_review_guidance(field: str) -> dict[str, Any]:
+    guidance_by_field = {
+        "sub_series": {
+            "field": "sub_series",
+            "manual_value_format": "official variant, campaign, collection, or style label exactly as shown on the product/detail page",
+            "required_evidence": [
+                "candidate product/detail page is the exact catalog row variant",
+                "value is visible in the product title, official page heading, or official product description",
+                "value narrows a broad catalog row without replacing the base series or category",
+            ],
+            "manual_confirmed_allowed_when": "the value identifies the product variant/campaign and prevents merging multiple designs into one row",
+            "do_not_use": [
+                "generic goods type such as acrylic stand",
+                "store-only category labels",
+                "machine-translated guesses not present on the evidence page",
+            ],
+        },
+        "name_ja": {
+            "field": "name_ja",
+            "manual_value_format": "official Japanese product name, preserving punctuation, spacing, brackets, prize/campaign wording, and character text",
+            "required_evidence": [
+                "candidate product/detail page is the exact catalog row variant",
+                "official Japanese title or heading is visible on the evidence page",
+                "variant and character wording match the image/product option being imported",
+            ],
+            "manual_confirmed_allowed_when": "the official Japanese product name can be copied without abbreviation or translation",
+            "do_not_use": [
+                "Korean/English translation as a substitute",
+                "series-only names when the candidate is a specific variant",
+                "normalized names that remove official brackets, prize labels, or character labels",
+            ],
+        },
+        "character_name": {
+            "field": "character_name",
+            "manual_value_format": "official character or option name only; use the source-language name shown by the product page when available",
+            "required_evidence": [
+                "candidate product/detail page is the exact catalog row variant",
+                "character or option name is visible in the official title, selected variation, image alt text, or description",
+                "for multi-character designs, keep the combined official option name instead of choosing one character",
+            ],
+            "manual_confirmed_allowed_when": "the product page clearly identifies the represented character/design option",
+            "do_not_use": [
+                "guessing from image appearance alone",
+                "dropping secondary characters from paired or group designs",
+                "translated nicknames when the official option name is available",
+            ],
+        },
+    }
+    return guidance_by_field.get(
+        field,
+        {
+            "field": field,
+            "manual_value_format": "exact official value from the evidence page",
+            "required_evidence": [
+                "candidate product/detail page is the exact catalog row variant",
+                "value is visible on or directly implied by the evidence page",
+            ],
+            "manual_confirmed_allowed_when": "manual evidence proves the field value",
+            "do_not_use": ["unverified guesses"],
+        },
+    )
 
 
 def _query_for_item(item: dict[str, Any]) -> str:
@@ -737,6 +804,9 @@ def build_report(
         reason for reason in completion_readiness["blocked_reasons"] if reason
     ]
     next_action_lanes = _build_next_action_lanes(review_work_order_items)
+    metadata_field_review_counts = Counter(
+        str(row.get("field") or "") for row in metadata_field_import_template
+    )
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -774,6 +844,9 @@ def build_report(
             "metadata_field_import_template_rows": len(metadata_field_import_template),
             "metadata_field_import_supported_rows": sum(
                 1 for row in metadata_field_import_template if row.get("import_supported") is True
+            ),
+            "metadata_field_review_counts": _counter_rows(
+                metadata_field_review_counts, "field"
             ),
             "candidate_blocker_counts": _counter_rows(blocker_counts, "blocker"),
             "review_bucket_counts": _counter_rows(review_bucket_counts, "review_bucket"),
