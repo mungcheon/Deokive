@@ -84,6 +84,18 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             batch_size=1,
             unmatched_keyword_review=unmatched_keyword_review,
             normalization_review={
+                "folder_visual_tokens": [
+                    {
+                        "category": "Stationery",
+                        "family": "stationery",
+                        "color_hint": "mint",
+                        "color_hex": "0xFF7DD3C7",
+                        "color_group": "mint",
+                        "color_sort_order": 130,
+                        "primary_icon_key": "sticky_note_2",
+                        "icon_options": ["sticky_note_2", "edit_note"],
+                    }
+                ],
                 "normalization_review_queue": [
                     {
                         "review_id": "animation-category-normalization-001",
@@ -180,6 +192,10 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["work_order"][1]["categories"], ["Clear File"])
         self.assertEqual(report["work_order"][1]["target_categories"], ["Stationery"])
         self.assertEqual(
+            report["work_order"][1]["target_category_visual_tokens"][0]["primary_icon_key"],
+            "sticky_note_2",
+        )
+        self.assertEqual(
             report["work_order"][1]["blocked_reason"],
             "subtype_category_may_need_sub_series_preservation",
         )
@@ -238,6 +254,18 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             report["automation_policy"]["manual_confirmation_template"],
             "server/animation_category_confirmed_rows.template.json",
+        )
+        normalization_batch = report["batches"][1]
+        normalization_row = normalization_batch["categories"][0]
+        self.assertEqual(normalization_row["target_category_visual_token"]["color_hex"], "0xFF7DD3C7")
+        self.assertEqual(normalization_row["suggested_primary_icon_key"], "sticky_note_2")
+        self.assertEqual(
+            normalization_row["category_mapping_template"]["folder_color_group"],
+            "mint",
+        )
+        self.assertEqual(
+            normalization_row["category_mapping_template"]["folder_icon_options"],
+            ["sticky_note_2", "edit_note"],
         )
 
 

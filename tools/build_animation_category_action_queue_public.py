@@ -231,12 +231,31 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _compact_normalization(row: dict[str, Any], review_priority: int) -> dict[str, Any]:
+def _visual_tokens_by_category(payload: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
+    if not isinstance(payload, dict):
+        return {}
+    tokens: dict[str, dict[str, Any]] = {}
+    for row in payload.get("folder_visual_tokens") or []:
+        if not isinstance(row, dict):
+            continue
+        category = str(row.get("category") or "").strip()
+        if category:
+            tokens[category] = row
+    return tokens
+
+
+def _compact_normalization(
+    row: dict[str, Any],
+    review_priority: int,
+    visual_tokens: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     mapping_mode = "canonical_category_normalization_review"
     rows = int(row.get("affected_catalog_rows") or row.get("rows") or 0)
     sample_names = _sample_names(row)
     template = row.get("category_mapping_template") if isinstance(row.get("category_mapping_template"), dict) else {}
     blocker = _mode_blocker(mapping_mode)
+    target_category = str(template.get("target_category") or row.get("suggested_category") or "").strip()
+    target_visual = dict((visual_tokens or {}).get(target_category) or {})
     return {
         "review_id": row.get("review_id"),
         "category": row.get("category"),
@@ -244,11 +263,15 @@ def _compact_normalization(row: dict[str, Any], review_priority: int) -> dict[st
         "review_priority": review_priority,
         "mapping_mode": mapping_mode,
         "requires_name_level_split_review": False,
-        "suggested_family": row.get("suggested_family") or row.get("suggested_category"),
+        "suggested_family": row.get("suggested_family") or target_visual.get("family") or row.get("suggested_category"),
         "suggested_category": row.get("suggested_category"),
-        "suggested_color_group": row.get("suggested_color_group"),
-        "suggested_color_hint": row.get("suggested_color_hint"),
-        "suggested_primary_icon_key": row.get("suggested_primary_icon_key"),
+        "suggested_color_group": row.get("suggested_color_group") or target_visual.get("color_group"),
+        "suggested_color_hint": row.get("suggested_color_hint") or target_visual.get("color_hint"),
+        "suggested_color_hex": row.get("suggested_color_hex") or target_visual.get("color_hex"),
+        "suggested_color_sort_order": row.get("suggested_color_sort_order") or target_visual.get("color_sort_order"),
+        "suggested_primary_icon_key": row.get("suggested_primary_icon_key") or target_visual.get("primary_icon_key"),
+        "suggested_icon_options": row.get("suggested_icon_options") or target_visual.get("icon_options") or [],
+        "target_category_visual_token": target_visual,
         "review_reason": row.get("review_reason"),
         "review_summary": {
             "affected_catalog_rows": rows,
@@ -268,10 +291,17 @@ def _compact_normalization(row: dict[str, Any], review_priority: int) -> dict[st
             "manual_confirmed": bool(template.get("manual_confirmed")),
             "mapping_mode": mapping_mode,
             "source_category": template.get("source_category") or row.get("category"),
-            "target_category": template.get("target_category") or row.get("suggested_category"),
+            "target_category": target_category,
             "preserve_source_category_as_sub_series": bool(
                 template.get("preserve_source_category_as_sub_series")
             ),
+            "folder_name": target_category,
+            "folder_color_hex": target_visual.get("color_hex"),
+            "folder_color_hint": target_visual.get("color_hint"),
+            "folder_color_group": target_visual.get("color_group"),
+            "folder_color_sort_order": target_visual.get("color_sort_order"),
+            "folder_icon_key": target_visual.get("primary_icon_key"),
+            "folder_icon_options": target_visual.get("icon_options") or [],
             "affected_catalog_rows": rows,
             "manual_note": template.get("manual_note") or "",
             **blocker,
@@ -362,6 +392,14 @@ def _work_order(
 
     normalization_rows = normalization_rows or []
     if normalization_rows:
+        target_visual_tokens = []
+        seen_target_categories: set[str] = set()
+        for row in normalization_rows:
+            category = str(row.get("suggested_category") or "").strip()
+            token = row.get("target_category_visual_token")
+            if category and isinstance(token, dict) and token and category not in seen_target_categories:
+                target_visual_tokens.append(token)
+                seen_target_categories.add(category)
         orders.append(
             {
                 "rank": 3,
@@ -379,6 +417,7 @@ def _work_order(
                         if str(row.get("suggested_category") or "")
                     }
                 ),
+                "target_category_visual_tokens": target_visual_tokens,
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
                 **_mode_blocker("canonical_category_normalization_review"),
@@ -430,8 +469,9 @@ def build_queue(
     ]
     rows.sort(key=lambda row: (int(row.get("review_priority") or 999), str(row.get("category") or "")))
     queued = rows[:max_categories]
+    visual_tokens = _visual_tokens_by_category(normalization_review)
     normalization_rows = [
-        _compact_normalization(row, 700 + index)
+        _compact_normalization(row, 700 + index, visual_tokens)
         for index, row in enumerate(_normalization_categories(normalization_review), start=1)
     ]
     normalization_rows.sort(key=lambda row: (int(row.get("review_priority") or 999), str(row.get("category") or "")))
