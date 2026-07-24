@@ -1000,6 +1000,24 @@ class PublicCatalogReportTests(unittest.TestCase):
             reissue_decision_template["same_campaign_family_reissue_item_rows"],
             20,
         )
+        self.assertEqual(
+            reissue_decision_template[
+                "item_template_non_exception_missing_price_sample_rows"
+            ],
+            16,
+        )
+        self.assertEqual(
+            reissue_decision_template["item_template_zero_price_exception_sample_rows"],
+            4,
+        )
+        self.assertEqual(
+            reissue_decision_template["item_template_price_policy_blocked_rows"],
+            8,
+        )
+        self.assertEqual(
+            reissue_decision_template["campaign_template_price_policy_blocked_rows"],
+            1,
+        )
         self.assertFalse(reissue_decision_template["auto_merge_enabled"])
         self.assertFalse(reissue_decision_template["auto_delete_enabled"])
         self.assertTrue(
@@ -4332,6 +4350,38 @@ class PublicCatalogReportTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("item_price_policy_blocked_rows"),
+            reissue_decision_summary.get("item_template_price_policy_blocked_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get(
+                "campaign_price_policy_blocked_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_template_price_policy_blocked_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get(
+                "campaign_review_batch_price_policy_blocked_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_batch_price_policy_blocked_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get(
+                "campaign_review_batch_missing_regular_price_sample_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_batch_non_exception_missing_price_sample_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("zero_price_exception_sample_rows"),
+            reissue_decision_summary.get("item_template_zero_price_exception_sample_rows"),
+        )
+        self.assertEqual(
             ichiban_reissue_dedupe_next_action.get("manual_confirmed_rows"),
             dedupe_action_summary.get("ichiban_reissue_manual_confirmed_rows"),
         )
@@ -4355,6 +4405,28 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "campaign_review_batch_visible_item_preview_rows"
             ),
             reissue_decision_summary.get("campaign_review_batch_visible_item_preview_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(
+                "campaign_review_batch_price_policy_blocked_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_batch_price_policy_blocked_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(
+                "campaign_review_batch_missing_regular_price_sample_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_batch_non_exception_missing_price_sample_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(
+                "zero_price_exception_sample_rows"
+            ),
+            reissue_decision_summary.get("item_template_zero_price_exception_sample_rows"),
         )
         self.assertTrue(
             all(
@@ -4536,6 +4608,40 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "ichiban_reissue_next_campaign_review_batch_item_work_order_rows"
             ),
             reissue_decision_summary.get("campaign_review_batch_item_work_order_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_item_price_policy_blocked_rows"
+            ),
+            reissue_decision_summary.get("item_template_price_policy_blocked_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_campaign_price_policy_blocked_rows"
+            ),
+            reissue_decision_summary.get("campaign_template_price_policy_blocked_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_campaign_review_batch_price_policy_blocked_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_batch_price_policy_blocked_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_campaign_review_batch_missing_regular_price_sample_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_batch_non_exception_missing_price_sample_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_zero_price_exception_sample_rows"
+            ),
+            reissue_decision_summary.get("item_template_zero_price_exception_sample_rows"),
         )
         self.assertEqual(
             ichiban_reissue_execution_action.get("next_step"),

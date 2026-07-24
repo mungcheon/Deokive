@@ -109,6 +109,33 @@ def _row_risk_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _price_policy_review(row: dict[str, Any], risk_summary: dict[str, Any]) -> dict[str, Any]:
+    non_exception_missing = int(
+        risk_summary.get("non_exception_missing_price_sample_rows") or 0
+    )
+    zero_exception_nonzero = int(
+        risk_summary.get("zero_price_exception_nonzero_sample_rows") or 0
+    )
+    zero_exception_rows = int(risk_summary.get("zero_price_exception_sample_rows") or 0)
+    blockers: list[str] = []
+    if non_exception_missing:
+        blockers.append("non_exception_official_price_missing")
+    if zero_exception_nonzero:
+        blockers.append("last_one_or_double_chance_price_must_be_zero")
+    return {
+        "status": "price_policy_review_required" if blockers else "price_policy_clear_for_identity_review",
+        "blockers": blockers,
+        "non_exception_missing_price_sample_rows": non_exception_missing,
+        "zero_price_exception_sample_rows": zero_exception_rows,
+        "zero_price_exception_nonzero_sample_rows": zero_exception_nonzero,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": bool(non_exception_missing),
+        "blocks_keep_drop_decision": bool(blockers),
+        "manual_confirmed": False,
+        "source_urls": row.get("source_urls") or [],
+    }
+
+
 def _reissue_review_lane(row: dict[str, Any], risk_summary: dict[str, Any]) -> str:
     comparison = row.get("campaign_url_comparison") or {}
     if comparison.get("likely_same_campaign_family_reissue"):
@@ -134,6 +161,7 @@ def _campaign_decision_guidance(row: dict[str, Any], risk_summary: dict[str, Any
         required_evidence.append("non-exception official price confirmed or explicitly left unknown")
     if int(risk_summary.get("zero_price_exception_sample_rows") or 0) > 0:
         required_evidence.append("Last One or Double Chance rows keep official_price_jpy=0")
+    price_review = _price_policy_review(row, risk_summary)
     return {
         "status": "campaign_pair_reissue_decision_required",
         "likely_same_campaign_family_reissue": bool(
@@ -150,6 +178,10 @@ def _campaign_decision_guidance(row: dict[str, Any], risk_summary: dict[str, Any
             "campaign_pair_reissue_keep_all_separate"
             if comparison.get("likely_same_campaign_family_reissue")
             else "needs_more_source_evidence"
+        ),
+        "price_policy_review": price_review,
+        "price_policy_blocks_keep_drop": bool(
+            price_review.get("blocks_keep_drop_decision")
         ),
         "manual_confirmed_allowed": False,
         "auto_merge_enabled": False,
@@ -182,6 +214,7 @@ def _item_template(row: dict[str, Any]) -> dict[str, Any]:
         "sample_rows": sample_rows,
         "sample_rows_with_identity_fields": _sample_rows_with_identity(sample_rows),
         "review_risk_summary": risk_summary,
+        "price_policy_review": _price_policy_review(row, risk_summary),
         "recommended_review_lane": _reissue_review_lane(row, risk_summary),
         "recommended_reviewer_action": (
             "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate."
@@ -227,6 +260,7 @@ def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
         "sample_rows": sample_rows,
         "sample_rows_with_identity_fields": _sample_rows_with_identity(sample_rows),
         "review_risk_summary": risk_summary,
+        "price_policy_review": _price_policy_review(row, risk_summary),
         "campaign_decision_guidance": _campaign_decision_guidance(row, risk_summary),
         "recommended_review_lane": (
             "campaign_pair_first"
@@ -266,6 +300,7 @@ def _campaign_item_decision_preview(
                 "campaign_url_comparison": item.get("campaign_url_comparison") or {},
                 "recommended_review_lane": item.get("recommended_review_lane") or "",
                 "review_risk_tags": (item.get("review_risk_summary") or {}).get("review_risk_tags") or [],
+                "price_policy_review": item.get("price_policy_review") or {},
                 "suggested_decision_if_campaign_is_reissue": (
                     "reissue_or_campaign_variant_keep_separate"
                 ),
@@ -303,6 +338,7 @@ def _compact_campaign_item_preview(
         "campaign_url_comparison": item.get("campaign_url_comparison") or {},
         "recommended_review_lane": item.get("recommended_review_lane") or "",
         "review_risk_tags": (item.get("review_risk_summary") or {}).get("review_risk_tags") or [],
+        "price_policy_review": item.get("price_policy_review") or {},
         "suggested_decision_if_campaign_is_reissue": preview.get(
             "suggested_decision_if_campaign_is_reissue"
         ),
@@ -355,6 +391,7 @@ def _next_campaign_review_batch(
                 "prize_labels": campaign.get("prize_labels") or [],
                 "campaign_url_comparison": campaign.get("campaign_url_comparison") or {},
                 "review_risk_tags": (campaign.get("review_risk_summary") or {}).get("review_risk_tags") or [],
+                "price_policy_review": campaign.get("price_policy_review") or {},
                 "recommended_review_lane": campaign.get("recommended_review_lane"),
                 "recommended_reviewer_action": campaign.get("recommended_reviewer_action"),
                 "campaign_decision_guidance": campaign.get("campaign_decision_guidance")
@@ -438,6 +475,43 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             "zero_price_exception_reissue_review",
             0,
         ),
+        "item_template_non_exception_missing_price_sample_rows": sum(
+            int(
+                (item.get("price_policy_review") or {}).get(
+                    "non_exception_missing_price_sample_rows"
+                )
+                or 0
+            )
+            for item in item_templates
+        ),
+        "item_template_zero_price_exception_sample_rows": sum(
+            int(
+                (item.get("price_policy_review") or {}).get(
+                    "zero_price_exception_sample_rows"
+                )
+                or 0
+            )
+            for item in item_templates
+        ),
+        "item_template_price_policy_blocked_rows": sum(
+            1
+            for item in item_templates
+            if (item.get("price_policy_review") or {}).get(
+                "blocks_keep_drop_decision"
+            )
+        ),
+        "campaign_template_price_policy_blocked_rows": sum(
+            1
+            for campaign in campaign_templates
+            if (campaign.get("price_policy_review") or {}).get(
+                "blocks_keep_drop_decision"
+            )
+        ),
+        "campaign_template_high_impact_rows": sum(
+            1
+            for campaign in campaign_templates
+            if int(campaign.get("item_work_order_count") or 0) >= 5
+        ),
         "campaign_covered_item_template_rows": sum(
             1 for item in item_templates if item.get("work_order_id") in campaign_covered_item_ids
         ),
@@ -477,6 +551,26 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             for campaign in campaign_templates
             if campaign.get("campaign_work_order_id")
             in {row.get("campaign_work_order_id") for row in next_campaign_review_batch}
+        ),
+        "campaign_review_batch_non_exception_missing_price_sample_rows": sum(
+            int(
+                (campaign.get("price_policy_review") or {}).get(
+                    "non_exception_missing_price_sample_rows"
+                )
+                or 0
+            )
+            for campaign in campaign_templates
+            if campaign.get("campaign_work_order_id")
+            in {row.get("campaign_work_order_id") for row in next_campaign_review_batch}
+        ),
+        "campaign_review_batch_price_policy_blocked_rows": sum(
+            1
+            for campaign in campaign_templates
+            if campaign.get("campaign_work_order_id")
+            in {row.get("campaign_work_order_id") for row in next_campaign_review_batch}
+            and (campaign.get("price_policy_review") or {}).get(
+                "blocks_keep_drop_decision"
+            )
         ),
         "campaign_review_batch_item_preview_rows": sum(
             int(campaign.get("item_review_preview_rows") or 0)

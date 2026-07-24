@@ -1433,6 +1433,26 @@ def _build_plan(load_report) -> dict[str, Any]:
                     kuji_reissue_decision_template_summary,
                     "campaign_review_batch_visible_item_preview_rows",
                 ),
+                "ichiban_reissue_item_price_policy_blocked_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "item_template_price_policy_blocked_rows",
+                ),
+                "ichiban_reissue_campaign_price_policy_blocked_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "campaign_template_price_policy_blocked_rows",
+                ),
+                "ichiban_reissue_campaign_review_batch_price_policy_blocked_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "campaign_review_batch_price_policy_blocked_rows",
+                ),
+                "ichiban_reissue_campaign_review_batch_missing_regular_price_sample_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "campaign_review_batch_non_exception_missing_price_sample_rows",
+                ),
+                "ichiban_reissue_zero_price_exception_sample_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "item_template_zero_price_exception_sample_rows",
+                ),
                 "ichiban_reissue_next_campaign_review_batch": [
                     row
                     for row in kuji_reissue_decision_template.get(

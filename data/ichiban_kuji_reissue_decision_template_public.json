@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T21:11:19Z",
+  "generated_at": "2026-07-24T21:55:56Z",
   "scope": "ichiban_kuji_reissue_decision_template",
   "source_report": "data/catalog_deduplication_action_queue_public.json",
   "summary": {
@@ -36,6 +36,11 @@
     ],
     "same_campaign_family_reissue_item_rows": 20,
     "zero_price_exception_reissue_item_rows": 0,
+    "item_template_non_exception_missing_price_sample_rows": 16,
+    "item_template_zero_price_exception_sample_rows": 4,
+    "item_template_price_policy_blocked_rows": 8,
+    "campaign_template_price_policy_blocked_rows": 1,
+    "campaign_template_high_impact_rows": 2,
     "campaign_covered_item_template_rows": 20,
     "standalone_item_template_rows": 0,
     "campaign_item_decision_preview_rows": 20,
@@ -47,6 +52,8 @@
     "campaign_review_batch_item_work_order_rows": 20,
     "campaign_review_batch_catalog_index_rows": 40,
     "campaign_review_batch_zero_price_exception_sample_rows": 2,
+    "campaign_review_batch_non_exception_missing_price_sample_rows": 8,
+    "campaign_review_batch_price_policy_blocked_rows": 1,
     "campaign_review_batch_item_preview_rows": 20,
     "campaign_review_batch_visible_item_preview_rows": 20,
     "campaign_review_batch_truncated_campaigns": 0,
@@ -270,6 +277,23 @@
           "high_impact_campaign_pair"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 8,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ]
+      },
       "campaign_decision_guidance": {
         "status": "campaign_pair_reissue_decision_required",
         "likely_same_campaign_family_reissue": true,
@@ -288,6 +312,24 @@
           "needs_more_source_evidence"
         ],
         "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "price_policy_review": {
+          "status": "price_policy_review_required",
+          "blockers": [
+            "non_exception_official_price_missing"
+          ],
+          "non_exception_missing_price_sample_rows": 8,
+          "zero_price_exception_sample_rows": 0,
+          "zero_price_exception_nonzero_sample_rows": 0,
+          "last_one_double_chance_expected_price_jpy": 0,
+          "regular_prize_price_required_before_merge": true,
+          "blocks_keep_drop_decision": true,
+          "manual_confirmed": false,
+          "source_urls": [
+            "https://1kuji.com/products/onep6",
+            "https://1kuji.com/products/onep8"
+          ]
+        },
+        "price_policy_blocks_keep_drop": true,
         "manual_confirmed_allowed": false,
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
@@ -364,6 +406,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -406,6 +465,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -448,6 +524,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -490,6 +583,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -532,6 +642,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -574,6 +701,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -616,6 +760,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -658,6 +819,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -862,6 +1040,21 @@
           "high_impact_campaign_pair"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ]
+      },
       "campaign_decision_guidance": {
         "status": "campaign_pair_reissue_decision_required",
         "likely_same_campaign_family_reissue": true,
@@ -879,6 +1072,22 @@
           "needs_more_source_evidence"
         ],
         "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "price_policy_review": {
+          "status": "price_policy_clear_for_identity_review",
+          "blockers": [],
+          "non_exception_missing_price_sample_rows": 0,
+          "zero_price_exception_sample_rows": 0,
+          "zero_price_exception_nonzero_sample_rows": 0,
+          "last_one_double_chance_expected_price_jpy": 0,
+          "regular_prize_price_required_before_merge": false,
+          "blocks_keep_drop_decision": false,
+          "manual_confirmed": false,
+          "source_urls": [
+            "https://1kuji.com/products/kimetsu",
+            "https://1kuji.com/products/kimetsu2"
+          ]
+        },
+        "price_policy_blocks_keep_drop": false,
         "manual_confirmed_allowed": false,
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
@@ -952,6 +1161,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -992,6 +1216,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1032,6 +1271,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1072,6 +1326,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1112,6 +1381,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1152,6 +1436,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1193,6 +1492,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 2,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1352,6 +1666,21 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
+        ]
+      },
       "campaign_decision_guidance": {
         "status": "campaign_pair_reissue_decision_required",
         "likely_same_campaign_family_reissue": true,
@@ -1369,6 +1698,22 @@
           "needs_more_source_evidence"
         ],
         "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "price_policy_review": {
+          "status": "price_policy_clear_for_identity_review",
+          "blockers": [],
+          "non_exception_missing_price_sample_rows": 0,
+          "zero_price_exception_sample_rows": 0,
+          "zero_price_exception_nonzero_sample_rows": 0,
+          "last_one_double_chance_expected_price_jpy": 0,
+          "regular_prize_price_required_before_merge": false,
+          "blocks_keep_drop_decision": false,
+          "manual_confirmed": false,
+          "source_urls": [
+            "https://1kuji.com/products/naruto_wcf",
+            "https://1kuji.com/products/naruto_wcf2"
+          ]
+        },
+        "price_policy_blocks_keep_drop": false,
         "manual_confirmed_allowed": false,
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
@@ -1438,6 +1783,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/naruto_wcf",
+              "https://1kuji.com/products/naruto_wcf2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1478,6 +1838,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/naruto_wcf",
+              "https://1kuji.com/products/naruto_wcf2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1518,6 +1893,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/naruto_wcf",
+              "https://1kuji.com/products/naruto_wcf2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1647,6 +2037,21 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 2,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/haikyu4",
+          "https://1kuji.com/products/haikyu8"
+        ]
+      },
       "campaign_decision_guidance": {
         "status": "campaign_pair_reissue_decision_required",
         "likely_same_campaign_family_reissue": true,
@@ -1665,6 +2070,22 @@
           "needs_more_source_evidence"
         ],
         "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "price_policy_review": {
+          "status": "price_policy_clear_for_identity_review",
+          "blockers": [],
+          "non_exception_missing_price_sample_rows": 0,
+          "zero_price_exception_sample_rows": 2,
+          "zero_price_exception_nonzero_sample_rows": 0,
+          "last_one_double_chance_expected_price_jpy": 0,
+          "regular_prize_price_required_before_merge": false,
+          "blocks_keep_drop_decision": false,
+          "manual_confirmed": false,
+          "source_urls": [
+            "https://1kuji.com/products/haikyu4",
+            "https://1kuji.com/products/haikyu8"
+          ]
+        },
+        "price_policy_blocks_keep_drop": false,
         "manual_confirmed_allowed": false,
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
@@ -1735,6 +2156,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 2,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/haikyu4",
+              "https://1kuji.com/products/haikyu8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1776,6 +2212,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/haikyu4",
+              "https://1kuji.com/products/haikyu8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1832,6 +2283,23 @@
         "likely_same_campaign_family_reissue",
         "high_impact_campaign_pair"
       ],
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 8,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ]
+      },
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "campaign_decision_guidance": {
@@ -1852,6 +2320,24 @@
           "needs_more_source_evidence"
         ],
         "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "price_policy_review": {
+          "status": "price_policy_review_required",
+          "blockers": [
+            "non_exception_official_price_missing"
+          ],
+          "non_exception_missing_price_sample_rows": 8,
+          "zero_price_exception_sample_rows": 0,
+          "zero_price_exception_nonzero_sample_rows": 0,
+          "last_one_double_chance_expected_price_jpy": 0,
+          "regular_prize_price_required_before_merge": true,
+          "blocks_keep_drop_decision": true,
+          "manual_confirmed": false,
+          "source_urls": [
+            "https://1kuji.com/products/onep6",
+            "https://1kuji.com/products/onep8"
+          ]
+        },
+        "price_policy_blocks_keep_drop": true,
         "manual_confirmed_allowed": false,
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
@@ -1908,6 +2394,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1953,6 +2456,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -1998,6 +2518,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2043,6 +2580,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2088,6 +2642,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2133,6 +2704,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2178,6 +2766,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2223,6 +2828,23 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_review_required",
+            "blockers": [
+              "non_exception_official_price_missing"
+            ],
+            "non_exception_missing_price_sample_rows": 2,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": true,
+            "blocks_keep_drop_decision": true,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/onep6",
+              "https://1kuji.com/products/onep8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2275,6 +2897,21 @@
         "likely_same_campaign_family_reissue",
         "high_impact_campaign_pair"
       ],
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ]
+      },
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "campaign_decision_guidance": {
@@ -2294,6 +2931,22 @@
           "needs_more_source_evidence"
         ],
         "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "price_policy_review": {
+          "status": "price_policy_clear_for_identity_review",
+          "blockers": [],
+          "non_exception_missing_price_sample_rows": 0,
+          "zero_price_exception_sample_rows": 0,
+          "zero_price_exception_nonzero_sample_rows": 0,
+          "last_one_double_chance_expected_price_jpy": 0,
+          "regular_prize_price_required_before_merge": false,
+          "blocks_keep_drop_decision": false,
+          "manual_confirmed": false,
+          "source_urls": [
+            "https://1kuji.com/products/kimetsu",
+            "https://1kuji.com/products/kimetsu2"
+          ]
+        },
+        "price_policy_blocks_keep_drop": false,
         "manual_confirmed_allowed": false,
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
@@ -2347,6 +3000,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2390,6 +3058,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2433,6 +3116,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2476,6 +3174,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2519,6 +3232,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2562,6 +3290,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2606,6 +3349,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 2,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/kimetsu",
+              "https://1kuji.com/products/kimetsu2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2653,6 +3411,21 @@
         "identity_fields_complete",
         "likely_same_campaign_family_reissue"
       ],
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
+        ]
+      },
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "campaign_decision_guidance": {
@@ -2672,6 +3445,22 @@
           "needs_more_source_evidence"
         ],
         "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "price_policy_review": {
+          "status": "price_policy_clear_for_identity_review",
+          "blockers": [],
+          "non_exception_missing_price_sample_rows": 0,
+          "zero_price_exception_sample_rows": 0,
+          "zero_price_exception_nonzero_sample_rows": 0,
+          "last_one_double_chance_expected_price_jpy": 0,
+          "regular_prize_price_required_before_merge": false,
+          "blocks_keep_drop_decision": false,
+          "manual_confirmed": false,
+          "source_urls": [
+            "https://1kuji.com/products/naruto_wcf",
+            "https://1kuji.com/products/naruto_wcf2"
+          ]
+        },
+        "price_policy_blocks_keep_drop": false,
         "manual_confirmed_allowed": false,
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
@@ -2721,6 +3510,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/naruto_wcf",
+              "https://1kuji.com/products/naruto_wcf2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2764,6 +3568,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/naruto_wcf",
+              "https://1kuji.com/products/naruto_wcf2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2807,6 +3626,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/naruto_wcf",
+              "https://1kuji.com/products/naruto_wcf2"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2855,6 +3689,21 @@
         "identity_fields_complete",
         "likely_same_campaign_family_reissue"
       ],
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 2,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/haikyu4",
+          "https://1kuji.com/products/haikyu8"
+        ]
+      },
       "recommended_review_lane": "campaign_pair_first",
       "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "campaign_decision_guidance": {
@@ -2875,6 +3724,22 @@
           "needs_more_source_evidence"
         ],
         "recommended_first_decision": "campaign_pair_reissue_keep_all_separate",
+        "price_policy_review": {
+          "status": "price_policy_clear_for_identity_review",
+          "blockers": [],
+          "non_exception_missing_price_sample_rows": 0,
+          "zero_price_exception_sample_rows": 2,
+          "zero_price_exception_nonzero_sample_rows": 0,
+          "last_one_double_chance_expected_price_jpy": 0,
+          "regular_prize_price_required_before_merge": false,
+          "blocks_keep_drop_decision": false,
+          "manual_confirmed": false,
+          "source_urls": [
+            "https://1kuji.com/products/haikyu4",
+            "https://1kuji.com/products/haikyu8"
+          ]
+        },
+        "price_policy_blocks_keep_drop": false,
         "manual_confirmed_allowed": false,
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
@@ -2925,6 +3790,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 2,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/haikyu4",
+              "https://1kuji.com/products/haikyu8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -2969,6 +3849,21 @@
             "identity_fields_complete",
             "likely_same_campaign_family_reissue"
           ],
+          "price_policy_review": {
+            "status": "price_policy_clear_for_identity_review",
+            "blockers": [],
+            "non_exception_missing_price_sample_rows": 0,
+            "zero_price_exception_sample_rows": 0,
+            "zero_price_exception_nonzero_sample_rows": 0,
+            "last_one_double_chance_expected_price_jpy": 0,
+            "regular_prize_price_required_before_merge": false,
+            "blocks_keep_drop_decision": false,
+            "manual_confirmed": false,
+            "source_urls": [
+              "https://1kuji.com/products/haikyu4",
+              "https://1kuji.com/products/haikyu8"
+            ]
+          },
           "suggested_decision_if_campaign_is_reissue": "reissue_or_campaign_variant_keep_separate",
           "suggested_decision_if_campaign_is_duplicate": "same_sellable_product_keep_drop_confirmed",
           "keep_drop_still_requires_item_review": true,
@@ -3070,6 +3965,21 @@
           "zero_price_exception_rows_present",
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 2,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/haikyu4",
+          "https://1kuji.com/products/haikyu8"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -3193,6 +4103,21 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/haikyu4",
+          "https://1kuji.com/products/haikyu8"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -3311,6 +4236,21 @@
         "review_risk_tags": [
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -3433,6 +4373,21 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -3551,6 +4506,21 @@
         "review_risk_tags": [
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -3675,6 +4645,23 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -3795,6 +4782,23 @@
           "non_exception_price_missing",
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -3919,6 +4923,23 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -4039,6 +5060,23 @@
           "non_exception_price_missing",
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -4163,6 +5201,23 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -4283,6 +5338,23 @@
           "non_exception_price_missing",
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -4407,6 +5479,23 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -4529,6 +5618,23 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_review_required",
+        "blockers": [
+          "non_exception_official_price_missing"
+        ],
+        "non_exception_missing_price_sample_rows": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": true,
+        "blocks_keep_drop_decision": true,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -4647,6 +5753,21 @@
         "review_risk_tags": [
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -4769,6 +5890,21 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -4887,6 +6023,21 @@
         "review_risk_tags": [
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -5009,6 +6160,21 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -5127,6 +6293,21 @@
         "review_risk_tags": [
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",
@@ -5249,6 +6430,21 @@
           "likely_same_campaign_family_reissue"
         ]
       },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ]
+      },
       "recommended_review_lane": "same_campaign_family_reissue_review",
       "recommended_reviewer_action": "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate.",
       "decision_template": {
@@ -5368,6 +6564,21 @@
           "zero_price_exception_rows_present",
           "identity_fields_complete",
           "likely_same_campaign_family_reissue"
+        ]
+      },
+      "price_policy_review": {
+        "status": "price_policy_clear_for_identity_review",
+        "blockers": [],
+        "non_exception_missing_price_sample_rows": 0,
+        "zero_price_exception_sample_rows": 2,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "regular_prize_price_required_before_merge": false,
+        "blocks_keep_drop_decision": false,
+        "manual_confirmed": false,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
         ]
       },
       "recommended_review_lane": "same_campaign_family_reissue_review",

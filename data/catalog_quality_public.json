@@ -5654,7 +5654,10 @@
       }
     ],
     "image_url_ready_rows": 0,
+    "can_import_image_urls_now_rows": 0,
     "blocked_before_image_import_rows": 73,
+    "manual_confirmation_required_rows": 73,
+    "image_import_gate_status": "blocked_until_manual_source_or_image_confirmation",
     "download_ready_after_manual_image_url_rows": 73,
     "suggested_local_image_path_rows": 73,
     "local_image_download_instruction_ready_rows": 73,
@@ -9643,6 +9646,9 @@
     "pack_items": 20,
     "official_search_ok_rows": 0,
     "official_search_unavailable_rows": 20,
+    "official_search_needs_fallback_rows": 20,
+    "official_search_unreachable_rows": 0,
+    "official_search_broad_but_reachable_rows": 20,
     "store_fetch_blocked_rows": 0,
     "official_search_no_result_rows": 0,
     "official_search_broad_result_rows": 20,
@@ -9664,7 +9670,7 @@
     ],
     "fallback_web_search_required": true,
     "auto_apply_enabled": false,
-    "recommended_next_action": "resolve_unavailable_official_search_urls_before_source_import"
+    "recommended_next_action": "refine_broad_official_search_results_to_exact_detail_urls"
   },
   "ichiban_kuji_prize_name_image_review": {
     "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
@@ -9703,7 +9709,13 @@
     "focus_pack_id": "source-discovery-focus-001",
     "queue_rows": 20,
     "manual_confirmed_rows": 0,
-    "fallback_reason": "official_search_url_unavailable",
+    "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+    "by_fallback_reason": [
+      [
+        "broad_official_search_result_requires_exact_detail_url",
+        20
+      ]
+    ],
     "by_http_status": [
       [
         "200",
@@ -10463,7 +10475,7 @@
       "next_queue": {
         "source": "data/source_discovery_next_focus_fallback_queue_public.json",
         "queue_rows": 20,
-        "fallback_reason": "official_search_url_unavailable",
+        "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
         "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
         "first_primary_review_url_kind": "domain_limited_web_search",
         "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
@@ -10775,6 +10787,22 @@
     "first_primary_review_url_kind": "domain_limited_web_search",
     "auto_apply_enabled": false,
     "blocked_identity_rows": 0,
+    "candidate_detail_link_rows": 20,
+    "candidate_detail_links": 100,
+    "candidate_detail_link_source_counts": [
+      [
+        "official_search_result_sample_links",
+        20
+      ]
+    ],
+    "candidate_detail_link_review_status_counts": [
+      [
+        "broad_search_sample_requires_identity_check",
+        20
+      ]
+    ],
+    "candidate_detail_link_warning_rows": 20,
+    "broad_candidate_detail_link_rows": 20,
     "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment"
   },
   "source_discovery_next_focus_identity_backfill_queue": {
@@ -10889,6 +10917,11 @@
     ],
     "same_campaign_family_reissue_item_rows": 20,
     "zero_price_exception_reissue_item_rows": 0,
+    "item_template_non_exception_missing_price_sample_rows": 16,
+    "item_template_zero_price_exception_sample_rows": 4,
+    "item_template_price_policy_blocked_rows": 8,
+    "campaign_template_price_policy_blocked_rows": 1,
+    "campaign_template_high_impact_rows": 2,
     "campaign_covered_item_template_rows": 20,
     "standalone_item_template_rows": 0,
     "campaign_item_decision_preview_rows": 20,
@@ -10900,9 +10933,11 @@
     "campaign_review_batch_item_work_order_rows": 20,
     "campaign_review_batch_catalog_index_rows": 40,
     "campaign_review_batch_zero_price_exception_sample_rows": 2,
+    "campaign_review_batch_non_exception_missing_price_sample_rows": 8,
+    "campaign_review_batch_price_policy_blocked_rows": 1,
     "campaign_review_batch_item_preview_rows": 20,
-    "campaign_review_batch_visible_item_preview_rows": 17,
-    "campaign_review_batch_truncated_campaigns": 2,
+    "campaign_review_batch_visible_item_preview_rows": 20,
+    "campaign_review_batch_truncated_campaigns": 0,
     "first_item_evidence_url": "https://1kuji.com/products/haikyu4",
     "first_campaign_evidence_url": "https://1kuji.com/products/onep6",
     "auto_merge_enabled": false,
@@ -11031,6 +11066,19 @@
     "manual_review_candidate_rows": 0,
     "broad_result_link_threshold": 30,
     "fallback_to_domain_limited_web_search_rows": 20,
+    "primary_manual_review_url_rows": 20,
+    "primary_manual_review_url_kind_counts": [
+      [
+        "domain_limited_web_search",
+        20
+      ]
+    ],
+    "domain_limited_web_search_role_counts": [
+      [
+        "secondary_search_hint",
+        20
+      ]
+    ],
     "auto_apply_enabled": false,
     "recommended_next_action": "Use exact title candidates only after manual review; broad Ensky search result pages are not source_url evidence."
   },

@@ -87,12 +87,32 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["same_campaign_family_reissue_item_rows"], 1)
         self.assertEqual(report["summary"]["zero_price_exception_reissue_item_rows"], 0)
+        self.assertEqual(
+            report["summary"]["item_template_non_exception_missing_price_sample_rows"],
+            1,
+        )
+        self.assertEqual(report["summary"]["item_template_price_policy_blocked_rows"], 1)
+        self.assertEqual(
+            report["summary"]["campaign_template_price_policy_blocked_rows"],
+            1,
+        )
+        self.assertEqual(report["summary"]["campaign_template_high_impact_rows"], 0)
         self.assertEqual(report["summary"]["campaign_covered_item_template_rows"], 1)
         self.assertEqual(report["summary"]["standalone_item_template_rows"], 0)
         self.assertEqual(report["summary"]["campaign_item_decision_preview_rows"], 2)
         self.assertEqual(report["summary"]["campaign_review_batch_rows"], 1)
         self.assertEqual(report["summary"]["campaign_review_batch_item_work_order_rows"], 2)
         self.assertEqual(report["summary"]["campaign_review_batch_catalog_index_rows"], 0)
+        self.assertEqual(
+            report["summary"][
+                "campaign_review_batch_non_exception_missing_price_sample_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
+            report["summary"]["campaign_review_batch_price_policy_blocked_rows"],
+            1,
+        )
         self.assertEqual(report["summary"]["campaign_review_batch_item_preview_rows"], 2)
         self.assertEqual(report["summary"]["campaign_review_batch_visible_item_preview_rows"], 2)
         self.assertEqual(report["summary"]["campaign_review_batch_truncated_campaigns"], 0)
@@ -138,6 +158,20 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
             "identity_fields_complete",
             report["campaign_templates"][0]["review_risk_summary"]["review_risk_tags"],
         )
+        self.assertTrue(
+            report["campaign_templates"][0]["price_policy_review"][
+                "blocks_keep_drop_decision"
+            ]
+        )
+        self.assertIn(
+            "non_exception_official_price_missing",
+            report["campaign_templates"][0]["price_policy_review"]["blockers"],
+        )
+        self.assertTrue(
+            report["campaign_templates"][0]["campaign_decision_guidance"][
+                "price_policy_blocks_keep_drop"
+            ]
+        )
         self.assertEqual(
             report["campaign_templates"][0]["item_decision_application_preview"][0][
                 "suggested_decision_if_campaign_is_reissue"
@@ -165,6 +199,11 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
             ],
             "same_campaign_family_reissue_review",
         )
+        self.assertTrue(
+            report["campaign_templates"][0]["item_decision_application_preview"][0][
+                "price_policy_review"
+            ]["blocks_keep_drop_decision"]
+        )
         self.assertIn(
             "likely_same_campaign_family_reissue",
             report["campaign_templates"][0]["item_decision_application_preview"][0][
@@ -186,6 +225,11 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertIn(
             "identity_fields_complete",
             report["item_templates"][0]["review_risk_summary"]["review_risk_tags"],
+        )
+        self.assertTrue(
+            report["item_templates"][0]["price_policy_review"][
+                "blocks_keep_drop_decision"
+            ]
         )
         self.assertEqual(report["next_campaign_review_batch"][0]["campaign_work_order_id"], "campaign-001")
         self.assertEqual(report["next_campaign_review_batch"][0]["item_work_order_count"], 2)
@@ -230,6 +274,16 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                 "recommended_review_lane"
             ],
             "same_campaign_family_reissue_review",
+        )
+        self.assertTrue(
+            report["next_campaign_review_batch"][0]["price_policy_review"][
+                "blocks_keep_drop_decision"
+            ]
+        )
+        self.assertTrue(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0][
+                "price_policy_review"
+            ]["blocks_keep_drop_decision"]
         )
         self.assertTrue(
             report["next_campaign_review_batch"][0]["item_review_preview"][0][

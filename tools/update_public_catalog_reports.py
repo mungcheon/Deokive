@@ -3714,6 +3714,25 @@ def build_operations_public(
                     "campaign_review_batch_visible_item_preview_rows", 0
                 )
             ),
+            "item_price_policy_blocked_rows": ichiban_reissue_decision_template_summary.get(
+                "item_template_price_policy_blocked_rows", 0
+            ),
+            "campaign_price_policy_blocked_rows": ichiban_reissue_decision_template_summary.get(
+                "campaign_template_price_policy_blocked_rows", 0
+            ),
+            "campaign_review_batch_price_policy_blocked_rows": (
+                ichiban_reissue_decision_template_summary.get(
+                    "campaign_review_batch_price_policy_blocked_rows", 0
+                )
+            ),
+            "campaign_review_batch_missing_regular_price_sample_rows": (
+                ichiban_reissue_decision_template_summary.get(
+                    "campaign_review_batch_non_exception_missing_price_sample_rows", 0
+                )
+            ),
+            "zero_price_exception_sample_rows": ichiban_reissue_decision_template_summary.get(
+                "item_template_zero_price_exception_sample_rows", 0
+            ),
             "next_campaign_review_batch": [
                 row
                 for row in ichiban_reissue_decision_template.get(
@@ -6101,6 +6120,24 @@ def build_agent_work_queue_public(
                 "campaign_review_batch_visible_item_preview_rows": int(
                     reissue_decision_summary.get(
                         "campaign_review_batch_visible_item_preview_rows"
+                    )
+                    or 0
+                ),
+                "campaign_review_batch_price_policy_blocked_rows": int(
+                    reissue_decision_summary.get(
+                        "campaign_review_batch_price_policy_blocked_rows"
+                    )
+                    or 0
+                ),
+                "campaign_review_batch_missing_regular_price_sample_rows": int(
+                    reissue_decision_summary.get(
+                        "campaign_review_batch_non_exception_missing_price_sample_rows"
+                    )
+                    or 0
+                ),
+                "zero_price_exception_sample_rows": int(
+                    reissue_decision_summary.get(
+                        "item_template_zero_price_exception_sample_rows"
                     )
                     or 0
                 ),
