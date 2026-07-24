@@ -8,7 +8,7 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
-from urllib.parse import urljoin
+from urllib.parse import quote_plus, urljoin
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -72,6 +72,12 @@ def exact_title_detail_links(html: str, base_url: str, title: str) -> list[str]:
     return links
 
 
+def domain_limited_web_search_url(item: dict[str, Any]) -> str:
+    title = str(item.get("name_ja") or item.get("name_ko") or "").strip()
+    query = f'site:enskyshop.com/products/detail "{title}"' if title else "site:enskyshop.com/products/detail"
+    return f"https://duckduckgo.com/?q={quote_plus(query)}"
+
+
 def audit_item(item: dict[str, Any], fetcher: Fetcher) -> dict[str, Any]:
     url = str(item.get("fallback_store_search_url") or "")
     title = str(item.get("name_ja") or item.get("name_ko") or "")
@@ -89,6 +95,7 @@ def audit_item(item: dict[str, Any], fetcher: Fetcher) -> dict[str, Any]:
         "candidate_source_urls": [],
         "broad_result_page": False,
         "auto_apply_enabled": False,
+        "domain_limited_web_search_url": domain_limited_web_search_url(item),
     }
     if not url:
         result.update(

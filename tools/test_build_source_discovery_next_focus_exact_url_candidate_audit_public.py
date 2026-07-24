@@ -33,6 +33,8 @@ class SourceDiscoveryNextFocusExactUrlCandidateAuditPublicTest(unittest.TestCase
         self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
         self.assertTrue(report["items"][0]["broad_result_page"])
         self.assertEqual(report["items"][0]["candidate_source_urls"], [])
+        self.assertIn("site%3Aenskyshop.com%2Fproducts%2Fdetail", report["items"][0]["domain_limited_web_search_url"])
+        self.assertIn("%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F", report["items"][0]["domain_limited_web_search_url"])
         self.assertEqual(report["items"][0]["recommended_next_action"], "use_domain_limited_web_search_url")
 
     def test_exact_title_candidate_is_manual_review_only(self) -> None:
@@ -65,6 +67,10 @@ class SourceDiscoveryNextFocusExactUrlCandidateAuditPublicTest(unittest.TestCase
         self.assertEqual(
             report["items"][0]["recommended_next_action"],
             "review_exact_title_candidate_source_urls",
+        )
+        self.assertIn(
+            "%22%E4%BA%94%E6%9D%A1%E6%82%9F",
+            report["items"][0]["domain_limited_web_search_url"],
         )
 
 
