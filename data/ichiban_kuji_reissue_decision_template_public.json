@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T05:28:53Z",
+  "generated_at": "2026-07-24T08:49:12Z",
   "scope": "ichiban_kuji_reissue_decision_template",
   "source_report": "data/catalog_deduplication_action_queue_public.json",
   "summary": {
@@ -29,6 +29,10 @@
     "item_templates_with_identity_fields": 20,
     "campaign_templates_with_evidence_urls": 4,
     "campaign_templates_with_identity_fields": 4,
+    "campaign_review_batch_rows": 4,
+    "campaign_review_batch_item_work_order_rows": 20,
+    "campaign_review_batch_catalog_index_rows": 40,
+    "campaign_review_batch_zero_price_exception_sample_rows": 2,
     "first_item_evidence_url": "https://1kuji.com/products/haikyu4",
     "first_campaign_evidence_url": "https://1kuji.com/products/onep6",
     "auto_merge_enabled": false,
@@ -236,6 +240,21 @@
         }
       ],
       "sample_rows_with_identity_fields": 8,
+      "review_risk_summary": {
+        "sample_row_count": 8,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 8,
+        "identity_field_sample_rows": 8,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete",
+          "likely_same_campaign_family_reissue",
+          "high_impact_campaign_pair"
+        ]
+      },
+      "recommended_review_lane": "campaign_pair_first",
+      "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "decision_template": {
         "campaign_work_order_id": "ichiban-reissue-campaign-001",
         "manual_confirmed": false,
@@ -600,6 +619,20 @@
         }
       ],
       "sample_rows_with_identity_fields": 8,
+      "review_risk_summary": {
+        "sample_row_count": 8,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 8,
+        "review_risk_tags": [
+          "identity_fields_complete",
+          "likely_same_campaign_family_reissue",
+          "high_impact_campaign_pair"
+        ]
+      },
+      "recommended_review_lane": "campaign_pair_first",
+      "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "decision_template": {
         "campaign_work_order_id": "ichiban-reissue-campaign-002",
         "manual_confirmed": false,
@@ -901,6 +934,19 @@
         }
       ],
       "sample_rows_with_identity_fields": 6,
+      "review_risk_summary": {
+        "sample_row_count": 6,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 6,
+        "review_risk_tags": [
+          "identity_fields_complete",
+          "likely_same_campaign_family_reissue"
+        ]
+      },
+      "recommended_review_lane": "campaign_pair_first",
+      "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "decision_template": {
         "campaign_work_order_id": "ichiban-reissue-campaign-003",
         "manual_confirmed": false,
@@ -1095,6 +1141,20 @@
         }
       ],
       "sample_rows_with_identity_fields": 4,
+      "review_risk_summary": {
+        "sample_row_count": 4,
+        "zero_price_exception_sample_rows": 2,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 4,
+        "review_risk_tags": [
+          "zero_price_exception_rows_present",
+          "identity_fields_complete",
+          "likely_same_campaign_family_reissue"
+        ]
+      },
+      "recommended_review_lane": "campaign_pair_first",
+      "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
       "decision_template": {
         "campaign_work_order_id": "ichiban-reissue-campaign-004",
         "manual_confirmed": false,
@@ -1162,6 +1222,140 @@
         }
       ],
       "item_decision_application_preview_rows": 2
+    }
+  ],
+  "next_campaign_review_batch": [
+    {
+      "campaign_work_order_id": "ichiban-reissue-campaign-001",
+      "priority": 1,
+      "item_work_order_count": 8,
+      "catalog_index_count": 16,
+      "first_evidence_url": "https://1kuji.com/products/onep6",
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "prize_labels": [
+        "A賞",
+        "B賞",
+        "C賞",
+        "D賞",
+        "E賞",
+        "F賞",
+        "G賞",
+        "H賞"
+      ],
+      "review_risk_tags": [
+        "non_exception_price_missing",
+        "identity_fields_complete",
+        "likely_same_campaign_family_reissue",
+        "high_impact_campaign_pair"
+      ],
+      "recommended_review_lane": "campaign_pair_first",
+      "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
+      "affected_item_work_order_ids": [
+        "ichiban-reissue-dedupe-006",
+        "ichiban-reissue-dedupe-007",
+        "ichiban-reissue-dedupe-008",
+        "ichiban-reissue-dedupe-009",
+        "ichiban-reissue-dedupe-010",
+        "ichiban-reissue-dedupe-011",
+        "ichiban-reissue-dedupe-012",
+        "ichiban-reissue-dedupe-013"
+      ],
+      "manual_confirmed": false
+    },
+    {
+      "campaign_work_order_id": "ichiban-reissue-campaign-002",
+      "priority": 2,
+      "item_work_order_count": 7,
+      "catalog_index_count": 14,
+      "first_evidence_url": "https://1kuji.com/products/kimetsu",
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "prize_labels": [
+        "A賞",
+        "B賞",
+        "C賞",
+        "D賞",
+        "E賞",
+        "F賞",
+        "ラストワン賞"
+      ],
+      "review_risk_tags": [
+        "identity_fields_complete",
+        "likely_same_campaign_family_reissue",
+        "high_impact_campaign_pair"
+      ],
+      "recommended_review_lane": "campaign_pair_first",
+      "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
+      "affected_item_work_order_ids": [
+        "ichiban-reissue-dedupe-014",
+        "ichiban-reissue-dedupe-015",
+        "ichiban-reissue-dedupe-016",
+        "ichiban-reissue-dedupe-017",
+        "ichiban-reissue-dedupe-018",
+        "ichiban-reissue-dedupe-019",
+        "ichiban-reissue-dedupe-020"
+      ],
+      "manual_confirmed": false
+    },
+    {
+      "campaign_work_order_id": "ichiban-reissue-campaign-003",
+      "priority": 3,
+      "item_work_order_count": 3,
+      "catalog_index_count": 6,
+      "first_evidence_url": "https://1kuji.com/products/naruto_wcf",
+      "source_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "prize_labels": [
+        "A賞",
+        "B賞",
+        "C賞"
+      ],
+      "review_risk_tags": [
+        "identity_fields_complete",
+        "likely_same_campaign_family_reissue"
+      ],
+      "recommended_review_lane": "campaign_pair_first",
+      "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
+      "affected_item_work_order_ids": [
+        "ichiban-reissue-dedupe-003",
+        "ichiban-reissue-dedupe-004",
+        "ichiban-reissue-dedupe-005"
+      ],
+      "manual_confirmed": false
+    },
+    {
+      "campaign_work_order_id": "ichiban-reissue-campaign-004",
+      "priority": 4,
+      "item_work_order_count": 2,
+      "catalog_index_count": 4,
+      "first_evidence_url": "https://1kuji.com/products/haikyu4",
+      "source_urls": [
+        "https://1kuji.com/products/haikyu4",
+        "https://1kuji.com/products/haikyu8"
+      ],
+      "prize_labels": [
+        "ラストワン賞",
+        "缶バッジ"
+      ],
+      "review_risk_tags": [
+        "zero_price_exception_rows_present",
+        "identity_fields_complete",
+        "likely_same_campaign_family_reissue"
+      ],
+      "recommended_review_lane": "campaign_pair_first",
+      "recommended_reviewer_action": "Compare the official campaign pages first; one campaign decision can settle all affected item work orders.",
+      "affected_item_work_order_ids": [
+        "ichiban-reissue-dedupe-001",
+        "ichiban-reissue-dedupe-002"
+      ],
+      "manual_confirmed": false
     }
   ],
   "item_templates": [
@@ -1243,6 +1437,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 2,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "zero_price_exception_rows_present",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-001",
         "manual_confirmed": false,
@@ -1351,6 +1556,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-002",
         "manual_confirmed": false,
@@ -1458,6 +1673,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-003",
         "manual_confirmed": false,
@@ -1565,6 +1790,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-004",
         "manual_confirmed": false,
@@ -1672,6 +1907,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-005",
         "manual_confirmed": false,
@@ -1780,6 +2025,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 2,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-006",
         "manual_confirmed": false,
@@ -1888,6 +2144,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 2,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-007",
         "manual_confirmed": false,
@@ -1996,6 +2263,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 2,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-008",
         "manual_confirmed": false,
@@ -2104,6 +2382,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 2,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-009",
         "manual_confirmed": false,
@@ -2212,6 +2501,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 2,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-010",
         "manual_confirmed": false,
@@ -2320,6 +2620,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 2,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-011",
         "manual_confirmed": false,
@@ -2428,6 +2739,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 2,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-012",
         "manual_confirmed": false,
@@ -2536,6 +2858,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 2,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "non_exception_price_missing",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-013",
         "manual_confirmed": false,
@@ -2643,6 +2976,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-014",
         "manual_confirmed": false,
@@ -2750,6 +3093,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-015",
         "manual_confirmed": false,
@@ -2857,6 +3210,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-016",
         "manual_confirmed": false,
@@ -2964,6 +3327,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-017",
         "manual_confirmed": false,
@@ -3071,6 +3444,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-018",
         "manual_confirmed": false,
@@ -3178,6 +3561,16 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 0,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-019",
         "manual_confirmed": false,
@@ -3285,6 +3678,17 @@
         }
       ],
       "sample_rows_with_identity_fields": 2,
+      "review_risk_summary": {
+        "sample_row_count": 2,
+        "zero_price_exception_sample_rows": 2,
+        "zero_price_exception_nonzero_sample_rows": 0,
+        "non_exception_missing_price_sample_rows": 0,
+        "identity_field_sample_rows": 2,
+        "review_risk_tags": [
+          "zero_price_exception_rows_present",
+          "identity_fields_complete"
+        ]
+      },
       "decision_template": {
         "work_order_id": "ichiban-reissue-dedupe-020",
         "manual_confirmed": false,

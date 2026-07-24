@@ -69,8 +69,49 @@ def _sample_rows_with_identity(rows: list[dict[str, Any]]) -> int:
     )
 
 
+def _is_zero_price_prize(row: dict[str, Any]) -> bool:
+    label = " ".join(
+        str(row.get(key) or "")
+        for key in ("name_ko", "name_ja", "sub_series", "prize_rank", "prize_item_name")
+    )
+    return any(token in label for token in ("ラストワン", "LAST ONE", "Last One", "더블찬스", "ダブルチャンス"))
+
+
+def _row_risk_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    zero_exception_rows = [row for row in rows if _is_zero_price_prize(row)]
+    missing_price_rows = [
+        row
+        for row in rows
+        if row.get("official_price_jpy") in (None, "")
+        and not _is_zero_price_prize(row)
+    ]
+    zero_exception_nonzero_rows = [
+        row
+        for row in zero_exception_rows
+        if row.get("official_price_jpy") not in (0, None, "")
+    ]
+    tags: list[str] = []
+    if zero_exception_rows:
+        tags.append("zero_price_exception_rows_present")
+    if zero_exception_nonzero_rows:
+        tags.append("zero_price_exception_price_review")
+    if missing_price_rows:
+        tags.append("non_exception_price_missing")
+    if _sample_rows_with_identity(rows) == len(rows) and rows:
+        tags.append("identity_fields_complete")
+    return {
+        "sample_row_count": len(rows),
+        "zero_price_exception_sample_rows": len(zero_exception_rows),
+        "zero_price_exception_nonzero_sample_rows": len(zero_exception_nonzero_rows),
+        "non_exception_missing_price_sample_rows": len(missing_price_rows),
+        "identity_field_sample_rows": _sample_rows_with_identity(rows),
+        "review_risk_tags": tags,
+    }
+
+
 def _item_template(row: dict[str, Any]) -> dict[str, Any]:
     template = _copy_template(row)
+    sample_rows = row.get("sample_rows") or []
     return {
         "work_order_id": row.get("work_order_id"),
         "campaign_work_order_id": row.get("campaign_work_order_id"),
@@ -84,8 +125,9 @@ def _item_template(row: dict[str, Any]) -> dict[str, Any]:
         "campaign_url_comparison": row.get("campaign_url_comparison") or {},
         "reissue_signal_reasons": row.get("reissue_signal_reasons") or [],
         "manual_review_checklist": row.get("manual_review_checklist") or [],
-        "sample_rows": row.get("sample_rows") or [],
-        "sample_rows_with_identity_fields": _sample_rows_with_identity(row.get("sample_rows") or []),
+        "sample_rows": sample_rows,
+        "sample_rows_with_identity_fields": _sample_rows_with_identity(sample_rows),
+        "review_risk_summary": _row_risk_summary(sample_rows),
         "decision_template": template,
         "manual_confirmed": False,
         "decision": template.get("decision") or "",
@@ -100,6 +142,14 @@ def _item_template(row: dict[str, Any]) -> dict[str, Any]:
 
 def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
     template = _copy_template(row)
+    sample_rows = row.get("sample_rows") or []
+    risk_summary = _row_risk_summary(sample_rows)
+    comparison = row.get("campaign_url_comparison") or {}
+    review_tags = list(risk_summary["review_risk_tags"])
+    if comparison.get("likely_same_campaign_family_reissue"):
+        review_tags.append("likely_same_campaign_family_reissue")
+    if int(row.get("item_work_order_count") or 0) >= 5:
+        review_tags.append("high_impact_campaign_pair")
     return {
         "campaign_work_order_id": row.get("campaign_work_order_id"),
         "priority": row.get("priority"),
@@ -110,10 +160,22 @@ def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
         "affected_item_work_order_ids": template.get("affected_item_work_order_ids") or [],
         "catalog_indexes": row.get("catalog_indexes") or [],
         "prize_labels": row.get("prize_labels") or [],
-        "campaign_url_comparison": row.get("campaign_url_comparison") or {},
+        "campaign_url_comparison": comparison,
         "manual_review_checklist": row.get("manual_review_checklist") or [],
-        "sample_rows": row.get("sample_rows") or [],
-        "sample_rows_with_identity_fields": _sample_rows_with_identity(row.get("sample_rows") or []),
+        "sample_rows": sample_rows,
+        "sample_rows_with_identity_fields": _sample_rows_with_identity(sample_rows),
+        "review_risk_summary": {
+            **risk_summary,
+            "review_risk_tags": review_tags,
+        },
+        "recommended_review_lane": (
+            "campaign_pair_first"
+            if int(row.get("item_work_order_count") or 0) > 1
+            else "item_pair_review"
+        ),
+        "recommended_reviewer_action": (
+            "Compare the official campaign pages first; one campaign decision can settle all affected item work orders."
+        ),
         "decision_template": template,
         "manual_confirmed": False,
         "decision": template.get("decision") or "",
@@ -156,6 +218,38 @@ def _campaign_item_decision_preview(
     return previews
 
 
+def _next_campaign_review_batch(campaign_templates: list[dict[str, Any]], *, limit: int = 4) -> list[dict[str, Any]]:
+    def score(campaign: dict[str, Any]) -> tuple[int, int, int, int]:
+        risk = campaign.get("review_risk_summary") or {}
+        return (
+            int(campaign.get("item_work_order_count") or 0),
+            int(risk.get("non_exception_missing_price_sample_rows") or 0),
+            int(risk.get("zero_price_exception_sample_rows") or 0),
+            int(campaign.get("evidence_url_count") or 0),
+        )
+
+    ordered = sorted(campaign_templates, key=score, reverse=True)
+    batch: list[dict[str, Any]] = []
+    for campaign in ordered[:limit]:
+        batch.append(
+            {
+                "campaign_work_order_id": campaign.get("campaign_work_order_id"),
+                "priority": campaign.get("priority"),
+                "item_work_order_count": campaign.get("item_work_order_count") or 0,
+                "catalog_index_count": len(campaign.get("catalog_indexes") or []),
+                "first_evidence_url": campaign.get("first_evidence_url") or "",
+                "source_urls": campaign.get("source_urls") or [],
+                "prize_labels": campaign.get("prize_labels") or [],
+                "review_risk_tags": (campaign.get("review_risk_summary") or {}).get("review_risk_tags") or [],
+                "recommended_review_lane": campaign.get("recommended_review_lane"),
+                "recommended_reviewer_action": campaign.get("recommended_reviewer_action"),
+                "affected_item_work_order_ids": campaign.get("affected_item_work_order_ids") or [],
+                "manual_confirmed": False,
+            }
+        )
+    return batch
+
+
 def build_report(action_queue: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     item_templates = [_item_template(row) for row in _safe_list(action_queue.get("ichiban_reissue_work_order"))]
     campaign_templates = [
@@ -174,6 +268,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         campaign["item_decision_application_preview_rows"] = len(
             campaign["item_decision_application_preview"]
         )
+    next_campaign_review_batch = _next_campaign_review_batch(campaign_templates)
 
     item_decisions = Counter(item["decision"] or "unconfirmed" for item in item_templates)
     campaign_decisions = Counter(item["decision"] or "unconfirmed" for item in campaign_templates)
@@ -224,6 +319,26 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         "campaign_templates_with_identity_fields": sum(
             1 for campaign in campaign_templates if int(campaign.get("sample_rows_with_identity_fields") or 0) > 0
         ),
+        "campaign_review_batch_rows": len(next_campaign_review_batch),
+        "campaign_review_batch_item_work_order_rows": sum(
+            int(campaign.get("item_work_order_count") or 0)
+            for campaign in next_campaign_review_batch
+        ),
+        "campaign_review_batch_catalog_index_rows": sum(
+            int(campaign.get("catalog_index_count") or 0)
+            for campaign in next_campaign_review_batch
+        ),
+        "campaign_review_batch_zero_price_exception_sample_rows": sum(
+            int(
+                (campaign.get("review_risk_summary") or {}).get(
+                    "zero_price_exception_sample_rows"
+                )
+                or 0
+            )
+            for campaign in campaign_templates
+            if campaign.get("campaign_work_order_id")
+            in {row.get("campaign_work_order_id") for row in next_campaign_review_batch}
+        ),
         "first_item_evidence_url": _first_url(
             [item.get("first_evidence_url") for item in item_templates]
         ),
@@ -255,6 +370,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             "manual_review_required_before_mutation": True,
         },
         "campaign_templates": campaign_templates,
+        "next_campaign_review_batch": next_campaign_review_batch,
         "item_templates": item_templates,
     }
 

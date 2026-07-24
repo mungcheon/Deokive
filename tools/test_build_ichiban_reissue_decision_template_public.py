@@ -68,6 +68,9 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["summary"]["campaign_covered_item_template_rows"], 1)
         self.assertEqual(report["summary"]["standalone_item_template_rows"], 0)
         self.assertEqual(report["summary"]["campaign_item_decision_preview_rows"], 2)
+        self.assertEqual(report["summary"]["campaign_review_batch_rows"], 1)
+        self.assertEqual(report["summary"]["campaign_review_batch_item_work_order_rows"], 2)
+        self.assertEqual(report["summary"]["campaign_review_batch_catalog_index_rows"], 0)
         self.assertEqual(report["summary"]["item_templates_with_evidence_urls"], 1)
         self.assertEqual(report["summary"]["campaign_templates_with_evidence_urls"], 1)
         self.assertEqual(report["summary"]["item_templates_with_identity_fields"], 1)
@@ -89,6 +92,11 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["campaign_templates"][0]["first_evidence_url"], "https://1kuji.com/products/a")
         self.assertEqual(report["campaign_templates"][0]["evidence_url_count"], 2)
         self.assertEqual(report["campaign_templates"][0]["sample_rows_with_identity_fields"], 1)
+        self.assertEqual(report["campaign_templates"][0]["recommended_review_lane"], "campaign_pair_first")
+        self.assertIn(
+            "identity_fields_complete",
+            report["campaign_templates"][0]["review_risk_summary"]["review_risk_tags"],
+        )
         self.assertEqual(
             report["campaign_templates"][0]["item_decision_application_preview"][0][
                 "suggested_decision_if_campaign_is_reissue"
@@ -114,6 +122,13 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["item_templates"][0]["first_evidence_url"], "https://1kuji.com/products/a")
         self.assertEqual(report["item_templates"][0]["evidence_url_count"], 2)
         self.assertEqual(report["item_templates"][0]["sample_rows_with_identity_fields"], 1)
+        self.assertIn(
+            "identity_fields_complete",
+            report["item_templates"][0]["review_risk_summary"]["review_risk_tags"],
+        )
+        self.assertEqual(report["next_campaign_review_batch"][0]["campaign_work_order_id"], "campaign-001")
+        self.assertEqual(report["next_campaign_review_batch"][0]["item_work_order_count"], 2)
+        self.assertFalse(report["next_campaign_review_batch"][0]["manual_confirmed"])
         self.assertFalse(report["automation_policy"]["auto_merge_enabled"])
 
 
