@@ -505,6 +505,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             "current_source_url",
         )
         execution_queue = report["execution_queue_summary"]
+        self.assertEqual(execution_queue["queued_rows_total"], 6)
+        self.assertGreater(execution_queue["raw_queued_rows_total"], 6)
+        self.assertEqual(
+            execution_queue["overlapping_queue_rows"],
+            execution_queue["raw_queued_rows_total"] - execution_queue["queued_rows_total"],
+        )
         self.assertEqual(execution_queue["not_yet_queued_rows"], 0)
         self.assertEqual(execution_queue["unqueued_phase_rows_total"], 0)
         self.assertGreater(execution_queue["overlay_queue_rows"], 0)

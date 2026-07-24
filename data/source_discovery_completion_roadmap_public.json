@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T20:48:23Z",
+  "generated_at": "2026-07-24T20:51:22Z",
   "scope": "source_discovery_completion_roadmap",
   "summary": {
     "missing_image_rows": 745,
     "source_first_rows": 717,
     "queued_source_rows": 667,
-    "focus_source_rows": 511,
-    "focus_coverage": 0.7661,
+    "focus_source_rows": 667,
+    "focus_coverage": 1.0,
     "top_10_store_rows": 541,
     "top_10_store_coverage": 0.8111,
     "current_focus_pack_rows": 20,
@@ -28,8 +28,8 @@
     "auto_apply_enabled": false,
     "manual_confirmed_rows": 0,
     "queued_source_rows": 667,
-    "focus_source_rows": 511,
-    "remaining_focus_review_rows": 511,
+    "focus_source_rows": 667,
+    "remaining_focus_review_rows": 667,
     "current_focus_pack_id": "source-discovery-focus-001",
     "current_focus_pack_rows": 20,
     "current_focus_remaining_rows": 20,
@@ -239,7 +239,7 @@
     {
       "phase": 2,
       "name": "top_store_source_confirmation",
-      "rows": 511,
+      "rows": 667,
       "public_report": "data/source_discovery_focus_packs_public.json",
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "next_machine_step": "rotate_focus_packs_until_current_focus_stores_are_confirmed"
@@ -247,7 +247,7 @@
     {
       "phase": 3,
       "name": "non_focus_source_confirmation",
-      "rows": 156,
+      "rows": 0,
       "public_report": "data/source_discovery_action_queue_public.json",
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "next_machine_step": "build_next_focus_pack_from_remaining_store_bottlenecks"

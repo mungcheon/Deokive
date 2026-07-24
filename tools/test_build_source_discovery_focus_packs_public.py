@@ -145,7 +145,7 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
         self.assertEqual(report["work_order"][0]["blocked_rows"], 1)
         self.assertFalse(report["packs"][0]["auto_apply_enabled"])
 
-    def test_default_focus_limit_covers_top_eight_source_stores(self) -> None:
+    def test_default_focus_limit_covers_all_source_stores(self) -> None:
         action_queue = {
             "summary": {"actionable_source_rows": 9},
             "batches": [
@@ -178,9 +178,51 @@ class BuildSourceDiscoveryFocusPacksPublicTest(unittest.TestCase):
             pack_size=20,
         )
 
+        self.assertEqual(report["summary"]["focus_store_count"], 9)
+        self.assertEqual(report["summary"]["focus_source_rows"], 9)
+        self.assertEqual(report["summary"]["focus_pack_count"], 9)
+        self.assertEqual(report["summary"]["non_focus_source_rows"], 0)
+        self.assertEqual(
+            report["summary"]["focus_source_stores"],
+            [f"Store {index}" for index in range(1, 10)],
+        )
+
+    def test_explicit_focus_limit_can_publish_top_eight_source_stores(self) -> None:
+        action_queue = {
+            "summary": {"actionable_source_rows": 9},
+            "batches": [
+                {
+                    "batch_id": f"b{index}",
+                    "source_store": f"Store {index}",
+                    "items": [
+                        {
+                            "catalog_index": index,
+                            "source_store": f"Store {index}",
+                            "category": "Badge",
+                            "name_ko": f"Goods {index}",
+                        }
+                    ],
+                }
+                for index in range(1, 10)
+            ],
+        }
+        bottlenecks = {
+            "stores": [
+                {"source_store": f"Store {index}", "rows": 1}
+                for index in range(1, 10)
+            ]
+        }
+
+        report = focus.build_report(
+            action_queue,
+            bottlenecks,
+            generated_at="2026-07-22T00:00:00Z",
+            top_store_limit=8,
+            pack_size=20,
+        )
+
         self.assertEqual(report["summary"]["focus_store_count"], 8)
         self.assertEqual(report["summary"]["focus_source_rows"], 8)
-        self.assertEqual(report["summary"]["focus_pack_count"], 8)
         self.assertEqual(report["summary"]["non_focus_source_rows"], 1)
         self.assertEqual(
             report["summary"]["focus_source_stores"],

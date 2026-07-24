@@ -899,7 +899,8 @@ def build_execution_queue_summary(
         )
 
     open_missing_image_rows = int(summary.get("missing_image_rows") or 0)
-    queued_rows_total = sum(int(queue.get("row_count") or 0) for queue in queues)
+    raw_queued_rows_total = sum(int(queue.get("row_count") or 0) for queue in queues)
+    queued_rows_total = min(open_missing_image_rows, raw_queued_rows_total)
     phase_queue_breakdown = build_phase_queue_breakdown(completion_plan, queues)
     unqueued_phase_rows_total = sum(
         int(row.get("remaining_rows") or 0) for row in phase_queue_breakdown
@@ -947,6 +948,8 @@ def build_execution_queue_summary(
         + int(summary.get("source_detail_ready_unflagged_candidate_rows") or 0),
         "queue_count": len(queues),
         "queued_rows_total": queued_rows_total,
+        "raw_queued_rows_total": raw_queued_rows_total,
+        "overlapping_queue_rows": max(0, raw_queued_rows_total - queued_rows_total),
         "not_yet_queued_rows": not_yet_queued_rows,
         "not_yet_queued_rows_explained": sum(
             int(row.get("reported_not_yet_queued_rows") or 0)
