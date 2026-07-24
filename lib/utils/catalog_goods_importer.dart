@@ -494,30 +494,26 @@ class _CatalogImportActionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Text(
-        label,
-        style: TextStyle(
-          inherit: false,
-          color: color,
-          fontSize: 15,
-          fontWeight: FontWeight.w900,
-          height: 1,
-          decoration: TextDecoration.none,
-          fontFamilyFallback: _fontFallback,
-          shadows: const [],
-        ),
-        strutStyle: const StrutStyle(
-          fontSize: 15,
-          height: 1.15,
-          forceStrutHeight: true,
-        ),
-        maxLines: 1,
-        softWrap: false,
-        overflow: TextOverflow.visible,
-        textAlign: TextAlign.center,
+    return Text(
+      label,
+      style: TextStyle(
+        color: color,
+        fontSize: 15,
+        fontWeight: FontWeight.w900,
+        height: 1,
+        decoration: TextDecoration.none,
+        fontFamilyFallback: _fontFallback,
+        shadows: const [],
       ),
+      strutStyle: const StrutStyle(
+        fontSize: 15,
+        height: 1.15,
+        forceStrutHeight: true,
+      ),
+      maxLines: 1,
+      softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
     );
   }
 }
