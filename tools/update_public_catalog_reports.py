@@ -2170,6 +2170,7 @@ def build_operations_public(
     animation_action_queue_override: dict[str, Any] | None = None,
     animation_split_review_override: dict[str, Any] | None = None,
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
+    ichiban_reissue_decision_template_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -2286,6 +2287,14 @@ def build_operations_public(
     dedupe_review_batches_summary = dedupe_review_batches.get("summary", {})
     dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
     dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
+    ichiban_reissue_decision_template = (
+        ichiban_reissue_decision_template_override
+        if ichiban_reissue_decision_template_override is not None
+        else load_json(ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE, {})
+        if ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE.exists()
+        else {"summary": {}}
+    )
+    ichiban_reissue_decision_template_summary = ichiban_reissue_decision_template.get("summary", {})
     dedupe_template_import_dry_run = (
         deduplication_template_import_dry_run_override
         if deduplication_template_import_dry_run_override is not None
@@ -2916,7 +2925,8 @@ def build_operations_public(
         {
             "priority": 43,
             "workstream": "ichiban_kuji_reissue_dedupe_review",
-            "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            "public_report": f"data/{ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE.name}",
+            "work_order_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
             "review_groups": dedupe_action_queue_summary.get("ichiban_reissue_review_groups", 0),
             "probable_reissue_groups": dedupe_action_queue_summary.get(
                 "ichiban_probable_reissue_review_groups", 0
@@ -2934,6 +2944,12 @@ def build_operations_public(
             ],
             "decision_template_rows": dedupe_action_queue_summary.get(
                 "ichiban_reissue_decision_template_rows", 0
+            ),
+            "campaign_decision_template_rows": ichiban_reissue_decision_template_summary.get(
+                "campaign_template_rows", 0
+            ),
+            "item_decision_template_rows": ichiban_reissue_decision_template_summary.get(
+                "item_template_rows", 0
             ),
             "manual_confirmed_rows": dedupe_action_queue_summary.get(
                 "ichiban_reissue_manual_confirmed_rows", 0
@@ -3516,7 +3532,8 @@ def build_operations_public(
                 "ichiban_reissue_manual_confirmed_rows", 0
             ),
             "protected_groups": dedupe_action_queue_summary.get("ichiban_reissue_protected_groups", 0),
-            "primary_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            "primary_report": f"data/{ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE.name}",
+            "work_order_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
             "next_step": "fill_ichiban_reissue_decision_template_before_dedupe",
             "auto_apply_enabled": False,
         } if dedupe_action_queue_summary else None,
@@ -4634,7 +4651,7 @@ def build_agent_work_queue_public(
             workstream="ichiban_kuji_reissue_dedupe_review",
             priority=55 + lane_index,
             title=f"Ichiban Kuji reissue dedupe check {lane_index:03d}",
-            public_report=DEDUPLICATION_ACTION_QUEUE,
+            public_report=ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE,
             rows=int(lane.get("row_count") or 0),
             recommended_action=str(
                 lane.get("review_reason")
@@ -7211,6 +7228,7 @@ def validate_report_consistency(
         f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
         f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}",
+        f"data/{ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE.name}",
         f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}",
         f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}",
         f"data/{GENERIC_SOURCE.name}",
@@ -7686,6 +7704,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_action_queue,
         animation_split_review,
         animation_unmatched_keyword_review,
+        ichiban_kuji_reissue_decision_template,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -7728,6 +7747,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "requested_focus_action_queue_public.json": load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}),
             "catalog_deduplication_review_batches_public.json": load_json(DEDUPLICATION_REVIEW_BATCHES, {}),
             "catalog_deduplication_action_queue_public.json": load_json(DEDUPLICATION_ACTION_QUEUE, {}),
+            "ichiban_kuji_reissue_decision_template_public.json": ichiban_kuji_reissue_decision_template,
             "ichiban_kuji_metadata_review_batches_public.json": load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {}),
             "ichiban_kuji_metadata_action_queue_public.json": load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}),
             "ichiban_kuji_prize_name_image_review_public.json": ichiban_kuji_prize_name_image_review,

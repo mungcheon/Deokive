@@ -2196,6 +2196,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             dedupe_action_summary.get("ichiban_reissue_decision_template_rows"),
         )
         self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("public_report"),
+            "data/ichiban_kuji_reissue_decision_template_public.json",
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("work_order_report"),
+            "data/catalog_deduplication_action_queue_public.json",
+        )
+        self.assertEqual(ichiban_reissue_dedupe_next_action.get("item_decision_template_rows"), 20)
+        self.assertEqual(ichiban_reissue_dedupe_next_action.get("campaign_decision_template_rows"), 4)
+        self.assertEqual(
             ichiban_reissue_dedupe_next_action.get("manual_confirmed_rows"),
             dedupe_action_summary.get("ichiban_reissue_manual_confirmed_rows"),
         )
@@ -2204,6 +2214,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             "fill_ichiban_reissue_decision_template_before_dedupe",
         )
         self.assertGreater(len(ichiban_reissue_dedupe_agent_batches), 0)
+        self.assertEqual(
+            ichiban_reissue_dedupe_agent_batches[0].get("public_report"),
+            "data/ichiban_kuji_reissue_decision_template_public.json",
+        )
         self.assertEqual(ichiban_reissue_dedupe_agent_batches[0]["rows"], 2)
         self.assertEqual(len(ichiban_reissue_dedupe_agent_batches[0]["sample_items"]), 2)
         self.assertEqual(
@@ -2273,6 +2287,28 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             ichiban_reissue_execution_action["evidence"].get("ichiban_reissue_manual_confirmed_rows"),
             dedupe_action_summary.get("ichiban_reissue_manual_confirmed_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action.get("public_report"),
+            "data/ichiban_kuji_reissue_decision_template_public.json",
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_decision_template_report"
+            ),
+            "data/ichiban_kuji_reissue_decision_template_public.json",
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_item_template_rows"
+            ),
+            20,
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_campaign_template_rows"
+            ),
+            4,
         )
         self.assertEqual(
             ichiban_reissue_execution_action.get("next_step"),

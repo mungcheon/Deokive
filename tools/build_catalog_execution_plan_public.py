@@ -117,6 +117,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     dedupe_batches = load_report("catalog_deduplication_review_batches_public.json")
     dedupe_action_queue = load_report("catalog_deduplication_action_queue_public.json")
     dedupe_fast_review = load_report("catalog_deduplication_fast_review_public.json")
+    kuji_reissue_decision_template = load_report("ichiban_kuji_reissue_decision_template_public.json")
     kuji_history = load_report("ichiban_kuji_history_public.json")
     kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
     kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
@@ -153,6 +154,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     dedupe_summary = _summary(dedupe_batches)
     dedupe_action_summary = _summary(dedupe_action_queue)
     dedupe_fast_summary = _summary(dedupe_fast_review)
+    kuji_reissue_decision_template_summary = _summary(kuji_reissue_decision_template)
     kuji_history_summary = _summary(kuji_history)
     dedupe_fast_breakdowns = dedupe_fast_review.get("breakdowns")
     if not isinstance(dedupe_fast_breakdowns, dict):
@@ -726,7 +728,7 @@ def _build_plan(load_report) -> dict[str, Any]:
         _action(
             priority=52,
             workstream="ichiban_kuji_reissue_dedupe_review",
-            public_report="data/catalog_deduplication_action_queue_public.json",
+            public_report="data/ichiban_kuji_reissue_decision_template_public.json",
             status="manual_review",
             rows=_count(dedupe_action_summary, "ichiban_reissue_review_groups"),
             command="Verify same-name Ichiban Kuji rows against campaign pages before any dedupe decision.",
@@ -753,6 +755,21 @@ def _build_plan(load_report) -> dict[str, Any]:
                 ),
                 "ichiban_reissue_manual_confirmed_rows": _count(
                     dedupe_action_summary, "ichiban_reissue_manual_confirmed_rows"
+                ),
+                "ichiban_reissue_decision_template_report": (
+                    "data/ichiban_kuji_reissue_decision_template_public.json"
+                ),
+                "ichiban_reissue_item_template_rows": _count(
+                    kuji_reissue_decision_template_summary, "item_template_rows"
+                ),
+                "ichiban_reissue_campaign_template_rows": _count(
+                    kuji_reissue_decision_template_summary, "campaign_template_rows"
+                ),
+                "ichiban_reissue_template_manual_confirmed_item_rows": _count(
+                    kuji_reissue_decision_template_summary, "manual_confirmed_item_rows"
+                ),
+                "ichiban_reissue_template_manual_confirmed_campaign_rows": _count(
+                    kuji_reissue_decision_template_summary, "manual_confirmed_campaign_rows"
                 ),
                 "ichiban_reissue_protected_groups": _count(
                     dedupe_action_summary, "ichiban_reissue_protected_groups"

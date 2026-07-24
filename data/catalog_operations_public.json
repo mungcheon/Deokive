@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:05Z",
+  "generated_at": "2026-07-24T01:43:23Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -28,8 +28,8 @@
       "danganronpa_missing_media_rows": 34,
       "danganronpa_patch_template_pending_rows": 34,
       "danganronpa_patch_template_ready_rows": 0,
-      "confirmed_import_template_rows": 1141,
-      "confirmed_import_action_queue_rows": 4637,
+      "confirmed_import_template_rows": 1158,
+      "confirmed_import_action_queue_rows": 4252,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
@@ -1714,7 +1714,8 @@
       "decision_template_rows": 20,
       "manual_confirmed_rows": 0,
       "protected_groups": 0,
-      "primary_report": "data/catalog_deduplication_action_queue_public.json",
+      "primary_report": "data/ichiban_kuji_reissue_decision_template_public.json",
+      "work_order_report": "data/catalog_deduplication_action_queue_public.json",
       "next_step": "fill_ichiban_reissue_decision_template_before_dedupe",
       "auto_apply_enabled": false
     },
@@ -2771,9 +2772,9 @@
       "public_report": "data/catalog_confirmed_import_readiness_public.json",
       "ready_or_pending_import_rows": 0,
       "blocked_confirmed_rows": 0,
-      "template_items": 1141,
-      "public_action_queue_rows": 4637,
-      "public_action_queue_batches": 180,
+      "template_items": 1158,
+      "public_action_queue_rows": 4252,
+      "public_action_queue_batches": 178,
       "recommended_next_action": "Review confirmed import readiness before attempting source/image/metadata writes."
     },
     {
@@ -4129,7 +4130,8 @@
     {
       "priority": 43,
       "workstream": "ichiban_kuji_reissue_dedupe_review",
-      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "public_report": "data/ichiban_kuji_reissue_decision_template_public.json",
+      "work_order_report": "data/catalog_deduplication_action_queue_public.json",
       "review_groups": 46,
       "probable_reissue_groups": 20,
       "review_rows": 92,
@@ -4244,6 +4246,8 @@
         }
       ],
       "decision_template_rows": 20,
+      "campaign_decision_template_rows": 4,
+      "item_decision_template_rows": 20,
       "manual_confirmed_rows": 0,
       "protected_groups": 0,
       "next_step": "fill_ichiban_reissue_decision_template_before_dedupe",
