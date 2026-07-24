@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -11,6 +12,22 @@ import build_catalog_execution_plan_public as plan
 
 
 class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
+    def test_write_report_skips_timestamp_only_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "execution_plan.json"
+            report = {
+                "schema_version": 1,
+                "generated_at": "2026-01-01T00:00:00Z",
+                "summary": {"action_count": 1},
+                "actions": [],
+            }
+            plan.write_report(report, path)
+            first_mtime = path.stat().st_mtime_ns
+
+            plan.write_report({**report, "generated_at": "2026-01-01T00:01:00Z"}, path)
+
+            self.assertEqual(path.stat().st_mtime_ns, first_mtime)
+
     def test_plan_prefers_manual_confirmation_before_import(self) -> None:
         payloads = {
             "catalog_operations_public.json": {

@@ -2075,12 +2075,34 @@ def build_plan() -> dict[str, Any]:
     return _build_plan(_load)
 
 
+def write_report(report: dict[str, Any], path: Path = DEFAULT_OUTPUT) -> None:
+    serialized = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+    if path.exists():
+        existing_text = path.read_text(encoding="utf-8-sig")
+        if existing_text == serialized:
+            return
+        try:
+            existing_report = json.loads(existing_text)
+        except json.JSONDecodeError:
+            existing_report = None
+        if isinstance(existing_report, dict):
+            existing_without_generated_at = {
+                key: value for key, value in existing_report.items() if key != "generated_at"
+            }
+            report_without_generated_at = {
+                key: value for key, value in report.items() if key != "generated_at"
+            }
+            if existing_without_generated_at == report_without_generated_at:
+                return
+    path.write_text(serialized, encoding="utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
     report = build_plan()
-    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_report(report, args.output)
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     print(f"Report: {args.output}")
     return 0

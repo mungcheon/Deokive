@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -10,6 +11,22 @@ import build_source_discovery_next_focus_fallback_queue_public as target
 
 
 class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
+    def test_write_report_skips_timestamp_only_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "fallback_queue.json"
+            report = {
+                "schema_version": 1,
+                "generated_at": "2026-01-01T00:00:00Z",
+                "summary": {"queue_rows": 1},
+                "items": [],
+            }
+            target.write_report(report, path)
+            first_mtime = path.stat().st_mtime_ns
+
+            target.write_report({**report, "generated_at": "2026-01-01T00:01:00Z"}, path)
+
+            self.assertEqual(path.stat().st_mtime_ns, first_mtime)
+
     def test_build_report_keeps_only_fallback_required_rows(self) -> None:
         next_pack = {
             "summary": {"focus_pack_id": "source-discovery-focus-001"},
