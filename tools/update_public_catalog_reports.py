@@ -129,6 +129,9 @@ SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT = DATA / "source_discovery_nex
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE = DATA / "source_discovery_next_focus_fallback_queue_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT = DATA / "source_discovery_next_focus_fallback_import_dry_run_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE = DATA / "source_discovery_next_focus_exact_url_review_queue_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT = (
+    DATA / "source_discovery_next_focus_exact_url_candidate_audit_public.json"
+)
 SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE = DATA / "source_discovery_next_focus_identity_backfill_queue_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_CANDIDATE_REVIEW_QUEUE = (
     DATA / "source_discovery_next_focus_identity_candidate_review_queue_public.json"
@@ -9609,6 +9612,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.name}",
             **source_discovery_next_focus_exact_url_queue["summary"],
         }
+        if SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.exists():
+            target["source_discovery_next_focus_exact_url_candidate_audit"] = copy_report_summary(
+                SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT,
+                "source_discovery_next_focus_exact_url_candidate_audit",
+            )
         target["source_discovery_next_focus_identity_backfill_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE.name}",
             **source_discovery_next_focus_identity_backfill_queue["summary"],
@@ -10413,6 +10421,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_CANDIDATE_REVIEW_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT.relative_to(ROOT)),

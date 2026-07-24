@@ -322,6 +322,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertIn("data/source_discovery_next_focus_fallback_queue_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_exact_url_review_queue_public.json", updated_files)
+        self.assertIn("data/source_discovery_next_focus_exact_url_candidate_audit_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_identity_backfill_queue_public.json", updated_files)
         self.assertIn(
             "data/source_discovery_next_focus_identity_candidate_review_queue_public.json",
@@ -802,6 +803,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
             fallback_queue_rows,
         )
+        if "source_discovery_next_focus_exact_url_candidate_audit" in quality:
+            self.assertEqual(
+                quality["source_discovery_next_focus_exact_url_candidate_audit"]["queue_rows"],
+                quality["source_discovery_next_focus_exact_url_review_queue"]["queue_rows"],
+            )
+            self.assertIs(
+                quality["source_discovery_next_focus_exact_url_candidate_audit"]["auto_apply_enabled"],
+                False,
+            )
         self.assertEqual(
             quality["source_discovery_next_focus_identity_backfill_queue"][
                 "queue_rows"
