@@ -492,6 +492,7 @@ def build_starter_queue_report(
         for group in groups
         if isinstance(group.get("fallback_web_search_urls"), list) and group.get("fallback_web_search_urls")
     )
+    next_review_batch = next_starter_review_batch(groups, limit=20)
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -507,6 +508,20 @@ def build_starter_queue_report(
             "missing_source_url_rows": int(summary.get("missing_source_url_rows") or 0),
             "coverage_matches_missing_source_url_rows": rows
             == int(summary.get("missing_source_url_rows") or 0),
+            "next_review_batch_rows": len(next_review_batch),
+            "next_review_batch_group_count": len(
+                {
+                    (
+                        str(item.get("source_store") or ""),
+                        str(item.get("affiliation") or ""),
+                        str(item.get("category") or ""),
+                    )
+                    for item in next_review_batch
+                }
+            ),
+            "next_review_batch_primary_source_store": (
+                next_review_batch[0].get("source_store") if next_review_batch else None
+            ),
             "auto_apply_enabled": False,
         },
         "instructions": [
@@ -515,6 +530,7 @@ def build_starter_queue_report(
             "If a group has no store search_url values, use fallback_web_search_urls as a starting point only; the accepted source_url still must be an exact official or licensed product/detail page.",
             "Do not use representative or similar images unless a later manual review report explicitly allows that row.",
         ],
+        "next_review_batch": next_review_batch,
         "groups": groups,
         "automation_policy": {
             "auto_apply_catalog_changes": False,
@@ -523,6 +539,42 @@ def build_starter_queue_report(
             "requires_product_image_visible_on_confirmed_source": True,
         },
     }
+
+
+def next_starter_review_batch(groups: list[dict[str, Any]], *, limit: int) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for group_rank, group in enumerate(groups, start=1):
+        sample_items = group.get("sample_items")
+        if not isinstance(sample_items, list):
+            continue
+        for item_rank, item in enumerate(sample_items, start=1):
+            if not isinstance(item, dict):
+                continue
+            rows.append(
+                {
+                    "group_rank": group_rank,
+                    "item_rank": item_rank,
+                    "source_store": group.get("source_store"),
+                    "affiliation": group.get("affiliation"),
+                    "category": group.get("category"),
+                    "group_rows": group.get("rows"),
+                    "primary_strategy": group.get("primary_strategy"),
+                    "recommended_workflow": group.get("recommended_workflow"),
+                    "first_group_search_url": group.get("first_search_url"),
+                    "first_group_fallback_web_search_url": group.get(
+                        "first_fallback_web_search_url"
+                    ),
+                    **item,
+                    "review_instructions": [
+                        "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+                        "Accept only an exact official or licensed product/detail page.",
+                        "Do not fill image_url unless the exact product image is visible on the accepted source.",
+                    ],
+                }
+            )
+            if len(rows) >= limit:
+                return rows
+    return rows
 
 
 def recommended_workflow(source_store: str, rows: int) -> str:

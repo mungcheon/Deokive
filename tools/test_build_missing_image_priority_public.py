@@ -68,6 +68,17 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
             starter_queue_report["source_report"],
             "data/catalog_missing_image_priority_public.json",
         )
+        self.assertGreater(starter_summary["next_review_batch_rows"], 0)
+        self.assertGreater(starter_summary["next_review_batch_group_count"], 0)
+        self.assertTrue(starter_summary["next_review_batch_primary_source_store"])
+        self.assertEqual(
+            len(starter_queue_report["next_review_batch"]),
+            starter_summary["next_review_batch_rows"],
+        )
+        self.assertIn(
+            "exact official or licensed product/detail page",
+            starter_queue_report["next_review_batch"][0]["review_instructions"][1],
+        )
         self.assertTrue(
             starter_queue_report["automation_policy"]["requires_exact_product_source_url"]
         )
@@ -213,6 +224,18 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertEqual(starter_queue_report["summary"]["groups_with_search_urls"], 1)
         self.assertEqual(starter_queue_report["summary"]["groups_with_fallback_web_search_urls"], 0)
         self.assertEqual(starter_queue_report["summary"]["groups_with_any_search_url"], 1)
+        self.assertEqual(starter_queue_report["summary"]["next_review_batch_rows"], 2)
+        self.assertEqual(starter_queue_report["summary"]["next_review_batch_group_count"], 1)
+        self.assertEqual(
+            starter_queue_report["summary"]["next_review_batch_primary_source_store"],
+            starter_queue[0]["source_store"],
+        )
+        self.assertEqual(starter_queue_report["next_review_batch"][0]["group_rank"], 1)
+        self.assertEqual(starter_queue_report["next_review_batch"][0]["item_rank"], 1)
+        self.assertEqual(
+            starter_queue_report["next_review_batch"][0]["first_group_search_url"],
+            "https://www.enskyshop.com/search?q=HUNTER",
+        )
 
     def test_source_discovery_starter_queue_adds_fallback_web_search_when_no_store_search_url(self) -> None:
         catalog = {
@@ -255,6 +278,11 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertEqual(starter_queue_report["summary"]["groups_with_search_urls"], 0)
         self.assertEqual(starter_queue_report["summary"]["groups_with_fallback_web_search_urls"], 1)
         self.assertEqual(starter_queue_report["summary"]["groups_with_any_search_url"], 1)
+        self.assertEqual(starter_queue_report["summary"]["next_review_batch_rows"], 1)
+        self.assertIn(
+            "google.com/search",
+            starter_queue_report["next_review_batch"][0]["first_group_fallback_web_search_url"],
+        )
 
     def test_reports_existing_image_reuse_candidates_for_exact_identity(self) -> None:
         catalog = {
