@@ -27,6 +27,7 @@ def _write_json(path: Path, payload) -> Path:
 class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
     def test_default_workflows_include_source_discovery_import_path(self) -> None:
         self.assertIn("source_discovery", readiness.WORKFLOWS)
+        self.assertIn("source_discovery_next_focus_fallback", readiness.WORKFLOWS)
         metadata = readiness.WORKFLOWS["catalog_field"]
         self.assertEqual(metadata["public_action_queue"].name, "catalog_metadata_action_queue_public.json")
         self.assertEqual(metadata["public_action_rows_key"], "queued_missing_cells")
@@ -52,6 +53,23 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(
             workflow["public_action_next_step"],
             "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
+        )
+
+        focused = readiness.WORKFLOWS["source_discovery_next_focus_fallback"]
+        self.assertEqual(focused["confirmed"].name, "source_discovery_confirmed_rows.json")
+        self.assertEqual(
+            focused["template"].name,
+            "source_discovery_next_focus_fallback_confirmed_rows.template.json",
+        )
+        self.assertEqual(
+            focused["report"].name,
+            "source_discovery_next_focus_fallback_confirmed_import_dryrun.json",
+        )
+        self.assertEqual(focused["public_action_queue"].name, "source_discovery_next_focus_fallback_queue_public.json")
+        self.assertEqual(focused["public_action_rows_key"], "queue_rows")
+        self.assertEqual(
+            focused["public_action_next_step"],
+            "confirm_focused_fallback_source_urls_then_run_import_confirmed_source_discovery_rows",
         )
 
         image = readiness.WORKFLOWS["catalog_image"]
@@ -133,6 +151,11 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
             self.assertEqual(workflow["confirmed"], importer.DEFAULT_QUEUE, workflow_name)
             self.assertEqual(workflow["template"], importer.FALLBACK_QUEUE, workflow_name)
             self.assertEqual(workflow["report"], importer.DEFAULT_REPORT, workflow_name)
+
+        focused = readiness.WORKFLOWS["source_discovery_next_focus_fallback"]
+        self.assertEqual(focused["confirmed"], import_confirmed_source_discovery_rows.DEFAULT_QUEUE)
+        self.assertNotEqual(focused["template"], import_confirmed_source_discovery_rows.FALLBACK_QUEUE)
+        self.assertNotEqual(focused["report"], import_confirmed_source_discovery_rows.DEFAULT_REPORT)
 
     def test_template_candidates_are_public_without_row_details(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

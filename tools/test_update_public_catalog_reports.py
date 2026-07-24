@@ -1377,6 +1377,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         batches = agent_queue.get("batches", [])
         top_batches = agent_queue.get("top_next_batches", [])
         confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
+        focused_source_fallback = next(
+            row
+            for row in confirmed_readiness["workflows"]
+            if row.get("workflow") == "source_discovery_next_focus_fallback"
+        )
+        self.assertEqual(focused_source_fallback["status"], "template_ready_for_manual_confirmation")
+        self.assertEqual(focused_source_fallback["template_items"], 17)
+        self.assertEqual(focused_source_fallback["public_action_rows"], 17)
+        self.assertEqual(focused_source_fallback["skipped_rows"], 17)
+        self.assertEqual(focused_source_fallback["skip_reason_counts"], [["manual_confirmed_false", 17]])
         self.assertGreater(len(batches), 0)
         self.assertLessEqual(len(batches), reports.MAX_AGENT_WORK_QUEUE_BATCHES)
         self.assertEqual(agent_queue["summary"]["max_published_batches"], reports.MAX_AGENT_WORK_QUEUE_BATCHES)

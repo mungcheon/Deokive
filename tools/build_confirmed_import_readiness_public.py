@@ -57,6 +57,15 @@ WORKFLOWS = {
         "public_action_batches_key": "action_batch_count",
         "public_action_next_step": "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
     },
+    "source_discovery_next_focus_fallback": {
+        "confirmed": SERVER / "source_discovery_confirmed_rows.json",
+        "template": SERVER / "source_discovery_next_focus_fallback_confirmed_rows.template.json",
+        "report": SERVER / "source_discovery_next_focus_fallback_confirmed_import_dryrun.json",
+        "public_workstream": "source_discovery_next_focus_fallback_source_urls",
+        "public_action_queue": DATA / "source_discovery_next_focus_fallback_queue_public.json",
+        "public_action_rows_key": "queue_rows",
+        "public_action_next_step": "confirm_focused_fallback_source_urls_then_run_import_confirmed_source_discovery_rows",
+    },
     "catalog_image": {
         "confirmed": SERVER / "catalog_image_attachment_confirmed_rows.json",
         "template": SERVER / "catalog_image_attachment_confirmed_rows.template.json",

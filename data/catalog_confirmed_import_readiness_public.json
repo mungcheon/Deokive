@@ -1,36 +1,36 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T01:28:52Z",
+  "generated_at": "2026-07-24T00:42:17Z",
   "scope": "public_confirmed_import_readiness",
   "summary": {
-    "workflow_count": 11,
+    "workflow_count": 12,
     "confirmed_files": 2,
-    "template_items": 1141,
-    "public_action_queue_rows": 4637,
-    "public_action_queue_batches": 180,
+    "template_items": 1158,
+    "public_action_queue_rows": 4252,
+    "public_action_queue_batches": 178,
     "manual_confirmed_true": 0,
     "updated_rows": 0,
-    "skipped_rows": 0,
+    "skipped_rows": 17,
     "duplicates": 0,
     "ready_or_pending_import_rows": 0,
     "blocked_confirmed_rows": 0,
-    "manual_confirmation_backlog_rows": 5778,
-    "work_order_lanes": 10,
+    "manual_confirmation_backlog_rows": 5410,
+    "work_order_lanes": 11,
     "top_work_order_row_count": 641,
     "top_work_order_lane": "confirm_template_rows",
     "top_work_order_workflow": "source_discovery",
     "by_status": [
       [
         "public_action_queue_ready_for_confirmation",
-        6
+        5
       ],
       [
         "no_current_candidates",
-        2
+        3
       ],
       [
         "template_ready_for_manual_confirmation",
-        2
+        3
       ],
       [
         "confirmed_file_empty",
@@ -99,7 +99,7 @@
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
-      "public_action_rows": 2499,
+      "public_action_rows": 2498,
       "public_action_batches": 14,
       "public_action_next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
       "updated_rows": 0,
@@ -122,13 +122,41 @@
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/source_discovery_action_queue_public.json",
-      "public_action_rows": 642,
-      "public_action_batches": 61,
+      "public_action_rows": 632,
+      "public_action_batches": 60,
       "public_action_next_step": "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
       "updated_rows": 0,
       "skipped_rows": 0,
       "duplicates": 0,
       "skip_reason_counts": [],
+      "next_action": "Review template candidates and copy exact matches into the confirmed file.",
+      "auto_apply_enabled": false
+    },
+    {
+      "workflow": "source_discovery_next_focus_fallback",
+      "public_workstream": "source_discovery_next_focus_fallback_source_urls",
+      "status": "template_ready_for_manual_confirmation",
+      "confirmed_file_exists": false,
+      "template_file_exists": true,
+      "import_report_exists": true,
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 17,
+      "template_manual_confirmed_true": 0,
+      "public_action_queue_exists": true,
+      "public_action_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "public_action_rows": 17,
+      "public_action_batches": 0,
+      "public_action_next_step": "confirm_focused_fallback_source_urls_then_run_import_confirmed_source_discovery_rows",
+      "updated_rows": 0,
+      "skipped_rows": 17,
+      "duplicates": 0,
+      "skip_reason_counts": [
+        [
+          "manual_confirmed_false",
+          17
+        ]
+      ],
       "next_action": "Review template candidates and copy exact matches into the confirmed file.",
       "auto_apply_enabled": false
     },
@@ -250,7 +278,7 @@
     {
       "workflow": "animation_category",
       "public_workstream": "animation_category_mapping",
-      "status": "public_action_queue_ready_for_confirmation",
+      "status": "no_current_candidates",
       "confirmed_file_exists": false,
       "template_file_exists": false,
       "import_report_exists": false,
@@ -260,14 +288,14 @@
       "template_manual_confirmed_true": 0,
       "public_action_queue_exists": true,
       "public_action_queue_report": "data/animation_category_action_queue_public.json",
-      "public_action_rows": 391,
-      "public_action_batches": 1,
+      "public_action_rows": 0,
+      "public_action_batches": 0,
       "public_action_next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
       "updated_rows": 0,
       "skipped_rows": 0,
       "duplicates": 0,
       "skip_reason_counts": [],
-      "next_action": "Use the linked public action queue to prepare exact confirmed rows.",
+      "next_action": "Generate or refresh the matching candidate/template queue.",
       "auto_apply_enabled": false
     },
     {
@@ -320,28 +348,40 @@
       "rank": 2
     },
     {
-      "workflow": "catalog_field",
-      "public_workstream": "metadata_field_values",
-      "lane": "convert_public_action_queue_to_confirmed_rows",
-      "row_count": 2499,
-      "batch_count": 14,
-      "next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
-      "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
+      "workflow": "source_discovery_next_focus_fallback",
+      "public_workstream": "source_discovery_next_focus_fallback_source_urls",
+      "lane": "confirm_template_rows",
+      "row_count": 17,
+      "batch_count": 0,
+      "next_step": "review_template_rows_then_copy_exact_confirmed_rows",
+      "template_file_exists": true,
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
       "rank": 3
     },
     {
+      "workflow": "catalog_field",
+      "public_workstream": "metadata_field_values",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 2498,
+      "batch_count": 14,
+      "next_step": "fill_confirmed_metadata_patch_templates_then_run_import_confirmed_metadata_rows",
+      "public_action_queue_report": "data/catalog_metadata_action_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 4
+    },
+    {
       "workflow": "source_discovery",
       "public_workstream": "source_discovery_source_urls",
       "lane": "convert_public_action_queue_to_confirmed_rows",
-      "row_count": 642,
-      "batch_count": 61,
+      "row_count": 632,
+      "batch_count": 60,
       "next_step": "confirm_source_url_templates_then_run_import_confirmed_source_discovery_rows",
       "public_action_queue_report": "data/source_discovery_action_queue_public.json",
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
-      "rank": 4
+      "rank": 5
     },
     {
       "workflow": "focus_image",
@@ -351,18 +391,6 @@
       "batch_count": 86,
       "next_step": "confirm_requested_focus_templates_then_run_import_confirmed_requested_focus_rows",
       "public_action_queue_report": "data/requested_focus_action_queue_public.json",
-      "manual_confirmation_required": true,
-      "auto_apply_enabled": false,
-      "rank": 5
-    },
-    {
-      "workflow": "animation_category",
-      "public_workstream": "animation_category_mapping",
-      "lane": "convert_public_action_queue_to_confirmed_rows",
-      "row_count": 391,
-      "batch_count": 1,
-      "next_step": "fill_confirmed_animation_category_mapping_templates_then_run_import_confirmed_animation_category_rows",
-      "public_action_queue_report": "data/animation_category_action_queue_public.json",
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
       "rank": 6
@@ -404,6 +432,18 @@
       "rank": 9
     },
     {
+      "workflow": "source_discovery_next_focus_fallback",
+      "public_workstream": "source_discovery_next_focus_fallback_source_urls",
+      "lane": "convert_public_action_queue_to_confirmed_rows",
+      "row_count": 17,
+      "batch_count": 0,
+      "next_step": "confirm_focused_fallback_source_urls_then_run_import_confirmed_source_discovery_rows",
+      "public_action_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "rank": 10
+    },
+    {
       "workflow": "official_detail",
       "public_workstream": "official_detail_source_image",
       "lane": "convert_public_action_queue_to_confirmed_rows",
@@ -413,7 +453,7 @@
       "public_action_queue_report": "data/official_detail_review_batches_public.json",
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
-      "rank": 10
+      "rank": 11
     }
   ],
   "instructions": [
