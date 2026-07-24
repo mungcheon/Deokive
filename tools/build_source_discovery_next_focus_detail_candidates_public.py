@@ -176,6 +176,67 @@ def _counter_rows(counter: Counter[str], key: str) -> list[list[Any]]:
     return [[name, count] for name, count in counter.most_common() if name]
 
 
+def _action_lane_for_decision(decision: str) -> str:
+    if decision == "exact_candidate_confirmation_ready":
+        return "confirm_exact_candidate_identity"
+    if decision == "fallback_search_required":
+        return "fallback_source_search"
+    if decision == "catalog_variant_detail_required_before_import":
+        return "catalog_variant_metadata_enrichment"
+    if decision == "manual_candidate_identity_review_required":
+        return "manual_candidate_identity_review"
+    if decision == "manual_source_research_required":
+        return "manual_source_research"
+    return "candidate_research_required"
+
+
+def _lane_priority(lane: str) -> int:
+    return {
+        "confirm_exact_candidate_identity": 1,
+        "fallback_source_search": 2,
+        "catalog_variant_metadata_enrichment": 3,
+        "manual_candidate_identity_review": 4,
+        "manual_source_research": 5,
+        "candidate_research_required": 6,
+    }.get(lane, 99)
+
+
+def _build_next_action_lanes(work_order_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for item in work_order_items:
+        decision = str((item.get("review_decision") or {}).get("decision") or "")
+        lane = _action_lane_for_decision(decision)
+        grouped.setdefault(lane, []).append(item)
+
+    lanes = []
+    for lane, rows in grouped.items():
+        lanes.append(
+            {
+                "lane": lane,
+                "priority": _lane_priority(lane),
+                "row_count": len(rows),
+                "candidate_rows": sum(int(row.get("candidate_count") or 0) for row in rows),
+                "next_catalog_index": rows[0].get("catalog_index") if rows else None,
+                "recommended_next_step": rows[0].get("recommended_next_step") if rows else None,
+                "sample_items": [
+                    {
+                        "catalog_index": row.get("catalog_index"),
+                        "name_ko": row.get("name_ko"),
+                        "name_ja": row.get("name_ja"),
+                        "candidate_count": row.get("candidate_count"),
+                        "top_candidate_title": row.get("top_candidate_title"),
+                        "top_candidate_blockers": row.get("top_candidate_blockers") or [],
+                        "decision": (row.get("review_decision") or {}).get("decision"),
+                        "recommended_next_step": row.get("recommended_next_step"),
+                    }
+                    for row in rows[:8]
+                ],
+                "auto_apply_enabled": False,
+            }
+        )
+    return sorted(lanes, key=lambda row: (int(row["priority"]), -int(row["row_count"])))
+
+
 def _review_bucket(item: dict[str, Any], candidate_payload: list[dict[str, Any]]) -> str:
     if not candidate_payload:
         if item.get("needs_fallback_web_search"):
@@ -516,6 +577,7 @@ def build_report(
     completion_readiness["blocked_reasons"] = [
         reason for reason in completion_readiness["blocked_reasons"] if reason
     ]
+    next_action_lanes = _build_next_action_lanes(review_work_order_items)
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -553,6 +615,10 @@ def build_report(
             "review_bucket_counts": _counter_rows(review_bucket_counts, "review_bucket"),
             "review_decision_counts": _counter_rows(decision_counts, "review_decision"),
             "review_decision_reason_counts": _counter_rows(decision_reason_counts, "reason"),
+            "next_action_lane_count": len(next_action_lanes),
+            "next_action_lanes": [
+                [lane["lane"], lane["row_count"]] for lane in next_action_lanes
+            ],
             "fallback_bridge_rows": len(fallback_bridge_items),
             "manual_review_item_rows": manual_review_rows,
             "variant_detail_required_rows": variant_detail_rows,
@@ -574,6 +640,7 @@ def build_report(
         ],
         "items": items,
         "candidate_review_work_order": review_work_order_items,
+        "next_action_lanes": next_action_lanes,
         "fallback_bridge_items": fallback_bridge_items,
         "exact_candidate_confirmation_shortlist": exact_candidate_confirmation_shortlist,
         "candidate_confirmation_template": candidate_confirmation_template,

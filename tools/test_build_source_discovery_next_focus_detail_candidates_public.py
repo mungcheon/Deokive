@@ -100,6 +100,11 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             report["summary"]["review_decision_counts"],
             [["exact_candidate_confirmation_ready", 1], ["manual_source_research_required", 1]],
         )
+        self.assertEqual(report["summary"]["next_action_lane_count"], 2)
+        self.assertEqual(
+            report["summary"]["next_action_lanes"],
+            [["confirm_exact_candidate_identity", 1], ["manual_source_research", 1]],
+        )
         self.assertEqual(report["summary"]["variant_detail_required_rows"], 0)
         self.assertEqual(report["summary"]["exact_candidate_confirmation_ready_items"], 1)
         self.assertEqual(report["completion_readiness"]["status"], "exact_candidate_confirmation_ready")
@@ -145,6 +150,15 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             report["candidate_review_work_order"][0]["review_decision"]["decision"],
             "exact_candidate_confirmation_ready",
         )
+        self.assertEqual(report["next_action_lanes"][0]["lane"], "confirm_exact_candidate_identity")
+        self.assertEqual(report["next_action_lanes"][0]["row_count"], 1)
+        self.assertEqual(report["next_action_lanes"][0]["candidate_rows"], 1)
+        self.assertEqual(report["next_action_lanes"][0]["next_catalog_index"], 1)
+        self.assertEqual(
+            report["next_action_lanes"][0]["sample_items"][0]["decision"],
+            "exact_candidate_confirmation_ready",
+        )
+        self.assertEqual(report["next_action_lanes"][1]["lane"], "manual_source_research")
         self.assertFalse(report["automation_policy"]["auto_apply_source_url"])
 
     def test_build_report_bridges_no_candidate_fallback_rows(self) -> None:
@@ -183,6 +197,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         )
 
         self.assertEqual(report["summary"]["fallback_bridge_rows"], 1)
+        self.assertEqual(report["summary"]["next_action_lanes"], [["fallback_source_search", 1]])
         self.assertEqual(report["summary"]["completion_readiness_status"], "fallback_search_required")
         self.assertEqual(report["summary"]["no_candidate_items"], 1)
         self.assertEqual(report["summary"]["review_bucket_counts"], [["fallback_search_required", 1]])
@@ -201,6 +216,8 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             report["candidate_review_work_order"][0]["review_decision"]["decision"],
             "fallback_search_required",
         )
+        self.assertEqual(report["next_action_lanes"][0]["lane"], "fallback_source_search")
+        self.assertEqual(report["next_action_lanes"][0]["row_count"], 1)
         self.assertEqual(report["completion_readiness"]["status"], "fallback_search_required")
         self.assertEqual(
             report["completion_readiness"]["next_safe_phase"],
@@ -249,6 +266,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             [["catalog_variant_detail_required_before_import", 1]],
         )
         self.assertEqual(report["summary"]["variant_detail_required_rows"], 1)
+        self.assertEqual(report["summary"]["next_action_lanes"], [["catalog_variant_metadata_enrichment", 1]])
         self.assertEqual(report["summary"]["completion_readiness_status"], "variant_detail_required")
         self.assertEqual(report["summary"]["exact_candidate_confirmation_ready_items"], 0)
         decision = report["items"][0]["review_decision"]
