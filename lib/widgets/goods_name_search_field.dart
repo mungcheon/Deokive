@@ -381,11 +381,17 @@ class _CatalogRow extends StatelessWidget {
                     ),
                   ),
                 const SizedBox(height: 8),
-                FilledButton.tonalIcon(
+                FilledButton.icon(
                   onPressed: () => Navigator.pop(context, entry),
-                  icon: const Icon(Icons.add_rounded, size: 16),
+                  icon: Icon(
+                    Icons.add_rounded,
+                    size: 16,
+                    color: theme.colorScheme.onPrimary,
+                  ),
                   label: Text(actionLabel),
                   style: FilledButton.styleFrom(
+                    backgroundColor: theme.colorScheme.primary,
+                    foregroundColor: theme.colorScheme.onPrimary,
                     visualDensity: VisualDensity.compact,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     textStyle: const TextStyle(
