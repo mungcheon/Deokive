@@ -65,6 +65,9 @@ class SourceDiscoveryNextFocusPackFetchAuditPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["pack_items"], 2)
         self.assertEqual(report["summary"]["official_search_ok_rows"], 1)
         self.assertEqual(report["summary"]["official_search_unavailable_rows"], 1)
+        self.assertEqual(report["summary"]["official_search_needs_fallback_rows"], 1)
+        self.assertEqual(report["summary"]["official_search_unreachable_rows"], 0)
+        self.assertEqual(report["summary"]["official_search_broad_but_reachable_rows"], 0)
         self.assertEqual(report["summary"]["store_fetch_blocked_rows"], 0)
         self.assertFalse(report["summary"]["all_unavailable_rows_are_store_fetch_blocked"])
         self.assertTrue(report["summary"]["fallback_web_search_required"])
@@ -104,6 +107,9 @@ class SourceDiscoveryNextFocusPackFetchAuditPublicTest(unittest.TestCase):
         report = target.build_report(pack, fetcher=blocked_fetch)
 
         self.assertEqual(report["summary"]["store_fetch_blocked_rows"], 2)
+        self.assertEqual(report["summary"]["official_search_needs_fallback_rows"], 2)
+        self.assertEqual(report["summary"]["official_search_unreachable_rows"], 2)
+        self.assertEqual(report["summary"]["official_search_broad_but_reachable_rows"], 0)
         self.assertEqual(
             report["summary"]["store_fetch_blocked_by_netloc"],
             [("www.animate-onlineshop.jp", 2)],
@@ -149,6 +155,9 @@ class SourceDiscoveryNextFocusPackFetchAuditPublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["official_search_ok_rows"], 0)
         self.assertEqual(report["summary"]["official_search_unavailable_rows"], 1)
+        self.assertEqual(report["summary"]["official_search_needs_fallback_rows"], 1)
+        self.assertEqual(report["summary"]["official_search_unreachable_rows"], 0)
+        self.assertEqual(report["summary"]["official_search_broad_but_reachable_rows"], 0)
         self.assertEqual(report["summary"]["official_search_no_result_rows"], 1)
         self.assertTrue(report["summary"]["fallback_web_search_required"])
         self.assertTrue(report["items"][0]["needs_fallback_web_search"])
@@ -187,7 +196,14 @@ class SourceDiscoveryNextFocusPackFetchAuditPublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["official_search_ok_rows"], 0)
         self.assertEqual(report["summary"]["official_search_unavailable_rows"], 1)
+        self.assertEqual(report["summary"]["official_search_needs_fallback_rows"], 1)
+        self.assertEqual(report["summary"]["official_search_unreachable_rows"], 0)
+        self.assertEqual(report["summary"]["official_search_broad_but_reachable_rows"], 1)
         self.assertEqual(report["summary"]["official_search_broad_result_rows"], 1)
+        self.assertEqual(
+            report["summary"]["recommended_next_action"],
+            "refine_broad_official_search_results_to_exact_detail_urls",
+        )
         self.assertTrue(report["summary"]["fallback_web_search_required"])
         self.assertTrue(report["items"][0]["broad_result_page"])
         self.assertEqual(

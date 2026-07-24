@@ -168,6 +168,16 @@ def build_report(
     no_result_rows = [item for item in audited_items if item.get("no_results_page")]
     broad_result_rows = [item for item in audited_items if item.get("broad_result_page")]
     product_link_rows = [item for item in audited_items if int(item.get("product_detail_link_count") or 0) > 0]
+    unreachable_rows = [
+        item
+        for item in unavailable_rows
+        if item.get("http_status") is None or item.get("store_fetch_blocked")
+    ]
+    broad_but_reachable_rows = [
+        item
+        for item in broad_result_rows
+        if item.get("content_checked") and item.get("http_status") == 200
+    ]
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -178,6 +188,9 @@ def build_report(
             "pack_items": len(items),
             "official_search_ok_rows": len(items) - len(unavailable_rows),
             "official_search_unavailable_rows": len(unavailable_rows),
+            "official_search_needs_fallback_rows": len(unavailable_rows),
+            "official_search_unreachable_rows": len(unreachable_rows),
+            "official_search_broad_but_reachable_rows": len(broad_but_reachable_rows),
             "store_fetch_blocked_rows": store_fetch_blocked_rows,
             "official_search_no_result_rows": len(no_result_rows),
             "official_search_broad_result_rows": len(broad_result_rows),
@@ -191,7 +204,9 @@ def build_report(
             "fallback_web_search_required": bool(unavailable_rows),
             "auto_apply_enabled": False,
             "recommended_next_action": (
-                "resolve_unavailable_official_search_urls_before_source_import"
+                "refine_broad_official_search_results_to_exact_detail_urls"
+                if broad_but_reachable_rows and len(broad_but_reachable_rows) == len(unavailable_rows)
+                else "resolve_unreachable_or_no_result_official_search_urls_before_source_import"
                 if unavailable_rows
                 else "review_official_search_results_for_exact_detail_urls"
             ),

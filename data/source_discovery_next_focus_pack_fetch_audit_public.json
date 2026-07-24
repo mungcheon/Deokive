@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T17:42:56Z",
+  "generated_at": "2026-07-24T21:17:36Z",
   "scope": "source_discovery_next_focus_pack_fetch_audit",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -8,6 +8,9 @@
     "pack_items": 20,
     "official_search_ok_rows": 0,
     "official_search_unavailable_rows": 20,
+    "official_search_needs_fallback_rows": 20,
+    "official_search_unreachable_rows": 0,
+    "official_search_broad_but_reachable_rows": 20,
     "store_fetch_blocked_rows": 0,
     "official_search_no_result_rows": 0,
     "official_search_broad_result_rows": 20,
@@ -29,7 +32,7 @@
     ],
     "fallback_web_search_required": true,
     "auto_apply_enabled": false,
-    "recommended_next_action": "resolve_unavailable_official_search_urls_before_source_import"
+    "recommended_next_action": "refine_broad_official_search_results_to_exact_detail_urls"
   },
   "items": [
     {
