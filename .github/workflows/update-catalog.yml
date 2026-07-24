@@ -47,6 +47,7 @@ jobs:
           python tools/build_source_discovery_next_focus_split_queues_public.py --write
           python tools/build_source_discovery_next_focus_live_source_probe_public.py --write
           python tools/build_source_discovery_next_focus_variant_metadata_backfill_public.py --write
+          python tools/import_confirmed_variant_metadata_backfill_rows.py
           python tools/build_source_discovery_store_bottlenecks_public.py --write
           python tools/build_ensky_cache_candidate_action_queue_public.py --write
           python tools/build_source_detail_candidate_action_queue_public.py --write
@@ -166,6 +167,7 @@ jobs:
             data/source_discovery_next_focus_identity_backfill_queue_public.json \
             data/source_discovery_next_focus_live_source_probe_public.json \
             data/source_discovery_next_focus_variant_metadata_backfill_public.json \
+            data/source_discovery_next_focus_variant_metadata_import_dry_run_public.json \
             data/catalog_deduplication_public.json \
             data/catalog_deduplication_review_batches_public.json \
             data/catalog_deduplication_action_queue_public.json \
