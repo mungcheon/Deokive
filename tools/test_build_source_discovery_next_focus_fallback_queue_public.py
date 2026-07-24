@@ -197,6 +197,48 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertIn("SLAM+DUNK", item["fallback_store_search_url"])
         self.assertIn("SLAM+DUNK", item["domain_limited_web_search_urls"][0])
 
+    def test_ensky_focus_uses_ensky_detail_guidance(self) -> None:
+        next_pack = {
+            "summary": {"focus_pack_id": "source-discovery-focus-001"},
+            "items": [
+                {
+                    "catalog_index": 20,
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": "Ensky",
+                    "category": "Keychain",
+                    "name_ko": "Chiikawa rubber strap",
+                    "name_ja": "ちいかわ ラバーストラップ",
+                    "official_search_url": "https://www.enskyshop.com/products/list?name=chiikawa",
+                    "allowed_source_domains": ["www.enskyshop.com", "www.ensky.co.jp"],
+                }
+            ],
+        }
+        fetch_audit = {
+            "items": [
+                {
+                    "catalog_index": 20,
+                    "needs_fallback_web_search": True,
+                    "fetch_status": "ok_200_broad_result_set",
+                    "http_status": 200,
+                }
+            ]
+        }
+
+        report = target.build_report(next_pack, fetch_audit, generated_at="2026-01-01T00:00:00Z")
+
+        item = report["items"][0]
+        review_row = report["review_table"][0]
+        self.assertIn("site%3Awww.enskyshop.com%2Fproducts%2Fdetail", item["domain_limited_web_search_urls"][0])
+        self.assertIn(
+            "https://www.enskyshop.com/products/detail/...",
+            review_row["source_url_review_guidance"]["accepted_source_url_patterns"],
+        )
+        self.assertNotIn(
+            "https://www.animate-onlineshop.jp/pn/.../pd/...",
+            review_row["source_url_review_guidance"]["accepted_source_url_patterns"],
+        )
+        self.assertIn("Ensky products/list search pages", review_row["source_url_review_guidance"]["rejected_source_url_patterns"])
+
 
 if __name__ == "__main__":
     unittest.main()

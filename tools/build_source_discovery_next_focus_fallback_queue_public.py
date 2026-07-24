@@ -41,6 +41,65 @@ SOURCE_URL_REVIEW_GUIDANCE = {
 }
 
 
+def _allowed_source_domains(item: dict[str, Any]) -> list[str]:
+    domains = item.get("allowed_source_domains")
+    if isinstance(domains, list):
+        clean = [str(domain or "").strip() for domain in domains if str(domain or "").strip()]
+        if clean:
+            return clean
+    return ["www.animate-onlineshop.jp"]
+
+
+def _primary_domain(item: dict[str, Any]) -> str:
+    return _allowed_source_domains(item)[0]
+
+
+def _detail_path_prefix(domain: str) -> str:
+    if "animate-onlineshop.jp" in domain:
+        return "/pn/"
+    if "enskyshop.com" in domain:
+        return "/products/detail"
+    return ""
+
+
+def _source_url_review_guidance(item: dict[str, Any]) -> dict[str, Any]:
+    domain = _primary_domain(item)
+    if "animate-onlineshop.jp" in domain:
+        accepted = [
+            "https://www.animate-onlineshop.jp/pn/.../pd/...",
+            "https://www.animate-onlineshop.jp/products/detail.php?product_id=...",
+        ]
+        rejected = [
+            "Google search result URLs",
+            "Animate products/list.php search pages",
+            "Animate sphone/products/list.php search pages",
+            "category, ranking, cart, favorite, or account pages",
+        ]
+    elif "enskyshop.com" in domain:
+        accepted = [
+            "https://www.enskyshop.com/products/detail/...",
+            "https://en.enskyshop.com/products/detail/...",
+        ]
+        rejected = [
+            "Google search result URLs",
+            "Ensky products/list search pages",
+            "category, ranking, cart, favorite, or account pages",
+        ]
+    else:
+        accepted = [f"https://{domain}/..."]
+        rejected = [
+            "Google search result URLs",
+            f"{domain} search/list pages",
+            "category, ranking, cart, favorite, or account pages",
+        ]
+    return {
+        **SOURCE_URL_REVIEW_GUIDANCE,
+        "accepted_source_url_patterns": accepted,
+        "rejected_source_url_patterns": rejected,
+        "allowed_source_domains": _allowed_source_domains(item),
+    }
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -88,7 +147,7 @@ def _legacy_store_search_url(item: dict[str, Any]) -> str:
     return raw.replace("products/list.php", "sphone/products/list.php")
 
 
-def _domain_limited_web_search_urls(item: dict[str, Any]) -> list[str]:
+def _legacy_domain_limited_web_search_urls(item: dict[str, Any]) -> list[str]:
     urls: list[str] = []
     domains = item.get("allowed_source_domains") or ["www.animate-onlineshop.jp"]
     domain = str(domains[0] or "www.animate-onlineshop.jp").strip()
@@ -105,7 +164,7 @@ def _domain_limited_web_search_urls(item: dict[str, Any]) -> list[str]:
     return urls
 
 
-def _fallback_search_queries(item: dict[str, Any]) -> list[dict[str, str]]:
+def _legacy_fallback_search_queries(item: dict[str, Any]) -> list[dict[str, str]]:
     queries: list[dict[str, str]] = []
     domains = item.get("allowed_source_domains") or ["www.animate-onlineshop.jp"]
     domain = str(domains[0] or "www.animate-onlineshop.jp").strip()
@@ -126,15 +185,54 @@ def _fallback_search_queries(item: dict[str, Any]) -> list[dict[str, str]]:
     return queries
 
 
+def _domain_limited_web_search_urls(item: dict[str, Any]) -> list[str]:
+    urls: list[str] = []
+    domain = _primary_domain(item)
+    detail_path = _detail_path_prefix(domain)
+    for term in _search_terms(item):
+        queries = [
+            f'site:{domain}{detail_path} "{term}"',
+            f'site:{domain}{detail_path} "{term}" "detail"',
+            f'site:{domain}{detail_path} "{term}" "product"',
+        ]
+        for query in queries:
+            url = f"https://www.google.com/search?q={quote_plus(query)}"
+            if url not in urls:
+                urls.append(url)
+    return urls
+
+
+def _fallback_search_queries(item: dict[str, Any]) -> list[dict[str, str]]:
+    queries: list[dict[str, str]] = []
+    domain = _primary_domain(item)
+    detail_path = _detail_path_prefix(domain)
+    for term in _search_terms(item):
+        for purpose, suffix in [
+            ("exact_title_detail_page", ""),
+            ("exact_title_detail_path", " detail"),
+            ("exact_title_product_page", " product"),
+        ]:
+            query = f'site:{domain}{detail_path} "{term}"{suffix}'
+            queries.append(
+                {
+                    "purpose": purpose,
+                    "query": query,
+                    "search_url": f"https://www.google.com/search?q={quote_plus(query)}",
+                }
+            )
+    return queries
+
+
 def _fallback_work_order(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     if not queue_items:
         return []
 
+    first_store = str(queue_items[0].get("source_store") or "official store")
     return [
         {
             "rank": 1,
             "lane": "domain_limited_exact_title_search",
-            "description": "Open the first domain-limited query for each row and look for an exact Animate product detail page.",
+            "description": f"Open the first domain-limited query for each row and look for an exact {first_store} product detail page.",
             "queue_rows": len(queue_items),
             "query_count": sum(1 for item in queue_items if item.get("domain_limited_web_search_urls")),
             "sample_search_urls": [
@@ -146,7 +244,7 @@ def _fallback_work_order(queue_items: list[dict[str, Any]]) -> list[dict[str, An
         {
             "rank": 2,
             "lane": "legacy_mobile_store_search",
-            "description": "If web search is weak, open the legacy mobile Animate search URL and inspect product-detail results manually.",
+            "description": f"If web search is weak, open the official {first_store} search URL and inspect product-detail results manually.",
             "queue_rows": sum(1 for item in queue_items if item.get("fallback_store_search_url")),
             "sample_search_urls": [
                 item["fallback_store_search_url"]
@@ -240,7 +338,8 @@ def _review_table(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "import_field": field_template.get("field") or "source_url",
                 "blocked_until": "exact_product_detail_source_url_confirmed",
                 "acceptance_rule": item.get("acceptance_rule"),
-                "source_url_review_guidance": SOURCE_URL_REVIEW_GUIDANCE,
+                "source_url_review_guidance": item.get("source_url_review_guidance")
+                or _source_url_review_guidance(item),
                 **identity_review,
             }
         )
@@ -267,7 +366,11 @@ def _manual_entry_template(queue_items: list[dict[str, Any]]) -> dict[str, Any]:
             "on an allowed source domain; manual_confirmed_image_url may be filled only after the "
             "product image is verified on that exact page."
         ),
-        "source_url_review_guidance": SOURCE_URL_REVIEW_GUIDANCE,
+        "source_url_review_guidance": (
+            queue_items[0].get("source_url_review_guidance")
+            if queue_items
+            else SOURCE_URL_REVIEW_GUIDANCE
+        ),
         "dry_run_command": (
             "python -m tools.import_confirmed_source_discovery_rows "
             "--queue server/source_discovery_confirmed_rows.json"
@@ -335,7 +438,7 @@ def build_report(
                     "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. "
                     "Only fill manual_confirmed_source_url when title, product type, and character/variant match."
                 ),
-                "source_url_review_guidance": SOURCE_URL_REVIEW_GUIDANCE,
+                "source_url_review_guidance": _source_url_review_guidance(item),
                 "source_patch_template": item.get("source_patch_template") or {},
                 "catalog_field_import_template": item.get("catalog_field_import_template") or {},
                 "auto_apply_enabled": False,
