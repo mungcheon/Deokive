@@ -7,6 +7,7 @@ import re
 import sys
 import time
 import unicodedata
+import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any
@@ -32,7 +33,7 @@ USER_AGENT = (
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.IGNORECASE | re.DOTALL)
 
 
-def _fetch_text(url: str) -> str | None:
+def _fetch_text(url: str) -> tuple[str | None, str | None]:
     request = urllib.request.Request(
         url,
         headers={
@@ -46,10 +47,12 @@ def _fetch_text(url: str) -> str | None:
     try:
         with urllib.request.urlopen(request, timeout=20) as response:
             if response.status != 200:
-                return None
-            return response.read().decode(response.headers.get_content_charset() or "utf-8", errors="replace")
-    except Exception:
-        return None
+                return None, f"http_status_{response.status}"
+            return response.read().decode(response.headers.get_content_charset() or "utf-8", errors="replace"), None
+    except urllib.error.HTTPError as exc:
+        return None, f"http_error_{exc.code}"
+    except Exception as exc:
+        return None, type(exc).__name__
 
 
 def _plain(value: str) -> str:
@@ -262,7 +265,7 @@ def enrich(
     processed = 0
     changes: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []
-    cache: dict[str, str | None] = {}
+    cache: dict[str, tuple[str | None, str | None]] = {}
 
     for row in rows:
         if not isinstance(row, dict):
@@ -284,9 +287,16 @@ def enrich(
         if source_url not in cache:
             cache[source_url] = _fetch_text(source_url)
             time.sleep(0.08)
-        source = cache[source_url]
+        source, fetch_error = cache[source_url]
         if not source:
-            rejected.append({"name_ko": row.get("name_ko"), "source_url": source_url, "reason": "fetch_failed"})
+            rejected.append(
+                {
+                    "name_ko": row.get("name_ko"),
+                    "source_url": source_url,
+                    "reason": "fetch_failed",
+                    "fetch_error": fetch_error,
+                }
+            )
             continue
         detail_title = _title(source)
         if not _safe_title_match(row, detail_title):

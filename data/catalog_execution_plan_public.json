@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T15:45:50Z",
+  "generated_at": "2026-07-24T15:50:59Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
     "blocked_action_count": 1,
     "manual_review_action_count": 22,
     "pending_import_action_count": 0,
-    "total_action_rows": 32576,
+    "total_action_rows": 32573,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -76,10 +76,10 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2446,
+      "metadata_action_missing_cells": 2445,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2446,
+      "metadata_actionable_missing_cells": 2445,
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 130,
       "animation_category_review_rows": 0,
@@ -5364,7 +5364,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 13878,
+      "rows": 13876,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -5373,8 +5373,8 @@
         "batch_count": 30,
         "field_missing_totals": {
           "name_ja": 526,
-          "release_date": 1353,
-          "barcode": 10085,
+          "release_date": 1352,
+          "barcode": 10084,
           "official_price_jpy": 567,
           "image_url": 710,
           "source_url": 637
@@ -5386,7 +5386,7 @@
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 2446,
+      "rows": 2445,
       "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
       "next_step": "fill_confirmed_metadata_patch_templates",
       "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
@@ -5394,8 +5394,8 @@
       "evidence": {
         "actionable_group_count": 166,
         "queued_group_count": 166,
-        "actionable_missing_cells": 2446,
-        "queued_missing_cells": 2446,
+        "actionable_missing_cells": 2445,
+        "queued_missing_cells": 2445,
         "action_batch_count": 14,
         "field_counts": [
           [
@@ -5414,7 +5414,7 @@
         "missing_cells_by_field": [
           [
             "release_date",
-            1353
+            1352
           ],
           [
             "official_price_jpy",
@@ -5440,7 +5440,7 @@
           ],
           [
             "엔스카이",
-            224
+            223
           ],
           [
             "굿스마일컴퍼니",
@@ -5601,7 +5601,7 @@
           {
             "field": "release_date",
             "source_store": "엔스카이",
-            "missing_rows": 224,
+            "missing_rows": 223,
             "priority": 10,
             "workflow": "official_metadata_review",
             "primary_review_url": "https://www.enskyshop.com/products/detail/24195",

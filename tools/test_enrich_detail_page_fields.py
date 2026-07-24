@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from enrich_detail_page_fields import _extract_fields, _row_contains, _safe_title_match, load_catalog, write_catalog
+from enrich_detail_page_fields import _extract_fields, _fetch_text, _row_contains, _safe_title_match, load_catalog, write_catalog
 
 
 class DetailPageFieldEnrichmentSafetyTest(unittest.TestCase):
@@ -108,6 +108,19 @@ class DetailPageFieldEnrichmentSafetyTest(unittest.TestCase):
         self.assertEqual(written["meta"]["missing"]["release_date"], 0)
         self.assertEqual(written["meta"]["row_count"], 1)
         self.assertEqual(written["total_items"], 1)
+
+    def test_fetch_text_classifies_http_errors(self) -> None:
+        import urllib.error
+        from unittest.mock import patch
+
+        def raise_429(_request, timeout):
+            raise urllib.error.HTTPError("https://example.com", 429, "Too Many Requests", {}, None)
+
+        with patch("urllib.request.urlopen", side_effect=raise_429):
+            source, reason = _fetch_text("https://example.com")
+
+        self.assertIsNone(source)
+        self.assertEqual(reason, "http_error_429")
 
 
 if __name__ == "__main__":

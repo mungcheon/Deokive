@@ -925,7 +925,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(alignment["non_action_queue_groups"], 13)
             self.assertEqual(alignment["fast_review_groups"], 42)
             self.assertEqual(alignment["held_for_later_groups"], 6)
-            self.assertEqual(alignment["name_duplicate_protected_groups"], 504)
+            self.assertEqual(alignment["name_duplicate_protected_groups"], 505)
             self.assertEqual(
                 alignment["ichiban_campaign_or_reissue_protected_groups"],
                 479,
