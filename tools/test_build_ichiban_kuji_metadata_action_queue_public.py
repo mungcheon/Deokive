@@ -72,7 +72,21 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["campaign_patch_work_order_rows"], 2)
         self.assertEqual(report["summary"]["campaign_patch_work_order_template_rows"], 2)
+        self.assertEqual(report["summary"]["primary_review_url_rows"], 2)
+        self.assertEqual(report["summary"]["queued_primary_review_url_rows"], 2)
+        self.assertEqual(
+            dict(report["summary"]["primary_review_url_kind_counts"]),
+            {"official_1kuji_campaign_page": 2},
+        )
+        self.assertEqual(
+            report["summary"]["first_primary_review_url"],
+            "https://1kuji.com/products/release",
+        )
         self.assertEqual([step["lane"] for step in report["work_order"]], ["confirm_release_dates", "confirm_draw_prices"])
+        self.assertEqual(
+            report["work_order"][0]["sample_campaigns"][0]["primary_review_url"],
+            "https://1kuji.com/products/release",
+        )
         self.assertEqual(report["work_order"][0]["campaign_count"], 1)
         self.assertEqual(report["work_order"][0]["catalog_item_rows"], 8)
         self.assertEqual(dict(report["work_order"][0]["field_patch_template_counts"]), {"release_date": 1})
@@ -96,6 +110,9 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
             ["release", "price"],
         )
         first_work_item = report["campaign_patch_work_order"][0]
+        self.assertEqual(first_work_item["primary_review_url"], "https://1kuji.com/products/release")
+        self.assertEqual(first_work_item["primary_review_url_kind"], "official_1kuji_campaign_page")
+        self.assertEqual(first_work_item["evidence_url_count"], 1)
         self.assertEqual(first_work_item["fields_to_confirm"], ["release_date"])
         self.assertEqual(first_work_item["field_patch_template_count"], 1)
         self.assertFalse(first_work_item["manual_confirmed"])
@@ -128,6 +145,9 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
             "server/ichiban_kuji_metadata_confirmed_rows.json",
         )
         first_campaign = report["batches"][0]["campaigns"][0]
+        self.assertEqual(first_campaign["primary_review_url"], "https://1kuji.com/products/release")
+        self.assertEqual(first_campaign["primary_review_url_kind"], "official_1kuji_campaign_page")
+        self.assertEqual(first_campaign["evidence_urls"], ["https://1kuji.com/products/release"])
         self.assertEqual(first_campaign["review_lane"], "confirm_campaign_release_date")
         self.assertEqual(first_campaign["patch_summary"]["fields"], ["release_date"])
         self.assertEqual(first_campaign["patch_summary"]["target_catalog_item_rows"], 8)
@@ -170,6 +190,7 @@ class BuildIchibanKujiMetadataActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["action_batch_count"], 2)
         self.assertEqual(report["summary"]["work_order_steps"], 1)
         self.assertEqual(report["summary"]["campaign_patch_work_order_rows"], 2)
+        self.assertEqual(report["summary"]["primary_review_url_rows"], 0)
         self.assertEqual(report["work_order"][0]["campaign_count"], 2)
 
 

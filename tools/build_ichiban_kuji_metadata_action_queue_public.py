@@ -49,6 +49,36 @@ def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     return [[name, count] for name, count in counts.most_common()]
 
 
+def _primary_review_url(campaign: dict[str, Any], templates: list[dict[str, Any]]) -> str:
+    url = str(campaign.get("url") or "").strip()
+    if url:
+        return url
+    for template in templates:
+        evidence_url = str(template.get("evidence_url") or "").strip()
+        if evidence_url:
+            return evidence_url
+    return ""
+
+
+def _review_url_kind(url: str) -> str:
+    if not url:
+        return ""
+    if "1kuji.com/products/" in url:
+        return "official_1kuji_campaign_page"
+    if "1kuji.com" in url:
+        return "official_1kuji_page"
+    return "external_or_archive_evidence"
+
+
+def _evidence_urls(campaign: dict[str, Any], templates: list[dict[str, Any]]) -> list[str]:
+    urls: list[str] = []
+    for value in [campaign.get("url")] + [template.get("evidence_url") for template in templates]:
+        url = str(value or "").strip()
+        if url and url not in urls:
+            urls.append(url)
+    return urls
+
+
 def _field_confirmation_rules(fields: list[str]) -> list[str]:
     rules: list[str] = []
     if "release_date" in fields:
@@ -181,6 +211,8 @@ def _work_order(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
                         "slug": row.get("slug"),
                         "title": row.get("title"),
                         "url": row.get("url"),
+                        "primary_review_url": row.get("primary_review_url"),
+                        "primary_review_url_kind": row.get("primary_review_url_kind"),
                         "catalog_item_rows": row.get("catalog_item_rows"),
                     }
                     for row in rows[:5]
@@ -210,6 +242,10 @@ def _campaign_patch_work_order(campaigns: list[dict[str, Any]]) -> list[dict[str
                 "slug": campaign.get("slug"),
                 "title": campaign.get("title"),
                 "url": campaign.get("url"),
+                "primary_review_url": campaign.get("primary_review_url"),
+                "primary_review_url_kind": campaign.get("primary_review_url_kind"),
+                "evidence_urls": campaign.get("evidence_urls") or [],
+                "evidence_url_count": campaign.get("evidence_url_count") or 0,
                 "catalog_item_rows": campaign.get("catalog_item_rows"),
                 "fields_to_confirm": fields,
                 "field_patch_template_count": len(templates),
@@ -239,9 +275,15 @@ def _compact_campaign(campaign: dict[str, Any], batch: dict[str, Any]) -> dict[s
     ]
     patch_summary = _patch_summary(templates, campaign.get("catalog_item_rows"))
     fields = patch_summary["fields"]
+    primary_review_url = _primary_review_url(campaign, templates)
+    evidence_urls = _evidence_urls(campaign, templates)
     return {
         "group_key": campaign.get("group_key"),
         "url": campaign.get("url"),
+        "primary_review_url": primary_review_url,
+        "primary_review_url_kind": _review_url_kind(primary_review_url),
+        "evidence_urls": evidence_urls,
+        "evidence_url_count": len(evidence_urls),
         "slug": campaign.get("slug"),
         "title": campaign.get("title"),
         "catalog_item_rows": campaign.get("catalog_item_rows"),
@@ -334,6 +376,11 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
         for template in row.get("campaign_field_patch_templates") or []
         if isinstance(template, dict) and template.get("field")
     )
+    review_url_kind_counts = Counter(
+        str(row.get("primary_review_url_kind") or "")
+        for row in campaigns
+        if row.get("primary_review_url")
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -350,6 +397,13 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
             "by_workflow": _counter_pairs(campaigns, "workflow"),
             "field_patch_template_count": sum(patch_template_counts.values()),
             "field_patch_template_counts": patch_template_counts.most_common(),
+            "primary_review_url_rows": sum(1 for row in campaigns if row.get("primary_review_url")),
+            "queued_primary_review_url_rows": sum(1 for row in published if row.get("primary_review_url")),
+            "primary_review_url_kind_counts": review_url_kind_counts.most_common(),
+            "first_primary_review_url": next(
+                (row.get("primary_review_url") for row in published if row.get("primary_review_url")),
+                "",
+            ),
             "work_order_steps": len(work_order),
             "work_order_lanes": [step["lane"] for step in work_order],
             "campaign_patch_work_order_rows": len(campaign_patch_work_order),

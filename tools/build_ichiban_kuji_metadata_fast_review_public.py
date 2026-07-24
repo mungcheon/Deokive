@@ -57,15 +57,45 @@ def compact_template(template: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def review_url_kind(url: str) -> str:
+    if not url:
+        return ""
+    if "1kuji.com/products/" in url:
+        return "official_1kuji_campaign_page"
+    if "1kuji.com" in url:
+        return "official_1kuji_page"
+    return "external_or_archive_evidence"
+
+
+def evidence_urls(campaign: dict[str, Any], templates: list[dict[str, Any]]) -> list[str]:
+    urls: list[str] = []
+    values = [campaign.get("primary_review_url"), campaign.get("url")]
+    values.extend(template.get("evidence_url") for template in templates)
+    for value in values:
+        url = str(value or "").strip()
+        if url and url not in urls:
+            urls.append(url)
+    return urls
+
+
 def compact_campaign(campaign: dict[str, Any]) -> dict[str, Any]:
     templates = [
         compact_template(template)
         for template in campaign.get("campaign_field_patch_templates") or []
         if isinstance(template, dict)
     ]
+    primary_review_url = str(
+        campaign.get("primary_review_url") or campaign.get("url") or ""
+    ).strip()
+    urls = evidence_urls(campaign, templates)
     return {
         "slug": campaign.get("slug"),
         "url": campaign.get("url"),
+        "primary_review_url": primary_review_url,
+        "primary_review_url_kind": campaign.get("primary_review_url_kind")
+        or review_url_kind(primary_review_url),
+        "evidence_urls": urls,
+        "evidence_url_count": len(urls),
         "title": campaign.get("title"),
         "workflow": campaign.get("workflow"),
         "missing_fields": campaign.get("missing_fields") or [],
@@ -134,6 +164,8 @@ def build_work_order(campaigns: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 ),
                 "first_campaign_slug": lane_campaigns[0].get("slug"),
                 "first_campaign_url": lane_campaigns[0].get("url"),
+                "first_primary_review_url": lane_campaigns[0].get("primary_review_url"),
+                "first_primary_review_url_kind": lane_campaigns[0].get("primary_review_url_kind"),
                 "manual_confirmation_template": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
                 "confirmed_queue": "server/ichiban_kuji_metadata_confirmed_rows.json",
                 "import_tool": "tools/import_confirmed_ichiban_metadata_rows.py",
@@ -180,11 +212,19 @@ def build_report(
         for campaign in fast_campaigns
         for template in campaign.get("campaign_field_patch_templates") or []
     )
+    review_url_kind_counts = Counter(
+        str(campaign.get("primary_review_url_kind") or "")
+        for campaign in fast_campaigns
+        if campaign.get("primary_review_url")
+    )
     campaign_patch_queue = [
         {
             "rank": rank,
             "slug": campaign.get("slug"),
             "url": campaign.get("url"),
+            "primary_review_url": campaign.get("primary_review_url"),
+            "primary_review_url_kind": campaign.get("primary_review_url_kind"),
+            "evidence_url_count": campaign.get("evidence_url_count") or 0,
             "title": campaign.get("title"),
             "workflow": campaign.get("workflow"),
             "missing_fields": campaign.get("missing_fields") or [],
@@ -209,6 +249,21 @@ def build_report(
             "fast_review_template_rows": sum(
                 len(campaign.get("campaign_field_patch_templates") or [])
                 for campaign in fast_campaigns
+            ),
+            "primary_review_url_rows": sum(
+                1 for campaign in fast_campaigns if campaign.get("primary_review_url")
+            ),
+            "primary_review_url_kind_counts": counter_rows(
+                review_url_kind_counts,
+                "primary_review_url_kind",
+            ),
+            "first_primary_review_url": next(
+                (
+                    campaign.get("primary_review_url")
+                    for campaign in fast_campaigns
+                    if campaign.get("primary_review_url")
+                ),
+                "",
             ),
             "manual_confirmed_true": 0,
             "auto_apply_enabled": False,

@@ -50,14 +50,34 @@ class IchibanKujiMetadataFastReviewTests(unittest.TestCase):
         self.assertEqual(report["summary"]["held_for_later_campaigns"], 1)
         self.assertEqual(report["summary"]["fast_review_catalog_item_rows"], 10)
         self.assertEqual(report["summary"]["fast_review_template_rows"], 2)
+        self.assertEqual(report["summary"]["primary_review_url_rows"], 2)
+        self.assertEqual(
+            report["summary"]["first_primary_review_url"],
+            "https://1kuji.com/products/release",
+        )
+        self.assertEqual(
+            report["summary"]["primary_review_url_kind_counts"],
+            [{"primary_review_url_kind": "official_1kuji_campaign_page", "campaigns": 2}],
+        )
         self.assertEqual([item["slug"] for item in report["items"]], ["release", "large-price"])
+        self.assertEqual(report["items"][0]["primary_review_url"], "https://1kuji.com/products/release")
+        self.assertEqual(report["items"][0]["primary_review_url_kind"], "official_1kuji_campaign_page")
+        self.assertEqual(report["items"][0]["evidence_url_count"], 1)
         self.assertEqual(report["items"][0]["campaign_field_patch_templates"][0]["manual_confirmed"], False)
         self.assertEqual([row["lane"] for row in report["work_order"]], ["confirm_release_dates", "confirm_draw_prices"])
         self.assertEqual(report["work_order"][0]["campaign_count"], 1)
         self.assertEqual(report["work_order"][0]["template_rows"], 1)
         self.assertEqual(report["work_order"][0]["first_campaign_slug"], "release")
+        self.assertEqual(
+            report["work_order"][0]["first_primary_review_url"],
+            "https://1kuji.com/products/release",
+        )
         self.assertTrue(report["work_order"][0]["manual_confirmation_required"])
         self.assertEqual(report["campaign_patch_queue"][0]["slug"], "release")
+        self.assertEqual(
+            report["campaign_patch_queue"][0]["primary_review_url"],
+            "https://1kuji.com/products/release",
+        )
         self.assertEqual(report["campaign_patch_queue"][1]["slug"], "large-price")
         self.assertEqual(report["campaign_patch_queue"][1]["template_rows"], 1)
         self.assertIs(report["summary"]["auto_apply_enabled"], False)
