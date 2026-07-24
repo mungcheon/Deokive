@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from import_confirmed_catalog_field_rows import import_rows
+from import_confirmed_catalog_field_rows import _normalize_review_queue, import_rows
 
 
 def _seed_row(**overrides):
@@ -259,6 +259,19 @@ class ConfirmedCatalogFieldImportTests(unittest.TestCase):
 
         self.assertEqual(result["updated"], [])
         self.assertEqual(result["skipped"][0]["reason"], "invalid_character_name")
+
+    def test_normalizes_public_metadata_field_template_report(self):
+        row = _item("sub_series", "Balletcore style")
+        unrelated_item = {"manual_review_status": "not_started", "catalog_index": 1}
+        queue = _normalize_review_queue(
+            {
+                "schema_version": 1,
+                "items": [unrelated_item],
+                "metadata_field_import_template": [row],
+            }
+        )
+
+        self.assertEqual(queue, {"items": [row]})
 
 
 if __name__ == "__main__":

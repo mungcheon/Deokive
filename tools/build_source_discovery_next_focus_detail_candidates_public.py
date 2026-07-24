@@ -821,6 +821,11 @@ def build_report(
             "confirmed_template": "data/source_discovery_focus_confirmed_template_public.json",
             "import_tool": "tools/import_confirmed_source_discovery_rows.py",
             "metadata_field_import_tool": "tools/import_confirmed_catalog_field_rows.py",
+            "metadata_field_import_dry_run_command": (
+                "python tools/import_confirmed_catalog_field_rows.py "
+                "--queue data/source_discovery_next_focus_detail_candidates_public.json "
+                "--seed server/catalog_seed_from_local.json"
+            ),
         },
     }
 

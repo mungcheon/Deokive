@@ -307,11 +307,16 @@ def _normalize_review_queue(raw_queue: Any) -> dict[str, Any]:
     if isinstance(raw_queue, list):
         return {"items": raw_queue}
     if isinstance(raw_queue, dict):
+        if isinstance(raw_queue.get("metadata_field_import_template"), list):
+            return {"items": raw_queue["metadata_field_import_template"]}
         if isinstance(raw_queue.get("items"), list):
             return raw_queue
         if raw_queue.get("field") and raw_queue.get("row_index") is not None:
             return {"items": [raw_queue]}
-    raise SystemExit("review queue must be an object with items, a list of items, or one copied item object")
+    raise SystemExit(
+        "review queue must be an object with items, metadata_field_import_template, "
+        "a list of items, or one copied item object"
+    )
 
 
 def main() -> int:

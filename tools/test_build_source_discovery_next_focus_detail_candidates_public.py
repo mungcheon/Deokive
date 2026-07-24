@@ -351,6 +351,10 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             report["automation_policy"]["metadata_field_import_supported_fields"],
             ["sub_series", "name_ja", "character_name"],
         )
+        self.assertEqual(
+            report["automation_policy"]["metadata_field_import_dry_run_command"],
+            "python tools/import_confirmed_catalog_field_rows.py --queue data/source_discovery_next_focus_detail_candidates_public.json --seed server/catalog_seed_from_local.json",
+        )
 
     def test_build_report_uses_localized_animate_query_for_korean_only_rows(self) -> None:
         source = {
