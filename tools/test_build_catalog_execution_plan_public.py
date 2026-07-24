@@ -385,18 +385,50 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "missing_release_date_campaign_groups": 1,
                     "missing_official_price_jpy_rows": 7,
                     "missing_official_price_jpy_campaign_groups": 2,
+                    "official_price_jpy_review_queue_campaigns": 2,
+                    "avg_missing_price_rows_per_campaign_group": 3.5,
+                    "metadata_resolution_readiness_status": "manual_campaign_metadata_review_required",
+                    "metadata_manual_review_campaigns": 3,
+                    "metadata_auto_apply_ready_campaigns": 0,
+                    "metadata_review_queue_covers_all_price_campaign_groups": True,
                     "campaign_metadata_review_queue_rows": 3,
+                }
+            },
+            "ichiban_kuji_historical_roadmap_public.json": {
+                "summary": {
+                    "completion_readiness": {
+                        "status": "manual_review_required",
+                        "manual_metadata_campaigns": 3,
+                        "manual_reissue_review_groups": 2,
+                        "zero_price_policy_ready": True,
+                        "numbered_variant_policy_ready": True,
+                        "next_safe_phase": "confirm_ichiban_campaign_metadata",
+                    }
                 }
             },
             "ichiban_kuji_metadata_action_queue_public.json": {
                 "summary": {
                     "actionable_campaigns": 1,
                     "queued_action_campaigns": 1,
+                    "unqueued_action_campaigns": 0,
+                    "campaign_queue_coverage": 1.0,
                     "queued_catalog_item_rows": 8,
                     "action_batch_count": 1,
+                    "field_patch_template_count": 1,
                     "field_patch_template_counts": [["release_date", 1]],
+                    "primary_review_url_rows": 1,
+                    "queued_primary_review_url_rows": 1,
+                    "first_primary_review_url": "https://1kuji.example/campaign",
                     "work_order_steps": 1,
                     "work_order_lanes": ["confirm_release_dates"],
+                }
+            },
+            "ichiban_kuji_metadata_fast_review_public.json": {
+                "summary": {
+                    "fast_review_campaigns": 1,
+                    "held_for_later_campaigns": 0,
+                    "fast_review_template_rows": 1,
+                    "manual_confirmed_true": 0,
                 }
             },
             "ichiban_kuji_prize_name_image_review_public.json": {
@@ -458,6 +490,11 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "auto_apply_ready_rows": 0,
                     "protected_unnumbered_multi_item_prize_groups": 1,
                     "protected_unnumbered_multi_item_prize_rows": 2,
+                    "probable_reissue_work_order_rows": 2,
+                    "campaign_first_review_plan_rows": 1,
+                    "campaign_first_review_item_work_order_rows": 2,
+                    "campaign_first_review_plans_with_evidence_urls": 1,
+                    "campaign_first_review_first_evidence_url": "https://1kuji.example/reissue",
                     "completion_readiness_status": "ichiban_reissue_review_required",
                     "auto_merge_enabled": False,
                     "auto_delete_enabled": False,
@@ -910,15 +947,70 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             if action["workstream"] == "ichiban_kuji_metadata_action_queue"
         )
         self.assertEqual(kuji_action["rows"], 1)
+        self.assertEqual(
+            kuji_action["evidence"]["historical_readiness_status"],
+            "manual_review_required",
+        )
+        self.assertEqual(
+            kuji_action["evidence"]["historical_next_safe_phase"],
+            "confirm_ichiban_campaign_metadata",
+        )
+        self.assertEqual(
+            kuji_action["evidence"]["metadata_resolution_readiness_status"],
+            "manual_campaign_metadata_review_required",
+        )
+        self.assertEqual(kuji_action["evidence"]["metadata_manual_review_campaigns"], 3)
+        self.assertEqual(
+            kuji_action["evidence"]["metadata_auto_apply_ready_campaigns"], 0
+        )
+        self.assertTrue(
+            kuji_action["evidence"][
+                "metadata_review_queue_covers_all_price_campaign_groups"
+            ]
+        )
+        self.assertEqual(kuji_action["evidence"]["unqueued_action_campaigns"], 0)
+        self.assertEqual(kuji_action["evidence"]["campaign_queue_coverage"], 1.0)
         self.assertEqual(kuji_action["evidence"]["queued_catalog_item_rows"], 8)
         self.assertEqual(kuji_action["evidence"]["missing_release_date_campaign_groups"], 1)
         self.assertEqual(kuji_action["evidence"]["missing_official_price_jpy_campaign_groups"], 2)
+        self.assertEqual(kuji_action["evidence"]["official_price_jpy_review_queue_campaigns"], 2)
+        self.assertEqual(
+            kuji_action["evidence"]["avg_missing_price_rows_per_campaign_group"],
+            3.5,
+        )
+        self.assertEqual(kuji_action["evidence"]["field_patch_template_count"], 1)
+        self.assertEqual(kuji_action["evidence"]["primary_review_url_rows"], 1)
+        self.assertEqual(kuji_action["evidence"]["queued_primary_review_url_rows"], 1)
+        self.assertEqual(
+            kuji_action["evidence"]["first_primary_review_url"],
+            "https://1kuji.example/campaign",
+        )
+        self.assertEqual(kuji_action["evidence"]["fast_review_campaigns"], 1)
+        self.assertEqual(kuji_action["evidence"]["held_for_later_campaigns"], 0)
+        self.assertEqual(kuji_action["evidence"]["fast_review_template_rows"], 1)
+        self.assertEqual(kuji_action["evidence"]["fast_review_manual_confirmed_true"], 0)
         self.assertEqual(kuji_action["evidence"]["work_order_steps"], 1)
         self.assertEqual(kuji_action["evidence"]["work_order_lanes"], ["confirm_release_dates"])
         self.assertEqual(report["summary"]["ichiban_campaign_rows"], 14)
         self.assertEqual(report["summary"]["ichiban_catalog_kuji_item_rows"], 20)
         self.assertEqual(report["summary"]["ichiban_campaigns_without_catalog_items"], 3)
         self.assertEqual(report["summary"]["ichiban_campaign_metadata_review_queue_rows"], 3)
+        self.assertEqual(
+            report["summary"]["ichiban_historical_readiness_status"],
+            "manual_review_required",
+        )
+        self.assertEqual(
+            report["summary"]["ichiban_historical_next_safe_phase"],
+            "confirm_ichiban_campaign_metadata",
+        )
+        self.assertEqual(report["summary"]["ichiban_metadata_manual_review_campaigns"], 3)
+        self.assertEqual(report["summary"]["ichiban_metadata_auto_apply_ready_campaigns"], 0)
+        self.assertEqual(report["summary"]["ichiban_metadata_actionable_campaigns"], 1)
+        self.assertEqual(report["summary"]["ichiban_metadata_queued_action_campaigns"], 1)
+        self.assertEqual(report["summary"]["ichiban_metadata_fast_review_campaigns"], 1)
+        self.assertEqual(
+            report["summary"]["ichiban_metadata_fast_review_manual_confirmed_true"], 0
+        )
         self.assertEqual(report["summary"]["ichiban_missing_release_date_campaign_groups"], 1)
         self.assertEqual(report["summary"]["ichiban_missing_official_price_jpy_campaign_groups"], 2)
         kuji_name_image = next(
@@ -963,11 +1055,29 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(kuji_policy["evidence"]["manual_confirmed_rows"], 0)
         self.assertEqual(kuji_policy["evidence"]["auto_apply_ready_rows"], 0)
         self.assertEqual(kuji_policy["evidence"]["protected_unnumbered_multi_item_prize_groups"], 1)
+        self.assertEqual(kuji_policy["evidence"]["probable_reissue_work_order_rows"], 2)
+        self.assertEqual(kuji_policy["evidence"]["campaign_first_review_plan_rows"], 1)
+        self.assertEqual(
+            kuji_policy["evidence"]["campaign_first_review_item_work_order_rows"], 2
+        )
+        self.assertEqual(
+            kuji_policy["evidence"]["campaign_first_review_plans_with_evidence_urls"], 1
+        )
+        self.assertEqual(
+            kuji_policy["evidence"]["campaign_first_review_first_evidence_url"],
+            "https://1kuji.example/reissue",
+        )
         self.assertEqual(
             kuji_policy["evidence"]["completion_readiness_status"],
             "ichiban_reissue_review_required",
         )
         self.assertTrue(kuji_policy["evidence"]["completion_readiness"]["zero_price_policy_ready"])
+        self.assertEqual(
+            kuji_policy["evidence"]["historical_roadmap_completion_readiness"][
+                "next_safe_phase"
+            ],
+            "confirm_ichiban_campaign_metadata",
+        )
         self.assertFalse(kuji_policy["evidence"]["auto_merge_enabled"])
         self.assertFalse(kuji_policy["evidence"]["auto_delete_enabled"])
         self.assertEqual(kuji_policy["evidence"]["prize_policy_review_batch_count"], 2)
@@ -976,6 +1086,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_numbered_variant_application_skipped_rows"], 0)
         self.assertEqual(report["summary"]["ichiban_prize_policy_review_batch_count"], 2)
         self.assertEqual(report["summary"]["ichiban_reissue_duplicate_review_groups"], 2)
+        self.assertEqual(report["summary"]["ichiban_probable_reissue_work_order_rows"], 2)
+        self.assertEqual(report["summary"]["ichiban_campaign_first_review_plan_rows"], 1)
         animation_action = next(
             action
             for action in report["actions"]

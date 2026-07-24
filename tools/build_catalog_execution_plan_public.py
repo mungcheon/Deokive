@@ -136,8 +136,10 @@ def _build_plan(load_report) -> dict[str, Any]:
     dedupe_template_import = load_report("catalog_deduplication_template_import_dry_run_public.json")
     kuji_reissue_decision_template = load_report("ichiban_kuji_reissue_decision_template_public.json")
     kuji_history = load_report("ichiban_kuji_history_public.json")
+    kuji_historical_roadmap = load_report("ichiban_kuji_historical_roadmap_public.json")
     kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
     kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
+    kuji_metadata_fast_review = load_report("ichiban_kuji_metadata_fast_review_public.json")
     kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
     kuji_policy_issue_queue = load_report("ichiban_kuji_prize_policy_issue_queue_public.json")
     kuji_name_image = load_report("ichiban_kuji_prize_name_image_review_public.json")
@@ -184,11 +186,16 @@ def _build_plan(load_report) -> dict[str, Any]:
         dedupe_completion = {}
     kuji_reissue_decision_template_summary = _summary(kuji_reissue_decision_template)
     kuji_history_summary = _summary(kuji_history)
+    kuji_historical_roadmap_summary = _summary(kuji_historical_roadmap)
+    kuji_historical_readiness = kuji_historical_roadmap_summary.get("completion_readiness")
+    if not isinstance(kuji_historical_readiness, dict):
+        kuji_historical_readiness = {}
     dedupe_fast_breakdowns = dedupe_fast_review.get("breakdowns")
     if not isinstance(dedupe_fast_breakdowns, dict):
         dedupe_fast_breakdowns = {}
     kuji_summary = _summary(kuji_batches)
     kuji_action_summary = _summary(kuji_action_queue)
+    kuji_metadata_fast_summary = _summary(kuji_metadata_fast_review)
     kuji_policy_summary = _summary(kuji_policy)
     kuji_policy_issue_summary = _summary(kuji_policy_issue_queue)
     kuji_name_image_summary = _summary(kuji_name_image)
@@ -1105,8 +1112,32 @@ def _build_plan(load_report) -> dict[str, Any]:
             next_step="fill_confirmed_ichiban_campaign_patch_templates",
             blocker="Historical 1kuji metadata is manual-only until official campaign evidence is confirmed.",
             evidence={
+                "historical_readiness_status": kuji_historical_readiness.get("status"),
+                "historical_next_safe_phase": kuji_historical_readiness.get(
+                    "next_safe_phase"
+                ),
+                "metadata_resolution_readiness_status": kuji_history_summary.get(
+                    "metadata_resolution_readiness_status"
+                ),
+                "metadata_manual_review_campaigns": _count(
+                    kuji_history_summary, "metadata_manual_review_campaigns"
+                ),
+                "metadata_auto_apply_ready_campaigns": _count(
+                    kuji_history_summary, "metadata_auto_apply_ready_campaigns"
+                ),
+                "metadata_review_queue_covers_all_price_campaign_groups": bool(
+                    kuji_history_summary.get(
+                        "metadata_review_queue_covers_all_price_campaign_groups"
+                    )
+                ),
                 "actionable_campaigns": _count(kuji_action_summary, "actionable_campaigns"),
                 "queued_action_campaigns": _count(kuji_action_summary, "queued_action_campaigns"),
+                "unqueued_action_campaigns": _count(
+                    kuji_action_summary, "unqueued_action_campaigns"
+                ),
+                "campaign_queue_coverage": kuji_action_summary.get(
+                    "campaign_queue_coverage"
+                ),
                 "queued_catalog_item_rows": _count(kuji_action_summary, "queued_catalog_item_rows"),
                 "missing_release_date_campaign_groups": _count(
                     kuji_history_summary, "missing_release_date_campaign_groups"
@@ -1114,8 +1145,38 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "missing_official_price_jpy_campaign_groups": _count(
                     kuji_history_summary, "missing_official_price_jpy_campaign_groups"
                 ),
+                "official_price_jpy_review_queue_campaigns": _count(
+                    kuji_history_summary, "official_price_jpy_review_queue_campaigns"
+                ),
+                "avg_missing_price_rows_per_campaign_group": kuji_history_summary.get(
+                    "avg_missing_price_rows_per_campaign_group"
+                ),
                 "action_batch_count": _count(kuji_action_summary, "action_batch_count"),
+                "field_patch_template_count": _count(
+                    kuji_action_summary, "field_patch_template_count"
+                ),
                 "field_patch_template_counts": kuji_action_summary.get("field_patch_template_counts", []),
+                "primary_review_url_rows": _count(
+                    kuji_action_summary, "primary_review_url_rows"
+                ),
+                "queued_primary_review_url_rows": _count(
+                    kuji_action_summary, "queued_primary_review_url_rows"
+                ),
+                "first_primary_review_url": kuji_action_summary.get(
+                    "first_primary_review_url"
+                ),
+                "fast_review_campaigns": _count(
+                    kuji_metadata_fast_summary, "fast_review_campaigns"
+                ),
+                "held_for_later_campaigns": _count(
+                    kuji_metadata_fast_summary, "held_for_later_campaigns"
+                ),
+                "fast_review_template_rows": _count(
+                    kuji_metadata_fast_summary, "fast_review_template_rows"
+                ),
+                "fast_review_manual_confirmed_true": _count(
+                    kuji_metadata_fast_summary, "manual_confirmed_true"
+                ),
                 "work_order_steps": _count(kuji_action_summary, "work_order_steps"),
                 "work_order_lanes": kuji_action_summary.get("work_order_lanes", []),
             },
@@ -1221,6 +1282,23 @@ def _build_plan(load_report) -> dict[str, Any]:
                         kuji_policy_summary, "repeated_name_different_source_review_catalog_item_rows"
                     ),
                     "probable_reissue_review_groups": kuji_probable_reissue_review_rows,
+                    "probable_reissue_work_order_rows": _count(
+                        kuji_policy_issue_summary, "probable_reissue_work_order_rows"
+                    ),
+                    "campaign_first_review_plan_rows": _count(
+                        kuji_policy_issue_summary, "campaign_first_review_plan_rows"
+                    ),
+                    "campaign_first_review_item_work_order_rows": _count(
+                        kuji_policy_issue_summary,
+                        "campaign_first_review_item_work_order_rows",
+                    ),
+                    "campaign_first_review_plans_with_evidence_urls": _count(
+                        kuji_policy_issue_summary,
+                        "campaign_first_review_plans_with_evidence_urls",
+                    ),
+                    "campaign_first_review_first_evidence_url": kuji_policy_issue_summary.get(
+                        "campaign_first_review_first_evidence_url"
+                    ),
                     "issue_queue_rows": _count(kuji_policy_issue_summary, "issue_rows"),
                     "open_issue_rows": _count(kuji_policy_issue_summary, "open_issue_rows"),
                     "manual_review_rows": _count(kuji_policy_issue_summary, "manual_review_rows"),
@@ -1238,6 +1316,7 @@ def _build_plan(load_report) -> dict[str, Any]:
                         "completion_readiness_status"
                     ),
                     "completion_readiness": kuji_policy_issue_queue.get("completion_readiness", {}),
+                    "historical_roadmap_completion_readiness": kuji_historical_readiness,
                     "auto_merge_enabled": bool(kuji_policy_issue_summary.get("auto_merge_enabled", False)),
                     "auto_delete_enabled": bool(kuji_policy_issue_summary.get("auto_delete_enabled", False)),
                     "prize_policy_review_batch_count": _count(
@@ -1411,6 +1490,30 @@ def _build_plan(load_report) -> dict[str, Any]:
             "ichiban_campaign_metadata_review_queue_rows": _count(
                 kuji_history_summary, "campaign_metadata_review_queue_rows"
             ),
+            "ichiban_historical_readiness_status": kuji_historical_readiness.get(
+                "status"
+            ),
+            "ichiban_historical_next_safe_phase": kuji_historical_readiness.get(
+                "next_safe_phase"
+            ),
+            "ichiban_metadata_manual_review_campaigns": _count(
+                kuji_history_summary, "metadata_manual_review_campaigns"
+            ),
+            "ichiban_metadata_auto_apply_ready_campaigns": _count(
+                kuji_history_summary, "metadata_auto_apply_ready_campaigns"
+            ),
+            "ichiban_metadata_actionable_campaigns": _count(
+                kuji_action_summary, "actionable_campaigns"
+            ),
+            "ichiban_metadata_queued_action_campaigns": _count(
+                kuji_action_summary, "queued_action_campaigns"
+            ),
+            "ichiban_metadata_fast_review_campaigns": _count(
+                kuji_metadata_fast_summary, "fast_review_campaigns"
+            ),
+            "ichiban_metadata_fast_review_manual_confirmed_true": _count(
+                kuji_metadata_fast_summary, "manual_confirmed_true"
+            ),
             "ichiban_missing_release_date_campaign_groups": _count(
                 kuji_history_summary, "missing_release_date_campaign_groups"
             ),
@@ -1433,6 +1536,12 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "ichiban_reissue_duplicate_review_groups": kuji_reissue_review_rows,
             "ichiban_probable_reissue_review_groups": kuji_probable_reissue_review_rows,
+            "ichiban_probable_reissue_work_order_rows": _count(
+                kuji_policy_issue_summary, "probable_reissue_work_order_rows"
+            ),
+            "ichiban_campaign_first_review_plan_rows": _count(
+                kuji_policy_issue_summary, "campaign_first_review_plan_rows"
+            ),
             "ichiban_prize_name_image_review_rows": _count(kuji_name_image_summary, "review_rows"),
             "ichiban_prize_name_image_name_structure_review_rows": _count(
                 kuji_name_image_summary, "name_structure_review_rows"

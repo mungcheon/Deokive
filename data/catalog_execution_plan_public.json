@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T07:48:13Z",
+  "generated_at": "2026-07-24T07:52:09Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 24,
@@ -115,6 +115,14 @@
     "ichiban_campaigns_with_catalog_items": 576,
     "ichiban_campaigns_without_catalog_items": 38,
     "ichiban_campaign_metadata_review_queue_rows": 42,
+    "ichiban_historical_readiness_status": "manual_review_required",
+    "ichiban_historical_next_safe_phase": "confirm_ichiban_campaign_metadata",
+    "ichiban_metadata_manual_review_campaigns": 42,
+    "ichiban_metadata_auto_apply_ready_campaigns": 0,
+    "ichiban_metadata_actionable_campaigns": 44,
+    "ichiban_metadata_queued_action_campaigns": 44,
+    "ichiban_metadata_fast_review_campaigns": 20,
+    "ichiban_metadata_fast_review_manual_confirmed_true": 0,
     "ichiban_missing_release_date_campaign_groups": 1,
     "ichiban_missing_official_price_jpy_campaign_groups": 41,
     "ichiban_zero_price_exception_policy_pass": true,
@@ -127,6 +135,8 @@
     "ichiban_numbered_variant_application_skipped_rows": 0,
     "ichiban_reissue_duplicate_review_groups": 46,
     "ichiban_probable_reissue_review_groups": 20,
+    "ichiban_probable_reissue_work_order_rows": 20,
+    "ichiban_campaign_first_review_plan_rows": 4,
     "ichiban_prize_name_image_review_rows": 0,
     "ichiban_prize_name_image_name_structure_review_rows": 0,
     "ichiban_prize_name_image_image_identity_review_rows": 0,
@@ -2242,12 +2252,23 @@
       "blocker": "Historical 1kuji metadata is manual-only until official campaign evidence is confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
+        "historical_readiness_status": "manual_review_required",
+        "historical_next_safe_phase": "confirm_ichiban_campaign_metadata",
+        "metadata_resolution_readiness_status": "manual_campaign_metadata_review_required",
+        "metadata_manual_review_campaigns": 42,
+        "metadata_auto_apply_ready_campaigns": 0,
+        "metadata_review_queue_covers_all_price_campaign_groups": true,
         "actionable_campaigns": 44,
         "queued_action_campaigns": 44,
+        "unqueued_action_campaigns": 0,
+        "campaign_queue_coverage": 1.0,
         "queued_catalog_item_rows": 381,
         "missing_release_date_campaign_groups": 1,
         "missing_official_price_jpy_campaign_groups": 41,
+        "official_price_jpy_review_queue_campaigns": 41,
+        "avg_missing_price_rows_per_campaign_group": 8.54,
         "action_batch_count": 6,
+        "field_patch_template_count": 44,
         "field_patch_template_counts": [
           [
             "official_price_jpy",
@@ -2258,6 +2279,13 @@
             2
           ]
         ],
+        "primary_review_url_rows": 44,
+        "queued_primary_review_url_rows": 44,
+        "first_primary_review_url": "https://1kuji.com/products/jujutsu-o",
+        "fast_review_campaigns": 20,
+        "held_for_later_campaigns": 24,
+        "fast_review_template_rows": 20,
+        "fast_review_manual_confirmed_true": 0,
         "work_order_steps": 2,
         "work_order_lanes": [
           "confirm_release_dates",
@@ -2302,6 +2330,11 @@
         "repeated_name_different_source_review_batch_count": 4,
         "repeated_name_different_source_review_catalog_item_rows": 92,
         "probable_reissue_review_groups": 20,
+        "probable_reissue_work_order_rows": 20,
+        "campaign_first_review_plan_rows": 4,
+        "campaign_first_review_item_work_order_rows": 20,
+        "campaign_first_review_plans_with_evidence_urls": 4,
+        "campaign_first_review_first_evidence_url": "https://1kuji.com/products/onep6",
         "issue_queue_rows": 20,
         "open_issue_rows": 40,
         "manual_review_rows": 40,
@@ -2336,6 +2369,20 @@
           "auto_merge_enabled": false,
           "auto_delete_enabled": false,
           "safety_note": "Last One and Double Chance zero-price rows are policy exceptions; same-name Ichiban Kuji rows across campaign URLs must not be merged until official campaign evidence confirms the identity decision."
+        },
+        "historical_roadmap_completion_readiness": {
+          "status": "manual_review_required",
+          "manual_metadata_campaigns": 44,
+          "manual_reissue_review_groups": 20,
+          "manual_prize_name_image_patch_rows": 0,
+          "zero_price_policy_ready": true,
+          "numbered_variant_policy_ready": true,
+          "blocked_auto_apply_reasons": [
+            "campaign_metadata_requires_official_confirmation",
+            "same_name_reissue_groups_require_keep_or_merge_decisions",
+            "prize_name_image_patches_require_official_lineup_confirmation"
+          ],
+          "next_safe_phase": "confirm_ichiban_campaign_metadata"
         },
         "auto_merge_enabled": false,
         "auto_delete_enabled": false,
