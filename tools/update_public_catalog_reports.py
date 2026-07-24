@@ -546,15 +546,76 @@ def catalog_goal_open_review_queues(goal_gate: dict[str, Any]) -> dict[str, Any]
     }
 
 
+def catalog_goal_readiness_dashboard(goal_gate: dict[str, Any]) -> dict[str, Any]:
+    pillars = goal_gate.get("pillars", [])
+    if not isinstance(pillars, list):
+        pillars = []
+    normalized_pillars = [
+        row for row in pillars if isinstance(row, dict) and row.get("pillar")
+    ]
+
+    def _int(row: dict[str, Any], key: str) -> int:
+        try:
+            return int(row.get(key) or 0)
+        except (TypeError, ValueError):
+            return 0
+
+    def _needs_review(row: dict[str, Any]) -> bool:
+        status = str(row.get("status") or "").lower()
+        return (
+            _int(row, "manual_review_rows") > 0
+            or status not in {"pass", "ready", "no_open_policy_issues"}
+        )
+
+    blocking_pillars = [
+        {
+            "pillar": row.get("pillar"),
+            "label": row.get("label"),
+            "status": row.get("status"),
+            "manual_review_rows": _int(row, "manual_review_rows"),
+            "auto_apply_ready_rows": _int(row, "auto_apply_ready_rows"),
+            "next_safe_phase": row.get("next_safe_phase"),
+            "next_queue_lane": row.get("next_queue_lane"),
+            "next_queue_rows": _int(row, "next_queue_rows"),
+            "public_report": row.get("public_report"),
+        }
+        for row in normalized_pillars
+        if _needs_review(row)
+    ]
+    return {
+        "status": goal_gate.get("status", "unknown"),
+        "manual_review_required": bool(blocking_pillars),
+        "pillar_count": len(normalized_pillars),
+        "blocking_pillar_count": len(blocking_pillars),
+        "manual_review_rows": sum(
+            _int(row, "manual_review_rows") for row in normalized_pillars
+        ),
+        "auto_apply_ready_rows": sum(
+            _int(row, "auto_apply_ready_rows") for row in normalized_pillars
+        ),
+        "next_safe_phase": goal_gate.get("next_safe_phase"),
+        "blocked_reasons": goal_gate.get("blocked_reasons", []),
+        "blocking_pillars": blocking_pillars,
+        "next_blocking_pillar": blocking_pillars[0] if blocking_pillars else None,
+        "auto_apply_enabled": bool(goal_gate.get("auto_apply_enabled", False)),
+        "auto_merge_enabled": bool(goal_gate.get("auto_merge_enabled", False)),
+        "auto_delete_enabled": bool(goal_gate.get("auto_delete_enabled", False)),
+    }
+
+
 def expose_catalog_goal_open_queues(
     operations: dict[str, Any],
     agent_work_queue: dict[str, Any],
     execution_plan: dict[str, Any],
     target: dict[str, Any],
 ) -> None:
-    goal_open_queues = catalog_goal_open_review_queues(
-        target.get("catalog_goal_progress_gate", {})
-    )
+    goal_gate = target.get("catalog_goal_progress_gate", {})
+    goal_open_queues = catalog_goal_open_review_queues(goal_gate)
+    readiness_dashboard = catalog_goal_readiness_dashboard(goal_gate)
+    target["goal_readiness_dashboard"] = readiness_dashboard
+    operations["goal_readiness_dashboard"] = readiness_dashboard
+    agent_work_queue["goal_readiness_dashboard"] = readiness_dashboard
+    execution_plan["goal_readiness_dashboard"] = readiness_dashboard
     operations["summary"]["open_review_queues"].update(goal_open_queues)
     agent_work_queue["summary"]["open_review_queues"] = operations["summary"][
         "open_review_queues"
@@ -11238,7 +11299,15 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "next_safe_phase": target.get(
                     "deduplication_action_queue",
                     {},
-                ).get("next_safe_phase", "review_duplicate_decisions"),
+                )
+                .get("completion_readiness", {})
+                .get(
+                    "next_safe_phase",
+                    target.get("deduplication_action_queue", {}).get(
+                        "next_safe_phase",
+                        "review_duplicate_decisions",
+                    ),
+                ),
                 "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
             },
             {
@@ -11699,9 +11768,17 @@ def update_reports(write: bool) -> dict[str, Any]:
                     {},
                 ).get("app_animation_visuals_covered", False),
                 "next_safe_phase": target.get(
-                    "animation_category_coverage_audit",
+                    "animation_category_action_queue",
                     {},
-                ).get("next_safe_phase", "confirm_category_normalization_before_import"),
+                )
+                .get("blocking_dashboard", {})
+                .get(
+                    "next_safe_phase",
+                    target.get("animation_category_coverage_audit", {}).get(
+                        "next_safe_phase",
+                        "confirm_category_normalization_before_import",
+                    ),
+                ),
                 "public_report": f"data/{ANIMATION_CATEGORY_COVERAGE_AUDIT.name}",
             },
             {
@@ -11801,11 +11878,15 @@ def update_reports(write: bool) -> dict[str, Any]:
                     False,
                 ),
                 "next_safe_phase": target.get(
-                    "ichiban_kuji_historical_roadmap",
+                    "ichiban_kuji_reissue_decision_template",
                     {},
-                ).get("completion_readiness", {}).get(
+                )
+                .get("blocking_dashboard", {})
+                .get(
                     "next_safe_phase",
-                    "confirm_ichiban_campaign_metadata",
+                    target.get("ichiban_kuji_historical_roadmap", {})
+                    .get("completion_readiness", {})
+                    .get("next_safe_phase", "confirm_ichiban_campaign_metadata"),
                 ),
                 "public_report": f"data/{ICHIIBAN_KUJI_HISTORICAL_ROADMAP.name}",
             },

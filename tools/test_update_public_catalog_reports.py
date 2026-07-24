@@ -2000,9 +2000,65 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "last_one_and_double_chance_zero_price_protected"
             ]
         )
+        readiness_dashboard = quality["goal_readiness_dashboard"]
+        self.assertEqual(readiness_dashboard["status"], "manual_review_required")
+        self.assertTrue(readiness_dashboard["manual_review_required"])
+        self.assertEqual(readiness_dashboard["pillar_count"], 5)
+        self.assertEqual(readiness_dashboard["blocking_pillar_count"], 5)
+        self.assertEqual(readiness_dashboard["manual_review_rows"], 943)
+        self.assertEqual(readiness_dashboard["auto_apply_ready_rows"], 0)
+        self.assertEqual(
+            readiness_dashboard["next_safe_phase"],
+            "review_candidate_source_urls",
+        )
+        self.assertFalse(readiness_dashboard["auto_apply_enabled"])
+        self.assertFalse(readiness_dashboard["auto_merge_enabled"])
+        self.assertFalse(readiness_dashboard["auto_delete_enabled"])
+        blocking_pillars = {
+            row["pillar"]: row for row in readiness_dashboard["blocking_pillars"]
+        }
+        self.assertEqual(
+            set(blocking_pillars),
+            {
+                "dedupe",
+                "missing_images",
+                "source_url_updates",
+                "animation_categories",
+                "ichiban_kuji_history",
+            },
+        )
+        self.assertEqual(
+            readiness_dashboard["next_blocking_pillar"]["pillar"],
+            "dedupe",
+        )
+        self.assertEqual(blocking_pillars["dedupe"]["manual_review_rows"], 48)
+        self.assertEqual(
+            blocking_pillars["dedupe"]["next_safe_phase"],
+            "verify_ichiban_campaign_pages_before_dedupe",
+        )
+        self.assertEqual(
+            blocking_pillars["missing_images"]["next_safe_phase"],
+            "replace_generic_source_urls",
+        )
+        self.assertEqual(
+            blocking_pillars["source_url_updates"]["next_queue_lane"],
+            "candidate_review_required",
+        )
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         agent_queue = reports.load_json(reports.AGENT_WORK_QUEUE)
         execution_plan = reports.load_json(reports.EXECUTION_PLAN)
+        self.assertEqual(
+            operations["goal_readiness_dashboard"],
+            readiness_dashboard,
+        )
+        self.assertEqual(
+            agent_queue["goal_readiness_dashboard"],
+            readiness_dashboard,
+        )
+        self.assertEqual(
+            execution_plan["goal_readiness_dashboard"],
+            readiness_dashboard,
+        )
         open_queues = operations["summary"]["open_review_queues"]
         self.assertEqual(
             open_queues["catalog_goal_manual_review_pillars"],

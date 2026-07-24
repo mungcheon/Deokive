@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T22:28:08Z",
+  "generated_at": "2026-07-24T23:34:04Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
@@ -44979,5 +44979,92 @@
     "auto_apply_catalog_changes": false,
     "safe_for_github_pages": true,
     "reason": "This queue coordinates work; it does not contain credentials or private ownership data."
+  },
+  "goal_readiness_dashboard": {
+    "status": "manual_review_required",
+    "manual_review_required": true,
+    "pillar_count": 5,
+    "blocking_pillar_count": 5,
+    "manual_review_rows": 943,
+    "auto_apply_ready_rows": 0,
+    "next_safe_phase": "review_candidate_source_urls",
+    "blocked_reasons": [
+      "dedupe_requires_manual_keep_or_merge_decisions",
+      "missing_images_require_manual_source_or_image_evidence",
+      "source_url_updates_require_exact_source_confirmation",
+      "animation_category_normalization_requires_manual_confirmation",
+      "ichiban_reissue_and_campaign_metadata_require_manual_review"
+    ],
+    "blocking_pillars": [
+      {
+        "pillar": "dedupe",
+        "label": "Deduplicate catalog rows",
+        "status": "blocked_until_manual_review",
+        "manual_review_rows": 48,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+        "next_queue_lane": "same_barcode_fast_review",
+        "next_queue_rows": 10,
+        "public_report": "data/catalog_deduplication_action_queue_public.json"
+      },
+      {
+        "pillar": "missing_images",
+        "label": "Resolve missing catalog images",
+        "status": "manual_evidence_required",
+        "manual_review_rows": 745,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "replace_generic_source_urls",
+        "next_queue_lane": "replace_generic_source_urls",
+        "next_queue_rows": 50,
+        "public_report": "data/catalog_missing_image_actionability_public.json"
+      },
+      {
+        "pillar": "source_url_updates",
+        "label": "Replace generic source URLs before image import",
+        "status": "manual_source_url_confirmation_required",
+        "manual_review_rows": 50,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "review_candidate_source_urls",
+        "next_queue_lane": "candidate_review_required",
+        "next_queue_rows": 3,
+        "public_report": "data/catalog_image_source_url_confirmed_template_public.json"
+      },
+      {
+        "pillar": "animation_categories",
+        "label": "Normalize animation goods categories and folder visuals",
+        "status": "visual_coverage_passed_normalization_review_pending",
+        "manual_review_rows": 36,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "confirm_canonical_animation_category_normalization",
+        "next_queue_lane": "canonical_category_normalization_review",
+        "next_queue_rows": 36,
+        "public_report": "data/animation_category_coverage_audit_public.json"
+      },
+      {
+        "pillar": "ichiban_kuji_history",
+        "label": "Organize historical Ichiban Kuji metadata and reissues",
+        "status": "reissue_review_required",
+        "manual_review_rows": 64,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
+        "next_queue_lane": null,
+        "next_queue_rows": 0,
+        "public_report": "data/ichiban_kuji_historical_roadmap_public.json"
+      }
+    ],
+    "next_blocking_pillar": {
+      "pillar": "dedupe",
+      "label": "Deduplicate catalog rows",
+      "status": "blocked_until_manual_review",
+      "manual_review_rows": 48,
+      "auto_apply_ready_rows": 0,
+      "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+      "next_queue_lane": "same_barcode_fast_review",
+      "next_queue_rows": 10,
+      "public_report": "data/catalog_deduplication_action_queue_public.json"
+    },
+    "auto_apply_enabled": false,
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false
   }
 }
