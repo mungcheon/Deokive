@@ -1404,6 +1404,57 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(pillars["dedupe"]["manual_review_rows"], 48)
         self.assertEqual(pillars["dedupe"]["queued_rows"], 48)
         self.assertEqual(pillars["dedupe"]["unqueued_rows"], 0)
+        self.assertEqual(pillars["dedupe"]["queue_coverage"], 1.0)
+        self.assertEqual(pillars["dedupe"]["actionable_groups"], 48)
+        self.assertEqual(
+            pillars["dedupe"]["explicit_keep_drop_required_groups"],
+            48,
+        )
+        self.assertEqual(pillars["dedupe"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(pillars["dedupe"]["auto_delete_ready_groups"], 0)
+        self.assertEqual(pillars["dedupe"]["fast_review_groups"], 42)
+        self.assertEqual(pillars["dedupe"]["held_for_later_groups"], 6)
+        self.assertEqual(
+            pillars["dedupe"]["next_fast_review_batch_groups"],
+            10,
+        )
+        self.assertEqual(
+            pillars["dedupe"]["next_fast_review_batch_drop_candidate_rows"],
+            10,
+        )
+        self.assertEqual(
+            pillars["dedupe"]["next_fast_review_primary_review_url_groups"],
+            10,
+        )
+        self.assertEqual(
+            pillars["dedupe"]["next_fast_review_warning_counts"],
+            [
+                ["name_delta_requires_variant_check", 5],
+                ["image_delta_requires_visual_check", 5],
+            ],
+        )
+        self.assertEqual(pillars["dedupe"]["confirmed_template_rows"], 42)
+        self.assertEqual(pillars["dedupe"]["confirmed_template_manual_rows"], 0)
+        self.assertEqual(pillars["dedupe"]["dry_run_ready_decision_rows"], 0)
+        self.assertEqual(pillars["dedupe"]["dry_run_blocked_rows"], 42)
+        self.assertEqual(pillars["dedupe"]["ichiban_reissue_review_groups"], 46)
+        self.assertEqual(pillars["dedupe"]["ichiban_reissue_review_rows"], 92)
+        self.assertEqual(pillars["dedupe"]["ichiban_reissue_work_order_rows"], 20)
+        self.assertEqual(
+            pillars["dedupe"]["ichiban_reissue_decision_template_rows"],
+            20,
+        )
+        self.assertEqual(
+            pillars["dedupe"]["ichiban_reissue_work_orders_with_evidence_urls"],
+            20,
+        )
+        self.assertEqual(pillars["dedupe"]["name_duplicate_protected_groups"], 505)
+        self.assertEqual(
+            pillars["dedupe"]["name_duplicate_ichiban_protected_groups"],
+            479,
+        )
+        self.assertEqual(pillars["dedupe"]["next_queue_lane"], "same_barcode_fast_review")
+        self.assertEqual(pillars["dedupe"]["next_queue_rows"], 10)
         self.assertEqual(pillars["missing_images"]["open_rows"], 745)
         self.assertEqual(pillars["missing_images"]["queued_rows"], 542)
         self.assertEqual(pillars["missing_images"]["unqueued_rows"], 203)

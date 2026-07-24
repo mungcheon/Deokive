@@ -10789,6 +10789,91 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "deduplication_action_queue",
                     {},
                 ).get("queue_coverage", 0),
+                "actionable_groups": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("actionable_groups", 0),
+                "explicit_keep_drop_required_groups": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("explicit_keep_drop_required_groups", 0),
+                "auto_delete_ready_groups": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("auto_delete_ready_groups", 0),
+                "fast_review_groups": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("fast_review_groups", 0),
+                "held_for_later_groups": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("held_for_later_groups", 0),
+                "next_fast_review_batch_groups": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("next_fast_review_batch_groups", 0),
+                "next_fast_review_batch_drop_candidate_rows": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("next_fast_review_batch_drop_candidate_rows", 0),
+                "next_fast_review_primary_review_url_groups": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("next_fast_review_batch_primary_review_url_groups", 0),
+                "next_fast_review_warning_counts": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("next_fast_review_batch_warning_counts", []),
+                "confirmed_template_rows": target.get(
+                    "deduplication_confirmed_template",
+                    {},
+                ).get("template_items", 0),
+                "confirmed_template_manual_rows": target.get(
+                    "deduplication_confirmed_template",
+                    {},
+                ).get("manual_confirmed_rows", 0),
+                "dry_run_ready_decision_rows": target.get(
+                    "deduplication_template_import_dry_run",
+                    {},
+                ).get("ready_decision_rows", 0),
+                "dry_run_blocked_rows": target.get(
+                    "deduplication_template_import_dry_run",
+                    {},
+                ).get("blocked_rows", 0),
+                "ichiban_reissue_review_groups": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("ichiban_reissue_review_groups", 0),
+                "ichiban_reissue_review_rows": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("ichiban_reissue_review_rows", 0),
+                "ichiban_reissue_work_order_rows": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("ichiban_reissue_work_order_rows", 0),
+                "ichiban_reissue_decision_template_rows": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("ichiban_reissue_decision_template_rows", 0),
+                "ichiban_reissue_work_orders_with_evidence_urls": target.get(
+                    "deduplication_action_queue",
+                    {},
+                ).get("ichiban_reissue_work_orders_with_evidence_urls", 0),
+                "name_duplicate_protected_groups": target.get(
+                    "name_duplicate_audit",
+                    {},
+                ).get("protected_groups", 0),
+                "name_duplicate_ichiban_protected_groups": target.get(
+                    "name_duplicate_audit",
+                    {},
+                ).get("ichiban_campaign_or_reissue_protected_groups", 0),
+                "next_queue_lane": "same_barcode_fast_review",
+                "next_queue_rows": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("next_fast_review_batch_groups", 0),
                 "next_safe_phase": target.get(
                     "deduplication_action_queue",
                     {},
