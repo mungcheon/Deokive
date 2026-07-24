@@ -1,40 +1,40 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T17:51:06Z",
+  "generated_at": "2026-07-24T17:58:07Z",
   "scope": "source_discovery_next_focus_exact_url_review_queue",
   "source_report": "data/source_discovery_next_focus_fallback_queue_public.json",
   "summary": {
-    "queue_rows": 5,
+    "queue_rows": 20,
     "manual_confirmed_rows": 0,
     "by_source_store": [
       [
         "엔스카이",
-        5
+        20
       ]
     ],
     "by_category": [
       [
         "키링",
-        5
+        20
       ]
     ],
     "by_identity_review_status": [
       [
         "exact_page_match_review_ready",
-        5
+        20
       ]
     ],
-    "primary_review_url_rows": 5,
+    "primary_review_url_rows": 20,
     "primary_review_url_kind_counts": [
       [
         "domain_limited_web_search",
-        5
+        20
       ]
     ],
     "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
     "first_primary_review_url_kind": "domain_limited_web_search",
     "auto_apply_enabled": false,
-    "blocked_identity_rows": 15,
+    "blocked_identity_rows": 0,
     "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment"
   },
   "automation_policy": {
@@ -227,6 +227,651 @@
       "primary_review_url_kind": "domain_limited_web_search",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1531,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
+      "name_ja": "初音ミク メタリックラバーストラップ",
+      "search_term": "初音ミク メタリックラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1539,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "토도로키 쇼토 러버 스트랩",
+      "name_ja": "轟焦凍 ラバーストラップ",
+      "search_term": "轟焦凍 ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1541,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "다비 메탈릭 러버 스트랩",
+      "name_ja": "荼毘 メタリックラバーストラップ",
+      "search_term": "荼毘 メタリックラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1542,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "올마이트 러버 스트랩",
+      "name_ja": "オールマイト ラバーストラップ",
+      "search_term": "オールマイト ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1543,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "곤 프릭스 러버 스트랩",
+      "name_ja": "ゴン=フリークス ラバーストラップ",
+      "search_term": "ゴン=フリークス ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1544,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "키루아 조르딕 러버 스트랩",
+      "name_ja": "キルア=ゾルディック ラバーストラップ",
+      "search_term": "キルア=ゾルディック ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1545,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "쿠라피카 러버 스트랩",
+      "name_ja": "クラピカ ラバーストラップ",
+      "search_term": "クラピカ ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1546,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "레오리오 러버 스트랩",
+      "name_ja": "レオリオ ラバーストラップ",
+      "search_term": "レオリオ ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1547,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "히소카 러버 스트랩",
+      "name_ja": "ヒソカ ラバーストラップ",
+      "search_term": "ヒソカ ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%82%BD%E3%82%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%82%BD%E3%82%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%82%BD%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1548,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "쿠로로 루실풀 메탈릭 러버 스트랩",
+      "name_ja": "クロロ=ルシルフル メタリックラバーストラップ",
+      "search_term": "クロロ=ルシルフル メタリックラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AF%E3%83%AD%E3%83%AD%3D%E3%83%AB%E3%82%B7%E3%83%AB%E3%83%95%E3%83%AB+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AF%E3%83%AD%E3%83%AD%3D%E3%83%AB%E3%82%B7%E3%83%AB%E3%83%95%E3%83%AB+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AF%E3%83%AD%E3%83%AD%3D%E3%83%AB%E3%82%B7%E3%83%AB%E3%83%95%E3%83%AB%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1549,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "이타도리 유지 러버 스트랩",
+      "name_ja": "虎杖悠仁 ラバーストラップ",
+      "search_term": "虎杖悠仁 ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1550,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "후시구로 메구미 러버 스트랩",
+      "name_ja": "伏黒恵 ラバーストラップ",
+      "search_term": "伏黒恵 ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E4%BC%8F%E9%BB%92%E6%81%B5+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E4%BC%8F%E9%BB%92%E6%81%B5+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E4%BC%8F%E9%BB%92%E6%81%B5%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1551,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "쿠기사키 노바라 러버 스트랩",
+      "name_ja": "釘崎野薔薇 ラバーストラップ",
+      "search_term": "釘崎野薔薇 ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1552,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "고죠 사토루 러버 스트랩",
+      "name_ja": "五条悟 ラバーストラップ",
+      "search_term": "五条悟 ラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E4%BA%94%E6%9D%A1%E6%82%9F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E4%BA%94%E6%9D%A1%E6%82%9F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E4%BA%94%E6%9D%A1%E6%82%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_evidence_url": "",
+      "manual_note": "",
+      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.enskyshop.com/products/detail/...",
+          "https://en.enskyshop.com/products/detail/..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Ensky products/list search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset.",
+        "allowed_source_domains": [
+          "www.enskyshop.com"
+        ]
+      },
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1554,
+      "focus_pack_id": "source-discovery-focus-001",
+      "source_store": "엔스카이",
+      "category": "키링",
+      "name_ko": "료멘 스쿠나 메탈릭 러버 스트랩",
+      "name_ja": "両面宿儺 メタリックラバーストラップ",
+      "search_term": "両面宿儺 メタリックラバーストラップ",
+      "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "primary_review_url_kind": "domain_limited_web_search",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "manual_confirmed": false,
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",

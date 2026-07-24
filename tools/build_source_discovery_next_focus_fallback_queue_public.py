@@ -275,6 +275,42 @@ def _has_variant_marker(value: Any) -> bool:
     return any(marker in text for marker in ("(", ")", "（", "）", "①", "②", "③", "④", "⑤"))
 
 
+GOODS_TYPE_TERMS = (
+    "ラバーストラップ",
+    "メタリックラバーストラップ",
+    "アクリル",
+    "アクキー",
+    "缶バッジ",
+    "キーホルダー",
+    "ぬいぐるみ",
+    "マスコット",
+    "フィギュア",
+    "ストラップ",
+    "러버 스트랩",
+    "메탈릭 러버 스트랩",
+    "아크릴",
+    "캔뱃지",
+    "키홀더",
+    "인형",
+    "마스코트",
+    "피규어",
+    "스트랩",
+)
+
+
+def _has_explicit_identity_in_title(value: Any) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    for term in GOODS_TYPE_TERMS:
+        if term not in text:
+            continue
+        prefix = text.split(term, 1)[0].strip(" /・-＿_:：")
+        if len(prefix) >= 2:
+            return True
+    return False
+
+
 def _identity_review(item: dict[str, Any]) -> dict[str, Any]:
     search_term = _first_value(item.get("fallback_search_terms"))
     blockers: list[str] = []
@@ -282,6 +318,9 @@ def _identity_review(item: dict[str, Any]) -> dict[str, Any]:
         blockers.append("missing_name_ja")
     if not any(
         _has_variant_marker(value)
+        for value in (item.get("name_ko"), item.get("name_ja"), search_term)
+    ) and not any(
+        _has_explicit_identity_in_title(value)
         for value in (item.get("name_ko"), item.get("name_ja"), search_term)
     ):
         blockers.append("variant_or_character_not_explicit")

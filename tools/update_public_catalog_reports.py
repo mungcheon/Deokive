@@ -9325,6 +9325,8 @@ def update_reports(write: bool) -> dict[str, Any]:
         image_attachment_template_import_dry_run,
         source_discovery_next_focus_detail_candidates=source_discovery_next_focus_detail_candidates,
         source_discovery_next_focus_fallback_queue=source_discovery_next_focus_fallback_queue,
+        source_discovery_next_focus_exact_url_queue=source_discovery_next_focus_exact_url_queue,
+        source_discovery_next_focus_identity_backfill_queue=source_discovery_next_focus_identity_backfill_queue,
         generated_at=generated_at,
     )
     source_discovery_completion_roadmap = build_source_discovery_completion_roadmap_public(

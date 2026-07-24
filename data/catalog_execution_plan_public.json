@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T17:51:31Z",
+  "generated_at": "2026-07-24T17:58:32Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
     "blocked_action_count": 1,
     "manual_review_action_count": 22,
     "pending_import_action_count": 0,
-    "total_action_rows": 32804,
+    "total_action_rows": 32819,
     "open_review_queues": {
       "source_discovery_rows": 672,
       "image_missing_rows": 745,
@@ -296,11 +296,11 @@
     ],
     "source_next_focus_fallback_rows": 20,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
-    "source_next_focus_source_confirmation_ready_rows": 5,
-    "source_next_focus_exact_url_review_rows": 5,
+    "source_next_focus_source_confirmation_ready_rows": 20,
+    "source_next_focus_exact_url_review_rows": 20,
     "source_next_focus_exact_url_manual_confirmed_rows": 0,
-    "source_next_focus_identity_backfill_rows": 15,
-    "source_next_focus_identity_candidate_review_rows": 15,
+    "source_next_focus_identity_backfill_rows": 0,
+    "source_next_focus_identity_candidate_review_rows": 0,
     "source_next_focus_identity_candidate_review_candidate_rows": 0,
     "source_next_focus_fallback_import_dry_run_updated_rows": 0,
     "source_next_focus_fallback_import_dry_run_skipped_rows": 20,
@@ -1020,41 +1020,41 @@
       "workstream": "source_discovery_next_focus_exact_url_review_queue",
       "public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
       "status": "manual_review",
-      "rows": 5,
+      "rows": 20,
       "command": "Confirm exact product detail URLs from the fallback queue before image attachment.",
       "next_step": "copy_exact_confirmed_source_urls_into_focus_template",
       "blocker": "Exact source URL review is manual-only until product identity is confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
-        "queue_rows": 5,
+        "queue_rows": 20,
         "manual_confirmed_rows": 0,
-        "blocked_identity_rows": 15,
+        "blocked_identity_rows": 0,
         "by_source_store": [
           [
             "엔스카이",
-            5
+            20
           ]
         ],
         "by_category": [
           [
             "키링",
-            5
+            20
           ]
         ],
         "by_identity_review_status": [
           [
             "exact_page_match_review_ready",
-            5
+            20
           ]
         ],
-        "primary_review_url_rows": 5,
+        "primary_review_url_rows": 20,
         "primary_review_url_kind_counts": [
           [
             "domain_limited_web_search",
-            5
+            20
           ]
         ],
-        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
         "first_primary_review_url_kind": "domain_limited_web_search",
         "auto_apply_enabled": false
       }
@@ -1073,10 +1073,10 @@
         "focus_pack_id": "source-discovery-focus-001",
         "queue_rows": 20,
         "manual_confirmed_rows": 0,
-        "source_confirmation_ready_rows": 5,
-        "exact_url_review_queue_rows": 5,
-        "identity_backfill_queue_rows": 15,
-        "identity_candidate_review_queue_rows": 15,
+        "source_confirmation_ready_rows": 20,
+        "exact_url_review_queue_rows": 20,
+        "identity_backfill_queue_rows": 0,
+        "identity_candidate_review_queue_rows": 0,
         "identity_candidate_review_candidate_rows": 0,
         "fallback_import_dry_run_updated_rows": 0,
         "fallback_import_dry_run_skipped_rows": 20,
@@ -1088,15 +1088,11 @@
         ],
         "fallback_import_dry_run_write": false,
         "metadata_backfill_required_rows": 0,
-        "variant_disambiguation_required_rows": 15,
+        "variant_disambiguation_required_rows": 0,
         "by_identity_review_status": [
           [
-            "variant_disambiguation_required",
-            15
-          ],
-          [
             "exact_page_match_review_ready",
-            5
+            20
           ]
         ],
         "fallback_reason": "official_search_url_unavailable",

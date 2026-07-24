@@ -239,6 +239,40 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         )
         self.assertIn("Ensky products/list search pages", review_row["source_url_review_guidance"]["rejected_source_url_patterns"])
 
+    def test_character_title_without_parentheses_can_move_to_exact_review(self) -> None:
+        next_pack = {
+            "summary": {"focus_pack_id": "source-discovery-focus-001"},
+            "items": [
+                {
+                    "catalog_index": 30,
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": "Ensky",
+                    "category": "Keychain",
+                    "name_ko": "고죠 사토루 러버 스트랩",
+                    "name_ja": "五条悟 ラバーストラップ",
+                    "official_search_url": "https://www.enskyshop.com/products/list?name=gojo",
+                    "allowed_source_domains": ["www.enskyshop.com"],
+                }
+            ],
+        }
+        fetch_audit = {
+            "items": [
+                {
+                    "catalog_index": 30,
+                    "needs_fallback_web_search": True,
+                    "fetch_status": "ok_200_broad_result_set",
+                    "http_status": 200,
+                }
+            ]
+        }
+
+        report = target.build_report(next_pack, fetch_audit, generated_at="2026-01-01T00:00:00Z")
+
+        review_row = report["review_table"][0]
+        self.assertEqual(review_row["identity_review_status"], "exact_page_match_review_ready")
+        self.assertEqual(review_row["identity_blockers"], [])
+        self.assertTrue(review_row["can_confirm_source_url_after_page_match"])
+
 
 if __name__ == "__main__":
     unittest.main()

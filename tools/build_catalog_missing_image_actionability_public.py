@@ -22,6 +22,12 @@ DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES = (
 DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE = (
     DATA / "source_discovery_next_focus_fallback_queue_public.json"
 )
+DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE = (
+    DATA / "source_discovery_next_focus_exact_url_review_queue_public.json"
+)
+DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE = (
+    DATA / "source_discovery_next_focus_identity_backfill_queue_public.json"
+)
 DEFAULT_IMAGE_ATTACHMENT_TEMPLATE = DATA / "catalog_image_attachment_confirmed_template_public.json"
 DEFAULT_IMAGE_ATTACHMENT_TEMPLATE_DRY_RUN = DATA / "catalog_image_attachment_template_import_dry_run_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_missing_image_actionability_public.json"
@@ -1297,6 +1303,8 @@ def build_report(
     image_attachment_template_dry_run: dict[str, Any] | None = None,
     source_discovery_next_focus_detail_candidates: dict[str, Any] | None = None,
     source_discovery_next_focus_fallback_queue: dict[str, Any] | None = None,
+    source_discovery_next_focus_exact_url_queue: dict[str, Any] | None = None,
+    source_discovery_next_focus_identity_backfill_queue: dict[str, Any] | None = None,
     *,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -1328,6 +1336,18 @@ def build_report(
     image_attachment_template_dry_run_summary = (
         image_attachment_template_dry_run
         if isinstance(image_attachment_template_dry_run, dict)
+        else {}
+    )
+    next_focus_exact_url_summary = (
+        source_discovery_next_focus_exact_url_queue.get("summary")
+        if isinstance(source_discovery_next_focus_exact_url_queue, dict)
+        and isinstance(source_discovery_next_focus_exact_url_queue.get("summary"), dict)
+        else {}
+    )
+    next_focus_identity_backfill_summary = (
+        source_discovery_next_focus_identity_backfill_queue.get("summary")
+        if isinstance(source_discovery_next_focus_identity_backfill_queue, dict)
+        and isinstance(source_discovery_next_focus_identity_backfill_queue.get("summary"), dict)
         else {}
     )
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
@@ -1386,6 +1406,15 @@ def build_report(
         if workflow == "review_gotouchi_official_candidates"
     )
 
+    split_action_lanes = [
+        ["exact_source_url_review", int(next_focus_exact_url_summary.get("queue_rows") or 0)],
+        [
+            "catalog_variant_metadata_enrichment",
+            int(next_focus_identity_backfill_summary.get("queue_rows") or 0),
+        ],
+    ]
+    split_action_lanes = [lane for lane in split_action_lanes if lane[1] > 0]
+
     summary_out = {
         "missing_image_rows": missing_image_rows,
         "readiness_classified_rows": readiness_total,
@@ -1426,18 +1455,25 @@ def build_report(
             (next_source_discovery_focus_pack or {}).get("row_count") or 0
         ),
         "source_discovery_next_focus_action_lane_count": int(
-            (
-                (next_source_discovery_focus_pack or {})
-                .get("candidate_review_summary", {})
-                .get("next_action_lane_count")
+            len(split_action_lanes)
+            if split_action_lanes
+            else (
+                (
+                    (next_source_discovery_focus_pack or {})
+                    .get("candidate_review_summary", {})
+                    .get("next_action_lane_count")
+                )
+                or 0
             )
-            or 0
         ),
         "source_discovery_next_focus_action_lanes": (
-            (next_source_discovery_focus_pack or {})
-            .get("candidate_review_summary", {})
-            .get("next_action_lanes")
-            or []
+            split_action_lanes
+            or (
+                (next_source_discovery_focus_pack or {})
+                .get("candidate_review_summary", {})
+                .get("next_action_lanes")
+                or []
+            )
         ),
         "source_discovery_focus_template_dry_run_updated_rows": int(
             focus_template_dry_run_summary.get("updated_rows") or 0
@@ -1610,6 +1646,16 @@ def main() -> int:
         type=Path,
         default=DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE,
     )
+    parser.add_argument(
+        "--source-discovery-next-focus-exact-url-queue",
+        type=Path,
+        default=DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE,
+    )
+    parser.add_argument(
+        "--source-discovery-next-focus-identity-backfill-queue",
+        type=Path,
+        default=DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE,
+    )
     parser.add_argument("--image-attachment-template", type=Path, default=DEFAULT_IMAGE_ATTACHMENT_TEMPLATE)
     parser.add_argument(
         "--image-attachment-template-dry-run",
@@ -1651,6 +1697,16 @@ def main() -> int:
         if args.source_discovery_next_focus_fallback_queue.exists()
         else None
     )
+    next_focus_exact_url_queue = (
+        load_json(args.source_discovery_next_focus_exact_url_queue)
+        if args.source_discovery_next_focus_exact_url_queue.exists()
+        else None
+    )
+    next_focus_identity_backfill_queue = (
+        load_json(args.source_discovery_next_focus_identity_backfill_queue)
+        if args.source_discovery_next_focus_identity_backfill_queue.exists()
+        else None
+    )
     report = build_report(
         load_json(args.enrichment),
         load_json(args.action_queue),
@@ -1662,6 +1718,8 @@ def main() -> int:
         image_attachment_template_dry_run,
         source_discovery_next_focus_detail_candidates=next_focus_detail_candidates,
         source_discovery_next_focus_fallback_queue=next_focus_fallback_queue,
+        source_discovery_next_focus_exact_url_queue=next_focus_exact_url_queue,
+        source_discovery_next_focus_identity_backfill_queue=next_focus_identity_backfill_queue,
     )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

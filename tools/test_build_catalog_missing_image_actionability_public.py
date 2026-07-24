@@ -195,6 +195,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 }
             ],
         }
+        next_focus_exact_url_queue = {"summary": {"queue_rows": 1}}
+        next_focus_identity_backfill_queue = {"summary": {"queue_rows": 1}}
         source_detail_queue = {
             "batches": [
                 {
@@ -263,6 +265,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             image_attachment_template_dry_run,
             source_discovery_next_focus_detail_candidates=next_focus_detail_candidates,
             source_discovery_next_focus_fallback_queue=next_focus_fallback_queue,
+            source_discovery_next_focus_exact_url_queue=next_focus_exact_url_queue,
+            source_discovery_next_focus_identity_backfill_queue=next_focus_identity_backfill_queue,
             generated_at="2026-07-22T00:00:00Z",
         )
 
@@ -294,8 +298,8 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(
             report["summary"]["source_discovery_next_focus_action_lanes"],
             [
-                ["fallback_source_search", 1],
-                ["manual_candidate_identity_review", 1],
+                ["exact_source_url_review", 1],
+                ["catalog_variant_metadata_enrichment", 1],
             ],
         )
         self.assertEqual(report["summary"]["source_discovery_focus_template_dry_run_updated_rows"], 0)
