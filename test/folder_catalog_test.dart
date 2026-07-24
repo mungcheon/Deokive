@@ -39,4 +39,21 @@ void main() {
     expect(values.toSet().length, values.length);
     expect(AppPaletteCatalog.folderColors.length, greaterThanOrEqualTo(188));
   });
+
+  test('folder color families cover the palette in sorted picker order', () {
+    final families = AppPaletteCatalog.folderColorFamilies;
+    var expectedStart = 0;
+
+    expect(families.length, greaterThanOrEqualTo(8));
+    expect(families.first.label, contains('로즈'));
+    expect(families.last.label, contains('뉴트럴'));
+
+    for (final family in families) {
+      expect(family.start, expectedStart);
+      expect(family.count, greaterThan(0));
+      expectedStart += family.count;
+    }
+
+    expect(expectedStart, AppPaletteCatalog.folderColors.length);
+  });
 }

@@ -25,6 +25,8 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
 
   final List<AppIconOption> _iconOptions = AppIconCatalog.folderIcons;
   final List<Color> _colors = AppPaletteCatalog.folderColors;
+  final List<FolderColorFamily> _colorFamilies =
+      AppPaletteCatalog.folderColorFamilies;
 
   @override
   void initState() {
@@ -131,6 +133,7 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
           _FolderVisualPicker(
             groupedIcons: _groupedIcons,
             colors: _colors,
+            colorFamilies: _colorFamilies,
             selectedIcon: _selectedIcon,
             selectedColor: _selectedColor,
             onIconSelected: (icon) => setState(() => _selectedIcon = icon),
@@ -156,6 +159,7 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
 class _FolderVisualPicker extends StatelessWidget {
   final Map<String, List<AppIconOption>> groupedIcons;
   final List<Color> colors;
+  final List<FolderColorFamily> colorFamilies;
   final IconData selectedIcon;
   final Color selectedColor;
   final ValueChanged<IconData> onIconSelected;
@@ -164,6 +168,7 @@ class _FolderVisualPicker extends StatelessWidget {
   const _FolderVisualPicker({
     required this.groupedIcons,
     required this.colors,
+    required this.colorFamilies,
     required this.selectedIcon,
     required this.selectedColor,
     required this.onIconSelected,
@@ -216,8 +221,9 @@ class _FolderVisualPicker extends StatelessWidget {
                   ),
                   SingleChildScrollView(
                     padding: const EdgeInsets.all(14),
-                    child: _ColorGrid(
+                    child: _ColorFamilyList(
                       colors: colors,
+                      families: colorFamilies,
                       selectedColor: selectedColor,
                       onSelected: onColorSelected,
                     ),
@@ -394,6 +400,80 @@ class _IconChoice extends StatelessWidget {
           ),
           child: Icon(option.icon, color: foreground, size: 25),
         ),
+      ),
+    );
+  }
+}
+
+class _ColorFamilyList extends StatelessWidget {
+  final List<Color> colors;
+  final List<FolderColorFamily> families;
+  final Color selectedColor;
+  final ValueChanged<Color> onSelected;
+
+  const _ColorFamilyList({
+    required this.colors,
+    required this.families,
+    required this.selectedColor,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final sections = families.where((family) {
+      final end = family.start + family.count;
+      return family.start >= 0 && family.count > 0 && end <= colors.length;
+    });
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final family in sections)
+          _ColorSection(
+            title: family.label,
+            colors: colors.sublist(family.start, family.start + family.count),
+            selectedColor: selectedColor,
+            onSelected: onSelected,
+          ),
+      ],
+    );
+  }
+}
+
+class _ColorSection extends StatelessWidget {
+  final String title;
+  final List<Color> colors;
+  final Color selectedColor;
+  final ValueChanged<Color> onSelected;
+
+  const _ColorSection({
+    required this.title,
+    required this.colors,
+    required this.selectedColor,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.64),
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const SizedBox(height: 10),
+          _ColorGrid(
+            colors: colors,
+            selectedColor: selectedColor,
+            onSelected: onSelected,
+          ),
+        ],
       ),
     );
   }

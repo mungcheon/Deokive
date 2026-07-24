@@ -29,6 +29,18 @@ class AppPaletteSpec {
   });
 }
 
+class FolderColorFamily {
+  final String label;
+  final int start;
+  final int count;
+
+  const FolderColorFamily({
+    required this.label,
+    required this.start,
+    required this.count,
+  });
+}
+
 class AppPaletteCatalog {
   static const List<AppPaletteSpec> all = [
     AppPaletteSpec(
@@ -308,5 +320,16 @@ class AppPaletteCatalog {
     Color(0xFF4B5563),
     Color(0xFF374151),
     Color(0xFF1F2937),
+  ];
+
+  static const List<FolderColorFamily> folderColorFamilies = [
+    FolderColorFamily(label: '로즈 / 레드 / 핑크', start: 0, count: 37),
+    FolderColorFamily(label: '피치 / 오렌지 / 옐로우', start: 37, count: 25),
+    FolderColorFamily(label: '샌드 / 웜 뉴트럴', start: 62, count: 15),
+    FolderColorFamily(label: '올리브 / 그린', start: 77, count: 27),
+    FolderColorFamily(label: '민트 / 틸 / 시안', start: 104, count: 19),
+    FolderColorFamily(label: '스카이 / 블루', start: 123, count: 23),
+    FolderColorFamily(label: '인디고 / 바이올렛 / 퍼플', start: 146, count: 25),
+    FolderColorFamily(label: '뉴트럴', start: 171, count: 17),
   ];
 }
