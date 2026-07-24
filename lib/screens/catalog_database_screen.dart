@@ -676,29 +676,18 @@ class _CatalogAddButtonLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Text(
-        label,
-        style: TextStyle(
-          inherit: false,
-          color: color,
-          fontSize: 13,
-          fontWeight: FontWeight.w900,
-          height: 1,
-          shadows: const [
-            Shadow(
-              color: Color(0x33000000),
-              blurRadius: 2,
-              offset: Offset(0, 1),
-            ),
-          ],
-        ),
-        maxLines: 1,
-        softWrap: false,
-        overflow: TextOverflow.visible,
-        textAlign: TextAlign.center,
+    return Text(
+      label,
+      style: TextStyle(
+        color: color,
+        fontSize: 13,
+        fontWeight: FontWeight.w900,
+        height: 1,
       ),
+      maxLines: 1,
+      softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
     );
   }
 }
