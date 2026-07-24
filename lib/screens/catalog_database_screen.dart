@@ -588,11 +588,11 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 132,
+        minWidth: expanded ? 0 : 118,
         minHeight: 40,
         maxHeight: 40,
       ),
-      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 16),
+      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 12),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: background,
@@ -679,24 +679,34 @@ class _CatalogAddButtonLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: TextStyle(
-        inherit: false,
-        color: color,
-        fontSize: 13,
-        fontWeight: FontWeight.w900,
-        height: 1,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        label,
+        style: TextStyle(
+          inherit: false,
+          color: color,
+          fontSize: 13,
+          fontWeight: FontWeight.w900,
+          height: 1,
+          shadows: [
+            Shadow(
+              color: Colors.black.withValues(alpha: 0.32),
+              blurRadius: 2,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        strutStyle: const StrutStyle(
+          fontSize: 13,
+          height: 1.15,
+          forceStrutHeight: true,
+        ),
+        maxLines: 1,
+        softWrap: false,
+        overflow: TextOverflow.visible,
+        textAlign: TextAlign.center,
       ),
-      strutStyle: const StrutStyle(
-        fontSize: 13,
-        height: 1.15,
-        forceStrutHeight: true,
-      ),
-      maxLines: 1,
-      softWrap: false,
-      overflow: TextOverflow.ellipsis,
-      textAlign: TextAlign.center,
     );
   }
 }
