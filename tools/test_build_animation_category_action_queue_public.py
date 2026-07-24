@@ -138,11 +138,27 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["normalization_review_categories"], 1)
         self.assertEqual(report["summary"]["normalization_review_rows"], 8)
         self.assertEqual(report["summary"]["normalization_review_target_categories"], [("Stationery", 1)])
+        self.assertEqual(report["summary"]["target_visual_token_rows"], 2)
+        self.assertEqual(report["summary"]["target_visual_token_catalog_rows"], 105)
+        self.assertEqual(report["summary"]["target_visual_color_groups"], [("mint", 1), ("blue", 1)])
+        self.assertEqual(
+            report["summary"]["target_visual_primary_icon_keys"],
+            [("sticky_note_2", 1), ("view_carousel", 1)],
+        )
+        self.assertTrue(report["summary"]["target_visual_palette_ordered"])
         self.assertEqual(report["summary"]["app_folder_color_count"], 188)
         self.assertEqual(report["summary"]["app_folder_icon_option_count"], 211)
         self.assertTrue(report["summary"]["app_folder_palette_sorted_by_family"])
         self.assertTrue(report["summary"]["app_animation_visuals_covered"])
         self.assertEqual(report["app_folder_visual_catalog"]["icon_group_count"], 9)
+        self.assertEqual(report["target_visual_token_summary"]["visual_token_rows"], 2)
+        self.assertEqual(
+            [
+                token["color_sort_order"]
+                for token in report["target_visual_token_summary"]["tokens"]
+            ],
+            [130, 220],
+        )
         self.assertEqual(
             report["summary"]["by_mapping_mode"],
             [("name_level_split_review_required", 1), ("direct_category_mapping_review", 1)],
@@ -196,6 +212,10 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             "sticky_note_2",
         )
         self.assertEqual(
+            report["work_order"][1]["target_visual_token_summary"]["color_group_counts"],
+            [("mint", 1)],
+        )
+        self.assertEqual(
             report["work_order"][1]["blocked_reason"],
             "subtype_category_may_need_sub_series_preservation",
         )
@@ -217,6 +237,11 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         )
         batch = report["batches"][0]
         self.assertEqual(batch["review_state"], "manual_category_mapping_confirmation_required")
+        self.assertEqual(batch["target_visual_token_summary"]["color_group_counts"], [("blue", 1)])
+        self.assertEqual(
+            batch["target_visual_token_summary"]["tokens"][0]["primary_icon_key"],
+            "view_carousel",
+        )
         self.assertEqual(batch["next_machine_step"], "fill_confirmed_animation_category_mapping_templates")
         self.assertEqual(batch["manual_confirmation_template"], "server/animation_category_confirmed_rows.template.json")
         self.assertEqual(batch["import_tool"], "tools/import_confirmed_animation_category_rows.py")
@@ -266,6 +291,10 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             normalization_row["category_mapping_template"]["folder_icon_options"],
             ["sticky_note_2", "edit_note"],
+        )
+        self.assertEqual(
+            normalization_batch["target_visual_token_summary"]["tokens"][0]["color_sort_order"],
+            130,
         )
 
 

@@ -216,7 +216,10 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
         "suggested_category": row.get("suggested_category"),
         "suggested_color_group": row.get("suggested_color_group"),
         "suggested_color_hint": row.get("suggested_color_hint"),
+        "suggested_color_hex": row.get("suggested_color_hex"),
+        "suggested_color_sort_order": row.get("suggested_color_sort_order"),
         "suggested_primary_icon_key": row.get("suggested_primary_icon_key"),
+        "suggested_icon_options": row.get("suggested_icon_options") or [],
         "review_reason": row.get("review_reason"),
         "review_summary": review_summary,
         "name_split_hints": review_summary["name_split_hints"],
@@ -242,6 +245,79 @@ def _visual_tokens_by_category(payload: dict[str, Any] | None) -> dict[str, dict
         if category:
             tokens[category] = row
     return tokens
+
+
+def _row_visual_token(row: dict[str, Any]) -> dict[str, Any]:
+    target_visual = (
+        row.get("target_category_visual_token")
+        if isinstance(row.get("target_category_visual_token"), dict)
+        else {}
+    )
+    target_category = str(
+        row.get("suggested_category")
+        or row.get("category")
+        or target_visual.get("category")
+        or ""
+    ).strip()
+    color_group = str(
+        row.get("suggested_color_group")
+        or target_visual.get("color_group")
+        or "neutral"
+    ).strip()
+    color_hint = str(
+        row.get("suggested_color_hint")
+        or target_visual.get("color_hint")
+        or ""
+    ).strip()
+    primary_icon_key = str(
+        row.get("suggested_primary_icon_key")
+        or target_visual.get("primary_icon_key")
+        or ""
+    ).strip()
+    icon_options = row.get("suggested_icon_options") or target_visual.get("icon_options") or []
+    if not isinstance(icon_options, list):
+        icon_options = []
+    return {
+        "source_category": row.get("category"),
+        "target_category": target_category,
+        "family": row.get("suggested_family") or target_visual.get("family"),
+        "affected_catalog_rows": int(row.get("rows") or 0),
+        "color_group": color_group,
+        "color_hint": color_hint,
+        "color_hex": row.get("suggested_color_hex") or target_visual.get("color_hex"),
+        "color_sort_order": int(row.get("suggested_color_sort_order") or target_visual.get("color_sort_order") or 999),
+        "primary_icon_key": primary_icon_key,
+        "icon_options": [str(value) for value in icon_options if str(value)],
+    }
+
+
+def _visual_review_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    tokens = [_row_visual_token(row) for row in rows]
+    tokens = [
+        token
+        for token in tokens
+        if token.get("target_category") or token.get("color_hint") or token.get("primary_icon_key")
+    ]
+    tokens.sort(
+        key=lambda token: (
+            int(token.get("color_sort_order") or 999),
+            str(token.get("color_group") or ""),
+            str(token.get("target_category") or ""),
+            str(token.get("source_category") or ""),
+        )
+    )
+    return {
+        "visual_token_rows": len(tokens),
+        "affected_catalog_rows": sum(int(token.get("affected_catalog_rows") or 0) for token in tokens),
+        "color_group_counts": Counter(str(token.get("color_group") or "neutral") for token in tokens).most_common(),
+        "primary_icon_key_counts": Counter(str(token.get("primary_icon_key") or "") for token in tokens).most_common(),
+        "palette_ordered": all(
+            int(tokens[index].get("color_sort_order") or 999)
+            <= int(tokens[index + 1].get("color_sort_order") or 999)
+            for index in range(len(tokens) - 1)
+        ),
+        "tokens": tokens,
+    }
 
 
 def _compact_normalization(
@@ -383,6 +459,7 @@ def _work_order(
                 "next_step": "fill_confirmed_animation_category_mapping_templates",
                 "template": CONFIRMED_TEMPLATE,
                 "categories": [row.get("category") for row in direct_rows],
+                "target_visual_token_summary": _visual_review_summary(direct_rows),
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
                 **_mode_blocker("direct_category_mapping_review"),
@@ -418,6 +495,7 @@ def _work_order(
                     }
                 ),
                 "target_category_visual_tokens": target_visual_tokens,
+                "target_visual_token_summary": _visual_review_summary(normalization_rows),
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
                 **_mode_blocker("canonical_category_normalization_review"),
@@ -496,6 +574,7 @@ def build_queue(
                 "affected_catalog_rows": sum(int(row.get("rows") or 0) for row in chunk),
                 "family_counts": family_counts.most_common(),
                 "color_group_counts": color_counts.most_common(),
+                "target_visual_token_summary": _visual_review_summary(chunk),
                 "review_state": "manual_category_mapping_confirmation_required",
                 "next_machine_step": "fill_confirmed_animation_category_mapping_templates",
                 "manual_confirmation_template": CONFIRMED_TEMPLATE,
@@ -515,6 +594,7 @@ def build_queue(
                 "category_count": len(chunk),
                 "affected_catalog_rows": sum(int(row.get("rows") or 0) for row in chunk),
                 "target_category_counts": target_counts.most_common(),
+                "target_visual_token_summary": _visual_review_summary(chunk),
                 "review_state": "manual_canonical_category_normalization_required",
                 "next_machine_step": "confirm_canonical_animation_category_normalization",
                 "manual_confirmation_template": CONFIRMED_TEMPLATE,
@@ -539,6 +619,7 @@ def build_queue(
         else {}
     )
     work_order = _work_order(queued, unmatched_keyword_review, normalization_rows)
+    target_visual_summary = _visual_review_summary(queued + normalization_rows)
     summary = {
         "actionable_categories": len(rows),
         "queued_categories": len(queued),
@@ -559,6 +640,11 @@ def build_queue(
         "normalization_review_target_categories": Counter(
             str(row.get("suggested_category") or "") for row in normalization_rows
         ).most_common(),
+        "target_visual_token_rows": target_visual_summary["visual_token_rows"],
+        "target_visual_token_catalog_rows": target_visual_summary["affected_catalog_rows"],
+        "target_visual_color_groups": target_visual_summary["color_group_counts"],
+        "target_visual_primary_icon_keys": target_visual_summary["primary_icon_key_counts"],
+        "target_visual_palette_ordered": target_visual_summary["palette_ordered"],
         "app_folder_color_count": int(app_visual_catalog.get("color_count") or 0),
         "app_folder_icon_option_count": int(app_visual_catalog.get("icon_count") or 0),
         "app_folder_icon_group_count": int(app_visual_catalog.get("icon_group_count") or 0),
@@ -588,6 +674,7 @@ def build_queue(
         "scope": "animation_category_action_queue",
         "summary": summary,
         "app_folder_visual_catalog": app_visual_catalog,
+        "target_visual_token_summary": target_visual_summary,
         "work_order": work_order,
         "batches": batches,
         "automation_policy": {
