@@ -320,6 +320,46 @@ def _visual_review_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _normalization_decision_guidance(row: dict[str, Any]) -> dict[str, Any]:
+    template = (
+        row.get("category_mapping_template")
+        if isinstance(row.get("category_mapping_template"), dict)
+        else {}
+    )
+    source_category = str(
+        template.get("source_category") or row.get("category") or ""
+    ).strip()
+    target_category = str(
+        template.get("target_category") or row.get("suggested_category") or ""
+    ).strip()
+    preserve_source = bool(template.get("preserve_source_category_as_sub_series"))
+    sample_names = row.get("sample_names") or []
+    return {
+        "status": "canonical_category_normalization_confirmation_required",
+        "recommended_decision": "normalize_to_target_category_preserve_source_sub_series"
+        if preserve_source
+        else "normalize_to_target_category",
+        "source_category": source_category,
+        "target_category": target_category,
+        "preserve_source_category_as_sub_series": preserve_source,
+        "suggested_sub_series_value": source_category if preserve_source else "",
+        "manual_note_suggestion": (
+            f"Normalize {source_category} under {target_category}; keep {source_category} as sub_series for search."
+            if preserve_source and source_category and target_category
+            else ""
+        ),
+        "sample_name_count": len(sample_names),
+        "required_evidence": [
+            "sample names fit the target canonical category",
+            "source category remains useful as a subtype/search label",
+            "target folder color and icon are available in the app catalog",
+            "manual note explains why this is a category normalization, not a deletion",
+        ],
+        "manual_confirmed_allowed": False,
+        "auto_apply_enabled": False,
+    }
+
+
 def _next_normalization_review_batch(
     rows: list[dict[str, Any]],
     *,
@@ -351,6 +391,7 @@ def _next_normalization_review_batch(
                 "folder_color_group": template.get("folder_color_group") or row.get("suggested_color_group"),
                 "folder_color_hex": template.get("folder_color_hex") or row.get("suggested_color_hex"),
                 "folder_icon_key": template.get("folder_icon_key") or row.get("suggested_primary_icon_key"),
+                "normalization_decision_guidance": _normalization_decision_guidance(row),
                 "category_mapping_template": template,
                 "blocked_until": row.get("blocked_until"),
                 "operator_checklist": [
@@ -412,6 +453,7 @@ def _compact_normalization(
                 template.get("preserve_source_category_as_sub_series")
             ),
         },
+        "normalization_decision_guidance": _normalization_decision_guidance(row),
         "name_split_hints": [],
         "sample_names": sample_names,
         "category_mapping_template": {

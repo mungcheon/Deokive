@@ -300,6 +300,18 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             ["sticky_note_2", "edit_note"],
         )
         self.assertEqual(
+            normalization_row["normalization_decision_guidance"]["recommended_decision"],
+            "normalize_to_target_category_preserve_source_sub_series",
+        )
+        self.assertEqual(
+            normalization_row["normalization_decision_guidance"]["suggested_sub_series_value"],
+            "Clear File",
+        )
+        self.assertIn(
+            "source category remains useful as a subtype/search label",
+            normalization_row["normalization_decision_guidance"]["required_evidence"],
+        )
+        self.assertEqual(
             normalization_batch["target_visual_token_summary"]["tokens"][0]["color_sort_order"],
             130,
         )
@@ -311,6 +323,14 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertTrue(next_normalization["preserve_source_category_as_sub_series"])
         self.assertEqual(next_normalization["folder_color_group"], "mint")
         self.assertEqual(next_normalization["folder_icon_key"], "sticky_note_2")
+        self.assertEqual(
+            next_normalization["normalization_decision_guidance"]["target_category"],
+            "Stationery",
+        )
+        self.assertEqual(
+            next_normalization["normalization_decision_guidance"]["suggested_sub_series_value"],
+            "Clear File",
+        )
         self.assertEqual(
             next_normalization["category_mapping_template"]["target_category"],
             "Stationery",
