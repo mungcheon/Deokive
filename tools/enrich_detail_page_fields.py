@@ -94,9 +94,47 @@ def _ascii_tokens(value: Any) -> set[str]:
     return {token for token in re.split(r"[^0-9a-z]+", text) if len(token) >= 2}
 
 
+def _has_japanese(value: str) -> bool:
+    return bool(re.search(r"[\u3040-\u30ff\u3400-\u9fff]", value))
+
+
+def _generic_character_name(value: Any) -> bool:
+    text = unicodedata.normalize("NFKC", str(value or "")).strip().lower()
+    return text in {"", "\uae30\ud0c0", "\ud63c\ud569", "various", "unknown", "etc"}
+
+
+def _looks_like_detail_character_token(token: str, row_tokens: set[str], series_tokens: set[str]) -> bool:
+    if token in row_tokens or token in series_tokens:
+        return False
+    if token in {"ver", "vol", "box", "set", "tv", "\u518d\u8ca9", "\u518d\u8ca9\u7248"}:
+        return False
+    if re.fullmatch(r"[a-z0-9]+", token):
+        return False
+    if not re.fullmatch(r"[\u3040-\u30ff\u3400-\u9fff]{2,10}", token):
+        return False
+    return True
+
+
+def _has_unmatched_detail_character(row: dict[str, Any], detail_title: str, detail_tokens: set[str]) -> bool:
+    if "character_name" not in row:
+        return False
+    if not _generic_character_name(row.get("character_name")):
+        return False
+    name_ja = str(row.get("name_ja") or "")
+    if not name_ja or not _has_japanese(name_ja):
+        return False
+
+    row_tokens = _distinctive_tokens(name_ja)
+    series_tokens = _distinctive_tokens(row.get("series_name") or row.get("affiliation") or "")
+    detail_only = detail_tokens - row_tokens - series_tokens
+    return any(_looks_like_detail_character_token(token, row_tokens, series_tokens) for token in detail_only)
+
+
 def _safe_title_match(row: dict[str, Any], detail_title: str) -> bool:
     detail_tokens = _distinctive_tokens(detail_title)
     if not detail_tokens:
+        return False
+    if _has_unmatched_detail_character(row, detail_title, detail_tokens):
         return False
     name_ja = str(row.get("name_ja") or "").strip()
     if name_ja:

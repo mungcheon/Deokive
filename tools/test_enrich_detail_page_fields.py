@@ -62,6 +62,29 @@ class DetailPageFieldEnrichmentSafetyTest(unittest.TestCase):
 
         self.assertTrue(_safe_title_match(row, title))
 
+    def test_rejects_generic_series_row_for_specific_character_detail(self) -> None:
+        row = {
+            "name_ko": "\uc720\ub77c\uc720\ub77c \ud5e4\ub4dc \ud5cc\ud130\ud5cc\ud130 \ud53c\uaddc\uc5b4",
+            "name_ja": "\u3086\u3089\u3086\u3089\u30d8\u30c3\u30c9 HUNTER\u00d7HUNTER \u30d5\u30a3\u30ae\u30e5\u30a2",
+            "character_name": "\uae30\ud0c0",
+            "affiliation": "\ud5cc\ud130X\ud5cc\ud130",
+            "series_name": "\uc720\ub77c\uc720\ub77c \ud53c\uaddc\uc5b4 \ud5cc\ud130\ud5cc\ud130",
+        }
+        title = "\u3086\u3089\u3086\u3089\u30d8\u30c3\u30c9 HUNTER\u00d7HUNTER \u30b4\u30f3\u3010\u518d\u8ca9\u3011 | \u30a2\u30cb\u30e1\u30a4\u30c8"
+
+        self.assertFalse(_safe_title_match(row, title))
+
+    def test_accepts_specific_character_row_for_specific_character_detail(self) -> None:
+        row = {
+            "name_ko": "\ud5cc\ud130X\ud5cc\ud130 \uc544\ud06c\ub9b4 \uc2a4\ud0e0\ub4dc (\uace4 \ud504\ub9ad\uc2a4)",
+            "name_ja": "HUNTER\u00d7HUNTER \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 (\u30b4\u30f3=\u30d5\u30ea\u30fc\u30af\u30b9)",
+            "character_name": "\uace4 \ud504\ub9ad\uc2a4",
+            "affiliation": "\ud5cc\ud130X\ud5cc\ud130",
+        }
+        title = "\u3010\u30b0\u30c3\u30ba-\u30b9\u30bf\u30f3\u30c9\u30dd\u30c3\u30d7\u3011HUNTER\u00d7HUNTER \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 \u30b4\u30f3=\u30d5\u30ea\u30fc\u30af\u30b9 | \u30a2\u30cb\u30e1\u30a4\u30c8"
+
+        self.assertTrue(_safe_title_match(row, title))
+
     def test_extracts_kotobukiya_detail_fields(self) -> None:
         source = """
         <html><body>

@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T15:50:28Z",
+  "generated_at": "2026-07-24T16:07:12Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
       "source_url": 0.9687,
       "image_url": 0.9651,
-      "release_date": 0.9336
+      "release_date": 0.9337
     },
     "missing": {
       "source_url": 637,
       "image_url": 710,
-      "release_date": 1352,
+      "release_date": 1348,
       "official_price_jpy": 567,
-      "barcode": 10084,
+      "barcode": 10082,
       "name_ja": 526
     },
     "open_review_queues": {
@@ -84,10 +84,10 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2445,
+      "metadata_action_missing_cells": 2441,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2445,
+      "metadata_actionable_missing_cells": 2441,
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 130,
       "animation_category_review_rows": 0,
@@ -136,7 +136,7 @@
     {
       "key": "release_date_coverage",
       "status": "pass",
-      "value": 0.9336,
+      "value": 0.9337,
       "target": 0.9
     },
     {
@@ -1458,7 +1458,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 13876,
+      "open_rows": 13870,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -1466,7 +1466,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 13876,
+      "open_rows": 13870,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -1474,10 +1474,10 @@
     {
       "workstream": "metadata_action_queue",
       "status": "manual_review",
-      "open_rows": 2445,
+      "open_rows": 2441,
       "actionable_group_count": 166,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2445,
+      "actionable_missing_cells": 2441,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -1499,7 +1499,7 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1352
+          1348
         ],
         [
           "official_price_jpy",
@@ -1548,12 +1548,12 @@
           62
         ],
         [
-          "코토부키야",
+          "MINISO",
           50
         ],
         [
-          "MINISO",
-          50
+          "코토부키야",
+          46
         ],
         [
           "ご当地ちいかわ 공식(API)",
@@ -1786,10 +1786,10 @@
         {
           "field": "release_date",
           "source_store": "코토부키야",
-          "missing_rows": 50,
+          "missing_rows": 46,
           "priority": 10,
           "workflow": "official_metadata_review",
-          "primary_review_url": "https://www.kotobukiya.co.jp/product/detail/p4934054089062/",
+          "primary_review_url": "https://www.kotobukiya.co.jp/product/detail/p4934054077151/",
           "primary_review_url_kind": "sample_source_url",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
         },
@@ -2119,17 +2119,6 @@
       "recommended_first_action": "source_and_image_enrichment"
     },
     {
-      "source_store": "코토부키야",
-      "priority_score": 520.0,
-      "rows": 67,
-      "missing_source_url": 44,
-      "missing_image_url": 44,
-      "missing_release_date": 50,
-      "missing_price_jpy": 0,
-      "missing_barcode": 48,
-      "recommended_first_action": "source_and_image_enrichment"
-    },
-    {
       "source_store": "Stellive Store",
       "priority_score": 513.0,
       "rows": 98,
@@ -2138,6 +2127,17 @@
       "missing_release_date": 93,
       "missing_price_jpy": 98,
       "missing_barcode": 98,
+      "recommended_first_action": "source_and_image_enrichment"
+    },
+    {
+      "source_store": "코토부키야",
+      "priority_score": 511.0,
+      "rows": 67,
+      "missing_source_url": 44,
+      "missing_image_url": 44,
+      "missing_release_date": 46,
+      "missing_price_jpy": 0,
+      "missing_barcode": 46,
       "recommended_first_action": "source_and_image_enrichment"
     },
     {
@@ -7572,7 +7572,7 @@
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
       "field_store_group_count": 351,
-      "missing_cell_count": 13876,
+      "missing_cell_count": 13870,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
@@ -7582,8 +7582,8 @@
       "actionable_group_count": 166,
       "queued_group_count": 166,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2445,
-      "queued_missing_cells": 2445,
+      "actionable_missing_cells": 2441,
+      "queued_missing_cells": 2441,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -7604,7 +7604,7 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1352
+          1348
         ],
         [
           "official_price_jpy",
@@ -7653,12 +7653,12 @@
           62
         ],
         [
-          "코토부키야",
+          "MINISO",
           50
         ],
         [
-          "MINISO",
-          50
+          "코토부키야",
+          46
         ],
         [
           "ご当地ちいかわ 공식(API)",
@@ -7891,10 +7891,10 @@
         {
           "field": "release_date",
           "source_store": "코토부키야",
-          "missing_rows": 50,
+          "missing_rows": 46,
           "priority": 10,
           "workflow": "official_metadata_review",
-          "primary_review_url": "https://www.kotobukiya.co.jp/product/detail/p4934054089062/",
+          "primary_review_url": "https://www.kotobukiya.co.jp/product/detail/p4934054077151/",
           "primary_review_url_kind": "sample_source_url",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
         },

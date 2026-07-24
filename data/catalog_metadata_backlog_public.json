@@ -11,8 +11,8 @@
     ],
     "field_missing_totals": {
       "name_ja": 526,
-      "release_date": 1352,
-      "barcode": 10084,
+      "release_date": 1348,
+      "barcode": 10082,
       "official_price_jpy": 567,
       "source_url": 637,
       "image_url": 710
@@ -56,7 +56,7 @@
       ],
       [
         "코토부키야",
-        52
+        48
       ],
       [
         "ご当地ちいかわ 공식(API)",
@@ -185,8 +185,8 @@
   "field_review_queue": [
     {
       "field": "barcode",
-      "missing_rows": 10084,
-      "priority_score": 10084,
+      "missing_rows": 10082,
+      "priority_score": 10082,
       "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
       "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
       "auto_apply_enabled": false,
@@ -223,7 +223,7 @@
         },
         {
           "source_store": "코토부키야",
-          "missing_rows": 48
+          "missing_rows": 46
         },
         {
           "source_store": "Movic",
@@ -245,8 +245,8 @@
     },
     {
       "field": "release_date",
-      "missing_rows": 1352,
-      "priority_score": 1352,
+      "missing_rows": 1348,
+      "priority_score": 1348,
       "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
       "evidence_required": "official product or campaign page showing release/sale date",
       "auto_apply_enabled": false,
@@ -275,7 +275,7 @@
         },
         {
           "source_store": "코토부키야",
-          "missing_rows": 50
+          "missing_rows": 46
         },
         {
           "source_store": "ご当地ちいかわ 공식(API)",
@@ -2831,71 +2831,26 @@
       ]
     },
     {
-      "field": "release_date",
+      "field": "barcode",
       "source_store": "코토부키야",
-      "missing_rows": 50,
-      "priority_score": 50,
-      "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-      "evidence_required": "official product or campaign page showing release/sale date",
+      "missing_rows": 46,
+      "priority_score": 46,
+      "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
       "auto_apply_enabled": false,
-      "next_step": "official_metadata_extraction",
-      "risk": "campaign_or_reissue_date_confusion",
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
       "sample_catalog_indexes": [
-        1158,
-        1159,
-        1229,
-        1230,
-        1231,
         1302,
         1303,
-        1304
+        1304,
+        1305,
+        1306,
+        1307,
+        1360,
+        1413
       ],
       "sample_items": [
-        {
-          "catalog_index": 1158,
-          "name_ko": "BISHOUJO ReMIX 하츠네 미쿠",
-          "name_ja": "BISHOUJO ReMIX 初音ミク",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://www.kotobukiya.co.jp/product/detail/p4934054089062/",
-          "image_url": "https://www.kotobukiya.co.jp/files/uploads/2020/03/1eaace3e4329a4251459494bd99927e4aced7609.jpg"
-        },
-        {
-          "catalog_index": 1159,
-          "name_ko": "심해탐사 로봇 덴시타코 3호 하츠네 미쿠 컬러 Ver.",
-          "name_ja": "海洋探査ロボット デンシタコ3号 初音ミクカラーVer.",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://www.kotobukiya.co.jp/product/detail/p4934054046263/",
-          "image_url": "https://www.kotobukiya.co.jp/files/uploads/2022/06/6dcdef5bb3fc69556f36e011d9c8aa6399361d04.jpg"
-        },
-        {
-          "catalog_index": 1229,
-          "name_ko": "ARTFX J 토도로키 쇼토 콜드플레임의 창백한 칼날 Ver.",
-          "name_ja": "ARTFX J 轟焦凍 コールドフレイムの蒼刃Ver.",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://www.kotobukiya.co.jp/product/detail/p4934054077151/",
-          "image_url": "https://www.kotobukiya.co.jp/sm_files/co/product/2026/202604/PV375_ShotoTodoroki/PV375_ShotoTodoroki_eye.jpg"
-        },
-        {
-          "catalog_index": 1230,
-          "name_ko": "ARTFX J 마운트 레이디",
-          "name_ja": "ARTFX J マウントレディ",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://www.kotobukiya.co.jp/product/detail/p4934054056705/",
-          "image_url": "https://www.kotobukiya.co.jp/files/product/2024/202401/PV163_ARTFXJ_MtLADY/PV163_ARTFXJ_MtLADY_MAIN.jpg"
-        },
-        {
-          "catalog_index": 1231,
-          "name_ko": "ARTFX J 하츠메 메이",
-          "name_ja": "ARTFX J 発目明",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://www.kotobukiya.co.jp/product/detail/p4934054057023/",
-          "image_url": "https://www.kotobukiya.co.jp/files/product/2023/202312/PV164_ARTFXJ_MeiHatsume/PV164_ARTFXJ_MeiHatsume_MAIN.jpg"
-        },
         {
           "catalog_index": 1302,
           "name_ko": "ARTFX J 곤 프릭스",
@@ -2922,47 +2877,83 @@
           "category": "피규어",
           "source_url": null,
           "image_url": null
+        },
+        {
+          "catalog_index": 1305,
+          "name_ko": "ARTFX J 히소카",
+          "name_ja": "ARTFX J ヒソカ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1306,
+          "name_ko": "ARTFX J 일루미 조르딕",
+          "name_ja": "ARTFX J イルミ＝ゾルディック",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1307,
+          "name_ko": "ARTFX J 레오리오",
+          "name_ja": "ARTFX J レオリオ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1360,
+          "name_ko": "ARTFX J 료멘 스쿠나",
+          "name_ja": "ARTFX J 両面宿儺",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1413,
+          "name_ko": "ARTFX J 리코 & 레그",
+          "name_ja": "ARTFX J リコ & レグ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
         }
       ]
     },
     {
-      "field": "barcode",
+      "field": "release_date",
       "source_store": "코토부키야",
-      "missing_rows": 48,
-      "priority_score": 48,
-      "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
-      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "missing_rows": 46,
+      "priority_score": 46,
+      "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+      "evidence_required": "official product or campaign page showing release/sale date",
       "auto_apply_enabled": false,
-      "next_step": "barcode_evidence_review",
-      "risk": "shared_variant_or_box_barcode",
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
       "sample_catalog_indexes": [
-        1158,
-        1159,
+        1229,
         1302,
         1303,
         1304,
         1305,
         1306,
-        1307
+        1307,
+        1360
       ],
       "sample_items": [
         {
-          "catalog_index": 1158,
-          "name_ko": "BISHOUJO ReMIX 하츠네 미쿠",
-          "name_ja": "BISHOUJO ReMIX 初音ミク",
+          "catalog_index": 1229,
+          "name_ko": "ARTFX J 토도로키 쇼토 콜드플레임의 창백한 칼날 Ver.",
+          "name_ja": "ARTFX J 轟焦凍 コールドフレイムの蒼刃Ver.",
           "series_name": null,
           "category": "피규어",
-          "source_url": "https://www.kotobukiya.co.jp/product/detail/p4934054089062/",
-          "image_url": "https://www.kotobukiya.co.jp/files/uploads/2020/03/1eaace3e4329a4251459494bd99927e4aced7609.jpg"
-        },
-        {
-          "catalog_index": 1159,
-          "name_ko": "심해탐사 로봇 덴시타코 3호 하츠네 미쿠 컬러 Ver.",
-          "name_ja": "海洋探査ロボット デンシタコ3号 初音ミクカラーVer.",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://www.kotobukiya.co.jp/product/detail/p4934054046263/",
-          "image_url": "https://www.kotobukiya.co.jp/files/uploads/2022/06/6dcdef5bb3fc69556f36e011d9c8aa6399361d04.jpg"
+          "source_url": "https://www.kotobukiya.co.jp/product/detail/p4934054077151/",
+          "image_url": "https://www.kotobukiya.co.jp/sm_files/co/product/2026/202604/PV375_ShotoTodoroki/PV375_ShotoTodoroki_eye.jpg"
         },
         {
           "catalog_index": 1302,
@@ -3013,6 +3004,15 @@
           "catalog_index": 1307,
           "name_ko": "ARTFX J 레오리오",
           "name_ja": "ARTFX J レオリオ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1360,
+          "name_ko": "ARTFX J 료멘 스쿠나",
+          "name_ja": "ARTFX J 両面宿儺",
           "series_name": null,
           "category": "피규어",
           "source_url": null,
