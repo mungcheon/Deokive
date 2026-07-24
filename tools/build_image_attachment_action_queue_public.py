@@ -386,6 +386,49 @@ def _build_source_url_update_template_batches(
     return batches
 
 
+def _build_next_source_url_review_batch(
+    templates: list[dict[str, Any]],
+    *,
+    limit: int = 10,
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for row in templates[:limit]:
+        rows.append(
+            {
+                "manual_confirmed": False,
+                "row_index": row.get("row_index"),
+                "source_store": row.get("source_store"),
+                "name_ko": row.get("name_ko"),
+                "name_ja": row.get("name_ja"),
+                "series_name": row.get("series_name"),
+                "category": row.get("category"),
+                "current_source_url": row.get("current_source_url"),
+                "primary_review_url": row.get("primary_review_url"),
+                "primary_review_url_kind": row.get("primary_review_url_kind"),
+                "source_search_url": row.get("source_search_url"),
+                "first_fallback_web_search_url": row.get(
+                    "first_fallback_web_search_url"
+                ),
+                "fallback_web_search_urls": row.get("fallback_web_search_urls")
+                or [],
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "blocked_until": row.get("blocked_until")
+                or "exact_product_source_url_confirmed",
+                "operator_checklist": [
+                    "Open primary_review_url first.",
+                    "Confirm the exact product detail page, not a storefront/search page.",
+                    "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+                    "Leave manual_confirmed=false until the source URL proves the exact item identity.",
+                ],
+                "unblocks": "image_url_extraction_and_attachment_review",
+                "auto_apply_enabled": False,
+            }
+        )
+    return rows
+
+
 def _first_workstream_batch_id(workstreams: list[dict[str, Any]], field: str) -> Any:
     return next(
         (
@@ -1008,6 +1051,9 @@ def build_report(
     source_url_update_template_batches = _build_source_url_update_template_batches(
         source_url_update_template
     )
+    next_source_url_review_batch = _build_next_source_url_review_batch(
+        source_url_update_template
+    )
     execution_readiness = _build_execution_readiness(
         source_url_update_required_rows=source_url_update_required_rows,
         representative_image_review_required_rows=representative_image_review_required_rows,
@@ -1089,6 +1135,21 @@ def build_report(
             ),
             "source_url_update_work_order_count": len(source_url_update_work_order),
             "source_url_update_template_batch_count": len(source_url_update_template_batches),
+            "next_source_url_review_batch_rows": len(next_source_url_review_batch),
+            "next_source_url_review_batch_store_count": len(
+                {
+                    row.get("source_store")
+                    for row in next_source_url_review_batch
+                    if row.get("source_store")
+                }
+            ),
+            "next_source_url_review_batch_primary_review_url_rows": sum(
+                1 for row in next_source_url_review_batch if row.get("primary_review_url")
+            ),
+            "next_source_url_review_batch_primary_review_url_kind_counts": _counter_pairs(
+                next_source_url_review_batch,
+                "primary_review_url_kind",
+            ),
             "representative_image_review_workstream_count": sum(
                 1 for row in workstreams if row.get("representative_image_review_rows")
             ),
@@ -1108,6 +1169,7 @@ def build_report(
         "source_url_update_work_order": source_url_update_work_order,
         "source_url_update_template": source_url_update_template,
         "source_url_update_template_batches": source_url_update_template_batches,
+        "next_source_url_review_batch": next_source_url_review_batch,
         "next_operator_actions": next_operator_actions,
         "next_actions": [
             {

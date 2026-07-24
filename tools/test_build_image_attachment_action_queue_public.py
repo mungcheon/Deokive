@@ -88,6 +88,13 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_workstream_count"], 1)
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 1)
         self.assertEqual(report["summary"]["source_url_update_template_batch_count"], 1)
+        self.assertEqual(report["summary"]["next_source_url_review_batch_rows"], 2)
+        self.assertEqual(report["summary"]["next_source_url_review_batch_store_count"], 1)
+        self.assertEqual(report["summary"]["next_source_url_review_batch_primary_review_url_rows"], 2)
+        self.assertEqual(
+            dict(report["summary"]["next_source_url_review_batch_primary_review_url_kind_counts"]),
+            {"source_search_url": 1, "fallback_web_search": 1},
+        )
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(
@@ -326,6 +333,20 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(template_batch["official_search_url_rows"], 1)
         self.assertEqual(template_batch["fallback_web_search_url_rows"], 1)
         self.assertEqual([row["row_index"] for row in template_batch["rows"]], [2, 1])
+        self.assertEqual([row["row_index"] for row in report["next_source_url_review_batch"]], [2, 1])
+        self.assertFalse(report["next_source_url_review_batch"][0]["manual_confirmed"])
+        self.assertEqual(
+            report["next_source_url_review_batch"][0]["primary_review_url"],
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
+        )
+        self.assertIn(
+            "exact product detail page",
+            report["next_source_url_review_batch"][0]["operator_checklist"][1],
+        )
+        self.assertEqual(
+            report["next_source_url_review_batch"][0]["unblocks"],
+            "image_url_extraction_and_attachment_review",
+        )
         self.assertEqual(
             report["workstreams"][0]["review_summary"]["first_primary_review_url"],
             report["batches"][0]["first_primary_review_url"],
@@ -361,6 +382,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 0)
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 0)
         self.assertEqual(report["summary"]["source_url_update_template_batch_count"], 0)
+        self.assertEqual(report["summary"]["next_source_url_review_batch_rows"], 0)
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 1)
