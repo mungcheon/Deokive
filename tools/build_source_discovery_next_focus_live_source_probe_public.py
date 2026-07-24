@@ -33,6 +33,23 @@ PRODUCT_LINK_RE = re.compile(
     re.I | re.S,
 )
 
+VARIANT_RISK_PATTERNS = {
+    "resale_or_rerelease": re.compile(r"(?:再販|再発売|再入荷|rerelease|re-?release)", re.I),
+    "oversized_variant": re.compile(r"(?:big|BIG|特大|大型|ビッグ)", re.I),
+    "mini_or_junior_variant": re.compile(r"(?:mini|ミニ|Jr\.|ジュニア)", re.I),
+    "letter_or_version_variant": re.compile(
+        r"(?:ver\.?\s*[A-Z0-9]+|[A-Z](?=[)）]|$)|[Ａ-Ｚ])",
+        re.I,
+    ),
+    "named_theme_variant": re.compile(
+        r"(?:シティポップ|プレミアム|Jewel\s*Flash|Aure\s*Glass|みんなで旅行|描き下ろし)",
+        re.I,
+    ),
+    "collection_or_trading_variant": re.compile(r"(?:コレクション|トレーディング|ランダム|BOX|vol\.?\s*\d+)", re.I),
+    "calendar_product_type": re.compile(r"(?:カレンダー|calendar)", re.I),
+    "collaboration_variant": re.compile(r"(?:サンリオ|コラボ|collaboration|コラボレーション)", re.I),
+}
+
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -104,6 +121,24 @@ def _match_score(row: dict[str, Any], title: str) -> dict[str, Any]:
     }
 
 
+def _variant_risk(row: dict[str, Any], title: str) -> dict[str, Any]:
+    row_text = " ".join(
+        str(row.get(field) or "")
+        for field in ("name_ja", "search_term", "name_ko", "category")
+    )
+    flags: list[str] = []
+    for name, pattern in VARIANT_RISK_PATTERNS.items():
+        title_hit = bool(pattern.search(title))
+        row_hit = bool(pattern.search(row_text))
+        if title_hit and not row_hit:
+            flags.append(name)
+    return {
+        "flags": flags,
+        "risk_level": "variant_review_required" if flags else "no_extra_variant_risk_detected",
+        "blocks_auto_apply": bool(flags),
+    }
+
+
 def _product_source_url(value: str) -> bool:
     parsed = urlsplit(value)
     if not parsed.scheme.startswith("http") or not parsed.netloc:
@@ -132,6 +167,7 @@ def extract_candidates(
         }
         if row is not None:
             candidate["title_match"] = _match_score(row, title)
+            candidate["variant_risk"] = _variant_risk(row, title)
         candidates.append(candidate)
     return candidates
 
@@ -196,6 +232,11 @@ def build_report(
             for candidate in candidates
             if float((candidate.get("title_match") or {}).get("best_field_score") or 0) >= 0.75
         ]
+        low_variant_risk_strong_candidates = [
+            candidate
+            for candidate in strong_candidates
+            if not (candidate.get("variant_risk") or {}).get("blocks_auto_apply")
+        ]
         out_items.append(
             {
                 **base,
@@ -205,6 +246,8 @@ def build_report(
                 "candidate_count": len(candidates),
                 "strong_title_match_candidate_count": len(strong_candidates),
                 "strong_title_match_candidates": strong_candidates[:10],
+                "low_variant_risk_strong_candidate_count": len(low_variant_risk_strong_candidates),
+                "low_variant_risk_strong_candidates": low_variant_risk_strong_candidates[:10],
                 "candidates": candidates[:10],
                 "blocked_until": (
                     "manual_exact_product_identity_confirmation"
@@ -216,6 +259,9 @@ def build_report(
 
     candidate_rows = [item for item in out_items if item.get("candidate_count")]
     strong_candidate_rows = [item for item in out_items if item.get("strong_title_match_candidate_count")]
+    low_variant_risk_strong_candidate_rows = [
+        item for item in out_items if item.get("low_variant_risk_strong_candidate_count")
+    ]
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -228,6 +274,10 @@ def build_report(
             "strong_title_match_candidate_rows": len(strong_candidate_rows),
             "strong_title_match_candidate_total": sum(
                 int(item.get("strong_title_match_candidate_count") or 0) for item in out_items
+            ),
+            "low_variant_risk_strong_candidate_rows": len(low_variant_risk_strong_candidate_rows),
+            "low_variant_risk_strong_candidate_total": sum(
+                int(item.get("low_variant_risk_strong_candidate_count") or 0) for item in out_items
             ),
             "no_detail_candidate_rows": sum(
                 1 for item in out_items if item.get("probe_status") == "no_detail_candidates_on_search_page"

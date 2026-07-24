@@ -48,6 +48,23 @@ class SourceDiscoveryNextFocusLiveSourceProbePublicTest(unittest.TestCase):
         self.assertEqual(score["best_field_score"], 1.0)
         self.assertGreater(score["score"], 0)
 
+    def test_variant_risk_flags_candidate_only_variants(self) -> None:
+        row = {
+            "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+            "search_term": "カードキャプターさくら アクリルスタンド 木之本桜",
+        }
+
+        risk = probe._variant_risk(
+            row,
+            "カードキャプターさくら 木之本 桜F BIGアクリルスタンド シティポップ ver.A【再販】",
+        )
+
+        self.assertTrue(risk["blocks_auto_apply"])
+        self.assertIn("oversized_variant", risk["flags"])
+        self.assertIn("letter_or_version_variant", risk["flags"])
+        self.assertIn("resale_or_rerelease", risk["flags"])
+        self.assertIn("named_theme_variant", risk["flags"])
+
     def test_build_report_marks_rows_without_candidates_for_alternate_research(self) -> None:
         queue = {
             "items": [
@@ -97,6 +114,7 @@ class SourceDiscoveryNextFocusLiveSourceProbePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["detail_candidate_total"], 1)
         self.assertEqual(report["items"][0]["probe_status"], "detail_candidates_found")
         self.assertEqual(report["items"][0]["strong_title_match_candidate_count"], 0)
+        self.assertEqual(report["items"][0]["low_variant_risk_strong_candidate_count"], 0)
         self.assertFalse(report["items"][0]["auto_apply_enabled"])
         self.assertEqual(
             report["items"][0]["candidates"][0]["source_url"],
