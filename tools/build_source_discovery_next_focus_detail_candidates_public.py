@@ -104,6 +104,59 @@ def _fallback_search_summary(item: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
+def _metadata_field_template_rows(
+    item: dict[str, Any],
+    *,
+    query: str,
+    candidate_payload: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    top_candidate = candidate_payload[0] if candidate_payload else {}
+    base = {
+        "manual_confirmed": False,
+        "manual_review_status": "not_started",
+        "manual_note": "",
+        "focus_pack_id": item.get("focus_pack_id"),
+        "catalog_index": item.get("catalog_index"),
+        "source_store": item.get("source_store"),
+        "affiliation": item.get("affiliation")
+        or (item.get("catalog_field_import_template") or {}).get("affiliation"),
+        "category": item.get("category"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "search_query": query,
+        "evidence_url": top_candidate.get("candidate_source_url") or item.get("official_search_url"),
+        "candidate_title": top_candidate.get("candidate_title") or "",
+        "candidate_source_url": top_candidate.get("candidate_source_url") or "",
+        "candidate_image_url": top_candidate.get("candidate_image_url") or "",
+        "manual_value": "",
+        "blocked_until": "manual_confirmed_true",
+        "required_evidence": [
+            "exact_catalog_variant_identity_confirmed",
+            "official_product_detail_url",
+            "field_value_appears_on_or_is_directly_implied_by_evidence_url",
+        ],
+    }
+    rows: list[dict[str, Any]] = []
+    for field in ("sub_series", "name_ja", "character_name"):
+        row = {
+            **base,
+            "field": field,
+            "import_tool": (
+                "tools/import_confirmed_catalog_field_rows.py"
+                if field == "sub_series"
+                else ""
+            ),
+            "import_supported": field == "sub_series",
+            "review_note": (
+                "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
+                if field == "sub_series"
+                else "Review-only until the catalog metadata importer supports this field."
+            ),
+        }
+        rows.append(row)
+    return rows
+
+
 def _query_for_item(item: dict[str, Any]) -> str:
     query_row = dict(item)
     field_template = item.get("catalog_field_import_template")
@@ -396,6 +449,7 @@ def build_report(
     fallback_bridge_items: list[dict[str, Any]] = []
     review_work_order_items: list[dict[str, Any]] = []
     metadata_enrichment_template: list[dict[str, Any]] = []
+    metadata_field_import_template: list[dict[str, Any]] = []
     candidate_rows = 0
     items_with_candidates = 0
     candidate_items_with_official_no_results = 0
@@ -485,6 +539,13 @@ def build_report(
             }
         )
         if review_decision.get("decision") == "catalog_variant_detail_required_before_import":
+            metadata_field_import_template.extend(
+                _metadata_field_template_rows(
+                    item,
+                    query=query,
+                    candidate_payload=candidate_payload,
+                )
+            )
             metadata_enrichment_template.append(
                 {
                     "manual_confirmed": False,
@@ -715,6 +776,10 @@ def build_report(
                 1 for row in candidate_confirmation_template if row.get("manual_confirmed") is True
             ),
             "metadata_enrichment_template_rows": len(metadata_enrichment_template),
+            "metadata_field_import_template_rows": len(metadata_field_import_template),
+            "metadata_field_import_supported_rows": sum(
+                1 for row in metadata_field_import_template if row.get("import_supported") is True
+            ),
             "candidate_blocker_counts": _counter_rows(blocker_counts, "blocker"),
             "review_bucket_counts": _counter_rows(review_bucket_counts, "review_bucket"),
             "review_decision_counts": _counter_rows(decision_counts, "review_decision"),
@@ -741,12 +806,14 @@ def build_report(
             "Review each candidate_source_url as an exact product/detail page before confirmation.",
             "Only fill manual_confirmed_source_url and manual_confirmed_image_url after title, variant, category, and image identity match.",
             "This report is candidate-only; it never mutates catalog data.",
+            "For catalog_variant_metadata_enrichment rows, confirm variant metadata first; only sub_series currently has a supported catalog field importer.",
         ],
         "items": items,
         "candidate_review_work_order": review_work_order_items,
         "next_action_lanes": next_action_lanes,
         "fallback_bridge_items": fallback_bridge_items,
         "metadata_enrichment_template": metadata_enrichment_template,
+        "metadata_field_import_template": metadata_field_import_template,
         "exact_candidate_confirmation_shortlist": exact_candidate_confirmation_shortlist,
         "candidate_confirmation_template": candidate_confirmation_template,
         "automation_policy": {
@@ -754,8 +821,11 @@ def build_report(
             "auto_apply_image_url": False,
             "requires_manual_review": True,
             "candidate_confirmation_template": "candidate_confirmation_template",
+            "metadata_field_import_template": "metadata_field_import_template",
+            "metadata_field_import_supported_fields": ["sub_series"],
             "confirmed_template": "data/source_discovery_focus_confirmed_template_public.json",
             "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+            "metadata_field_import_tool": "tools/import_confirmed_catalog_field_rows.py",
         },
     }
 

@@ -468,6 +468,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             4,
         )
         self.assertEqual(
+            quality["source_discovery_next_focus_detail_candidates"]["metadata_field_import_template_rows"],
+            12,
+        )
+        self.assertEqual(
+            quality["source_discovery_next_focus_detail_candidates"]["metadata_field_import_supported_rows"],
+            4,
+        )
+        self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],
             0,
         )
@@ -2552,6 +2560,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
         )
         self.assertEqual(
+            execution_plan["summary"].get(
+                "source_next_focus_detail_metadata_field_import_template_rows"
+            ),
+            source_next_focus_detail_summary.get("metadata_field_import_template_rows"),
+        )
+        self.assertEqual(
+            execution_plan["summary"].get(
+                "source_next_focus_detail_metadata_field_import_supported_rows"
+            ),
+            source_next_focus_detail_summary.get("metadata_field_import_supported_rows"),
+        )
+        self.assertEqual(
             source_next_focus_detail_execution_action.get("rows"),
             source_next_focus_detail_summary.get("pack_items"),
         )
@@ -2560,6 +2580,18 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "metadata_enrichment_template_rows"
             ),
             source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_execution_action["evidence"].get(
+                "metadata_field_import_template_rows"
+            ),
+            source_next_focus_detail_summary.get("metadata_field_import_template_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_execution_action["evidence"].get(
+                "metadata_field_import_supported_rows"
+            ),
+            source_next_focus_detail_summary.get("metadata_field_import_supported_rows"),
         )
         self.assertEqual(
             source_next_focus_detail_execution_action["evidence"].get("next_action_lanes"),
@@ -2574,12 +2606,28 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
         )
         self.assertEqual(
+            source_next_focus_detail_scorecard.get("metadata_field_import_template_rows"),
+            source_next_focus_detail_summary.get("metadata_field_import_template_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_scorecard.get("metadata_field_import_supported_rows"),
+            source_next_focus_detail_summary.get("metadata_field_import_supported_rows"),
+        )
+        self.assertEqual(
             source_next_focus_detail_next_action.get("next_action_lanes"),
             source_next_focus_detail_summary.get("next_action_lanes"),
         )
         self.assertEqual(
             source_next_focus_detail_next_action.get("metadata_enrichment_template_rows"),
             source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_next_action.get("metadata_field_import_template_rows"),
+            source_next_focus_detail_summary.get("metadata_field_import_template_rows"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_next_action.get("metadata_field_import_supported_rows"),
+            source_next_focus_detail_summary.get("metadata_field_import_supported_rows"),
         )
         self.assertEqual(
             source_next_focus_detail_scorecard.get("open_rows"),

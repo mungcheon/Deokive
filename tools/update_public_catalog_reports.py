@@ -2970,6 +2970,14 @@ def build_operations_public(
                 "metadata_enrichment_template_rows",
                 0,
             ),
+            "metadata_field_import_template_rows": source_next_focus_detail_candidates_summary.get(
+                "metadata_field_import_template_rows",
+                0,
+            ),
+            "metadata_field_import_supported_rows": source_next_focus_detail_candidates_summary.get(
+                "metadata_field_import_supported_rows",
+                0,
+            ),
             "next_action_lane_count": source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0),
             "next_action_lanes": source_next_focus_detail_candidates_summary.get("next_action_lanes", []),
             "completion_readiness_status": source_next_focus_detail_candidates_summary.get(
@@ -3582,6 +3590,14 @@ def build_operations_public(
             "candidate_rows": source_next_focus_detail_candidates_summary.get("candidate_rows", 0),
             "metadata_enrichment_template_rows": source_next_focus_detail_candidates_summary.get(
                 "metadata_enrichment_template_rows",
+                0,
+            ),
+            "metadata_field_import_template_rows": source_next_focus_detail_candidates_summary.get(
+                "metadata_field_import_template_rows",
+                0,
+            ),
+            "metadata_field_import_supported_rows": source_next_focus_detail_candidates_summary.get(
+                "metadata_field_import_supported_rows",
                 0,
             ),
             "next_action_lane_count": source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0),
@@ -5076,6 +5092,11 @@ def build_agent_work_queue_public(
         for row in source_next_focus_detail_candidates.get("metadata_enrichment_template", [])
         if isinstance(row, dict)
     ]
+    metadata_field_import_rows = [
+        row
+        for row in source_next_focus_detail_candidates.get("metadata_field_import_template", [])
+        if isinstance(row, dict)
+    ]
     if metadata_enrichment_rows:
         add_batch(
             agent_id="agent-source-detail-candidate",
@@ -5096,6 +5117,10 @@ def build_agent_work_queue_public(
             review_summary={
                 "focus_pack_id": source_detail_summary.get("focus_pack_id"),
                 "metadata_enrichment_template_rows": len(metadata_enrichment_rows),
+                "metadata_field_import_template_rows": len(metadata_field_import_rows),
+                "metadata_field_import_supported_rows": sum(
+                    1 for row in metadata_field_import_rows if row.get("import_supported") is True
+                ),
                 "variant_detail_required_rows": int(
                     source_detail_summary.get("variant_detail_required_rows") or 0
                 ),

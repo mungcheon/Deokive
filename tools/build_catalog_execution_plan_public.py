@@ -571,6 +571,14 @@ def _build_plan(load_report) -> dict[str, Any]:
                         source_next_focus_detail_summary,
                         "metadata_enrichment_template_rows",
                     ),
+                    "metadata_field_import_template_rows": _count(
+                        source_next_focus_detail_summary,
+                        "metadata_field_import_template_rows",
+                    ),
+                    "metadata_field_import_supported_rows": _count(
+                        source_next_focus_detail_summary,
+                        "metadata_field_import_supported_rows",
+                    ),
                     "next_action_lane_count": _count(
                         source_next_focus_detail_summary, "next_action_lane_count"
                     ),
@@ -1965,6 +1973,14 @@ def _build_plan(load_report) -> dict[str, Any]:
             "source_next_focus_detail_metadata_enrichment_template_rows": _count(
                 source_next_focus_detail_summary,
                 "metadata_enrichment_template_rows",
+            ),
+            "source_next_focus_detail_metadata_field_import_template_rows": _count(
+                source_next_focus_detail_summary,
+                "metadata_field_import_template_rows",
+            ),
+            "source_next_focus_detail_metadata_field_import_supported_rows": _count(
+                source_next_focus_detail_summary,
+                "metadata_field_import_supported_rows",
             ),
             "source_next_focus_detail_action_lanes": (
                 source_next_focus_detail_summary.get("next_action_lanes") or []
