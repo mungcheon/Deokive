@@ -2136,8 +2136,31 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_fallback_summary.get("work_order_lanes"),
         )
         self.assertEqual(
+            source_next_focus_fallback_next_action.get("first_primary_review_url"),
+            source_next_focus_fallback_summary.get("first_primary_review_url"),
+        )
+        self.assertEqual(
+            source_next_focus_fallback_next_action.get("first_primary_review_url_kind"),
+            source_next_focus_fallback_summary.get("first_primary_review_url_kind"),
+        )
+        self.assertEqual(
             source_next_focus_fallback_scorecard.get("work_order_lanes"),
             source_next_focus_fallback_summary.get("work_order_lanes"),
+        )
+        self.assertEqual(
+            source_next_focus_fallback_scorecard.get("first_primary_review_url"),
+            source_next_focus_fallback_summary.get("first_primary_review_url"),
+        )
+        source_next_focus_fallback_execution_action = next(
+            row
+            for row in execution_plan.get("actions", [])
+            if row.get("workstream") == "source_discovery_next_focus_fallback_queue"
+        )
+        self.assertEqual(
+            source_next_focus_fallback_execution_action["evidence"].get(
+                "first_primary_review_url"
+            ),
+            source_next_focus_fallback_summary.get("first_primary_review_url"),
         )
         self.assertEqual(
             execution_plan["summary"].get("source_next_focus_detail_action_lane_count"),

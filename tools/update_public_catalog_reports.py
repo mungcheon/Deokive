@@ -2825,6 +2825,12 @@ def build_operations_public(
             "first_domain_limited_web_search_url": source_next_focus_fallback_queue_summary.get(
                 "first_domain_limited_web_search_url"
             ),
+            "first_primary_review_url": source_next_focus_fallback_queue_summary.get(
+                "first_primary_review_url"
+            ),
+            "first_primary_review_url_kind": source_next_focus_fallback_queue_summary.get(
+                "first_primary_review_url_kind"
+            ),
             "auto_apply_enabled": source_next_focus_fallback_queue_summary.get("auto_apply_enabled", False),
             "recommended_next_action": "Review fallback rows and fill exact manual_confirmed_source_url values before source import.",
         } if source_next_focus_fallback_queue_summary else None,
@@ -3388,6 +3394,12 @@ def build_operations_public(
             "primary_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
             "next_step": "fill_exact_manual_confirmed_source_urls_from_fallback_research",
             "work_order_lanes": source_next_focus_fallback_queue_summary.get("work_order_lanes", []),
+            "first_primary_review_url": source_next_focus_fallback_queue_summary.get(
+                "first_primary_review_url"
+            ),
+            "first_primary_review_url_kind": source_next_focus_fallback_queue_summary.get(
+                "first_primary_review_url_kind"
+            ),
             "auto_apply_enabled": source_next_focus_fallback_queue_summary.get("auto_apply_enabled", False),
         } if source_next_focus_fallback_queue_summary else None,
         {

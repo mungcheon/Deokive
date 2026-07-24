@@ -451,6 +451,12 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "first_fallback_store_search_url": source_next_focus_fallback_summary.get(
                         "first_fallback_store_search_url"
                     ),
+                    "first_primary_review_url": source_next_focus_fallback_summary.get(
+                        "first_primary_review_url"
+                    ),
+                    "first_primary_review_url_kind": source_next_focus_fallback_summary.get(
+                        "first_primary_review_url_kind"
+                    ),
                 },
             )
         )
