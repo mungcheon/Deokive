@@ -46,6 +46,36 @@ class DeduplicationFastReviewTests(unittest.TestCase):
                             ],
                         },
                         {
+                            "key_type": "barcode",
+                            "key": "333",
+                            "review_confidence": "high_review_confidence",
+                            "review_risk": "strong_identity_review",
+                            "keep_catalog_index": 7,
+                            "drop_catalog_indexes": [8],
+                            "stores": ["store a", "store b"],
+                            "categories": ["badge"],
+                            "evidence": ["barcode", "same_barcode", "same_source_url"],
+                            "dedupe_decision_template": {"key": "333"},
+                            "rows": [
+                                {
+                                    "catalog_index": 7,
+                                    "name_ko": "치이카와 양말 (시사/오렌지)",
+                                    "source_store": "store a",
+                                    "source_url": "https://example.test/same",
+                                    "image_url": "https://example.test/same-a.jpg",
+                                    "richness": 12,
+                                },
+                                {
+                                    "catalog_index": 8,
+                                    "name_ko": "치이카와 양말 (시사 / 오렌지)",
+                                    "source_store": "store b",
+                                    "source_url": "https://example.test/same",
+                                    "image_url": "https://example.test/same-b.jpg",
+                                    "richness": 10,
+                                },
+                            ],
+                        },
+                        {
                             "key_type": "source_url",
                             "key": "https://example.test/a",
                             "review_confidence": "high_review_confidence",
@@ -64,22 +94,27 @@ class DeduplicationFastReviewTests(unittest.TestCase):
 
         report = build_report(action_queue, generated_at="2026-07-22T00:00:00Z")
 
-        self.assertEqual(report["summary"]["fast_review_groups"], 1)
+        self.assertEqual(report["summary"]["fast_review_groups"], 2)
         self.assertEqual(report["summary"]["held_for_later_groups"], 2)
-        self.assertEqual(report["summary"]["same_barcode_groups"], 1)
-        self.assertEqual(report["summary"]["same_source_url_groups"], 1)
+        self.assertEqual(report["summary"]["same_barcode_groups"], 2)
+        self.assertEqual(report["summary"]["same_source_url_groups"], 2)
         self.assertEqual(report["summary"]["same_image_url_groups"], 0)
         self.assertEqual(report["summary"]["name_delta_groups"], 1)
-        self.assertEqual(report["summary"]["image_delta_groups"], 1)
-        self.assertEqual(report["summary"]["variant_warning_groups"], 1)
-        self.assertEqual(report["summary"]["next_fast_review_batch_groups"], 1)
-        self.assertEqual(report["summary"]["next_fast_review_batch_drop_candidate_rows"], 1)
-        self.assertEqual(report["summary"]["next_fast_review_batch_primary_review_url_groups"], 1)
+        self.assertEqual(report["summary"]["image_delta_groups"], 2)
+        self.assertEqual(report["summary"]["image_url_only_same_identity_groups"], 1)
+        self.assertEqual(report["summary"]["variant_warning_groups"], 2)
+        self.assertEqual(report["summary"]["next_fast_review_batch_groups"], 2)
+        self.assertEqual(report["summary"]["next_fast_review_batch_drop_candidate_rows"], 2)
+        self.assertEqual(report["summary"]["next_fast_review_batch_primary_review_url_groups"], 2)
+        self.assertEqual(
+            report["summary"]["next_fast_review_batch_image_url_only_same_identity_groups"],
+            1,
+        )
         self.assertEqual(
             report["summary"]["next_fast_review_batch_warning_counts"],
-            [["name_delta_requires_variant_check", 1]],
+            [["image_delta_requires_visual_check", 1], ["name_delta_requires_variant_check", 1]],
         )
-        self.assertEqual(report["summary"]["primary_review_url_groups"], 1)
+        self.assertEqual(report["summary"]["primary_review_url_groups"], 2)
         self.assertEqual(report["summary"]["first_primary_review_url"], "https://example.test/item")
         self.assertIs(report["summary"]["auto_delete_enabled"], False)
         self.assertIs(report["items"][0]["dedupe_decision_template"]["manual_confirmed"], False)
@@ -99,22 +134,30 @@ class DeduplicationFastReviewTests(unittest.TestCase):
         self.assertEqual(report["items"][0]["identity_delta"]["store_count"], 2)
         self.assertEqual(
             report["breakdowns"]["by_fast_review_lane"],
-            [{"fast_review_lane": "same_barcode_and_source_url", "groups": 1}],
+            [{"fast_review_lane": "same_barcode_and_source_url", "groups": 2}],
         )
         self.assertEqual(
             report["breakdowns"]["by_fast_review_warning"],
-            [{"fast_review_warning": "name_delta_requires_variant_check", "groups": 1}],
+            [
+                {"fast_review_warning": "name_delta_requires_variant_check", "groups": 1},
+                {"fast_review_warning": "image_delta_requires_visual_check", "groups": 1},
+            ],
         )
         self.assertEqual(
             report["breakdowns"]["by_primary_review_url_kind"],
-            [{"primary_review_url_kind": "keep_source_url", "groups": 1}],
+            [{"primary_review_url_kind": "keep_source_url", "groups": 2}],
         )
-        self.assertEqual(report["next_fast_review_batch"][0]["key"], "111")
+        self.assertEqual(report["next_fast_review_batch"][0]["key"], "333")
+        self.assertTrue(report["next_fast_review_batch"][0]["image_url_only_same_identity"])
+        self.assertEqual(
+            report["next_fast_review_batch"][0]["suggested_review_order"],
+            "image_url_only_same_identity_first",
+        )
         self.assertFalse(report["next_fast_review_batch"][0]["manual_confirmed"])
         self.assertFalse(report["next_fast_review_batch"][0]["auto_merge_enabled"])
         self.assertEqual(
             report["next_fast_review_batch"][0]["primary_review_url"],
-            "https://example.test/item",
+            "https://example.test/same",
         )
         self.assertIn(
             "same sellable item",

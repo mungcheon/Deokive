@@ -142,6 +142,16 @@ def fast_review_warning(delta: dict[str, Any]) -> str:
     return "no_identity_delta_detected"
 
 
+def is_image_url_only_same_identity_group(group: dict[str, Any], delta: dict[str, Any]) -> bool:
+    return (
+        bool(group.get("same_barcode"))
+        and bool(group.get("same_source_url"))
+        and not bool(delta.get("name_differs"))
+        and not bool(delta.get("source_url_differs"))
+        and bool(delta.get("image_url_differs"))
+    )
+
+
 def compact_group(group: dict[str, Any]) -> dict[str, Any]:
     rows = [compact_row(row) for row in group.get("rows") or [] if isinstance(row, dict)]
     evidence = group.get("evidence") or []
@@ -160,6 +170,13 @@ def compact_group(group: dict[str, Any]) -> dict[str, Any]:
     delta = identity_delta(rows)
     review_urls = review_url_summary(group, rows)
     warning = fast_review_warning(delta)
+    image_url_only_same_identity = is_image_url_only_same_identity_group(
+        {
+            "same_barcode": same_barcode,
+            "same_source_url": same_source_url,
+        },
+        delta,
+    )
     return {
         "key_type": group.get("key_type"),
         "key": group.get("key"),
@@ -176,6 +193,12 @@ def compact_group(group: dict[str, Any]) -> dict[str, Any]:
         "same_image_url": same_image_url,
         "fast_review_lane": fast_review_lane,
         "fast_review_warning": warning,
+        "image_url_only_same_identity": image_url_only_same_identity,
+        "suggested_review_order": (
+            "image_url_only_same_identity_first"
+            if image_url_only_same_identity
+            else "identity_delta_review"
+        ),
         **review_urls,
         "keep_reason": keep_reason(group, rows),
         "identity_delta": delta,
@@ -192,7 +215,15 @@ def counter_rows(counter: Counter[str], field: str) -> list[dict[str, Any]]:
 
 def next_fast_review_batch(items: list[dict[str, Any]], *, limit: int = 10) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for item in items[:limit]:
+    ordered_items = sorted(
+        items,
+        key=lambda item: (
+            0 if item.get("image_url_only_same_identity") else 1,
+            str(item.get("fast_review_warning") or ""),
+            int(item.get("keep_catalog_index") or 999_999_999),
+        ),
+    )
+    for item in ordered_items[:limit]:
         rows.append(
             {
                 "manual_confirmed": False,
@@ -208,6 +239,8 @@ def next_fast_review_batch(items: list[dict[str, Any]], *, limit: int = 10) -> l
                 "stores": item.get("stores") or [],
                 "categories": item.get("categories") or [],
                 "identity_delta": item.get("identity_delta") or {},
+                "image_url_only_same_identity": bool(item.get("image_url_only_same_identity")),
+                "suggested_review_order": item.get("suggested_review_order"),
                 "dedupe_decision_template": item.get("dedupe_decision_template") or {},
                 "operator_checklist": [
                     "Open primary_review_url and compare the exact product identity.",
@@ -259,6 +292,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
     same_image_url_groups = 0
     name_delta_groups = 0
     image_delta_groups = 0
+    image_url_only_same_identity_groups = 0
     for group in fast_groups:
         if group.get("same_barcode"):
             same_barcode_groups += 1
@@ -271,6 +305,8 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             name_delta_groups += 1
         if delta.get("image_url_differs"):
             image_delta_groups += 1
+        if group.get("image_url_only_same_identity"):
+            image_url_only_same_identity_groups += 1
         by_fast_review_lane[str(group.get("fast_review_lane") or "unknown")] += 1
         by_fast_review_warning[str(group.get("fast_review_warning") or "unknown")] += 1
         if group.get("primary_review_url"):
@@ -296,6 +332,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             "same_image_url_groups": same_image_url_groups,
             "name_delta_groups": name_delta_groups,
             "image_delta_groups": image_delta_groups,
+            "image_url_only_same_identity_groups": image_url_only_same_identity_groups,
             "variant_warning_groups": sum(
                 1 for group in fast_groups if group.get("fast_review_warning") != "no_identity_delta_detected"
             ),
@@ -306,6 +343,9 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             ),
             "next_fast_review_batch_primary_review_url_groups": sum(
                 1 for item in next_batch if item.get("primary_review_url")
+            ),
+            "next_fast_review_batch_image_url_only_same_identity_groups": sum(
+                1 for item in next_batch if item.get("image_url_only_same_identity")
             ),
             "next_fast_review_batch_warning_counts": [
                 [key, value]

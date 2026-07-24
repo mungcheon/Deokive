@@ -10882,6 +10882,14 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "deduplication_fast_review",
                     {},
                 ).get("next_fast_review_batch_primary_review_url_groups", 0),
+                "image_url_only_same_identity_groups": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("image_url_only_same_identity_groups", 0),
+                "next_fast_review_image_url_only_same_identity_groups": target.get(
+                    "deduplication_fast_review",
+                    {},
+                ).get("next_fast_review_batch_image_url_only_same_identity_groups", 0),
                 "next_fast_review_warning_counts": target.get(
                     "deduplication_fast_review",
                     {},

@@ -1152,6 +1152,16 @@ class PublicCatalogReportTests(unittest.TestCase):
                 dedupe_action_summary["ichiban_reissue_work_order_rows"],
             )
             self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
+            self.assertEqual(
+                quality["deduplication_fast_review"]["image_url_only_same_identity_groups"],
+                19,
+            )
+            self.assertEqual(
+                quality["deduplication_fast_review"][
+                    "next_fast_review_batch_image_url_only_same_identity_groups"
+                ],
+                10,
+            )
             self.assertEqual(quality["deduplication_fast_review"]["manual_confirmed_true"], 0)
             self.assertIs(quality["deduplication_fast_review"]["auto_delete_enabled"], False)
             alignment = quality["deduplication_queue_alignment"]
@@ -1443,6 +1453,11 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(pillars["dedupe"]["auto_apply_ready_rows"], 0)
         self.assertEqual(pillars["dedupe"]["auto_delete_ready_groups"], 0)
         self.assertEqual(pillars["dedupe"]["fast_review_groups"], 42)
+        self.assertEqual(pillars["dedupe"]["image_url_only_same_identity_groups"], 19)
+        self.assertEqual(
+            pillars["dedupe"]["next_fast_review_image_url_only_same_identity_groups"],
+            10,
+        )
         self.assertEqual(pillars["dedupe"]["held_for_later_groups"], 6)
         self.assertEqual(
             pillars["dedupe"]["next_fast_review_batch_groups"],
@@ -1458,10 +1473,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["dedupe"]["next_fast_review_warning_counts"],
-            [
-                ["name_delta_requires_variant_check", 5],
-                ["image_delta_requires_visual_check", 5],
-            ],
+            [["image_delta_requires_visual_check", 10]],
         )
         self.assertEqual(pillars["dedupe"]["confirmed_template_rows"], 42)
         self.assertEqual(pillars["dedupe"]["confirmed_template_manual_rows"], 0)
