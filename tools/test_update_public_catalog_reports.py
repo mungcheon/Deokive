@@ -1770,6 +1770,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             confirmed_readiness["summary"]["manual_confirmed_true"],
         )
         self.assertEqual(
+            agent_queue["summary"]["confirmed_import_variant_metadata_template_rows"],
+            confirmed_readiness["summary"].get("variant_metadata_template_rows", 0),
+        )
+        self.assertEqual(
+            agent_queue["summary"]["confirmed_import_variant_metadata_manual_confirmed_rows"],
+            confirmed_readiness["summary"].get("variant_metadata_manual_confirmed_rows", 0),
+        )
+        self.assertEqual(
+            agent_queue["summary"]["confirmed_import_variant_metadata_skipped_rows"],
+            confirmed_readiness["summary"].get("variant_metadata_skipped_rows", 0),
+        )
+        self.assertEqual(
             agent_queue["summary"]["confirmed_import_manual_confirmation_backlog_rows"],
             confirmed_readiness["summary"]["template_items"]
             + confirmed_readiness["summary"]["public_action_queue_rows"]
@@ -2272,6 +2284,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             open_queues.get("confirmed_import_action_queue_rows"),
             readiness_summary.get("public_action_queue_rows"),
+        )
+        self.assertEqual(
+            open_queues.get("confirmed_import_variant_metadata_template_rows"),
+            readiness_summary.get("variant_metadata_template_rows"),
         )
         self.assertEqual(
             open_queues.get("requested_focus_action_rows"),

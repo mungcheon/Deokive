@@ -200,6 +200,35 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
             "omitted_from_public_report",
         )
 
+    def test_variant_metadata_summary_counts_are_exposed(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            workflows = {
+                "variant_metadata": {
+                    "confirmed": _write_json(
+                        root / "variant.template.json",
+                        {
+                            "items": [
+                                {"manual_confirmed": False},
+                                {"manual_confirmed": False},
+                            ]
+                        },
+                    ),
+                    "template": root / "variant.template.json",
+                    "report": _write_json(
+                        root / "variant_report.json",
+                        {"updated_rows": 0, "skipped_rows": 2},
+                    ),
+                    "public_workstream": "catalog_variant_metadata_enrichment",
+                }
+            }
+
+            report = readiness.build_report(workflows)
+
+        self.assertEqual(report["summary"]["variant_metadata_template_rows"], 2)
+        self.assertEqual(report["summary"]["variant_metadata_manual_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["variant_metadata_skipped_rows"], 2)
+
     def test_public_action_queue_counts_are_summarized_without_row_details(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

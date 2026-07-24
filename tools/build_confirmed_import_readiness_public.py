@@ -380,6 +380,10 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
         int(row["template_items"]) + int(row["public_action_rows"])
         for row in rows
     )
+    variant_metadata_row = next(
+        (row for row in rows if row.get("workflow") == "variant_metadata"),
+        {},
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -403,6 +407,15 @@ def build_report(workflows: dict[str, dict[str, Any]] | None = None) -> dict[str
                 int(row["manual_confirmed_true"])
                 for row in rows
                 if row["status"] == "confirmed_rows_blocked"
+            ),
+            "variant_metadata_template_rows": int(
+                variant_metadata_row.get("template_items") or 0
+            ),
+            "variant_metadata_manual_confirmed_rows": int(
+                variant_metadata_row.get("manual_confirmed_true") or 0
+            ),
+            "variant_metadata_skipped_rows": int(
+                variant_metadata_row.get("skipped_rows") or 0
             ),
             "manual_confirmation_backlog_rows": manual_confirmation_backlog_rows,
             "work_order_lanes": len(work_order),

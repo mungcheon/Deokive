@@ -4216,6 +4216,9 @@ def build_operations_public(
         open_review_queues["confirmed_import_pending_rows"] = confirmed_import_readiness_summary.get(
             "ready_or_pending_import_rows", 0
         )
+        open_review_queues[
+            "confirmed_import_variant_metadata_template_rows"
+        ] = confirmed_import_readiness_summary.get("variant_metadata_template_rows", 0)
     if dedupe_action_queue_summary:
         open_review_queues["dedupe_action_groups"] = dedupe_action_queue_summary.get("queued_groups", 0)
         open_review_queues["dedupe_actionable_groups"] = dedupe_action_queue_summary.get("actionable_groups", 0)
@@ -6067,6 +6070,15 @@ def build_agent_work_queue_public(
     confirmed_ready_rows = int(confirmed_summary.get("manual_confirmed_true") or 0)
     confirmed_pending_rows = int(confirmed_summary.get("ready_or_pending_import_rows") or 0)
     confirmed_blocked_rows = int(confirmed_summary.get("blocked_confirmed_rows") or 0)
+    confirmed_variant_metadata_template_rows = int(
+        confirmed_summary.get("variant_metadata_template_rows") or 0
+    )
+    confirmed_variant_metadata_manual_confirmed_rows = int(
+        confirmed_summary.get("variant_metadata_manual_confirmed_rows") or 0
+    )
+    confirmed_variant_metadata_skipped_rows = int(
+        confirmed_summary.get("variant_metadata_skipped_rows") or 0
+    )
     top_next_batches = [
         {
             "batch_id": batch["batch_id"],
@@ -6098,6 +6110,9 @@ def build_agent_work_queue_public(
             "confirmed_import_manual_confirmed_ready_rows": confirmed_ready_rows,
             "confirmed_import_pending_rows": confirmed_pending_rows,
             "confirmed_import_blocked_confirmed_rows": confirmed_blocked_rows,
+            "confirmed_import_variant_metadata_template_rows": confirmed_variant_metadata_template_rows,
+            "confirmed_import_variant_metadata_manual_confirmed_rows": confirmed_variant_metadata_manual_confirmed_rows,
+            "confirmed_import_variant_metadata_skipped_rows": confirmed_variant_metadata_skipped_rows,
             "confirmed_import_manual_confirmation_backlog_rows": max(
                 confirmed_template_rows + confirmed_action_rows - confirmed_ready_rows,
                 0,
@@ -7798,6 +7813,9 @@ def validate_report_consistency(
         expected_open_queues["confirmed_import_pending_rows"] = confirmed_import_readiness_summary.get(
             "ready_or_pending_import_rows", 0
         )
+        expected_open_queues[
+            "confirmed_import_variant_metadata_template_rows"
+        ] = confirmed_import_readiness_summary.get("variant_metadata_template_rows", 0)
     if requested_focus_review_summary:
         expected_open_queues["requested_focus_review_rows"] = requested_focus_review_summary.get("review_row_count", 0)
     requested_focus_action_queue = (
@@ -8236,6 +8254,15 @@ def validate_report_consistency(
         "confirmed_import_manual_confirmed_ready_rows": confirmed_ready_rows,
         "confirmed_import_pending_rows": int(confirmed_import_readiness_summary.get("ready_or_pending_import_rows") or 0),
         "confirmed_import_blocked_confirmed_rows": int(confirmed_import_readiness_summary.get("blocked_confirmed_rows") or 0),
+        "confirmed_import_variant_metadata_template_rows": int(
+            confirmed_import_readiness_summary.get("variant_metadata_template_rows") or 0
+        ),
+        "confirmed_import_variant_metadata_manual_confirmed_rows": int(
+            confirmed_import_readiness_summary.get("variant_metadata_manual_confirmed_rows") or 0
+        ),
+        "confirmed_import_variant_metadata_skipped_rows": int(
+            confirmed_import_readiness_summary.get("variant_metadata_skipped_rows") or 0
+        ),
         "confirmed_import_manual_confirmation_backlog_rows": expected_confirmation_backlog,
         "confirmed_import_work_order_lanes": int(confirmed_import_readiness_summary.get("work_order_lanes") or 0),
         "confirmed_import_top_work_order_lane": confirmed_import_readiness_summary.get("top_work_order_lane"),
