@@ -28,6 +28,11 @@ class PublicCatalogReportTests(unittest.TestCase):
 
             self.assertEqual(path.stat().st_mtime_ns, first_mtime)
 
+            summary_timestamp_only = {"summary_generated_at": "later", **payload}
+            reports.write_json(path, summary_timestamp_only)
+
+            self.assertEqual(path.stat().st_mtime_ns, first_mtime)
+
     def test_public_report_generation_keeps_site_data_safe_and_consistent(self):
         result = reports.update_reports(write=False)
 

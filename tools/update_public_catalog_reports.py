@@ -467,6 +467,9 @@ def app_folder_visual_catalog_summary() -> dict[str, Any]:
     }
 
 
+TIMESTAMP_ONLY_KEYS = {"generated_at", "summary_generated_at"}
+
+
 def write_json(path: Path, data: Any) -> None:
     serialized = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     if path.exists():
@@ -479,10 +482,12 @@ def write_json(path: Path, data: Any) -> None:
             existing_data = None
         if isinstance(existing_data, dict) and isinstance(data, dict):
             existing_without_generated_at = {
-                key: value for key, value in existing_data.items() if key != "generated_at"
+                key: value
+                for key, value in existing_data.items()
+                if key not in TIMESTAMP_ONLY_KEYS
             }
             data_without_generated_at = {
-                key: value for key, value in data.items() if key != "generated_at"
+                key: value for key, value in data.items() if key not in TIMESTAMP_ONLY_KEYS
             }
             if existing_without_generated_at == data_without_generated_at:
                 return
