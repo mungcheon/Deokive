@@ -587,9 +587,10 @@ class _CatalogAddButton extends StatelessWidget {
     final content = AnimatedContainer(
       duration: const Duration(milliseconds: 140),
       height: 40,
-      constraints: BoxConstraints.tightFor(
-        width: expanded ? null : 118,
-        height: 40,
+      constraints: BoxConstraints(
+        minWidth: expanded ? 0 : 124,
+        minHeight: 40,
+        maxHeight: 40,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12),
       clipBehavior: Clip.antiAlias,
@@ -620,11 +621,17 @@ class _CatalogAddButton extends StatelessWidget {
               mainAxisSize: expanded ? MainAxisSize.max : MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon),
+                Icon(icon, color: foreground),
                 const SizedBox(width: 5),
                 Flexible(
                   child: Text(
                     label,
+                    style: TextStyle(
+                      color: foreground,
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w900,
+                      height: 1,
+                    ),
                     maxLines: 1,
                     softWrap: false,
                     overflow: TextOverflow.ellipsis,

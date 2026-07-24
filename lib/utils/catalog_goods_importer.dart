@@ -435,11 +435,17 @@ class _CatalogImportActionButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon),
+                Icon(icon, color: foregroundColor),
                 const SizedBox(width: 7),
                 Flexible(
                   child: Text(
                     label,
+                    style: TextStyle(
+                      color: foregroundColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                      height: 1,
+                    ),
                     maxLines: 1,
                     softWrap: false,
                     overflow: TextOverflow.ellipsis,
