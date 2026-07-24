@@ -10228,8 +10228,13 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["deduplication_review_batches"] = copy_report_summary(
                 DEDUPLICATION_REVIEW_BATCHES, "deduplication_review_batches"
             )
-        dedupe_action_queue_summary = {}
-        if DEDUPLICATION_ACTION_QUEUE.exists():
+        dedupe_action_queue_summary = deduplication_action_queue.get("summary", {})
+        if dedupe_action_queue_summary:
+            target["deduplication_action_queue"] = {
+                "public_report": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+                **dedupe_action_queue_summary,
+            }
+        elif DEDUPLICATION_ACTION_QUEUE.exists():
             dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {})
             dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
             target["deduplication_action_queue"] = copy_report_summary(

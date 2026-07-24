@@ -856,6 +856,25 @@ def build_report(
     completion_readiness["blocked_reasons"] = [
         reason for reason in completion_readiness["blocked_reasons"] if reason
     ]
+    dedupe_safety_gate = {
+        "status": "blocked_until_manual_review"
+        if completion_readiness["blocked_reasons"]
+        else "clear",
+        "auto_merge_ready_groups": 0,
+        "auto_delete_ready_groups": 0,
+        "manual_decision_required_groups": len(actionable),
+        "ichiban_reissue_manual_review_groups": reissue_policy.get(
+            "ichiban_reissue_review_groups",
+            0,
+        ),
+        "ichiban_probable_reissue_review_groups": reissue_policy.get(
+            "ichiban_probable_reissue_review_groups",
+            0,
+        ),
+        "protected_reissue_overlap_groups": protected_group_count,
+        "blocked_reasons": completion_readiness["blocked_reasons"],
+        "next_safe_phase": completion_readiness["next_safe_phase"],
+    }
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(published), batch_size):
@@ -940,6 +959,10 @@ def build_report(
             "ichiban_reissue_protected_groups": protected_group_count,
             "ichiban_reissue_protected_rows": len(protected_row_indexes),
             "completion_readiness_status": completion_status,
+            "dedupe_safety_gate_status": dedupe_safety_gate["status"],
+            "dedupe_safety_gate_blocked_reason_count": len(
+                dedupe_safety_gate["blocked_reasons"]
+            ),
             "auto_merge_ready_groups": 0,
             "auto_delete_ready_groups": 0,
             "explicit_keep_drop_required_groups": len(actionable),
@@ -947,6 +970,7 @@ def build_report(
             "auto_delete_enabled": False,
         },
         "completion_readiness": completion_readiness,
+        "dedupe_safety_gate": dedupe_safety_gate,
         "instructions": [
             "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",
             "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",

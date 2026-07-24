@@ -1042,6 +1042,14 @@ class PublicCatalogReportTests(unittest.TestCase):
                 dedupe_action_summary["explicit_keep_drop_required_groups"],
             )
             self.assertEqual(
+                quality["deduplication_action_queue"]["dedupe_safety_gate_status"],
+                dedupe_action_summary["dedupe_safety_gate_status"],
+            )
+            self.assertEqual(
+                quality["deduplication_action_queue"]["dedupe_safety_gate_blocked_reason_count"],
+                dedupe_action_summary["dedupe_safety_gate_blocked_reason_count"],
+            )
+            self.assertEqual(
                 quality["deduplication_action_queue"]["ichiban_reissue_work_order_rows"],
                 dedupe_action_summary["ichiban_reissue_work_order_rows"],
             )

@@ -92,6 +92,11 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["completion_readiness"]["status"], "manual_keep_drop_confirmation_required")
         self.assertEqual(report["completion_readiness"]["next_safe_phase"], "record_manual_keep_drop_decisions")
+        self.assertEqual(report["summary"]["dedupe_safety_gate_status"], "blocked_until_manual_review")
+        self.assertEqual(report["summary"]["dedupe_safety_gate_blocked_reason_count"], 2)
+        self.assertEqual(report["dedupe_safety_gate"]["manual_decision_required_groups"], 2)
+        self.assertEqual(report["dedupe_safety_gate"]["auto_merge_ready_groups"], 0)
+        self.assertEqual(report["dedupe_safety_gate"]["auto_delete_ready_groups"], 0)
         self.assertIn(
             "explicit_manual_keep_drop_confirmation_required",
             report["completion_readiness"]["blocked_reasons"],
@@ -290,6 +295,9 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["ichiban_reissue_manual_confirmed_rows"], 0)
         self.assertEqual(report["summary"]["completion_readiness_status"], "ichiban_reissue_review_required")
+        self.assertEqual(report["summary"]["dedupe_safety_gate_status"], "blocked_until_manual_review")
+        self.assertEqual(report["dedupe_safety_gate"]["manual_decision_required_groups"], 1)
+        self.assertEqual(report["dedupe_safety_gate"]["protected_reissue_overlap_groups"], 1)
         self.assertEqual(report["completion_readiness"]["status"], "ichiban_reissue_review_required")
         self.assertEqual(
             report["completion_readiness"]["next_safe_phase"],
@@ -408,6 +416,9 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_probable_reissue_sample_rows"], 2)
         self.assertEqual(report["summary"]["ichiban_reissue_protected_groups"], 0)
         self.assertEqual(report["summary"]["completion_readiness_status"], "ichiban_reissue_review_required")
+        self.assertEqual(report["summary"]["dedupe_safety_gate_status"], "blocked_until_manual_review")
+        self.assertEqual(report["dedupe_safety_gate"]["manual_decision_required_groups"], 0)
+        self.assertEqual(report["dedupe_safety_gate"]["ichiban_reissue_manual_review_groups"], 46)
         self.assertEqual(report["completion_readiness"]["ichiban_reissue_work_order_rows"], 1)
         self.assertEqual(len(report["ichiban_reissue_review_lane"]), 1)
         self.assertEqual(len(report["ichiban_reissue_work_order"]), 1)
