@@ -191,7 +191,8 @@ class DeokiveApp extends StatelessWidget {
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final isSelected = states.contains(WidgetState.selected);
           return TextStyle(
-            color: isSelected ? spec.primary : surfaceText.withOpacity(0.78),
+            color:
+                isSelected ? spec.primary : surfaceText.withValues(alpha: 0.78),
             fontSize: navLabelSize,
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
           );
@@ -215,7 +216,7 @@ class DeokiveApp extends StatelessWidget {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           backgroundColor: spec.primary,
-          foregroundColor: spec.text,
+          foregroundColor: colorScheme.onPrimary,
           textStyle: TextStyle(
             fontFamily: resolvedFamily,
             fontWeight: FontWeight.w700,
@@ -261,7 +262,7 @@ class DeokiveApp extends StatelessWidget {
         filled: true,
         fillColor: surface,
         labelStyle: TextStyle(color: surfaceText),
-        helperStyle: TextStyle(color: surfaceText.withOpacity(0.75)),
+        helperStyle: TextStyle(color: surfaceText.withValues(alpha: 0.75)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: outline),

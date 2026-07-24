@@ -341,6 +341,20 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                         width: double.infinity,
                         height: 48,
                         child: FilledButton.icon(
+                          style: FilledButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
+                            foregroundColor:
+                                Theme.of(context).colorScheme.onPrimary,
+                            disabledBackgroundColor: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withValues(alpha: 0.28),
+                            disabledForegroundColor: Theme.of(context)
+                                .colorScheme
+                                .onPrimary
+                                .withValues(alpha: 0.70),
+                          ),
                           onPressed: destinationFolder == null
                               ? null
                               : () => Navigator.pop(
