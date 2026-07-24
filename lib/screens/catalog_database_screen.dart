@@ -315,7 +315,11 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                       const SizedBox(width: 10),
                       Expanded(
                         flex: 2,
-                        child: FilledButton.icon(
+                        child: _CatalogAddButton(
+                          key: const Key('catalog-add-sheet-button'),
+                          label: '내 굿즈에 추가하기',
+                          icon: Icons.add_rounded,
+                          expanded: true,
                           onPressed: () async {
                             Navigator.pop(sheetContext);
                             if (!parentContext.mounted) return;
@@ -329,25 +333,6 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                               setState(() {});
                             }
                           },
-                          icon: Icon(
-                            Icons.add_rounded,
-                            color: _catalogAddButtonForeground,
-                          ),
-                          label: Text(
-                            '내 굿즈에 추가하기',
-                            style: const TextStyle(
-                              color: _catalogAddButtonForeground,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          style: FilledButton.styleFrom(
-                            backgroundColor: _catalogAddButtonBackground,
-                            foregroundColor: _catalogAddButtonForeground,
-                            textStyle: const TextStyle(
-                              color: _catalogAddButtonForeground,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
                         ),
                       ),
                     ],
@@ -561,58 +546,108 @@ class _CatalogListTile extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            SizedBox(
-              width: 108,
-              height: 40,
-              child: FilledButton(
-                onPressed: isAdding ? null : () async => onAdd(),
-                style: FilledButton.styleFrom(
-                  backgroundColor: _catalogAddButtonBackground,
-                  foregroundColor: _catalogAddButtonForeground,
-                  disabledBackgroundColor: _catalogAddButtonDisabledBackground,
-                  disabledForegroundColor: _catalogAddButtonDisabledForeground,
-                  textStyle: const TextStyle(
-                    color: _catalogAddButtonForeground,
-                    fontWeight: FontWeight.w900,
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 9),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                ),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        isAdding ? Icons.more_horiz_rounded : Icons.add_rounded,
-                        size: 17,
-                        color: isAdding
-                            ? _catalogAddButtonDisabledForeground
-                            : _catalogAddButtonForeground,
-                      ),
-                      const SizedBox(width: 3),
-                      Text(
-                        isAdding ? '추가 중' : '추가하기',
-                        maxLines: 1,
-                        softWrap: false,
-                        style: TextStyle(
-                          color: isAdding
-                              ? _catalogAddButtonDisabledForeground
-                              : _catalogAddButtonForeground,
-                          fontSize: 12.5,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            _CatalogAddButton(
+              key: const Key('catalog-add-list-button'),
+              label: isAdding ? '추가 중' : '추가하기',
+              icon: isAdding ? Icons.more_horiz_rounded : Icons.add_rounded,
+              disabled: isAdding,
+              onPressed: () async => onAdd(),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _CatalogAddButton extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final bool disabled;
+  final bool expanded;
+  final Future<void> Function()? onPressed;
+
+  const _CatalogAddButton({
+    super.key,
+    required this.label,
+    required this.icon,
+    this.disabled = false,
+    this.expanded = false,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final background = disabled
+        ? _catalogAddButtonDisabledBackground
+        : _catalogAddButtonBackground;
+    final foreground = disabled
+        ? _catalogAddButtonDisabledForeground
+        : _catalogAddButtonForeground;
+
+    final content = AnimatedContainer(
+      duration: const Duration(milliseconds: 140),
+      height: 40,
+      constraints: BoxConstraints(
+        minWidth: expanded ? 0 : 112,
+        maxWidth: expanded ? double.infinity : 124,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 13),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(999),
+        boxShadow: disabled
+            ? null
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.12),
+                  blurRadius: 12,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+      ),
+      child: Center(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: DefaultTextStyle.merge(
+            style: TextStyle(
+              color: foreground,
+              fontSize: 13,
+              fontWeight: FontWeight.w900,
+              height: 1,
+            ),
+            child: IconTheme.merge(
+              data: IconThemeData(color: foreground, size: 17),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(icon),
+                  const SizedBox(width: 5),
+                  Text(
+                    label,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.visible,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    if (disabled || onPressed == null) {
+      return content;
+    }
+
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(999),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(999),
+        onTap: onPressed,
+        child: content,
       ),
     );
   }

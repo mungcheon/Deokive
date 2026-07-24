@@ -51,10 +51,10 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.text(entry.nameKo).first);
+    await tester.tap(find.text(entry.nameKo).last);
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byType(FilledButton).last);
+    await tester.tap(find.byKey(const Key('catalog-add-sheet-button')));
     await tester.pumpAndSettle();
     expect(find.text('Default'), findsOneWidget);
 
@@ -108,7 +108,7 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(FilledButton, '추가하기').first);
+    await tester.tap(find.byKey(const Key('catalog-add-list-button')).first);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();
@@ -161,7 +161,7 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(FilledButton).first);
+    await tester.tap(find.byKey(const Key('catalog-add-list-button')).first);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();
@@ -208,7 +208,7 @@ void main() {
 
     await tester.enterText(find.byType(TextField), entry.nameKo);
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(FilledButton, '추가하기').first);
+    await tester.tap(find.byKey(const Key('catalog-add-list-button')).first);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(FilledButton).last);
     await tester.pumpAndSettle();
