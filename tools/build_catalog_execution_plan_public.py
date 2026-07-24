@@ -1090,6 +1090,55 @@ def _build_plan(load_report) -> dict[str, Any]:
                     for row in image_action_queue.get("workstreams", [])
                     if isinstance(row, dict)
                 ][:8],
+                "next_source_url_review_batch_rows": _count(
+                    image_action_summary, "next_source_url_review_batch_rows"
+                ),
+                "next_source_url_review_batch_store_count": _count(
+                    image_action_summary, "next_source_url_review_batch_store_count"
+                ),
+                "next_source_url_review_batch_primary_review_url_rows": _count(
+                    image_action_summary,
+                    "next_source_url_review_batch_primary_review_url_rows",
+                ),
+                "next_source_url_review_batch_primary_review_url_kind_counts": (
+                    image_action_summary.get(
+                        "next_source_url_review_batch_primary_review_url_kind_counts",
+                        [],
+                    )
+                ),
+                "next_source_url_review_batch": [
+                    row
+                    for row in image_action_queue.get("next_source_url_review_batch", [])
+                    if isinstance(row, dict)
+                ][:10],
+                "next_representative_image_review_batch_rows": _count(
+                    image_action_summary, "next_representative_image_review_batch_rows"
+                ),
+                "next_representative_image_review_batch_store_count": _count(
+                    image_action_summary,
+                    "next_representative_image_review_batch_store_count",
+                ),
+                "next_representative_image_review_batch_primary_review_url_rows": _count(
+                    image_action_summary,
+                    "next_representative_image_review_batch_primary_review_url_rows",
+                ),
+                "next_representative_image_review_batch_local_path_rows": _count(
+                    image_action_summary,
+                    "next_representative_image_review_batch_local_path_rows",
+                ),
+                "next_representative_image_review_batch_primary_review_url_kind_counts": (
+                    image_action_summary.get(
+                        "next_representative_image_review_batch_primary_review_url_kind_counts",
+                        [],
+                    )
+                ),
+                "next_representative_image_review_batch": [
+                    row
+                    for row in image_action_queue.get(
+                        "next_representative_image_review_batch", []
+                    )
+                    if isinstance(row, dict)
+                ][:10],
                 "excluded_workflow_rows": image_action_summary.get("excluded_workflow_rows", []),
                 "by_workflow": image_action_summary.get("by_workflow", []),
             },

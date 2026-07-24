@@ -2928,6 +2928,46 @@ def build_operations_public(
             "by_workflow": image_action_queue_summary.get("by_workflow", []),
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
             "top_image_attachment_workstreams": image_action_workstreams,
+            "next_source_url_review_batch_rows": image_action_queue_summary.get(
+                "next_source_url_review_batch_rows", 0
+            ),
+            "next_source_url_review_batch_store_count": image_action_queue_summary.get(
+                "next_source_url_review_batch_store_count", 0
+            ),
+            "next_source_url_review_batch_primary_review_url_rows": image_action_queue_summary.get(
+                "next_source_url_review_batch_primary_review_url_rows", 0
+            ),
+            "next_source_url_review_batch_primary_review_url_kind_counts": image_action_queue_summary.get(
+                "next_source_url_review_batch_primary_review_url_kind_counts", []
+            ),
+            "next_source_url_review_batch": [
+                row
+                for row in image_action_queue.get("next_source_url_review_batch", [])
+                if isinstance(row, dict)
+            ][:10],
+            "next_representative_image_review_batch_rows": image_action_queue_summary.get(
+                "next_representative_image_review_batch_rows", 0
+            ),
+            "next_representative_image_review_batch_store_count": image_action_queue_summary.get(
+                "next_representative_image_review_batch_store_count", 0
+            ),
+            "next_representative_image_review_batch_primary_review_url_rows": image_action_queue_summary.get(
+                "next_representative_image_review_batch_primary_review_url_rows", 0
+            ),
+            "next_representative_image_review_batch_local_path_rows": image_action_queue_summary.get(
+                "next_representative_image_review_batch_local_path_rows", 0
+            ),
+            "next_representative_image_review_batch_primary_review_url_kind_counts": image_action_queue_summary.get(
+                "next_representative_image_review_batch_primary_review_url_kind_counts", []
+            ),
+            "next_representative_image_review_batch_candidate_status_counts": image_action_queue_summary.get(
+                "next_representative_image_review_batch_candidate_status_counts", []
+            ),
+            "next_representative_image_review_batch": [
+                row
+                for row in image_action_queue.get("next_representative_image_review_batch", [])
+                if isinstance(row, dict)
+            ][:10],
             "excluded_workflow_rows": image_action_queue_summary.get("excluded_workflow_rows", []),
             "attachment_readiness": image_action_queue.get(
                 "attachment_readiness", {}
@@ -4789,7 +4829,10 @@ def build_agent_work_queue_public(
             if review_summary and review_summary.get("exact_type_candidate_rows", 0) > 0:
                 return "official_exact_candidate_review_required"
             return "official_candidate_mismatch_review_required"
-        if workstream == "image_url_attachment":
+        if workstream in {
+            "image_url_attachment",
+            "image_attachment_source_url_next_review_batch",
+        }:
             return "source_discovery_then_image_attachment"
         if workstream == "image_attachment_action_queue":
             return "image_evidence_confirmation_required"
@@ -4988,12 +5031,56 @@ def build_agent_work_queue_public(
             )
 
     image_action_batches = [batch for batch in image_action_queue.get("batches", []) if isinstance(batch, dict)]
+    image_next_source_url_batch = [
+        row
+        for row in image_action_queue.get("next_source_url_review_batch", [])
+        if isinstance(row, dict)
+    ]
     image_next_representative_batch = [
         row
         for row in image_action_queue.get("next_representative_image_review_batch", [])
         if isinstance(row, dict)
     ]
     image_action_summary = image_action_queue.get("summary", {})
+    if image_next_source_url_batch:
+        add_batch(
+            agent_id="agent-image-action",
+            workstream="image_attachment_source_url_next_review_batch",
+            priority=18,
+            title="Next image source-url replacement review batch",
+            public_report=IMAGE_ATTACHMENT_ACTION_QUEUE,
+            rows=len(image_next_source_url_batch),
+            recommended_action=(
+                "Open each primary_review_url and replace generic storefront URLs with exact "
+                "product/detail source URLs before image import."
+            ),
+            acceptance_criteria=[
+                "Accepted source_url must be an exact product or product-detail page.",
+                "Do not attach image_url until the exact product page image is visible.",
+                "Use source_search_url before fallback web search when present.",
+                "Keep auto-apply disabled; prepare reviewed source_url template rows only.",
+            ],
+            samples=image_next_source_url_batch,
+            sample_limit=10,
+            review_summary={
+                "next_source_url_review_batch_rows": len(image_next_source_url_batch),
+                "next_source_url_review_batch_store_count": int(
+                    image_action_summary.get("next_source_url_review_batch_store_count") or 0
+                ),
+                "next_source_url_review_batch_primary_review_url_rows": int(
+                    image_action_summary.get(
+                        "next_source_url_review_batch_primary_review_url_rows"
+                    )
+                    or 0
+                ),
+                "next_source_url_review_batch_primary_review_url_kind_counts": (
+                    image_action_summary.get(
+                        "next_source_url_review_batch_primary_review_url_kind_counts",
+                        [],
+                    )
+                ),
+            },
+        )
     if image_next_representative_batch:
         add_batch(
             agent_id="agent-image-action",
@@ -5013,6 +5100,7 @@ def build_agent_work_queue_public(
                 "Prepare reviewed image templates only; auto-apply remains disabled.",
             ],
             samples=image_next_representative_batch,
+            sample_limit=10,
             review_summary={
                 "next_representative_image_review_batch_rows": len(
                     image_next_representative_batch

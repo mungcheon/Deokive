@@ -1813,6 +1813,28 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         image_action = reports.load_json(reports.IMAGE_ATTACHMENT_ACTION_QUEUE)
         image_action_summary = image_action.get("summary", {})
+        image_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "image_attachment_action_queue"
+        )
+        image_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "image_attachment_action_queue"
+        )
+        execution_plan = reports.load_json(reports.EXECUTION_PLAN)
+        image_execution_action = next(
+            row
+            for row in execution_plan.get("actions", [])
+            if row.get("workstream") == "image_attachment_action_queue"
+        )
+        source_url_image_agent_batch = next(
+            batch
+            for batch in batches
+            if batch.get("workstream")
+            == "image_attachment_source_url_next_review_batch"
+        )
         first_image_action_batch = next(
             batch
             for batch in batches
@@ -1836,6 +1858,79 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             open_queues.get("image_attachment_local_download_ready_rows"),
             image_action_summary.get("local_image_download_instruction_ready_rows"),
+        )
+        self.assertEqual(
+            image_next_action.get("next_source_url_review_batch_rows"),
+            image_action_summary.get("next_source_url_review_batch_rows"),
+        )
+        self.assertEqual(
+            len(image_next_action.get("next_source_url_review_batch", [])),
+            image_action_summary.get("next_source_url_review_batch_rows"),
+        )
+        self.assertEqual(
+            image_next_action.get(
+                "next_representative_image_review_batch_rows"
+            ),
+            image_action_summary.get("next_representative_image_review_batch_rows"),
+        )
+        self.assertEqual(
+            len(image_next_action.get("next_representative_image_review_batch", [])),
+            image_action_summary.get(
+                "next_representative_image_review_batch_rows"
+            ),
+        )
+        self.assertEqual(
+            image_execution_action["evidence"].get(
+                "next_source_url_review_batch_rows"
+            ),
+            image_action_summary.get("next_source_url_review_batch_rows"),
+        )
+        self.assertEqual(
+            len(
+                image_execution_action["evidence"].get(
+                    "next_source_url_review_batch", []
+                )
+            ),
+            image_action_summary.get("next_source_url_review_batch_rows"),
+        )
+        self.assertEqual(
+            image_execution_action["evidence"].get(
+                "next_representative_image_review_batch_rows"
+            ),
+            image_action_summary.get("next_representative_image_review_batch_rows"),
+        )
+        self.assertEqual(
+            len(
+                image_execution_action["evidence"].get(
+                    "next_representative_image_review_batch", []
+                )
+            ),
+            image_action_summary.get(
+                "next_representative_image_review_batch_rows"
+            ),
+        )
+        self.assertEqual(
+            source_url_image_agent_batch.get("rows"),
+            image_action_summary.get("next_source_url_review_batch_rows"),
+        )
+        self.assertEqual(
+            len(source_url_image_agent_batch.get("sample_items", [])),
+            image_action_summary.get("next_source_url_review_batch_rows"),
+        )
+        self.assertEqual(
+            source_url_image_agent_batch.get("review_summary", {}).get(
+                "next_source_url_review_batch_primary_review_url_rows"
+            ),
+            image_action_summary.get(
+                "next_source_url_review_batch_primary_review_url_rows"
+            ),
+        )
+        self.assertTrue(
+            all(
+                item.get("primary_review_url")
+                for item in source_url_image_agent_batch.get("sample_items", [])
+                if isinstance(item, dict)
+            )
         )
         self.assertGreater(
             first_image_action_batch.get("review_summary", {}).get("primary_review_url_rows", 0),
@@ -1876,6 +1971,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             representative_image_agent_batch.get("rows"),
+            image_action_summary.get("next_representative_image_review_batch_rows"),
+        )
+        self.assertEqual(
+            len(representative_image_agent_batch.get("sample_items", [])),
             image_action_summary.get("next_representative_image_review_batch_rows"),
         )
         self.assertEqual(
@@ -2004,16 +2103,6 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "metadata_action_queue"
-        )
-        image_scorecard = next(
-            row
-            for row in operations.get("workstream_scorecard", [])
-            if row.get("workstream") == "image_attachment_action_queue"
-        )
-        image_next_action = next(
-            row
-            for row in operations.get("next_actions", [])
-            if row.get("workstream") == "image_attachment_action_queue"
         )
         dedupe_action = reports.load_json(reports.DEDUPLICATION_ACTION_QUEUE)
         dedupe_action_summary = dedupe_action.get("summary", {})

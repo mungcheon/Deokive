@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T14:14:40Z",
+  "generated_at": "2026-07-24T14:19:32Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20289,
+    "summed_batch_rows": 20297,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -57,7 +57,7 @@
       ],
       [
         "deduplication_review",
-        7
+        6
       ],
       [
         "ichiban_kuji_prize_policy_audit",
@@ -93,6 +93,10 @@
       ],
       [
         "gotouchi_official_candidate_review",
+        1
+      ],
+      [
+        "image_attachment_source_url_next_review_batch",
         1
       ],
       [
@@ -142,6 +146,10 @@
         10
       ],
       [
+        "agent-image-action",
+        9
+      ],
+      [
         "agent-ichiban-action",
         9
       ],
@@ -154,10 +162,6 @@
         8
       ],
       [
-        "agent-image-action",
-        8
-      ],
-      [
         "agent-source-image",
         8
       ],
@@ -167,7 +171,7 @@
       ],
       [
         "agent-dedupe",
-        7
+        6
       ],
       [
         "agent-ichiban-prize-policy",
@@ -3577,7 +3581,7 @@
       "next_machine_step": "confirm_exact_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-54",
+      "batch_id": "015-agent-generic-source-cleanup-55",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3683,7 +3687,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-55",
+      "batch_id": "015-agent-generic-source-cleanup-56",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3739,7 +3743,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-56",
+      "batch_id": "015-agent-generic-source-cleanup-57",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3812,7 +3816,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-57",
+      "batch_id": "018-agent-gotouchi-review-58",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -3919,7 +3923,767 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "018-agent-ichiban-action-138",
+      "batch_id": "018-agent-image-action-41",
+      "agent_id": "agent-image-action",
+      "workstream": "image_attachment_source_url_next_review_batch",
+      "priority": 18,
+      "title": "Next image source-url replacement review batch",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "rows": 10,
+      "recommended_action": "Open each primary_review_url and replace generic storefront URLs with exact product/detail source URLs before image import.",
+      "acceptance_criteria": [
+        "Accepted source_url must be an exact product or product-detail page.",
+        "Do not attach image_url until the exact product page image is visible.",
+        "Use source_search_url before fallback web search when present.",
+        "Keep auto-apply disabled; prepare reviewed source_url template rows only."
+      ],
+      "sample_items": [
+        {
+          "manual_confirmed": false,
+          "row_index": 2325,
+          "source_store": "Stellive Store",
+          "name_ko": "스텔라이브 1주년 뱃지 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "캔뱃지",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "low_confidence_candidate_review",
+          "source_url_review_blockers": [
+            "candidate_score_too_low",
+            "exact_product_identity_unconfirmed"
+          ],
+          "candidate_status": "low_confidence_candidate",
+          "candidate_score": 0.2733,
+          "candidate_count": 5,
+          "candidate_options": [
+            {
+              "product_no": 3700,
+              "title": "S.S.Stellive 메탈 뱃지",
+              "source_url": "https://fanding.kr/@stellive/shop/3700",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/vKsGONz2woPTJl6I.webp",
+              "release_date": "2026-07-14",
+              "score": 0.2733,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.3333
+            },
+            {
+              "product_no": 3701,
+              "title": "S.S.Stellive 레트로 병뚜껑 뱃지",
+              "source_url": "https://fanding.kr/@stellive/shop/3701",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/09/C07F2nrzsNcKbkI8.webp",
+              "release_date": "2026-07-14",
+              "score": 0.25,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.25
+            },
+            {
+              "product_no": 374,
+              "title": "Milky Way 메탈 로고 뱃지",
+              "source_url": "https://fanding.kr/@stellive/shop/374",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2024/03/08/NAw8o0XVptGYd7T2.webp",
+              "release_date": "2024-03-12",
+              "score": 0.236,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.2
+            },
+            {
+              "product_no": 3529,
+              "title": "2026 AKANE LIZE : OVT. 금속 뱃지",
+              "source_url": "https://fanding.kr/@stellive/shop/3529",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/06/01/C6HgOuTKy05X4jkJ.webp",
+              "release_date": "2026-06-02",
+              "score": 0.2267,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.1667
+            },
+            {
+              "product_no": 3729,
+              "title": "2026 AKANE LIZE : OVT. 금속 뱃지 [2차 판매]",
+              "source_url": "https://fanding.kr/@stellive/shop/3729",
+              "image_url": "https://uploads.cdn.fanding.com/upload/image/product_thumbnail/2026/07/13/6GerTYx8UF1V3EXI.webp",
+              "release_date": "2026-07-14",
+              "score": 0.2267,
+              "shared_tokens": [
+                "뱃지"
+              ],
+              "query_overlap": 0.25,
+              "title_overlap": 0.1667
+            }
+          ],
+          "match_diagnostics": {
+            "query_tokens": [
+              "1주년",
+              "뱃지",
+              "세트",
+              "스텔라이브"
+            ],
+            "query_members": [],
+            "query_events": [
+              "1주년"
+            ],
+            "top_candidate_title": "S.S.Stellive 메탈 뱃지",
+            "top_candidate_score": 0.2733,
+            "top_candidate_shared_tokens": [
+              "뱃지"
+            ],
+            "top_candidate_query_overlap": 0.25,
+            "top_candidate_title_overlap": 0.3333,
+            "diagnosis": "candidate_exists_but_score_below_manual_review_threshold"
+          },
+          "fallback_search_queries": [
+            "스텔라이브 1주년 뱃지 세트 캔뱃지",
+            "site:fanding.kr/@stellive/shop 스텔라이브 1주년 뱃지 세트",
+            "1주년 캔뱃지"
+          ],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "low_confidence_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "Candidate options are review hints only; do not copy the top candidate without exact title/member/event/type confirmation.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2352,
+          "source_store": "Stellive Store",
+          "name_ko": "강지 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2355,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2356,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2357,
+          "source_store": "Stellive Store",
+          "name_ko": "아이리 칸나 키링 세트",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2361,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2362,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 생일 기념 굿즈",
+          "name_ja": null,
+          "series_name": null,
+          "category": "액세서리",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2363,
+          "source_store": "Stellive Store",
+          "name_ko": "쿠루미 노아 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2372,
+          "source_store": "Stellive Store",
+          "name_ko": "하나코 코코나 마스코트 인형",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "row_index": 2373,
+          "source_store": "Stellive Store",
+          "name_ko": "비비 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "current_source_url": "https://fanding.kr/@stellive/shop",
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "primary_review_url_kind": "source_search_url",
+          "source_search_url": "https://fanding.kr/@stellive/shop?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "first_fallback_web_search_url": "",
+          "fallback_web_search_urls": [],
+          "source_url_review_lane": "manual_search_required",
+          "source_url_review_blockers": [
+            "no_exact_product_candidate",
+            "manual_product_detail_search_required"
+          ],
+          "candidate_status": "no_candidate",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "source_url_review_guidance": {
+            "source_store": "Stellive Store",
+            "primary_review_url_kind": "source_search_url",
+            "candidate_status": "no_candidate",
+            "accepted_url_patterns": [
+              "https://fanding.kr/@stellive/shop/{product_no}",
+              "page title/product card must preserve member, event, product type, and variant terms"
+            ],
+            "required_evidence": [
+              "exact product detail page",
+              "product title preserves the catalog name or official variant wording",
+              "goods type/category matches the catalog row",
+              "product image or page context can later support image_url attachment"
+            ],
+            "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+            "do_not_use": [
+              "storefront root URL",
+              "search results URL",
+              "category/listing page",
+              "low-score candidate with only generic token overlap"
+            ],
+            "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+            "auto_apply_allowed": false
+          },
+          "manual_value": "",
+          "evidence_url": "",
+          "candidate_source_url": "",
+          "blocked_until": "exact_product_source_url_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm the exact product detail page, not a storefront/search page.",
+            "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
+            "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
+            "Leave manual_confirmed=false until the source URL proves the exact item identity."
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        }
+      ],
+      "review_summary": {
+        "next_source_url_review_batch_rows": 10,
+        "next_source_url_review_batch_store_count": 1,
+        "next_source_url_review_batch_primary_review_url_rows": 10,
+        "next_source_url_review_batch_primary_review_url_kind_counts": [
+          [
+            "source_search_url",
+            10
+          ]
+        ]
+      },
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
+    },
+    {
+      "batch_id": "018-agent-ichiban-action-139",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 18,
@@ -4871,7 +5635,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "019-agent-confirmed-import-53",
+      "batch_id": "019-agent-confirmed-import-54",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -5089,7 +5853,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "019-agent-source-fallback-50",
+      "batch_id": "019-agent-source-fallback-51",
       "agent_id": "agent-source-fallback",
       "workstream": "source_discovery_next_focus_fallback_queue",
       "priority": 19,
@@ -5483,7 +6247,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "019-agent-image-action-41",
+      "batch_id": "019-agent-image-action-42",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 19,
@@ -6457,6 +7221,222 @@
           ],
           "unblocks": "manual_catalog_image_url_import",
           "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 946,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+          "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+          "series_name": "ご当地",
+          "category": "아크릴 키링",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E4%BA%AC%E9%83%BD+%E6%B8%85%E6%B0%B4%E5%AF%BA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E4%BA%AC%E9%83%BD+%E6%B8%85%E6%B0%B4%E5%AF%BA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E4%BA%AC%E9%83%BD+%E6%B8%85%E6%B0%B4%E5%AF%BA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
+          "representative_top_candidates": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
+              "image_url": "https://www.jp-api.com/images/tphoto_568895_0_b.png",
+              "alt": "ニデック京都タワー ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "matched_motifs": [
+                "京都"
+              ],
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": "https://www.jp-api.com/images/tphoto_574472_0_b.png",
+              "alt": "ニデック京都タワー 記念メダル",
+              "type": "misc",
+              "matched_motifs": [
+                "京都"
+              ],
+              "row_type": "acrylic_keyholder",
+              "type_match": false,
+              "score": 2
+            }
+          ],
+          "suggested_local_image_path": "assets/catalog_images/catalog_946.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_946.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_946.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 946,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
+            "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+            "category": "아크릴 키링",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_946.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_confirmed": false,
+          "catalog_index": 950,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+          "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+          "series_name": "ご当地",
+          "category": "타월",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94"
+          ],
+          "manual_image_url": "",
+          "evidence_url": "",
+          "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
+          "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
+          "representative_top_candidates": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+              "alt": "北海道 ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "matched_motifs": [
+                "北海道"
+              ],
+              "row_type": "towel",
+              "type_match": false,
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+              "alt": "北海道 キャラットソックス",
+              "type": "socks",
+              "matched_motifs": [
+                "北海道"
+              ],
+              "row_type": "towel",
+              "type_match": false,
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+              "alt": "北海道 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "matched_motifs": [
+                "北海道"
+              ],
+              "row_type": "towel",
+              "type_match": false,
+              "score": 2
+            }
+          ],
+          "suggested_local_image_path": "assets/catalog_images/catalog_950.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_950.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_950.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 950,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
+            "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
+            "category": "타월",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_950.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "blocked_until": "representative_image_exact_product_type_confirmed",
+          "operator_checklist": [
+            "Open primary_review_url first.",
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Paste the confirmed product image URL into manual_image_url and evidence_url.",
+            "Leave manual_confirmed=false if the official candidate shows a different product type."
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
         }
       ],
       "review_summary": {
@@ -6474,7 +7454,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-focus-pack-49",
+      "batch_id": "020-agent-source-focus-pack-50",
       "agent_id": "agent-source-focus-pack",
       "workstream": "source_discovery_next_focus_pack",
       "priority": 20,
@@ -6665,7 +7645,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-58",
+      "batch_id": "020-agent-source-image-59",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -6764,7 +7744,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-59",
+      "batch_id": "020-agent-source-image-60",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -6962,7 +7942,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-60",
+      "batch_id": "020-agent-source-image-61",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7061,7 +8041,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-61",
+      "batch_id": "020-agent-source-image-62",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7160,7 +8140,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-62",
+      "batch_id": "020-agent-source-image-63",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7259,7 +8239,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-63",
+      "batch_id": "020-agent-source-image-64",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7358,7 +8338,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-64",
+      "batch_id": "020-agent-source-image-65",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7457,7 +8437,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-image-action-42",
+      "batch_id": "020-agent-image-action-43",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -8762,7 +9742,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-image-action-43",
+      "batch_id": "020-agent-image-action-44",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -10067,7 +11047,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-starter-159",
+      "batch_id": "020-agent-source-starter-160",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_next_review_batch",
       "priority": 20,
@@ -10672,7 +11652,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-fallback-51",
+      "batch_id": "020-agent-source-fallback-52",
       "agent_id": "agent-source-fallback",
       "workstream": "source_discovery_next_focus_fallback_queue",
       "priority": 20,
@@ -11078,7 +12058,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "020-agent-source-image-65",
+      "batch_id": "020-agent-source-image-66",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -12200,7 +13180,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-image-action-44",
+      "batch_id": "020-agent-image-action-45",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -13046,7 +14026,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-detail-candidate-52",
+      "batch_id": "020-agent-source-detail-candidate-53",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_discovery_next_focus_detail_candidates",
       "priority": 20,
@@ -13430,7 +14410,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-image-action-45",
+      "batch_id": "020-agent-image-action-46",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -14149,7 +15129,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-ichiban-action-139",
+      "batch_id": "020-agent-ichiban-action-140",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 20,
@@ -14184,7 +15164,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "020-agent-image-action-46",
+      "batch_id": "020-agent-image-action-47",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 20,
@@ -14587,7 +15567,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "022-agent-animation-category-action-158",
+      "batch_id": "022-agent-animation-category-action-159",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -15131,7 +16111,7 @@
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
     },
     {
-      "batch_id": "022-agent-source-detail-candidate-76",
+      "batch_id": "022-agent-source-detail-candidate-77",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 22,
@@ -15729,7 +16709,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "028-agent-source-action-66",
+      "batch_id": "028-agent-source-action-67",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -16100,7 +17080,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-67",
+      "batch_id": "028-agent-source-action-68",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -16471,7 +17451,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-68",
+      "batch_id": "028-agent-source-action-69",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -16842,7 +17822,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-69",
+      "batch_id": "028-agent-source-action-70",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -17213,7 +18193,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-70",
+      "batch_id": "028-agent-source-action-71",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -17584,7 +18564,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-71",
+      "batch_id": "028-agent-source-action-72",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -17955,7 +18935,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-72",
+      "batch_id": "028-agent-source-action-73",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -18326,7 +19306,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-74",
+      "batch_id": "028-agent-source-action-75",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -18697,7 +19677,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-75",
+      "batch_id": "028-agent-source-action-76",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -19068,7 +20048,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-73",
+      "batch_id": "028-agent-source-action-74",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -19362,7 +20342,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-ichiban-action-140",
+      "batch_id": "030-agent-ichiban-action-141",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 30,
@@ -19421,7 +20401,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "030-agent-source-discovery-78",
+      "batch_id": "030-agent-source-discovery-79",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -19520,7 +20500,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-79",
+      "batch_id": "030-agent-source-discovery-80",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -19619,7 +20599,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-80",
+      "batch_id": "030-agent-source-discovery-81",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -19718,7 +20698,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-81",
+      "batch_id": "030-agent-source-discovery-82",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -19817,7 +20797,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-82",
+      "batch_id": "030-agent-source-discovery-83",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -19916,7 +20896,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-84",
+      "batch_id": "030-agent-source-discovery-85",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -20015,7 +20995,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-85",
+      "batch_id": "030-agent-source-discovery-86",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -20114,7 +21094,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-86",
+      "batch_id": "030-agent-source-discovery-87",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -20213,7 +21193,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-87",
+      "batch_id": "030-agent-source-discovery-88",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -20312,7 +21292,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-88",
+      "batch_id": "030-agent-source-discovery-89",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -20411,7 +21391,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-image-action-47",
+      "batch_id": "030-agent-image-action-48",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 30,
@@ -21592,7 +22572,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "030-agent-source-discovery-83",
+      "batch_id": "030-agent-source-discovery-84",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21691,7 +22671,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-89",
+      "batch_id": "030-agent-source-discovery-90",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22414,7 +23394,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-image-action-48",
+      "batch_id": "030-agent-image-action-49",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 30,
@@ -23294,7 +24274,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "031-agent-source-starter-160",
+      "batch_id": "031-agent-source-starter-161",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23403,7 +24383,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-161",
+      "batch_id": "031-agent-source-starter-162",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23512,7 +24492,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-162",
+      "batch_id": "031-agent-source-starter-163",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23621,7 +24601,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-163",
+      "batch_id": "031-agent-source-starter-164",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23730,7 +24710,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-164",
+      "batch_id": "031-agent-source-starter-165",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23839,7 +24819,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-165",
+      "batch_id": "031-agent-source-starter-166",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -23948,7 +24928,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-166",
+      "batch_id": "031-agent-source-starter-167",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -24057,7 +25037,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-167",
+      "batch_id": "031-agent-source-starter-168",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -24166,7 +25146,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-168",
+      "batch_id": "031-agent-source-starter-169",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -24275,7 +25255,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-169",
+      "batch_id": "031-agent-source-starter-170",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -24384,7 +25364,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "032-agent-source-detail-candidate-77",
+      "batch_id": "032-agent-source-detail-candidate-78",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 32,
@@ -24764,7 +25744,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "038-agent-ichiban-action-141",
+      "batch_id": "038-agent-ichiban-action-142",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -26775,7 +27755,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "045-agent-metadata-action-90",
+      "batch_id": "045-agent-metadata-action-91",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -26891,7 +27871,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-96",
+      "batch_id": "045-agent-metadata-action-97",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -27007,7 +27987,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-91",
+      "batch_id": "045-agent-metadata-action-92",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -27123,7 +28103,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-92",
+      "batch_id": "045-agent-metadata-action-93",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -27239,7 +28219,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-93",
+      "batch_id": "045-agent-metadata-action-94",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -27355,7 +28335,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-94",
+      "batch_id": "045-agent-metadata-action-95",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -27471,7 +28451,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-95",
+      "batch_id": "045-agent-metadata-action-96",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -27587,7 +28567,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-142",
+      "batch_id": "048-agent-ichiban-action-143",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -28539,7 +29519,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-143",
+      "batch_id": "048-agent-ichiban-action-144",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -29509,7 +30489,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-144",
+      "batch_id": "048-agent-ichiban-action-145",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -30485,7 +31465,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-145",
+      "batch_id": "048-agent-ichiban-action-146",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -31461,7 +32441,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-146",
+      "batch_id": "048-agent-ichiban-action-147",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -31960,7 +32940,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "050-agent-metadata-98",
+      "batch_id": "050-agent-metadata-99",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -32059,7 +33039,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-101",
+      "batch_id": "050-agent-metadata-102",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -32158,7 +33138,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-99",
+      "batch_id": "050-agent-metadata-100",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -32356,7 +33336,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-100",
+      "batch_id": "050-agent-metadata-101",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -32455,7 +33435,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "051-agent-ichiban-campaign-first-119",
+      "batch_id": "051-agent-ichiban-campaign-first-120",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 51,
@@ -32556,7 +33536,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "052-agent-ichiban-campaign-first-120",
+      "batch_id": "052-agent-ichiban-campaign-first-121",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 52,
@@ -32651,7 +33631,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "053-agent-ichiban-campaign-first-121",
+      "batch_id": "053-agent-ichiban-campaign-first-122",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 53,
@@ -32726,7 +33706,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-reissue-dedupe-110",
+      "batch_id": "054-agent-ichiban-reissue-dedupe-111",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 54,
@@ -33803,7 +34783,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-campaign-first-122",
+      "batch_id": "054-agent-ichiban-campaign-first-123",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 54,
@@ -33874,7 +34854,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "055-agent-metadata-action-97",
+      "batch_id": "055-agent-metadata-action-98",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 55,
@@ -33990,7 +34970,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-reissue-dedupe-111",
+      "batch_id": "056-agent-ichiban-reissue-dedupe-112",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 56,
@@ -34040,7 +35020,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "057-agent-ichiban-reissue-dedupe-112",
+      "batch_id": "057-agent-ichiban-reissue-dedupe-113",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 57,
@@ -34090,7 +35070,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "058-agent-ichiban-reissue-dedupe-113",
+      "batch_id": "058-agent-ichiban-reissue-dedupe-114",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 58,
@@ -34140,7 +35120,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "059-agent-ichiban-reissue-dedupe-114",
+      "batch_id": "059-agent-ichiban-reissue-dedupe-115",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 59,
@@ -34190,7 +35170,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "060-agent-metadata-105",
+      "batch_id": "060-agent-metadata-106",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -34289,7 +35269,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-102",
+      "batch_id": "060-agent-metadata-103",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -34388,7 +35368,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-103",
+      "batch_id": "060-agent-metadata-104",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -34487,7 +35467,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-104",
+      "batch_id": "060-agent-metadata-105",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -34586,7 +35566,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-ichiban-reissue-dedupe-115",
+      "batch_id": "060-agent-ichiban-reissue-dedupe-116",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 60,
@@ -34636,7 +35616,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "061-agent-ichiban-reissue-dedupe-116",
+      "batch_id": "061-agent-ichiban-reissue-dedupe-117",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 61,
@@ -34686,7 +35666,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "062-agent-ichiban-reissue-dedupe-117",
+      "batch_id": "062-agent-ichiban-reissue-dedupe-118",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 62,
@@ -34736,7 +35716,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "063-agent-ichiban-reissue-dedupe-118",
+      "batch_id": "063-agent-ichiban-reissue-dedupe-119",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 63,
@@ -34786,7 +35766,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "070-agent-metadata-106",
+      "batch_id": "070-agent-metadata-107",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -34885,7 +35865,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-107",
+      "batch_id": "070-agent-metadata-108",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -34984,7 +35964,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-108",
+      "batch_id": "070-agent-metadata-109",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -35083,7 +36063,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-109",
+      "batch_id": "070-agent-metadata-110",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -35182,7 +36162,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-154",
+      "batch_id": "085-agent-ichiban-prize-policy-155",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -35499,7 +36479,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-153",
+      "batch_id": "085-agent-ichiban-prize-policy-154",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -35721,7 +36701,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-dedupe-action-123",
+      "batch_id": "085-agent-dedupe-action-124",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -36744,7 +37724,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-124",
+      "batch_id": "085-agent-dedupe-action-125",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -37765,7 +38745,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-125",
+      "batch_id": "085-agent-dedupe-action-126",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -38788,7 +39768,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-126",
+      "batch_id": "085-agent-dedupe-action-127",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -39803,7 +40783,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-127",
+      "batch_id": "085-agent-dedupe-action-128",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -40771,7 +41751,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "086-agent-ichiban-prize-policy-155",
+      "batch_id": "086-agent-ichiban-prize-policy-156",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 86,
@@ -41083,7 +42063,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "087-agent-ichiban-prize-policy-156",
+      "batch_id": "087-agent-ichiban-prize-policy-157",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 87,
@@ -41403,7 +42383,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "088-agent-ichiban-prize-policy-157",
+      "batch_id": "088-agent-ichiban-prize-policy-158",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 88,
@@ -41718,7 +42698,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "090-agent-dedupe-128",
+      "batch_id": "090-agent-dedupe-129",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -41757,7 +42737,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-129",
+      "batch_id": "090-agent-dedupe-130",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -41796,7 +42776,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-130",
+      "batch_id": "090-agent-dedupe-131",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -41835,7 +42815,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-131",
+      "batch_id": "090-agent-dedupe-132",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -41874,7 +42854,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-132",
+      "batch_id": "090-agent-dedupe-133",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -41913,7 +42893,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-133",
+      "batch_id": "090-agent-dedupe-134",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -41945,45 +42925,6 @@
           "category": "의류",
           "source_store": "치이카와 마켓",
           "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
-          "official_search_url": ""
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-134",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 582,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (하치와레)",
-          "name_ja": "ちいかわパーク ふわころ人形 S (ハチワレ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 3644,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (가르마)",
-          "name_ja": "ちいかわ ちいかわパーク ぷわころぬいぐるみS（ハチワレ）",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
           "official_search_url": ""
         }
       ],
