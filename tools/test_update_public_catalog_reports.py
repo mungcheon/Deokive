@@ -1406,6 +1406,50 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(pillars["source_url_updates"]["open_rows"], 50)
         self.assertEqual(pillars["animation_categories"]["manual_review_rows"], 36)
         self.assertEqual(pillars["ichiban_kuji_history"]["manual_review_rows"], 64)
+        operations = reports.load_json(reports.OPERATIONS_REPORT)
+        agent_queue = reports.load_json(reports.AGENT_WORK_QUEUE)
+        execution_plan = reports.load_json(reports.EXECUTION_PLAN)
+        open_queues = operations["summary"]["open_review_queues"]
+        self.assertEqual(
+            open_queues["catalog_goal_manual_review_pillars"],
+            goal_gate["manual_review_pillar_count"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_manual_review_rows"],
+            goal_gate["manual_review_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_auto_apply_ready_rows"],
+            goal_gate["auto_apply_ready_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_dedupe_manual_review_rows"],
+            pillars["dedupe"]["manual_review_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_missing_image_rows"],
+            pillars["missing_images"]["manual_review_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_source_url_update_rows"],
+            pillars["source_url_updates"]["manual_review_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_animation_category_rows"],
+            pillars["animation_categories"]["manual_review_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_ichiban_manual_review_rows"],
+            pillars["ichiban_kuji_history"]["manual_review_rows"],
+        )
+        self.assertEqual(
+            agent_queue["summary"]["open_review_queues"],
+            open_queues,
+        )
+        self.assertEqual(
+            execution_plan["summary"]["open_review_queues"],
+            open_queues,
+        )
         self.assertFalse(goal_gate["auto_apply_enabled"])
         self.assertFalse(goal_gate["auto_merge_enabled"])
         self.assertFalse(goal_gate["auto_delete_enabled"])

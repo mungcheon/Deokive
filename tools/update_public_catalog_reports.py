@@ -510,6 +510,66 @@ def _dict_delta(actual: dict[str, Any], expected: dict[str, Any], limit: int = 1
     return delta
 
 
+def catalog_goal_open_review_queues(goal_gate: dict[str, Any]) -> dict[str, Any]:
+    pillars = goal_gate.get("pillars", [])
+    if not isinstance(pillars, list):
+        pillars = []
+    by_pillar = {
+        str(row.get("pillar")): row
+        for row in pillars
+        if isinstance(row, dict) and row.get("pillar")
+    }
+    return {
+        "catalog_goal_manual_review_pillars": goal_gate.get(
+            "manual_review_pillar_count", 0
+        ),
+        "catalog_goal_manual_review_rows": goal_gate.get("manual_review_rows", 0),
+        "catalog_goal_auto_apply_ready_rows": goal_gate.get(
+            "auto_apply_ready_rows", 0
+        ),
+        "catalog_goal_dedupe_manual_review_rows": by_pillar.get(
+            "dedupe", {}
+        ).get("manual_review_rows", 0),
+        "catalog_goal_missing_image_rows": by_pillar.get(
+            "missing_images", {}
+        ).get("manual_review_rows", 0),
+        "catalog_goal_source_url_update_rows": by_pillar.get(
+            "source_url_updates", {}
+        ).get("manual_review_rows", 0),
+        "catalog_goal_animation_category_rows": by_pillar.get(
+            "animation_categories", {}
+        ).get("manual_review_rows", 0),
+        "catalog_goal_ichiban_manual_review_rows": by_pillar.get(
+            "ichiban_kuji_history", {}
+        ).get("manual_review_rows", 0),
+    }
+
+
+def expose_catalog_goal_open_queues(
+    operations: dict[str, Any],
+    agent_work_queue: dict[str, Any],
+    execution_plan: dict[str, Any],
+    target: dict[str, Any],
+) -> None:
+    goal_open_queues = catalog_goal_open_review_queues(
+        target.get("catalog_goal_progress_gate", {})
+    )
+    operations["summary"]["open_review_queues"].update(goal_open_queues)
+    agent_work_queue["summary"]["open_review_queues"] = operations["summary"][
+        "open_review_queues"
+    ]
+    execution_plan["summary"]["open_review_queues"] = operations["summary"][
+        "open_review_queues"
+    ]
+    target.setdefault("operations", {}).update(goal_open_queues)
+    target.setdefault("agent_work_queue", {})["open_review_queues"] = operations[
+        "summary"
+    ]["open_review_queues"]
+    target.setdefault("execution_plan", {})["open_review_queues"] = operations[
+        "summary"
+    ]["open_review_queues"]
+
+
 def enrich_image_action_queue_source_url_review(
     image_action_queue: dict[str, Any],
     source_url_template: dict[str, Any],
@@ -8254,6 +8314,7 @@ def validate_report_consistency(
     danganronpa_patch_template_dry_run: dict[str, Any],
     operations: dict[str, Any],
     agent_work_queue: dict[str, Any],
+    catalog_goal_progress_gate: dict[str, Any] | None = None,
     metadata_action_queue_override: dict[str, Any] | None = None,
     animation_review_batches_override: dict[str, Any] | None = None,
     animation_action_queue_override: dict[str, Any] | None = None,
@@ -8843,6 +8904,10 @@ def validate_report_consistency(
         )
         expected_open_queues["animation_category_unmatched_keyword_product_type_candidates"] = (
             animation_unmatched_keyword_summary.get("product_type_candidate_count", 0)
+        )
+    if catalog_goal_progress_gate:
+        expected_open_queues.update(
+            catalog_goal_open_review_queues(catalog_goal_progress_gate)
         )
     if open_queues != expected_open_queues:
         findings.append(
@@ -10858,6 +10923,12 @@ def update_reports(write: bool) -> dict[str, Any]:
             "auto_merge_enabled": False,
             "auto_delete_enabled": False,
         }
+        expose_catalog_goal_open_queues(
+            operations,
+            agent_work_queue,
+            execution_plan,
+            target,
+        )
 
     consistency_findings = validate_report_consistency(
         rows,
@@ -10874,6 +10945,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         danganronpa_patch_template_dry_run,
         operations,
         agent_work_queue,
+        target.get("catalog_goal_progress_gate", {}),
         metadata_action_queue,
         animation_review_batches,
         animation_action_queue,
