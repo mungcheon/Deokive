@@ -33,6 +33,9 @@ class SourceDiscoveryNextFocusExactUrlCandidateAuditPublicTest(unittest.TestCase
         self.assertEqual(report["summary"]["queue_rows"], 1)
         self.assertEqual(report["summary"]["store_search_broad_result_rows"], 1)
         self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(report["summary"]["sample_product_detail_link_rows"], 1)
+        self.assertEqual(report["summary"]["sample_product_detail_links"], 5)
+        self.assertEqual(report["summary"]["broad_result_sample_detail_link_rows"], 1)
         self.assertEqual(report["summary"]["primary_manual_review_url_rows"], 1)
         self.assertEqual(
             report["summary"]["primary_manual_review_url_kind_counts"],
@@ -44,6 +47,19 @@ class SourceDiscoveryNextFocusExactUrlCandidateAuditPublicTest(unittest.TestCase
         )
         self.assertTrue(report["items"][0]["broad_result_page"])
         self.assertEqual(report["items"][0]["candidate_source_urls"], [])
+        self.assertEqual(len(report["items"][0]["sample_product_detail_links"]), 5)
+        self.assertEqual(
+            report["items"][0]["sample_product_detail_links"][0],
+            "https://www.enskyshop.com/products/detail/10000",
+        )
+        self.assertEqual(
+            report["items"][0]["sample_product_detail_link_source"],
+            "broad_official_search_result",
+        )
+        self.assertIn(
+            "only review starting points",
+            report["items"][0]["sample_product_detail_link_warning"],
+        )
         self.assertEqual(
             report["items"][0]["manual_review_queue_report"],
             "data/source_discovery_next_focus_exact_url_review_queue_public.json",
@@ -83,6 +99,9 @@ class SourceDiscoveryNextFocusExactUrlCandidateAuditPublicTest(unittest.TestCase
         self.assertEqual(report["summary"]["exact_title_candidate_rows"], 1)
         self.assertEqual(report["summary"]["manual_review_candidate_rows"], 1)
         self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(report["summary"]["sample_product_detail_link_rows"], 1)
+        self.assertEqual(report["summary"]["sample_product_detail_links"], 1)
+        self.assertEqual(report["summary"]["broad_result_sample_detail_link_rows"], 0)
         self.assertFalse(report["items"][0]["broad_result_page"])
         self.assertEqual(
             report["items"][0]["candidate_source_urls"],

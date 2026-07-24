@@ -2791,9 +2791,40 @@ class PublicCatalogReportTests(unittest.TestCase):
                     "domain_limited_web_search_role_counts"
                 ),
             )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("review_summary", {}).get(
+                    "sample_product_detail_link_rows"
+                ),
+                source_next_focus_exact_url_audit_summary.get(
+                    "sample_product_detail_link_rows"
+                ),
+            )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("review_summary", {}).get(
+                    "sample_product_detail_links"
+                ),
+                source_next_focus_exact_url_audit_summary.get(
+                    "sample_product_detail_links"
+                ),
+            )
+            self.assertEqual(
+                exact_url_audit_agent_batch.get("review_summary", {}).get(
+                    "broad_result_sample_detail_link_rows"
+                ),
+                source_next_focus_exact_url_audit_summary.get(
+                    "broad_result_sample_detail_link_rows"
+                ),
+            )
             self.assertTrue(
                 all(
                     item.get("broad_result_page") is True
+                    for item in exact_url_audit_agent_batch.get("sample_items", [])
+                    if isinstance(item, dict)
+                )
+            )
+            self.assertTrue(
+                any(
+                    item.get("sample_product_detail_links")
                     for item in exact_url_audit_agent_batch.get("sample_items", [])
                     if isinstance(item, dict)
                 )

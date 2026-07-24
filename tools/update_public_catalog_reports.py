@@ -5784,6 +5784,16 @@ def build_agent_work_queue_public(
                     exact_url_audit_summary.get("fallback_to_domain_limited_web_search_rows")
                     or len(exact_url_fallback_rows)
                 ),
+                "sample_product_detail_link_rows": int(
+                    exact_url_audit_summary.get("sample_product_detail_link_rows") or 0
+                ),
+                "sample_product_detail_links": int(
+                    exact_url_audit_summary.get("sample_product_detail_links") or 0
+                ),
+                "broad_result_sample_detail_link_rows": int(
+                    exact_url_audit_summary.get("broad_result_sample_detail_link_rows")
+                    or 0
+                ),
                 "primary_manual_review_url_rows": int(
                     exact_url_audit_summary.get("primary_manual_review_url_rows") or 0
                 ),

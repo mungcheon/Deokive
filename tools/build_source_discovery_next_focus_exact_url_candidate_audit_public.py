@@ -137,6 +137,15 @@ def audit_item(item: dict[str, Any], fetcher: Fetcher) -> dict[str, Any]:
             "http_detail_link_count": len(links),
             "exact_title_detail_link_count": len(exact_links),
             "candidate_source_urls": exact_links[:5],
+            "sample_product_detail_links": links[:5],
+            "sample_product_detail_link_count": min(len(links), 5),
+            "sample_product_detail_link_source": "broad_official_search_result",
+            "sample_product_detail_link_warning": (
+                "Sample detail links come from the official search result page and are only review starting points; "
+                "confirm exact title, character, variant, and product type before using any link as source_url."
+            )
+            if links
+            else "",
             "broad_result_page": broad,
             "recommended_next_action": (
                 "review_exact_title_candidate_source_urls"
@@ -182,6 +191,17 @@ def build_report(
             "auto_apply_ready_rows": 0,
             "manual_review_candidate_rows": len(exact_ready),
             "broad_result_link_threshold": BROAD_RESULT_LINK_THRESHOLD,
+            "sample_product_detail_link_rows": sum(
+                1 for item in audited if item.get("sample_product_detail_links")
+            ),
+            "sample_product_detail_links": sum(
+                len(item.get("sample_product_detail_links") or []) for item in audited
+            ),
+            "broad_result_sample_detail_link_rows": sum(
+                1
+                for item in audited
+                if item.get("broad_result_page") and item.get("sample_product_detail_links")
+            ),
             "fallback_to_domain_limited_web_search_rows": sum(
                 1
                 for item in audited
