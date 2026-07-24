@@ -25,6 +25,20 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "manual_or_blocked_items": 3,
                 }
             },
+            "catalog_image_asset_audit_public.json": {
+                "summary": {
+                    "status": "pass",
+                    "download_readiness_status": "known_image_assets_complete",
+                    "image_url_rows": 90,
+                    "local_image_path_rows": 90,
+                    "image_url_without_local_path_rows": 0,
+                    "missing_local_image_files": 0,
+                    "missing_web_public_asset_files": 0,
+                    "known_image_download_blocker_rows": 0,
+                    "auto_download_ready_rows": 0,
+                    "rows_still_requiring_image_url_evidence": 10,
+                }
+            },
             "catalog_image_attachment_action_queue_public.json": {
                 "summary": {
                     "actionable_image_rows": 2,
@@ -36,6 +50,9 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "source_url_update_template_batch_count": 1,
                     "representative_image_review_required_rows": 0,
                     "image_url_ready_rows": 0,
+                    "download_ready_after_manual_image_url_rows": 2,
+                    "suggested_local_image_path_rows": 2,
+                    "local_image_download_instruction_ready_rows": 2,
                     "workstream_count": 1,
                     "source_url_update_workstream_count": 1,
                     "representative_image_review_workstream_count": 0,
@@ -51,6 +68,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                         "representative_image_review_rows": 0,
                     }
                 ],
+            },
+            "catalog_missing_image_actionability_public.json": {
+                "summary": {
+                    "image_attachment_template_rows": 2,
+                    "image_attachment_template_confirmed_rows": 0,
+                    "image_attachment_template_dry_run_updated_rows": 0,
+                    "image_attachment_template_dry_run_skipped_rows": 2,
+                    "source_discovery_focus_template_rows": 8,
+                    "source_discovery_focus_template_confirmed_rows": 0,
+                }
             },
             "source_discovery_review_batches_public.json": {
                 "summary": {"source_discovery_rows": 10, "batch_count": 2}
@@ -686,6 +713,21 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(ensky["evidence"]["import_readiness"]["identity_warning_rows"], 5)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
+        self.assertEqual(image["evidence"]["known_image_asset_status"], "pass")
+        self.assertEqual(
+            image["evidence"]["download_readiness_status"],
+            "known_image_assets_complete",
+        )
+        self.assertEqual(image["evidence"]["image_url_rows"], 90)
+        self.assertEqual(image["evidence"]["local_image_path_rows"], 90)
+        self.assertEqual(image["evidence"]["image_url_without_local_path_rows"], 0)
+        self.assertEqual(image["evidence"]["missing_local_image_files"], 0)
+        self.assertEqual(image["evidence"]["missing_web_public_asset_files"], 0)
+        self.assertEqual(image["evidence"]["known_image_download_blocker_rows"], 0)
+        self.assertEqual(image["evidence"]["auto_download_ready_rows"], 0)
+        self.assertEqual(
+            image["evidence"]["rows_still_requiring_image_url_evidence"], 10
+        )
         self.assertEqual(image["evidence"]["provider_candidate_items"], 7)
         self.assertEqual(image["evidence"]["manual_or_blocked_items"], 3)
         image_action = next(
@@ -700,6 +742,29 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(image_action["evidence"]["source_url_update_template_rows"], 2)
         self.assertEqual(image_action["evidence"]["source_url_update_template_batch_count"], 1)
         self.assertEqual(image_action["evidence"]["image_url_ready_rows"], 0)
+        self.assertEqual(
+            image_action["evidence"]["download_ready_after_manual_image_url_rows"], 2
+        )
+        self.assertEqual(image_action["evidence"]["suggested_local_image_path_rows"], 2)
+        self.assertEqual(
+            image_action["evidence"]["local_image_download_instruction_ready_rows"], 2
+        )
+        self.assertEqual(image_action["evidence"]["image_attachment_template_rows"], 2)
+        self.assertEqual(
+            image_action["evidence"]["image_attachment_template_confirmed_rows"], 0
+        )
+        self.assertEqual(
+            image_action["evidence"]["image_attachment_template_dry_run_updated_rows"], 0
+        )
+        self.assertEqual(
+            image_action["evidence"]["image_attachment_template_dry_run_skipped_rows"], 2
+        )
+        self.assertEqual(
+            image_action["evidence"]["source_discovery_focus_template_rows"], 8
+        )
+        self.assertEqual(
+            image_action["evidence"]["source_discovery_focus_template_confirmed_rows"], 0
+        )
         self.assertEqual(image_action["evidence"]["workstream_count"], 1)
         self.assertEqual(image_action["evidence"]["source_url_update_workstream_count"], 1)
         self.assertEqual(
@@ -713,6 +778,20 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["image_action_source_url_update_template_batch_count"], 1)
         self.assertEqual(report["summary"]["image_action_image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["image_action_workstream_count"], 1)
+        self.assertEqual(report["summary"]["image_known_asset_status"], "pass")
+        self.assertEqual(
+            report["summary"]["image_download_readiness_status"],
+            "known_image_assets_complete",
+        )
+        self.assertEqual(report["summary"]["image_url_without_local_path_rows"], 0)
+        self.assertEqual(report["summary"]["image_missing_local_image_files"], 0)
+        self.assertEqual(report["summary"]["image_rows_still_requiring_url_evidence"], 10)
+        self.assertEqual(report["summary"]["image_auto_download_ready_rows"], 0)
+        self.assertEqual(report["summary"]["image_attachment_template_rows"], 2)
+        self.assertEqual(report["summary"]["image_attachment_template_confirmed_rows"], 0)
+        self.assertEqual(
+            report["summary"]["image_attachment_template_dry_run_skipped_rows"], 2
+        )
         metadata_action = next(
             action
             for action in report["actions"]

@@ -108,7 +108,9 @@ def _build_plan(load_report) -> dict[str, Any]:
     operations = load_report("catalog_operations_public.json")
     image_batches = load_report("catalog_image_enrichment_batches_public.json")
     image_candidates = load_report("catalog_image_candidate_review_public.json")
+    image_asset_audit = load_report("catalog_image_asset_audit_public.json")
     image_action_queue = load_report("catalog_image_attachment_action_queue_public.json")
+    image_actionability = load_report("catalog_missing_image_actionability_public.json")
     source_batches = load_report("source_discovery_review_batches_public.json")
     source_action_queue = load_report("source_discovery_action_queue_public.json")
     source_focus_template = load_report("source_discovery_focus_confirmed_template_public.json")
@@ -153,7 +155,9 @@ def _build_plan(load_report) -> dict[str, Any]:
         open_queues = {}
     image_summary = _summary(image_batches)
     image_candidate_summary = _summary(image_candidates)
+    image_asset_summary = _summary(image_asset_audit)
     image_action_summary = _summary(image_action_queue)
+    image_actionability_summary = _summary(image_actionability)
     source_summary = _summary(source_batches)
     source_action_summary = _summary(source_action_queue)
     source_focus_template_summary = _summary(source_focus_template)
@@ -668,6 +672,32 @@ def _build_plan(load_report) -> dict[str, Any]:
             next_step="resolve_source_url_blockers_then_extract_images",
             blocker="No exact source_url-ready image rows are currently published." if ready_image_rows == 0 else None,
             evidence={
+                "known_image_asset_status": image_asset_summary.get("status"),
+                "download_readiness_status": image_asset_summary.get(
+                    "download_readiness_status"
+                ),
+                "image_url_rows": _count(image_asset_summary, "image_url_rows"),
+                "local_image_path_rows": _count(
+                    image_asset_summary, "local_image_path_rows"
+                ),
+                "image_url_without_local_path_rows": _count(
+                    image_asset_summary, "image_url_without_local_path_rows"
+                ),
+                "missing_local_image_files": _count(
+                    image_asset_summary, "missing_local_image_files"
+                ),
+                "missing_web_public_asset_files": _count(
+                    image_asset_summary, "missing_web_public_asset_files"
+                ),
+                "known_image_download_blocker_rows": _count(
+                    image_asset_summary, "known_image_download_blocker_rows"
+                ),
+                "auto_download_ready_rows": _count(
+                    image_asset_summary, "auto_download_ready_rows"
+                ),
+                "rows_still_requiring_image_url_evidence": _count(
+                    image_asset_summary, "rows_still_requiring_image_url_evidence"
+                ),
                 "source_url_ready_rows": ready_image_rows,
                 "provider_candidate_items": _count(image_candidate_summary, "provider_candidate_items"),
                 "manual_or_blocked_items": _count(image_candidate_summary, "manual_or_blocked_items"),
@@ -705,6 +735,37 @@ def _build_plan(load_report) -> dict[str, Any]:
                     image_action_summary, "representative_image_review_required_rows"
                 ),
                 "image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
+                "download_ready_after_manual_image_url_rows": _count(
+                    image_action_summary, "download_ready_after_manual_image_url_rows"
+                ),
+                "suggested_local_image_path_rows": _count(
+                    image_action_summary, "suggested_local_image_path_rows"
+                ),
+                "local_image_download_instruction_ready_rows": _count(
+                    image_action_summary, "local_image_download_instruction_ready_rows"
+                ),
+                "image_attachment_template_rows": _count(
+                    image_actionability_summary, "image_attachment_template_rows"
+                ),
+                "image_attachment_template_confirmed_rows": _count(
+                    image_actionability_summary,
+                    "image_attachment_template_confirmed_rows",
+                ),
+                "image_attachment_template_dry_run_updated_rows": _count(
+                    image_actionability_summary,
+                    "image_attachment_template_dry_run_updated_rows",
+                ),
+                "image_attachment_template_dry_run_skipped_rows": _count(
+                    image_actionability_summary,
+                    "image_attachment_template_dry_run_skipped_rows",
+                ),
+                "source_discovery_focus_template_rows": _count(
+                    image_actionability_summary, "source_discovery_focus_template_rows"
+                ),
+                "source_discovery_focus_template_confirmed_rows": _count(
+                    image_actionability_summary,
+                    "source_discovery_focus_template_confirmed_rows",
+                ),
                 "workstream_count": _count(image_action_summary, "workstream_count"),
                 "source_url_update_workstream_count": _count(
                     image_action_summary, "source_url_update_workstream_count"
@@ -1402,6 +1463,32 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "image_action_image_url_ready_rows": _count(image_action_summary, "image_url_ready_rows"),
             "image_action_workstream_count": _count(image_action_summary, "workstream_count"),
+            "image_known_asset_status": image_asset_summary.get("status"),
+            "image_download_readiness_status": image_asset_summary.get(
+                "download_readiness_status"
+            ),
+            "image_url_without_local_path_rows": _count(
+                image_asset_summary, "image_url_without_local_path_rows"
+            ),
+            "image_missing_local_image_files": _count(
+                image_asset_summary, "missing_local_image_files"
+            ),
+            "image_rows_still_requiring_url_evidence": _count(
+                image_asset_summary, "rows_still_requiring_image_url_evidence"
+            ),
+            "image_auto_download_ready_rows": _count(
+                image_asset_summary, "auto_download_ready_rows"
+            ),
+            "image_attachment_template_rows": _count(
+                image_actionability_summary, "image_attachment_template_rows"
+            ),
+            "image_attachment_template_confirmed_rows": _count(
+                image_actionability_summary, "image_attachment_template_confirmed_rows"
+            ),
+            "image_attachment_template_dry_run_skipped_rows": _count(
+                image_actionability_summary,
+                "image_attachment_template_dry_run_skipped_rows",
+            ),
             "source_focus_template_rows": _count(source_focus_template_summary, "template_items"),
             "source_focus_template_work_order_pack_count": _count(
                 source_focus_template_summary, "work_order_pack_count"
