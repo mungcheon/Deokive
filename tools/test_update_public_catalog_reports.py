@@ -3120,6 +3120,25 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(
             image_blocking_dashboard.get("manual_review_required_before_import")
         )
+        quality_image_action = quality.get("image_attachment_action_queue") or {}
+        self.assertEqual(
+            quality_image_action.get("blocking_dashboard", {}).get("status"),
+            image_blocking_dashboard.get("status"),
+        )
+        self.assertEqual(
+            quality_image_action.get("blocking_dashboard", {}).get(
+                "blocked_before_image_import_rows"
+            ),
+            image_blocking_dashboard.get("blocked_before_image_import_rows"),
+        )
+        self.assertEqual(
+            quality_image_action.get("attachment_readiness", {}).get(
+                "local_image_download_instruction_ready_rows"
+            ),
+            image_action.get("attachment_readiness", {}).get(
+                "local_image_download_instruction_ready_rows"
+            ),
+        )
         self.assertEqual(
             sum(count for _, count in image_action_summary.get("by_review_lane", [])),
             image_action_summary.get("sample_action_item_rows"),

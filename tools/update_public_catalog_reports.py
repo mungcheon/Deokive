@@ -10548,9 +10548,20 @@ def update_reports(write: bool) -> dict[str, Any]:
         }
         image_attachment_action_summary = image_attachment_action_queue.get("summary", {})
         if IMAGE_ATTACHMENT_ACTION_QUEUE.exists():
-            target["image_attachment_action_queue"] = copy_report_summary(
-                IMAGE_ATTACHMENT_ACTION_QUEUE, "image_attachment_action_queue"
-            )
+            target["image_attachment_action_queue"] = {
+                **copy_report_summary(
+                    IMAGE_ATTACHMENT_ACTION_QUEUE,
+                    "image_attachment_action_queue",
+                ),
+                "blocking_dashboard": image_attachment_action_queue.get(
+                    "blocking_dashboard",
+                    {},
+                ),
+                "attachment_readiness": image_attachment_action_queue.get(
+                    "attachment_readiness",
+                    {},
+                ),
+            }
             target["image_attachment_queue_alignment"] = {
                 "public_reports": [
                     f"data/{MISSING_IMAGE_PRIORITY.name}",
