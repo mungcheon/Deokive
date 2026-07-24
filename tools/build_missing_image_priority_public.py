@@ -12,6 +12,7 @@ DATA = ROOT / "data"
 CATALOG = DATA / "catalog_public.json"
 WORK_QUEUE = DATA / "catalog_missing_image_work_queue_public.json"
 REPORT = DATA / "catalog_missing_image_priority_public.json"
+STARTER_QUEUE_REPORT = DATA / "source_discovery_starter_queue_public.json"
 
 
 def now_utc() -> str:
@@ -352,6 +353,7 @@ def build_report(
         },
         "focus_groups": focus_groups,
         "source_discovery_starter_queue": source_discovery_starter_queue[:30],
+        "_source_discovery_starter_queue_full": source_discovery_starter_queue,
         "high_priority_samples": [
             {
                 "catalog_index": item.get("catalog_index"),
@@ -395,6 +397,56 @@ def build_report(
     }
 
 
+def build_starter_queue_report(
+    missing_image_priority_report: dict[str, Any],
+    *,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
+    summary = missing_image_priority_report.get("summary", {})
+    groups_source = (
+        missing_image_priority_report.get("_source_discovery_starter_queue_full")
+        or missing_image_priority_report.get("source_discovery_starter_queue", [])
+    )
+    groups = [
+        group
+        for group in groups_source
+        if isinstance(group, dict)
+    ]
+    rows = sum(int(group.get("rows") or 0) for group in groups)
+    sample_items = sum(
+        len(group.get("sample_items") or [])
+        for group in groups
+        if isinstance(group.get("sample_items"), list)
+    )
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at or now_utc(),
+        "scope": "source_discovery_starter_queue",
+        "source_report": f"data/{REPORT.name}",
+        "summary": {
+            "starter_queue_groups": len(groups),
+            "starter_queue_rows": rows,
+            "sample_item_rows": sample_items,
+            "missing_source_url_rows": int(summary.get("missing_source_url_rows") or 0),
+            "coverage_matches_missing_source_url_rows": rows
+            == int(summary.get("missing_source_url_rows") or 0),
+            "auto_apply_enabled": False,
+        },
+        "instructions": [
+            "Use this queue for missing-image rows that do not yet have exact source_url evidence.",
+            "Open the provided search_url values and confirm the exact product/detail page before importing any source_url or image_url.",
+            "Do not use representative or similar images unless a later manual review report explicitly allows that row.",
+        ],
+        "groups": groups,
+        "automation_policy": {
+            "auto_apply_catalog_changes": False,
+            "requires_exact_product_identity": True,
+            "requires_exact_product_source_url": True,
+            "requires_product_image_visible_on_confirmed_source": True,
+        },
+    }
+
+
 def recommended_workflow(source_store: str, rows: int) -> str:
     if source_store in {"FuRyu", "Taito", "Banpresto", "SEGA"}:
         return "official_prize_provider_search_then_exact_detail_match"
@@ -406,7 +458,9 @@ def recommended_workflow(source_store: str, rows: int) -> str:
 
 
 def write_report(report: dict[str, Any], path: Path = REPORT) -> None:
-    path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    payload = dict(report)
+    payload.pop("_source_discovery_starter_queue_full", None)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> None:

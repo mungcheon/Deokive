@@ -49,6 +49,7 @@ IMAGE_BACKLOG = DATA / "catalog_image_backlog_public.json"
 IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
 IMAGE_ASSET_AUDIT = DATA / "catalog_image_asset_audit_public.json"
 MISSING_IMAGE_PRIORITY = DATA / "catalog_missing_image_priority_public.json"
+SOURCE_DISCOVERY_STARTER_QUEUE = DATA / "source_discovery_starter_queue_public.json"
 ANIMATE_MISSING_IMAGE_SEARCH = DATA / "animate_missing_image_search_public.json"
 GOODSMILE_MISSING_IMAGE_SEARCH = DATA / "goodsmile_missing_image_search_public.json"
 KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH = DATA / "kotobukiya_movic_missing_image_search_public.json"
@@ -7487,6 +7488,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         load_json(DATA / "catalog_missing_image_work_queue_public.json", {"items": []}),
         generated_at=generated_at,
     )
+    source_discovery_starter_queue = build_missing_image_priority_public.build_starter_queue_report(
+        missing_image_priority,
+        generated_at=generated_at,
+    )
     missing_image_report_coverage = build_missing_image_report_coverage_public.build_report(
         catalog,
         load_json(DATA / "catalog_missing_image_work_queue_public.json", {"items": []}),
@@ -7878,6 +7883,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{MISSING_IMAGE_PRIORITY.name}",
             **missing_image_priority["summary"],
         }
+        if target is quality:
+            target["source_discovery_starter_queue"] = {
+                "public_report": f"data/{SOURCE_DISCOVERY_STARTER_QUEUE.name}",
+                **source_discovery_starter_queue["summary"],
+            }
         target["source_discovery_focus_packs"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_PACKS.name}",
             **source_discovery_focus_packs["summary"],
@@ -8548,7 +8558,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_BACKLOG, image_backlog)
         write_json(IMAGE_CANDIDATES, image_candidates)
         write_json(IMAGE_ASSET_AUDIT, image_asset_audit)
-        write_json(MISSING_IMAGE_PRIORITY, missing_image_priority)
+        missing_image_priority_public = dict(missing_image_priority)
+        missing_image_priority_public.pop("_source_discovery_starter_queue_full", None)
+        write_json(MISSING_IMAGE_PRIORITY, missing_image_priority_public)
+        write_json(SOURCE_DISCOVERY_STARTER_QUEUE, source_discovery_starter_queue)
         write_json(MISSING_IMAGE_REPORT_COVERAGE, missing_image_report_coverage)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, image_attachment_template_import_dry_run)
@@ -8600,6 +8613,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_CANDIDATES.relative_to(ROOT)),
             str(IMAGE_ASSET_AUDIT.relative_to(ROOT)),
             str(MISSING_IMAGE_PRIORITY.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_STARTER_QUEUE.relative_to(ROOT)),
             str(ANIMATE_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(GOODSMILE_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
             str(KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH.relative_to(ROOT)),

@@ -25,6 +25,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_agent_work_queue_public.json", updated_files)
         self.assertIn("data/catalog_image_asset_audit_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_priority_public.json", updated_files)
+        self.assertIn("data/source_discovery_starter_queue_public.json", updated_files)
         self.assertIn("data/animate_missing_image_search_public.json", updated_files)
         self.assertIn("data/goodsmile_missing_image_search_public.json", updated_files)
         self.assertIn("data/kotobukiya_movic_missing_image_search_public.json", updated_files)
@@ -115,6 +116,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             result["missing"]["image_url"],
         )
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
+        self.assertEqual(
+            quality["source_discovery_starter_queue"]["starter_queue_rows"],
+            quality["missing_image_priority"]["missing_source_url_rows"],
+        )
+        self.assertTrue(
+            quality["source_discovery_starter_queue"]["coverage_matches_missing_source_url_rows"]
+        )
+        self.assertIs(quality["source_discovery_starter_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["image_backlog"]["missing_images"], result["missing"]["image_url"])
         self.assertEqual(
             quality["image_backlog"]["candidate_review_summary"]["missing_images"],

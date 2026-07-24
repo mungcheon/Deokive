@@ -49,6 +49,29 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertGreater(len(report["breakdowns"]["by_source_store"]), 0)
         self.assertTrue(report["automation_policy"]["requires_exact_product_identity"])
 
+        starter_queue_report = target.build_starter_queue_report(
+            report,
+            generated_at="2026-01-01T00:00:00Z",
+        )
+        starter_summary = starter_queue_report["summary"]
+        self.assertEqual(
+            starter_summary["starter_queue_groups"],
+            summary["source_discovery_starter_queue_groups"],
+        )
+        self.assertEqual(
+            starter_summary["starter_queue_rows"],
+            summary["source_discovery_starter_queue_rows"],
+        )
+        self.assertTrue(starter_summary["coverage_matches_missing_source_url_rows"])
+        self.assertIs(starter_summary["auto_apply_enabled"], False)
+        self.assertEqual(
+            starter_queue_report["source_report"],
+            "data/catalog_missing_image_priority_public.json",
+        )
+        self.assertTrue(
+            starter_queue_report["automation_policy"]["requires_exact_product_source_url"]
+        )
+
     def test_build_report_counts_focus_groups_and_priority_samples(self) -> None:
         catalog = {
             "items": [
@@ -111,6 +134,16 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["source_discovery_starter_queue_rows"], 0)
         self.assertEqual(report["source_discovery_starter_queue"], [])
+
+        starter_queue_report = target.build_starter_queue_report(
+            report,
+            generated_at="2026-01-01T00:00:00Z",
+        )
+        self.assertEqual(starter_queue_report["summary"]["starter_queue_groups"], 0)
+        self.assertEqual(starter_queue_report["summary"]["starter_queue_rows"], 0)
+        self.assertTrue(
+            starter_queue_report["summary"]["coverage_matches_missing_source_url_rows"]
+        )
 
     def test_source_discovery_starter_queue_groups_missing_source_rows(self) -> None:
         catalog = {
