@@ -596,6 +596,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(reissue_decision_template["campaign_template_rows"], 4)
         self.assertEqual(reissue_decision_template["manual_confirmed_item_rows"], 0)
         self.assertEqual(reissue_decision_template["manual_confirmed_campaign_rows"], 0)
+        self.assertEqual(
+            reissue_decision_template["item_review_lane_counts"],
+            [["same_campaign_family_reissue_review", 20]],
+        )
+        self.assertEqual(
+            reissue_decision_template["campaign_review_lane_counts"],
+            [["campaign_pair_first", 4]],
+        )
+        self.assertEqual(
+            reissue_decision_template["same_campaign_family_reissue_item_rows"],
+            20,
+        )
         self.assertFalse(reissue_decision_template["auto_merge_enabled"])
         self.assertFalse(reissue_decision_template["auto_delete_enabled"])
         self.assertTrue(
@@ -3202,6 +3214,24 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "ichiban_reissue_campaign_template_rows"
             ),
             4,
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_item_review_lane_counts"
+            ),
+            reissue_decision_summary.get("item_review_lane_counts"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_campaign_review_lane_counts"
+            ),
+            reissue_decision_summary.get("campaign_review_lane_counts"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_same_campaign_family_item_rows"
+            ),
+            reissue_decision_summary.get("same_campaign_family_reissue_item_rows"),
         )
         self.assertEqual(
             ichiban_reissue_execution_action.get("next_step"),

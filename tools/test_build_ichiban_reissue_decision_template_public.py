@@ -29,6 +29,9 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                                 "identity_label": "一番くじ Sample / A賞 / Figure",
                             }
                         ],
+                        "campaign_url_comparison": {
+                            "likely_same_campaign_family_reissue": True,
+                        },
                         "decision_template": {
                             "campaign_work_order_id": "campaign-001",
                             "manual_confirmed": True,
@@ -53,6 +56,9 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                                 "identity_label": "一番くじ Sample / A賞 / Figure",
                             }
                         ],
+                        "campaign_url_comparison": {
+                            "likely_same_campaign_family_reissue": True,
+                        },
                         "decision_template": {
                             "work_order_id": "item-001",
                             "manual_confirmed": True,
@@ -71,6 +77,16 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["summary"]["manual_confirmed_campaign_rows"], 0)
         self.assertEqual(report["summary"]["manual_confirmed_item_rows"], 0)
         self.assertEqual(report["summary"]["same_sellable_product_keep_drop_ready_rows"], 0)
+        self.assertEqual(
+            report["summary"]["item_review_lane_counts"],
+            [["same_campaign_family_reissue_review", 1]],
+        )
+        self.assertEqual(
+            report["summary"]["campaign_review_lane_counts"],
+            [["campaign_pair_first", 1]],
+        )
+        self.assertEqual(report["summary"]["same_campaign_family_reissue_item_rows"], 1)
+        self.assertEqual(report["summary"]["zero_price_exception_reissue_item_rows"], 0)
         self.assertEqual(report["summary"]["campaign_covered_item_template_rows"], 1)
         self.assertEqual(report["summary"]["standalone_item_template_rows"], 0)
         self.assertEqual(report["summary"]["campaign_item_decision_preview_rows"], 2)
@@ -127,10 +143,30 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
             report["campaign_templates"][0]["item_decision_application_preview"][0]["first_evidence_url"],
             "https://1kuji.com/products/a",
         )
+        self.assertEqual(
+            report["campaign_templates"][0]["item_decision_application_preview"][0][
+                "recommended_review_lane"
+            ],
+            "same_campaign_family_reissue_review",
+        )
+        self.assertIn(
+            "likely_same_campaign_family_reissue",
+            report["campaign_templates"][0]["item_decision_application_preview"][0][
+                "review_risk_tags"
+            ],
+        )
         self.assertEqual(report["item_templates"][0]["drop_catalog_indexes"], [2])
         self.assertEqual(report["item_templates"][0]["first_evidence_url"], "https://1kuji.com/products/a")
         self.assertEqual(report["item_templates"][0]["evidence_url_count"], 2)
         self.assertEqual(report["item_templates"][0]["sample_rows_with_identity_fields"], 1)
+        self.assertEqual(
+            report["item_templates"][0]["recommended_review_lane"],
+            "same_campaign_family_reissue_review",
+        )
+        self.assertIn(
+            "likely_same_campaign_family_reissue",
+            report["item_templates"][0]["review_risk_summary"]["review_risk_tags"],
+        )
         self.assertIn(
             "identity_fields_complete",
             report["item_templates"][0]["review_risk_summary"]["review_risk_tags"],
@@ -157,6 +193,17 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(
             report["next_campaign_review_batch"][0]["item_review_preview"][0]["sample_name_ko"],
             "一番くじ Sample - A賞 Figure",
+        )
+        self.assertTrue(
+            report["next_campaign_review_batch"][0]["campaign_url_comparison"][
+                "likely_same_campaign_family_reissue"
+            ]
+        )
+        self.assertEqual(
+            report["next_campaign_review_batch"][0]["item_review_preview"][0][
+                "recommended_review_lane"
+            ],
+            "same_campaign_family_reissue_review",
         )
         self.assertTrue(
             report["next_campaign_review_batch"][0]["item_review_preview"][0][

@@ -1314,6 +1314,18 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "ichiban_reissue_template_manual_confirmed_campaign_rows": _count(
                     kuji_reissue_decision_template_summary, "manual_confirmed_campaign_rows"
                 ),
+                "ichiban_reissue_item_review_lane_counts": (
+                    kuji_reissue_decision_template_summary.get("item_review_lane_counts")
+                    or []
+                ),
+                "ichiban_reissue_campaign_review_lane_counts": (
+                    kuji_reissue_decision_template_summary.get("campaign_review_lane_counts")
+                    or []
+                ),
+                "ichiban_reissue_same_campaign_family_item_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "same_campaign_family_reissue_item_rows",
+                ),
                 "ichiban_reissue_protected_groups": _count(
                     dedupe_action_summary, "ichiban_reissue_protected_groups"
                 ),

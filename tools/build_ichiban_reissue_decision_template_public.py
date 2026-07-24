@@ -109,9 +109,26 @@ def _row_risk_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _reissue_review_lane(row: dict[str, Any], risk_summary: dict[str, Any]) -> str:
+    comparison = row.get("campaign_url_comparison") or {}
+    if comparison.get("likely_same_campaign_family_reissue"):
+        return "same_campaign_family_reissue_review"
+    if "zero_price_exception_rows_present" in (risk_summary.get("review_risk_tags") or []):
+        return "zero_price_exception_reissue_review"
+    if int(risk_summary.get("non_exception_missing_price_sample_rows") or 0) > 0:
+        return "price_then_reissue_identity_review"
+    return "item_pair_review"
+
+
 def _item_template(row: dict[str, Any]) -> dict[str, Any]:
     template = _copy_template(row)
     sample_rows = row.get("sample_rows") or []
+    risk_summary = _row_risk_summary(sample_rows)
+    comparison = row.get("campaign_url_comparison") or {}
+    review_tags = list(risk_summary["review_risk_tags"])
+    if comparison.get("likely_same_campaign_family_reissue"):
+        review_tags.append("likely_same_campaign_family_reissue")
+    risk_summary = {**risk_summary, "review_risk_tags": review_tags}
     return {
         "work_order_id": row.get("work_order_id"),
         "campaign_work_order_id": row.get("campaign_work_order_id"),
@@ -127,7 +144,11 @@ def _item_template(row: dict[str, Any]) -> dict[str, Any]:
         "manual_review_checklist": row.get("manual_review_checklist") or [],
         "sample_rows": sample_rows,
         "sample_rows_with_identity_fields": _sample_rows_with_identity(sample_rows),
-        "review_risk_summary": _row_risk_summary(sample_rows),
+        "review_risk_summary": risk_summary,
+        "recommended_review_lane": _reissue_review_lane(row, risk_summary),
+        "recommended_reviewer_action": (
+            "Treat same-family numbered 1kuji URLs as possible reissues first; only record keep/drop after official campaign pages prove an exact duplicate."
+        ),
         "decision_template": template,
         "manual_confirmed": False,
         "decision": template.get("decision") or "",
@@ -203,6 +224,9 @@ def _campaign_item_decision_preview(
                 "source_urls": item.get("source_urls") or campaign.get("source_urls") or [],
                 "first_evidence_url": item.get("first_evidence_url")
                 or _first_url(campaign.get("source_urls")),
+                "campaign_url_comparison": item.get("campaign_url_comparison") or {},
+                "recommended_review_lane": item.get("recommended_review_lane") or "",
+                "review_risk_tags": (item.get("review_risk_summary") or {}).get("review_risk_tags") or [],
                 "suggested_decision_if_campaign_is_reissue": (
                     "reissue_or_campaign_variant_keep_separate"
                 ),
@@ -236,6 +260,9 @@ def _compact_campaign_item_preview(
         "variant_name": sample.get("variant_name") or sample.get("identity_label") or "",
         "sample_name_ko": sample.get("name_ko") or "",
         "sample_name_ja": sample.get("name_ja") or "",
+        "campaign_url_comparison": item.get("campaign_url_comparison") or {},
+        "recommended_review_lane": item.get("recommended_review_lane") or "",
+        "review_risk_tags": (item.get("review_risk_summary") or {}).get("review_risk_tags") or [],
         "suggested_decision_if_campaign_is_reissue": preview.get(
             "suggested_decision_if_campaign_is_reissue"
         ),
@@ -284,6 +311,7 @@ def _next_campaign_review_batch(
                 "first_evidence_url": campaign.get("first_evidence_url") or "",
                 "source_urls": campaign.get("source_urls") or [],
                 "prize_labels": campaign.get("prize_labels") or [],
+                "campaign_url_comparison": campaign.get("campaign_url_comparison") or {},
                 "review_risk_tags": (campaign.get("review_risk_summary") or {}).get("review_risk_tags") or [],
                 "recommended_review_lane": campaign.get("recommended_review_lane"),
                 "recommended_reviewer_action": campaign.get("recommended_reviewer_action"),
@@ -319,6 +347,14 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
 
     item_decisions = Counter(item["decision"] or "unconfirmed" for item in item_templates)
     campaign_decisions = Counter(item["decision"] or "unconfirmed" for item in campaign_templates)
+    item_review_lanes = Counter(
+        item.get("recommended_review_lane") or "item_pair_review"
+        for item in item_templates
+    )
+    campaign_review_lanes = Counter(
+        item.get("recommended_review_lane") or "campaign_pair_first"
+        for item in campaign_templates
+    )
     campaign_covered_item_ids = {
         work_order_id
         for campaign in campaign_templates
@@ -346,6 +382,16 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         ),
         "item_decision_counts": [[key, count] for key, count in sorted(item_decisions.items())],
         "campaign_decision_counts": [[key, count] for key, count in sorted(campaign_decisions.items())],
+        "item_review_lane_counts": [[key, count] for key, count in sorted(item_review_lanes.items())],
+        "campaign_review_lane_counts": [[key, count] for key, count in sorted(campaign_review_lanes.items())],
+        "same_campaign_family_reissue_item_rows": item_review_lanes.get(
+            "same_campaign_family_reissue_review",
+            0,
+        ),
+        "zero_price_exception_reissue_item_rows": item_review_lanes.get(
+            "zero_price_exception_reissue_review",
+            0,
+        ),
         "campaign_covered_item_template_rows": sum(
             1 for item in item_templates if item.get("work_order_id") in campaign_covered_item_ids
         ),
