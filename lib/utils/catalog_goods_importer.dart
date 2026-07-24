@@ -342,36 +342,51 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                         ),
                       ),
                       const SizedBox(height: 8),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 48,
-                        child: FilledButton.icon(
-                          style: FilledButton.styleFrom(
-                            backgroundColor: _catalogImportButtonBackground,
-                            foregroundColor: _catalogImportButtonForeground,
-                            disabledBackgroundColor:
-                                _catalogImportButtonDisabledBackground,
-                            disabledForegroundColor:
-                                _catalogImportButtonDisabledForeground,
-                          ),
-                          onPressed: destinationFolder == null
-                              ? null
-                              : () => Navigator.pop(
-                                    sheetContext,
-                                    _CatalogImportDestination(
-                                      folder: destinationFolder,
-                                      addToWishlist: selectedKind ==
-                                          _CatalogImportKind.wishlist,
-                                      wishlistTargetFolder: selectedFolder,
-                                    ),
-                                  ),
-                          icon: const Icon(Icons.add_rounded),
-                          label: Text(
-                            selectedKind == _CatalogImportKind.wishlist
-                                ? '위시리스트에 추가'
-                                : '선택한 폴더에 추가',
-                          ),
-                        ),
+                      Builder(
+                        builder: (context) {
+                          final canImport = destinationFolder != null;
+                          final buttonForeground = canImport
+                              ? _catalogImportButtonForeground
+                              : _catalogImportButtonDisabledForeground;
+                          return SizedBox(
+                            width: double.infinity,
+                            height: 48,
+                            child: FilledButton.icon(
+                              style: FilledButton.styleFrom(
+                                backgroundColor: _catalogImportButtonBackground,
+                                foregroundColor: _catalogImportButtonForeground,
+                                disabledBackgroundColor:
+                                    _catalogImportButtonDisabledBackground,
+                                disabledForegroundColor:
+                                    _catalogImportButtonDisabledForeground,
+                              ),
+                              onPressed: canImport
+                                  ? () => Navigator.pop(
+                                        sheetContext,
+                                        _CatalogImportDestination(
+                                          folder: destinationFolder,
+                                          addToWishlist: selectedKind ==
+                                              _CatalogImportKind.wishlist,
+                                          wishlistTargetFolder: selectedFolder,
+                                        ),
+                                      )
+                                  : null,
+                              icon: Icon(
+                                Icons.add_rounded,
+                                color: buttonForeground,
+                              ),
+                              label: Text(
+                                selectedKind == _CatalogImportKind.wishlist
+                                    ? '위시리스트에 추가'
+                                    : '선택한 폴더에 추가',
+                                style: TextStyle(
+                                  color: buttonForeground,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
