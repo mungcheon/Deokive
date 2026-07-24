@@ -1572,6 +1572,104 @@ class PublicCatalogReportTests(unittest.TestCase):
             "candidate_review_required",
         )
         self.assertEqual(pillars["source_url_updates"]["next_queue_rows"], 3)
+        self.assertEqual(pillars["source_url_updates"]["template_rows"], 50)
+        self.assertEqual(
+            pillars["source_url_updates"]["template_confirmed_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["template_candidate_prefilled_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["manual_search_required_rows"],
+            42,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["manual_search_rows_with_store_search_url"],
+            42,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["manual_search_rows_with_site_query"],
+            42,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["manual_search_rows_without_search_hint"],
+            0,
+        )
+        self.assertEqual(pillars["source_url_updates"]["provider_missing_rows"], 5)
+        self.assertEqual(
+            pillars["source_url_updates"][
+                "provider_missing_rows_with_store_search_url"
+            ],
+            5,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"][
+                "provider_missing_rows_without_search_hint"
+            ],
+            0,
+        )
+        self.assertEqual(pillars["source_url_updates"]["candidate_review_rows"], 3)
+        self.assertEqual(
+            pillars["source_url_updates"]["candidate_rows_with_options"],
+            3,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["candidate_single_option_rows"],
+            2,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["candidate_low_confidence_rows"],
+            2,
+        )
+        self.assertEqual(pillars["source_url_updates"]["candidate_weak_rows"], 1)
+        self.assertEqual(
+            pillars["source_url_updates"]["next_source_url_review_batch_rows"],
+            10,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["next_source_url_review_batch_store_count"],
+            1,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"][
+                "next_source_url_review_batch_primary_review_url_rows"
+            ],
+            10,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["source_url_update_primary_review_url_rows"],
+            50,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"][
+                "source_url_update_missing_primary_review_url_rows"
+            ],
+            0,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["source_url_update_review_start_coverage"],
+            1.0,
+        )
+        self.assertEqual(pillars["source_url_updates"]["ready_to_import_rows"], 0)
+        self.assertEqual(pillars["source_url_updates"]["dry_run_updated_rows"], 0)
+        self.assertEqual(pillars["source_url_updates"]["dry_run_skipped_rows"], 73)
+        self.assertTrue(
+            pillars["source_url_updates"]["manual_confirmation_required"]
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["blocked_until"],
+            "manual_exact_source_url_confirmation",
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["blocked_reasons"],
+            [
+                "source_url_identity_not_confirmed",
+                "source_url_template_has_no_manual_confirmations",
+                "source_url_candidates_require_manual_review",
+            ],
+        )
         self.assertEqual(pillars["animation_categories"]["manual_review_rows"], 36)
         self.assertEqual(pillars["animation_categories"]["queued_rows"], 36)
         self.assertEqual(pillars["animation_categories"]["unqueued_rows"], 0)

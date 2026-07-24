@@ -11102,6 +11102,124 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "source_url_update_execution_gate",
                     {},
                 ).get("next_review_rows", 0),
+                "template_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("template_rows", 0),
+                "template_confirmed_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("template_confirmed_rows", 0),
+                "template_candidate_prefilled_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("template_candidate_prefilled_rows", 0),
+                "manual_search_required_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("manual_search_required_rows", 0),
+                "manual_search_rows_with_store_search_url": target.get(
+                    "manual_source_url_search_queue",
+                    {},
+                ).get("with_store_search_url", 0),
+                "manual_search_rows_with_site_query": target.get(
+                    "manual_source_url_search_queue",
+                    {},
+                ).get("with_site_query", 0),
+                "manual_search_rows_without_search_hint": target.get(
+                    "manual_source_url_search_queue",
+                    {},
+                )
+                .get("review_readiness", {})
+                .get("rows_without_search_hint", 0),
+                "provider_missing_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("provider_missing_rows", 0),
+                "provider_missing_rows_with_store_search_url": target.get(
+                    "provider_missing_source_url_queue",
+                    {},
+                ).get("with_store_search_url", 0),
+                "provider_missing_rows_without_search_hint": target.get(
+                    "provider_missing_source_url_queue",
+                    {},
+                )
+                .get("review_readiness", {})
+                .get("rows_without_search_hint", 0),
+                "candidate_review_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("candidate_review_rows", 0),
+                "candidate_rows_with_options": target.get(
+                    "candidate_source_url_review_queue",
+                    {},
+                ).get("with_candidate_options", 0),
+                "candidate_single_option_rows": target.get(
+                    "candidate_source_url_review_queue",
+                    {},
+                )
+                .get("review_readiness", {})
+                .get("single_candidate_option_rows", 0),
+                "candidate_low_confidence_rows": target.get(
+                    "candidate_source_url_review_queue",
+                    {},
+                )
+                .get("review_readiness", {})
+                .get("low_confidence_rows", 0),
+                "candidate_weak_rows": target.get(
+                    "candidate_source_url_review_queue",
+                    {},
+                )
+                .get("review_readiness", {})
+                .get("weak_candidate_rows", 0),
+                "next_source_url_review_batch_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("next_source_url_review_batch_rows", 0),
+                "next_source_url_review_batch_store_count": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("next_source_url_review_batch_store_count", 0),
+                "next_source_url_review_batch_primary_review_url_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("next_source_url_review_batch_primary_review_url_rows", 0),
+                "source_url_update_primary_review_url_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("source_url_update_primary_review_url_rows", 0),
+                "source_url_update_missing_primary_review_url_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("source_url_update_missing_primary_review_url_rows", 0),
+                "source_url_update_review_start_coverage": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("source_url_update_review_start_coverage", 0),
+                "ready_to_import_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("ready_to_import_rows", 0),
+                "dry_run_updated_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("dry_run_updated_rows", 0),
+                "dry_run_skipped_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("dry_run_skipped_rows", 0),
+                "manual_confirmation_required": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("manual_confirmation_required", True),
+                "blocked_until": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("blocked_until"),
+                "blocked_reasons": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("blocked_reasons", []),
                 "next_safe_phase": target.get(
                     "source_url_update_execution_gate",
                     {},
