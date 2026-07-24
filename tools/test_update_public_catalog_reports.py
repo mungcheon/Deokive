@@ -77,6 +77,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/ichiban_kuji_prize_name_image_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_name_image_patch_candidates_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_historical_roadmap_public.json", updated_files)
+        self.assertIn("data/ichiban_kuji_reissue_deduplication_public.json", updated_files)
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
         self.assertIn("data/animation_category_unmatched_keyword_review_public.json", updated_files)
         self.assertIn("data/source_detail_probe_public.json", updated_files)
@@ -465,6 +466,19 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_completion_roadmap"]["focus_source_rows"],
         )
         self.assertEqual(quality["source_discovery_completion_roadmap"]["queued_source_rows"], 632)
+        reissue_deduplication = quality["ichiban_kuji_reissue_deduplication"]
+        self.assertEqual(reissue_deduplication["reissue_duplicate_groups"], 149)
+        self.assertEqual(reissue_deduplication["removed_rows"], 165)
+        self.assertEqual(reissue_deduplication["missing_local_image_files"], 0)
+        self.assertTrue(reissue_deduplication["summary_matches_top_level_counts"])
+        self.assertFalse(
+            reissue_deduplication["automation_policy"]["auto_merge_enabled"]
+        )
+        self.assertTrue(
+            reissue_deduplication["automation_policy"][
+                "manual_review_required_before_mutation"
+            ]
+        )
         self.assertEqual(quality["source_discovery_completion_roadmap"]["current_focus_pack_rows"], 20)
         self.assertEqual(
             quality["source_discovery_completion_roadmap"]["completion_readiness_status"],
