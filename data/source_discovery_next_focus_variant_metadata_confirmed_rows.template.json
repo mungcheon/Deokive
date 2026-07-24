@@ -1,0 +1,580 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-24T13:34:38Z",
+  "scope": "source_discovery_next_focus_variant_metadata_confirmed_rows_template",
+  "source_reports": [
+    "data/source_discovery_next_focus_variant_metadata_backfill_public.json",
+    "data/catalog_public.json"
+  ],
+  "instructions": [
+    "Copy this file to a confirmed rows file or edit the template entries after manual source review.",
+    "Set manual_confirmed to true only when manual_evidence_url is an exact product page for this variant.",
+    "Fill only fields that are proven by the evidence page; leave other manual_confirmed_* fields blank.",
+    "Run tools/import_confirmed_variant_metadata_backfill_rows.py and review the dry-run report before --write."
+  ],
+  "summary": {
+    "template_rows": 2,
+    "missing_catalog_rows": 0,
+    "missing_catalog_indexes": []
+  },
+  "items": [
+    {
+      "catalog_index": 1117,
+      "current": {
+        "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+        "name_ja": null,
+        "category": "아크릴 스탠드",
+        "sub_series": null,
+        "character_name": "키노모토 사쿠라",
+        "affiliation": "카드캡터 체리",
+        "source_store": "애니메이트"
+      },
+      "review": {
+        "variant_risk_flags": [
+          "collection_or_trading_variant",
+          "letter_or_version_variant",
+          "mini_or_junior_variant",
+          "named_theme_variant",
+          "oversized_variant",
+          "resale_or_rerelease"
+        ],
+        "recommended_metadata_fields": [
+          "name_ja",
+          "sub_series",
+          "name_ko"
+        ],
+        "review_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C",
+        "candidate_samples": [
+          {
+            "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%AF%E3%83%AA%E3%82%A2%E3%82%AB%E3%83%BC%E3%83%89%E7%B7%A8+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E6%9C%A8%E4%B9%8B%E6%9C%AC+%E6%A1%9C%26%E3%82%B1%E3%83%AD%E3%81%A1%E3%82%83%E3%82%93+%E3%81%BF%E3%82%93%E3%81%AA%E3%81%A7%E6%97%85%E8%A1%8Cver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3478244/",
+            "page_title": "【グッズ-スタンドポップ】カードキャプターさくら クリアカード編 描き下ろし 木之本 桜&ケロちゃん みんなで旅行ver. BIGアクリルスタンド",
+            "title_match": {
+              "matched_tokens": [
+                "カードキャプターさくら",
+                "アクリルスタンド",
+                "木之本桜"
+              ],
+              "required_token_count": 8,
+              "matched_token_count": 3,
+              "score": 0.375,
+              "field_scores": {
+                "name_ja": {
+                  "tokens": [],
+                  "matched_tokens": [],
+                  "required_token_count": 0,
+                  "matched_token_count": 0,
+                  "score": 0
+                },
+                "search_term": {
+                  "tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "matched_tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "required_token_count": 3,
+                  "matched_token_count": 3,
+                  "score": 1.0
+                },
+                "name_ko": {
+                  "tokens": [
+                    "카드캡터",
+                    "체리",
+                    "아크릴",
+                    "스탠드",
+                    "사쿠라"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 5,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                },
+                "category": {
+                  "tokens": [
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 2,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                }
+              },
+              "best_field_score": 1.0
+            },
+            "variant_risk": {
+              "flags": [
+                "oversized_variant",
+                "letter_or_version_variant",
+                "named_theme_variant"
+              ],
+              "risk_level": "variant_review_required",
+              "blocks_auto_apply": true
+            }
+          },
+          {
+            "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+Jewel+Flash+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC+%E6%A1%9C+A%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/3540362/",
+            "page_title": "【グッズ-スタンドポップ】カードキャプターさくら Jewel Flash アクリルスタンド 木之本 桜 A【再販】",
+            "title_match": {
+              "matched_tokens": [
+                "カードキャプターさくら",
+                "アクリルスタンド",
+                "木之本桜"
+              ],
+              "required_token_count": 8,
+              "matched_token_count": 3,
+              "score": 0.375,
+              "field_scores": {
+                "name_ja": {
+                  "tokens": [],
+                  "matched_tokens": [],
+                  "required_token_count": 0,
+                  "matched_token_count": 0,
+                  "score": 0
+                },
+                "search_term": {
+                  "tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "matched_tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "required_token_count": 3,
+                  "matched_token_count": 3,
+                  "score": 1.0
+                },
+                "name_ko": {
+                  "tokens": [
+                    "카드캡터",
+                    "체리",
+                    "아크릴",
+                    "스탠드",
+                    "사쿠라"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 5,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                },
+                "category": {
+                  "tokens": [
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 2,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                }
+              },
+              "best_field_score": 1.0
+            },
+            "variant_risk": {
+              "flags": [
+                "resale_or_rerelease",
+                "named_theme_variant"
+              ],
+              "risk_level": "variant_review_required",
+              "blocks_auto_apply": true
+            }
+          },
+          {
+            "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%AF%E3%83%AA%E3%82%A2%E3%82%AB%E3%83%BC%E3%83%89%E7%B7%A8+%E6%9C%A8%E4%B9%8B%E6%9C%AC+%E6%A1%9C+Aure+Glass+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+ver.B/pd/3433290/",
+            "page_title": "【グッズ-スタンドポップ】カードキャプターさくら クリアカード編 木之本 桜 Aure Glass アクリルスタンド ver.B",
+            "title_match": {
+              "matched_tokens": [
+                "カードキャプターさくら",
+                "アクリルスタンド",
+                "木之本桜"
+              ],
+              "required_token_count": 8,
+              "matched_token_count": 3,
+              "score": 0.375,
+              "field_scores": {
+                "name_ja": {
+                  "tokens": [],
+                  "matched_tokens": [],
+                  "required_token_count": 0,
+                  "matched_token_count": 0,
+                  "score": 0
+                },
+                "search_term": {
+                  "tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "matched_tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "required_token_count": 3,
+                  "matched_token_count": 3,
+                  "score": 1.0
+                },
+                "name_ko": {
+                  "tokens": [
+                    "카드캡터",
+                    "체리",
+                    "아크릴",
+                    "스탠드",
+                    "사쿠라"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 5,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                },
+                "category": {
+                  "tokens": [
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 2,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                }
+              },
+              "best_field_score": 1.0
+            },
+            "variant_risk": {
+              "flags": [
+                "letter_or_version_variant",
+                "named_theme_variant"
+              ],
+              "risk_level": "variant_review_required",
+              "blocks_auto_apply": true
+            }
+          },
+          {
+            "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%AF%E3%83%AA%E3%82%A2%E3%82%AB%E3%83%BC%E3%83%89%E7%B7%A8+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E6%9C%A8%E4%B9%8B%E6%9C%AC+%E6%A1%9C%26%E3%82%B1%E3%83%AD%E3%81%A1%E3%82%83%E3%82%93+%E3%81%BF%E3%82%93%E3%81%AA%E3%81%A7%E6%97%85%E8%A1%8Cver.+%E7%89%B9%E5%A4%A7%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3478241/",
+            "page_title": "【グッズ-スタンドポップ】カードキャプターさくら クリアカード編 描き下ろし 木之本 桜&ケロちゃん みんなで旅行ver. 特大アクリルスタンド",
+            "title_match": {
+              "matched_tokens": [
+                "カードキャプターさくら",
+                "アクリルスタンド",
+                "木之本桜"
+              ],
+              "required_token_count": 8,
+              "matched_token_count": 3,
+              "score": 0.375,
+              "field_scores": {
+                "name_ja": {
+                  "tokens": [],
+                  "matched_tokens": [],
+                  "required_token_count": 0,
+                  "matched_token_count": 0,
+                  "score": 0
+                },
+                "search_term": {
+                  "tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "matched_tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "required_token_count": 3,
+                  "matched_token_count": 3,
+                  "score": 1.0
+                },
+                "name_ko": {
+                  "tokens": [
+                    "카드캡터",
+                    "체리",
+                    "아크릴",
+                    "스탠드",
+                    "사쿠라"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 5,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                },
+                "category": {
+                  "tokens": [
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 2,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                }
+              },
+              "best_field_score": 1.0
+            },
+            "variant_risk": {
+              "flags": [
+                "oversized_variant",
+                "named_theme_variant"
+              ],
+              "risk_level": "variant_review_required",
+              "blocks_auto_apply": true
+            }
+          },
+          {
+            "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%AF%E3%83%AA%E3%82%A2%E3%82%AB%E3%83%BC%E3%83%89%E7%B7%A8+%E6%9C%A8%E4%B9%8B%E6%9C%AC+%E6%A1%9C+Aure+Glass+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+ver.C/pd/3433291/",
+            "page_title": "【グッズ-スタンドポップ】カードキャプターさくら クリアカード編 木之本 桜 Aure Glass アクリルスタンド ver.C",
+            "title_match": {
+              "matched_tokens": [
+                "カードキャプターさくら",
+                "アクリルスタンド",
+                "木之本桜"
+              ],
+              "required_token_count": 8,
+              "matched_token_count": 3,
+              "score": 0.375,
+              "field_scores": {
+                "name_ja": {
+                  "tokens": [],
+                  "matched_tokens": [],
+                  "required_token_count": 0,
+                  "matched_token_count": 0,
+                  "score": 0
+                },
+                "search_term": {
+                  "tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "matched_tokens": [
+                    "カードキャプターさくら",
+                    "アクリルスタンド",
+                    "木之本桜"
+                  ],
+                  "required_token_count": 3,
+                  "matched_token_count": 3,
+                  "score": 1.0
+                },
+                "name_ko": {
+                  "tokens": [
+                    "카드캡터",
+                    "체리",
+                    "아크릴",
+                    "스탠드",
+                    "사쿠라"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 5,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                },
+                "category": {
+                  "tokens": [
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 2,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                }
+              },
+              "best_field_score": 1.0
+            },
+            "variant_risk": {
+              "flags": [
+                "letter_or_version_variant",
+                "named_theme_variant"
+              ],
+              "risk_level": "variant_review_required",
+              "blocks_auto_apply": true
+            }
+          }
+        ]
+      },
+      "metadata_backfill_template": {
+        "catalog_index": 1117,
+        "manual_confirmed": false,
+        "manual_confirmed_name_ja": "",
+        "manual_confirmed_name_ko": "",
+        "manual_confirmed_sub_series": "",
+        "manual_confirmed_category": "",
+        "manual_evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%AF%E3%83%AA%E3%82%A2%E3%82%AB%E3%83%BC%E3%83%89%E7%B7%A8+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E6%9C%A8%E4%B9%8B%E6%9C%AC+%E6%A1%9C%26%E3%82%B1%E3%83%AD%E3%81%A1%E3%82%83%E3%82%93+%E3%81%BF%E3%82%93%E3%81%AA%E3%81%A7%E6%97%85%E8%A1%8Cver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3478244/",
+        "manual_note": "Fill only exact variant metadata after checking candidate_samples."
+      }
+    },
+    {
+      "catalog_index": 1119,
+      "current": {
+        "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
+        "name_ja": null,
+        "category": "아크릴 스탠드",
+        "sub_series": null,
+        "character_name": "츠키노 우사기",
+        "affiliation": "세일러문",
+        "source_store": "애니메이트"
+      },
+      "review": {
+        "variant_risk_flags": [
+          "calendar_product_type",
+          "collaboration_variant",
+          "collection_or_trading_variant"
+        ],
+        "recommended_metadata_fields": [
+          "name_ja",
+          "sub_series",
+          "name_ko",
+          "category"
+        ],
+        "review_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3",
+        "candidate_samples": [
+          {
+            "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8C%E7%BE%8E%E5%B0%91%E5%A5%B3%E6%88%A6%E5%A3%AB%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3Cosmos%E3%80%8D+2024%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC+CL-020/pd/2366162/",
+            "page_title": "【カレンダー】劇場版「美少女戦士セーラームーンCosmos」 2024アクリルスタンドカレンダー CL-020",
+            "title_match": {
+              "matched_tokens": [
+                "セーラームーン",
+                "アクリルスタンド"
+              ],
+              "required_token_count": 5,
+              "matched_token_count": 2,
+              "score": 0.4,
+              "field_scores": {
+                "name_ja": {
+                  "tokens": [],
+                  "matched_tokens": [],
+                  "required_token_count": 0,
+                  "matched_token_count": 0,
+                  "score": 0
+                },
+                "search_term": {
+                  "tokens": [
+                    "セーラームーン",
+                    "アクリルスタンド"
+                  ],
+                  "matched_tokens": [
+                    "セーラームーン",
+                    "アクリルスタンド"
+                  ],
+                  "required_token_count": 2,
+                  "matched_token_count": 2,
+                  "score": 1.0
+                },
+                "name_ko": {
+                  "tokens": [
+                    "세일러문",
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 3,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                },
+                "category": {
+                  "tokens": [
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 2,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                }
+              },
+              "best_field_score": 1.0
+            },
+            "variant_risk": {
+              "flags": [
+                "calendar_product_type"
+              ],
+              "risk_level": "variant_review_required",
+              "blocks_auto_apply": true
+            }
+          },
+          {
+            "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%8C%E7%BE%8E%E5%B0%91%E5%A5%B3%E6%88%A6%E5%A3%AB%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%E3%80%8D%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%C3%97%E3%82%B5%E3%83%B3%E3%83%AA%E3%82%AA%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/pd/2236381/",
+            "page_title": "【グッズ-スタンドポップ】「美少女戦士セーラームーン」シリーズ×サンリオキャラクターズ アクリルスタンドコレクション",
+            "title_match": {
+              "matched_tokens": [
+                "セーラームーン",
+                "アクリルスタンド"
+              ],
+              "required_token_count": 5,
+              "matched_token_count": 2,
+              "score": 0.4,
+              "field_scores": {
+                "name_ja": {
+                  "tokens": [],
+                  "matched_tokens": [],
+                  "required_token_count": 0,
+                  "matched_token_count": 0,
+                  "score": 0
+                },
+                "search_term": {
+                  "tokens": [
+                    "セーラームーン",
+                    "アクリルスタンド"
+                  ],
+                  "matched_tokens": [
+                    "セーラームーン",
+                    "アクリルスタンド"
+                  ],
+                  "required_token_count": 2,
+                  "matched_token_count": 2,
+                  "score": 1.0
+                },
+                "name_ko": {
+                  "tokens": [
+                    "세일러문",
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 3,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                },
+                "category": {
+                  "tokens": [
+                    "아크릴",
+                    "스탠드"
+                  ],
+                  "matched_tokens": [],
+                  "required_token_count": 2,
+                  "matched_token_count": 0,
+                  "score": 0.0
+                }
+              },
+              "best_field_score": 1.0
+            },
+            "variant_risk": {
+              "flags": [
+                "collection_or_trading_variant",
+                "collaboration_variant"
+              ],
+              "risk_level": "variant_review_required",
+              "blocks_auto_apply": true
+            }
+          }
+        ]
+      },
+      "metadata_backfill_template": {
+        "catalog_index": 1119,
+        "manual_confirmed": false,
+        "manual_confirmed_name_ja": "",
+        "manual_confirmed_name_ko": "",
+        "manual_confirmed_sub_series": "",
+        "manual_confirmed_category": "",
+        "manual_evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8C%E7%BE%8E%E5%B0%91%E5%A5%B3%E6%88%A6%E5%A3%AB%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3Cosmos%E3%80%8D+2024%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC+CL-020/pd/2366162/",
+        "manual_note": "Fill only exact variant metadata after checking candidate_samples."
+      }
+    }
+  ]
+}

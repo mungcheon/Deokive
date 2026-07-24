@@ -16,7 +16,7 @@ except Exception:
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
-DEFAULT_QUEUE = DATA / "source_discovery_next_focus_variant_metadata_backfill_public.json"
+DEFAULT_QUEUE = DATA / "source_discovery_next_focus_variant_metadata_confirmed_rows.template.json"
 DEFAULT_CATALOG = DATA / "catalog_public.json"
 DEFAULT_REPORT = DATA / "source_discovery_next_focus_variant_metadata_import_dry_run_public.json"
 
