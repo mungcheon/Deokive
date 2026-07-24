@@ -2484,6 +2484,23 @@ class PublicCatalogReportTests(unittest.TestCase):
             ichiban_reissue_dedupe_next_action.get("work_order_report"),
             "data/catalog_deduplication_action_queue_public.json",
         )
+        self.assertEqual(
+            dedupe_action_summary.get("ichiban_reissue_work_orders_with_evidence_urls"),
+            dedupe_action_summary.get("ichiban_reissue_work_order_rows"),
+        )
+        self.assertEqual(
+            dedupe_action_summary.get("ichiban_reissue_campaign_work_orders_with_evidence_urls"),
+            dedupe_action_summary.get("ichiban_reissue_campaign_work_order_rows"),
+        )
+        self.assertTrue(dedupe_action_summary.get("ichiban_reissue_first_evidence_url"))
+        self.assertEqual(
+            dedupe_action["ichiban_reissue_work_order"][0]["first_evidence_url"],
+            dedupe_action_summary.get("ichiban_reissue_first_evidence_url"),
+        )
+        self.assertGreater(
+            dedupe_action["ichiban_reissue_work_order"][0]["evidence_url_count"],
+            0,
+        )
         self.assertEqual(ichiban_reissue_dedupe_next_action.get("item_decision_template_rows"), 20)
         self.assertEqual(ichiban_reissue_dedupe_next_action.get("campaign_decision_template_rows"), 4)
         self.assertEqual(

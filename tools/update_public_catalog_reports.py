@@ -17,6 +17,7 @@ import build_animation_category_action_queue_public
 import build_animation_category_review_batches_public
 import build_animation_category_split_review_public
 import build_animation_category_unmatched_keyword_review_public
+import build_deduplication_action_queue_public
 import build_gotouchi_official_candidate_review_queue_public
 import build_image_attachment_action_queue_public
 import build_image_source_url_confirmed_template_public
@@ -2178,6 +2179,7 @@ def build_operations_public(
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
     requested_focus_action_queue_override: dict[str, Any] | None = None,
+    deduplication_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -2321,7 +2323,13 @@ def build_operations_public(
         load_json(DEDUPLICATION_REVIEW_BATCHES, {}) if DEDUPLICATION_REVIEW_BATCHES.exists() else {}
     )
     dedupe_review_batches_summary = dedupe_review_batches.get("summary", {})
-    dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
+    dedupe_action_queue = (
+        deduplication_action_queue_override
+        if deduplication_action_queue_override is not None
+        else load_json(DEDUPLICATION_ACTION_QUEUE, {})
+        if DEDUPLICATION_ACTION_QUEUE.exists()
+        else {}
+    )
     dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
     ichiban_reissue_decision_template = (
         ichiban_reissue_decision_template_override
@@ -4201,6 +4209,7 @@ def build_agent_work_queue_public(
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
     requested_focus_action_queue_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
+    deduplication_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -4250,7 +4259,13 @@ def build_agent_work_queue_public(
         if SOURCE_DISCOVERY_STARTER_QUEUE.exists()
         else {}
     )
-    dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
+    dedupe_action_queue = (
+        deduplication_action_queue_override
+        if deduplication_action_queue_override is not None
+        else load_json(DEDUPLICATION_ACTION_QUEUE, {})
+        if DEDUPLICATION_ACTION_QUEUE.exists()
+        else {}
+    )
     metadata_review_batches = (
         metadata_review_batches_override
         if metadata_review_batches_override is not None
@@ -7868,14 +7883,23 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
+    ichiban_prize_policy_audit_source = (
+        load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {})
+        if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists()
+        else {}
+    )
+    deduplication_action_queue = build_deduplication_action_queue_public.build_report(
+        load_json(DEDUPLICATION_REVIEW_BATCHES, {})
+        if DEDUPLICATION_REVIEW_BATCHES.exists()
+        else {},
+        max_groups=100,
+        batch_size=10,
+        ichiban_policy_audit=ichiban_prize_policy_audit_source,
+    )
     ichiban_kuji_prize_policy_issue_queue = (
         build_ichiban_prize_policy_issue_queue_public.build_queue(
-            load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {})
-            if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists()
-            else {},
-            load_json(DEDUPLICATION_ACTION_QUEUE, {})
-            if DEDUPLICATION_ACTION_QUEUE.exists()
-            else {},
+            ichiban_prize_policy_audit_source,
+            deduplication_action_queue,
             generated_at=generated_at,
         )
     )
@@ -7889,9 +7913,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     )
     ichiban_kuji_reissue_decision_template = (
         build_ichiban_reissue_decision_template_public.build_report(
-            load_json(DEDUPLICATION_ACTION_QUEUE, {})
-            if DEDUPLICATION_ACTION_QUEUE.exists()
-            else {},
+            deduplication_action_queue,
             generated_at=generated_at,
         )
     )
@@ -7901,9 +7923,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_metadata_action_queue=ichiban_metadata_action_queue,
         ichiban_metadata_fast_review=ichiban_metadata_fast_review,
         ichiban_kuji_prize_policy_issue_queue=ichiban_kuji_prize_policy_issue_queue,
-        deduplication_action_queue=load_json(DEDUPLICATION_ACTION_QUEUE, {})
-        if DEDUPLICATION_ACTION_QUEUE.exists()
-        else {},
+        deduplication_action_queue=deduplication_action_queue,
         name_duplicate_audit=name_duplicate_audit,
         ichiban_kuji_prize_name_image_review=ichiban_kuji_prize_name_image_review,
         ichiban_kuji_prize_name_image_patch_candidates=ichiban_kuji_prize_name_image_patch_candidates,
@@ -8045,6 +8065,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_starter_queue,
         image_attachment_action_queue,
         requested_focus_action_queue,
+        deduplication_action_queue,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -8068,6 +8089,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_starter_queue,
         requested_focus_action_queue,
         image_attachment_action_queue,
+        deduplication_action_queue,
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 
@@ -8092,7 +8114,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "requested_focus_review_batches_public.json": requested_focus_review_batches,
             "requested_focus_action_queue_public.json": requested_focus_action_queue,
             "catalog_deduplication_review_batches_public.json": load_json(DEDUPLICATION_REVIEW_BATCHES, {}),
-            "catalog_deduplication_action_queue_public.json": load_json(DEDUPLICATION_ACTION_QUEUE, {}),
+            "catalog_deduplication_action_queue_public.json": deduplication_action_queue,
             "ichiban_kuji_reissue_decision_template_public.json": ichiban_kuji_reissue_decision_template,
             "ichiban_kuji_metadata_review_batches_public.json": load_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, {}),
             "ichiban_kuji_metadata_action_queue_public.json": load_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, {}),
@@ -8932,6 +8954,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(METADATA_ACTION_QUEUE, metadata_action_queue)
         write_json(IMAGE_ENRICHMENT_BATCHES, image_enrichment_batches)
         write_json(DEDUPLICATION, deduplication)
+        write_json(DEDUPLICATION_ACTION_QUEUE, deduplication_action_queue)
         write_json(NAME_DUPLICATE_AUDIT, name_duplicate_audit)
         write_json(ANIMATION_CATEGORIES, animation_categories)
         write_json(ANIMATION_CATEGORY_COVERAGE_AUDIT, animation_category_coverage_audit)

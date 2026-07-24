@@ -271,6 +271,12 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["ichiban_reissue_decision_template_rows"], 1)
         self.assertEqual(report["summary"]["ichiban_reissue_campaign_work_order_rows"], 1)
         self.assertEqual(report["summary"]["ichiban_reissue_campaign_decision_template_rows"], 1)
+        self.assertEqual(report["summary"]["ichiban_reissue_work_orders_with_evidence_urls"], 1)
+        self.assertEqual(report["summary"]["ichiban_reissue_campaign_work_orders_with_evidence_urls"], 1)
+        self.assertEqual(
+            report["summary"]["ichiban_reissue_first_evidence_url"],
+            "https://1kuji.com/products/sample",
+        )
         self.assertEqual(report["summary"]["ichiban_reissue_manual_confirmed_rows"], 0)
         self.assertEqual(report["summary"]["completion_readiness_status"], "ichiban_reissue_review_required")
         self.assertEqual(report["completion_readiness"]["status"], "ichiban_reissue_review_required")
@@ -294,6 +300,16 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
             report["ichiban_reissue_work_order"][0]["review_state"],
             "ichiban_reissue_identity_confirmation_required",
         )
+        self.assertEqual(
+            report["ichiban_reissue_work_order"][0]["first_evidence_url"],
+            "https://1kuji.com/products/sample",
+        )
+        self.assertEqual(report["ichiban_reissue_work_order"][0]["evidence_url_count"], 2)
+        self.assertEqual(
+            campaign_order["first_evidence_url"],
+            "https://1kuji.com/products/sample",
+        )
+        self.assertEqual(campaign_order["evidence_url_count"], 2)
         self.assertIn(
             "reissue_or_campaign_variant_keep_separate",
             report["ichiban_reissue_work_order"][0]["decision_template"]["decision_options"],
@@ -426,6 +442,8 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(campaign_order["item_work_order_count"], 2)
         self.assertEqual(campaign_order["catalog_indexes"], [101, 102, 103, 104])
         self.assertEqual(campaign_order["prize_labels"], ["A賞", "B賞"])
+        self.assertEqual(campaign_order["first_evidence_url"], "https://1kuji.com/products/sample")
+        self.assertEqual(campaign_order["evidence_url_count"], 2)
         self.assertEqual(
             campaign_order["next_machine_step"],
             "compare_campaign_pair_once_then_apply_decision_to_item_work_orders",

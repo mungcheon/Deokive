@@ -172,6 +172,14 @@ def _campaign_url_comparison(source_urls: list[str]) -> dict[str, Any]:
     }
 
 
+def _evidence_url_summary(source_urls: list[str]) -> dict[str, Any]:
+    urls = [str(url).strip() for url in source_urls if str(url).strip()]
+    return {
+        "first_evidence_url": urls[0] if urls else "",
+        "evidence_url_count": len(urls),
+    }
+
+
 def protected_ichiban_reissue_catalog_indexes(policy_audit: dict[str, Any] | None) -> set[int]:
     if not policy_audit:
         return set()
@@ -278,6 +286,7 @@ def ichiban_reissue_work_order(
         source_urls = [str(url).strip() for url in row.get("source_urls") or [] if str(url).strip()]
         prize_identity = _prize_identity_summary(sample_rows)
         campaign_url_comparison = _campaign_url_comparison(source_urls)
+        evidence_summary = _evidence_url_summary(source_urls)
         orders.append(
             {
                 "work_order_id": f"ichiban-reissue-dedupe-{rank:03d}",
@@ -287,6 +296,7 @@ def ichiban_reissue_work_order(
                 "source_url_count": row.get("source_url_count"),
                 "catalog_indexes": catalog_indexes,
                 "source_urls": source_urls,
+                **evidence_summary,
                 "campaign_slug_families": row.get("campaign_slug_families") or [],
                 "campaign_url_comparison": campaign_url_comparison,
                 "reissue_signal_reasons": row.get("reissue_signal_reasons") or [],
@@ -370,11 +380,13 @@ def ichiban_reissue_campaign_work_order(
             for row in order.get("sample_rows") or []
             if isinstance(row, dict)
         ][:12]
+        evidence_summary = _evidence_url_summary(list(source_urls))
         campaign_orders.append(
             {
                 "campaign_work_order_id": f"ichiban-reissue-campaign-{rank:03d}",
                 "priority": rank,
                 "source_urls": list(source_urls),
+                **evidence_summary,
                 "campaign_url_comparison": _campaign_url_comparison(list(source_urls)),
                 "item_work_order_count": len(orders),
                 "item_work_order_ids": [str(order.get("work_order_id") or "") for order in orders],
@@ -699,6 +711,12 @@ def build_report(
         for order in reissue_work_orders
         if order.get("decision_template", {}).get("manual_confirmed") is True
     )
+    reissue_work_orders_with_evidence = sum(
+        1 for order in reissue_work_orders if order.get("first_evidence_url")
+    )
+    reissue_campaign_work_orders_with_evidence = sum(
+        1 for order in reissue_campaign_work_orders if order.get("first_evidence_url")
+    )
     completion_status = (
         "clear"
         if not actionable and not reissue_work_orders
@@ -793,6 +811,26 @@ def build_report(
             "ichiban_reissue_decision_template_rows": len(reissue_work_orders),
             "ichiban_reissue_campaign_work_order_rows": len(reissue_campaign_work_orders),
             "ichiban_reissue_campaign_decision_template_rows": len(reissue_campaign_work_orders),
+            "ichiban_reissue_work_orders_with_evidence_urls": reissue_work_orders_with_evidence,
+            "ichiban_reissue_campaign_work_orders_with_evidence_urls": (
+                reissue_campaign_work_orders_with_evidence
+            ),
+            "ichiban_reissue_first_evidence_url": next(
+                (
+                    order.get("first_evidence_url")
+                    for order in reissue_work_orders
+                    if order.get("first_evidence_url")
+                ),
+                "",
+            ),
+            "ichiban_reissue_first_campaign_evidence_url": next(
+                (
+                    order.get("first_evidence_url")
+                    for order in reissue_campaign_work_orders
+                    if order.get("first_evidence_url")
+                ),
+                "",
+            ),
             "ichiban_reissue_manual_confirmed_rows": manual_confirmed_reissue_rows,
             "ichiban_reissue_protected_groups": protected_group_count,
             "ichiban_reissue_protected_rows": len(protected_row_indexes),
