@@ -588,7 +588,7 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 92,
+        minWidth: expanded ? 0 : 104,
         minHeight: 40,
         maxHeight: 40,
       ),
@@ -669,25 +669,28 @@ class _CatalogAddButtonLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: TextStyle(
-        color: color,
-        fontSize: 13,
-        fontWeight: FontWeight.w900,
-        height: 1,
-        shadows: const [
-          Shadow(
-            color: Color(0x66000000),
-            blurRadius: 2,
-            offset: Offset(0, 1),
-          ),
-        ],
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        label,
+        style: TextStyle(
+          color: color,
+          fontSize: 13,
+          fontWeight: FontWeight.w900,
+          height: 1,
+          shadows: const [
+            Shadow(
+              color: Color(0x66000000),
+              blurRadius: 2,
+              offset: Offset(0, 1),
+            ),
+          ],
+        ),
+        maxLines: 1,
+        softWrap: false,
+        overflow: TextOverflow.visible,
+        textAlign: TextAlign.center,
       ),
-      maxLines: 1,
-      softWrap: false,
-      overflow: TextOverflow.ellipsis,
-      textAlign: TextAlign.center,
     );
   }
 }
