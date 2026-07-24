@@ -395,6 +395,7 @@ def build_report(
     decision_reason_counts: Counter[str] = Counter()
     fallback_bridge_items: list[dict[str, Any]] = []
     review_work_order_items: list[dict[str, Any]] = []
+    metadata_enrichment_template: list[dict[str, Any]] = []
     candidate_rows = 0
     items_with_candidates = 0
     candidate_items_with_official_no_results = 0
@@ -483,6 +484,56 @@ def build_report(
                 **fallback_search,
             }
         )
+        if review_decision.get("decision") == "catalog_variant_detail_required_before_import":
+            metadata_enrichment_template.append(
+                {
+                    "manual_confirmed": False,
+                    "manual_review_status": "not_started",
+                    "manual_note": "",
+                    "focus_pack_id": item.get("focus_pack_id"),
+                    "catalog_index": item.get("catalog_index"),
+                    "source_store": item.get("source_store"),
+                    "category": item.get("category"),
+                    "current_name_ko": item.get("name_ko"),
+                    "current_name_ja": item.get("name_ja"),
+                    "search_query": query,
+                    "top_candidate_title": (
+                        candidate_payload[0].get("candidate_title") if candidate_payload else ""
+                    ),
+                    "top_candidate_source_url": (
+                        candidate_payload[0].get("candidate_source_url") if candidate_payload else ""
+                    ),
+                    "top_candidate_image_url": (
+                        candidate_payload[0].get("candidate_image_url") if candidate_payload else ""
+                    ),
+                    "candidate_options": [
+                        {
+                            "rank": candidate.get("rank"),
+                            "candidate_title": candidate.get("candidate_title"),
+                            "candidate_source_url": candidate.get("candidate_source_url"),
+                            "candidate_image_url": candidate.get("candidate_image_url"),
+                            "exact_candidate_blockers": candidate.get("exact_candidate_blockers") or [],
+                        }
+                        for candidate in candidate_payload[:5]
+                    ],
+                    "suggested_name_ja": "",
+                    "suggested_series_name": "",
+                    "suggested_sub_series": "",
+                    "suggested_character_name": "",
+                    "evidence_url": (
+                        candidate_payload[0].get("candidate_source_url")
+                        if candidate_payload
+                        else item.get("official_search_url")
+                    ),
+                    "blocked_until": "exact_catalog_variant_identity_confirmed",
+                    "required_evidence": [
+                        "exact_variant_or_character_name",
+                        "official_product_title",
+                        "official_product_detail_url",
+                        "image_identity_matches_selected_variant_before_import",
+                    ],
+                }
+            )
         if candidate_payload:
             items_with_candidates += 1
             if official_search_no_results:
@@ -663,6 +714,7 @@ def build_report(
             "candidate_confirmation_manual_confirmed_rows": sum(
                 1 for row in candidate_confirmation_template if row.get("manual_confirmed") is True
             ),
+            "metadata_enrichment_template_rows": len(metadata_enrichment_template),
             "candidate_blocker_counts": _counter_rows(blocker_counts, "blocker"),
             "review_bucket_counts": _counter_rows(review_bucket_counts, "review_bucket"),
             "review_decision_counts": _counter_rows(decision_counts, "review_decision"),
@@ -694,6 +746,7 @@ def build_report(
         "candidate_review_work_order": review_work_order_items,
         "next_action_lanes": next_action_lanes,
         "fallback_bridge_items": fallback_bridge_items,
+        "metadata_enrichment_template": metadata_enrichment_template,
         "exact_candidate_confirmation_shortlist": exact_candidate_confirmation_shortlist,
         "candidate_confirmation_template": candidate_confirmation_template,
         "automation_policy": {

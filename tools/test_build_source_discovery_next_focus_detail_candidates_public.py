@@ -300,6 +300,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             [["catalog_variant_detail_required_before_import", 1]],
         )
         self.assertEqual(report["summary"]["variant_detail_required_rows"], 1)
+        self.assertEqual(report["summary"]["metadata_enrichment_template_rows"], 1)
         self.assertEqual(report["summary"]["next_action_lanes"], [["catalog_variant_metadata_enrichment", 1]])
         self.assertEqual(report["summary"]["completion_readiness_status"], "variant_detail_required")
         self.assertEqual(report["summary"]["exact_candidate_confirmation_ready_items"], 0)
@@ -311,6 +312,19 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             "catalog_variant_detail_required_before_import",
             report["completion_readiness"]["blocked_reasons"],
         )
+        metadata_row = report["metadata_enrichment_template"][0]
+        self.assertFalse(metadata_row["manual_confirmed"])
+        self.assertEqual(metadata_row["catalog_index"], 10)
+        self.assertEqual(metadata_row["current_name_ko"], "acrylic stand")
+        self.assertEqual(metadata_row["top_candidate_title"], "JoJo acrylic stand Iggy")
+        self.assertEqual(
+            metadata_row["top_candidate_source_url"],
+            "https://www.animate-onlineshop.jp/pn/test/pd/7654321/",
+        )
+        self.assertEqual(len(metadata_row["candidate_options"]), 2)
+        self.assertEqual(metadata_row["suggested_name_ja"], "")
+        self.assertEqual(metadata_row["suggested_sub_series"], "")
+        self.assertIn("exact_variant_or_character_name", metadata_row["required_evidence"])
 
     def test_build_report_uses_localized_animate_query_for_korean_only_rows(self) -> None:
         source = {
