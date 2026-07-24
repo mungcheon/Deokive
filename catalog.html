@@ -789,13 +789,15 @@
     .choose-owned {
       border-left: 1px solid rgba(255, 126, 178, 0.16);
       cursor: pointer;
-      transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+      line-height: 1.15;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+      white-space: normal;
     }
 
     .quick-owned {
-      background: var(--mint);
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(37, 41, 56, 0.18);
+      background: #ffffff;
+      color: #116f63;
+      text-shadow: none;
     }
 
     .choose-owned {
@@ -810,8 +812,8 @@
 
     .quick-owned.added,
     .choose-owned.added {
-      background: rgba(38, 196, 165, 0.14);
-      color: #167e6f;
+      background: #e8fbf6;
+      color: #0d695d;
       text-shadow: none;
     }
 
