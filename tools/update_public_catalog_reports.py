@@ -494,6 +494,44 @@ def write_json(path: Path, data: Any) -> None:
     path.write_text(serialized, encoding="utf-8")
 
 
+def enrich_image_action_queue_source_url_review(
+    image_action_queue: dict[str, Any],
+    source_url_template: dict[str, Any],
+) -> dict[str, Any]:
+    template_rows = {
+        row.get("row_index"): row
+        for row in source_url_template.get("items") or []
+        if isinstance(row, dict)
+    }
+    enriched = dict(image_action_queue)
+    enriched_batch = []
+    for row in image_action_queue.get("next_source_url_review_batch") or []:
+        if not isinstance(row, dict):
+            continue
+        template = template_rows.get(row.get("row_index"))
+        if not isinstance(template, dict):
+            enriched_batch.append(row)
+            continue
+        enriched_batch.append(
+            {
+                **row,
+                "candidate_status": template.get("candidate_status"),
+                "candidate_review_lane": template.get("candidate_review_lane"),
+                "candidate_score": template.get("candidate_score"),
+                "candidate_count": template.get("candidate_count"),
+                "candidate_options": template.get("candidate_options") or [],
+                "source_url_review_lane": template.get("source_url_review_lane"),
+                "source_url_review_blockers": template.get("source_url_review_blockers")
+                or [],
+                "match_diagnostics": template.get("match_diagnostics") or {},
+                "fallback_search_queries": template.get("fallback_search_queries") or [],
+                "store_search_hints": template.get("store_search_hints") or {},
+            }
+        )
+    enriched["next_source_url_review_batch"] = enriched_batch
+    return enriched
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -8390,6 +8428,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         image_attachment_action_queue,
         load_json(STELLIVE_FANDING_CANDIDATES, {}) if STELLIVE_FANDING_CANDIDATES.exists() else None,
         generated_at=generated_at,
+    )
+    image_attachment_action_queue = enrich_image_action_queue_source_url_review(
+        image_attachment_action_queue,
+        image_source_url_confirmed_template,
     )
     image_attachment_confirmed_template = (
         load_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, {})

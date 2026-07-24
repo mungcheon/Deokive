@@ -12,6 +12,52 @@ from build_metadata_action_queue_public import build_report as build_metadata_ac
 
 
 class PublicCatalogReportTests(unittest.TestCase):
+    def test_enrich_image_action_queue_source_url_review_adds_candidate_context(self):
+        action_queue = {
+            "next_source_url_review_batch": [
+                {
+                    "row_index": 10,
+                    "name_ko": "Badge",
+                    "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=Badge",
+                }
+            ]
+        }
+        source_url_template = {
+            "items": [
+                {
+                    "row_index": 10,
+                    "candidate_status": "low_confidence_candidate",
+                    "candidate_review_lane": "low_confidence_candidate_review",
+                    "candidate_score": 0.27,
+                    "candidate_count": 2,
+                    "candidate_options": [
+                        {
+                            "source_url": "https://fanding.kr/@stellive/shop/3700",
+                            "title": "Badge maybe",
+                        }
+                    ],
+                    "source_url_review_lane": "low_confidence_candidate_review",
+                    "source_url_review_blockers": ["candidate_score_too_low"],
+                    "match_diagnostics": {"diagnosis": "needs_review"},
+                    "fallback_search_queries": ["site:fanding.kr/@stellive/shop Badge"],
+                    "store_search_hints": {
+                        "store_search_url": "https://fanding.kr/@stellive/shop?keyword=Badge"
+                    },
+                }
+            ]
+        }
+
+        enriched = reports.enrich_image_action_queue_source_url_review(
+            action_queue,
+            source_url_template,
+        )
+
+        row = enriched["next_source_url_review_batch"][0]
+        self.assertEqual(row["candidate_status"], "low_confidence_candidate")
+        self.assertEqual(row["candidate_options"][0]["title"], "Badge maybe")
+        self.assertEqual(row["source_url_review_blockers"], ["candidate_score_too_low"])
+        self.assertEqual(row["match_diagnostics"]["diagnosis"], "needs_review")
+
     def test_write_json_skips_identical_payloads(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             path = Path(temp_dir) / "report.json"
