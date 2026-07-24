@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -200,7 +202,7 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
       builder: (sheetContext) {
         final theme = Theme.of(sheetContext);
         final palette = theme.extension<DeokivePalette>()!;
-        final addButtonForeground = _readableForegroundFor(palette.primary);
+        final addButtonForeground = _catalogButtonForeground(palette.primary);
         return DraggableScrollableSheet(
           expand: false,
           initialChildSize: 0.80,
@@ -488,7 +490,7 @@ class _CatalogListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final palette = theme.extension<DeokivePalette>()!;
-    final addButtonForeground = _readableForegroundFor(palette.primary);
+    final addButtonForeground = _catalogButtonForeground(palette.primary);
     return Material(
       color: theme.colorScheme.surface,
       borderRadius: BorderRadius.circular(18),
@@ -556,7 +558,7 @@ class _CatalogListTile extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             SizedBox(
-              width: 96,
+              width: 108,
               height: 40,
               child: FilledButton(
                 onPressed: isAdding ? null : () async => onAdd(),
@@ -574,36 +576,30 @@ class _CatalogListTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(999),
                   ),
                 ),
-                child: isAdding
-                    ? Icon(
-                        Icons.more_horiz_rounded,
-                        size: 18,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        isAdding ? Icons.more_horiz_rounded : Icons.add_rounded,
+                        size: 17,
                         color: addButtonForeground,
-                      )
-                    : FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.add_rounded,
-                              size: 17,
-                              color: addButtonForeground,
-                            ),
-                            const SizedBox(width: 3),
-                            Text(
-                              '추가하기',
-                              maxLines: 1,
-                              softWrap: false,
-                              style: TextStyle(
-                                color: addButtonForeground,
-                                fontSize: 12.5,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ],
+                      ),
+                      const SizedBox(width: 3),
+                      Text(
+                        isAdding ? '추가 중' : '추가하기',
+                        maxLines: 1,
+                        softWrap: false,
+                        style: TextStyle(
+                          color: addButtonForeground,
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w900,
                         ),
                       ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
@@ -718,9 +714,29 @@ String _entrySubtitle(GoodsCatalogEntry entry) {
   return parts.join(' · ');
 }
 
-Color _readableForegroundFor(Color background) {
-  final brightness = ThemeData.estimateBrightnessForColor(background);
-  return brightness == Brightness.light
-      ? const Color(0xFF171717)
-      : Colors.white;
+Color _catalogButtonForeground(Color background) {
+  const dark = Color(0xFF111111);
+  const light = Colors.white;
+  final darkContrast = _contrastRatio(background, dark);
+  final lightContrast = _contrastRatio(background, light);
+  return darkContrast >= lightContrast ? dark : light;
+}
+
+double _contrastRatio(Color a, Color b) {
+  final lighter = math.max(_relativeLuminance(a), _relativeLuminance(b));
+  final darker = math.min(_relativeLuminance(a), _relativeLuminance(b));
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+double _relativeLuminance(Color color) {
+  double channel(double value) {
+    final normalized = value / 255;
+    return normalized <= 0.03928
+        ? normalized / 12.92
+        : math.pow((normalized + 0.055) / 1.055, 2.4).toDouble();
+  }
+
+  return 0.2126 * channel(color.red.toDouble()) +
+      0.7152 * channel(color.green.toDouble()) +
+      0.0722 * channel(color.blue.toDouble());
 }
