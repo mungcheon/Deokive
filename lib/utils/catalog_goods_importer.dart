@@ -11,6 +11,11 @@ import '../state/app_state.dart';
 import '../widgets/goods_name_search_field.dart';
 import 'catalog_asset_urls.dart';
 
+const _catalogImportButtonBackground = Color(0xFF252938);
+const _catalogImportButtonForeground = Colors.white;
+const _catalogImportButtonDisabledBackground = Color(0xFFE7E9EE);
+const _catalogImportButtonDisabledForeground = Color(0xFF5D6575);
+
 Future<bool> showCatalogGoodsImportFlow(
   BuildContext context, {
   FolderItem? initialFolder,
@@ -342,18 +347,12 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                         height: 48,
                         child: FilledButton.icon(
                           style: FilledButton.styleFrom(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.primary,
-                            foregroundColor:
-                                Theme.of(context).colorScheme.onPrimary,
-                            disabledBackgroundColor: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withValues(alpha: 0.28),
-                            disabledForegroundColor: Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withValues(alpha: 0.70),
+                            backgroundColor: _catalogImportButtonBackground,
+                            foregroundColor: _catalogImportButtonForeground,
+                            disabledBackgroundColor:
+                                _catalogImportButtonDisabledBackground,
+                            disabledForegroundColor:
+                                _catalogImportButtonDisabledForeground,
                           ),
                           onPressed: destinationFolder == null
                               ? null

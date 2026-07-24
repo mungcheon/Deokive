@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +7,11 @@ import '../state/app_state.dart';
 import '../theme/deokive_palette.dart';
 import '../utils/catalog_goods_importer.dart';
 import '../widgets/catalog_entry_image.dart';
+
+const _catalogAddButtonBackground = Color(0xFF252938);
+const _catalogAddButtonForeground = Colors.white;
+const _catalogAddButtonDisabledBackground = Color(0xFFE7E9EE);
+const _catalogAddButtonDisabledForeground = Color(0xFF5D6575);
 
 class CatalogDatabaseScreen extends StatefulWidget {
   final FolderItem? initialFolder;
@@ -201,8 +204,6 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
       isScrollControlled: true,
       builder: (sheetContext) {
         final theme = Theme.of(sheetContext);
-        final palette = theme.extension<DeokivePalette>()!;
-        final addButtonForeground = _catalogButtonForeground(palette.primary);
         return DraggableScrollableSheet(
           expand: false,
           initialChildSize: 0.80,
@@ -330,18 +331,18 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                           },
                           icon: Icon(
                             Icons.add_rounded,
-                            color: addButtonForeground,
+                            color: _catalogAddButtonForeground,
                           ),
                           label: Text(
                             '내 굿즈에 추가하기',
-                            style: TextStyle(
-                              color: addButtonForeground,
+                            style: const TextStyle(
+                              color: _catalogAddButtonForeground,
                               fontWeight: FontWeight.w900,
                             ),
                           ),
                           style: FilledButton.styleFrom(
-                            backgroundColor: palette.primary,
-                            foregroundColor: addButtonForeground,
+                            backgroundColor: _catalogAddButtonBackground,
+                            foregroundColor: _catalogAddButtonForeground,
                           ),
                         ),
                       ),
@@ -490,7 +491,6 @@ class _CatalogListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final palette = theme.extension<DeokivePalette>()!;
-    final addButtonForeground = _catalogButtonForeground(palette.primary);
     return Material(
       color: theme.colorScheme.surface,
       borderRadius: BorderRadius.circular(18),
@@ -563,13 +563,10 @@ class _CatalogListTile extends StatelessWidget {
               child: FilledButton(
                 onPressed: isAdding ? null : () async => onAdd(),
                 style: FilledButton.styleFrom(
-                  backgroundColor: palette.primary,
-                  foregroundColor: addButtonForeground,
-                  disabledBackgroundColor: palette.primary.withValues(
-                    alpha: 0.30,
-                  ),
-                  disabledForegroundColor:
-                      addButtonForeground.withValues(alpha: 0.72),
+                  backgroundColor: _catalogAddButtonBackground,
+                  foregroundColor: _catalogAddButtonForeground,
+                  disabledBackgroundColor: _catalogAddButtonDisabledBackground,
+                  disabledForegroundColor: _catalogAddButtonDisabledForeground,
                   padding: const EdgeInsets.symmetric(horizontal: 9),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   shape: RoundedRectangleBorder(
@@ -584,7 +581,9 @@ class _CatalogListTile extends StatelessWidget {
                       Icon(
                         isAdding ? Icons.more_horiz_rounded : Icons.add_rounded,
                         size: 17,
-                        color: addButtonForeground,
+                        color: isAdding
+                            ? _catalogAddButtonDisabledForeground
+                            : _catalogAddButtonForeground,
                       ),
                       const SizedBox(width: 3),
                       Text(
@@ -592,7 +591,9 @@ class _CatalogListTile extends StatelessWidget {
                         maxLines: 1,
                         softWrap: false,
                         style: TextStyle(
-                          color: addButtonForeground,
+                          color: isAdding
+                              ? _catalogAddButtonDisabledForeground
+                              : _catalogAddButtonForeground,
                           fontSize: 12.5,
                           fontWeight: FontWeight.w900,
                         ),
@@ -712,31 +713,4 @@ String _entrySubtitle(GoodsCatalogEntry entry) {
       .toList();
   if (parts.isEmpty) return '상세 정보 없음';
   return parts.join(' · ');
-}
-
-Color _catalogButtonForeground(Color background) {
-  const dark = Color(0xFF111111);
-  const light = Colors.white;
-  final darkContrast = _contrastRatio(background, dark);
-  final lightContrast = _contrastRatio(background, light);
-  return darkContrast >= lightContrast ? dark : light;
-}
-
-double _contrastRatio(Color a, Color b) {
-  final lighter = math.max(_relativeLuminance(a), _relativeLuminance(b));
-  final darker = math.min(_relativeLuminance(a), _relativeLuminance(b));
-  return (lighter + 0.05) / (darker + 0.05);
-}
-
-double _relativeLuminance(Color color) {
-  double channel(double value) {
-    final normalized = value / 255;
-    return normalized <= 0.03928
-        ? normalized / 12.92
-        : math.pow((normalized + 0.055) / 1.055, 2.4).toDouble();
-  }
-
-  return 0.2126 * channel(color.red.toDouble()) +
-      0.7152 * channel(color.green.toDouble()) +
-      0.0722 * channel(color.blue.toDouble());
 }
