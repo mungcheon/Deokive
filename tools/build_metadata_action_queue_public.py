@@ -65,8 +65,32 @@ def _template_for_group(group: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _review_urls_for_group(group: dict[str, Any]) -> list[dict[str, str]]:
+    urls: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for item in group.get("sample_items") or []:
+        if not isinstance(item, dict):
+            continue
+        url = str(item.get("source_url") or "").strip()
+        if not url or url in seen:
+            continue
+        seen.add(url)
+        urls.append(
+            {
+                "url": url,
+                "kind": "sample_source_url",
+                "catalog_index": str(item.get("catalog_index") or ""),
+                "label": str(item.get("name_ja") or item.get("name_ko") or ""),
+            }
+        )
+    return urls
+
+
 def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
     field = str(group.get("field") or "")
+    review_urls = _review_urls_for_group(group)
+    primary_review_url = review_urls[0]["url"] if review_urls else None
+    primary_review_url_kind = review_urls[0]["kind"] if review_urls else "manual_lookup_required"
     return {
         "field": field,
         "source_store": group.get("source_store"),
@@ -77,6 +101,10 @@ def _compact_group(group: dict[str, Any], batch: dict[str, Any]) -> dict[str, An
         "risk": group.get("risk"),
         "recommended_action": group.get("recommended_action") or batch.get("recommended_action"),
         "next_machine_step": group.get("next_machine_step") or batch.get("next_machine_step"),
+        "primary_review_url": primary_review_url,
+        "primary_review_url_kind": primary_review_url_kind,
+        "review_urls": review_urls,
+        "review_url_count": len(review_urls),
         "sample_catalog_indexes": group.get("sample_catalog_indexes") or [],
         "sample_items": group.get("sample_items") or [],
         "catalog_field_import_template": _template_for_group(group),
@@ -121,8 +149,21 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
         chunk = published[offset : offset + batch_size]
         field_counts = Counter(str(row.get("field") or "") for row in chunk)
         store_counts = Counter(str(row.get("source_store") or "") for row in chunk)
+        url_kind_counts = Counter(str(row.get("primary_review_url_kind") or "") for row in chunk)
         field_missing_cells = Counter()
         store_missing_cells = Counter()
+        first_primary_review_url = next(
+            (row.get("primary_review_url") for row in chunk if row.get("primary_review_url")),
+            None,
+        )
+        first_primary_review_url_kind = next(
+            (
+                row.get("primary_review_url_kind")
+                for row in chunk
+                if row.get("primary_review_url")
+            ),
+            None,
+        )
         for row in chunk:
             missing_rows = int(row.get("missing_rows") or 0)
             field_missing_cells[str(row.get("field") or "")] += missing_rows
@@ -136,6 +177,10 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
                 "offset": offset,
                 "field_counts": field_counts.most_common(),
                 "source_store_counts": store_counts.most_common(),
+                "primary_review_url_groups": sum(1 for row in chunk if row.get("primary_review_url")),
+                "primary_review_url_kind_counts": url_kind_counts.most_common(),
+                "first_primary_review_url": first_primary_review_url,
+                "first_primary_review_url_kind": first_primary_review_url_kind,
                 "missing_cells_by_field": field_missing_cells.most_common(),
                 "missing_cells_by_source_store": store_missing_cells.most_common(),
                 "review_state": "manual_metadata_evidence_confirmation_required",
@@ -148,10 +193,23 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
 
     missing_cells_by_field = Counter()
     missing_cells_by_store = Counter()
+    primary_review_url_kind_counts = Counter(str(row.get("primary_review_url_kind") or "") for row in published)
     for row in groups:
         missing_rows = int(row.get("missing_rows") or 0)
         missing_cells_by_field[str(row.get("field") or "")] += missing_rows
         missing_cells_by_store[str(row.get("source_store") or "")] += missing_rows
+    first_primary_review_url = next(
+        (row.get("primary_review_url") for row in published if row.get("primary_review_url")),
+        None,
+    )
+    first_primary_review_url_kind = next(
+        (
+            row.get("primary_review_url_kind")
+            for row in published
+            if row.get("primary_review_url")
+        ),
+        None,
+    )
     top_action_groups = [
         {
             "field": row.get("field"),
@@ -159,6 +217,8 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
             "missing_rows": int(row.get("missing_rows") or 0),
             "priority": int(row.get("priority") or 99),
             "workflow": row.get("workflow"),
+            "primary_review_url": row.get("primary_review_url"),
+            "primary_review_url_kind": row.get("primary_review_url_kind"),
             "recommended_action": row.get("recommended_action"),
         }
         for row in sorted(
@@ -188,6 +248,10 @@ def build_report(review_batches: dict[str, Any], *, max_groups: int = 200, batch
             "action_batch_count": len(batches),
             "batch_size": batch_size,
             "max_groups": max_groups,
+            "primary_review_url_groups": sum(1 for row in published if row.get("primary_review_url")),
+            "first_primary_review_url": first_primary_review_url,
+            "first_primary_review_url_kind": first_primary_review_url_kind,
+            "primary_review_url_kind_counts": primary_review_url_kind_counts.most_common(),
             "field_counts": _counter_pairs(groups, "field"),
             "source_store_counts": _counter_pairs(groups, "source_store")[:40],
             "missing_cells_by_field": missing_cells_by_field.most_common(),

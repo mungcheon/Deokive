@@ -3009,6 +3009,12 @@ def build_operations_public(
             "group_queue_coverage": metadata_action_queue_summary.get("group_queue_coverage", 0),
             "missing_cell_queue_coverage": metadata_action_queue_summary.get("missing_cell_queue_coverage", 0),
             "action_batch_count": metadata_action_queue_summary.get("action_batch_count", 0),
+            "primary_review_url_groups": metadata_action_queue_summary.get("primary_review_url_groups", 0),
+            "first_primary_review_url": metadata_action_queue_summary.get("first_primary_review_url"),
+            "first_primary_review_url_kind": metadata_action_queue_summary.get("first_primary_review_url_kind"),
+            "primary_review_url_kind_counts": metadata_action_queue_summary.get(
+                "primary_review_url_kind_counts", []
+            ),
             "missing_cells_by_field": metadata_action_queue_summary.get("missing_cells_by_field", []),
             "missing_cells_by_source_store": metadata_action_queue_summary.get("missing_cells_by_source_store", []),
             "top_action_groups": metadata_action_queue_summary.get("top_action_groups", []),
@@ -3649,6 +3655,12 @@ def build_operations_public(
             ),
             "group_queue_coverage": metadata_action_queue_summary.get("group_queue_coverage", 0),
             "missing_cell_queue_coverage": metadata_action_queue_summary.get("missing_cell_queue_coverage", 0),
+            "primary_review_url_groups": metadata_action_queue_summary.get("primary_review_url_groups", 0),
+            "first_primary_review_url": metadata_action_queue_summary.get("first_primary_review_url"),
+            "first_primary_review_url_kind": metadata_action_queue_summary.get("first_primary_review_url_kind"),
+            "primary_review_url_kind_counts": metadata_action_queue_summary.get(
+                "primary_review_url_kind_counts", []
+            ),
             "primary_report": f"data/{METADATA_ACTION_QUEUE.name}",
             "next_step": "fill_confirmed_metadata_patch_templates",
             "missing_cells_by_field": metadata_action_queue_summary.get("missing_cells_by_field", []),
@@ -4077,6 +4089,9 @@ def build_operations_public(
         )
         open_review_queues["metadata_unqueued_actionable_missing_cells"] = metadata_action_queue_summary.get(
             "unqueued_actionable_missing_cells", 0
+        )
+        open_review_queues["metadata_primary_review_url_groups"] = metadata_action_queue_summary.get(
+            "primary_review_url_groups", 0
         )
     if animation_review_batches_summary:
         open_review_queues["animation_category_review_rows"] = animation_review_batches_summary.get("source_rows", 0)
@@ -4898,6 +4913,14 @@ def build_agent_work_queue_public(
                 for item in group.get("sample_items", [])
                 if isinstance(item, dict)
             ],
+            review_summary={
+                "action_batch_groups": int(action_batch.get("group_count") or 0),
+                "action_batch_missing_cells": int(action_batch.get("missing_cell_count") or 0),
+                "primary_review_url_groups": int(action_batch.get("primary_review_url_groups") or 0),
+                "first_primary_review_url": action_batch.get("first_primary_review_url"),
+                "first_primary_review_url_kind": action_batch.get("first_primary_review_url_kind"),
+                "primary_review_url_kind_counts": action_batch.get("primary_review_url_kind_counts", []),
+            },
         )
     if metadata_review_batch_rows:
         for metadata_batch in metadata_review_batch_rows[:12]:
@@ -7301,6 +7324,9 @@ def validate_report_consistency(
         )
         expected_open_queues["metadata_unqueued_actionable_missing_cells"] = metadata_action_summary.get(
             "unqueued_actionable_missing_cells", 0
+        )
+        expected_open_queues["metadata_primary_review_url_groups"] = metadata_action_summary.get(
+            "primary_review_url_groups", 0
         )
     image_action_queue = (
         image_attachment_action_queue_override

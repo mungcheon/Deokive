@@ -2372,9 +2372,26 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues.get("metadata_unqueued_actionable_missing_cells"),
             metadata_action_summary.get("unqueued_actionable_missing_cells"),
         )
+        self.assertGreater(metadata_action_summary.get("primary_review_url_groups", 0), 0)
+        self.assertEqual(
+            open_queues.get("metadata_primary_review_url_groups"),
+            metadata_action_summary.get("primary_review_url_groups"),
+        )
         self.assertEqual(
             metadata_scorecard.get("missing_cell_queue_coverage"),
             metadata_action_summary.get("missing_cell_queue_coverage"),
+        )
+        self.assertEqual(
+            metadata_scorecard.get("primary_review_url_groups"),
+            metadata_action_summary.get("primary_review_url_groups"),
+        )
+        self.assertEqual(
+            metadata_scorecard.get("first_primary_review_url"),
+            metadata_action_summary.get("first_primary_review_url"),
+        )
+        self.assertEqual(
+            metadata_scorecard.get("primary_review_url_kind_counts"),
+            metadata_action_summary.get("primary_review_url_kind_counts"),
         )
         self.assertEqual(
             metadata_scorecard.get("missing_cells_by_field"),
@@ -2395,8 +2412,29 @@ class PublicCatalogReportTests(unittest.TestCase):
             metadata_action_summary.get("missing_cells_by_field"),
         )
         self.assertEqual(
+            rebuilt_metadata_action.get("summary", {}).get("primary_review_url_groups"),
+            metadata_action_summary.get("primary_review_url_groups"),
+        )
+        self.assertEqual(
             metadata_next_action.get("unqueued_actionable_missing_cells"),
             metadata_action_summary.get("unqueued_actionable_missing_cells"),
+        )
+        self.assertEqual(
+            metadata_next_action.get("primary_review_url_groups"),
+            metadata_action_summary.get("primary_review_url_groups"),
+        )
+        self.assertEqual(
+            metadata_next_action.get("first_primary_review_url"),
+            metadata_action_summary.get("first_primary_review_url"),
+        )
+        first_metadata_batch = next(
+            batch
+            for batch in agent_queue["batches"]
+            if batch.get("workstream") == "metadata_action_queue"
+        )
+        self.assertEqual(
+            first_metadata_batch.get("review_summary", {}).get("first_primary_review_url"),
+            metadata_action["batches"][0].get("first_primary_review_url"),
         )
         self.assertEqual(
             metadata_next_action.get("missing_cells_by_source_store"),
