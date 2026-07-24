@@ -621,13 +621,14 @@ class _CatalogAddButton extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(icon),
+                  Icon(icon, color: foreground),
                   const SizedBox(width: 5),
                   Text(
                     label,
                     maxLines: 1,
                     softWrap: false,
                     overflow: TextOverflow.visible,
+                    style: TextStyle(color: foreground),
                   ),
                 ],
               ),
