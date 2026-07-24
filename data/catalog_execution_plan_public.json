@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T15:11:13Z",
+  "generated_at": "2026-07-24T15:26:25Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
     "blocked_action_count": 1,
     "manual_review_action_count": 22,
     "pending_import_action_count": 0,
-    "total_action_rows": 32690,
+    "total_action_rows": 32659,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -16,7 +16,7 @@
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 8069,
+      "requested_focus_open_rows": 8055,
       "danganronpa_missing_media_rows": 34,
       "danganronpa_patch_template_pending_rows": 34,
       "danganronpa_patch_template_ready_rows": 0,
@@ -76,12 +76,12 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2499,
+      "metadata_action_missing_cells": 2485,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2499,
+      "metadata_actionable_missing_cells": 2485,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "metadata_primary_review_url_groups": 131,
+      "metadata_primary_review_url_groups": 130,
       "animation_category_review_rows": 0,
       "animation_category_action_rows": 0,
       "animation_category_split_review_categories": 0,
@@ -114,11 +114,11 @@
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
     "requested_focus_topic_count": 5,
-    "requested_focus_open_rows": 8069,
+    "requested_focus_open_rows": 8063,
     "requested_focus_topics_with_open_work": 4,
     "requested_focus_missing_image_rows": 34,
     "requested_focus_missing_source_url_rows": 34,
-    "requested_focus_missing_release_date_rows": 124,
+    "requested_focus_missing_release_date_rows": 118,
     "requested_focus_missing_official_price_jpy_rows": 383,
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
@@ -492,10 +492,10 @@
         "total_matched_catalog_rows": 8178,
         "total_requested_labels": 27,
         "topics_with_open_work": 4,
-        "open_rows": 8069,
+        "open_rows": 8063,
         "missing_image_rows": 34,
         "missing_source_url_rows": 34,
-        "missing_release_date_rows": 124,
+        "missing_release_date_rows": 118,
         "missing_official_price_jpy_rows": 383,
         "requested_needs_review": 1,
         "batch_count": 313,
@@ -5364,7 +5364,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 13939,
+      "rows": 13922,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -5373,8 +5373,8 @@
         "batch_count": 30,
         "field_missing_totals": {
           "name_ja": 526,
-          "release_date": 1406,
-          "barcode": 10093,
+          "release_date": 1392,
+          "barcode": 10090,
           "official_price_jpy": 567,
           "image_url": 710,
           "source_url": 637
@@ -5386,7 +5386,7 @@
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 2499,
+      "rows": 2485,
       "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
       "next_step": "fill_confirmed_metadata_patch_templates",
       "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
@@ -5394,8 +5394,8 @@
       "evidence": {
         "actionable_group_count": 166,
         "queued_group_count": 166,
-        "actionable_missing_cells": 2499,
-        "queued_missing_cells": 2499,
+        "actionable_missing_cells": 2485,
+        "queued_missing_cells": 2485,
         "action_batch_count": 14,
         "field_counts": [
           [
@@ -5414,7 +5414,7 @@
         "missing_cells_by_field": [
           [
             "release_date",
-            1406
+            1392
           ],
           [
             "official_price_jpy",
@@ -5455,16 +5455,16 @@
             84
           ],
           [
-            "Movic",
-            75
-          ],
-          [
             "Weverse Shop",
             66
           ],
           [
             "치이카와 파크",
             62
+          ],
+          [
+            "Movic",
+            61
           ],
           [
             "코토부키야",
@@ -5679,16 +5679,6 @@
             "recommended_action": "Verify original Japanese product titles from official listings."
           },
           {
-            "field": "release_date",
-            "source_store": "Movic",
-            "missing_rows": 74,
-            "priority": 10,
-            "workflow": "official_metadata_review",
-            "primary_review_url": "https://www.movic.jp/shop/g/g02330-00350-00624/",
-            "primary_review_url_kind": "sample_source_url",
-            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
-          },
-          {
             "field": "name_ja",
             "source_store": "애니메이트",
             "missing_rows": 63,
@@ -5707,6 +5697,16 @@
             "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367451",
             "primary_review_url_kind": "sample_source_url",
             "recommended_action": "Verify original Japanese product titles from official listings."
+          },
+          {
+            "field": "release_date",
+            "source_store": "Movic",
+            "missing_rows": 60,
+            "priority": 10,
+            "workflow": "official_metadata_review",
+            "primary_review_url": null,
+            "primary_review_url_kind": "manual_lookup_required",
+            "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
           },
           {
             "field": "release_date",

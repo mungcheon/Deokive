@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T15:10:44Z",
+  "generated_at": "2026-07-24T15:25:55Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20297,
+    "summed_batch_rows": 20255,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -226,7 +226,7 @@
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 8069,
+      "requested_focus_open_rows": 8055,
       "danganronpa_missing_media_rows": 34,
       "danganronpa_patch_template_pending_rows": 34,
       "danganronpa_patch_template_ready_rows": 0,
@@ -286,12 +286,12 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2499,
+      "metadata_action_missing_cells": 2485,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2499,
+      "metadata_actionable_missing_cells": 2485,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "metadata_primary_review_url_groups": 131,
+      "metadata_primary_review_url_groups": 130,
       "animation_category_review_rows": 0,
       "animation_category_action_rows": 0,
       "animation_category_split_review_categories": 0,
@@ -8142,7 +8142,7 @@
       "priority": 20,
       "title": "요청 우선 보강: 단간론파 굿즈",
       "public_report": "data/requested_focus_enrichment_public.json",
-      "rows": 117,
+      "rows": 103,
       "recommended_action": "attach_exact_source_and_image_evidence",
       "acceptance_criteria": [
         "Confirm each update against exact official or trusted source evidence.",
@@ -29188,7 +29188,7 @@
       "priority": 45,
       "title": "Metadata action metadata-action-001",
       "public_report": "data/catalog_metadata_action_queue_public.json",
-      "rows": 988,
+      "rows": 974,
       "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
       "acceptance_criteria": [
         "Only release_date, official_price_jpy, and name_ja groups are included here.",
@@ -29279,18 +29279,18 @@
       ],
       "review_summary": {
         "action_batch_groups": 12,
-        "action_batch_missing_cells": 988,
-        "primary_review_url_groups": 11,
+        "action_batch_missing_cells": 974,
+        "primary_review_url_groups": 10,
         "first_primary_review_url": "https://www.enskyshop.com/products/detail/24195",
         "first_primary_review_url_kind": "sample_source_url",
         "primary_review_url_kind_counts": [
           [
             "sample_source_url",
-            11
+            10
           ],
           [
             "manual_lookup_required",
-            1
+            2
           ]
         ]
       },
@@ -36603,7 +36603,7 @@
       "priority": 60,
       "title": "메타데이터 검수: metadata-review-008",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 876,
+      "rows": 862,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
