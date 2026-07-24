@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T17:26:07Z",
+  "generated_at": "2026-07-24T17:43:39Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
-    "action_count": 23,
+    "action_count": 25,
     "blocked_action_count": 1,
-    "manual_review_action_count": 20,
+    "manual_review_action_count": 22,
     "pending_import_action_count": 0,
-    "total_action_rows": 32776,
+    "total_action_rows": 32804,
     "open_review_queues": {
       "source_discovery_rows": 672,
       "image_missing_rows": 745,
@@ -48,7 +48,7 @@
       "source_discovery_focus_pack_progress_remaining_rows": 452,
       "source_discovery_starter_queue_rows": 672,
       "source_discovery_starter_queue_groups": 353,
-      "source_discovery_next_focus_fallback_rows": 0,
+      "source_discovery_next_focus_fallback_rows": 20,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
@@ -286,24 +286,24 @@
     "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": 3,
     "source_next_focus_detail_action_lanes": [
       [
-        "catalog_variant_metadata_enrichment",
-        1
+        "fallback_source_search",
+        19
       ],
       [
-        "manual_source_research",
-        19
+        "catalog_variant_metadata_enrichment",
+        1
       ]
     ],
-    "source_next_focus_fallback_rows": 0,
+    "source_next_focus_fallback_rows": 20,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
-    "source_next_focus_source_confirmation_ready_rows": 0,
-    "source_next_focus_exact_url_review_rows": 0,
+    "source_next_focus_source_confirmation_ready_rows": 5,
+    "source_next_focus_exact_url_review_rows": 5,
     "source_next_focus_exact_url_manual_confirmed_rows": 0,
-    "source_next_focus_identity_backfill_rows": 0,
-    "source_next_focus_identity_candidate_review_rows": 0,
+    "source_next_focus_identity_backfill_rows": 15,
+    "source_next_focus_identity_candidate_review_rows": 15,
     "source_next_focus_identity_candidate_review_candidate_rows": 0,
     "source_next_focus_fallback_import_dry_run_updated_rows": 0,
-    "source_next_focus_fallback_import_dry_run_skipped_rows": 0,
+    "source_next_focus_fallback_import_dry_run_skipped_rows": 20,
     "source_discovery_starter_queue_rows": 672,
     "source_discovery_starter_queue_groups": 353,
     "source_discovery_starter_next_review_batch_rows": 20,
@@ -1002,17 +1002,132 @@
         "next_action_lane_count": 2,
         "next_action_lanes": [
           [
-            "catalog_variant_metadata_enrichment",
-            1
+            "fallback_source_search",
+            19
           ],
           [
-            "manual_source_research",
-            19
+            "catalog_variant_metadata_enrichment",
+            1
           ]
         ],
-        "completion_readiness_status": "variant_detail_required",
+        "completion_readiness_status": "fallback_search_required",
         "auto_apply_ready_rows": 0,
         "auto_apply_enabled": false
+      }
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_next_focus_exact_url_review_queue",
+      "public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+      "status": "manual_review",
+      "rows": 5,
+      "command": "Confirm exact product detail URLs from the fallback queue before image attachment.",
+      "next_step": "copy_exact_confirmed_source_urls_into_focus_template",
+      "blocker": "Exact source URL review is manual-only until product identity is confirmed.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "queue_rows": 5,
+        "manual_confirmed_rows": 0,
+        "blocked_identity_rows": 15,
+        "by_source_store": [
+          [
+            "엔스카이",
+            5
+          ]
+        ],
+        "by_category": [
+          [
+            "키링",
+            5
+          ]
+        ],
+        "by_identity_review_status": [
+          [
+            "exact_page_match_review_ready",
+            5
+          ]
+        ],
+        "primary_review_url_rows": 5,
+        "primary_review_url_kind_counts": [
+          [
+            "domain_limited_web_search",
+            5
+          ]
+        ],
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_primary_review_url_kind": "domain_limited_web_search",
+        "auto_apply_enabled": false
+      }
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_next_focus_fallback_queue",
+      "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "status": "manual_review",
+      "rows": 20,
+      "command": "Work fallback rows with web search, archives, or alternate official store entry points.",
+      "next_step": "fill_exact_manual_confirmed_source_urls_from_fallback_research",
+      "blocker": "Every fallback source_url still needs exact product identity confirmation before import.",
+      "auto_apply_enabled": false,
+      "evidence": {
+        "focus_pack_id": "source-discovery-focus-001",
+        "queue_rows": 20,
+        "manual_confirmed_rows": 0,
+        "source_confirmation_ready_rows": 5,
+        "exact_url_review_queue_rows": 5,
+        "identity_backfill_queue_rows": 15,
+        "identity_candidate_review_queue_rows": 15,
+        "identity_candidate_review_candidate_rows": 0,
+        "fallback_import_dry_run_updated_rows": 0,
+        "fallback_import_dry_run_skipped_rows": 20,
+        "fallback_import_dry_run_skip_reason_counts": [
+          [
+            "manual_confirmed_false",
+            20
+          ]
+        ],
+        "fallback_import_dry_run_write": false,
+        "metadata_backfill_required_rows": 0,
+        "variant_disambiguation_required_rows": 15,
+        "by_identity_review_status": [
+          [
+            "variant_disambiguation_required",
+            15
+          ],
+          [
+            "exact_page_match_review_ready",
+            5
+          ]
+        ],
+        "fallback_reason": "official_search_url_unavailable",
+        "by_http_status": [
+          [
+            "200",
+            20
+          ]
+        ],
+        "by_source_store": [
+          [
+            "엔스카이",
+            20
+          ]
+        ],
+        "by_category": [
+          [
+            "키링",
+            20
+          ]
+        ],
+        "work_order_steps": 3,
+        "work_order_lanes": [
+          "domain_limited_exact_title_search",
+          "legacy_mobile_store_search",
+          "evidence_fill_and_dry_run"
+        ],
+        "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_primary_review_url_kind": "domain_limited_web_search"
       }
     },
     {
@@ -1020,7 +1135,7 @@
       "workstream": "source_discovery_next_focus_pack_fetch_audit",
       "public_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
       "status": "fallback_required",
-      "rows": 17,
+      "rows": 20,
       "command": "Use web search, store archives, or alternate official entry points to find exact product detail URLs for the current focus pack.",
       "next_step": "resolve_unavailable_official_search_urls_before_source_import",
       "blocker": "Current focus pack official_search_url values are not fetchable; do not import source_url/image_url from these search URLs.",
@@ -1028,16 +1143,12 @@
       "evidence": {
         "focus_pack_id": "source-discovery-focus-001",
         "pack_items": 20,
-        "official_search_ok_rows": 3,
-        "official_search_unavailable_rows": 17,
+        "official_search_ok_rows": 0,
+        "official_search_unavailable_rows": 20,
         "status_counts": [
           [
-            "ok_200_no_results",
-            17
-          ],
-          [
-            "ok_200",
-            3
+            "ok_200_broad_result_set",
+            20
           ]
         ]
       }

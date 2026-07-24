@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T17:25:41Z",
+  "generated_at": "2026-07-24T17:42:56Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20278,
+    "summed_batch_rows": 20299,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -52,12 +52,12 @@
         8
       ],
       [
-        "deduplication_review",
-        8
-      ],
-      [
         "ichiban_kuji_metadata_action_queue",
         7
+      ],
+      [
+        "deduplication_review",
+        6
       ],
       [
         "ichiban_kuji_prize_policy_audit",
@@ -78,6 +78,10 @@
       [
         "generic_source_url_cleanup",
         3
+      ],
+      [
+        "source_discovery_next_focus_fallback_queue",
+        2
       ],
       [
         "ichiban_kuji_metadata_action_work_order",
@@ -167,7 +171,7 @@
       ],
       [
         "agent-dedupe",
-        8
+        6
       ],
       [
         "agent-ichiban-prize-policy",
@@ -192,6 +196,10 @@
       [
         "agent-source-detail-candidate",
         3
+      ],
+      [
+        "agent-source-fallback",
+        2
       ],
       [
         "agent-gotouchi-review",
@@ -250,7 +258,7 @@
       "source_discovery_focus_pack_progress_remaining_rows": 452,
       "source_discovery_starter_queue_rows": 672,
       "source_discovery_starter_queue_groups": 353,
-      "source_discovery_next_focus_fallback_rows": 0,
+      "source_discovery_next_focus_fallback_rows": 20,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
@@ -3573,7 +3581,7 @@
       "next_machine_step": "confirm_exact_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-53",
+      "batch_id": "015-agent-generic-source-cleanup-55",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3679,7 +3687,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-54",
+      "batch_id": "015-agent-generic-source-cleanup-56",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3735,7 +3743,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-55",
+      "batch_id": "015-agent-generic-source-cleanup-57",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3808,7 +3816,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-56",
+      "batch_id": "018-agent-gotouchi-review-58",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -4968,7 +4976,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "018-agent-ichiban-action-137",
+      "batch_id": "018-agent-ichiban-action-139",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 18,
@@ -5920,7 +5928,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "019-agent-confirmed-import-52",
+      "batch_id": "019-agent-confirmed-import-54",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -7345,6 +7353,259 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
+      "batch_id": "019-agent-source-fallback-51",
+      "agent_id": "agent-source-fallback",
+      "workstream": "source_discovery_next_focus_fallback_queue",
+      "priority": 19,
+      "title": "포커스팩 exact source 후보 15개 확인",
+      "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "rows": 5,
+      "recommended_action": "Open domain-limited primary_review_url values first, then confirm exact product detail source URLs.",
+      "acceptance_criteria": [
+        "Accepted manual_confirmed_source_url must be an exact product/detail page, not a search page.",
+        "Product title, image, character, and variant must match the catalog row.",
+        "manual_confirmed_image_url is optional and only allowed after the exact page image is verified.",
+        "Keep auto-apply disabled and run the dry-run importer before any write import."
+      ],
+      "sample_items": [
+        {
+          "review_priority": 1,
+          "catalog_index": 922,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+          "search_term": "ちいかわ ラバーストラップ (うさぎ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 2,
+          "catalog_index": 923,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "search_term": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 3,
+          "catalog_index": 924,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "search_term": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 4,
+          "catalog_index": 925,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "search_term": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 5,
+          "catalog_index": 926,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "search_term": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        }
+      ],
+      "review_summary": {
+        "source_confirmation_ready_rows": 5,
+        "queue_rows": 20,
+        "manual_entry_template_rows": 20,
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_primary_review_url_kind": "domain_limited_web_search",
+        "dry_run_command": "python -m tools.import_confirmed_source_discovery_rows --queue server/source_discovery_confirmed_rows.json"
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
       "batch_id": "020-agent-source-focus-pack-50",
       "agent_id": "agent-source-focus-pack",
       "workstream": "source_discovery_next_focus_pack",
@@ -7536,7 +7797,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-57",
+      "batch_id": "020-agent-source-image-59",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7635,7 +7896,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-58",
+      "batch_id": "020-agent-source-image-60",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7833,7 +8094,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-59",
+      "batch_id": "020-agent-source-image-61",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7932,7 +8193,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-60",
+      "batch_id": "020-agent-source-image-62",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8031,7 +8292,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-61",
+      "batch_id": "020-agent-source-image-63",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8130,7 +8391,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-62",
+      "batch_id": "020-agent-source-image-64",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8229,7 +8490,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-63",
+      "batch_id": "020-agent-source-image-65",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -11751,7 +12012,407 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-starter-158",
+      "batch_id": "020-agent-source-fallback-52",
+      "agent_id": "agent-source-fallback",
+      "workstream": "source_discovery_next_focus_fallback_queue",
+      "priority": 20,
+      "title": "현재 포커스팩 fallback 소스 확인",
+      "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "rows": 20,
+      "recommended_action": "Open primary_review_url values and fill manual_confirmed_source_url only for exact product pages.",
+      "acceptance_criteria": [
+        "primary_review_url is only a review starting point; accepted source_url must be an exact product/detail page.",
+        "Rows with variant or metadata blockers stay blocked until identity is disambiguated.",
+        "Keep auto-apply disabled and prepare manual confirmed source templates only."
+      ],
+      "sample_items": [
+        {
+          "review_priority": 1,
+          "catalog_index": 922,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+          "search_term": "ちいかわ ラバーストラップ (うさぎ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 2,
+          "catalog_index": 923,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "search_term": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 3,
+          "catalog_index": 924,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "search_term": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 4,
+          "catalog_index": 925,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "search_term": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 5,
+          "catalog_index": 926,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "search_term": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 6,
+          "catalog_index": 1531,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
+          "name_ja": "初音ミク メタリックラバーストラップ",
+          "search_term": "初音ミク メタリックラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "variant_disambiguation_required",
+          "identity_blockers": [
+            "variant_or_character_not_explicit"
+          ],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": true,
+          "can_confirm_source_url_after_page_match": false
+        },
+        {
+          "review_priority": 7,
+          "catalog_index": 1539,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "토도로키 쇼토 러버 스트랩",
+          "name_ja": "轟焦凍 ラバーストラップ",
+          "search_term": "轟焦凍 ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "variant_disambiguation_required",
+          "identity_blockers": [
+            "variant_or_character_not_explicit"
+          ],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": true,
+          "can_confirm_source_url_after_page_match": false
+        },
+        {
+          "review_priority": 8,
+          "catalog_index": 1541,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "엔스카이",
+          "category": "키링",
+          "name_ko": "다비 메탈릭 러버 스트랩",
+          "name_ja": "荼毘 メタリックラバーストラップ",
+          "search_term": "荼毘 メタリックラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_url_review_guidance": {
+            "accepted_source_url_patterns": [
+              "https://www.animate-onlineshop.jp/pn/.../pd/...",
+              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+            ],
+            "rejected_source_url_patterns": [
+              "Google search result URLs",
+              "Animate products/list.php search pages",
+              "Animate sphone/products/list.php search pages",
+              "category, ranking, cart, favorite, or account pages"
+            ],
+            "confirmation_checks": [
+              "catalog row title or Japanese name matches the product detail page title",
+              "character, variant, size, and goods type match the catalog row",
+              "product image on the page depicts the same exact item or explicitly confirmed variant"
+            ],
+            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+          },
+          "identity_review_status": "variant_disambiguation_required",
+          "identity_blockers": [
+            "variant_or_character_not_explicit"
+          ],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": true,
+          "can_confirm_source_url_after_page_match": false
+        }
+      ],
+      "review_summary": {
+        "queue_rows": 20,
+        "review_table_rows": 20,
+        "source_confirmation_ready_rows": 5,
+        "metadata_backfill_required_rows": 0,
+        "variant_disambiguation_required_rows": 15,
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_primary_review_url_kind": "domain_limited_web_search",
+        "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "work_order_lanes": [
+          "domain_limited_exact_title_search",
+          "legacy_mobile_store_search",
+          "evidence_fill_and_dry_run"
+        ]
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
+    },
+    {
+      "batch_id": "020-agent-source-starter-160",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_next_review_batch",
       "priority": 20,
@@ -12356,7 +13017,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-64",
+      "batch_id": "020-agent-source-image-66",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -15314,7 +15975,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-ichiban-action-138",
+      "batch_id": "020-agent-ichiban-action-140",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 20,
@@ -15802,7 +16463,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-detail-candidate-51",
+      "batch_id": "020-agent-source-detail-candidate-53",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_discovery_next_focus_detail_candidates",
       "priority": 20,
@@ -15873,12 +16534,12 @@
         "candidate_rows": 1,
         "next_action_lanes": [
           [
-            "catalog_variant_metadata_enrichment",
-            1
+            "fallback_source_search",
+            19
           ],
           [
-            "manual_source_research",
-            19
+            "catalog_variant_metadata_enrichment",
+            1
           ]
         ]
       },
@@ -15886,7 +16547,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "022-agent-animation-category-action-157",
+      "batch_id": "022-agent-animation-category-action-159",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -16430,7 +17091,7 @@
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
     },
     {
-      "batch_id": "022-agent-source-detail-candidate-75",
+      "batch_id": "022-agent-source-detail-candidate-77",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 22,
@@ -16881,7 +17542,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "028-agent-source-action-65",
+      "batch_id": "028-agent-source-action-67",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -17252,7 +17913,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-66",
+      "batch_id": "028-agent-source-action-68",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -17623,7 +18284,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-67",
+      "batch_id": "028-agent-source-action-69",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -17994,7 +18655,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-68",
+      "batch_id": "028-agent-source-action-70",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -18365,7 +19026,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-69",
+      "batch_id": "028-agent-source-action-71",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -18736,7 +19397,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-70",
+      "batch_id": "028-agent-source-action-72",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -19107,7 +19768,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-71",
+      "batch_id": "028-agent-source-action-73",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -19478,7 +20139,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-72",
+      "batch_id": "028-agent-source-action-74",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -19849,7 +20510,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-74",
+      "batch_id": "028-agent-source-action-76",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -20220,7 +20881,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-73",
+      "batch_id": "028-agent-source-action-75",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -20690,7 +21351,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-ichiban-action-139",
+      "batch_id": "030-agent-ichiban-action-141",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 30,
@@ -20749,7 +21410,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "030-agent-source-discovery-77",
+      "batch_id": "030-agent-source-discovery-79",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -20848,7 +21509,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-78",
+      "batch_id": "030-agent-source-discovery-80",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -20947,7 +21608,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-79",
+      "batch_id": "030-agent-source-discovery-81",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21046,7 +21707,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-80",
+      "batch_id": "030-agent-source-discovery-82",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21145,7 +21806,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-81",
+      "batch_id": "030-agent-source-discovery-83",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21244,7 +21905,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-82",
+      "batch_id": "030-agent-source-discovery-84",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21343,7 +22004,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-84",
+      "batch_id": "030-agent-source-discovery-86",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21442,7 +22103,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-85",
+      "batch_id": "030-agent-source-discovery-87",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21541,7 +22202,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-86",
+      "batch_id": "030-agent-source-discovery-88",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21640,7 +22301,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-87",
+      "batch_id": "030-agent-source-discovery-89",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21739,7 +22400,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-88",
+      "batch_id": "030-agent-source-discovery-90",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21838,7 +22499,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-83",
+      "batch_id": "030-agent-source-discovery-85",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -24622,7 +25283,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "031-agent-source-starter-159",
+      "batch_id": "031-agent-source-starter-161",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -24731,7 +25392,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-160",
+      "batch_id": "031-agent-source-starter-162",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -24840,7 +25501,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-161",
+      "batch_id": "031-agent-source-starter-163",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -24949,7 +25610,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-162",
+      "batch_id": "031-agent-source-starter-164",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25058,7 +25719,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-163",
+      "batch_id": "031-agent-source-starter-165",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25167,7 +25828,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-164",
+      "batch_id": "031-agent-source-starter-166",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25276,7 +25937,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-165",
+      "batch_id": "031-agent-source-starter-167",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25385,7 +26046,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-166",
+      "batch_id": "031-agent-source-starter-168",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25494,7 +26155,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-167",
+      "batch_id": "031-agent-source-starter-169",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25603,7 +26264,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-168",
+      "batch_id": "031-agent-source-starter-170",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25712,7 +26373,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "032-agent-source-detail-candidate-76",
+      "batch_id": "032-agent-source-detail-candidate-78",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 32,
@@ -26029,7 +26690,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "038-agent-ichiban-action-140",
+      "batch_id": "038-agent-ichiban-action-142",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -28040,7 +28701,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "045-agent-metadata-action-89",
+      "batch_id": "045-agent-metadata-action-91",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -28156,7 +28817,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-95",
+      "batch_id": "045-agent-metadata-action-97",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -28272,7 +28933,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-90",
+      "batch_id": "045-agent-metadata-action-92",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -28388,7 +29049,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-91",
+      "batch_id": "045-agent-metadata-action-93",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -28504,7 +29165,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-92",
+      "batch_id": "045-agent-metadata-action-94",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -28620,7 +29281,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-93",
+      "batch_id": "045-agent-metadata-action-95",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -28736,7 +29397,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-94",
+      "batch_id": "045-agent-metadata-action-96",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -28852,7 +29513,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-141",
+      "batch_id": "048-agent-ichiban-action-143",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -29804,7 +30465,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-142",
+      "batch_id": "048-agent-ichiban-action-144",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -30774,7 +31435,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-143",
+      "batch_id": "048-agent-ichiban-action-145",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -31750,7 +32411,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-144",
+      "batch_id": "048-agent-ichiban-action-146",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -32726,7 +33387,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-145",
+      "batch_id": "048-agent-ichiban-action-147",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -33225,7 +33886,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "050-agent-metadata-97",
+      "batch_id": "050-agent-metadata-99",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -33324,7 +33985,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-100",
+      "batch_id": "050-agent-metadata-102",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -33423,7 +34084,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-98",
+      "batch_id": "050-agent-metadata-100",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -33621,7 +34282,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-99",
+      "batch_id": "050-agent-metadata-101",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -33720,7 +34381,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "051-agent-ichiban-campaign-first-118",
+      "batch_id": "051-agent-ichiban-campaign-first-120",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 51,
@@ -33821,7 +34482,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "052-agent-ichiban-campaign-first-119",
+      "batch_id": "052-agent-ichiban-campaign-first-121",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 52,
@@ -33916,7 +34577,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "053-agent-ichiban-campaign-first-120",
+      "batch_id": "053-agent-ichiban-campaign-first-122",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 53,
@@ -33991,7 +34652,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-reissue-dedupe-109",
+      "batch_id": "054-agent-ichiban-reissue-dedupe-111",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 54,
@@ -35068,7 +35729,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-campaign-first-121",
+      "batch_id": "054-agent-ichiban-campaign-first-123",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 54,
@@ -35139,7 +35800,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "055-agent-metadata-action-96",
+      "batch_id": "055-agent-metadata-action-98",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 55,
@@ -35255,7 +35916,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-reissue-dedupe-110",
+      "batch_id": "056-agent-ichiban-reissue-dedupe-112",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 56,
@@ -35305,7 +35966,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "057-agent-ichiban-reissue-dedupe-111",
+      "batch_id": "057-agent-ichiban-reissue-dedupe-113",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 57,
@@ -35355,7 +36016,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "058-agent-ichiban-reissue-dedupe-112",
+      "batch_id": "058-agent-ichiban-reissue-dedupe-114",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 58,
@@ -35405,7 +36066,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "059-agent-ichiban-reissue-dedupe-113",
+      "batch_id": "059-agent-ichiban-reissue-dedupe-115",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 59,
@@ -35455,7 +36116,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "060-agent-metadata-104",
+      "batch_id": "060-agent-metadata-106",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -35554,7 +36215,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-101",
+      "batch_id": "060-agent-metadata-103",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -35653,7 +36314,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-102",
+      "batch_id": "060-agent-metadata-104",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -35752,7 +36413,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-103",
+      "batch_id": "060-agent-metadata-105",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -35851,7 +36512,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-ichiban-reissue-dedupe-114",
+      "batch_id": "060-agent-ichiban-reissue-dedupe-116",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 60,
@@ -35901,7 +36562,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "061-agent-ichiban-reissue-dedupe-115",
+      "batch_id": "061-agent-ichiban-reissue-dedupe-117",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 61,
@@ -35951,7 +36612,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "062-agent-ichiban-reissue-dedupe-116",
+      "batch_id": "062-agent-ichiban-reissue-dedupe-118",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 62,
@@ -36001,7 +36662,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "063-agent-ichiban-reissue-dedupe-117",
+      "batch_id": "063-agent-ichiban-reissue-dedupe-119",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 63,
@@ -36051,7 +36712,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "070-agent-metadata-105",
+      "batch_id": "070-agent-metadata-107",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -36150,7 +36811,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-106",
+      "batch_id": "070-agent-metadata-108",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -36249,7 +36910,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-107",
+      "batch_id": "070-agent-metadata-109",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -36348,7 +37009,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-108",
+      "batch_id": "070-agent-metadata-110",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -36447,7 +37108,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-153",
+      "batch_id": "085-agent-ichiban-prize-policy-155",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -36764,7 +37425,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-152",
+      "batch_id": "085-agent-ichiban-prize-policy-154",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -36986,7 +37647,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-dedupe-action-122",
+      "batch_id": "085-agent-dedupe-action-124",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -38009,7 +38670,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-123",
+      "batch_id": "085-agent-dedupe-action-125",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -39030,7 +39691,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-124",
+      "batch_id": "085-agent-dedupe-action-126",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -40053,7 +40714,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-125",
+      "batch_id": "085-agent-dedupe-action-127",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -41068,7 +41729,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-126",
+      "batch_id": "085-agent-dedupe-action-128",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -42036,7 +42697,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "086-agent-ichiban-prize-policy-154",
+      "batch_id": "086-agent-ichiban-prize-policy-156",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 86,
@@ -42348,7 +43009,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "087-agent-ichiban-prize-policy-155",
+      "batch_id": "087-agent-ichiban-prize-policy-157",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 87,
@@ -42668,7 +43329,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "088-agent-ichiban-prize-policy-156",
+      "batch_id": "088-agent-ichiban-prize-policy-158",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 88,
@@ -42983,7 +43644,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "090-agent-dedupe-127",
+      "batch_id": "090-agent-dedupe-129",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -43022,7 +43683,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-128",
+      "batch_id": "090-agent-dedupe-130",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -43061,7 +43722,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-129",
+      "batch_id": "090-agent-dedupe-131",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -43100,7 +43761,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-130",
+      "batch_id": "090-agent-dedupe-132",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -43139,7 +43800,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-131",
+      "batch_id": "090-agent-dedupe-133",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -43178,7 +43839,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-132",
+      "batch_id": "090-agent-dedupe-134",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -43210,84 +43871,6 @@
           "category": "의류",
           "source_store": "치이카와 마켓",
           "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
-          "official_search_url": ""
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-133",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 582,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (하치와레)",
-          "name_ja": "ちいかわパーク ふわころ人形 S (ハチワレ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 3644,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (가르마)",
-          "name_ja": "ちいかわ ちいかわパーク ぷわころぬいぐるみS（ハチワレ）",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
-          "official_search_url": ""
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-134",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 583,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (우사기)",
-          "name_ja": "ちいかわパーク ふわころ人形 S (うさぎ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359098",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 3643,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (토끼)",
-          "name_ja": "ちいかわ ちいかわパーク ぷわころぬいぐるみS（うさぎ）",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359098",
           "official_search_url": ""
         }
       ],

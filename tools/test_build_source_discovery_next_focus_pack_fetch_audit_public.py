@@ -157,6 +157,48 @@ class SourceDiscoveryNextFocusPackFetchAuditPublicTest(unittest.TestCase):
             "official_search_returned_no_results",
         )
 
+    def test_build_report_marks_broad_result_sets_as_fallback(self) -> None:
+        pack = {
+            "summary": {"focus_pack_id": "source-discovery-focus-001"},
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": "Ensky",
+                    "category": "Rubber strap",
+                    "name_ko": "A",
+                    "name_ja": "A",
+                    "official_search_url": "https://www.enskyshop.com/products/list?name=A",
+                },
+            ],
+        }
+
+        def broad_fetch(url: str) -> dict[str, object]:
+            return {
+                "fetch_status": "ok",
+                "http_status": 200,
+                "final_url": url,
+                "content_checked": True,
+                "no_results_page": False,
+                "product_detail_link_count": target.BROAD_RESULT_LINK_THRESHOLD + 1,
+            }
+
+        report = target.build_report(pack, fetcher=broad_fetch)
+
+        self.assertEqual(report["summary"]["official_search_ok_rows"], 0)
+        self.assertEqual(report["summary"]["official_search_unavailable_rows"], 1)
+        self.assertEqual(report["summary"]["official_search_broad_result_rows"], 1)
+        self.assertTrue(report["summary"]["fallback_web_search_required"])
+        self.assertTrue(report["items"][0]["broad_result_page"])
+        self.assertEqual(
+            report["items"][0]["fetch_block_reason"],
+            "official_search_returned_broad_result_set",
+        )
+        self.assertEqual(
+            report["items"][0]["recommended_next_action"],
+            "refine_official_search_or_use_detail_candidate_provider",
+        )
+
     def test_fetcher_marks_missing_url_without_network(self) -> None:
         result = target.fetch_url("")
 

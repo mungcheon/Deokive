@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T17:25:41Z",
+  "generated_at": "2026-07-24T17:42:56Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -56,7 +56,7 @@
       "source_discovery_focus_pack_progress_remaining_rows": 452,
       "source_discovery_starter_queue_rows": 672,
       "source_discovery_starter_queue_groups": 353,
-      "source_discovery_next_focus_fallback_rows": 0,
+      "source_discovery_next_focus_fallback_rows": 20,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
@@ -209,20 +209,16 @@
     },
     {
       "workstream": "source_discovery_next_focus_pack_fetch_audit",
-      "status": "fallback_required",
-      "open_rows": 17,
+      "status": "ready_for_manual_review",
+      "open_rows": 0,
       "focus_pack_id": "source-discovery-focus-001",
       "pack_items": 20,
-      "official_search_ok_rows": 3,
-      "official_search_unavailable_rows": 17,
+      "official_search_ok_rows": 20,
+      "official_search_unavailable_rows": 0,
       "status_counts": [
         [
-          "ok_200_no_results",
-          17
-        ],
-        [
           "ok_200",
-          3
+          20
         ]
       ],
       "primary_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
@@ -250,32 +246,46 @@
       "next_action_lane_count": 2,
       "next_action_lanes": [
         [
-          "catalog_variant_metadata_enrichment",
-          1
+          "fallback_source_search",
+          19
         ],
         [
-          "manual_source_research",
-          19
+          "catalog_variant_metadata_enrichment",
+          1
         ]
       ],
-      "completion_readiness_status": "variant_detail_required",
+      "completion_readiness_status": "fallback_search_required",
       "primary_report": "data/source_discovery_next_focus_detail_candidates_public.json",
       "next_step": "resolve_current_focus_pack_lanes_before_source_import",
       "auto_apply_enabled": false
     },
     {
       "workstream": "source_discovery_next_focus_fallback_queue",
-      "status": "clear",
-      "open_rows": 0,
+      "status": "manual_review",
+      "open_rows": 20,
       "manual_confirmed_rows": 0,
-      "fallback_reason": "none",
-      "by_source_store": [],
-      "by_category": [],
+      "fallback_reason": "official_search_url_unavailable",
+      "by_source_store": [
+        [
+          "엔스카이",
+          20
+        ]
+      ],
+      "by_category": [
+        [
+          "키링",
+          20
+        ]
+      ],
       "primary_report": "data/source_discovery_next_focus_fallback_queue_public.json",
       "next_step": "fill_exact_manual_confirmed_source_urls_from_fallback_research",
-      "work_order_lanes": [],
-      "first_primary_review_url": "",
-      "first_primary_review_url_kind": "",
+      "work_order_lanes": [
+        "domain_limited_exact_title_search",
+        "legacy_mobile_store_search",
+        "evidence_fill_and_dry_run"
+      ],
+      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+      "first_primary_review_url_kind": "domain_limited_web_search",
       "auto_apply_enabled": false
     },
     {
@@ -2695,9 +2705,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 23,
+      "action_count": 24,
       "blocked_action_count": 1,
-      "manual_review_action_count": 20,
+      "manual_review_action_count": 21,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -6601,9 +6611,9 @@
       "public_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
       "focus_pack_id": "source-discovery-focus-001",
       "pack_items": 20,
-      "official_search_ok_rows": 3,
-      "official_search_unavailable_rows": 17,
-      "fallback_web_search_required": true,
+      "official_search_ok_rows": 20,
+      "official_search_unavailable_rows": 0,
+      "fallback_web_search_required": false,
       "recommended_next_action": "Use web search or store archives for the current focus pack before marking any source_url confirmed."
     },
     {
@@ -6628,15 +6638,15 @@
       "next_action_lane_count": 2,
       "next_action_lanes": [
         [
-          "catalog_variant_metadata_enrichment",
-          1
+          "fallback_source_search",
+          19
         ],
         [
-          "manual_source_research",
-          19
+          "catalog_variant_metadata_enrichment",
+          1
         ]
       ],
-      "completion_readiness_status": "variant_detail_required",
+      "completion_readiness_status": "fallback_search_required",
       "auto_apply_ready_rows": 0,
       "auto_apply_enabled": false,
       "recommended_next_action": "Work the current focus pack by lane: fallback search, variant metadata, then identity review."
@@ -6646,16 +6656,30 @@
       "workstream": "source_discovery_next_focus_fallback_queue",
       "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
       "focus_pack_id": "source-discovery-focus-001",
-      "queue_rows": 0,
+      "queue_rows": 20,
       "manual_confirmed_rows": 0,
-      "fallback_reason": "none",
-      "by_source_store": [],
-      "by_category": [],
-      "work_order_steps": 0,
-      "work_order_lanes": [],
-      "first_domain_limited_web_search_url": "",
-      "first_primary_review_url": "",
-      "first_primary_review_url_kind": "",
+      "fallback_reason": "official_search_url_unavailable",
+      "by_source_store": [
+        [
+          "엔스카이",
+          20
+        ]
+      ],
+      "by_category": [
+        [
+          "키링",
+          20
+        ]
+      ],
+      "work_order_steps": 3,
+      "work_order_lanes": [
+        "domain_limited_exact_title_search",
+        "legacy_mobile_store_search",
+        "evidence_fill_and_dry_run"
+      ],
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+      "first_primary_review_url_kind": "domain_limited_web_search",
       "auto_apply_enabled": false,
       "recommended_next_action": "Review fallback rows and fill exact manual_confirmed_source_url values before source import."
     },

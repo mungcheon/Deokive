@@ -38,6 +38,7 @@ import build_requested_focus_action_queue_public
 import build_requested_focus_next_work_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_fallback_queue_public
+import build_source_discovery_next_focus_pack_fetch_audit_public
 import build_source_discovery_next_focus_identity_candidate_review_public
 import build_source_discovery_next_focus_pack_public
 import build_source_discovery_next_focus_split_queues_public
@@ -750,6 +751,30 @@ def _count_pairs(rows: list[dict[str, Any]], field: str) -> list[list[Any]]:
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _catalog_index_sequence(report: dict[str, Any]) -> list[Any]:
+    return [
+        item.get("catalog_index")
+        for item in report.get("items", [])
+        if isinstance(item, dict)
+    ]
+
+
+def fetch_audit_matches_focus_pack(
+    fetch_audit: dict[str, Any],
+    focus_pack: dict[str, Any],
+) -> bool:
+    if not isinstance(fetch_audit, dict) or not isinstance(focus_pack, dict):
+        return False
+    summary = fetch_audit.get("summary")
+    if not isinstance(summary, dict) or summary.get("broad_result_link_threshold") != (
+        build_source_discovery_next_focus_pack_fetch_audit_public.BROAD_RESULT_LINK_THRESHOLD
+    ):
+        return False
+    return bool(fetch_audit.get("items")) and _catalog_index_sequence(
+        fetch_audit
+    ) == _catalog_index_sequence(focus_pack)
 
 
 def present(value: Any) -> bool:
@@ -9234,10 +9259,21 @@ def update_reports(write: bool) -> dict[str, Any]:
         items,
         queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_PACK,
     )
-    source_discovery_next_focus_fetch_audit = (
+    existing_source_discovery_next_focus_fetch_audit = (
         load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists()
         else {}
+    )
+    source_discovery_next_focus_fetch_audit = (
+        existing_source_discovery_next_focus_fetch_audit
+        if fetch_audit_matches_focus_pack(
+            existing_source_discovery_next_focus_fetch_audit,
+            source_discovery_next_focus_pack,
+        )
+        else build_source_discovery_next_focus_pack_fetch_audit_public.build_report(
+            source_discovery_next_focus_pack,
+            generated_at=generated_at,
+        )
     )
     source_discovery_next_focus_fallback_queue = (
         build_source_discovery_next_focus_fallback_queue_public.build_report(
@@ -9548,10 +9584,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             "skipped_rows": source_discovery_next_focus_pack_import["skipped_rows"],
             "skip_reason_counts": source_discovery_next_focus_pack_import["skip_reason_counts"],
         }
-        if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists():
-            target["source_discovery_next_focus_pack_fetch_audit"] = copy_report_summary(
-                SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, "source_discovery_next_focus_pack_fetch_audit"
-            )
+        if source_discovery_next_focus_fetch_audit.get("summary"):
+            target["source_discovery_next_focus_pack_fetch_audit"] = {
+                "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.name}",
+                **source_discovery_next_focus_fetch_audit["summary"],
+            }
         if source_discovery_next_focus_detail_candidates.get("summary"):
             target["source_discovery_next_focus_detail_candidates"] = {
                 "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}",
@@ -10311,6 +10348,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(SOURCE_DISCOVERY_ROADMAP, source_discovery_completion_roadmap)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, source_discovery_next_focus_pack)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, source_discovery_next_focus_fetch_audit)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, source_discovery_next_focus_detail_candidates)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT, source_discovery_next_focus_metadata_field_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, source_discovery_next_focus_fallback_queue)

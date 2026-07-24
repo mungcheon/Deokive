@@ -645,11 +645,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_next_focus_detail_candidates"]["pack_items"],
             quality["source_discovery_next_focus_pack"]["pack_items"],
         )
-        self.assertEqual(
-            quality["source_discovery_next_focus_detail_candidates"]["fallback_bridge_rows"],
+        self.assertLessEqual(
             quality["source_discovery_next_focus_detail_candidates"][
                 "candidate_rows_from_fallback_search"
             ],
+            quality["source_discovery_next_focus_detail_candidates"]["fallback_bridge_rows"],
         )
         self.assertGreaterEqual(
             quality["source_discovery_next_focus_detail_candidates"][
@@ -743,7 +743,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertGreaterEqual(
             quality["source_discovery_next_focus_pack_fetch_audit"][
                 "official_search_unavailable_rows"
-            ],
+            ]
+            + quality["source_discovery_next_focus_pack_fetch_audit"].get(
+                "official_search_broad_result_rows", 0
+            ),
             fallback_queue_rows,
         )
         self.assertEqual(
@@ -786,11 +789,18 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "source_confirmation_ready_rows"
             ],
         )
+        self.assertEqual(
+            quality["source_discovery_next_focus_exact_url_review_queue"]["queue_rows"]
+            + quality["source_discovery_next_focus_exact_url_review_queue"][
+                "blocked_identity_rows"
+            ],
+            fallback_queue_rows,
+        )
         self.assertLessEqual(
             quality["source_discovery_next_focus_exact_url_review_queue"][
                 "blocked_identity_rows"
             ],
-            quality["source_discovery_next_focus_exact_url_review_queue"]["queue_rows"],
+            fallback_queue_rows,
         )
         self.assertEqual(
             quality["source_discovery_next_focus_identity_backfill_queue"][

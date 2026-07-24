@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T17:23:48Z",
+  "generated_at": "2026-07-24T17:33:31Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 745,
@@ -28,12 +28,12 @@
     "source_discovery_next_focus_action_lane_count": 2,
     "source_discovery_next_focus_action_lanes": [
       [
-        "catalog_variant_metadata_enrichment",
-        1
+        "fallback_source_search",
+        19
       ],
       [
-        "manual_source_research",
-        19
+        "catalog_variant_metadata_enrichment",
+        1
       ]
     ],
     "source_discovery_focus_template_dry_run_updated_rows": 0,
@@ -6671,24 +6671,24 @@
       "next_action_lane_count": 2,
       "next_action_lanes": [
         [
-          "catalog_variant_metadata_enrichment",
-          1
+          "fallback_source_search",
+          19
         ],
         [
-          "manual_source_research",
-          19
+          "catalog_variant_metadata_enrichment",
+          1
         ]
       ],
       "official_search_has_results": 0,
       "official_search_no_results": 0,
-      "fallback_search_needed_items": 0
+      "fallback_search_needed_items": 20
     },
     "fallback_review_summary": {
-      "queue_rows": 0,
-      "fallback_query_count": 0,
+      "queue_rows": 20,
+      "fallback_query_count": 120,
       "manual_confirmed_rows": 0,
-      "first_domain_limited_web_search_url": "",
-      "first_fallback_store_search_url": ""
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+      "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
     },
     "candidate_review_samples": [
       {
@@ -6696,8 +6696,8 @@
         "name_ko": "치이카와 러버 스트랩 (우사기)",
         "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
         "candidate_count": 0,
-        "official_search_audit_status": "fetch_audit_missing",
-        "needs_fallback_web_search": false,
+        "official_search_audit_status": "official_search_unavailable",
+        "needs_fallback_web_search": true,
         "status": null
       },
       {
@@ -6705,8 +6705,8 @@
         "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
         "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
         "candidate_count": 0,
-        "official_search_audit_status": "fetch_audit_missing",
-        "needs_fallback_web_search": false,
+        "official_search_audit_status": "official_search_unavailable",
+        "needs_fallback_web_search": true,
         "status": null
       },
       {
@@ -6714,8 +6714,8 @@
         "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
         "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
         "candidate_count": 0,
-        "official_search_audit_status": "fetch_audit_missing",
-        "needs_fallback_web_search": false,
+        "official_search_audit_status": "official_search_unavailable",
+        "needs_fallback_web_search": true,
         "status": null
       },
       {
@@ -6723,8 +6723,8 @@
         "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
         "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
         "candidate_count": 0,
-        "official_search_audit_status": "fetch_audit_missing",
-        "needs_fallback_web_search": false,
+        "official_search_audit_status": "official_search_unavailable",
+        "needs_fallback_web_search": true,
         "status": null
       },
       {
@@ -6732,8 +6732,8 @@
         "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
         "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
         "candidate_count": 0,
-        "official_search_audit_status": "fetch_audit_missing",
-        "needs_fallback_web_search": false,
+        "official_search_audit_status": "official_search_unavailable",
+        "needs_fallback_web_search": true,
         "status": null
       },
       {
@@ -6741,8 +6741,8 @@
         "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
         "name_ja": "初音ミク メタリックラバーストラップ",
         "candidate_count": 0,
-        "official_search_audit_status": "fetch_audit_missing",
-        "needs_fallback_web_search": false,
+        "official_search_audit_status": "official_search_unavailable",
+        "needs_fallback_web_search": true,
         "status": null
       },
       {
@@ -6750,8 +6750,8 @@
         "name_ko": "토도로키 쇼토 러버 스트랩",
         "name_ja": "轟焦凍 ラバーストラップ",
         "candidate_count": 1,
-        "official_search_audit_status": "fetch_audit_missing",
-        "needs_fallback_web_search": false,
+        "official_search_audit_status": "official_search_unavailable",
+        "needs_fallback_web_search": true,
         "status": null
       },
       {
@@ -6759,9 +6759,67 @@
         "name_ko": "다비 메탈릭 러버 스트랩",
         "name_ja": "荼毘 メタリックラバーストラップ",
         "candidate_count": 0,
-        "official_search_audit_status": "fetch_audit_missing",
-        "needs_fallback_web_search": false,
+        "official_search_audit_status": "official_search_unavailable",
+        "needs_fallback_web_search": true,
         "status": null
+      }
+    ],
+    "fallback_review_samples": [
+      {
+        "catalog_index": 922,
+        "name_ko": "치이카와 러버 스트랩 (우사기)",
+        "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+        "domain_limited_web_search_url_count": 6,
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+      },
+      {
+        "catalog_index": 923,
+        "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+        "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+        "domain_limited_web_search_url_count": 6,
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+      },
+      {
+        "catalog_index": 924,
+        "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+        "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+        "domain_limited_web_search_url_count": 6,
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+      },
+      {
+        "catalog_index": 925,
+        "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+        "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+        "domain_limited_web_search_url_count": 6,
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+      },
+      {
+        "catalog_index": 926,
+        "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+        "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+        "domain_limited_web_search_url_count": 6,
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+      },
+      {
+        "catalog_index": 1531,
+        "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
+        "name_ja": "初音ミク メタリックラバーストラップ",
+        "domain_limited_web_search_url_count": 6,
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+      },
+      {
+        "catalog_index": 1539,
+        "name_ko": "토도로키 쇼토 러버 스트랩",
+        "name_ja": "轟焦凍 ラバーストラップ",
+        "domain_limited_web_search_url_count": 6,
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+      },
+      {
+        "catalog_index": 1541,
+        "name_ko": "다비 메탈릭 러버 스트랩",
+        "name_ja": "荼毘 メタリックラバーストラップ",
+        "domain_limited_web_search_url_count": 6,
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
       }
     ]
   },
@@ -8142,24 +8200,24 @@
           "next_action_lane_count": 2,
           "next_action_lanes": [
             [
-              "catalog_variant_metadata_enrichment",
-              1
+              "fallback_source_search",
+              19
             ],
             [
-              "manual_source_research",
-              19
+              "catalog_variant_metadata_enrichment",
+              1
             ]
           ],
           "official_search_has_results": 0,
           "official_search_no_results": 0,
-          "fallback_search_needed_items": 0
+          "fallback_search_needed_items": 20
         },
         "fallback_review_summary": {
-          "queue_rows": 0,
-          "fallback_query_count": 0,
+          "queue_rows": 20,
+          "fallback_query_count": 120,
           "manual_confirmed_rows": 0,
-          "first_domain_limited_web_search_url": "",
-          "first_fallback_store_search_url": ""
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
         },
         "candidate_review_samples": [
           {
@@ -8167,8 +8225,8 @@
             "name_ko": "치이카와 러버 스트랩 (우사기)",
             "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
             "candidate_count": 0,
-            "official_search_audit_status": "fetch_audit_missing",
-            "needs_fallback_web_search": false,
+            "official_search_audit_status": "official_search_unavailable",
+            "needs_fallback_web_search": true,
             "status": null
           },
           {
@@ -8176,8 +8234,8 @@
             "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
             "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
             "candidate_count": 0,
-            "official_search_audit_status": "fetch_audit_missing",
-            "needs_fallback_web_search": false,
+            "official_search_audit_status": "official_search_unavailable",
+            "needs_fallback_web_search": true,
             "status": null
           },
           {
@@ -8185,8 +8243,8 @@
             "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
             "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
             "candidate_count": 0,
-            "official_search_audit_status": "fetch_audit_missing",
-            "needs_fallback_web_search": false,
+            "official_search_audit_status": "official_search_unavailable",
+            "needs_fallback_web_search": true,
             "status": null
           },
           {
@@ -8194,8 +8252,8 @@
             "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
             "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
             "candidate_count": 0,
-            "official_search_audit_status": "fetch_audit_missing",
-            "needs_fallback_web_search": false,
+            "official_search_audit_status": "official_search_unavailable",
+            "needs_fallback_web_search": true,
             "status": null
           },
           {
@@ -8203,8 +8261,8 @@
             "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
             "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
             "candidate_count": 0,
-            "official_search_audit_status": "fetch_audit_missing",
-            "needs_fallback_web_search": false,
+            "official_search_audit_status": "official_search_unavailable",
+            "needs_fallback_web_search": true,
             "status": null
           },
           {
@@ -8212,8 +8270,8 @@
             "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
             "name_ja": "初音ミク メタリックラバーストラップ",
             "candidate_count": 0,
-            "official_search_audit_status": "fetch_audit_missing",
-            "needs_fallback_web_search": false,
+            "official_search_audit_status": "official_search_unavailable",
+            "needs_fallback_web_search": true,
             "status": null
           },
           {
@@ -8221,8 +8279,8 @@
             "name_ko": "토도로키 쇼토 러버 스트랩",
             "name_ja": "轟焦凍 ラバーストラップ",
             "candidate_count": 1,
-            "official_search_audit_status": "fetch_audit_missing",
-            "needs_fallback_web_search": false,
+            "official_search_audit_status": "official_search_unavailable",
+            "needs_fallback_web_search": true,
             "status": null
           },
           {
@@ -8230,9 +8288,67 @@
             "name_ko": "다비 메탈릭 러버 스트랩",
             "name_ja": "荼毘 メタリックラバーストラップ",
             "candidate_count": 0,
-            "official_search_audit_status": "fetch_audit_missing",
-            "needs_fallback_web_search": false,
+            "official_search_audit_status": "official_search_unavailable",
+            "needs_fallback_web_search": true,
             "status": null
+          }
+        ],
+        "fallback_review_samples": [
+          {
+            "catalog_index": 922,
+            "name_ko": "치이카와 러버 스트랩 (우사기)",
+            "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+            "domain_limited_web_search_url_count": 6,
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+          },
+          {
+            "catalog_index": 923,
+            "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+            "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+            "domain_limited_web_search_url_count": 6,
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+          },
+          {
+            "catalog_index": 924,
+            "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+            "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+            "domain_limited_web_search_url_count": 6,
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+          },
+          {
+            "catalog_index": 925,
+            "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+            "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+            "domain_limited_web_search_url_count": 6,
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+          },
+          {
+            "catalog_index": 926,
+            "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+            "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+            "domain_limited_web_search_url_count": 6,
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+          },
+          {
+            "catalog_index": 1531,
+            "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
+            "name_ja": "初音ミク メタリックラバーストラップ",
+            "domain_limited_web_search_url_count": 6,
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+          },
+          {
+            "catalog_index": 1539,
+            "name_ko": "토도로키 쇼토 러버 스트랩",
+            "name_ja": "轟焦凍 ラバーストラップ",
+            "domain_limited_web_search_url_count": 6,
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+          },
+          {
+            "catalog_index": 1541,
+            "name_ko": "다비 메탈릭 러버 스트랩",
+            "name_ja": "荼毘 メタリックラバーストラップ",
+            "domain_limited_web_search_url_count": 6,
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
           }
         ]
       },
@@ -8551,24 +8667,24 @@
             "next_action_lane_count": 2,
             "next_action_lanes": [
               [
-                "catalog_variant_metadata_enrichment",
-                1
+                "fallback_source_search",
+                19
               ],
               [
-                "manual_source_research",
-                19
+                "catalog_variant_metadata_enrichment",
+                1
               ]
             ],
             "official_search_has_results": 0,
             "official_search_no_results": 0,
-            "fallback_search_needed_items": 0
+            "fallback_search_needed_items": 20
           },
           "fallback_review_summary": {
-            "queue_rows": 0,
-            "fallback_query_count": 0,
+            "queue_rows": 20,
+            "fallback_query_count": 120,
             "manual_confirmed_rows": 0,
-            "first_domain_limited_web_search_url": "",
-            "first_fallback_store_search_url": ""
+            "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+            "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
           },
           "candidate_review_samples": [
             {
@@ -8576,8 +8692,8 @@
               "name_ko": "치이카와 러버 스트랩 (우사기)",
               "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -8585,8 +8701,8 @@
               "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
               "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -8594,8 +8710,8 @@
               "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
               "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -8603,8 +8719,8 @@
               "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
               "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -8612,8 +8728,8 @@
               "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
               "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -8621,8 +8737,8 @@
               "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
               "name_ja": "初音ミク メタリックラバーストラップ",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -8630,8 +8746,8 @@
               "name_ko": "토도로키 쇼토 러버 스트랩",
               "name_ja": "轟焦凍 ラバーストラップ",
               "candidate_count": 1,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -8639,9 +8755,67 @@
               "name_ko": "다비 메탈릭 러버 스트랩",
               "name_ja": "荼毘 メタリックラバーストラップ",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
+            }
+          ],
+          "fallback_review_samples": [
+            {
+              "catalog_index": 922,
+              "name_ko": "치이카와 러버 스트랩 (우사기)",
+              "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+            },
+            {
+              "catalog_index": 923,
+              "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+              "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+            },
+            {
+              "catalog_index": 924,
+              "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+              "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+            },
+            {
+              "catalog_index": 925,
+              "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+            },
+            {
+              "catalog_index": 926,
+              "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+            },
+            {
+              "catalog_index": 1531,
+              "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
+              "name_ja": "初音ミク メタリックラバーストラップ",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+            },
+            {
+              "catalog_index": 1539,
+              "name_ko": "토도로키 쇼토 러버 스트랩",
+              "name_ja": "轟焦凍 ラバーストラップ",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+            },
+            {
+              "catalog_index": 1541,
+              "name_ko": "다비 메탈릭 러버 스트랩",
+              "name_ja": "荼毘 メタリックラバーストラップ",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
             }
           ]
         },
@@ -10632,24 +10806,24 @@
             "next_action_lane_count": 2,
             "next_action_lanes": [
               [
-                "catalog_variant_metadata_enrichment",
-                1
+                "fallback_source_search",
+                19
               ],
               [
-                "manual_source_research",
-                19
+                "catalog_variant_metadata_enrichment",
+                1
               ]
             ],
             "official_search_has_results": 0,
             "official_search_no_results": 0,
-            "fallback_search_needed_items": 0
+            "fallback_search_needed_items": 20
           },
           "fallback_review_summary": {
-            "queue_rows": 0,
-            "fallback_query_count": 0,
+            "queue_rows": 20,
+            "fallback_query_count": 120,
             "manual_confirmed_rows": 0,
-            "first_domain_limited_web_search_url": "",
-            "first_fallback_store_search_url": ""
+            "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+            "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
           },
           "candidate_review_samples": [
             {
@@ -10657,8 +10831,8 @@
               "name_ko": "치이카와 러버 스트랩 (우사기)",
               "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -10666,8 +10840,8 @@
               "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
               "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -10675,8 +10849,8 @@
               "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
               "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -10684,8 +10858,8 @@
               "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
               "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -10693,8 +10867,8 @@
               "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
               "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -10702,8 +10876,8 @@
               "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
               "name_ja": "初音ミク メタリックラバーストラップ",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -10711,8 +10885,8 @@
               "name_ko": "토도로키 쇼토 러버 스트랩",
               "name_ja": "轟焦凍 ラバーストラップ",
               "candidate_count": 1,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
             },
             {
@@ -10720,9 +10894,67 @@
               "name_ko": "다비 메탈릭 러버 스트랩",
               "name_ja": "荼毘 メタリックラバーストラップ",
               "candidate_count": 0,
-              "official_search_audit_status": "fetch_audit_missing",
-              "needs_fallback_web_search": false,
+              "official_search_audit_status": "official_search_unavailable",
+              "needs_fallback_web_search": true,
               "status": null
+            }
+          ],
+          "fallback_review_samples": [
+            {
+              "catalog_index": 922,
+              "name_ko": "치이카와 러버 스트랩 (우사기)",
+              "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+            },
+            {
+              "catalog_index": 923,
+              "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+              "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+            },
+            {
+              "catalog_index": 924,
+              "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+              "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+            },
+            {
+              "catalog_index": 925,
+              "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+            },
+            {
+              "catalog_index": 926,
+              "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+            },
+            {
+              "catalog_index": 1531,
+              "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
+              "name_ja": "初音ミク メタリックラバーストラップ",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+            },
+            {
+              "catalog_index": 1539,
+              "name_ko": "토도로키 쇼토 러버 스트랩",
+              "name_ja": "轟焦凍 ラバーストラップ",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+            },
+            {
+              "catalog_index": 1541,
+              "name_ko": "다비 메탈릭 러버 스트랩",
+              "name_ja": "荼毘 メタリックラバーストラップ",
+              "domain_limited_web_search_url_count": 6,
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
             }
           ]
         },
@@ -10811,24 +11043,24 @@
         "next_action_lane_count": 2,
         "next_action_lanes": [
           [
-            "catalog_variant_metadata_enrichment",
-            1
+            "fallback_source_search",
+            19
           ],
           [
-            "manual_source_research",
-            19
+            "catalog_variant_metadata_enrichment",
+            1
           ]
         ],
         "official_search_has_results": 0,
         "official_search_no_results": 0,
-        "fallback_search_needed_items": 0
+        "fallback_search_needed_items": 20
       },
       "fallback_review_summary": {
-        "queue_rows": 0,
-        "fallback_query_count": 0,
+        "queue_rows": 20,
+        "fallback_query_count": 120,
         "manual_confirmed_rows": 0,
-        "first_domain_limited_web_search_url": "",
-        "first_fallback_store_search_url": ""
+        "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fpn%2F+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
       },
       "candidate_review_samples": [
         {
@@ -10836,8 +11068,8 @@
           "name_ko": "치이카와 러버 스트랩 (우사기)",
           "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
           "candidate_count": 0,
-          "official_search_audit_status": "fetch_audit_missing",
-          "needs_fallback_web_search": false,
+          "official_search_audit_status": "official_search_unavailable",
+          "needs_fallback_web_search": true,
           "status": null
         },
         {
@@ -10845,8 +11077,8 @@
           "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
           "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
           "candidate_count": 0,
-          "official_search_audit_status": "fetch_audit_missing",
-          "needs_fallback_web_search": false,
+          "official_search_audit_status": "official_search_unavailable",
+          "needs_fallback_web_search": true,
           "status": null
         },
         {
@@ -10854,8 +11086,8 @@
           "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
           "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
           "candidate_count": 0,
-          "official_search_audit_status": "fetch_audit_missing",
-          "needs_fallback_web_search": false,
+          "official_search_audit_status": "official_search_unavailable",
+          "needs_fallback_web_search": true,
           "status": null
         },
         {
@@ -10863,8 +11095,8 @@
           "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
           "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
           "candidate_count": 0,
-          "official_search_audit_status": "fetch_audit_missing",
-          "needs_fallback_web_search": false,
+          "official_search_audit_status": "official_search_unavailable",
+          "needs_fallback_web_search": true,
           "status": null
         },
         {
@@ -10872,8 +11104,8 @@
           "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
           "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
           "candidate_count": 0,
-          "official_search_audit_status": "fetch_audit_missing",
-          "needs_fallback_web_search": false,
+          "official_search_audit_status": "official_search_unavailable",
+          "needs_fallback_web_search": true,
           "status": null
         },
         {
@@ -10881,8 +11113,8 @@
           "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
           "name_ja": "初音ミク メタリックラバーストラップ",
           "candidate_count": 0,
-          "official_search_audit_status": "fetch_audit_missing",
-          "needs_fallback_web_search": false,
+          "official_search_audit_status": "official_search_unavailable",
+          "needs_fallback_web_search": true,
           "status": null
         },
         {
@@ -10890,8 +11122,8 @@
           "name_ko": "토도로키 쇼토 러버 스트랩",
           "name_ja": "轟焦凍 ラバーストラップ",
           "candidate_count": 1,
-          "official_search_audit_status": "fetch_audit_missing",
-          "needs_fallback_web_search": false,
+          "official_search_audit_status": "official_search_unavailable",
+          "needs_fallback_web_search": true,
           "status": null
         },
         {
@@ -10899,9 +11131,67 @@
           "name_ko": "다비 메탈릭 러버 스트랩",
           "name_ja": "荼毘 メタリックラバーストラップ",
           "candidate_count": 0,
-          "official_search_audit_status": "fetch_audit_missing",
-          "needs_fallback_web_search": false,
+          "official_search_audit_status": "official_search_unavailable",
+          "needs_fallback_web_search": true,
           "status": null
+        }
+      ],
+      "fallback_review_samples": [
+        {
+          "catalog_index": 922,
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+          "domain_limited_web_search_url_count": 6,
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+        },
+        {
+          "catalog_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "domain_limited_web_search_url_count": 6,
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+        },
+        {
+          "catalog_index": 924,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "domain_limited_web_search_url_count": 6,
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+        },
+        {
+          "catalog_index": 925,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "domain_limited_web_search_url_count": 6,
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+        },
+        {
+          "catalog_index": 926,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "domain_limited_web_search_url_count": 6,
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+        },
+        {
+          "catalog_index": 1531,
+          "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
+          "name_ja": "初音ミク メタリックラバーストラップ",
+          "domain_limited_web_search_url_count": 6,
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "catalog_index": 1539,
+          "name_ko": "토도로키 쇼토 러버 스트랩",
+          "name_ja": "轟焦凍 ラバーストラップ",
+          "domain_limited_web_search_url_count": 6,
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "catalog_index": 1541,
+          "name_ko": "다비 메탈릭 러버 스트랩",
+          "name_ja": "荼毘 メタリックラバーストラップ",
+          "domain_limited_web_search_url_count": 6,
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
         }
       ]
     },
