@@ -240,6 +240,7 @@ void main() {
     expect(addTextStyle.shadows, isNotEmpty);
     expect(addIconTheme.color, Colors.white);
     expect(tester.getSize(addTextFinder).width, greaterThan(0));
+    expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(46));
     expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(118));
   });
 
@@ -305,6 +306,7 @@ void main() {
     expect(addTextStyle.shadows, isNotNull);
     expect(addTextStyle.shadows, isNotEmpty);
     expect(addIconTheme.color, Colors.white);
+    expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(116));
   });
 
   testWidgets('catalog database can add even when saved folders are empty',

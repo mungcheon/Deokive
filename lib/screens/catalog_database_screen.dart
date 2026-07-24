@@ -623,12 +623,26 @@ class _CatalogAddButton extends StatelessWidget {
               children: [
                 Icon(icon, color: foreground),
                 const SizedBox(width: 5),
-                Flexible(
-                  child: _CatalogAddButtonLabel(
-                    label: label,
-                    color: foreground,
+                if (expanded)
+                  Flexible(
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(minWidth: 72),
+                        child: _CatalogAddButtonLabel(
+                          label: label,
+                          color: foreground,
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minWidth: 46),
+                    child: _CatalogAddButtonLabel(
+                      label: label,
+                      color: foreground,
+                    ),
                   ),
-                ),
               ],
             ),
           ),
