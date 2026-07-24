@@ -432,24 +432,15 @@ class _CatalogImportActionButton extends StatelessWidget {
           ),
           child: Center(
             child: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(icon, color: foregroundColor),
                 const SizedBox(width: 7),
                 Flexible(
-                  child: Text(
-                    label,
-                    style: TextStyle(
-                      color: foregroundColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w900,
-                      height: 1,
-                    ),
-                    maxLines: 1,
-                    softWrap: false,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
+                  child: _CatalogImportActionLabel(
+                    label: label,
+                    color: foregroundColor,
                   ),
                 ),
               ],
@@ -469,6 +460,33 @@ class _CatalogImportActionButton extends StatelessWidget {
         onTap: onPressed,
         child: content,
       ),
+    );
+  }
+}
+
+class _CatalogImportActionLabel extends StatelessWidget {
+  final String label;
+  final Color color;
+
+  const _CatalogImportActionLabel({
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      label,
+      style: TextStyle(
+        color: color,
+        fontSize: 15,
+        fontWeight: FontWeight.w900,
+        height: 1,
+      ),
+      maxLines: 1,
+      softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
     );
   }
 }

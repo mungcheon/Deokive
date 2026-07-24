@@ -588,11 +588,11 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 136,
+        minWidth: expanded ? 0 : 112,
         minHeight: 40,
         maxHeight: 40,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 14),
+      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 12),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: background,
@@ -623,21 +623,18 @@ class _CatalogAddButton extends StatelessWidget {
               children: [
                 Icon(icon, color: foreground),
                 const SizedBox(width: 5),
-                Flexible(
-                  child: Text(
-                    label,
-                    style: TextStyle(
+                if (expanded)
+                  Flexible(
+                    child: _CatalogAddButtonLabel(
+                      label: label,
                       color: foreground,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w900,
-                      height: 1,
                     ),
-                    maxLines: 1,
-                    softWrap: false,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
+                  )
+                else
+                  _CatalogAddButtonLabel(
+                    label: label,
+                    color: foreground,
                   ),
-                ),
               ],
             ),
           ),
@@ -657,6 +654,33 @@ class _CatalogAddButton extends StatelessWidget {
         onTap: onPressed,
         child: content,
       ),
+    );
+  }
+}
+
+class _CatalogAddButtonLabel extends StatelessWidget {
+  final String label;
+  final Color color;
+
+  const _CatalogAddButtonLabel({
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      label,
+      style: TextStyle(
+        color: color,
+        fontSize: 13,
+        fontWeight: FontWeight.w900,
+        height: 1,
+      ),
+      maxLines: 1,
+      softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
     );
   }
 }

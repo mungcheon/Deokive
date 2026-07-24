@@ -239,7 +239,8 @@ void main() {
 
     expect(addTextStyle.color, Colors.white);
     expect(addIconTheme.color, Colors.white);
-    expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(118));
+    expect(tester.getSize(addTextFinder).width, greaterThan(0));
+    expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(112));
   });
 
   testWidgets('catalog destination add button keeps visible foreground',
