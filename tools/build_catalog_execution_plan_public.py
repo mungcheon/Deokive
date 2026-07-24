@@ -127,9 +127,11 @@ def _build_plan(load_report) -> dict[str, Any]:
     requested_batches = load_report("requested_focus_review_batches_public.json")
     requested_action_queue = load_report("requested_focus_action_queue_public.json")
     danganronpa_missing_media = load_report("danganronpa_missing_media_public.json")
+    dedupe_catalog = load_report("catalog_deduplication_public.json")
     dedupe_batches = load_report("catalog_deduplication_review_batches_public.json")
     dedupe_action_queue = load_report("catalog_deduplication_action_queue_public.json")
     dedupe_fast_review = load_report("catalog_deduplication_fast_review_public.json")
+    dedupe_template_import = load_report("catalog_deduplication_template_import_dry_run_public.json")
     kuji_reissue_decision_template = load_report("ichiban_kuji_reissue_decision_template_public.json")
     kuji_history = load_report("ichiban_kuji_history_public.json")
     kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
@@ -167,9 +169,14 @@ def _build_plan(load_report) -> dict[str, Any]:
     requested_summary = _summary(requested_batches)
     requested_action_summary = _summary(requested_action_queue)
     danganronpa_media_summary = _summary(danganronpa_missing_media)
+    dedupe_catalog_summary = _summary(dedupe_catalog)
     dedupe_summary = _summary(dedupe_batches)
     dedupe_action_summary = _summary(dedupe_action_queue)
     dedupe_fast_summary = _summary(dedupe_fast_review)
+    dedupe_template_import_summary = _summary(dedupe_template_import)
+    dedupe_completion = dedupe_action_queue.get("completion_readiness")
+    if not isinstance(dedupe_completion, dict):
+        dedupe_completion = {}
     kuji_reissue_decision_template_summary = _summary(kuji_reissue_decision_template)
     kuji_history_summary = _summary(kuji_history)
     dedupe_fast_breakdowns = dedupe_fast_review.get("breakdowns")
@@ -839,6 +846,12 @@ def _build_plan(load_report) -> dict[str, Any]:
             next_step="compare_duplicate_group_evidence",
             blocker="auto_delete_enabled is false; variant risk requires manual decisions.",
             evidence={
+                "duplicate_groups": _count(dedupe_catalog_summary, "duplicate_groups"),
+                "duplicate_rows": _count(dedupe_catalog_summary, "duplicate_rows"),
+                "published_groups": _count(dedupe_catalog_summary, "published_groups"),
+                "by_key_type": dedupe_catalog_summary.get("by_key_type", []),
+                "by_review_risk": dedupe_catalog_summary.get("by_review_risk", []),
+                "top_review_risk": dedupe_catalog_summary.get("top_review_risk"),
                 "batch_count": _count(dedupe_summary, "batch_count"),
                 "by_review_confidence": dedupe_summary.get("by_review_confidence", []),
             },
@@ -858,9 +871,46 @@ def _build_plan(load_report) -> dict[str, Any]:
             evidence={
                 "actionable_groups": _count(dedupe_action_summary, "actionable_groups"),
                 "queued_groups": _count(dedupe_action_summary, "queued_groups"),
+                "unqueued_actionable_groups": _count(
+                    dedupe_action_summary, "unqueued_actionable_groups"
+                ),
+                "queue_coverage": dedupe_action_summary.get("queue_coverage"),
                 "action_batch_count": _count(dedupe_action_summary, "action_batch_count"),
+                "by_key_type": dedupe_action_summary.get("by_key_type", []),
                 "by_review_confidence": dedupe_action_summary.get("by_review_confidence", []),
+                "by_merge_blocker": dedupe_action_summary.get("by_merge_blocker", []),
+                "by_manual_review_required_reason": dedupe_action_summary.get(
+                    "by_manual_review_required_reason", []
+                ),
                 "excluded_review_confidence": dedupe_action_summary.get("excluded_review_confidence", []),
+                "completion_readiness_status": dedupe_action_summary.get(
+                    "completion_readiness_status"
+                ),
+                "completion_readiness": dedupe_completion,
+                "auto_merge_ready_groups": _count(
+                    dedupe_action_summary, "auto_merge_ready_groups"
+                ),
+                "auto_delete_ready_groups": _count(
+                    dedupe_action_summary, "auto_delete_ready_groups"
+                ),
+                "explicit_keep_drop_required_groups": _count(
+                    dedupe_action_summary, "explicit_keep_drop_required_groups"
+                ),
+                "template_manual_confirmed_rows": _count(
+                    dedupe_template_import_summary, "manual_confirmed_rows"
+                ),
+                "template_ready_decision_rows": _count(
+                    dedupe_template_import_summary, "ready_decision_rows"
+                ),
+                "template_blocked_rows": _count(
+                    dedupe_template_import_summary, "blocked_rows"
+                ),
+                "template_skip_reason_counts": dedupe_template_import_summary.get(
+                    "skip_reason_counts", []
+                ),
+                "template_write_enabled": bool(
+                    dedupe_template_import_summary.get("write", False)
+                ),
                 "ichiban_reissue_review_groups": _count(
                     dedupe_action_summary, "ichiban_reissue_review_groups"
                 ),
@@ -883,6 +933,12 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "fast_review_same_barcode_groups": _count(dedupe_fast_summary, "same_barcode_groups"),
                 "fast_review_same_source_url_groups": _count(dedupe_fast_summary, "same_source_url_groups"),
                 "fast_review_same_image_url_groups": _count(dedupe_fast_summary, "same_image_url_groups"),
+                "fast_review_manual_confirmed_true": _count(
+                    dedupe_fast_summary, "manual_confirmed_true"
+                ),
+                "fast_review_variant_warning_groups": _count(
+                    dedupe_fast_summary, "variant_warning_groups"
+                ),
                 "fast_review_lanes": dedupe_fast_breakdowns.get("by_fast_review_lane", []),
             },
         )
@@ -1297,6 +1353,22 @@ def _build_plan(load_report) -> dict[str, Any]:
                 kuji_name_image_patch_summary, "blocked_rows"
             ),
             "dedupe_fast_review_groups": _count(dedupe_fast_summary, "fast_review_groups"),
+            "dedupe_duplicate_groups": _count(dedupe_catalog_summary, "duplicate_groups"),
+            "dedupe_duplicate_rows": _count(dedupe_catalog_summary, "duplicate_rows"),
+            "dedupe_actionable_groups": _count(dedupe_action_summary, "actionable_groups"),
+            "dedupe_queued_groups": _count(dedupe_action_summary, "queued_groups"),
+            "dedupe_auto_merge_ready_groups": _count(
+                dedupe_action_summary, "auto_merge_ready_groups"
+            ),
+            "dedupe_auto_delete_ready_groups": _count(
+                dedupe_action_summary, "auto_delete_ready_groups"
+            ),
+            "dedupe_template_blocked_rows": _count(
+                dedupe_template_import_summary, "blocked_rows"
+            ),
+            "dedupe_template_ready_decision_rows": _count(
+                dedupe_template_import_summary, "ready_decision_rows"
+            ),
             "dedupe_fast_review_same_source_url_groups": _count(
                 dedupe_fast_summary, "same_source_url_groups"
             ),

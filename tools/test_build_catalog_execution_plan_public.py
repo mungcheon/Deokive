@@ -265,6 +265,19 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     ],
                 }
             },
+            "catalog_deduplication_public.json": {
+                "summary": {
+                    "duplicate_groups": 3,
+                    "duplicate_rows": 6,
+                    "published_groups": 3,
+                    "by_key_type": [["barcode", 2], ["source_url", 1]],
+                    "by_review_risk": [
+                        ["strong_identity_review", 2],
+                        ["variant_risk_review", 1],
+                    ],
+                    "top_review_risk": "strong_identity_review",
+                }
+            },
             "catalog_deduplication_review_batches_public.json": {
                 "summary": {"source_groups": 1, "batch_count": 1}
             },
@@ -272,8 +285,17 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                 "summary": {
                     "actionable_groups": 2,
                     "queued_groups": 2,
+                    "unqueued_actionable_groups": 0,
+                    "queue_coverage": 1.0,
                     "action_batch_count": 1,
+                    "by_key_type": [["barcode", 2]],
                     "by_review_confidence": [["high_review_confidence", 2]],
+                    "by_merge_blocker": [
+                        ["multi_store_variant_or_retailer_review", 2]
+                    ],
+                    "by_manual_review_required_reason": [
+                        ["manual_keep_drop_confirmation_required", 2]
+                    ],
                     "excluded_review_confidence": [["variant_caution", 1]],
                     "ichiban_reissue_review_groups": 46,
                     "ichiban_reissue_review_rows": 92,
@@ -284,6 +306,17 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "ichiban_reissue_manual_confirmed_rows": 0,
                     "ichiban_reissue_protected_groups": 0,
                     "ichiban_reissue_protected_rows": 0,
+                    "completion_readiness_status": "ichiban_reissue_review_required",
+                    "auto_merge_ready_groups": 0,
+                    "auto_delete_ready_groups": 0,
+                    "explicit_keep_drop_required_groups": 2,
+                },
+                "completion_readiness": {
+                    "status": "ichiban_reissue_review_required",
+                    "blocked_reasons": [
+                        "explicit_manual_keep_drop_confirmation_required"
+                    ],
+                    "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
                 }
             },
             "catalog_deduplication_fast_review_public.json": {
@@ -292,6 +325,8 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "same_barcode_groups": 2,
                     "same_source_url_groups": 1,
                     "same_image_url_groups": 1,
+                    "manual_confirmed_true": 0,
+                    "variant_warning_groups": 2,
                 },
                 "breakdowns": {
                     "by_fast_review_lane": [
@@ -299,6 +334,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                         {"fast_review_lane": "same_barcode_and_image_url", "groups": 1},
                     ]
                 },
+            },
+            "catalog_deduplication_template_import_dry_run_public.json": {
+                "summary": {
+                    "template_items": 2,
+                    "manual_confirmed_rows": 0,
+                    "ready_decision_rows": 0,
+                    "blocked_rows": 2,
+                    "skip_reason_counts": [["manual_confirmed_false", 2]],
+                    "write": False,
+                }
             },
             "ichiban_kuji_metadata_review_batches_public.json": {
                 "summary": {"catalog_item_rows": 0}
@@ -682,8 +727,37 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(dedupe_action["rows"], 2)
         self.assertEqual(dedupe_action["evidence"]["actionable_groups"], 2)
+        self.assertEqual(dedupe_action["evidence"]["unqueued_actionable_groups"], 0)
+        self.assertEqual(dedupe_action["evidence"]["queue_coverage"], 1.0)
+        self.assertEqual(dedupe_action["evidence"]["by_key_type"], [["barcode", 2]])
+        self.assertEqual(
+            dedupe_action["evidence"]["by_manual_review_required_reason"][0][0],
+            "manual_keep_drop_confirmation_required",
+        )
+        self.assertEqual(
+            dedupe_action["evidence"]["completion_readiness_status"],
+            "ichiban_reissue_review_required",
+        )
+        self.assertEqual(
+            dedupe_action["evidence"]["completion_readiness"]["next_safe_phase"],
+            "verify_ichiban_campaign_pages_before_dedupe",
+        )
+        self.assertEqual(dedupe_action["evidence"]["auto_merge_ready_groups"], 0)
+        self.assertEqual(dedupe_action["evidence"]["auto_delete_ready_groups"], 0)
+        self.assertEqual(
+            dedupe_action["evidence"]["explicit_keep_drop_required_groups"], 2
+        )
+        self.assertEqual(dedupe_action["evidence"]["template_blocked_rows"], 2)
+        self.assertEqual(dedupe_action["evidence"]["template_ready_decision_rows"], 0)
+        self.assertFalse(dedupe_action["evidence"]["template_write_enabled"])
+        self.assertEqual(
+            dedupe_action["evidence"]["template_skip_reason_counts"],
+            [["manual_confirmed_false", 2]],
+        )
         self.assertEqual(dedupe_action["evidence"]["fast_review_groups"], 2)
         self.assertEqual(dedupe_action["evidence"]["fast_review_same_source_url_groups"], 1)
+        self.assertEqual(dedupe_action["evidence"]["fast_review_manual_confirmed_true"], 0)
+        self.assertEqual(dedupe_action["evidence"]["fast_review_variant_warning_groups"], 2)
         self.assertEqual(dedupe_action["evidence"]["ichiban_reissue_review_groups"], 46)
         self.assertEqual(
             dedupe_action["evidence"]["ichiban_probable_reissue_review_groups"], 20
@@ -694,6 +768,14 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             "same_barcode_and_source_url",
         )
         self.assertEqual(report["summary"]["dedupe_fast_review_groups"], 2)
+        self.assertEqual(report["summary"]["dedupe_duplicate_groups"], 3)
+        self.assertEqual(report["summary"]["dedupe_duplicate_rows"], 6)
+        self.assertEqual(report["summary"]["dedupe_actionable_groups"], 2)
+        self.assertEqual(report["summary"]["dedupe_queued_groups"], 2)
+        self.assertEqual(report["summary"]["dedupe_auto_merge_ready_groups"], 0)
+        self.assertEqual(report["summary"]["dedupe_auto_delete_ready_groups"], 0)
+        self.assertEqual(report["summary"]["dedupe_template_blocked_rows"], 2)
+        self.assertEqual(report["summary"]["dedupe_template_ready_decision_rows"], 0)
         self.assertEqual(report["summary"]["dedupe_fast_review_same_source_url_groups"], 1)
         self.assertEqual(report["summary"]["dedupe_ichiban_reissue_review_groups"], 46)
         self.assertEqual(
