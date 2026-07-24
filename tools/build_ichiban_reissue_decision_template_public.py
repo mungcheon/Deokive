@@ -323,7 +323,7 @@ def _next_campaign_review_batch(
     item_templates_by_id: dict[str, dict[str, Any]],
     *,
     limit: int = 4,
-    item_preview_limit: int = 6,
+    item_preview_limit: int = 12,
 ) -> list[dict[str, Any]]:
     def score(campaign: dict[str, Any]) -> tuple[int, int, int, int]:
         risk = campaign.get("review_risk_summary") or {}
@@ -342,6 +342,8 @@ def _next_campaign_review_batch(
             for preview in (campaign.get("item_decision_application_preview") or [])
             if isinstance(preview, dict)
         ]
+        visible_item_previews = item_previews[:item_preview_limit]
+        hidden_preview_rows = max(0, len(item_previews) - len(visible_item_previews))
         batch.append(
             {
                 "campaign_work_order_id": campaign.get("campaign_work_order_id"),
@@ -359,8 +361,10 @@ def _next_campaign_review_batch(
                 or {},
                 "affected_item_work_order_ids": campaign.get("affected_item_work_order_ids") or [],
                 "item_review_preview_rows": len(item_previews),
-                "item_review_preview": item_previews[:item_preview_limit],
-                "item_review_preview_truncated": len(item_previews) > item_preview_limit,
+                "visible_item_review_preview_rows": len(visible_item_previews),
+                "hidden_item_review_preview_rows": hidden_preview_rows,
+                "item_review_preview": visible_item_previews,
+                "item_review_preview_truncated": hidden_preview_rows > 0,
                 "manual_confirmed": False,
             }
         )

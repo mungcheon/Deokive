@@ -303,5 +303,74 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertNotEqual(preview["variant_name"], preview["identity_label"])
 
 
+    def test_long_campaign_preview_publishes_more_rows_and_hidden_count(self):
+        affected_ids = [f"item-{index:02d}" for index in range(14)]
+        action_queue = {
+            "ichiban_reissue_campaign_work_order": [
+                {
+                    "campaign_work_order_id": "campaign-long",
+                    "source_urls": [
+                        "https://1kuji.com/products/sample",
+                        "https://1kuji.com/products/sample2",
+                    ],
+                    "item_work_order_count": len(affected_ids),
+                    "campaign_url_comparison": {
+                        "likely_same_campaign_family_reissue": True,
+                    },
+                    "decision_template": {
+                        "campaign_work_order_id": "campaign-long",
+                        "affected_item_work_order_ids": affected_ids,
+                    },
+                }
+            ],
+            "ichiban_reissue_work_order": [
+                {
+                    "work_order_id": work_order_id,
+                    "catalog_indexes": [index, index + 100],
+                    "source_urls": [
+                        "https://1kuji.com/products/sample",
+                        "https://1kuji.com/products/sample2",
+                    ],
+                    "sample_rows": [
+                        {
+                            "name_ko": f"Sample Kuji - {index} Prize",
+                            "campaign_title": "Sample Kuji",
+                            "prize_rank": f"{index} Prize",
+                            "prize_item_name": f"Prize {index}",
+                            "variant_name": f"Variant {index}",
+                            "identity_label": f"Sample Kuji / {index} Prize / Prize {index}",
+                        }
+                    ],
+                    "campaign_url_comparison": {
+                        "likely_same_campaign_family_reissue": True,
+                    },
+                    "decision_template": {"work_order_id": work_order_id},
+                }
+                for index, work_order_id in enumerate(affected_ids)
+            ],
+        }
+
+        report = builder.build_report(
+            action_queue,
+            generated_at="2026-07-24T00:00:00Z",
+        )
+
+        campaign = report["next_campaign_review_batch"][0]
+        self.assertEqual(campaign["item_review_preview_rows"], 14)
+        self.assertEqual(campaign["visible_item_review_preview_rows"], 12)
+        self.assertEqual(campaign["hidden_item_review_preview_rows"], 2)
+        self.assertTrue(campaign["item_review_preview_truncated"])
+        self.assertEqual(len(campaign["item_review_preview"]), 12)
+        self.assertEqual(
+            report["summary"]["campaign_review_batch_item_preview_rows"],
+            14,
+        )
+        self.assertEqual(
+            report["summary"]["campaign_review_batch_visible_item_preview_rows"],
+            12,
+        )
+        self.assertEqual(report["summary"]["campaign_review_batch_truncated_campaigns"], 1)
+
+
 if __name__ == "__main__":
     unittest.main()
