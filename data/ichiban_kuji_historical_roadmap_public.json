@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T06:36:19Z",
+  "generated_at": "2026-07-24T18:45:46Z",
   "summary": {
     "catalog_ichiban_rows": 7898,
     "campaign_rows": 614,
@@ -42,6 +42,26 @@
       ],
       "next_safe_phase": "confirm_ichiban_campaign_metadata"
     },
+    "price_and_prize_policy_gate": {
+      "status": "reissue_review_required",
+      "zero_price_policy_ready": true,
+      "numbered_variant_policy_ready": true,
+      "last_one_and_double_chance_zero_price_protected": true,
+      "same_rank_numbered_variants_represented": true,
+      "reissue_review_blockers": 20,
+      "reissue_work_order_rows": 20,
+      "auto_merge_ready_rows": 0,
+      "auto_delete_ready_rows": 0,
+      "auto_apply_ready_rows": 0,
+      "next_safe_phase": "resolve_ichiban_reissue_identity",
+      "blocked_reasons": [
+        "same_name_reissue_groups_require_keep_or_merge_decisions"
+      ]
+    },
+    "price_and_prize_policy_gate_status": "reissue_review_required",
+    "price_policy_auto_apply_ready_rows": 0,
+    "price_policy_auto_merge_ready_rows": 0,
+    "price_policy_auto_delete_ready_rows": 0,
     "auto_apply_enabled": false,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false

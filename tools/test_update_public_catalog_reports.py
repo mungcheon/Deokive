@@ -1283,6 +1283,36 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
             True,
         )
+        self.assertEqual(
+            quality["ichiban_kuji_historical_roadmap"][
+                "price_and_prize_policy_gate_status"
+            ],
+            "reissue_review_required",
+        )
+        self.assertTrue(
+            quality["ichiban_kuji_historical_roadmap"][
+                "price_and_prize_policy_gate"
+            ]["last_one_and_double_chance_zero_price_protected"]
+        )
+        self.assertTrue(
+            quality["ichiban_kuji_historical_roadmap"][
+                "price_and_prize_policy_gate"
+            ]["same_rank_numbered_variants_represented"]
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_historical_roadmap"][
+                "price_and_prize_policy_gate"
+            ]["reissue_review_blockers"],
+            quality["ichiban_kuji_prize_policy_issue_queue"][
+                "probable_reissue_review_groups"
+            ],
+        )
+        self.assertIn(
+            "same_name_reissue_groups_require_keep_or_merge_decisions",
+            quality["ichiban_kuji_historical_roadmap"][
+                "price_and_prize_policy_gate"
+            ]["blocked_reasons"],
+        )
         ichiban_history = reports.load_json(reports.ICHIIBAN_KUJI_HISTORY)
         self.assertEqual(
             ichiban_history["summary"]["official_price_jpy_review_queue_campaigns"],
@@ -1839,6 +1869,29 @@ class PublicCatalogReportTests(unittest.TestCase):
                 ],
                 "next_safe_phase": "confirm_ichiban_campaign_metadata",
             },
+        )
+        self.assertEqual(
+            summary["price_and_prize_policy_gate"],
+            {
+                "status": "reissue_review_required",
+                "zero_price_policy_ready": True,
+                "numbered_variant_policy_ready": True,
+                "last_one_and_double_chance_zero_price_protected": True,
+                "same_rank_numbered_variants_represented": True,
+                "reissue_review_blockers": 2,
+                "reissue_work_order_rows": 2,
+                "auto_merge_ready_rows": 0,
+                "auto_delete_ready_rows": 0,
+                "auto_apply_ready_rows": 0,
+                "next_safe_phase": "resolve_ichiban_reissue_identity",
+                "blocked_reasons": [
+                    "same_name_reissue_groups_require_keep_or_merge_decisions",
+                ],
+            },
+        )
+        self.assertEqual(
+            summary["price_and_prize_policy_gate_status"],
+            "reissue_review_required",
         )
         self.assertEqual(roadmap["phases"][0]["phase"], "confirm_ichiban_campaign_metadata")
         self.assertEqual(roadmap["phases"][0]["rows"], 2)

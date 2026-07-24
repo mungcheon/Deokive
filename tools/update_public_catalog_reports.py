@@ -8039,6 +8039,48 @@ def build_ichiban_kuji_historical_roadmap_public(
             "auto_delete_enabled": False,
         },
     ]
+    zero_price_policy_ready = (
+        prize_policy.get("zero_price_exception_policy_pass", False) is True
+        and value(prize_policy, "zero_price_violation_rows") == 0
+    )
+    numbered_variant_policy_ready = (
+        prize_policy.get("numbered_variant_coverage_policy_pass", False) is True
+    )
+    reissue_review_groups = value(
+        prize_policy,
+        "probable_reissue_review_groups",
+    )
+    price_and_prize_policy_gate = {
+        "status": "reissue_review_required"
+        if reissue_review_groups
+        else "ready",
+        "zero_price_policy_ready": zero_price_policy_ready,
+        "numbered_variant_policy_ready": numbered_variant_policy_ready,
+        "last_one_and_double_chance_zero_price_protected": zero_price_policy_ready,
+        "same_rank_numbered_variants_represented": numbered_variant_policy_ready,
+        "reissue_review_blockers": reissue_review_groups,
+        "reissue_work_order_rows": value(
+            prize_policy,
+            "probable_reissue_work_order_rows",
+        ),
+        "auto_merge_ready_rows": 0,
+        "auto_delete_ready_rows": 0,
+        "auto_apply_ready_rows": 0,
+        "next_safe_phase": "resolve_ichiban_reissue_identity"
+        if reissue_review_groups
+        else "review_prize_name_image_patches",
+        "blocked_reasons": [
+            reason
+            for reason in [
+                None if zero_price_policy_ready else "zero_price_exception_policy_failed",
+                None if numbered_variant_policy_ready else "numbered_variant_policy_failed",
+                "same_name_reissue_groups_require_keep_or_merge_decisions"
+                if reissue_review_groups
+                else None,
+            ]
+            if reason
+        ],
+    }
 
     summary = {
         "catalog_ichiban_rows": value(history, "catalog_kuji_item_rows"),
@@ -8113,17 +8155,8 @@ def build_ichiban_kuji_historical_roadmap_public(
                 "open_candidate_rows",
             )
             + value(prize_name_image, "review_rows"),
-            "zero_price_policy_ready": prize_policy.get(
-                "zero_price_exception_policy_pass",
-                False,
-            )
-            is True
-            and value(prize_policy, "zero_price_violation_rows") == 0,
-            "numbered_variant_policy_ready": prize_policy.get(
-                "numbered_variant_coverage_policy_pass",
-                False,
-            )
-            is True,
+            "zero_price_policy_ready": zero_price_policy_ready,
+            "numbered_variant_policy_ready": numbered_variant_policy_ready,
             "blocked_auto_apply_reasons": [
                 "campaign_metadata_requires_official_confirmation",
                 "same_name_reissue_groups_require_keep_or_merge_decisions",
@@ -8131,6 +8164,11 @@ def build_ichiban_kuji_historical_roadmap_public(
             ],
             "next_safe_phase": "confirm_ichiban_campaign_metadata",
         },
+        "price_and_prize_policy_gate": price_and_prize_policy_gate,
+        "price_and_prize_policy_gate_status": price_and_prize_policy_gate["status"],
+        "price_policy_auto_apply_ready_rows": 0,
+        "price_policy_auto_merge_ready_rows": 0,
+        "price_policy_auto_delete_ready_rows": 0,
         "auto_apply_enabled": False,
         "auto_merge_enabled": False,
         "auto_delete_enabled": False,
