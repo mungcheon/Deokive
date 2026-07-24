@@ -9893,6 +9893,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["stellive_fanding_candidates"] = copy_report_summary(
                 STELLIVE_FANDING_CANDIDATES, "stellive_fanding_candidates"
             )
+        image_attachment_action_summary = image_attachment_action_queue.get("summary", {})
         target["image_source_url_confirmed_template"] = {
             "public_report": f"data/{IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.name}",
             **image_source_url_confirmed_template["summary"],
@@ -10070,6 +10071,112 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "auto_apply_enabled": False,
             },
             "auto_apply_enabled": False,
+        }
+        source_url_split = target["source_url_update_queue_split"]
+        source_url_readiness = source_url_split["review_readiness"]
+        source_url_next_queue = source_url_readiness.get("next_queue", {})
+        target["source_url_update_execution_gate"] = {
+            "public_reports": [
+                f"data/{IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.name}",
+                f"data/{MANUAL_SOURCE_URL_SEARCH_QUEUE.name}",
+                f"data/{PROVIDER_MISSING_SOURCE_URL_QUEUE.name}",
+                f"data/{CANDIDATE_SOURCE_URL_REVIEW_QUEUE.name}",
+                f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+                f"data/{IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.name}",
+            ],
+            "status": "manual_source_url_confirmation_required"
+            if source_url_split["source_url_update_required_rows"]
+            else "empty",
+            "source_url_update_required_rows": source_url_split[
+                "source_url_update_required_rows"
+            ],
+            "template_rows": image_source_url_confirmed_template["summary"].get(
+                "template_items", 0
+            ),
+            "template_confirmed_rows": image_source_url_confirmed_template[
+                "summary"
+            ].get("manual_confirmed_rows", 0),
+            "template_candidate_prefilled_rows": image_source_url_confirmed_template[
+                "summary"
+            ].get("candidate_prefilled_rows", 0),
+            "covered_rows": source_url_split["covered_rows"],
+            "uncovered_rows": max(
+                0,
+                int(source_url_split["source_url_update_required_rows"] or 0)
+                - int(source_url_split["covered_rows"] or 0),
+            ),
+            "manual_search_required_rows": source_url_split[
+                "manual_search_required_rows"
+            ],
+            "provider_missing_rows": source_url_split["provider_missing_rows"],
+            "candidate_review_rows": source_url_split["candidate_review_rows"],
+            "next_queue_lane": "replace_generic_source_urls",
+            "next_review_lane": source_url_next_queue.get("lane"),
+            "next_review_rows": source_url_next_queue.get("rows", 0),
+            "next_source_url_review_batch_rows": image_attachment_action_summary.get(
+                "next_source_url_review_batch_rows", 0
+            ),
+            "next_source_url_review_batch_store_count": (
+                image_attachment_action_summary.get(
+                    "next_source_url_review_batch_store_count", 0
+                )
+            ),
+            "next_source_url_review_batch_primary_review_url_rows": (
+                image_attachment_action_summary.get(
+                    "next_source_url_review_batch_primary_review_url_rows", 0
+                )
+            ),
+            "source_url_update_primary_review_url_rows": (
+                image_attachment_action_summary.get(
+                    "source_url_update_primary_review_url_rows", 0
+                )
+            ),
+            "source_url_update_missing_primary_review_url_rows": (
+                image_attachment_action_summary.get(
+                    "source_url_update_missing_primary_review_url_rows", 0
+                )
+            ),
+            "source_url_update_review_start_coverage": (
+                image_attachment_action_summary.get(
+                    "source_url_update_review_start_coverage", 0
+                )
+            ),
+            "ready_to_import_rows": image_attachment_template_import_dry_run[
+                "summary"
+            ].get("ready_image_rows", 0),
+            "dry_run_updated_rows": image_attachment_template_import_dry_run[
+                "summary"
+            ].get("updated_rows", 0),
+            "dry_run_skipped_rows": image_attachment_template_import_dry_run[
+                "summary"
+            ].get("skipped_rows", 0),
+            "auto_apply_ready_rows": source_url_readiness.get(
+                "auto_apply_ready_rows", 0
+            ),
+            "auto_apply_enabled": False,
+            "manual_confirmation_required": True,
+            "blocked_until": "manual_exact_source_url_confirmation",
+            "next_safe_phase": "review_candidate_source_urls"
+            if source_url_next_queue.get("lane") == "candidate_review_required"
+            else "manual_source_url_search",
+            "blocked_reasons": [
+                reason
+                for reason in [
+                    "source_url_identity_not_confirmed"
+                    if source_url_split["source_url_update_required_rows"]
+                    else None,
+                    "source_url_template_has_no_manual_confirmations"
+                    if image_source_url_confirmed_template["summary"].get(
+                        "manual_confirmed_rows", 0
+                    )
+                    == 0
+                    else None,
+                    "source_url_candidates_require_manual_review"
+                    if source_url_split["candidate_review_rows"]
+                    else None,
+                ]
+                if reason
+            ],
         }
         target["requested_focus_enrichment"] = {
             "public_report": f"data/{REQUESTED_FOCUS.name}",

@@ -607,6 +607,42 @@ class PublicCatalogReportTests(unittest.TestCase):
             3,
         )
         self.assertIs(quality["source_url_update_queue_split"]["auto_apply_enabled"], False)
+        source_gate = quality["source_url_update_execution_gate"]
+        self.assertEqual(
+            source_gate["status"],
+            "manual_source_url_confirmation_required",
+        )
+        self.assertEqual(source_gate["source_url_update_required_rows"], 50)
+        self.assertEqual(source_gate["template_rows"], 50)
+        self.assertEqual(source_gate["template_confirmed_rows"], 0)
+        self.assertEqual(source_gate["covered_rows"], 50)
+        self.assertEqual(source_gate["uncovered_rows"], 0)
+        self.assertEqual(source_gate["manual_search_required_rows"], 42)
+        self.assertEqual(source_gate["provider_missing_rows"], 5)
+        self.assertEqual(source_gate["candidate_review_rows"], 3)
+        self.assertEqual(source_gate["next_queue_lane"], "replace_generic_source_urls")
+        self.assertEqual(source_gate["next_review_lane"], "candidate_review_required")
+        self.assertEqual(source_gate["next_review_rows"], 3)
+        self.assertEqual(source_gate["next_source_url_review_batch_rows"], 10)
+        self.assertEqual(
+            source_gate["next_source_url_review_batch_primary_review_url_rows"],
+            10,
+        )
+        self.assertEqual(source_gate["source_url_update_primary_review_url_rows"], 50)
+        self.assertEqual(
+            source_gate["source_url_update_missing_primary_review_url_rows"],
+            0,
+        )
+        self.assertEqual(source_gate["source_url_update_review_start_coverage"], 1.0)
+        self.assertEqual(source_gate["ready_to_import_rows"], 0)
+        self.assertEqual(source_gate["auto_apply_ready_rows"], 0)
+        self.assertFalse(source_gate["auto_apply_enabled"])
+        self.assertTrue(source_gate["manual_confirmation_required"])
+        self.assertEqual(source_gate["next_safe_phase"], "review_candidate_source_urls")
+        self.assertIn(
+            "source_url_template_has_no_manual_confirmations",
+            source_gate["blocked_reasons"],
+        )
         self.assertEqual(quality["manual_source_url_search_queue"]["manual_search_required_rows"], 42)
         self.assertEqual(quality["manual_source_url_search_queue"]["with_store_search_url"], 42)
         self.assertEqual(
