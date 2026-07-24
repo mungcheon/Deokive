@@ -14,11 +14,19 @@ except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INPUT = ROOT / "server" / "catalog_seed_from_local.json"
+DEFAULT_INPUT = ROOT / "data" / "catalog_public.json"
 DEFAULT_REPORT = ROOT / "server" / "zero_official_price_cleanup_report.json"
 
 EXTRA_ZERO_PRICE_PRIZE_TERMS = ("라스트원", "더블찬스")
 ZERO_PRICE_PRIZE_TERMS = LAST_ONE_TOKENS + DOUBLE_CHANCE_TOKENS + EXTRA_ZERO_PRICE_PRIZE_TERMS
+
+
+def catalog_rows(payload: Any) -> list[dict[str, Any]]:
+    if isinstance(payload, list):
+        return [row for row in payload if isinstance(row, dict)]
+    if isinstance(payload, dict) and isinstance(payload.get("items"), list):
+        return [row for row in payload["items"] if isinstance(row, dict)]
+    return []
 
 
 def _zero_price_prize_row(row: dict[str, Any]) -> bool:
@@ -57,9 +65,10 @@ def main() -> int:
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    rows = json.loads(args.input.read_text(encoding="utf-8-sig"))
-    if not isinstance(rows, list):
-        raise SystemExit(f"{args.input} must contain a JSON list")
+    payload = json.loads(args.input.read_text(encoding="utf-8-sig"))
+    rows = catalog_rows(payload)
+    if not rows:
+        raise SystemExit(f"{args.input} must contain a JSON list or an object with items")
 
     changes = clear_zero_prices(rows)
     report = {
@@ -70,7 +79,7 @@ def main() -> int:
     }
     args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if args.write and changes:
-        args.input.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        args.input.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(
         json.dumps(
