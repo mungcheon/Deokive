@@ -17,6 +17,8 @@ class SourceDiscoveryNextFocusExactUrlCandidateAuditPublicTest(unittest.TestCase
                     "catalog_index": 1,
                     "source_store": "Ensky",
                     "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                    "primary_review_url": "https://www.google.com/search?q=primary",
+                    "primary_review_url_kind": "domain_limited_web_search",
                     "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=x",
                 }
             ]
@@ -31,8 +33,30 @@ class SourceDiscoveryNextFocusExactUrlCandidateAuditPublicTest(unittest.TestCase
         self.assertEqual(report["summary"]["queue_rows"], 1)
         self.assertEqual(report["summary"]["store_search_broad_result_rows"], 1)
         self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(report["summary"]["primary_manual_review_url_rows"], 1)
+        self.assertEqual(
+            report["summary"]["primary_manual_review_url_kind_counts"],
+            [("domain_limited_web_search", 1)],
+        )
+        self.assertEqual(
+            report["summary"]["domain_limited_web_search_role_counts"],
+            [("secondary_search_hint", 1)],
+        )
         self.assertTrue(report["items"][0]["broad_result_page"])
         self.assertEqual(report["items"][0]["candidate_source_urls"], [])
+        self.assertEqual(
+            report["items"][0]["manual_review_queue_report"],
+            "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        )
+        self.assertEqual(
+            report["items"][0]["primary_manual_review_url"],
+            "https://www.google.com/search?q=primary",
+        )
+        self.assertEqual(
+            report["items"][0]["domain_limited_web_search_role"],
+            "secondary_search_hint",
+        )
+        self.assertIn("Open primary_manual_review_url first", report["items"][0]["manual_review_instruction"])
         self.assertIn("site%3Aenskyshop.com%2Fproducts%2Fdetail", report["items"][0]["domain_limited_web_search_url"])
         self.assertIn("%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F", report["items"][0]["domain_limited_web_search_url"])
         self.assertEqual(report["items"][0]["recommended_next_action"], "use_domain_limited_web_search_url")

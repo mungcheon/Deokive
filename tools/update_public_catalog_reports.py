@@ -37,6 +37,7 @@ import build_provider_missing_source_url_queue_public
 import build_requested_focus_action_queue_public
 import build_requested_focus_next_work_public
 import build_source_discovery_next_focus_detail_candidates_public
+import build_source_discovery_next_focus_exact_url_candidate_audit_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_pack_fetch_audit_public
 import build_source_discovery_next_focus_identity_candidate_review_public
@@ -2641,6 +2642,7 @@ def build_operations_public(
     source_next_focus_detail_candidates_override: dict[str, Any] | None = None,
     source_next_focus_metadata_field_import_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
+    source_next_focus_exact_url_candidate_audit_override: dict[str, Any] | None = None,
     source_discovery_action_queue_override: dict[str, Any] | None = None,
     source_discovery_focus_template_override: dict[str, Any] | None = None,
     source_discovery_focus_template_import_override: dict[str, Any] | None = None,
@@ -2731,6 +2733,13 @@ def build_operations_public(
         else {}
     )
     source_next_focus_fallback_queue_summary = source_next_focus_fallback_queue.get("summary", {})
+    source_next_focus_exact_url_candidate_audit = (
+        source_next_focus_exact_url_candidate_audit_override
+        if source_next_focus_exact_url_candidate_audit_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.exists()
+        else {}
+    )
     source_discovery_starter_queue = (
         source_discovery_starter_queue_override
         if source_discovery_starter_queue_override is not None
@@ -9581,6 +9590,12 @@ def update_reports(write: bool) -> dict[str, Any]:
         fetch_audit=source_discovery_next_focus_fetch_audit,
         generated_at=generated_at,
     )
+    source_discovery_next_focus_exact_url_candidate_audit = (
+        build_source_discovery_next_focus_exact_url_candidate_audit_public.build_report(
+            source_discovery_next_focus_exact_url_queue,
+            generated_at=generated_at,
+        )
+    )
     source_discovery_next_focus_identity_candidate_review_queue = (
         build_source_discovery_next_focus_identity_candidate_review_public.build_report(
             source_discovery_next_focus_identity_backfill_queue,
@@ -9645,6 +9660,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_next_focus_detail_candidates_override=source_discovery_next_focus_detail_candidates,
         source_next_focus_metadata_field_import_override=source_discovery_next_focus_metadata_field_import,
         source_next_focus_fallback_queue_override=source_discovery_next_focus_fallback_queue,
+        source_next_focus_exact_url_candidate_audit_override=source_discovery_next_focus_exact_url_candidate_audit,
         source_discovery_action_queue_override=source_discovery_action_queue,
         source_discovery_focus_template_override=source_discovery_focus_template,
         source_discovery_focus_template_import_override=source_discovery_focus_template_import,
@@ -9682,12 +9698,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_next_focus_detail_candidates,
         source_discovery_next_focus_metadata_field_import,
         source_discovery_next_focus_fallback_queue,
-        source_next_focus_exact_url_candidate_audit_override=load_json(
-            SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT,
-            {},
-        )
-        if SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.exists()
-        else {},
+        source_next_focus_exact_url_candidate_audit_override=source_discovery_next_focus_exact_url_candidate_audit,
         source_discovery_starter_queue_override=source_discovery_starter_queue,
         requested_focus_action_queue_override=requested_focus_action_queue,
         image_attachment_action_queue_override=image_attachment_action_queue,
@@ -9710,6 +9721,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "source_discovery_next_focus_detail_candidates_public.json": source_discovery_next_focus_detail_candidates,
             "source_discovery_next_focus_metadata_field_import_dry_run_public.json": source_discovery_next_focus_metadata_field_import,
             "source_discovery_next_focus_fallback_queue_public.json": source_discovery_next_focus_fallback_queue,
+            "source_discovery_next_focus_exact_url_candidate_audit_public.json": source_discovery_next_focus_exact_url_candidate_audit,
             "source_discovery_review_batches_public.json": source_discovery_review_batches,
             "source_discovery_action_queue_public.json": source_discovery_action_queue,
             "ensky_cache_candidate_action_queue_public.json": ensky_cache_candidate_action_queue,
@@ -9893,11 +9905,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.name}",
             **source_discovery_next_focus_exact_url_queue["summary"],
         }
-        if SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.exists():
-            target["source_discovery_next_focus_exact_url_candidate_audit"] = copy_report_summary(
-                SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT,
-                "source_discovery_next_focus_exact_url_candidate_audit",
-            )
+        if source_discovery_next_focus_exact_url_candidate_audit.get("summary"):
+            target["source_discovery_next_focus_exact_url_candidate_audit"] = {
+                "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.name}",
+                **source_discovery_next_focus_exact_url_candidate_audit["summary"],
+            }
         target["source_discovery_next_focus_identity_backfill_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE.name}",
             **source_discovery_next_focus_identity_backfill_queue["summary"],
@@ -11652,6 +11664,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT, source_discovery_next_focus_metadata_field_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, source_discovery_next_focus_fallback_queue)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE, source_discovery_next_focus_exact_url_queue)
+        write_json(
+            SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT,
+            source_discovery_next_focus_exact_url_candidate_audit,
+        )
         write_json(
             SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE,
             source_discovery_next_focus_identity_backfill_queue,

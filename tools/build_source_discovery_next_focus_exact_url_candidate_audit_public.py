@@ -5,6 +5,7 @@ import json
 import re
 import sys
 import urllib.request
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
@@ -81,6 +82,8 @@ def domain_limited_web_search_url(item: dict[str, Any]) -> str:
 def audit_item(item: dict[str, Any], fetcher: Fetcher) -> dict[str, Any]:
     url = str(item.get("fallback_store_search_url") or "")
     title = str(item.get("name_ja") or item.get("name_ko") or "")
+    primary_review_url = str(item.get("primary_review_url") or "")
+    primary_review_url_kind = str(item.get("primary_review_url_kind") or "")
     base = "https://www.enskyshop.com/"
     result: dict[str, Any] = {
         "catalog_index": item.get("catalog_index"),
@@ -95,7 +98,15 @@ def audit_item(item: dict[str, Any], fetcher: Fetcher) -> dict[str, Any]:
         "candidate_source_urls": [],
         "broad_result_page": False,
         "auto_apply_enabled": False,
+        "manual_review_queue_report": str(DEFAULT_INPUT.relative_to(ROOT)).replace("\\", "/"),
+        "primary_manual_review_url": primary_review_url,
+        "primary_manual_review_url_kind": primary_review_url_kind,
         "domain_limited_web_search_url": domain_limited_web_search_url(item),
+        "domain_limited_web_search_role": "secondary_search_hint",
+        "manual_review_instruction": (
+            "Open primary_manual_review_url first when present; use domain_limited_web_search_url only as a secondary "
+            "search hint. Never copy broad store search sample links without exact product identity confirmation."
+        ),
     }
     if not url:
         result.update(
@@ -176,6 +187,19 @@ def build_report(
                 for item in audited
                 if item.get("recommended_next_action") == "use_domain_limited_web_search_url"
             ),
+            "primary_manual_review_url_rows": sum(
+                1 for item in audited if item.get("primary_manual_review_url")
+            ),
+            "primary_manual_review_url_kind_counts": Counter(
+                str(item.get("primary_manual_review_url_kind") or "")
+                for item in audited
+                if item.get("primary_manual_review_url")
+            ).most_common(),
+            "domain_limited_web_search_role_counts": Counter(
+                str(item.get("domain_limited_web_search_role") or "")
+                for item in audited
+                if item.get("domain_limited_web_search_url")
+            ).most_common(),
             "auto_apply_enabled": False,
             "recommended_next_action": "Use exact title candidates only after manual review; broad Ensky search result pages are not source_url evidence.",
         },
