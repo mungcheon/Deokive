@@ -1380,6 +1380,20 @@ def _build_plan(load_report) -> dict[str, Any]:
                     kuji_action_summary, "field_patch_template_count"
                 ),
                 "field_patch_template_counts": kuji_action_summary.get("field_patch_template_counts", []),
+                "next_campaign_patch_review_batch_rows": _count(
+                    kuji_action_summary, "next_campaign_patch_review_batch_rows"
+                ),
+                "next_campaign_patch_review_batch_template_rows": _count(
+                    kuji_action_summary,
+                    "next_campaign_patch_review_batch_template_rows",
+                ),
+                "next_campaign_patch_review_batch_primary_review_url_rows": _count(
+                    kuji_action_summary,
+                    "next_campaign_patch_review_batch_primary_review_url_rows",
+                ),
+                "next_campaign_patch_review_batch_field_counts": kuji_action_summary.get(
+                    "next_campaign_patch_review_batch_field_counts", []
+                ),
                 "primary_review_url_rows": _count(
                     kuji_action_summary, "primary_review_url_rows"
                 ),

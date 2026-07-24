@@ -1288,6 +1288,14 @@ class PublicCatalogReportTests(unittest.TestCase):
                     "unqueued_action_campaigns": 0,
                     "queued_catalog_item_rows": 7,
                     "action_batch_count": 1,
+                    "field_patch_template_counts": [["official_price_jpy", 1]],
+                    "next_campaign_patch_review_batch_rows": 2,
+                    "next_campaign_patch_review_batch_template_rows": 2,
+                    "next_campaign_patch_review_batch_primary_review_url_rows": 2,
+                    "next_campaign_patch_review_batch_field_counts": [
+                        ["official_price_jpy", 1],
+                        ["release_date", 1],
+                    ],
                 }
             },
             ichiban_metadata_fast_review={
@@ -2739,12 +2747,38 @@ class PublicCatalogReportTests(unittest.TestCase):
             ichiban_action_summary.get("queued_catalog_item_rows"),
         )
         self.assertEqual(
+            open_queues.get("ichiban_metadata_next_campaign_patch_review_batch_rows"),
+            ichiban_action_summary.get("next_campaign_patch_review_batch_rows"),
+        )
+        self.assertEqual(
+            open_queues.get(
+                "ichiban_metadata_next_campaign_patch_review_batch_template_rows"
+            ),
+            ichiban_action_summary.get("next_campaign_patch_review_batch_template_rows"),
+        )
+        self.assertEqual(
+            open_queues.get(
+                "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows"
+            ),
+            ichiban_action_summary.get(
+                "next_campaign_patch_review_batch_primary_review_url_rows"
+            ),
+        )
+        self.assertEqual(
             ichiban_scorecard.get("campaign_queue_coverage"),
             ichiban_action_summary.get("campaign_queue_coverage"),
         )
         self.assertEqual(
             ichiban_next_action.get("field_patch_template_counts"),
             ichiban_action_summary.get("field_patch_template_counts"),
+        )
+        self.assertEqual(
+            ichiban_next_action.get("next_campaign_patch_review_batch_rows"),
+            ichiban_action_summary.get("next_campaign_patch_review_batch_rows"),
+        )
+        self.assertEqual(
+            ichiban_next_action.get("next_campaign_patch_review_batch_field_counts"),
+            ichiban_action_summary.get("next_campaign_patch_review_batch_field_counts"),
         )
         self.assertEqual(
             ichiban_next_action.get("work_order_steps"),

@@ -511,6 +511,13 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "action_batch_count": 1,
                     "field_patch_template_count": 1,
                     "field_patch_template_counts": [["release_date", 1]],
+                    "next_campaign_patch_review_batch_rows": 2,
+                    "next_campaign_patch_review_batch_template_rows": 2,
+                    "next_campaign_patch_review_batch_primary_review_url_rows": 2,
+                    "next_campaign_patch_review_batch_field_counts": [
+                        ["official_price_jpy", 1],
+                        ["release_date", 1],
+                    ],
                     "primary_review_url_rows": 1,
                     "queued_primary_review_url_rows": 1,
                     "first_primary_review_url": "https://1kuji.example/campaign",
@@ -1267,6 +1274,21 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             3.5,
         )
         self.assertEqual(kuji_action["evidence"]["field_patch_template_count"], 1)
+        self.assertEqual(kuji_action["evidence"]["next_campaign_patch_review_batch_rows"], 2)
+        self.assertEqual(
+            kuji_action["evidence"]["next_campaign_patch_review_batch_template_rows"],
+            2,
+        )
+        self.assertEqual(
+            kuji_action["evidence"][
+                "next_campaign_patch_review_batch_primary_review_url_rows"
+            ],
+            2,
+        )
+        self.assertEqual(
+            kuji_action["evidence"]["next_campaign_patch_review_batch_field_counts"],
+            [["official_price_jpy", 1], ["release_date", 1]],
+        )
         self.assertEqual(kuji_action["evidence"]["primary_review_url_rows"], 1)
         self.assertEqual(kuji_action["evidence"]["queued_primary_review_url_rows"], 1)
         self.assertEqual(

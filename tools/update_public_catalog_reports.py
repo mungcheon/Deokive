@@ -3209,6 +3209,22 @@ def build_operations_public(
             "field_patch_template_counts": ichiban_kuji_metadata_action_queue_summary.get(
                 "field_patch_template_counts", []
             ),
+            "next_campaign_patch_review_batch_rows": ichiban_kuji_metadata_action_queue_summary.get(
+                "next_campaign_patch_review_batch_rows", 0
+            ),
+            "next_campaign_patch_review_batch_template_rows": ichiban_kuji_metadata_action_queue_summary.get(
+                "next_campaign_patch_review_batch_template_rows", 0
+            ),
+            "next_campaign_patch_review_batch_primary_review_url_rows": (
+                ichiban_kuji_metadata_action_queue_summary.get(
+                    "next_campaign_patch_review_batch_primary_review_url_rows", 0
+                )
+            ),
+            "next_campaign_patch_review_batch_field_counts": (
+                ichiban_kuji_metadata_action_queue_summary.get(
+                    "next_campaign_patch_review_batch_field_counts", []
+                )
+            ),
             "work_order_steps": ichiban_kuji_metadata_action_queue_summary.get("work_order_steps", 0),
             "work_order_lanes": ichiban_kuji_metadata_action_queue_summary.get("work_order_lanes", []),
             "recommended_next_action": "Work queued 1kuji metadata templates, then expand remaining actionable campaigns.",
@@ -3871,6 +3887,17 @@ def build_operations_public(
             "queued_catalog_item_rows": ichiban_kuji_metadata_action_queue_summary.get("queued_catalog_item_rows", 0),
             "primary_report": f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
             "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
+            "next_campaign_patch_review_batch_rows": ichiban_kuji_metadata_action_queue_summary.get(
+                "next_campaign_patch_review_batch_rows", 0
+            ),
+            "next_campaign_patch_review_batch_template_rows": ichiban_kuji_metadata_action_queue_summary.get(
+                "next_campaign_patch_review_batch_template_rows", 0
+            ),
+            "next_campaign_patch_review_batch_field_counts": (
+                ichiban_kuji_metadata_action_queue_summary.get(
+                    "next_campaign_patch_review_batch_field_counts", []
+                )
+            ),
             "work_order_lanes": ichiban_kuji_metadata_action_queue_summary.get("work_order_lanes", []),
             "auto_apply_enabled": ichiban_kuji_metadata_action_queue_summary.get("auto_apply_enabled", False),
         } if ichiban_kuji_metadata_action_queue_summary else None,
@@ -4172,6 +4199,19 @@ def build_operations_public(
         )
         open_review_queues["ichiban_metadata_queued_catalog_item_rows"] = (
             ichiban_kuji_metadata_action_queue_summary.get("queued_catalog_item_rows", 0)
+        )
+        open_review_queues["ichiban_metadata_next_campaign_patch_review_batch_rows"] = (
+            ichiban_kuji_metadata_action_queue_summary.get("next_campaign_patch_review_batch_rows", 0)
+        )
+        open_review_queues["ichiban_metadata_next_campaign_patch_review_batch_template_rows"] = (
+            ichiban_kuji_metadata_action_queue_summary.get(
+                "next_campaign_patch_review_batch_template_rows", 0
+            )
+        )
+        open_review_queues["ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows"] = (
+            ichiban_kuji_metadata_action_queue_summary.get(
+                "next_campaign_patch_review_batch_primary_review_url_rows", 0
+            )
         )
     if metadata_action_queue_summary:
         open_review_queues["metadata_action_missing_cells"] = metadata_action_queue_summary.get(
@@ -7554,6 +7594,17 @@ def validate_report_consistency(
         )
         expected_open_queues["ichiban_metadata_queued_catalog_item_rows"] = ichiban_action_summary.get(
             "queued_catalog_item_rows", 0
+        )
+        expected_open_queues["ichiban_metadata_next_campaign_patch_review_batch_rows"] = (
+            ichiban_action_summary.get("next_campaign_patch_review_batch_rows", 0)
+        )
+        expected_open_queues["ichiban_metadata_next_campaign_patch_review_batch_template_rows"] = (
+            ichiban_action_summary.get("next_campaign_patch_review_batch_template_rows", 0)
+        )
+        expected_open_queues["ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows"] = (
+            ichiban_action_summary.get(
+                "next_campaign_patch_review_batch_primary_review_url_rows", 0
+            )
         )
     ichiban_prize_name_image_review = (
         load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, {})
