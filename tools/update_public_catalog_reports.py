@@ -1349,7 +1349,7 @@ def build_source_discovery_completion_roadmap_public(
             "rows": int(focus_summary.get("remaining_focus_review_rows") or 0),
             "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_PACKS.name}",
             "blocked_until": "exact_product_detail_source_url_confirmed",
-            "next_machine_step": "rotate_focus_packs_until_top_5_stores_are_confirmed",
+            "next_machine_step": "rotate_focus_packs_until_current_focus_stores_are_confirmed",
         },
         {
             "phase": 3,

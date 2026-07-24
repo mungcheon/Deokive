@@ -189,7 +189,7 @@ def build_report(
     bottlenecks: dict[str, Any],
     *,
     generated_at: str | None = None,
-    top_store_limit: int = 5,
+    top_store_limit: int = 8,
     pack_size: int = 20,
 ) -> dict[str, Any]:
     by_store = collect_action_items(action_queue)
@@ -311,7 +311,7 @@ def main() -> int:
     parser.add_argument("--action-queue", type=Path, default=DEFAULT_ACTION_QUEUE)
     parser.add_argument("--bottlenecks", type=Path, default=DEFAULT_BOTTLENECKS)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--top-store-limit", type=int, default=5)
+    parser.add_argument("--top-store-limit", type=int, default=8)
     parser.add_argument("--pack-size", type=int, default=20)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()

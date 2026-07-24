@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T17:58:07Z",
+  "generated_at": "2026-07-24T20:45:03Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 745,
@@ -16,12 +16,12 @@
     "source_detail_unflagged_candidate_rows": 0,
     "source_detail_ready_unflagged_candidate_rows": 0,
     "manual_image_research_rows": 5,
-    "source_discovery_focus_pack_rows": 452,
-    "source_discovery_focus_pack_count": 25,
-    "source_discovery_not_started_focus_pack_count": 25,
-    "source_discovery_remaining_focus_review_rows": 452,
+    "source_discovery_focus_pack_rows": 511,
+    "source_discovery_focus_pack_count": 30,
+    "source_discovery_not_started_focus_pack_count": 30,
+    "source_discovery_remaining_focus_review_rows": 511,
     "source_discovery_confirmed_focus_source_rows": 0,
-    "source_discovery_focus_template_rows": 452,
+    "source_discovery_focus_template_rows": 511,
     "source_discovery_focus_template_confirmed_rows": 0,
     "source_discovery_next_focus_pack_id": "source-discovery-focus-001",
     "source_discovery_next_focus_pack_rows": 20,
@@ -33,9 +33,9 @@
       ]
     ],
     "source_discovery_focus_template_dry_run_updated_rows": 0,
-    "source_discovery_focus_template_dry_run_skipped_rows": 452,
-    "source_discovery_focus_coverage": 0.6777,
-    "source_discovery_non_focus_rows": 215,
+    "source_discovery_focus_template_dry_run_skipped_rows": 511,
+    "source_discovery_focus_coverage": 0.7661,
+    "source_discovery_non_focus_rows": 156,
     "action_queue_rows": 73,
     "direct_image_action_queue_rows": 73,
     "direct_image_action_primary_review_url_rows": 73,
@@ -122,7 +122,7 @@
     "completion_plan_phase_count": 5,
     "completion_plan_status": "balanced",
     "blocking_dashboard_status": "manual_evidence_required",
-    "blocking_dashboard_queue_coverage": 0.7275
+    "blocking_dashboard_queue_coverage": 0.8067
   },
   "readiness": [
     {
@@ -6913,7 +6913,7 @@
       "rank": 4,
       "lane": "discover_exact_source_urls",
       "source": "source_discovery_action_queue_public.json",
-      "row_count": 452,
+      "row_count": 511,
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "top_source_stores": [
@@ -8575,7 +8575,7 @@
       {
         "rank": 4,
         "lane": "discover_exact_source_urls",
-        "row_count": 452,
+        "row_count": 511,
         "source": "source_discovery_action_queue_public.json",
         "next_step": "confirm_exact_source_url_then_fill_source_templates",
         "blocked_reason": "missing_exact_source_url",
@@ -8919,7 +8919,7 @@
       "generic_source_url_replacement_rows": 50,
       "representative_image_review_rows": 23,
       "source_detail_recheck_required_rows": 12,
-      "source_discovery_focus_rows": 452,
+      "source_discovery_focus_rows": 511,
       "manual_image_research_rows": 5
     },
     "automation_policy": {
@@ -8931,10 +8931,10 @@
     "open_missing_image_rows": 745,
     "auto_import_ready_rows": 0,
     "queue_count": 5,
-    "queued_rows_total": 542,
-    "not_yet_queued_rows": 203,
-    "not_yet_queued_rows_explained": 203,
-    "unqueued_phase_rows_total": 215,
+    "queued_rows_total": 601,
+    "not_yet_queued_rows": 144,
+    "not_yet_queued_rows_explained": 144,
+    "unqueued_phase_rows_total": 156,
     "overlay_queue_rows": 12,
     "completion_plan_status": "balanced",
     "next_queue": {
@@ -9069,7 +9069,7 @@
       {
         "rank": 4,
         "lane": "discover_exact_source_urls",
-        "row_count": 452,
+        "row_count": 511,
         "source": "source_discovery_action_queue_public.json",
         "template": "source_discovery_focus_confirmed_template_public.json",
         "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -9210,9 +9210,9 @@
       },
       {
         "phase_id": "complete_source_discovery_focus_packs",
-        "row_count": 452,
+        "row_count": 511,
         "direct_queue_lane": "discover_exact_source_urls",
-        "queued_rows": 452,
+        "queued_rows": 511,
         "remaining_rows": 0,
         "next_step": "fill_source_discovery_focus_confirmed_template",
         "blocked_reason": "missing_exact_source_url",
@@ -9221,10 +9221,10 @@
       },
       {
         "phase_id": "triage_remaining_source_discovery_backlog",
-        "row_count": 215,
+        "row_count": 156,
         "direct_queue_lane": null,
         "queued_rows": 0,
-        "remaining_rows": 215,
+        "remaining_rows": 156,
         "next_step": "promote_next_store_groups_into_focus_packs",
         "blocked_reason": "missing_exact_source_url",
         "source": "source_discovery_action_queue_public.json",
@@ -9246,12 +9246,12 @@
       {
         "bucket": "later_source_discovery_backlog",
         "phase_id": "triage_remaining_source_discovery_backlog",
-        "phase_row_count": 215,
+        "phase_row_count": 156,
         "direct_queue_lane": null,
         "directly_queued_rows": 0,
-        "remaining_phase_rows": 215,
+        "remaining_phase_rows": 156,
         "offset_by_overlay_queue_rows": 12,
-        "reported_not_yet_queued_rows": 203,
+        "reported_not_yet_queued_rows": 144,
         "next_step": "promote_next_store_groups_into_focus_packs",
         "blocked_reason": "missing_exact_source_url",
         "explanation": "These rows are outside the current focused source-discovery pack. Overlay candidate recheck queues may cover some of the same catalog rows, so the displayed not_yet_queued_rows is remaining_phase_rows minus overlay_queue_rows."
@@ -9269,9 +9269,9 @@
     "total_open_rows": 745,
     "auto_import_ready_rows": 0,
     "manual_validation_required_rows": 745,
-    "queued_rows_total": 542,
-    "not_yet_queued_rows": 203,
-    "queue_coverage": 0.7275,
+    "queued_rows_total": 601,
+    "not_yet_queued_rows": 144,
+    "queue_coverage": 0.8067,
     "top_blocked_reason": {
       "blocked_reason": "missing_exact_source_url",
       "rows": 667
@@ -9317,13 +9317,13 @@
       },
       {
         "phase_id": "complete_source_discovery_focus_packs",
-        "row_count": 452,
+        "row_count": 511,
         "blocked_reason": "missing_exact_source_url",
         "next_step": "fill_source_discovery_focus_confirmed_template"
       },
       {
         "phase_id": "triage_remaining_source_discovery_backlog",
-        "row_count": 215,
+        "row_count": 156,
         "blocked_reason": "missing_exact_source_url",
         "next_step": "promote_next_store_groups_into_focus_packs"
       },
@@ -9507,7 +9507,7 @@
         "rank": 3,
         "phase_id": "complete_source_discovery_focus_packs",
         "title": "상위 스토어 source_url 발견 팩 처리",
-        "row_count": 452,
+        "row_count": 511,
         "source": "source_discovery_focus_packs_public.json",
         "next_step": "fill_source_discovery_focus_confirmed_template",
         "template": "source_discovery_focus_confirmed_template_public.json",
@@ -10964,7 +10964,7 @@
         "rank": 4,
         "phase_id": "triage_remaining_source_discovery_backlog",
         "title": "포커스 팩 밖 source_url 누락 항목 정리",
-        "row_count": 215,
+        "row_count": 156,
         "source": "source_discovery_action_queue_public.json",
         "next_step": "promote_next_store_groups_into_focus_packs",
         "template": "source_discovery_focus_confirmed_template_public.json",

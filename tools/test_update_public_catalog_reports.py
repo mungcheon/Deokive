@@ -431,9 +431,9 @@ class PublicCatalogReportTests(unittest.TestCase):
                 execution_queue["queued_rows_total"],
                 execution_queue["open_missing_image_rows"] - execution_queue["not_yet_queued_rows"],
             )
-            self.assertEqual(execution_queue["not_yet_queued_rows"], 203)
-            self.assertEqual(execution_queue["not_yet_queued_rows_explained"], 203)
-            self.assertEqual(execution_queue["unqueued_phase_rows_total"], 215)
+            self.assertEqual(execution_queue["not_yet_queued_rows"], 144)
+            self.assertEqual(execution_queue["not_yet_queued_rows_explained"], 144)
+            self.assertEqual(execution_queue["unqueued_phase_rows_total"], 156)
             self.assertEqual(execution_queue["overlay_queue_rows"], 12)
             self.assertEqual(
                 execution_queue["unqueued_rows_breakdown"][0]["phase_id"],
@@ -443,7 +443,7 @@ class PublicCatalogReportTests(unittest.TestCase):
                 execution_queue["unqueued_rows_breakdown"][0][
                     "reported_not_yet_queued_rows"
                 ],
-                203,
+                144,
             )
             self.assertEqual(execution_queue["completion_plan_status"], "balanced")
             self.assertEqual(execution_queue["next_queue"]["lane"], "replace_generic_source_urls")
@@ -505,8 +505,8 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(missing_image_gate["source_first_rows"], 717)
             self.assertEqual(missing_image_gate["review_before_attach_rows"], 23)
             self.assertEqual(missing_image_gate["manual_image_research_rows"], 5)
-            self.assertEqual(missing_image_gate["source_discovery_focus_pack_rows"], 452)
-            self.assertEqual(missing_image_gate["not_yet_queued_rows"], 203)
+            self.assertEqual(missing_image_gate["source_discovery_focus_pack_rows"], 511)
+            self.assertEqual(missing_image_gate["not_yet_queued_rows"], 144)
             self.assertEqual(missing_image_gate["next_queue_lane"], "replace_generic_source_urls")
             self.assertEqual(missing_image_gate["next_queue_rows"], 50)
             self.assertEqual(
@@ -1490,9 +1490,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(pillars["dedupe"]["next_queue_lane"], "same_barcode_fast_review")
         self.assertEqual(pillars["dedupe"]["next_queue_rows"], 10)
         self.assertEqual(pillars["missing_images"]["open_rows"], 745)
-        self.assertEqual(pillars["missing_images"]["queued_rows"], 542)
-        self.assertEqual(pillars["missing_images"]["unqueued_rows"], 203)
-        self.assertEqual(pillars["missing_images"]["queue_coverage"], 0.7275)
+        self.assertEqual(pillars["missing_images"]["queued_rows"], 601)
+        self.assertEqual(pillars["missing_images"]["unqueued_rows"], 144)
+        self.assertEqual(pillars["missing_images"]["queue_coverage"], 0.8067)
         self.assertEqual(
             pillars["missing_images"]["next_queue_lane"],
             "replace_generic_source_urls",
@@ -1508,11 +1508,11 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(pillars["missing_images"]["manual_image_research_rows"], 5)
         self.assertEqual(
             pillars["missing_images"]["source_discovery_focus_pack_rows"],
-            452,
+            511,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_remaining_focus_review_rows"],
-            452,
+            511,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_next_focus_pack_rows"],
@@ -1528,21 +1528,21 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_focus_pack_count"],
-            25,
+            30,
         )
         self.assertEqual(
             pillars["missing_images"][
                 "source_discovery_not_started_focus_pack_count"
             ],
-            25,
+            30,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_focus_coverage"],
-            0.6777,
+            0.7661,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_non_focus_rows"],
-            215,
+            156,
         )
         self.assertEqual(pillars["missing_images"]["action_queue_rows"], 73)
         self.assertEqual(pillars["missing_images"]["direct_image_action_rows"], 73)
