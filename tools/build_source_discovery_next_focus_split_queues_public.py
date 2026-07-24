@@ -7,6 +7,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -75,8 +76,46 @@ def _primary_review_url(row: dict[str, Any]) -> tuple[Any, str]:
     return "", ""
 
 
-def _exact_item(row: dict[str, Any]) -> dict[str, Any]:
+def _absolute_candidate_url(url: Any, row: dict[str, Any]) -> str:
+    raw = str(url or "").strip()
+    if not raw:
+        return ""
+    if raw.startswith("http://") or raw.startswith("https://"):
+        return raw
+    domains = (
+        (row.get("source_url_review_guidance") or {}).get("allowed_source_domains")
+        or row.get("allowed_source_domains")
+        or []
+    )
+    domain = str(domains[0] if domains else "").strip()
+    if raw.startswith("/") and not domain:
+        for key in ("fallback_store_search_url", "primary_review_url", "first_domain_limited_web_search_url"):
+            netloc = urlsplit(str(row.get(key) or "")).netloc
+            if netloc and "google." not in netloc:
+                domain = netloc
+                break
+    if raw.startswith("/") and domain:
+        return f"https://{domain}{raw}"
+    return raw
+
+
+def _candidate_detail_links(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, Any]]) -> list[str]:
+    try:
+        catalog_index = int(row.get("catalog_index"))
+    except (TypeError, ValueError):
+        return []
+    audit_item = fetch_audit_by_index.get(catalog_index) or {}
+    links: list[str] = []
+    for link in audit_item.get("sample_product_detail_links") or []:
+        absolute = _absolute_candidate_url(link, row)
+        if absolute and absolute not in links:
+            links.append(absolute)
+    return links
+
+
+def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
     primary_review_url, primary_review_url_kind = _primary_review_url(row)
+    candidate_detail_links = _candidate_detail_links(row, fetch_audit_by_index)
     return {
         "catalog_index": row.get("catalog_index"),
         "focus_pack_id": row.get("focus_pack_id"),
@@ -87,6 +126,9 @@ def _exact_item(row: dict[str, Any]) -> dict[str, Any]:
         "search_term": row.get("search_term"),
         "primary_review_url": primary_review_url,
         "primary_review_url_kind": primary_review_url_kind,
+        "candidate_detail_links": candidate_detail_links,
+        "candidate_detail_link_count": len(candidate_detail_links),
+        "first_candidate_detail_link": candidate_detail_links[0] if candidate_detail_links else "",
         "first_domain_limited_web_search_url": row.get("first_domain_limited_web_search_url"),
         "fallback_store_search_url": row.get("fallback_store_search_url"),
         "manual_confirmed": False,
@@ -132,10 +174,27 @@ def _identity_item(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_reports(payload: dict[str, Any], *, generated_at: str | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
+def build_reports(
+    payload: dict[str, Any],
+    *,
+    fetch_audit: dict[str, Any] | None = None,
+    generated_at: str | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     generated_at = generated_at or _now_utc()
     rows = [row for row in payload.get("review_table") or [] if isinstance(row, dict)]
-    exact_items = [_exact_item(row) for row in rows if row.get("can_confirm_source_url_after_page_match") is True]
+    fetch_audit_by_index: dict[int, dict[str, Any]] = {}
+    for item in (fetch_audit or {}).get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        try:
+            fetch_audit_by_index[int(item.get("catalog_index"))] = item
+        except (TypeError, ValueError):
+            continue
+    exact_items = [
+        _exact_item(row, fetch_audit_by_index)
+        for row in rows
+        if row.get("can_confirm_source_url_after_page_match") is True
+    ]
     identity_items = [_identity_item(row) for row in rows if row.get("requires_variant_disambiguation") is True]
 
     exact_report = {
@@ -146,6 +205,12 @@ def build_reports(payload: dict[str, Any], *, generated_at: str | None = None) -
         "summary": {
             **_base_summary(exact_items),
             "blocked_identity_rows": len(identity_items),
+            "candidate_detail_link_rows": sum(
+                1 for item in exact_items if item.get("candidate_detail_links")
+            ),
+            "candidate_detail_links": sum(
+                int(item.get("candidate_detail_link_count") or 0) for item in exact_items
+            ),
             "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment",
         },
         "automation_policy": {
