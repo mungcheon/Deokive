@@ -157,12 +157,24 @@ def compact_starter_item(item: dict[str, Any], queue_row: dict[str, Any]) -> dic
     }
 
 
+def unique_sample_search_urls(sample_items: list[dict[str, Any]], limit: int = 5) -> list[str]:
+    urls: list[str] = []
+    for item in sample_items:
+        url = str(item.get("search_url") or "").strip()
+        if url and url not in urls:
+            urls.append(url)
+        if len(urls) >= limit:
+            break
+    return urls
+
+
 def starter_queue_rows(groups: dict[tuple[str, str, str, str], dict[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for group in groups.values():
         primary_strategy = ""
         if group["strategy_rows"]:
             primary_strategy = group["strategy_rows"].most_common(1)[0][0]
+        search_urls = unique_sample_search_urls(group["sample_items"])
         rows.append(
             {
                 "source_store": group["source_store"],
@@ -171,6 +183,9 @@ def starter_queue_rows(groups: dict[tuple[str, str, str, str], dict[str, Any]]) 
                 "primary_strategy": primary_strategy,
                 "priority": group["priority"],
                 "rows": group["rows"],
+                "first_search_url": search_urls[0] if search_urls else None,
+                "search_urls": search_urls,
+                "search_url_count": len(search_urls),
                 "sample_items": group["sample_items"],
                 "recommended_workflow": recommended_workflow(
                     group["source_store"],
@@ -418,6 +433,11 @@ def build_starter_queue_report(
         for group in groups
         if isinstance(group.get("sample_items"), list)
     )
+    groups_with_search_urls = sum(
+        1
+        for group in groups
+        if isinstance(group.get("search_urls"), list) and group.get("search_urls")
+    )
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -427,6 +447,7 @@ def build_starter_queue_report(
             "starter_queue_groups": len(groups),
             "starter_queue_rows": rows,
             "sample_item_rows": sample_items,
+            "groups_with_search_urls": groups_with_search_urls,
             "missing_source_url_rows": int(summary.get("missing_source_url_rows") or 0),
             "coverage_matches_missing_source_url_rows": rows
             == int(summary.get("missing_source_url_rows") or 0),

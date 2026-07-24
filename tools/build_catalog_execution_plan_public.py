@@ -440,7 +440,8 @@ def _build_plan(load_report) -> dict[str, Any]:
                             "rows": row.get("rows", 0),
                             "source_store": row.get("source_store"),
                             "category": row.get("category"),
-                            "official_search_url": row.get("official_search_url"),
+                            "first_search_url": row.get("first_search_url"),
+                            "search_urls": row.get("search_urls", []),
                         }
                         for row in source_discovery_starter_queue.get("groups", [])
                         if isinstance(row, dict)

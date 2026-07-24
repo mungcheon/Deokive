@@ -150,14 +150,16 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                         "rows": 8,
                         "source_store": "Animate",
                         "category": "Acrylic stand",
-                        "official_search_url": "https://animate.example/search?q=acrylic",
+                        "first_search_url": "https://animate.example/search?q=acrylic",
+                        "search_urls": ["https://animate.example/search?q=acrylic"],
                     },
                     {
                         "group_key": "Good Smile Company|Figure",
                         "rows": 4,
                         "source_store": "Good Smile Company",
                         "category": "Figure",
-                        "official_search_url": "https://goodsmile.example/search?q=figure",
+                        "first_search_url": "https://goodsmile.example/search?q=figure",
+                        "search_urls": ["https://goodsmile.example/search?q=figure"],
                     },
                 ],
             },
@@ -527,6 +529,10 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertTrue(source_starter["evidence"]["coverage_matches_missing_source_url_rows"])
         self.assertEqual(source_starter["evidence"]["starter_queue_groups"], 3)
         self.assertEqual(source_starter["evidence"]["top_groups"][0]["group_key"], "Animate|Acrylic stand")
+        self.assertEqual(
+            source_starter["evidence"]["top_groups"][0]["first_search_url"],
+            "https://animate.example/search?q=acrylic",
+        )
         self.assertEqual(report["summary"]["source_discovery_starter_queue_rows"], 12)
         self.assertEqual(report["summary"]["source_discovery_starter_queue_groups"], 3)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")

@@ -194,8 +194,23 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertEqual(report["summary"]["source_discovery_starter_queue_rows"], 2)
         self.assertEqual(starter_queue[0]["rows"], 2)
         self.assertEqual(starter_queue[0]["recommended_workflow"], "official_storefront_search_then_exact_detail_match")
+        self.assertEqual(starter_queue[0]["first_search_url"], "https://www.enskyshop.com/search?q=HUNTER")
+        self.assertEqual(
+            starter_queue[0]["search_urls"],
+            [
+                "https://www.enskyshop.com/search?q=HUNTER",
+                "https://www.enskyshop.com/search?q=HUNTER+B",
+            ],
+        )
+        self.assertEqual(starter_queue[0]["search_url_count"], 2)
         self.assertEqual(len(starter_queue[0]["sample_items"]), 2)
         self.assertEqual(starter_queue[0]["sample_items"][0]["search_url"], "https://www.enskyshop.com/search?q=HUNTER")
+
+        starter_queue_report = target.build_starter_queue_report(
+            report,
+            generated_at="2026-01-01T00:00:00Z",
+        )
+        self.assertEqual(starter_queue_report["summary"]["groups_with_search_urls"], 1)
 
     def test_reports_existing_image_reuse_candidates_for_exact_identity(self) -> None:
         catalog = {

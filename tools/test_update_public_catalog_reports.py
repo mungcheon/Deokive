@@ -2026,6 +2026,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_discovery_starter_next_action["starter_queue_groups"],
             source_discovery_starter_summary["starter_queue_groups"],
         )
+        self.assertGreater(len(source_discovery_starter_next_action["top_search_urls"]), 0)
         self.assertEqual(
             source_discovery_starter_scorecard["next_step"],
             "find_exact_official_product_source_url",
@@ -2041,6 +2042,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_discovery_starter_execution_action["evidence"]["starter_queue_groups"],
             source_discovery_starter_summary["starter_queue_groups"],
+        )
+        self.assertGreater(
+            len(source_discovery_starter_execution_action["evidence"]["top_groups"][0]["search_urls"]),
+            0,
         )
         self.assertEqual(
             {batch.get("review_state") for batch in source_discovery_starter_agent_batches},
