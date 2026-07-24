@@ -343,6 +343,10 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                           style: FilledButton.styleFrom(
                             backgroundColor: _catalogAddButtonBackground,
                             foregroundColor: _catalogAddButtonForeground,
+                            textStyle: const TextStyle(
+                              color: _catalogAddButtonForeground,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                         ),
                       ),
@@ -567,6 +571,10 @@ class _CatalogListTile extends StatelessWidget {
                   foregroundColor: _catalogAddButtonForeground,
                   disabledBackgroundColor: _catalogAddButtonDisabledBackground,
                   disabledForegroundColor: _catalogAddButtonDisabledForeground,
+                  textStyle: const TextStyle(
+                    color: _catalogAddButtonForeground,
+                    fontWeight: FontWeight.w900,
+                  ),
                   padding: const EdgeInsets.symmetric(horizontal: 9),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   shape: RoundedRectangleBorder(

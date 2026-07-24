@@ -359,6 +359,10 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                                     _catalogImportButtonDisabledBackground,
                                 disabledForegroundColor:
                                     _catalogImportButtonDisabledForeground,
+                                textStyle: const TextStyle(
+                                  color: _catalogImportButtonForeground,
+                                  fontWeight: FontWeight.w900,
+                                ),
                               ),
                               onPressed: canImport
                                   ? () => Navigator.pop(
