@@ -47,6 +47,7 @@ class SourceDiscoveryNextFocusSplitQueuesPublicTest(unittest.TestCase):
             "items": [
                 {
                     "catalog_index": 1,
+                    "broad_result_page": True,
                     "sample_product_detail_links": [
                         "/products/detail/123",
                         "https://www.animate-onlineshop.jp/products/detail.php?product_id=456",
@@ -66,6 +67,16 @@ class SourceDiscoveryNextFocusSplitQueuesPublicTest(unittest.TestCase):
         self.assertEqual(exact["summary"]["primary_review_url_rows"], 1)
         self.assertEqual(exact["summary"]["candidate_detail_link_rows"], 1)
         self.assertEqual(exact["summary"]["candidate_detail_links"], 2)
+        self.assertEqual(
+            exact["summary"]["candidate_detail_link_source_counts"],
+            [("official_search_result_sample_links", 1)],
+        )
+        self.assertEqual(
+            exact["summary"]["candidate_detail_link_review_status_counts"],
+            [("broad_search_sample_requires_identity_check", 1)],
+        )
+        self.assertEqual(exact["summary"]["candidate_detail_link_warning_rows"], 1)
+        self.assertEqual(exact["summary"]["broad_candidate_detail_link_rows"], 1)
         self.assertEqual(exact["summary"]["first_primary_review_url"], "https://www.google.com/search?q=ready")
         self.assertEqual(exact["summary"]["first_primary_review_url_kind"], "domain_limited_web_search")
         self.assertEqual(exact["items"][0]["next_action"], "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url")
@@ -79,6 +90,18 @@ class SourceDiscoveryNextFocusSplitQueuesPublicTest(unittest.TestCase):
         self.assertEqual(
             exact["items"][0]["first_candidate_detail_link"],
             "https://www.animate-onlineshop.jp/products/detail/123",
+        )
+        self.assertEqual(
+            exact["items"][0]["candidate_detail_link_source"],
+            "official_search_result_sample_links",
+        )
+        self.assertEqual(
+            exact["items"][0]["candidate_detail_link_review_status"],
+            "broad_search_sample_requires_identity_check",
+        )
+        self.assertIn(
+            "may not match this catalog row",
+            exact["items"][0]["candidate_detail_link_warning"],
         )
         self.assertEqual(
             exact["items"][0]["source_url_review_guidance"]["rejected_source_url_patterns"],

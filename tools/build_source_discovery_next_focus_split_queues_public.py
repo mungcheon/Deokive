@@ -113,9 +113,49 @@ def _candidate_detail_links(row: dict[str, Any], fetch_audit_by_index: dict[int,
     return links
 
 
+def _candidate_detail_link_review_fields(
+    row: dict[str, Any],
+    fetch_audit_by_index: dict[int, dict[str, Any]],
+    candidate_detail_links: list[str],
+) -> dict[str, str]:
+    if not candidate_detail_links:
+        return {
+            "candidate_detail_link_source": "",
+            "candidate_detail_link_review_status": "",
+            "candidate_detail_link_warning": "",
+        }
+    try:
+        catalog_index = int(row.get("catalog_index"))
+    except (TypeError, ValueError):
+        audit_item: dict[str, Any] = {}
+    else:
+        audit_item = fetch_audit_by_index.get(catalog_index) or {}
+    if audit_item.get("broad_result_page") is True:
+        return {
+            "candidate_detail_link_source": "official_search_result_sample_links",
+            "candidate_detail_link_review_status": "broad_search_sample_requires_identity_check",
+            "candidate_detail_link_warning": (
+                "These links are sampled from a broad official search result and may not match this catalog row; "
+                "use only as review starting points."
+            ),
+        }
+    return {
+        "candidate_detail_link_source": "fetch_audit_sample_product_detail_links",
+        "candidate_detail_link_review_status": "candidate_detail_links_require_manual_identity_check",
+        "candidate_detail_link_warning": (
+            "These candidate links require manual identity confirmation before copying to source_url or image_url."
+        ),
+    }
+
+
 def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
     primary_review_url, primary_review_url_kind = _primary_review_url(row)
     candidate_detail_links = _candidate_detail_links(row, fetch_audit_by_index)
+    candidate_review_fields = _candidate_detail_link_review_fields(
+        row,
+        fetch_audit_by_index,
+        candidate_detail_links,
+    )
     return {
         "catalog_index": row.get("catalog_index"),
         "focus_pack_id": row.get("focus_pack_id"),
@@ -129,6 +169,7 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
         "candidate_detail_links": candidate_detail_links,
         "candidate_detail_link_count": len(candidate_detail_links),
         "first_candidate_detail_link": candidate_detail_links[0] if candidate_detail_links else "",
+        **candidate_review_fields,
         "first_domain_limited_web_search_url": row.get("first_domain_limited_web_search_url"),
         "fallback_store_search_url": row.get("fallback_store_search_url"),
         "manual_confirmed": False,
@@ -210,6 +251,25 @@ def build_reports(
             ),
             "candidate_detail_links": sum(
                 int(item.get("candidate_detail_link_count") or 0) for item in exact_items
+            ),
+            "candidate_detail_link_source_counts": Counter(
+                str(item.get("candidate_detail_link_source") or "")
+                for item in exact_items
+                if item.get("candidate_detail_links")
+            ).most_common(),
+            "candidate_detail_link_review_status_counts": Counter(
+                str(item.get("candidate_detail_link_review_status") or "")
+                for item in exact_items
+                if item.get("candidate_detail_links")
+            ).most_common(),
+            "candidate_detail_link_warning_rows": sum(
+                1 for item in exact_items if str(item.get("candidate_detail_link_warning") or "")
+            ),
+            "broad_candidate_detail_link_rows": sum(
+                1
+                for item in exact_items
+                if item.get("candidate_detail_link_review_status")
+                == "broad_search_sample_requires_identity_check"
             ),
             "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment",
         },
