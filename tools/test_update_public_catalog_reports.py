@@ -1452,6 +1452,9 @@ class PublicCatalogReportTests(unittest.TestCase):
         batches = agent_queue.get("batches", [])
         top_batches = agent_queue.get("top_next_batches", [])
         confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
+        requested_focus_action = reports.load_json(reports.REQUESTED_FOCUS_ACTION_QUEUE)
+        requested_focus_action_summary = requested_focus_action.get("summary", {})
+        requested_focus_action_batches = requested_focus_action.get("batches", [])
         focused_source_fallback = next(
             row
             for row in confirmed_readiness["workflows"]
@@ -1481,6 +1484,35 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertTrue(
             any(item.get("primary_review_url") for item in fallback_agent_batch.get("sample_items", []))
+        )
+        first_requested_focus_action_batch = next(
+            batch
+            for batch in batches
+            if batch.get("workstream") == "requested_focus_action_queue"
+        )
+        self.assertEqual(
+            requested_focus_action_summary.get("review_url_rows"),
+            requested_focus_action_summary.get("actionable_template_rows"),
+        )
+        self.assertGreater(requested_focus_action_summary.get("review_url_rows", 0), 0)
+        self.assertTrue(
+            any(
+                item.get("primary_review_url")
+                for batch in requested_focus_action_batches
+                for item in batch.get("items", [])
+                if isinstance(item, dict)
+            )
+        )
+        self.assertTrue(
+            any(
+                item.get("primary_review_url")
+                for item in first_requested_focus_action_batch.get("sample_items", [])
+                if isinstance(item, dict)
+            )
+        )
+        self.assertIn(
+            first_requested_focus_action_batch.get("review_summary", {}).get("first_primary_review_url_kind"),
+            {"domain_limited_web_search", "web_search", "existing_source_url"},
         )
         self.assertGreater(len(batches), 0)
         self.assertLessEqual(len(batches), reports.MAX_AGENT_WORK_QUEUE_BATCHES)
@@ -1521,6 +1553,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         danganronpa_dry_summary = danganronpa_dry_run.get("summary", {})
         requested_focus_action = reports.load_json(reports.REQUESTED_FOCUS_ACTION_QUEUE)
         requested_focus_action_summary = requested_focus_action.get("summary", {})
+        requested_focus_action_batches = requested_focus_action.get("batches", [])
         requested_focus_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])

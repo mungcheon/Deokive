@@ -25,6 +25,7 @@ class BuildRequestedFocusActionQueuePublicTest(unittest.TestCase):
                             "catalog_index": 2,
                             "missing_field": "source_url",
                             "name_ko": "Acrylic Stand",
+                            "name_ja": "アクリルスタンド",
                             "category": "Acrylic",
                             "source_store": "Movic",
                             "catalog_field_import_template": {
@@ -59,6 +60,7 @@ class BuildRequestedFocusActionQueuePublicTest(unittest.TestCase):
                             "name_ko": "Nui",
                             "category": "Plush",
                             "source_store": "Good Smile",
+                            "source_url": "https://example.com/nui",
                             "catalog_field_import_template": {
                                 "field": "image_url",
                                 "manual_confirmed": False,
@@ -106,6 +108,15 @@ class BuildRequestedFocusActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(first_template["blocked_until"], "exact_product_source_url_confirmed")
         self.assertEqual(first_template["blocked_reason"], "missing_exact_source_url_for_requested_focus")
         self.assertIn("manual_note_for_source_choice", first_template["required_evidence"])
+        self.assertEqual(report["summary"]["review_url_rows"], 2)
+        self.assertEqual(
+            dict(report["summary"]["primary_review_url_kind_counts"]),
+            {"domain_limited_web_search": 1, "existing_source_url": 1},
+        )
+        self.assertEqual(report["batches"][0]["first_primary_review_url_kind"], "domain_limited_web_search")
+        self.assertIn("site%3Awww.movic.jp", report["batches"][0]["first_primary_review_url"])
+        self.assertEqual(report["batches"][1]["first_primary_review_url_kind"], "existing_source_url")
+        self.assertEqual(report["batches"][1]["first_primary_review_url"], "https://example.com/nui")
 
     def test_max_batches_caps_published_batches_not_total_summary(self) -> None:
         review_batches = {

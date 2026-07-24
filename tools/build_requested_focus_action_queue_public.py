@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import urllib.parse
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -126,11 +127,48 @@ def _with_blocker(template: dict[str, Any], field: str) -> dict[str, Any]:
     return enriched
 
 
+STORE_SEARCH_DOMAINS = {
+    "AmiAmi": "www.amiami.jp",
+    "FuRyu": "furyuprize.com",
+    "Movic": "www.movic.jp",
+    "Taito": "www.taito.co.jp",
+    "\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8": "www.goodsmile.info",
+    "\uc560\ub2c8\uba54\uc774\ud2b8": "www.animate-onlineshop.jp",
+    "\uc5d4\uc2a4\uce74\uc774": "www.enskyshop.com",
+    "\ucf54\ud1a0\ubd80\ud0a4\uc57c": "shop.kotobukiya.co.jp",
+}
+
+
+def _review_query(item: dict[str, Any], batch: dict[str, Any]) -> str:
+    title = str(item.get("name_ja") or item.get("name_ko") or "").strip()
+    topic = str(batch.get("topic_label") or batch.get("topic_id") or "").strip()
+    category = str(item.get("category") or "").strip()
+    return " ".join(part for part in (title, topic, category) if part)
+
+
+def _primary_review_url(batch: dict[str, Any], item: dict[str, Any], field: str) -> tuple[str, str]:
+    source_url = str(item.get("source_url") or "").strip()
+    if field in {"image_url", "release_date", "official_price_jpy", "name_ja"} and source_url:
+        return source_url, "existing_source_url"
+
+    source_store = str(item.get("source_store") or batch.get("source_store") or "").strip()
+    domain = STORE_SEARCH_DOMAINS.get(source_store)
+    query = _review_query(item, batch)
+    if domain and query:
+        encoded = urllib.parse.quote(f'site:{domain} "{query}"')
+        return f"https://www.google.com/search?q={encoded}", "domain_limited_web_search"
+    if query:
+        encoded = urllib.parse.quote(f"{query} {source_store}".strip())
+        return f"https://www.google.com/search?q={encoded}", "web_search"
+    return "", "manual_lookup_required"
+
+
 def _compact_action_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     template = item.get("catalog_field_import_template")
     template = template if isinstance(template, dict) else {}
     field = str(template.get("field") or item.get("missing_field") or batch.get("missing_field") or "")
     blocker = _blocker_for_field(field)
+    primary_url, primary_kind = _primary_review_url(batch, item, field)
     return {
         "catalog_index": item.get("catalog_index"),
         "topic_id": batch.get("topic_id"),
@@ -149,13 +187,21 @@ def _compact_action_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[st
         "blocked_until": blocker.get("blocked_until"),
         "blocked_reason": blocker.get("blocked_reason"),
         "required_evidence": list(blocker.get("required_evidence") or []),
+        "primary_review_url": primary_url,
+        "primary_review_url_kind": primary_kind,
         "next_machine_step": batch.get("next_machine_step"),
         "recommended_action": batch.get("recommended_action"),
         "auto_apply_enabled": False,
     }
 
 
-def build_report(review_batches: dict[str, Any], *, max_batches: int = 120, batch_size: int = 25) -> dict[str, Any]:
+def build_report(
+    review_batches: dict[str, Any],
+    *,
+    max_batches: int = 120,
+    batch_size: int = 25,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
     action_items: list[dict[str, Any]] = []
     barcode_template_rows = 0
     skipped_non_template_rows = 0
@@ -225,6 +271,18 @@ def build_report(review_batches: dict[str, Any], *, max_batches: int = 120, batc
                     "blocked_until": _blocker_for_field(field).get("blocked_until"),
                     "blocked_reason": _blocker_for_field(field).get("blocked_reason"),
                     "required_evidence": list(_blocker_for_field(field).get("required_evidence") or []),
+                    "first_primary_review_url": next(
+                        (str(item.get("primary_review_url")) for item in chunk if item.get("primary_review_url")),
+                        "",
+                    ),
+                    "first_primary_review_url_kind": next(
+                        (
+                            str(item.get("primary_review_url_kind"))
+                            for item in chunk
+                            if item.get("primary_review_url")
+                        ),
+                        "manual_lookup_required",
+                    ),
                     "category_counts": _count_pairs(chunk, "category"),
                     "blocked_reason_counts": _count_pairs(chunk, "blocked_reason"),
                     "blocked_until_counts": _count_pairs(chunk, "blocked_until"),
@@ -236,6 +294,8 @@ def build_report(review_batches: dict[str, Any], *, max_batches: int = 120, batc
             break
 
     queued_rows = sum(int(batch.get("row_count") or 0) for batch in action_batches)
+    review_url_rows = sum(1 for item in action_items if item.get("primary_review_url"))
+    primary_review_url_kind_counts = _count_pairs(action_items, "primary_review_url_kind")
     unqueued_actionable_rows = max(len(action_items) - queued_rows, 0)
     queue_coverage = round(queued_rows / len(action_items), 4) if action_items else 1.0
     non_barcode_template_rows = len(action_items)
@@ -245,7 +305,7 @@ def build_report(review_batches: dict[str, Any], *, max_batches: int = 120, batc
     )
     return {
         "schema_version": 1,
-        "generated_at": _now_utc(),
+        "generated_at": generated_at or _now_utc(),
         "scope": "requested_focus_action_queue",
         "summary": {
             "actionable_template_rows": len(action_items),
@@ -264,6 +324,8 @@ def build_report(review_batches: dict[str, Any], *, max_batches: int = 120, batc
             "topic_counts": _count_pairs(action_items, "topic_id"),
             "blocked_reason_counts": _count_pairs(action_items, "blocked_reason"),
             "blocked_until_counts": _count_pairs(action_items, "blocked_until"),
+            "review_url_rows": review_url_rows,
+            "primary_review_url_kind_counts": primary_review_url_kind_counts,
             "barcode_template_rows_excluded_blocked_reason": BARCODE_EXCLUDED_BLOCKER["blocked_reason"],
             "barcode_template_rows_excluded_blocked_until": BARCODE_EXCLUDED_BLOCKER["blocked_until"],
             "barcode_template_rows_excluded_required_evidence": BARCODE_EXCLUDED_BLOCKER["required_evidence"],

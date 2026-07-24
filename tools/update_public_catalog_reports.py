@@ -30,6 +30,7 @@ import build_manual_source_url_search_queue_public
 import build_missing_image_report_coverage_public
 import build_missing_image_priority_public
 import build_provider_missing_source_url_queue_public
+import build_requested_focus_action_queue_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_identity_candidate_review_public
@@ -2176,6 +2177,7 @@ def build_operations_public(
     ichiban_reissue_decision_template_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
+    requested_focus_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -2430,12 +2432,11 @@ def build_operations_public(
     requested_focus_review_batches = (
         load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}) if REQUESTED_FOCUS_REVIEW_BATCHES.exists() else {}
     )
-    requested_focus_action_queue = (
-        load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
-    )
     requested_focus_review_batches_summary = requested_focus_review_batches.get("summary", {})
     requested_focus_action_queue = (
-        load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
+        requested_focus_action_queue_override
+        if requested_focus_action_queue_override is not None
+        else load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
     )
     requested_focus_action_queue_summary = requested_focus_action_queue.get("summary", {})
     danganronpa_media_summary = danganronpa_missing_media["summary"]
@@ -2591,6 +2592,10 @@ def build_operations_public(
             ),
             "non_barcode_template_share": requested_focus_action_queue_summary.get(
                 "non_barcode_template_share", 0
+            ),
+            "review_url_rows": requested_focus_action_queue_summary.get("review_url_rows", 0),
+            "primary_review_url_kind_counts": requested_focus_action_queue_summary.get(
+                "primary_review_url_kind_counts", []
             ),
             "action_batch_count": requested_focus_action_queue_summary.get("action_batch_count", 0),
             "recommended_next_action": "Work queued non-barcode requested-focus rows, then expand remaining actionable rows before barcode research.",
@@ -3315,6 +3320,7 @@ def build_operations_public(
             "barcode_template_rows_excluded": requested_focus_action_queue_summary.get(
                 "barcode_template_rows_excluded", 0
             ),
+            "review_url_rows": requested_focus_action_queue_summary.get("review_url_rows", 0),
             "primary_report": f"data/{REQUESTED_FOCUS_ACTION_QUEUE.name}",
             "next_step": "work_non_barcode_requested_focus_batches_first",
             "auto_apply_enabled": requested_focus_action_queue_summary.get("auto_apply_enabled", False),
@@ -4185,6 +4191,7 @@ def build_agent_work_queue_public(
     source_next_focus_pack_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
+    requested_focus_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -4204,7 +4211,9 @@ def build_agent_work_queue_public(
         load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}) if REQUESTED_FOCUS_REVIEW_BATCHES.exists() else {}
     )
     requested_focus_action_queue = (
-        load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
+        requested_focus_action_queue_override
+        if requested_focus_action_queue_override is not None
+        else load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
     )
     image_action_queue = (
         load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
@@ -4531,6 +4540,13 @@ def build_agent_work_queue_public(
                     "Prepare reviewed catalog patches only; auto-apply remains disabled.",
                 ],
                 samples=[item for item in action_batch.get("items", []) if isinstance(item, dict)],
+                review_summary={
+                    "action_batch_rows": int(action_batch.get("row_count") or 0),
+                    "missing_field": action_batch.get("missing_field"),
+                    "blocked_reason": action_batch.get("blocked_reason"),
+                    "first_primary_review_url": action_batch.get("first_primary_review_url"),
+                    "first_primary_review_url_kind": action_batch.get("first_primary_review_url_kind"),
+                },
             )
 
     image_action_batches = [batch for batch in image_action_queue.get("batches", []) if isinstance(batch, dict)]
@@ -7746,6 +7762,11 @@ def update_reports(write: bool) -> dict[str, Any]:
     generic_source_patch_candidates = build_generic_source_patch_candidates_public(generated_at)
     requested_report = load_json(REQUESTED, {}) if REQUESTED.exists() else {}
     requested_focus = build_requested_focus_enrichment_public(items, requested_report, generated_at)
+    requested_focus_review_batches = load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {})
+    requested_focus_action_queue = build_requested_focus_action_queue_public.build_report(
+        requested_focus_review_batches,
+        generated_at=generated_at,
+    )
     danganronpa_missing_media = build_danganronpa_missing_media_public(items, generated_at)
     danganronpa_patch_template_dry_run = build_danganronpa_patch_template_dry_run_public(
         danganronpa_missing_media,
@@ -7986,6 +8007,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_reissue_decision_template,
         source_discovery_starter_queue,
         image_attachment_action_queue,
+        requested_focus_action_queue,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -8007,6 +8029,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_next_focus_pack,
         source_discovery_next_focus_fallback_queue,
         source_discovery_starter_queue,
+        requested_focus_action_queue,
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 
@@ -8028,8 +8051,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             "ensky_cache_candidate_action_queue_public.json": load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {}),
             "catalog_metadata_review_batches_public.json": metadata_review_batches,
             "catalog_metadata_action_queue_public.json": metadata_action_queue,
-            "requested_focus_review_batches_public.json": load_json(REQUESTED_FOCUS_REVIEW_BATCHES, {}),
-            "requested_focus_action_queue_public.json": load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}),
+            "requested_focus_review_batches_public.json": requested_focus_review_batches,
+            "requested_focus_action_queue_public.json": requested_focus_action_queue,
             "catalog_deduplication_review_batches_public.json": load_json(DEDUPLICATION_REVIEW_BATCHES, {}),
             "catalog_deduplication_action_queue_public.json": load_json(DEDUPLICATION_ACTION_QUEUE, {}),
             "ichiban_kuji_reissue_decision_template_public.json": ichiban_kuji_reissue_decision_template,
@@ -8930,6 +8953,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(MISSING_IMAGE_ACTIONABILITY, missing_image_actionability)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
+        write_json(REQUESTED_FOCUS_ACTION_QUEUE, requested_focus_action_queue)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
         write_json(DANGANRONPA_PATCH_TEMPLATE_DRY_RUN, danganronpa_patch_template_dry_run)
         write_json(DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN, deduplication_template_import_dry_run)
