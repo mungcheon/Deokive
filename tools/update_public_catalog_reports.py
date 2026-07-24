@@ -10914,17 +10914,71 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "queued_rows": target.get(
                     "animation_category_action_queue",
                     {},
-                ).get("queued_catalog_rows", 0),
-                "unqueued_rows": target.get(
-                    "animation_category_coverage_audit",
-                    {},
-                ).get("normalization_review_blocker_rows", 0),
+                ).get(
+                    "normalization_review_rows",
+                    target.get("animation_category_action_queue", {}).get(
+                        "queued_catalog_rows",
+                        0,
+                    ),
+                ),
+                "unqueued_rows": max(
+                    0,
+                    int(
+                        target.get(
+                            "animation_category_coverage_audit",
+                            {},
+                        ).get("normalization_review_blocker_rows", 0)
+                        or 0
+                    )
+                    - int(
+                        target.get("animation_category_action_queue", {}).get(
+                            "normalization_review_rows",
+                            target.get("animation_category_action_queue", {}).get(
+                                "queued_catalog_rows",
+                                0,
+                            ),
+                        )
+                        or 0
+                    ),
+                ),
                 "queue_coverage": 1.0
                 if target.get("animation_category_action_queue", {}).get(
-                    "queued_catalog_rows",
+                    "normalization_review_rows",
                     0,
                 )
                 else 0,
+                "next_queue_lane": (
+                    target.get("animation_category_action_queue", {})
+                    .get("work_order_lanes", [None])[0]
+                    if target.get("animation_category_action_queue", {}).get(
+                        "work_order_lanes"
+                    )
+                    else None
+                ),
+                "next_queue_rows": target.get(
+                    "animation_category_action_queue",
+                    {},
+                ).get("next_normalization_review_batch_catalog_rows", 0),
+                "next_queue_category_rows": target.get(
+                    "animation_category_action_queue",
+                    {},
+                ).get("next_normalization_review_batch_rows", 0),
+                "target_categories": target.get(
+                    "animation_category_action_queue",
+                    {},
+                ).get("next_normalization_review_batch_target_categories", []),
+                "preserve_sub_series_rows": target.get(
+                    "animation_category_action_queue",
+                    {},
+                ).get("next_normalization_review_batch_preserve_sub_series_rows", 0),
+                "visual_palette_ordered": target.get(
+                    "animation_category_action_queue",
+                    {},
+                ).get("target_visual_palette_ordered", False),
+                "app_animation_visuals_covered": target.get(
+                    "animation_category_action_queue",
+                    {},
+                ).get("app_animation_visuals_covered", False),
                 "next_safe_phase": target.get(
                     "animation_category_coverage_audit",
                     {},

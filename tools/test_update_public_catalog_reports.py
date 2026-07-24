@@ -1422,8 +1422,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(pillars["source_url_updates"]["next_queue_rows"], 3)
         self.assertEqual(pillars["animation_categories"]["manual_review_rows"], 36)
-        self.assertIn("queued_rows", pillars["animation_categories"])
-        self.assertIn("unqueued_rows", pillars["animation_categories"])
+        self.assertEqual(pillars["animation_categories"]["queued_rows"], 36)
+        self.assertEqual(pillars["animation_categories"]["unqueued_rows"], 0)
+        self.assertEqual(pillars["animation_categories"]["queue_coverage"], 1.0)
+        self.assertEqual(
+            pillars["animation_categories"]["next_queue_lane"],
+            "canonical_category_normalization_review",
+        )
+        self.assertEqual(pillars["animation_categories"]["next_queue_rows"], 36)
+        self.assertEqual(
+            pillars["animation_categories"]["next_queue_category_rows"],
+            4,
+        )
+        self.assertEqual(
+            pillars["animation_categories"]["target_categories"],
+            [["문구", 3], ["가방", 1]],
+        )
+        self.assertTrue(pillars["animation_categories"]["visual_palette_ordered"])
+        self.assertTrue(
+            pillars["animation_categories"]["app_animation_visuals_covered"]
+        )
         self.assertEqual(pillars["ichiban_kuji_history"]["manual_review_rows"], 64)
         self.assertEqual(pillars["ichiban_kuji_history"]["queued_rows"], 44)
         self.assertEqual(pillars["ichiban_kuji_history"]["unqueued_rows"], 20)
