@@ -193,6 +193,21 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
                     }
                 ]
             },
+            fallback_queue={
+                "items": [
+                    {
+                        "catalog_index": 9,
+                        "domain_limited_web_search_urls": [
+                            "https://google.example/search-exact",
+                            "https://google.example/search-title",
+                        ],
+                        "fallback_store_search_url": "https://animate.example/sphone/search",
+                        "fallback_search_queries": ["exact title", "ko title"],
+                        "fallback_search_terms": ["exact title"],
+                        "allowed_source_domains": ["www.animate-onlineshop.jp"],
+                    }
+                ]
+            },
             generated_at="2026-07-23T00:00:00Z",
         )
 
@@ -204,6 +219,18 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(report["summary"]["review_decision_counts"], [["fallback_search_required", 1]])
         self.assertEqual(report["items"][0]["review_decision"]["decision"], "fallback_search_required")
         self.assertEqual(report["fallback_bridge_items"][0]["catalog_index"], 9)
+        self.assertEqual(
+            report["fallback_bridge_items"][0]["domain_limited_web_search_url_count"],
+            2,
+        )
+        self.assertEqual(
+            report["fallback_bridge_items"][0]["first_domain_limited_web_search_url"],
+            "https://google.example/search-exact",
+        )
+        self.assertEqual(
+            report["fallback_bridge_items"][0]["fallback_store_search_url"],
+            "https://animate.example/sphone/search",
+        )
         self.assertEqual(
             report["fallback_bridge_items"][0]["fallback_queue_report"],
             "data/source_discovery_next_focus_fallback_queue_public.json",
@@ -218,6 +245,13 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         )
         self.assertEqual(report["next_action_lanes"][0]["lane"], "fallback_source_search")
         self.assertEqual(report["next_action_lanes"][0]["row_count"], 1)
+        self.assertEqual(report["next_action_lanes"][0]["fallback_search_url_count"], 2)
+        self.assertEqual(
+            report["next_action_lanes"][0]["sample_items"][0][
+                "first_domain_limited_web_search_url"
+            ],
+            "https://google.example/search-exact",
+        )
         self.assertEqual(report["completion_readiness"]["status"], "fallback_search_required")
         self.assertEqual(
             report["completion_readiness"]["next_safe_phase"],

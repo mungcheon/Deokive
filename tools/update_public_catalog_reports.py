@@ -7830,17 +7830,18 @@ def update_reports(write: bool) -> dict[str, Any]:
         if SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.exists()
         else {}
     )
-    source_discovery_next_focus_detail_candidates = (
-        build_source_discovery_next_focus_detail_candidates_public.build_report(
-            source_discovery_next_focus_pack,
-            fetch_audit=source_discovery_next_focus_fetch_audit,
-            generated_at=generated_at,
-        )
-    )
     source_discovery_next_focus_fallback_queue = (
         build_source_discovery_next_focus_fallback_queue_public.build_report(
             source_discovery_next_focus_pack,
             source_discovery_next_focus_fetch_audit,
+            generated_at=generated_at,
+        )
+    )
+    source_discovery_next_focus_detail_candidates = (
+        build_source_discovery_next_focus_detail_candidates_public.build_report(
+            source_discovery_next_focus_pack,
+            fetch_audit=source_discovery_next_focus_fetch_audit,
+            fallback_queue=source_discovery_next_focus_fallback_queue,
             generated_at=generated_at,
         )
     )

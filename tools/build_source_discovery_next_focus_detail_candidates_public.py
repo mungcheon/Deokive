@@ -34,6 +34,7 @@ DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "source_discovery_next_focus_pack_public.json"
 DEFAULT_OUTPUT = DATA / "source_discovery_next_focus_detail_candidates_public.json"
 DEFAULT_FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
+DEFAULT_FALLBACK_QUEUE = DATA / "source_discovery_next_focus_fallback_queue_public.json"
 
 
 SearchFn = Callable[[dict[str, Any]], list[ProductImage]]
@@ -68,6 +69,39 @@ def _fetch_audit_by_index(fetch_audit: dict[str, Any] | None) -> dict[int, dict[
         if catalog_index is not None:
             rows[catalog_index] = item
     return rows
+
+
+def _items_by_catalog_index(payload: dict[str, Any] | None) -> dict[int, dict[str, Any]]:
+    if not isinstance(payload, dict):
+        return {}
+    rows: dict[int, dict[str, Any]] = {}
+    for item in payload.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        catalog_index = _catalog_index(item.get("catalog_index"))
+        if catalog_index is not None:
+            rows[catalog_index] = item
+    return rows
+
+
+def _fallback_search_summary(item: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(item, dict):
+        return {}
+    domain_urls = item.get("domain_limited_web_search_urls") or []
+    if not isinstance(domain_urls, list):
+        domain_urls = []
+    queries = item.get("fallback_search_queries") or []
+    if not isinstance(queries, list):
+        queries = []
+    return {
+        "fallback_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+        "domain_limited_web_search_url_count": len(domain_urls),
+        "first_domain_limited_web_search_url": domain_urls[0] if domain_urls else None,
+        "fallback_store_search_url": item.get("fallback_store_search_url"),
+        "fallback_search_query_count": len(queries),
+        "fallback_search_terms": item.get("fallback_search_terms") or [],
+        "allowed_source_domains": item.get("allowed_source_domains") or [],
+    }
 
 
 def _query_for_item(item: dict[str, Any]) -> str:
@@ -216,6 +250,10 @@ def _build_next_action_lanes(work_order_items: list[dict[str, Any]]) -> list[dic
                 "priority": _lane_priority(lane),
                 "row_count": len(rows),
                 "candidate_rows": sum(int(row.get("candidate_count") or 0) for row in rows),
+                "fallback_search_url_count": sum(
+                    int(row.get("domain_limited_web_search_url_count") or 0)
+                    for row in rows
+                ),
                 "next_catalog_index": rows[0].get("catalog_index") if rows else None,
                 "recommended_next_step": rows[0].get("recommended_next_step") if rows else None,
                 "sample_items": [
@@ -228,6 +266,13 @@ def _build_next_action_lanes(work_order_items: list[dict[str, Any]]) -> list[dic
                         "top_candidate_blockers": row.get("top_candidate_blockers") or [],
                         "decision": (row.get("review_decision") or {}).get("decision"),
                         "recommended_next_step": row.get("recommended_next_step"),
+                        "domain_limited_web_search_url_count": row.get(
+                            "domain_limited_web_search_url_count", 0
+                        ),
+                        "first_domain_limited_web_search_url": row.get(
+                            "first_domain_limited_web_search_url"
+                        ),
+                        "fallback_store_search_url": row.get("fallback_store_search_url"),
                     }
                     for row in rows[:8]
                 ],
@@ -332,11 +377,13 @@ def build_report(
     *,
     search_fn: SearchFn | None = None,
     fetch_audit: dict[str, Any] | None = None,
+    fallback_queue: dict[str, Any] | None = None,
     generated_at: str | None = None,
     candidate_limit: int = 8,
 ) -> dict[str, Any]:
     search = search_fn or _default_searcher()
     audit_by_index = _fetch_audit_by_index(fetch_audit)
+    fallback_by_index = _items_by_catalog_index(fallback_queue)
     items: list[dict[str, Any]] = []
     candidate_confirmation_template: list[dict[str, Any]] = []
     exact_candidate_confirmation_shortlist: list[dict[str, Any]] = []
@@ -400,6 +447,9 @@ def build_report(
         review_bucket_counts[review_bucket] += 1
         decision_counts[str(review_decision.get("decision") or "")] += 1
         decision_reason_counts.update(review_decision.get("reasons") or [])
+        fallback_search = _fallback_search_summary(
+            fallback_by_index.get(_catalog_index(item.get("catalog_index")) or -1)
+        )
         if review_bucket == "fallback_search_required":
             fallback_bridge_items.append(
                 {
@@ -410,6 +460,7 @@ def build_report(
                     "official_search_audit_status": audit_status,
                     "fallback_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
                     "recommended_next_step": "review_domain_limited_or_legacy_store_fallback_search",
+                    **fallback_search,
                 }
             )
         review_work_order_items.append(
@@ -429,6 +480,7 @@ def build_report(
                 "review_decision": review_decision,
                 "official_search_audit_status": audit_status,
                 "recommended_next_step": review_decision.get("recommended_next_step"),
+                **fallback_search,
             }
         )
         if candidate_payload:
@@ -660,12 +712,19 @@ def main() -> int:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--fetch-audit", type=Path, default=DEFAULT_FETCH_AUDIT)
+    parser.add_argument("--fallback-queue", type=Path, default=DEFAULT_FALLBACK_QUEUE)
     parser.add_argument("--candidate-limit", type=int, default=8)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
     fetch_audit = load_json(args.fetch_audit) if args.fetch_audit.exists() else None
-    report = build_report(load_json(args.input), fetch_audit=fetch_audit, candidate_limit=args.candidate_limit)
+    fallback_queue = load_json(args.fallback_queue) if args.fallback_queue.exists() else None
+    report = build_report(
+        load_json(args.input),
+        fetch_audit=fetch_audit,
+        fallback_queue=fallback_queue,
+        candidate_limit=args.candidate_limit,
+    )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
