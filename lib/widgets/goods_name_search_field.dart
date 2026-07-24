@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/goods_catalog_entry.dart';
 import 'catalog_entry_image.dart';
 
+const _catalogPickerActionBackground = Color(0xFF252938);
+const _catalogPickerActionForeground = Colors.white;
+
 /// Goods-name input that opens a catalog picker dialog when tapped.
 /// Selecting a row fills the form from the read-only public DB.
 class GoodsNameSearchField extends StatefulWidget {
@@ -386,18 +389,23 @@ class _CatalogRow extends StatelessWidget {
                   icon: Icon(
                     Icons.add_rounded,
                     size: 16,
-                    color: theme.colorScheme.onPrimary,
+                    color: _catalogPickerActionForeground,
                   ),
-                  label: Text(actionLabel),
+                  label: Text(
+                    actionLabel,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: const TextStyle(
+                      color: _catalogPickerActionForeground,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
                   style: FilledButton.styleFrom(
-                    backgroundColor: theme.colorScheme.primary,
-                    foregroundColor: theme.colorScheme.onPrimary,
+                    backgroundColor: _catalogPickerActionBackground,
+                    foregroundColor: _catalogPickerActionForeground,
                     visualDensity: VisualDensity.compact,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    textStyle: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w800,
-                    ),
                   ),
                 ),
               ],
