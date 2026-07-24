@@ -420,6 +420,11 @@ class _CatalogImportActionButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: onPressed == null
+              ? foregroundColor.withValues(alpha: 0.12)
+              : Colors.white.withValues(alpha: 0.14),
+        ),
       ),
       child: IconTheme(
         data: IconThemeData(color: foregroundColor, size: 19),
@@ -439,15 +444,9 @@ class _CatalogImportActionButton extends StatelessWidget {
                 const SizedBox(width: 7),
                 Expanded(
                   child: Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(minWidth: 116),
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: _CatalogImportActionLabel(
-                          label: label,
-                          color: foregroundColor,
-                        ),
-                      ),
+                    child: _CatalogImportActionLabel(
+                      label: label,
+                      color: foregroundColor,
                     ),
                   ),
                 ),
@@ -491,13 +490,6 @@ class _CatalogImportActionLabel extends StatelessWidget {
         fontSize: 15,
         fontWeight: FontWeight.w900,
         height: 1,
-        shadows: const [
-          Shadow(
-            color: Color(0x66000000),
-            blurRadius: 2,
-            offset: Offset(0, 1),
-          ),
-        ],
       ),
       maxLines: 1,
       softWrap: false,

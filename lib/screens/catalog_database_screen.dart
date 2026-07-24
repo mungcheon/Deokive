@@ -588,15 +588,20 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 128,
+        minWidth: expanded ? 0 : 108,
         minHeight: 40,
         maxHeight: 40,
       ),
-      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 15),
+      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 13),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: disabled
+              ? _catalogAddButtonDisabledForeground.withValues(alpha: 0.12)
+              : Colors.white.withValues(alpha: 0.14),
+        ),
         boxShadow: disabled
             ? null
             : [
@@ -626,22 +631,16 @@ class _CatalogAddButton extends StatelessWidget {
                 if (expanded)
                   Flexible(
                     child: Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(minWidth: 72),
-                        child: _CatalogAddButtonLabel(
-                          label: label,
-                          color: foreground,
-                        ),
+                      child: _CatalogAddButtonLabel(
+                        label: label,
+                        color: foreground,
                       ),
                     ),
                   )
                 else
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(minWidth: 46),
-                    child: _CatalogAddButtonLabel(
-                      label: label,
-                      color: foreground,
-                    ),
+                  _CatalogAddButtonLabel(
+                    label: label,
+                    color: foreground,
                   ),
               ],
             ),
@@ -677,29 +676,19 @@ class _CatalogAddButtonLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Text(
-        label,
-        style: TextStyle(
-          inherit: false,
-          color: color,
-          fontSize: 13,
-          fontWeight: FontWeight.w900,
-          height: 1,
-          shadows: const [
-            Shadow(
-              color: Color(0x66000000),
-              blurRadius: 2,
-              offset: Offset(0, 1),
-            ),
-          ],
-        ),
-        maxLines: 1,
-        softWrap: false,
-        overflow: TextOverflow.visible,
-        textAlign: TextAlign.center,
+    return Text(
+      label,
+      style: TextStyle(
+        inherit: false,
+        color: color,
+        fontSize: 13,
+        fontWeight: FontWeight.w900,
+        height: 1,
       ),
+      maxLines: 1,
+      softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
     );
   }
 }
