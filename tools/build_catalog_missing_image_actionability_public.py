@@ -403,6 +403,10 @@ def enrich_next_focus_pack(
                 detail_summary.get("manual_candidate_review_rows") or 0
             ),
             "no_candidate_items": int(detail_summary.get("no_candidate_items") or 0),
+            "next_action_lane_count": int(
+                detail_summary.get("next_action_lane_count") or 0
+            ),
+            "next_action_lanes": detail_summary.get("next_action_lanes") or [],
             "official_search_has_results": dict(
                 detail_summary.get("official_search_audit_status_counts") or []
             ).get("official_search_has_results", 0),
@@ -1360,6 +1364,20 @@ def build_report(
         ),
         "source_discovery_next_focus_pack_rows": int(
             (next_source_discovery_focus_pack or {}).get("row_count") or 0
+        ),
+        "source_discovery_next_focus_action_lane_count": int(
+            (
+                (next_source_discovery_focus_pack or {})
+                .get("candidate_review_summary", {})
+                .get("next_action_lane_count")
+            )
+            or 0
+        ),
+        "source_discovery_next_focus_action_lanes": (
+            (next_source_discovery_focus_pack or {})
+            .get("candidate_review_summary", {})
+            .get("next_action_lanes")
+            or []
         ),
         "source_discovery_focus_template_dry_run_updated_rows": int(
             focus_template_dry_run_summary.get("updated_rows") or 0

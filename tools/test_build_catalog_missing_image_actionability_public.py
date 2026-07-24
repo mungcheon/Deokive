@@ -96,6 +96,11 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 "candidate_rows": 3,
                 "manual_candidate_review_rows": 3,
                 "no_candidate_items": 1,
+                "next_action_lane_count": 2,
+                "next_action_lanes": [
+                    ["fallback_source_search", 1],
+                    ["manual_candidate_identity_review", 1],
+                ],
                 "official_search_audit_status_counts": [
                     ["official_search_has_results", 1],
                     ["official_search_no_results", 1],
@@ -233,6 +238,14 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_discovery_focus_template_confirmed_rows"], 0)
         self.assertEqual(report["summary"]["source_discovery_next_focus_pack_id"], "source-discovery-focus-001")
         self.assertEqual(report["summary"]["source_discovery_next_focus_pack_rows"], 2)
+        self.assertEqual(report["summary"]["source_discovery_next_focus_action_lane_count"], 2)
+        self.assertEqual(
+            report["summary"]["source_discovery_next_focus_action_lanes"],
+            [
+                ["fallback_source_search", 1],
+                ["manual_candidate_identity_review", 1],
+            ],
+        )
         self.assertEqual(report["summary"]["source_discovery_focus_template_dry_run_updated_rows"], 0)
         self.assertEqual(report["summary"]["source_discovery_focus_template_dry_run_skipped_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_focus_coverage"], 0.8)
@@ -362,6 +375,15 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 "fallback_search_needed_items"
             ],
             1,
+        )
+        self.assertEqual(
+            report["next_source_discovery_focus_pack"]["candidate_review_summary"][
+                "next_action_lanes"
+            ],
+            [
+                ["fallback_source_search", 1],
+                ["manual_candidate_identity_review", 1],
+            ],
         )
         self.assertEqual(
             report["next_source_discovery_focus_pack"]["fallback_review_summary"][
